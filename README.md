@@ -52,10 +52,9 @@
 
 ```text
 jp-life-work/
-├── README.md
+├── README.md                     # 项目总览 + 五阶段路线图 + 目录与体系说明
 ├── requirements.txt              # Python 依赖（scripts/ 所需）
 ├── docs/                         # 知识库（每个主题目录 = 一个可动态更新的"主题项目"）
-│   ├── 00-overview/              # 总览与路线图
 │   ├── 01-visa-immigration/      # 签证与在留资格
 │   ├── 02-language/              # 日语学习
 │   ├── 03-career-driver/         # 司机职业阶段
@@ -70,7 +69,7 @@ jp-life-work/
 │   └── 12-regional/              # 地域信息
 ├── monitors-japan/               # 监测项目（monitors-{地区} 平铺，参照 macropulse-reports 约定）
 │   └── ssw-driver-logistics/     #   特定技能司机·物流·智能驾驶监测
-│       ├── data/                 #     指标登记册（活值）+ 构建脚本（按需）
+│       ├── data/                 #     指标登记册（活值）
 │       ├── prompts/              #     动态更新提示词（继承公共三层模板）
 │       ├── reports/              #     基线 + 各版本报告（md + html 双格式）
 │       └── reviews/              #     每期运行复盘
@@ -80,13 +79,12 @@ jp-life-work/
 │   ├── 职业就业调研/              #   第 2 层类型模板：行业调研 + 落地建议类
 │   ├── 市场指标监测/              #   第 2 层类型模板：指标台账 + 信号判定类
 │   └── 知识库主题更新/            #   第 2 层类型模板：docs/ 主题文档群增量回写类
-├── data/       # 全库级结构化数据（主题级活值放各主题 data/）
 ├── scripts/    # 脚本工具（md2html.py 等）
-├── skills/     # 技能库：可复用方法论与操作指引
-├── sources/    # 全库级参考来源记录（主题级来源台账放各主题提示词或 data/）
-├── archive/    # 归档：已过时或被新版本替代的文档
+├── archive/    # 个人证据归档（证书/给与明细扫描件，按需创建子目录）
 └── output/     # 生成产物（HTML，不入库，见 .gitignore）
 ```
+
+> `docs/{主题}/data/` 与 `archive/` 下的子目录为**按需创建**：无实际文件时不预建空目录（git 不追踪空目录，预建会在克隆后消失，造成声明与实际不符）。
 
 ## 动态更新体系（三层提示词继承）
 
@@ -107,7 +105,6 @@ jp-life-work/
 
 | 目录 | 用途 | 现状 | 动态更新配置 |
 |------|------|------|------|
-| 00-overview | 项目总览、五阶段路线图索引与阅读导航 | 待填充 | prompt-overview-update.md |
 | 01-visa-immigration | 特定技能1号/2号制度、考试与日语要求、申请流程与材料、育成就劳制度新动向、永住与长期在留规划、政策更新日志 | 9 篇 | prompt-visa-immigration-update.md |
 | 02-language | JLPT N4/N3/N2 分阶段备考计划、JFT-Basic 备用方案、学习资源清单与进度跟踪 | 7 篇 | prompt-language-update.md |
 | 03-career-driver | 司机岗位全景、薪资结构与工时合规、安全规范、现场经验积累、求职渠道与面试、实际工作条件记录 | 7 篇 | prompt-career-driver-update.md |
@@ -117,7 +114,7 @@ jp-life-work/
 | 07-economy | 日本宏观经济、物流行业薪资行情、生活成本与收入规划 | 5 篇 | prompt-economy-update.md |
 | 08-politics-law | 在留法规框架、政治动向与移民政策环境、维权与合规工具箱 | 4 篇 | prompt-politics-law-update.md |
 | 09-technology-industry | 物流数字化技能地图、数字化岗位与转型路径 | 3 篇 | prompt-technology-industry-update.md |
-| 10-education | 资格地图、学习体系与教育投资 | 2 篇 | prompt-education-update.md |
+| 10-education | 资格地图、学习体系与教育投资 | 3 篇 | prompt-education-update.md |
 | 11-culture-life | 职场文化与人际、生活指南与适应 | 3 篇 | prompt-culture-life-update.md |
 | 12-regional | 地域选择框架、地域生活笔记 | 3 篇 | prompt-regional-update.md |
 
@@ -125,12 +122,11 @@ jp-life-work/
 
 | 目录 | 用途 |
 |------|------|
-| data/ | 全库级结构化数据：薪资行情、考试时间节点、费用清单等可量化记录（主题/项目级活值放各自 data/） |
-| scripts/ | 脚本工具：数据整理、文档生成等自动化脚本（依赖见 requirements.txt） |
 | prompts/ | 公共提示词层：三层继承体系（通用基座 → 类型模板）+ 质量规范 |
-| skills/ | 技能库：可复用的方法论与操作指引 |
-| sources/ | 全库级参考来源：引用的官方与行业信息出处记录（主题级来源台账放各主题配置） |
-| archive/ | 归档：已过时或被新版本替代的文档 |
+| monitors-japan/ | 监测项目：`monitors-{地区}/{主题}` 平铺，项目内四件套（data/prompts/reports/reviews） |
+| scripts/ | 脚本工具：数据整理、文档生成等自动化脚本（依赖见 requirements.txt） |
+| archive/ | 个人证据归档：证书、给与明细等扫描件（按年月建子目录） |
+| output/ | 生成产物：`md2html.py` 输出的 HTML，不入库 |
 
 ## 使用约定
 

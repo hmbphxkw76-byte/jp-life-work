@@ -20,5 +20,5 @@
 
 ## 使用约定
 
-- 每季度核对实证进展并更新 [../05-logistics-industry/05-行业数据跟踪](../05-logistics-industry/05-行业数据跟踪.md)。
+- 每季度核对实证进展并更新 [../05-logistics-industry/04-行业数据跟踪](../05-logistics-industry/04-行业数据跟踪.md)。
 - 本文的岗位时间表判断若与最新政策冲突，以最新为准并在数据跟踪文件记录。
