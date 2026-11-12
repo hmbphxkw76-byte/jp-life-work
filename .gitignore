@@ -37,5 +37,9 @@ Desktop.ini
 .screenshots/
 .trae-html-share-packages/
 
-# HTML 与 md 同目录存放，随源文件入库；仅忽略临时文件
+# HTML 与 md 同目录存放：仅 reports/ 入库（由 html-sync 生成）
+# data/ 与 prompts/ 的 HTML 不入库，避免 md2html.py 全量生成时误提交
+[0-9][0-9]-*/data/*.html
+[0-9][0-9]-*/prompts/*.html
+/prompts/**/*.html
 *.html.tmp
