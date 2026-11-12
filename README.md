@@ -119,13 +119,13 @@ jp-life-work/
 | 03-career-management | 管理岗地图与路径评估、业务知识体系、管理岗日语与沟通、过渡学习计划、成果档案与晋升材料 | 日本管理岗过渡知识手册.md | prompt-career-logistics-update.md |
 | 04-industry-logistics | 日本物流产业概览、EC/冷链/3PL 增长赛道、自动化与技术趋势、行业数据跟踪 | 日本物流行业知识手册.md | prompt-logistics-industry-update.md |
 | 05-industry-autonomous | 自动驾驶技术路线与时间表、法规与许可制度、仓储自动化与无人配送、个人技能对接与机会 | 日本自动驾驶与自动化知识手册.md | prompt-autonomous-automation-update.md |
-| 06-industry-technology | 物流数字化技能地图、数字化岗位与转型路径 | 日本技术与数字化知识手册.md | prompt-technology-industry-update.md |
+| 06-industry-technology | 物流数字化技能地图、数字化岗位与转型路径、日本数字化劳动市场与岗位行情 | 日本技术与数字化知识手册.md | prompt-technology-industry-update.md |
 | 07-economy-finance | 日本宏观经济、物流行业薪资行情、生活成本与收入规划 | 日本经济与财务知识手册.md | prompt-economy-update.md |
-| 08-visa-immigration | 特定技能1号/2号制度、考试与日语要求、申请流程与材料、育成就劳制度新动向、永住与长期在留规划、政策更新日志 | 日本签证与在留资格知识手册.md | prompt-visa-immigration-update.md |
+| 08-visa-immigration | 特定技能1号/2号制度、考试与日语要求、申请流程与材料、育成就劳制度新动向、永住与长期在留规划、家属带同与家庭规划、政策更新日志 | 日本签证与在留资格知识手册.md | prompt-visa-immigration-update.md |
 | 09-politics-law | 在留法规框架、政治动向与移民政策环境、维权与合规工具箱 | 日本政治与法规知识手册.md | prompt-politics-law-update.md |
-| 10-education-qualification | 资格地图、学习体系与教育投资 | 日本资格与教育投资知识手册.md | prompt-education-update.md |
+| 10-education-qualification | 资格地图、学习体系与教育投资、日本学校教育体系与子女教育、高等教育与技人国学历路径 | 日本资格与教育投资知识手册.md | prompt-education-update.md |
 | 11-language-japanese | JLPT N4/N3/N2 分阶段备考计划、JFT-Basic 备用方案、学习资源清单与进度跟踪 | 日本日语学习知识手册.md | prompt-language-update.md |
-| 12-culture-life | 职场文化与人际、生活指南与适应 | 日本文化与生活知识手册.md | prompt-culture-life-update.md |
+| 12-culture-life | 职场文化与人际、生活指南与适应（含防灾应急）、医疗与健康、住房与安家、社会融入与社群 | 日本文化与生活知识手册.md | prompt-culture-life-update.md |
 | 13-regional-info | 地域选择框架、地域生活笔记 | 日本地域信息知识手册.md | prompt-regional-update.md |
 
 ### 其他目录说明
