@@ -2,7 +2,7 @@
 
 > **用途**：周期性刷新「政治与法规」知识库，动态获取入管法改正、劳动维权渠道、移民政策动向的最新官方口径。可直接整体复制，替换顶部变量后提交给 AI 执行。
 >
-> **继承声明（三层体系）**：本文件 = [通用基座](../../prompts/通用基座/prompt-generic-base.md) × [知识库主题更新类型模板](../../prompts/知识库主题更新/prompt-knowledge-topic-update-template.md) × 本主题专属配置。维权渠道以 [01-monitor-ssw-driver](../../01-monitor-ssw-driver/data/ssw-driver-indicator-registry.md) 修正清单（ITJ/GFP 结论）为锚，本主题不得另立分叉；冲突时以本文件为准。
+> **继承声明（三层体系）**：本文件 = [通用基座](../../prompts/通用基座/prompt-generic-base.md) × [知识库主题更新类型模板](../../prompts/知识库主题更新/prompt-knowledge-topic-update-template.md) × 本主题专属配置。维权渠道以 [01-ssw-driver](../../01-ssw-driver/data/ssw-driver-indicator-registry.md) 修正清单（ITJ/GFP 结论）为锚，本主题不得另立分叉；冲突时以本文件为准。
 
 ---
 
@@ -29,7 +29,7 @@
 2. **术语口径区分**（正文中不得混用）：
    - 法令条文（e-Gov 原文）≠ 政府解说页 ≠ 媒体转述，三层须分别标注；
    - 在留资格种类引用须注明制度（同 08-visa-immigration 口径）。
-3. **交叉验证锚**：维权渠道以 01-monitor-ssw-driver 修正清单（ITJ/GFP 结论）为锚；本主题文档与监测报告冲突时，回写监测报告并同步本主题。
+3. **交叉验证锚**：维权渠道以 01-ssw-driver 修正清单（ITJ/GFP 结论）为锚；本主题文档与监测报告冲突时，回写监测报告并同步本主题。
 
 ## 二、来源优先级（通用框架的本主题实例化，冲突时报双份并标注）
 
@@ -46,7 +46,7 @@
 - ❌（首期为空）】
 ```
 
-> 制度类修正统一记入 01-monitor-ssw-driver 报告文首清单为单一事实源；本主题只追加**主题级**修正（文档结构、路径、口径类）。
+> 制度类修正统一记入 01-ssw-driver 报告文首清单为单一事实源；本主题只追加**主题级**修正（文档结构、路径、口径类）。
 
 ---
 

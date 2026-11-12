@@ -30,7 +30,7 @@ jobs:
 
       - name: 清理非 reports 目录的 HTML
         run: |
-          find . -path ./01-monitor-ssw-driver/reviews -prune -o \
+          find . -path ./01-ssw-driver/reviews -prune -o \
             -name "*.html" -print | grep -v "/reports/" | xargs rm -f 2>/dev/null || true
 
       - name: 检查 HTML 变更并提交

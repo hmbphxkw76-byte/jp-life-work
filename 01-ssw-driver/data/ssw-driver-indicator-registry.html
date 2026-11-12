@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SSW 司机物流监测 · 指标登记册（活值）</title>
+<style>
+  body { max-width: 860px; margin: 2rem auto; padding: 0 1rem;
+         font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+         line-height: 1.7; color: #222; }
+  pre { background: #f5f5f5; padding: 0.8rem; overflow-x: auto; border-radius: 4px; }
+  code { background: #f5f5f5; padding: 0.1em 0.3em; border-radius: 3px; }
+  pre code { padding: 0; background: none; }
+  table { border-collapse: collapse; }
+  th, td { border: 1px solid #ccc; padding: 0.4em 0.7em; }
+  table a[title^="来源"] { color: inherit; text-decoration: none;
+    word-break: normal; overflow-wrap: anywhere;
+    border-bottom: 1px dotted #b8b0a0; }
+  table a[title^="来源"] strong, table a[title^="来源"] em,
+  table a[title^="来源"] code { color: inherit; background: none; }
+  table a[title^="来源"]:hover { color: #1a5f5a; background: rgba(26,95,90,.09);
+    border-bottom: 1px solid currentColor; }
+  table a[title^="来源"]::after { content: "↗"; margin-left: 3px;
+    font-size: .76em; opacity: 0; }
+  table a[title^="来源"]:hover::after { opacity: .85; }
+  blockquote { border-left: 4px solid #ccc; margin-left: 0; padding-left: 1em; color: #555; }
+</style>
+</head>
+<body>
+<h1 id="ssw-司机物流监测-指标登记册-活值">SSW 司机物流监测 · 指标登记册（活值）</h1>
+<blockquote>
+<p><strong>用途</strong>：14 项关键监测指标的<strong>活值存放处</strong>（提示词只保留指标定义与数据源，避免提示词被每次运行改写）。每次运行更新本登记册 → 回写报告"数据变更摘要"。<br />
+<strong>格式</strong>：每项含 <code>最新值（来源/年份）</code> 与 <code>基准版本</code>。首值取自 v2026.11.11_4 报告"数据变更摘要"（数据基准 2026-11-11）。<br />
+<strong>锚定</strong>：已修正事实清单以最新版报告文首为单一事实源，本登记册不重复维护。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>指标</th>
+<th>优先数据源</th>
+<th>最新值（来源/年份）</th>
+<th>基准版本</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>特定技能在留者总数（分野别）</td>
+<td>ISA 统计月报（moj.go.jp）</td>
+<td>自動車運送業 1 号 843 人（充足率 3.8%）；SSW 1 号全体 438,128、2 号 23,348（2026-08 末速报）[001472175.pdf]</td>
+<td>v2026.11.11_4</td>
+</tr>
+<tr>
+<td>2</td>
+<td>「自動車運送業」分野要件</td>
+<td>isa.go.jp / mlit.go.jp</td>
+<td>受入上限 22,100（2026-01-23 阁议新运用方针）；无健康检查义务、仅適性診断 [001467291.pdf, 2026]</td>
+<td>v2026.11.11_4</td>
+</tr>
+<tr>
+<td>3</td>
+<td>技能試験・日本語試験日程与费用</td>
+<td>ClassNK portal / Prometric / JLPT</td>
+<td>ClassNK 6,500 円（US$45、越南 US$50）、证明书 15,000 円；JFT-Basic 10,000 円；JLPT N4 450 元；月报至 2026-09（实施国 18，中国大陆无考点）[news/29]</td>
+<td>v2026.11.11_4</td>
+</tr>
+<tr>
+<td>4</td>
+<td>司机缺口</td>
+<td>政策パッケージ / NX 总研试算</td>
+<td>現状 14%（14 万人相当）/2030 年 34%（34 万人相当）；2025 年度不足 110,809、2030 年度不足 162,912 [cas.go.jp 20231226_1.pdf; mlit 001583917.pdf]</td>
+<td>v2026.11.11_4</td>
+</tr>
+<tr>
+<td>5</td>
+<td>運輸業月均工资</td>
+<td>厚労省每月勤労統計 / 全ト协</td>
+<td>341,158 円（+4.9%，2026-09）；全ト协「2025 年度版」A 级 [jta.or.jp chinginjittai2025]</td>
+<td>v2026.11.11_4</td>
+</tr>
+<tr>
+<td>6</td>
+<td>求人抽样（岗位×地域×月収×URL）</td>
+<td>HelloWork / 求人聚合 → 官网回溯</td>
+<td>9 样本全部四元组立档、官网回溯完成（详见 _4 版 3.3 表）</td>
+<td>v2026.11.11_4</td>
+</tr>
+<tr>
+<td>7</td>
+<td>物流倒産件数</td>
+<td>帝国データバンク / TSR</td>
+<td>TDB FY2025 321 件／TSR 历年 308 件</td>
+<td>v2026.11.11_4</td>
+</tr>
+<tr>
+<td>8</td>
+<td>运赁指数</td>
+<td>日銀 SPPI / WebKit</td>
+<td>SPPI 113.3（+4.6%）／WebKit 142</td>
+<td>v2026.11.11_4</td>
+</tr>
+<tr>
+<td>9</td>
+<td>「2024年問題」对策</td>
+<td>MLIT 政策页</td>
+<td>适正化二法 2025-06 公布、检讨会年内出建言</td>
+<td>v2026.11.11_4</td>
+</tr>
+<tr>
+<td>10</td>
+<td>L4 自动驾驶进展</td>
+<td>npa.go.jp / mlit.go.jp / SOZ</td>
+<td>许可 12 件、路线图 2026</td>
+<td>v2026.11.11_4</td>
+</tr>
+<tr>
+<td>11</td>
+<td>物流企业外国人雇佣</td>
+<td>企业 IR / 媒体</td>
+<td>SGHD FY2027/3 上半期 9,204 亿円（+17.6%，2026-11-06 发布）</td>
+<td>v2026.11.11_4</td>
+</tr>
+<tr>
+<td>12</td>
+<td>登録支援機関</td>
+<td>isa.go.jp / 行业机构</td>
+<td>行情 2–4 万円/人・月；登录费 28,400 円</td>
+<td>v2026.11.11_4</td>
+</tr>
+<tr>
+<td>13</td>
+<td>中国中介渠道</td>
+<td>商务部名单 / 驻日领馆</td>
+<td>名单入口已核实；签证费 715 元现行（2026-07-01 起）</td>
+<td>v2026.11.11_4</td>
+</tr>
+<tr>
+<td>14</td>
+<td>驾照路径与费用</td>
+<td>e-Stat 0003449368 / くらシム / TRUCK-BANK</td>
+<td>普通教习全国官方均价（AT 限定）324,381 円（総務省 2026-09）；MT 通学 30–40 万円（くらシム 2026-10-18）；大型 25–28 万円（TRUCK-BANK 2026-06）</td>
+<td>v2026.11.11_4</td>
+</tr>
+</tbody>
+</table>
+<h2 id="交叉验证输入">交叉验证输入</h2>
+<table>
+<thead>
+<tr>
+<th>输入</th>
+<th>来源</th>
+<th>最新值</th>
+<th>基准版本</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>汇率（中日收入对比）</td>
+<td>中国外汇交易中心中间价</td>
+<td>100 日元 = 4.2355 元（2026-11-10）[chinamoney.com.cn]</td>
+<td>v2026.11.11_4</td>
+</tr>
+<tr>
+<td>中国侧工资对比</td>
+<td>国家统计局（项目指定例外）</td>
+<td>见报告 3.5</td>
+<td>v2026.11.11_4</td>
+</tr>
+</tbody>
+</table>
+<h2 id="观察项与触发器状态-每次运行更新">观察项与触发器状态（每次运行更新）</h2>
+<table>
+<thead>
+<tr>
+<th>状态项</th>
+<th>内容</th>
+<th>更新于</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>唯一观察项</td>
+<td>ssw.go.jp 受入上限 24,500 未同步更正（连续四次）→ 降级为月度触发器检查</td>
+<td>v2026.11.11_4</td>
+</tr>
+<tr>
+<td>首要触发器</td>
+<td>ISA 9 月末速报未发布；预计 12 月上旬随 10 月数据发布（推断）→ 触发后重点刷新 #1、#3</td>
+<td>v2026.11.11_4</td>
+</tr>
+<tr>
+<td>触发器结论</td>
+<td>三项周期触发器（ssw.go.jp／ISA 月报／ClassNK 月报）截至 2026-11-11 均未满足</td>
+<td>v2026.11.11_4</td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

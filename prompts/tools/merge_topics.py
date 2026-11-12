@@ -41,7 +41,7 @@ TOPIC_NAMES = {
 }
 
 # 已是单文档格式，跳过
-SKIP = {"01-monitor-ssw-driver"}
+SKIP = {"01-ssw-driver"}
 
 MERGE_DATE = "2026-11-12"
 

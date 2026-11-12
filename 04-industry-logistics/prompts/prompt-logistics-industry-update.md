@@ -2,7 +2,7 @@
 
 > **用途**：周期性刷新「物流行业研究」知识库，动态获取物流白書、SPPI、行业倒産的最新官方口径，跟踪增长赛道与 `2024年問題` 对策进展。可直接整体复制，替换顶部变量后提交给 AI 执行。
 >
-> **继承声明（三层体系）**：本文件 = [通用基座](../../prompts/通用基座/prompt-generic-base.md) × [知识库主题更新类型模板](../../prompts/知识库主题更新/prompt-knowledge-topic-update-template.md) × 本主题专属配置。行业宏观数字以 [01-monitor-ssw-driver](../../01-monitor-ssw-driver/data/ssw-driver-indicator-registry.md) 最新报告为交叉验证锚，本主题不得另立分叉；冲突时以本文件为准。
+> **继承声明（三层体系）**：本文件 = [通用基座](../../prompts/通用基座/prompt-generic-base.md) × [知识库主题更新类型模板](../../prompts/知识库主题更新/prompt-knowledge-topic-update-template.md) × 本主题专属配置。行业宏观数字以 [01-ssw-driver](../../01-ssw-driver/data/ssw-driver-indicator-registry.md) 最新报告为交叉验证锚，本主题不得另立分叉；冲突时以本文件为准。
 
 ---
 
@@ -30,7 +30,7 @@
    - EC 物流 ≠ 冷链 ≠ 3PL 委托形态；
    - SPPI ≠ WebKit 运賃指数（口径不同禁止混算）；
    - 倒産件数 TDB ≠ TSR 口径。
-3. **交叉验证锚**：行业宏观数字以 01-monitor-ssw-driver 最新报告为交叉验证锚，`2024年問題` 对策锚 monitors #9，SPPI 锚 monitors #8。
+3. **交叉验证锚**：行业宏观数字以 01-ssw-driver 最新报告为交叉验证锚，`2024年問題` 对策锚 monitors #9，SPPI 锚 monitors #8。
 
 ## 二、来源优先级（通用框架的本主题实例化，冲突时报双份并标注）
 
@@ -47,7 +47,7 @@
 - ❌（首期为空）】
 ```
 
-> 制度类修正统一记入 01-monitor-ssw-driver 报告文首清单为单一事实源；本主题只追加**主题级**修正（文档结构、路径、口径类）。
+> 制度类修正统一记入 01-ssw-driver 报告文首清单为单一事实源；本主题只追加**主题级**修正（文档结构、路径、口径类）。
 
 ---
 
@@ -121,7 +121,7 @@
 - [ ] SPPI 与 WebKit 运賃指数口径未混算
 - [ ] 倒産件数明确标注 TDB vs TSR 口径
 - [ ] 与 05-industry-autonomous 分工正确（本篇产业面 / 06 技术面）
-- [ ] 宏观数字与 01-monitor-ssw-driver 最新报告交叉验证一致
+- [ ] 宏观数字与 01-ssw-driver 最新报告交叉验证一致
 - [ ] 追踪表 4 项均已核对并填"是否更新"
 - [ ] `{{REGISTRY_PATH}}` 已读已写：追踪表"上次值"列取自登记册，变更摘要与登记册一致；prompt 模板自身无硬编码活值
 

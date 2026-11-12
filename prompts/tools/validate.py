@@ -28,7 +28,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 
 # 监测项目（多版本单文档，不适用"仅 1 份知识手册"约束）
-MONITOR_PROJECT = "01-monitor-ssw-driver"
+MONITOR_PROJECT = "01-ssw-driver"
 
 # 知识手册文件名特征
 HANDBOOK_SUFFIX = "知识手册.md"

@@ -55,7 +55,7 @@
 ```text
 jp-life-work/
 ├── README.md                          # 项目总览 + 五阶段路线图 + 目录与体系说明
-├── 01-monitor-ssw-driver/             # 监测项目：特定技能司机·物流·智能驾驶
+├── 01-ssw-driver/                     # 监测项目：特定技能司机·物流·智能驾驶
 │   ├── data/                          #   指标登记册（活值）
 │   ├── prompts/                       #   动态更新提示词（继承公共三层模板）
 │   ├── reports/                       #   基线 + 各版本报告（md + html 同目录）
@@ -90,7 +90,7 @@ jp-life-work/
 >
 > `（同构）` 表示与 `02-career-driver` 相同的 `data/ + prompts/ + reports/archives/` 结构。
 >
-> 每个编号主题目录统一为 `data/ + prompts/ + reports/` 三层，且 `reports/` 下含 `archives/` 子目录；`01-monitor-ssw-driver` 另保留 `reviews/`（每期复盘）。`reviews/` 暂不向其他主题推广。
+> 每个编号主题目录统一为 `data/ + prompts/ + reports/` 三层，且 `reports/` 下含 `archives/` 子目录；`01-ssw-driver` 另保留 `reviews/`（每期复盘）。`reviews/` 暂不向其他主题推广。
 >
 > **单文档格式约定**：每个知识库主题在 `reports/` 下仅维护**单份知识手册 `.md`** 及同名 `.html`，禁止同一主题分散为多份零散 `.md`。知识手册内以 `## NN 章节名` 组织各章节，原 00-index 的导航内容已并入手册前部「导航与使用约定」。
 >
@@ -133,7 +133,7 @@ jp-life-work/
 | 目录 | 用途 |
 |------|------|
 | prompts/ | 公共提示词层：三层继承体系（通用基座 → 类型模板）+ 质量规范 + `tools/` 共用脚本 |
-| 01-monitor-ssw-driver/ | 监测项目：data/prompts/reports/reviews |
+| 01-ssw-driver/ | 监测项目：data/prompts/reports/reviews |
 | NN-{主题}/ | 12 个知识库主题（02–13）：data/ + prompts/ + reports/（含 archives/） |
 
 ## 使用约定
