@@ -31,3 +31,6 @@ jobs:
             echo "::warning::规范校验存在警告项（无错误，不阻断合并）"
             exit 0
           fi
+
+      - name: 运行提示词契约测试
+        run: python -m unittest discover -s prompts/tools/tests -p "test_*.py"

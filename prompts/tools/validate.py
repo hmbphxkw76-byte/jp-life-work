@@ -235,14 +235,25 @@ def check_no_hardcoded_values(errors, warnings):
                 # 跳过纯引用标记行（如 [x]、☐）
                 if re.match(r"^[-*]\s*\[?[ x☐]?\]?\s*$", stripped):
                     continue
-                # 跳过已修正事实清单（制度性描述，非活值）
-                if "❌" in stripped or "不得再称" in stripped:
+                # 跳过明确的制度常数声明（非追踪活值）
+                if re.search(r"制度常数|非追踪活值|制度性常数", stripped):
                     continue
-                # 跳过制度性描述（上限/通算/制度/规则/要件/资格等上下文）
-                if re.search(r"(上限|通算|制度|规则|要件|资格|号别|分野|回数)", stripped):
+                # 含"当前有效值/当前值"的行必须检测：仅取该标记之后的片段，
+                # 避免把同一行中"旧值 24,500 → 当前 22,100"的旧值误报为活值
+                current = re.search(r"当前有效|当前值|现行值", stripped)
+                if current:
+                    checkable = stripped[current.start():]
+                elif re.search(r"旧值|旧费用|旧数据", stripped) and re.search(
+                    r"不得|禁止|严禁|不可|不再|勿|❌", stripped
+                ):
+                    # 被显式否定的历史值，非当前活值
                     continue
+                elif re.search(r"(上限|通算|制度|规则|要件|资格|号别|分野|回数)", stripped):
+                    continue
+                else:
+                    checkable = stripped
                 # 检测数字+单位
-                for m in HARDCODED_VALUE_RE.finditer(stripped):
+                for m in HARDCODED_VALUE_RE.finditer(checkable):
                     warnings.append(
                         f"[{topic.name}/{pf.name}:{i}] 疑似活值硬编码: \"{m.group()}\""
                         f"（活值应存于 {topic.name}/data/*-indicator-registry.md）"
