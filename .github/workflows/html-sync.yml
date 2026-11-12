@@ -8,6 +8,9 @@ on:
       - "prompts/tools/md2html.py"
       - "requirements.txt"
 
+permissions:
+  contents: write
+
 jobs:
   sync-html:
     runs-on: ubuntu-latest
