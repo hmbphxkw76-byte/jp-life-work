@@ -61,8 +61,10 @@ jp-life-work/
 │   ├── reports/                  #   基线 + 各版本报告（md + html 同目录）
 │   └── reviews/                  #   每期运行复盘
 ├── monitors-visa-immigration/    # 知识库主题：签证与在留资格
+│   ├── data/                     #   主题数据（来源台账/指标活值）
 │   ├── prompts/                  #   主题专属配置
-│   └── reports/                  #   文档群（00-index + 8 篇）+ 同名 HTML
+│   └── reports/                  #   单份知识手册（md + 同名 html）
+│       └── archives/             #   归档旧版知识手册
 ├── monitors-language/            # 知识库主题：日语学习（同构）
 ├── monitors-career-driver/       # 知识库主题：司机职业阶段
 ├── monitors-career-logistics/    # 知识库主题：物流运营/管理阶段
@@ -79,13 +81,15 @@ jp-life-work/
     ├── 通用基座/                  #   第 1 层：运行变量/锚定/更新协议/追踪表/执行/输出骨架
     ├── 职业就业调研/              #   第 2 层类型模板：行业调研 + 落地建议类
     ├── 市场指标监测/              #   第 2 层类型模板：指标台账 + 信号判定类
-    ├── 知识库主题更新/            #   第 2 层类型模板：monitors-* 主题文档群增量回写类
+    ├── 知识库主题更新/            #   第 2 层类型模板：monitors-* 主题单份知识手册增量回写类
     └── tools/                    #   全库共用脚本（md2html.py）
 ```
 
-> 每个 `monitors-*` 统一为 `prompts/ + reports/` 两层；`monitors-ssw-driver-logistics` 另有 `data/`（指标活值）与 `reviews/`（每期复盘）。`data/` 子目录按需创建，不预建空目录。
+> 每个 `monitors-*` 统一为 `data/ + prompts/ + reports/` 三层，且 `reports/` 下含 `archives/` 子目录；`monitors-ssw-driver-logistics` 另保留 `reviews/`（每期复盘）。`reviews/` 暂不向其他主题推广。
 >
-> **保留策略**：`reports/` 顶层只保留最新 3 份（`00-index.md` 固定保留），其余移入 `reports/archives/`；归档上限 7 份，超出删最旧。由 `python prompts/tools/archive_reports.py` 执行，`--dry-run` 可预览。
+> **单文档格式约定**：每个知识库主题在 `reports/` 下仅维护**单份知识手册 `.md`** 及同名 `.html`，禁止同一主题分散为多份零散 `.md`。知识手册内以 `## NN 章节名` 组织各章节，原 00-index 的导航内容已并入手册前部「导航与使用约定」。
+>
+> **保留策略**：`reports/` 顶层只保留最新 3 份（`*_baseline` 基线版固定保留、永不归档），其余移入 `reports/archives/`；归档上限 7 份，超出删最旧。由 `python prompts/tools/archive_reports.py` 执行，`--dry-run` 可预览。
 
 ## 动态更新体系（三层提示词继承）
 
@@ -96,28 +100,28 @@ jp-life-work/
 ```
 
 - **监测项目**（monitors-*）：按《职业就业调研》或《市场指标监测》类型模板继承，指标活值存项目 `data/` 登记册，运行复盘存 `reviews/`。
-- **知识库主题**（monitors-visa-immigration 等 12 个）：按《知识库主题更新》类型模板继承，动态获取的资料**增量回写**主题文档群，变更摘要与待复核清单记入各主题 `00-index.md`。
+- **知识库主题**（monitors-visa-immigration 等 12 个）：按《知识库主题更新》类型模板继承，动态获取的资料**增量回写**主题单份知识手册，变更摘要与待复核清单记入手册内「导航与使用约定」的更新日志区。
 - 覆盖规则：主题/项目专属 > 类型模板 > 通用基座 > 《监测报告通用规范》；覆盖须显式声明。
 - 质量红线（全层强制）：逐点引用 `[Source: URL, 年份]`、来源优先级五层框架、事实与推断分离、口径标注、禁止编造、空窗期不虚构变化。
 
 ### 知识库主题目录说明（monitors-*）
 
-每个主题目录以 `00-index.md` 作为目录导航，其余按编号组织内容；每主题自带 `prompts/prompt-{slug}-update.md`（第 3 层动态更新配置）。
+每个主题目录在 `reports/` 下维护**单份知识手册 `.md`**（含同名 `.html`），手册内以 `## NN 章节名` 组织内容；每主题自带 `prompts/prompt-{slug}-update.md`（第 3 层动态更新配置）。
 
-| 目录 | 用途 | 现状 | 动态更新配置 |
+| 目录 | 用途 | 知识手册 | 动态更新配置 |
 |------|------|------|------|
-| monitors-visa-immigration | 特定技能1号/2号制度、考试与日语要求、申请流程与材料、育成就劳制度新动向、永住与长期在留规划、政策更新日志 | 3 篇（+6 归档） | prompt-visa-immigration-update.md |
-| monitors-language | JLPT N4/N3/N2 分阶段备考计划、JFT-Basic 备用方案、学习资源清单与进度跟踪 | 3 篇（+4 归档） | prompt-language-update.md |
-| monitors-career-driver | 司机岗位全景、薪资结构与工时合规、安全规范、现场经验积累、求职渠道与面试、实际工作条件记录 | 3 篇（+4 归档） | prompt-career-driver-update.md |
-| monitors-career-logistics | 管理岗地图与路径评估、业务知识体系、管理岗日语与沟通、过渡学习计划、成果档案与晋升材料 | 3 篇（+3 归档） | prompt-career-logistics-update.md |
-| monitors-logistics-industry | 日本物流产业概览、EC/冷链/3PL 增长赛道、自动化与技术趋势、行业数据跟踪 | 3 篇（+2 归档） | prompt-logistics-industry-update.md |
-| monitors-autonomous-automation | 自动驾驶技术路线与时间表、法规与许可制度、仓储自动化与无人配送、个人技能对接与机会 | 3 篇（+2 归档） | prompt-autonomous-automation-update.md |
-| monitors-economy | 日本宏观经济、物流行业薪资行情、生活成本与收入规划 | 3 篇（+2 归档） | prompt-economy-update.md |
-| monitors-politics-law | 在留法规框架、政治动向与移民政策环境、维权与合规工具箱 | 3 篇（+1 归档） | prompt-politics-law-update.md |
-| monitors-technology-industry | 物流数字化技能地图、数字化岗位与转型路径 | 3 篇 | prompt-technology-industry-update.md |
-| monitors-education | 资格地图、学习体系与教育投资 | 3 篇 | prompt-education-update.md |
-| monitors-culture-life | 职场文化与人际、生活指南与适应 | 3 篇 | prompt-culture-life-update.md |
-| monitors-regional | 地域选择框架、地域生活笔记 | 3 篇 | prompt-regional-update.md |
+| monitors-visa-immigration | 特定技能1号/2号制度、考试与日语要求、申请流程与材料、育成就劳制度新动向、永住与长期在留规划、政策更新日志 | 日本签证与在留资格知识手册.md | prompt-visa-immigration-update.md |
+| monitors-language | JLPT N4/N3/N2 分阶段备考计划、JFT-Basic 备用方案、学习资源清单与进度跟踪 | 日本日语学习知识手册.md | prompt-language-update.md |
+| monitors-career-driver | 司机岗位全景、薪资结构与工时合规、安全规范、现场经验积累、求职渠道与面试、实际工作条件记录 | 日本司机职业知识手册.md | prompt-career-driver-update.md |
+| monitors-career-logistics | 管理岗地图与路径评估、业务知识体系、管理岗日语与沟通、过渡学习计划、成果档案与晋升材料 | 日本管理岗过渡知识手册.md | prompt-career-logistics-update.md |
+| monitors-logistics-industry | 日本物流产业概览、EC/冷链/3PL 增长赛道、自动化与技术趋势、行业数据跟踪 | 日本物流行业知识手册.md | prompt-logistics-industry-update.md |
+| monitors-autonomous-automation | 自动驾驶技术路线与时间表、法规与许可制度、仓储自动化与无人配送、个人技能对接与机会 | 日本自动驾驶与自动化知识手册.md | prompt-autonomous-automation-update.md |
+| monitors-economy | 日本宏观经济、物流行业薪资行情、生活成本与收入规划 | 日本经济与财务知识手册.md | prompt-economy-update.md |
+| monitors-politics-law | 在留法规框架、政治动向与移民政策环境、维权与合规工具箱 | 日本政治与法规知识手册.md | prompt-politics-law-update.md |
+| monitors-technology-industry | 物流数字化技能地图、数字化岗位与转型路径 | 日本技术与数字化知识手册.md | prompt-technology-industry-update.md |
+| monitors-education | 资格地图、学习体系与教育投资 | 日本资格与教育投资知识手册.md | prompt-education-update.md |
+| monitors-culture-life | 职场文化与人际、生活指南与适应 | 日本文化与生活知识手册.md | prompt-culture-life-update.md |
+| monitors-regional | 地域选择框架、地域生活笔记 | 日本地域信息知识手册.md | prompt-regional-update.md |
 
 ### 其他目录说明
 
@@ -125,10 +129,19 @@ jp-life-work/
 |------|------|
 | prompts/ | 公共提示词层：三层继承体系（通用基座 → 类型模板）+ 质量规范 + `tools/` 共用脚本 |
 | monitors-ssw-driver-logistics/ | 监测项目：data/prompts/reports/reviews |
-| monitors-{主题}/ | 12 个知识库主题：prompts/ + reports/ |
+| monitors-{主题}/ | 12 个知识库主题：data/ + prompts/ + reports/（含 archives/） |
 
 ## 使用约定
 
 - **文档格式**：源文档统一使用 Markdown（`.md`），按主题存放在 `monitors-*` 下。
+- **单文档约束**：每个知识库主题仅维护**单份知识手册 `.md`** 与同名 `.html`，禁止同一主题拆分为多份零散 `.md`。新增/更新内容直接在知识手册内对应章节修改，不新建章节文件。
 - **报告输出**：`python prompts/tools/md2html.py` 将各 `reports/` 下的 md 转为同名 HTML，与 md 同目录存放并随源文件入库。
+- **规范校验**：`python prompts/tools/validate.py` 执行 10 项规范一致性校验（单文档约束、目录结构、引用格式、锚点链接、活值硬编码等）。退出码：0=通过，1=错误（需修复），2=仅警告。
 - **脚本环境**：`prompts/tools/` 下的共用脚本基于 Python 运行（依赖见 requirements.txt）。
+
+## CI 自动化
+
+| Workflow | 触发 | 作用 |
+|----------|------|------|
+| [规范校验](.github/workflows/validate.yml) | push/PR 到 main | 运行 `validate.py`，错误阻断合并，警告放行 |
+| [HTML 同步](.github/workflows/html-sync.yml) | reports/*.md 变更 | 自动重新生成 HTML 并提交 |

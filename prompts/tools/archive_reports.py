@@ -6,7 +6,7 @@
 - 顶层只保留最新 3 份文档；md 与同名 html 视为一份
 - 其余移入 reports/archives/
 - archives/ 最多保留 7 份，超出删除最旧
-- 00-index.md 固定在顶层，计入 3 份
+- *_baseline（基线版）固定在顶层，永不归档；归档目录中的基线版会被移回顶层
 
 用法:
     python prompts/tools/archive_reports.py --dry-run   # 预览
@@ -23,7 +23,11 @@ ROOT = Path(__file__).resolve().parents[2]
 KEEP_TOP = 3
 KEEP_ARCHIVE = 7
 KNOWN_SUFFIXES = {".md", ".html"}
-PINNED = "00-index.md"
+
+
+def is_pinned(stem: str) -> bool:
+    """基线版常驻 reports/ 顶层。"""
+    return stem.lower().endswith("_baseline")
 VERSION = re.compile(r"_v(\d{4})\.(\d{2})\.(\d{2})(?:_(\d+))?$")
 
 
@@ -54,10 +58,17 @@ def main() -> int:
         if not reports.is_dir():
             continue
         archives = reports / "archives"
+        if archives.is_dir():
+            for stem, files in stems_in(archives).items():
+                if is_pinned(stem):
+                    print(f"[{reports.relative_to(ROOT)}] 基线版移回顶层: {stem}")
+                    if not args.dry_run:
+                        for f in files:
+                            shutil.move(str(f), str(reports / f.name))
         groups = stems_in(reports)
 
         ordered = sorted(groups, key=sort_key)
-        pinned = [s for s in ordered if s + ".md" == PINNED]
+        pinned = [s for s in ordered if is_pinned(s)]
         others = [s for s in ordered if s not in pinned]
         keep = pinned + others[-(KEEP_TOP - len(pinned)):] if len(ordered) > KEEP_TOP else ordered
         move = [s for s in ordered if s not in keep]

@@ -10,13 +10,23 @@ HTML 与源 md 写入同一目录（reports/ 下的 md 生成同名 .html），
 使用 UTF-8 编码，支持表格、代码块、目录锚点。
 """
 import argparse
+import re
 import sys
 from pathlib import Path
 
 import markdown
 
+
+def slugify(value, separator):
+    """保留中文、字母、数字的 slugify；空格与标点转为 separator。"""
+    value = value.strip().lower()
+    value = re.sub(r"[^\w\u4e00-\u9fff]+", separator, value, flags=re.UNICODE)
+    value = re.sub(rf"{re.escape(separator)}+", separator, value)
+    return value.strip(separator)
+
+
 EXTENSIONS = ["tables", "fenced_code", "toc", "nl2br"]
-EXTENSION_CONFIGS = {"toc": {"permalink": False}}
+EXTENSION_CONFIGS = {"toc": {"permalink": False, "slugify": slugify}}
 
 TEMPLATE = """<!DOCTYPE html>
 <html lang="zh-CN">
@@ -33,6 +43,16 @@ TEMPLATE = """<!DOCTYPE html>
   pre code {{ padding: 0; background: none; }}
   table {{ border-collapse: collapse; }}
   th, td {{ border: 1px solid #ccc; padding: 0.4em 0.7em; }}
+  table a[title^="来源"] {{ color: inherit; text-decoration: none;
+    word-break: normal; overflow-wrap: anywhere;
+    border-bottom: 1px dotted #b8b0a0; }}
+  table a[title^="来源"] strong, table a[title^="来源"] em,
+  table a[title^="来源"] code {{ color: inherit; background: none; }}
+  table a[title^="来源"]:hover {{ color: #1a5f5a; background: rgba(26,95,90,.09);
+    border-bottom: 1px solid currentColor; }}
+  table a[title^="来源"]::after {{ content: "↗"; margin-left: 3px;
+    font-size: .76em; opacity: 0; }}
+  table a[title^="来源"]:hover::after {{ opacity: .85; }}
   blockquote {{ border-left: 4px solid #ccc; margin-left: 0; padding-left: 1em; color: #555; }}
 </style>
 </head>

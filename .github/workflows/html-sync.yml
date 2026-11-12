@@ -1,0 +1,43 @@
+name: HTML 同步
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "monitors-*/reports/*.md"
+      - "prompts/tools/md2html.py"
+      - "requirements.txt"
+
+jobs:
+  sync-html:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 设置 Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: 安装依赖
+        run: pip install -r requirements.txt
+
+      - name: 重新生成 HTML
+        run: python prompts/tools/md2html.py
+
+      - name: 清理非 reports 目录的 HTML
+        run: |
+          find . -path ./monitors-ssw-driver-logistics/reviews -prune -o \
+            -name "*.html" -print | grep -v "/reports/" | xargs rm -f 2>/dev/null || true
+
+      - name: 检查 HTML 变更并提交
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "HTML 已是最新，无需提交"
+          else
+            git commit -m "chore: 自动同步 HTML（由 CI 生成）"
+            git push
+          fi
