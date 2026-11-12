@@ -126,7 +126,7 @@ jp-life-work/
 | 10-education-qualification | 资格地图、学习体系与教育投资、日本学校教育体系与子女教育、高等教育与技人国学历路径 | 日本资格与教育投资知识手册.md | prompt-education-update.md |
 | 11-language-japanese | JLPT N4/N3/N2 分阶段备考计划、JFT-Basic 备用方案、学习资源清单与进度跟踪 | 日本日语学习知识手册.md | prompt-language-update.md |
 | 12-culture-life | 职场文化与人际、生活指南与适应（含防灾应急）、医疗与健康、住房与安家、社会融入与社群 | 日本文化与生活知识手册.md | prompt-culture-life-update.md |
-| 13-regional-info | 地域选择框架、地域生活笔记 | 日本地域信息知识手册.md | prompt-regional-update.md |
+| 13-regional-info | 地域选择框架（含医疗/教育地域差视角）、地域生活笔记（含防灾情报渠道） | 日本地域信息知识手册.md | prompt-regional-update.md |
 
 ### 其他目录说明
 

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>11 文化与生活 · 动态更新提示词</title>
+<title>12 文化与生活 · 动态更新提示词</title>
 <style>
   body { max-width: 860px; margin: 2rem auto; padding: 0 1rem;
          font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
@@ -27,7 +27,7 @@
 </style>
 </head>
 <body>
-<h1 id="11-文化与生活-动态更新提示词">11 文化与生活 · 动态更新提示词</h1>
+<h1 id="12-文化与生活-动态更新提示词">12 文化与生活 · 动态更新提示词</h1>
 <blockquote>
 <p><strong>用途</strong>：周期性刷新「文化与生活」知识库，动态获取劳动文化制度、生活手续、自治体支援的最新官方口径，保持个人生活适应记录同步。可直接整体复制，替换顶部变量后提交给 AI 执行。</p>
 <p><strong>继承声明（三层体系）</strong>：本文件 = <a href="../../prompts/通用基座/prompt-generic-base.md">通用基座</a> × <a href="../../prompts/知识库主题更新/prompt-knowledge-topic-update-template.md">知识库主题更新类型模板</a> × 本主题专属配置。冲突时本文件优先。</p>
@@ -40,7 +40,7 @@
 {{CURRENT_DATE}}         = 本次运行日期 YYYY-MM-DD
 {{FRESHNESS_PRIORITY}}   = 数据时效优先级窗口（默认：制度类近 12 个月内优先；经验类标注记录日期）
 {{SOURCE_LANGUAGE_RULE}} = 制度类须日文官方原文；经验类不限（标注为个案）
-{{REGISTRY_PATH}}        = ../data/culture-life-indicator-registry.md —— 6 项指标活值登记册，每次运行先读后写
+{{REGISTRY_PATH}}        = ../data/culture-life-indicator-registry.md —— 7 项指标活值登记册，每次运行先读后写
 {{REVIEWS_DIR}}          = ../reviews/ —— 每期运行复盘存放处（可选）
 </code></pre>
 <hr />
@@ -155,6 +155,13 @@
 <td></td>
 <td>☐</td>
 </tr>
+<tr>
+<td>7</td>
+<td>UR 賃貸住宅申込收入基准（制度参数）</td>
+<td>UR 都市機構</td>
+<td></td>
+<td>☐</td>
+</tr>
 </tbody>
 </table>
 <blockquote>
@@ -185,7 +192,7 @@
 <li>[ ] 经验类内容全部标注为个案，未与制度类事实混存</li>
 <li>[ ] 与 09-politics-law、08-visa-immigration 的联动触发器正确</li>
 <li>[ ] 医疗章节未硬编码费率/上限，活值均落在 <code>{{REGISTRY_PATH}}</code></li>
-<li>[ ] 追踪表 6 项均已核对并填"是否更新"</li>
+<li>[ ] 追踪表 7 项均已核对并填"是否更新"</li>
 <li>[ ] <code>{{REGISTRY_PATH}}</code> 已读已写：追踪表"上次值"列取自登记册，变更摘要与登记册一致；prompt 模板自身无硬编码活值</li>
 </ul>
 <p><strong>结束提示词。</strong></p>
