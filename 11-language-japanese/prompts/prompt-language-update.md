@@ -1,8 +1,13 @@
 # 11 日语学习 · 动态更新提示词
 
+> **模板标识**：PRM-TOPIC-11
+> **适用场景**：`11-language-japanese` 知识手册的周期性增量更新（学习路线、N4/N3/N2 计划、资源、进度）
+> **版本**：v2026.11.12
+> **更新说明**：2026-11-12 考试日程/费用/考位的 SSOT 由 08 改锚 01 登记册 #3；N3/N2 章节更新要点补全；登记册回写限定主责项；移除 reviews 默认目录。
+>
 > **用途**：周期性刷新「日语学习」知识库，动态获取 JLPT、JFT-Basic 考试日程与费用的最新官方口径，保持学习进度跟踪同步。可直接整体复制，替换顶部变量后提交给 AI 执行。
 >
-> **继承声明（三层体系）**：本文件 = [通用基座](../../prompts/通用基座/prompt-generic-base.md) × [知识库主题更新类型模板](../../prompts/知识库主题更新/prompt-knowledge-topic-update-template.md) × 本主题专属配置。考试费用/日程数字以 [08-visa-immigration](../../08-visa-immigration/prompts/prompt-visa-immigration-update.md) 追踪表为单一事实源，本主题不重复维护；冲突时以本文件为准。
+> **继承声明（三层体系）**：本文件 = [通用基座](../../prompts/通用基座/prompt-generic-base.md) × [知识库主题更新类型模板](../../prompts/知识库主题更新/prompt-knowledge-topic-update-template.md) × 本主题专属配置。考试日程、费用、考位数字以 [01-ssw-driver 指标登记册](../../01-ssw-driver/data/ssw-driver-indicator-registry.md) 追踪项 #3 为单一事实源；考试类事实修正以 01-ssw-driver 最新报告文首"已修正事实清单"为锚。本主题只读引用，不得独立改值或回写。
 
 ---
 
@@ -11,13 +16,15 @@
 ```
 {{TOPIC_DIR}}            = 11-language-japanese（固定）
 {{HANDBOOK_PATH}}        = 11-language-japanese/reports/日本日语学习知识手册.md
+{{PREVIOUS_REPORT_PATH}} = 同上手册在本次运行前的上一版快照（首期以 `_baseline` 或 git 历史为回退锚）
 {{DOC_LIST}}             = 手册内对应章节（由主题提示词第五节声明）
 {{CURRENT_DATE}}         = 本次运行日期 YYYY-MM-DD
 {{FRESHNESS_PRIORITY}}   = 数据时效优先级窗口（默认：考试制度类近 12 个月内优先；个人进度标注记录日期）
 {{SOURCE_LANGUAGE_RULE}} = 考试制度类须日/英官方原文；学习方法类不限
-{{REGISTRY_PATH}}        = ../data/language-indicator-registry.md —— 4 项指标活值登记册，每次运行先读后写
-{{REVIEWS_DIR}}          = ../reviews/ —— 每期运行复盘存放处（可选）
+{{REGISTRY_PATH}}        = ../data/language-indicator-registry.md —— 4 项指标活值登记册；仅本主题主责项先读后写，外部 SSOT 项只读引用不回写
 ```
+
+（本主题未启用运行复盘：不设置 `{{REVIEWS_DIR}}`，运行时不得创建 `reviews/` 目录。）
 
 ---
 
@@ -25,7 +32,10 @@
 
 通用约束（逐点引用、事实与推断分离、口径标注等）自动继承通用规范第一至四节。本主题额外强制：
 
-1. **受众定位**：JLPT N4→N2 分阶段备考 + JFT-Basic 备用方案的学习计划库。与 08-visa-immigration（考试制度）、02-career-driver（现场日语）联动：考试费用/日程数字以 08-visa-immigration 追踪表为单一事实源，本主题不重复维护。
+1. **受众定位**：JLPT N4→N2 分阶段备考 + JFT-Basic 备用方案的学习计划库。与 08-visa-immigration（在留制度侧）、02-career-driver（现场日语）联动，但**考试日程/费用/考位活值一律以 01-ssw-driver 登记册 #3 为准**（只读引用）：日程、费用、考位三项分别锚定 #3，本主题不重复维护数值。
+   - 日程锚定：[01-ssw-driver 登记册 #3](../../01-ssw-driver/data/ssw-driver-indicator-registry.md#3)（日程）
+   - 费用锚定：[01-ssw-driver 登记册 #3](../../01-ssw-driver/data/ssw-driver-indicator-registry.md#3)（费用）
+   - 考位锚定：[01-ssw-driver 登记册 #3](../../01-ssw-driver/data/ssw-driver-indicator-registry.md#3)（考位/考场）
 
 ## 二、来源优先级（通用框架的本主题实例化，冲突时报双份并标注）
 
@@ -35,10 +45,12 @@
 
 ## 三、基线锚定（防止已修正事实回退）
 
-更新时必须**读取 `{{HANDBOOK_PATH}}`（单份知识手册）与受影响章节的当前版本**（含 `reports/archives/` 内历史版），继承其结构与全部已核实结论。本清单随每次修正持续追加：
+更新时必须**读取 `{{PREVIOUS_REPORT_PATH}}` 指定上一版快照**（含 `reports/archives/` 内历史版），继承其结构与全部已核实结论。本清单随每次修正持续追加：
+
+- 修正清单锚定：[01-ssw-driver 最新版报告](../../01-ssw-driver/reports/日本特定技能司机物流监测报告_v2026.11.12_5.md) 文首"已修正事实清单"（考试日程/费用类修正以该清单为准，本主题只读同步）
 
 ```
-【考试费用/日程类修正统一记入 08-visa-immigration 主题清单；本主题学习计划类修正追加于此：
+【考试费用/日程类修正统一记入 01-ssw-driver 最新报告文首清单；本主题学习计划类修正追加于此：
 - ❌（首期为空）】
 ```
 
@@ -63,10 +75,10 @@
 
 ```
 【导航与使用约定】更新：篇目状态与最近更新日期；保持：篇目结构（手册前部导航区，含更新日志）
-【01 总体学习路线与考试选择】动态获取：JLPT vs JFT-Basic 选择前提（费用/考场/频率，锚 08-visa-immigration 追踪表）；保持：路线框架
+【01 总体学习路线与考试选择】动态获取：JLPT vs JFT-Basic 选择前提（费用/考场/频率，锚 01-ssw-driver 登记册 #3）；保持：路线框架
 【02 N4 备考计划】更新：周计划完成状态；保持：语法/词汇清单
-【03 N3 备考计划】同上
-【04 N2 备考计划】同上
+【03 N3 备考计划】更新：周计划完成状态与 N3 模考记录（个人数据，注明日期）；保持：语法/词汇清单
+【04 N2 备考计划】更新：周计划完成状态与 N2 模考记录（个人数据，注明日期）；保持：语法/词汇清单
 【05 资源与工具清单】动态获取：教材版本、App 可用性、官方样题入口 URL 有效性；保持：资源分类
 【06 学习进度跟踪】更新：进度表、模考成绩、报考记录（个人数据，注明记录日期）
 ```
@@ -75,23 +87,25 @@
 
 ## 六、关键信息追踪表 — 每次运行逐项核对
 
-> prompt 模板内严禁填写活值；运行前从 `{{REGISTRY_PATH}}` 读取、运行后回写。登记册格式见通用基座五-A。
+> prompt 模板内严禁填写活值；活值维护口径见下方说明与通用基座五-A。
 
-| # | 信息项 | 优先数据源 | 上次值（运行前从 {{REGISTRY_PATH}} 读取填入） | 本次是否更新 |
+| # | 信息项 | 优先数据源 | 上次值（运行前从 {{PREVIOUS_REPORT_PATH}} 读取填入） | 本次是否更新 |
 |---|---|---|---|---|
 | 1 | JLPT 下一次考试报名窗口 | jees.or.jp / 各领馆文化中心 |  | ☐ |
 | 2 | JFT-Basic 考场次与考位 | prometric-jp.com/ssw |  | ☐ |
-| 3 | 当前学习进度（N4/N3/N2） | 自记录（06 文档） |  | ☐ |
+| 3 | 当前学习进度（N4/N3/N2） | 自记录（06 章 学习进度跟踪） |  | ☐ |
 | 4 | 主用教材版本 | 出版社页面 |  | ☐ |
 
-> 每次运行须逐项填写"是否更新"，未变动项保留登记册值并注明"截至 {{CURRENT_DATE}} 无更新"。**指标活值统一维护于 `{{REGISTRY_PATH}}`**（登记册格式见通用基座五-A）：运行前读登记册 → 核验 → 运行后回写登记册 → 回写手册内更新日志区与相关章节；prompt 模板内不重复维护数值。
+> 上表 1–3 项为外部主责项：日程锚定 [01-ssw-driver 登记册 #3](../../01-ssw-driver/data/ssw-driver-indicator-registry.md#3)（日程）、费用锚定 [01-ssw-driver 登记册 #3](../../01-ssw-driver/data/ssw-driver-indicator-registry.md#3)（费用）、考位锚定 [01-ssw-driver 登记册 #3](../../01-ssw-driver/data/ssw-driver-indicator-registry.md#3)（考位），均只读引用，不得独立回写；若与官方一手来源冲突，先回官方原文复核，再由 01-ssw-driver 主责更新。
+
+> 每次运行须逐项填写"是否更新"，未变动项保留基线值并注明"截至 {{CURRENT_DATE}} 无更新"。**活值统一维护于 `{{REGISTRY_PATH}}`（仅本主题主责项；外部 SSOT 项只读引用，不回写）**：先读取 `{{PREVIOUS_REPORT_PATH}}` 指定上一版快照做差异比较，再核验回写登记册 → 回写手册内更新日志区与相关章节；prompt 模板内不重复维护数值。
 
 ---
 
 ## 七、执行方式（建议）
 
 1. 启动 1–2 个并行研究子代理：① JLPT/JFT-Basic 考试报名与考场信息；② 教材版本与资源可用性。全部限定日/英来源、逐点引用，**每条数据必须附可直接访问的 URL**。
-2. 子代理返回后，由主代理读取 `{{HANDBOOK_PATH}}`（单份知识手册）与受影响章节当前版本做差异合并，**继承已修正事实、应用第四、五节更新要点**。
+2. 子代理返回后，由主代理读取 `{{PREVIOUS_REPORT_PATH}}` 指定上一版快照做差异合并，**继承已修正事实、应用第四、五节更新要点**。
 3. 对冲突数据保留双份引用；对无法核实项单列"待复核清单"。
 4. 回写完成后运行 `python prompts/tools/md2html.py 11-language-japanese/reports` 重新生成 HTML；运行 `python prompts/tools/archive_reports.py` 执行保留策略。
 
@@ -111,10 +125,11 @@
 
 通用自检清单见通用规范第八节。本主题额外确认：
 
-- [ ] 考试费用/日程数字未在本主题重复维护，以 08-visa-immigration 追踪表为准
-- [ ] JLPT vs JFT-Basic 选择前提的费用/考场/频率锚定 08-visa-immigration
+- [ ] 考试费用/日程/考位数字未在本主题重复维护，以 01-ssw-driver 登记册 #3 为准（只读）
+- [ ] JLPT vs JFT-Basic 选择前提的费用/考场/频率锚定 01-ssw-driver 登记册 #3
 - [ ] 学习社区经验全部标注为经验，未作事实引用
 - [ ] 追踪表 4 项均已核对并填"是否更新"
-- [ ] `{{REGISTRY_PATH}}` 已读已写：追踪表"上次值"列取自登记册，变更摘要与登记册一致；prompt 模板自身无硬编码活值
+- [ ] `{{REGISTRY_PATH}}` 已读已写（仅本主题主责项；外部 SSOT 项只读）：变更摘要与登记册一致；prompt 模板自身无硬编码活值
+- [ ] 未创建 `reviews/` 目录、未输出复盘（本主题未启用）
 
 **结束提示词。**
