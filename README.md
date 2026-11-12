@@ -5,6 +5,7 @@
 - **初期目标**：以**特定技能司机**进入日本物流行业。
 - **中期目标**：转向**仓储运营、运输管理、供应链协调、团队长/管理岗**。
 - **长期目标**：进入**物流技术、数字化、自动化、无人驾驶相关岗位**，并规划**在留资格切换（司机分野无 2 号）、永住及长期定居路径**。
+- **主题阅读**：[主题总览](index.html)（分类、章节详情与检索） · [汇总阅读](library.html)（13 个主题连续阅读）
 - **周期更新看板**：[updates.md](updates.md)（各主题到期状态、版本链与追溯入口，每周自动刷新）
 
 ## 路线图
@@ -56,6 +57,7 @@
 ```text
 jp-life-work/
 ├── README.md                          # 项目总览 + 五阶段路线图 + 目录与体系说明
+├── index.html / library.html          # 主题总览 + 汇总阅读（脚本生成，勿手工编辑）
 ├── updates.md / updates.html          # 周期更新看板（脚本生成，勿手工编辑）
 ├── 内容边界规范.md                     # 内容归位、SSOT、重复判定与主题边界卡
 ├── 内容更新周期标准.md                 # 8 类主题周期标准、调整规则与 13 主题映射
@@ -88,7 +90,7 @@ jp-life-work/
     ├── 职业就业调研/                   #   第 2 层类型模板：行业调研 + 落地建议类
     ├── 市场指标监测/                   #   第 2 层类型模板：指标台账 + 信号判定类
     ├── 知识库主题更新/                 #   第 2 层类型模板：编号主题单份知识手册增量回写类
-    └── tools/                         #   全库共用脚本（md2html / validate / archive / merge）
+    └── tools/                         #   全库共用脚本（md2html / build_library / validate / archive / merge）
 ```
 
 > **层级规则**：仓库根为第 0 层；主题目录为第 1 层；`data/`、`prompts/`、`reports/` 为第 2 层；`reports/archives/` 为第 3 层。不新增分组目录，分组由编号段表达：01 监测 → 02–03 职业 → 04–06 行业 → 07 环境 → 08–09 制度 → 10–11 成长 → 12–13 生活。
@@ -146,8 +148,9 @@ jp-life-work/
 - **文档格式**：源文档统一使用 Markdown（`.md`），按主题存放在 `NN-*` 主题目录下。
 - **单文档约束**：每个知识库主题仅维护**单份知识手册 `.md`** 与同名 `.html`，禁止同一主题拆分为多份零散 `.md`。新增/更新内容直接在知识手册内对应章节修改，不新建章节文件。
 - **报告输出**：`python prompts/tools/md2html.py` 将各 `reports/` 下的 md 转为同名 HTML，与 md 同目录存放并随源文件入库。
+- **聚合页面**：`python prompts/tools/build_library.py` 从 13 个主题主文档生成 [主题总览](index.html) 与 [汇总阅读](library.html)；`python prompts/tools/build_library.py --check` 仅检查生成结果是否最新，不写文件。
 - **内容边界**：内容归位、事实单一来源（SSOT）、重复判定与四主题边界卡见 [内容边界规范.md](内容边界规范.md)；目录结构与路线图以本 README 为准，规范不重复维护。
-- **规范校验**：`python prompts/tools/validate.py` 执行 10 项规范一致性校验（单文档约束、目录结构、引用格式、锚点链接、活值硬编码等）。退出码：0=通过，1=错误（需修复），2=仅警告。
+- **规范校验**：`python prompts/tools/validate.py` 执行 11 项规范一致性校验（单文档约束、目录结构、引用格式、锚点链接、聚合页面同步、活值硬编码等）。退出码：0=通过，1=错误（需修复），2=仅警告。
 - **周期排期**：`python prompts/tools/update_scheduler.py status` 查看到期状态；`dispatch` 为到期主题创建工单；`dashboard` 刷新 [updates.md](updates.md)。排期在 [prompts/schedule.json](prompts/schedule.json) 配置。
 - **脚本环境**：`prompts/tools/` 下的共用脚本基于 Python 运行（依赖见 requirements.txt）。
 
@@ -179,5 +182,5 @@ AI IDE / 本人 执行工单
 | Workflow | 触发 | 作用 |
 |----------|------|------|
 | [规范校验](.github/workflows/validate.yml) | push/PR 到 main | 运行 `validate.py`，错误阻断合并，警告放行 |
-| [HTML 同步](.github/workflows/html-sync.yml) | reports/*.md 变更 | 归档 → 重新生成 HTML → 规范校验 → 提交 |
+| [HTML 同步](.github/workflows/html-sync.yml) | reports/*.md、排期或聚合构建器变更 | 归档 → 重新生成独立及聚合 HTML → 规范校验 → 提交 |
 | [周期更新调度](.github/workflows/scheduled-update.yml) | 每周一 cron / 手动 | 计算到期主题、创建工单、刷新看板、失败告警 |

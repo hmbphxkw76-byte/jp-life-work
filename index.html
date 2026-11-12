@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>主题总览｜日本生活与工作知识库</title>
+<style>
+  body { max-width: 860px; margin: 2rem auto; padding: 0 1rem;
+         font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+         line-height: 1.7; color: #222; }
+  pre { background: #f5f5f5; padding: 0.8rem; overflow-x: auto; border-radius: 4px; }
+  code { background: #f5f5f5; padding: 0.1em 0.3em; border-radius: 3px; }
+  pre code { padding: 0; background: none; }
+  table { border-collapse: collapse; }
+  th, td { border: 1px solid #ccc; padding: 0.4em 0.7em; }
+  table a[title^="来源"] { color: inherit; text-decoration: none;
+    word-break: normal; overflow-wrap: anywhere;
+    border-bottom: 1px dotted #b8b0a0; }
+  table a[title^="来源"] strong, table a[title^="来源"] em,
+  table a[title^="来源"] code { color: inherit; background: none; }
+  table a[title^="来源"]:hover { color: #1a5f5a; background: rgba(26,95,90,.09);
+    border-bottom: 1px solid currentColor; }
+  table a[title^="来源"]::after { content: "↗"; margin-left: 3px;
+    font-size: .76em; opacity: 0; }
+  table a[title^="来源"]:hover::after { opacity: .85; }
+  blockquote { border-left: 4px solid #ccc; margin-left: 0; padding-left: 1em; color: #555; }
+
+:root { --accent: #1a5f5a; --ink: #222; --muted: #66736f; --line: #d9e2df; --paper: #fff; --wash: #f4f7f6; }
+html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+body.index-page, body.library-page { max-width: none; margin: 0; padding: 0; background: var(--wash); color: var(--ink); }
+.site-header { position: sticky; top: 0; z-index: 30; background: rgba(255,255,255,.97); border-bottom: 1px solid var(--line); }
+.topbar { max-width: 1200px; margin: 0 auto; padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; gap: 18px; }
+.brand { color: var(--accent); font-size: 18px; font-weight: 700; white-space: nowrap; }
+.topnav { display: flex; flex-wrap: wrap; gap: 16px; font-size: 14px; }
+.topnav a[aria-current="page"] { font-weight: 700; border-bottom: 2px solid var(--accent); }
+.page-main { max-width: 1200px; margin: 0 auto; padding: 28px 24px 48px; }
+.hero { margin-bottom: 22px; }
+.hero h1 { margin: 0 0 8px; padding: 0; border: 0; font-size: 28px; }
+.hero p { margin: 0; color: var(--muted); }
+.search-shell { position: relative; max-width: 820px; margin: 18px 0; }
+.search-input { width: 100%; padding: 12px 16px; border: 1px solid #b9c9c4; border-radius: 8px; font: inherit; background: #fff; }
+.search-input:focus { outline: 3px solid rgba(26,95,90,.18); border-color: var(--accent); }
+.search-hint { margin: 6px 0 0; color: var(--muted); font-size: 12px; }
+.search-results { display: none; position: absolute; z-index: 40; top: calc(100% - 24px); left: 0; right: 0; max-height: 420px; overflow-y: auto; padding: 8px; background: #fff; border: 1px solid var(--line); border-radius: 8px; box-shadow: 0 10px 30px rgba(20,50,45,.14); }
+.search-results.is-visible { display: block; }
+.search-result { display: block; padding: 10px 12px; border-radius: 5px; color: var(--ink); }
+.search-result:hover, .search-result:focus { background: #edf5f3; text-decoration: none; }
+.search-result strong, .search-result span { display: block; }
+.search-result span { color: var(--muted); font-size: 12px; line-height: 1.55; }
+.search-empty { padding: 14px; margin: 0; color: var(--muted); }
+.category-nav { display: flex; flex-wrap: wrap; gap: 8px; margin: 22px 0; }
+.category-nav a { padding: 6px 12px; border: 1px solid var(--line); border-radius: 999px; background: #fff; font-size: 13px; }
+.category-nav a.is-active { color: #fff; background: var(--accent); border-color: var(--accent); }
+.category-section { margin: 30px 0; scroll-margin-top: 82px; }
+.category-heading { margin: 0 0 14px; padding-left: 10px; border-left: 4px solid var(--accent); font-size: 20px; }
+.topic-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+.topic-card { min-width: 0; padding: 20px; background: var(--paper); border: 1px solid var(--line); border-radius: 10px; scroll-margin-top: 88px; }
+.topic-card:target { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(26,95,90,.18); }
+.topic-card-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+.topic-title { margin: 0; font-size: 18px; line-height: 1.5; }
+.topic-number { color: var(--accent); margin-right: 6px; }
+.topic-category { flex: none; padding: 2px 8px; border-radius: 4px; background: #edf5f3; color: var(--accent); font-size: 12px; }
+.topic-description { min-height: 3.4em; margin: 12px 0; color: #4d5955; }
+.topic-meta { color: var(--muted); font-size: 12px; }
+.card-actions { display: flex; flex-wrap: wrap; gap: 10px; margin: 16px 0 12px; }
+.button { display: inline-block; padding: 7px 12px; border: 1px solid var(--accent); border-radius: 6px; font-size: 13px; }
+.button-primary { color: #fff; background: var(--accent); }
+.button-secondary { color: var(--accent); background: #fff; }
+.topic-details { border-top: 1px solid #edf1ef; padding-top: 10px; }
+.topic-details summary, .topic-local-toc summary { cursor: pointer; color: var(--accent); font-weight: 700; }
+.chapter-list { margin: 8px 0 0; padding-left: 0; list-style: none; }
+.chapter-list li { margin: 0; }
+.chapter-list a { display: block; padding: 5px 8px; border-radius: 4px; font-size: 13px; }
+.chapter-list a:hover { background: #edf5f3; }
+.library-layout { display: grid; grid-template-columns: 250px minmax(0, 1fr); gap: 24px; align-items: start; }
+.library-sidebar { position: sticky; top: 84px; max-height: calc(100vh - 104px); overflow-y: auto; }
+.topic-navigation { padding: 14px; background: #fff; border: 1px solid var(--line); border-radius: 8px; }
+.topic-navigation summary { cursor: pointer; color: var(--accent); font-weight: 700; }
+.topic-navigation ul { margin: 10px 0 0; padding-left: 0; list-style: none; }
+.topic-navigation li { margin: 0; }
+.topic-navigation a { display: block; padding: 5px 7px; border-radius: 4px; font-size: 13px; line-height: 1.5; }
+.topic-navigation a:hover { background: #edf5f3; }
+.library-content { min-width: 0; }
+.topic-document { min-width: 0; margin-bottom: 28px; padding: 28px; background: #fff; border: 1px solid var(--line); border-radius: 10px; scroll-margin-top: 82px; }
+.topic-document:target { border-color: var(--accent); }
+.topic-toolbar { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; padding-bottom: 12px; border-bottom: 1px solid var(--line); color: var(--muted); font-size: 12px; }
+.topic-toolbar-links { display: flex; flex-wrap: wrap; gap: 12px; }
+.topic-local-toc { margin: 18px 0; padding: 12px 16px; background: #f4f7f6; border-radius: 6px; }
+.topic-local-toc .chapter-list { columns: 2; column-gap: 24px; }
+.topic-body { min-width: 0; }
+.topic-body p, .topic-body li { overflow-wrap: anywhere; }
+.topic-body h1:first-child { margin-top: 18px; }
+.topic-body h1, .topic-body h2, .topic-body h3, .topic-body h4, .topic-body h5, .topic-body h6 { scroll-margin-top: 86px; }
+.topic-body h1:target, .topic-body h2:target, .topic-body h3:target, .topic-body h4:target, .topic-body h5:target, .topic-body h6:target { background: #fff3bf; outline: 3px solid #fff3bf; }
+.table-wrap { max-width: 100%; overflow-x: auto; }
+.table-wrap table { min-width: 480px; width: 100%; }
+.topic-body img { height: auto; }
+.noscript-note { padding: 10px 14px; background: #fff3bf; border: 1px solid #e5d272; }
+[hidden] { display: none !important; }
+@media (min-width: 761px) {
+  .topic-navigation > .navigation-content { display: block; }
+  .topic-navigation > summary { pointer-events: none; list-style: none; }
+}
+@media (max-width: 760px) {
+  html { scroll-padding-top: 18px; }
+  .site-header { position: static; }
+  .topbar { padding: 12px 16px; align-items: flex-start; flex-direction: column; gap: 8px; }
+  .page-main { padding: 20px 14px 36px; }
+  .hero h1 { font-size: 24px; }
+  .topic-grid { grid-template-columns: minmax(0, 1fr); }
+  .topic-description { min-height: 0; }
+  .library-layout { display: block; }
+  .library-sidebar { position: static; max-height: none; margin-bottom: 18px; }
+  .topic-document { padding: 18px 15px; }
+  .topic-local-toc .chapter-list { columns: 1; }
+  .search-results { position: static; margin-top: 6px; max-height: 360px; }
+}
+@media print {
+  .site-header, .search-shell, .category-nav, .library-sidebar, .card-actions, .topic-toolbar { display: none !important; }
+  body.index-page, body.library-page { background: #fff; }
+  .library-layout { display: block; }
+  .topic-document { border: 0; padding: 0; break-before: page; }
+}
+
+</style>
+</head>
+<body class="index-page">
+
+<header class="site-header">
+  <div class="topbar">
+    <a class="brand" href="index.html">日本生活与工作知识库</a>
+    <nav class="topnav" aria-label="主导航"><a href="index.html" aria-current="page">主题总览</a><a href="library.html">汇总阅读</a><a href="updates.html">周期更新看板</a></nav>
+  </div>
+</header>
+<main class="page-main" id="topics">
+  <div class="hero"><h1>主题总览</h1><p>集中浏览 13 个当前主题，展开章节详情，或进入连续汇总阅读。历史归档不在此重复收录。</p></div>
+  <div class="search-shell">
+    <input class="search-input" id="site-search" type="search" placeholder="搜索主题、分类或章节，例如：司机 薪资" autocomplete="off">
+    <p class="search-hint">按 / 快速聚焦，按 Esc 清空；最多展示 30 条结果。</p>
+    <div class="search-results" id="search-results" role="region" aria-label="搜索结果" aria-live="polite"></div>
+  </div>
+  <nav class="category-nav" aria-label="主题分类"><a href="#topics" data-filter="" class="is-active">全部</a><a href="#category-1" data-filter="监测动态">监测动态</a><a href="#category-2" data-filter="职业就业">职业就业</a><a href="#category-3" data-filter="行业技术">行业技术</a><a href="#category-4" data-filter="经济环境">经济环境</a><a href="#category-5" data-filter="制度政策">制度政策</a><a href="#category-6" data-filter="学习成长">学习成长</a><a href="#category-7" data-filter="生活地域">生活地域</a></nav>
+  
+<section class="category-section" id="category-1">
+  <h2 class="category-heading">监测动态 <small>1 个主题</small></h2>
+  <div class="topic-grid">
+<article class="topic-card" id="topic-01-ssw-driver" data-category="监测动态">
+  <div class="topic-card-header">
+    <h3 class="topic-title"><span class="topic-number">01</span>特定技能司机·物流·智能驾驶监测</h3>
+    <span class="topic-category">监测动态</span>
+  </div>
+  <p class="topic-description">政策、薪资、供需、资格、技术与风险的 7 日周期监测</p>
+  <div class="topic-meta">v2026.11.12_5 · 周期监测 · 10 个主要章节</div>
+  <div class="card-actions">
+    <a class="button button-primary" href="library.html#topic-01-ssw-driver">在汇总页阅读 →</a>
+    <a class="button button-secondary" href="01-ssw-driver/reports/%E6%97%A5%E6%9C%AC%E7%89%B9%E5%AE%9A%E6%8A%80%E8%83%BD%E5%8F%B8%E6%9C%BA%E7%89%A9%E6%B5%81%E7%9B%91%E6%B5%8B%E6%8A%A5%E5%91%8A_v2026.11.12_5.html">查看独立原文</a>
+  </div>
+  <details class="topic-details">
+    <summary>主题详情与章节直达</summary>
+    <ul class="chapter-list"><li><a class="chapter-link" data-search="特定技能司机·物流·智能驾驶监测 【已修正事实清单】（本清单随每次修正持续追加，后续版本不得回退）" href="library.html#topic-01-ssw-driver--已修正事实清单-本清单随每次修正持续追加-后续版本不得回退">【已修正事实清单】（本清单随每次修正持续追加，后续版本不得回退）</a></li><li><a class="chapter-link" data-search="特定技能司机·物流·智能驾驶监测 数据变更摘要（14 项追踪指标，上期值＝v2026.11.11_4）" href="library.html#topic-01-ssw-driver--数据变更摘要-14-项追踪指标-上期值-v2026-11-11_4">数据变更摘要（14 项追踪指标，上期值＝v2026.11.11_4）</a></li><li><a class="chapter-link" data-search="特定技能司机·物流·智能驾驶监测 一、核心结论（摘要，相对上一版的增量判断）" href="library.html#topic-01-ssw-driver--一-核心结论-摘要-相对上一版的增量判断">一、核心结论（摘要，相对上一版的增量判断）</a></li><li><a class="chapter-link" data-search="特定技能司机·物流·智能驾驶监测 二、特定技能制度与签证路径" href="library.html#topic-01-ssw-driver--二-特定技能制度与签证路径">二、特定技能制度与签证路径</a></li><li><a class="chapter-link" data-search="特定技能司机·物流·智能驾驶监测 三、司机供需与薪资待遇" href="library.html#topic-01-ssw-driver--三-司机供需与薪资待遇">三、司机供需与薪资待遇</a></li><li><a class="chapter-link" data-search="特定技能司机·物流·智能驾驶监测 四、物流行业态势" href="library.html#topic-01-ssw-driver--四-物流行业态势">四、物流行业态势</a></li><li><a class="chapter-link" data-search="特定技能司机·物流·智能驾驶监测 五、智能驾驶与未来展望" href="library.html#topic-01-ssw-driver--五-智能驾驶与未来展望">五、智能驾驶与未来展望</a></li><li><a class="chapter-link" data-search="特定技能司机·物流·智能驾驶监测 六、就业落地建议（结论章）" href="library.html#topic-01-ssw-driver--六-就业落地建议-结论章">六、就业落地建议（结论章）</a></li><li><a class="chapter-link" data-search="特定技能司机·物流·智能驾驶监测 七、数据可靠性与局限说明" href="library.html#topic-01-ssw-driver--七-数据可靠性与局限说明">七、数据可靠性与局限说明</a></li><li><a class="chapter-link" data-search="特定技能司机·物流·智能驾驶监测 八、参考来源清单（本版新增条目＋继承说明）" href="library.html#topic-01-ssw-driver--八-参考来源清单-本版新增条目-继承说明">八、参考来源清单（本版新增条目＋继承说明）</a></li></ul>
+  </details>
+</article></div>
+</section>
+<section class="category-section" id="category-2">
+  <h2 class="category-heading">职业就业 <small>2 个主题</small></h2>
+  <div class="topic-grid">
+<article class="topic-card" id="topic-02-career-driver" data-category="职业就业">
+  <div class="topic-card-header">
+    <h3 class="topic-title"><span class="topic-number">02</span>司机岗位执行手册</h3>
+    <span class="topic-category">职业就业</span>
+  </div>
+  <p class="topic-description">岗位全景、薪资工时、安全规范、求职渠道与现场工作记录</p>
+  <div class="topic-meta">v1.0 · 知识手册 · 6 个主要章节</div>
+  <div class="card-actions">
+    <a class="button button-primary" href="library.html#topic-02-career-driver">在汇总页阅读 →</a>
+    <a class="button button-secondary" href="02-career-driver/reports/%E6%97%A5%E6%9C%AC%E5%8F%B8%E6%9C%BA%E8%81%8C%E4%B8%9A%E7%9F%A5%E8%AF%86%E6%89%8B%E5%86%8C.html">查看独立原文</a>
+  </div>
+  <details class="topic-details">
+    <summary>主题详情与章节直达</summary>
+    <ul class="chapter-list"><li><a class="chapter-link" data-search="司机岗位执行手册 01 司机岗位全景" href="library.html#topic-02-career-driver--01-司机岗位全景">01 司机岗位全景</a></li><li><a class="chapter-link" data-search="司机岗位执行手册 02 薪资结构与工时合规" href="library.html#topic-02-career-driver--02-薪资结构与工时合规">02 薪资结构与工时合规</a></li><li><a class="chapter-link" data-search="司机岗位执行手册 03 安全规范与现场制度" href="library.html#topic-02-career-driver--03-安全规范与现场制度">03 安全规范与现场制度</a></li><li><a class="chapter-link" data-search="司机岗位执行手册 04 现场经验积累清单" href="library.html#topic-02-career-driver--04-现场经验积累清单">04 现场经验积累清单</a></li><li><a class="chapter-link" data-search="司机岗位执行手册 05 求职渠道与简历面试" href="library.html#topic-02-career-driver--05-求职渠道与简历面试">05 求职渠道与简历面试</a></li><li><a class="chapter-link" data-search="司机岗位执行手册 06 实际工作条件记录" href="library.html#topic-02-career-driver--06-实际工作条件记录">06 实际工作条件记录</a></li></ul>
+  </details>
+</article>
+<article class="topic-card" id="topic-03-career-management" data-category="职业就业">
+  <div class="topic-card-header">
+    <h3 class="topic-title"><span class="topic-number">03</span>管理岗过渡手册</h3>
+    <span class="topic-category">职业就业</span>
+  </div>
+  <p class="topic-description">运行管理者资格、运营组织、晋升通道与五年转型能力档案</p>
+  <div class="topic-meta">v1.0 · 知识手册 · 5 个主要章节</div>
+  <div class="card-actions">
+    <a class="button button-primary" href="library.html#topic-03-career-management">在汇总页阅读 →</a>
+    <a class="button button-secondary" href="03-career-management/reports/%E6%97%A5%E6%9C%AC%E7%AE%A1%E7%90%86%E5%B2%97%E8%BF%87%E6%B8%A1%E7%9F%A5%E8%AF%86%E6%89%8B%E5%86%8C.html">查看独立原文</a>
+  </div>
+  <details class="topic-details">
+    <summary>主题详情与章节直达</summary>
+    <ul class="chapter-list"><li><a class="chapter-link" data-search="管理岗过渡手册 01 管理岗地图与路径评估" href="library.html#topic-03-career-management--01-管理岗地图与路径评估">01 管理岗地图与路径评估</a></li><li><a class="chapter-link" data-search="管理岗过渡手册 02 业务知识体系" href="library.html#topic-03-career-management--02-业务知识体系">02 业务知识体系</a></li><li><a class="chapter-link" data-search="管理岗过渡手册 03 管理岗日语与沟通" href="library.html#topic-03-career-management--03-管理岗日语与沟通">03 管理岗日语与沟通</a></li><li><a class="chapter-link" data-search="管理岗过渡手册 04 管理岗过渡学习计划" href="library.html#topic-03-career-management--04-管理岗过渡学习计划">04 管理岗过渡学习计划</a></li><li><a class="chapter-link" data-search="管理岗过渡手册 05 成果档案与晋升材料" href="library.html#topic-03-career-management--05-成果档案与晋升材料">05 成果档案与晋升材料</a></li></ul>
+  </details>
+</article></div>
+</section>
+<section class="category-section" id="category-3">
+  <h2 class="category-heading">行业技术 <small>3 个主题</small></h2>
+  <div class="topic-grid">
+<article class="topic-card" id="topic-04-industry-logistics" data-category="行业技术">
+  <div class="topic-card-header">
+    <h3 class="topic-title"><span class="topic-number">04</span>物流产业与赛道</h3>
+    <span class="topic-category">行业技术</span>
+  </div>
+  <p class="topic-description">冷链、末端配送、医药物流、海外仓、绿色物流与产业图谱</p>
+  <div class="topic-meta">v1.0 · 知识手册 · 4 个主要章节</div>
+  <div class="card-actions">
+    <a class="button button-primary" href="library.html#topic-04-industry-logistics">在汇总页阅读 →</a>
+    <a class="button button-secondary" href="04-industry-logistics/reports/%E6%97%A5%E6%9C%AC%E7%89%A9%E6%B5%81%E8%A1%8C%E4%B8%9A%E7%9F%A5%E8%AF%86%E6%89%8B%E5%86%8C.html">查看独立原文</a>
+  </div>
+  <details class="topic-details">
+    <summary>主题详情与章节直达</summary>
+    <ul class="chapter-list"><li><a class="chapter-link" data-search="物流产业与赛道 01 日本物流产业概览" href="library.html#topic-04-industry-logistics--01-日本物流产业概览">01 日本物流产业概览</a></li><li><a class="chapter-link" data-search="物流产业与赛道 02 增长赛道：EC、冷链、3PL" href="library.html#topic-04-industry-logistics--02-增长赛道-ec-冷链-3pl">02 增长赛道：EC、冷链、3PL</a></li><li><a class="chapter-link" data-search="物流产业与赛道 03 自动化与技术趋势" href="library.html#topic-04-industry-logistics--03-自动化与技术趋势">03 自动化与技术趋势</a></li><li><a class="chapter-link" data-search="物流产业与赛道 04 行业数据跟踪" href="library.html#topic-04-industry-logistics--04-行业数据跟踪">04 行业数据跟踪</a></li></ul>
+  </details>
+</article>
+<article class="topic-card" id="topic-05-industry-autonomous" data-category="行业技术">
+  <div class="topic-card-header">
+    <h3 class="topic-title"><span class="topic-number">05</span>自动驾驶与自动化</h3>
+    <span class="topic-category">行业技术</span>
+  </div>
+  <p class="topic-description">L2–L4 技术、TaaS 商业化、监管沙盒与场景替代节奏</p>
+  <div class="topic-meta">v1.0 · 知识手册 · 4 个主要章节</div>
+  <div class="card-actions">
+    <a class="button button-primary" href="library.html#topic-05-industry-autonomous">在汇总页阅读 →</a>
+    <a class="button button-secondary" href="05-industry-autonomous/reports/%E6%97%A5%E6%9C%AC%E8%87%AA%E5%8A%A8%E9%A9%BE%E9%A9%B6%E4%B8%8E%E8%87%AA%E5%8A%A8%E5%8C%96%E7%9F%A5%E8%AF%86%E6%89%8B%E5%86%8C.html">查看独立原文</a>
+  </div>
+  <details class="topic-details">
+    <summary>主题详情与章节直达</summary>
+    <ul class="chapter-list"><li><a class="chapter-link" data-search="自动驾驶与自动化 01 自动驾驶技术路线与时间表" href="library.html#topic-05-industry-autonomous--01-自动驾驶技术路线与时间表">01 自动驾驶技术路线与时间表</a></li><li><a class="chapter-link" data-search="自动驾驶与自动化 02 法规与许可制度" href="library.html#topic-05-industry-autonomous--02-法规与许可制度">02 法规与许可制度</a></li><li><a class="chapter-link" data-search="自动驾驶与自动化 03 仓储自动化与无人配送" href="library.html#topic-05-industry-autonomous--03-仓储自动化与无人配送">03 仓储自动化与无人配送</a></li><li><a class="chapter-link" data-search="自动驾驶与自动化 04 个人技能对接与机会" href="library.html#topic-05-industry-autonomous--04-个人技能对接与机会">04 个人技能对接与机会</a></li></ul>
+  </details>
+</article>
+<article class="topic-card" id="topic-06-industry-technology" data-category="行业技术">
+  <div class="topic-card-header">
+    <h3 class="topic-title"><span class="topic-number">06</span>技术与数字化</h3>
+    <span class="topic-category">行业技术</span>
+  </div>
+  <p class="topic-description">AI 调度、TMS/WMS、数字孪生、网络安全与转型工具评估</p>
+  <div class="topic-meta">v1.0 · 知识手册 · 3 个主要章节</div>
+  <div class="card-actions">
+    <a class="button button-primary" href="library.html#topic-06-industry-technology">在汇总页阅读 →</a>
+    <a class="button button-secondary" href="06-industry-technology/reports/%E6%97%A5%E6%9C%AC%E6%8A%80%E6%9C%AF%E4%B8%8E%E6%95%B0%E5%AD%97%E5%8C%96%E7%9F%A5%E8%AF%86%E6%89%8B%E5%86%8C.html">查看独立原文</a>
+  </div>
+  <details class="topic-details">
+    <summary>主题详情与章节直达</summary>
+    <ul class="chapter-list"><li><a class="chapter-link" data-search="技术与数字化 01 物流数字化技能地图" href="library.html#topic-06-industry-technology--01-物流数字化技能地图">01 物流数字化技能地图</a></li><li><a class="chapter-link" data-search="技术与数字化 02 数字化岗位与转型路径" href="library.html#topic-06-industry-technology--02-数字化岗位与转型路径">02 数字化岗位与转型路径</a></li><li><a class="chapter-link" data-search="技术与数字化 03 日本数字化劳动市场与岗位行情" href="library.html#topic-06-industry-technology--03-日本数字化劳动市场与岗位行情">03 日本数字化劳动市场与岗位行情</a></li></ul>
+  </details>
+</article></div>
+</section>
+<section class="category-section" id="category-4">
+  <h2 class="category-heading">经济环境 <small>1 个主题</small></h2>
+  <div class="topic-grid">
+<article class="topic-card" id="topic-07-economy-finance" data-category="经济环境">
+  <div class="topic-card-header">
+    <h3 class="topic-title"><span class="topic-number">07</span>经济与财务</h3>
+    <span class="topic-category">经济环境</span>
+  </div>
+  <p class="topic-description">日元汇率、物价税负、社会保险、年金医疗、住房与长期财务</p>
+  <div class="topic-meta">v1.0 · 知识手册 · 4 个主要章节</div>
+  <div class="card-actions">
+    <a class="button button-primary" href="library.html#topic-07-economy-finance">在汇总页阅读 →</a>
+    <a class="button button-secondary" href="07-economy-finance/reports/%E6%97%A5%E6%9C%AC%E7%BB%8F%E6%B5%8E%E4%B8%8E%E8%B4%A2%E5%8A%A1%E7%9F%A5%E8%AF%86%E6%89%8B%E5%86%8C.html">查看独立原文</a>
+  </div>
+  <details class="topic-details">
+    <summary>主题详情与章节直达</summary>
+    <ul class="chapter-list"><li><a class="chapter-link" data-search="经济与财务 01 收入结构与薪资行情" href="library.html#topic-07-economy-finance--01-收入结构与薪资行情">01 收入结构与薪资行情</a></li><li><a class="chapter-link" data-search="经济与财务 02 生活成本与储蓄规划" href="library.html#topic-07-economy-finance--02-生活成本与储蓄规划">02 生活成本与储蓄规划</a></li><li><a class="chapter-link" data-search="经济与财务 03 税务社保年金" href="library.html#topic-07-economy-finance--03-税务社保年金">03 税务社保年金</a></li><li><a class="chapter-link" data-search="经济与财务 04 长期财务规划" href="library.html#topic-07-economy-finance--04-长期财务规划">04 长期财务规划</a></li></ul>
+  </details>
+</article></div>
+</section>
+<section class="category-section" id="category-5">
+  <h2 class="category-heading">制度政策 <small>2 个主题</small></h2>
+  <div class="topic-grid">
+<article class="topic-card" id="topic-08-visa-immigration" data-category="制度政策">
+  <div class="topic-card-header">
+    <h3 class="topic-title"><span class="topic-number">08</span>签证与在留资格</h3>
+    <span class="topic-category">制度政策</span>
+  </div>
+  <p class="topic-description">特定技能、技人国、经营管理、永住规划、家属带同与在留变更</p>
+  <div class="topic-meta">v1.0 · 知识手册 · 9 个主要章节</div>
+  <div class="card-actions">
+    <a class="button button-primary" href="library.html#topic-08-visa-immigration">在汇总页阅读 →</a>
+    <a class="button button-secondary" href="08-visa-immigration/reports/%E6%97%A5%E6%9C%AC%E7%AD%BE%E8%AF%81%E4%B8%8E%E5%9C%A8%E7%95%99%E8%B5%84%E6%A0%BC%E7%9F%A5%E8%AF%86%E6%89%8B%E5%86%8C.html">查看独立原文</a>
+  </div>
+  <details class="topic-details">
+    <summary>主题详情与章节直达</summary>
+    <ul class="chapter-list"><li><a class="chapter-link" data-search="签证与在留资格 01 特定技能制度概览" href="library.html#topic-08-visa-immigration--01-特定技能制度概览">01 特定技能制度概览</a></li><li><a class="chapter-link" data-search="签证与在留资格 02 特定技能1号-自动车运送业" href="library.html#topic-08-visa-immigration--02-特定技能1号-自动车运送业">02 特定技能1号-自动车运送业</a></li><li><a class="chapter-link" data-search="签证与在留资格 03 考试与日语要求" href="library.html#topic-08-visa-immigration--03-考试与日语要求">03 考试与日语要求</a></li><li><a class="chapter-link" data-search="签证与在留资格 04 申请流程与材料" href="library.html#topic-08-visa-immigration--04-申请流程与材料">04 申请流程与材料</a></li><li><a class="chapter-link" data-search="签证与在留资格 05 特定技能2号与升级路径" href="library.html#topic-08-visa-immigration--05-特定技能2号与升级路径">05 特定技能2号与升级路径</a></li><li><a class="chapter-link" data-search="签证与在留资格 06 育成就劳制度与新动向" href="library.html#topic-08-visa-immigration--06-育成就劳制度与新动向">06 育成就劳制度与新动向</a></li><li><a class="chapter-link" data-search="签证与在留资格 07 永住与长期在留规划" href="library.html#topic-08-visa-immigration--07-永住与长期在留规划">07 永住与长期在留规划</a></li><li><a class="chapter-link" data-search="签证与在留资格 08 家属带同与家庭规划" href="library.html#topic-08-visa-immigration--08-家属带同与家庭规划">08 家属带同与家庭规划</a></li><li><a class="chapter-link" data-search="签证与在留资格 09 政策更新日志" href="library.html#topic-08-visa-immigration--09-政策更新日志">09 政策更新日志</a></li></ul>
+  </details>
+</article>
+<article class="topic-card" id="topic-09-politics-law" data-category="制度政策">
+  <div class="topic-card-header">
+    <h3 class="topic-title"><span class="topic-number">09</span>政治与法规</h3>
+    <span class="topic-category">制度政策</span>
+  </div>
+  <p class="topic-description">雇佣解约、劳动监察、年金、灾害法与司法救济</p>
+  <div class="topic-meta">v1.0 · 知识手册 · 3 个主要章节</div>
+  <div class="card-actions">
+    <a class="button button-primary" href="library.html#topic-09-politics-law">在汇总页阅读 →</a>
+    <a class="button button-secondary" href="09-politics-law/reports/%E6%97%A5%E6%9C%AC%E6%94%BF%E6%B2%BB%E4%B8%8E%E6%B3%95%E8%A7%84%E7%9F%A5%E8%AF%86%E6%89%8B%E5%86%8C.html">查看独立原文</a>
+  </div>
+  <details class="topic-details">
+    <summary>主题详情与章节直达</summary>
+    <ul class="chapter-list"><li><a class="chapter-link" data-search="政治与法规 01 在留法规框架" href="library.html#topic-09-politics-law--01-在留法规框架">01 在留法规框架</a></li><li><a class="chapter-link" data-search="政治与法规 02 政治动向与移民政策环境" href="library.html#topic-09-politics-law--02-政治动向与移民政策环境">02 政治动向与移民政策环境</a></li><li><a class="chapter-link" data-search="政治与法规 03 维权与合规工具箱" href="library.html#topic-09-politics-law--03-维权与合规工具箱">03 维权与合规工具箱</a></li></ul>
+  </details>
+</article></div>
+</section>
+<section class="category-section" id="category-6">
+  <h2 class="category-heading">学习成长 <small>2 个主题</small></h2>
+  <div class="topic-grid">
+<article class="topic-card" id="topic-10-education-qualification" data-category="学习成长">
+  <div class="topic-card-header">
+    <h3 class="topic-title"><span class="topic-number">10</span>资格与教育投资</h3>
+    <span class="topic-category">学习成长</span>
+  </div>
+  <p class="topic-description">资格 ROI、通信制大学、K12 与子女教育、家庭教育预算</p>
+  <div class="topic-meta">v1.1 · 知识手册 · 4 个主要章节</div>
+  <div class="card-actions">
+    <a class="button button-primary" href="library.html#topic-10-education-qualification">在汇总页阅读 →</a>
+    <a class="button button-secondary" href="10-education-qualification/reports/%E6%97%A5%E6%9C%AC%E8%B5%84%E6%A0%BC%E4%B8%8E%E6%95%99%E8%82%B2%E6%8A%95%E8%B5%84%E7%9F%A5%E8%AF%86%E6%89%8B%E5%86%8C.html">查看独立原文</a>
+  </div>
+  <details class="topic-details">
+    <summary>主题详情与章节直达</summary>
+    <ul class="chapter-list"><li><a class="chapter-link" data-search="资格与教育投资 01 资格地图" href="library.html#topic-10-education-qualification--01-资格地图">01 资格地图</a></li><li><a class="chapter-link" data-search="资格与教育投资 02 学习体系与教育投资" href="library.html#topic-10-education-qualification--02-学习体系与教育投资">02 学习体系与教育投资</a></li><li><a class="chapter-link" data-search="资格与教育投资 03 日本学校教育体系与子女教育" href="library.html#topic-10-education-qualification--03-日本学校教育体系与子女教育">03 日本学校教育体系与子女教育</a></li><li><a class="chapter-link" data-search="资格与教育投资 04 高等教育与技人国学历路径" href="library.html#topic-10-education-qualification--04-高等教育与技人国学历路径">04 高等教育与技人国学历路径</a></li></ul>
+  </details>
+</article>
+<article class="topic-card" id="topic-11-language-japanese" data-category="学习成长">
+  <div class="topic-card-header">
+    <h3 class="topic-title"><span class="topic-number">11</span>日语学习</h3>
+    <span class="topic-category">学习成长</span>
+  </div>
+  <p class="topic-description">阶段目标、JLPT 能力对标、教材课程、口语练习与场景词库</p>
+  <div class="topic-meta">v1.0 · 知识手册 · 6 个主要章节</div>
+  <div class="card-actions">
+    <a class="button button-primary" href="library.html#topic-11-language-japanese">在汇总页阅读 →</a>
+    <a class="button button-secondary" href="11-language-japanese/reports/%E6%97%A5%E6%9C%AC%E6%97%A5%E8%AF%AD%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%89%8B%E5%86%8C.html">查看独立原文</a>
+  </div>
+  <details class="topic-details">
+    <summary>主题详情与章节直达</summary>
+    <ul class="chapter-list"><li><a class="chapter-link" data-search="日语学习 01 总体学习路线与考试选择" href="library.html#topic-11-language-japanese--01-总体学习路线与考试选择">01 总体学习路线与考试选择</a></li><li><a class="chapter-link" data-search="日语学习 02 N4备考计划" href="library.html#topic-11-language-japanese--02-n4备考计划">02 N4备考计划</a></li><li><a class="chapter-link" data-search="日语学习 03 N3备考计划" href="library.html#topic-11-language-japanese--03-n3备考计划">03 N3备考计划</a></li><li><a class="chapter-link" data-search="日语学习 04 N2备考计划" href="library.html#topic-11-language-japanese--04-n2备考计划">04 N2备考计划</a></li><li><a class="chapter-link" data-search="日语学习 05 资源与工具清单" href="library.html#topic-11-language-japanese--05-资源与工具清单">05 资源与工具清单</a></li><li><a class="chapter-link" data-search="日语学习 06 学习进度跟踪" href="library.html#topic-11-language-japanese--06-学习进度跟踪">06 学习进度跟踪</a></li></ul>
+  </details>
+</article></div>
+</section>
+<section class="category-section" id="category-7">
+  <h2 class="category-heading">生活地域 <small>2 个主题</small></h2>
+  <div class="topic-grid">
+<article class="topic-card" id="topic-12-culture-life" data-category="生活地域">
+  <div class="topic-card-header">
+    <h3 class="topic-title"><span class="topic-number">12</span>文化与生活</h3>
+    <span class="topic-category">生活地域</span>
+  </div>
+  <p class="topic-description">医疗、住房、手机银行、交通、防灾、文化礼仪与社会融入</p>
+  <div class="topic-meta">v1.0 · 知识手册 · 5 个主要章节</div>
+  <div class="card-actions">
+    <a class="button button-primary" href="library.html#topic-12-culture-life">在汇总页阅读 →</a>
+    <a class="button button-secondary" href="12-culture-life/reports/%E6%97%A5%E6%9C%AC%E6%96%87%E5%8C%96%E4%B8%8E%E7%94%9F%E6%B4%BB%E7%9F%A5%E8%AF%86%E6%89%8B%E5%86%8C.html">查看独立原文</a>
+  </div>
+  <details class="topic-details">
+    <summary>主题详情与章节直达</summary>
+    <ul class="chapter-list"><li><a class="chapter-link" data-search="文化与生活 01 职场文化与人际" href="library.html#topic-12-culture-life--01-职场文化与人际">01 职场文化与人际</a></li><li><a class="chapter-link" data-search="文化与生活 02 生活指南与适应" href="library.html#topic-12-culture-life--02-生活指南与适应">02 生活指南与适应</a></li><li><a class="chapter-link" data-search="文化与生活 03 医疗与健康" href="library.html#topic-12-culture-life--03-医疗与健康">03 医疗与健康</a></li><li><a class="chapter-link" data-search="文化与生活 04 住房与安家" href="library.html#topic-12-culture-life--04-住房与安家">04 住房与安家</a></li><li><a class="chapter-link" data-search="文化与生活 05 社会融入与社群" href="library.html#topic-12-culture-life--05-社会融入与社群">05 社会融入与社群</a></li></ul>
+  </details>
+</article>
+<article class="topic-card" id="topic-13-regional-info" data-category="生活地域">
+  <div class="topic-card-header">
+    <h3 class="topic-title"><span class="topic-number">13</span>地域信息</h3>
+    <span class="topic-category">生活地域</span>
+  </div>
+  <p class="topic-description">北海道、东京、大阪、福冈、千叶的区域成本与定居环境</p>
+  <div class="topic-meta">v1.0 · 知识手册 · 2 个主要章节</div>
+  <div class="card-actions">
+    <a class="button button-primary" href="library.html#topic-13-regional-info">在汇总页阅读 →</a>
+    <a class="button button-secondary" href="13-regional-info/reports/%E6%97%A5%E6%9C%AC%E5%9C%B0%E5%9F%9F%E4%BF%A1%E6%81%AF%E7%9F%A5%E8%AF%86%E6%89%8B%E5%86%8C.html">查看独立原文</a>
+  </div>
+  <details class="topic-details">
+    <summary>主题详情与章节直达</summary>
+    <ul class="chapter-list"><li><a class="chapter-link" data-search="地域信息 01 地域选择框架" href="library.html#topic-13-regional-info--01-地域选择框架">01 地域选择框架</a></li><li><a class="chapter-link" data-search="地域信息 02 地域生活笔记" href="library.html#topic-13-regional-info--02-地域生活笔记">02 地域生活笔记</a></li></ul>
+  </details>
+</article></div>
+</section>
+</main>
+<script>
+(() => {
+  const input = document.getElementById('site-search');
+  const resultBox = document.getElementById('search-results');
+  const cards = Array.from(document.querySelectorAll('.topic-card'));
+  const sections = Array.from(document.querySelectorAll('.category-section'));
+  const chapters = Array.from(document.querySelectorAll('.chapter-link'));
+  const filters = Array.from(document.querySelectorAll('[data-filter]'));
+  let activeCategory = '';
+  let timer;
+
+  const termsOf = value => value.trim().toLowerCase().split(/\s+/).filter(Boolean);
+  const matches = (text, terms) => terms.every(term => text.toLowerCase().includes(term));
+
+  function renderResults(items, query) {
+    resultBox.replaceChildren();
+    if (!query) {
+      resultBox.classList.remove('is-visible');
+      return;
+    }
+    resultBox.classList.add('is-visible');
+    if (!items.length) {
+      const empty = document.createElement('p');
+      empty.className = 'search-empty';
+      empty.textContent = '未找到匹配主题或章节。';
+      resultBox.appendChild(empty);
+      return;
+    }
+    items.slice(0, 30).forEach(item => {
+      const link = document.createElement('a');
+      link.className = 'search-result';
+      link.href = item.href;
+      const title = document.createElement('strong');
+      title.textContent = item.title;
+      const meta = document.createElement('span');
+      meta.textContent = item.meta;
+      link.append(title, meta);
+      resultBox.appendChild(link);
+    });
+  }
+
+  function applyFilters() {
+    const query = input.value.trim();
+    const terms = termsOf(query);
+    const results = [];
+    cards.forEach(card => {
+      const categoryOk = !activeCategory || card.dataset.category === activeCategory;
+      const textOk = !terms.length || matches(card.textContent, terms);
+      card.hidden = !(categoryOk && textOk);
+      if (categoryOk && terms.length && textOk) {
+        results.push({
+          href: 'index.html#' + card.id,
+          title: card.querySelector('.topic-title').textContent.trim(),
+          meta: card.dataset.category + ' · 匹配主题'
+        });
+      }
+    });
+    chapters.forEach(link => {
+      const card = link.closest('.topic-card');
+      const categoryOk = !activeCategory || card.dataset.category === activeCategory;
+      if (categoryOk && terms.length && matches(link.dataset.search, terms)) {
+        card.hidden = false;
+        results.push({
+          href: link.href,
+          title: link.textContent.trim(),
+          meta: card.querySelector('.topic-title').textContent.trim() + ' · 章节直达'
+        });
+      }
+    });
+    sections.forEach(section => {
+      section.hidden = !Array.from(section.querySelectorAll('.topic-card')).some(card => !card.hidden);
+    });
+    renderResults(results, query);
+  }
+
+  filters.forEach(link => link.addEventListener('click', event => {
+    event.preventDefault();
+    activeCategory = link.dataset.filter;
+    filters.forEach(item => item.classList.toggle('is-active', item === link));
+    applyFilters();
+  }));
+  input.addEventListener('input', () => {
+    clearTimeout(timer);
+    timer = setTimeout(applyFilters, 150);
+  });
+  resultBox.addEventListener('click', () => resultBox.classList.remove('is-visible'));
+  document.addEventListener('keydown', event => {
+    if (event.key === '/' && !['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) {
+      event.preventDefault();
+      input.focus();
+    }
+    if (event.key === 'Escape' && document.activeElement === input) {
+      input.value = '';
+      applyFilters();
+    }
+  });
+})();
+</script>
+</body>
+</html>

@@ -28,6 +28,26 @@ def slugify(value, separator):
 EXTENSIONS = ["tables", "fenced_code", "toc", "nl2br"]
 EXTENSION_CONFIGS = {"toc": {"permalink": False, "slugify": slugify}}
 
+BASE_CSS = """  body { max-width: 860px; margin: 2rem auto; padding: 0 1rem;
+         font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+         line-height: 1.7; color: #222; }
+  pre { background: #f5f5f5; padding: 0.8rem; overflow-x: auto; border-radius: 4px; }
+  code { background: #f5f5f5; padding: 0.1em 0.3em; border-radius: 3px; }
+  pre code { padding: 0; background: none; }
+  table { border-collapse: collapse; }
+  th, td { border: 1px solid #ccc; padding: 0.4em 0.7em; }
+  table a[title^="来源"] { color: inherit; text-decoration: none;
+    word-break: normal; overflow-wrap: anywhere;
+    border-bottom: 1px dotted #b8b0a0; }
+  table a[title^="来源"] strong, table a[title^="来源"] em,
+  table a[title^="来源"] code { color: inherit; background: none; }
+  table a[title^="来源"]:hover { color: #1a5f5a; background: rgba(26,95,90,.09);
+    border-bottom: 1px solid currentColor; }
+  table a[title^="来源"]::after { content: "↗"; margin-left: 3px;
+    font-size: .76em; opacity: 0; }
+  table a[title^="来源"]:hover::after { opacity: .85; }
+  blockquote { border-left: 4px solid #ccc; margin-left: 0; padding-left: 1em; color: #555; }"""
+
 TEMPLATE = """<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -35,25 +55,7 @@ TEMPLATE = """<!DOCTYPE html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{title}</title>
 <style>
-  body {{ max-width: 860px; margin: 2rem auto; padding: 0 1rem;
-         font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
-         line-height: 1.7; color: #222; }}
-  pre {{ background: #f5f5f5; padding: 0.8rem; overflow-x: auto; border-radius: 4px; }}
-  code {{ background: #f5f5f5; padding: 0.1em 0.3em; border-radius: 3px; }}
-  pre code {{ padding: 0; background: none; }}
-  table {{ border-collapse: collapse; }}
-  th, td {{ border: 1px solid #ccc; padding: 0.4em 0.7em; }}
-  table a[title^="来源"] {{ color: inherit; text-decoration: none;
-    word-break: normal; overflow-wrap: anywhere;
-    border-bottom: 1px dotted #b8b0a0; }}
-  table a[title^="来源"] strong, table a[title^="来源"] em,
-  table a[title^="来源"] code {{ color: inherit; background: none; }}
-  table a[title^="来源"]:hover {{ color: #1a5f5a; background: rgba(26,95,90,.09);
-    border-bottom: 1px solid currentColor; }}
-  table a[title^="来源"]::after {{ content: "↗"; margin-left: 3px;
-    font-size: .76em; opacity: 0; }}
-  table a[title^="来源"]:hover::after {{ opacity: .85; }}
-  blockquote {{ border-left: 4px solid #ccc; margin-left: 0; padding-left: 1em; color: #555; }}
+{base_css}
 </style>
 </head>
 <body>
@@ -74,7 +76,7 @@ def convert(md_path: Path) -> Path:
         if line.startswith("# "):
             title = line[2:].strip()
             break
-    html = TEMPLATE.format(title=title, body=body)
+    html = TEMPLATE.format(title=title, body=body, base_css=BASE_CSS)
 
     # 与源文件同目录：08-visa-immigration/reports/a.md -> .../reports/a.html
     out_path = md_path.with_suffix(".html")

@@ -17,6 +17,8 @@
       "cadence_days": 7,
       "priority": 1,
       "target": "01-ssw-driver/reports",
+      "category": "监测动态",
+      "description": "政策、薪资、供需、资格、技术与风险的 7 日周期监测",
       "prompt": "01-ssw-driver/prompts/prompt-ssw-driver-logistics-update.md",
       "registry": "01-ssw-driver/data/ssw-driver-indicator-registry.md"
     },
@@ -27,6 +29,8 @@
       "cadence_days": 30,
       "priority": 10,
       "target": "02-career-driver/reports/日本司机职业知识手册.md",
+      "category": "职业就业",
+      "description": "岗位全景、薪资工时、安全规范、求职渠道与现场工作记录",
       "prompt": "02-career-driver/prompts/prompt-career-driver-update.md",
       "registry": "02-career-driver/data/career-driver-indicator-registry.md"
     },
@@ -37,6 +41,8 @@
       "cadence_days": 90,
       "priority": 10,
       "target": "03-career-management/reports/日本管理岗过渡知识手册.md",
+      "category": "职业就业",
+      "description": "运行管理者资格、运营组织、晋升通道与五年转型能力档案",
       "prompt": "03-career-management/prompts/prompt-career-logistics-update.md",
       "registry": "03-career-management/data/career-logistics-indicator-registry.md"
     },
@@ -47,6 +53,8 @@
       "cadence_days": 90,
       "priority": 10,
       "target": "04-industry-logistics/reports/日本物流行业知识手册.md",
+      "category": "行业技术",
+      "description": "冷链、末端配送、医药物流、海外仓、绿色物流与产业图谱",
       "prompt": "04-industry-logistics/prompts/prompt-logistics-industry-update.md",
       "registry": "04-industry-logistics/data/logistics-industry-indicator-registry.md"
     },
@@ -57,6 +65,8 @@
       "cadence_days": 30,
       "priority": 10,
       "target": "05-industry-autonomous/reports/日本自动驾驶与自动化知识手册.md",
+      "category": "行业技术",
+      "description": "L2–L4 技术、TaaS 商业化、监管沙盒与场景替代节奏",
       "prompt": "05-industry-autonomous/prompts/prompt-autonomous-automation-update.md",
       "registry": "05-industry-autonomous/data/autonomous-automation-indicator-registry.md"
     },
@@ -67,6 +77,8 @@
       "cadence_days": 30,
       "priority": 10,
       "target": "06-industry-technology/reports/日本技术与数字化知识手册.md",
+      "category": "行业技术",
+      "description": "AI 调度、TMS/WMS、数字孪生、网络安全与转型工具评估",
       "prompt": "06-industry-technology/prompts/prompt-technology-industry-update.md",
       "registry": "06-industry-technology/data/technology-industry-indicator-registry.md"
     },
@@ -77,6 +89,8 @@
       "cadence_days": 30,
       "priority": 10,
       "target": "07-economy-finance/reports/日本经济与财务知识手册.md",
+      "category": "经济环境",
+      "description": "日元汇率、物价税负、社会保险、年金医疗、住房与长期财务",
       "prompt": "07-economy-finance/prompts/prompt-economy-update.md",
       "registry": "07-economy-finance/data/economy-indicator-registry.md"
     },
@@ -87,6 +101,8 @@
       "cadence_days": 90,
       "priority": 10,
       "target": "08-visa-immigration/reports/日本签证与在留资格知识手册.md",
+      "category": "制度政策",
+      "description": "特定技能、技人国、经营管理、永住规划、家属带同与在留变更",
       "prompt": "08-visa-immigration/prompts/prompt-visa-immigration-update.md",
       "registry": "08-visa-immigration/data/visa-immigration-indicator-registry.md"
     },
@@ -97,6 +113,8 @@
       "cadence_days": 90,
       "priority": 10,
       "target": "09-politics-law/reports/日本政治与法规知识手册.md",
+      "category": "制度政策",
+      "description": "雇佣解约、劳动监察、年金、灾害法与司法救济",
       "prompt": "09-politics-law/prompts/prompt-politics-law-update.md",
       "registry": "09-politics-law/data/politics-law-indicator-registry.md"
     },
@@ -107,6 +125,8 @@
       "cadence_days": 180,
       "priority": 10,
       "target": "10-education-qualification/reports/日本资格与教育投资知识手册.md",
+      "category": "学习成长",
+      "description": "资格 ROI、通信制大学、K12 与子女教育、家庭教育预算",
       "prompt": "10-education-qualification/prompts/prompt-education-update.md",
       "registry": "10-education-qualification/data/education-indicator-registry.md"
     },
@@ -117,6 +137,8 @@
       "cadence_days": 180,
       "priority": 10,
       "target": "11-language-japanese/reports/日本日语学习知识手册.md",
+      "category": "学习成长",
+      "description": "阶段目标、JLPT 能力对标、教材课程、口语练习与场景词库",
       "prompt": "11-language-japanese/prompts/prompt-language-update.md",
       "registry": "11-language-japanese/data/language-indicator-registry.md"
     },
@@ -127,6 +149,8 @@
       "cadence_days": 365,
       "priority": 10,
       "target": "12-culture-life/reports/日本文化与生活知识手册.md",
+      "category": "生活地域",
+      "description": "医疗、住房、手机银行、交通、防灾、文化礼仪与社会融入",
       "prompt": "12-culture-life/prompts/prompt-culture-life-update.md",
       "registry": "12-culture-life/data/culture-life-indicator-registry.md"
     },
@@ -137,6 +161,8 @@
       "cadence_days": 365,
       "priority": 10,
       "target": "13-regional-info/reports/日本地域信息知识手册.md",
+      "category": "生活地域",
+      "description": "北海道、东京、大阪、福冈、千叶的区域成本与定居环境",
       "prompt": "13-regional-info/prompts/prompt-regional-update.md",
       "registry": "13-regional-info/data/regional-indicator-registry.md"
     }

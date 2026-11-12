@@ -12,6 +12,7 @@
   8. 跨主题链接锚点：指向其他主题知识手册 html 的锚点须存在
   9. 提示词变量：第 3 层提示词须含 {{HANDBOOK_PATH}}、{{REGISTRY_PATH}}、{{TOPIC_DIR}}
  10. 继承声明：第 3 层提示词头部须声明三层继承
+ 11. 聚合页面同步：主题总览与汇总阅读双向链接完整，生成页面与主题源文件同步
 
 用法:
     python prompts/tools/validate.py              # 全量校验
@@ -24,6 +25,8 @@ import argparse
 import re
 import sys
 from pathlib import Path
+
+import build_library
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -357,6 +360,49 @@ def check_anchor_links(errors, warnings):
     check_cross_topic_links(errors, warnings)
 
 
+def check_library_pages(errors, warnings):
+    """11. 聚合页面同步：双向链接完整，生成结果与主题源文件一致。"""
+    try:
+        topics = build_library.load_topics()
+        pages = build_library.build_pages()
+    except build_library.BuildError as exc:
+        errors.append(f"[聚合页面] 构建失败: {exc}")
+        return
+
+    contents = {}
+    for relative in pages:
+        path = ROOT / relative
+        if not path.is_file():
+            errors.append(f"[聚合页面] 缺少生成页面: {relative.as_posix()}")
+            continue
+        contents[relative] = read_text(path)
+
+    if len(contents) == len(pages):
+        index = contents[Path("index.html")]
+        library = contents[Path("library.html")]
+        for topic in topics:
+            anchor = build_library.topic_anchor(topic["id"])
+            if f'id="{anchor}"' not in index:
+                errors.append(f"[index.html] 缺少主题卡片锚点: #{anchor}")
+            if f'href="library.html#{anchor}"' not in index:
+                errors.append(
+                    f"[index.html] 缺少主题汇总链接: library.html#{anchor}"
+                )
+            if f'id="{anchor}"' not in library:
+                errors.append(f"[library.html] 缺少主题正文锚点: #{anchor}")
+            if f'href="index.html#{anchor}"' not in library:
+                errors.append(
+                    f"[library.html] 缺少主题返回链接: index.html#{anchor}"
+                )
+
+    for relative in build_library.compare_outputs(pages, root=ROOT):
+        if (ROOT / relative).is_file():
+            errors.append(
+                f"[{relative.as_posix()}] 聚合页面与主题源文件不同步，"
+                "请运行 python prompts/tools/build_library.py"
+            )
+
+
 CHECKS = [
     (1, "单文档约束", check_single_doc),
     (2, "目录结构", check_dir_structure),
@@ -368,6 +414,7 @@ CHECKS = [
     (8, "锚点链接校验", check_anchor_links),
     (9, "提示词变量", check_prompt_variables),
     (10, "继承声明", check_inheritance_declaration),
+    (11, "聚合页面同步", check_library_pages),
 ]
 
 

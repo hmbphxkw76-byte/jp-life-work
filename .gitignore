@@ -35,6 +35,8 @@ Desktop.ini
 
 # 工具生成
 .screenshots/
+.superpowers/
+.trae/
 .trae-html-share-packages/
 _tmp_*
 
