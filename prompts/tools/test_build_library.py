@@ -193,5 +193,157 @@ class ValidationIntegrationTests(unittest.TestCase):
         self.assertTrue(any("返回链接" in error for error in errors), errors)
 
 
+class UpdateMarkerTests(unittest.TestCase):
+    def test_body_without_markers_is_unchanged(self):
+        body = (
+            '<h2 id="topic-02-career-driver--薪资">02 薪资</h2>\n<p>正文。</p>\n'
+            '<table><tr><td>A</td></tr></table>'
+        )
+        result, updates = library.apply_update_markers(body, "02-career-driver")
+        self.assertEqual(body, result)
+        self.assertEqual([], updates)
+
+    def test_section_marker_adds_badge_and_highlight(self):
+        body = (
+            '<h2 id="topic-02-career-driver--薪资">02 薪资</h2>\n'
+            '<!-- updated: 2026-11-12 | 最低賃金 -->\n\n'
+            '<p>正文。</p>\n'
+            '<h2 id="topic-02-career-driver--其他">03 其他</h2>\n'
+            '<p>未更新。</p>'
+        )
+        result, updates = library.apply_update_markers(body, "02-career-driver")
+        self.assertEqual([{"date": "2026-11-12", "note": "最低賃金"}], updates)
+        self.assertIn('<span class="update-badge"', result)
+        self.assertIn('title="已更新 2026-11-12：最低賃金"', result)
+        self.assertIn('<div class="update-section" data-updated="2026-11-12">', result)
+        # 未更新章节保持原样，不被卷入高亮区
+        self.assertLess(result.index("</div>"), result.index('<h2 id="topic-02-career-driver--其他"'))
+        self.assertTrue(result.endswith("<p>未更新。</p>"))
+
+    def test_block_marker_wraps_following_block(self):
+        body = (
+            '<p>前言。</p>\n<!-- updated: 2026-11-12 -->\n'
+            '<table><tr><td>A</td></tr></table>\n<p>后续。</p>'
+        )
+        result, updates = library.apply_update_markers(body, "02-career-driver")
+        self.assertEqual([{"date": "2026-11-12", "note": ""}], updates)
+        self.assertIn('<div class="update-block" data-updated="2026-11-12">', result)
+        self.assertIn('<table><tr><td>A</td></tr></table></div>', result)
+        self.assertTrue(result.startswith("<p>前言。</p>"))
+        self.assertTrue(result.endswith("<p>后续。</p>"))
+
+    def test_marker_before_heading_is_section_level(self):
+        body = '<!-- updated: 2026-11-12 | 新增 -->\n<h2 id="a">05 新章节</h2>\n<p>内容。</p>'
+        result, updates = library.apply_update_markers(body, "02-career-driver")
+        self.assertEqual(1, len(updates))
+        self.assertIn('<h2 id="a">05 新章节 <span class="update-badge"', result)
+        self.assertIn('<div class="update-section"', result)
+
+    def test_invalid_marker_syntax_is_ignored(self):
+        body = '<p>正文。</p>\n<!-- updated: 2026/11/12 -->\n<p>后续。</p>'
+        result, updates = library.apply_update_markers(body, "02-career-driver")
+        self.assertEqual(body, result)
+        self.assertEqual([], updates)
+
+    def test_marker_does_not_change_heading_ids(self):
+        body = (
+            '<h2 id="topic-x--a">A</h2>\n<!-- updated: 2026-11-12 -->\n<p>1</p>\n'
+            '<h3 id="topic-x--b">B</h3>\n<p>2</p>\n<h2 id="topic-x--c">C</h2>\n<p>3</p>'
+        )
+        result, _ = library.apply_update_markers(body, "x")
+        ids = re.findall(r'<h[1-6] id="([^"]+)"', result)
+        self.assertEqual(["topic-x--a", "topic-x--b", "topic-x--c"], ids)
+
+    def test_nested_block_marker_inside_section(self):
+        body = (
+            '<h2 id="a">A</h2>\n<!-- updated: 2026-11-12 -->\n<p>1</p>\n'
+            '<!-- updated: 2026-11-12 -->\n<table><tr><td>x</td></tr></table>\n'
+        )
+        result, updates = library.apply_update_markers(body, "x")
+        self.assertEqual(2, len(updates))
+        self.assertIn('<div class="update-section"', result)
+        self.assertIn('<div class="update-block"', result)
+
+    def test_empty_section_only_adds_heading_badge(self):
+        body = '<h2 id="a">A</h2>\n<!-- updated: 2026-11-12 -->\n<h2 id="b">B</h2>\n<p>x</p>'
+        result, updates = library.apply_update_markers(body, "x")
+        self.assertEqual(1, len(updates))
+        self.assertIn('<span class="update-badge"', result)
+        self.assertNotIn("update-section", result)
+
+
+class UpdateDisplayTests(unittest.TestCase):
+    def _topic(self, updates):
+        return {
+            "id": "02-career-driver", "name": "司机岗位", "kind": "knowledge",
+            "category": "职业就业", "description": "测试描述", "version": "v1.0",
+            "html": ROOT / "02-career-driver/reports/日本司机职业知识手册.html",
+            "body": "<p>正文</p>",
+            "chapters": [{"title": "02 薪资", "id": "topic-02-career-driver--薪资", "level": 2}],
+            "updates": updates,
+        }
+
+    def test_index_renders_update_flag(self):
+        index = library.render_index([self._topic([{"date": "2026-11-12", "note": ""}])])
+        self.assertIn("已更新 1 处", index)
+        self.assertIn('class="topic-update-flag"', index)
+        self.assertIn("最近更新 2026-11-12", index)
+
+    def test_index_omits_update_flag_for_clean_topic(self):
+        index = library.render_index([self._topic([])])
+        self.assertNotIn('class="topic-update-flag"', index)
+
+    def test_library_renders_update_flag(self):
+        page = library.render_library([self._topic([{"date": "2026-11-12", "note": ""}])])
+        self.assertIn("已更新 1 处", page)
+        self.assertIn('class="topic-update-flag"', page)
+
+    def test_library_omits_update_flag_for_clean_topic(self):
+        page = library.render_library([self._topic([])])
+        self.assertNotIn('class="topic-update-flag"', page)
+
+
+class UpdateMarkerValidationTests(unittest.TestCase):
+    def _write(self, root, text):
+        reports = root / "02-career-driver" / "reports"
+        reports.mkdir(parents=True)
+        (reports / "日本司机职业知识手册.md").write_text(text, encoding="utf-8")
+
+    def test_valid_marker_passes(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            self._write(root, "<!-- updated: 2026-11-12 | 最低賃金 -->\n")
+            with patch("validate.ROOT", root):
+                errors, warnings = [], []
+                validate.check_update_markers(errors, warnings)
+        self.assertEqual([], errors)
+        self.assertEqual([], warnings)
+
+    def test_bad_marker_syntax_is_reported(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            self._write(root, "<!-- updated: 2026/11/12 -->\n")
+            with patch("validate.ROOT", root):
+                errors, warnings = [], []
+                validate.check_update_markers(errors, warnings)
+        self.assertTrue(any("语法错误" in e for e in errors), errors)
+
+    def test_inline_marker_warns(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            self._write(root, "说明文字 <!-- updated: 2026-11-12 -->\n")
+            with patch("validate.ROOT", root):
+                errors, warnings = [], []
+                validate.check_update_markers(errors, warnings)
+        self.assertEqual([], errors)
+        self.assertTrue(any("单独成行" in w for w in warnings), warnings)
+
+    def test_current_sources_pass_marker_validation(self):
+        errors, warnings = [], []
+        validate.check_update_markers(errors, warnings)
+        self.assertEqual([], errors)
+        self.assertEqual([], warnings)
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -5,6 +5,7 @@ import argparse
 import html
 import re
 import sys
+from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import quote, unquote, urlsplit, urlunsplit
 
@@ -110,6 +111,221 @@ def extract_chapters(body, topic_id):
     return chapters
 
 
+# ─────────────────────────────────────────────────────────────
+# 更新标记（已更新 标注 / 高亮）
+#
+# 约定写法（写在源文档 markdown 中，单独成行）：
+#   <!-- updated: 2026-11-12 -->
+#   <!-- updated: 2026-11-12 | 本次更新摘要 -->
+#
+# 两种生效方式：
+#   章节级：标记紧跟在章节标题（## NN …）之后 → 标题加「已更新」徽标，整节内容高亮；
+#   块级：  标记位于段落 / 表格 / 列表 / 引用 / 代码块之前 → 该块加徽标并高亮。
+# 未标记的内容在构建后保持逐字节不变。
+# ─────────────────────────────────────────────────────────────
+
+UPDATE_MARKER_RE = re.compile(
+    r"<!--\s*updated:\s*(?P<date>\d{4}-\d{2}-\d{2})(?:\s*\|\s*(?P<note>[^>]*?))?\s*-->"
+)
+
+_VOID_ELEMENTS = {
+    "area", "base", "br", "col", "embed", "hr", "img", "input",
+    "link", "meta", "param", "source", "track", "wbr",
+}
+
+
+class _TopLevelBlockSplitter(HTMLParser):
+    """把 HTML 拆成顶层块序列，保留原始文本以便无损重组。"""
+
+    def __init__(self, html_text):
+        super().__init__(convert_charrefs=False)
+        self._html = html_text
+        self._line_starts = [0]
+        for match in re.finditer("\n", html_text):
+            self._line_starts.append(match.end())
+        self.blocks = []
+        self._depth = 0
+        self._start = None
+        self.feed(html_text)
+        self.close()
+
+    def _offset(self):
+        line, column = self.getpos()
+        return self._line_starts[line - 1] + column
+
+    def handle_starttag(self, tag, attrs):
+        if tag in _VOID_ELEMENTS:
+            if self._depth == 0:
+                start = self._offset()
+                self.blocks.append(self._html[start:start + len(self.get_starttag_text())])
+            return
+        if self._depth == 0:
+            self._start = self._offset()
+        self._depth += 1
+
+    def handle_startendtag(self, tag, attrs):
+        if self._depth == 0:
+            start = self._offset()
+            self.blocks.append(self._html[start:start + len(self.get_starttag_text())])
+
+    def handle_endtag(self, tag):
+        if self._depth == 0:
+            start = self._offset()
+            self.blocks.append(self._html[start:start + len(tag) + 3])
+            return
+        self._depth -= 1
+        if self._depth == 0 and self._start is not None:
+            end = self._offset() + len(tag) + 3
+            self.blocks.append(self._html[self._start:end])
+            self._start = None
+
+    def handle_data(self, data):
+        if self._depth == 0:
+            start = self._offset()
+            self.blocks.append(self._html[start:start + len(data)])
+
+    def handle_comment(self, data):
+        if self._depth == 0:
+            start = self._offset()
+            self.blocks.append(self._html[start:start + len(data) + 7])
+
+    def handle_entityref(self, name):
+        if self._depth == 0:
+            start = self._offset()
+            self.blocks.append(self._html[start:start + len(name) + 2])
+
+    def handle_charref(self, name):
+        if self._depth == 0:
+            start = self._offset()
+            self.blocks.append(self._html[start:start + len(name) + 3])
+
+
+def _is_heading(block):
+    match = re.match(r"<h([1-6])\b", block.strip())
+    return int(match.group(1)) if match else None
+
+
+def _badge_html(date, note):
+    title = f"已更新 {date}" + (f"：{note}" if note else "")
+    note_html = f'<span class="update-note">{html.escape(note)}</span>' if note else ""
+    return (
+        f'<span class="update-badge" title="{html.escape(title, quote=True)}">'
+        f"已更新 {html.escape(date)}</span>{note_html}"
+    )
+
+
+def _inject_heading_badge(heading_html, date, note):
+    badge = _badge_html(date, note)
+    match = re.search(r"</h[1-6]>", heading_html)
+    if not match:
+        return heading_html + badge
+    position = match.start()
+    return f"{heading_html[:position]} {badge}{heading_html[position:]}"
+
+
+def _process_blocks(blocks):
+    result = []
+    updates = []
+    index = 0
+    total = len(blocks)
+    while index < total:
+        block = blocks[index]
+        stripped = block.strip()
+        marker = UPDATE_MARKER_RE.fullmatch(stripped) if stripped else None
+        if marker is None:
+            result.append(block)
+            index += 1
+            continue
+
+        date = marker.group("date")
+        note = (marker.group("note") or "").strip()
+        updates.append({"date": date, "note": note})
+
+        previous = None
+        for position in range(len(result) - 1, -1, -1):
+            if result[position].strip():
+                previous = position
+                break
+
+        next_index = index + 1
+        while next_index < total and not blocks[next_index].strip():
+            next_index += 1
+
+        previous_level = _is_heading(result[previous]) if previous is not None else None
+        next_level = _is_heading(blocks[next_index]) if next_index < total else None
+
+        if previous_level:
+            # 章节级：标记紧跟标题之后
+            result[previous] = _inject_heading_badge(result[previous], date, note)
+            end = index + 1
+            while end < total:
+                level = _is_heading(blocks[end])
+                if level is not None and level <= previous_level:
+                    break
+                end += 1
+            inner_html, inner_updates = _process_blocks(blocks[index + 1:end])
+            updates.extend(inner_updates)
+            if inner_html.strip():
+                result.append(
+                    f'<div class="update-section" data-updated="{html.escape(date, quote=True)}">'
+                    f"{inner_html}</div>"
+                )
+            index = end
+            continue
+
+        if next_level:
+            # 章节级：标记位于标题之前
+            end = next_index + 1
+            while end < total:
+                level = _is_heading(blocks[end])
+                if level is not None and level <= next_level:
+                    break
+                end += 1
+            heading_html = _inject_heading_badge(blocks[next_index], date, note)
+            inner_html, inner_updates = _process_blocks(blocks[next_index + 1:end])
+            updates.extend(inner_updates)
+            result.append(heading_html)
+            if inner_html.strip():
+                result.append(
+                    f'<div class="update-section" data-updated="{html.escape(date, quote=True)}">'
+                    f"{inner_html}</div>"
+                )
+            index = end
+            continue
+
+        # 块级：标记位于段落 / 表格 / 列表 / 引用 / 代码块之前
+        if next_index < total:
+            result.append(
+                f'<div class="update-block" data-updated="{html.escape(date, quote=True)}">'
+                f"{_badge_html(date, note)}{blocks[next_index]}</div>"
+            )
+            index = next_index + 1
+        else:
+            index += 1
+    return "".join(result), updates
+
+
+def apply_update_markers(body, topic_id=None):
+    """把更新标记转换为可见徽标与高亮包装，返回 (html, 更新记录)。
+
+    没有标记时原样返回，保证未更新内容逐字节不变。
+    """
+    if not UPDATE_MARKER_RE.search(body):
+        return body, []
+    blocks = _TopLevelBlockSplitter(body).blocks
+    if "".join(blocks) != body:
+        return body, []
+    return _process_blocks(blocks)
+
+
+def collect_updates(body):
+    """统计源文档中的更新标记，供总览页与工具条展示。"""
+    return [
+        {"date": match.group("date"), "note": (match.group("note") or "").strip()}
+        for match in UPDATE_MARKER_RE.finditer(body)
+    ]
+
+
 CATEGORIES = ("监测动态", "职业就业", "行业技术", "经济环境", "制度政策", "学习成长", "生活地域")
 
 LIBRARY_CSS = """
@@ -183,6 +399,12 @@ body.index-page, body.library-page { max-width: none; margin: 0; padding: 0; bac
 .table-wrap { max-width: 100%; overflow-x: auto; }
 .table-wrap table { min-width: 480px; width: 100%; }
 .topic-body img { height: auto; }
+.update-badge { display: inline-block; margin: 0 0 0 6px; padding: 1px 8px; border: 1px solid #e5d272; border-radius: 999px; background: #fff3bf; color: #7a5c00; font-size: 12px; font-weight: 400; line-height: 1.6; vertical-align: middle; white-space: nowrap; }
+.update-note { margin-left: 4px; color: #9a7b1e; font-size: 12px; font-weight: 400; }
+.update-block { position: relative; margin: 1.2em 0; padding: 14px 16px; background: #fffdf6; border: 1px solid #f0dfa8; border-left: 4px solid #e8b93c; border-radius: 6px; }
+.update-block > .update-badge { position: absolute; top: -11px; left: 12px; margin: 0; box-shadow: 0 1px 2px rgba(120,90,10,.12); }
+.update-section { margin: 1.4em 0; padding: 2px 0 2px 16px; border-left: 4px solid #e8b93c; background: rgba(232,185,60,.05); }
+.topic-update-flag { display: inline-block; margin-left: 6px; padding: 0 6px; border: 1px solid #e5d272; border-radius: 999px; background: #fff3bf; color: #7a5c00; font-size: 11px; line-height: 1.6; white-space: nowrap; }
 .noscript-note { padding: 10px 14px; background: #fff3bf; border: 1px solid #e5d272; }
 [hidden] { display: none !important; }
 @media (min-width: 761px) {
@@ -425,6 +647,14 @@ def render_index(topics):
                 f'<li><a class="chapter-link" data-search="{html.escape(topic["name"] + " " + chapter["title"], quote=True)}" href="library.html#{chapter["id"]}">{html.escape(chapter["title"])}</a></li>'
                 for chapter in topic["chapters"]
             )
+            updates = topic.get("updates") or []
+            update_flag = ""
+            if updates:
+                latest = max(update["date"] for update in updates)
+                update_flag = (
+                    f'<span class="topic-update-flag" title="最近更新 {html.escape(latest)}">'
+                    f"已更新 {len(updates)} 处</span>"
+                )
             cards.append(f"""
 <article class="topic-card" id="{anchor}" data-category="{html.escape(topic['category'], quote=True)}">
   <div class="topic-card-header">
@@ -432,7 +662,7 @@ def render_index(topics):
     <span class="topic-category">{html.escape(topic['category'])}</span>
   </div>
   <p class="topic-description">{html.escape(topic['description'])}</p>
-  <div class="topic-meta">{html.escape(topic['version'])} · {'周期监测' if topic['kind'] == 'monitor' else '知识手册'} · {len(topic['chapters'])} 个主要章节</div>
+  <div class="topic-meta">{html.escape(topic['version'])} · {'周期监测' if topic['kind'] == 'monitor' else '知识手册'} · {len(topic['chapters'])} 个主要章节{update_flag}</div>
   <div class="card-actions">
     <a class="button button-primary" href="library.html#{anchor}">在汇总页阅读 →</a>
     <a class="button button-secondary" href="{original_url}">查看独立原文</a>
@@ -485,10 +715,18 @@ def render_library(topics):
             f'<li><a href="#{chapter["id"]}">{html.escape(chapter["title"])}</a></li>'
             for chapter in topic["chapters"]
         )
+        updates = topic.get("updates") or []
+        update_flag = ""
+        if updates:
+            latest = max(update["date"] for update in updates)
+            update_flag = (
+                f'　<span class="topic-update-flag" title="最近更新 {html.escape(latest)}">'
+                f"已更新 {len(updates)} 处</span>"
+            )
         documents.append(f"""
 <section class="topic-document" id="{anchor}" data-name="{html.escape(topic['name'], quote=True)}">
   <header class="topic-toolbar">
-    <span>{html.escape(topic['category'])} · {html.escape(topic['version'])}</span>
+    <span>{html.escape(topic['category'])} · {html.escape(topic['version'])}{update_flag}</span>
     <div class="topic-toolbar-links"><a href="index.html#{anchor}">返回主题总览</a><a href="{original_url}">独立原文</a></div>
   </header>
   <details class="topic-local-toc"><summary>本主题目录（{len(topic['chapters'])} 个主要章节）</summary><ul class="chapter-list">{chapter_items}</ul></details>
@@ -534,6 +772,7 @@ def build_pages():
         )
         topic["body"] = namespace_html(body, topic["id"], topic["source"].parent, html_to_topic)
         topic["chapters"] = extract_chapters(topic["body"], topic["id"])
+        topic["body"], topic["updates"] = apply_update_markers(topic["body"], topic["id"])
 
     heading_ids = re.findall(r'<h[1-6] id="([^"]+)"', "".join(topic["body"] for topic in topics))
     duplicates = sorted({anchor for anchor in heading_ids if heading_ids.count(anchor) > 1})

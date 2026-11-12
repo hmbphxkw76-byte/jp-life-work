@@ -13,6 +13,7 @@
   9. 提示词变量：第 3 层提示词须含 {{HANDBOOK_PATH}}、{{REGISTRY_PATH}}、{{TOPIC_DIR}}
  10. 继承声明：第 3 层提示词头部须声明三层继承
  11. 聚合页面同步：主题总览与汇总阅读双向链接完整，生成页面与主题源文件同步
+ 12. 更新标记规范：源文档中的 <!-- updated: … --> 须语法正确且单独成行
 
 用法:
     python prompts/tools/validate.py              # 全量校验
@@ -365,6 +366,34 @@ def check_inheritance_declaration(errors, warnings):
 # 主流程
 # ──────────────────────────────────────────────
 
+def check_update_markers(errors, warnings):
+    """12. 更新标记规范：<!-- updated: … --> 须语法正确且单独成行。
+
+    正确写法：<!-- updated: 2026-11-12 -->  或  <!-- updated: 2026-11-12 | 本次更新摘要 -->
+    仅校验 reports/ 顶层当前主文档（归档为历史快照，不参与）。
+    """
+    for topic in iter_topic_dirs():
+        reports = topic / "reports"
+        if not reports.is_dir():
+            continue
+        for md in reports.glob("*.md"):
+            for lineno, line in enumerate(read_text(md).split("\n"), 1):
+                if "updated:" not in line:
+                    continue
+                stripped = line.strip()
+                if build_library.UPDATE_MARKER_RE.fullmatch(stripped):
+                    continue
+                if build_library.UPDATE_MARKER_RE.search(stripped):
+                    warnings.append(
+                        f"[{topic.name}/{md.name}:{lineno}] 更新标记应单独成行: {stripped}"
+                    )
+                else:
+                    errors.append(
+                        f"[{topic.name}/{md.name}:{lineno}] 更新标记语法错误，应为 "
+                        "<!-- updated: YYYY-MM-DD [| 摘要] -->: " + stripped
+                    )
+
+
 def check_anchor_links(errors, warnings):
     """8. 锚点链接校验：内部 #锚点 与跨主题 html#锚点 均须存在。"""
     check_internal_anchor_links(errors, warnings)
@@ -426,6 +455,7 @@ CHECKS = [
     (9, "提示词变量", check_prompt_variables),
     (10, "继承声明", check_inheritance_declaration),
     (11, "聚合页面同步", check_library_pages),
+    (12, "更新标记规范", check_update_markers),
 ]
 
 
