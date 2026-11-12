@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>第 5 期运行复盘（2026-11-12）</title>
+<style>
+  body { max-width: 860px; margin: 2rem auto; padding: 0 1rem;
+         font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+         line-height: 1.7; color: #222; }
+  pre { background: #f5f5f5; padding: 0.8rem; overflow-x: auto; border-radius: 4px; }
+  code { background: #f5f5f5; padding: 0.1em 0.3em; border-radius: 3px; }
+  pre code { padding: 0; background: none; }
+  table { border-collapse: collapse; }
+  th, td { border: 1px solid #ccc; padding: 0.4em 0.7em; }
+  table a[title^="来源"] { color: inherit; text-decoration: none;
+    word-break: normal; overflow-wrap: anywhere;
+    border-bottom: 1px dotted #b8b0a0; }
+  table a[title^="来源"] strong, table a[title^="来源"] em,
+  table a[title^="来源"] code { color: inherit; background: none; }
+  table a[title^="来源"]:hover { color: #1a5f5a; background: rgba(26,95,90,.09);
+    border-bottom: 1px solid currentColor; }
+  table a[title^="来源"]::after { content: "↗"; margin-left: 3px;
+    font-size: .76em; opacity: 0; }
+  table a[title^="来源"]:hover::after { opacity: .85; }
+  blockquote { border-left: 4px solid #ccc; margin-left: 0; padding-left: 1em; color: #555; }
+</style>
+</head>
+<body>
+<h1 id="第-5-期运行复盘-2026-11-12">第 5 期运行复盘（2026-11-12）</h1>
+<blockquote>
+<p>项目：01-ssw-driver「日本特定技能司机与物流」监测<br />
+报告版本：v2026.11.12_5（reports/日本特定技能司机物流监测报告_v2026.11.12_5.md）<br />
+数据基准日：2026-11-12　上一版：v2026.11.11_4</p>
+</blockquote>
+<h2 id="一-运行概况">一、运行概况</h2>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>运行时间</td>
+<td>2026-11-12（第五期）</td>
+</tr>
+<tr>
+<td>上一版</td>
+<td>v2026.11.11_4（4 个正式文件 + 2 个草稿，55KB 级）</td>
+</tr>
+<tr>
+<td>本次产出</td>
+<td>报告 md 1 个 + HTML 1 个；指标登记册回写；本复盘</td>
+</tr>
+<tr>
+<td>检索方式</td>
+<td>官方页直取优先（moj.go.jp / mlit.go.jp / mhlw.go.jp / boj.or.jp / tsr-net / tdb.co.jp / 领馆页），辅以行业媒体与聚合层回溯</td>
+</tr>
+<tr>
+<td>指标结果</td>
+<td>有更新 5 项（#2 #3 #7 #9 #12）；无变化 9 项（#1 #4 #5 #6 #8 #10 #11 #13 #14）；未取得 0 项（其中 #4、#10、#11 的部分子项未取得，见第三节）</td>
+</tr>
+<tr>
+<td>结构</td>
+<td>八章维持；变更摘要 14 行；已修正事实清单由 18 条扩至 20 条（新增 2 条均为本版修正）</td>
+</tr>
+<tr>
+<td>篇幅</td>
+<td>与 _4 版同量级（约 5 万字符），未注水</td>
+</tr>
+</tbody>
+</table>
+<h2 id="二-14-项逐项处理矩阵">二、14 项逐项处理矩阵</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>指标</th>
+<th>本轮动作</th>
+<th>结论</th>
+<th>证据等级</th>
+<th>关键来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>特定技能在留者</td>
+<td>直取 ISA 001472175.pdf（2026-11-06 版表格）</td>
+<td>无变化：843／438,128／23,348（令和 8 年 8 月末）；同表 22,100</td>
+<td>A</td>
+<td>moj.go.jp</td>
+</tr>
+<tr>
+<td>2</td>
+<td>分野要件</td>
+<td>读 03_00198.html + 別冊 001472534.pdf 制定履历与个别要件</td>
+<td><strong>有更新</strong>：卡车 A2.2 不变；出租车/巴士 2027-04-01 起 COE 须 B1；別冊令和 8 年 10 月 9 日一部改正</td>
+<td>A</td>
+<td>moj.go.jp</td>
+</tr>
+<tr>
+<td>3</td>
+<td>试验日程与费用</td>
+<td>读 ClassNK 新闻一览 + ISA JFT-Basic 公告</td>
+<td><strong>有更新</strong>：2026-12 JLPT 全等级满员；月报仍 2026-09；费用不变</td>
+<td>A</td>
+<td>classnk.or.jp / moj.go.jp</td>
+</tr>
+<tr>
+<td>4</td>
+<td>司机缺口</td>
+<td>未检索到新版推计；查 2026-09 倍率</td>
+<td>无变化（110,809／162,912 沿用）；9 月职业别细表未取得</td>
+<td>B</td>
+<td>mlit.go.jp</td>
+</tr>
+<tr>
+<td>5</td>
+<td>運輸業工资</td>
+<td>校对厚労省 2026-09 分与行业媒体数值</td>
+<td>无变化：341,158 円（+4.9%）；10 月分未公布</td>
+<td>A</td>
+<td>mhlw.go.jp / logi-today</td>
+</tr>
+<tr>
+<td>6</td>
+<td>求人抽样</td>
+<td>维持 9 样本，未新增</td>
+<td>无变化</td>
+<td>B/C</td>
+<td>各行链接</td>
+</tr>
+<tr>
+<td>7</td>
+<td>物流倒産</td>
+<td>取 TSR 2026-10 与 TDB 2026-10 报</td>
+<td><strong>有更新</strong>：運輸業 38 件（+2.7%）；人手不足関連 50 件（TSR）/56 件（TDB）</td>
+<td>A</td>
+<td>tsr-net / tdb.co.jp</td>
+</tr>
+<tr>
+<td>8</td>
+<td>运赁指数</td>
+<td>取日銀 SPPI 2026-09 速报 PDF</td>
+<td>无变化（口径拆分）：道路貨物輸送 +4.6%；運輸・郵便 +8.4% 为外航拉动</td>
+<td>A</td>
+<td>boj.or.jp</td>
+</tr>
+<tr>
+<td>9</td>
+<td>2024 年问题</td>
+<td>读 MLIT 二法页与物流効率化法页</td>
+<td><strong>有更新</strong>：[1]–[3] 2026-04-01 施行；[4][5] 未施行；物流効率化法 2026-04 起特定事業者</td>
+<td>A</td>
+<td>mlit.go.jp</td>
+</tr>
+<tr>
+<td>10</td>
+<td>L4</td>
+<td>检索许可件数；取 RoAD to the L4 与柏市发布</td>
+<td>无变化（件数未取得）；补いすゞ 2026 年度认可申请、柏市 2025-11 许可</td>
+<td>B</td>
+<td>road-to-the-l4 / city.kashiwa</td>
+</tr>
+<tr>
+<td>11</td>
+<td>企业 IR</td>
+<td>检索 SGHD 11 月发布</td>
+<td>无变化（同一发布）：补経常 397 億円、純利益 279.29 億円</td>
+<td>C（媒体速报）</td>
+<td>kabutan</td>
+</tr>
+<tr>
+<td>12</td>
+<td>登録支援機関</td>
+<td>读 ISA 支援体制改正页</td>
+<td><strong>有更新</strong>：2027-04-01 施行四项要件</td>
+<td>A</td>
+<td>moj.go.jp</td>
+</tr>
+<tr>
+<td>13</td>
+<td>中国中介渠道</td>
+<td>复核三馆费用页</td>
+<td>无变化：715 元／1,430 元</td>
+<td>A</td>
+<td>领馆页</td>
+</tr>
+<tr>
+<td>14</td>
+<td>驾照费用</td>
+<td>复核 e-Stat 2026-09 与两家区间来源</td>
+<td>无变化：324,381 円（AT 限定）；MT 30–40 万円</td>
+<td>B</td>
+<td>e-stat / kurasim</td>
+</tr>
+</tbody>
+</table>
+<h2 id="三-未取得项与原因">三、未取得项与原因</h2>
+<ol>
+<li><strong>ISA 9 月末在留者数据</strong>：ISA 于 2026-11-06 更新了受入见込数·在留者数表（001472175.pdf），但表内基准仍为令和 8 年 8 月末。判断为发布节奏问题（该表滞后约 2 个月），非页面异常；预计 12 月上旬随 10 月分更新。已在登记册「首要触发器」记录。<strong>未使用任何推测数值替代。</strong></li>
+<li><strong>厚労省 2026-09 分「自動車運転の職業」有效求人倍率</strong>：仅取到产业别 2.54（2026-08）。2026-09 分一般職業紹介状況已于 2026-10-30 公布，但职业别细表（11602000 下的 PDF）本轮未逐页核对，故不更新数值。报告中以「9 月细表未取得」显式标注。</li>
+<li><strong>特定自動運行（L4）许可件数</strong>：警察庁/国交省均未提供汇总件数页；检索到的是个别案例（柏市）与事业者计划（いすゞ），无法据此更新 12 件。按纪律保留原值并标注「本轮未取得」。</li>
+<li><strong>SGHD 官方决算短信</strong>：只取到媒体速报（kabutan/时事），企业官网 IR 的短信 PDF 未直接打开。利润三项数值标注为 C 级、待官方原件确认。</li>
+<li><strong>汇率</strong>：未重新取 2026-11-12 当日中间价，沿用 2026-11-10 的 4.2355 元，并在正文与待复核清单双处标注。</li>
+<li><strong>ClassNK 2026 年 10 月月报</strong>：发布节奏为次月中旬（9 月分于 2026-10-15 发布），10 月分截至 11-12 尚未发布，非获取失败。</li>
+</ol>
+<h2 id="四-本期新发现的制度级问题-需下期起持续跟踪">四、本期新发现的制度级问题（需下期起持续跟踪）</h2>
+<ol>
+<li><strong>日语要件分区分化已正式公告</strong>：分野整体不再适用「统一 A2.2」的简化表述。任何对外材料若写「自動車運送業日语要求 N4/A2.2」都属于口径不全，须按卡车/出租车/巴士三区分表述。本版已在已修正事实清单追加条目。</li>
+<li><strong>JLPT 供给瓶颈首次成为路径变量</strong>：2026-12 全等级在报名截止前满员，说明"日语考试名额"本身已成为可观测的准入约束。下期应把「JLPT 报名开放/满员状态」纳入 #3 的月度检查项（而非仅在考试费变动时看）。</li>
+<li><strong>2027-04-01 两个生效日叠加</strong>（B1 要件 + 支援体制要件改正）：同一时点将同时改变"人"（语言门槛）与"服务"（支援机关成本）两侧，2027 年初需做一次专项复核，不能等到年度更新。</li>
+<li><strong>标准运赁废止与適正原価告示的空窗</strong>：二法 [5] 未施行，但官方页面已明示"标准运赁将废止"。若告示与废止不同步，过渡期货主谈判基准会缺失；下期应把 MLIT 告示页列入触发监控。</li>
+</ol>
+<h2 id="五-下期建议">五、下期建议</h2>
+<ol>
+<li><strong>优先级 A（必做）</strong>：刷新 #1（ISA 10 月末/9 月末数据，预期 12 月上旬）、#3（ClassNK 2026-10 月报、JLPT 2027 年上半年报名窗口）、#7（TSR/TDB 2026-11 月报）。</li>
+<li><strong>优先级 B</strong>：补齐 #4 的职业别求人倍率细表（2026-09/10）；尝试从警察庁「自動運転」相关页或国会答弁取 L4 许可件数汇总值。</li>
+<li><strong>优先级 C</strong>：SGHD 官方短信 PDF 与中期经营计划中"外籍司机"表述；#6 新增 1–2 条 2026-11 时点样本（优先含「特定技能」标签的岗位），以检验 265,020 円是否为区间下沿。</li>
+<li><strong>方法改进</strong>：对"表已换版但数据未换月"的情形，在下期起统一在变更摘要「变化性质」列写「换版未换月」，避免读者误读为更新。</li>
+<li><strong>风险提示</strong>：本期 #11 与 #4 的部分子项为媒体/二手来源，下期若仍无法取得官方原件，应在报告"可靠性与局限"章继续保留 C 级标注，不得升格。</li>
+</ol>
+<h2 id="六-自检结果">六、自检结果</h2>
+<ul>
+<li>报告八章结构完整；变更摘要覆盖 14 项；文末两行（版本声明 + 待复核清单）齐备。</li>
+<li>事实底线复核：22,100 未回退；162,912/110,809 未回退；341,158 円（不含赏与）与 430 万円（含赏与）口径标注保留；在留者数值沿用 2026-08 末并注明；全部数值带日/英来源链接。</li>
+<li>表内无 <code>[Source: ...]</code>；跨主题链接 8 处均指向已存在的手册锚点。</li>
+<li><code>python prompts/tools/md2html.py 01-ssw-driver/reports</code> 与 <code>python prompts/tools/validate.py</code> 结果见运行记录（最终输出行附于交付汇报）。</li>
+</ul>
+</body>
+</html>
