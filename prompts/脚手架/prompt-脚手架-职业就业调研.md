@@ -1,9 +1,14 @@
 # {{项目名}} · 动态更新提示词（单份报告型）
 
+> **模板标识**：PRM-SCF-EMP-001
+> **适用场景**：新建「行业调研 + 落地建议」类单份报告监测项目时，复制本脚手架并替换占位符
+> **版本**：v2026.11.12
+> **更新说明**：2026-11-12 同步通用基座的 `vYYYY.MM.DD[_N]` 同日递增版本规则，覆盖规则改为显式允许/禁止清单。
+>
 > **用途**：周期性刷新《{{项目名}}监测报告》，动态获取权威数据。可直接复制，替换顶部占位符后提交给 AI 执行。
 > **产出**：单份 Markdown 报告（同目录自包含 HTML），版本命名 `{{项目名}}监测报告_{{REPORT_VERSION}}.md`（`{{REPORT_VERSION}}` 已含 `v` 前缀，文件名不得再重复加 `v`）。
 >
-> **继承声明（三层体系）**：本文件 = [通用基座](../../prompts/通用基座/prompt-generic-base.md) × [职业就业调研类型模板](../../prompts/职业就业调研/prompt-employment-research-template.md) × 本项目专属配置。质量规则（中文输出、逐点引用、事实与推断分离、口径标注、来源优先级框架、版本管理）见上两层与 [监测报告通用规范](../../prompts/monitoring-common-spec.md)；冲突时以本文件为准。
+> **继承声明（三层体系）**：本文件 = [通用基座](../../prompts/通用基座/prompt-generic-base.md) × [职业就业调研类型模板](../../prompts/职业就业调研/prompt-employment-research-template.md) × 本项目专属配置。质量规则（中文输出、逐点引用、事实与推断分离、口径标注、来源优先级框架、版本管理）见上两层与 [监测报告通用规范](../../prompts/monitoring-common-spec.md)。可覆盖范围仅限输出结构、路径、运行变量与更严格的类型纪律；不可覆盖引用纪律、禁止编造、事实与推断分离、SSOT 主责与已修正事实。
 
 ---
 
@@ -15,7 +20,7 @@
 {{CURRENT_DATE}}         = 本次运行日期，格式 YYYY-MM-DD
 {{PREVIOUS_REPORT_PATH}} = 上一版报告路径（reports/ 内版本号最新一份）；首期为空 → 直接产出基线报告
 {{OUTPUT_PATH}}          = ../reports/（本次报告输出目录，可按项目调整）
-{{REPORT_VERSION}}       = 本次版本号，格式 vYYYY.MM.DD（跨日运行禁止复用同日版本号）
+{{REPORT_VERSION}}       = 本次版本号，格式 vYYYY.MM.DD[_N]：同日首次运行可省略 _N，同日多次运行须逐次递增 _N（_2、_3…），不得复用同一版本号；任何情况下不得覆盖既有文件
 {{FRESHNESS_PRIORITY}}   = 数据时效优先级窗口（默认：近 12 个月内数据优先；超过 24 个月须标注年份并谨慎使用）
 {{REGISTRY_PATH}}        = ../data/{{slug}}-indicator-registry.md —— N 项指标活值登记册，每次运行先读后写
 {{REVIEWS_DIR}}          = ../reviews/ —— 每期运行复盘存放处（命名 YYYY-MM-DD-第 N 期运行复盘.md）
