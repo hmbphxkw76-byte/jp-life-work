@@ -1,0 +1,143 @@
+{
+  "version": 1,
+  "timezone": "Asia/Tokyo",
+  "dispatch": {
+    "max_issues_per_run": 4,
+    "due_soon_days": 7
+  },
+  "defaults": {
+    "cadence_days": 90
+  },
+  "topics": [
+    {
+      "id": "01-ssw-driver",
+      "name": "特定技能司机·物流·智能驾驶监测",
+      "kind": "monitor",
+      "cadence_days": 30,
+      "priority": 1,
+      "target": "01-ssw-driver/reports",
+      "prompt": "01-ssw-driver/prompts/prompt-ssw-driver-logistics-update.md",
+      "registry": "01-ssw-driver/data/ssw-driver-indicator-registry.md"
+    },
+    {
+      "id": "02-career-driver",
+      "name": "司机岗位执行手册",
+      "kind": "knowledge",
+      "cadence_days": 90,
+      "priority": 10,
+      "target": "02-career-driver/reports/日本司机职业知识手册.md",
+      "prompt": "02-career-driver/prompts/prompt-career-driver-update.md",
+      "registry": "02-career-driver/data/career-driver-indicator-registry.md"
+    },
+    {
+      "id": "03-career-management",
+      "name": "管理岗过渡手册",
+      "kind": "knowledge",
+      "cadence_days": 90,
+      "priority": 10,
+      "target": "03-career-management/reports/日本管理岗过渡知识手册.md",
+      "prompt": "03-career-management/prompts/prompt-career-logistics-update.md",
+      "registry": "03-career-management/data/career-logistics-indicator-registry.md"
+    },
+    {
+      "id": "04-industry-logistics",
+      "name": "物流产业与赛道",
+      "kind": "knowledge",
+      "cadence_days": 90,
+      "priority": 10,
+      "target": "04-industry-logistics/reports/日本物流行业知识手册.md",
+      "prompt": "04-industry-logistics/prompts/prompt-logistics-industry-update.md",
+      "registry": "04-industry-logistics/data/logistics-industry-indicator-registry.md"
+    },
+    {
+      "id": "05-industry-autonomous",
+      "name": "自动驾驶与自动化",
+      "kind": "knowledge",
+      "cadence_days": 90,
+      "priority": 10,
+      "target": "05-industry-autonomous/reports/日本自动驾驶与自动化知识手册.md",
+      "prompt": "05-industry-autonomous/prompts/prompt-autonomous-automation-update.md",
+      "registry": "05-industry-autonomous/data/autonomous-automation-indicator-registry.md"
+    },
+    {
+      "id": "06-industry-technology",
+      "name": "技术与数字化",
+      "kind": "knowledge",
+      "cadence_days": 90,
+      "priority": 10,
+      "target": "06-industry-technology/reports/日本技术与数字化知识手册.md",
+      "prompt": "06-industry-technology/prompts/prompt-technology-industry-update.md",
+      "registry": "06-industry-technology/data/technology-industry-indicator-registry.md"
+    },
+    {
+      "id": "07-economy-finance",
+      "name": "经济与财务",
+      "kind": "knowledge",
+      "cadence_days": 90,
+      "priority": 10,
+      "target": "07-economy-finance/reports/日本经济与财务知识手册.md",
+      "prompt": "07-economy-finance/prompts/prompt-economy-update.md",
+      "registry": "07-economy-finance/data/economy-indicator-registry.md"
+    },
+    {
+      "id": "08-visa-immigration",
+      "name": "签证与在留资格",
+      "kind": "knowledge",
+      "cadence_days": 90,
+      "priority": 10,
+      "target": "08-visa-immigration/reports/日本签证与在留资格知识手册.md",
+      "prompt": "08-visa-immigration/prompts/prompt-visa-immigration-update.md",
+      "registry": "08-visa-immigration/data/visa-immigration-indicator-registry.md"
+    },
+    {
+      "id": "09-politics-law",
+      "name": "政治与法规",
+      "kind": "knowledge",
+      "cadence_days": 90,
+      "priority": 10,
+      "target": "09-politics-law/reports/日本政治与法规知识手册.md",
+      "prompt": "09-politics-law/prompts/prompt-politics-law-update.md",
+      "registry": "09-politics-law/data/politics-law-indicator-registry.md"
+    },
+    {
+      "id": "10-education-qualification",
+      "name": "资格与教育投资",
+      "kind": "knowledge",
+      "cadence_days": 90,
+      "priority": 10,
+      "target": "10-education-qualification/reports/日本资格与教育投资知识手册.md",
+      "prompt": "10-education-qualification/prompts/prompt-education-update.md",
+      "registry": "10-education-qualification/data/education-indicator-registry.md"
+    },
+    {
+      "id": "11-language-japanese",
+      "name": "日语学习",
+      "kind": "knowledge",
+      "cadence_days": 90,
+      "priority": 10,
+      "target": "11-language-japanese/reports/日本日语学习知识手册.md",
+      "prompt": "11-language-japanese/prompts/prompt-language-update.md",
+      "registry": "11-language-japanese/data/language-indicator-registry.md"
+    },
+    {
+      "id": "12-culture-life",
+      "name": "文化与生活",
+      "kind": "knowledge",
+      "cadence_days": 90,
+      "priority": 10,
+      "target": "12-culture-life/reports/日本文化与生活知识手册.md",
+      "prompt": "12-culture-life/prompts/prompt-culture-life-update.md",
+      "registry": "12-culture-life/data/culture-life-indicator-registry.md"
+    },
+    {
+      "id": "13-regional-info",
+      "name": "地域信息",
+      "kind": "knowledge",
+      "cadence_days": 90,
+      "priority": 10,
+      "target": "13-regional-info/reports/日本地域信息知识手册.md",
+      "prompt": "13-regional-info/prompts/prompt-regional-update.md",
+      "registry": "13-regional-info/data/regional-indicator-registry.md"
+    }
+  ]
+}

@@ -1,0 +1,116 @@
+name: 周期更新调度
+
+on:
+  schedule:
+    # 每周一 00:15 UTC = 09:15 JST，避开整点高负载时段
+    - cron: "15 0 * * 1"
+  workflow_dispatch:
+    inputs:
+      force_topic:
+        description: "强制主题 id（如 08-visa-immigration）或 all；留空按到期判断"
+        required: false
+        default: ""
+      dry_run:
+        description: "仅预览，不创建工单、不提交看板"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: scheduled-update
+  cancel-in-progress: false
+
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      PYTHONIOENCODING: utf-8
+    steps:
+      - name: 检出仓库（需完整历史以计算上次更新）
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: 设置 Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.x"
+
+      - name: 安装依赖（最多重试 3 次）
+        run: |
+          for i in 1 2 3; do
+            if pip install -r requirements.txt; then
+              exit 0
+            fi
+            echo "pip 安装失败，第 $i 次重试…"
+            sleep $((i * 5))
+          done
+          exit 1
+
+      - name: 生成更新看板
+        if: ${{ inputs.dry_run != true }}
+        run: python prompts/tools/update_scheduler.py dashboard
+
+      - name: 生成看板 HTML
+        if: ${{ inputs.dry_run != true }}
+        run: python prompts/tools/md2html.py updates.md
+
+      - name: 创建到期工单
+        env:
+          FORCE_TOPIC: ${{ inputs.force_topic }}
+          DRY_RUN: ${{ inputs.dry_run }}
+        run: |
+          ARGS=()
+          if [ -n "$FORCE_TOPIC" ]; then
+            ARGS+=(--force "$FORCE_TOPIC")
+          fi
+          if [ "$DRY_RUN" = "true" ]; then
+            ARGS+=(--dry-run)
+          fi
+          python prompts/tools/update_scheduler.py dispatch "${ARGS[@]}"
+
+      - name: 提交看板变更（推送失败重试 3 次）
+        if: ${{ inputs.dry_run != true }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add updates.md updates.html
+          if git diff --cached --quiet; then
+            echo "看板无变化，跳过提交"
+            exit 0
+          fi
+          git commit -m "chore: 自动刷新周期更新看板"
+          for i in 1 2 3; do
+            if git push; then
+              echo "推送成功"
+              exit 0
+            fi
+            echo "推送失败，第 $i 次重试…"
+            git pull --rebase --autostash || true
+            sleep $((i * 5))
+          done
+          exit 1
+
+      - name: 规范校验
+        if: ${{ inputs.dry_run != true }}
+        run: |
+          set +e
+          python prompts/tools/validate.py
+          code=$?
+          set -e
+          if [ "$code" -eq 1 ]; then
+            echo "::error::规范校验存在错误，调度结果需修复"
+            exit 1
+          fi
+          exit 0
+
+      - name: 失败告警（创建或追加 ops-alert Issue）
+        if: failure()
+        run: |
+          python prompts/tools/update_scheduler.py alert \
+            --reason "周期更新调度工作流失败（job: ${{ github.job }}）"

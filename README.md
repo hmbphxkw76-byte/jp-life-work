@@ -5,6 +5,7 @@
 - **初期目标**：以**特定技能司机**进入日本物流行业。
 - **中期目标**：转向**仓储运营、运输管理、供应链协调、团队长/管理岗**。
 - **长期目标**：进入**物流技术、数字化、自动化、无人驾驶相关岗位**，并规划**在留资格切换（司机分野无 2 号）、永住及长期定居路径**。
+- **周期更新看板**：[updates.md](updates.md)（各主题到期状态、版本链与追溯入口，每周自动刷新）
 
 ## 路线图
 
@@ -55,6 +56,8 @@
 ```text
 jp-life-work/
 ├── README.md                          # 项目总览 + 五阶段路线图 + 目录与体系说明
+├── updates.md / updates.html          # 周期更新看板（脚本生成，勿手工编辑）
+├── 内容边界规范.md                     # 内容归位、SSOT、重复判定与主题边界卡
 ├── 01-ssw-driver/                     # 监测项目：特定技能司机·物流·智能驾驶
 │   ├── data/                          #   指标登记册（活值）
 │   ├── prompts/                       #   动态更新提示词（继承公共三层模板）
@@ -78,6 +81,7 @@ jp-life-work/
 ├── 12-culture-life/                   # 生活：文化与生活（同构）
 ├── 13-regional-info/                  # 生活：地域信息（同构）
 └── prompts/                           # 公共提示词层（三层继承体系）
+    ├── schedule.json                  #   周期更新排期配置（节奏/路径/优先级）
     ├── monitoring-common-spec.md      #   质量规范（单份，跨类型共享）
     ├── 通用基座/                       #   第 1 层：运行变量/锚定/更新协议/追踪表/执行/输出骨架
     ├── 职业就业调研/                   #   第 2 层类型模板：行业调研 + 落地建议类
@@ -143,11 +147,32 @@ jp-life-work/
 - **报告输出**：`python prompts/tools/md2html.py` 将各 `reports/` 下的 md 转为同名 HTML，与 md 同目录存放并随源文件入库。
 - **内容边界**：内容归位、事实单一来源（SSOT）、重复判定与四主题边界卡见 [内容边界规范.md](内容边界规范.md)；目录结构与路线图以本 README 为准，规范不重复维护。
 - **规范校验**：`python prompts/tools/validate.py` 执行 10 项规范一致性校验（单文档约束、目录结构、引用格式、锚点链接、活值硬编码等）。退出码：0=通过，1=错误（需修复），2=仅警告。
+- **周期排期**：`python prompts/tools/update_scheduler.py status` 查看到期状态；`dispatch` 为到期主题创建工单；`dashboard` 刷新 [updates.md](updates.md)。排期在 [prompts/schedule.json](prompts/schedule.json) 配置。
 - **脚本环境**：`prompts/tools/` 下的共用脚本基于 Python 运行（依赖见 requirements.txt）。
+
+## 周期更新自动化
+
+采用**工单驱动**：GitHub Actions 只负责定时巡检与机械动作，内容研究/改写仍由 AI IDE 或本人按工单执行，避免无密钥环境下的编造风险。
+
+```text
+每周一 09:15 JST  scheduled-update.yml
+        │  计算到期主题（监测 30 天 / 知识 90 天，读 git 历史）
+        ├─→ 创建 GitHub Issue（label: update-task，同主题去重）
+        ├─→ 刷新 updates.md / updates.html 并提交
+        └─→ 失败 → 创建/追加 ops-alert Issue（@本人，触发邮件）
+AI IDE / 本人 执行工单
+        └─→ push reports/*.md → html-sync.yml：归档 → 生成 HTML → 校验 → 提交
+```
+
+- **触发**：每周一 cron + 手动 `workflow_dispatch`（可指定 `force_topic` 或 `dry_run`）；内容更新后 push 触发后置链路。
+- **追溯**：工单记录上期提交与验收清单；看板汇总上次更新、下次到期、版本链；监测报告保留 `archives/`，知识手册用 GitHub History + 手册内「更新日志」。
+- **权限**：个人私有仓库免费额度 2,000 分钟/月；本方案每周约 1–2 分钟/次，月耗约 5–10 分钟。需在 Settings → Actions → General 将 Workflow permissions 设为 **Read and write**。
+- **完整设计**（约束核验、频率矩阵、重试与告警规则、验收清单）：[自动化更新方案.md](自动化更新方案.md)。
 
 ## CI 自动化
 
 | Workflow | 触发 | 作用 |
 |----------|------|------|
 | [规范校验](.github/workflows/validate.yml) | push/PR 到 main | 运行 `validate.py`，错误阻断合并，警告放行 |
-| [HTML 同步](.github/workflows/html-sync.yml) | reports/*.md 变更 | 自动重新生成 HTML 并提交 |
+| [HTML 同步](.github/workflows/html-sync.yml) | reports/*.md 变更 | 归档 → 重新生成 HTML → 规范校验 → 提交 |
+| [周期更新调度](.github/workflows/scheduled-update.yml) | 每周一 cron / 手动 | 计算到期主题、创建工单、刷新看板、失败告警 |

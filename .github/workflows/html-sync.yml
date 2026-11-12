@@ -25,15 +25,31 @@ jobs:
       - name: 安装依赖
         run: pip install -r requirements.txt
 
+      - name: 整理归档（保留策略）
+        run: python prompts/tools/archive_reports.py
+
       - name: 重新生成 HTML
         run: python prompts/tools/md2html.py
 
       - name: 清理非 reports 目录的 HTML
         run: |
           find . -path ./01-ssw-driver/reviews -prune -o \
-            -name "*.html" -print | grep -v "/reports/" | xargs rm -f 2>/dev/null || true
+            -name "*.html" -print | grep -v "/reports/" | \
+            grep -v "^\./updates\.html$" | xargs rm -f 2>/dev/null || true
 
-      - name: 检查 HTML 变更并提交
+      - name: 提交前规范校验
+        run: |
+          set +e
+          python prompts/tools/validate.py
+          code=$?
+          set -e
+          if [ "$code" -eq 1 ]; then
+            echo "::error::规范校验存在错误，已阻止自动提交；请修复后重试"
+            exit 1
+          fi
+          exit 0
+
+      - name: 检查变更并提交
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
@@ -41,6 +57,6 @@ jobs:
           if git diff --cached --quiet; then
             echo "HTML 已是最新，无需提交"
           else
-            git commit -m "chore: 自动同步 HTML（由 CI 生成）"
+            git commit -m "chore: 自动归档并同步 HTML（由 CI 生成）"
             git push
           fi

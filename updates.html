@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>周期更新看板</title>
+<style>
+  body { max-width: 860px; margin: 2rem auto; padding: 0 1rem;
+         font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+         line-height: 1.7; color: #222; }
+  pre { background: #f5f5f5; padding: 0.8rem; overflow-x: auto; border-radius: 4px; }
+  code { background: #f5f5f5; padding: 0.1em 0.3em; border-radius: 3px; }
+  pre code { padding: 0; background: none; }
+  table { border-collapse: collapse; }
+  th, td { border: 1px solid #ccc; padding: 0.4em 0.7em; }
+  table a[title^="来源"] { color: inherit; text-decoration: none;
+    word-break: normal; overflow-wrap: anywhere;
+    border-bottom: 1px dotted #b8b0a0; }
+  table a[title^="来源"] strong, table a[title^="来源"] em,
+  table a[title^="来源"] code { color: inherit; background: none; }
+  table a[title^="来源"]:hover { color: #1a5f5a; background: rgba(26,95,90,.09);
+    border-bottom: 1px solid currentColor; }
+  table a[title^="来源"]::after { content: "↗"; margin-left: 3px;
+    font-size: .76em; opacity: 0; }
+  table a[title^="来源"]:hover::after { opacity: .85; }
+  blockquote { border-left: 4px solid #ccc; margin-left: 0; padding-left: 1em; color: #555; }
+</style>
+</head>
+<body>
+<h1 id="周期更新看板">周期更新看板</h1>
+<blockquote>
+<p><strong>自动生成</strong>：由 <code>prompts/tools/update_scheduler.py</code> 生成，请勿手工编辑（手工改动会在下次调度时被覆盖）。<br />
+<strong>生成时间</strong>：2026-11-12 14:58 JST　<strong>排期配置</strong>：<a href="prompts/schedule.json">schedule.json</a>　<strong>调度工作流</strong>：<a href=".github/workflows/scheduled-update.yml">scheduled-update.yml</a></p>
+</blockquote>
+<h2 id="总览">总览</h2>
+<ul>
+<li>主题总数：<strong>13</strong>　已到期：<strong>0</strong>　7 天内到期：<strong>0</strong>　正常：<strong>13</strong></li>
+<li>调度节奏：每周一 09:15 JST 自动巡检；各主题节奏见下表（由 schedule.json 驱动）。</li>
+<li>到期后自动创建 GitHub Issue 工单（标签 <code>update-task</code>），由 AI IDE 或本人执行内容更新。</li>
+</ul>
+<h2 id="主题状态">主题状态</h2>
+<table>
+<thead>
+<tr>
+<th>主题</th>
+<th>类型</th>
+<th>节奏</th>
+<th>上次更新</th>
+<th>下次到期</th>
+<th>状态</th>
+<th>当前版本</th>
+<th>入口</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>01-ssw-driver 特定技能司机·物流·智能驾驶监测</td>
+<td>监测</td>
+<td>30 天</td>
+<td>2026-11-12（d9c530a）</td>
+<td>2026-12-12</td>
+<td>正常</td>
+<td>v2026.11.12_5</td>
+<td><a href="01-ssw-driver/reports/日本特定技能司机物流监测报告_v2026.11.12_5.md">报告</a> · <a href="01-ssw-driver/reports/日本特定技能司机物流监测报告_v2026.11.12_5.html">HTML</a> · <a href="01-ssw-driver/reports/archives/">历史</a> · <a href="01-ssw-driver/prompts/prompt-ssw-driver-logistics-update.md">提示词</a></td>
+</tr>
+<tr>
+<td>02-career-driver 司机岗位执行手册</td>
+<td>知识</td>
+<td>90 天</td>
+<td>2026-11-12（b2ee225）</td>
+<td>2027-02-10</td>
+<td>正常</td>
+<td>v1.0</td>
+<td><a href="02-career-driver/reports/日本司机职业知识手册.md">手册</a> · <a href="02-career-driver/reports/日本司机职业知识手册.html">HTML</a> · <a href="02-career-driver/reports/archives/">历史</a> · <a href="02-career-driver/prompts/prompt-career-driver-update.md">提示词</a></td>
+</tr>
+<tr>
+<td>03-career-management 管理岗过渡手册</td>
+<td>知识</td>
+<td>90 天</td>
+<td>2026-11-12（f9100d9）</td>
+<td>2027-02-10</td>
+<td>正常</td>
+<td>v1.0</td>
+<td><a href="03-career-management/reports/日本管理岗过渡知识手册.md">手册</a> · <a href="03-career-management/reports/日本管理岗过渡知识手册.html">HTML</a> · <a href="03-career-management/reports/archives/">历史</a> · <a href="03-career-management/prompts/prompt-career-logistics-update.md">提示词</a></td>
+</tr>
+<tr>
+<td>04-industry-logistics 物流产业与赛道</td>
+<td>知识</td>
+<td>90 天</td>
+<td>2026-11-12（f9100d9）</td>
+<td>2027-02-10</td>
+<td>正常</td>
+<td>v1.0</td>
+<td><a href="04-industry-logistics/reports/日本物流行业知识手册.md">手册</a> · <a href="04-industry-logistics/reports/日本物流行业知识手册.html">HTML</a> · <a href="04-industry-logistics/reports/archives/">历史</a> · <a href="04-industry-logistics/prompts/prompt-logistics-industry-update.md">提示词</a></td>
+</tr>
+<tr>
+<td>05-industry-autonomous 自动驾驶与自动化</td>
+<td>知识</td>
+<td>90 天</td>
+<td>2026-11-12（9054f92）</td>
+<td>2027-02-10</td>
+<td>正常</td>
+<td>v1.0</td>
+<td><a href="05-industry-autonomous/reports/日本自动驾驶与自动化知识手册.md">手册</a> · <a href="05-industry-autonomous/reports/日本自动驾驶与自动化知识手册.html">HTML</a> · <a href="05-industry-autonomous/reports/archives/">历史</a> · <a href="05-industry-autonomous/prompts/prompt-autonomous-automation-update.md">提示词</a></td>
+</tr>
+<tr>
+<td>06-industry-technology 技术与数字化</td>
+<td>知识</td>
+<td>90 天</td>
+<td>2026-11-12（f54b0de）</td>
+<td>2027-02-10</td>
+<td>正常</td>
+<td>v1.0</td>
+<td><a href="06-industry-technology/reports/日本技术与数字化知识手册.md">手册</a> · <a href="06-industry-technology/reports/日本技术与数字化知识手册.html">HTML</a> · <a href="06-industry-technology/reports/archives/">历史</a> · <a href="06-industry-technology/prompts/prompt-technology-industry-update.md">提示词</a></td>
+</tr>
+<tr>
+<td>07-economy-finance 经济与财务</td>
+<td>知识</td>
+<td>90 天</td>
+<td>2026-11-12（9054f92）</td>
+<td>2027-02-10</td>
+<td>正常</td>
+<td>v1.0</td>
+<td><a href="07-economy-finance/reports/日本经济与财务知识手册.md">手册</a> · <a href="07-economy-finance/reports/日本经济与财务知识手册.html">HTML</a> · <a href="07-economy-finance/reports/archives/">历史</a> · <a href="07-economy-finance/prompts/prompt-economy-update.md">提示词</a></td>
+</tr>
+<tr>
+<td>08-visa-immigration 签证与在留资格</td>
+<td>知识</td>
+<td>90 天</td>
+<td>2026-11-12（f4d5fd4）</td>
+<td>2027-02-10</td>
+<td>正常</td>
+<td>v1.0</td>
+<td><a href="08-visa-immigration/reports/日本签证与在留资格知识手册.md">手册</a> · <a href="08-visa-immigration/reports/日本签证与在留资格知识手册.html">HTML</a> · <a href="08-visa-immigration/reports/archives/">历史</a> · <a href="08-visa-immigration/prompts/prompt-visa-immigration-update.md">提示词</a></td>
+</tr>
+<tr>
+<td>09-politics-law 政治与法规</td>
+<td>知识</td>
+<td>90 天</td>
+<td>2026-11-12（42f90dd）</td>
+<td>2027-02-10</td>
+<td>正常</td>
+<td>v1.0</td>
+<td><a href="09-politics-law/reports/日本政治与法规知识手册.md">手册</a> · <a href="09-politics-law/reports/日本政治与法规知识手册.html">HTML</a> · <a href="09-politics-law/reports/archives/">历史</a> · <a href="09-politics-law/prompts/prompt-politics-law-update.md">提示词</a></td>
+</tr>
+<tr>
+<td>10-education-qualification 资格与教育投资</td>
+<td>知识</td>
+<td>90 天</td>
+<td>2026-11-12（f54b0de）</td>
+<td>2027-02-10</td>
+<td>正常</td>
+<td>v1.1</td>
+<td><a href="10-education-qualification/reports/日本资格与教育投资知识手册.md">手册</a> · <a href="10-education-qualification/reports/日本资格与教育投资知识手册.html">HTML</a> · <a href="10-education-qualification/reports/archives/">历史</a> · <a href="10-education-qualification/prompts/prompt-education-update.md">提示词</a></td>
+</tr>
+<tr>
+<td>11-language-japanese 日语学习</td>
+<td>知识</td>
+<td>90 天</td>
+<td>2026-11-12（9054f92）</td>
+<td>2027-02-10</td>
+<td>正常</td>
+<td>v1.0</td>
+<td><a href="11-language-japanese/reports/日本日语学习知识手册.md">手册</a> · <a href="11-language-japanese/reports/日本日语学习知识手册.html">HTML</a> · <a href="11-language-japanese/reports/archives/">历史</a> · <a href="11-language-japanese/prompts/prompt-language-update.md">提示词</a></td>
+</tr>
+<tr>
+<td>12-culture-life 文化与生活</td>
+<td>知识</td>
+<td>90 天</td>
+<td>2026-11-12（f54b0de）</td>
+<td>2027-02-10</td>
+<td>正常</td>
+<td>v1.0</td>
+<td><a href="12-culture-life/reports/日本文化与生活知识手册.md">手册</a> · <a href="12-culture-life/reports/日本文化与生活知识手册.html">HTML</a> · <a href="12-culture-life/reports/archives/">历史</a> · <a href="12-culture-life/prompts/prompt-culture-life-update.md">提示词</a></td>
+</tr>
+<tr>
+<td>13-regional-info 地域信息</td>
+<td>知识</td>
+<td>90 天</td>
+<td>2026-11-12（f54b0de）</td>
+<td>2027-02-10</td>
+<td>正常</td>
+<td>v1.0</td>
+<td><a href="13-regional-info/reports/日本地域信息知识手册.md">手册</a> · <a href="13-regional-info/reports/日本地域信息知识手册.html">HTML</a> · <a href="13-regional-info/reports/archives/">历史</a> · <a href="13-regional-info/prompts/prompt-regional-update.md">提示词</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="到期队列">到期队列</h2>
+<p>当前无到期主题。</p>
+<h2 id="查阅与追溯">查阅与追溯</h2>
+<table>
+<thead>
+<tr>
+<th>追溯对象</th>
+<th>入口</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>监测报告版本链</td>
+<td><a href="01-ssw-driver/reports/">01-ssw-driver/reports</a> · <a href="01-ssw-driver/reports/archives/">archives</a></td>
+<td>文件名含版本号，基线常驻顶层</td>
+</tr>
+<tr>
+<td>知识手册历次版本</td>
+<td>各主题 <code>reports/</code> 下的手册 → GitHub 文件 History</td>
+<td>单文档增量回写；变更摘要记入手册「更新日志」</td>
+</tr>
+<tr>
+<td>更新工单</td>
+<td><a href="issues?q=is%3Aissue+label%3Aupdate-task">update-task</a></td>
+<td>每个到期主题一个工单，关闭即完成</td>
+</tr>
+<tr>
+<td>调度异常</td>
+<td><a href="issues?q=is%3Aissue+label%3Aops-alert">ops-alert</a></td>
+<td>由失败的工作流自动创建</td>
+</tr>
+<tr>
+<td>规范校验</td>
+<td><a href="prompts/tools/validate.py">validate.py</a></td>
+<td>提交前与 CI 双重执行</td>
+</tr>
+</tbody>
+</table>
+<h2 id="使用说明">使用说明</h2>
+<ol>
+<li><strong>定期查阅</strong>：打开本页 → 看「到期队列」→ 进入对应提示词执行更新。</li>
+<li><strong>手机查阅</strong>：在 GitHub 仓库首页点 <code>updates.md</code> 即可阅读；HTML 版适合本地双击打开。</li>
+<li><strong>回溯历史</strong>：监测报告直接打开 <code>archives/</code>；知识手册用 GitHub History 对比任意两次提交。</li>
+<li><strong>调整节奏</strong>：编辑 <code>prompts/schedule.json</code> 中对应主题的 <code>cadence_days</code>，下次调度自动生效。</li>
+</ol>
+</body>
+</html>
