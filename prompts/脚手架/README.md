@@ -65,9 +65,9 @@
 
 ---
 
-## 与现有 monitors 的交叉验证锚
+## 与现有 01-ssw-driver 的交叉验证锚
 
-如果新主题与现有 monitors 有数据交叉（如司机薪资、汇率、试验费用等），在 prompt 继承声明末尾添加：
+如果新主题与现有 01-ssw-driver 有数据交叉（如司机薪资、汇率、试验费用等），在 prompt 继承声明末尾添加：
 
 ```
 > **交叉验证锚**：{{数字/结论}} 以 NN-{{target}}/data/{{target}}-indicator-registry.md 为单一事实源；冲突时以本文件为准。

@@ -8,7 +8,7 @@
 | # | 指标 | 优先数据源 | 最新值（来源/年份） | 基准版本 |
 |---|---|---|---|---|
 | 1 | 入管法最新改正 | e-Gov | 待基线确立 | baseline |
-| 2 | 外国人劳动咨询窗口 | check-roudou.mhlw.go.jp | Hotline 0120-811-610（锚 monitors 清单） | baseline |
+| 2 | 外国人劳动咨询窗口 | check-roudou.mhlw.go.jp | Hotline 0120-811-610（锚 01-ssw-driver 清单） | baseline |
 | 3 | 移民政策重大动向 | 官方公报 / 媒体 | 待基线确立 | baseline |
 | 4 | 育成就労施行进度 | 官房 / 厚労省 | 2027 年施行（02 篇） | baseline |
 | 5 | 维权渠道联系方式现行口径 | 各都道府県労働局 | 待基线确立 | baseline |
