@@ -6,14 +6,14 @@
 
 | # | 文件 | 内容 |
 |---|---|---|
-| 01 | [收入结构与薪资行情](01-收入结构与薪资行情.md) | 薪资基本盘、地域差、10 年收入曲线、合规副收边界 |
-| 02 | [生活成本与储蓄规划](02-生活成本与储蓄规划.md) | 单身月度成本模型、储蓄率目标、汇款渠道 |
+| 01 | [收入结构与薪资行情](archives/01-收入结构与薪资行情.md) | 薪资基本盘、地域差、10 年收入曲线、合规副收边界 |
+| 02 | [生活成本与储蓄规划](archives/02-生活成本与储蓄规划.md) | 单身月度成本模型、储蓄率目标、汇款渠道 |
 | 03 | [税务社保年金](03-税务社保年金.md) | 四大公的义务、年金与永住、归档清单 |
 | 04 | [长期财务规划](04-长期财务规划.md) | 10 年里程碑、世帯年收达标模拟、大额决策时机 |
 
 ## 关联目录
 
-- 岗位薪资细节与公司合规 → [../../monitors-career-driver/reports/02-薪资结构与工时合规](../../monitors-career-driver/reports/02-薪资结构与工时合规.md)
+- 岗位薪资细节与公司合规 → [../../monitors-career-driver/reports/archives/02-薪资结构与工时合规](../../monitors-career-driver/reports/archives/02-薪资结构与工时合规.md)
 - 永住年收要件与取消风险 → [../../monitors-visa-immigration/reports/07-永住与长期在留规划](../../monitors-visa-immigration/reports/07-永住与长期在留规划.md)
 - 工作条件实际记录（月度） → [../../monitors-career-driver/reports/06-实际工作条件记录](../../monitors-career-driver/reports/06-实际工作条件记录.md)
 

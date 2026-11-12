@@ -23,7 +23,7 @@
 - 定义：荷主企业将物流全案外包——仓储+运输+系统+人员管理一揽子
 - 岗位谱系：现场作业、SV（supervisor）、WMS 操作、KPI 报告担当、荷主折冲
 - 对外国人最友好的增长点：**语言多样性与现场翻译·带人能力**在 3PL 是显性价值
-- 个人机会：3PL 仓库 SV = 管理岗与数字化岗位的最短交叉点（→ [../../monitors-career-logistics/reports/01-管理岗地图与路径评估](../../monitors-career-logistics/reports/01-管理岗地图与路径评估.md)）
+- 个人机会：3PL 仓库 SV = 管理岗与数字化岗位的最短交叉点（→ [../../../monitors-career-logistics/reports/archives/01-管理岗地图与路径评估](../../../monitors-career-logistics/reports/archives/01-管理岗地图与路径评估.md)）
 
 ## 四、绿色物流（グリーンロジスティクス）
 
@@ -42,5 +42,5 @@
 
 ## 六、关联
 
-- 自动化技术细节 → [03-自动化与技术趋势](03-自动化与技术趋势.md)
-- WMS/TMS 系统技能 → [../../monitors-technology-industry](../../monitors-technology-industry/reports/)
+- 自动化技术细节 → [03-自动化与技术趋势](../03-自动化与技术趋势.md)
+- WMS/TMS 系统技能 → [../../../monitors-technology-industry](../../../monitors-technology-industry/reports/)

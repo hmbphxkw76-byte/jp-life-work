@@ -84,6 +84,8 @@ jp-life-work/
 ```
 
 > 每个 `monitors-*` 统一为 `prompts/ + reports/` 两层；`monitors-ssw-driver-logistics` 另有 `data/`（指标活值）与 `reviews/`（每期复盘）。`data/` 子目录按需创建，不预建空目录。
+>
+> **保留策略**：`reports/` 顶层只保留最新 3 份（`00-index.md` 固定保留），其余移入 `reports/archives/`；归档上限 7 份，超出删最旧。由 `python prompts/tools/archive_reports.py` 执行，`--dry-run` 可预览。
 
 ## 动态更新体系（三层提示词继承）
 
@@ -104,14 +106,14 @@ jp-life-work/
 
 | 目录 | 用途 | 现状 | 动态更新配置 |
 |------|------|------|------|
-| monitors-visa-immigration | 特定技能1号/2号制度、考试与日语要求、申请流程与材料、育成就劳制度新动向、永住与长期在留规划、政策更新日志 | 9 篇 | prompt-visa-immigration-update.md |
-| monitors-language | JLPT N4/N3/N2 分阶段备考计划、JFT-Basic 备用方案、学习资源清单与进度跟踪 | 7 篇 | prompt-language-update.md |
-| monitors-career-driver | 司机岗位全景、薪资结构与工时合规、安全规范、现场经验积累、求职渠道与面试、实际工作条件记录 | 7 篇 | prompt-career-driver-update.md |
-| monitors-career-logistics | 管理岗地图与路径评估、业务知识体系、管理岗日语与沟通、过渡学习计划、成果档案与晋升材料 | 6 篇 | prompt-career-logistics-update.md |
-| monitors-logistics-industry | 日本物流产业概览、EC/冷链/3PL 增长赛道、自动化与技术趋势、行业数据跟踪 | 5 篇 | prompt-logistics-industry-update.md |
-| monitors-autonomous-automation | 自动驾驶技术路线与时间表、法规与许可制度、仓储自动化与无人配送、个人技能对接与机会 | 5 篇 | prompt-autonomous-automation-update.md |
-| monitors-economy | 日本宏观经济、物流行业薪资行情、生活成本与收入规划 | 5 篇 | prompt-economy-update.md |
-| monitors-politics-law | 在留法规框架、政治动向与移民政策环境、维权与合规工具箱 | 4 篇 | prompt-politics-law-update.md |
+| monitors-visa-immigration | 特定技能1号/2号制度、考试与日语要求、申请流程与材料、育成就劳制度新动向、永住与长期在留规划、政策更新日志 | 3 篇（+6 归档） | prompt-visa-immigration-update.md |
+| monitors-language | JLPT N4/N3/N2 分阶段备考计划、JFT-Basic 备用方案、学习资源清单与进度跟踪 | 3 篇（+4 归档） | prompt-language-update.md |
+| monitors-career-driver | 司机岗位全景、薪资结构与工时合规、安全规范、现场经验积累、求职渠道与面试、实际工作条件记录 | 3 篇（+4 归档） | prompt-career-driver-update.md |
+| monitors-career-logistics | 管理岗地图与路径评估、业务知识体系、管理岗日语与沟通、过渡学习计划、成果档案与晋升材料 | 3 篇（+3 归档） | prompt-career-logistics-update.md |
+| monitors-logistics-industry | 日本物流产业概览、EC/冷链/3PL 增长赛道、自动化与技术趋势、行业数据跟踪 | 3 篇（+2 归档） | prompt-logistics-industry-update.md |
+| monitors-autonomous-automation | 自动驾驶技术路线与时间表、法规与许可制度、仓储自动化与无人配送、个人技能对接与机会 | 3 篇（+2 归档） | prompt-autonomous-automation-update.md |
+| monitors-economy | 日本宏观经济、物流行业薪资行情、生活成本与收入规划 | 3 篇（+2 归档） | prompt-economy-update.md |
+| monitors-politics-law | 在留法规框架、政治动向与移民政策环境、维权与合规工具箱 | 3 篇（+1 归档） | prompt-politics-law-update.md |
 | monitors-technology-industry | 物流数字化技能地图、数字化岗位与转型路径 | 3 篇 | prompt-technology-industry-update.md |
 | monitors-education | 资格地图、学习体系与教育投资 | 3 篇 | prompt-education-update.md |
 | monitors-culture-life | 职场文化与人际、生活指南与适应 | 3 篇 | prompt-culture-life-update.md |

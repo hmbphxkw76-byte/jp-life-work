@@ -13,7 +13,7 @@
 
 - 维权流程 → [../../monitors-politics-law/reports/03-维权与合规工具箱](../../monitors-politics-law/reports/03-维权与合规工具箱.md)
 - 地域选择 → [../../monitors-regional](../../monitors-regional/reports/00-index.md)
-- 生活成本 → [../../monitors-economy/reports/02-生活成本与储蓄规划](../../monitors-economy/reports/02-生活成本与储蓄规划.md)
+- 生活成本 → [../../monitors-economy/reports/archives/02-生活成本与储蓄规划](../../monitors-economy/reports/archives/02-生活成本与储蓄规划.md)
 
 ## 使用约定
 

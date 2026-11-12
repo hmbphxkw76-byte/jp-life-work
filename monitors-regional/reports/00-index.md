@@ -11,7 +11,7 @@
 
 ## 关联目录
 
-- 薪资地域差 → [../../monitors-economy/reports/01-收入结构与薪资行情](../../monitors-economy/reports/01-收入结构与薪资行情.md)
+- 薪资地域差 → [../../monitors-economy/reports/archives/01-收入结构与薪资行情](../../monitors-economy/reports/archives/01-收入结构与薪资行情.md)
 - 落地手续 → [../../monitors-culture-life/reports/02-生活指南与适应](../../monitors-culture-life/reports/02-生活指南与适应.md)
 
 ## 使用约定

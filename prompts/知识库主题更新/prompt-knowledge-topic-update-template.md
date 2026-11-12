@@ -47,6 +47,7 @@ monitors-{topic}/
 2. 并行子代理 2–4 个，按文档群分工；每个子代理限定主题来源台账范围、逐点引用、**每条数据必须附 URL**。
 3. 主代理差异合并：读取受影响文档当前版本 → 继承已修正事实 → 按"更新/动态获取/保持"回写 → 更新 `00-index.md`。
 4. 回写完成后运行 `python prompts/tools/md2html.py {{TOPIC_DIR}}/reports` 重新生成 HTML（与 md 同目录，随源文件入库）。
+5. 运行 `python prompts/tools/archive_reports.py` 执行保留策略：`reports/` 顶层保留最新 3 份（`00-index.md` 固定），其余入 `archives/`，归档上限 7 份。
 
 ## 类型差异 T6 · 主题专属必填区（第 3 层填写清单）
 
