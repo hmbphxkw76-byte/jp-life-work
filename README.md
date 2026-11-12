@@ -43,7 +43,7 @@
 ### 阶段 5：长期定居与永住规划
 
 - 确认特定技能2号是否适用（结论：司机分野无 2 号，须规划资格切换）。
-- 按技人国门槛倒推：大学相关专业或 10 年实务经验（详见 docs/01-visa-immigration/05）。
+- 按技人国门槛倒推：大学相关专业或 10 年实务经验（详见 monitors-visa-immigration/05）。
 - 关键时点：Y3 转管理/企划岗，Y4 提交在留资格变更，Y5 前完成（1 号上限）。
 - 规划在留资格、税务、社保、年金、收入证明。
 - 记录连续工作年限、收入水平、职业稳定性。
@@ -55,83 +55,78 @@
 ```text
 jp-life-work/
 ├── README.md                     # 项目总览 + 五阶段路线图 + 目录与体系说明
-├── requirements.txt              # Python 依赖（scripts/ 所需）
-├── docs/                         # 知识库（每个主题目录 = 一个可动态更新的"主题项目"）
-│   ├── 01-visa-immigration/      # 签证与在留资格
-│   ├── 02-language/              # 日语学习
-│   ├── 03-career-driver/         # 司机职业阶段
-│   ├── 04-career-logistics/      # 物流运营/管理阶段
-│   ├── 05-logistics-industry/    # 物流行业研究
-│   ├── 06-autonomous-automation/ # 自动驾驶与自动化
-│   ├── 07-economy/               # 经济与薪资
-│   ├── 08-politics-law/          # 政策与法规
-│   ├── 09-technology-industry/   # 技术与数字化
-│   ├── 10-education/             # 教育与资格
-│   ├── 11-culture-life/          # 文化与生活
-│   └── 12-regional/              # 地域信息
-├── monitors-japan/               # 监测项目（monitors-{地区} 平铺，参照 macropulse-reports 约定）
-│   └── ssw-driver-logistics/     #   特定技能司机·物流·智能驾驶监测
-│       ├── data/                 #     指标登记册（活值）
-│       ├── prompts/              #     动态更新提示词（继承公共三层模板）
-│       ├── reports/              #     基线 + 各版本报告（md + html 双格式）
-│       └── reviews/              #     每期运行复盘
+├── requirements.txt              # Python 依赖（prompts/tools 所需）
+├── monitors-ssw-driver-logistics/ # 监测项目：特定技能司机·物流·智能驾驶
+│   ├── data/                     #   指标登记册（活值）
+│   ├── prompts/                  #   动态更新提示词（继承公共三层模板）
+│   ├── reports/                  #   基线 + 各版本报告（md + html 双格式）
+│   └── reviews/                  #   每期运行复盘
+├── monitors-visa-immigration/    # 知识库主题：签证与在留资格
+├── monitors-language/            # 知识库主题：日语学习
+├── monitors-career-driver/       # 知识库主题：司机职业阶段
+├── monitors-career-logistics/    # 知识库主题：物流运营/管理阶段
+├── monitors-logistics-industry/  # 知识库主题：物流行业研究
+├── monitors-autonomous-automation/ # 知识库主题：自动驾驶与自动化
+├── monitors-economy/             # 知识库主题：经济与薪资
+├── monitors-politics-law/        # 知识库主题：政策与法规
+├── monitors-technology-industry/ # 知识库主题：技术与数字化
+├── monitors-education/           # 知识库主题：教育与资格
+├── monitors-culture-life/        # 知识库主题：文化与生活
+├── monitors-regional/            # 知识库主题：地域信息
 ├── prompts/                      # 公共提示词层（三层继承体系）
 │   ├── monitoring-common-spec.md #   质量规范（单份，跨类型共享）
 │   ├── 通用基座/                  #   第 1 层：运行变量/锚定/更新协议/追踪表/执行/输出骨架
 │   ├── 职业就业调研/              #   第 2 层类型模板：行业调研 + 落地建议类
 │   ├── 市场指标监测/              #   第 2 层类型模板：指标台账 + 信号判定类
-│   └── 知识库主题更新/            #   第 2 层类型模板：docs/ 主题文档群增量回写类
-├── scripts/    # 脚本工具（md2html.py 等）
-├── archive/    # 个人证据归档（证书/给与明细扫描件，按需创建子目录）
+│   ├── 知识库主题更新/            #   第 2 层类型模板：monitors-* 主题文档群增量回写类
+│   └── tools/                    #   脚本工具（md2html.py）
 └── output/     # 生成产物（HTML，不入库，见 .gitignore）
 ```
 
-> `docs/{主题}/data/` 与 `archive/` 下的子目录为**按需创建**：无实际文件时不预建空目录（git 不追踪空目录，预建会在克隆后消失，造成声明与实际不符）。
+> `monitors-{主题}/data/` 下的子目录为**按需创建**：无实际文件时不预建空目录（git 不追踪空目录，预建会在克隆后消失，造成声明与实际不符）。
 
 ## 动态更新体系（三层提示词继承）
 
 ```text
 第 1 层  prompts/通用基座/                        运行变量、基线锚定、更新协议、追踪表、执行与输出骨架
 第 2 层  prompts/{职业就业调研|市场指标监测|知识库主题更新}/   类型差异（输出形态、结构模板、专属纪律）
-第 3 层  {monitors 项目|docs 主题}/prompts/       专属配置（来源清单、事件触发器、追踪指标、已修正事实）
+第 3 层  monitors-{主题}/prompts/                专属配置（来源清单、事件触发器、追踪指标、已修正事实）
 ```
 
 - **监测项目**（monitors-*）：按《职业就业调研》或《市场指标监测》类型模板继承，指标活值存项目 `data/` 登记册，运行复盘存 `reviews/`。
-- **知识库主题**（docs/*）：按《知识库主题更新》类型模板继承，动态获取的资料**增量回写**主题文档群，变更摘要与待复核清单记入各主题 `00-index.md`。
+- **知识库主题**（monitors-visa-immigration 等 12 个）：按《知识库主题更新》类型模板继承，动态获取的资料**增量回写**主题文档群，变更摘要与待复核清单记入各主题 `00-index.md`。
 - 覆盖规则：主题/项目专属 > 类型模板 > 通用基座 > 《监测报告通用规范》；覆盖须显式声明。
 - 质量红线（全层强制）：逐点引用 `[Source: URL, 年份]`、来源优先级五层框架、事实与推断分离、口径标注、禁止编造、空窗期不虚构变化。
 
-### docs/ 主题目录说明
+### 知识库主题目录说明（monitors-*）
 
 每个主题目录以 `00-index.md` 作为目录导航，其余按编号组织内容；每主题自带 `prompts/prompt-{slug}-update.md`（第 3 层动态更新配置）。
 
 | 目录 | 用途 | 现状 | 动态更新配置 |
 |------|------|------|------|
-| 01-visa-immigration | 特定技能1号/2号制度、考试与日语要求、申请流程与材料、育成就劳制度新动向、永住与长期在留规划、政策更新日志 | 9 篇 | prompt-visa-immigration-update.md |
-| 02-language | JLPT N4/N3/N2 分阶段备考计划、JFT-Basic 备用方案、学习资源清单与进度跟踪 | 7 篇 | prompt-language-update.md |
-| 03-career-driver | 司机岗位全景、薪资结构与工时合规、安全规范、现场经验积累、求职渠道与面试、实际工作条件记录 | 7 篇 | prompt-career-driver-update.md |
-| 04-career-logistics | 管理岗地图与路径评估、业务知识体系、管理岗日语与沟通、过渡学习计划、成果档案与晋升材料 | 6 篇 | prompt-career-logistics-update.md |
-| 05-logistics-industry | 日本物流产业概览、EC/冷链/3PL 增长赛道、自动化与技术趋势、行业数据跟踪 | 5 篇 | prompt-logistics-industry-update.md |
-| 06-autonomous-automation | 自动驾驶技术路线与时间表、法规与许可制度、仓储自动化与无人配送、个人技能对接与机会 | 5 篇 | prompt-autonomous-automation-update.md |
-| 07-economy | 日本宏观经济、物流行业薪资行情、生活成本与收入规划 | 5 篇 | prompt-economy-update.md |
-| 08-politics-law | 在留法规框架、政治动向与移民政策环境、维权与合规工具箱 | 4 篇 | prompt-politics-law-update.md |
-| 09-technology-industry | 物流数字化技能地图、数字化岗位与转型路径 | 3 篇 | prompt-technology-industry-update.md |
-| 10-education | 资格地图、学习体系与教育投资 | 3 篇 | prompt-education-update.md |
-| 11-culture-life | 职场文化与人际、生活指南与适应 | 3 篇 | prompt-culture-life-update.md |
-| 12-regional | 地域选择框架、地域生活笔记 | 3 篇 | prompt-regional-update.md |
+| monitors-visa-immigration | 特定技能1号/2号制度、考试与日语要求、申请流程与材料、育成就劳制度新动向、永住与长期在留规划、政策更新日志 | 9 篇 | prompt-visa-immigration-update.md |
+| monitors-language | JLPT N4/N3/N2 分阶段备考计划、JFT-Basic 备用方案、学习资源清单与进度跟踪 | 7 篇 | prompt-language-update.md |
+| monitors-career-driver | 司机岗位全景、薪资结构与工时合规、安全规范、现场经验积累、求职渠道与面试、实际工作条件记录 | 7 篇 | prompt-career-driver-update.md |
+| monitors-career-logistics | 管理岗地图与路径评估、业务知识体系、管理岗日语与沟通、过渡学习计划、成果档案与晋升材料 | 6 篇 | prompt-career-logistics-update.md |
+| monitors-logistics-industry | 日本物流产业概览、EC/冷链/3PL 增长赛道、自动化与技术趋势、行业数据跟踪 | 5 篇 | prompt-logistics-industry-update.md |
+| monitors-autonomous-automation | 自动驾驶技术路线与时间表、法规与许可制度、仓储自动化与无人配送、个人技能对接与机会 | 5 篇 | prompt-autonomous-automation-update.md |
+| monitors-economy | 日本宏观经济、物流行业薪资行情、生活成本与收入规划 | 5 篇 | prompt-economy-update.md |
+| monitors-politics-law | 在留法规框架、政治动向与移民政策环境、维权与合规工具箱 | 4 篇 | prompt-politics-law-update.md |
+| monitors-technology-industry | 物流数字化技能地图、数字化岗位与转型路径 | 3 篇 | prompt-technology-industry-update.md |
+| monitors-education | 资格地图、学习体系与教育投资 | 3 篇 | prompt-education-update.md |
+| monitors-culture-life | 职场文化与人际、生活指南与适应 | 3 篇 | prompt-culture-life-update.md |
+| monitors-regional | 地域选择框架、地域生活笔记 | 3 篇 | prompt-regional-update.md |
 
 ### 其他目录说明
 
 | 目录 | 用途 |
 |------|------|
-| prompts/ | 公共提示词层：三层继承体系（通用基座 → 类型模板）+ 质量规范 |
-| monitors-japan/ | 监测项目：`monitors-{地区}/{主题}` 平铺，项目内四件套（data/prompts/reports/reviews） |
-| scripts/ | 脚本工具：数据整理、文档生成等自动化脚本（依赖见 requirements.txt） |
-| archive/ | 个人证据归档：证书、给与明细等扫描件（按年月建子目录） |
-| output/ | 生成产物：`md2html.py` 输出的 HTML，不入库 |
+| prompts/ | 公共提示词层：三层继承体系（通用基座 → 类型模板）+ 质量规范 + `tools/` 脚本 |
+| monitors-ssw-driver-logistics/ | 监测项目：项目内四件套（data/prompts/reports/reviews） |
+| output/ | 生成产物：`prompts/tools/md2html.py` 输出的 HTML，不入库 |
 
 ## 使用约定
 
-- **文档格式**：源文档统一使用 Markdown（`.md`），按主题存放在 `docs/` 下。
+- **文档格式**：源文档统一使用 Markdown（`.md`），按主题存放在 `monitors-*` 下。
 - **报告输出**：需要展示的报告由脚本从 Markdown 生成 HTML，输出到 `output/` 目录；该目录为生成产物，默认不入库（见 [.gitignore](.gitignore)）。
-- **脚本环境**：`scripts/` 下的脚本基于 Python 运行，用于数据整理与报告生成。
+- **脚本环境**：`prompts/tools/` 下的脚本基于 Python 运行，用于数据整理与报告生成。

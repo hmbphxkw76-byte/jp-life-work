@@ -1,0 +1,24 @@
+# monitors-autonomous-automation 索引
+
+自动驾驶与自动化区。覆盖阶段 4：技术时间表、法规框架、仓储自动化、个人技能对接。
+
+## 文件一览
+
+| # | 文件 | 内容 |
+|---|---|---|
+| 01 | [自动驾驶技术路线与时间表](01-自动驾驶技术路线与时间表.md) | L2–L4 分级、新東名实证、中継输送模式、岗位时间表判断 |
+| 02 | [法规与许可制度](02-法规与许可制度.md) | 道交法 L4 运行许可、遠隔監視要件、责任与保险 |
+| 03 | [仓储自动化与无人配送](03-仓储自动化与无人配送.md) | 技术谱系、与语言门槛的关系、观察名单 |
+| 04 | [个人技能对接与机会](04-个人技能对接与机会.md) | 未来岗位画像、机会雷达、风险对冲、年度自检 |
+
+## 关联目录
+
+- 行业大势与数据跟踪 → [../monitors-logistics-industry](../monitors-logistics-industry/00-index.md)
+- 管理岗主线（转型的载体） → [../monitors-career-logistics](../monitors-career-logistics/00-index.md)
+- 技术技能清单 → [../monitors-technology-industry](../monitors-technology-industry/)
+- 深度法规 → [../monitors-politics-law](../monitors-politics-law/)
+
+## 使用约定
+
+- 每季度核对实证进展并更新 [../monitors-logistics-industry/04-行业数据跟踪](../monitors-logistics-industry/04-行业数据跟踪.md)。
+- 本文的岗位时间表判断若与最新政策冲突，以最新为准并在数据跟踪文件记录。
