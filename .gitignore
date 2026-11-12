@@ -35,6 +35,7 @@ Desktop.ini
 
 # 工具生成
 .screenshots/
+.trae-html-share-packages/
 
 # HTML 与 md 同目录存放，随源文件入库；仅忽略临时文件
 *.html.tmp
