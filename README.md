@@ -58,6 +58,7 @@ jp-life-work/
 ├── README.md                          # 项目总览 + 五阶段路线图 + 目录与体系说明
 ├── updates.md / updates.html          # 周期更新看板（脚本生成，勿手工编辑）
 ├── 内容边界规范.md                     # 内容归位、SSOT、重复判定与主题边界卡
+├── 内容更新周期标准.md                 # 8 类主题周期标准、调整规则与 13 主题映射
 ├── 01-ssw-driver/                     # 监测项目：特定技能司机·物流·智能驾驶
 │   ├── data/                          #   指标登记册（活值）
 │   ├── prompts/                       #   动态更新提示词（继承公共三层模板）
@@ -156,18 +157,22 @@ jp-life-work/
 
 ```text
 每周一 09:15 JST  scheduled-update.yml
-        │  计算到期主题（监测 30 天 / 知识 90 天，读 git 历史）
+        │  计算到期主题（周/月/季/半年/年，读 git 历史）
         ├─→ 创建 GitHub Issue（label: update-task，同主题去重）
         ├─→ 刷新 updates.md / updates.html 并提交
+        ├─→ 停摆 / 逾期 / 积压巡检 → 分级告警
         └─→ 失败 → 创建/追加 ops-alert Issue（@本人，触发邮件）
 AI IDE / 本人 执行工单
         └─→ push reports/*.md → html-sync.yml：归档 → 生成 HTML → 校验 → 提交
 ```
 
 - **触发**：每周一 cron + 手动 `workflow_dispatch`（可指定 `force_topic` 或 `dry_run`）；内容更新后 push 触发后置链路。
+- **节奏**：01 每周；02/05/06/07 每月；03/04/08/09 每季度；10/11 每半年；12/13 每年。逐主题配置见 [prompts/schedule.json](prompts/schedule.json)。
 - **追溯**：工单记录上期提交与验收清单；看板汇总上次更新、下次到期、版本链；监测报告保留 `archives/`，知识手册用 GitHub History + 手册内「更新日志」。
+- **告警**：P0 失败/停摆、P1 收口失败/积压、P2 逾期预警；同标题去重，6/24 小时冷却，成功运行自动追加「已恢复」回执。
 - **权限**：个人私有仓库免费额度 2,000 分钟/月；本方案每周约 1–2 分钟/次，月耗约 5–10 分钟。需在 Settings → Actions → General 将 Workflow permissions 设为 **Read and write**。
 - **完整设计**（约束核验、频率矩阵、重试与告警规则、验收清单）：[自动化更新方案.md](自动化更新方案.md)。
+- **周期标准**（8 类主题、周期矩阵、13 主题映射、R1–R8 调整规则）：[内容更新周期标准.md](内容更新周期标准.md)。
 
 ## CI 自动化
 

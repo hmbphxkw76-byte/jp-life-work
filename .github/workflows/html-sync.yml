@@ -10,10 +10,15 @@ on:
 
 permissions:
   contents: write
+  issues: write
 
 jobs:
   sync-html:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      PYTHONIOENCODING: utf-8
     steps:
       - uses: actions/checkout@v5
 
@@ -22,8 +27,16 @@ jobs:
         with:
           python-version: "3.x"
 
-      - name: 安装依赖
-        run: pip install -r requirements.txt
+      - name: 安装依赖（最多重试 3 次）
+        run: |
+          for i in 1 2 3; do
+            if pip install -r requirements.txt; then
+              exit 0
+            fi
+            echo "pip 安装失败，第 $i 次重试…"
+            sleep $((i * 5))
+          done
+          exit 1
 
       - name: 整理归档（保留策略）
         run: python prompts/tools/archive_reports.py
@@ -38,25 +51,55 @@ jobs:
             grep -v "^\./updates\.html$" | xargs rm -f 2>/dev/null || true
 
       - name: 提交前规范校验
+        env:
+          VALIDATE_LOG: ${{ runner.temp }}/validate.log
         run: |
           set +e
-          python prompts/tools/validate.py
+          python prompts/tools/validate.py > "$VALIDATE_LOG" 2>&1
           code=$?
           set -e
+          cat "$VALIDATE_LOG"
           if [ "$code" -eq 1 ]; then
             echo "::error::规范校验存在错误，已阻止自动提交；请修复后重试"
             exit 1
           fi
           exit 0
 
-      - name: 检查变更并提交
+      - name: 检查变更并提交（推送失败重试 3 次）
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add -A
           if git diff --cached --quiet; then
             echo "HTML 已是最新，无需提交"
-          else
-            git commit -m "chore: 自动归档并同步 HTML（由 CI 生成）"
-            git push
+            exit 0
           fi
+          git commit -m "chore: 自动归档并同步 HTML（由 CI 生成）"
+          for i in 1 2 3; do
+            if git push; then
+              echo "推送成功"
+              exit 0
+            fi
+            echo "推送失败，第 $i 次重试…"
+            git pull --rebase --autostash || true
+            sleep $((i * 5))
+          done
+          exit 1
+
+      - name: 失败告警（P1，内容收口链路）
+        if: failure()
+        env:
+          DETAIL_FILE: ${{ runner.temp }}/validate.log
+        run: |
+          ARGS=(--kind finalize --severity p1 --title "[告警][P1] 内容收口失败" \
+            --reason "内容更新后的归档/HTML/校验链路失败（job: ${{ github.job }}）")
+          if [ -f "$DETAIL_FILE" ]; then
+            ARGS+=(--detail-file "$DETAIL_FILE")
+          fi
+          python prompts/tools/update_scheduler.py alert "${ARGS[@]}"
+
+      - name: 恢复回执
+        if: success()
+        run: |
+          python prompts/tools/update_scheduler.py alert --recovered \
+            --title "[告警][P1] 内容收口失败"

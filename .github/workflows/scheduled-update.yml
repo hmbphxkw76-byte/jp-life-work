@@ -52,6 +52,9 @@ jobs:
           done
           exit 1
 
+      - name: 停摆检测（仅 schedule 触发）
+        run: python prompts/tools/update_scheduler.py heartbeat --max-gap-days 10
+
       - name: 生成更新看板
         if: ${{ inputs.dry_run != true }}
         run: python prompts/tools/update_scheduler.py dashboard
@@ -73,6 +76,10 @@ jobs:
             ARGS+=(--dry-run)
           fi
           python prompts/tools/update_scheduler.py dispatch "${ARGS[@]}"
+
+      - name: 逾期与积压告警
+        if: ${{ inputs.dry_run != true }}
+        run: python prompts/tools/update_scheduler.py backlog
 
       - name: 提交看板变更（推送失败重试 3 次）
         if: ${{ inputs.dry_run != true }}
@@ -98,19 +105,32 @@ jobs:
 
       - name: 规范校验
         if: ${{ inputs.dry_run != true }}
+        env:
+          VALIDATE_LOG: ${{ runner.temp }}/validate.log
         run: |
           set +e
-          python prompts/tools/validate.py
+          python prompts/tools/validate.py > "$VALIDATE_LOG" 2>&1
           code=$?
           set -e
+          cat "$VALIDATE_LOG"
           if [ "$code" -eq 1 ]; then
             echo "::error::规范校验存在错误，调度结果需修复"
             exit 1
           fi
           exit 0
 
-      - name: 失败告警（创建或追加 ops-alert Issue）
+      - name: 失败告警（P0，包含校验日志）
         if: failure()
+        env:
+          DETAIL_FILE: ${{ runner.temp }}/validate.log
         run: |
-          python prompts/tools/update_scheduler.py alert \
-            --reason "周期更新调度工作流失败（job: ${{ github.job }}）"
+          ARGS=(--kind run_failure --severity p0 \
+            --reason "周期更新调度工作流失败（job: ${{ github.job }}）")
+          if [ -f "$DETAIL_FILE" ]; then
+            ARGS+=(--detail-file "$DETAIL_FILE")
+          fi
+          python prompts/tools/update_scheduler.py alert "${ARGS[@]}"
+
+      - name: 恢复回执（成功运行时关闭告警闭环）
+        if: ${{ success() && inputs.dry_run != true }}
+        run: python prompts/tools/update_scheduler.py alert --recovered

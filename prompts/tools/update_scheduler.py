@@ -20,7 +20,10 @@
     python prompts/tools/update_scheduler.py dispatch
     python prompts/tools/update_scheduler.py dispatch --force 08-visa-immigration
     python prompts/tools/update_scheduler.py dashboard
-    python prompts/tools/update_scheduler.py alert --reason "定时调度失败"
+    python prompts/tools/update_scheduler.py alert --kind run_failure --reason "定时调度失败"
+    python prompts/tools/update_scheduler.py alert --recovered
+    python prompts/tools/update_scheduler.py heartbeat --max-gap-days 10
+    python prompts/tools/update_scheduler.py backlog
 
 退出码: 0 = 正常；1 = 配置/命令失败。
 """
@@ -49,6 +52,21 @@ JST = timezone(timedelta(hours=9))
 
 LABEL_TASK = "update-task"
 LABEL_ALERT = "ops-alert"
+
+# 告警分级与固定标题（标题是去重键，不可随运行变化）
+ALERT_KINDS = {
+    "run_failure": ("[告警][P0] 周期更新调度失败", "p0"),
+    "heartbeat": ("[告警][P0] 周期调度停摆", "p0"),
+    "backlog": ("[告警][P1] 更新任务积压", "p1"),
+    "overdue": ("[告警][P2] 更新任务逾期", "p2"),
+    "finalize": ("[告警][P1] 内容收口失败", "p1"),
+}
+SEVERITY_COLORS = {"p0": "B60205", "p1": "D93F0B", "p2": "FBCA04"}
+SEVERITY_DESC = {
+    "p0": "阻断：调度失败或停摆，需当日处理",
+    "p1": "重要：积压或内容收口失败，需 3 日内处理",
+    "p2": "提示：逾期预警，下次周检处理",
+}
 
 ISSUE_TEMPLATE = Template("""## 周期更新任务：$topic_id $topic_name
 
@@ -92,18 +110,24 @@ python prompts/tools/validate.py
 
 ALERT_TEMPLATE = Template("""## 告警：$reason
 
-- 工作流：$workflow
-- 运行：$run_url
-- 分支：$ref
-- 提交：$sha
-- 时间：$created_at
+| 项 | 内容 |
+|---|---|
+| 级别 | **$severity_label**（$severity_desc） |
+| 工作流 | $workflow |
+| 运行 | $run_url |
+| 分支 | $ref |
+| 提交 | $sha |
+| 时间 | $created_at |
+| 最近连续失败 | $recent_failures 次（不含本次） |
+
+$detail
 
 ### 处理建议
 
-1. 打开运行日志定位失败步骤：$run_url
-2. 修复后手动重跑：`gh workflow run scheduled-update.yml`
-3. 若为权限问题，检查仓库 Settings → Actions → General → Workflow permissions 是否为 **Read and write**。
-4. 恢复后关闭本 Issue；再次失败会以评论形式追加到本 Issue，不重复新建。
+$suggestions
+
+> 去重规则：同一标题同时只保留一个未关闭 Issue；冷却期内重复失败只记录日志，不重复评论。
+> 恢复后由成功运行自动追加「已恢复」回执，请确认后关闭本 Issue。
 
 $mention
 """)
@@ -496,7 +520,8 @@ def cmd_dashboard(args: argparse.Namespace) -> int:
         "| 更新工单 | [update-task]"
         "(issues?q=is%3Aissue+label%3Aupdate-task) | 每个到期主题一个工单，关闭即完成 |",
         "| 调度异常 | [ops-alert]"
-        "(issues?q=is%3Aissue+label%3Aops-alert) | 由失败的工作流自动创建 |",
+        "(issues?q=is%3Aissue+label%3Aops-alert) | 分级 P0/P1/P2；"
+        "失败、停摆、积压、收口失败自动创建/追加 |",
         "| 规范校验 | [validate.py](prompts/tools/validate.py) | 提交前与 CI 双重执行 |",
         "",
         "## 使用说明",
@@ -584,12 +609,33 @@ def cmd_dispatch(args: argparse.Namespace) -> int:
     elif force == "all":
         selected = rows
     else:
-        selected = [r for r in rows if r["status"]["due"]]
+        lookahead = int(cfg.get("dispatch", {}).get("lookahead_days", 3))
+
+        def dispatchable(row: dict) -> bool:
+            status = row["status"]
+            if status["due"]:
+                return True
+            # 短周期主题给提前量，避免"周巡检 + 7 天节奏"被拖成 13 天
+            return (
+                status["cadence"] <= 7
+                and status["last"] is not None
+                and status["days_left"] <= lookahead
+            )
+
+        selected = [r for r in rows if dispatchable(r)]
         selected.sort(key=lambda r: (
             r["topic"].get("priority", 99), r["status"]["days_left"],
         ))
         limit = int(cfg.get("dispatch", {}).get("max_issues_per_run", 4))
         selected = selected[:limit]
+        early = [r for r in selected if not r["status"]["due"]]
+        if early:
+            log(
+                "短周期提前派发: "
+                + ", ".join(
+                    f"{r['topic']['id']}（{r['status']['text']}）" for r in early
+                )
+            )
 
     if not selected:
         log("没有到期主题，无需创建工单。")
@@ -645,43 +691,134 @@ def cmd_dispatch(args: argparse.Namespace) -> int:
 
 
 # ──────────────────────────────────────────────
-# alert
+# alert（分级、冷却、恢复回执）
 # ──────────────────────────────────────────────
 
-def cmd_alert(args: argparse.Namespace) -> int:
-    if not require_gh():
-        return fail("未找到 gh CLI，无法创建告警 Issue。")
-    ensure_label(LABEL_ALERT, "B60205", "自动化调度异常告警")
+ALERT_SUGGESTIONS = {
+    "run_failure": (
+        "1. 打开运行日志定位失败步骤。\n"
+        "2. 修复后手动重跑：`gh workflow run scheduled-update.yml`。\n"
+        "3. 若为权限问题，检查 Settings → Actions → General → "
+        "Workflow permissions 是否为 **Read and write**。\n"
+        "4. 若为网络/配额问题，确认 Actions 分钟数未耗尽。"
+    ),
+    "heartbeat": (
+        "1. 检查工作流是否被禁用：`gh workflow view scheduled-update.yml`。\n"
+        "2. 手动启用：`gh workflow enable scheduled-update.yml`。\n"
+        "3. 确认默认分支仍有 `schedule` 触发配置。\n"
+        "4. 若仓库长期无活动，先手动触发一次恢复计时。"
+    ),
+    "backlog": (
+        "1. 打开 `update-task` 工单列表，优先处理逾期最久的主题。\n"
+        "2. 已完成的工单及时关闭，避免占用积压阈值。\n"
+        "3. 若某主题长期无法更新，调大 `prompts/schedule.json` 的 "
+        "`cadence_days` 或降级优先级。"
+    ),
+    "overdue": (
+        "1. 下次周检时优先处理到期主题。\n"
+        "2. 若属于预期内延迟（如出差），可暂不处理，逾期超过 30 天会升级为 P1。\n"
+        "3. 关闭已完成工单可避免误判积压。"
+    ),
+    "finalize": (
+        "1. 查看告警下方 `validate.py` 输出，修复规范错误。\n"
+        "2. 本地复跑：`python prompts/tools/validate.py`。\n"
+        "3. 修复后推送，或对失败运行执行 `gh run rerun <run-id>`。\n"
+        "4. 确认 HTML 与归档已随提交入库。"
+    ),
+}
 
+
+def open_issue_index(label: str) -> dict[str, int]:
+    out = run_gh([
+        "issue", "list", "--label", label, "--state", "open",
+        "--limit", "100", "--json", "number,title",
+    ])
+    return {
+        item.get("title", ""): int(item["number"])
+        for item in json.loads(out.stdout or "[]")
+    }
+
+
+def issue_age_hours(number: int) -> float:
+    """Issue 距最近一次更新的小时数，用于告警冷却。"""
+    out = run_gh([
+        "api", f"repos/{detect_repo()}/issues/{number}", "--jq", ".updated_at",
+    ])
+    stamp = out.stdout.strip().replace("Z", "+00:00")
+    updated = datetime.fromisoformat(stamp)
+    return (datetime.now(timezone.utc) - updated).total_seconds() / 3600
+
+
+def recent_failure_count() -> int:
+    """统计最近一次成功之前的连续失败次数。"""
+    try:
+        out = run_gh([
+            "run", "list", "--workflow=scheduled-update.yml",
+            "--limit", "10", "--json", "conclusion",
+        ])
+    except RuntimeError:
+        return 0
+    count = 0
+    for row in json.loads(out.stdout or "[]"):
+        conclusion = row.get("conclusion")
+        if conclusion == "success":
+            break
+        if conclusion in ("failure", "timed_out", "startup_failure", "cancelled"):
+            count += 1
+    return count
+
+
+def detail_block(path: str) -> str:
+    if not path:
+        return "无附加日志。"
+    try:
+        text = Path(path).read_text(encoding="utf-8", errors="replace")
+    except OSError:
+        return f"日志文件不可读：`{path}`"
+    lines = text.splitlines()
+    total = len(lines)
+    if total > 40:
+        lines = lines[:40] + [f"...（已截断，共 {total} 行，完整日志见运行页面）"]
+    return "### 失败详情\n\n```text\n" + "\n".join(lines) + "\n```"
+
+
+def run_context() -> dict:
     now = datetime.now(JST)
     server = os.environ.get("GITHUB_SERVER_URL", "https://github.com")
     repo = detect_repo()
     run_id = os.environ.get("GITHUB_RUN_ID", "")
-    run_url = f"{server}/{repo}/actions/runs/{run_id}" if run_id else "（本地运行，无 URL）"
-    owner = os.environ.get("GITHUB_REPOSITORY_OWNER", "")
-    body = ALERT_TEMPLATE.substitute(
-        reason=args.reason,
-        workflow=os.environ.get("GITHUB_WORKFLOW", "scheduled-update"),
-        run_url=run_url,
-        ref=detect_branch(),
-        sha=os.environ.get("GITHUB_SHA", git("rev-parse", "--short", "HEAD"))[:7],
-        created_at=f"{now:%Y-%m-%d %H:%M} JST",
-        mention=f"@{owner}" if owner else "",
-    )
+    return {
+        "now": now,
+        "run_url": (
+            f"{server}/{repo}/actions/runs/{run_id}"
+            if run_id else "（本地运行，无 URL）"
+        ),
+        "workflow": os.environ.get("GITHUB_WORKFLOW", "scheduled-update"),
+        "ref": detect_branch(),
+        "sha": os.environ.get("GITHUB_SHA", git("rev-parse", "--short", "HEAD"))[:7],
+        "owner": os.environ.get("GITHUB_REPOSITORY_OWNER", ""),
+    }
 
-    out = run_gh([
-        "issue", "list", "--label", LABEL_ALERT, "--state", "open",
-        "--limit", "100", "--json", "number,title",
-    ])
-    title = "[告警] 周期更新调度失败"
-    for item in json.loads(out.stdout or "[]"):
-        if item.get("title") == title:
-            run_gh([
-                "issue", "comment", str(item["number"]),
-                "--body", f"再次失败：{run_url}（{now:%Y-%m-%d %H:%M} JST）",
-            ])
-            log(f"已追加告警评论到 #{item['number']}")
+
+def post_or_update_alert(
+    title: str, body: str, severity: str, cooldown_hours: float,
+) -> int:
+    """同一标题只保留一个未关闭 Issue；冷却期内只记日志，不重复评论。"""
+    ensure_label(LABEL_ALERT, "B60205", "自动化调度异常告警")
+    ensure_label(
+        f"severity:{severity}", SEVERITY_COLORS.get(severity, "B60205"),
+        SEVERITY_DESC.get(severity, "自动化告警"),
+    )
+    existing = open_issue_index(LABEL_ALERT)
+    if title in existing:
+        number = existing[title]
+        age = issue_age_hours(number)
+        if age < cooldown_hours:
+            log(f"告警 #{number} 仍在冷却期（{age:.1f}h < {cooldown_hours}h），跳过评论")
             return 0
+        run_gh(["issue", "comment", str(number), "--body", body])
+        log(f"已追加告警评论到 #{number}（级别 {severity.upper()}）")
+        return 0
 
     with tempfile.NamedTemporaryFile(
         "w", encoding="utf-8", suffix=".md", delete=False, newline="\n"
@@ -691,12 +828,224 @@ def cmd_alert(args: argparse.Namespace) -> int:
     try:
         created = run_gh([
             "issue", "create", "--title", title,
-            "--body-file", body_path, "--label", LABEL_ALERT,
+            "--body-file", body_path,
+            "--label", LABEL_ALERT,
+            "--label", f"severity:{severity}",
         ])
-        log(f"已创建告警 Issue: {created.stdout.strip().splitlines()[-1]}")
+        log(f"已创建告警 Issue（{severity.upper()}）: "
+            f"{created.stdout.strip().splitlines()[-1]}")
     finally:
         Path(body_path).unlink(missing_ok=True)
     return 0
+
+
+def build_alert_body(args: argparse.Namespace, title: str, severity: str) -> str:
+    ctx = run_context()
+    mention = (
+        f"@{ctx['owner']}" if ctx["owner"] and severity in ("p0", "p1") else ""
+    )
+    return ALERT_TEMPLATE.substitute(
+        reason=args.reason,
+        severity_label=severity.upper(),
+        severity_desc=SEVERITY_DESC.get(severity, "自动化告警"),
+        workflow=ctx["workflow"],
+        run_url=ctx["run_url"],
+        ref=ctx["ref"],
+        sha=ctx["sha"],
+        created_at=f"{ctx['now']:%Y-%m-%d %H:%M} JST",
+        recent_failures=recent_failure_count(),
+        detail=detail_block(getattr(args, "detail_file", "") or ""),
+        suggestions=ALERT_SUGGESTIONS.get(
+            getattr(args, "kind", "run_failure"), ALERT_SUGGESTIONS["run_failure"]
+        ),
+        mention=mention,
+    )
+
+
+def cmd_recovered(args: argparse.Namespace) -> int:
+    """在未关闭的 P0 告警下追加恢复回执（不自动关闭）。"""
+    titles = (
+        [args.title] if args.title
+        else [ALERT_KINDS["run_failure"][0], ALERT_KINDS["heartbeat"][0]]
+    )
+    existing = open_issue_index(LABEL_ALERT)
+    ctx = run_context()
+    note = (
+        f"已恢复：{ctx['now']:%Y-%m-%d %H:%M} JST 的成功运行已完成。\n\n"
+        f"运行：{ctx['run_url']}\n\n请确认结果后关闭本 Issue。"
+    )
+    for title in titles:
+        number = existing.get(title)
+        if not number:
+            continue
+        comments = json.loads(
+            run_gh([
+                "issue", "view", str(number), "--json", "comments",
+            ]).stdout or "{}"
+        ).get("comments", [])
+        if comments and "已恢复" in comments[-1].get("body", ""):
+            log(f"告警 #{number} 已有恢复回执，跳过")
+            continue
+        run_gh(["issue", "comment", str(number), "--body", note])
+        log(f"已追加恢复回执到 #{number}")
+    return 0
+
+
+def cmd_alert(args: argparse.Namespace) -> int:
+    if args.recovered:
+        if not require_gh():
+            return fail("未找到 gh CLI，无法写入恢复回执。")
+        return cmd_recovered(args)
+
+    if not require_gh():
+        return fail("未找到 gh CLI，无法创建告警 Issue。")
+    default_title, default_severity = ALERT_KINDS.get(
+        args.kind, ALERT_KINDS["run_failure"]
+    )
+    title = args.title or default_title
+    severity = (args.severity or default_severity).lower()
+    if severity not in SEVERITY_COLORS:
+        return fail(f"未知告警级别: {severity}")
+    body = build_alert_body(args, title, severity)
+    return post_or_update_alert(
+        title, body, severity, cooldown_hours=args.cooldown_hours,
+    )
+
+
+# ──────────────────────────────────────────────
+# heartbeat / backlog（自动巡检类告警）
+# ──────────────────────────────────────────────
+
+def cmd_heartbeat(args: argparse.Namespace) -> int:
+    """检测调度停摆：上次成功运行距现在超过阈值时告警。"""
+    if os.environ.get("GITHUB_EVENT_NAME") != "schedule" and not args.force:
+        log("非 schedule 触发，跳过停摆检测（可用 --force 强制执行）")
+        return 0
+    if not require_gh():
+        log("未找到 gh CLI，跳过停摆检测")
+        return 0
+    try:
+        out = run_gh([
+            "run", "list", "--workflow=scheduled-update.yml",
+            "--status", "success", "--limit", "10",
+            "--json", "createdAt,url,event",
+        ])
+    except RuntimeError as exc:
+        log(f"读取运行历史失败，跳过停摆检测: {exc}")
+        return 0
+    # 只看 schedule 触发的成功运行，避免手动 dry-run 掩盖定时停摆
+    rows = [
+        row for row in json.loads(out.stdout or "[]")
+        if row.get("event") == "schedule"
+    ]
+    if not rows:
+        log("暂无 schedule 成功记录（首次部署或定时从未成功），跳过停摆检测")
+        return 0
+
+    last = datetime.fromisoformat(
+        rows[0]["createdAt"].replace("Z", "+00:00")
+    )
+    gap_days = (datetime.now(timezone.utc) - last).total_seconds() / 86400
+    if gap_days <= args.max_gap_days:
+        log(f"停摆检测正常：距上次成功 {gap_days:.1f} 天")
+        return 0
+
+    args.kind = "heartbeat"
+    args.reason = (
+        f"调度已 {gap_days:.1f} 天未成功运行（阈值 {args.max_gap_days} 天），"
+        "可能存在 cron 丢弃、工作流被禁用或权限失效"
+    )
+    args.detail_file = ""
+    title, severity = ALERT_KINDS["heartbeat"]
+    body = build_alert_body(args, title, severity) + (
+        f"\n\n上次成功运行：{rows[0].get('url', '—')}"
+    )
+    return post_or_update_alert(
+        title, body, severity, cooldown_hours=args.cooldown_hours,
+    )
+
+
+def cmd_backlog(args: argparse.Namespace) -> int:
+    """积压/逾期巡检：逾期超阈值或未关闭工单过多时告警。"""
+    cfg = load_config()
+    errors = validate_config(cfg)
+    if errors:
+        for e in errors:
+            print(f"  ✗ {e}", file=sys.stderr)
+        return 1
+    if not require_gh():
+        log("未找到 gh CLI，跳过积压巡检")
+        return 0
+
+    rows = gather(cfg)
+    overdue: list[tuple[int, dict]] = []
+    for row in rows:
+        status = row["status"]
+        if status["key"] != "overdue":
+            continue
+        days = 0 if status["last"] is None else -status["days_left"]
+        overdue.append((days, row))
+
+    try:
+        task_count = len(open_task_issues())
+    except RuntimeError as exc:
+        log(f"读取工单失败，按 0 计: {exc}")
+        task_count = 0
+
+    critical = [x for x in overdue if x[0] > args.critical_days]
+    warn = [x for x in overdue if args.warn_days < x[0] <= args.critical_days]
+
+    if critical or task_count > args.max_open:
+        title, severity = ALERT_KINDS["backlog"]
+        args.kind = "backlog"
+        reasons = []
+        if critical:
+            reasons.append(f"{len(critical)} 个主题逾期超过 {args.critical_days} 天")
+        if task_count > args.max_open:
+            reasons.append(f"未关闭工单 {task_count} 个，超过阈值 {args.max_open}")
+        args.reason = "；".join(reasons)
+        args.detail_file = ""
+        body = build_alert_body(args, title, severity) + _backlog_detail(
+            critical, warn, task_count
+        )
+        return post_or_update_alert(
+            title, body, severity, cooldown_hours=args.cooldown_hours,
+        )
+
+    if warn:
+        title, severity = ALERT_KINDS["overdue"]
+        args.kind = "overdue"
+        args.reason = f"{len(warn)} 个主题逾期超过 {args.warn_days} 天（未达 P1 阈值）"
+        args.detail_file = ""
+        body = build_alert_body(args, title, severity) + _backlog_detail(
+            [], warn, task_count
+        )
+        return post_or_update_alert(
+            title, body, severity, cooldown_hours=args.cooldown_hours,
+        )
+
+    log(
+        f"积压巡检正常：逾期 {len(overdue)} 个，未关闭工单 {task_count} 个"
+    )
+    return 0
+
+
+def _backlog_detail(
+    critical: list[tuple[int, dict]],
+    warn: list[tuple[int, dict]],
+    task_count: int,
+) -> str:
+    lines = ["", "### 积压明细", "", f"- 未关闭 `update-task` 工单：{task_count} 个"]
+    for days, row in critical + warn:
+        topic = row["topic"]
+        lines.append(
+            f"- {topic['id']} {topic['name']}：逾期 {days} 天，"
+            f"到期 {row['status']['next_due']}，"
+            f"工单入口 `{topic['prompt']}`"
+        )
+    if not critical and not warn:
+        lines.append("- 无逾期主题，仅工单数量超阈值。")
+    return "\n".join(lines) + "\n"
 
 
 # ──────────────────────────────────────────────
@@ -723,9 +1072,42 @@ def build_parser() -> argparse.ArgumentParser:
     p_dash.add_argument("--output", default="", help="输出路径（默认根目录 updates.md）")
     p_dash.set_defaults(func=cmd_dashboard)
 
-    p_alert = sub.add_parser("alert", help="创建或追加调度告警 Issue")
+    p_alert = sub.add_parser("alert", help="创建/追加分级告警 Issue，或写入恢复回执")
+    p_alert.add_argument(
+        "--kind", default="run_failure", choices=sorted(ALERT_KINDS),
+        help="告警类型，决定默认标题、级别与处理建议",
+    )
     p_alert.add_argument("--reason", default="周期更新调度工作流运行失败")
+    p_alert.add_argument("--severity", default="", choices=["", "p0", "p1", "p2"])
+    p_alert.add_argument("--title", default="", help="覆盖默认标题（去重键）")
+    p_alert.add_argument("--detail-file", default="", help="附带的失败日志文件")
+    p_alert.add_argument(
+        "--cooldown-hours", type=float, default=6.0,
+        help="同一告警的评论冷却小时数（默认 6）",
+    )
+    p_alert.add_argument(
+        "--recovered", action="store_true",
+        help="在未关闭告警下追加恢复回执；配合 --title 可指定单个告警",
+    )
     p_alert.set_defaults(func=cmd_alert)
+
+    p_heartbeat = sub.add_parser("heartbeat", help="检测调度停摆并告警")
+    p_heartbeat.add_argument(
+        "--max-gap-days", type=int, default=10,
+        help="距上次成功运行超过该天数即告警（默认 10）",
+    )
+    p_heartbeat.add_argument(
+        "--force", action="store_true", help="非 schedule 触发时也执行检测",
+    )
+    p_heartbeat.add_argument("--cooldown-hours", type=float, default=24.0)
+    p_heartbeat.set_defaults(func=cmd_heartbeat)
+
+    p_backlog = sub.add_parser("backlog", help="检测逾期与工单积压并分级告警")
+    p_backlog.add_argument("--warn-days", type=int, default=14)
+    p_backlog.add_argument("--critical-days", type=int, default=30)
+    p_backlog.add_argument("--max-open", type=int, default=6)
+    p_backlog.add_argument("--cooldown-hours", type=float, default=24.0)
+    p_backlog.set_defaults(func=cmd_backlog)
 
     return parser
 
