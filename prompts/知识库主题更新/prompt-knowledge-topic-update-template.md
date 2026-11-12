@@ -10,11 +10,12 @@
 
 ```text
 monitors-{topic}/
-├── 00-index.md                    # 目录导航：篇目清单 + 更新状态 + 最近更新日期（每次更新后维护）
-├── {NN}-…md                       # 主题文档（按编号组织，一篇一个子话题）
 ├── prompts/
 │   └── prompt-{slug}-update.md    # 第 3 层主题提示词 = 本模板 × 主题专属配置
-└── data/                          # 可选：主题级登记册（指标活值、来源台账）
+└── reports/
+    ├── 00-index.md                # 目录导航：篇目清单 + 更新状态 + 最近更新日期（每次更新后维护）
+    ├── {NN}-…md                   # 主题文档（按编号组织，一篇一个子话题）
+    └── {NN}-…html                 # 与 md 同名的生成产物（随源文件入库）
 ```
 
 ## 类型差异 T2 · 专属运行变量
@@ -22,7 +23,7 @@ monitors-{topic}/
 ```
 {{TOPIC_DIR}}            = 主题目录路径（如 monitors-visa-immigration）
 {{DOC_LIST}}             = 本次更新涉及的文档清单（由主题提示词声明）
-{{INDEX_PATH}}           = 主题导航文件（默认 {TOPIC_DIR}/00-index.md）
+{{INDEX_PATH}}           = 主题导航文件（默认 {TOPIC_DIR}/reports/00-index.md）
 ```
 
 锚定对象：`{{PREVIOUS_REPORT_PATH}}` 在本类型中语义为 **`{{TOPIC_DIR}}` 内各文档的当前版本**（git 历史为最终回退锚）。
@@ -45,7 +46,7 @@ monitors-{topic}/
 1. 触发器前置检查（同通用基座第六节第 1 条）。
 2. 并行子代理 2–4 个，按文档群分工；每个子代理限定主题来源台账范围、逐点引用、**每条数据必须附 URL**。
 3. 主代理差异合并：读取受影响文档当前版本 → 继承已修正事实 → 按"更新/动态获取/保持"回写 → 更新 `00-index.md`。
-4. 回写完成后运行 `python prompts/tools/md2html.py {{TOPIC_DIR}}` 重新生成 HTML（产物在 `output/`，不入库）。
+4. 回写完成后运行 `python prompts/tools/md2html.py {{TOPIC_DIR}}/reports` 重新生成 HTML（与 md 同目录，随源文件入库）。
 
 ## 类型差异 T6 · 主题专属必填区（第 3 层填写清单）
 

@@ -55,14 +55,15 @@
 ```text
 jp-life-work/
 ├── README.md                     # 项目总览 + 五阶段路线图 + 目录与体系说明
-├── requirements.txt              # Python 依赖（prompts/tools 所需）
 ├── monitors-ssw-driver-logistics/ # 监测项目：特定技能司机·物流·智能驾驶
 │   ├── data/                     #   指标登记册（活值）
 │   ├── prompts/                  #   动态更新提示词（继承公共三层模板）
-│   ├── reports/                  #   基线 + 各版本报告（md + html 双格式）
+│   ├── reports/                  #   基线 + 各版本报告（md + html 同目录）
 │   └── reviews/                  #   每期运行复盘
 ├── monitors-visa-immigration/    # 知识库主题：签证与在留资格
-├── monitors-language/            # 知识库主题：日语学习
+│   ├── prompts/                  #   主题专属配置
+│   └── reports/                  #   文档群（00-index + 8 篇）+ 同名 HTML
+├── monitors-language/            # 知识库主题：日语学习（同构）
 ├── monitors-career-driver/       # 知识库主题：司机职业阶段
 ├── monitors-career-logistics/    # 知识库主题：物流运营/管理阶段
 ├── monitors-logistics-industry/  # 知识库主题：物流行业研究
@@ -73,17 +74,16 @@ jp-life-work/
 ├── monitors-education/           # 知识库主题：教育与资格
 ├── monitors-culture-life/        # 知识库主题：文化与生活
 ├── monitors-regional/            # 知识库主题：地域信息
-├── prompts/                      # 公共提示词层（三层继承体系）
-│   ├── monitoring-common-spec.md #   质量规范（单份，跨类型共享）
-│   ├── 通用基座/                  #   第 1 层：运行变量/锚定/更新协议/追踪表/执行/输出骨架
-│   ├── 职业就业调研/              #   第 2 层类型模板：行业调研 + 落地建议类
-│   ├── 市场指标监测/              #   第 2 层类型模板：指标台账 + 信号判定类
-│   ├── 知识库主题更新/            #   第 2 层类型模板：monitors-* 主题文档群增量回写类
-│   └── tools/                    #   脚本工具（md2html.py）
-└── output/     # 生成产物（HTML，不入库，见 .gitignore）
+└── prompts/                      # 公共提示词层（三层继承体系）
+    ├── monitoring-common-spec.md #   质量规范（单份，跨类型共享）
+    ├── 通用基座/                  #   第 1 层：运行变量/锚定/更新协议/追踪表/执行/输出骨架
+    ├── 职业就业调研/              #   第 2 层类型模板：行业调研 + 落地建议类
+    ├── 市场指标监测/              #   第 2 层类型模板：指标台账 + 信号判定类
+    ├── 知识库主题更新/            #   第 2 层类型模板：monitors-* 主题文档群增量回写类
+    └── tools/                    #   全库共用脚本（md2html.py）
 ```
 
-> `monitors-{主题}/data/` 下的子目录为**按需创建**：无实际文件时不预建空目录（git 不追踪空目录，预建会在克隆后消失，造成声明与实际不符）。
+> 每个 `monitors-*` 统一为 `prompts/ + reports/` 两层；`monitors-ssw-driver-logistics` 另有 `data/`（指标活值）与 `reviews/`（每期复盘）。`data/` 子目录按需创建，不预建空目录。
 
 ## 动态更新体系（三层提示词继承）
 
@@ -121,12 +121,12 @@ jp-life-work/
 
 | 目录 | 用途 |
 |------|------|
-| prompts/ | 公共提示词层：三层继承体系（通用基座 → 类型模板）+ 质量规范 + `tools/` 脚本 |
-| monitors-ssw-driver-logistics/ | 监测项目：项目内四件套（data/prompts/reports/reviews） |
-| output/ | 生成产物：`prompts/tools/md2html.py` 输出的 HTML，不入库 |
+| prompts/ | 公共提示词层：三层继承体系（通用基座 → 类型模板）+ 质量规范 + `tools/` 共用脚本 |
+| monitors-ssw-driver-logistics/ | 监测项目：data/prompts/reports/reviews |
+| monitors-{主题}/ | 12 个知识库主题：prompts/ + reports/ |
 
 ## 使用约定
 
 - **文档格式**：源文档统一使用 Markdown（`.md`），按主题存放在 `monitors-*` 下。
-- **报告输出**：需要展示的报告由脚本从 Markdown 生成 HTML，输出到 `output/` 目录；该目录为生成产物，默认不入库（见 [.gitignore](.gitignore)）。
-- **脚本环境**：`prompts/tools/` 下的脚本基于 Python 运行，用于数据整理与报告生成。
+- **报告输出**：`python prompts/tools/md2html.py` 将各 `reports/` 下的 md 转为同名 HTML，与 md 同目录存放并随源文件入库。
+- **脚本环境**：`prompts/tools/` 下的共用脚本基于 Python 运行（依赖见 requirements.txt）。

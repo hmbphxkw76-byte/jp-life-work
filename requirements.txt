@@ -1,2 +1,2 @@
-# scripts/ 依赖
+# prompts/tools/ 依赖
 markdown>=3.5
