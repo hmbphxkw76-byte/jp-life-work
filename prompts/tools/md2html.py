@@ -2,7 +2,7 @@
 """Markdown 转 HTML 批量转换脚本（全库共用）。
 
 用法:
-    python prompts/tools/md2html.py              # 转换根目录下所有 monitors-* 目录
+    python prompts/tools/md2html.py              # 转换根目录下所有编号主题目录（NN-*）
     python prompts/tools/md2html.py path/to/file.md    # 转换单个文件
     python prompts/tools/md2html.py path/to/dir        # 转换目录下所有 .md
 
@@ -76,7 +76,7 @@ def convert(md_path: Path) -> Path:
             break
     html = TEMPLATE.format(title=title, body=body)
 
-    # 与源文件同目录：monitors-visa-immigration/reports/a.md -> .../reports/a.html
+    # 与源文件同目录：08-visa-immigration/reports/a.md -> .../reports/a.html
     out_path = md_path.with_suffix(".html")
     out_path.write_text(html, encoding="utf-8")
     return out_path
@@ -98,13 +98,13 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="将 Markdown 转换为 HTML")
     parser.add_argument(
         "inputs", nargs="*",
-        help="md 文件或目录；默认转换根目录下所有 monitors-* 目录",
+        help="md 文件或目录；默认转换根目录下所有编号主题目录（NN-*）",
     )
     args = parser.parse_args()
 
     root = Path.cwd()
     inputs = [Path(p) for p in args.inputs] or sorted(
-        p for p in root.iterdir() if p.is_dir() and p.name.startswith("monitors-")
+        p for p in root.iterdir() if p.is_dir() and re.match(r"^\d{2}-", p.name)
     )
 
     files = collect_md_files(inputs)

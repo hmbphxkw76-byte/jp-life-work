@@ -6,16 +6,16 @@
 > **继承声明（三层体系）**：本文件 = [通用基座](../../prompts/通用基座/prompt-generic-base.md) × [知识库主题更新类型模板](../../prompts/知识库主题更新/prompt-knowledge-topic-update-template.md) × 本主题专属配置。质量规则（中文输出、逐点引用、事实与推断分离、口径标注、来源优先级框架、版本管理）见上两层与 [监测报告通用规范](../../prompts/monitoring-common-spec.md)；冲突时以本文件为准。
 >
 <!-- 如存在交叉验证锚，将下一行的方括号段替换为实际锚定声明；无交叉则整行删除 -->
-> **交叉验证锚**：［{{数字/结论}} 以 monitors-{{target}}/data/{{target}}-indicator-registry.md 为单一事实源；冲突时以本文件为准。］
+> **交叉验证锚**：［{{数字/结论}} 以 NN-{{target}}/data/{{target}}-indicator-registry.md 为单一事实源；冲突时以本文件为准。］
 
 ---
 
 ## 运行变量（每次运行前填写）
 
 ```
-{{TOPIC_DIR}}            = monitors-{{slug}}（固定）
+{{TOPIC_DIR}}            = NN-{{slug}}（固定）
 {{CURRENT_DATE}}         = 本次运行日期，格式 YYYY-MM-DD
-{{HANDBOOK_PATH}}        = monitors-{{slug}}/reports/日本{{中文名}}知识手册.md
+{{HANDBOOK_PATH}}        = NN-{{slug}}/reports/日本{{中文名}}知识手册.md
 {{DOC_LIST}}             = 手册内对应章节（01–NN，见第五节；旧版在 reports/archives/）
 {{PREVIOUS_REPORT_PATH}} = 知识手册当前版本（语义见类型模板 T2）
 {{FRESHNESS_PRIORITY}}   = 数据时效优先级窗口（默认：近 12 个月内优先；超过 24 个月须标注年份并谨慎使用）
@@ -56,7 +56,7 @@
 ```
 
 <!-- 如存在交叉验证锚，保留下一行并替换占位符；无交叉则删除整行 -->
-> ［{{类型类/制度类/数字类}}修正统一记入 monitors-{{target}} 报告文首清单为单一事实源；本主题只追加**主题级**修正。］
+> ［{{类型类/制度类/数字类}}修正统一记入 NN-{{target}} 报告文首清单为单一事实源；本主题只追加**主题级**修正。］
 
 ---
 

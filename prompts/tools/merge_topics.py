@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""将各 monitors-* 主题下分散的多份章节 .md 合并为单份完整文档。
+"""将各编号主题（NN-*）下分散的多份章节 .md 合并为单份完整文档。
 
 用法:
     python prompts/tools/merge_topics.py            # 生成合并文档（不删除旧文件）
@@ -26,22 +26,22 @@ def slugify(value: str, separator: str = "-") -> str:
 
 # 主题目录名 -> 中文主题名
 TOPIC_NAMES = {
-    "monitors-autonomous-automation": "自动驾驶与自动化",
-    "monitors-career-driver": "司机职业",
-    "monitors-career-logistics": "管理岗过渡",
-    "monitors-culture-life": "文化与生活",
-    "monitors-economy": "经济与财务",
-    "monitors-education": "资格与教育投资",
-    "monitors-language": "日语学习",
-    "monitors-logistics-industry": "日本物流行业",
-    "monitors-politics-law": "政治与法规",
-    "monitors-regional": "地域信息",
-    "monitors-technology-industry": "技术与数字化",
-    "monitors-visa-immigration": "签证与在留资格",
+    "05-industry-autonomous": "自动驾驶与自动化",
+    "02-career-driver": "司机职业",
+    "03-career-management": "管理岗过渡",
+    "12-culture-life": "文化与生活",
+    "07-economy-finance": "经济与财务",
+    "10-education-qualification": "资格与教育投资",
+    "11-language-japanese": "日语学习",
+    "04-industry-logistics": "日本物流行业",
+    "09-politics-law": "政治与法规",
+    "13-regional-info": "地域信息",
+    "06-industry-technology": "技术与数字化",
+    "08-visa-immigration": "签证与在留资格",
 }
 
 # 已是单文档格式，跳过
-SKIP = {"monitors-ssw-driver-logistics"}
+SKIP = {"01-monitor-ssw-driver"}
 
 MERGE_DATE = "2026-11-12"
 
@@ -148,8 +148,8 @@ def fix_cross_topic_links(text: str, current_topic: str, global_map: dict) -> st
     def repl(m):
         label = m.group(1)
         target = m.group(2)
-        # 从路径中提取 monitors-xxx 主题名
-        m_topic = re.search(r"(monitors-[\w-]+)", target)
+        # 从路径中提取编号主题名
+        m_topic = re.search(r"(\d{2}-[\w-]+)", target)
         if not m_topic:
             return m.group(0)
         topic_name = m_topic.group(1)
@@ -168,8 +168,8 @@ def fix_cross_topic_links(text: str, current_topic: str, global_map: dict) -> st
             return m.group(0)
         # 从当前主题 reports/ 到目标主题 reports/ 的相对路径（需两级 .. 到项目根）
         return f"[{label}](../../{topic_name}/reports/{handbook}#{anchor})"
-    # 匹配包含 monitors- 的非 http(s) .md 链接
-    return re.sub(r"\[([^\]]+)\]\((?!https?://)([^)]*monitors-[\w-]+[^)]*\.md)\)", repl, text)
+    # 匹配包含编号主题名的非 http(s) .md 链接
+    return re.sub(r"\[([^\]]+)\]\((?!https?://)([^)]*\d{2}-[\w-]+[^)]*\.md)\)", repl, text)
 
 
 def merge_topic(topic_dir: Path, clean: bool, global_map: dict) -> bool:
@@ -293,7 +293,7 @@ def main() -> int:
     else:
         topic_dirs = sorted(
             p for p in root.iterdir()
-            if p.is_dir() and p.name.startswith("monitors-")
+            if p.is_dir() and re.match(r"^\d{2}-", p.name)
         )
 
     global_map = build_global_map(topic_dirs)

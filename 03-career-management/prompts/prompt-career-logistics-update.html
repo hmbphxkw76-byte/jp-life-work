@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>04 物流运营与管理 · 动态更新提示词</title>
+<style>
+  body { max-width: 860px; margin: 2rem auto; padding: 0 1rem;
+         font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+         line-height: 1.7; color: #222; }
+  pre { background: #f5f5f5; padding: 0.8rem; overflow-x: auto; border-radius: 4px; }
+  code { background: #f5f5f5; padding: 0.1em 0.3em; border-radius: 3px; }
+  pre code { padding: 0; background: none; }
+  table { border-collapse: collapse; }
+  th, td { border: 1px solid #ccc; padding: 0.4em 0.7em; }
+  table a[title^="来源"] { color: inherit; text-decoration: none;
+    word-break: normal; overflow-wrap: anywhere;
+    border-bottom: 1px dotted #b8b0a0; }
+  table a[title^="来源"] strong, table a[title^="来源"] em,
+  table a[title^="来源"] code { color: inherit; background: none; }
+  table a[title^="来源"]:hover { color: #1a5f5a; background: rgba(26,95,90,.09);
+    border-bottom: 1px solid currentColor; }
+  table a[title^="来源"]::after { content: "↗"; margin-left: 3px;
+    font-size: .76em; opacity: 0; }
+  table a[title^="来源"]:hover::after { opacity: .85; }
+  blockquote { border-left: 4px solid #ccc; margin-left: 0; padding-left: 1em; color: #555; }
+</style>
+</head>
+<body>
+<h1 id="04-物流运营与管理-动态更新提示词">04 物流运营与管理 · 动态更新提示词</h1>
+<blockquote>
+<p><strong>用途</strong>：周期性刷新「物流运营与管理」知识库，动态获取运送事业制度、管理岗采用条件、讲习资格的最新官方口径，保持个人晋升档案同步。可直接整体复制，替换顶部变量后提交给 AI 执行。</p>
+<p><strong>继承声明（三层体系）</strong>：本文件 = <a href="../../prompts/通用基座/prompt-generic-base.md">通用基座</a> × <a href="../../prompts/知识库主题更新/prompt-knowledge-topic-update-template.md">知识库主题更新类型模板</a> × 本主题专属配置。冲突时本文件优先。</p>
+</blockquote>
+<hr />
+<h2 id="运行变量-每次运行前填写">运行变量（每次运行前填写）</h2>
+<pre><code>{{TOPIC_DIR}}            = 03-career-management（固定）
+{{HANDBOOK_PATH}}        = 03-career-management/reports/日本管理岗过渡知识手册.md
+{{DOC_LIST}}             = 手册内对应章节（由主题提示词第五节声明）
+{{CURRENT_DATE}}         = 本次运行日期 YYYY-MM-DD
+{{FRESHNESS_PRIORITY}}   = 数据时效优先级窗口（默认：近 12 个月内优先；超过 24 个月须标注年份并谨慎使用）
+{{SOURCE_LANGUAGE_RULE}} = 行业/制度类须日文原文；方法论类不限
+{{REGISTRY_PATH}}        = ../data/career-logistics-indicator-registry.md —— 4 项指标活值登记册，每次运行先读后写
+{{REVIEWS_DIR}}          = ../reviews/ —— 每期运行复盘存放处（可选）
+</code></pre>
+<hr />
+<h2 id="一-主题专属硬性约束">一、主题专属硬性约束</h2>
+<p>通用约束（逐点引用、事实与推断分离、口径标注等）自动继承通用规范第一至四节。本主题额外强制：</p>
+<ol>
+<li><strong>受众定位</strong>："阶段 3 管理岗过渡"知识库：管理岗地图、业务知识、管理日语、过渡学习计划、晋升档案。与 02-career-driver（现场层）形成递进，与 04-industry-logistics（行业层）互为引用。</li>
+</ol>
+<h2 id="二-来源优先级-通用框架的本主题实例化-冲突时报双份并标注">二、来源优先级（通用框架的本主题实例化，冲突时报双份并标注）</h2>
+<p>① 国土交通省（mlit.go.jp 运送事业制度、安全管理）＞ ② 日本ロジスティクスシステム協会、全日本トラック協会（管理者讲习、安全管理责者）＞ ③ 主要物流企业官网/IR（日通、佐川、雅玛多、SGHD 的职级与采用信息）＞ ④ 求人门户管理岗频道（预期指标）＞ ⑤ 行业媒体（LNEWS、物流ウィークリー，须回溯）</p>
+<hr />
+<h2 id="三-基线锚定-防止已修正事实回退">三、基线锚定（防止已修正事实回退）</h2>
+<p>更新时必须<strong>读取 <code>{{HANDBOOK_PATH}}</code>（单份知识手册）与受影响章节的当前版本</strong>（含 <code>reports/archives/</code> 内历史版），继承其结构与全部已核实结论。本清单随每次修正持续追加：</p>
+<pre><code>- ❌（首期为空）——产生修正后逐条补记。
+</code></pre>
+<hr />
+<h2 id="四-更新协议-事件触发器表">四、更新协议 + 事件触发器表</h2>
+<p>刷新窗口与差异对比规则继承通用模板。本主题<strong>必查重大事件触发器</strong>（命中任一项即触发对应文档重点更新；无触发则降级为核验/收敛型轻运行，<strong>不得为制造变化而虚构变化</strong>）：</p>
+<pre><code>- 运送事业管理者相关讲习/资格制度变化 → 02/10（联动 10-education-qualification）
+- 目标企业管理岗采用条件变化 → 01/05
+- `2024年問題`对策下的管理岗职责变化（运賃适正化、M&amp;A） → 01/02
+- 个人晋升里程碑 → 05
+</code></pre>
+<hr />
+<h2 id="五-手册章节更新要点-知识库主题更新类型">五、手册章节更新要点（知识库主题更新类型）</h2>
+<p>明确要动态获取 / 保持的内容：</p>
+<pre><code>【导航与使用约定】更新：篇目状态与最近更新日期；保持：篇目结构（手册前部导航区，含更新日志）
+【01 管理岗地图与路径评估】动态获取：职级体系、管理岗求人抽样（标注口径）；保持：路径评估框架（推断标注）
+【02 业务知识体系】更新：运营/调度/安全知识点补充；保持：知识框架
+【03 管理岗日语与沟通】更新：会议/报告/邮件用语积累；保持：场景分类
+【04 管理岗过渡学习计划】更新：计划完成状态；保持：计划结构
+【05 成果档案与晋升材料】更新：个人可量化成果（准点率、事故率、成本节约），注明统计周期；保持：档案字段
+</code></pre>
+<hr />
+<h2 id="六-关键信息追踪表-每次运行逐项核对">六、关键信息追踪表 — 每次运行逐项核对</h2>
+<blockquote>
+<p>prompt 模板内严禁填写活值；运行前从 <code>{{REGISTRY_PATH}}</code> 读取、运行后回写。登记册格式见通用基座五-A。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>信息项</th>
+<th>优先数据源</th>
+<th>上次值（运行前从 {{REGISTRY_PATH}} 读取填入）</th>
+<th>本次是否更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>目标企业管理岗采用条件</td>
+<td>企业官网采用页</td>
+<td></td>
+<td>☐</td>
+</tr>
+<tr>
+<td>2</td>
+<td>管理者讲习/安全管理责者讲习日程</td>
+<td>全ト协/都道府県</td>
+<td></td>
+<td>☐</td>
+</tr>
+<tr>
+<td>3</td>
+<td>管理岗求人薪资口径</td>
+<td>求人门户（预期指标）</td>
+<td></td>
+<td>☐</td>
+</tr>
+<tr>
+<td>4</td>
+<td>个人晋升档案最新条目</td>
+<td>05 文档</td>
+<td></td>
+<td>☐</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>每次运行须逐项填写"是否更新"，未变动项保留登记册值并注明"截至 {{CURRENT_DATE}} 无更新"。<strong>指标活值统一维护于 <code>{{REGISTRY_PATH}}</code></strong>（登记册格式见通用基座五-A）：运行前读登记册 → 核验 → 运行后回写登记册 → 回写手册内更新日志区与相关章节；prompt 模板内不重复维护数值。</p>
+</blockquote>
+<hr />
+<h2 id="七-执行方式-建议">七、执行方式（建议）</h2>
+<ol>
+<li>启动 2–3 个并行研究子代理：① 运送事业制度与管理岗资格；② 目标企业职级体系与采用条件；③ 讲习日程。全部限定日/英来源、逐点引用，<strong>每条数据必须附可直接访问的 URL</strong>。</li>
+<li>子代理返回后，由主代理读取 <code>{{HANDBOOK_PATH}}</code>（单份知识手册）与受影响章节当前版本做差异合并，<strong>继承已修正事实、应用第四、五节更新要点</strong>。</li>
+<li>对冲突数据保留双份引用；对无法核实项单列"待复核清单"。</li>
+<li>回写完成后运行 <code>python prompts/tools/md2html.py 03-career-management/reports</code> 重新生成 HTML；运行 <code>python prompts/tools/archive_reports.py</code> 执行保留策略。</li>
+</ol>
+<hr />
+<h2 id="八-输出格式要求">八、输出格式要求</h2>
+<ul>
+<li><strong>增量回写</strong> <code>{{DOC_LIST}}</code> 中受影响章节；未受影响章节不动；结构性内容（路径评估框架、知识框架、场景分类）按第五节"保持"。</li>
+<li><strong>变更摘要与待复核清单</strong>写入手册内「导航与使用约定」的更新日志区（格式见知识库模板 T3），不单独成文。</li>
+<li>正文新增数据点一律附 <code>[Source: 完整URL, 年份]</code>；表格按通用规范二.2 呈现（主题文字超链接 + hover 来源，不设"来源"列）；推断显式标注。</li>
+<li>新增知识在现有文档中找不到位置时，在手册内新建 ## NN 章节（编号顺延）；禁止把不相关内容塞进既有章节，禁止新建独立 .md 文件。</li>
+<li>文件命名与保留策略：<code>reports/</code> 顶层保留最新 3 份（<code>*_baseline</code> 基线版固定保留，永不进入 archives），其余入 <code>reports/archives/</code>，归档上限 7 份。</li>
+</ul>
+<hr />
+<h2 id="九-质量自检-通用清单之外的本主题专属项">九、质量自检（通用清单之外的本主题专属项）</h2>
+<p>通用自检清单见通用规范第八节。本主题额外确认：</p>
+<ul>
+<li>[ ] 与 02-career-driver（现场层）的递进关系清晰，未交叉重复</li>
+<li>[ ] 与 04-industry-logistics（行业层）的引用关系正确</li>
+<li>[ ] 管理岗推断性评估均已标注</li>
+<li>[ ] 追踪表 4 项均已核对并填"是否更新"</li>
+<li>[ ] <code>{{REGISTRY_PATH}}</code> 已读已写：追踪表"上次值"列取自登记册，变更摘要与登记册一致；prompt 模板自身无硬编码活值</li>
+</ul>
+<p><strong>结束提示词。</strong></p>
+</body>
+</html>

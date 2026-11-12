@@ -1,15 +1,15 @@
 # 类型模板 · 知识库主题更新（动态获取）
 
-> **层级定位**：第 2 层类型模板 = [通用基座](../通用基座/prompt-generic-base.md) × 本文件差异配置。适用于本仓库 `monitors-*` 下**以单份知识手册为单位**的主题（每个 `monitors-{topic}/` 即一个"主题项目"）。与监测类的区别：产出不是单份新报告，而是**增量回写既有单份知识手册**；锚定对象是知识手册自身的历史版本。
+> **层级定位**：第 2 层类型模板 = [通用基座](../通用基座/prompt-generic-base.md) × 本文件差异配置。适用于本仓库 `NN-*` 下**以单份知识手册为单位**的主题（每个 `NN-{topic}/` 即一个"主题项目"）。与监测类的区别：产出不是单份新报告，而是**增量回写既有单份知识手册**；锚定对象是知识手册自身的历史版本。
 >
 > **继承声明**：运行变量、全局约束、基线锚定、更新协议、执行方式、自检骨架均自动继承通用基座与《[监测报告通用规范](../monitoring-common-spec.md)》，本文件只写**类型差异**；与上层冲突时以本文件为准。
 
 ---
 
-## 类型差异 T1 · 主题项目结构（monitors-* 主题目录约定）
+## 类型差异 T1 · 主题项目结构（NN-* 主题目录约定）
 
 ```text
-monitors-{topic}/
+NN-{topic}/
 ├── data/                           # 主题数据（来源台账/指标活值，按需落文件）
 ├── prompts/
 │   └── prompt-{slug}-update.md    # 第 3 层主题提示词 = 本模板 × 主题专属配置
@@ -24,10 +24,10 @@ monitors-{topic}/
 ## 类型差异 T2 · 专属运行变量
 
 ```
-{{TOPIC_DIR}}            = 主题目录路径（如 monitors-visa-immigration）
+{{TOPIC_DIR}}            = 主题目录路径（如 08-visa-immigration）
 {{HANDBOOK_PATH}}        = 单份知识手册路径（{{TOPIC_DIR}}/reports/日本{中文名}知识手册.md）
 {{DOC_LIST}}             = 本次更新涉及的章节清单（由主题提示词声明，对应手册内 ## NN 章节）
-{{REGISTRY_PATH}}        = 指标活值登记册路径（**强制，继承通用基座**）；规范写法 `monitors-{slug}/data/{slug}-indicator-registry.md`，prompt 文件内可写作 `../data/{slug}-indicator-registry.md`（等价）；登记册为活值唯一存放处，prompt 模板内禁止持有具体数值
+{{REGISTRY_PATH}}        = 指标活值登记册路径（**强制，继承通用基座**）；规范写法 `NN-{slug}/data/{slug}-indicator-registry.md`，prompt 文件内可写作 `../data/{slug}-indicator-registry.md`（等价）；登记册为活值唯一存放处，prompt 模板内禁止持有具体数值
 ```
 
 锚定对象：`{{PREVIOUS_REPORT_PATH}}` 在本类型中语义为 **`{{HANDBOOK_PATH}}` 的当前版本**（git 历史为最终回退锚）。

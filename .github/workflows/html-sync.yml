@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
     paths:
-      - "monitors-*/reports/*.md"
+      - "[0-9][0-9]-*/reports/*.md"
       - "prompts/tools/md2html.py"
       - "requirements.txt"
 
@@ -27,7 +27,7 @@ jobs:
 
       - name: 清理非 reports 目录的 HTML
         run: |
-          find . -path ./monitors-ssw-driver-logistics/reviews -prune -o \
+          find . -path ./01-monitor-ssw-driver/reviews -prune -o \
             -name "*.html" -print | grep -v "/reports/" | xargs rm -f 2>/dev/null || true
 
       - name: 检查 HTML 变更并提交

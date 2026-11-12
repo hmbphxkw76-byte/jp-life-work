@@ -26,8 +26,8 @@
 {{OUTPUT_PATH}}          = 本次输出路径（按类型模板/项目声明）
 {{SOURCE_LANGUAGE_RULE}} = 来源语言规则（如"仅英文" / "日文+英文" / "不限，引用须回溯原文"）
 {{FRESHNESS_PRIORITY}}   = 数据时效优先级窗口（默认：近 12 个月内优先；超过 24 个月须标注年份并谨慎使用）
-{{REGISTRY_PATH}}        = 指标活值登记册路径（**强制变量，不得省略**）；规范写法 `monitors-{slug}/data/{slug}-indicator-registry.md`（仓库根相对），prompt 文件内可写作 `../data/{slug}-indicator-registry.md`（等价）；登记册为活值唯一存放处，prompt 模板内禁止持有具体数值
-{{REVIEWS_DIR}}          = 运行复盘存放目录（建议 monitors-{slug}/reviews/，如项目不需要可省略）
+{{REGISTRY_PATH}}        = 指标活值登记册路径（**强制变量，不得省略**）；规范写法 `NN-{slug}/data/{slug}-indicator-registry.md`（仓库根相对），prompt 文件内可写作 `../data/{slug}-indicator-registry.md`（等价）；登记册为活值唯一存放处，prompt 模板内禁止持有具体数值
+{{REVIEWS_DIR}}          = 运行复盘存放目录（建议 NN-{slug}/reviews/，如项目不需要可省略）
 ```
 
 类型模板/项目可追加专属变量（如知识库类型的 `{{TOPIC_DIR}}`、`{{INDEX_PATH}}`、`{{DOC_LIST}}`；职业就业调研类型的 `{{REPORT_VERSION}}` 已在通用集），但不得重定义上述通用变量含义。

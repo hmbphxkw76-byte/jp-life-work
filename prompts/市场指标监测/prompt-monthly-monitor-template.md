@@ -1,6 +1,6 @@
 # 类型模板 · 市场指标监测（月度）
 
-> **层级定位**：第 2 层类型模板 = [通用基座](../通用基座/prompt-generic-base.md) × 本文件差异配置。适用于「指标台账 + 信号规则 + 周期性简报」的监测项目（如 monitors-dubai/apartment-monitor）。就业调研类项目请用《[职业就业调研类型模板](../职业就业调研/prompt-employment-research-template.md)》。
+> **层级定位**：第 2 层类型模板 = [通用基座](../通用基座/prompt-generic-base.md) × 本文件差异配置。适用于「指标台账 + 信号规则 + 周期性简报」的监测项目（如 01-monitor-{slug}）。就业调研类项目请用《[职业就业调研类型模板](../职业就业调研/prompt-employment-research-template.md)》。
 >
 > **继承声明**：运行变量、全局约束、基线锚定、更新协议、追踪表、执行与输出骨架均自动继承通用基座与《[监测报告通用规范](../monitoring-common-spec.md)》；本文件只写**类型差异**。本类型对核验纪律要求严于通用规范，冲突时以本文件为准。
 

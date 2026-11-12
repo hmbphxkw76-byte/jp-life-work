@@ -43,7 +43,7 @@
 ### 阶段 5：长期定居与永住规划
 
 - 确认特定技能2号是否适用（结论：司机分野无 2 号，须规划资格切换）。
-- 按技人国门槛倒推：大学相关专业或 10 年实务经验（详见 monitors-visa-immigration/05）。
+- 按技人国门槛倒推：大学相关专业或 10 年实务经验（详见 08-visa-immigration/05）。
 - 关键时点：Y3 转管理/企划岗，Y4 提交在留资格变更，Y5 前完成（1 号上限）。
 - 规划在留资格、税务、社保、年金、收入证明。
 - 记录连续工作年限、收入水平、职业稳定性。
@@ -54,38 +54,43 @@
 
 ```text
 jp-life-work/
-├── README.md                     # 项目总览 + 五阶段路线图 + 目录与体系说明
-├── monitors-ssw-driver-logistics/ # 监测项目：特定技能司机·物流·智能驾驶
-│   ├── data/                     #   指标登记册（活值）
-│   ├── prompts/                  #   动态更新提示词（继承公共三层模板）
-│   ├── reports/                  #   基线 + 各版本报告（md + html 同目录）
-│   └── reviews/                  #   每期运行复盘
-├── monitors-visa-immigration/    # 知识库主题：签证与在留资格
-│   ├── data/                     #   主题数据（来源台账/指标活值）
-│   ├── prompts/                  #   主题专属配置
-│   └── reports/                  #   单份知识手册（md + 同名 html）
-│       └── archives/             #   归档旧版知识手册
-├── monitors-language/            # 知识库主题：日语学习（同构）
-├── monitors-career-driver/       # 知识库主题：司机职业阶段
-├── monitors-career-logistics/    # 知识库主题：物流运营/管理阶段
-├── monitors-logistics-industry/  # 知识库主题：物流行业研究
-├── monitors-autonomous-automation/ # 知识库主题：自动驾驶与自动化
-├── monitors-economy/             # 知识库主题：经济与薪资
-├── monitors-politics-law/        # 知识库主题：政策与法规
-├── monitors-technology-industry/ # 知识库主题：技术与数字化
-├── monitors-education/           # 知识库主题：教育与资格
-├── monitors-culture-life/        # 知识库主题：文化与生活
-├── monitors-regional/            # 知识库主题：地域信息
-└── prompts/                      # 公共提示词层（三层继承体系）
-    ├── monitoring-common-spec.md #   质量规范（单份，跨类型共享）
-    ├── 通用基座/                  #   第 1 层：运行变量/锚定/更新协议/追踪表/执行/输出骨架
-    ├── 职业就业调研/              #   第 2 层类型模板：行业调研 + 落地建议类
-    ├── 市场指标监测/              #   第 2 层类型模板：指标台账 + 信号判定类
-    ├── 知识库主题更新/            #   第 2 层类型模板：monitors-* 主题单份知识手册增量回写类
-    └── tools/                    #   全库共用脚本（md2html.py）
+├── README.md                          # 项目总览 + 五阶段路线图 + 目录与体系说明
+├── 01-monitor-ssw-driver/             # 监测项目：特定技能司机·物流·智能驾驶
+│   ├── data/                          #   指标登记册（活值）
+│   ├── prompts/                       #   动态更新提示词（继承公共三层模板）
+│   ├── reports/                       #   基线 + 各版本报告（md + html 同目录）
+│   │   └── archives/                  #   历史版本
+│   └── reviews/                       #   每期运行复盘
+├── 02-career-driver/                  # 职业阶段 1–2：司机岗位执行手册
+│   ├── data/                          #   主题数据（来源台账/指标活值）
+│   ├── prompts/                       #   主题专属配置
+│   └── reports/                       #   单份知识手册（md + 同名 html）
+│       └── archives/                  #   归档旧版知识手册
+├── 03-career-management/              # 职业阶段 3：管理岗过渡手册（同构）
+├── 04-industry-logistics/             # 行业研究：物流产业与赛道（同构）
+├── 05-industry-autonomous/            # 行业研究：自动驾驶与自动化（同构）
+├── 06-industry-technology/            # 行业研究：技术与数字化（同构）
+├── 07-economy-finance/                # 环境：经济与财务（同构）
+├── 08-visa-immigration/               # 制度：签证与在留资格（同构）
+├── 09-politics-law/                   # 制度：政策与法规（同构）
+├── 10-education-qualification/        # 成长：资格与教育投资（同构）
+├── 11-language-japanese/              # 成长：日语学习（同构）
+├── 12-culture-life/                   # 生活：文化与生活（同构）
+├── 13-regional-info/                  # 生活：地域信息（同构）
+└── prompts/                           # 公共提示词层（三层继承体系）
+    ├── monitoring-common-spec.md      #   质量规范（单份，跨类型共享）
+    ├── 通用基座/                       #   第 1 层：运行变量/锚定/更新协议/追踪表/执行/输出骨架
+    ├── 职业就业调研/                   #   第 2 层类型模板：行业调研 + 落地建议类
+    ├── 市场指标监测/                   #   第 2 层类型模板：指标台账 + 信号判定类
+    ├── 知识库主题更新/                 #   第 2 层类型模板：编号主题单份知识手册增量回写类
+    └── tools/                         #   全库共用脚本（md2html / validate / archive / merge）
 ```
 
-> 每个 `monitors-*` 统一为 `data/ + prompts/ + reports/` 三层，且 `reports/` 下含 `archives/` 子目录；`monitors-ssw-driver-logistics` 另保留 `reviews/`（每期复盘）。`reviews/` 暂不向其他主题推广。
+> **层级规则**：仓库根为第 0 层；主题目录为第 1 层；`data/`、`prompts/`、`reports/` 为第 2 层；`reports/archives/` 为第 3 层。不新增分组目录，分组由编号段表达：01 监测 → 02–03 职业 → 04–06 行业 → 07 环境 → 08–09 制度 → 10–11 成长 → 12–13 生活。
+>
+> `（同构）` 表示与 `02-career-driver` 相同的 `data/ + prompts/ + reports/archives/` 结构。
+>
+> 每个编号主题目录统一为 `data/ + prompts/ + reports/` 三层，且 `reports/` 下含 `archives/` 子目录；`01-monitor-ssw-driver` 另保留 `reviews/`（每期复盘）。`reviews/` 暂不向其他主题推广。
 >
 > **单文档格式约定**：每个知识库主题在 `reports/` 下仅维护**单份知识手册 `.md`** 及同名 `.html`，禁止同一主题分散为多份零散 `.md`。知识手册内以 `## NN 章节名` 组织各章节，原 00-index 的导航内容已并入手册前部「导航与使用约定」。
 >
@@ -96,44 +101,44 @@ jp-life-work/
 ```text
 第 1 层  prompts/通用基座/                        运行变量、基线锚定、更新协议、追踪表、执行与输出骨架
 第 2 层  prompts/{职业就业调研|市场指标监测|知识库主题更新}/   类型差异（输出形态、结构模板、专属纪律）
-第 3 层  monitors-{主题}/prompts/                专属配置（来源清单、事件触发器、追踪指标、已修正事实）
+第 3 层  NN-{主题}/prompts/                      专属配置（来源清单、事件触发器、追踪指标、已修正事实）
 ```
 
-- **监测项目**（monitors-*）：按《职业就业调研》或《市场指标监测》类型模板继承，指标活值存项目 `data/` 登记册，运行复盘存 `reviews/`。
-- **知识库主题**（monitors-visa-immigration 等 12 个）：按《知识库主题更新》类型模板继承，动态获取的资料**增量回写**主题单份知识手册，变更摘要与待复核清单记入手册内「导航与使用约定」的更新日志区。
+- **监测项目**（01-monitor-*）：按《职业就业调研》或《市场指标监测》类型模板继承，指标活值存项目 `data/` 登记册，运行复盘存 `reviews/`。
+- **知识库主题**（02–13 共 12 个）：按《知识库主题更新》类型模板继承，动态获取的资料**增量回写**主题单份知识手册，变更摘要与待复核清单记入手册内「导航与使用约定」的更新日志区。
 - 覆盖规则：主题/项目专属 > 类型模板 > 通用基座 > 《监测报告通用规范》；覆盖须显式声明。
 - 质量红线（全层强制）：逐点引用 `[Source: URL, 年份]`、来源优先级五层框架、事实与推断分离、口径标注、禁止编造、空窗期不虚构变化。
 
-### 知识库主题目录说明（monitors-*）
+### 知识库主题目录说明（NN-*）
 
 每个主题目录在 `reports/` 下维护**单份知识手册 `.md`**（含同名 `.html`），手册内以 `## NN 章节名` 组织内容；每主题自带 `prompts/prompt-{slug}-update.md`（第 3 层动态更新配置）。
 
 | 目录 | 用途 | 知识手册 | 动态更新配置 |
 |------|------|------|------|
-| monitors-visa-immigration | 特定技能1号/2号制度、考试与日语要求、申请流程与材料、育成就劳制度新动向、永住与长期在留规划、政策更新日志 | 日本签证与在留资格知识手册.md | prompt-visa-immigration-update.md |
-| monitors-language | JLPT N4/N3/N2 分阶段备考计划、JFT-Basic 备用方案、学习资源清单与进度跟踪 | 日本日语学习知识手册.md | prompt-language-update.md |
-| monitors-career-driver | 司机岗位全景、薪资结构与工时合规、安全规范、现场经验积累、求职渠道与面试、实际工作条件记录 | 日本司机职业知识手册.md | prompt-career-driver-update.md |
-| monitors-career-logistics | 管理岗地图与路径评估、业务知识体系、管理岗日语与沟通、过渡学习计划、成果档案与晋升材料 | 日本管理岗过渡知识手册.md | prompt-career-logistics-update.md |
-| monitors-logistics-industry | 日本物流产业概览、EC/冷链/3PL 增长赛道、自动化与技术趋势、行业数据跟踪 | 日本物流行业知识手册.md | prompt-logistics-industry-update.md |
-| monitors-autonomous-automation | 自动驾驶技术路线与时间表、法规与许可制度、仓储自动化与无人配送、个人技能对接与机会 | 日本自动驾驶与自动化知识手册.md | prompt-autonomous-automation-update.md |
-| monitors-economy | 日本宏观经济、物流行业薪资行情、生活成本与收入规划 | 日本经济与财务知识手册.md | prompt-economy-update.md |
-| monitors-politics-law | 在留法规框架、政治动向与移民政策环境、维权与合规工具箱 | 日本政治与法规知识手册.md | prompt-politics-law-update.md |
-| monitors-technology-industry | 物流数字化技能地图、数字化岗位与转型路径 | 日本技术与数字化知识手册.md | prompt-technology-industry-update.md |
-| monitors-education | 资格地图、学习体系与教育投资 | 日本资格与教育投资知识手册.md | prompt-education-update.md |
-| monitors-culture-life | 职场文化与人际、生活指南与适应 | 日本文化与生活知识手册.md | prompt-culture-life-update.md |
-| monitors-regional | 地域选择框架、地域生活笔记 | 日本地域信息知识手册.md | prompt-regional-update.md |
+| 02-career-driver | 司机岗位全景、薪资结构与工时合规、安全规范、现场经验积累、求职渠道与面试、实际工作条件记录 | 日本司机职业知识手册.md | prompt-career-driver-update.md |
+| 03-career-management | 管理岗地图与路径评估、业务知识体系、管理岗日语与沟通、过渡学习计划、成果档案与晋升材料 | 日本管理岗过渡知识手册.md | prompt-career-logistics-update.md |
+| 04-industry-logistics | 日本物流产业概览、EC/冷链/3PL 增长赛道、自动化与技术趋势、行业数据跟踪 | 日本物流行业知识手册.md | prompt-logistics-industry-update.md |
+| 05-industry-autonomous | 自动驾驶技术路线与时间表、法规与许可制度、仓储自动化与无人配送、个人技能对接与机会 | 日本自动驾驶与自动化知识手册.md | prompt-autonomous-automation-update.md |
+| 06-industry-technology | 物流数字化技能地图、数字化岗位与转型路径 | 日本技术与数字化知识手册.md | prompt-technology-industry-update.md |
+| 07-economy-finance | 日本宏观经济、物流行业薪资行情、生活成本与收入规划 | 日本经济与财务知识手册.md | prompt-economy-update.md |
+| 08-visa-immigration | 特定技能1号/2号制度、考试与日语要求、申请流程与材料、育成就劳制度新动向、永住与长期在留规划、政策更新日志 | 日本签证与在留资格知识手册.md | prompt-visa-immigration-update.md |
+| 09-politics-law | 在留法规框架、政治动向与移民政策环境、维权与合规工具箱 | 日本政治与法规知识手册.md | prompt-politics-law-update.md |
+| 10-education-qualification | 资格地图、学习体系与教育投资 | 日本资格与教育投资知识手册.md | prompt-education-update.md |
+| 11-language-japanese | JLPT N4/N3/N2 分阶段备考计划、JFT-Basic 备用方案、学习资源清单与进度跟踪 | 日本日语学习知识手册.md | prompt-language-update.md |
+| 12-culture-life | 职场文化与人际、生活指南与适应 | 日本文化与生活知识手册.md | prompt-culture-life-update.md |
+| 13-regional-info | 地域选择框架、地域生活笔记 | 日本地域信息知识手册.md | prompt-regional-update.md |
 
 ### 其他目录说明
 
 | 目录 | 用途 |
 |------|------|
 | prompts/ | 公共提示词层：三层继承体系（通用基座 → 类型模板）+ 质量规范 + `tools/` 共用脚本 |
-| monitors-ssw-driver-logistics/ | 监测项目：data/prompts/reports/reviews |
-| monitors-{主题}/ | 12 个知识库主题：data/ + prompts/ + reports/（含 archives/） |
+| 01-monitor-ssw-driver/ | 监测项目：data/prompts/reports/reviews |
+| NN-{主题}/ | 12 个知识库主题（02–13）：data/ + prompts/ + reports/（含 archives/） |
 
 ## 使用约定
 
-- **文档格式**：源文档统一使用 Markdown（`.md`），按主题存放在 `monitors-*` 下。
+- **文档格式**：源文档统一使用 Markdown（`.md`），按主题存放在 `NN-*` 主题目录下。
 - **单文档约束**：每个知识库主题仅维护**单份知识手册 `.md`** 与同名 `.html`，禁止同一主题拆分为多份零散 `.md`。新增/更新内容直接在知识手册内对应章节修改，不新建章节文件。
 - **报告输出**：`python prompts/tools/md2html.py` 将各 `reports/` 下的 md 转为同名 HTML，与 md 同目录存放并随源文件入库。
 - **规范校验**：`python prompts/tools/validate.py` 执行 10 项规范一致性校验（单文档约束、目录结构、引用格式、锚点链接、活值硬编码等）。退出码：0=通过，1=错误（需修复），2=仅警告。

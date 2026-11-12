@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """报告归档与保留策略（全库共用）。
 
-规则（对每个 monitors-*/reports/ 生效）：
+规则（对每个 NN-*/reports/ 生效）：
 - 顶层只保留最新 3 份文档；md 与同名 html 视为一份
 - 其余移入 reports/archives/
 - archives/ 最多保留 7 份，超出删除最旧
@@ -54,7 +54,7 @@ def main() -> int:
     parser.add_argument("--dry-run", action="store_true", help="只打印计划，不移动/删除")
     args = parser.parse_args()
 
-    for reports in sorted(ROOT.glob("monitors-*/reports")):
+    for reports in sorted(ROOT.glob("[0-9][0-9]-*/reports")):
         if not reports.is_dir():
             continue
         archives = reports / "archives"

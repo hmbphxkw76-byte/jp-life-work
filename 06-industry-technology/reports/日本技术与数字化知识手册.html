@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>日本技术与数字化知识手册</title>
+<style>
+  body { max-width: 860px; margin: 2rem auto; padding: 0 1rem;
+         font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+         line-height: 1.7; color: #222; }
+  pre { background: #f5f5f5; padding: 0.8rem; overflow-x: auto; border-radius: 4px; }
+  code { background: #f5f5f5; padding: 0.1em 0.3em; border-radius: 3px; }
+  pre code { padding: 0; background: none; }
+  table { border-collapse: collapse; }
+  th, td { border: 1px solid #ccc; padding: 0.4em 0.7em; }
+  table a[title^="来源"] { color: inherit; text-decoration: none;
+    word-break: normal; overflow-wrap: anywhere;
+    border-bottom: 1px dotted #b8b0a0; }
+  table a[title^="来源"] strong, table a[title^="来源"] em,
+  table a[title^="来源"] code { color: inherit; background: none; }
+  table a[title^="来源"]:hover { color: #1a5f5a; background: rgba(26,95,90,.09);
+    border-bottom: 1px solid currentColor; }
+  table a[title^="来源"]::after { content: "↗"; margin-left: 3px;
+    font-size: .76em; opacity: 0; }
+  table a[title^="来源"]:hover::after { opacity: .85; }
+  blockquote { border-left: 4px solid #ccc; margin-left: 0; padding-left: 1em; color: #555; }
+</style>
+</head>
+<body>
+<h1 id="日本技术与数字化知识手册">日本技术与数字化知识手册</h1>
+<blockquote>
+<p><strong>版本</strong>：v1.0（合并整理版）　<strong>整理日期</strong>：2026-11-12<br />
+<strong>说明</strong>：本文档由原分散的多份章节文档合并整理而成，保留全部原内容与层级关系。后续更新请直接维护本单份文档。</p>
+</blockquote>
+<hr />
+<h2 id="导航与使用约定">导航与使用约定</h2>
+<h2 id="06-industry-technology-索引">06-industry-technology 索引</h2>
+<p>技术与数字化区。覆盖阶段 4：技能地图、岗位路径。</p>
+<h3 id="文件一览">文件一览</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>文件</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>01</td>
+<td>物流数字化技能地图</td>
+<td>三层技能（现场系统→数据整理→分析工具）、TMS/WMS 概念、证明方式</td>
+</tr>
+<tr>
+<td>02</td>
+<td>数字化岗位与转型路径</td>
+<td>公司内转岗/跳槽/SaaS 厂商三条路、JD 检索词、评估节点</td>
+</tr>
+</tbody>
+</table>
+<h3 id="关联目录">关联目录</h3>
+<ul>
+<li>自动化岗位画像 → ../../05-industry-autonomous</li>
+<li>资格与讲习 → ../../10-education-qualification</li>
+<li>管理岗主线 → ../../03-career-management</li>
+</ul>
+<h3 id="使用约定">使用约定</h3>
+<ul>
+<li>技能学习以 01-物流数字化技能地图 的层次推进；每年 1 月自检一层。</li>
+</ul>
+<hr />
+<h2 id="01-物流数字化技能地图">01 物流数字化技能地图</h2>
+<blockquote>
+<p>信息核对日期：2026-11-11。对应阶段 4：系统操作、数据分析、流程优化。原则：<strong>学公司正在用的，再学通用的</strong>。技能与岗位信息以国土交通省物流政策公开资料为参照 [Source: https://www.mlit.go.jp/, 2026]。</p>
+</blockquote>
+<h3 id="一-技能分层-由近及远">一、技能分层（由近及远）</h3>
+<h4 id="第-1-层-现场系统操作-y1-2-内">第 1 层：现场系统操作（Y1–2 内）</h4>
+<table>
+<thead>
+<tr>
+<th>技能</th>
+<th>学法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>伝票/受发注系统</td>
+<td>入职培训认真做，手册自己重写一份</td>
+</tr>
+<tr>
+<td>ドラレコ/运行管理后台</td>
+<td>数据能导出、能看懂指标</td>
+</tr>
+<tr>
+<td>ハンディ端末（仓库）</td>
+<td>全功能掌握，当"会教别人的人"</td>
+</tr>
+</tbody>
+</table>
+<h4 id="第-2-层-数据整理-y2-4">第 2 层：数据整理（Y2–4）</h4>
+<table>
+<thead>
+<tr>
+<th>技能</th>
+<th>目标</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Excel 函数</td>
+<td>VLOOKUP/XLOOKUP、IF、SUMIFS、TEXT 函数</td>
+</tr>
+<tr>
+<td>Excel 透视表</td>
+<td>10 分钟内从导出数据做出月报图</td>
+</tr>
+<tr>
+<td>基础统计</td>
+<td>均值/分布/趋势——看懂 KPI 异动</td>
+</tr>
+</tbody>
+</table>
+<h4 id="第-3-层-分析与工具-y4-转-dx-岗前">第 3 层：分析与工具（Y4+，转 DX 岗前）</h4>
+<table>
+<thead>
+<tr>
+<th>技能</th>
+<th>工具</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BI 看板</td>
+<td>Power BI / Looker Studio（免费）任选一</td>
+</tr>
+<tr>
+<td>SQL 基础</td>
+<td>SELECT/GROUP BY——能自己拉数</td>
+</tr>
+<tr>
+<td>轻量编程</td>
+<td>Python（pandas 处理 CSV）——可选，非必需</td>
+</tr>
+<tr>
+<td>流程优化</td>
+<td>PDCA、BPMN 流程图、改善提案书写法</td>
+</tr>
+</tbody>
+</table>
+<h3 id="二-物流系统知识-概念层">二、物流系统知识（概念层）</h3>
+<table>
+<thead>
+<tr>
+<th>系统</th>
+<th>管什么</th>
+<th>个人关联</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>TMS</strong></td>
+<td>运输计划/配车/运费</td>
+<td>运行管理的系统化版——主线技能</td>
+</tr>
+<tr>
+<td><strong>WMS</strong></td>
+<td>库存/入出库/拣选</td>
+<td>仓储转岗的核心</td>
+</tr>
+<tr>
+<td>CRM/SFA</td>
+<td>客户对应</td>
+<td>事务所方向才需要</td>
+</tr>
+<tr>
+<td>EDI</td>
+<td>荷主↔物流数据交换</td>
+<td>理解"为什么传票数字化"</td>
+</tr>
+</tbody>
+</table>
+<h3 id="三-证明方式-比证书重要">三、证明方式（比证书重要）</h3>
+<ul>
+<li>自作工具：把自己做的配车表/KPI 看板/改善提案存档 → <a href="../../03-career-management/reports/日本管理岗过渡知识手册.html#05-成果档案与晋升材料">../../03-career-management/reports/05-成果档案与晋升材料</a></li>
+<li>公司内"数字担当"实绩（培训过几人、改善过什么）</li>
+<li>必要时补考：Microsoft MOS Excel、GAS/Python 微证书——锦上添花</li>
+</ul>
+<h3 id="四-资源入口">四、资源入口</h3>
+<ul>
+<li>Microsoft Learn（Excel/Power BI 免费官方课）</li>
+<li>Udemy 日语系 SQL/Python 课程（打折时 1500 円级）</li>
+<li>ロジスティクス検定（L検）：物流知识体系化，详见 <a href="../../10-education-qualification/reports/日本资格与教育投资知识手册.html">../../10-education-qualification</a></li>
+</ul>
+<hr />
+<h2 id="02-数字化岗位与转型路径">02 数字化岗位与转型路径</h2>
+<blockquote>
+<p>阶段 4 的职业落地：从"会用系统的人"到"吃系统饭的人"的三条路。</p>
+</blockquote>
+<h3 id="一-三条转型路径">一、三条转型路径</h3>
+<h4 id="路径-a-公司内转岗-首选">路径 A：公司内转岗（首选）</h4>
+<pre><code class="language-text">司机 → 运行管理辅助 → 配车担当（TMS 用户） → 运输管理系统担当/DX 推进室
+</code></pre>
+<ul>
+<li>前提：公司有 5+ 台车规模、有系统、有转岗先例</li>
+<li>时机：第 4–6 年（与主任竞聘同期评估）</li>
+<li>在留注意：特定技能框架内的业务范围受限——大规模转事务岗可能需要资格变更（技术·人文·国际业务需学历/10 年实务），转岗谈判时与行政书士确认</li>
+</ul>
+<h4 id="路径-b-跳槽到系统化大企业">路径 B：跳槽到系统化大企业</h4>
+<ul>
+<li>3PL 大手/大手宅配的"运行管理/配送管理/仓库管理"岗——系统暴露度高</li>
+<li>卖点组合：现场经验 5 年 + N2 + TMS/WMS 使用实绩 + 改善提案集</li>
+</ul>
+<h4 id="路径-c-物流-saas-技术公司">路径 C：物流 SaaS/技术公司</h4>
+<ul>
+<li>WMS/TMS 厂商的<strong>实施顾问（導入コンサル）/客服成功（CS）</strong>——非常吃"懂现场"的人</li>
+<li>前身岗位值钱：真实跑过配车和仓库的人做导入培训，说服力碾压纯 IT 背景</li>
+<li>日语+中文双语=对华供应链客户关系的差异化</li>
+</ul>
+<h3 id="二-岗位-jd-关键词对照-求职检索用">二、岗位 JD 关键词对照（求职检索用）</h3>
+<table>
+<thead>
+<tr>
+<th>检索词</th>
+<th>对应岗位</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>配車管理・運行管理</td>
+<td>路径 A/B 第一步</td>
+</tr>
+<tr>
+<td>ロジスティクス担当・物流企画</td>
+<td>本社物流部门</td>
+</tr>
+<tr>
+<td>WMS 導入・フィールドエンジニア</td>
+<td>路径 C</td>
+</tr>
+<tr>
+<td>サプライチェーン</td>
+<td>更上游的企划岗</td>
+</tr>
+<tr>
+<td>物流DX・改善</td>
+<td>DX 推进</td>
+</tr>
+</tbody>
+</table>
+<h3 id="三-评估节点">三、评估节点</h3>
+<table>
+<thead>
+<tr>
+<th>年</th>
+<th>动作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Y4</td>
+<td>检视公司内转岗可能性（01 文件第 2 层技能是否完成）</td>
+</tr>
+<tr>
+<td>Y6</td>
+<td>若无内部机会 → 路径 B 求职市场试探（不轻易辞职，先面试 3 家摸行情）</td>
+</tr>
+<tr>
+<td>Y8</td>
+<td>路径 C 可选窗口（现场故事+系统实绩完备时）</td>
+</tr>
+</tbody>
+</table>
+<h3 id="四-关联">四、关联</h3>
+<ul>
+<li>自动化岗位画像 → <a href="../../05-industry-autonomous/reports/日本自动驾驶与自动化知识手册.html#04-个人技能对接与机会">../../05-industry-autonomous/reports/04-个人技能对接与机会</a></li>
+<li>技能学习计划 → <a href="#01-物流数字化技能地图">01-物流数字化技能地图</a></li>
+</ul>
+<hr />
+</body>
+</html>

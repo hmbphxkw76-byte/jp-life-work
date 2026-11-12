@@ -1,12 +1,12 @@
 # 脚手架 · 全新主题 prompt 创建指南
 
-> **用途**：本目录提供两套**可直接复制粘贴**的 prompt 脚手架，用于创建新的 `monitors-{slug}` 主题目录。
+> **用途**：本目录提供两套**可直接复制粘贴**的 prompt 脚手架，用于创建新的 `NN-{slug}` 主题目录。
 > **前置**：先阅读 [通用基座](../通用基座/prompt-generic-base.md) 和匹配的类型模板，理解三层继承体系。
 > **步骤**：
-> 1. 复制对应的脚手架文件到 `monitors-{slug}/prompts/prompt-{slug}-update.md`
+> 1. 复制对应的脚手架文件到 `NN-{slug}/prompts/prompt-{slug}-update.md`
 > 2. 替换所有项目占位符：`{{项目名}}`/`{{主题名}}`、`{{slug}}`、`{{受众描述}}`、来源清单类（`{{列出…}}`）、`{{事件 N}}`、`{{模块名 N}}`/`{{文档名}}`、`{{项目专属自检项 N}}`；可选锚（`{{数字/结论}}`、`{{target}}`、`{{类型类/制度类/数字类}}`）按实际填写，无交叉验证则删除该行
-> 3. 首次运行前，按通用基座五-A 格式创建 `monitors-{slug}/data/{slug}-indicator-registry.md`
-> 4. 运行、获取首版基线、修正登记册，后续迭代;每期结束后在 `monitors-{slug}/reviews/` 写复盘（如启用）
+> 3. 首次运行前，按通用基座五-A 格式创建 `NN-{slug}/data/{slug}-indicator-registry.md`
+> 4. 运行、获取首版基线、修正登记册，后续迭代;每期结束后在 `NN-{slug}/reviews/` 写复盘（如启用）
 
 ---
 
@@ -32,8 +32,8 @@
   {{OUTPUT_PATH}}
 ★ {{FRESHNESS_PRIORITY}}
 ★ {{SOURCE_LANGUAGE_RULE}}
-★ {{REGISTRY_PATH}}     = monitors-{slug}/data/{slug}-indicator-registry.md（prompt 文件内可写 ../data/{slug}-indicator-registry.md，等价）—— N 项指标活值登记册，每次运行先读后写
-  {{REVIEWS_DIR}}       = monitors-{slug}/reviews/ —— 运行复盘存放处（未启用可省略，启用则每期必写）
+★ {{REGISTRY_PATH}}     = NN-{slug}/data/{slug}-indicator-registry.md（prompt 文件内可写 ../data/{slug}-indicator-registry.md，等价）—— N 项指标活值登记册，每次运行先读后写
+  {{REVIEWS_DIR}}       = NN-{slug}/reviews/ —— 运行复盘存放处（未启用可省略，启用则每期必写）
 ```
 
 类型专属变量（由对应类型模板定义，不得与通用变量重名冲突）：
@@ -70,14 +70,14 @@
 如果新主题与现有 monitors 有数据交叉（如司机薪资、汇率、试验费用等），在 prompt 继承声明末尾添加：
 
 ```
-> **交叉验证锚**：{{数字/结论}} 以 monitors-{{target}}/data/{{target}}-indicator-registry.md 为单一事实源；冲突时以本文件为准。
+> **交叉验证锚**：{{数字/结论}} 以 NN-{{target}}/data/{{target}}-indicator-registry.md 为单一事实源；冲突时以本文件为准。
 ```
 
 ---
 
 ## 首次运行 checklist
 
-- [ ] 目录结构创建：`monitors-{slug}/{data,prompts,reports,reviews}/`
+- [ ] 目录结构创建：`NN-{slug}/{data,prompts,reports,reviews}/`
 - [ ] `data/{slug}-indicator-registry.md` 按通用基座五-A 格式创建（首期"最新值"列可写"待基线确立"）
 - [ ] prompt 文件已替换所有占位符
 - [ ] 类型模板匹配（单份报告用职业就业调研模板、知识手册用知识库主题更新模板）

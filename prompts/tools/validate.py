@@ -3,7 +3,7 @@
 
 校验项：
   1. 单文档约束：知识库主题 reports/ 下仅 1 份知识手册 md，无编号开头的零散 md
-  2. 目录结构：monitors-* 统一为 data/ + prompts/ + reports/ + reports/archives/
+  2. 目录结构：编号主题目录（NN-*）统一为 data/ + prompts/ + reports/ + reports/archives/
   3. HTML 存在性：reports/ 下每个 md 须有同名 html
   4. 无 00-index 残留
   5. 表格来源规范：表格无独立"来源"列、无 [Source:…] 原文
@@ -28,7 +28,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 
 # 监测项目（多版本单文档，不适用"仅 1 份知识手册"约束）
-MONITOR_PROJECT = "monitors-ssw-driver-logistics"
+MONITOR_PROJECT = "01-monitor-ssw-driver"
 
 # 知识手册文件名特征
 HANDBOOK_SUFFIX = "知识手册.md"
@@ -51,9 +51,9 @@ HARDCODED_VALUE_RE = re.compile(
 # ──────────────────────────────────────────────
 
 def iter_topic_dirs():
-    """遍历所有 monitors-* 主题目录。"""
+    """遍历所有编号主题目录（NN-*）。"""
     for p in sorted(ROOT.iterdir()):
-        if p.is_dir() and p.name.startswith("monitors-"):
+        if p.is_dir() and re.match(r"^\d{2}-", p.name):
             yield p
 
 
@@ -111,7 +111,7 @@ def check_dir_structure(errors, warnings):
         archives = topic / "reports" / "archives"
         if not archives.is_dir():
             errors.append(f"[{topic.name}] 缺少目录: reports/archives/")
-        # ssw-driver-logistics 允许有 reviews/，其他主题不应有
+        # 监测项目允许有 reviews/，其他主题不应有
         if topic.name != MONITOR_PROJECT and (topic / "reviews").is_dir():
             warnings.append(f"[{topic.name}] 存在 reviews/ 目录（仅监测项目保留）")
 
