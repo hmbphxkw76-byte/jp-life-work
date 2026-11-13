@@ -37,3 +37,7 @@
 [2026-11-13T17:39:59] [check] cybersecurity -> ../dubai/cybersecurity/prompts/business-config.md：无变更（词汇库与提示词区间一致）
 [2026-11-13T17:39:59] [check] financial-markets -> ../dubai/apartment/prompts/business-config.md：无变更（词汇库与提示词区间一致）
 [2026-11-13T17:39:59] [check] economy -> ../trends/economy/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-13T19:02:43] [error] ai-security -> ../trends/ai-security/prompts/business-config.md：目标提示词不存在：D:\文档\GitHub\jp-life-work\src\vocabulary\..\trends\ai-security\prompts\business-config.md
+[2026-11-13T19:02:43] [error] cybersecurity -> ../dubai/cybersecurity/prompts/business-config.md：目标提示词不存在：D:\文档\GitHub\jp-life-work\src\vocabulary\..\dubai\cybersecurity\prompts\business-config.md
+[2026-11-13T19:02:43] [error] financial-markets -> ../dubai/apartment/prompts/business-config.md：目标提示词不存在：D:\文档\GitHub\jp-life-work\src\vocabulary\..\dubai\apartment\prompts\business-config.md
+[2026-11-13T19:02:43] [error] economy -> ../trends/economy/prompts/business-config.md：目标提示词不存在：D:\文档\GitHub\jp-life-work\src\vocabulary\..\trends\economy\prompts\business-config.md

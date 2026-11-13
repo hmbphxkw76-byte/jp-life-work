@@ -283,14 +283,48 @@ python src/vocabulary/script/vocab_tool.py topic-add --topic financial-markets -
 | 首次接入业务线 | 目标尚无标记区间 | 配置 `insert_before` 后跑一次 `sync`（自动插入区块）；并在目标文件版本记录人工登记机制接入（如 business-config v1.2） |
 | 想临时停用自动同步 | — | `sync.json` 设 `auto_trigger: false`（watch/手动 sync 不受影响） |
 
-### 9.5 已接入绑定
+### 9.5 已接入绑定（历史记录）
 
-| 词汇库主题 | 目标提示词 | 接入日期 |
+> ⚠️ 下表目标路径基于仓库迁移前的 `trends/`、`dubai/` 目录，迁移到 01–13 主题目录后**已全部失效**（`sync_vocab.py check` 当前 4 个目标均报「目标提示词不存在」）。重新启用自动同步前，须先把 `config/sync.json` 的 `targets[].path` 重绑到对应主题目录的 `prompts/business-config.md`，并复核 `insert_before` 锚点唯一性。
+
+| 词汇库主题 | 目标提示词（迁移前路径） | 接入日期 |
 |---|---|---|
 | ai-security（49 条，v1.3） | `trends/ai-security/prompts/business-config.md`「词汇速览」区块（插于第七节版本记录之前） | 2026-11-13 |
 | cybersecurity（153 条，v1.4） | `dubai/cybersecurity/prompts/business-config.md`「词汇速览」区块（插于第九节版本记录之前） | 2026-11-13 |
 | financial-markets（49 条，v1.1） | `dubai/apartment/prompts/business-config.md`「词汇速览」区块（插于第十三节版本记录之前） | 2026-11-13 |
 | economy（44 条，v1.2） | `trends/economy/prompts/business-config.md`「词汇速览」区块（插于第七节版本记录之前） | 2026-11-13 |
+
+## 十、路径、别名与工具链约定
+
+### 10.1 路径约定
+
+- 词汇子系统根目录为 `src/vocabulary/`；下文所有命令均在**仓库根目录**执行。
+- 脚本内部以自身位置推导根目录（`Path(__file__).parent.parent`），因此不依赖当前工作目录；`topics.json` / `sync.json` 中的相对路径均相对 `src/vocabulary/` 解析。
+- 仓库级引用建议使用完整相对路径 `src/vocabulary/...`，避免跨主题目录引用时层级歧义。
+
+### 10.2 路径别名 `@/vocabulary`
+
+本仓库当前为**文档 + Python 工具链**项目，不存在 `package.json` / `tsconfig.json` / `jsconfig.json` / ESLint 配置，也没有 TS/JS 源码，因此**没有可挂载路径别名的配置入口**，本次不新增虚构配置。
+
+若后续引入前端工程（Vite/Next.js 等），按以下映射接入即可，无需改动词汇目录本身：
+
+| 配置项 | 建议值 |
+|---|---|
+| `compilerOptions.paths`（tsconfig/jsconfig） | `"@/vocabulary/*": ["src/vocabulary/*"]` |
+| Vite `resolve.alias` | `'@': path.resolve(__dirname, 'src')` |
+| ESLint 忽略 | `src/vocabulary/data/**`（数据与导出产物不参与 lint） |
+
+### 10.3 校验与验收
+
+| 检查项 | 命令 | 通过标准 |
+|---|---|---|
+| 主题注册表 | `python src/vocabulary/script/vocab_tool.py topics` | 列出全部已注册主题 |
+| 注册表/目录一致性 | `python src/vocabulary/script/vocab_tool.py topic-check` | 0 错误 / 0 警告 |
+| 词库质量（逐主题） | `python src/vocabulary/script/vocab_tool.py check --topic <topic>` | 0 错误 / 0 警告 |
+| 脚本语法 | `python -m compileall src/vocabulary/script` | 无 SyntaxError |
+| 构建 / ESLint / TypeScript | 不适用（仓库无对应工具链） | — |
+
+> 说明：新增 `schema/`、`templates/` 仅为静态资源，不参与脚本扫描（`topic-check` 只审计 `data/` 下的主题目录），不会触发任何校验告警。
 
 ---
 
@@ -305,3 +339,4 @@ python src/vocabulary/script/vocab_tool.py topic-add --topic financial-markets -
 | v1.4 | 2026-11-13 | 新增 cybersecurity 主题与第二条绑定 | cybersecurity 主题接入（6 分类 90 条，两批种子）并绑定同步至 dubai/cybersecurity/prompts/business-config.md（sync.json v1.1）；全库 3 主题 188 条 |
 | v1.5 | 2026-11-13 | 第三条绑定（全量覆盖） | financial-markets 绑定同步至 dubai/apartment/prompts/business-config.md；至此三条业务线全部接入自动同步（49+90+49=188 条） |
 | v1.6 | 2026-11-13 | 新增 economy 主题与第四条绑定 | economy（经济）主题接入：3 分类（经济体与国家 / 区域经济组织 / 经济概念），种子 17 条入库 + 并行批次扩展至 44 条（v1.2），ECO 前缀；绑定同步至 trends/economy/prompts/business-config.md（sync.json v1.2）；全库 4 主题 |
+| v1.7 | 2026-11-13 | 目录规范化与扩展骨架 | 目录迁入 `src/vocabulary/` 并补齐扩展骨架：新增 `schema/export.schema.json`（导出数据契约）与 `templates/topic-import-template.md`（导入模板）；README 增加目录职责映射、命名约定、新主题目录创建规则、路径/别名/工具链说明与验收命令；脚本内用法示例路径同步修正。现有 config/data/script 结构未改动，4 主题 295 条词条校验 0 错误 0 警告 |

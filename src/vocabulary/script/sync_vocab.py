@@ -3,7 +3,7 @@
 """sync_vocab.py — 词汇库 → 业务提示词自动同步工具。
 
 职责与机制：
-- 将词汇库（vocabulary/data/<topic>/terms.md）词条按预设格式写入业务提示词的标记区间
+- 将词汇库（src/vocabulary/data/<topic>/terms.md）词条按预设格式写入业务提示词的标记区间
   （`<!-- VOCAB-SYNC:BEGIN topic=... -->` … `<!-- VOCAB-SYNC:END -->`），区间外内容字节级零触碰；
 - 增量检测：逐词条 hash（sha256）与上次同步状态比对，仅在有新增/修改/删除时写盘；
 - 双重校验：同步前 diff（check），同步后回读验证（区间完整性 + 词条覆盖 + 区间外内容与
@@ -14,11 +14,11 @@
 退出码（对齐仓库工具链约定）：0=成功（含无变更）；1=错误（已回滚或配置问题，修复后重试）；2=警告/有待同步差异。
 
 用法：
-  python vocabulary/script/sync_vocab.py sync  [--topic T] [--full]     # 执行同步（手动/重试入口）
-  python vocabulary/script/sync_vocab.py check [--topic T]              # 仅对比差异，不写盘
-  python vocabulary/script/sync_vocab.py verify [--topic T]             # 校验已写入区间的正确性
-  python vocabulary/script/sync_vocab.py watch [--interval N]           # 常驻轮询监听变更
-  python vocabulary/script/sync_vocab.py status                         # 查看绑定与同步状态
+  python src/vocabulary/script/sync_vocab.py sync  [--topic T] [--full]     # 执行同步（手动/重试入口）
+  python src/vocabulary/script/sync_vocab.py check [--topic T]              # 仅对比差异，不写盘
+  python src/vocabulary/script/sync_vocab.py verify [--topic T]             # 校验已写入区间的正确性
+  python src/vocabulary/script/sync_vocab.py watch [--interval N]           # 常驻轮询监听变更
+  python src/vocabulary/script/sync_vocab.py status                         # 查看绑定与同步状态
 """
 
 from __future__ import annotations
@@ -180,9 +180,9 @@ def build_block(tmeta: dict, tcfg: dict, terms: list, version: str, nl: str) -> 
     fmt = tcfg.get("format", "digest")
     title = tcfg.get("section_title", "## 词汇速览（词汇库自动同步）")
     L = [f"<!-- VOCAB-SYNC:BEGIN topic={tmeta['id']} do-not-edit -->", title, ""]
-    L.append(f"> 由 `vocabulary/script/sync_vocab.py` 自动维护：词汇库 {tmeta['id']} {version}，"
+    L.append(f"> 由 `src/vocabulary/script/sync_vocab.py` 自动维护：词汇库 {tmeta['id']} {version}，"
              f"共 {len(terms)} 条（同步于 {now_iso()}）。标记区间内请勿手工编辑；词条变更走词汇库"
-             f"导入流程（vocabulary/README.md 第三节），同步机制见第九节。")
+             f"导入流程（src/vocabulary/README.md 第三节），同步机制见第九节。")
     L.append("")
 
     def cellv(s) -> str:
@@ -356,7 +356,7 @@ def cmd_sync(cfg, topics, state, log_path, topic_filter, force=False) -> int:
         except Exception as exc:
             ok = False
             plog(log_path, f"[error] {binding['topic']} -> {tcfg['path']}：{exc}")
-            plog(log_path, f"[error] 可修复后手动重试：python vocabulary/script/sync_vocab.py sync --topic {binding['topic']}")
+            plog(log_path, f"[error] 可修复后手动重试：python src/vocabulary/script/sync_vocab.py sync --topic {binding['topic']}")
     if state.get("targets"):
         dump_json(SYNC_ROOT / cfg.get("state_file", "data/sync-state.json"), state)
     return 0 if ok else 1
@@ -477,7 +477,7 @@ def cmd_status(cfg, topics, log_path) -> int:
         except Exception as exc:
             state_txt = f"状态读取失败：{exc}"
         print(f"  {binding['topic']} -> {tcfg['path']}  {state_txt if rec else '从未同步'}")
-    print(f"共 {n} 个绑定目标。手动重试入口：python vocabulary/script/sync_vocab.py sync [--topic T]")
+    print(f"共 {n} 个绑定目标。手动重试入口：python src/vocabulary/script/sync_vocab.py sync [--topic T]")
     return 0
 
 
@@ -485,8 +485,8 @@ def cmd_status(cfg, topics, log_path) -> int:
 
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description="词汇库 → 业务提示词自动同步工具（标记区间保护 + 增量检测 + 校验回滚）")
-    ap.add_argument("--config", default=str(DEFAULT_SYNC_CONFIG), help="同步配置路径（默认 vocabulary/config/sync.json）")
-    ap.add_argument("--topics", default=str(DEFAULT_TOPICS_CONFIG), help="主题注册表路径（默认 vocabulary/config/topics.json）")
+    ap.add_argument("--config", default=str(DEFAULT_SYNC_CONFIG), help="同步配置路径（默认 src/vocabulary/config/sync.json）")
+    ap.add_argument("--topics", default=str(DEFAULT_TOPICS_CONFIG), help="主题注册表路径（默认 src/vocabulary/config/topics.json）")
     sub = ap.add_subparsers(dest="cmd", required=True)
     p = sub.add_parser("sync", help="执行同步（手动/重试入口）")
     p.add_argument("--topic", default="", help="仅同步指定主题")

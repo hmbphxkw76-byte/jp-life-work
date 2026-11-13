@@ -9,13 +9,13 @@
 - 退出码（对齐 prompts/tools 工具链约定）：0=通过；1=错误（阻断）；2=警告（有产出但有瑕疵）。
 
 用法示例：
-  python vocabulary/script/vocab_tool.py topics
-  python vocabulary/script/vocab_tool.py init --topic ai-security
-  python vocabulary/script/vocab_tool.py import --topic ai-security --file vocabulary/data/ai-security/imports/2026-11-13_seed-ai-security.md
-  python vocabulary/script/vocab_tool.py check --topic ai-security
-  python vocabulary/script/vocab_tool.py tag --topic ai-security --id AIS-001 --add 蓝队 --remove 红队
-  python vocabulary/script/vocab_tool.py export --topic ai-security --format all
-  python vocabulary/script/vocab_tool.py index
+  python src/vocabulary/script/vocab_tool.py topics
+  python src/vocabulary/script/vocab_tool.py init --topic ai-security
+  python src/vocabulary/script/vocab_tool.py import --topic ai-security --file src/vocabulary/data/ai-security/imports/2026-11-13_seed-ai-security.md
+  python src/vocabulary/script/vocab_tool.py check --topic ai-security
+  python src/vocabulary/script/vocab_tool.py tag --topic ai-security --id AIS-001 --add 蓝队 --remove 红队
+  python src/vocabulary/script/vocab_tool.py export --topic ai-security --format all
+  python src/vocabulary/script/vocab_tool.py index
 """
 
 from __future__ import annotations
@@ -288,7 +288,7 @@ def auto_sync_hook(topic_id: str):
             print(out)
         if r.returncode != 0:
             print(f"  [warn] 自动同步未成功（exit {r.returncode}），可手动重试："
-                  f"python vocabulary/script/sync_vocab.py sync --topic {topic_id}")
+                  f"python src/vocabulary/script/sync_vocab.py sync --topic {topic_id}")
     except Exception as exc:  # 钩子失败不阻断词汇库主流程
         print(f"  [warn] 自动同步钩子异常：{exc}；可手动重试 sync_vocab.py sync --topic {topic_id}")
 
@@ -675,7 +675,7 @@ def cmd_topic_add(cfg: dict, args) -> int:
             print("  [warn] 未提供受控分类词表（--categories）；导入词条时分类不受限，建议后续补充。")
         if dir_existed:
             print("  [warn] 检测到同名数据目录已存在，已按孤儿目录纳管。")
-        print(f"  下一步：python vocabulary/script/vocab_tool.py import --topic {tid} --file <导入文件>")
+        print(f"  下一步：python src/vocabulary/script/vocab_tool.py import --topic {tid} --file <导入文件>")
         return 0
     except Exception as exc:
         shutil.copyfile(backup, cfg_path)
@@ -772,7 +772,7 @@ def cmd_topic_check(cfg: dict, args) -> int:
 
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description="标准化动态词汇库管理工具（主题无关核心，参数读自 config/topics.json）")
-    ap.add_argument("--config", default=str(DEFAULT_CONFIG), help="主题注册表路径（默认 vocabulary/config/topics.json）")
+    ap.add_argument("--config", default=str(DEFAULT_CONFIG), help="主题注册表路径（默认 src/vocabulary/config/topics.json）")
     sub = ap.add_subparsers(dest="cmd", required=True)
     sub.add_parser("topics", help="列出已注册主题")
     p = sub.add_parser("init", help="创建主题目录与词库骨架")
