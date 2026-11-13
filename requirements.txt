@@ -1,2 +1,0 @@
-# prompts/tools/ 依赖
-markdown>=3.5

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>02 司机职业 · 动态更新提示词</title>
+<style>
+/* 无障碍壳层：skip link（视觉隐藏直至聚焦）+ 全局焦点环 */
+.skip-link { position: absolute; left: -9999px; top: 0; z-index: 100;
+  padding: 8px 14px; background: #16324f; color: #fff;
+  border-radius: 0 0 6px 6px; text-decoration: none; }
+.skip-link:focus { left: 8px; top: 8px; }
+:focus-visible { outline: 2px solid #2f5597; outline-offset: 2px; }
+
+  body { max-width: 860px; margin: 2rem auto; padding: 0 1rem;
+         font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+         line-height: 1.7; color: #222; }
+  pre { background: #f5f5f5; padding: 0.8rem; overflow-x: auto; border-radius: 4px; }
+  code { background: #f5f5f5; padding: 0.1em 0.3em; border-radius: 3px; }
+  pre code { padding: 0; background: none; }
+  table { border-collapse: collapse; }
+  th, td { border: 1px solid #ccc; padding: 0.4em 0.7em; }
+  table a[title^="来源"] { color: inherit; text-decoration: none;
+    word-break: normal; overflow-wrap: anywhere;
+    border-bottom: 1px dotted #b8b0a0; }
+  table a[title^="来源"] strong, table a[title^="来源"] em,
+  table a[title^="来源"] code { color: inherit; background: none; }
+  table a[title^="来源"]:hover { color: #1a5f5a; background: rgba(26,95,90,.09);
+    border-bottom: 1px solid currentColor; }
+  table a[title^="来源"]::after { content: "↗"; margin-left: 3px;
+    font-size: .76em; opacity: 0; }
+  table a[title^="来源"]:hover::after { opacity: .85; }
+  blockquote { border-left: 4px solid #ccc; margin-left: 0; padding-left: 1em; color: #555; }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">跳到主要内容</a>
+<main id="main-content">
+<h1 id="02-司机职业-动态更新提示词">02 司机职业 · 动态更新提示词</h1>
+<blockquote>
+<p><strong>模板标识</strong>：PRM-TOPIC-02<br />
+<strong>适用场景</strong>：<code>02-career-driver</code> 知识手册的周期性增量更新（岗位全景、薪资工时、安全规范、经验、求职、个人记录）<br />
+<strong>版本</strong>：v2026.11.12<br />
+<strong>更新说明</strong>：2026-11-12 交叉验证改为只读绑定 01 主责；免许触发器改指手册 01 章；登记册回写限定本主题主责项；移除 reviews 默认目录。</p>
+<p><strong>用途</strong>：周期性刷新「司机职业」知识库，动态获取薪资、求人、免许制度的最新官方口径，保持个人记录同步。可直接整体复制，替换顶部变量后提交给 AI 执行。</p>
+<p><strong>继承声明（三层体系）</strong>：本文件 = <a href="../../prompts/通用基座/prompt-generic-base.md">通用基座</a> × <a href="../../prompts/知识库主题更新/prompt-knowledge-topic-update-template.md">知识库主题更新类型模板</a> × 本主题专属配置。薪资/求人/缺口数字以 <a href="../../01-ssw-driver/data/ssw-driver-indicator-registry.md">01-ssw-driver 指标登记册</a> 为<strong>单一事实源</strong>：本主题只读引用，不得独立改值或回写。</p>
+</blockquote>
+<hr />
+<h2 id="运行变量-每次运行前填写">运行变量（每次运行前填写）</h2>
+<pre><code>{{TOPIC_DIR}}            = 02-career-driver（固定）
+{{HANDBOOK_PATH}}        = 02-career-driver/reports/日本司机职业知识手册.md
+{{DOC_LIST}}             = 手册内对应章节（由主题提示词第五节声明）
+{{CURRENT_DATE}}         = 本次运行日期 YYYY-MM-DD
+{{FRESHNESS_PRIORITY}}   = 数据时效优先级窗口（默认：近 12 个月内优先；超过 24 个月须标注年份并谨慎使用）
+{{SOURCE_LANGUAGE_RULE}} = 数据类须日文官方/企业官网原文；经验类不限
+{{REGISTRY_PATH}}        = ../data/career-driver-indicator-registry.md —— 5 项指标活值登记册；仅本主题主责项先读后写，外部 SSOT 项只读引用不回写
+</code></pre>
+<p>（本主题未启用运行复盘：不设置 <code>{{REVIEWS_DIR}}</code>，运行时不得创建 <code>reviews/</code> 目录。）</p>
+<hr />
+<h2 id="一-主题专属硬性约束">一、主题专属硬性约束</h2>
+<p>通用约束（逐点引用、事实与推断分离、口径标注等）自动继承通用规范第一至四节。本主题额外强制：</p>
+<ol>
+<li><strong>受众定位</strong>：司机岗位的职前准备与职中记录库：岗位全景、薪资工时合规、安全规范、经验积累、求职渠道。面向"阶段 1 准备入场 → 阶段 2 司机落地"。</li>
+<li><strong>术语口径区分</strong>（正文中不得混用）：</li>
+<li>普通货运司机 ≠ 特定技能「自動車運送業」分野司机；</li>
+<li>月収（含/不含手当）≠ 年収；「賞与」「諸手当」口径须逐项标注；</li>
+<li>1.5 乗務 / 2 乗務 ≠ 通運配送。</li>
+<li><strong>交叉验证锚（只读）</strong>：薪资（锚 01-ssw-driver 登记册 #5）、求人样本（#6）、驾照/免许费用（#14）等数字以 01-ssw-driver 为单一事实源；本主题只读引用，不得独立回写。若与官方一手来源冲突，先回官方原文复核，再由 01-ssw-driver 主责更新，本主题仅同步引用。</li>
+</ol>
+<h2 id="二-来源优先级-通用框架的本主题实例化-冲突时报双份并标注">二、来源优先级（通用框架的本主题实例化，冲突时报双份并标注）</h2>
+<p>① 国土交通省（mlit.go.jp 賃金・运賃統計、運転者顧客満足度等）、厚生労働省（mhlw.go.jp 每月勤労統計、労働基準法）＞ ② 全日本トラック協会（jta.or.jp 賃金実態）、警視庁/各公安委員会（免许）＞ ③ 企业官网采用页（回溯核实后的求人四元组）＞ ④ HelloWork、Indeed、求人Box 等门户（仅预期指标，须四元组立档）＞ ⑤ 司机经验博客/YouTube（标注为个案经验）</p>
+<hr />
+<h2 id="三-基线锚定-防止已修正事实回退">三、基线锚定（防止已修正事实回退）</h2>
+<p>更新时必须<strong>读取 <code>{{HANDBOOK_PATH}}</code>（单份知识手册）与受影响章节的上一版快照</strong>（含 <code>reports/archives/</code> 内历史版），继承其结构与全部已核实结论。本清单随每次修正持续追加：</p>
+<pre><code>【继承 01-ssw-driver 最新版报告文首清单；主题级修正追加于此：
+- ❌（首期为空）】
+</code></pre>
+<blockquote>
+<p>制度类修正统一记入 01-ssw-driver 报告文首清单为单一事实源；本主题只追加<strong>主题级</strong>修正（文档结构、路径、口径类）。</p>
+</blockquote>
+<hr />
+<h2 id="四-更新协议-事件触发器表">四、更新协议 + 事件触发器表</h2>
+<p>刷新窗口与差异对比规则继承通用模板。本主题<strong>必查重大事件触发器</strong>（命中任一项即触发对应文档重点更新；无触发则降级为核验/收敛型轻运行，<strong>不得为制造变化而虚构变化</strong>）：</p>
+<pre><code>- 01-ssw-driver 报告薪资/求人模块更新（#5/#6） → 02/05
+- 劳动法规或残业规制变化（`2024年問題`对策立法进展） → 02
+- 免许制度/教习费用变化（锚 01-ssw-driver #14） → 01
+- 个人入职/换岗/条件变化 → 06
+</code></pre>
+<hr />
+<h2 id="五-手册章节更新要点-知识库主题更新类型">五、手册章节更新要点（知识库主题更新类型）</h2>
+<p>明确要动态获取 / 保持的内容：</p>
+<pre><code>【导航与使用约定】更新：篇目状态与最近更新日期；保持：篇目结构（手册前部导航区，含更新日志）
+【01 司机岗位全景】动态获取：岗位类别、车型、雇佣形态官方分类，以及各岗位所需免许与取得费用（锚 01-ssw-driver #14）；保持：全景框架
+【02 薪资结构与工时合规】动态获取：賃金統計最新值、残业规制（锚 01-ssw-driver #5）；保持：薪资结构模型（推断标注）
+【03 安全规范与现场制度】动态获取：法规修订（改善基準令、事故对策）；保持：现场制度清单
+【04 现场经验积累清单】更新：个人完成度勾选；保持：清单项
+【05 求职渠道与简历面试】动态获取：回溯核实的新求人样本（继承 01-ssw-driver 四元组规范：编号+企业+地点+数字+URL）；保持：简历/面试话术
+【06 实际工作条件记录】更新：个人记录（薪资、加班、路线），注明记录周期；保持：字段结构
+</code></pre>
+<hr />
+<h2 id="六-关键信息追踪表-每次运行逐项核对">六、关键信息追踪表 — 每次运行逐项核对</h2>
+<blockquote>
+<p>prompt 模板内严禁填写活值；活值维护口径见下方说明与通用基座五-A。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>信息项</th>
+<th>优先数据源</th>
+<th>上次值（运行前从 {{PREVIOUS_REPORT_PATH}} 读取填入）</th>
+<th>本次是否更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>運輸業月均工资</td>
+<td>厚労省每月勤労統計</td>
+<td></td>
+<td>☐</td>
+</tr>
+<tr>
+<td>2</td>
+<td>全ト协賃金実態最新版</td>
+<td>jta.or.jp</td>
+<td></td>
+<td>☐</td>
+</tr>
+<tr>
+<td>3</td>
+<td>求人样本库规模与核实状态</td>
+<td>01-ssw-driver 3.3 表</td>
+<td></td>
+<td>☐</td>
+</tr>
+<tr>
+<td>4</td>
+<td>大型/中型免许取得路径费用</td>
+<td>教习所官方/くらシム+総務省交叉验证</td>
+<td></td>
+<td>☐</td>
+</tr>
+<tr>
+<td>5</td>
+<td>个人工作条件记录最新周期</td>
+<td>06 章（实际工作条件记录）</td>
+<td></td>
+<td>☐</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>每次运行须逐项填写"是否更新"，未变动项保留基线值并注明"截至 {{CURRENT_DATE}} 无更新"。<strong>活值统一维护于 <code>{{REGISTRY_PATH}}</code>（仅本主题主责项；外部 01-ssw-driver 主责项只读引用，不回写）</strong>：先读取 <code>{{PREVIOUS_REPORT_PATH}}</code> 指定上一版快照做差异比较，再核验回写登记册 → 回写手册内更新日志区与相关章节；prompt 模板内不重复维护数值。</p>
+</blockquote>
+<hr />
+<h2 id="七-执行方式-建议">七、执行方式（建议）</h2>
+<ol>
+<li>启动 2–3 个并行研究子代理：① 薪资统计与劳动法规；② 求人抽样与免许制度；③ 安全规范。全部限定日/英来源、逐点引用，<strong>每条数据（含佐证级）必须附可直接访问的 URL</strong>。</li>
+<li>子代理返回后，由主代理读取 <code>{{HANDBOOK_PATH}}</code>（单份知识手册）与受影响章节的上一版快照做差异合并，<strong>继承已修正事实、应用第四、五节更新要点</strong>。</li>
+<li>对冲突数据保留双份引用；对无法核实项单列"待复核清单"。</li>
+<li>回写完成后运行 <code>python prompts/tools/md2html.py 02-career-driver/reports</code> 重新生成 HTML；运行 <code>python prompts/tools/archive_reports.py</code> 执行保留策略。</li>
+</ol>
+<hr />
+<h2 id="八-输出格式要求">八、输出格式要求</h2>
+<ul>
+<li><strong>增量回写</strong> <code>{{DOC_LIST}}</code> 中受影响章节；未受影响章节不动；结构性内容（岗位全景、薪资结构模型、安全清单）按第五节"保持"。</li>
+<li><strong>变更摘要与待复核清单</strong>写入手册内「导航与使用约定」的更新日志区（格式见知识库模板 T3），不单独成文。</li>
+<li>正文新增数据点一律附 <code>[Source: 完整URL, 年份]</code>；表格按通用规范二.2 呈现（主题文字超链接 + hover 来源，不设"来源"列）；推断显式标注。</li>
+<li>新增知识在现有文档中找不到位置时，在手册内新建 ## NN 章节（编号顺延）；禁止把不相关内容塞进既有章节，禁止新建独立 .md 文件。</li>
+<li>文件命名与保留策略：<code>reports/</code> 顶层保留最新 3 份（<code>*_baseline</code> 为当前周期基线），其余入 <code>reports/archives/</code>，归档上限 7 份。</li>
+<li>基线滚动：<code>*_baseline</code> 按周期滚动（每期第一次更新即新基线），旧基线归档为 <code>archives/*_baseline_&lt;周期&gt;</code>，历史基线保留 12 期；同周期内更新与基线累计对比。详见 <a href="../../基线报告管理规则.md">基线报告管理规则</a>。</li>
+</ul>
+<hr />
+<h2 id="九-质量自检-通用清单之外的本主题专属项">九、质量自检（通用清单之外的本主题专属项）</h2>
+<p>通用自检清单见通用规范第八节。本主题额外确认：</p>
+<ul>
+<li>[ ] 普通货运司机与特定技能「自動車運送業」分野司机数据已区分</li>
+<li>[ ] 薪资口径（月収含/不含手当、賞与・諸手当）逐项标注</li>
+<li>[ ] 求人样本遵循 01-ssw-driver 四元组规范（编号+企业+地点+数字+URL）</li>
+<li>[ ] 追踪表 5 项均已核对并填"是否更新"</li>
+<li>[ ] <code>{{REGISTRY_PATH}}</code> 已读已写（仅本主题主责项；外部 SSOT 项只读）：变更摘要与登记册一致；prompt 模板自身无硬编码活值</li>
+<li>[ ] 未创建 <code>reviews/</code> 目录、未输出复盘（本主题未启用）</li>
+</ul>
+<p><strong>结束提示词。</strong></p>
+</main>
+<script>
+document.addEventListener('click', function (event) {
+  var link = event.target.closest ? event.target.closest('.skip-link') : null;
+  if (!link) return;
+  var target = document.querySelector(link.getAttribute('href'));
+  if (target) { target.setAttribute('tabindex', '-1'); target.focus(); }
+});
+</script>
+</body>
+</html>
