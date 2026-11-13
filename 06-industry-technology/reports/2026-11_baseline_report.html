@@ -5,53 +5,44 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>日本技术与数字化知识手册</title>
 <style>
-/* 无障碍壳层：skip link（视觉隐藏直至聚焦）+ 全局焦点环 */
-.skip-link { position: absolute; left: -9999px; top: 0; z-index: 100;
-  padding: 8px 14px; background: #16324f; color: #fff;
-  border-radius: 0 0 6px 6px; text-decoration: none; }
-.skip-link:focus { left: 8px; top: 8px; }
-:focus-visible { outline: 2px solid #2f5597; outline-offset: 2px; }
-
-  body { max-width: 860px; margin: 2rem auto; padding: 0 1rem;
-         font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
-         line-height: 1.7; color: #222; }
-  pre { background: #f5f5f5; padding: 0.8rem; overflow-x: auto; border-radius: 4px; }
-  code { background: #f5f5f5; padding: 0.1em 0.3em; border-radius: 3px; }
-  pre code { padding: 0; background: none; }
-  table { border-collapse: collapse; }
-  th, td { border: 1px solid #ccc; padding: 0.4em 0.7em; }
-  table a[title^="来源"] { color: inherit; text-decoration: none;
-    word-break: normal; overflow-wrap: anywhere;
-    border-bottom: 1px dotted #b8b0a0; }
-  table a[title^="来源"] strong, table a[title^="来源"] em,
-  table a[title^="来源"] code { color: inherit; background: none; }
-  table a[title^="来源"]:hover { color: #1a5f5a; background: rgba(26,95,90,.09);
-    border-bottom: 1px solid currentColor; }
-  table a[title^="来源"]::after { content: "↗"; margin-left: 3px;
-    font-size: .76em; opacity: 0; }
-  table a[title^="来源"]:hover::after { opacity: .85; }
-  blockquote { border-left: 4px solid #ccc; margin-left: 0; padding-left: 1em; color: #555; }
+body { max-width: 1160px; margin: 24px auto; padding: 0 16px;
+      font-family: "Segoe UI", "Microsoft YaHei", sans-serif; color: #1a1a2e; line-height: 1.7; }
+h1, h2, h3 { color: #16213e; }
+table { border-collapse: collapse; width: 100%; overflow-x: auto; display: block; }
+th, td { border: 1px solid #cbd5e1; padding: 6px 10px; text-align: left; }
+th { background: #f1f5f9; }
+img { max-width: 100%; }
+code { background: #f6f8fa; padding: 2px 4px; border-radius: 3px; }
+blockquote { border-left: 4px solid #94a3b8; margin: 0; padding-left: 12px; color: #475569; }
+nav { margin: 12px 0 20px; padding: 8px 0; border-bottom: 1px solid #e2e8f0; }
+nav a { margin-right: 14px; color: #16213e; font-size: 14px; text-decoration: none; white-space: nowrap; }
+nav a:hover { text-decoration: underline; }
 </style>
 </head>
 <body>
-<a class="skip-link" href="#main-content">跳到主要内容</a>
-<main id="main-content">
-<h1 id="日本技术与数字化知识手册">日本技术与数字化知识手册</h1>
+<h1 id="_1">日本技术与数字化知识手册</h1>
 <blockquote>
-<p><strong>版本</strong>：v1.0（合并整理版）　<strong>整理日期</strong>：2026-11-12<br />
+<p><strong>版本</strong>：v1.0（合并整理版）　<strong>整理日期</strong>：2026-11-12
 <strong>说明</strong>：本文档由原分散的多份章节文档合并整理而成，保留全部原内容与层级关系。后续更新请直接维护本单份文档。</p>
 </blockquote>
 <hr />
-<h2 id="导航与使用约定">导航与使用约定</h2>
-<h2 id="06-industry-technology-索引">06-industry-technology 索引</h2>
+<nav aria-label="报告导航">
+<a href="#s1">导航与使用约定</a>
+<a href="#s2">06-industry-technology 索引</a>
+<a href="#s3">01 物流数字化技能地图</a>
+<a href="#s4">02 数字化岗位与转型路径</a>
+<a href="#s5">03 日本数字化劳动市场与岗位行情</a>
+</nav>
+<h2 id="s1">导航与使用约定</h2>
+<h2 id="s2">06-industry-technology 索引</h2>
 <p>技术与数字化区。覆盖阶段 4：技能地图、岗位路径。</p>
-<h3 id="文件一览">文件一览</h3>
-<table>
+<h3 id="_3">文件一览</h3>
+<table class="fixed">
 <thead>
 <tr>
-<th>#</th>
-<th>文件</th>
-<th>内容</th>
+<th style="width:33%">#</th>
+<th style="width:33%">文件</th>
+<th style="width:34%">内容</th>
 </tr>
 </thead>
 <tbody>
@@ -72,26 +63,26 @@
 </tr>
 </tbody>
 </table>
-<h3 id="关联目录">关联目录</h3>
+<h3 id="_4">关联目录</h3>
 <ul>
 <li>自动化岗位画像 → ../../05-industry-autonomous</li>
 <li>资格与讲习 → ../../10-education-qualification</li>
 <li>管理岗主线 → ../../03-career-management</li>
 </ul>
-<h3 id="使用约定">使用约定</h3>
+<h3 id="_5">使用约定</h3>
 <ul>
 <li>技能学习以 01-物流数字化技能地图 的层次推进；每年 1 月自检一层。</li>
 </ul>
-<h3 id="更新日志">更新日志</h3>
-<h4 id="2026-11-12-维度扩充-新增-03-章">2026-11-12（维度扩充：新增 03 章）</h4>
+<h3 id="_6">更新日志</h3>
+<h4 id="2026-11-12-03">2026-11-12（维度扩充：新增 03 章）</h4>
 <p>变更摘要：</p>
-<table>
+<table class="fixed">
 <thead>
 <tr>
-<th>位置</th>
-<th>变更点</th>
-<th>依据</th>
-<th>性质</th>
+<th style="width:25%">位置</th>
+<th style="width:25%">变更点</th>
+<th style="width:25%">依据</th>
+<th style="width:25%">性质</th>
 </tr>
 </thead>
 <tbody>
@@ -131,17 +122,17 @@
 <p>2026-11-12 复核已闭环：2030 年 IT 人才缺口取経産省「IT人材需給に関する調査」報告書原文（2019-03）表 3-5——低位 16.4 万／中位 44.9 万／高位 78.7 万人。</p>
 </blockquote>
 <hr />
-<h2 id="01-物流数字化技能地图">01 物流数字化技能地图</h2>
+<h2 id="s3">01 物流数字化技能地图</h2>
 <blockquote>
 <p>信息核对日期：2026-11-11。对应阶段 4：系统操作、数据分析、流程优化。原则：<strong>学公司正在用的，再学通用的</strong>。技能与岗位信息以国土交通省物流政策公开资料为参照 [Source: https://www.mlit.go.jp/, 2026]。</p>
 </blockquote>
-<h3 id="一-技能分层-由近及远">一、技能分层（由近及远）</h3>
-<h4 id="第-1-层-现场系统操作-y1-2-内">第 1 层：现场系统操作（Y1–2 内）</h4>
-<table>
+<h3 id="_7">一、技能分层（由近及远）</h3>
+<h4 id="1-y12">第 1 层：现场系统操作（Y1–2 内）</h4>
+<table class="fixed">
 <thead>
 <tr>
-<th>技能</th>
-<th>学法</th>
+<th style="width:50%">技能</th>
+<th style="width:50%">学法</th>
 </tr>
 </thead>
 <tbody>
@@ -159,12 +150,12 @@
 </tr>
 </tbody>
 </table>
-<h4 id="第-2-层-数据整理-y2-4">第 2 层：数据整理（Y2–4）</h4>
-<table>
+<h4 id="2-y24">第 2 层：数据整理（Y2–4）</h4>
+<table class="fixed">
 <thead>
 <tr>
-<th>技能</th>
-<th>目标</th>
+<th style="width:50%">技能</th>
+<th style="width:50%">目标</th>
 </tr>
 </thead>
 <tbody>
@@ -182,12 +173,12 @@
 </tr>
 </tbody>
 </table>
-<h4 id="第-3-层-分析与工具-y4-转-dx-岗前">第 3 层：分析与工具（Y4+，转 DX 岗前）</h4>
-<table>
+<h4 id="3-y4-dx">第 3 层：分析与工具（Y4+，转 DX 岗前）</h4>
+<table class="fixed">
 <thead>
 <tr>
-<th>技能</th>
-<th>工具</th>
+<th style="width:50%">技能</th>
+<th style="width:50%">工具</th>
 </tr>
 </thead>
 <tbody>
@@ -209,13 +200,13 @@
 </tr>
 </tbody>
 </table>
-<h3 id="二-物流系统知识-概念层">二、物流系统知识（概念层）</h3>
-<table>
+<h3 id="_8">二、物流系统知识（概念层）</h3>
+<table class="fixed">
 <thead>
 <tr>
-<th>系统</th>
-<th>管什么</th>
-<th>个人关联</th>
+<th style="width:33%">系统</th>
+<th style="width:33%">管什么</th>
+<th style="width:34%">个人关联</th>
 </tr>
 </thead>
 <tbody>
@@ -241,25 +232,25 @@
 </tr>
 </tbody>
 </table>
-<h3 id="三-证明方式-比证书重要">三、证明方式（比证书重要）</h3>
+<h3 id="_9">三、证明方式（比证书重要）</h3>
 <ul>
 <li>自作工具：把自己做的配车表/KPI 看板/改善提案存档 → <a href="../../03-career-management/reports/2026-11_baseline_report.html#05-成果档案与晋升材料">03-管理岗过渡 · 05</a></li>
 <li>公司内"数字担当"实绩（培训过几人、改善过什么）</li>
 <li>必要时补考：Microsoft MOS Excel、GAS/Python 微证书——锦上添花</li>
 </ul>
-<h3 id="四-资源入口">四、资源入口</h3>
+<h3 id="_10">四、资源入口</h3>
 <ul>
 <li>Microsoft Learn（Excel/Power BI 免费官方课）</li>
 <li>Udemy 日语系 SQL/Python 课程（打折时 1500 円级）</li>
 <li>ロジスティクス検定（L検）：物流知识体系化，详见 <a href="../../10-education-qualification/reports/2026-11_baseline_report.html">10-资格与教育投资</a></li>
 </ul>
 <hr />
-<h2 id="02-数字化岗位与转型路径">02 数字化岗位与转型路径</h2>
+<h2 id="s4">02 数字化岗位与转型路径</h2>
 <blockquote>
 <p>阶段 4 的职业落地：从"会用系统的人"到"吃系统饭的人"的三条路。</p>
 </blockquote>
-<h3 id="一-三条转型路径">一、三条转型路径</h3>
-<h4 id="路径-a-公司内转岗-首选">路径 A：公司内转岗（首选）</h4>
+<h3 id="_11">一、三条转型路径</h3>
+<h4 id="a">路径 A：公司内转岗（首选）</h4>
 <pre><code class="language-text">司机 → 运行管理辅助 → 配车担当（TMS 用户） → 运输管理系统担当/DX 推进室
 </code></pre>
 <ul>
@@ -267,23 +258,23 @@
 <li>时机：第 4–6 年（与主任竞聘同期评估）</li>
 <li>在留注意：特定技能框架内的业务范围受限——大规模转事务岗可能需要资格变更（技术·人文·国际业务需学历/10 年实务），转岗谈判时与行政书士确认</li>
 </ul>
-<h4 id="路径-b-跳槽到系统化大企业">路径 B：跳槽到系统化大企业</h4>
+<h4 id="b">路径 B：跳槽到系统化大企业</h4>
 <ul>
 <li>3PL 大手/大手宅配的"运行管理/配送管理/仓库管理"岗——系统暴露度高</li>
 <li>卖点组合：现场经验 5 年 + N2 + TMS/WMS 使用实绩 + 改善提案集</li>
 </ul>
-<h4 id="路径-c-物流-saas-技术公司">路径 C：物流 SaaS/技术公司</h4>
+<h4 id="c-saas">路径 C：物流 SaaS/技术公司</h4>
 <ul>
 <li>WMS/TMS 厂商的<strong>实施顾问（導入コンサル）/客服成功（CS）</strong>——非常吃"懂现场"的人</li>
 <li>前身岗位值钱：真实跑过配车和仓库的人做导入培训，说服力碾压纯 IT 背景</li>
 <li>日语+中文双语=对华供应链客户关系的差异化</li>
 </ul>
-<h3 id="二-岗位-jd-关键词对照-求职检索用">二、岗位 JD 关键词对照（求职检索用）</h3>
-<table>
+<h3 id="jd">二、岗位 JD 关键词对照（求职检索用）</h3>
+<table class="fixed">
 <thead>
 <tr>
-<th>检索词</th>
-<th>对应岗位</th>
+<th style="width:50%">检索词</th>
+<th style="width:50%">对应岗位</th>
 </tr>
 </thead>
 <tbody>
@@ -309,12 +300,12 @@
 </tr>
 </tbody>
 </table>
-<h3 id="三-评估节点">三、评估节点</h3>
-<table>
+<h3 id="_12">三、评估节点</h3>
+<table class="fixed">
 <thead>
 <tr>
-<th>年</th>
-<th>动作</th>
+<th style="width:50%">年</th>
+<th style="width:50%">动作</th>
 </tr>
 </thead>
 <tbody>
@@ -332,19 +323,19 @@
 </tr>
 </tbody>
 </table>
-<h3 id="四-关联">四、关联</h3>
+<h3 id="_13">四、关联</h3>
 <ul>
 <li>自动化岗位画像 → <a href="../../05-industry-autonomous/reports/2026-11_baseline_report.html#04-个人技能对接与机会">05-自动驾驶与自动化 · 04</a></li>
 <li>技能学习计划 → <a href="#01-物流数字化技能地图">01-物流数字化技能地图</a></li>
 </ul>
 <hr />
-<h2 id="03-日本数字化劳动市场与岗位行情">03 日本数字化劳动市场与岗位行情</h2>
+<h2 id="s5">03 日本数字化劳动市场与岗位行情</h2>
 <!-- updated: 2026-11-12 | 新增章节 -->
 
 <blockquote>
 <p>信息核对日期：2026-11-12。对应阶段 4 的市场面：转职/跳槽谈判前的行情基准。薪资类数据来自转职服务登录者统计与企业公开值，与个人实际报价有偏差，仅作参照带。在留资格与日语审查要件一律见 <a href="../../08-visa-immigration/reports/2026-11_baseline_report.html#05-特定技能2号与升级路径">05 特定技能2号与升级路径</a>，本章节只管"技能-岗位-行情"。</p>
 </blockquote>
-<h3 id="一-it-数字化人才供需全景">一、IT/数字化人才供需全景</h3>
+<h3 id="it">一、IT/数字化人才供需全景</h3>
 <ul>
 <li>官方试算（経産省「IT人材需給に関する調査」，三省連携、2019 公表）：2018 年 IT 人材约 103 万人 → 2030 年供给约 113 万人；需求按市场情景扩大——低位情景（年 1%）约 130 万、中位（2.7%）约 158 万、高位（4.4%）约 192 万，对应 2030 年缺口<strong>低位约 16 万／中位约 45 万／高位约 79 万</strong> [Source: https://www.meti.go.jp/policy/it_policy/jinzai/gaiyou.pdf, 2019]</li>
 <li>缺口结构比总量重要：中位情景 45 万缺口中先端 IT 人材（AI/IoT/云）不足 27 万–55 万，従来型 IT 人材在 Re スキル（转岗学习）停滞时反而可能<strong>过剩 10 万</strong>——行情结论是"向先端领域补技能"，与 01 章第 3 层技能规划一致 [Source: https://www.meti.go.jp/policy/it_policy/jinzai/gaiyou.pdf, 2019]</li>
@@ -352,13 +343,13 @@
 <li>供给侧长期收缩：IT 相关产业从业者以 2019 年为峰值，此后入職者数低于退職者数、产业人口转减且高龄化（経産省 2026-04 资料引「IT人材の最新動向と将来推計」）[Source: https://www.jisa.or.jp/Portals/0/pdf/meti20260423-1.pdf, 2026]</li>
 <li>官方技能对照工具：デジタルスキル標準（DX 推进型/活用型两分）、Re スキル講座认证制度 [Source: https://www.meti.go.jp/policy/it_policy/jinzai/index.html, 2026]</li>
 </ul>
-<h3 id="二-数字化岗位薪资带">二、数字化岗位薪资带</h3>
-<table>
+<h3 id="_14">二、数字化岗位薪资带</h3>
+<table class="fixed">
 <thead>
 <tr>
-<th>指标（口径）</th>
-<th>数值</th>
-<th>年份</th>
+<th style="width:33%">指标（口径）</th>
+<th style="width:33%">数值</th>
+<th style="width:34%">年份</th>
 </tr>
 </thead>
 <tbody>
@@ -392,7 +383,7 @@
 <li>doda IT/通信小分类（2025）：IT コンサルティング 505 万 &gt; HW/SW/パッケージベンダ 493 万 &gt; SIer 481 万 &gt; 通信/ISP/DC 434 万 [Source: https://doda.jp/guide/heikin/gyousyu/index.html, 2025]</li>
 <li>物流业 vs IT 岗对比（<strong>推断</strong>读法）：物流上市公司平均年收多在 500 万级以下（鸿池 544 万仅列运输业 69 社第 57 位、求人票平均 426 万），而统一统计口径下软件工程师 578 万——同一段现场经验换到系统岗是加薪方向；但物流公司内转岗多沿用本公司年功序列，跳到 SIer/厂商才是行情兑现路径（推断）</li>
 </ul>
-<h3 id="三-外语要求与外国人就业现状">三、外语要求与外国人就业现状</h3>
+<h3 id="_15">三、外语要求与外国人就业现状</h3>
 <ul>
 <li>规模：外国人劳动者约 204 万人（雇用保险 5 人以上事业所口径），「専門的・技術的分野」占 42.1%（前年 38.9%）；该分野月间固定给与 306.5 千円 [Source: https://www.mhlw.go.jp/stf/newpage_75722.html, 2026]</li>
 <li>高度人才构成：技・人文・国際業務在留外国人约 46 万人（2015 年约 13 万的 3.5 倍）；高度専門職约 3.1 万人中 IT 工程师占 31.2% [Source: https://www.jisa.or.jp/Portals/0/pdf/meti20260423-1.pdf, 2026]</li>
@@ -400,14 +391,14 @@
 <li>等级带（<strong>推断</strong>整理）：系统担当/社内 SE N2 起步可谈；DX 企划/导入顾问面向荷主管理层需 N1 或等效商务级；技人国审查与高度人材积分（N1 15 分/N2 10 分）要件见 visa 手册 05 章，不在此重写</li>
 <li>英语环境岗位（<strong>推断</strong>）：集中在外资 SI/咨询、全球化物流科技厂商（英语文档环境）；公开统计无英语岗占比数据，<strong>待复核</strong></li>
 </ul>
-<h3 id="四-物流业外泛用型岗位与转职市场">四、物流业外泛用型岗位与转职市场</h3>
+<h3 id="_16">四、物流业外泛用型岗位与转职市场</h3>
 <ul>
 <li>WMS/TMS 实施岗：物流 SaaS 厂商「導入コンサル/实施顾问」，求人事例带 380 万–800 万（パッケージ導入コンサルタント求人带）[Source: https://xn--pckua2a7gp15o89zb.com/%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E5%B0%8E%E5%85%A5%E3%82%B3%E3%83%B3%E3%82%B5%E3%83%AB%E3%82%BF%E3%83%B3%E3%83%88%E3%81%AE%E4%BB%95%E4%BA%8B, 2026]——真实跑过配车/仓库的现场经验是该岗差异化筹码（对接 02 章路径 C）</li>
 <li>用户企业情报部门/社内 SE：非 IT 业种的社内系统岗缺口大（结合本章 85.1% 不足数据，<strong>推断</strong>），是 02 章路径 A 之外的第二落点</li>
 <li>数据分析/改善岗：先端 IT 人材缺口 27 万–55 万的组成部分，01 章第 3 层技能（BI/SQL）直接对应（推断）</li>
 <li>转职市场特征：外国人在职者中 6.1% 明确"辞掉现职在日本国内换公司"、国内入職者 19.1% 经由求人广告自力求职；海外入職者 82.0% 依赖介绍会社 [Source: https://www.mhlw.go.jp/stf/newpage_75722.html, 2026]——已在国内的转职不必绑死送出机构渠道</li>
 </ul>
-<h3 id="五-与本项目路线的对接要点-推断">五、与本项目路线的对接要点（推断）</h3>
+<h3 id="_17">五、与本项目路线的对接要点（推断）</h3>
 <ul>
 <li>Y5–Y6（衔接 <a href="#02-数字化岗位与转型路径">02 数字化岗位与转型路径</a> 评估节点）：内部转岗（路径 A）行情兑现有限，重点谈职级与"システム担当"头衔；路径 B 试探时以 SIer 481 万／IT コンサル 505 万带（doda 口径，2025）为报价参照</li>
 <li>Y7–Y8（路径 C 窗口）：WMS/TMS 实施岗报价带 380 万–800 万（求人事例，2026），落地取决于现场故事+日语等级；此阶段 N1 回报最大（报价上限 + 高度人材积分 15 分）</li>
@@ -416,14 +407,5 @@
 <li>数值管理：本章薪资带与缺口数为活值，登记于 <a href="../data/technology_industry_indicator_registry.md">data/technology_industry_indicator_registry.md</a> #4–#6，每年随调查更新刷新</li>
 </ul>
 <hr />
-</main>
-<script>
-document.addEventListener('click', function (event) {
-  var link = event.target.closest ? event.target.closest('.skip-link') : null;
-  if (!link) return;
-  var target = document.querySelector(link.getAttribute('href'));
-  if (target) { target.setAttribute('tabindex', '-1'); target.focus(); }
-});
-</script>
 </body>
 </html>

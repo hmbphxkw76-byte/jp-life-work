@@ -5,53 +5,45 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>日本自动驾驶与自动化知识手册</title>
 <style>
-/* 无障碍壳层：skip link（视觉隐藏直至聚焦）+ 全局焦点环 */
-.skip-link { position: absolute; left: -9999px; top: 0; z-index: 100;
-  padding: 8px 14px; background: #16324f; color: #fff;
-  border-radius: 0 0 6px 6px; text-decoration: none; }
-.skip-link:focus { left: 8px; top: 8px; }
-:focus-visible { outline: 2px solid #2f5597; outline-offset: 2px; }
-
-  body { max-width: 860px; margin: 2rem auto; padding: 0 1rem;
-         font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
-         line-height: 1.7; color: #222; }
-  pre { background: #f5f5f5; padding: 0.8rem; overflow-x: auto; border-radius: 4px; }
-  code { background: #f5f5f5; padding: 0.1em 0.3em; border-radius: 3px; }
-  pre code { padding: 0; background: none; }
-  table { border-collapse: collapse; }
-  th, td { border: 1px solid #ccc; padding: 0.4em 0.7em; }
-  table a[title^="来源"] { color: inherit; text-decoration: none;
-    word-break: normal; overflow-wrap: anywhere;
-    border-bottom: 1px dotted #b8b0a0; }
-  table a[title^="来源"] strong, table a[title^="来源"] em,
-  table a[title^="来源"] code { color: inherit; background: none; }
-  table a[title^="来源"]:hover { color: #1a5f5a; background: rgba(26,95,90,.09);
-    border-bottom: 1px solid currentColor; }
-  table a[title^="来源"]::after { content: "↗"; margin-left: 3px;
-    font-size: .76em; opacity: 0; }
-  table a[title^="来源"]:hover::after { opacity: .85; }
-  blockquote { border-left: 4px solid #ccc; margin-left: 0; padding-left: 1em; color: #555; }
+body { max-width: 1160px; margin: 24px auto; padding: 0 16px;
+      font-family: "Segoe UI", "Microsoft YaHei", sans-serif; color: #1a1a2e; line-height: 1.7; }
+h1, h2, h3 { color: #16213e; }
+table { border-collapse: collapse; width: 100%; overflow-x: auto; display: block; }
+th, td { border: 1px solid #cbd5e1; padding: 6px 10px; text-align: left; }
+th { background: #f1f5f9; }
+img { max-width: 100%; }
+code { background: #f6f8fa; padding: 2px 4px; border-radius: 3px; }
+blockquote { border-left: 4px solid #94a3b8; margin: 0; padding-left: 12px; color: #475569; }
+nav { margin: 12px 0 20px; padding: 8px 0; border-bottom: 1px solid #e2e8f0; }
+nav a { margin-right: 14px; color: #16213e; font-size: 14px; text-decoration: none; white-space: nowrap; }
+nav a:hover { text-decoration: underline; }
 </style>
 </head>
 <body>
-<a class="skip-link" href="#main-content">跳到主要内容</a>
-<main id="main-content">
-<h1 id="日本自动驾驶与自动化知识手册">日本自动驾驶与自动化知识手册</h1>
+<h1 id="_1">日本自动驾驶与自动化知识手册</h1>
 <blockquote>
-<p><strong>版本</strong>：v1.0（合并整理版）　<strong>整理日期</strong>：2026-11-12<br />
+<p><strong>版本</strong>：v1.0（合并整理版）　<strong>整理日期</strong>：2026-11-12
 <strong>说明</strong>：本文档由原分散的多份章节文档合并整理而成，保留全部原内容与层级关系。后续更新请直接维护本单份文档。</p>
 </blockquote>
 <hr />
-<h2 id="导航与使用约定">导航与使用约定</h2>
-<h2 id="05-industry-autonomous-索引">05-industry-autonomous 索引</h2>
+<nav aria-label="报告导航">
+<a href="#s1">导航与使用约定</a>
+<a href="#s2">05-industry-autonomous 索引</a>
+<a href="#s3">01 自动驾驶技术路线与时间表</a>
+<a href="#s4">02 法规与许可制度</a>
+<a href="#s5">03 仓储自动化与无人配送</a>
+<a href="#s6">04 个人技能对接与机会</a>
+</nav>
+<h2 id="s1">导航与使用约定</h2>
+<h2 id="s2">05-industry-autonomous 索引</h2>
 <p>自动驾驶与自动化区。覆盖阶段 4：技术时间表、法规框架、仓储自动化、个人技能对接。</p>
-<h3 id="文件一览">文件一览</h3>
-<table>
+<h3 id="_3">文件一览</h3>
+<table class="fixed">
 <thead>
 <tr>
-<th>#</th>
-<th>文件</th>
-<th>内容</th>
+<th style="width:33%">#</th>
+<th style="width:33%">文件</th>
+<th style="width:34%">内容</th>
 </tr>
 </thead>
 <tbody>
@@ -77,30 +69,30 @@
 </tr>
 </tbody>
 </table>
-<h3 id="关联目录">关联目录</h3>
+<h3 id="_4">关联目录</h3>
 <ul>
 <li>行业大势与数据跟踪 → ../../04-industry-logistics</li>
 <li>管理岗主线（转型的载体） → ../../03-career-management</li>
 <li>技术技能清单 → <a href="../../06-industry-technology/reports/">../../06-industry-technology</a></li>
 <li>深度法规 → <a href="../../09-politics-law/reports/">../../09-politics-law</a></li>
 </ul>
-<h3 id="使用约定">使用约定</h3>
+<h3 id="_5">使用约定</h3>
 <ul>
 <li>每季度核对实证进展并更新 ../../04-industry-logistics/reports/04-行业数据跟踪。</li>
 <li>本文的岗位时间表判断若与最新政策冲突，以最新为准并在数据跟踪文件记录。</li>
 </ul>
 <hr />
-<h2 id="01-自动驾驶技术路线与时间表">01 自动驾驶技术路线与时间表</h2>
+<h2 id="s3">01 自动驾驶技术路线与时间表</h2>
 <blockquote>
 <p>信息核对日期：2026-11-11。对应阶段 4「跟踪自动驾驶卡车对岗位结构的影响」。本文聚焦"什么时候、以什么形态影响司机岗位"。</p>
 </blockquote>
-<h3 id="一-日本自动驾驶分级与物流应用">一、日本自动驾驶分级与物流应用</h3>
-<table>
+<h3 id="_6">一、日本自动驾驶分级与物流应用</h3>
+<table class="fixed">
 <thead>
 <tr>
-<th>级别</th>
-<th>定义</th>
-<th>物流应用形态</th>
+<th style="width:33%">级别</th>
+<th style="width:33%">定义</th>
+<th style="width:34%">物流应用形态</th>
 </tr>
 </thead>
 <tbody>
@@ -121,12 +113,12 @@
 </tr>
 </tbody>
 </table>
-<h3 id="二-已确认的实证与商用节点">二、已确认的实证与商用节点</h3>
-<table>
+<h3 id="_7">二、已确认的实证与商用节点</h3>
+<table class="fixed">
 <thead>
 <tr>
-<th>时间</th>
-<th>事项</th>
+<th style="width:50%">时间</th>
+<th style="width:50%">事项</th>
 </tr>
 </thead>
 <tbody>
@@ -149,7 +141,7 @@
 </tbody>
 </table>
 <p>来源：国交省白書（https://www.mlit.go.jp/hakusyo/mlit/r06/hakusho/r07/html/n1212000.html）、モビリティ・ロードマップ 2026 [Source: https://www.mlit.go.jp/hakusyo/mlit/r06/hakusho/r07/html/n1212000.html, 2026]。</p>
-<h3 id="三-中継输送-模式-最关键的岗位概念">三、"中継输送"模式——最关键的岗位概念</h3>
+<h3 id="_8">三、"中継输送"模式——最关键的岗位概念</h3>
 <pre><code class="language-text">[枢纽A] --自动驾驶(高速夜间)-- [换乘点] --人工驾驶(一般道)-- [终点]
          无人·监控中心远隔            传统司机角色
 </code></pre>
@@ -158,12 +150,12 @@
 <li>由此诞生的新岗位：<strong>远隔监控员（モニタリングオペレーター）、换乘点运航管理者、编组调度</strong></li>
 <li>传统"长途司机"岗位被拆解而非消失——最先转型的是干线司机本人</li>
 </ul>
-<h3 id="四-主要玩家-观察名单">四、主要玩家（观察名单）</h3>
-<table>
+<h3 id="_9">四、主要玩家（观察名单）</h3>
+<table class="fixed">
 <thead>
 <tr>
-<th>类型</th>
-<th>企业</th>
+<th style="width:50%">类型</th>
+<th style="width:50%">企业</th>
 </tr>
 </thead>
 <tbody>
@@ -181,12 +173,12 @@
 </tr>
 </tbody>
 </table>
-<h3 id="五-对岗位的时间表判断-本规划视角">五、对岗位的时间表判断（本规划视角）</h3>
-<table>
+<h3 id="_10">五、对岗位的时间表判断（本规划视角）</h3>
+<table class="fixed">
 <thead>
 <tr>
-<th>时期</th>
-<th>判断</th>
+<th style="width:50%">时期</th>
+<th style="width:50%">判断</th>
 </tr>
 </thead>
 <tbody>
@@ -205,23 +197,23 @@
 </tbody>
 </table>
 <p>结论：<strong>时间站在计划这一边</strong>——关键是 Y5 前完成管理岗转身，与 <a href="../../03-career-management/reports/2026-11_baseline_report.html#04-管理岗过渡学习计划">03-管理岗过渡 · 04</a> 的时间轴一致。</p>
-<h3 id="六-跟踪动作">六、跟踪动作</h3>
+<h3 id="_11">六、跟踪动作</h3>
 <ul>
 <li>每季度：モビリティ・ロードマップ改订、新東名实证区间扩大新闻 → <a href="../../04-industry-logistics/reports/2026-11_baseline_report.html#04-行业数据跟踪">../../04-industry-logistics/reports/04-行业数据跟踪</a></li>
 <li>关注词汇：遠隔監視・乗務員なし・中継輸送・レベル4運行許可</li>
 </ul>
 <hr />
-<h2 id="02-法规与许可制度">02 法规与许可制度</h2>
+<h2 id="s4">02 法规与许可制度</h2>
 <blockquote>
 <p>信息核对日期：2026-11-11。自动驾驶的法规框架（面向"了解程度足以规划职业"而非"成为法务专家"）。深度法规研究 → <a href="../../09-politics-law/reports/">../../09-politics-law</a>。</p>
 </blockquote>
-<h3 id="一-两法体系">一、两法体系</h3>
-<table>
+<h3 id="_12">一、两法体系</h3>
+<table class="fixed">
 <thead>
 <tr>
-<th>法律</th>
-<th>管什么</th>
-<th>关键制度</th>
+<th style="width:33%">法律</th>
+<th style="width:33%">管什么</th>
+<th style="width:34%">关键制度</th>
 </tr>
 </thead>
 <tbody>
@@ -238,41 +230,41 @@
 </tbody>
 </table>
 <p>另：货物运送业务的运行管理义务（货送法体系）不因自动驾驶免除——<strong>运行管理者/监控体制仍是法定要求</strong>。</p>
-<h3 id="二-l4-许可的三大要件-职业机会所在">二、L4 许可的三大要件（职业机会所在）</h3>
+<h3 id="l4">二、L4 许可的三大要件（职业机会所在）</h3>
 <ol>
 <li><strong>遠隔監視</strong>：能实时掌握车辆状态并安全停止的操作体制</li>
 <li><strong>运行管理制度</strong>：L4 也要点呼·指示·记录——运行管理经验是转型资本</li>
 <li><strong>事故应对体制</strong>：现场対応·保险·与警察的连携规程</li>
 </ol>
 <p><strong>解读</strong>：L4 运营岗位需要的是"懂运输现场+懂系统"的复合人——这正是本规划阶段 3+4 交叉培养的画像。</p>
-<h3 id="三-责任与保险-常识级">三、责任与保险（常识级）</h3>
+<h3 id="_13">三、责任与保险（常识级）</h3>
 <ul>
 <li>L4 事故：原则上由运营主体（事业者）担责，车体保险+新形态责任保险组合</li>
 <li>个人的远隔监控岗位：职务执行责任在公司，个人需要的是<strong>操作规程理解与记录能力</strong></li>
 </ul>
-<h3 id="四-跟踪要点">四、跟踪要点</h3>
+<h3 id="_14">四、跟踪要点</h3>
 <ul>
 <li>[ ] 公安委员会 L4 许可件数（每年更新，观察商用化速度）</li>
 <li>[ ] 遠隔監視者 相关资格/研修制度的建立动向（新职业的规范化标志）</li>
 <li>[ ] 货送法运用方针是否为自动驾驶运行追加新义务</li>
 </ul>
-<h3 id="关联">关联</h3>
+<h3 id="_15">关联</h3>
 <ul>
 <li>技术路线与时间表 → <a href="#01-自动驾驶技术路线与时间表">01-自动驾驶技术路线与时间表</a></li>
 <li>仓储自动化 → <a href="#03-仓储自动化与无人配送">03-仓储自动化与无人配送</a></li>
 </ul>
 <hr />
-<h2 id="03-仓储自动化与无人配送">03 仓储自动化与无人配送</h2>
+<h2 id="s5">03 仓储自动化与无人配送</h2>
 <blockquote>
 <p>信息核对日期：2026-11-11。司机之外的另一条自动化战线——阶段 4 的另一只脚。</p>
 </blockquote>
-<h3 id="一-仓储自动化技术谱系">一、仓储自动化技术谱系</h3>
-<table>
+<h3 id="_16">一、仓储自动化技术谱系</h3>
+<table class="fixed">
 <thead>
 <tr>
-<th>层级</th>
-<th>技术</th>
-<th>普及度</th>
+<th style="width:33%">层级</th>
+<th style="width:33%">技术</th>
+<th style="width:34%">普及度</th>
 </tr>
 </thead>
 <tbody>
@@ -299,12 +291,12 @@
 </tbody>
 </table>
 <p><strong>与语言的关系</strong>：自动化反而降低了对"日语母语级"的作业要求（系统指令化），但提高了<strong>系统操作与异常处理</strong>的权重——对日语 N3 级+数字敏感的人是利好。</p>
-<h3 id="二-无人配送-ラストワンマイル">二、无人配送（ラストワンマイル）</h3>
-<table>
+<h3 id="_17">二、无人配送（ラストワンマイル）</h3>
+<table class="fixed">
 <thead>
 <tr>
-<th>形态</th>
-<th>现状</th>
+<th style="width:50%">形态</th>
+<th style="width:50%">现状</th>
 </tr>
 </thead>
 <tbody>
@@ -323,13 +315,13 @@
 </tbody>
 </table>
 <p>判断：无人配送对岗位的实质影响比干线自动驾驶更远，10 年内是补充不是替代。</p>
-<h3 id="三-观察名单-企业-项目">三、观察名单（企业/项目）</h3>
+<h3 id="_18">三、观察名单（企业/项目）</h3>
 <ul>
 <li>大手导入：雅玛多（次世代营业所）、佐川（GX 战略）、日通（自动化仓）</li>
 <li>技术方： Merchant 派（倉庫机器人）、SaaS WMS（Logiless、BOXIL 系列产品比较）</li>
 <li>数据源：LogiBiz、Material Flow 等行业媒体</li>
 </ul>
-<h3 id="四-个人技能对接">四、个人技能对接</h3>
+<h3 id="_19">四、个人技能对接</h3>
 <ol>
 <li><strong>在公司内第一个学会新设备/新系统</strong>（导入培训认真做、操作手册自己整理一份）——零成本建立"数字担当"标签</li>
 <li>フォークリフト讲习（3–10 万円，1 周）——仓储世界的通行证</li>
@@ -337,17 +329,17 @@
 </ol>
 <p>→ 技能清单细化：<a href="../../06-industry-technology/reports/">../../06-industry-technology</a></p>
 <hr />
-<h2 id="04-个人技能对接与机会">04 个人技能对接与机会</h2>
+<h2 id="s6">04 个人技能对接与机会</h2>
 <blockquote>
 <p>把自动化趋势翻译成"我现在能做的具体动作"。对应阶段 4 评估。</p>
 </blockquote>
-<h3 id="一-未来岗位画像-10-年视角">一、未来岗位画像（10 年视角）</h3>
-<table>
+<h3 id="10">一、未来岗位画像（10 年视角）</h3>
+<table class="fixed">
 <thead>
 <tr>
-<th>岗位</th>
-<th>需要</th>
-<th>现在从哪积累</th>
+<th style="width:33%">岗位</th>
+<th style="width:33%">需要</th>
+<th style="width:34%">现在从哪积累</th>
 </tr>
 </thead>
 <tbody>
@@ -379,19 +371,19 @@
 </tbody>
 </table>
 <p><strong>共同底层</strong>：现场信任 × 日语（N2+）× 系统操作 × 运行管理法定经验——四样都是本规划已在推进的。</p>
-<h3 id="二-机会雷达-遇到就抓住的信号">二、机会雷达（遇到就抓住的信号）</h3>
+<h3 id="_20">二、机会雷达（遇到就抓住的信号）</h3>
 <ul>
 <li>公司导入新系统/设备时的<strong>操作担当指名</strong> → 主动报名</li>
 <li>国交省/业界的实证项目说明会（西濃運輸型中継模式扩散时，各公司都要人）</li>
 <li>配车担当休假时的<strong>代理指名</strong> → 高价值信号，务必接住</li>
 <li>新人教育培训担当 → 带人=管理岗前置经验</li>
 </ul>
-<h3 id="三-风险对冲">三、风险对冲</h3>
-<table>
+<h3 id="_21">三、风险对冲</h3>
+<table class="fixed">
 <thead>
 <tr>
-<th>风险</th>
-<th>对冲</th>
+<th style="width:50%">风险</th>
+<th style="width:50%">对冲</th>
 </tr>
 </thead>
 <tbody>
@@ -409,21 +401,12 @@
 </tr>
 </tbody>
 </table>
-<h3 id="四-年度自检-加进-1-月复盘">四、年度自检（加进 1 月复盘）</h3>
+<h3 id="1">四、年度自检（加进 1 月复盘）</h3>
 <ol>
 <li>今年我接触了哪些新系统/设备？能独立操作吗？</li>
 <li>公司的自动化导入计划我知道多少？</li>
 <li>我的"系统+现场"复合故事（简历用）更新了吗？</li>
 </ol>
 <hr />
-</main>
-<script>
-document.addEventListener('click', function (event) {
-  var link = event.target.closest ? event.target.closest('.skip-link') : null;
-  if (!link) return;
-  var target = document.querySelector(link.getAttribute('href'));
-  if (target) { target.setAttribute('tabindex', '-1'); target.focus(); }
-});
-</script>
 </body>
 </html>
