@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# 编辑器 / 系统
+.DS_Store
+Thumbs.db
+
+# IDE 本地共享/截图缓存
+.trae-html-share-packages/
+.screenshots/
+
+# 词汇库工具生成的备份与日志产物（工具自带轮转保留，不入库）
+src/vocabulary/data/sync-backups/
+src/vocabulary/data/topic-backups/

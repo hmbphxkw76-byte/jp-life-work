@@ -1,0 +1,121 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jp-life-work.local/vocabulary/export.schema.json",
+  "title": "词汇库导出数据契约",
+  "description": "vocab_tool.py export 产物的类型定义。JSON 导出为整个 payload；JSONL 每行即一个 terms[] 元素。字段语义以 README 第六节为准。",
+  "type": "object",
+  "required": ["topic", "name", "version", "generated_at", "count", "categories", "terms"],
+  "additionalProperties": false,
+  "properties": {
+    "topic": {
+      "type": "string",
+      "description": "主题 ID，与 config/topics.json 的键一致",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+    },
+    "name": {
+      "type": "string",
+      "description": "主题中文名称",
+      "minLength": 1
+    },
+    "version": {
+      "type": "string",
+      "description": "词库版本号，取自 terms.md 版本记录最后一行",
+      "pattern": "^v\\d+\\.\\d+$"
+    },
+    "generated_at": {
+      "type": "string",
+      "description": "导出时间（本地时间，ISO 8601，秒级）",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}$"
+    },
+    "count": {
+      "type": "integer",
+      "description": "词条总数，须等于 terms 数组长度",
+      "minimum": 0
+    },
+    "categories": {
+      "type": "object",
+      "description": "分类分布：分类名 → 词条数",
+      "additionalProperties": {
+        "type": "integer",
+        "minimum": 0
+      }
+    },
+    "terms": {
+      "type": "array",
+      "description": "词条数组",
+      "items": {
+        "$ref": "#/$defs/term"
+      }
+    }
+  },
+  "$defs": {
+    "term": {
+      "type": "object",
+      "required": [
+        "id",
+        "term",
+        "aliases",
+        "category",
+        "tags",
+        "definition",
+        "source",
+        "first_added",
+        "last_updated"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "词条主键：{id_prefix}-{三位序号}",
+          "pattern": "^[A-Z]{2,4}-\\d{3}$"
+        },
+        "term": {
+          "type": "string",
+          "description": "词条名",
+          "minLength": 1
+        },
+        "aliases": {
+          "type": "array",
+          "description": "别名列表，恒为数组（无别名为空数组）",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "category": {
+          "type": "string",
+          "description": "分类，必须属于该主题的受控分类词表",
+          "minLength": 1
+        },
+        "tags": {
+          "type": "array",
+          "description": "标签列表，恒为数组（无标签为空数组）",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "definition": {
+          "type": "string",
+          "description": "定义，说明概念边界与用途",
+          "minLength": 1
+        },
+        "source": {
+          "type": "string",
+          "description": "来源；无法当场核验时以「（需核实原文）」结尾",
+          "minLength": 1
+        },
+        "first_added": {
+          "type": "string",
+          "description": "首次登记日期",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+        },
+        "last_updated": {
+          "type": "string",
+          "description": "最近更新日期",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+        }
+      }
+    }
+  }
+}

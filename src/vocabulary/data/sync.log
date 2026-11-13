@@ -1,0 +1,122 @@
+[2026-11-13T16:51:56] [check] ai-security -> ../trends/ai-security/prompts/business-config.md：初次同步：待写入 47 条（未写盘）
+[2026-11-13T16:51:56] [error] ai-security -> ../trends/ai-security/prompts/business-config.md：写入后校验失败，已自动回滚备份 ai-security.business-config.md.20261113_165156.bak：区间后内容发生变化（异常，已不具备保留性）
+[2026-11-13T16:51:56] [error] 可修复后手动重试：python vocabulary/script/sync_vocab.py sync --topic ai-security
+[2026-11-13T16:51:56] [check] ai-security -> ../trends/ai-security/prompts/business-config.md：初次同步：待写入 47 条（未写盘）
+[2026-11-13T16:51:56] [verify] ai-security -> ../trends/ai-security/prompts/business-config.md：不通过（缺少 ai-security 的 VOCAB-SYNC 区间；状态文件无同步记录）
+[2026-11-13T16:52:30] [sync] ai-security -> ../trends/ai-security/prompts/business-config.md：新区块插入成功：新增 47 / 修改 0 / 删除 0，共 47 条（v1.1）；备份 sync-backups/ai-security.business-config.md.20261113_165230.bak
+[2026-11-13T16:52:30] [check] ai-security -> ../trends/ai-security/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-13T16:52:30] [verify] ai-security -> business-config.md：通过（47 条覆盖完整，区间外内容一致，词汇库 v1.1）
+[2026-11-13T16:52:52] [verify] ai-security -> ../trends/ai-security/prompts/business-config.md：不通过（词条未覆盖 1 条（如 提示词泄露）；词汇库在最近一次同步后有变更（建议重新 sync））
+[2026-11-13T16:53:04] [sync] ai-security -> ../trends/ai-security/prompts/business-config.md：区块替换成功：新增 1 / 修改 0 / 删除 0，共 48 条（v1.2）；备份 sync-backups/ai-security.business-config.md.20261113_165304.bak
+[2026-11-13T16:53:43] [verify] ai-security -> business-config.md：通过（48 条覆盖完整，区间外内容一致，词汇库 v1.2）
+[2026-11-13T16:54:05] [sync] ai-security -> ../trends/ai-security/prompts/business-config.md：区块替换成功：新增 1 / 修改 0 / 删除 0，共 49 条（v1.3）；备份 sync-backups/ai-security.business-config.md.20261113_165405.bak
+[2026-11-13T16:54:05] [verify] ai-security -> business-config.md：通过（49 条覆盖完整，区间外内容一致，词汇库 v1.3）
+[2026-11-13T16:57:01] [check] ai-security -> ../trends/ai-security/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-13T16:57:01] [verify] ai-security -> business-config.md：通过（49 条覆盖完整，区间外内容一致，词汇库 v1.3）
+[2026-11-13T17:12:57] [sync] cybersecurity -> ../dubai/cybersecurity/prompts/business-config.md：新区块插入成功：新增 90 / 修改 0 / 删除 0，共 90 条（v1.2）；备份 sync-backups/cybersecurity.business-config.md.20261113_171257.bak
+[2026-11-13T17:12:57] [check] ai-security -> ../trends/ai-security/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-13T17:12:57] [check] cybersecurity -> ../dubai/cybersecurity/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-13T17:12:57] [verify] ai-security -> business-config.md：通过（49 条覆盖完整，区间外内容一致，词汇库 v1.3）
+[2026-11-13T17:12:57] [verify] cybersecurity -> business-config.md：通过（90 条覆盖完整，区间外内容一致，词汇库 v1.2）
+[2026-11-13T17:14:19] [sync] financial-markets -> ../dubai/apartment/prompts/business-config.md：新区块插入成功：新增 49 / 修改 0 / 删除 0，共 49 条（v1.1）；备份 sync-backups/financial-markets.business-config.md.20261113_171419.bak
+[2026-11-13T17:14:19] [check] ai-security -> ../trends/ai-security/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-13T17:14:19] [check] cybersecurity -> ../dubai/cybersecurity/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-13T17:14:19] [check] financial-markets -> ../dubai/apartment/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-13T17:14:19] [verify] ai-security -> business-config.md：通过（49 条覆盖完整，区间外内容一致，词汇库 v1.3）
+[2026-11-13T17:14:19] [verify] cybersecurity -> business-config.md：通过（90 条覆盖完整，区间外内容一致，词汇库 v1.2）
+[2026-11-13T17:14:19] [verify] financial-markets -> business-config.md：通过（49 条覆盖完整，区间外内容一致，词汇库 v1.1）
+[2026-11-13T17:23:49] [sync] cybersecurity -> ../dubai/cybersecurity/prompts/business-config.md：区块替换成功：新增 36 / 修改 0 / 删除 0，共 126 条（v1.3）；备份 sync-backups/cybersecurity.business-config.md.20261113_172349.bak
+[2026-11-13T17:23:58] [verify] ai-security -> business-config.md：通过（49 条覆盖完整，区间外内容一致，词汇库 v1.3）
+[2026-11-13T17:23:58] [verify] cybersecurity -> business-config.md：通过（126 条覆盖完整，区间外内容一致，词汇库 v1.3）
+[2026-11-13T17:23:58] [verify] financial-markets -> business-config.md：通过（49 条覆盖完整，区间外内容一致，词汇库 v1.1）
+[2026-11-13T17:28:00] [sync] cybersecurity -> ../dubai/cybersecurity/prompts/business-config.md：区块替换成功：新增 27 / 修改 0 / 删除 0，共 153 条（v1.4）；备份 sync-backups/cybersecurity.business-config.md.20261113_172800.bak
+[2026-11-13T17:28:00] [verify] cybersecurity -> business-config.md：通过（153 条覆盖完整，区间外内容一致，词汇库 v1.4）
+[2026-11-13T17:32:49] [sync] economy -> ../trends/economy/prompts/business-config.md：区块替换成功：新增 44 / 修改 0 / 删除 0，共 44 条（v1.2）；备份 sync-backups/economy.business-config.md.20261113_173249.bak
+[2026-11-13T17:39:59] [verify] economy -> business-config.md：通过（44 条覆盖完整，区间外内容一致，词汇库 v1.2）
+[2026-11-13T17:39:59] [check] ai-security -> ../trends/ai-security/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-13T17:39:59] [check] cybersecurity -> ../dubai/cybersecurity/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-13T17:39:59] [check] financial-markets -> ../dubai/apartment/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-13T17:39:59] [check] economy -> ../trends/economy/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-13T19:02:43] [error] ai-security -> ../trends/ai-security/prompts/business-config.md：目标提示词不存在：D:\文档\GitHub\jp-life-work\src\vocabulary\..\trends\ai-security\prompts\business-config.md
+[2026-11-13T19:02:43] [error] cybersecurity -> ../dubai/cybersecurity/prompts/business-config.md：目标提示词不存在：D:\文档\GitHub\jp-life-work\src\vocabulary\..\dubai\cybersecurity\prompts\business-config.md
+[2026-11-13T19:02:43] [error] financial-markets -> ../dubai/apartment/prompts/business-config.md：目标提示词不存在：D:\文档\GitHub\jp-life-work\src\vocabulary\..\dubai\apartment\prompts\business-config.md
+[2026-11-13T19:02:43] [error] economy -> ../trends/economy/prompts/business-config.md：目标提示词不存在：D:\文档\GitHub\jp-life-work\src\vocabulary\..\trends\economy\prompts\business-config.md
+[2026-11-13T19:11:32] [check] financial-markets -> ../../07-economy-finance/prompts/business-config.md：初次同步：待写入 49 条（未写盘）
+[2026-11-13T19:11:32] [check] economy -> ../../07-economy-finance/prompts/business-config.md：初次同步：待写入 44 条（未写盘）
+[2026-11-13T19:11:35] [sync] financial-markets -> ../../07-economy-finance/prompts/business-config.md：新区块插入成功：新增 49 / 修改 0 / 删除 0，共 49 条（v1.1）；备份 sync-backups/financial-markets.business-config.md.20261113_191135.bak
+[2026-11-13T19:11:35] [sync] economy -> ../../07-economy-finance/prompts/business-config.md：新区块插入成功：新增 44 / 修改 0 / 删除 0，共 44 条（v1.2）；备份 sync-backups/economy.business-config.md.20261113_191135.bak
+[2026-11-13T19:11:35] [verify] financial-markets -> business-config.md：通过（49 条覆盖完整，区间外内容一致，词汇库 v1.1）
+[2026-11-13T19:11:35] [verify] economy -> business-config.md：通过（44 条覆盖完整，区间外内容一致，词汇库 v1.2）
+[2026-11-13T19:11:51] [check] financial-markets -> ../../07-economy-finance/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-13T19:11:51] [check] economy -> ../../07-economy-finance/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-13T19:11:51] [verify] financial-markets -> business-config.md：通过（49 条覆盖完整，区间外内容一致，词汇库 v1.1）
+[2026-11-13T19:11:51] [verify] economy -> business-config.md：通过（44 条覆盖完整，区间外内容一致，词汇库 v1.2）
+[2026-11-13T19:32:17] [sync] ssw-driver -> ../../01-ssw-driver/prompts/business-config.md：新区块插入成功：新增 68 / 修改 0 / 删除 0，共 68 条（v1.1）；备份 sync-backups/ssw-driver.business-config.md.20261113_193217.bak
+[2026-11-13T19:32:17] [sync] career-driver -> ../../02-career-driver/prompts/business-config.md：新区块插入成功：新增 68 / 修改 0 / 删除 0，共 68 条（v1.1）；备份 sync-backups/career-driver.business-config.md.20261113_193217.bak
+[2026-11-13T19:32:17] [sync] career-management -> ../../03-career-management/prompts/business-config.md：新区块插入成功：新增 68 / 修改 0 / 删除 0，共 68 条（v1.1）；备份 sync-backups/career-management.business-config.md.20261113_193217.bak
+[2026-11-13T19:32:17] [sync] industry-logistics -> ../../04-industry-logistics/prompts/business-config.md：新区块插入成功：新增 68 / 修改 0 / 删除 0，共 68 条（v1.1）；备份 sync-backups/industry-logistics.business-config.md.20261113_193217.bak
+[2026-11-13T19:32:18] [sync] industry-autonomous -> ../../05-industry-autonomous/prompts/business-config.md：新区块插入成功：新增 68 / 修改 0 / 删除 0，共 68 条（v1.1）；备份 sync-backups/industry-autonomous.business-config.md.20261113_193218.bak
+[2026-11-13T19:32:18] [sync] industry-technology -> ../../06-industry-technology/prompts/business-config.md：新区块插入成功：新增 68 / 修改 0 / 删除 0，共 68 条（v1.1）；备份 sync-backups/industry-technology.business-config.md.20261113_193218.bak
+[2026-11-13T19:32:18] [sync] economy-finance -> ../../07-economy-finance/prompts/business-config.md：新区块插入成功：新增 68 / 修改 0 / 删除 0，共 68 条（v1.1）；备份 sync-backups/economy-finance.business-config.md.20261113_193218.bak
+[2026-11-13T19:32:18] [sync] visa-immigration -> ../../08-visa-immigration/prompts/business-config.md：新区块插入成功：新增 68 / 修改 0 / 删除 0，共 68 条（v1.1）；备份 sync-backups/visa-immigration.business-config.md.20261113_193218.bak
+[2026-11-13T19:32:19] [sync] politics-law -> ../../09-politics-law/prompts/business-config.md：新区块插入成功：新增 68 / 修改 0 / 删除 0，共 68 条（v1.1）；备份 sync-backups/politics-law.business-config.md.20261113_193219.bak
+[2026-11-13T19:32:19] [sync] education-qualification -> ../../10-education-qualification/prompts/business-config.md：新区块插入成功：新增 68 / 修改 0 / 删除 0，共 68 条（v1.1）；备份 sync-backups/education-qualification.business-config.md.20261113_193219.bak
+[2026-11-13T19:32:19] [sync] language-japanese -> ../../11-language-japanese/prompts/business-config.md：新区块插入成功：新增 68 / 修改 0 / 删除 0，共 68 条（v1.1）；备份 sync-backups/language-japanese.business-config.md.20261113_193219.bak
+[2026-11-13T19:32:19] [sync] culture-life -> ../../12-culture-life/prompts/business-config.md：新区块插入成功：新增 68 / 修改 0 / 删除 0，共 68 条（v1.1）；备份 sync-backups/culture-life.business-config.md.20261113_193219.bak
+[2026-11-13T19:32:19] [sync] regional-info -> ../../13-regional-info/prompts/business-config.md：新区块插入成功：新增 68 / 修改 0 / 删除 0，共 68 条（v1.1）；备份 sync-backups/regional-info.business-config.md.20261113_193219.bak
+[2026-11-13T19:32:29] [verify] ssw-driver -> business-config.md：通过（68 条覆盖完整，区间外内容一致，词汇库 v1.1）
+[2026-11-13T19:32:29] [verify] career-driver -> business-config.md：通过（68 条覆盖完整，区间外内容一致，词汇库 v1.1）
+[2026-11-13T19:32:29] [verify] career-management -> business-config.md：通过（68 条覆盖完整，区间外内容一致，词汇库 v1.1）
+[2026-11-13T19:32:29] [verify] industry-logistics -> business-config.md：通过（68 条覆盖完整，区间外内容一致，词汇库 v1.1）
+[2026-11-13T19:32:29] [verify] industry-autonomous -> business-config.md：通过（68 条覆盖完整，区间外内容一致，词汇库 v1.1）
+[2026-11-13T19:32:29] [verify] industry-technology -> business-config.md：通过（68 条覆盖完整，区间外内容一致，词汇库 v1.1）
+[2026-11-13T19:32:29] [verify] economy-finance -> business-config.md：通过（68 条覆盖完整，区间外内容一致，词汇库 v1.1）
+[2026-11-13T19:32:29] [verify] visa-immigration -> business-config.md：通过（68 条覆盖完整，区间外内容一致，词汇库 v1.1）
+[2026-11-13T19:32:29] [verify] politics-law -> business-config.md：通过（68 条覆盖完整，区间外内容一致，词汇库 v1.1）
+[2026-11-13T19:32:29] [verify] education-qualification -> business-config.md：通过（68 条覆盖完整，区间外内容一致，词汇库 v1.1）
+[2026-11-13T19:32:29] [verify] language-japanese -> business-config.md：通过（68 条覆盖完整，区间外内容一致，词汇库 v1.1）
+[2026-11-13T19:32:29] [verify] culture-life -> business-config.md：通过（68 条覆盖完整，区间外内容一致，词汇库 v1.1）
+[2026-11-13T19:32:29] [verify] regional-info -> business-config.md：通过（68 条覆盖完整，区间外内容一致，词汇库 v1.1）
+[2026-11-13T19:52:37] [sync] ssw-driver -> ../../01-ssw-driver/prompts/business-config.md：区块替换成功：新增 34 / 修改 0 / 删除 0，共 102 条（v1.2）；备份 sync-backups/ssw-driver.business-config.md.20261113_195237.bak
+[2026-11-13T19:52:37] [sync] career-driver -> ../../02-career-driver/prompts/business-config.md：区块替换成功：新增 34 / 修改 0 / 删除 0，共 102 条（v1.2）；备份 sync-backups/career-driver.business-config.md.20261113_195237.bak
+[2026-11-13T19:52:37] [sync] industry-logistics -> ../../04-industry-logistics/prompts/business-config.md：区块替换成功：新增 34 / 修改 0 / 删除 0，共 102 条（v1.2）；备份 sync-backups/industry-logistics.business-config.md.20261113_195237.bak
+[2026-11-13T19:52:37] [sync] industry-autonomous -> ../../05-industry-autonomous/prompts/business-config.md：区块替换成功：新增 34 / 修改 0 / 删除 0，共 102 条（v1.2）；备份 sync-backups/industry-autonomous.business-config.md.20261113_195237.bak
+[2026-11-13T19:52:43] [verify] ssw-driver -> business-config.md：通过（102 条覆盖完整，区间外内容一致，词汇库 v1.2）
+[2026-11-13T19:52:43] [verify] career-driver -> business-config.md：通过（102 条覆盖完整，区间外内容一致，词汇库 v1.2）
+[2026-11-13T19:52:43] [verify] career-management -> business-config.md：通过（68 条覆盖完整，区间外内容一致，词汇库 v1.1）
+[2026-11-13T19:52:43] [verify] industry-logistics -> business-config.md：通过（102 条覆盖完整，区间外内容一致，词汇库 v1.2）
+[2026-11-13T19:52:43] [verify] industry-autonomous -> business-config.md：通过（102 条覆盖完整，区间外内容一致，词汇库 v1.2）
+[2026-11-13T19:52:43] [verify] industry-technology -> business-config.md：通过（68 条覆盖完整，区间外内容一致，词汇库 v1.1）
+[2026-11-13T19:52:43] [verify] economy-finance -> business-config.md：通过（68 条覆盖完整，区间外内容一致，词汇库 v1.1）
+[2026-11-13T19:52:43] [verify] visa-immigration -> business-config.md：通过（68 条覆盖完整，区间外内容一致，词汇库 v1.1）
+[2026-11-13T19:52:43] [verify] politics-law -> business-config.md：通过（68 条覆盖完整，区间外内容一致，词汇库 v1.1）
+[2026-11-13T19:52:43] [verify] education-qualification -> business-config.md：通过（68 条覆盖完整，区间外内容一致，词汇库 v1.1）
+[2026-11-13T19:52:43] [verify] language-japanese -> business-config.md：通过（68 条覆盖完整，区间外内容一致，词汇库 v1.1）
+[2026-11-13T19:52:43] [verify] culture-life -> business-config.md：通过（68 条覆盖完整，区间外内容一致，词汇库 v1.1）
+[2026-11-13T19:52:43] [verify] regional-info -> business-config.md：通过（68 条覆盖完整，区间外内容一致，词汇库 v1.1）
+[2026-11-13T20:08:47] [sync] ssw-driver -> ../../01-ssw-driver/prompts/business-config.md：区块替换成功：新增 2 / 修改 0 / 删除 0，共 104 条（v1.3）；备份 sync-backups/ssw-driver.business-config.md.20261113_200847.bak
+[2026-11-13T20:08:47] [sync] career-driver -> ../../02-career-driver/prompts/business-config.md：区块替换成功：新增 2 / 修改 0 / 删除 0，共 104 条（v1.3）；备份 sync-backups/career-driver.business-config.md.20261113_200847.bak
+[2026-11-13T20:08:47] [sync] career-management -> ../../03-career-management/prompts/business-config.md：区块替换成功：新增 4 / 修改 0 / 删除 0，共 72 条（v1.2）；备份 sync-backups/career-management.business-config.md.20261113_200847.bak
+[2026-11-13T20:08:48] [sync] industry-logistics -> ../../04-industry-logistics/prompts/business-config.md：区块替换成功：新增 4 / 修改 0 / 删除 0，共 106 条（v1.3）；备份 sync-backups/industry-logistics.business-config.md.20261113_200848.bak
+[2026-11-13T20:08:48] [sync] industry-autonomous -> ../../05-industry-autonomous/prompts/business-config.md：区块替换成功：新增 2 / 修改 0 / 删除 0，共 104 条（v1.3）；备份 sync-backups/industry-autonomous.business-config.md.20261113_200848.bak
+[2026-11-13T20:08:48] [sync] industry-technology -> ../../06-industry-technology/prompts/business-config.md：区块替换成功：新增 6 / 修改 0 / 删除 0，共 74 条（v1.2）；备份 sync-backups/industry-technology.business-config.md.20261113_200848.bak
+[2026-11-13T20:08:48] [sync] economy-finance -> ../../07-economy-finance/prompts/business-config.md：区块替换成功：新增 5 / 修改 0 / 删除 0，共 73 条（v1.2）；备份 sync-backups/economy-finance.business-config.md.20261113_200848.bak
+[2026-11-13T20:08:49] [sync] visa-immigration -> ../../08-visa-immigration/prompts/business-config.md：区块替换成功：新增 1 / 修改 0 / 删除 0，共 69 条（v1.2）；备份 sync-backups/visa-immigration.business-config.md.20261113_200849.bak
+[2026-11-13T20:08:49] [sync] politics-law -> ../../09-politics-law/prompts/business-config.md：区块替换成功：新增 1 / 修改 0 / 删除 0，共 69 条（v1.2）；备份 sync-backups/politics-law.business-config.md.20261113_200849.bak
+[2026-11-13T20:08:49] [sync] language-japanese -> ../../11-language-japanese/prompts/business-config.md：区块替换成功：新增 1 / 修改 0 / 删除 0，共 69 条（v1.2）；备份 sync-backups/language-japanese.business-config.md.20261113_200849.bak
+[2026-11-13T20:08:49] [sync] culture-life -> ../../12-culture-life/prompts/business-config.md：区块替换成功：新增 2 / 修改 0 / 删除 0，共 70 条（v1.2）；备份 sync-backups/culture-life.business-config.md.20261113_200849.bak
+[2026-11-13T20:08:49] [sync] regional-info -> ../../13-regional-info/prompts/business-config.md：区块替换成功：新增 1 / 修改 0 / 删除 0，共 69 条（v1.2）；备份 sync-backups/regional-info.business-config.md.20261113_200849.bak
+[2026-11-13T20:09:13] [sync] ssw-driver -> ../../01-ssw-driver/prompts/business-config.md：区块替换成功：新增 1 / 修改 0 / 删除 0，共 105 条（v1.4）；备份 sync-backups/ssw-driver.business-config.md.20261113_200913.bak
+[2026-11-13T20:09:21] [verify] ssw-driver -> business-config.md：通过（105 条覆盖完整，区间外内容一致，词汇库 v1.4）
+[2026-11-13T20:09:21] [verify] career-driver -> business-config.md：通过（104 条覆盖完整，区间外内容一致，词汇库 v1.3）
+[2026-11-13T20:09:21] [verify] career-management -> business-config.md：通过（72 条覆盖完整，区间外内容一致，词汇库 v1.2）
+[2026-11-13T20:09:21] [verify] industry-logistics -> business-config.md：通过（106 条覆盖完整，区间外内容一致，词汇库 v1.3）
+[2026-11-13T20:09:21] [verify] industry-autonomous -> business-config.md：通过（104 条覆盖完整，区间外内容一致，词汇库 v1.3）
+[2026-11-13T20:09:21] [verify] industry-technology -> business-config.md：通过（74 条覆盖完整，区间外内容一致，词汇库 v1.2）
+[2026-11-13T20:09:21] [verify] economy-finance -> business-config.md：通过（73 条覆盖完整，区间外内容一致，词汇库 v1.2）
+[2026-11-13T20:09:21] [verify] visa-immigration -> business-config.md：通过（69 条覆盖完整，区间外内容一致，词汇库 v1.2）
+[2026-11-13T20:09:21] [verify] politics-law -> business-config.md：通过（69 条覆盖完整，区间外内容一致，词汇库 v1.2）
+[2026-11-13T20:09:21] [verify] education-qualification -> business-config.md：通过（68 条覆盖完整，区间外内容一致，词汇库 v1.1）
+[2026-11-13T20:09:21] [verify] language-japanese -> business-config.md：通过（69 条覆盖完整，区间外内容一致，词汇库 v1.2）
+[2026-11-13T20:09:21] [verify] culture-life -> business-config.md：通过（70 条覆盖完整，区间外内容一致，词汇库 v1.2）
+[2026-11-13T20:09:21] [verify] regional-info -> business-config.md：通过（69 条覆盖完整，区间外内容一致，词汇库 v1.2）

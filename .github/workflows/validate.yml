@@ -1,0 +1,78 @@
+# 规范校验门禁：PR 与 main 分支推送时自动运行规范校验 + 契约测试。
+# 错误级违规（退出码 1）阻断合并；警告级（退出码 2）放行。
+name: validate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: validate-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 安装依赖
+        run: pip install -r requirements.txt
+
+      - name: 契约测试（src/tests）
+        run: python -m unittest discover -s src/tests -v
+
+      # 各校验脚本退出码约定：0=通过；1=错误（阻断）；2=警告（放行）
+      - name: 结构与规范校验（validate.py）
+        run: |
+          python src/prompts-tools/tools/validate.py || code=$?
+          if [ "${code:-0}" -eq 1 ]; then
+            echo "::error::validate.py 存在错误级违规，阻断合并"
+            exit 1
+          fi
+          echo "validate.py 退出码 ${code:-0}（0=通过，2=仅警告不阻断）"
+
+      - name: 报告自动归位检查（classify_reports.py）
+        run: |
+          python src/prompts-tools/tools/classify_reports.py --check --unknown-warn || code=$?
+          if [ "${code:-0}" -eq 1 ]; then
+            echo "::error::存在可自动归位的错位报告（本地运行 classify_reports.py --apply 修复后提交）"
+            exit 1
+          fi
+          echo "classify_reports.py 退出码 ${code:-0}（2=存在需人工确认归属的报告，不阻断）"
+
+      - name: 结构补全检查（ensure_region_topics.py --check）
+        run: |
+          python src/prompts-tools/tools/ensure_region_topics.py --check || code=$?
+          if [ "${code:-0}" -eq 1 ]; then
+            echo "::error::结构补全检查失败"
+            exit 1
+          fi
+          echo "ensure_region_topics.py 退出码 ${code:-0}（2=存在缺失项，由定时维护补齐，不阻断）"
+
+      - name: 汇总页一致性校验（build_hub.py --check）
+        run: |
+          python src/prompts-tools/tools/build_hub.py --check || code=$?
+          if [ "${code:-0}" -eq 1 ]; then
+            echo "::error::汇总页已过期（本地运行 build_hub.py 重新生成后提交）"
+            exit 1
+          fi
+          echo "build_hub.py 退出码 ${code:-0}（汇总页缺失时 WARN 放行，由首次生成补建）"
+
+      # 建议级关卡：既有基线报告尚未按新类型模板改写（年度刷新时补齐合规内容），
+      # 暂以 continue-on-error 放行并展示结果；报告改写完成后移除该标记即转为错误级阻断。
+      - name: 报告内容 lint（建议级，暂不阻断）
+        continue-on-error: true
+        run: python src/prompts-tools/tools/lint_reports.py
+
+      - name: 模板合规校验（建议级，暂不阻断）
+        continue-on-error: true
+        run: python src/prompts-tools/tools/compliance_check.py
