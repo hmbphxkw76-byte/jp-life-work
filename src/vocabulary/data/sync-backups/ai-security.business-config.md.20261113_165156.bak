@@ -1,0 +1,63 @@
+# AI 安全趋势周报 · 业务配置（business-config）
+
+> **定位**：`trends/ai-security` 业务线的单一事实源。变量、受众、主题矩阵、来源分级、触发器、交付格式一律以本文件为准；周期提示词不复制这些内容，只给路径。
+> **类型继承声明（四层体系）**：业务提示词 = [通用基座](../../../report_templates/prompt-generic-base.md) × [监测报告通用规范](../../../report_templates/monitoring-common-spec.md) × [周期更新类型模板（行业趋势周报型 trend-weekly）](../../../report_templates/trend-weekly/prompt-weekly-monitor-template.md) × 本文件。冲突时以业务提示词为准。
+
+---
+
+## 一、变量区（固定值）
+
+```
+{{REGION}}               = 全球
+{{TOPIC}}                = AI 行业趋势（安全视角）
+{{CADENCE}}              = 周（weekly，日历节拍）
+{{REGISTRY_PATH}}        = data/ai_security_trend_ledger.md
+{{REGISTRY_FORMAT}}      = md-ledger
+{{BASELINE_REPORT_PATH}} = reports/2026-11-13_weekly.html（首期周报，本业务线的结构与结论锚；机制建立走周报首期，未单独出九节基线文档）
+{{REPO_RAW_URL_BASE}}    = https://github.com/hmbphxkw76-byte/macropulse-reports/blob/main/trends/ai-security
+{{FRESHNESS_PRIORITY}}   = 最新官方页 > 上期值 > 预测值
+{{SOURCE_LANGUAGE_RULE}} = 官方一手以英文为准；中文媒体仅作线索，数值须回官方页核验
+```
+
+## 二、受众定位
+
+- **受众**：AI 安全技术负责人 · RedTeam_AI 团队（工具链：PyRIT / promptfoo / garak）。
+- **视角**：从攻击面、评估基准与红队工程实践出发解读行业趋势。
+- **结论边界**：可执行启示只给「条件 → 判读 → 框架性含义 → 风险提示」，不给具体买卖价位与仓位建议。
+
+## 三、主题矩阵（固定 3 块，对应周报 s2–s4，不得增删）
+
+| 板块 | 周报节 | 覆盖范围 | 不覆盖 |
+|---|---|---|---|
+| AI 安全与红队 | s2 | 攻击面与真实事件、标准与框架（EU AI Act / OWASP）、安全市场与竞争 | 通用软件漏洞（非 AI 相关） |
+| LLM 与 Agent 技术演进 | s3 | 模型能力基准、Agent 架构与评估、成本与效率 | 非 LLM 的传统 ML 进展 |
+| AI 应用与商业化 | s4 | 采用与支出、定价与商业模式、垂直与区域应用 | 未落数据的传闻 |
+
+## 四、来源分级（四层实例化）
+
+| 层级 | 机构清单（示例，持续维护） | 采信规则 |
+|---|---|---|
+| ① 官方一手 | Microsoft Security Blog、OpenAI、Anthropic、SEC EDGAR、EU 官方（EUR-Lex）、METR、Stanford HAI | 唯一可直接采信层，标「已核验」 |
+| ② 行业机构 | OWASP GenAI、Gartner、Grand View Research、Cursor 官方报告 | 可采信；PDF 记录发布日期；预测分歧并列 |
+| ③ 挂牌门户 / 数据库 | Arena 评分、基准排行榜 | 仅作状态快照，须注日期与版本 |
+| ④ 媒体转述 | 36kr、InfoQ、央广网等中文媒体 | 只作线索；数值标「需核实原文」并回官方页校验 |
+
+## 五、触发器（`事件 → 受影响板块`）
+
+- 重大模型发布 / 重大安全事件 → s2、s3 当期升级
+- 监管与标准动作（法案生效节点、Top 10 更新）→ s2 当期升级
+- 头部厂商融资 / IPO / 定价重构 → s4 当期升级
+- 评估基准退役或缺陷披露 → s3 当期升级
+
+## 六、交付格式与命名
+
+- **纯 HTML 交付**（业务配置声明，走 monitoring-common-spec 第 1 节例外条款）：富样式手写自包含 HTML 为主交付物，落盘 `reports/{{YYYY-MM-DD}}_weekly.html`（日期 = 数据截止日）；md 源稿存 `sources/` 同名存档，**不参与 `md2html.py` 自动转换**（防止覆盖手工渲染）。
+- 周报按归档保留策略滚动（weekly 12 期，超限移入 `reports/archives/`）。
+
+## 七、版本记录
+
+| 版本 | 日期 | 变更 | 说明 |
+|---|---|---|---|
+| v1.0 | 2026-11-13 | 初始版本 | 业务线标准化重构：按 trend-weekly 类型接入目录规范、提示词与校验链 |
+| v1.1 | 2026-11-13 | 字段定义补全 | 填实 `{{REPO_RAW_URL_BASE}}`（对齐 apartment/cybersecurity 的 repo blob 基址）；`{{BASELINE_REPORT_PATH}}` 显式指向首期周报（周期报告读取锚，模板要求必填） |
+| v1.2 | 2026-11-13 | 词汇库绑定机制 | 接入 `vocabulary/script/sync_vocab.py` 自动同步：新增「词汇速览（词汇库自动同步）」标记区间，由脚本维护（AI 安全术语与别名的唯一速览源）；区间外内容不受同步影响 |

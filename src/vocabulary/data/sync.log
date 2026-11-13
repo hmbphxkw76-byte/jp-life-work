@@ -1,0 +1,39 @@
+[2026-11-13T16:51:56] [check] ai-security -> ../trends/ai-security/prompts/business-config.md：初次同步：待写入 47 条（未写盘）
+[2026-11-13T16:51:56] [error] ai-security -> ../trends/ai-security/prompts/business-config.md：写入后校验失败，已自动回滚备份 ai-security.business-config.md.20261113_165156.bak：区间后内容发生变化（异常，已不具备保留性）
+[2026-11-13T16:51:56] [error] 可修复后手动重试：python vocabulary/script/sync_vocab.py sync --topic ai-security
+[2026-11-13T16:51:56] [check] ai-security -> ../trends/ai-security/prompts/business-config.md：初次同步：待写入 47 条（未写盘）
+[2026-11-13T16:51:56] [verify] ai-security -> ../trends/ai-security/prompts/business-config.md：不通过（缺少 ai-security 的 VOCAB-SYNC 区间；状态文件无同步记录）
+[2026-11-13T16:52:30] [sync] ai-security -> ../trends/ai-security/prompts/business-config.md：新区块插入成功：新增 47 / 修改 0 / 删除 0，共 47 条（v1.1）；备份 sync-backups/ai-security.business-config.md.20261113_165230.bak
+[2026-11-13T16:52:30] [check] ai-security -> ../trends/ai-security/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-13T16:52:30] [verify] ai-security -> business-config.md：通过（47 条覆盖完整，区间外内容一致，词汇库 v1.1）
+[2026-11-13T16:52:52] [verify] ai-security -> ../trends/ai-security/prompts/business-config.md：不通过（词条未覆盖 1 条（如 提示词泄露）；词汇库在最近一次同步后有变更（建议重新 sync））
+[2026-11-13T16:53:04] [sync] ai-security -> ../trends/ai-security/prompts/business-config.md：区块替换成功：新增 1 / 修改 0 / 删除 0，共 48 条（v1.2）；备份 sync-backups/ai-security.business-config.md.20261113_165304.bak
+[2026-11-13T16:53:43] [verify] ai-security -> business-config.md：通过（48 条覆盖完整，区间外内容一致，词汇库 v1.2）
+[2026-11-13T16:54:05] [sync] ai-security -> ../trends/ai-security/prompts/business-config.md：区块替换成功：新增 1 / 修改 0 / 删除 0，共 49 条（v1.3）；备份 sync-backups/ai-security.business-config.md.20261113_165405.bak
+[2026-11-13T16:54:05] [verify] ai-security -> business-config.md：通过（49 条覆盖完整，区间外内容一致，词汇库 v1.3）
+[2026-11-13T16:57:01] [check] ai-security -> ../trends/ai-security/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-13T16:57:01] [verify] ai-security -> business-config.md：通过（49 条覆盖完整，区间外内容一致，词汇库 v1.3）
+[2026-11-13T17:12:57] [sync] cybersecurity -> ../dubai/cybersecurity/prompts/business-config.md：新区块插入成功：新增 90 / 修改 0 / 删除 0，共 90 条（v1.2）；备份 sync-backups/cybersecurity.business-config.md.20261113_171257.bak
+[2026-11-13T17:12:57] [check] ai-security -> ../trends/ai-security/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-13T17:12:57] [check] cybersecurity -> ../dubai/cybersecurity/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-13T17:12:57] [verify] ai-security -> business-config.md：通过（49 条覆盖完整，区间外内容一致，词汇库 v1.3）
+[2026-11-13T17:12:57] [verify] cybersecurity -> business-config.md：通过（90 条覆盖完整，区间外内容一致，词汇库 v1.2）
+[2026-11-13T17:14:19] [sync] financial-markets -> ../dubai/apartment/prompts/business-config.md：新区块插入成功：新增 49 / 修改 0 / 删除 0，共 49 条（v1.1）；备份 sync-backups/financial-markets.business-config.md.20261113_171419.bak
+[2026-11-13T17:14:19] [check] ai-security -> ../trends/ai-security/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-13T17:14:19] [check] cybersecurity -> ../dubai/cybersecurity/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-13T17:14:19] [check] financial-markets -> ../dubai/apartment/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-13T17:14:19] [verify] ai-security -> business-config.md：通过（49 条覆盖完整，区间外内容一致，词汇库 v1.3）
+[2026-11-13T17:14:19] [verify] cybersecurity -> business-config.md：通过（90 条覆盖完整，区间外内容一致，词汇库 v1.2）
+[2026-11-13T17:14:19] [verify] financial-markets -> business-config.md：通过（49 条覆盖完整，区间外内容一致，词汇库 v1.1）
+[2026-11-13T17:23:49] [sync] cybersecurity -> ../dubai/cybersecurity/prompts/business-config.md：区块替换成功：新增 36 / 修改 0 / 删除 0，共 126 条（v1.3）；备份 sync-backups/cybersecurity.business-config.md.20261113_172349.bak
+[2026-11-13T17:23:58] [verify] ai-security -> business-config.md：通过（49 条覆盖完整，区间外内容一致，词汇库 v1.3）
+[2026-11-13T17:23:58] [verify] cybersecurity -> business-config.md：通过（126 条覆盖完整，区间外内容一致，词汇库 v1.3）
+[2026-11-13T17:23:58] [verify] financial-markets -> business-config.md：通过（49 条覆盖完整，区间外内容一致，词汇库 v1.1）
+[2026-11-13T17:28:00] [sync] cybersecurity -> ../dubai/cybersecurity/prompts/business-config.md：区块替换成功：新增 27 / 修改 0 / 删除 0，共 153 条（v1.4）；备份 sync-backups/cybersecurity.business-config.md.20261113_172800.bak
+[2026-11-13T17:28:00] [verify] cybersecurity -> business-config.md：通过（153 条覆盖完整，区间外内容一致，词汇库 v1.4）
+[2026-11-13T17:32:49] [sync] economy -> ../trends/economy/prompts/business-config.md：区块替换成功：新增 44 / 修改 0 / 删除 0，共 44 条（v1.2）；备份 sync-backups/economy.business-config.md.20261113_173249.bak
+[2026-11-13T17:39:59] [verify] economy -> business-config.md：通过（44 条覆盖完整，区间外内容一致，词汇库 v1.2）
+[2026-11-13T17:39:59] [check] ai-security -> ../trends/ai-security/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-13T17:39:59] [check] cybersecurity -> ../dubai/cybersecurity/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-13T17:39:59] [check] financial-markets -> ../dubai/apartment/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-13T17:39:59] [check] economy -> ../trends/economy/prompts/business-config.md：无变更（词汇库与提示词区间一致）

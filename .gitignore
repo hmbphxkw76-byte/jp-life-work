@@ -1,0 +1,8 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# 编辑器 / 系统
+.DS_Store
+Thumbs.db
