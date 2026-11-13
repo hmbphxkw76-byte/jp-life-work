@@ -7,6 +7,7 @@
 from __future__ import annotations
 
 import sys
+import tempfile
 import unittest
 from datetime import datetime, timezone
 from pathlib import Path
@@ -107,20 +108,44 @@ class TestDefaultPeriod(unittest.TestCase):
 
 
 class TestBuildTasks(unittest.TestCase):
+    """任务清单推导（hermetic：在临时目录构造业务线，不依赖真实仓库状态）。"""
+
+    def setUp(self):
+        self._tmp = tempfile.TemporaryDirectory()
+        self._root = Path(self._tmp.name)
+        self._orig_root = _common.ROOT
+        _common.ROOT = self._root
+
+    def tearDown(self):
+        _common.ROOT = self._orig_root
+        self._tmp.cleanup()
+
+    def _make_business(self, rel, prompts=(), reports=()):
+        base = self._root / rel
+        (base / "prompts").mkdir(parents=True)
+        (base / "reports").mkdir(parents=True)
+        for p in prompts:
+            (base / "prompts" / p).write_text("", encoding="utf-8")
+        for r in reports:
+            (base / "reports" / r).write_text("", encoding="utf-8")
+        return _common.Business(rel)
+
     def test_status_done_when_output_exists(self):
-        # apartment 已有 2026-11_monthly.html（真实仓库状态）
-        tasks = build_tasks("2026-11", _common.iter_business_dirs())
-        self.assertTrue(tasks, "至少应识别出 apartment 一条业务线")
-        by_out = {t["output"]: t for t in tasks}
-        t = by_out["apartment/reports/2026-11_monthly.html"]
-        self.assertEqual(t["status"], "done")
-        self.assertEqual(t["cycle"], "monthly")
-        self.assertTrue(t["prompt"].endswith("prompt-monthly-monitor.md"))
+        biz = self._make_business(
+            "99-demo", prompts=["prompt-monthly-monitor.md"], reports=["2026-11_monthly.html"]
+        )
+        tasks = build_tasks("2026-11", [biz])
+        self.assertEqual(len(tasks), 1)
+        self.assertEqual(tasks[0]["output"], "99-demo/reports/2026-11_monthly.html")
+        self.assertEqual(tasks[0]["status"], "done")
+        self.assertEqual(tasks[0]["cycle"], "monthly")
+        self.assertTrue(tasks[0]["prompt"].endswith("prompt-monthly-monitor.md"))
 
     def test_pending_when_output_missing(self):
-        tasks = build_tasks("2026-12", _common.iter_business_dirs())
-        by_out = {t["output"]: t for t in tasks}
-        self.assertEqual(by_out["apartment/reports/2026-12_monthly.html"]["status"], "pending")
+        biz = self._make_business("99-demo", prompts=["prompt-monthly-monitor.md"])
+        tasks = build_tasks("2026-12", [biz])
+        self.assertEqual(tasks[0]["output"], "99-demo/reports/2026-12_monthly.html")
+        self.assertEqual(tasks[0]["status"], "pending")
 
 
 class TestSelectArchives(unittest.TestCase):

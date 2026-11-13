@@ -1,26 +1,56 @@
 # 词汇库子系统（vocabulary）· 标准操作流程（SOP）
 
-> **一句话定位**：仓库级、主题无关的标准化动态词汇子系统。首期落地 **AI 安全词汇**（红队/蓝队、AI 红队认证考试、攻击技术、防御检测、工具平台、框架标准、基准评估，共 7 分类 47 条种子）；新增任意领域词汇仅需在配置文件登记一个主题，**零代码修改**。
+> **一句话定位**：仓库级、主题无关的标准化动态词汇子系统，位于 `src/vocabulary/`。首期落地 **AI 安全词汇**（红队/蓝队、AI 红队认证考试、攻击技术、防御检测、工具平台、框架标准、基准评估，共 7 分类）；当前已登记 4 个主题、295 条词条。新增任意领域词汇仅需执行一条 `topic-add` 命令，**零代码修改**。
 
 ---
 
 ## 一、架构与目录
 
 ```
-vocabulary/
-├── README.md                          # 本文件：标准操作流程（SOP）
+src/vocabulary/
+├── README.md                          # 本文件：标准操作流程（SOP）与扩展规范
 ├── INDEX.md                           # 全主题索引（index 命令自动生成，勿手工编辑）
 ├── config/
-│   └── topics.json                    # 主题注册表（扩展唯一改动点，单一事实源）
-├── script/
-│   └── vocab_tool.py                  # 核心脚本（主题无关，仅依赖 Python 标准库）
-└── data/
-    └── ai-security/                   # 每主题一个数据目录（由 init 创建）
-        ├── terms.md                   # 结构化存储（9 列 md-table 契约，脚本统一读写）
-        ├── imports/                   # 批量导入文件暂存（保留留痕）
-        │   └── 2026-11-13_seed-ai-security.md
-        └── exports/                   # 导出产物（json / csv / jsonl，供上层对接）
+│   ├── topics.json                    # 主题注册表（脚本托管，单一事实源）
+│   └── sync.json                      # 词库 → 业务提示词同步绑定配置
+├── script/                            # 组件目录：主题无关的实现代码
+│   ├── vocab_tool.py                  # 核心脚本（仅依赖 Python 标准库）
+│   └── sync_vocab.py                  # 同步脚本（标记区间保护 + 增量检测 + 回滚）
+├── schema/                            # 类型定义目录：导出数据契约
+│   └── export.schema.json             # JSON Schema（JSON / JSONL 字段类型定义）
+├── templates/                         # 模板目录：新增主题时复用的文件模板
+│   └── topic-import-template.md       # 词汇导入文件模板（6 列格式契约）
+└── data/                              # 数据文件目录：每主题一个子目录
+    ├── <topic>/                       # 由 topic-add 自动创建，按主题隔离
+    │   ├── terms.md                   # 结构化存储（9 列 md-table 契约，脚本统一读写）
+    │   ├── imports/                   # 批量导入文件暂存（永久留痕）
+    │   └── exports/                   # 导出产物（json / csv / jsonl，供上层对接）
+    └── …                              # 现有主题：ai-security / cybersecurity / economy / financial-markets
 ```
+
+### 1.1 目录职责映射
+
+| 需求维度 | 目录 | 职责 | 扩展方式 |
+|---|---|---|---|
+| 按主题分类的子目录 | `data/<topic>/` | 主题词库、导入留痕、导出产物 | `topic-add` 一条命令自动创建，无需改代码 |
+| 组件目录 | `script/` | 主题无关的工具实现与共享逻辑 | 新增功能时加脚本并保持无主题硬编码 |
+| 数据文件目录 | `data/` | 全部结构化数据与运行留痕 | 仅通过脚本读写，禁止手工编辑 `terms.md` |
+| 类型定义目录 | `schema/` | 导出数据契约（字段、类型、格式约束） | 契约变更时同步更新 Schema 与 README 第六节 |
+| 配置目录 | `config/` | 主题注册表、同步绑定 | `topic-add` / `topic-remove` / `sync.json` |
+| 模板目录 | `templates/` | 新增主题/导入文件的复用模板 | 新增模板按 `<用途>-template.<ext>` 命名 |
+
+### 1.2 文件命名约定
+
+| 对象 | 约定 | 示例 |
+|---|---|---|
+| 主题 ID（目录名） | 小写 kebab-case，仅字母/数字/连字符 | `ai-security`、`financial-markets` |
+| ID 前缀 | 2–4 位大写字母，全局唯一 | `AIS`、`FIN`、`CYB` |
+| 词库文件 | 固定 `terms.md` | `data/economy/terms.md` |
+| 导入文件 | `YYYY-MM-DD_<说明>.md`（也支持 `.csv` / `.json`） | `2026-11-13_seed-economy.md` |
+| 导出产物 | `{topic}_{YYYY-MM-DD}_export.{json,csv,jsonl}` | `economy_2026-11-13_export.json` |
+| 脚本 | 小写 snake_case + `.py` | `vocab_tool.py` |
+| Schema | 小写 + `.schema.json` | `export.schema.json` |
+| 模板 | `<用途>-template.<ext>` | `topic-import-template.md` |
 
 **三层解耦设计**（主题与实现完全分离的保证）：
 
@@ -35,10 +65,10 @@ vocabulary/
 ## 二、快速开始（AI 安全词汇已就位）
 
 ```powershell
-python vocabulary/script/vocab_tool.py topics                                          # 查看已注册主题
-python vocabulary/script/vocab_tool.py check --topic ai-security                       # 质量校验（当前 47 条，0 错误 0 警告）
-python vocabulary/script/vocab_tool.py export --topic ai-security --format all         # 一键导出 json/csv/jsonl
-python vocabulary/script/vocab_tool.py index                                           # 重新生成全主题索引
+python src/vocabulary/script/vocab_tool.py topics                                          # 查看已注册主题
+python src/vocabulary/script/vocab_tool.py check --topic ai-security                       # 质量校验（当前 49 条，0 错误 0 警告）
+python src/vocabulary/script/vocab_tool.py export --topic ai-security --format all         # 一键导出 json/csv/jsonl
+python src/vocabulary/script/vocab_tool.py index                                           # 重新生成全主题索引
 ```
 
 ## 三、全链路标准操作流程（六步）
@@ -91,7 +121,7 @@ python vocabulary/script/vocab_tool.py index                                    
 
 | 项 | 规范 |
 |---|---|
-| 全主题索引 | `index` 命令 → `vocabulary/INDEX.md`（主题 × 词条数 × 分类分布 × 版本 × 存储路径），自动生成勿手工编辑 |
+| 全主题索引 | `index` 命令 → `src/vocabulary/INDEX.md`（主题 × 词条数 × 分类分布 × 版本 × 存储路径），自动生成勿手工编辑 |
 | 结构化导出 | `export` 命令 → `exports/{topic}_{YYYY-MM-DD}_export.{json,csv,jsonl}`；jsonl 每行一个词条对象，适合检索系统逐行摄取 |
 | 对接建议 | 以词条 ID 为主键；别名与标签作索引字段；分类作过滤面；JSON 顶层含 `topic / version / generated_at / count / categories` 元数据 |
 
@@ -112,7 +142,7 @@ python vocabulary/script/vocab_tool.py index                                    
 新增主题**无需手工编辑注册表**（topics.json 已降级为脚本托管文件），一条命令完成全部目录关联：
 
 ```powershell
-python vocabulary/script/vocab_tool.py topic-add --topic financial-markets --name 金融市场 --prefix FIN --categories "宏观与经济指标;金融机构与组织;金融工具与产品;市场机制与交易;监管与政策;估值与风险" --description "金融市场全领域词汇"
+python src/vocabulary/script/vocab_tool.py topic-add --topic financial-markets --name 金融市场 --prefix FIN --categories "宏观与经济指标;金融机构与组织;金融工具与产品;市场机制与交易;监管与政策;估值与风险" --description "金融市场全领域词汇"
 ```
 
 命令自动完成（实时同步主题↔目录映射）：
@@ -122,6 +152,24 @@ python vocabulary/script/vocab_tool.py topic-add --topic financial-markets --nam
 3. **索引同步**：INDEX.md 自动重建。
 4. **操作日志**：`data/topic-ops.log` 逐条留痕（动作 / 前缀 / 分类 / 备份文件名 / 结果）。
 5. **失败回滚**：任何一步异常自动恢复注册表备份并清理本次新建目录，现有结构不受影响，给出明确错误提示。
+
+### 4.1 新增主题的目录创建规则
+
+| 规则 | 要求 |
+|---|---|
+| 创建入口 | 只能通过 `topic-add` 创建；禁止手工新建 `data/<topic>/`（手工目录会被 `topic-check` 判为孤儿，且缺少词库骨架） |
+| 固定结构 | `data/<topic>/` 下必须且仅含 `terms.md` + `imports/` + `exports/` 三件套 |
+| 主题 ID | 小写 kebab-case，与 `config/topics.json` 键、`data/` 子目录名三者完全一致 |
+| 分类词表 | `--categories` 必须是该主题的完整受控分类，后续词条分类不得越界 |
+| ID 前缀 | 2–4 位大写字母，全局唯一；缺省自动派生并查重 |
+| 导入文件 | 复制 `templates/topic-import-template.md` 到 `imports/`，按 `YYYY-MM-DD_<说明>.md` 命名 |
+| 新主题验收 | `topic-check` 0 错误；`check --topic <topic>` 0 错误；`index` 后 INDEX.md 出现该主题 |
+
+### 4.2 扩展时的禁止事项
+
+- 禁止在 `script/` 中写死任何主题名、分类名或词条内容（主题知识只能来自 `config/topics.json`）。
+- 禁止手工编辑 `terms.md` 与 `topics.json`；词条变更走 `import` / `tag`，主题变更走 `topic-add` / `topic-remove`。
+- 禁止删除 `imports/` 中的历史导入文件（来源留痕）；禁止把 `terms.md` 拆成多份零散文件。
 
 辅助命令：
 
@@ -145,7 +193,7 @@ python vocabulary/script/vocab_tool.py topic-add --topic financial-markets --nam
 | `topic-remove` | `--topic` `--force` `--delete-data` | 移除主题注册（数据默认保留） | 0/1 |
 | `topic-check` | — | 注册表与目录结构一致性审计 | 0/1/2 |
 
-通用参数：`--config` 指定备用主题注册表（默认 `vocabulary/config/topics.json`）；导入文件路径支持相对仓库根或 vocabulary/ 根书写。
+通用参数：`--config` 指定备用主题注册表（默认 `src/vocabulary/config/topics.json`）；导入文件路径支持相对仓库根或 `src/vocabulary/` 根书写。
 
 ## 六、数据契约（上层系统对接）
 
@@ -208,7 +256,7 @@ python vocabulary/script/vocab_tool.py topic-add --topic financial-markets --nam
 | 方式 | 操作 | 适用场景 |
 |---|---|---|
 | 自动钩子（默认，推荐） | 无需部署：`vocab_tool.py` 的 `import` / `tag` 成功写盘后自动调用同步（`sync.json` 的 `auto_trigger: true` 时生效） | Agent 驱动的常规词汇维护 |
-| 常驻监听 | `python vocabulary/script/sync_vocab.py watch`（`--interval N` 调轮询间隔，默认取配置 `watch_interval_sec`） | 词汇库可能被脚本外手段直接修改时 |
+| 常驻监听 | `python src/vocabulary/script/sync_vocab.py watch`（`--interval N` 调轮询间隔，默认取配置 `watch_interval_sec`） | 词汇库可能被脚本外手段直接修改时 |
 | 手动/定时 | `sync` 子命令（也是失败后的重试入口）；可挂 Schedule 定期执行 `sync` | 一次性接入、兜底对账 |
 
 ### 9.2 触发条件与配置
