@@ -5,6 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>日本地域信息知识手册</title>
 <style>
+/* 无障碍壳层：skip link（视觉隐藏直至聚焦）+ 全局焦点环 */
+.skip-link { position: absolute; left: -9999px; top: 0; z-index: 100;
+  padding: 8px 14px; background: #16324f; color: #fff;
+  border-radius: 0 0 6px 6px; text-decoration: none; }
+.skip-link:focus { left: 8px; top: 8px; }
+:focus-visible { outline: 2px solid #2f5597; outline-offset: 2px; }
+
   body { max-width: 860px; margin: 2rem auto; padding: 0 1rem;
          font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
          line-height: 1.7; color: #222; }
@@ -27,6 +34,8 @@
 </style>
 </head>
 <body>
+<a class="skip-link" href="#main-content">跳到主要内容</a>
+<main id="main-content">
 <h1 id="日本地域信息知识手册">日本地域信息知识手册</h1>
 <blockquote>
 <p><strong>版本</strong>：v1.0（合并整理版）　<strong>整理日期</strong>：2026-11-12<br />
@@ -205,6 +214,8 @@
 <li>落地 1 个月后：实际体验 vs 预期复盘，写入 <a href="#02-地域生活笔记">02-地域生活笔记</a></li>
 </ol>
 <h3 id="地域间公共服务差异视角">地域间公共服务差异视角</h3>
+<!-- updated: 2026-11-12 | 新增小节 -->
+
 <blockquote>
 <p>评分框架的补充视角：公共服务水平在日本国内存在系统性地域差，转职/定居前横向比对。保险与就医流程、学制等制度细节由专门主题维护（见下方交叉引用），本节只做地域差视角与官方数据入口。</p>
 </blockquote>
@@ -322,6 +333,8 @@
 <li>地震时集合点（与家人约定）</li>
 </ul>
 <h3 id="地域防灾情报渠道">地域防灾情报渠道</h3>
+<!-- updated: 2026-11-12 | 新增小节 -->
+
 <blockquote>
 <p>防灾情报分三层：国家预警 → 自治体通知 → 个人接收。定居地确定后，把第三层的登记动作补进本章「一、定居地档案」。与 <a href="../../09-politics-law/reports/日本政治与法规知识手册.html#02-政治动向与移民政策环境">09-politics-law 外国人权利动向观察点</a>（灾害时外国人支援）互补。</p>
 </blockquote>
@@ -397,5 +410,14 @@
 </tbody>
 </table>
 <hr />
+</main>
+<script>
+document.addEventListener('click', function (event) {
+  var link = event.target.closest ? event.target.closest('.skip-link') : null;
+  if (!link) return;
+  var target = document.querySelector(link.getAttribute('href'));
+  if (target) { target.setAttribute('tabindex', '-1'); target.focus(); }
+});
+</script>
 </body>
 </html>

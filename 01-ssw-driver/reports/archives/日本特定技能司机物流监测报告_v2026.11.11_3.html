@@ -5,6 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>日本特定技能司机与物流行业监测报告（第四期·待复核清零版）</title>
 <style>
+/* 无障碍壳层：skip link（视觉隐藏直至聚焦）+ 全局焦点环 */
+.skip-link { position: absolute; left: -9999px; top: 0; z-index: 100;
+  padding: 8px 14px; background: #16324f; color: #fff;
+  border-radius: 0 0 6px 6px; text-decoration: none; }
+.skip-link:focus { left: 8px; top: 8px; }
+:focus-visible { outline: 2px solid #2f5597; outline-offset: 2px; }
+
   body { max-width: 860px; margin: 2rem auto; padding: 0 1rem;
          font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
          line-height: 1.7; color: #222; }
@@ -27,6 +34,8 @@
 </style>
 </head>
 <body>
+<a class="skip-link" href="#main-content">跳到主要内容</a>
+<main id="main-content">
 <h1 id="日本特定技能司机与物流行业监测报告-第四期-待复核清零版">日本特定技能司机与物流行业监测报告（第四期·待复核清零版）</h1>
 <blockquote>
 <p><strong>版本</strong>：v2026.11.11_3（第四期·待复核清零版）　<strong>数据基准日</strong>：2026-11-11　<strong>上一版</strong>：reports/archives/日本特定技能司机物流监测报告_v2026.11.11_2.md<br />
@@ -527,5 +536,14 @@
 <p><strong>继承前三版</strong>：基线、v2026.11.11 与 v2026.11.11_2 已列来源不重复列出。主要沿用：ISA 分野页/运用方针别纸 10/运用要领/在留者统计速报（001472175、001467291、001417998、001473135、001335263、001434808）、ISA FAQ 与旧路径页、ssw.go.jp、ClassNK Portal（news/20、news/25、news/29）、Prometric/JFT-Basic 手册/JLPT 报名页、外務省与沈阳/广州/上海领馆费用页、国交省 Q&amp;A/白書/政策包（cas.go.jp）/检讨会资料/再检证/連結トラック页/大綱（001984794、n1112000、n1111000）、厚労省毎月勤労統計/求人倍率/外国人相談体系、全ト协賃金実態、TDB/TSR、LNews/SGHD 决算短信/NX 新闻室/连合春斗速报/佐川、NPA/デジタル庁路线图、千葉県警察/drivey/气仙沼/阿自马达教习单点、商务部/femhzs、协会けんぽ/年金/国税厅、求人Box/genbars 聚合转载等。</p>
 <hr />
 <p>本报告为 v2026.11.11_3 动态更新版（第四期·待复核清零版），数据基准 2026-11-11，全部引自日/英来源（中国侧国家统计局/外汇交易中心为项目指定例外，仅用于中国侧输入）。</p>
+</main>
+<script>
+document.addEventListener('click', function (event) {
+  var link = event.target.closest ? event.target.closest('.skip-link') : null;
+  if (!link) return;
+  var target = document.querySelector(link.getAttribute('href'));
+  if (target) { target.setAttribute('tabindex', '-1'); target.focus(); }
+});
+</script>
 </body>
 </html>

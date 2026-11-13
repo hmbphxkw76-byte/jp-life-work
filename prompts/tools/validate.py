@@ -13,7 +13,8 @@
   9. 提示词变量：第 3 层提示词须含 {{HANDBOOK_PATH}}、{{REGISTRY_PATH}}、{{TOPIC_DIR}}
  10. 继承声明：第 3 层提示词头部须声明三层继承
  11. 聚合页面同步：主题总览与汇总阅读双向链接完整，生成页面与主题源文件同步
- 12. 更新标记规范：源文档中的 <!-- updated: … --> 须语法正确且单独成行
+  12. 更新标记规范：源文档中的 <!-- updated: … --> 须语法正确且单独成行
+  13. 无障碍合规：对比度（WebAIM AA）、焦点环、landmark 骨架、details 结构、表格语义
 
 用法:
     python prompts/tools/validate.py              # 全量校验
@@ -27,7 +28,9 @@ import re
 import sys
 from pathlib import Path
 
+import a11y
 import build_library
+import md2html
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -443,6 +446,26 @@ def check_library_pages(errors, warnings):
             )
 
 
+def check_accessibility(errors, warnings):
+    """13. 无障碍合规：对比度 / 焦点环 / landmark / details / 表格语义。
+
+    规范来源：WebAIM（WCAG 2.1 AA 1.4.3/1.4.11/2.4.7）、GOV.UK Design System、BBC GEL。
+    """
+    css = "\n".join([md2html.SHELL_CSS, md2html.BASE_CSS, build_library.LIBRARY_CSS])
+    errors.extend(a11y.check_palette_contrast(css))
+    errors.extend(a11y.check_non_text_contrast(css))
+    errors.extend(a11y.check_focus_indicator(css))
+
+    for relative, content in build_library.build_pages().items():
+        for message in a11y.check_html(content):
+            errors.append(f"[{relative.as_posix()}] {message}")
+
+    if 'class="skip-link" href="#main-content"' not in md2html.TEMPLATE:
+        errors.append("[md2html] 独立原文页模板缺少 skip link")
+    if '<main id="main-content">' not in md2html.TEMPLATE:
+        errors.append("[md2html] 独立原文页模板缺少 main landmark")
+
+
 CHECKS = [
     (1, "单文档约束", check_single_doc),
     (2, "目录结构", check_dir_structure),
@@ -456,6 +479,7 @@ CHECKS = [
     (10, "继承声明", check_inheritance_declaration),
     (11, "聚合页面同步", check_library_pages),
     (12, "更新标记规范", check_update_markers),
+    (13, "无障碍合规", check_accessibility),
 ]
 
 

@@ -5,6 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>日本签证与在留资格知识手册</title>
 <style>
+/* 无障碍壳层：skip link（视觉隐藏直至聚焦）+ 全局焦点环 */
+.skip-link { position: absolute; left: -9999px; top: 0; z-index: 100;
+  padding: 8px 14px; background: #16324f; color: #fff;
+  border-radius: 0 0 6px 6px; text-decoration: none; }
+.skip-link:focus { left: 8px; top: 8px; }
+:focus-visible { outline: 2px solid #2f5597; outline-offset: 2px; }
+
   body { max-width: 860px; margin: 2rem auto; padding: 0 1rem;
          font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
          line-height: 1.7; color: #222; }
@@ -27,6 +34,8 @@
 </style>
 </head>
 <body>
+<a class="skip-link" href="#main-content">跳到主要内容</a>
+<main id="main-content">
 <h1 id="日本签证与在留资格知识手册">日本签证与在留资格知识手册</h1>
 <blockquote>
 <p><strong>版本</strong>：v1.0（合并整理版）　<strong>整理日期</strong>：2026-11-12<br />
@@ -1297,6 +1306,8 @@ Y6–Y10：新资格持续 5 年 + 收入/纳税/年金达标 → 永住申请
 </ul>
 <hr />
 <h2 id="08-家属带同与家庭规划">08 家属带同与家庭规划</h2>
+<!-- updated: 2026-11-12 | 新增章节 -->
+
 <blockquote>
 <p>信息核对日期：2026-11-12。本章承接 <a href="#07-永住与长期在留规划">07-永住与长期在留规划</a> 的「家属签证」要点展开，服务于阶段 5（永住定居）的家庭规划：何时能带家属、配偶能否工作、子女如何衔接就学。制度依据以出入国在留管理厅（ISA）现行口径为准。</p>
 </blockquote>
@@ -1650,5 +1661,14 @@ Y6–Y10：新资格持续 5 年 + 收入/纳税/年金达标 → 永住申请
 <li>若与已有文档冲突：先改正文，再在此记录变更</li>
 </ol>
 <hr />
+</main>
+<script>
+document.addEventListener('click', function (event) {
+  var link = event.target.closest ? event.target.closest('.skip-link') : null;
+  if (!link) return;
+  var target = document.querySelector(link.getAttribute('href'));
+  if (target) { target.setAttribute('tabindex', '-1'); target.focus(); }
+});
+</script>
 </body>
 </html>

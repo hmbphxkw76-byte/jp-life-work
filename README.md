@@ -103,7 +103,7 @@ jp-life-work/
 >
 > **单文档格式约定**：每个知识库主题在 `reports/` 下仅维护**单份知识手册 `.md`** 及同名 `.html`，禁止同一主题分散为多份零散 `.md`。知识手册内以 `## NN 章节名` 组织各章节，原 00-index 的导航内容已并入手册前部「导航与使用约定」。
 >
-> **保留策略**：`reports/` 顶层只保留最新 3 份（`*_baseline` 基线版固定保留、永不归档），其余移入 `reports/archives/`；归档上限 7 份，超出删最旧。由 `python prompts/tools/archive_reports.py` 执行，`--dry-run` 可预览。
+> **保留策略**：`reports/` 顶层只保留最新 3 份（`*_baseline` 为当前周期基线，按周期滚动、过期归档为 `archives/*_baseline_<周期>`），其余移入 `reports/archives/`；归档上限 7 份，超出删最旧；历史基线保留 12 期。由 `python prompts/tools/archive_reports.py` 执行，`--dry-run` 可预览。基线滚动与累计对比规则详见 [基线报告管理规则.md](基线报告管理规则.md)。
 >
 > **更新标记约定（已更新 标注）**：在源文档 markdown 中，于需要突出展示的更新内容旁**单独一行**写入
 > `<!-- updated: YYYY-MM-DD [| 本次更新摘要] -->`。构建 `index.html` / `library.html` 时自动转换为「已更新」徽标与高亮：
@@ -160,9 +160,13 @@ jp-life-work/
 - **文档格式**：源文档统一使用 Markdown（`.md`），按主题存放在 `NN-*` 主题目录下。
 - **单文档约束**：每个知识库主题仅维护**单份知识手册 `.md`** 与同名 `.html`，禁止同一主题拆分为多份零散 `.md`。新增/更新内容直接在知识手册内对应章节修改，不新建章节文件。
 - **报告输出**：`python prompts/tools/md2html.py` 将各 `reports/` 下的 md 转为同名 HTML，与 md 同目录存放并随源文件入库。
-- **聚合页面**：`python prompts/tools/build_library.py` 从 13 个主题主文档生成 [主题总览](index.html) 与 [汇总阅读](library.html)；`python prompts/tools/build_library.py --check` 仅检查生成结果是否最新，不写文件。
+- **聚合页面**：`python prompts/tools/build_library.py` 从 13 个主题主文档生成 [主题总览](index.html)、[汇总阅读](library.html) 与 [更新记录](changelog.html)；`python prompts/tools/build_library.py --check` 仅检查生成结果是否最新，不写文件。
+- **总览页表格**：主题总览页以「编号 / 主题 / 分类 / 操作」表格呈现全部主题；操作列固定展示 1–12 月标签，某月存在报告时可点击跳转至该月报告（跨年份取该月最新一份，新报告入库后自动滚动更新），无报告的月份置灰禁用。月份映射由 `collect_report_editions` / `build_month_reports` 扫描 `reports/` 与 `reports/archives/` 的 md/html 版本生成，仅链接存在同名 HTML 的条目。
+- **聚合页面设计**：三页的页面框架（顶栏、Hero、筛选栏、总览表格、阅读页侧栏、页脚）采用 MacroPulse Reports 风格的设计令牌与组件，集中在 `build_library.py` 的 `LIBRARY_CSS`；源文档正文仍使用 `md2html.py` 的 `BASE_CSS`（独立原文页与汇总页共用），**不要为汇总页单独改动 `BASE_CSS`**，以免改变基准框架原文的视觉风格。
+- **分层架构**：`build_library.py` 按「导航配置 → 页面骨架 → 内容块」三层组织（`build_navigation` / `build_*_search_index` → `render_topbar` / `render_hero` / `page_shell` → `render_topic_table` / `render_topic_row` / `render_month_tags` / `render_topic_section` / `render_changelog_group`），页面装配层组合三者。
+- **无障碍合规**：全站默认包含 skip link、landmark 骨架、GOV.UK details 结构、BBC GEL 表格语义（`role=group` + `aria-labelledby` + `tabindex` + `caption`）、WCAG 2.1 AA 对比度与可见焦点环；对比度与结构规则由 `validate.py` 第 13 项自动校验。
 - **内容边界**：内容归位、事实单一来源（SSOT）、重复判定与四主题边界卡见 [内容边界规范.md](内容边界规范.md)；目录结构与路线图以本 README 为准，规范不重复维护。
-- **规范校验**：`python prompts/tools/validate.py` 执行 12 项规范一致性校验（单文档约束、目录结构、引用格式、锚点链接、聚合页面同步、活值硬编码、更新标记规范等）。退出码：0=通过，1=错误（需修复），2=仅警告。
+- **规范校验**：`python prompts/tools/validate.py` 执行 13 项规范一致性校验（单文档约束、目录结构、引用格式、锚点链接、聚合页面同步、活值硬编码、更新标记规范、无障碍合规等）。退出码：0=通过，1=错误（需修复），2=仅警告。
 - **周期排期**：`python prompts/tools/update_scheduler.py status` 查看到期状态；`dispatch` 为到期主题创建工单；`dashboard` 刷新 [updates.md](updates.md)。排期在 [prompts/schedule.json](prompts/schedule.json) 配置。
 - **脚本环境**：`prompts/tools/` 下的共用脚本基于 Python 运行（依赖见 requirements.txt）。
 

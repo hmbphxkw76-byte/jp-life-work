@@ -5,6 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>周期更新看板</title>
 <style>
+/* 无障碍壳层：skip link（视觉隐藏直至聚焦）+ 全局焦点环 */
+.skip-link { position: absolute; left: -9999px; top: 0; z-index: 100;
+  padding: 8px 14px; background: #16324f; color: #fff;
+  border-radius: 0 0 6px 6px; text-decoration: none; }
+.skip-link:focus { left: 8px; top: 8px; }
+:focus-visible { outline: 2px solid #2f5597; outline-offset: 2px; }
+
   body { max-width: 860px; margin: 2rem auto; padding: 0 1rem;
          font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
          line-height: 1.7; color: #222; }
@@ -27,6 +34,8 @@
 </style>
 </head>
 <body>
+<a class="skip-link" href="#main-content">跳到主要内容</a>
+<main id="main-content">
 <h1 id="周期更新看板">周期更新看板</h1>
 <blockquote>
 <p><strong>自动生成</strong>：由 <code>prompts/tools/update_scheduler.py</code> 生成，请勿手工编辑（手工改动会在下次调度时被覆盖）。<br />
@@ -200,7 +209,7 @@
 <tr>
 <td>监测报告版本链</td>
 <td><a href="01-ssw-driver/reports/">01-ssw-driver/reports</a> · <a href="01-ssw-driver/reports/archives/">archives</a></td>
-<td>文件名含版本号，基线常驻顶层</td>
+<td>文件名含版本号；基线按周期滚动，当前基线在顶层、历史基线在 archives</td>
 </tr>
 <tr>
 <td>知识手册历次版本</td>
@@ -231,5 +240,14 @@
 <li><strong>回溯历史</strong>：监测报告直接打开 <code>archives/</code>；知识手册用 GitHub History 对比任意两次提交。</li>
 <li><strong>调整节奏</strong>：编辑 <code>prompts/schedule.json</code> 中对应主题的 <code>cadence_days</code>，下次调度自动生效。</li>
 </ol>
+</main>
+<script>
+document.addEventListener('click', function (event) {
+  var link = event.target.closest ? event.target.closest('.skip-link') : null;
+  if (!link) return;
+  var target = document.querySelector(link.getAttribute('href'));
+  if (target) { target.setAttribute('tabindex', '-1'); target.focus(); }
+});
+</script>
 </body>
 </html>

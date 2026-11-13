@@ -61,7 +61,7 @@ NN-{topic}/
 3. 并行子代理 2–4 个，按手册章节分工；每个子代理限定主题来源台账范围、逐点引用、**每条数据必须附 URL**。
 4. 主代理差异合并：读取知识手册当前版本 → 继承已修正事实 → 按"更新/动态获取/保持"回写对应章节 → 更新手册内更新日志区。
 5. 回写完成后运行 `python prompts/tools/md2html.py {{TOPIC_DIR}}/reports` 重新生成 HTML（与 md 同目录，随源文件入库）。
-6. 运行 `python prompts/tools/archive_reports.py` 执行保留策略：`reports/` 顶层保留最新 3 份（`*_baseline` 基线版固定保留，永不进入 archives），其余入 `archives/`，归档上限 7 份。
+6. 运行 `python prompts/tools/archive_reports.py` 执行保留策略：`reports/` 顶层保留最新 3 份（`*_baseline` 为当前周期基线），其余入 `archives/`，归档上限 7 份；历史基线保留 12 期。基线滚动与累计对比规则详见 [基线报告管理规则](../../基线报告管理规则.md)。
 7. 推送后由 `html-sync.yml` 自动复跑归档、HTML 生成与 `validate.py`；工单内回复版本号与提交 SHA 后关闭。
 
 ## 类型差异 T6 · 主题专属必填区（第 3 层填写清单）

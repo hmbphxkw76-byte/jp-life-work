@@ -35,7 +35,7 @@
 
 | 追溯对象 | 入口 | 说明 |
 |---|---|---|
-| 监测报告版本链 | [01-ssw-driver/reports](01-ssw-driver/reports/) · [archives](01-ssw-driver/reports/archives/) | 文件名含版本号，基线常驻顶层 |
+| 监测报告版本链 | [01-ssw-driver/reports](01-ssw-driver/reports/) · [archives](01-ssw-driver/reports/archives/) | 文件名含版本号；基线按周期滚动，当前基线在顶层、历史基线在 archives |
 | 知识手册历次版本 | 各主题 `reports/` 下的手册 → GitHub 文件 History | 单文档增量回写；变更摘要记入手册「更新日志」 |
 | 更新工单 | [update-task](issues?q=is%3Aissue+label%3Aupdate-task) | 每个到期主题一个工单，关闭即完成 |
 | 调度异常 | [ops-alert](issues?q=is%3Aissue+label%3Aops-alert) | 分级 P0/P1/P2；失败、停摆、积压、收口失败自动创建/追加 |

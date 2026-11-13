@@ -48,6 +48,26 @@ BASE_CSS = """  body { max-width: 860px; margin: 2rem auto; padding: 0 1rem;
   table a[title^="来源"]:hover::after { opacity: .85; }
   blockquote { border-left: 4px solid #ccc; margin-left: 0; padding-left: 1em; color: #555; }"""
 
+# 无障碍壳层样式：skip link（视觉隐藏直至聚焦）+ 全局焦点环。
+# 独立原文页与汇总页共用；BASE_CSS 只负责源文档正文，不在此改动。
+SHELL_CSS = """/* 无障碍壳层：skip link（视觉隐藏直至聚焦）+ 全局焦点环 */
+.skip-link { position: absolute; left: -9999px; top: 0; z-index: 100;
+  padding: 8px 14px; background: #16324f; color: #fff;
+  border-radius: 0 0 6px 6px; text-decoration: none; }
+.skip-link:focus { left: 8px; top: 8px; }
+:focus-visible { outline: 2px solid #2f5597; outline-offset: 2px; }
+"""
+
+# skip link 激活后把焦点移到 main（GOV.UK v4 行为）；无 JS 时退化为普通锚点跳转。
+SKIP_LINK_JS = """<script>
+document.addEventListener('click', function (event) {
+  var link = event.target.closest ? event.target.closest('.skip-link') : null;
+  if (!link) return;
+  var target = document.querySelector(link.getAttribute('href'));
+  if (target) { target.setAttribute('tabindex', '-1'); target.focus(); }
+});
+</script>"""
+
 TEMPLATE = """<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -55,11 +75,16 @@ TEMPLATE = """<!DOCTYPE html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{title}</title>
 <style>
+{shell_css}
 {base_css}
 </style>
 </head>
 <body>
+<a class="skip-link" href="#main-content">跳到主要内容</a>
+<main id="main-content">
 {body}
+</main>
+{skip_js}
 </body>
 </html>
 """
@@ -76,7 +101,10 @@ def convert(md_path: Path) -> Path:
         if line.startswith("# "):
             title = line[2:].strip()
             break
-    html = TEMPLATE.format(title=title, body=body, base_css=BASE_CSS)
+    html = TEMPLATE.format(
+        title=title, body=body, base_css=BASE_CSS,
+        shell_css=SHELL_CSS, skip_js=SKIP_LINK_JS,
+    )
 
     # 与源文件同目录：08-visa-immigration/reports/a.md -> .../reports/a.html
     out_path = md_path.with_suffix(".html")

@@ -5,6 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>日本技术与数字化知识手册</title>
 <style>
+/* 无障碍壳层：skip link（视觉隐藏直至聚焦）+ 全局焦点环 */
+.skip-link { position: absolute; left: -9999px; top: 0; z-index: 100;
+  padding: 8px 14px; background: #16324f; color: #fff;
+  border-radius: 0 0 6px 6px; text-decoration: none; }
+.skip-link:focus { left: 8px; top: 8px; }
+:focus-visible { outline: 2px solid #2f5597; outline-offset: 2px; }
+
   body { max-width: 860px; margin: 2rem auto; padding: 0 1rem;
          font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
          line-height: 1.7; color: #222; }
@@ -27,6 +34,8 @@
 </style>
 </head>
 <body>
+<a class="skip-link" href="#main-content">跳到主要内容</a>
+<main id="main-content">
 <h1 id="日本技术与数字化知识手册">日本技术与数字化知识手册</h1>
 <blockquote>
 <p><strong>版本</strong>：v1.0（合并整理版）　<strong>整理日期</strong>：2026-11-12<br />
@@ -330,6 +339,8 @@
 </ul>
 <hr />
 <h2 id="03-日本数字化劳动市场与岗位行情">03 日本数字化劳动市场与岗位行情</h2>
+<!-- updated: 2026-11-12 | 新增章节 -->
+
 <blockquote>
 <p>信息核对日期：2026-11-12。对应阶段 4 的市场面：转职/跳槽谈判前的行情基准。薪资类数据来自转职服务登录者统计与企业公开值，与个人实际报价有偏差，仅作参照带。在留资格与日语审查要件一律见 <a href="../../08-visa-immigration/reports/日本签证与在留资格知识手册.html#05-特定技能2号与升级路径">05 特定技能2号与升级路径</a>，本章节只管"技能-岗位-行情"。</p>
 </blockquote>
@@ -405,5 +416,14 @@
 <li>数值管理：本章薪资带与缺口数为活值，登记于 <a href="../data/technology-industry-indicator-registry.md">data/technology-industry-indicator-registry.md</a> #4–#6，每年随调查更新刷新</li>
 </ul>
 <hr />
+</main>
+<script>
+document.addEventListener('click', function (event) {
+  var link = event.target.closest ? event.target.closest('.skip-link') : null;
+  if (!link) return;
+  var target = document.querySelector(link.getAttribute('href'));
+  if (target) { target.setAttribute('tabindex', '-1'); target.focus(); }
+});
+</script>
 </body>
 </html>

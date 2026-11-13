@@ -5,6 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>日本资格与教育投资知识手册</title>
 <style>
+/* 无障碍壳层：skip link（视觉隐藏直至聚焦）+ 全局焦点环 */
+.skip-link { position: absolute; left: -9999px; top: 0; z-index: 100;
+  padding: 8px 14px; background: #16324f; color: #fff;
+  border-radius: 0 0 6px 6px; text-decoration: none; }
+.skip-link:focus { left: 8px; top: 8px; }
+:focus-visible { outline: 2px solid #2f5597; outline-offset: 2px; }
+
   body { max-width: 860px; margin: 2rem auto; padding: 0 1rem;
          font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
          line-height: 1.7; color: #222; }
@@ -27,6 +34,8 @@
 </style>
 </head>
 <body>
+<a class="skip-link" href="#main-content">跳到主要内容</a>
+<main id="main-content">
 <h1 id="日本资格与教育投资知识手册">日本资格与教育投资知识手册</h1>
 <blockquote>
 <p><strong>版本</strong>：v1.1（维度扩充版）　<strong>整理日期</strong>：2026-11-12<br />
@@ -380,6 +389,8 @@
 </table>
 <hr />
 <h2 id="03-日本学校教育体系与子女教育">03 日本学校教育体系与子女教育</h2>
+<!-- updated: 2026-11-12 | 新增章节 -->
+
 <blockquote>
 <p>信息核对日期：2026-11-12。制度+手续+成本框架，不做学区/升学策略深水区。承接家属带同后子女落地就学场景，在留资格与家族滞在要件归 <a href="../../08-visa-immigration/reports/日本签证与在留资格知识手册.html#07-永住与长期在留规划">07 永住与长期在留规划</a>。</p>
 </blockquote>
@@ -521,6 +532,8 @@
 </blockquote>
 <hr />
 <h2 id="04-高等教育与技人国学历路径">04 高等教育与技人国学历路径</h2>
+<!-- updated: 2026-11-12 | 新增章节 -->
+
 <blockquote>
 <p>信息核对日期：2026-11-12。本章只做教育侧分析；「技人国」在留要件细节归 visa 手册 05 章（不重写在留要件），核心交付为<strong>「大学毕业 vs 10 年实务经验」两条技人国路线的成本-时间-风险对比表</strong>。</p>
 </blockquote>
@@ -672,5 +685,14 @@
 </tbody>
 </table>
 <hr />
+</main>
+<script>
+document.addEventListener('click', function (event) {
+  var link = event.target.closest ? event.target.closest('.skip-link') : null;
+  if (!link) return;
+  var target = document.querySelector(link.getAttribute('href'));
+  if (target) { target.setAttribute('tabindex', '-1'); target.focus(); }
+});
+</script>
 </body>
 </html>

@@ -6,6 +6,7 @@ import tempfile
 import unittest
 from pathlib import Path
 from unittest.mock import patch
+from urllib.parse import quote
 
 import build_library as library
 import validate
@@ -57,7 +58,9 @@ class RenderingTests(unittest.TestCase):
 
     def test_table_is_wrapped_for_responsive_scrolling(self):
         result = library.namespace_html("<table><tr><td>A</td></tr></table>", "02-career-driver", ROOT, {})
-        self.assertIn('<div class="table-wrap"><table>', result)
+        self.assertIn('<div class="table-wrap" role="group"', result)
+        self.assertIn('tabindex="0"', result)
+        self.assertIn('<caption id="table-caption-02-career-driver-1">', result)
 
     def test_chapter_extraction_filters_meta_headings(self):
         body = (
@@ -111,10 +114,11 @@ class PageBuildTests(unittest.TestCase):
             self.assertIn(f'href="library.html#{anchor}"', index)
             self.assertIn(f'href="index.html#{anchor}"', library_html)
 
-    def test_index_has_all_categories_and_cards(self):
+    def test_index_has_all_topic_rows(self):
         index = self.first[Path("index.html")]
-        self.assertEqual(13, len(re.findall(r'class="topic-card"', index)))
-        self.assertEqual(7, len(re.findall(r'class="category-section"', index)))
+        self.assertEqual(13, len(re.findall(r'class="topic-row"', index)))
+        self.assertIn('<table class="topic-table">', index)
+        self.assertIn('<caption id="topic-table-caption">', index)
 
     def test_library_retains_source_content(self):
         output = self.first[Path("library.html")]
@@ -303,6 +307,47 @@ class UpdateDisplayTests(unittest.TestCase):
         self.assertNotIn('class="topic-update-flag"', page)
 
 
+class MonthTagTests(unittest.TestCase):
+    """操作列月份标签：12 个月完整呈现，有报告可点、无报告置灰。"""
+
+    def _topic(self):
+        return {
+            "id": "02-career-driver", "name": "司机岗位", "kind": "knowledge",
+            "category": "职业就业", "description": "测试描述", "version": "v1.0",
+            "html": ROOT / "02-career-driver/reports/日本司机职业知识手册.html",
+            "body": "<p>正文</p>",
+            "chapters": [{"title": "02 薪资", "id": "topic-02-career-driver--薪资", "level": 2}],
+            "updates": [],
+        }
+
+    def test_index_renders_twelve_month_tags_in_order(self):
+        index = library.render_index([self._topic()])
+        tags = re.findall(r'class="month-tag[^"]*"[^>]*>([^<]+)<', index)
+        self.assertEqual([f"{month}月" for month in range(1, 13)], tags)
+
+    def test_month_with_report_links_to_report_html(self):
+        index = library.render_index([self._topic()])
+        url = quote("02-career-driver/reports/日本司机职业知识手册.html", safe="/")
+        self.assertIn(f'<a class="month-tag" href="{url}"', index)
+
+    def test_month_without_report_is_disabled(self):
+        index = library.render_index([self._topic()])
+        self.assertIn('<span class="month-tag off"', index)
+        self.assertIn("该月暂无报告", index)
+
+    def test_monitor_editions_use_filename_versions(self):
+        topic = {"id": "01-ssw-driver", "kind": "monitor", "target": "01-ssw-driver/reports"}
+        versions = {edition["version"] for edition in library.collect_report_editions(topic)}
+        self.assertIn("v2026.11.12_5", versions)
+        self.assertIn("v2026.11.11_3", versions)
+
+    def test_month_reports_pick_latest_per_month(self):
+        topic = {"id": "01-ssw-driver", "kind": "monitor", "target": "01-ssw-driver/reports"}
+        by_month = library.build_month_reports(topic)
+        self.assertEqual("v2026.11.12_5", by_month[11]["version"])
+        self.assertIn(11, by_month)
+
+
 class UpdateMarkerValidationTests(unittest.TestCase):
     def _write(self, root, text):
         reports = root / "02-career-driver" / "reports"
@@ -343,6 +388,133 @@ class UpdateMarkerValidationTests(unittest.TestCase):
         validate.check_update_markers(errors, warnings)
         self.assertEqual([], errors)
         self.assertEqual([], warnings)
+
+
+class ChangelogTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.pages = library.build_pages()
+        cls.changelog = cls.pages[Path("changelog.html")]
+
+    def test_changelog_page_is_generated(self):
+        self.assertIn(Path("changelog.html"), self.pages)
+
+    def test_changelog_lists_update_entries(self):
+        self.assertIn("更新记录", self.changelog)
+        self.assertIn("2026-11-12", self.changelog)
+        self.assertIn("特定技能司机", self.changelog)
+
+    def test_changelog_links_to_library_topic(self):
+        self.assertIn('href="library.html#topic-01-ssw-driver"', self.changelog)
+
+    def test_topbar_links_to_changelog(self):
+        for name in ("index.html", "library.html", "changelog.html"):
+            self.assertIn('href="changelog.html"', self.pages[Path(name)])
+
+    def test_changelog_landmark_skeleton(self):
+        self.assertRegex(self.changelog, r'<main[^>]*id="main-content"')
+        self.assertIn('<a class="skip-link" href="#main-content">', self.changelog)
+
+    def test_index_card_shows_modified_date(self):
+        self.assertIn("最近更新", self.pages[Path("index.html")])
+
+    def test_library_topic_head_shows_modified_date(self):
+        self.assertIn("最近更新", self.pages[Path("library.html")])
+
+    def test_topic_modified_uses_latest_update(self):
+        topic = {"updates": [{"date": "2026-11-10"}, {"date": "2026-11-12"}]}
+        self.assertEqual("2026-11-12", library.topic_modified(topic))
+
+
+class LayeredComponentTests(unittest.TestCase):
+    """三层架构：导航配置 / 页面骨架 / 内容块。"""
+
+    def test_render_topbar_marks_active_nav(self):
+        bar = library.render_topbar("library", "汇总阅读")
+        self.assertIn('<a href="library.html" class="active">汇总阅读</a>', bar)
+        self.assertIn('<a href="changelog.html">更新记录</a>', bar)
+        self.assertNotIn('<div class="searchbox">', bar)
+
+    def test_render_topbar_includes_searchbox_when_placeholder_given(self):
+        bar = library.render_topbar("index", "JAPAN LIFE & WORK KNOWLEDGE BASE", "搜索…")
+        self.assertIn('<div class="searchbox">', bar)
+        self.assertIn('<div class="spacer"></div>', bar)
+
+    def test_build_navigation_groups_by_category(self):
+        navigation = library.build_navigation(library.load_topics())
+        self.assertEqual(7, navigation.count('class="toc-region"'))
+        self.assertIn('class="toc-topic"', navigation)
+
+    def test_render_footer_and_totop(self):
+        self.assertIn('<footer class="footer">', library.render_footer("x"))
+        self.assertIn('aria-label="回到顶部"', library.render_totop())
+
+    def test_render_topic_row_is_a_content_block(self):
+        topic = {
+            "id": "02-career-driver", "name": "司机岗位", "kind": "knowledge",
+            "category": "职业就业", "description": "测试描述", "version": "v1.0",
+            "html": ROOT / "02-career-driver/reports/日本司机职业知识手册.html",
+            "body": "<p>正文</p>",
+            "chapters": [{"title": "02 薪资", "id": "topic-02-career-driver--薪资", "level": 2}],
+            "updates": [{"date": "2026-11-12", "note": ""}],
+        }
+        row = library.render_topic_row(topic)
+        self.assertIn('class="topic-row"', row)
+        self.assertIn('id="topic-02-career-driver"', row)
+        self.assertIn("最近更新", row)
+        self.assertIn('class="month-tags"', row)
+        self.assertIn('class="topic-details"', row)
+
+
+class SearchIndexTests(unittest.TestCase):
+    """P1-2：构建期生成内联结构化搜索索引，替代运行时 DOM 遍历。"""
+
+    def test_library_search_index_records_are_structured(self):
+        topics = [{
+            "id": "02-career-driver", "name": "司机岗位",
+            "body": '<h2 id="topic-02-career-driver--薪资">02 薪资</h2><p>正文内容。</p>',
+            "chapters": [], "updates": [],
+        }]
+        records = library.build_library_search_index(topics)
+        self.assertEqual(2, len(records))
+        self.assertEqual("02 薪资", records[0]["title"])
+        self.assertEqual("正文内容。", records[1]["text"])
+        self.assertEqual("topic-02-career-driver--薪资", records[1]["target"])
+
+    def test_library_page_embeds_search_index(self):
+        page = library.build_pages()[Path("library.html")]
+        self.assertIn("const SEARCH_INDEX =", page)
+
+    def test_index_page_embeds_topic_index(self):
+        page = library.build_pages()[Path("index.html")]
+        self.assertIn("const TOPIC_INDEX =", page)
+
+
+class DesignTokenTests(unittest.TestCase):
+    """P1-3：USWDS 式有限档位令牌（space / radius / measure）。"""
+
+    def test_token_scales_are_defined(self):
+        root = library.LIBRARY_CSS[
+            library.LIBRARY_CSS.find(":root") : library.LIBRARY_CSS.find(
+                "}", library.LIBRARY_CSS.find(":root")
+            )
+        ]
+        for token in (
+            "--space-1", "--space-4", "--space-5",
+            "--radius-xs", "--radius-sm", "--radius-md", "--radius-lg", "--radius-pill",
+            "--measure-body", "--measure-main", "--measure-layout", "--measure-sidebar",
+        ):
+            self.assertIn(token, root)
+
+    def test_radius_values_use_tokens(self):
+        self.assertEqual([], re.findall(r"border-radius:\s*\d+px", library.LIBRARY_CSS))
+
+    def test_measure_tokens_are_used(self):
+        css = library.LIBRARY_CSS
+        self.assertIn("max-width: var(--measure-main)", css)
+        self.assertIn("max-width: var(--measure-layout)", css)
+        self.assertIn("width: var(--measure-sidebar)", css)
+        self.assertIn("max-width: var(--measure-body)", css)
 
 
 if __name__ == "__main__":
