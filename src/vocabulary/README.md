@@ -1,6 +1,6 @@
 # 词汇库子系统（vocabulary）· 标准操作流程（SOP）
 
-> **一句话定位**：仓库级、主题无关的标准化动态词汇子系统，位于 `src/vocabulary/`。首期落地 **AI 安全词汇**（红队/蓝队、AI 红队认证考试、攻击技术、防御检测、工具平台、框架标准、基准评估，共 7 分类）；当前已登记 4 个主题、295 条词条。新增任意领域词汇仅需执行一条 `topic-add` 命令，**零代码修改**。
+> **一句话定位**：仓库级、主题无关的标准化动态词汇子系统，位于 `src/vocabulary/`。当前已按仓库 **01–13 业务线一一对应**登记 13 个主题、1052 条词条（4 个重点主题各 104–106 条，其余 9 个主题 68–74 条，6–7 个受控分类），经交叉校验全部完整覆盖对应业务线核心指标词，并全部同步至各业务线 `prompts/business-config.md`。新增任意领域词汇仅需执行一条 `topic-add` 命令，**零代码修改**。
 
 ---
 
@@ -25,7 +25,7 @@ src/vocabulary/
     │   ├── terms.md                   # 结构化存储（9 列 md-table 契约，脚本统一读写）
     │   ├── imports/                   # 批量导入文件暂存（永久留痕）
     │   └── exports/                   # 导出产物（json / csv / jsonl，供上层对接）
-    └── …                              # 现有主题：ai-security / cybersecurity / economy / financial-markets
+    └── …                              # 现有主题：与 01–13 业务线一一对应的 13 个主题
 ```
 
 ### 1.1 目录职责映射
@@ -62,12 +62,12 @@ src/vocabulary/
 
 **核心不变量**：脚本代码中不出现任何主题名、分类名、词条内容；数据文件中不出现流程逻辑。二者仅通过 `topics.json` 连接。
 
-## 二、快速开始（AI 安全词汇已就位）
+## 二、快速开始（13 主题词库已就位）
 
 ```powershell
 python src/vocabulary/script/vocab_tool.py topics                                          # 查看已注册主题
-python src/vocabulary/script/vocab_tool.py check --topic ai-security                       # 质量校验（当前 49 条，0 错误 0 警告）
-python src/vocabulary/script/vocab_tool.py export --topic ai-security --format all         # 一键导出 json/csv/jsonl
+python src/vocabulary/script/vocab_tool.py check --topic ssw-driver                        # 质量校验（当前 68 条，0 错误 0 警告）
+python src/vocabulary/script/vocab_tool.py export --topic ssw-driver --format all          # 一键导出 json/csv/jsonl
 python src/vocabulary/script/vocab_tool.py index                                           # 重新生成全主题索引
 ```
 
@@ -283,16 +283,27 @@ python src/vocabulary/script/vocab_tool.py topic-add --topic financial-markets -
 | 首次接入业务线 | 目标尚无标记区间 | 配置 `insert_before` 后跑一次 `sync`（自动插入区块）；并在目标文件版本记录人工登记机制接入（如 business-config v1.2） |
 | 想临时停用自动同步 | — | `sync.json` 设 `auto_trigger: false`（watch/手动 sync 不受影响） |
 
-### 9.5 已接入绑定（历史记录）
+### 9.5 已接入绑定
 
-> ⚠️ 下表目标路径基于仓库迁移前的 `trends/`、`dubai/` 目录，迁移到 01–13 主题目录后**已全部失效**（`sync_vocab.py check` 当前 4 个目标均报「目标提示词不存在」）。重新启用自动同步前，须先把 `config/sync.json` 的 `targets[].path` 重绑到对应主题目录的 `prompts/business-config.md`，并复核 `insert_before` 锚点唯一性。
+13 个主题与 01–13 业务线一一绑定，均写入各自 `prompts/business-config.md` 的「十二、版本记录」之前；2026-11-13 首次写入并通过 `verify`（每主题 68 条，区间外内容逐字节一致）。
 
-| 词汇库主题 | 目标提示词（迁移前路径） | 接入日期 |
-|---|---|---|
-| ai-security（49 条，v1.3） | `trends/ai-security/prompts/business-config.md`「词汇速览」区块（插于第七节版本记录之前） | 2026-11-13 |
-| cybersecurity（153 条，v1.4） | `dubai/cybersecurity/prompts/business-config.md`「词汇速览」区块（插于第九节版本记录之前） | 2026-11-13 |
-| financial-markets（49 条，v1.1） | `dubai/apartment/prompts/business-config.md`「词汇速览」区块（插于第十三节版本记录之前） | 2026-11-13 |
-| economy（44 条，v1.2） | `trends/economy/prompts/business-config.md`「词汇速览」区块（插于第七节版本记录之前） | 2026-11-13 |
+| 业务线 | 词汇库主题 | 目标提示词 | 区块标题 |
+|---|---|---|---|
+| 01 | ssw-driver | `01-ssw-driver/prompts/business-config.md` | `## 词汇速览：特定技能司机（词汇库自动同步）` |
+| 02 | career-driver | `02-career-driver/prompts/business-config.md` | `## 词汇速览：司机职业发展（词汇库自动同步）` |
+| 03 | career-management | `03-career-management/prompts/business-config.md` | `## 词汇速览：职业管理与晋升（词汇库自动同步）` |
+| 04 | industry-logistics | `04-industry-logistics/prompts/business-config.md` | `## 词汇速览：物流行业（词汇库自动同步）` |
+| 05 | industry-autonomous | `05-industry-autonomous/prompts/business-config.md` | `## 词汇速览：自动驾驶与自动化（词汇库自动同步）` |
+| 06 | industry-technology | `06-industry-technology/prompts/business-config.md` | `## 词汇速览：技术行业（词汇库自动同步）` |
+| 07 | economy-finance | `07-economy-finance/prompts/business-config.md` | `## 词汇速览：经济与财务（词汇库自动同步）` |
+| 08 | visa-immigration | `08-visa-immigration/prompts/business-config.md` | `## 词汇速览：签证与移民（词汇库自动同步）` |
+| 09 | politics-law | `09-politics-law/prompts/business-config.md` | `## 词汇速览：政治与法律（词汇库自动同步）` |
+| 10 | education-qualification | `10-education-qualification/prompts/business-config.md` | `## 词汇速览：教育与资格（词汇库自动同步）` |
+| 11 | language-japanese | `11-language-japanese/prompts/business-config.md` | `## 词汇速览：日语语言（词汇库自动同步）` |
+| 12 | culture-life | `12-culture-life/prompts/business-config.md` | `## 词汇速览：文化与生活（词汇库自动同步）` |
+| 13 | regional-info | `13-regional-info/prompts/business-config.md` | `## 词汇速览：地区信息（词汇库自动同步）` |
+
+> **说明**：同一目标文件绑定多个主题时，须使用不同的 `section_title`，避免区块标题重复。
 
 ## 十、路径、别名与工具链约定
 
@@ -340,3 +351,7 @@ python src/vocabulary/script/vocab_tool.py topic-add --topic financial-markets -
 | v1.5 | 2026-11-13 | 第三条绑定（全量覆盖） | financial-markets 绑定同步至 dubai/apartment/prompts/business-config.md；至此三条业务线全部接入自动同步（49+90+49=188 条） |
 | v1.6 | 2026-11-13 | 新增 economy 主题与第四条绑定 | economy（经济）主题接入：3 分类（经济体与国家 / 区域经济组织 / 经济概念），种子 17 条入库 + 并行批次扩展至 44 条（v1.2），ECO 前缀；绑定同步至 trends/economy/prompts/business-config.md（sync.json v1.2）；全库 4 主题 |
 | v1.7 | 2026-11-13 | 目录规范化与扩展骨架 | 目录迁入 `src/vocabulary/` 并补齐扩展骨架：新增 `schema/export.schema.json`（导出数据契约）与 `templates/topic-import-template.md`（导入模板）；README 增加目录职责映射、命名约定、新主题目录创建规则、路径/别名/工具链说明与验收命令；脚本内用法示例路径同步修正。现有 config/data/script 结构未改动，4 主题 295 条词条校验 0 错误 0 警告 |
+| v1.8 | 2026-11-13 | 同步目标重绑 | sync.json v1.3：financial-markets、economy 重绑至 `07-economy-finance/prompts/business-config.md`（第十二节版本记录前，区块标题区分主题），首次写入并校验通过（49 + 44 条，区间外内容一致）；ai-security、cybersecurity 因 01–13 无对应主题暂不绑定，词库保留 |
+| v1.9 | 2026-11-13 | 13 业务线词库重建 | 按 01–13 业务线一一对应重建主题体系：移除 ai-security、cybersecurity、economy、financial-markets 四个历史主题及其数据（含 07 旧同步区块），新建 13 个主题、每主题 68 条，共 884 条（6–7 个受控分类/主题）；13 条 sync.json v2.0 绑定全部写入各自 business-config.md 并通过 verify；`check` 13 主题 0 错误 0 警告，`topic-check` 0 错误 0 警告；vocab_tool.py 允许从空注册表引导 topic-add |
+| v2.0 | 2026-11-13 | 4 主题扩展至 102 条 | ssw-driver、career-driver、industry-logistics、industry-autonomous 各新增 34 条扩展种子（imports/2026-11-13_expansion-*.md），零重复、零跳过；4 主题词库 v1.2（各 102 条），全库 13 主题 1020 条；check 0 错误 0 警告，4 个业务线同步区块增量更新并通过 verify |
+| v2.1 | 2026-11-13 | 全库交叉校验与缺口补录 | 以 13 条业务线指标登记册核心指标词为基准逐词核对，发现 12 个主题共 32 项指标级缺口（如育成就劳 MOC、SPPI、物流白書、家計調査、時間外労働上限、納期遵守率等），经 imports/2026-11-13_gapfill*.md 全部补录入库（32 条，0 重复）；复核 13/13 主题完整覆盖，全库 1052 条；check / topic-check / sync verify 全部通过 |

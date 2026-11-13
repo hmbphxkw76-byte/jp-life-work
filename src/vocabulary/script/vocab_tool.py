@@ -182,8 +182,8 @@ def load_config(path: Path) -> dict:
     if not path.exists():
         raise FileNotFoundError(f"配置文件不存在：{path}")
     cfg = json.loads(path.read_text(encoding="utf-8-sig"))
-    if not isinstance(cfg.get("topics"), dict) or not cfg["topics"]:
-        raise ValueError("配置文件缺少非空 topics 对象")
+    if not isinstance(cfg.get("topics"), dict):
+        raise ValueError("配置文件缺少 topics 对象")
     return cfg
 
 
