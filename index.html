@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>主题总览｜日本生活与工作知识库</title>
+<style>
+/* 无障碍壳层：skip link（视觉隐藏直至聚焦）+ 全局焦点环 */
+.skip-link { position: absolute; left: -9999px; top: 0; z-index: 100;
+  padding: 8px 14px; background: #16324f; color: #fff;
+  border-radius: 0 0 6px 6px; text-decoration: none; }
+.skip-link:focus { left: 8px; top: 8px; }
+:focus-visible { outline: 2px solid #2f5597; outline-offset: 2px; }
+
+  body { max-width: 860px; margin: 2rem auto; padding: 0 1rem;
+         font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+         line-height: 1.7; color: #222; }
+  pre { background: #f5f5f5; padding: 0.8rem; overflow-x: auto; border-radius: 4px; }
+  code { background: #f5f5f5; padding: 0.1em 0.3em; border-radius: 3px; }
+  pre code { padding: 0; background: none; }
+  table { border-collapse: collapse; }
+  th, td { border: 1px solid #ccc; padding: 0.4em 0.7em; }
+  table a[title^="来源"] { color: inherit; text-decoration: none;
+    word-break: normal; overflow-wrap: anywhere;
+    border-bottom: 1px dotted #b8b0a0; }
+  table a[title^="来源"] strong, table a[title^="来源"] em,
+  table a[title^="来源"] code { color: inherit; background: none; }
+  table a[title^="来源"]:hover { color: #1a5f5a; background: rgba(26,95,90,.09);
+    border-bottom: 1px solid currentColor; }
+  table a[title^="来源"]::after { content: "↗"; margin-left: 3px;
+    font-size: .76em; opacity: 0; }
+  table a[title^="来源"]:hover::after { opacity: .85; }
+  blockquote { border-left: 4px solid #ccc; margin-left: 0; padding-left: 1em; color: #555; }
+
+:root {
+  /* 颜色令牌 */
+  --bg: #f4f6f9; --card: #ffffff; --ink: #15202b; --ink2: #465667; --ink3: #5f6e7d;
+  --line: #e1e7ee; --line2: #eef2f6; --border-control: #76828f;
+  --navy: #16324f; --navy2: #2f5597; --blue: #3f6fb0; --blue-l: #eaf1fa;
+  --green: #1c7444; --green-l: #eaf5ef;
+  --amber: #8a5f0e; --amber-l: #fdf4e2; --amber-line: #f0dcb0;
+  --gray: #5f6b76; --gray-l: #eff2f4;
+  /* 间距档位（4px 基准，USWDS 式有限档位） */
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px;
+  --space-5: 24px; --space-6: 32px; --space-7: 40px; --space-8: 56px;
+  /* 圆角档位 */
+  --radius-xs: 4px; --radius-sm: 6px; --radius-md: 10px; --radius-lg: 12px;
+  --radius-pill: 999px;
+  /* 行宽 / 容器宽度 */
+  --measure-body: 860px; --measure-main: 1240px; --measure-layout: 1440px;
+  --measure-sidebar: 266px; --measure-search: 240px; --measure-results: 340px;
+  --measure-table: 480px; --measure-card-min: 320px; --measure-note-min: 200px;
+  --measure-search-min: 180px; --measure-results-max: 360px;
+  --measure-sidebar-max: 280px;
+  --topbar-h: 56px; --shadow: 0 1px 3px rgba(20,40,70,.06);
+}
+html { scroll-behavior: smooth; scroll-padding-top: calc(var(--topbar-h) + 14px); }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body.index-page, body.library-page, body.changelog-page {
+  max-width: none; margin: 0; padding: 0; background: var(--bg); color: var(--ink);
+  font-family: "Microsoft YaHei", "PingFang SC", "Segoe UI", Arial, sans-serif;
+  line-height: 1.7; font-size: 14.5px;
+}
+[hidden] { display: none !important; }
+/* 仅页面框架组件使用 border-box；.topic-body 内的源文档元素保持原始盒模型 */
+.topbar, .hero, .filterbar, .main, .layout, .sidebar, .reader-main, .cards, .topic-card,
+.report-block, .report-bar, .topic-local-toc, .topic-head, .searchbox, .footer, .totop,
+.topic-table, .month-tags, .month-tag,
+.topbar *, .hero *, .filterbar *, .sidebar *, .topic-card *, .report-block .report-bar *,
+.topic-local-toc *, .searchbox *, .footer *, .topic-table *, .month-tags * { box-sizing: border-box; }
+
+/* ── 顶栏 ── */
+.topbar { position: sticky; top: 0; z-index: 50; background: rgba(22,50,79,.97); color: #fff;
+  display: flex; align-items: center; gap: var(--space-4); padding: 0 var(--space-5); height: var(--topbar-h);
+  box-shadow: 0 2px 10px rgba(15,35,56,.25); }
+.topbar .brand { font-weight: 700; font-size: 15px; letter-spacing: .4px; white-space: nowrap; }
+.topbar .brand a { color: #fff; }
+.topbar .brand a:hover { text-decoration: none; }
+.topbar .brand-sub { font-size: 12.5px; color: rgba(255,255,255,.72); letter-spacing: .6px; white-space: nowrap; }
+.topbar nav { display: flex; gap: 4px; }
+.topbar nav a { color: rgba(255,255,255,.82); font-size: 13px; padding: 5px 12px; border-radius: var(--radius-pill); }
+.topbar nav a:hover { background: rgba(255,255,255,.14); color: #fff; text-decoration: none; }
+.topbar nav a.active { background: rgba(255,255,255,.18); color: #fff; font-weight: 600; }
+.topbar .spacer { flex: 1; }
+
+/* ── 搜索框 ── */
+.searchbox { position: relative; }
+.searchbox > input { width: var(--measure-search); max-width: 42vw; padding: 6px 13px; border-radius: var(--radius-pill);
+  border: 1px solid rgba(255,255,255,.6); background: rgba(255,255,255,.1); color: #fff;
+  font-size: 13px; font-family: inherit; }
+.searchbox > input::placeholder { color: rgba(255,255,255,.55); }
+.searchbox > input:focus { background: rgba(255,255,255,.18); border-color: rgba(255,255,255,.85); }
+.topbar :focus-visible { outline-color: #ffffff; }
+.searchbox .results { position: absolute; top: calc(100% + 6px); right: 0; width: var(--measure-results); max-width: 86vw;
+  background: #fff; border: 1px solid var(--line); border-radius: var(--radius-md);
+  box-shadow: 0 10px 30px rgba(15,35,56,.2); max-height: var(--measure-results-max); overflow-y: auto;
+  z-index: 60; display: none; color: var(--ink); }
+.searchbox .results.show { display: block; }
+.sr-item { display: block; padding: 9px 13px; border-bottom: 1px solid var(--line2); }
+.sr-item:last-child { border-bottom: 0; }
+.sr-item:hover { background: var(--blue-l); text-decoration: none; }
+.sr-item .t { font-size: 13px; color: var(--navy); font-weight: 700; line-height: 1.4; }
+.sr-item .path { font-size: 11px; color: var(--ink3); margin-top: 1px; }
+.sr-item .s { font-size: 12px; color: var(--ink2); line-height: 1.55; margin-top: 3px;
+  max-height: 3.2em; overflow: hidden; }
+.sr-none { padding: 16px; text-align: center; color: var(--ink3); font-size: 12.5px; }
+
+/* ── Hero（总览页） ── */
+.hero { background: linear-gradient(128deg,#0f2338 0%,#16324f 52%,#2f5597 100%);
+  color: #fff; padding: var(--space-7) var(--space-7) var(--space-7); }
+.hero .eyebrow { font-size: 11.5px; letter-spacing: 2.4px; color: rgba(255,255,255,.72); }
+.hero h1 { font-size: 27px; font-weight: 700; letter-spacing: .4px; margin: 8px 0; padding: 0; border: 0; }
+.hero .sub { font-size: 13.5px; color: rgba(255,255,255,.8); max-width: var(--measure-body); margin: 0; }
+.hero .stats { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+.hero .stat { background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2);
+  border-radius: var(--radius-md); padding: var(--space-2) var(--space-4); font-size: 12px; color: rgba(255,255,255,.85); }
+.hero .stat b { font-size: 20px; display: block; color: #fff; letter-spacing: .5px; line-height: 1.3; }
+.hero .legend { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 18px;
+  font-size: 12px; color: rgba(255,255,255,.78); }
+.hero .legend .legend-text { color: rgba(255,255,255,.72); }
+
+/* ── 筛选栏（总览页） ── */
+.filterbar { position: sticky; top: var(--topbar-h); z-index: 40;
+  background: rgba(244,246,249,.95); backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--line); padding: var(--space-3) var(--space-5);
+  display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.chips { display: flex; gap: 6px; flex-wrap: wrap; }
+.chip { border: 1px solid var(--border-control); background: #fff; border-radius: var(--radius-pill); padding: var(--space-1) var(--space-3);
+  font-size: 12.5px; color: var(--ink2); cursor: pointer; user-select: none; font-family: inherit; }
+.chip:hover { border-color: var(--blue); }
+.chip.on { background: var(--navy); border-color: var(--navy); color: #fff; }
+.filterbar .count { font-size: 12px; color: var(--ink3); margin-left: auto; white-space: nowrap; }
+
+/* ── 主题卡片（总览页） ── */
+.main { max-width: var(--measure-main); margin: 0 auto; padding: var(--space-2) var(--space-5) 50px; }
+.category-section { margin-bottom: 12px; scroll-margin-top: calc(var(--topbar-h) + 14px); }
+.region-head { display: flex; align-items: baseline; gap: 10px; margin: 24px 0 2px; flex-wrap: wrap; }
+.region-head h2 { font-size: 20px; color: var(--navy); margin: 0; padding: 0; border: 0; }
+.region-head .en { font-size: 11px; color: var(--ink3); letter-spacing: 1.6px; text-transform: uppercase; }
+.region-head .count { font-size: 11.5px; color: var(--ink3); }
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(var(--measure-card-min), 1fr));
+  gap: 14px; margin: 12px 0 6px; }
+.topic-card { min-width: 0; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius-lg);
+  padding: var(--space-4) 18px; display: flex; flex-direction: column; gap: var(--space-2); box-shadow: var(--shadow);
+  transition: border-color .15s, box-shadow .15s; scroll-margin-top: calc(var(--topbar-h) + 14px); }
+.topic-card:hover { border-color: #c9d6e6; box-shadow: 0 4px 14px rgba(20,40,70,.09); }
+.topic-card:target { border-color: var(--blue); box-shadow: 0 0 0 3px var(--blue); }
+.topic-card .row1 { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.badge { font-size: 11px; border-radius: var(--radius-xs); padding: 1px 7px; background: var(--blue-l);
+  color: var(--navy2); white-space: nowrap; font-weight: 600; }
+.badge.std { background: var(--gray-l); color: var(--gray); }
+.badge.warn { background: var(--amber-l); color: var(--amber); }
+.badge.baseline { background: var(--green-l); color: var(--green); }
+.badge.updated { background: var(--amber-l); color: var(--amber); }
+.count { font-size: 11.5px; color: var(--ink3); white-space: nowrap; }
+.topic-card h4 { font-size: 16.5px; color: var(--navy); letter-spacing: .2px; margin: 0; padding: 0; border: 0; line-height: 1.5; }
+.topic-number { color: var(--blue); font-weight: 700; margin-right: 6px; }
+.topic-card .desc { font-size: 12.8px; color: var(--ink2); line-height: 1.65; flex: 1; margin: 0; }
+.status-row { display: flex; gap: 6px; flex-wrap: wrap; }
+.status-badge { font-size: 11px; border-radius: var(--radius-xs); padding: 2px var(--space-2); font-weight: 600; white-space: nowrap; }
+.sb-base { background: var(--green-l); color: var(--green); }
+.sb-upd { background: var(--amber-l); color: var(--amber); }
+.sb-none { background: var(--gray-l); color: var(--gray); font-weight: 500; }
+.topic-update-flag { font-size: 11px; border-radius: var(--radius-xs); padding: 2px var(--space-2); font-weight: 600;
+  white-space: nowrap; background: var(--amber-l); color: var(--amber); }
+.topic-card .actions { display: flex; gap: 8px; margin-top: 2px; flex-wrap: wrap; }
+.btn { display: inline-block; font-size: 12.5px; border-radius: var(--radius-sm); padding: 6px 13px;
+  border: 1px solid var(--border-control); background: #fff; color: var(--navy2); cursor: pointer;
+  font-family: inherit; line-height: 1.5; }
+.btn:hover { text-decoration: none; border-color: var(--blue); }
+.btn.primary { background: var(--navy); border-color: var(--navy); color: #fff; }
+.btn.primary:hover { background: var(--navy2); border-color: var(--navy2); }
+.topic-details { border-top: 1px dashed var(--line); padding-top: 8px; }
+.topic-details summary, .topic-local-toc summary { cursor: pointer; color: var(--navy2); font-weight: 700; font-size: 12.5px; }
+.topic-details .summary-text, .topic-local-toc .summary-text { font: inherit; }
+.topic-details .details-text, .topic-local-toc .details-text { margin-top: 2px; }
+.chapter-list { margin: 8px 0 0; padding-left: 0; list-style: none; }
+.chapter-list li { margin: 0; }
+.chapter-list a { display: block; padding: 5px 9px; border-radius: var(--radius-sm); font-size: 12.5px; line-height: 1.5; }
+.chapter-list a:hover { background: var(--blue-l); text-decoration: none; }
+.noresult { padding: 44px 20px; text-align: center; color: var(--ink3); font-size: 13.5px; }
+
+/* ── 主题总览表（总览页） ── */
+.topic-table { width: 100%; min-width: 760px; border-collapse: separate; border-spacing: 0;
+  background: var(--card); border: 1px solid var(--line); border-radius: var(--radius-lg);
+  overflow: hidden; box-shadow: var(--shadow); }
+.topic-table th, .topic-table td { padding: 9px 14px; border-bottom: 1px solid var(--line2);
+  text-align: left; vertical-align: middle; font-size: 13.5px; }
+.topic-table thead th { background: var(--gray-l); color: var(--navy); font-size: 12.5px;
+  letter-spacing: .4px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+.topic-table tbody tr:last-child td { border-bottom: 0; }
+.topic-table tbody tr:hover { background: #f8fafd; }
+.topic-row { scroll-margin-top: calc(var(--topbar-h) + 14px); }
+.topic-row:target td { background: #fff8e6; }
+.topic-row:target td:first-child { box-shadow: inset 3px 0 0 var(--blue); }
+.col-num { width: 52px; color: var(--blue); font-weight: 700; white-space: nowrap; }
+.col-topic { min-width: 230px; }
+.topic-link { color: var(--navy); font-weight: 700; font-size: 14.5px; }
+.topic-link:hover { text-decoration: underline; }
+.topic-meta { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; margin-top: 3px; }
+.col-topic .topic-details { border-top: 1px dashed var(--line); padding-top: 6px; margin-top: 6px; }
+.col-topic .chapter-list { margin-top: 4px; }
+.col-topic .chapter-list a { padding: 3px 7px; font-size: 12px; }
+.col-cat { width: 110px; white-space: nowrap; }
+.col-ops { min-width: 500px; }
+.month-tags { display: flex; flex-wrap: wrap; gap: 4px; }
+.month-tag { display: inline-block; min-width: 34px; text-align: center; padding: 2px 7px;
+  border-radius: var(--radius-pill); font-size: 11.5px; line-height: 1.6;
+  background: var(--navy); color: #fff; white-space: nowrap; }
+.month-tag:hover { background: var(--navy2); text-decoration: none; }
+.month-tag.off { background: var(--gray-l); color: var(--ink3); cursor: default; }
+
+/* ── 更新记录页 ── */
+.cl-group { margin: 18px 0; }
+.cl-date { font-size: 16px; color: var(--navy); margin: 0 0 8px; padding: 0; border: 0; }
+.cl-list { list-style: none; margin: 0; padding: 0; }
+.cl-list li { display: flex; gap: var(--space-3); align-items: baseline; flex-wrap: wrap;
+  background: var(--card); border: 1px solid var(--line); border-radius: var(--radius-lg);
+  padding: var(--space-3) var(--space-4); margin-bottom: var(--space-2); }
+.cl-topic { font-weight: 700; color: var(--navy); }
+.cl-note { flex: 1; min-width: var(--measure-note-min); font-size: 13px; color: var(--ink2); }
+.topic-modified { font-size: 11px; color: var(--ink3); white-space: nowrap; }
+
+/* ── 阅读页布局 ── */
+.layout { display: flex; max-width: var(--measure-layout); margin: 0 auto; align-items: flex-start; }
+.sidebar { width: var(--measure-sidebar); flex: none; position: sticky; top: var(--topbar-h);
+  height: calc(100vh - var(--topbar-h)); overflow-y: auto; padding: var(--space-4) 10px 50px;
+  border-right: 1px solid var(--line); background: #fbfcfe; }
+.sidebar::-webkit-scrollbar { width: 6px; }
+.sidebar::-webkit-scrollbar-thumb { background: #d3dce6; border-radius: var(--radius-xs); }
+.toc-region { font-size: 13px; font-weight: 700; color: var(--navy); margin: 14px 0 5px;
+  letter-spacing: .4px; padding: 0 8px; }
+.toc-topic { display: block; font-size: 13px; color: var(--ink2); padding: 5px 9px;
+  border-radius: var(--radius-sm); margin: 2px 0; line-height: 1.4; }
+.toc-topic:hover { background: var(--blue-l); text-decoration: none; }
+.toc-topic.active { background: var(--blue-l); color: var(--navy); font-weight: 700; }
+.reader-main { flex: 1; min-width: 0; padding: 18px 26px 60px; }
+.topic-section { margin-bottom: 10px; scroll-margin-top: calc(var(--topbar-h) + 14px); }
+.topic-head { border-left: 4px solid var(--navy2); padding: 2px 0 2px 12px; margin: 28px 0 12px; }
+.topic-head .crumb { font-size: 11.5px; color: var(--ink3); letter-spacing: .4px; }
+.topic-head h2 { font-size: 21px; color: var(--navy); margin: 2px 0; padding: 0; border: 0; }
+.topic-head .meta { font-size: 12.3px; color: var(--ink2); }
+.report-block { background: var(--card); border: 1px solid var(--line);
+  border-radius: var(--radius-lg); margin: var(--space-4) 0; overflow: hidden; box-shadow: var(--shadow);
+  scroll-margin-top: calc(var(--topbar-h) + 14px); }
+.report-bar { display: flex; align-items: center; gap: var(--space-3); flex-wrap: wrap; padding: var(--space-3) var(--space-4);
+  background: linear-gradient(125deg,#f5f9fd,#edf3fa); border-bottom: 1px solid var(--line); }
+.report-bar .rt { font-size: 14px; font-weight: 700; color: var(--navy); flex: 1; min-width: var(--measure-note-min);
+  line-height: 1.5; }
+.report-bar .ra { font-size: 12px; display: flex; gap: 10px; align-items: center; white-space: nowrap; }
+.topic-local-toc { padding: var(--space-3) var(--space-4); background: #f8fafc; border-bottom: 1px solid var(--line); }
+.topic-local-toc .chapter-list { columns: 2; column-gap: 24px; }
+
+/* ── 主题正文（保持源文档原始排版） ── */
+.topic-body { min-width: 0; padding: 18px 22px 26px; font-size: 16px; line-height: 1.7; color: #222; }
+.topic-body p, .topic-body li { overflow-wrap: anywhere; }
+.topic-body h1:first-child { margin-top: 18px; }
+.topic-body h1, .topic-body h2, .topic-body h3, .topic-body h4, .topic-body h5, .topic-body h6 { scroll-margin-top: calc(var(--topbar-h) + 14px); }
+.topic-body h1:target, .topic-body h2:target, .topic-body h3:target, .topic-body h4:target, .topic-body h5:target, .topic-body h6:target { background: #fff3bf; outline: 3px solid #fff3bf; }
+.table-wrap { max-width: 100%; overflow-x: auto; }
+.table-wrap table { min-width: var(--measure-table); width: 100%; }
+.table-wrap caption { caption-side: top; text-align: left; font-size: 12.5px;
+  color: var(--ink3); padding: 0 0 6px; }
+.topic-body img { height: auto; }
+
+/* ── 更新标注（amber 家族） ── */
+.update-badge { display: inline-block; margin: 0 0 0 6px; padding: 1px 8px;
+  border: 1px solid var(--amber-line); border-radius: var(--radius-pill); background: var(--amber-l);
+  color: var(--amber); font-size: 12px; font-weight: 600; line-height: 1.6;
+  vertical-align: middle; white-space: nowrap; }
+.update-note { margin-left: 4px; color: var(--amber); font-size: 12px; font-weight: 400; }
+.update-block { position: relative; margin: 1.2em 0; padding: 14px 16px; background: #fffdf7;
+  border: 1px solid var(--amber-line); border-left: 4px solid var(--amber); border-radius: var(--radius-sm); }
+.update-block > .update-badge { position: absolute; top: -11px; left: 12px; margin: 0;
+  box-shadow: 0 1px 2px rgba(120,90,10,.12); }
+.update-section { margin: 1.4em 0; padding: 2px 0 2px 16px; border-left: 4px solid var(--amber);
+  background: rgba(154,106,18,.05); }
+.noscript-note { padding: 10px 14px; background: var(--amber-l); border: 1px solid var(--amber-line); }
+
+/* ── 页脚 / 回到顶部 ── */
+.footer { text-align: center; color: var(--ink3); font-size: 11.5px; padding: 26px 20px 36px;
+  line-height: 1.9; border-top: 1px solid var(--line); }
+.footer code { background: var(--gray-l); padding: 0.1em 0.3em; border-radius: var(--radius-xs); }
+.totop { position: fixed; right: 22px; bottom: 22px; width: 40px; height: 40px; border-radius: 50%;
+  background: var(--navy); color: #fff; border: 0; font-size: 17px; cursor: pointer;
+  box-shadow: 0 4px 14px rgba(15,35,56,.3); opacity: 0; pointer-events: none;
+  transition: opacity .2s; z-index: 70; font-family: inherit; }
+.totop.show { opacity: 1; pointer-events: auto; }
+
+/* ── 响应式 ── */
+@media (max-width: 960px) {
+  html { scroll-padding-top: 18px; }
+  .topbar { position: static; height: auto; padding: 8px 14px; flex-wrap: wrap; row-gap: 8px; }
+  .topbar .brand-sub { display: none; }
+  .searchbox { flex: 1; min-width: var(--measure-search-min); }
+  .searchbox > input { width: 100%; max-width: none; }
+  .searchbox .results { left: 0; right: auto; width: min(var(--measure-results), 86vw); }
+  .filterbar { position: static; padding: 10px 14px; }
+  .hero { padding: 32px 22px 28px; }
+  .hero h1 { font-size: 22px; }
+  .main { padding: 6px 14px 40px; }
+  .cards { grid-template-columns: 1fr; }
+  .layout { flex-direction: column; align-items: stretch; }
+  .sidebar { position: static; width: 100%; height: auto; max-height: var(--measure-sidebar-max);
+    border-right: 0; border-bottom: 1px solid var(--line); }
+  .reader-main { padding: 14px 14px 50px; }
+  .topic-local-toc .chapter-list { columns: 1; }
+  .report-bar .ra { width: 100%; }
+  .totop { right: 14px; bottom: 14px; }
+}
+@media print {
+  .topbar, .filterbar, .sidebar, .searchbox, .topic-card .actions, .topic-details,
+  .report-bar, .topic-local-toc, .totop { display: none !important; }
+  body.index-page, body.library-page, body.changelog-page { background: #fff; }
+  .layout { display: block; }
+  .report-block { border: 0; box-shadow: none; }
+  .topic-section { break-before: page; }
+}
+
+</style>
+</head>
+<body class="index-page">
+<a class="skip-link" href="#main-content">跳到主要内容</a>
+<header class="topbar">
+  <div class="brand"><a href="index.html">日本生活与工作知识库</a></div>
+  <div class="brand-sub">JAPAN LIFE &amp; WORK KNOWLEDGE BASE</div>
+  <nav aria-label="主导航"><a href="index.html" class="active">主题总览</a><a href="library.html">汇总阅读</a><a href="changelog.html">更新记录</a><a href="updates.html">周期更新看板</a></nav>
+  <div class="spacer"></div>
+  <div class="searchbox">
+    <input id="site-search" type="search" placeholder="搜索主题 / 分类 / 章节…（按 / 聚焦）" autocomplete="off">
+    <div class="results" id="search-results" role="region" aria-label="搜索结果" aria-live="polite"></div>
+  </div>
+</header>
+<section class="hero">
+  <div class="eyebrow">JAPAN LIFE &amp; WORK KNOWLEDGE BASE</div>
+  <h1>主题总览</h1>
+  <p class="sub">集中浏览 13 个当前主题：操作列的月份标签按年滚动，直达该主题当月发布的报告；也可进入连续汇总阅读。基准框架完整保留原始信息，更新内容以「已更新」标注突出展示，互不覆盖。</p>
+  <div class="stats"><div class="stat"><b>13</b>主题</div><div class="stat"><b>7</b>分类</div><div class="stat"><b>7</b>份文档有更新</div><div class="stat"><b>21</b>处更新标注</div></div>
+  <div class="legend"><span class="status-badge sb-base">基准框架</span><span class="legend-text">原始基准信息，完整保留</span>
+    <span class="status-badge sb-upd">已更新</span><span class="legend-text">基准后的更新内容，突出标注</span></div>
+  <noscript><p class="noscript-note">JavaScript 不可用，搜索与筛选已停用；全部主题行与月份报告链接仍可使用。</p></noscript>
+</section>
+<div class="filterbar">
+  <div class="chips" id="chips-category"><button class="chip on" data-category="all">全部</button><button class="chip" data-category="监测动态">监测动态</button><button class="chip" data-category="职业就业">职业就业</button><button class="chip" data-category="行业技术">行业技术</button><button class="chip" data-category="经济环境">经济环境</button><button class="chip" data-category="制度政策">制度政策</button><button class="chip" data-category="学习成长">学习成长</button><button class="chip" data-category="生活地域">生活地域</button></div>
+  <div class="chips" id="chips-status"><button class="chip on" data-status="all">全部状态</button><button class="chip" data-status="updated">有更新</button><button class="chip" data-status="baseline">仅基准框架</button></div>
+  <span class="count" id="hub-count"></span>
+</div>
+<main class="main" id="main-content"><div class="table-wrap" role="group" aria-labelledby="topic-table-caption" tabindex="0">
+<table class="topic-table">
+<caption id="topic-table-caption">共 13 个主题 · 操作列月份标签对应该主题当月发布的报告</caption>
+<thead><tr><th scope="col">编号</th><th scope="col">主题</th><th scope="col">分类</th><th scope="col">操作</th></tr></thead>
+<tbody><tr class="topic-row" id="topic-01-ssw-driver" data-category="监测动态" data-status="updated" data-search="特定技能司机·物流·智能驾驶监测 政策、薪资、供需、资格、技术与风险的 7 日周期监测 监测动态 【已修正事实清单】（本清单随每次修正持续追加，后续版本不得回退） 数据变更摘要（14 项追踪指标，上期值＝v2026.11.11_4） 一、核心结论（摘要，相对上一版的增量判断） 二、特定技能制度与签证路径 三、司机供需与薪资待遇 四、物流行业态势 五、智能驾驶与未来展望 六、就业落地建议（结论章） 七、数据可靠性与局限说明 八、参考来源清单（本版新增条目＋继承说明）">
+  <td class="col-num">01</td>
+  <td class="col-topic"><a class="topic-link" href="library.html#topic-01-ssw-driver">特定技能司机·物流·智能驾驶监测</a><div class="topic-meta"><span class="status-badge sb-base">基准框架 · v2026.11.12_5</span><span class="topic-update-flag" title="最近更新 2026-11-12">已更新 9 处</span><span class="topic-modified">最近更新 2026-11-12</span></div><details class="topic-details"><summary><span class="summary-text">章节直达（10）</span></summary><div class="details-text"><ul class="chapter-list"><li><a class="chapter-link" data-search="特定技能司机·物流·智能驾驶监测 【已修正事实清单】（本清单随每次修正持续追加，后续版本不得回退）" href="library.html#topic-01-ssw-driver--已修正事实清单-本清单随每次修正持续追加-后续版本不得回退">【已修正事实清单】（本清单随每次修正持续追加，后续版本不得回退）</a></li><li><a class="chapter-link" data-search="特定技能司机·物流·智能驾驶监测 数据变更摘要（14 项追踪指标，上期值＝v2026.11.11_4）" href="library.html#topic-01-ssw-driver--数据变更摘要-14-项追踪指标-上期值-v2026-11-11_4">数据变更摘要（14 项追踪指标，上期值＝v2026.11.11_4）</a></li><li><a class="chapter-link" data-search="特定技能司机·物流·智能驾驶监测 一、核心结论（摘要，相对上一版的增量判断）" href="library.html#topic-01-ssw-driver--一-核心结论-摘要-相对上一版的增量判断">一、核心结论（摘要，相对上一版的增量判断）</a></li><li><a class="chapter-link" data-search="特定技能司机·物流·智能驾驶监测 二、特定技能制度与签证路径" href="library.html#topic-01-ssw-driver--二-特定技能制度与签证路径">二、特定技能制度与签证路径</a></li><li><a class="chapter-link" data-search="特定技能司机·物流·智能驾驶监测 三、司机供需与薪资待遇" href="library.html#topic-01-ssw-driver--三-司机供需与薪资待遇">三、司机供需与薪资待遇</a></li><li><a class="chapter-link" data-search="特定技能司机·物流·智能驾驶监测 四、物流行业态势" href="library.html#topic-01-ssw-driver--四-物流行业态势">四、物流行业态势</a></li><li><a class="chapter-link" data-search="特定技能司机·物流·智能驾驶监测 五、智能驾驶与未来展望" href="library.html#topic-01-ssw-driver--五-智能驾驶与未来展望">五、智能驾驶与未来展望</a></li><li><a class="chapter-link" data-search="特定技能司机·物流·智能驾驶监测 六、就业落地建议（结论章）" href="library.html#topic-01-ssw-driver--六-就业落地建议-结论章">六、就业落地建议（结论章）</a></li><li><a class="chapter-link" data-search="特定技能司机·物流·智能驾驶监测 七、数据可靠性与局限说明" href="library.html#topic-01-ssw-driver--七-数据可靠性与局限说明">七、数据可靠性与局限说明</a></li><li><a class="chapter-link" data-search="特定技能司机·物流·智能驾驶监测 八、参考来源清单（本版新增条目＋继承说明）" href="library.html#topic-01-ssw-driver--八-参考来源清单-本版新增条目-继承说明">八、参考来源清单（本版新增条目＋继承说明）</a></li></ul></div></details></td>
+  <td class="col-cat"><span class="badge">监测动态</span></td>
+  <td class="col-ops"><div class="month-tags"><span class="month-tag off" title="该月暂无报告" aria-disabled="true">1月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">2月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">3月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">4月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">5月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">6月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">7月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">8月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">9月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">10月</span><a class="month-tag" href="01-ssw-driver/reports/%E6%97%A5%E6%9C%AC%E7%89%B9%E5%AE%9A%E6%8A%80%E8%83%BD%E5%8F%B8%E6%9C%BA%E7%89%A9%E6%B5%81%E7%9B%91%E6%B5%8B%E6%8A%A5%E5%91%8A_v2026.11.12_5.html" title="2026-11-12 · v2026.11.12_5">11月</a><span class="month-tag off" title="该月暂无报告" aria-disabled="true">12月</span></div></td>
+</tr><tr class="topic-row" id="topic-02-career-driver" data-category="职业就业" data-status="baseline" data-search="司机岗位执行手册 岗位全景、薪资工时、安全规范、求职渠道与现场工作记录 职业就业 01 司机岗位全景 02 薪资结构与工时合规 03 安全规范与现场制度 04 现场经验积累清单 05 求职渠道与简历面试 06 实际工作条件记录">
+  <td class="col-num">02</td>
+  <td class="col-topic"><a class="topic-link" href="library.html#topic-02-career-driver">司机岗位执行手册</a><div class="topic-meta"><span class="status-badge sb-base">基准框架 · v1.0</span><span class="status-badge sb-none">暂无更新</span><span class="topic-modified">最近更新 2026-11-13</span></div><details class="topic-details"><summary><span class="summary-text">章节直达（6）</span></summary><div class="details-text"><ul class="chapter-list"><li><a class="chapter-link" data-search="司机岗位执行手册 01 司机岗位全景" href="library.html#topic-02-career-driver--01-司机岗位全景">01 司机岗位全景</a></li><li><a class="chapter-link" data-search="司机岗位执行手册 02 薪资结构与工时合规" href="library.html#topic-02-career-driver--02-薪资结构与工时合规">02 薪资结构与工时合规</a></li><li><a class="chapter-link" data-search="司机岗位执行手册 03 安全规范与现场制度" href="library.html#topic-02-career-driver--03-安全规范与现场制度">03 安全规范与现场制度</a></li><li><a class="chapter-link" data-search="司机岗位执行手册 04 现场经验积累清单" href="library.html#topic-02-career-driver--04-现场经验积累清单">04 现场经验积累清单</a></li><li><a class="chapter-link" data-search="司机岗位执行手册 05 求职渠道与简历面试" href="library.html#topic-02-career-driver--05-求职渠道与简历面试">05 求职渠道与简历面试</a></li><li><a class="chapter-link" data-search="司机岗位执行手册 06 实际工作条件记录" href="library.html#topic-02-career-driver--06-实际工作条件记录">06 实际工作条件记录</a></li></ul></div></details></td>
+  <td class="col-cat"><span class="badge">职业就业</span></td>
+  <td class="col-ops"><div class="month-tags"><span class="month-tag off" title="该月暂无报告" aria-disabled="true">1月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">2月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">3月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">4月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">5月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">6月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">7月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">8月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">9月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">10月</span><a class="month-tag" href="02-career-driver/reports/%E6%97%A5%E6%9C%AC%E5%8F%B8%E6%9C%BA%E8%81%8C%E4%B8%9A%E7%9F%A5%E8%AF%86%E6%89%8B%E5%86%8C.html" title="2026-11-12 · baseline">11月</a><span class="month-tag off" title="该月暂无报告" aria-disabled="true">12月</span></div></td>
+</tr><tr class="topic-row" id="topic-03-career-management" data-category="职业就业" data-status="baseline" data-search="管理岗过渡手册 运行管理者资格、运营组织、晋升通道与五年转型能力档案 职业就业 01 管理岗地图与路径评估 02 业务知识体系 03 管理岗日语与沟通 04 管理岗过渡学习计划 05 成果档案与晋升材料">
+  <td class="col-num">03</td>
+  <td class="col-topic"><a class="topic-link" href="library.html#topic-03-career-management">管理岗过渡手册</a><div class="topic-meta"><span class="status-badge sb-base">基准框架 · v1.0</span><span class="status-badge sb-none">暂无更新</span><span class="topic-modified">最近更新 2026-11-13</span></div><details class="topic-details"><summary><span class="summary-text">章节直达（5）</span></summary><div class="details-text"><ul class="chapter-list"><li><a class="chapter-link" data-search="管理岗过渡手册 01 管理岗地图与路径评估" href="library.html#topic-03-career-management--01-管理岗地图与路径评估">01 管理岗地图与路径评估</a></li><li><a class="chapter-link" data-search="管理岗过渡手册 02 业务知识体系" href="library.html#topic-03-career-management--02-业务知识体系">02 业务知识体系</a></li><li><a class="chapter-link" data-search="管理岗过渡手册 03 管理岗日语与沟通" href="library.html#topic-03-career-management--03-管理岗日语与沟通">03 管理岗日语与沟通</a></li><li><a class="chapter-link" data-search="管理岗过渡手册 04 管理岗过渡学习计划" href="library.html#topic-03-career-management--04-管理岗过渡学习计划">04 管理岗过渡学习计划</a></li><li><a class="chapter-link" data-search="管理岗过渡手册 05 成果档案与晋升材料" href="library.html#topic-03-career-management--05-成果档案与晋升材料">05 成果档案与晋升材料</a></li></ul></div></details></td>
+  <td class="col-cat"><span class="badge">职业就业</span></td>
+  <td class="col-ops"><div class="month-tags"><span class="month-tag off" title="该月暂无报告" aria-disabled="true">1月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">2月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">3月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">4月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">5月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">6月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">7月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">8月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">9月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">10月</span><a class="month-tag" href="03-career-management/reports/%E6%97%A5%E6%9C%AC%E7%AE%A1%E7%90%86%E5%B2%97%E8%BF%87%E6%B8%A1%E7%9F%A5%E8%AF%86%E6%89%8B%E5%86%8C.html" title="2026-11-12 · baseline">11月</a><span class="month-tag off" title="该月暂无报告" aria-disabled="true">12月</span></div></td>
+</tr><tr class="topic-row" id="topic-04-industry-logistics" data-category="行业技术" data-status="baseline" data-search="物流产业与赛道 冷链、末端配送、医药物流、海外仓、绿色物流与产业图谱 行业技术 01 日本物流产业概览 02 增长赛道：EC、冷链、3PL 03 自动化与技术趋势 04 行业数据跟踪">
+  <td class="col-num">04</td>
+  <td class="col-topic"><a class="topic-link" href="library.html#topic-04-industry-logistics">物流产业与赛道</a><div class="topic-meta"><span class="status-badge sb-base">基准框架 · v1.0</span><span class="status-badge sb-none">暂无更新</span><span class="topic-modified">最近更新 2026-11-13</span></div><details class="topic-details"><summary><span class="summary-text">章节直达（4）</span></summary><div class="details-text"><ul class="chapter-list"><li><a class="chapter-link" data-search="物流产业与赛道 01 日本物流产业概览" href="library.html#topic-04-industry-logistics--01-日本物流产业概览">01 日本物流产业概览</a></li><li><a class="chapter-link" data-search="物流产业与赛道 02 增长赛道：EC、冷链、3PL" href="library.html#topic-04-industry-logistics--02-增长赛道-ec-冷链-3pl">02 增长赛道：EC、冷链、3PL</a></li><li><a class="chapter-link" data-search="物流产业与赛道 03 自动化与技术趋势" href="library.html#topic-04-industry-logistics--03-自动化与技术趋势">03 自动化与技术趋势</a></li><li><a class="chapter-link" data-search="物流产业与赛道 04 行业数据跟踪" href="library.html#topic-04-industry-logistics--04-行业数据跟踪">04 行业数据跟踪</a></li></ul></div></details></td>
+  <td class="col-cat"><span class="badge">行业技术</span></td>
+  <td class="col-ops"><div class="month-tags"><span class="month-tag off" title="该月暂无报告" aria-disabled="true">1月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">2月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">3月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">4月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">5月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">6月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">7月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">8月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">9月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">10月</span><a class="month-tag" href="04-industry-logistics/reports/%E6%97%A5%E6%9C%AC%E7%89%A9%E6%B5%81%E8%A1%8C%E4%B8%9A%E7%9F%A5%E8%AF%86%E6%89%8B%E5%86%8C.html" title="2026-11-12 · baseline">11月</a><span class="month-tag off" title="该月暂无报告" aria-disabled="true">12月</span></div></td>
+</tr><tr class="topic-row" id="topic-05-industry-autonomous" data-category="行业技术" data-status="baseline" data-search="自动驾驶与自动化 L2–L4 技术、TaaS 商业化、监管沙盒与场景替代节奏 行业技术 01 自动驾驶技术路线与时间表 02 法规与许可制度 03 仓储自动化与无人配送 04 个人技能对接与机会">
+  <td class="col-num">05</td>
+  <td class="col-topic"><a class="topic-link" href="library.html#topic-05-industry-autonomous">自动驾驶与自动化</a><div class="topic-meta"><span class="status-badge sb-base">基准框架 · v1.0</span><span class="status-badge sb-none">暂无更新</span><span class="topic-modified">最近更新 2026-11-13</span></div><details class="topic-details"><summary><span class="summary-text">章节直达（4）</span></summary><div class="details-text"><ul class="chapter-list"><li><a class="chapter-link" data-search="自动驾驶与自动化 01 自动驾驶技术路线与时间表" href="library.html#topic-05-industry-autonomous--01-自动驾驶技术路线与时间表">01 自动驾驶技术路线与时间表</a></li><li><a class="chapter-link" data-search="自动驾驶与自动化 02 法规与许可制度" href="library.html#topic-05-industry-autonomous--02-法规与许可制度">02 法规与许可制度</a></li><li><a class="chapter-link" data-search="自动驾驶与自动化 03 仓储自动化与无人配送" href="library.html#topic-05-industry-autonomous--03-仓储自动化与无人配送">03 仓储自动化与无人配送</a></li><li><a class="chapter-link" data-search="自动驾驶与自动化 04 个人技能对接与机会" href="library.html#topic-05-industry-autonomous--04-个人技能对接与机会">04 个人技能对接与机会</a></li></ul></div></details></td>
+  <td class="col-cat"><span class="badge">行业技术</span></td>
+  <td class="col-ops"><div class="month-tags"><span class="month-tag off" title="该月暂无报告" aria-disabled="true">1月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">2月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">3月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">4月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">5月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">6月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">7月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">8月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">9月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">10月</span><a class="month-tag" href="05-industry-autonomous/reports/%E6%97%A5%E6%9C%AC%E8%87%AA%E5%8A%A8%E9%A9%BE%E9%A9%B6%E4%B8%8E%E8%87%AA%E5%8A%A8%E5%8C%96%E7%9F%A5%E8%AF%86%E6%89%8B%E5%86%8C.html" title="2026-11-12 · baseline">11月</a><span class="month-tag off" title="该月暂无报告" aria-disabled="true">12月</span></div></td>
+</tr><tr class="topic-row" id="topic-06-industry-technology" data-category="行业技术" data-status="updated" data-search="技术与数字化 AI 调度、TMS/WMS、数字孪生、网络安全与转型工具评估 行业技术 01 物流数字化技能地图 02 数字化岗位与转型路径 03 日本数字化劳动市场与岗位行情">
+  <td class="col-num">06</td>
+  <td class="col-topic"><a class="topic-link" href="library.html#topic-06-industry-technology">技术与数字化</a><div class="topic-meta"><span class="status-badge sb-base">基准框架 · v1.0</span><span class="topic-update-flag" title="最近更新 2026-11-12">已更新 1 处</span><span class="topic-modified">最近更新 2026-11-12</span></div><details class="topic-details"><summary><span class="summary-text">章节直达（3）</span></summary><div class="details-text"><ul class="chapter-list"><li><a class="chapter-link" data-search="技术与数字化 01 物流数字化技能地图" href="library.html#topic-06-industry-technology--01-物流数字化技能地图">01 物流数字化技能地图</a></li><li><a class="chapter-link" data-search="技术与数字化 02 数字化岗位与转型路径" href="library.html#topic-06-industry-technology--02-数字化岗位与转型路径">02 数字化岗位与转型路径</a></li><li><a class="chapter-link" data-search="技术与数字化 03 日本数字化劳动市场与岗位行情" href="library.html#topic-06-industry-technology--03-日本数字化劳动市场与岗位行情">03 日本数字化劳动市场与岗位行情</a></li></ul></div></details></td>
+  <td class="col-cat"><span class="badge">行业技术</span></td>
+  <td class="col-ops"><div class="month-tags"><span class="month-tag off" title="该月暂无报告" aria-disabled="true">1月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">2月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">3月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">4月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">5月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">6月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">7月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">8月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">9月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">10月</span><a class="month-tag" href="06-industry-technology/reports/%E6%97%A5%E6%9C%AC%E6%8A%80%E6%9C%AF%E4%B8%8E%E6%95%B0%E5%AD%97%E5%8C%96%E7%9F%A5%E8%AF%86%E6%89%8B%E5%86%8C.html" title="2026-11-12 · baseline">11月</a><span class="month-tag off" title="该月暂无报告" aria-disabled="true">12月</span></div></td>
+</tr><tr class="topic-row" id="topic-07-economy-finance" data-category="经济环境" data-status="baseline" data-search="经济与财务 日元汇率、物价税负、社会保险、年金医疗、住房与长期财务 经济环境 01 收入结构与薪资行情 02 生活成本与储蓄规划 03 税务社保年金 04 长期财务规划">
+  <td class="col-num">07</td>
+  <td class="col-topic"><a class="topic-link" href="library.html#topic-07-economy-finance">经济与财务</a><div class="topic-meta"><span class="status-badge sb-base">基准框架 · v1.0</span><span class="status-badge sb-none">暂无更新</span><span class="topic-modified">最近更新 2026-11-13</span></div><details class="topic-details"><summary><span class="summary-text">章节直达（4）</span></summary><div class="details-text"><ul class="chapter-list"><li><a class="chapter-link" data-search="经济与财务 01 收入结构与薪资行情" href="library.html#topic-07-economy-finance--01-收入结构与薪资行情">01 收入结构与薪资行情</a></li><li><a class="chapter-link" data-search="经济与财务 02 生活成本与储蓄规划" href="library.html#topic-07-economy-finance--02-生活成本与储蓄规划">02 生活成本与储蓄规划</a></li><li><a class="chapter-link" data-search="经济与财务 03 税务社保年金" href="library.html#topic-07-economy-finance--03-税务社保年金">03 税务社保年金</a></li><li><a class="chapter-link" data-search="经济与财务 04 长期财务规划" href="library.html#topic-07-economy-finance--04-长期财务规划">04 长期财务规划</a></li></ul></div></details></td>
+  <td class="col-cat"><span class="badge">经济环境</span></td>
+  <td class="col-ops"><div class="month-tags"><span class="month-tag off" title="该月暂无报告" aria-disabled="true">1月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">2月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">3月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">4月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">5月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">6月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">7月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">8月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">9月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">10月</span><a class="month-tag" href="07-economy-finance/reports/%E6%97%A5%E6%9C%AC%E7%BB%8F%E6%B5%8E%E4%B8%8E%E8%B4%A2%E5%8A%A1%E7%9F%A5%E8%AF%86%E6%89%8B%E5%86%8C.html" title="2026-11-12 · baseline">11月</a><span class="month-tag off" title="该月暂无报告" aria-disabled="true">12月</span></div></td>
+</tr><tr class="topic-row" id="topic-08-visa-immigration" data-category="制度政策" data-status="updated" data-search="签证与在留资格 特定技能、技人国、经营管理、永住规划、家属带同与在留变更 制度政策 01 特定技能制度概览 02 特定技能1号-自动车运送业 03 考试与日语要求 04 申请流程与材料 05 特定技能2号与升级路径 06 育成就劳制度与新动向 07 永住与长期在留规划 08 家属带同与家庭规划 09 政策更新日志">
+  <td class="col-num">08</td>
+  <td class="col-topic"><a class="topic-link" href="library.html#topic-08-visa-immigration">签证与在留资格</a><div class="topic-meta"><span class="status-badge sb-base">基准框架 · v1.0</span><span class="topic-update-flag" title="最近更新 2026-11-12">已更新 1 处</span><span class="topic-modified">最近更新 2026-11-12</span></div><details class="topic-details"><summary><span class="summary-text">章节直达（9）</span></summary><div class="details-text"><ul class="chapter-list"><li><a class="chapter-link" data-search="签证与在留资格 01 特定技能制度概览" href="library.html#topic-08-visa-immigration--01-特定技能制度概览">01 特定技能制度概览</a></li><li><a class="chapter-link" data-search="签证与在留资格 02 特定技能1号-自动车运送业" href="library.html#topic-08-visa-immigration--02-特定技能1号-自动车运送业">02 特定技能1号-自动车运送业</a></li><li><a class="chapter-link" data-search="签证与在留资格 03 考试与日语要求" href="library.html#topic-08-visa-immigration--03-考试与日语要求">03 考试与日语要求</a></li><li><a class="chapter-link" data-search="签证与在留资格 04 申请流程与材料" href="library.html#topic-08-visa-immigration--04-申请流程与材料">04 申请流程与材料</a></li><li><a class="chapter-link" data-search="签证与在留资格 05 特定技能2号与升级路径" href="library.html#topic-08-visa-immigration--05-特定技能2号与升级路径">05 特定技能2号与升级路径</a></li><li><a class="chapter-link" data-search="签证与在留资格 06 育成就劳制度与新动向" href="library.html#topic-08-visa-immigration--06-育成就劳制度与新动向">06 育成就劳制度与新动向</a></li><li><a class="chapter-link" data-search="签证与在留资格 07 永住与长期在留规划" href="library.html#topic-08-visa-immigration--07-永住与长期在留规划">07 永住与长期在留规划</a></li><li><a class="chapter-link" data-search="签证与在留资格 08 家属带同与家庭规划" href="library.html#topic-08-visa-immigration--08-家属带同与家庭规划">08 家属带同与家庭规划</a></li><li><a class="chapter-link" data-search="签证与在留资格 09 政策更新日志" href="library.html#topic-08-visa-immigration--09-政策更新日志">09 政策更新日志</a></li></ul></div></details></td>
+  <td class="col-cat"><span class="badge">制度政策</span></td>
+  <td class="col-ops"><div class="month-tags"><span class="month-tag off" title="该月暂无报告" aria-disabled="true">1月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">2月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">3月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">4月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">5月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">6月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">7月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">8月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">9月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">10月</span><a class="month-tag" href="08-visa-immigration/reports/%E6%97%A5%E6%9C%AC%E7%AD%BE%E8%AF%81%E4%B8%8E%E5%9C%A8%E7%95%99%E8%B5%84%E6%A0%BC%E7%9F%A5%E8%AF%86%E6%89%8B%E5%86%8C.html" title="2026-11-12 · baseline">11月</a><span class="month-tag off" title="该月暂无报告" aria-disabled="true">12月</span></div></td>
+</tr><tr class="topic-row" id="topic-09-politics-law" data-category="制度政策" data-status="updated" data-search="政治与法规 雇佣解约、劳动监察、年金、灾害法与司法救济 制度政策 01 在留法规框架 02 政治动向与移民政策环境 03 维权与合规工具箱">
+  <td class="col-num">09</td>
+  <td class="col-topic"><a class="topic-link" href="library.html#topic-09-politics-law">政治与法规</a><div class="topic-meta"><span class="status-badge sb-base">基准框架 · v1.0</span><span class="topic-update-flag" title="最近更新 2026-11-12">已更新 2 处</span><span class="topic-modified">最近更新 2026-11-12</span></div><details class="topic-details"><summary><span class="summary-text">章节直达（3）</span></summary><div class="details-text"><ul class="chapter-list"><li><a class="chapter-link" data-search="政治与法规 01 在留法规框架" href="library.html#topic-09-politics-law--01-在留法规框架">01 在留法规框架</a></li><li><a class="chapter-link" data-search="政治与法规 02 政治动向与移民政策环境" href="library.html#topic-09-politics-law--02-政治动向与移民政策环境">02 政治动向与移民政策环境</a></li><li><a class="chapter-link" data-search="政治与法规 03 维权与合规工具箱" href="library.html#topic-09-politics-law--03-维权与合规工具箱">03 维权与合规工具箱</a></li></ul></div></details></td>
+  <td class="col-cat"><span class="badge">制度政策</span></td>
+  <td class="col-ops"><div class="month-tags"><span class="month-tag off" title="该月暂无报告" aria-disabled="true">1月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">2月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">3月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">4月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">5月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">6月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">7月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">8月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">9月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">10月</span><a class="month-tag" href="09-politics-law/reports/%E6%97%A5%E6%9C%AC%E6%94%BF%E6%B2%BB%E4%B8%8E%E6%B3%95%E8%A7%84%E7%9F%A5%E8%AF%86%E6%89%8B%E5%86%8C.html" title="2026-11-12 · baseline">11月</a><span class="month-tag off" title="该月暂无报告" aria-disabled="true">12月</span></div></td>
+</tr><tr class="topic-row" id="topic-10-education-qualification" data-category="学习成长" data-status="updated" data-search="资格与教育投资 资格 ROI、通信制大学、K12 与子女教育、家庭教育预算 学习成长 01 资格地图 02 学习体系与教育投资 03 日本学校教育体系与子女教育 04 高等教育与技人国学历路径">
+  <td class="col-num">10</td>
+  <td class="col-topic"><a class="topic-link" href="library.html#topic-10-education-qualification">资格与教育投资</a><div class="topic-meta"><span class="status-badge sb-base">基准框架 · v1.1</span><span class="topic-update-flag" title="最近更新 2026-11-12">已更新 2 处</span><span class="topic-modified">最近更新 2026-11-12</span></div><details class="topic-details"><summary><span class="summary-text">章节直达（4）</span></summary><div class="details-text"><ul class="chapter-list"><li><a class="chapter-link" data-search="资格与教育投资 01 资格地图" href="library.html#topic-10-education-qualification--01-资格地图">01 资格地图</a></li><li><a class="chapter-link" data-search="资格与教育投资 02 学习体系与教育投资" href="library.html#topic-10-education-qualification--02-学习体系与教育投资">02 学习体系与教育投资</a></li><li><a class="chapter-link" data-search="资格与教育投资 03 日本学校教育体系与子女教育" href="library.html#topic-10-education-qualification--03-日本学校教育体系与子女教育">03 日本学校教育体系与子女教育</a></li><li><a class="chapter-link" data-search="资格与教育投资 04 高等教育与技人国学历路径" href="library.html#topic-10-education-qualification--04-高等教育与技人国学历路径">04 高等教育与技人国学历路径</a></li></ul></div></details></td>
+  <td class="col-cat"><span class="badge">学习成长</span></td>
+  <td class="col-ops"><div class="month-tags"><span class="month-tag off" title="该月暂无报告" aria-disabled="true">1月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">2月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">3月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">4月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">5月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">6月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">7月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">8月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">9月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">10月</span><a class="month-tag" href="10-education-qualification/reports/%E6%97%A5%E6%9C%AC%E8%B5%84%E6%A0%BC%E4%B8%8E%E6%95%99%E8%82%B2%E6%8A%95%E8%B5%84%E7%9F%A5%E8%AF%86%E6%89%8B%E5%86%8C.html" title="2026-11-12 · baseline">11月</a><span class="month-tag off" title="该月暂无报告" aria-disabled="true">12月</span></div></td>
+</tr><tr class="topic-row" id="topic-11-language-japanese" data-category="学习成长" data-status="baseline" data-search="日语学习 阶段目标、JLPT 能力对标、教材课程、口语练习与场景词库 学习成长 01 总体学习路线与考试选择 02 N4备考计划 03 N3备考计划 04 N2备考计划 05 资源与工具清单 06 学习进度跟踪">
+  <td class="col-num">11</td>
+  <td class="col-topic"><a class="topic-link" href="library.html#topic-11-language-japanese">日语学习</a><div class="topic-meta"><span class="status-badge sb-base">基准框架 · v1.0</span><span class="status-badge sb-none">暂无更新</span><span class="topic-modified">最近更新 2026-11-13</span></div><details class="topic-details"><summary><span class="summary-text">章节直达（6）</span></summary><div class="details-text"><ul class="chapter-list"><li><a class="chapter-link" data-search="日语学习 01 总体学习路线与考试选择" href="library.html#topic-11-language-japanese--01-总体学习路线与考试选择">01 总体学习路线与考试选择</a></li><li><a class="chapter-link" data-search="日语学习 02 N4备考计划" href="library.html#topic-11-language-japanese--02-n4备考计划">02 N4备考计划</a></li><li><a class="chapter-link" data-search="日语学习 03 N3备考计划" href="library.html#topic-11-language-japanese--03-n3备考计划">03 N3备考计划</a></li><li><a class="chapter-link" data-search="日语学习 04 N2备考计划" href="library.html#topic-11-language-japanese--04-n2备考计划">04 N2备考计划</a></li><li><a class="chapter-link" data-search="日语学习 05 资源与工具清单" href="library.html#topic-11-language-japanese--05-资源与工具清单">05 资源与工具清单</a></li><li><a class="chapter-link" data-search="日语学习 06 学习进度跟踪" href="library.html#topic-11-language-japanese--06-学习进度跟踪">06 学习进度跟踪</a></li></ul></div></details></td>
+  <td class="col-cat"><span class="badge">学习成长</span></td>
+  <td class="col-ops"><div class="month-tags"><span class="month-tag off" title="该月暂无报告" aria-disabled="true">1月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">2月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">3月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">4月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">5月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">6月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">7月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">8月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">9月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">10月</span><a class="month-tag" href="11-language-japanese/reports/%E6%97%A5%E6%9C%AC%E6%97%A5%E8%AF%AD%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%89%8B%E5%86%8C.html" title="2026-11-12 · baseline">11月</a><span class="month-tag off" title="该月暂无报告" aria-disabled="true">12月</span></div></td>
+</tr><tr class="topic-row" id="topic-12-culture-life" data-category="生活地域" data-status="updated" data-search="文化与生活 医疗、住房、手机银行、交通、防灾、文化礼仪与社会融入 生活地域 01 职场文化与人际 02 生活指南与适应 03 医疗与健康 04 住房与安家 05 社会融入与社群">
+  <td class="col-num">12</td>
+  <td class="col-topic"><a class="topic-link" href="library.html#topic-12-culture-life">文化与生活</a><div class="topic-meta"><span class="status-badge sb-base">基准框架 · v1.0</span><span class="topic-update-flag" title="最近更新 2026-11-12">已更新 4 处</span><span class="topic-modified">最近更新 2026-11-12</span></div><details class="topic-details"><summary><span class="summary-text">章节直达（5）</span></summary><div class="details-text"><ul class="chapter-list"><li><a class="chapter-link" data-search="文化与生活 01 职场文化与人际" href="library.html#topic-12-culture-life--01-职场文化与人际">01 职场文化与人际</a></li><li><a class="chapter-link" data-search="文化与生活 02 生活指南与适应" href="library.html#topic-12-culture-life--02-生活指南与适应">02 生活指南与适应</a></li><li><a class="chapter-link" data-search="文化与生活 03 医疗与健康" href="library.html#topic-12-culture-life--03-医疗与健康">03 医疗与健康</a></li><li><a class="chapter-link" data-search="文化与生活 04 住房与安家" href="library.html#topic-12-culture-life--04-住房与安家">04 住房与安家</a></li><li><a class="chapter-link" data-search="文化与生活 05 社会融入与社群" href="library.html#topic-12-culture-life--05-社会融入与社群">05 社会融入与社群</a></li></ul></div></details></td>
+  <td class="col-cat"><span class="badge">生活地域</span></td>
+  <td class="col-ops"><div class="month-tags"><span class="month-tag off" title="该月暂无报告" aria-disabled="true">1月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">2月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">3月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">4月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">5月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">6月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">7月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">8月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">9月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">10月</span><a class="month-tag" href="12-culture-life/reports/%E6%97%A5%E6%9C%AC%E6%96%87%E5%8C%96%E4%B8%8E%E7%94%9F%E6%B4%BB%E7%9F%A5%E8%AF%86%E6%89%8B%E5%86%8C.html" title="2026-11-12 · baseline">11月</a><span class="month-tag off" title="该月暂无报告" aria-disabled="true">12月</span></div></td>
+</tr><tr class="topic-row" id="topic-13-regional-info" data-category="生活地域" data-status="updated" data-search="地域信息 北海道、东京、大阪、福冈、千叶的区域成本与定居环境 生活地域 01 地域选择框架 02 地域生活笔记">
+  <td class="col-num">13</td>
+  <td class="col-topic"><a class="topic-link" href="library.html#topic-13-regional-info">地域信息</a><div class="topic-meta"><span class="status-badge sb-base">基准框架 · v1.0</span><span class="topic-update-flag" title="最近更新 2026-11-12">已更新 2 处</span><span class="topic-modified">最近更新 2026-11-12</span></div><details class="topic-details"><summary><span class="summary-text">章节直达（2）</span></summary><div class="details-text"><ul class="chapter-list"><li><a class="chapter-link" data-search="地域信息 01 地域选择框架" href="library.html#topic-13-regional-info--01-地域选择框架">01 地域选择框架</a></li><li><a class="chapter-link" data-search="地域信息 02 地域生活笔记" href="library.html#topic-13-regional-info--02-地域生活笔记">02 地域生活笔记</a></li></ul></div></details></td>
+  <td class="col-cat"><span class="badge">生活地域</span></td>
+  <td class="col-ops"><div class="month-tags"><span class="month-tag off" title="该月暂无报告" aria-disabled="true">1月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">2月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">3月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">4月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">5月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">6月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">7月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">8月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">9月</span><span class="month-tag off" title="该月暂无报告" aria-disabled="true">10月</span><a class="month-tag" href="13-regional-info/reports/%E6%97%A5%E6%9C%AC%E5%9C%B0%E5%9F%9F%E4%BF%A1%E6%81%AF%E7%9F%A5%E8%AF%86%E6%89%8B%E5%86%8C.html" title="2026-11-12 · baseline">11月</a><span class="month-tag off" title="该月暂无报告" aria-disabled="true">12月</span></div></td>
+</tr></tbody>
+</table>
+</div></main>
+<footer class="footer">由 <code>prompts/tools/build_library.py</code> 自动生成 · 主题源文件见各主题 <code>reports/</code> 目录</footer>
+<button class="totop" id="totop" aria-label="回到顶部">↑</button>
+<script>
+document.addEventListener('click', function (event) {
+  var link = event.target.closest ? event.target.closest('.skip-link') : null;
+  if (!link) return;
+  var target = document.querySelector(link.getAttribute('href'));
+  if (target) { target.setAttribute('tabindex', '-1'); target.focus(); }
+});
+</script>
+<script>const TOPIC_INDEX = [{"title":"特定技能司机·物流·智能驾驶监测","meta":"监测动态 · 匹配主题","href":"index.html#topic-01-ssw-driver","text":"特定技能司机·物流·智能驾驶监测 政策、薪资、供需、资格、技术与风险的 7 日周期监测 监测动态","category":"监测动态","status":"updated"},{"title":"【已修正事实清单】（本清单随每次修正持续追加，后续版本不得回退）","meta":"特定技能司机·物流·智能驾驶监测 · 章节直达","href":"library.html#topic-01-ssw-driver--已修正事实清单-本清单随每次修正持续追加-后续版本不得回退","text":"特定技能司机·物流·智能驾驶监测 【已修正事实清单】（本清单随每次修正持续追加，后续版本不得回退）","category":"监测动态","status":"updated"},{"title":"数据变更摘要（14 项追踪指标，上期值＝v2026.11.11_4）","meta":"特定技能司机·物流·智能驾驶监测 · 章节直达","href":"library.html#topic-01-ssw-driver--数据变更摘要-14-项追踪指标-上期值-v2026-11-11_4","text":"特定技能司机·物流·智能驾驶监测 数据变更摘要（14 项追踪指标，上期值＝v2026.11.11_4）","category":"监测动态","status":"updated"},{"title":"一、核心结论（摘要，相对上一版的增量判断）","meta":"特定技能司机·物流·智能驾驶监测 · 章节直达","href":"library.html#topic-01-ssw-driver--一-核心结论-摘要-相对上一版的增量判断","text":"特定技能司机·物流·智能驾驶监测 一、核心结论（摘要，相对上一版的增量判断）","category":"监测动态","status":"updated"},{"title":"二、特定技能制度与签证路径","meta":"特定技能司机·物流·智能驾驶监测 · 章节直达","href":"library.html#topic-01-ssw-driver--二-特定技能制度与签证路径","text":"特定技能司机·物流·智能驾驶监测 二、特定技能制度与签证路径","category":"监测动态","status":"updated"},{"title":"三、司机供需与薪资待遇","meta":"特定技能司机·物流·智能驾驶监测 · 章节直达","href":"library.html#topic-01-ssw-driver--三-司机供需与薪资待遇","text":"特定技能司机·物流·智能驾驶监测 三、司机供需与薪资待遇","category":"监测动态","status":"updated"},{"title":"四、物流行业态势","meta":"特定技能司机·物流·智能驾驶监测 · 章节直达","href":"library.html#topic-01-ssw-driver--四-物流行业态势","text":"特定技能司机·物流·智能驾驶监测 四、物流行业态势","category":"监测动态","status":"updated"},{"title":"五、智能驾驶与未来展望","meta":"特定技能司机·物流·智能驾驶监测 · 章节直达","href":"library.html#topic-01-ssw-driver--五-智能驾驶与未来展望","text":"特定技能司机·物流·智能驾驶监测 五、智能驾驶与未来展望","category":"监测动态","status":"updated"},{"title":"六、就业落地建议（结论章）","meta":"特定技能司机·物流·智能驾驶监测 · 章节直达","href":"library.html#topic-01-ssw-driver--六-就业落地建议-结论章","text":"特定技能司机·物流·智能驾驶监测 六、就业落地建议（结论章）","category":"监测动态","status":"updated"},{"title":"七、数据可靠性与局限说明","meta":"特定技能司机·物流·智能驾驶监测 · 章节直达","href":"library.html#topic-01-ssw-driver--七-数据可靠性与局限说明","text":"特定技能司机·物流·智能驾驶监测 七、数据可靠性与局限说明","category":"监测动态","status":"updated"},{"title":"八、参考来源清单（本版新增条目＋继承说明）","meta":"特定技能司机·物流·智能驾驶监测 · 章节直达","href":"library.html#topic-01-ssw-driver--八-参考来源清单-本版新增条目-继承说明","text":"特定技能司机·物流·智能驾驶监测 八、参考来源清单（本版新增条目＋继承说明）","category":"监测动态","status":"updated"},{"title":"司机岗位执行手册","meta":"职业就业 · 匹配主题","href":"index.html#topic-02-career-driver","text":"司机岗位执行手册 岗位全景、薪资工时、安全规范、求职渠道与现场工作记录 职业就业","category":"职业就业","status":"baseline"},{"title":"01 司机岗位全景","meta":"司机岗位执行手册 · 章节直达","href":"library.html#topic-02-career-driver--01-司机岗位全景","text":"司机岗位执行手册 01 司机岗位全景","category":"职业就业","status":"baseline"},{"title":"02 薪资结构与工时合规","meta":"司机岗位执行手册 · 章节直达","href":"library.html#topic-02-career-driver--02-薪资结构与工时合规","text":"司机岗位执行手册 02 薪资结构与工时合规","category":"职业就业","status":"baseline"},{"title":"03 安全规范与现场制度","meta":"司机岗位执行手册 · 章节直达","href":"library.html#topic-02-career-driver--03-安全规范与现场制度","text":"司机岗位执行手册 03 安全规范与现场制度","category":"职业就业","status":"baseline"},{"title":"04 现场经验积累清单","meta":"司机岗位执行手册 · 章节直达","href":"library.html#topic-02-career-driver--04-现场经验积累清单","text":"司机岗位执行手册 04 现场经验积累清单","category":"职业就业","status":"baseline"},{"title":"05 求职渠道与简历面试","meta":"司机岗位执行手册 · 章节直达","href":"library.html#topic-02-career-driver--05-求职渠道与简历面试","text":"司机岗位执行手册 05 求职渠道与简历面试","category":"职业就业","status":"baseline"},{"title":"06 实际工作条件记录","meta":"司机岗位执行手册 · 章节直达","href":"library.html#topic-02-career-driver--06-实际工作条件记录","text":"司机岗位执行手册 06 实际工作条件记录","category":"职业就业","status":"baseline"},{"title":"管理岗过渡手册","meta":"职业就业 · 匹配主题","href":"index.html#topic-03-career-management","text":"管理岗过渡手册 运行管理者资格、运营组织、晋升通道与五年转型能力档案 职业就业","category":"职业就业","status":"baseline"},{"title":"01 管理岗地图与路径评估","meta":"管理岗过渡手册 · 章节直达","href":"library.html#topic-03-career-management--01-管理岗地图与路径评估","text":"管理岗过渡手册 01 管理岗地图与路径评估","category":"职业就业","status":"baseline"},{"title":"02 业务知识体系","meta":"管理岗过渡手册 · 章节直达","href":"library.html#topic-03-career-management--02-业务知识体系","text":"管理岗过渡手册 02 业务知识体系","category":"职业就业","status":"baseline"},{"title":"03 管理岗日语与沟通","meta":"管理岗过渡手册 · 章节直达","href":"library.html#topic-03-career-management--03-管理岗日语与沟通","text":"管理岗过渡手册 03 管理岗日语与沟通","category":"职业就业","status":"baseline"},{"title":"04 管理岗过渡学习计划","meta":"管理岗过渡手册 · 章节直达","href":"library.html#topic-03-career-management--04-管理岗过渡学习计划","text":"管理岗过渡手册 04 管理岗过渡学习计划","category":"职业就业","status":"baseline"},{"title":"05 成果档案与晋升材料","meta":"管理岗过渡手册 · 章节直达","href":"library.html#topic-03-career-management--05-成果档案与晋升材料","text":"管理岗过渡手册 05 成果档案与晋升材料","category":"职业就业","status":"baseline"},{"title":"物流产业与赛道","meta":"行业技术 · 匹配主题","href":"index.html#topic-04-industry-logistics","text":"物流产业与赛道 冷链、末端配送、医药物流、海外仓、绿色物流与产业图谱 行业技术","category":"行业技术","status":"baseline"},{"title":"01 日本物流产业概览","meta":"物流产业与赛道 · 章节直达","href":"library.html#topic-04-industry-logistics--01-日本物流产业概览","text":"物流产业与赛道 01 日本物流产业概览","category":"行业技术","status":"baseline"},{"title":"02 增长赛道：EC、冷链、3PL","meta":"物流产业与赛道 · 章节直达","href":"library.html#topic-04-industry-logistics--02-增长赛道-ec-冷链-3pl","text":"物流产业与赛道 02 增长赛道：EC、冷链、3PL","category":"行业技术","status":"baseline"},{"title":"03 自动化与技术趋势","meta":"物流产业与赛道 · 章节直达","href":"library.html#topic-04-industry-logistics--03-自动化与技术趋势","text":"物流产业与赛道 03 自动化与技术趋势","category":"行业技术","status":"baseline"},{"title":"04 行业数据跟踪","meta":"物流产业与赛道 · 章节直达","href":"library.html#topic-04-industry-logistics--04-行业数据跟踪","text":"物流产业与赛道 04 行业数据跟踪","category":"行业技术","status":"baseline"},{"title":"自动驾驶与自动化","meta":"行业技术 · 匹配主题","href":"index.html#topic-05-industry-autonomous","text":"自动驾驶与自动化 L2–L4 技术、TaaS 商业化、监管沙盒与场景替代节奏 行业技术","category":"行业技术","status":"baseline"},{"title":"01 自动驾驶技术路线与时间表","meta":"自动驾驶与自动化 · 章节直达","href":"library.html#topic-05-industry-autonomous--01-自动驾驶技术路线与时间表","text":"自动驾驶与自动化 01 自动驾驶技术路线与时间表","category":"行业技术","status":"baseline"},{"title":"02 法规与许可制度","meta":"自动驾驶与自动化 · 章节直达","href":"library.html#topic-05-industry-autonomous--02-法规与许可制度","text":"自动驾驶与自动化 02 法规与许可制度","category":"行业技术","status":"baseline"},{"title":"03 仓储自动化与无人配送","meta":"自动驾驶与自动化 · 章节直达","href":"library.html#topic-05-industry-autonomous--03-仓储自动化与无人配送","text":"自动驾驶与自动化 03 仓储自动化与无人配送","category":"行业技术","status":"baseline"},{"title":"04 个人技能对接与机会","meta":"自动驾驶与自动化 · 章节直达","href":"library.html#topic-05-industry-autonomous--04-个人技能对接与机会","text":"自动驾驶与自动化 04 个人技能对接与机会","category":"行业技术","status":"baseline"},{"title":"技术与数字化","meta":"行业技术 · 匹配主题","href":"index.html#topic-06-industry-technology","text":"技术与数字化 AI 调度、TMS/WMS、数字孪生、网络安全与转型工具评估 行业技术","category":"行业技术","status":"updated"},{"title":"01 物流数字化技能地图","meta":"技术与数字化 · 章节直达","href":"library.html#topic-06-industry-technology--01-物流数字化技能地图","text":"技术与数字化 01 物流数字化技能地图","category":"行业技术","status":"updated"},{"title":"02 数字化岗位与转型路径","meta":"技术与数字化 · 章节直达","href":"library.html#topic-06-industry-technology--02-数字化岗位与转型路径","text":"技术与数字化 02 数字化岗位与转型路径","category":"行业技术","status":"updated"},{"title":"03 日本数字化劳动市场与岗位行情","meta":"技术与数字化 · 章节直达","href":"library.html#topic-06-industry-technology--03-日本数字化劳动市场与岗位行情","text":"技术与数字化 03 日本数字化劳动市场与岗位行情","category":"行业技术","status":"updated"},{"title":"经济与财务","meta":"经济环境 · 匹配主题","href":"index.html#topic-07-economy-finance","text":"经济与财务 日元汇率、物价税负、社会保险、年金医疗、住房与长期财务 经济环境","category":"经济环境","status":"baseline"},{"title":"01 收入结构与薪资行情","meta":"经济与财务 · 章节直达","href":"library.html#topic-07-economy-finance--01-收入结构与薪资行情","text":"经济与财务 01 收入结构与薪资行情","category":"经济环境","status":"baseline"},{"title":"02 生活成本与储蓄规划","meta":"经济与财务 · 章节直达","href":"library.html#topic-07-economy-finance--02-生活成本与储蓄规划","text":"经济与财务 02 生活成本与储蓄规划","category":"经济环境","status":"baseline"},{"title":"03 税务社保年金","meta":"经济与财务 · 章节直达","href":"library.html#topic-07-economy-finance--03-税务社保年金","text":"经济与财务 03 税务社保年金","category":"经济环境","status":"baseline"},{"title":"04 长期财务规划","meta":"经济与财务 · 章节直达","href":"library.html#topic-07-economy-finance--04-长期财务规划","text":"经济与财务 04 长期财务规划","category":"经济环境","status":"baseline"},{"title":"签证与在留资格","meta":"制度政策 · 匹配主题","href":"index.html#topic-08-visa-immigration","text":"签证与在留资格 特定技能、技人国、经营管理、永住规划、家属带同与在留变更 制度政策","category":"制度政策","status":"updated"},{"title":"01 特定技能制度概览","meta":"签证与在留资格 · 章节直达","href":"library.html#topic-08-visa-immigration--01-特定技能制度概览","text":"签证与在留资格 01 特定技能制度概览","category":"制度政策","status":"updated"},{"title":"02 特定技能1号-自动车运送业","meta":"签证与在留资格 · 章节直达","href":"library.html#topic-08-visa-immigration--02-特定技能1号-自动车运送业","text":"签证与在留资格 02 特定技能1号-自动车运送业","category":"制度政策","status":"updated"},{"title":"03 考试与日语要求","meta":"签证与在留资格 · 章节直达","href":"library.html#topic-08-visa-immigration--03-考试与日语要求","text":"签证与在留资格 03 考试与日语要求","category":"制度政策","status":"updated"},{"title":"04 申请流程与材料","meta":"签证与在留资格 · 章节直达","href":"library.html#topic-08-visa-immigration--04-申请流程与材料","text":"签证与在留资格 04 申请流程与材料","category":"制度政策","status":"updated"},{"title":"05 特定技能2号与升级路径","meta":"签证与在留资格 · 章节直达","href":"library.html#topic-08-visa-immigration--05-特定技能2号与升级路径","text":"签证与在留资格 05 特定技能2号与升级路径","category":"制度政策","status":"updated"},{"title":"06 育成就劳制度与新动向","meta":"签证与在留资格 · 章节直达","href":"library.html#topic-08-visa-immigration--06-育成就劳制度与新动向","text":"签证与在留资格 06 育成就劳制度与新动向","category":"制度政策","status":"updated"},{"title":"07 永住与长期在留规划","meta":"签证与在留资格 · 章节直达","href":"library.html#topic-08-visa-immigration--07-永住与长期在留规划","text":"签证与在留资格 07 永住与长期在留规划","category":"制度政策","status":"updated"},{"title":"08 家属带同与家庭规划","meta":"签证与在留资格 · 章节直达","href":"library.html#topic-08-visa-immigration--08-家属带同与家庭规划","text":"签证与在留资格 08 家属带同与家庭规划","category":"制度政策","status":"updated"},{"title":"09 政策更新日志","meta":"签证与在留资格 · 章节直达","href":"library.html#topic-08-visa-immigration--09-政策更新日志","text":"签证与在留资格 09 政策更新日志","category":"制度政策","status":"updated"},{"title":"政治与法规","meta":"制度政策 · 匹配主题","href":"index.html#topic-09-politics-law","text":"政治与法规 雇佣解约、劳动监察、年金、灾害法与司法救济 制度政策","category":"制度政策","status":"updated"},{"title":"01 在留法规框架","meta":"政治与法规 · 章节直达","href":"library.html#topic-09-politics-law--01-在留法规框架","text":"政治与法规 01 在留法规框架","category":"制度政策","status":"updated"},{"title":"02 政治动向与移民政策环境","meta":"政治与法规 · 章节直达","href":"library.html#topic-09-politics-law--02-政治动向与移民政策环境","text":"政治与法规 02 政治动向与移民政策环境","category":"制度政策","status":"updated"},{"title":"03 维权与合规工具箱","meta":"政治与法规 · 章节直达","href":"library.html#topic-09-politics-law--03-维权与合规工具箱","text":"政治与法规 03 维权与合规工具箱","category":"制度政策","status":"updated"},{"title":"资格与教育投资","meta":"学习成长 · 匹配主题","href":"index.html#topic-10-education-qualification","text":"资格与教育投资 资格 ROI、通信制大学、K12 与子女教育、家庭教育预算 学习成长","category":"学习成长","status":"updated"},{"title":"01 资格地图","meta":"资格与教育投资 · 章节直达","href":"library.html#topic-10-education-qualification--01-资格地图","text":"资格与教育投资 01 资格地图","category":"学习成长","status":"updated"},{"title":"02 学习体系与教育投资","meta":"资格与教育投资 · 章节直达","href":"library.html#topic-10-education-qualification--02-学习体系与教育投资","text":"资格与教育投资 02 学习体系与教育投资","category":"学习成长","status":"updated"},{"title":"03 日本学校教育体系与子女教育","meta":"资格与教育投资 · 章节直达","href":"library.html#topic-10-education-qualification--03-日本学校教育体系与子女教育","text":"资格与教育投资 03 日本学校教育体系与子女教育","category":"学习成长","status":"updated"},{"title":"04 高等教育与技人国学历路径","meta":"资格与教育投资 · 章节直达","href":"library.html#topic-10-education-qualification--04-高等教育与技人国学历路径","text":"资格与教育投资 04 高等教育与技人国学历路径","category":"学习成长","status":"updated"},{"title":"日语学习","meta":"学习成长 · 匹配主题","href":"index.html#topic-11-language-japanese","text":"日语学习 阶段目标、JLPT 能力对标、教材课程、口语练习与场景词库 学习成长","category":"学习成长","status":"baseline"},{"title":"01 总体学习路线与考试选择","meta":"日语学习 · 章节直达","href":"library.html#topic-11-language-japanese--01-总体学习路线与考试选择","text":"日语学习 01 总体学习路线与考试选择","category":"学习成长","status":"baseline"},{"title":"02 N4备考计划","meta":"日语学习 · 章节直达","href":"library.html#topic-11-language-japanese--02-n4备考计划","text":"日语学习 02 N4备考计划","category":"学习成长","status":"baseline"},{"title":"03 N3备考计划","meta":"日语学习 · 章节直达","href":"library.html#topic-11-language-japanese--03-n3备考计划","text":"日语学习 03 N3备考计划","category":"学习成长","status":"baseline"},{"title":"04 N2备考计划","meta":"日语学习 · 章节直达","href":"library.html#topic-11-language-japanese--04-n2备考计划","text":"日语学习 04 N2备考计划","category":"学习成长","status":"baseline"},{"title":"05 资源与工具清单","meta":"日语学习 · 章节直达","href":"library.html#topic-11-language-japanese--05-资源与工具清单","text":"日语学习 05 资源与工具清单","category":"学习成长","status":"baseline"},{"title":"06 学习进度跟踪","meta":"日语学习 · 章节直达","href":"library.html#topic-11-language-japanese--06-学习进度跟踪","text":"日语学习 06 学习进度跟踪","category":"学习成长","status":"baseline"},{"title":"文化与生活","meta":"生活地域 · 匹配主题","href":"index.html#topic-12-culture-life","text":"文化与生活 医疗、住房、手机银行、交通、防灾、文化礼仪与社会融入 生活地域","category":"生活地域","status":"updated"},{"title":"01 职场文化与人际","meta":"文化与生活 · 章节直达","href":"library.html#topic-12-culture-life--01-职场文化与人际","text":"文化与生活 01 职场文化与人际","category":"生活地域","status":"updated"},{"title":"02 生活指南与适应","meta":"文化与生活 · 章节直达","href":"library.html#topic-12-culture-life--02-生活指南与适应","text":"文化与生活 02 生活指南与适应","category":"生活地域","status":"updated"},{"title":"03 医疗与健康","meta":"文化与生活 · 章节直达","href":"library.html#topic-12-culture-life--03-医疗与健康","text":"文化与生活 03 医疗与健康","category":"生活地域","status":"updated"},{"title":"04 住房与安家","meta":"文化与生活 · 章节直达","href":"library.html#topic-12-culture-life--04-住房与安家","text":"文化与生活 04 住房与安家","category":"生活地域","status":"updated"},{"title":"05 社会融入与社群","meta":"文化与生活 · 章节直达","href":"library.html#topic-12-culture-life--05-社会融入与社群","text":"文化与生活 05 社会融入与社群","category":"生活地域","status":"updated"},{"title":"地域信息","meta":"生活地域 · 匹配主题","href":"index.html#topic-13-regional-info","text":"地域信息 北海道、东京、大阪、福冈、千叶的区域成本与定居环境 生活地域","category":"生活地域","status":"updated"},{"title":"01 地域选择框架","meta":"地域信息 · 章节直达","href":"library.html#topic-13-regional-info--01-地域选择框架","text":"地域信息 01 地域选择框架","category":"生活地域","status":"updated"},{"title":"02 地域生活笔记","meta":"地域信息 · 章节直达","href":"library.html#topic-13-regional-info--02-地域生活笔记","text":"地域信息 02 地域生活笔记","category":"生活地域","status":"updated"}];
+
+(() => {
+  const input = document.getElementById('site-search');
+  const resultBox = document.getElementById('search-results');
+  const countEl = document.getElementById('hub-count');
+  const totop = document.getElementById('totop');
+  const rows = Array.from(document.querySelectorAll('.topic-row'));
+  const noResult = document.createElement('div');
+  noResult.className = 'noresult';
+  noResult.textContent = '未找到匹配的主题，请调整关键词或筛选条件。';
+  document.querySelector('.main').appendChild(noResult);
+
+  const state = { q: '', category: 'all', status: 'all' };
+  let timer;
+
+  const termsOf = value => value.trim().toLowerCase().split(/\s+/).filter(Boolean);
+  const matches = (text, terms) => terms.every(term => text.toLowerCase().includes(term));
+
+  function renderResults(items) {
+    resultBox.replaceChildren();
+    if (!state.q) {
+      resultBox.classList.remove('show');
+      return;
+    }
+    resultBox.classList.add('show');
+    if (!items.length) {
+      const empty = document.createElement('div');
+      empty.className = 'sr-none';
+      empty.textContent = '未找到匹配的主题或章节。';
+      resultBox.appendChild(empty);
+      return;
+    }
+    items.slice(0, 30).forEach(item => {
+      const link = document.createElement('a');
+      link.className = 'sr-item';
+      link.href = item.href;
+      const title = document.createElement('div');
+      title.className = 't';
+      title.textContent = item.title;
+      const meta = document.createElement('div');
+      meta.className = 'path';
+      meta.textContent = item.meta;
+      link.append(title, meta);
+      resultBox.appendChild(link);
+    });
+  }
+
+  function applyFilters() {
+    const terms = termsOf(state.q);
+    const results = [];
+    let visible = 0;
+    rows.forEach(row => {
+      const categoryOk = state.category === 'all' || row.dataset.category === state.category;
+      const statusOk = state.status === 'all' || row.dataset.status === state.status;
+      const textOk = !terms.length || matches(row.dataset.search, terms);
+      const show = categoryOk && statusOk && textOk;
+      row.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+    if (terms.length) {
+      TOPIC_INDEX.forEach(record => {
+        const categoryOk = state.category === 'all' || record.category === state.category;
+        const statusOk = state.status === 'all' || record.status === state.status;
+        if (categoryOk && statusOk && matches(record.text, terms)) {
+          results.push({ href: record.href, title: record.title, meta: record.meta });
+        }
+      });
+    }
+    noResult.style.display = visible ? 'none' : '';
+    countEl.textContent = '共 ' + visible + ' 个主题';
+    renderResults(results);
+  }
+
+  function bindChips(id, key) {
+    const wrap = document.getElementById(id);
+    wrap.addEventListener('click', event => {
+      const btn = event.target.closest('.chip');
+      if (!btn) return;
+      wrap.querySelectorAll('.chip').forEach(chip => chip.classList.remove('on'));
+      btn.classList.add('on');
+      state[key] = btn.dataset[key];
+      applyFilters();
+    });
+  }
+  bindChips('chips-category', 'category');
+  bindChips('chips-status', 'status');
+
+  input.addEventListener('input', () => {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      state.q = input.value.trim();
+      applyFilters();
+    }, 150);
+  });
+  resultBox.addEventListener('click', () => resultBox.classList.remove('show'));
+  document.addEventListener('keydown', event => {
+    if (event.key === '/' && !['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) {
+      event.preventDefault();
+      input.focus();
+    }
+    if (event.key === 'Escape' && document.activeElement === input) {
+      input.value = '';
+      state.q = '';
+      applyFilters();
+    }
+  });
+
+  window.addEventListener('scroll', () => {
+    totop.classList.toggle('show', window.scrollY > 600);
+  }, { passive: true });
+  totop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  applyFilters();
+})();
+</script>
+</body>
+</html>
