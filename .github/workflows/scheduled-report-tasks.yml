@@ -1,0 +1,88 @@
+# 月度报告产出提醒：每月 1 日生成当月任务清单并开一个 GitHub Issue 作为提醒。
+#
+# 只负责「提醒 + 待办清单」，不产出报告研究内容——报告需人工/Agent 按各主题
+# prompts/business-config.md 流程撰写。
+#
+# 流程：
+#   1. 按当前 UTC 月份（或手动指定 --period）运行 update_planner.py 生成任务清单
+#   2. 以 Issue 形式发布（标题含月份，正文含待办清单与命名规范提醒）
+#
+# 产出后：提交 reports/YYYY-MM-<slug>.md 并 push，html-sync 自动生成 HTML 与
+# 汇总页/阅读器；下期报告自动与本期比对并高亮「已更新」。
+name: scheduled-report-tasks
+
+on:
+  schedule:
+    # 每月 1 日 00:20 UTC = 09:20 JST，紧随定时维护（00:15）之后
+    - cron: "20 0 1 * *"
+  workflow_dispatch:
+    inputs:
+      period:
+        description: "周期标识（YYYY-MM / YYYY-Qn / YYYY），缺省按当前 UTC 月份"
+        required: false
+        default: ""
+
+concurrency:
+  group: scheduled-report-tasks
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 安装依赖
+        run: pip install -r requirements.txt
+
+      - name: 生成月度任务清单
+        id: plan
+        run: |
+          PERIOD="${{ github.event.inputs.period }}"
+          if [ -z "$PERIOD" ]; then PERIOD=$(date -u +%Y-%m); fi
+          echo "period=$PERIOD" >> "$GITHUB_OUTPUT"
+          python src/prompts-tools/tools/update_planner.py --period "$PERIOD" > /tmp/tasks.md
+          cat /tmp/tasks.md
+
+      - name: 发布月度提醒 Issue
+        run: |
+          PERIOD="${{ steps.plan.outputs.period }}"
+          # 用 Python 拼接正文，避免 shell 反引号 / 引号转义问题
+          PERIOD="$PERIOD" python - <<'PY'
+          import os
+          from pathlib import Path
+
+          period = os.environ["PERIOD"]
+          tasks = Path("/tmp/tasks.md").read_text(encoding="utf-8").strip()
+          lines = [
+              f"## 本月报告产出任务清单（{period}）",
+              "",
+              "> 由 `.github/workflows/scheduled-report-tasks.yml` 自动生成（每月 1 日 00:20 UTC）。",
+              f"> 命名规范：`reports/{period}-<slug>.md` + 同名 `.html`。",
+              "",
+              tasks,
+              "",
+              "---",
+              "",
+              "### 产出后",
+              "1. 提交 md 源稿并 push → `html-sync` 自动生成 HTML 与汇总页 / 阅读器。",
+              "2. 下期报告将与本期自动比对，新增 / 修改片段加「已更新」标记（阅读器可一键切换版本查看）。",
+              "",
+              "完成后请关闭本 Issue。",
+          ]
+          Path("/tmp/issue-body.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
+          PY
+          gh issue create \
+            --title "【月度报告产出】$PERIOD 任务清单" \
+            --body-file /tmp/issue-body.md

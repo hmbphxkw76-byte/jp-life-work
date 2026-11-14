@@ -33,7 +33,7 @@ from report_diff import (  # noqa: E402
     render_diffed_body,
     strip_body,
 )
-from update_planner import build_tasks, default_period, target_month  # noqa: E402
+from update_planner import build_tasks, default_period, pick_prompt, target_month  # noqa: E402
 
 
 # ──────────────────────────────────────────────
@@ -200,6 +200,29 @@ class TestBuildTasks(unittest.TestCase):
         biz = self._make_business("99-demo", prompts=["prompt-quarterly-analysis.md"])
         tasks = build_tasks("2026-Q4", [biz])
         self.assertEqual(tasks[0]["output"], "99-demo/reports/2026-12-demo.html")
+
+
+class TestPickPrompt(unittest.TestCase):
+    """月度任务选取提示词的优先级。"""
+
+    def test_prefers_monthly_monitor(self):
+        prompts = [
+            "prompt-annual-review.md",
+            "prompt-baseline-setup.md",
+            "prompt-monthly-monitor.md",
+            "prompt-quarterly-analysis.md",
+        ]
+        self.assertEqual(pick_prompt(prompts), "prompt-monthly-monitor.md")
+
+    def test_update_beats_baseline_setup(self):
+        prompts = ["prompt-baseline-setup.md", "prompt-update.md"]
+        self.assertEqual(pick_prompt(prompts), "prompt-update.md")
+
+    def test_falls_back_to_sorted_first(self):
+        self.assertEqual(pick_prompt(["prompt-zzz.md", "prompt-aaa.md"]), "prompt-aaa.md")
+
+    def test_empty(self):
+        self.assertEqual(pick_prompt([]), "")
 
 
 class TestSelectArchives(unittest.TestCase):

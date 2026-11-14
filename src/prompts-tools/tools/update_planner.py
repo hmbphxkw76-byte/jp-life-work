@@ -25,7 +25,6 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from _common import (  # noqa: E402
-    PROMPT_FILES,
     Business,
     iter_business_dirs,
     month_report_name,
@@ -42,6 +41,28 @@ def default_period(now: datetime) -> str:
     if month in (1, 4, 7, 10):
         return f"{year}-Q{(month - 1) // 3 + 1}"
     return f"{year}-{month:02d}"
+
+
+# 月度任务选取提示词的优先级：越靠前者越贴合「月度产出」语义，
+# 避免按字母序误选到年度 / 季度提示词。
+PROMPT_PRIORITY = [
+    "prompt-monthly-monitor.md",
+    "prompt-update.md",
+    "prompt-policy-review.md",
+    "prompt-baseline-setup.md",
+    "prompt-quarterly-analysis.md",
+    "prompt-annual-review.md",
+    "prompt-annual-refresh.md",
+    "prompt-weekly-monitor.md",
+]
+
+
+def pick_prompt(prompts: list[str]) -> str:
+    """从主题可用提示词中挑一个最贴合月度任务的；为空返回空串。"""
+    for p in PROMPT_PRIORITY:
+        if p in prompts:
+            return p
+    return sorted(prompts)[0] if prompts else ""
 
 
 def target_month(period: str) -> str:
@@ -61,8 +82,14 @@ def build_tasks(period: str, businesses: list[Business]) -> list[dict]:
     month = target_month(period)
     tasks = []
     for b in businesses:
-        # 只要该主题建立了任一周期提示词，即纳入该月任务（节拍由 prompts/ 决定）
-        prompts = [p for p in PROMPT_FILES.values() if (b.path / "prompts" / p).exists()]
+        # 扫描主题 prompts/ 下全部提示词（含 update / policy-review 等），
+        # 只要建立了任一提示词即纳入该月任务（具体节拍由提示词优先级选取）
+        prompts_dir = b.path / "prompts"
+        prompts = (
+            sorted(p.name for p in prompts_dir.glob("prompt-*.md"))
+            if prompts_dir.is_dir()
+            else []
+        )
         if not prompts:
             continue
         rs = topic_slug(b.region if not b.property_type else b.property_type)
@@ -74,7 +101,7 @@ def build_tasks(period: str, businesses: list[Business]) -> list[dict]:
                 "cycle": "monthly",
                 "cycle_label": "月度",
                 "period": month,
-                "prompt": f"{b.rel}/prompts/{sorted(prompts)[0]}",
+                "prompt": f"{b.rel}/prompts/{pick_prompt(prompts)}",
                 "output": f"{b.rel}/reports/{output}",
                 "status": status,
             }
