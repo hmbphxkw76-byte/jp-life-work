@@ -7,6 +7,7 @@
 from __future__ import annotations
 
 import json
+import re
 import sys
 import tempfile
 import unittest
@@ -409,9 +410,11 @@ class TestExitTransitionReturnRegistry(unittest.TestCase):
         ):
             self.assertIn(value, text)
 
-        rows = [line for line in text.splitlines() if line.startswith("| ") and line.count("|") >= 5]
-        self.assertGreaterEqual(len(rows), 20)
+        rows = [line for line in text.splitlines() if line.startswith("| ") and line.count("|") >= 10]
+        self.assertGreaterEqual(len(rows), 14)
         self.assertIn("⚠ 待核实", text)
+        for field in ("来源 URL", "版本 / 发布日期", "核验状态", "关联章节", "更新时间"):
+            self.assertIn(field, text)
 
 
 class TestExitTransitionReturnReports(unittest.TestCase):
@@ -456,6 +459,8 @@ class TestExitTransitionReturnReports(unittest.TestCase):
             "（推断）",
         ):
             self.assertIn(value, text)
+        self.assertIn("[出入国在留管理庁", text)
+        self.assertIn("2026-11-14", text)
 
     def test_initial_analysis_is_framework_companion(self):
         self.assertTrue(self.INITIAL.is_file())
@@ -501,11 +506,20 @@ class TestExitTransitionReturnHtml(unittest.TestCase):
             self.assertIn('<nav aria-label="报告导航">', text)
             self.assertIn('id="s1"', text)
             self.assertEqual([i for i in lint_html(text) if i[0] == "E"], [])
+            self.assertRegex(text, r'<a[^>]+href="https?://[^"]+"')
 
     def test_html_reports_use_fixed_tables(self):
         for path in (self.BASELINE, self.INITIAL):
             text = path.read_text(encoding="utf-8")
             self.assertIn('class="fixed"', text)
+
+    def test_baseline_html_has_nine_sections_and_resolving_anchors(self):
+        text = self.BASELINE.read_text(encoding="utf-8")
+        self.assertIn('id="s9"', text)
+        nav = re.search(r'<nav aria-label="报告导航">(.*?)</nav>', text, re.S)
+        self.assertIsNotNone(nav)
+        for anchor in re.findall(r'href="#(s\d+)"', nav.group(1)):
+            self.assertIn(f'id="{anchor}"', text)
 
 
 class TestExitTransitionReturnIntegration(unittest.TestCase):
