@@ -257,7 +257,7 @@ src/report_templates/handbook-split-standard.md 第三至七节逐项执行：
 | 06-industry-technology | ✅ 已完成 | 2026-11-14 | 3f1703b |
 | 07-economy-finance | ✅ 已完成 | 2026-11-14 | d60b9c9 |
 | 08-visa-immigration | ✅ 已完成 | 2026-11-14 | 6f7e851 |
-| 09-politics-law | ⬜ 待处理 | — | — |
+| 09-politics-law | ✅ 已完成 | 2026-11-14 | dcc07ca |
 | 10-education-qualification | ⬜ 待处理 | — | — |
 | 11-language-japanese | ⬜ 待处理 | — | — |
 | 12-culture-life | ✅ 已完成 | 2026-11-14 | 4d3e200 |
