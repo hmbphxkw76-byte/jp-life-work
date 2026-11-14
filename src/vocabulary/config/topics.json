@@ -1,6 +1,6 @@
 {
-  "version": "v1.24",
-  "updated": "2026-11-13",
+  "version": "v1.25",
+  "updated": "2026-11-14",
   "comment": "主题注册表（vocabulary 子系统单一事实源）。本文件由 vocab_tool.py 自动维护，请勿手工编辑：新增主题用 topic-add（自动登记注册表 + 创建 data/<topic>/ 目录 + 重建索引 + 备份回滚 + 操作日志），移除用 topic-remove，一致性审计用 topic-check。storage/imports_dir/exports_dir 为相对 vocabulary/ 根目录的路径。",
   "topics": {
     "ssw-driver": {
@@ -213,6 +213,22 @@
         "生活成本与设施",
         "地方政策与自治",
         "场景与表达"
+      ]
+    },
+    "exit-transition-return": {
+      "name": "退出·转型·回国",
+      "description": "在日外国人退出、转型与回国的执行层词汇",
+      "id_prefix": "ETR",
+      "storage": "data/exit-transition-return/terms.md",
+      "imports_dir": "data/exit-transition-return/imports",
+      "exports_dir": "data/exit-transition-return/exports",
+      "categories": [
+        "退出与劳动",
+        "转型与在留资格",
+        "年金与保险",
+        "税务与住民",
+        "离境与再入国",
+        "资产与生活清理"
       ]
     }
   }

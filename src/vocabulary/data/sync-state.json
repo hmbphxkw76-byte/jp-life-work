@@ -1181,6 +1181,41 @@
         "REG-068": "a36673ec0e480a269f4c78fed2900fc77cf03a4a3852b4e004bc12b16ff8eb08",
         "REG-069": "35eefcfc50ca8d9e48650727b04ba101140ac086c97662f683767ae6658b1d8f"
       }
+    },
+    "exit-transition-return=>../../16-exit-transition-return/prompts/business-config.md": {
+      "topic": "exit-transition-return",
+      "target": "../../16-exit-transition-return/prompts/business-config.md",
+      "vocab_version": "v1.1",
+      "term_count": 25,
+      "synced_at": "2026-11-14T11:17:24",
+      "source_hash": "242ed3091504cd13fa60f9f1ce4e55aaf2add0b7fa6011f4775785ecddf02f04",
+      "term_hashes": {
+        "ETR-001": "548ab59dd48a1064a9c0b4ba7831cfc6bbebe3f47477d389f13ec49a01693cc7",
+        "ETR-002": "431a272932a41cc9c173c51bd19c552e517719ac601f2854c5eb34fa83c7b855",
+        "ETR-003": "555f1c46c4e35581f90c944023fb451d629e7b27a9c3071b6e1cf1ec3c47147b",
+        "ETR-004": "f3f4f861f3b144f9b0784614524cc6b866b7d6b12f4153da62e2575af824a697",
+        "ETR-005": "b269ae308bdcee0d5035ec5217d5ea99f68778ed8ddf4df29d9a28dfc7e9d3ef",
+        "ETR-006": "c189971d8a8e14edd1c6d1d255b5827142cb982549cfdec53e23e63a13ac0a39",
+        "ETR-007": "90eece8cb7a790f36bbdfcd5cfa6db9027b9f5afa531fb23fb6d45b743d533b1",
+        "ETR-008": "731bfc0e910f8665205c068f3809cd1a29d52c02d87bcc7c4a1dff698f2c502c",
+        "ETR-009": "b35e3e06bbdb0264b9bb085ca812b7dafe2392dfeea5e9e5b693d3864885231a",
+        "ETR-010": "a2ac479c254e9a8c762ac3465e225e3ebff6d81450ae17a4be28d60a3093adac",
+        "ETR-011": "5f1939f25cdc7fae395514b7610480f84fb6f64a1ddf488b3fab4388aef98822",
+        "ETR-012": "8d239894c5a84921483c2457855eec2c0370a80e414892429eaf5fada5da674c",
+        "ETR-013": "e62827f06d8b882a25ec61fef7a331d447200052a4309a1470a519dec3aa4357",
+        "ETR-014": "e1e33bb2dc518074cac49e0a8506aa24446e507a0073c464bbc7804cbce7129a",
+        "ETR-015": "1f5388fec21a77907d80f305f7b350688c2b680d78a93f9368408a3495c13f85",
+        "ETR-016": "536faded038a1194fe5918190c8b3c8674ce1f6b7ee26c267cf6d889940c2254",
+        "ETR-017": "d97a5f5d7cb3e65af0050ac30e16dcbb6b267916dae2f7b31b8205b101f2dbe1",
+        "ETR-018": "0f46335f004856f5d612c53cc0cc53cab16f9466e61ec90af718330514af4624",
+        "ETR-019": "a1f1ce869a76be1f6b7798c0d68efade925709c485e4b66793f578fa87b139c7",
+        "ETR-020": "1b9d172c5fc7a70da15a05461c81417c77491757e87ae700e8d6b690d8dc7c27",
+        "ETR-021": "49ad8863142818392f4880c55f464bdcef380963489bb1722464d791d745044d",
+        "ETR-022": "c8951f4ad4abbd621dbe7b56576f9e80511fc088234f94d640432f6e96186f0b",
+        "ETR-023": "43456559480be97e96227e6da9a06af2e277702623470635a86c56ef578c1f01",
+        "ETR-024": "e3fd53a2ac294258527385861437b674c2bad7146a1ec9d8725cc3e34dd2ff68",
+        "ETR-025": "68509e5cc4934ae123ad23ca0be8daefda25f2f012b5e5dd1db739bc64ce9b1d"
+      }
     }
   }
 }

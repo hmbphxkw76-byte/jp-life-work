@@ -14,3 +14,8 @@ Thumbs.db
 # 词汇库工具生成的备份与日志产物（工具自带轮转保留，不入库）
 src/vocabulary/data/sync-backups/
 src/vocabulary/data/topic-backups/
+
+# 本地 worktree 与执行计划工作区（不入库）
+.worktrees/
+.superpowers/
+docs/superpowers/

@@ -1,6 +1,6 @@
 # 词汇库索引（vocabulary）
 
-> 由 `script/vocab_tool.py index` 自动生成，请勿手工编辑。生成时间：2026-11-13T20:09:21
+> 由 `script/vocab_tool.py index` 自动生成，请勿手工编辑。生成时间：2026-11-14T11:08:26
 
 ## 主题总览
 
@@ -19,8 +19,9 @@
 | language-japanese | 日语语言 | JPN | 69 | 语言能力与考试 13 / 语法与句型 12 / 词汇与表达 11 / 学习与教学 9 / 场景与表达 8 / 敬语与语体 8 / 职场日语 8 | v1.2 | data/language-japanese/terms.md | 2026-11-13 |
 | culture-life | 文化与生活 | CUL | 70 | 公共服务与设施 13 / 文化习俗与节庆 12 / 日常生活与居住 12 / 饮食与消费 12 / 社交与礼仪 11 / 场景与表达 10 | v1.2 | data/culture-life/terms.md | 2026-11-13 |
 | regional-info | 地区信息 | REG | 69 | 人口与城市 12 / 地方政策与自治 12 / 行政区划与地理 12 / 地方经济与产业 11 / 场景与表达 11 / 生活成本与设施 11 | v1.2 | data/regional-info/terms.md | 2026-11-13 |
+| exit-transition-return | 退出·转型·回国 | ETR | 25 | 转型与在留资格 7 / 税务与住民 5 / 资产与生活清理 4 / 年金与保险 3 / 离境与再入国 3 / 退出与劳动 3 | v1.1 | data/exit-transition-return/terms.md | 2026-11-14 |
 
-合计：13 个主题，1052 条词条。
+合计：14 个主题，1077 条词条。
 
 ## 上层对接
 
