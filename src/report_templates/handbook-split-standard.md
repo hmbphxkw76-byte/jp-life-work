@@ -261,7 +261,7 @@ src/report_templates/handbook-split-standard.md 第三至七节逐项执行：
 | 10-education-qualification | ✅ 已完成 | 2026-11-14 | a140ace |
 | 11-language-japanese | ✅ 已完成 | 2026-11-14 | dd31206 |
 | 12-culture-life | ✅ 已完成 | 2026-11-14 | 4d3e200 |
-| 13-regional-info | ⬜ 待处理 | — | — |
+| 13-regional-info | ✅ 已完成 | 2026-11-14 | 77023cd |
 | 14-life-operations | ⬜ 待处理 | — | — |
 | 15-health-wellbeing | ⬜ 待处理 | — | — |
 | 16-exit-transition-return | ⬜ 待处理 | — | — |
