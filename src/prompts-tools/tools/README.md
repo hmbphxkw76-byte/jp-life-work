@@ -26,11 +26,11 @@ python -m unittest discover -s src/tests -v   # 单元测试（65 项）
 | validate.py | 校验 | validate.yml「规范校验」 |
 | lint_reports.py | 校验 | validate.yml「报告内容校验」（建议级） |
 | compliance_check.py | 校验+引导+审计 | validate.yml「报告模板合规校验」（建议级） |
-| classify_reports.py | 校验+修复 | 手动 / 待建定时任务「报告自动归位」 |
+| classify_reports.py | 校验+修复 | scheduled-maintenance.yml「报告自动归位」 |
 | ensure_region_topics.py | 校验+修复 | validate.yml「结构补全」 |
 | md2html.py | 生成 | html-sync.yml「HTML 同步」 |
-| archive_reports.py | 生成 | 手动 / 待建定时任务「归档策略」 |
-| build_index.py | 生成 | 手动 / 待建定时任务「生成全局索引」 |
+| archive_reports.py | 生成 | scheduled-maintenance.yml「归档策略」 |
+| build_index.py | 生成 | scheduled-maintenance.yml「生成全局索引」 |
 | build_hub.py | 生成 | validate.yml --check / html-sync.yml「汇总页 + 阅读器」 |
 | report_diff.py | 生成 | build_hub 依赖：跨月内容对比高亮（纯函数） |
 | migrate_monthly_reports.py | 迁移 | 一次性：存量报告合并重命名为月度系列 |

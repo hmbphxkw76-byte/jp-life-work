@@ -1,0 +1,85 @@
+# 定时维护：每月 1 日 00:15 UTC（= 09:15 JST）执行报告体系例行维护并提交生成物。
+#
+# 维护内容（均为幂等操作）：
+#   1. 报告自动归位（classify_reports.py --apply）
+#   2. 结构补全（ensure_region_topics.py）
+#   3. 归档策略（archive_reports.py，每主题保留最新 12 期）
+#   4. 生成全局索引（build_index.py → INDEX.md）
+#   5. 重建汇总页 / 阅读器（build_hub.py → index.html / reader.html）
+#   6. 跑契约测试确认无回归后，提交并推送变更（无变更则跳过）
+#
+# 原 scheduled-update.yml（周期更新调度）已于 37c7a90 删除，本工作流为重建版，
+# 只负责「维护生成物 + 结构」，不产出报告研究内容。
+name: scheduled-maintenance
+
+on:
+  schedule:
+    # 每月 1 日 00:15 UTC = 09:15 JST，避开整点高负载时段
+    - cron: "15 0 1 * *"
+  workflow_dispatch:
+
+concurrency:
+  group: scheduled-maintenance
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  maintain:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 安装依赖
+        run: pip install -r requirements.txt
+
+      # 退出码约定：0=通过；1=错误（阻断）；2=警告（放行）
+      - name: 报告自动归位（classify_reports.py --apply）
+        run: |
+          python src/prompts-tools/tools/classify_reports.py --apply || code=$?
+          if [ "${code:-0}" -eq 1 ]; then
+            echo "::error::报告归位失败"
+            exit 1
+          fi
+          echo "classify_reports.py 退出码 ${code:-0}"
+
+      - name: 结构补全（ensure_region_topics.py）
+        run: |
+          python src/prompts-tools/tools/ensure_region_topics.py || code=$?
+          if [ "${code:-0}" -eq 1 ]; then
+            echo "::error::结构补全失败"
+            exit 1
+          fi
+          echo "ensure_region_topics.py 退出码 ${code:-0}"
+
+      - name: 归档策略（archive_reports.py）
+        run: python src/prompts-tools/tools/archive_reports.py
+
+      - name: 生成全局索引（build_index.py）
+        run: python src/prompts-tools/tools/build_index.py
+
+      - name: 重建汇总页 / 阅读器（build_hub.py）
+        run: python src/prompts-tools/tools/build_hub.py
+
+      - name: 契约测试（确认维护无回归）
+        run: python -m unittest discover -s src/tests
+
+      - name: 提交维护产物
+        run: |
+          git add -A
+          if git diff --cached --quiet; then
+            echo "无变更，跳过提交"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git commit -m "chore: 定时维护（归位 / 归档 / 索引 / 汇总页同步）"
+          git push

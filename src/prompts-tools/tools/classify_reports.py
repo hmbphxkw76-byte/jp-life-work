@@ -1,4 +1,4 @@
-"""报告自动归位（手动 / 待建定时任务的归位步骤）。
+"""报告自动归位（scheduled-maintenance.yml 的归位步骤）。
 
 扫描散落在业务目录之外（仓库根、report_templates/ 等）的报告文件，
 按文件名中的主题 slug 判定归属业务线，移动到该主题 reports/。
