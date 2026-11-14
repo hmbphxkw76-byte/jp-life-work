@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>jp-life-work · 报告索引</title>
+<style>
+:root{
+  --bg:#f4f6f9; --card:#ffffff; --ink:#15202b; --ink2:#465667; --ink3:#6d7c8c;
+  --line:#e1e7ee; --line2:#eef2f6;
+  --navy:#16324f; --navy2:#2f5597; --blue:#3f6fb0; --blue-l:#eaf1fa;
+  --green:#1c7444; --green-l:#eaf5ef;
+  --amber:#9a6a12; --amber-l:#fdf4e2;
+  --purple:#5b4b8a; --purple-l:#f0edf7;
+  --gray:#74828f; --gray-l:#eff2f4;
+  --radius:12px; --shadow:0 1px 3px rgba(20,40,70,.06);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{font-family:"Microsoft YaHei","PingFang SC","Segoe UI",Arial,sans-serif;
+  background:var(--bg);color:var(--ink);line-height:1.7;font-size:14.5px}
+a{color:var(--navy2);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:var(--gray-l);padding:1px 5px;border-radius:4px;font-size:12px}
+[hidden]{display:none!important}
+
+/* ── Hero ── */
+.hero{background:linear-gradient(128deg,#0f2338 0%,#16324f 52%,#2f5597 100%);
+  color:#fff;padding:48px 40px 42px;text-align:center}
+.hero h1{font-size:27px;font-weight:700;letter-spacing:.4px;margin:0 0 4px}
+.hero .stats{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px;justify-content:center}
+.hero .stat{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);
+  border-radius:10px;padding:8px 16px;font-size:12px;color:rgba(255,255,255,.85)}
+.hero .stat b{font-size:20px;display:block;color:#fff;letter-spacing:.5px;line-height:1.3}
+
+/* ── 筛选栏 ── */
+.filterbar{position:sticky;top:0;z-index:40;
+  background:rgba(244,246,249,.95);backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--line);padding:12px 24px;
+  display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.filterbar>input{flex:1;min-width:220px;max-width:400px;padding:8px 14px;
+  border:1px solid var(--line);border-radius:18px;font-size:13.5px;background:#fff;
+  outline:none;font-family:inherit;color:var(--ink)}
+.filterbar>input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(63,111,176,.12)}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{border:1px solid var(--line);background:#fff;border-radius:14px;padding:4px 12px;
+  font-size:12.5px;color:var(--ink2);cursor:pointer;user-select:none;font-family:inherit}
+.chip:hover{border-color:var(--blue)}
+.chip.on{background:var(--navy);border-color:var(--navy);color:#fff}
+.filterbar .count{font-size:12px;color:var(--ink3);margin-left:auto;white-space:nowrap}
+
+/* ── 主题卡片 ── */
+.main{max-width:1240px;margin:0 auto;padding:8px 24px 50px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));
+  gap:14px;margin:12px 0 6px}
+.tcard{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:16px 18px;display:flex;flex-direction:column;gap:8px;box-shadow:var(--shadow);
+  transition:border-color .15s,box-shadow .15s}
+.tcard:hover{border-color:#c9d6e6;box-shadow:0 4px 14px rgba(20,40,70,.09)}
+.tcard .row1{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.badge{font-size:11px;border-radius:3px;padding:1px 7px;background:var(--blue-l);
+  color:var(--navy2);white-space:nowrap;font-weight:600}
+.tcard[data-type="industry-research"] .badge{background:var(--green-l);color:var(--green)}
+.tcard[data-type="policy-analysis"] .badge{background:var(--amber-l);color:var(--amber)}
+.tcard[data-type="market-monitoring"] .badge{background:var(--purple-l);color:var(--purple)}
+.count{font-size:11.5px;color:var(--ink3);white-space:nowrap}
+.tcard h4{font-size:16.5px;color:var(--navy);letter-spacing:.2px}
+.tcard .desc{font-size:12.8px;color:var(--ink2);line-height:1.65;flex:1}
+.tcard .reports{font-size:12px;color:var(--ink3);border-top:1px dashed var(--line);
+  padding-top:8px;line-height:2}
+.tcard .reports a{margin-right:12px;white-space:nowrap;font-size:12px}
+.tcard .actions{display:flex;gap:8px;margin-top:2px;flex-wrap:wrap}
+.btn{display:inline-block;font-size:12.5px;border-radius:7px;padding:6px 13px;
+  border:1px solid var(--line);background:#fff;color:var(--navy2);cursor:pointer;
+  font-family:inherit;line-height:1.5}
+.btn:hover{text-decoration:none;border-color:var(--blue)}
+.btn.primary{background:var(--navy);border-color:var(--navy);color:#fff}
+.btn.primary:hover{background:var(--navy2);border-color:var(--navy2)}
+.tcard.is-empty{border-style:dashed;background:#fbfcfe}
+.tcard.is-empty h4{color:var(--ink2)}
+.tcard.is-empty .desc,.tcard.is-empty .reports{display:none}
+.noresult{padding:44px 20px;text-align:center;color:var(--ink3);font-size:13.5px;
+  grid-column:1/-1}
+
+/* ── 主题详情页 ── */
+#view-detail{display:none}
+html.no-js #view-detail{display:block}
+html.js.detail-mode #view-detail{display:block}
+html.js.detail-mode #view-overview{display:none}
+.detail-layout{display:flex;max-width:1440px;margin:0 auto;align-items:flex-start}
+.sidebar{width:266px;flex:none;position:sticky;top:0;
+  height:100vh;overflow-y:auto;padding:16px 10px 50px;
+  border-right:1px solid var(--line);background:#fbfcfe}
+.sidebar::-webkit-scrollbar{width:6px}
+.sidebar::-webkit-scrollbar-thumb{background:#d3dce6;border-radius:3px}
+.back-link{display:block;font-size:13px;color:var(--navy2);padding:6px 9px;
+  border-radius:6px;margin:0 0 10px}
+.back-link:hover{background:var(--blue-l);text-decoration:none}
+.toc-topic{display:flex;align-items:baseline;gap:7px;font-size:13px;color:var(--ink2);
+  padding:5px 9px;border-radius:6px;margin:2px 0;line-height:1.45}
+.toc-topic:hover{background:var(--blue-l);text-decoration:none}
+.toc-topic.active{background:var(--blue-l);color:var(--navy);font-weight:700}
+.toc-topic .num{font-size:11px;color:var(--ink3);flex:none}
+.detail-main{flex:1;min-width:0;padding:18px 26px 60px}
+.topic-detail{display:block;scroll-margin-top:14px}
+html.js .topic-detail{display:none}
+html.js .topic-detail.active{display:block}
+.topic-detail:target .topic-head{border-left-color:var(--amber);
+  background:#fffdf6;border-radius:0 8px 8px 0}
+.topic-head{border-left:4px solid var(--navy2);padding:2px 0 2px 12px;margin:6px 0 14px}
+.topic-head .crumb{font-size:11.5px;color:var(--ink3);letter-spacing:.4px}
+.topic-head h2{font-size:22px;color:var(--navy);margin:2px 0 6px}
+.topic-head .desc{font-size:13px;color:var(--ink2);max-width:820px}
+.topic-head .meta{font-size:12.5px;color:var(--ink3);margin-top:6px}
+.report-filter{display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  margin:2px 0 12px;font-size:12.5px;color:var(--ink3)}
+.report-filter .rf-toggle{padding:4px 11px;font-size:12px}
+.report-list{margin:6px 0 10px}
+.report-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  padding:10px 16px;background:var(--card);border:1px solid var(--line);
+  border-radius:10px;margin:8px 0;box-shadow:var(--shadow)}
+.report-row:hover{border-color:#c9d6e6}
+.report-row .rdate{font-size:12px;color:var(--ink3);
+  font-variant-numeric:tabular-nums;white-space:nowrap;flex:none}
+.report-row .rbadge{font-size:11px;border-radius:3px;padding:1px 7px;
+  background:var(--blue-l);color:var(--navy2);white-space:nowrap;font-weight:600;flex:none}
+.report-row .rbadge.special{background:var(--gray-l);color:var(--gray)}
+.report-row .rt{font-size:14px;font-weight:700;color:var(--navy);
+  flex:1;min-width:220px;line-height:1.5}
+.report-row .rperiod{font-size:12px;color:var(--ink3);white-space:nowrap;flex:none}
+.empty-note{border:1px dashed var(--line);border-radius:var(--radius);
+  background:#fbfcfe;color:var(--ink3);font-size:13px;padding:26px;
+  text-align:center;margin:14px 0}
+
+/* ── 页脚 / 回到顶部 ── */
+.footer{text-align:center;color:var(--ink3);font-size:11.5px;padding:26px 20px 36px;
+  line-height:1.9;border-top:1px solid var(--line)}
+.footer .muted{margin:0 0 4px}
+.totop{position:fixed;right:22px;bottom:22px;width:40px;height:40px;border-radius:50%;
+  background:var(--navy);color:#fff;border:0;font-size:17px;cursor:pointer;
+  box-shadow:0 4px 14px rgba(15,35,56,.3);opacity:0;pointer-events:none;
+  transition:opacity .2s;z-index:70;font-family:inherit}
+.totop.show{opacity:1;pointer-events:auto}
+
+/* ── 响应式 ── */
+@media (max-width: 960px){
+  .detail-layout{flex-direction:column}
+  .sidebar{position:static;width:100%;height:auto;max-height:280px;border-right:0;
+    border-bottom:1px solid var(--line)}
+  .detail-main{padding:14px 14px 50px}
+  .hero{padding:32px 22px 28px}
+  .hero h1{font-size:22px}
+  .filterbar{padding:10px 14px}
+  .main{padding:6px 14px 40px}
+  .cards{grid-template-columns:1fr}
+  .totop{right:14px;bottom:14px}
+}
+</style>
+<script>document.documentElement.classList.remove('no-js');document.documentElement.classList.add('js');</script>
+</head>
+<body>
+<div id="view-overview">
+  <section class="hero">
+    <h1>日本生活与工作 · 报告索引</h1>
+    <div class="stats">
+      <div class="stat"><b>16</b>主题</div>
+      <div class="stat"><b>34</b>报告总数</div>
+    </div>
+  </section>
+
+  <div class="filterbar">
+    <input id="hub-search" type="search" placeholder="搜索主题 / 报告标题…">
+    <div class="chips" id="chips-type"><button class="chip on" data-type="all">全部类型</button><button class="chip" data-type="employment-research">职业就业调研型</button><button class="chip" data-type="industry-research">行业深度研究型</button><button class="chip" data-type="policy-analysis">政策法规解读型</button><button class="chip" data-type="market-monitoring">市场指标监测型</button></div>
+    <span class="count" id="hub-count"></span>
+  </div>
+
+  <main class="main">
+    <div class="cards"><article class="tcard" data-type="employment-research" data-search="赴日决策仪表盘 00-decision-hub 职业就业调研型 赴日决策仪表盘 · 2026-Q4 季度复核 赴日落地 90 天执行清单 定居地档案（个人记录模板）">
+  <div class="row1"><span class="badge">00 · 职业就业调研型</span><span class="count">3 份报告 · 最新 2026-12-31</span></div>
+  <h4>赴日决策仪表盘</h4>
+  <p class="desc"></p>
+  <div class="reports"><a href="00-decision-hub/reports/2026-Q4_quarterly.html" target="_blank" rel="noopener" title="赴日决策仪表盘 · 2026-Q4 季度复核">季度</a><a href="00-decision-hub/reports/2026-11-13_landing_checklist.html" target="_blank" rel="noopener" title="赴日落地 90 天执行清单">专题</a><a href="00-decision-hub/reports/2026-11-13_settlement_profile.html" target="_blank" rel="noopener" title="定居地档案（个人记录模板）">专题</a></div>
+  <div class="actions"><a class="btn primary" href="#topic-00-decision-hub">进入主题 →</a><a class="btn" href="00-decision-hub/reports/2026-Q4_quarterly.html" target="_blank" rel="noopener">最新报告 ↗</a></div>
+</article><article class="tcard" data-type="employment-research" data-search="特定技能司机 01-ssw-driver 职业就业调研型 日本特定技能司机（自動車運送業）全领域词汇：在留资格、岗位作业、劳动条件、证照考试、生活适应 日本特定技能司机与物流行业监测报告（第五期·制度修正版） 日本特定技能司机与物流行业监测报告（基线版） 日本特定技能司机 · 首份分析报告">
+  <div class="row1"><span class="badge">01 · 职业就业调研型</span><span class="count">3 份报告 · 最新 2026-12-31</span></div>
+  <h4>特定技能司机</h4>
+  <p class="desc">日本特定技能司机（自動車運送業）全领域词汇：在留资格、岗位作业、劳动条件、证照考试、生活适应</p>
+  <div class="reports"><a href="01-ssw-driver/reports/2026-Q4_quarterly.html" target="_blank" rel="noopener" title="日本特定技能司机与物流行业监测报告（第五期·制度修正版）">季度</a><a href="01-ssw-driver/reports/2026-11_baseline_report.html" target="_blank" rel="noopener" title="日本特定技能司机与物流行业监测报告（基线版）">基线</a><a href="01-ssw-driver/reports/2026-11-13_initial_analysis_report.html" target="_blank" rel="noopener" title="日本特定技能司机 · 首份分析报告">初析</a></div>
+  <div class="actions"><a class="btn primary" href="#topic-01-ssw-driver">进入主题 →</a><a class="btn" href="01-ssw-driver/reports/2026-Q4_quarterly.html" target="_blank" rel="noopener">最新报告 ↗</a></div>
+</article><article class="tcard" data-type="employment-research" data-search="司机职业发展 02-career-driver 职业就业调研型 日本司机职业发展全领域词汇：职级晋升、薪资待遇、技能证照、求职雇佣、转型路径 日本司机职业知识手册 日本司机职业发展 · 首份分析报告">
+  <div class="row1"><span class="badge">02 · 职业就业调研型</span><span class="count">2 份报告 · 最新 2026-11-30</span></div>
+  <h4>司机职业发展</h4>
+  <p class="desc">日本司机职业发展全领域词汇：职级晋升、薪资待遇、技能证照、求职雇佣、转型路径</p>
+  <div class="reports"><a href="02-career-driver/reports/2026-11_baseline_report.html" target="_blank" rel="noopener" title="日本司机职业知识手册">基线</a><a href="02-career-driver/reports/2026-11-13_initial_analysis_report.html" target="_blank" rel="noopener" title="日本司机职业发展 · 首份分析报告">初析</a></div>
+  <div class="actions"><a class="btn primary" href="#topic-02-career-driver">进入主题 →</a><a class="btn" href="02-career-driver/reports/2026-11_baseline_report.html" target="_blank" rel="noopener">最新报告 ↗</a></div>
+</article><article class="tcard" data-type="employment-research" data-search="职业管理与晋升 03-career-management 职业就业调研型 一线岗位向管理岗过渡的全领域词汇：管理职责、团队运营、绩效评估、人才培养、组织制度 日本管理岗过渡知识手册 日本管理岗过渡 · 首份分析报告">
+  <div class="row1"><span class="badge">03 · 职业就业调研型</span><span class="count">2 份报告 · 最新 2026-11-30</span></div>
+  <h4>职业管理与晋升</h4>
+  <p class="desc">一线岗位向管理岗过渡的全领域词汇：管理职责、团队运营、绩效评估、人才培养、组织制度</p>
+  <div class="reports"><a href="03-career-management/reports/2026-11_baseline_report.html" target="_blank" rel="noopener" title="日本管理岗过渡知识手册">基线</a><a href="03-career-management/reports/2026-11-13_initial_analysis_report.html" target="_blank" rel="noopener" title="日本管理岗过渡 · 首份分析报告">初析</a></div>
+  <div class="actions"><a class="btn primary" href="#topic-03-career-management">进入主题 →</a><a class="btn" href="03-career-management/reports/2026-11_baseline_report.html" target="_blank" rel="noopener">最新报告 ↗</a></div>
+</article><article class="tcard" data-type="industry-research" data-search="物流行业 04-industry-logistics 行业深度研究型 物流行业全领域词汇：行业结构、运输模式、仓配作业、法规政策、企业市场、数字化 日本物流行业知识手册 日本物流行业 · 首份分析报告">
+  <div class="row1"><span class="badge">04 · 行业深度研究型</span><span class="count">2 份报告 · 最新 2026-11-30</span></div>
+  <h4>物流行业</h4>
+  <p class="desc">物流行业全领域词汇：行业结构、运输模式、仓配作业、法规政策、企业市场、数字化</p>
+  <div class="reports"><a href="04-industry-logistics/reports/2026-11_baseline_report.html" target="_blank" rel="noopener" title="日本物流行业知识手册">基线</a><a href="04-industry-logistics/reports/2026-11-13_initial_analysis_report.html" target="_blank" rel="noopener" title="日本物流行业 · 首份分析报告">初析</a></div>
+  <div class="actions"><a class="btn primary" href="#topic-04-industry-logistics">进入主题 →</a><a class="btn" href="04-industry-logistics/reports/2026-11_baseline_report.html" target="_blank" rel="noopener">最新报告 ↗</a></div>
+</article><article class="tcard" data-type="industry-research" data-search="自动驾驶与自动化 05-industry-autonomous 行业深度研究型 自动驾驶与物流自动化全领域词汇：技术分级、传感器、算法架构、法规标准、商业化运营 日本自动驾驶与自动化知识手册 日本自动驾驶与自动化 · 首份分析报告">
+  <div class="row1"><span class="badge">05 · 行业深度研究型</span><span class="count">2 份报告 · 最新 2026-11-30</span></div>
+  <h4>自动驾驶与自动化</h4>
+  <p class="desc">自动驾驶与物流自动化全领域词汇：技术分级、传感器、算法架构、法规标准、商业化运营</p>
+  <div class="reports"><a href="05-industry-autonomous/reports/2026-11_baseline_report.html" target="_blank" rel="noopener" title="日本自动驾驶与自动化知识手册">基线</a><a href="05-industry-autonomous/reports/2026-11-13_initial_analysis_report.html" target="_blank" rel="noopener" title="日本自动驾驶与自动化 · 首份分析报告">初析</a></div>
+  <div class="actions"><a class="btn primary" href="#topic-05-industry-autonomous">进入主题 →</a><a class="btn" href="05-industry-autonomous/reports/2026-11_baseline_report.html" target="_blank" rel="noopener">最新报告 ↗</a></div>
+</article><article class="tcard" data-type="industry-research" data-search="技术行业 06-industry-technology 行业深度研究型 技术行业全领域词汇：技术栈架构、工程实践、数据AI、云基础设施、安全合规、岗位协作 日本技术与数字化知识手册 日本技术与数字化 · 首份分析报告">
+  <div class="row1"><span class="badge">06 · 行业深度研究型</span><span class="count">2 份报告 · 最新 2026-11-30</span></div>
+  <h4>技术行业</h4>
+  <p class="desc">技术行业全领域词汇：技术栈架构、工程实践、数据AI、云基础设施、安全合规、岗位协作</p>
+  <div class="reports"><a href="06-industry-technology/reports/2026-11_baseline_report.html" target="_blank" rel="noopener" title="日本技术与数字化知识手册">基线</a><a href="06-industry-technology/reports/2026-11-13_initial_analysis_report.html" target="_blank" rel="noopener" title="日本技术与数字化 · 首份分析报告">初析</a></div>
+  <div class="actions"><a class="btn primary" href="#topic-06-industry-technology">进入主题 →</a><a class="btn" href="06-industry-technology/reports/2026-11_baseline_report.html" target="_blank" rel="noopener">最新报告 ↗</a></div>
+</article><article class="tcard" data-type="employment-research" data-search="经济与财务 07-economy-finance 职业就业调研型 经济与个人财务全领域词汇：宏观指标、金融机构工具、市场交易、监管政策、个人税务、估值风险 日本经济与财务知识手册 经济与财务 · 首份分析报告">
+  <div class="row1"><span class="badge">07 · 职业就业调研型</span><span class="count">2 份报告 · 最新 2026-11-30</span></div>
+  <h4>经济与财务</h4>
+  <p class="desc">经济与个人财务全领域词汇：宏观指标、金融机构工具、市场交易、监管政策、个人税务、估值风险</p>
+  <div class="reports"><a href="07-economy-finance/reports/2026-11_baseline_report.html" target="_blank" rel="noopener" title="日本经济与财务知识手册">基线</a><a href="07-economy-finance/reports/2026-11-13_initial_analysis_report.html" target="_blank" rel="noopener" title="经济与财务 · 首份分析报告">初析</a></div>
+  <div class="actions"><a class="btn primary" href="#topic-07-economy-finance">进入主题 →</a><a class="btn" href="07-economy-finance/reports/2026-11_baseline_report.html" target="_blank" rel="noopener">最新报告 ↗</a></div>
+</article><article class="tcard" data-type="policy-analysis" data-search="签证与移民 08-visa-immigration 政策法规解读型 日本签证与移民全领域词汇：在留资格、申请审查、永住归化、家属生活、法规政策 日本签证与在留资格知识手册 日本签证与在留资格 · 首份分析报告">
+  <div class="row1"><span class="badge">08 · 政策法规解读型</span><span class="count">2 份报告 · 最新 2026-11-30</span></div>
+  <h4>签证与移民</h4>
+  <p class="desc">日本签证与移民全领域词汇：在留资格、申请审查、永住归化、家属生活、法规政策</p>
+  <div class="reports"><a href="08-visa-immigration/reports/2026-11_baseline_report.html" target="_blank" rel="noopener" title="日本签证与在留资格知识手册">基线</a><a href="08-visa-immigration/reports/2026-11-13_initial_analysis_report.html" target="_blank" rel="noopener" title="日本签证与在留资格 · 首份分析报告">初析</a></div>
+  <div class="actions"><a class="btn primary" href="#topic-08-visa-immigration">进入主题 →</a><a class="btn" href="08-visa-immigration/reports/2026-11_baseline_report.html" target="_blank" rel="noopener">最新报告 ↗</a></div>
+</article><article class="tcard" data-type="policy-analysis" data-search="政治与法律 09-politics-law 政策法规解读型 日本政治与法律全领域词汇：政治制度、法律体系、行政司法、劳动民事、政策选举 日本政治与法规知识手册 日本政治与法规 · 首份分析报告">
+  <div class="row1"><span class="badge">09 · 政策法规解读型</span><span class="count">2 份报告 · 最新 2026-11-30</span></div>
+  <h4>政治与法律</h4>
+  <p class="desc">日本政治与法律全领域词汇：政治制度、法律体系、行政司法、劳动民事、政策选举</p>
+  <div class="reports"><a href="09-politics-law/reports/2026-11_baseline_report.html" target="_blank" rel="noopener" title="日本政治与法规知识手册">基线</a><a href="09-politics-law/reports/2026-11-13_initial_analysis_report.html" target="_blank" rel="noopener" title="日本政治与法规 · 首份分析报告">初析</a></div>
+  <div class="actions"><a class="btn primary" href="#topic-09-politics-law">进入主题 →</a><a class="btn" href="09-politics-law/reports/2026-11_baseline_report.html" target="_blank" rel="noopener">最新报告 ↗</a></div>
+</article><article class="tcard" data-type="employment-research" data-search="教育与资格 10-education-qualification 职业就业调研型 日本教育与资格全领域词汇：教育体系、资格认证、考试备考、学费资助、院校专业 日本资格与教育投资知识手册 资格与教育投资 · 首份分析报告">
+  <div class="row1"><span class="badge">10 · 职业就业调研型</span><span class="count">2 份报告 · 最新 2026-11-30</span></div>
+  <h4>教育与资格</h4>
+  <p class="desc">日本教育与资格全领域词汇：教育体系、资格认证、考试备考、学费资助、院校专业</p>
+  <div class="reports"><a href="10-education-qualification/reports/2026-11_baseline_report.html" target="_blank" rel="noopener" title="日本资格与教育投资知识手册">基线</a><a href="10-education-qualification/reports/2026-11-13_initial_analysis_report.html" target="_blank" rel="noopener" title="资格与教育投资 · 首份分析报告">初析</a></div>
+  <div class="actions"><a class="btn primary" href="#topic-10-education-qualification">进入主题 →</a><a class="btn" href="10-education-qualification/reports/2026-11_baseline_report.html" target="_blank" rel="noopener">最新报告 ↗</a></div>
+</article><article class="tcard" data-type="employment-research" data-search="日语语言 11-language-japanese 职业就业调研型 日语语言全领域词汇：能力考试、语法句型、词汇表达、敬语语体、学习教学、职场日语 日本日语学习知识手册 日语学习 · 首份分析报告">
+  <div class="row1"><span class="badge">11 · 职业就业调研型</span><span class="count">2 份报告 · 最新 2026-11-30</span></div>
+  <h4>日语语言</h4>
+  <p class="desc">日语语言全领域词汇：能力考试、语法句型、词汇表达、敬语语体、学习教学、职场日语</p>
+  <div class="reports"><a href="11-language-japanese/reports/2026-11_baseline_report.html" target="_blank" rel="noopener" title="日本日语学习知识手册">基线</a><a href="11-language-japanese/reports/2026-11-13_initial_analysis_report.html" target="_blank" rel="noopener" title="日语学习 · 首份分析报告">初析</a></div>
+  <div class="actions"><a class="btn primary" href="#topic-11-language-japanese">进入主题 →</a><a class="btn" href="11-language-japanese/reports/2026-11_baseline_report.html" target="_blank" rel="noopener">最新报告 ↗</a></div>
+</article><article class="tcard" data-type="employment-research" data-search="文化与生活 12-culture-life 职业就业调研型 日本文化与生活全领域词汇：文化节庆、日常居住、饮食消费、社交礼仪、公共服务 日本文化与生活知识手册 文化与生活 · 首份分析报告">
+  <div class="row1"><span class="badge">12 · 职业就业调研型</span><span class="count">2 份报告 · 最新 2026-11-30</span></div>
+  <h4>文化与生活</h4>
+  <p class="desc">日本文化与生活全领域词汇：文化节庆、日常居住、饮食消费、社交礼仪、公共服务</p>
+  <div class="reports"><a href="12-culture-life/reports/2026-11_baseline_report.html" target="_blank" rel="noopener" title="日本文化与生活知识手册">基线</a><a href="12-culture-life/reports/2026-11-13_initial_analysis_report.html" target="_blank" rel="noopener" title="文化与生活 · 首份分析报告">初析</a></div>
+  <div class="actions"><a class="btn primary" href="#topic-12-culture-life">进入主题 →</a><a class="btn" href="12-culture-life/reports/2026-11_baseline_report.html" target="_blank" rel="noopener">最新报告 ↗</a></div>
+</article><article class="tcard" data-type="market-monitoring" data-search="地区信息 13-regional-info 市场指标监测型 日本地区信息全领域词汇：行政区划、人口城市、地方经济产业、生活成本设施、地方自治政策 日本地域信息知识手册 日本地域信息 · 首份分析报告">
+  <div class="row1"><span class="badge">13 · 市场指标监测型</span><span class="count">2 份报告 · 最新 2026-11-30</span></div>
+  <h4>地区信息</h4>
+  <p class="desc">日本地区信息全领域词汇：行政区划、人口城市、地方经济产业、生活成本设施、地方自治政策</p>
+  <div class="reports"><a href="13-regional-info/reports/2026-11_baseline_report.html" target="_blank" rel="noopener" title="日本地域信息知识手册">基线</a><a href="13-regional-info/reports/2026-11-13_initial_analysis_report.html" target="_blank" rel="noopener" title="日本地域信息 · 首份分析报告">初析</a></div>
+  <div class="actions"><a class="btn primary" href="#topic-13-regional-info">进入主题 →</a><a class="btn" href="13-regional-info/reports/2026-11_baseline_report.html" target="_blank" rel="noopener">最新报告 ↗</a></div>
+</article><article class="tcard" data-type="employment-research" data-search="在日生活实务 14-life-operations 职业就业调研型 赴日外国人落地执行层词汇：在留・住民・保险・年金、住房、公共交通、通信、银行、水电燃气、行政手续 日本 · 在日生活实务与行政手续 · 首期基线报告 在日生活实务与行政手续 · 首份分析报告">
+  <div class="row1"><span class="badge">14 · 职业就业调研型</span><span class="count">2 份报告 · 最新 2026-11-30</span></div>
+  <h4>在日生活实务</h4>
+  <p class="desc">赴日外国人落地执行层词汇：在留・住民・保险・年金、住房、公共交通、通信、银行、水电燃气、行政手续</p>
+  <div class="reports"><a href="14-life-operations/reports/2026-11_baseline_report.html" target="_blank" rel="noopener" title="日本 · 在日生活实务与行政手续 · 首期基线报告">基线</a><a href="14-life-operations/reports/2026-11-13_initial_analysis_report.html" target="_blank" rel="noopener" title="在日生活实务与行政手续 · 首份分析报告">初析</a></div>
+  <div class="actions"><a class="btn primary" href="#topic-14-life-operations">进入主题 →</a><a class="btn" href="14-life-operations/reports/2026-11_baseline_report.html" target="_blank" rel="noopener">最新报告 ↗</a></div>
+</article><article class="tcard" data-type="employment-research" data-search="医疗健康心理 15-health-wellbeing 职业就业调研型 在日外国人医疗与健康管理词汇：医保制度、就医实务、多语言通译、牙科精神科、心理健康、体检预防、介護福祉 日本 · 医疗·健康·心理 · 首期基线报告 医疗·健康·心理 · 首份分析报告">
+  <div class="row1"><span class="badge">15 · 职业就业调研型</span><span class="count">2 份报告 · 最新 2026-11-30</span></div>
+  <h4>医疗健康心理</h4>
+  <p class="desc">在日外国人医疗与健康管理词汇：医保制度、就医实务、多语言通译、牙科精神科、心理健康、体检预防、介護福祉</p>
+  <div class="reports"><a href="15-health-wellbeing/reports/2026-11_baseline_report.html" target="_blank" rel="noopener" title="日本 · 医疗·健康·心理 · 首期基线报告">基线</a><a href="15-health-wellbeing/reports/2026-11-13_initial_analysis_report.html" target="_blank" rel="noopener" title="医疗·健康·心理 · 首份分析报告">初析</a></div>
+  <div class="actions"><a class="btn primary" href="#topic-15-health-wellbeing">进入主题 →</a><a class="btn" href="15-health-wellbeing/reports/2026-11_baseline_report.html" target="_blank" rel="noopener">最新报告 ↗</a></div>
+</article></div>
+  </main>
+</div>
+
+<div id="view-detail">
+  <div class="detail-layout">
+    <aside class="sidebar">
+      <nav>
+        <a class="back-link" href="#/">← 返回主题总览</a>
+<a class="toc-topic" href="#topic-00-decision-hub"><span class="num">00</span>赴日决策仪表盘</a><a class="toc-topic" href="#topic-01-ssw-driver"><span class="num">01</span>特定技能司机</a><a class="toc-topic" href="#topic-02-career-driver"><span class="num">02</span>司机职业发展</a><a class="toc-topic" href="#topic-03-career-management"><span class="num">03</span>职业管理与晋升</a><a class="toc-topic" href="#topic-04-industry-logistics"><span class="num">04</span>物流行业</a><a class="toc-topic" href="#topic-05-industry-autonomous"><span class="num">05</span>自动驾驶与自动化</a><a class="toc-topic" href="#topic-06-industry-technology"><span class="num">06</span>技术行业</a><a class="toc-topic" href="#topic-07-economy-finance"><span class="num">07</span>经济与财务</a><a class="toc-topic" href="#topic-08-visa-immigration"><span class="num">08</span>签证与移民</a><a class="toc-topic" href="#topic-09-politics-law"><span class="num">09</span>政治与法律</a><a class="toc-topic" href="#topic-10-education-qualification"><span class="num">10</span>教育与资格</a><a class="toc-topic" href="#topic-11-language-japanese"><span class="num">11</span>日语语言</a><a class="toc-topic" href="#topic-12-culture-life"><span class="num">12</span>文化与生活</a><a class="toc-topic" href="#topic-13-regional-info"><span class="num">13</span>地区信息</a><a class="toc-topic" href="#topic-14-life-operations"><span class="num">14</span>在日生活实务</a><a class="toc-topic" href="#topic-15-health-wellbeing"><span class="num">15</span>医疗健康心理</a>
+      </nav>
+    </aside>
+    <main class="detail-main" id="detail-main">
+      <section class="topic-detail" id="topic-00-decision-hub" data-topic="00-decision-hub">
+  <div class="topic-head">
+    <div class="crumb">主题 00 · 职业就业调研型</div>
+    <h2>赴日决策仪表盘</h2>
+    <p class="desc"></p>
+    <div class="meta">共 3 份报告 · 最新 2026-12-31</div>
+  </div>
+  <div class="report-filter">
+    <span class="rf-note"></span>
+    <button class="btn rf-toggle" hidden></button>
+  </div>
+  <div class="report-list"><div class="report-row" data-date="2026-12-31">
+  <span class="rdate">2026-12-31</span>
+  <span class="rbadge">季度</span>
+  <a class="rt" href="00-decision-hub/reports/2026-Q4_quarterly.html" target="_blank" rel="noopener">赴日决策仪表盘 · 2026-Q4 季度复核</a>
+  <span class="rperiod">2026-Q4</span>
+</div><div class="report-row" data-date="2026-11-13">
+  <span class="rdate">2026-11-13</span>
+  <span class="rbadge special">专题</span>
+  <a class="rt" href="00-decision-hub/reports/2026-11-13_landing_checklist.html" target="_blank" rel="noopener">赴日落地 90 天执行清单</a>
+  <span class="rperiod">2026-11-13</span>
+</div><div class="report-row" data-date="2026-11-13">
+  <span class="rdate">2026-11-13</span>
+  <span class="rbadge special">专题</span>
+  <a class="rt" href="00-decision-hub/reports/2026-11-13_settlement_profile.html" target="_blank" rel="noopener">定居地档案（个人记录模板）</a>
+  <span class="rperiod">2026-11-13</span>
+</div></div>
+</section><section class="topic-detail" id="topic-01-ssw-driver" data-topic="01-ssw-driver">
+  <div class="topic-head">
+    <div class="crumb">主题 01 · 职业就业调研型</div>
+    <h2>特定技能司机</h2>
+    <p class="desc">日本特定技能司机（自動車運送業）全领域词汇：在留资格、岗位作业、劳动条件、证照考试、生活适应</p>
+    <div class="meta">共 3 份报告 · 最新 2026-12-31</div>
+  </div>
+  <div class="report-filter">
+    <span class="rf-note"></span>
+    <button class="btn rf-toggle" hidden></button>
+  </div>
+  <div class="report-list"><div class="report-row" data-date="2026-12-31">
+  <span class="rdate">2026-12-31</span>
+  <span class="rbadge">季度</span>
+  <a class="rt" href="01-ssw-driver/reports/2026-Q4_quarterly.html" target="_blank" rel="noopener">日本特定技能司机与物流行业监测报告（第五期·制度修正版）</a>
+  <span class="rperiod">2026-Q4</span>
+</div><div class="report-row" data-date="2026-11-30">
+  <span class="rdate">2026-11-30</span>
+  <span class="rbadge">基线</span>
+  <a class="rt" href="01-ssw-driver/reports/2026-11_baseline_report.html" target="_blank" rel="noopener">日本特定技能司机与物流行业监测报告（基线版）</a>
+  <span class="rperiod">2026-11</span>
+</div><div class="report-row" data-date="2026-11-13">
+  <span class="rdate">2026-11-13</span>
+  <span class="rbadge special">初析</span>
+  <a class="rt" href="01-ssw-driver/reports/2026-11-13_initial_analysis_report.html" target="_blank" rel="noopener">日本特定技能司机 · 首份分析报告</a>
+  <span class="rperiod">2026-11-13</span>
+</div></div>
+</section><section class="topic-detail" id="topic-02-career-driver" data-topic="02-career-driver">
+  <div class="topic-head">
+    <div class="crumb">主题 02 · 职业就业调研型</div>
+    <h2>司机职业发展</h2>
+    <p class="desc">日本司机职业发展全领域词汇：职级晋升、薪资待遇、技能证照、求职雇佣、转型路径</p>
+    <div class="meta">共 2 份报告 · 最新 2026-11-30</div>
+  </div>
+  <div class="report-filter">
+    <span class="rf-note"></span>
+    <button class="btn rf-toggle" hidden></button>
+  </div>
+  <div class="report-list"><div class="report-row" data-date="2026-11-30">
+  <span class="rdate">2026-11-30</span>
+  <span class="rbadge">基线</span>
+  <a class="rt" href="02-career-driver/reports/2026-11_baseline_report.html" target="_blank" rel="noopener">日本司机职业知识手册</a>
+  <span class="rperiod">2026-11</span>
+</div><div class="report-row" data-date="2026-11-13">
+  <span class="rdate">2026-11-13</span>
+  <span class="rbadge special">初析</span>
+  <a class="rt" href="02-career-driver/reports/2026-11-13_initial_analysis_report.html" target="_blank" rel="noopener">日本司机职业发展 · 首份分析报告</a>
+  <span class="rperiod">2026-11-13</span>
+</div></div>
+</section><section class="topic-detail" id="topic-03-career-management" data-topic="03-career-management">
+  <div class="topic-head">
+    <div class="crumb">主题 03 · 职业就业调研型</div>
+    <h2>职业管理与晋升</h2>
+    <p class="desc">一线岗位向管理岗过渡的全领域词汇：管理职责、团队运营、绩效评估、人才培养、组织制度</p>
+    <div class="meta">共 2 份报告 · 最新 2026-11-30</div>
+  </div>
+  <div class="report-filter">
+    <span class="rf-note"></span>
+    <button class="btn rf-toggle" hidden></button>
+  </div>
+  <div class="report-list"><div class="report-row" data-date="2026-11-30">
+  <span class="rdate">2026-11-30</span>
+  <span class="rbadge">基线</span>
+  <a class="rt" href="03-career-management/reports/2026-11_baseline_report.html" target="_blank" rel="noopener">日本管理岗过渡知识手册</a>
+  <span class="rperiod">2026-11</span>
+</div><div class="report-row" data-date="2026-11-13">
+  <span class="rdate">2026-11-13</span>
+  <span class="rbadge special">初析</span>
+  <a class="rt" href="03-career-management/reports/2026-11-13_initial_analysis_report.html" target="_blank" rel="noopener">日本管理岗过渡 · 首份分析报告</a>
+  <span class="rperiod">2026-11-13</span>
+</div></div>
+</section><section class="topic-detail" id="topic-04-industry-logistics" data-topic="04-industry-logistics">
+  <div class="topic-head">
+    <div class="crumb">主题 04 · 行业深度研究型</div>
+    <h2>物流行业</h2>
+    <p class="desc">物流行业全领域词汇：行业结构、运输模式、仓配作业、法规政策、企业市场、数字化</p>
+    <div class="meta">共 2 份报告 · 最新 2026-11-30</div>
+  </div>
+  <div class="report-filter">
+    <span class="rf-note"></span>
+    <button class="btn rf-toggle" hidden></button>
+  </div>
+  <div class="report-list"><div class="report-row" data-date="2026-11-30">
+  <span class="rdate">2026-11-30</span>
+  <span class="rbadge">基线</span>
+  <a class="rt" href="04-industry-logistics/reports/2026-11_baseline_report.html" target="_blank" rel="noopener">日本物流行业知识手册</a>
+  <span class="rperiod">2026-11</span>
+</div><div class="report-row" data-date="2026-11-13">
+  <span class="rdate">2026-11-13</span>
+  <span class="rbadge special">初析</span>
+  <a class="rt" href="04-industry-logistics/reports/2026-11-13_initial_analysis_report.html" target="_blank" rel="noopener">日本物流行业 · 首份分析报告</a>
+  <span class="rperiod">2026-11-13</span>
+</div></div>
+</section><section class="topic-detail" id="topic-05-industry-autonomous" data-topic="05-industry-autonomous">
+  <div class="topic-head">
+    <div class="crumb">主题 05 · 行业深度研究型</div>
+    <h2>自动驾驶与自动化</h2>
+    <p class="desc">自动驾驶与物流自动化全领域词汇：技术分级、传感器、算法架构、法规标准、商业化运营</p>
+    <div class="meta">共 2 份报告 · 最新 2026-11-30</div>
+  </div>
+  <div class="report-filter">
+    <span class="rf-note"></span>
+    <button class="btn rf-toggle" hidden></button>
+  </div>
+  <div class="report-list"><div class="report-row" data-date="2026-11-30">
+  <span class="rdate">2026-11-30</span>
+  <span class="rbadge">基线</span>
+  <a class="rt" href="05-industry-autonomous/reports/2026-11_baseline_report.html" target="_blank" rel="noopener">日本自动驾驶与自动化知识手册</a>
+  <span class="rperiod">2026-11</span>
+</div><div class="report-row" data-date="2026-11-13">
+  <span class="rdate">2026-11-13</span>
+  <span class="rbadge special">初析</span>
+  <a class="rt" href="05-industry-autonomous/reports/2026-11-13_initial_analysis_report.html" target="_blank" rel="noopener">日本自动驾驶与自动化 · 首份分析报告</a>
+  <span class="rperiod">2026-11-13</span>
+</div></div>
+</section><section class="topic-detail" id="topic-06-industry-technology" data-topic="06-industry-technology">
+  <div class="topic-head">
+    <div class="crumb">主题 06 · 行业深度研究型</div>
+    <h2>技术行业</h2>
+    <p class="desc">技术行业全领域词汇：技术栈架构、工程实践、数据AI、云基础设施、安全合规、岗位协作</p>
+    <div class="meta">共 2 份报告 · 最新 2026-11-30</div>
+  </div>
+  <div class="report-filter">
+    <span class="rf-note"></span>
+    <button class="btn rf-toggle" hidden></button>
+  </div>
+  <div class="report-list"><div class="report-row" data-date="2026-11-30">
+  <span class="rdate">2026-11-30</span>
+  <span class="rbadge">基线</span>
+  <a class="rt" href="06-industry-technology/reports/2026-11_baseline_report.html" target="_blank" rel="noopener">日本技术与数字化知识手册</a>
+  <span class="rperiod">2026-11</span>
+</div><div class="report-row" data-date="2026-11-13">
+  <span class="rdate">2026-11-13</span>
+  <span class="rbadge special">初析</span>
+  <a class="rt" href="06-industry-technology/reports/2026-11-13_initial_analysis_report.html" target="_blank" rel="noopener">日本技术与数字化 · 首份分析报告</a>
+  <span class="rperiod">2026-11-13</span>
+</div></div>
+</section><section class="topic-detail" id="topic-07-economy-finance" data-topic="07-economy-finance">
+  <div class="topic-head">
+    <div class="crumb">主题 07 · 职业就业调研型</div>
+    <h2>经济与财务</h2>
+    <p class="desc">经济与个人财务全领域词汇：宏观指标、金融机构工具、市场交易、监管政策、个人税务、估值风险</p>
+    <div class="meta">共 2 份报告 · 最新 2026-11-30</div>
+  </div>
+  <div class="report-filter">
+    <span class="rf-note"></span>
+    <button class="btn rf-toggle" hidden></button>
+  </div>
+  <div class="report-list"><div class="report-row" data-date="2026-11-30">
+  <span class="rdate">2026-11-30</span>
+  <span class="rbadge">基线</span>
+  <a class="rt" href="07-economy-finance/reports/2026-11_baseline_report.html" target="_blank" rel="noopener">日本经济与财务知识手册</a>
+  <span class="rperiod">2026-11</span>
+</div><div class="report-row" data-date="2026-11-13">
+  <span class="rdate">2026-11-13</span>
+  <span class="rbadge special">初析</span>
+  <a class="rt" href="07-economy-finance/reports/2026-11-13_initial_analysis_report.html" target="_blank" rel="noopener">经济与财务 · 首份分析报告</a>
+  <span class="rperiod">2026-11-13</span>
+</div></div>
+</section><section class="topic-detail" id="topic-08-visa-immigration" data-topic="08-visa-immigration">
+  <div class="topic-head">
+    <div class="crumb">主题 08 · 政策法规解读型</div>
+    <h2>签证与移民</h2>
+    <p class="desc">日本签证与移民全领域词汇：在留资格、申请审查、永住归化、家属生活、法规政策</p>
+    <div class="meta">共 2 份报告 · 最新 2026-11-30</div>
+  </div>
+  <div class="report-filter">
+    <span class="rf-note"></span>
+    <button class="btn rf-toggle" hidden></button>
+  </div>
+  <div class="report-list"><div class="report-row" data-date="2026-11-30">
+  <span class="rdate">2026-11-30</span>
+  <span class="rbadge">基线</span>
+  <a class="rt" href="08-visa-immigration/reports/2026-11_baseline_report.html" target="_blank" rel="noopener">日本签证与在留资格知识手册</a>
+  <span class="rperiod">2026-11</span>
+</div><div class="report-row" data-date="2026-11-13">
+  <span class="rdate">2026-11-13</span>
+  <span class="rbadge special">初析</span>
+  <a class="rt" href="08-visa-immigration/reports/2026-11-13_initial_analysis_report.html" target="_blank" rel="noopener">日本签证与在留资格 · 首份分析报告</a>
+  <span class="rperiod">2026-11-13</span>
+</div></div>
+</section><section class="topic-detail" id="topic-09-politics-law" data-topic="09-politics-law">
+  <div class="topic-head">
+    <div class="crumb">主题 09 · 政策法规解读型</div>
+    <h2>政治与法律</h2>
+    <p class="desc">日本政治与法律全领域词汇：政治制度、法律体系、行政司法、劳动民事、政策选举</p>
+    <div class="meta">共 2 份报告 · 最新 2026-11-30</div>
+  </div>
+  <div class="report-filter">
+    <span class="rf-note"></span>
+    <button class="btn rf-toggle" hidden></button>
+  </div>
+  <div class="report-list"><div class="report-row" data-date="2026-11-30">
+  <span class="rdate">2026-11-30</span>
+  <span class="rbadge">基线</span>
+  <a class="rt" href="09-politics-law/reports/2026-11_baseline_report.html" target="_blank" rel="noopener">日本政治与法规知识手册</a>
+  <span class="rperiod">2026-11</span>
+</div><div class="report-row" data-date="2026-11-13">
+  <span class="rdate">2026-11-13</span>
+  <span class="rbadge special">初析</span>
+  <a class="rt" href="09-politics-law/reports/2026-11-13_initial_analysis_report.html" target="_blank" rel="noopener">日本政治与法规 · 首份分析报告</a>
+  <span class="rperiod">2026-11-13</span>
+</div></div>
+</section><section class="topic-detail" id="topic-10-education-qualification" data-topic="10-education-qualification">
+  <div class="topic-head">
+    <div class="crumb">主题 10 · 职业就业调研型</div>
+    <h2>教育与资格</h2>
+    <p class="desc">日本教育与资格全领域词汇：教育体系、资格认证、考试备考、学费资助、院校专业</p>
+    <div class="meta">共 2 份报告 · 最新 2026-11-30</div>
+  </div>
+  <div class="report-filter">
+    <span class="rf-note"></span>
+    <button class="btn rf-toggle" hidden></button>
+  </div>
+  <div class="report-list"><div class="report-row" data-date="2026-11-30">
+  <span class="rdate">2026-11-30</span>
+  <span class="rbadge">基线</span>
+  <a class="rt" href="10-education-qualification/reports/2026-11_baseline_report.html" target="_blank" rel="noopener">日本资格与教育投资知识手册</a>
+  <span class="rperiod">2026-11</span>
+</div><div class="report-row" data-date="2026-11-13">
+  <span class="rdate">2026-11-13</span>
+  <span class="rbadge special">初析</span>
+  <a class="rt" href="10-education-qualification/reports/2026-11-13_initial_analysis_report.html" target="_blank" rel="noopener">资格与教育投资 · 首份分析报告</a>
+  <span class="rperiod">2026-11-13</span>
+</div></div>
+</section><section class="topic-detail" id="topic-11-language-japanese" data-topic="11-language-japanese">
+  <div class="topic-head">
+    <div class="crumb">主题 11 · 职业就业调研型</div>
+    <h2>日语语言</h2>
+    <p class="desc">日语语言全领域词汇：能力考试、语法句型、词汇表达、敬语语体、学习教学、职场日语</p>
+    <div class="meta">共 2 份报告 · 最新 2026-11-30</div>
+  </div>
+  <div class="report-filter">
+    <span class="rf-note"></span>
+    <button class="btn rf-toggle" hidden></button>
+  </div>
+  <div class="report-list"><div class="report-row" data-date="2026-11-30">
+  <span class="rdate">2026-11-30</span>
+  <span class="rbadge">基线</span>
+  <a class="rt" href="11-language-japanese/reports/2026-11_baseline_report.html" target="_blank" rel="noopener">日本日语学习知识手册</a>
+  <span class="rperiod">2026-11</span>
+</div><div class="report-row" data-date="2026-11-13">
+  <span class="rdate">2026-11-13</span>
+  <span class="rbadge special">初析</span>
+  <a class="rt" href="11-language-japanese/reports/2026-11-13_initial_analysis_report.html" target="_blank" rel="noopener">日语学习 · 首份分析报告</a>
+  <span class="rperiod">2026-11-13</span>
+</div></div>
+</section><section class="topic-detail" id="topic-12-culture-life" data-topic="12-culture-life">
+  <div class="topic-head">
+    <div class="crumb">主题 12 · 职业就业调研型</div>
+    <h2>文化与生活</h2>
+    <p class="desc">日本文化与生活全领域词汇：文化节庆、日常居住、饮食消费、社交礼仪、公共服务</p>
+    <div class="meta">共 2 份报告 · 最新 2026-11-30</div>
+  </div>
+  <div class="report-filter">
+    <span class="rf-note"></span>
+    <button class="btn rf-toggle" hidden></button>
+  </div>
+  <div class="report-list"><div class="report-row" data-date="2026-11-30">
+  <span class="rdate">2026-11-30</span>
+  <span class="rbadge">基线</span>
+  <a class="rt" href="12-culture-life/reports/2026-11_baseline_report.html" target="_blank" rel="noopener">日本文化与生活知识手册</a>
+  <span class="rperiod">2026-11</span>
+</div><div class="report-row" data-date="2026-11-13">
+  <span class="rdate">2026-11-13</span>
+  <span class="rbadge special">初析</span>
+  <a class="rt" href="12-culture-life/reports/2026-11-13_initial_analysis_report.html" target="_blank" rel="noopener">文化与生活 · 首份分析报告</a>
+  <span class="rperiod">2026-11-13</span>
+</div></div>
+</section><section class="topic-detail" id="topic-13-regional-info" data-topic="13-regional-info">
+  <div class="topic-head">
+    <div class="crumb">主题 13 · 市场指标监测型</div>
+    <h2>地区信息</h2>
+    <p class="desc">日本地区信息全领域词汇：行政区划、人口城市、地方经济产业、生活成本设施、地方自治政策</p>
+    <div class="meta">共 2 份报告 · 最新 2026-11-30</div>
+  </div>
+  <div class="report-filter">
+    <span class="rf-note"></span>
+    <button class="btn rf-toggle" hidden></button>
+  </div>
+  <div class="report-list"><div class="report-row" data-date="2026-11-30">
+  <span class="rdate">2026-11-30</span>
+  <span class="rbadge">基线</span>
+  <a class="rt" href="13-regional-info/reports/2026-11_baseline_report.html" target="_blank" rel="noopener">日本地域信息知识手册</a>
+  <span class="rperiod">2026-11</span>
+</div><div class="report-row" data-date="2026-11-13">
+  <span class="rdate">2026-11-13</span>
+  <span class="rbadge special">初析</span>
+  <a class="rt" href="13-regional-info/reports/2026-11-13_initial_analysis_report.html" target="_blank" rel="noopener">日本地域信息 · 首份分析报告</a>
+  <span class="rperiod">2026-11-13</span>
+</div></div>
+</section><section class="topic-detail" id="topic-14-life-operations" data-topic="14-life-operations">
+  <div class="topic-head">
+    <div class="crumb">主题 14 · 职业就业调研型</div>
+    <h2>在日生活实务</h2>
+    <p class="desc">赴日外国人落地执行层词汇：在留・住民・保险・年金、住房、公共交通、通信、银行、水电燃气、行政手续</p>
+    <div class="meta">共 2 份报告 · 最新 2026-11-30</div>
+  </div>
+  <div class="report-filter">
+    <span class="rf-note"></span>
+    <button class="btn rf-toggle" hidden></button>
+  </div>
+  <div class="report-list"><div class="report-row" data-date="2026-11-30">
+  <span class="rdate">2026-11-30</span>
+  <span class="rbadge">基线</span>
+  <a class="rt" href="14-life-operations/reports/2026-11_baseline_report.html" target="_blank" rel="noopener">日本 · 在日生活实务与行政手续 · 首期基线报告</a>
+  <span class="rperiod">2026-11</span>
+</div><div class="report-row" data-date="2026-11-13">
+  <span class="rdate">2026-11-13</span>
+  <span class="rbadge special">初析</span>
+  <a class="rt" href="14-life-operations/reports/2026-11-13_initial_analysis_report.html" target="_blank" rel="noopener">在日生活实务与行政手续 · 首份分析报告</a>
+  <span class="rperiod">2026-11-13</span>
+</div></div>
+</section><section class="topic-detail" id="topic-15-health-wellbeing" data-topic="15-health-wellbeing">
+  <div class="topic-head">
+    <div class="crumb">主题 15 · 职业就业调研型</div>
+    <h2>医疗健康心理</h2>
+    <p class="desc">在日外国人医疗与健康管理词汇：医保制度、就医实务、多语言通译、牙科精神科、心理健康、体检预防、介護福祉</p>
+    <div class="meta">共 2 份报告 · 最新 2026-11-30</div>
+  </div>
+  <div class="report-filter">
+    <span class="rf-note"></span>
+    <button class="btn rf-toggle" hidden></button>
+  </div>
+  <div class="report-list"><div class="report-row" data-date="2026-11-30">
+  <span class="rdate">2026-11-30</span>
+  <span class="rbadge">基线</span>
+  <a class="rt" href="15-health-wellbeing/reports/2026-11_baseline_report.html" target="_blank" rel="noopener">日本 · 医疗·健康·心理 · 首期基线报告</a>
+  <span class="rperiod">2026-11</span>
+</div><div class="report-row" data-date="2026-11-13">
+  <span class="rdate">2026-11-13</span>
+  <span class="rbadge special">初析</span>
+  <a class="rt" href="15-health-wellbeing/reports/2026-11-13_initial_analysis_report.html" target="_blank" rel="noopener">医疗·健康·心理 · 首份分析报告</a>
+  <span class="rperiod">2026-11-13</span>
+</div></div>
+</section>
+    </main>
+  </div>
+</div>
+
+<footer class="footer">
+  <p class="muted">最近生成：2026-11-14 02:34 UTC</p>
+  <p>由 <code>src/prompts-tools/tools/build_hub.py</code> 自动生成 · 主题与报告按目录自动发现，
+  新增主题重新生成即扩展 · 报告源文件见各主题 <code>reports/</code> 目录</p>
+</footer>
+<button class="totop" id="totop" title="回到顶部">↑</button>
+<script>
+(function () {
+  'use strict';
+  var root = document.documentElement;
+  root.classList.remove('no-js');
+  root.classList.add('js');
+
+  function pad(n) { return (n < 10 ? '0' : '') + n; }
+  function isoOf(d) {
+    return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate());
+  }
+  var TODAY = isoOf(new Date());
+  var RECENT_DAYS = 365;
+  var cutoff = new Date();
+  cutoff.setHours(0, 0, 0, 0);
+  cutoff.setDate(cutoff.getDate() - RECENT_DAYS);
+  var CUTOFF = isoOf(cutoff);
+
+  /* ---------- 视图路由（hash：#topic-<slug>） ---------- */
+  function slugFromHash() {
+    var m = /^#topic-(.+)$/.exec(location.hash || '');
+    if (!m) return null;
+    var slug = m[1];
+    var sec = document.querySelector('.topic-detail[data-topic="' + slug + '"]');
+    return sec ? slug : null;
+  }
+  function renderView() {
+    var slug = slugFromHash();
+    var secs = document.querySelectorAll('.topic-detail');
+    for (var i = 0; i < secs.length; i++) {
+      secs[i].classList.toggle('active', secs[i].getAttribute('data-topic') === slug);
+    }
+    root.classList.toggle('detail-mode', !!slug);
+    var tocs = document.querySelectorAll('.toc-topic');
+    for (var j = 0; j < tocs.length; j++) {
+      tocs[j].classList.toggle('active',
+        !!slug && tocs[j].getAttribute('href') === '#topic-' + slug);
+    }
+    if (slug) window.scrollTo(0, 0);
+  }
+  window.addEventListener('hashchange', renderView);
+
+  /* ---------- 近 1 年报告过滤（按查看日期动态计算） ---------- */
+  var details = document.querySelectorAll('.topic-detail');
+  for (var k = 0; k < details.length; k++) {
+    (function (sec) {
+      var rows = sec.querySelectorAll('.report-row');
+      var total = rows.length;
+      var older = 0;
+      for (var i = 0; i < total; i++) {
+        if (rows[i].getAttribute('data-date') < CUTOFF) {
+          rows[i].style.display = 'none';
+          older++;
+        }
+      }
+      var recent = total - older;
+      var note = sec.querySelector('.rf-note');
+      var toggle = sec.querySelector('.rf-toggle');
+      function renderNote() {
+        if (!note) return;
+        note.textContent = (recent === total)
+          ? '近 1 年（截至 ' + TODAY + '）· 共 ' + total + ' 份'
+          : '近 1 年（截至 ' + TODAY + '）· 显示 ' + recent + ' / ' + total + ' 份';
+      }
+      renderNote();
+      if (toggle && older > 0) {
+        toggle.hidden = false;
+        toggle.textContent = '显示更早报告（' + older + '）';
+        toggle.addEventListener('click', function () {
+          var expanded = toggle.getAttribute('data-expanded') === '1';
+          for (var i = 0; i < total; i++) {
+            var isOld = rows[i].getAttribute('data-date') < CUTOFF;
+            rows[i].style.display = (expanded && isOld) ? 'none' : '';
+          }
+          if (expanded) {
+            toggle.setAttribute('data-expanded', '0');
+            toggle.textContent = '显示更早报告（' + older + '）';
+            renderNote();
+          } else {
+            toggle.setAttribute('data-expanded', '1');
+            toggle.textContent = '只看近 1 年';
+            if (note) {
+              note.textContent = '已显示全部 ' + total + ' 份报告（含 ' + older + ' 份更早报告）';
+            }
+          }
+        });
+      }
+    })(details[k]);
+  }
+
+  /* ---------- 主题搜索 + 类型筛选 ---------- */
+  var qInput = document.getElementById('hub-search');
+  var countEl = document.getElementById('hub-count');
+  var noResult = document.createElement('div');
+  noResult.className = 'noresult';
+  noResult.textContent = '未找到匹配的主题，请调整关键词或筛选条件。';
+  var cardsBox = document.querySelector('.cards');
+  if (cardsBox) cardsBox.appendChild(noResult);
+  var state = { q: '', type: 'all' };
+  function applyFilter() {
+    var visible = 0;
+    var cards = document.querySelectorAll('.tcard');
+    for (var i = 0; i < cards.length; i++) {
+      var card = cards[i];
+      var okQ = !state.q ||
+        card.getAttribute('data-search').toLowerCase().indexOf(state.q) >= 0;
+      var okT = state.type === 'all' || card.getAttribute('data-type') === state.type;
+      var show = okQ && okT;
+      card.style.display = show ? '' : 'none';
+      if (show) visible++;
+    }
+    noResult.style.display = visible ? 'none' : '';
+    if (countEl) countEl.textContent = '共 ' + visible + ' 个主题';
+  }
+  if (qInput) {
+    var timer;
+    qInput.addEventListener('input', function () {
+      clearTimeout(timer);
+      timer = setTimeout(function () {
+        state.q = qInput.value.trim().toLowerCase();
+        applyFilter();
+      }, 120);
+    });
+  }
+  var chips = document.getElementById('chips-type');
+  if (chips) {
+    chips.addEventListener('click', function (e) {
+      var btn = e.target.closest('.chip');
+      if (!btn) return;
+      var all = chips.querySelectorAll('.chip');
+      for (var i = 0; i < all.length; i++) all[i].classList.remove('on');
+      btn.classList.add('on');
+      state.type = btn.getAttribute('data-type');
+      applyFilter();
+    });
+  }
+  document.addEventListener('keydown', function (e) {
+    if (e.key === '/' && document.activeElement !== qInput) {
+      e.preventDefault();
+      qInput.focus();
+    }
+  });
+  applyFilter();
+
+  /* ---------- 回到顶部 ---------- */
+  var totop = document.getElementById('totop');
+  window.addEventListener('scroll', function () {
+    totop.classList.toggle('show', window.scrollY > 400);
+  }, { passive: true });
+  totop.addEventListener('click', function () {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  renderView();
+})();
+</script>
+</body>
+</html>

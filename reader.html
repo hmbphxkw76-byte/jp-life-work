@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MacroPulse 阅读器</title>
+<style>body{margin:0;font-family:"Segoe UI","Microsoft YaHei",sans-serif;color:#1a1a2e;display:flex;height:100vh}nav{width:300px;overflow:auto;border-right:1px solid #cbd5e1;padding:16px;box-sizing:border-box}main{flex:1}iframe{width:100%;height:100%;border:0}a{color:#1d4ed8;text-decoration:none}a:hover{text-decoration:underline}</style>
+</head>
+<body>
+<nav><h2>报告列表</h2><ul><li><a href="?report=00-decision-hub/reports/2026-Q4_quarterly.html">00-decision-hub · 季度 2026-Q4</a></li><li><a href="?report=01-ssw-driver/reports/2026-Q4_quarterly.html">01-ssw-driver · 季度 2026-Q4</a></li><li><a href="?report=01-ssw-driver/reports/2026-11_baseline_report.html">01-ssw-driver · 基线 2026-11</a></li><li><a href="?report=02-career-driver/reports/2026-11_baseline_report.html">02-career-driver · 基线 2026-11</a></li><li><a href="?report=03-career-management/reports/2026-11_baseline_report.html">03-career-management · 基线 2026-11</a></li><li><a href="?report=04-industry-logistics/reports/2026-11_baseline_report.html">04-industry-logistics · 基线 2026-11</a></li><li><a href="?report=05-industry-autonomous/reports/2026-11_baseline_report.html">05-industry-autonomous · 基线 2026-11</a></li><li><a href="?report=06-industry-technology/reports/2026-11_baseline_report.html">06-industry-technology · 基线 2026-11</a></li><li><a href="?report=07-economy-finance/reports/2026-11_baseline_report.html">07-economy-finance · 基线 2026-11</a></li><li><a href="?report=08-visa-immigration/reports/2026-11_baseline_report.html">08-visa-immigration · 基线 2026-11</a></li><li><a href="?report=09-politics-law/reports/2026-11_baseline_report.html">09-politics-law · 基线 2026-11</a></li><li><a href="?report=10-education-qualification/reports/2026-11_baseline_report.html">10-education-qualification · 基线 2026-11</a></li><li><a href="?report=11-language-japanese/reports/2026-11_baseline_report.html">11-language-japanese · 基线 2026-11</a></li><li><a href="?report=12-culture-life/reports/2026-11_baseline_report.html">12-culture-life · 基线 2026-11</a></li><li><a href="?report=13-regional-info/reports/2026-11_baseline_report.html">13-regional-info · 基线 2026-11</a></li><li><a href="?report=14-life-operations/reports/2026-11_baseline_report.html">14-life-operations · 基线 2026-11</a></li><li><a href="?report=15-health-wellbeing/reports/2026-11_baseline_report.html">15-health-wellbeing · 基线 2026-11</a></li></ul></nav>
+<main><iframe id="frame" title="报告内容"></iframe></main>
+<script>var p=new URLSearchParams(location.search).get('report');if(p){document.getElementById('frame').src=p;}</script>
+</body>
+</html>
