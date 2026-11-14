@@ -254,7 +254,7 @@ src/report_templates/handbook-split-standard.md 第三至七节逐项执行：
 | 03-career-management | ✅ 已完成 | 2026-11-14 | 29c42e8 |
 | 04-industry-logistics | ✅ 已完成 | 2026-11-14 | 62b0e7e |
 | 05-industry-autonomous | ✅ 已完成 | 2026-11-14 | 1ca49ba |
-| 06-industry-technology | ⬜ 待处理 | — | — |
+| 06-industry-technology | ✅ 已完成 | 2026-11-14 | 3f1703b |
 | 07-economy-finance | ⬜ 待处理 | — | — |
 | 08-visa-immigration | ⬜ 待处理 | — | — |
 | 09-politics-law | ⬜ 待处理 | — | — |
