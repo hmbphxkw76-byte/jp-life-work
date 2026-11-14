@@ -8,6 +8,12 @@
 百分比列宽；h2 章节重编号 id="sN" 并生成简化锚点导航 <nav aria-label="报告导航">
 （置于文首 h1 与副标题之后、首个 h2 之前）。
 
+跨主题锚点兼容（2026-11-14）：toc 扩展生成的 id 会剥离非 ASCII 字符
+（如「3.3 维权与合规工具箱」→ id="33"），导致形如 #03-维权与合规工具箱 的
+GitHub 风格中文锚点在 HTML 中不可达。为此在 sN 重编号之后，为每个标题（h1–h6）
+内部注入 <a id="GitHub风格slug"></a> 附加锚点（保留 CJK/字母数字/连字符、
+空格转连字符、小写、重复标题加 -N 后缀），sN 导航与跨主题中文锚点双通道并存。
+
 退出码：0 = 成功（含无 md 可转换）；1 = 转换失败或依赖缺失。
 """
 from __future__ import annotations
@@ -49,8 +55,18 @@ nav a:hover {{ text-decoration: underline; }}
 
 
 H2_RE = re.compile(r"<h2\b[^>]*>.*?</h2>", re.DOTALL)
+HEAD_RE = re.compile(r"<h([1-6])\b[^>]*>.*?</h\1>", re.DOTALL)
 TABLE_RE = re.compile(r"<table\b.*?</table>", re.DOTALL)
 TH_RE = re.compile(r"<th\b[^>]*>")
+# GitHub 风格 slug 的剔除字符：保留 \w（含中日韩文字、字母数字、下划线）、连字符与空格
+SLUG_STRIP_RE = re.compile(r"[^\w\- ]", re.UNICODE)
+
+
+def _slug(heading_html: str) -> str:
+    """标题 HTML -> GitHub 风格 slug（保留 CJK：小写、去标点、空格转连字符）。"""
+    s = _strip_tags(heading_html).strip()
+    s = SLUG_STRIP_RE.sub("", s).replace(" ", "-").lower()
+    return s
 
 
 def _strip_tags(s: str) -> str:
@@ -109,6 +125,30 @@ def _fix_headings(html: str) -> str:
     return nav + html
 
 
+def _fix_heading_anchors(html: str) -> str:
+    """为每个标题（h1–h6）注入 GitHub 风格中文 slug 附加锚点，保证跨主题 #中文锚点 链接可达。
+
+    与 _fix_headings 的 sN 重编号双通道并存：h2 保留 id="sN"（导航用），标题内
+    额外注入 <a id="slug"></a>（跨主题链接用）；重复标题按 GitHub 惯例追加 -N。
+    """
+    used: set[str] = set()
+
+    def repl(m: re.Match) -> str:
+        tag = m.group(0)
+        slug = _slug(tag)
+        if not slug:
+            return tag
+        base, n = slug, 1
+        while slug in used:
+            slug = f"{base}-{n}"
+            n += 1
+        used.add(slug)
+        anchor = f'<a id="{slug}" aria-hidden="true"></a>'
+        return re.sub(r"(<h[1-6]\b[^>]*>)", lambda mm: mm.group(1) + anchor, tag, count=1)
+
+    return HEAD_RE.sub(repl, html)
+
+
 def convert(md_path: Path) -> str:
     """md 文本 -> 自包含 HTML 文本。依赖 markdown 包（见 requirements.txt）。"""
     try:
@@ -125,6 +165,7 @@ def convert(md_path: Path) -> str:
             break
     body = _fix_tables(body)
     body = _fix_headings(body)
+    body = _fix_heading_anchors(body)
     return TEMPLATE.format(title=title, body=body)
 
 

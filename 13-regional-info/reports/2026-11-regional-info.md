@@ -312,7 +312,7 @@
 | 医师数地域差 | 人口 10 万対医師数（従業地/居住地口径须区分） | [厚生労働省 医師・歯科医師・薬剤師統計](https://www.mhlw.go.jp/toukei/list/33-20.html "来源：https://www.mhlw.go.jp/toukei/list/33-20.html, 2026") | 医师向大都市圈集中——地方都市的夜间救急/专科就医半径先查到二次医疗圈 |
 | 病床数地域差 | 病院の一般病床（令和 6 年医療施設調査，2024-10-01：全国 879,728 床） | [厚生労働省 令和6年医療施設調査](https://www.mhlw.go.jp/toukei/saikin/hw/iryosd/24/index.html "来源：https://www.mhlw.go.jp/toukei/saikin/hw/iryosd/24/index.html, 2024") | 病床分布影响重伤/产育时的转院半径 |
 
-保险体系与就医流程细节 → [12-文化与生活 · 03-医疗与健康](../../12-culture-life/reports/2026-11-culture-life.html#03-医疗与健康)
+保险体系与就医流程细节 → [12-文化与生活 · 03-医疗与健康](../../12-culture-life/handbook/03-medical-health.md)
 
 **教育资源地域差（外国人儿童受入体制）**
 

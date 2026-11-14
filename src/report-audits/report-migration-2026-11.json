@@ -48,11 +48,12 @@
     {
       "slug": "culture-life",
       "month": "2026-11",
-      "target": "12-culture-life/reports/2026-11-culture-life.md",
+      "target": "12-culture-life/reports/archives/2026-11-culture-life-merged-v1.0.md",
       "source": "2026-11_baseline_report.md",
       "role": "appendix",
       "kind": "baseline",
-      "content_preserved": true
+      "content_preserved": true,
+      "note": "2026-11-14 手册已从报告附录拆分至 12-culture-life/handbook/（00–05），原文全文改存档于 archives 合并版快照，内容零丢失"
     },
     {
       "slug": "decision-hub",

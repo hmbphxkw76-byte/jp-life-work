@@ -23,3 +23,7 @@ docs/superpowers/
 # 本地工具备份目录（不入库）
 .catpaw/
 .catpaw-*/
+
+# 会话级预览/报告 HTML 产物（不入库，延续 8161677 的仓库惯例）
+culture-life-split-preview/
+culture-life-split-report/

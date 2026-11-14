@@ -655,14 +655,16 @@ class TestHistoricalMigration(unittest.TestCase):
 
 
 # 报告路径引用在迁移中允许改名（旧命名 -> YYYY-MM-<slug>），
-# 内容留存校验把 reports/ 之后的路径整体归一，聚焦实质文本比对。
-_REPORT_PATH_RE = re.compile(r"reports/[^\s`\]\)|）,，、]*")
+# 内容留存校验把 reports/ / handbook/ 之后的路径整体归一，聚焦实质文本比对。
+# （2026-11-14 起知识手册拆分至 topics/<slug>/handbook/，跨主题引用允许指向
+#  reports/ 或 handbook/，二者统一归一为 <PATH>。）
+_DOC_PATH_RE = re.compile(r"(?:reports|handbook)/[^\s`\]\)|）,，、]*")
 
 
 def _normalize(text: str) -> str:
-    """内容留存归一化：去标题标记 / 归一报告路径 / 去空白。"""
+    """内容留存归一化：去标题标记 / 归一文档路径 / 去空白。"""
     text = re.sub(r"(?m)^\s{0,3}#+\s?", "", text)
-    text = _REPORT_PATH_RE.sub("reports/<PATH>", text)
+    text = _DOC_PATH_RE.sub("<PATH>", text)
     return re.sub(r"\s+", "", text)
 
 
