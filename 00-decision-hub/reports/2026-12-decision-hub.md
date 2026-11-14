@@ -157,13 +157,7 @@
 
 ---
 
-## 九、免责声明
-
-**本报告仅供参考，不构成投资建议或决策依据。**
-
----
-
-## 十、参考来源清单
+## 九、参考来源清单
 
 1. [01 特定技能司机 · 基线报告](https://github.com/hmbphxkw76-byte/jp-life-work/blob/main/01-ssw-driver/reports/2026-11-ssw-driver.md) — 收入 / 缺口 / 考试 / 驾照 / 中介
 2. [01 初析报告](https://github.com/hmbphxkw76-byte/jp-life-work/blob/main/01-ssw-driver/reports/2026-11-ssw-driver.md) — 五问事实来源

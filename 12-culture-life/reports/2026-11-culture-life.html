@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>日本文化与生活 · 2026-11 月度报告</title>
+<style>
+:root{
+  --radius-sm:8px; --radius:12px; --radius-lg:16px;
+  --shadow:0 1px 3px rgba(20,40,70,.06); --shadow-md:0 4px 14px rgba(20,40,70,.09);
+  --font-sans:"Microsoft YaHei","PingFang SC","Segoe UI",Arial,sans-serif;
+  --font-mono:"SFMono-Regular",Consolas,"Liberation Mono",monospace;
+  --focus-ring:0 0 0 3px rgba(63,111,176,.35);
+  --bg:#f4f6f9; --card:#ffffff; --ink:#15202b; --ink2:#465667; --ink3:#657180;
+  --line:#e1e7ee; --line2:#eef2f6;
+  --navy:#16324f; --navy2:#2f5597; --blue:#3f6fb0; --blue-l:#eaf1fa;
+  --red:#a83224; --red-d:#822116; --red-l:#fbece8;
+  --pre:#b8541c; --pre-l:#fdf1e4;
+  --green:#1c7444; --green-l:#eaf5ef;
+  --amber:#956612; --amber-l:#fdf4e2;
+  --gray:#646f7b; --gray-l:#eff2f4;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{font-family:var(--font-sans);background:var(--bg);color:var(--ink);line-height:1.76;font-size:14.5px}
+a{color:var(--navy2);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px 68px}
+
+/* ── 跳转链接 / 焦点环 ── */
+.skip-link{position:absolute;left:12px;top:-48px;z-index:100;background:var(--navy);
+  color:#fff;padding:8px 16px;border-radius:0 0 8px 8px;font-size:12.5px;transition:top .15s ease}
+.skip-link:focus{top:0;color:#fff;text-decoration:none}
+:focus-visible{outline:none;box-shadow:var(--focus-ring)}
+
+/* ── 题头 Hero ── */
+.hero{background:linear-gradient(128deg,#0f2338 0%,#16324f 52%,#2f5597 100%);
+  color:#fff;padding:46px 36px 34px;border-radius:0 0 18px 18px;margin-bottom:24px}
+.hero .eyebrow{font-size:11.5px;letter-spacing:2.4px;color:rgba(255,255,255,.62);text-transform:uppercase}
+.hero h1{font-size:28px;font-weight:700;letter-spacing:.4px;margin:8px 0 6px;line-height:1.35}
+.hero .sub{font-size:13.5px;color:rgba(255,255,255,.82);max-width:900px}
+.hero .meta{font-size:12.3px;color:rgba(255,255,255,.78);margin-top:16px;line-height:2}
+.hero .meta b{color:#fff}
+.hero .tag{display:inline-block;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.2);
+  border-radius:14px;padding:2px 11px;margin:5px 6px 0 0;font-size:11.5px}
+
+/* ── 报告导航（sticky） ── */
+.report-nav{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);
+  border-bottom:1px solid var(--line);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  margin-bottom:26px}
+.report-nav .wrap{padding-top:10px;padding-bottom:10px}
+.nav-url{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;font-size:11.5px;
+  line-height:1.6;color:var(--ink3);padding-bottom:6px;margin-bottom:6px;
+  border-bottom:1px dashed var(--line)}
+.nav-url-label{font-weight:700;color:var(--ink2);white-space:nowrap}
+.nav-url a{color:var(--blue);word-break:break-all}
+.nav-tabs{display:flex;flex-wrap:wrap;gap:6px}
+.nav-tabs a{color:var(--ink2);font-size:12.5px;padding:5px 10px;border-radius:6px;
+  transition:background .15s ease,color .15s ease}
+.nav-tabs a:hover{background:var(--blue-l);color:var(--blue)}
+
+/* ── 跨月对比工具条 ── */
+.diff-bar{display:flex;flex-wrap:wrap;align-items:center;gap:8px;
+  margin-top:8px;padding-top:8px;border-top:1px dashed var(--line);
+  font-size:12px;color:var(--ink3)}
+.diff-bar .diff-summary{flex:1;min-width:200px;line-height:1.6}
+.diff-bar .diff-summary b{color:var(--navy)}
+.diff-toggle{font-size:12px;border:1px solid var(--line);background:#fff;border-radius:7px;
+  padding:4px 11px;cursor:pointer;color:var(--navy2);font-family:inherit}
+.diff-toggle:hover{border-color:var(--blue)}
+
+/* ── 正文 ── */
+h2.sec{font-size:20px;color:var(--navy);margin:44px 0 4px;padding-left:12px;
+  border-left:4px solid var(--navy2);font-weight:700;scroll-margin-top:110px}
+h3{font-size:15.5px;color:var(--navy);margin:22px 0 8px;font-weight:700}
+h4{font-size:14px;color:var(--navy);margin:16px 0 6px;font-weight:700}
+p{margin:0 0 12px}
+ul,ol{padding-left:22px;margin:8px 0 14px}
+li{margin-bottom:6px}
+hr{border:0;border-top:1px solid var(--line);margin:26px 0}
+strong{color:var(--ink)}
+code{background:#f6f8fa;padding:2px 5px;border-radius:4px;font-family:var(--font-mono);font-size:12.5px}
+pre{background:#f6f8fa;padding:12px 14px;border-radius:8px;overflow-x:auto;margin:10px 0 16px}
+pre code{background:none;padding:0;font-size:12.3px;line-height:1.65}
+blockquote{border-left:4px solid var(--navy2);background:var(--blue-l);
+  padding:12px 16px;border-radius:0 8px 8px 0;margin:12px 0;color:var(--ink2)}
+blockquote p:last-child{margin-bottom:0}
+.lead{color:var(--ink2);font-size:13.8px;margin:6px 0 14px}
+
+/* ── 表格 ── */
+table{width:100%;border-collapse:collapse;font-size:12.6px;background:var(--card);
+  border-radius:8px;overflow:hidden;margin:12px 0 16px}
+th{background:var(--navy);color:#fff;padding:8px 10px;text-align:left;font-weight:600;
+  font-size:12px;vertical-align:bottom}
+td{padding:7px 10px;border-bottom:1px solid var(--line2);vertical-align:top;line-height:1.62}
+tbody tr:nth-child(even) td{background:#fafbfd}
+tbody tr:hover td{background:var(--blue-l)}
+td.num{font-variant-numeric:tabular-nums}
+
+/* ── 信息卡 / 注释 ── */
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;
+  padding:18px 20px;margin:14px 0;box-shadow:var(--shadow)}
+.card h3:first-child{margin-top:0}
+.note{background:var(--amber-l);border-left:4px solid var(--amber);padding:10px 14px;
+  border-radius:0 7px 7px 0;font-size:12.9px;margin:12px 0}
+.note.gap{background:var(--gray-l);border-left-color:var(--gray)}
+.note.check{background:var(--green-l);border-left-color:var(--green)}
+.note.correct{background:var(--red-l);border-left-color:var(--red)}
+.note.preline{background:var(--pre-l);border-left-color:var(--pre)}
+
+/* ── 差异高亮（跨月对比） ── */
+.diff-badge{display:inline-block;font-size:10.5px;font-weight:700;line-height:1;
+  border-radius:3px;padding:2px 6px;margin-right:6px;vertical-align:middle;white-space:nowrap}
+.diff-block{border-radius:6px;padding:4px 8px;margin:4px -8px}
+.diff-new{background:var(--green-l);box-shadow:inset 3px 0 0 var(--green)}
+.diff-new .diff-badge{background:var(--green);color:#fff}
+.diff-mod{background:var(--amber-l);box-shadow:inset 3px 0 0 var(--amber)}
+.diff-mod .diff-badge{background:var(--amber);color:#fff}
+.diff-del-group{margin:6px 0;border:1px dashed var(--line);border-radius:6px;background:#fbfcfe}
+.diff-del-group>summary{cursor:pointer;font-size:12px;color:var(--ink3);
+  padding:6px 10px;user-select:none;list-style:none}
+.diff-del-group>summary::-webkit-details-marker{display:none}
+.diff-del-group>summary::before{content:"▸ ";color:var(--gray)}
+.diff-del-group[open]>summary::before{content:"▾ "}
+.diff-del-group .diff-del-body{padding:2px 8px 8px;color:var(--ink3)}
+.diff-del-group .diff-del-body s,.diff-del-group .diff-del-body del{color:var(--red)}
+.diff-del-group .diff-badge{background:var(--gray-l);color:var(--gray)}
+/* 隐藏更新标记：对照阅读模式 */
+main.hide-diff .diff-badge{display:none}
+main.hide-diff .diff-block{background:none;box-shadow:none;padding:0;margin:0}
+main.hide-diff .diff-del-group{display:none}
+
+/* ── 页脚 ── */
+.footer{font-size:11.4px;color:var(--ink3);text-align:center;margin-top:22px;line-height:1.9}
+.footer .backlinks{margin-top:8px}
+.footer .backlinks a{margin:0 8px}
+
+/* ── 响应式 ── */
+@media(max-width:760px){
+  .hero{padding:30px 20px;border-radius:0 0 14px 14px}
+  .hero h1{font-size:21px}
+  .wrap{padding:0 14px 46px}
+  td,th{padding:6px 7px;font-size:11.7px}
+  h2.sec{font-size:17.5px}
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">跳转到主要内容</a>
+<header class="hero" role="banner" aria-label="报告题头">
+  <div class="eyebrow">日本文化与生活 · 职业就业调研型</div>
+  <h1>日本文化与生活 · 2026-11 月度报告</h1>
+  <div class="sub">版本：v1.0（2026-11 月度）｜数据基准日：2026-11-14</div>
+  <div class="meta"><b>版本</b>：v1.0（2026-11 月度）<br><b>数据基准日</b>：2026-11-14<br><b>主题类型</b>：职业就业调研型（employment-research）<br><b>受众定位</b>：面向在日本从事货运司机工作、需要职场文化适应与日常生活落地的读者，兼具生活指南与心理适应视角。<br><b>来源规则</b>：① 厚生労働省（労働に関する制度）、総務省 / 自治体（生活制度、ゴミ分別等）＞ ② JILPT / 公共機関的职场调查 ＞ ③ 地域自治体多语言生活指南 ＞ ④ 在日生活门户与社区（经验类，标注个案）；每条数据必须附可直接访问的 URL，…</div>
+  <div><span class="tag">2026-11</span><span class="tag">职业就业调研型</span></div>
+</header>
+<nav class="report-nav" aria-label="报告导航">
+  <div class="wrap">
+    <div class="nav-url">
+      <span class="nav-url-label">报告路径</span>
+      <a href="2026-11-culture-life.html">12-culture-life\reports\2026-11-culture-life.html</a>
+    </div>
+    <div class="nav-tabs"><a href="#s1">一、核心结论（摘要）</a><a href="#s2">二、行业与政策发展趋势</a><a href="#s3">三、人才供需与薪酬（核心模块）</a><a href="#s4">四、雇主与企业类型细分</a><a href="#s5">五、岗位技能要求</a><a href="#s6">六、行业认可的职业资质与证书</a><a href="#s7">七、就业落地路径建议（结论章）</a><a href="#s8">八、数据可靠性与局限说明</a><a href="#s9">九、参考来源清单</a></div>
+    
+  </div>
+</nav>
+<main class="wrap" id="main-content" role="main" aria-label="报告正文">
+<h2 id="s1" class="sec">一、核心结论（摘要）</h2>
+<p><strong>核心判断</strong>（每条含数据、口径与来源）：</p>
+<ol>
+<li><strong>制度框架类内容核验程度较高</strong>：窗口自付 3 割依据健康保険法第 74 条；处方笺「含交付日在内 4 日以内」依据「保険医療機関及び保険医療養担当規則」第 20 条・第 21 条；#7119 确认为自治体设置，截至令和 6 年 11 月共 36 地域（覆盖 36/47 都道府県）。（事实）</li>
+<li><strong>登记册活值尚未闭合</strong>：7 项指标中 #1、#2、#4 待基线确立，#3 待记录，#5、#6 待复核，仅 #7（UR 收入基准）已确立。（事实）</li>
+<li><strong>UR 收入基准可作为住房维度的锚定活值</strong>：家賃 62,500 円未満→基准月收=家賃 4 倍等三档参数有 2026-11 核实来源，可用于公营住宅申请资格初判。（事实）</li>
+<li><strong>文化类内容属一般化观察</strong>：报联相 / 挨拶 / 5S、评价体系、饮み会等均标注为一般化观察，不作统计事实，习惯性做法不得表述为法定要求。（事实）</li>
+<li><strong>经验类内容已标注个案</strong>：社群参与方式、生活适应记录等属生活经验，不作事实引用。（事实）</li>
+</ol>
+<h3 id="_2">数据变更摘要</h3>
+<p>覆盖登记册全部 7 项追踪指标（活值以 <a href="../data/culture_life_indicator_registry.md">data/culture_life_indicator_registry.md</a> 为准）：</p>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:20%">#</th>
+<th style="width:20%">指标</th>
+<th style="width:20%">最新值（来源 / 年份）</th>
+<th style="width:20%">基准版本</th>
+<th style="width:20%">变更说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>在留相关生活手续流程变化</td>
+<td>待基线确立</td>
+<td>baseline</td>
+<td>截至 2026-11-14 无更新</td>
+</tr>
+<tr>
+<td>2</td>
+<td>职场文化相关官方调查</td>
+<td>待基线确立</td>
+<td>baseline</td>
+<td>截至 2026-11-14 无更新</td>
+</tr>
+<tr>
+<td>3</td>
+<td>个人生活适应记录</td>
+<td>待记录</td>
+<td>baseline</td>
+<td>截至 2026-11-14 无更新</td>
+</tr>
+<tr>
+<td>4</td>
+<td>医疗保险费率·自付上限·高额疗养费上限</td>
+<td>待基线确立</td>
+<td>baseline</td>
+<td>截至 2026-11-14 无更新；待跟踪：高额疗养费令和 8·9 年 8 月见直し</td>
+</tr>
+<tr>
+<td>5</td>
+<td>房价 / 租金行情指针</td>
+<td>待复核（口径参考：https://www.mlit.go.jp/totikensangyo/const/1_6_bf_000013.html, 2026）</td>
+<td>baseline</td>
+<td>截至 2026-11-14 无更新</td>
+</tr>
+<tr>
+<td>6</td>
+<td>防灾气象预警渠道（警戒レベル体系·推送 App）</td>
+<td>待复核（体系参考：https://www.jma.go.jp/jma/kishou/know/bosai/warning.html, 2026）</td>
+<td>baseline</td>
+<td>截至 2026-11-14 无更新</td>
+</tr>
+<tr>
+<td>7</td>
+<td>UR 賃貸住宅申込收入基准</td>
+<td>家賃 62,500 円未満→基准月收=家賃 4 倍；62,500–200,000 円→25 万円；200,000 円以上→40 万円；储蓄基准=家賃 100 倍可替代收入基准（来源：https://dr.www.ur-net.go.jp/chintai/sp/rent/requirements/, 2026）</td>
+<td>2026-11-12</td>
+<td>已确立，无更新</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_3">已修正事实清单</h3>
+<p>本版继承历史报告复核结论，无新增修正。历史报告 2026-11-12 复核已闭环 3 项：窗口自付 3 割依据健康保険法第 74 条；処方箋有效期 4 日依据「保険医療機関及び保険医療養担当規則」第 20 条・第 21 条；#7119 为自治体设置，截至令和 6 年 11 月共 36 地域（覆盖 36/47 都道府県）。</p>
+<h3 id="_4">调研说明</h3>
+<ul>
+<li><strong>来源语言规则</strong>：制度类须日文官方原文；经验类不限（标注为个案）。</li>
+<li><strong>时效窗口</strong>：制度类近 12 个月内优先；经验类标注记录日期。</li>
+<li><strong>标注约定</strong>：法规义务 ≠ 职场惯例 ≠ 一般化观察三层分别标注；推断标「推断」，自算标「自算」，预测标「预测值（F）」。</li>
+<li><strong>跨主题分工</strong>：维权流程与法规条文 → <a href="../../09-politics-law/reports/2026-11-politics-law.md">09-politics-law</a>；地域选择与生活成本 → <a href="../../13-regional-info/reports/2026-11-regional-info.md">13-regional-info</a> / <a href="../../07-economy-finance/reports/2026-11-economy-finance.md">07-economy-finance</a>；税费社保与年金缴纳申报 → <a href="../../07-economy-finance/reports/2026-11-economy-finance.md">07-economy-finance</a>；现场安全制度与事故处理 → <a href="../../02-career-driver/reports/2026-11-career-driver.md">02-career-driver</a>；在留手续与在留制度 → <a href="../../08-visa-immigration/reports/2026-11-visa-immigration.md">08-visa-immigration</a>；日语学习计划 → <a href="../../11-language-japanese/reports/2026-11-language-japanese.md">11-language-japanese</a>。</li>
+</ul>
+<h2 id="s2" class="sec">二、行业与政策发展趋势</h2>
+<h3 id="21">2.1 医疗保险制度框架（两条轨道，并列不合并）</h3>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:25%">轨道</th>
+<th style="width:25%">适用者</th>
+<th style="width:25%">加入方式</th>
+<th style="width:25%">保费口径</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>健康保险（职场健保 / 协会けんぽ）</td>
+<td>正社員、特定技能者等被用者</td>
+<td>雇主办理，本人与公司折半负担</td>
+<td>按标准报酬 × 费率，费率因健保组合而异（活值）</td>
+</tr>
+<tr>
+<td>国民健康保险</td>
+<td>非被用者、退职后、未随社保的家属</td>
+<td>自行到市区役所办理</td>
+<td>按所得与均等割计算，自治体差异大</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>制度框架以厚生労働省公开信息为准：全民皆保险（https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/index.html）；国保为「未加入被用者保险的全体住民」的保险（https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/koukikourei/index_00002.html）。</li>
+<li>窗口自付比例：3 割（未满 70 岁；70–74 岁 2 割；75 岁起转入后期高龄者医疗制度），法律依据为健康保険法第 74 条（https://laws.e-gov.go.jp/law/334AC0000000070）。</li>
+<li>外国人被保险者：国保有含简繁中文在内 19 语种的在留外国人向指南（https://www.mhlw.go.jp/stf/newpage_21895.html）。</li>
+<li>高额疗养费制度：单月自付超过按所得区分的上限部分可申请给付；上限额每年调整，属活值。官方示例（令和 8 年 8 月起新制度）：70 岁未满·年收约 370–510 万円者，100 万円治疗自付约 9.3 万円封顶（https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/juuyou/kougakuiryou/index.html）；令和 8·9 年 8 月各有见直し（监测触发器）。</li>
+<li>易漏点：退职后健保资格丧失，须在 14 天内转入国民健康保险或办理任意継続；断保会在永住审查的「公的义务」项留下记录（→ <a href="../../08-visa-immigration/reports/2026-11-visa-immigration.md">08-visa-immigration</a>）。</li>
+</ul>
+<h3 id="22">2.2 就医、体检与劳灾制度</h3>
+<p><strong>就医全流程</strong>：选机构（先「診療所（かかりつけ医）」后大病院；无介绍状直接去大病院会被收「選定療養費」）→ 带证件（マイナ保険証 + 在留卡；初诊填写问诊票）→ 就诊（需要「診断書」时另付文书费）→ 取药（医薬分業，持处方笺到調剤薬局取药，含交付日在内 4 日以内；依据保険医療機関及び保険医療養担当規則第 20 条・第 21 条）→ 付款（窗口 3 割，保留领收书）→ 夜间 / 假日先拨「救急安心センター（#7119）」咨询再决定是否叫救护车（非全国统一，由自治体设置；未开设地区拨「#8000（儿童急救咨询）」或直接 119）。</p>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:25%">项目</th>
+<th style="width:25%">依据 / 主体</th>
+<th style="width:25%">频率</th>
+<th style="width:25%">岗位要点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>定期健康診断</td>
+<td>労働安全衛生法，雇主实施</td>
+<td>每年</td>
+<td>血压 / 血糖 / 听力 / 视力是驾照适性关联项</td>
+</tr>
+<tr>
+<td>特定健診</td>
+<td>40–74 岁健保加入者</td>
+<td>每年</td>
+<td>可与公司健诊合并，避免重复受检</td>
+</tr>
+<tr>
+<td>がん検診</td>
+<td>自治体</td>
+<td>按自治体案内</td>
+<td>多地有补助，落地后在役所确认</td>
+</tr>
+<tr>
+<td>睡眠時無呼吸症候群（SAS）筛查</td>
+<td>运输业自主规范 + 健保（行业实践，待复核）</td>
+<td>有症状时</td>
+<td>日间嗜睡＝事故风险，结论影响乗務判定</td>
+</tr>
+<tr>
+<td>ストレスチェック</td>
+<td>労働安全衛生法（一定规模事业场义务）</td>
+<td>每年</td>
+<td>结果不直接进人事评价，可主动利用</td>
+</tr>
+</tbody>
+</table>
+<p><strong>劳灾保险与工伤</strong>（与职业安全直接衔接）：</p>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:33%">项目</th>
+<th style="width:33%">健康保险</th>
+<th style="width:34%">劳灾保险</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>覆盖范围</td>
+<td>疾病·伤害（业务外也覆盖）</td>
+<td>业务上灾害与通勤灾害</td>
+</tr>
+<tr>
+<td>窗口自付</td>
+<td>3 割</td>
+<td>疗养给付范围内原则上本人 0 负担（待复核）</td>
+</tr>
+<tr>
+<td>申请主体</td>
+<td>本人</td>
+<td>雇主提出、本人配合；雇主不配合可自行向劳动基准监督署申请</td>
+</tr>
+<tr>
+<td>休业期间</td>
+<td>伤病津贴（条件严格）</td>
+<td>休业（补偿）给付</td>
+</tr>
+</tbody>
+</table>
+<p><strong>心理健康资源</strong>：公司内（产业医、保健师、相談窓口，一定规模事业场为法定义务）；公司外（自治体「こころの健康相談」、よりそいホットライン 0120-279-338，24h，含外语对应、いのちの電話）；窗口总览见厚労省电话相谈页（https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/seikatsuhogo/jisatsu/soudan_tel.html）。</p>
+<h3 id="23">2.3 防灾预警体系与多语言情报渠道</h3>
+<ul>
+<li><strong>预警口径</strong>：按気象警報・警戒レベル行动（https://www.jma.go.jp/jma/kishou/know/bosai/warning.html）——发布避难指示（警戒レベル 4）全员避难，不等レベル 5；土砂 / 洪水危险区域实况看キキクル（https://www.jma.go.jp/bosai/risk/）。驾驶途中遇特別警報：立即驶离低洼地·地下道，就近进入坚固建筑，不强行回家。</li>
+<li><strong>地震初期应对</strong>：护头躲入桌下 → 摇晃停止后关火·断电·开门确保出口 → 穿鞋带包撤离；家具翻倒·落物占受伤原因 3–5 成，家具固定是第一道防线；海边强震立即向高处转移（海啸）。</li>
+<li><strong>多语言灾害情报渠道</strong>：</li>
+</ul>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:50%">渠道</th>
+<th style="width:50%">用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Safety tips（観光庁监修，https://www.mlit.go.jp/kankocho/seisaku_seido/kihonkeikaku/jizoku_kankochi/anzenkakuho/inbound/tool.html）</td>
+<td>15 语种推送：紧急地震速报·海啸·特別警報，附行动流程图与沟通卡</td>
+</tr>
+<tr>
+<td>NHK WORLD-JAPAN</td>
+<td>24 小时英语频道，大灾时的英语情报源</td>
+</tr>
+<tr>
+<td>JNTO Japan Visitor Hotline（050-3816-2787）</td>
+<td>英 / 中 / 韩 / 日 24h（事故·疾病·灾害支持）</td>
+</tr>
+<tr>
+<td>地域国際化協会相談窓口（https://www.clair.or.jp/j/multiculture/association/consultation_list.html）</td>
+<td>灾后生活咨询的多语言窗口全国一览</td>
+</tr>
+<tr>
+<td>自治体灾害支援体制</td>
+<td>総務省「情報難民ゼロ」项目培训災害時外国人支援情報コーディネーター（https://www.soumu.go.jp/menu_seisaku/chiho/02gyosei05_03000060.html）</td>
+</tr>
+</tbody>
+</table>
+<h3 id="24">2.4 多文化共生政策与支援体系</h3>
+<ul>
+<li>主管部门：総務省「地域の国際化の推進」。核心文件为「地域における多文化共生推進プラン」（令和 2 年改订，https://www.soumu.go.jp/menu_seisaku/chiho/02gyosei05_03000060.html），指导地方自治体制定指針·計画；策定状况逐年调查公开（令和 6 年 4 月时点为最新调查）。</li>
+<li>实践案例：多文化共生事例集（令和 3 年度版，https://www.soumu.go.jp/menu_seisaku/chiho/tabunkakyousei_suishin_r03.html）——外国人住民协働地域活化、留学生就职支援等。</li>
+<li>个人用法：搬家 / 换工作时用「自治体名 + 多文化共生 + 相談窓口」检索本地施策与窗口。</li>
+</ul>
+<h3 id="25">2.5 政策与趋势观察（触发器）</h3>
+<p>劳动文化相关制度变化（联动 09）→ 01；生活制度变化（在留卡手续、年金手续等，联动 08）→ 02；个人新生活经验沉淀 → 02；医疗保险制度 / 自付比例 / 高额疗养费上限变化 → 03；劳灾保险给付口径、工伤申领流程变化 → 03；体检 / 健诊制度变化 → 03；賃贷保护法制 / 家賃补给等住宅施策变化 → 04；多文化共生施策、外国人支援体制变化 → 05；大规模灾害（震度 5 弱以上 / 特別警報发布）→ 02 防灾小节；防灾气象预警体系与 App 渠道变化 → 02 防灾小节。无触发器命中且窗口未到时<strong>不启动</strong>。</p>
+<h2 id="s3" class="sec">三、人才供需与薪酬（核心模块）</h2>
+<h3 id="31">3.1 口径声明</h3>
+<p>本主题不维护「人才供需」与「薪酬」类数据：薪酬、税·社保·年金缴纳申报归 <a href="../../07-economy-finance/reports/2026-11-economy-finance.md">07-economy-finance</a>；地域选择与生活成本归 <a href="../../13-regional-info/reports/2026-11-regional-info.md">13-regional-info</a> / 07。本节按本主题范围呈现「生活成本与制度给付口径」，不编造供需与薪酬数字。</p>
+<h3 id="32">3.2 医疗成本口径</h3>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:33%">口径</th>
+<th style="width:33%">内容</th>
+<th style="width:34%">来源 / 时点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>窗口自付</td>
+<td>3 割（未满 70 岁；70–74 岁 2 割；75 岁起后期高龄者）</td>
+<td>厚生労働省 / 健康保険法第 74 条，2026 核实</td>
+</tr>
+<tr>
+<td>高额疗养费</td>
+<td>单月自付超上限部分申请给付；上限额每年调整（活值）</td>
+<td>厚生労働省，令和 8 年 8 月起新制度</td>
+</tr>
+<tr>
+<td>官方示例</td>
+<td>70 岁未满·年收约 370–510 万円者，100 万円治疗自付约 9.3 万円封顶</td>
+<td>厚生労働省高额疗养费专页，2026</td>
+</tr>
+<tr>
+<td>保险费率</td>
+<td>因健保组合 / 自治体而异（活值，待基线确立）</td>
+<td>厚労省 / 健保组合，登记册 #4</td>
+</tr>
+</tbody>
+</table>
+<h3 id="33">3.3 住房成本口径</h3>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:33%">口径</th>
+<th style="width:33%">内容</th>
+<th style="width:34%">来源 / 时点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>敷金</td>
+<td>存管型押金，退去清算后余额返还；0–2 个月（行情因地域 / 物件而异）</td>
+<td>国交省 / 平台抽样，登记册口径</td>
+</tr>
+<tr>
+<td>礼金</td>
+<td>付与房东不返还；市场惯例，无法定上限（推断；行情倍数待复核）</td>
+<td>国交省，手册 04</td>
+</tr>
+<tr>
+<td>仲介手数料</td>
+<td>法定上限：居住用借主侧 1 个月房租 × 1.1（含税）以内，贷主侧 × 0.55；令和 6 年 7 月起长期空き家特例上限 × 2.2</td>
+<td>国交省（https://www.mlit.go.jp/totikensangyo/const/1_6_bf_000013.html），2026</td>
+</tr>
+<tr>
+<td>保証会社料·火災保険等</td>
+<td>惯例，数额依物件与公司（行情待复核）</td>
+<td>国交省，手册 04</td>
+</tr>
+</tbody>
+</table>
+<h3 id="34-ur-2026-11">3.4 UR 賃貸住宅收入基准（制度参数，2026-11 核实）</h3>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:50%">家賃区间</th>
+<th style="width:50%">基准月收</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>62,500 円未満</td>
+<td>家賃 4 倍</td>
+</tr>
+<tr>
+<td>62,500–200,000 円</td>
+<td>25 万円</td>
+</tr>
+<tr>
+<td>200,000 円以上</td>
+<td>40 万円</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>储蓄基准 = 家賃 100 倍可替代收入基准；收入不足可用家賃一時払い（1–10 年）制度。</li>
+<li>来源：https://dr.www.ur-net.go.jp/chintai/sp/rent/requirements/，2026-11-12 核实。</li>
+</ul>
+<h3 id="35">3.5 多口径并列（不合并、不取均值）</h3>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:50%">指标</th>
+<th style="width:50%">并列口径</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>医疗保险</td>
+<td>健康保险（职场健保）≠ 国民健康保险（非被用者）</td>
+</tr>
+<tr>
+<td>房租成本</td>
+<td>敷金（存管型）≠ 礼金（不返还）≠ 仲介手数料（法定上限）</td>
+</tr>
+<tr>
+<td>防灾预警</td>
+<td>国家预警 ≠ 自治体通知 ≠ 个人接收渠道</td>
+</tr>
+<tr>
+<td>文化描述</td>
+<td>法规义务 ≠ 职场惯例 ≠ 一般化观察</td>
+</tr>
+</tbody>
+</table>
+<h2 id="s4" class="sec">四、雇主与企业类型细分</h2>
+<h3 id="41">4.1 边界声明</h3>
+<p>本主题不含雇主（企业）细分：货运司机雇主生态归 <a href="../../01-ssw-driver/reports/2026-11-ssw-driver.md">01-ssw-driver</a> 与 <a href="../../02-career-driver/reports/2026-11-career-driver.md">02-career-driver</a>。本节仅对本主题涉及的制度与服务主体做类型细分。</p>
+<h3 id="42">4.2 制度与服务主体类型</h3>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:25%">主体类型</th>
+<th style="width:25%">代表</th>
+<th style="width:25%">角色</th>
+<th style="width:25%">入选标准</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>中央省厅</td>
+<td>厚生労働省、総務省、国土交通省、内閣府防災、気象庁</td>
+<td>制度框架与官方信息</td>
+<td>官方发布页可回溯</td>
+</tr>
+<tr>
+<td>执行机构</td>
+<td>健保组合、UR 都市機構、自治体（市区役所 / 水道局）</td>
+<td>保费征收、公营住宅、生活手续</td>
+<td>官方发布页可回溯</td>
+</tr>
+<tr>
+<td>支援组织</td>
+<td>CLAIR（自治体国際化協会）、地域国際化協会</td>
+<td>多语言咨询、多文化共生施策</td>
+<td>官方发布页可回溯</td>
+</tr>
+<tr>
+<td>调查研究机构</td>
+<td>JILPT</td>
+<td>职场调查（文化维度优先来源）</td>
+<td>公共機関调查</td>
+</tr>
+<tr>
+<td>经验类社区</td>
+<td>同乡会、特定技能者交流会</td>
+<td>社群参与（标注个案）</td>
+<td>经验类，不作事实</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>未取得项：#2 职场文化相关官方调查待基线确立（JILPT / 厚労省）；#5 房价 / 租金行情指针待复核（国交省不動産情報 / 自治体公表）。</p>
+</blockquote>
+<h2 id="s5" class="sec">五、岗位技能要求</h2>
+<blockquote>
+<p>本节承载手册 01（职场文化与人际）与医疗日语最小集，对应「岗位技能要求」中的软技能与场景语言要求。</p>
+</blockquote>
+<h3 id="51">5.1 司机现场的三大文化规则（一般化观察）</h3>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:33%">规则</th>
+<th style="width:33%">内容</th>
+<th style="width:34%">实践</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>报联相（報告・連絡・相談）</td>
+<td>事前 / 事中 / 事后都要出声</td>
+<td>异常第一时间报，坏消息更要快</td>
+</tr>
+<tr>
+<td>挨拶文化</td>
+<td>早上 / 退勤 / 借用前后的寒暄是信用基础</td>
+<td>「おはようございます」大声说，成本最低的印象分</td>
+</tr>
+<tr>
+<td>5S（整理·整頓·清掃·清潔·躾）</td>
+<td>车辆 / 更衣室 / 传票的整洁＝职业度外显</td>
+<td>每天下班 10 分钟收拾，被看见</td>
+</tr>
+</tbody>
+</table>
+<h3 id="52">5.2 上下关系与沟通（一般化观察）</h3>
+<ul>
+<li>敬语体系是职位语言：对先辈用「です・ます」起步，对方主动破解后再放松。</li>
+<li>指示复述是尊重：接到指示 → 复述 → 执行 → 完成报告，四步闭环。</li>
+<li>饮み会：参加 1–2 次建立关系即可，长期缺席会边缘化；饮酒不劝强（现场酒精管理严格）。</li>
+<li>给礼物（手土産）：回国出差带点心，300–1000 円价位即可，关系润滑剂。</li>
+</ul>
+<h3 id="53">5.3 评价体系（一般化观察）</h3>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:50%">被认可的</th>
+<th style="width:50%">被扣分的</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>声を出す（出声确认）</td>
+<td>沉默独自处理</td>
+</tr>
+<tr>
+<td>守时守序（时间提前 10 分钟）</td>
+<td>借口与解释先行</td>
+</tr>
+<tr>
+<td>清洁感（车辆·仪容·更衣室）</td>
+<td>现场杂乱</td>
+</tr>
+<tr>
+<td>前辈照顾后辈的姿态</td>
+<td>只顾自己</td>
+</tr>
+</tbody>
+</table>
+<h3 id="54">5.4 跨文化生存策略</h3>
+<ol>
+<li>把「不懂就问」包装成「確認させてください」——好学不丢脸。</li>
+<li>不参与是非话题（工资、他人评价），只谈工作和改善。</li>
+<li>中国背景是资产：对华供应链客户、中文系统的导入支持——让语言成为岗位价值而非标签。</li>
+<li>遇到排挤 / 歧视：先书面记录，走 <a href="../../09-politics-law/reports/2026-11-politics-law.md">09-politics-law</a> 维权与合规工具箱流程。</li>
+</ol>
+<h3 id="55-n4">5.5 医疗日语最小集（N4 可用）</h3>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:50%">场景</th>
+<th style="width:50%">说法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>挂号</td>
+<td>初めてです。保険証があります。</td>
+</tr>
+<tr>
+<td>症状</td>
+<td>頭が痛いです／熱があります／お腹が痛いです</td>
+</tr>
+<tr>
+<td>起病时间</td>
+<td>三日くらい前からです</td>
+</tr>
+<tr>
+<td>用药</td>
+<td>薬を飲んでいます。アレルギーはありません。</td>
+</tr>
+<tr>
+<td>文书</td>
+<td>診断書をお願いします。</td>
+</tr>
+<tr>
+<td>转诊</td>
+<td>紹介状をお願いします。</td>
+</tr>
+<tr>
+<td>劳灾</td>
+<td>仕事中のけがです。労災でお願いします。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="s6" class="sec">六、行业认可的职业资质与证书</h2>
+<h3 id="61">6.1 边界声明</h3>
+<p>本主题不含职业资质证书内容：资格 / 学历路径归 <a href="../../10-education-qualification/reports/2026-11-education-qualification.md">10-education-qualification</a>；驾照路径归 <a href="../../01-ssw-driver/reports/2026-11-ssw-driver.md">01-ssw-driver</a> / 10；日语考试归 <a href="../../11-language-japanese/reports/2026-11-language-japanese.md">11-language-japanese</a>。本节呈现与生活制度直接相关的资格 / 证件与健诊制度资格。</p>
+<h3 id="62">6.2 制度资格与证件总览</h3>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:25%">资格 / 证件</th>
+<th style="width:25%">性质</th>
+<th style="width:25%">要点</th>
+<th style="width:25%">来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>健康保险被保险者证</td>
+<td>保险凭证</td>
+<td>职场健保 / 协会けんぽ由雇主办理；国保自行到市区役所办理</td>
+<td>厚生労働省（https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/index.html）</td>
+</tr>
+<tr>
+<td>マイナ保険証</td>
+<td>My Number 卡作健保证用</td>
+<td>未持卡时医疗机构可在线确认资格</td>
+<td>厚生労働省（https://www.mhlw.go.jp/stf/newpage_08277.html）</td>
+</tr>
+<tr>
+<td>特定健診</td>
+<td>40–74 岁健保加入者健诊</td>
+<td>可与公司健诊合并</td>
+<td>厚生労働省 / 手册 03</td>
+</tr>
+<tr>
+<td>劳灾保险给付资格</td>
+<td>业务上灾害与通勤灾害</td>
+<td>疗养给付范围内原则上本人 0 负担（待复核）</td>
+<td>厚生労働省（https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/gyousei/rousai/040325-14.html）</td>
+</tr>
+<tr>
+<td>定期健康診断</td>
+<td>労働安全衛生法，雇主实施</td>
+<td>血压 / 血糖 / 听力 / 视力是驾照适性关联项</td>
+<td>厚生労働省 / 手册 03</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>待复核：マイナ保険証与纸保险证切换的确切时点（厚労省マイナ保険証专页未见明确日期）；劳灾疗养给付「本人原则上 0 负担」表述待以申领手册正文二次核实。</p>
+</blockquote>
+<h2 id="s7" class="sec">七、就业落地路径建议（结论章）</h2>
+<blockquote>
+<p>以下均为「建议 / 推断」，与事实数据分离。</p>
+</blockquote>
+<h3 id="71-2">7.1 落地 2 周手续清单</h3>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:33%">手续</th>
+<th style="width:33%">期限</th>
+<th style="width:34%">去处</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>在留卡地址登录</td>
+<td>落地 14 天内</td>
+<td>市区役所</td>
+</tr>
+<tr>
+<td>健康保险·年金加入确认</td>
+<td>同时</td>
+<td>同上（公司加社保则确认被保险者证）</td>
+</tr>
+<tr>
+<td>My Number 卡申请</td>
+<td>随时</td>
+<td>邮寄申请 + 役所领取</td>
+</tr>
+<tr>
+<td>银行开户</td>
+<td>第 1–2 周</td>
+<td>邮储 / Mega bank（在留卡 + 印章）</td>
+</tr>
+<tr>
+<td>手机契约</td>
+<td>第 2 周</td>
+<td>格安 SIM 优先（在留卡 + 信用卡）</td>
+</tr>
+<tr>
+<td>印章（実印未必需，认印必备）</td>
+<td>第 1 周</td>
+<td>100 円店起用，签约用姓名全称章</td>
+</tr>
+</tbody>
+</table>
+<p>（建议：在留手续细节以 <a href="../../08-visa-immigration/reports/2026-11-visa-immigration.md">08-visa-immigration</a> 与 <a href="../../14-life-operations/reports/2026-11-life-operations.md">14-life-operations</a> 为准。）</p>
+<h3 id="72">7.2 生活基础设施与安全习惯（建议）</h3>
+<ul>
+<li>住宅：公司寮优先起步；自租注意礼金 / 敷金 / 保证人（保证会社）制度。</li>
+<li>交通：原付 / 自転车需在役所登记（防窃）；市区通勤多靠电车 + 接驳。</li>
+<li>医疗：健保 70% 报销；工作日白天病院、夜間救急センター分诊；指定药店（调剤药局）处方制度。</li>
+<li>购物：业务スーパー / イオン / 100 円店 + 中華物産店。</li>
+<li>金钱与安全：现金文化仍强（部分小店），但 IC 卡 + 信用卡覆盖 95% 生活；诈骗（特殊诈欺）高发，自称役所 / 警察要账号 = 100% 诈骗；家人（国内）也要同步防「孩子的电话」类跨境诈骗。</li>
+</ul>
+<h3 id="73">7.3 住房与安家路径（建议）</h3>
+<ul>
+<li><strong>流程</strong>：物件探し（不動産店 / 网站）→ 内见 → 申込（入居审查）→ 重要事項説明 + 契约 → 交钥匙；宅建业者对借主负有书面重要事項説明义务（现也可在线办理 IT 重要事項説明）。</li>
+<li><strong>初期费用</strong>：前家賃（必付）+ 敷金 + 礼金 + 仲介手数料（法定上限见 3.3）+ 保証会社料·火災保険等；行情倍数待复核，以所在地业者报价为准。</li>
+<li><strong>外国人入住障碍</strong>：审查标准不透明、语言、无国内保证人；国交省「外国人の民間賃貸住宅入居円滑化ガイドライン」（14 国语，含标准契约书·重要事項説明书范本，https://www.mlit.go.jp/jutakukentiku/house/jutakukentiku_house_tk3_000017.html）——被拒或条款不明时用它与业者对话。</li>
+<li><strong>公营选项（UR）</strong>：对外国籍开放（「UR が定める資格を持つ外国籍の方」可申込）；收入基准见 3.4；必要書類含住民票；收入不足可用家賃一時払い（1–10 年）。市営 / 県営住宅（所得限制 + 抽选）为另一条公营路线（抽选倍率等待复核）。</li>
+<li><strong>签约时序</strong>：在留卡（地址登录）→ 印章 → 银行口座 → 口座振替绑定房租 + 水电气；手机契约可与银行开户并行；水道向所在地水道局 / 役所做使用开始申报；电气、燃气、光纤网络开通流程按一般惯例（推断待复核），搬家前先确认可否「事前转移」。</li>
+<li><strong>退去与敷金清算</strong>：提出退去按契约书约定月数前通知（惯例 1 个月，推断）；敷金先抵扣未纳房租 + 修复费，余额返还；修复费仅限故意过失 / 通常使用范围外损耗，経年分由房东负担；要求出示明细、入退去时拍照留证；有争议以原状回復ガイドライン Q&amp;A（https://www.mlit.go.jp/jutakukentiku/house/jutakukentiku_house_tk3_000024.html）为依据交涉。</li>
+</ul>
+<h3 id="74">7.4 防灾与应急（建议）</h3>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:50%">准备层</th>
+<th style="width:50%">清单要点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>非常用持ち出し袋</td>
+<td>饮水·食品、贵重品（存折·印章·现金·健康保险证）、救急品·常备药、手电·收音机·预备电池、头盔·防灾头巾、口罩·军手·暖贴</td>
+</tr>
+<tr>
+<td>自宅备蓄（3 天起步）</td>
+<td>饮水每人每天 3L × 3 天份、食品 3 天份（α 米约 5 食 / 人）、卡式炉·简易厕所·卫生纸；南海トラフ地震有「备蓄 1 周以上」的建议</td>
+</tr>
+<tr>
+<td>家具固定</td>
+<td>L 型金具 / 顶柱 / 粘着垫固定家具、玻璃防飞散膜、感震断路器（部分自治体有购置补助）</td>
+</tr>
+<tr>
+<td>滚动备蓄</td>
+<td>ローリングストック：日常多吃一份、消耗即补——不额外花钱、不过期</td>
+</tr>
+<tr>
+<td>安否联络</td>
+<td>事先约定集合点；电话不通用災害用伝言ダイヤル 171 与各运营商灾害用伝言板</td>
+</tr>
+</tbody>
+</table>
+<p>（来源：内閣府防災 https://www.bousai.go.jp/kohou/kouhoubousai/h28/83/special_03.html，2016；季节性防灾内容每年 6 月与 11 月各核对一次。）</p>
+<h3 id="75">7.5 社会融入与心理健康（建议 / 经验类）</h3>
+<ul>
+<li><strong>社群</strong>：同乡会、特定技能者交流会有抗孤独价值；最稳入口为地域国際化协会的活动（日本語教室、地域交流イベント、防灾训练）；参与方式属生活经验（个案）：先从受援熟悉生态，再逐步转为志愿者。</li>
+<li><strong>心理适应</strong>：疲劳驾驶期（初入干线 / 夜班）是情绪低谷高发期：睡眠优先于学习计划（→ <a href="../../11-language-japanese/reports/2026-11-language-japanese.md">11-language-japanese</a> 的「最低维持量」设计）；与国内家人固定视频时间（时差 1 小时）；汇款计划 → <a href="../../07-economy-finance/reports/2026-11-economy-finance.md">07-economy-finance</a>。</li>
+<li><strong>自我照顾</strong>：司机职业病预防——腰（装卸姿势）、眼（夜间驾驶）、体重（便利店依赖）；三件套对策：午餐带饭、每周 2 次锻炼、定期健诊；每季度 1 个挑战清单（登当地山、参加祭り、做一道日本料理给同事）。</li>
+</ul>
+<h2 id="s8" class="sec">八、数据可靠性与局限说明</h2>
+<h3 id="81">8.1 核验程度分级</h3>
+<ul>
+<li><strong>A 官方一手</strong>：厚生労働省（健康保険法第 74 条、高额疗养费、处方笺規則、劳灾）、気象庁 / 内閣府防災（预警体系、防灾清单）、国交省 / UR 都市機構（租赁制度与 UR 收入基准）、総務省 / CLAIR（多文化共生施策、咨询窗口）、総務省 / 消防庁（#7119）。</li>
+<li><strong>B 权威转引</strong>：JILPT / 公共機関的职场调查、地域自治体多语言生活指南。</li>
+<li><strong>C 平台抽样 / 估算</strong>：文化描述（报联相 / 挨拶 / 5S 等一般化观察）、经验类内容（社群参与、生活适应，标注个案）、水电煤网开通流程（推断）。</li>
+</ul>
+<h3 id="82">8.2 已知口径冲突（并列呈现，不合并、不取均值）</h3>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:50%">指标</th>
+<th style="width:50%">并列口径</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>医疗保险</td>
+<td>健康保险（职场健保）≠ 国民健康保险（非被用者）</td>
+</tr>
+<tr>
+<td>房租成本</td>
+<td>敷金（存管型）≠ 礼金（不返还）≠ 仲介手数料（法定上限）</td>
+</tr>
+<tr>
+<td>防灾预警</td>
+<td>国家预警 ≠ 自治体通知 ≠ 个人接收渠道</td>
+</tr>
+<tr>
+<td>文化描述</td>
+<td>法规义务 ≠ 职场惯例 ≠ 一般化观察</td>
+</tr>
+</tbody>
+</table>
+<h3 id="83">8.3 未取得项</h3>
+<ul>
+<li>
+<h1 id="1-2-3-4-5-6">1 在留相关生活手续流程变化（待基线确立）、#2 职场文化相关官方调查（待基线确立）、#3 个人生活适应记录（待记录）、#4 医疗保险费率·自付上限·高额疗养费上限（待基线确立）、#5 房价 / 租金行情指针（待复核）、#6 防灾气象预警渠道（待复核）。</h1>
+</li>
+</ul>
+<h3 id="84">8.4 待复核清单（逐项给出复核入口）</h3>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:33%">#</th>
+<th style="width:33%">待复核项</th>
+<th style="width:34%">复核入口</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>大病院选定疗养加算通识口径</td>
+<td>厚労省现行告示（→ 手册 03）</td>
+</tr>
+<tr>
+<td>2</td>
+<td>劳灾疗养给付「本人原则上 0 负担」表述</td>
+<td>劳灾申领手册正文（→ 手册 03）</td>
+</tr>
+<tr>
+<td>3</td>
+<td>SAS 筛查为运输业行业实践，未核实现行规范出处</td>
+<td>厚労省 / 运输业自主规范（→ 手册 03）</td>
+</tr>
+<tr>
+<td>4</td>
+<td>礼金 / 敷金市场行情倍数、保証会社费用水平</td>
+<td>行情类活值，归 regional / economy 登记册（→ 手册 04）</td>
+</tr>
+<tr>
+<td>5</td>
+<td>UR「无礼金·敷金·保证人不要」等惯例性优势</td>
+<td>本次核实页面未直接确认，回 UR 官方页复核（→ 手册 04）</td>
+</tr>
+<tr>
+<td>6</td>
+<td>电·燃气·水道开通各事业者标准流程与时限</td>
+<td>正文按一般惯例描述并标推断，回各事业者官网复核（→ 手册 04）</td>
+</tr>
+<tr>
+<td>7</td>
+<td>マイナ保険証全面切换后纸保险证停发时点</td>
+<td>厚労省マイナ保険証专页（→ 手册 03）</td>
+</tr>
+<tr>
+<td>8</td>
+<td>地域国際化協会各窗口对应语言与受付时间</td>
+<td>依地域而异，定居后逐一核实（→ 手册 05）</td>
+</tr>
+</tbody>
+</table>
+<h3 id="85">8.5 时间基准声明</h3>
+<p>本报告数据基准日 2026-11-14；制度类信息核对日期 2026-11-12（手册 03/04/05）；防灾小节核对日期 2026-11-12；登记册活值基准版本为 baseline（#7 为 2026-11-12）；个人适应记录为自记录，标注记录日期。</p>
+<h2 id="s9" class="sec">九、参考来源清单</h2>
+<p><strong>官方一手（省厅 / 机构）</strong></p>
+<ol>
+<li>厚生労働省（医療保険总览），https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/index.html，2026。</li>
+<li>厚生労働省（国民健康保険制度），https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/koukikourei/index_00002.html，2026。</li>
+<li>厚生労働省（高额疗养费制度），https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/juuyou/kougakuiryou/index.html，2026。</li>
+<li>e-Gov（健康保険法第 74 条），https://laws.e-gov.go.jp/law/334AC0000000070，2026。</li>
+<li>厚生労働省（处方笺規則），https://www.mhlw.go.jp/stf/newpage_32041.html，2025。</li>
+<li>厚生労働省（マイナ保険証），https://www.mhlw.go.jp/stf/newpage_08277.html，2026。</li>
+<li>厚生労働省（劳灾保险给付请求手续 / 外国人手册），https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/gyousei/rousai/040325-14.html，2026。</li>
+<li>厚生労働省（电话相谈页），https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/seikatsuhogo/jisatsu/soudan_tel.html，2026。</li>
+<li>厚生労働省（在留外国人向指南），https://www.mhlw.go.jp/stf/newpage_21895.html，2026。</li>
+<li>厚生労働省（労働安全衛生法相关用语），https://anzeninfo.mhlw.go.jp/yougo/yougo51_1.html，2026。</li>
+<li>消防庁（救急安心センター #7119），https://www.fdma.go.jp/publication/hakusho/r6/report4/67976.html，2024。</li>
+<li>内閣府防災（防灾清单），https://www.bousai.go.jp/kohou/kouhoubousai/h28/83/special_03.html，2016。</li>
+<li>気象庁（気象警報・警戒レベル），https://www.jma.go.jp/jma/kishou/know/bosai/warning.html，2026。</li>
+<li>気象庁（キキクル），https://www.jma.go.jp/bosai/risk/，2026。</li>
+<li>国土交通省 / 観光庁（Safety tips / JNTO Hotline），https://www.mlit.go.jp/kankocho/seisaku_seido/kihonkeikaku/jizoku_kankochi/anzenkakuho/inbound/tool.html，2026。</li>
+<li>国土交通省（重要事項説明 / 仲介手数料），https://www.mlit.go.jp/totikensangyo/const/1_6_bf_000013.html，2026。</li>
+<li>国土交通省（原状回復ガイドライン），https://www.mlit.go.jp/jutakukentiku/house/jutakukentiku_house_tk3_000020.html，2026。</li>
+<li>国土交通省（原状回復 Q&amp;A），https://www.mlit.go.jp/jutakukentiku/house/jutakukentiku_house_tk3_000024.html，2026。</li>
+<li>国土交通省（外国人入住円滑化ガイドライン），https://www.mlit.go.jp/jutakukentiku/house/jutakukentiku_house_tk3_000017.html，2026。</li>
+<li>UR 都市機構（申込资格 / 收入基准），https://dr.www.ur-net.go.jp/chintai/sp/rent/requirements/，2026。</li>
+<li>UR 都市機構（必要書類），https://www.ur-net.go.jp/chintai/rent/documents/，2026。</li>
+<li>総務省（多文化共生推進プラン / 災害時外国人支援），https://www.soumu.go.jp/menu_seisaku/chiho/02gyosei05_03000060.html，2026。</li>
+<li>総務省（多文化共生事例集 令和 3 年度版），https://www.soumu.go.jp/menu_seisaku/chiho/tabunkakyousei_suishin_r03.html，2021。</li>
+<li>CLAIR（多文化共生ポータルサイト / 咨询窗口一览），https://www.clair.or.jp/j/multiculture/association/consultation_list.html，2026。</li>
+</ol>
+<p><strong>只读锚（跨主题）</strong></p>
+<ol>
+<li><a href="../../09-politics-law/reports/2026-11-politics-law.md">09-politics-law</a>（维权流程与法规条文），只读引用。</li>
+<li><a href="../../02-career-driver/reports/2026-11-career-driver.md">02-career-driver</a>（现场安全制度与事故处理），只读引用。</li>
+<li><a href="../../07-economy-finance/reports/2026-11-economy-finance.md">07-economy-finance</a>（税费社保与年金），只读引用。</li>
+<li><a href="../../08-visa-immigration/reports/2026-11-visa-immigration.md">08-visa-immigration</a>（在留手续与在留制度），只读引用。</li>
+<li><a href="../../13-regional-info/reports/2026-11-regional-info.md">13-regional-info</a>（地域选择与生活笔记），只读引用。</li>
+<li><a href="../../11-language-japanese/reports/2026-11-language-japanese.md">11-language-japanese</a>（日语学习计划），只读引用。</li>
+</ol>
+<p><strong>经验类（标注个案，不作事实）</strong></p>
+<ol>
+<li>在日生活门户与社区经验（社群参与、生活适应），无稳定官方 URL，按个案标注。</li>
+</ol>
+</main>
+<footer class="footer" role="contentinfo" aria-label="页脚">
+  <p>日本文化与生活 · 日本文化与生活 · 2026-11 月度报告｜2026-11<br>
+  报告路径：12-culture-life\reports\2026-11-culture-life.html</p>
+  <p class="backlinks">
+    <a href="../../index.html#topic-12-culture-life">← 返回主题</a>
+    <a href="../../index.html">返回首页</a>
+  </p>
+</footer>
+<script>
+(function () {
+  'use strict';
+  var main = document.getElementById('main-content');
+  var tgDiff = document.getElementById('tg-diff');
+  var tgDel = document.getElementById('tg-del');
+  if (main && tgDiff) {
+    tgDiff.addEventListener('click', function () {
+      var hide = main.classList.toggle('hide-diff');
+      tgDiff.textContent = hide ? '显示更新标记' : '隐藏更新标记';
+    });
+  }
+  if (tgDel) {
+    tgDel.addEventListener('click', function () {
+      var open = tgDel.getAttribute('data-open') === '1';
+      var groups = document.querySelectorAll('details.diff-del-group');
+      for (var i = 0; i < groups.length; i++) groups[i].open = !open;
+      tgDel.setAttribute('data-open', open ? '0' : '1');
+      tgDel.textContent = open ? '展开全部删除' : '收起全部删除';
+    });
+  }
+})();
+</script>
+</body>
+</html>

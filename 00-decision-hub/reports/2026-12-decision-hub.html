@@ -5,43 +5,215 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>赴日决策仪表盘 · 2026-Q4 季度复核</title>
 <style>
-body { max-width: 1160px; margin: 24px auto; padding: 0 16px;
-      font-family: "Segoe UI", "Microsoft YaHei", sans-serif; color: #1a1a2e; line-height: 1.7; }
-h1, h2, h3 { color: #16213e; }
-table { border-collapse: collapse; width: 100%; overflow-x: auto; display: block; }
-th, td { border: 1px solid #cbd5e1; padding: 6px 10px; text-align: left; }
-th { background: #f1f5f9; }
-img { max-width: 100%; }
-code { background: #f6f8fa; padding: 2px 4px; border-radius: 3px; }
-blockquote { border-left: 4px solid #94a3b8; margin: 0; padding-left: 12px; color: #475569; }
-nav { margin: 12px 0 20px; padding: 8px 0; border-bottom: 1px solid #e2e8f0; }
-nav a { margin-right: 14px; color: #16213e; font-size: 14px; text-decoration: none; white-space: nowrap; }
-nav a:hover { text-decoration: underline; }
+:root{
+  --radius-sm:8px; --radius:12px; --radius-lg:16px;
+  --shadow:0 1px 3px rgba(20,40,70,.06); --shadow-md:0 4px 14px rgba(20,40,70,.09);
+  --font-sans:"Microsoft YaHei","PingFang SC","Segoe UI",Arial,sans-serif;
+  --font-mono:"SFMono-Regular",Consolas,"Liberation Mono",monospace;
+  --focus-ring:0 0 0 3px rgba(63,111,176,.35);
+  --bg:#f4f6f9; --card:#ffffff; --ink:#15202b; --ink2:#465667; --ink3:#657180;
+  --line:#e1e7ee; --line2:#eef2f6;
+  --navy:#16324f; --navy2:#2f5597; --blue:#3f6fb0; --blue-l:#eaf1fa;
+  --red:#a83224; --red-d:#822116; --red-l:#fbece8;
+  --pre:#b8541c; --pre-l:#fdf1e4;
+  --green:#1c7444; --green-l:#eaf5ef;
+  --amber:#956612; --amber-l:#fdf4e2;
+  --gray:#646f7b; --gray-l:#eff2f4;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{font-family:var(--font-sans);background:var(--bg);color:var(--ink);line-height:1.76;font-size:14.5px}
+a{color:var(--navy2);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px 68px}
+
+/* ── 跳转链接 / 焦点环 ── */
+.skip-link{position:absolute;left:12px;top:-48px;z-index:100;background:var(--navy);
+  color:#fff;padding:8px 16px;border-radius:0 0 8px 8px;font-size:12.5px;transition:top .15s ease}
+.skip-link:focus{top:0;color:#fff;text-decoration:none}
+:focus-visible{outline:none;box-shadow:var(--focus-ring)}
+
+/* ── 题头 Hero ── */
+.hero{background:linear-gradient(128deg,#0f2338 0%,#16324f 52%,#2f5597 100%);
+  color:#fff;padding:46px 36px 34px;border-radius:0 0 18px 18px;margin-bottom:24px}
+.hero .eyebrow{font-size:11.5px;letter-spacing:2.4px;color:rgba(255,255,255,.62);text-transform:uppercase}
+.hero h1{font-size:28px;font-weight:700;letter-spacing:.4px;margin:8px 0 6px;line-height:1.35}
+.hero .sub{font-size:13.5px;color:rgba(255,255,255,.82);max-width:900px}
+.hero .meta{font-size:12.3px;color:rgba(255,255,255,.78);margin-top:16px;line-height:2}
+.hero .meta b{color:#fff}
+.hero .tag{display:inline-block;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.2);
+  border-radius:14px;padding:2px 11px;margin:5px 6px 0 0;font-size:11.5px}
+
+/* ── 报告导航（sticky） ── */
+.report-nav{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);
+  border-bottom:1px solid var(--line);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  margin-bottom:26px}
+.report-nav .wrap{padding-top:10px;padding-bottom:10px}
+.nav-url{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;font-size:11.5px;
+  line-height:1.6;color:var(--ink3);padding-bottom:6px;margin-bottom:6px;
+  border-bottom:1px dashed var(--line)}
+.nav-url-label{font-weight:700;color:var(--ink2);white-space:nowrap}
+.nav-url a{color:var(--blue);word-break:break-all}
+.nav-tabs{display:flex;flex-wrap:wrap;gap:6px}
+.nav-tabs a{color:var(--ink2);font-size:12.5px;padding:5px 10px;border-radius:6px;
+  transition:background .15s ease,color .15s ease}
+.nav-tabs a:hover{background:var(--blue-l);color:var(--blue)}
+
+/* ── 跨月对比工具条 ── */
+.diff-bar{display:flex;flex-wrap:wrap;align-items:center;gap:8px;
+  margin-top:8px;padding-top:8px;border-top:1px dashed var(--line);
+  font-size:12px;color:var(--ink3)}
+.diff-bar .diff-summary{flex:1;min-width:200px;line-height:1.6}
+.diff-bar .diff-summary b{color:var(--navy)}
+.diff-toggle{font-size:12px;border:1px solid var(--line);background:#fff;border-radius:7px;
+  padding:4px 11px;cursor:pointer;color:var(--navy2);font-family:inherit}
+.diff-toggle:hover{border-color:var(--blue)}
+
+/* ── 正文 ── */
+h2.sec{font-size:20px;color:var(--navy);margin:44px 0 4px;padding-left:12px;
+  border-left:4px solid var(--navy2);font-weight:700;scroll-margin-top:110px}
+h3{font-size:15.5px;color:var(--navy);margin:22px 0 8px;font-weight:700}
+h4{font-size:14px;color:var(--navy);margin:16px 0 6px;font-weight:700}
+p{margin:0 0 12px}
+ul,ol{padding-left:22px;margin:8px 0 14px}
+li{margin-bottom:6px}
+hr{border:0;border-top:1px solid var(--line);margin:26px 0}
+strong{color:var(--ink)}
+code{background:#f6f8fa;padding:2px 5px;border-radius:4px;font-family:var(--font-mono);font-size:12.5px}
+pre{background:#f6f8fa;padding:12px 14px;border-radius:8px;overflow-x:auto;margin:10px 0 16px}
+pre code{background:none;padding:0;font-size:12.3px;line-height:1.65}
+blockquote{border-left:4px solid var(--navy2);background:var(--blue-l);
+  padding:12px 16px;border-radius:0 8px 8px 0;margin:12px 0;color:var(--ink2)}
+blockquote p:last-child{margin-bottom:0}
+.lead{color:var(--ink2);font-size:13.8px;margin:6px 0 14px}
+
+/* ── 表格 ── */
+table{width:100%;border-collapse:collapse;font-size:12.6px;background:var(--card);
+  border-radius:8px;overflow:hidden;margin:12px 0 16px}
+th{background:var(--navy);color:#fff;padding:8px 10px;text-align:left;font-weight:600;
+  font-size:12px;vertical-align:bottom}
+td{padding:7px 10px;border-bottom:1px solid var(--line2);vertical-align:top;line-height:1.62}
+tbody tr:nth-child(even) td{background:#fafbfd}
+tbody tr:hover td{background:var(--blue-l)}
+td.num{font-variant-numeric:tabular-nums}
+
+/* ── 信息卡 / 注释 ── */
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;
+  padding:18px 20px;margin:14px 0;box-shadow:var(--shadow)}
+.card h3:first-child{margin-top:0}
+.note{background:var(--amber-l);border-left:4px solid var(--amber);padding:10px 14px;
+  border-radius:0 7px 7px 0;font-size:12.9px;margin:12px 0}
+.note.gap{background:var(--gray-l);border-left-color:var(--gray)}
+.note.check{background:var(--green-l);border-left-color:var(--green)}
+.note.correct{background:var(--red-l);border-left-color:var(--red)}
+.note.preline{background:var(--pre-l);border-left-color:var(--pre)}
+
+/* ── 差异高亮（跨月对比） ── */
+.diff-badge{display:inline-block;font-size:10.5px;font-weight:700;line-height:1;
+  border-radius:3px;padding:2px 6px;margin-right:6px;vertical-align:middle;white-space:nowrap}
+.diff-block{border-radius:6px;padding:4px 8px;margin:4px -8px}
+.diff-new{background:var(--green-l);box-shadow:inset 3px 0 0 var(--green)}
+.diff-new .diff-badge{background:var(--green);color:#fff}
+.diff-mod{background:var(--amber-l);box-shadow:inset 3px 0 0 var(--amber)}
+.diff-mod .diff-badge{background:var(--amber);color:#fff}
+.diff-del-group{margin:6px 0;border:1px dashed var(--line);border-radius:6px;background:#fbfcfe}
+.diff-del-group>summary{cursor:pointer;font-size:12px;color:var(--ink3);
+  padding:6px 10px;user-select:none;list-style:none}
+.diff-del-group>summary::-webkit-details-marker{display:none}
+.diff-del-group>summary::before{content:"▸ ";color:var(--gray)}
+.diff-del-group[open]>summary::before{content:"▾ "}
+.diff-del-group .diff-del-body{padding:2px 8px 8px;color:var(--ink3)}
+.diff-del-group .diff-del-body s,.diff-del-group .diff-del-body del{color:var(--red)}
+.diff-del-group .diff-badge{background:var(--gray-l);color:var(--gray)}
+/* 隐藏更新标记：对照阅读模式 */
+main.hide-diff .diff-badge{display:none}
+main.hide-diff .diff-block{background:none;box-shadow:none;padding:0;margin:0}
+main.hide-diff .diff-del-group{display:none}
+
+/* ── 页脚 ── */
+.footer{font-size:11.4px;color:var(--ink3);text-align:center;margin-top:22px;line-height:1.9}
+.footer .backlinks{margin-top:8px}
+.footer .backlinks a{margin:0 8px}
+
+/* ── 响应式 ── */
+@media(max-width:760px){
+  .hero{padding:30px 20px;border-radius:0 0 14px 14px}
+  .hero h1{font-size:21px}
+  .wrap{padding:0 14px 46px}
+  td,th{padding:6px 7px;font-size:11.7px}
+  h2.sec{font-size:17.5px}
+}
 </style>
 </head>
 <body>
-<h1 id="2026-q4"><a id="赴日决策仪表盘--2026-q4-季度复核" aria-hidden="true"></a>赴日决策仪表盘 · 2026-Q4 季度复核</h1>
-<blockquote>
-<p><strong>版本</strong>：v1.0（首份季度复核）　<strong>数据基准日</strong>：2026-11-14
-<strong>主题类型</strong>：职业就业调研型（employment-research）· 跨主题综合层
-<strong>受众定位</strong>：本人（拟通过特定技能签证赴日从事货运司机工作）的决策支持层
-<strong>来源规则</strong>：本主题不新增一手来源，全部结论引用 01–13 主题报告 / 登记册；每个结论附「（来源：主题 NN）」标注</p>
-</blockquote>
-<hr />
-<nav aria-label="报告导航">
-<a href="#s1">一、执行摘要（五问结论速览）</a>
-<a href="#s2">二、问题 1：去不去（值不值）</a>
-<a href="#s3">三、问题 2：能不能去（门槛）</a>
-<a href="#s4">四、问题 3：怎么去（路径）</a>
-<a href="#s5">五、问题 4：去哪（定居地）</a>
-<a href="#s6">六、问题 5：最坏怎么办（退出）</a>
-<a href="#s7">七、暴露的缺失清单</a>
-<a href="#s8">八、数据可靠性与局限说明</a>
-<a href="#s9">九、免责声明</a>
-<a href="#s10">十、参考来源清单</a>
+<a class="skip-link" href="#main-content">跳转到主要内容</a>
+<header class="hero" role="banner" aria-label="报告题头">
+  <div class="eyebrow">赴日决策仪表盘 · 职业就业调研型</div>
+  <h1>赴日决策仪表盘 · 2026-Q4 季度复核</h1>
+  <div class="sub">版本：v1.0（首份季度复核）｜数据基准日：2026-11-14</div>
+  <div class="meta"><b>版本</b>：v1.0（首份季度复核）<br><b>数据基准日</b>：2026-11-14<br><b>主题类型</b>：职业就业调研型（employment-research）· 跨主题综合层<br><b>受众定位</b>：本人（拟通过特定技能签证赴日从事货运司机工作）的决策支持层<br><b>来源规则</b>：本主题不新增一手来源，全部结论引用 01–13 主题报告 / 登记册；每个结论附「（来源：主题 NN）」标注</div>
+  <div><span class="tag">2026-12</span><span class="tag">职业就业调研型</span></div>
+</header>
+<nav class="report-nav" aria-label="报告导航">
+  <div class="wrap">
+    <div class="nav-url">
+      <span class="nav-url-label">报告路径</span>
+      <a href="2026-12-decision-hub.html">00-decision-hub\reports\2026-12-decision-hub.html</a>
+    </div>
+    <div class="nav-tabs"><a href="#s1">一、执行摘要（五问结论速览）</a><a href="#s2">二、问题 1：去不去（值不值）</a><a href="#s3">三、问题 2：能不能去（门槛）</a><a href="#s4">四、问题 3：怎么去（路径）</a><a href="#s5">五、问题 4：去哪（定居地）</a><a href="#s6">六、问题 5：最坏怎么办（退出）</a><a href="#s7">七、暴露的缺失清单</a><a href="#s8">八、数据可靠性与局限说明</a><a href="#s9">九、参考来源清单</a></div>
+    <div class="diff-bar"><span class="diff-summary">2026-12 期与 2026-11 期对比：新增 20 处、修改 6 处、删除 91 处，未变更 47 处。</span><button class="diff-toggle" id="tg-diff">隐藏更新标记</button><button class="diff-toggle" id="tg-del">展开全部删除</button></div>
+  </div>
 </nav>
-<h2 id="s1"><a id="一执行摘要五问结论速览" aria-hidden="true"></a>一、执行摘要（五问结论速览）</h2>
-<table class="fixed">
+<main class="wrap" id="main-content" role="main" aria-label="报告正文">
+<h2 id="s1" class="sec">一、执行摘要（五问结论速览）</h2><details class="diff-del-group"><summary>已更新 · 删除 1 处（点击展开）</summary><table class="fixed">
+<thead>
+<tr>
+<th style="width:20%">#</th>
+<th style="width:20%">决策问题</th>
+<th style="width:20%">结论</th>
+<th style="width:20%">置信度</th>
+<th style="width:20%">缺失</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>去不去（值不值）</td>
+<td>窗口已开、名额有限；收入高于全产业均值但绝对值偏低；自动驾驶暂不构成威胁</td>
+<td>事实 + 推断</td>
+<td>中国同岗到手对比</td>
+</tr>
+<tr>
+<td>2</td>
+<td>能不能去（门槛）</td>
+<td>门槛明确；驾照转换与中国大陆无考点是两大瓶颈</td>
+<td>事实</td>
+<td>驾照转换流程细节</td>
+</tr>
+<tr>
+<td>3</td>
+<td>怎么去（路径）</td>
+<td>路径清晰；中介风险与驾照耗时是关键变量</td>
+<td>事实 + 推断</td>
+<td>中介防骗、落地手续执行</td>
+</tr>
+<tr>
+<td>4</td>
+<td>去哪（定居地）</td>
+<td>有 7 维框架可用；个人选择未记录</td>
+<td>框架就绪</td>
+<td>个人定居地</td>
+</tr>
+<tr>
+<td>5</td>
+<td>最坏怎么办（退出）</td>
+<td>永住 / 归化路径存在；本分野不得 2 号；退出执行已由 16 接入</td>
+<td>部分事实</td>
+<td>退出执行金额 / 期限 / 要件</td>
+</tr>
+</tbody>
+</table></details><div class="diff-block diff-mod"><span class="diff-badge">已更新 · 修改</span><table class="fixed">
 <thead>
 <tr>
 <th style="width:20%">#</th>
@@ -88,97 +260,639 @@ nav a:hover { text-decoration: underline; }
 <td>退出执行、年金脱退</td>
 </tr>
 </tbody>
-</table>
-<p><strong>总体判读</strong>（条件化，非 Go/No-Go）：当前处于「窗口已开、门槛明确、路径清晰」阶段，主要不确定性集中在<strong>驾照转换成功率</strong>与<strong>落地执行层</strong>。若驾照能在窗口期内取得，且中介渠道可核验，则进入条件基本成立；反之应暂缓或做条件化安排。</p>
-<hr />
-<h2 id="s2"><a id="二问题-1去不去值不值" aria-hidden="true"></a>二、问题 1：去不去（值不值）</h2>
-<h3 id="21"><a id="21-收入面" aria-hidden="true"></a>2.1 收入面</h3>
-<ul>
-<li>运输业·邮政业月均现金给与总额 <strong>341,158 円</strong>（+4.9%，2026-09，2026-11-06 公布；全产业对照 311,409 円、+4.6%）（来源：01 · 厚労省毎月勤労統計）。</li>
-<li>全ト协 2025 年度版：男性大型司机月薪 <strong>39.5 万円</strong>（+4%）、全职务平均 <strong>35.98 万円</strong>（+5.3%）、含奖金 <strong>41.64 万円</strong>（+7.1%）（经 LogiShift 转引，原件待复核）（来源：01 · B/C 级）。</li>
-<li>求人抽样：东京圈 <strong>22–45 万円</strong> / 大阪圈 <strong>28–40.5 万円</strong> / 地方 <strong>25–36 万円</strong>（聚合平台转载，C 级，原企业页未逐一回溯）（来源：01 · 9 样本）。</li>
-</ul>
-<h3 id="22"><a id="22-缺口与窗口期" aria-hidden="true"></a>2.2 缺口与窗口期</h3>
-<ul>
-<li>有效求人倍率 <strong>2.56</strong>（2026-09，常用含パート，2026-10-30 公布；全产业 1.06）（来源：01 · 厚労省）。</li>
-<li>司机缺口（并列口径）：现状 <strong>14%</strong> / 2030 年 <strong>34%</strong>（政策包示意图）≠ 2030 年度平均约 <strong>7%</strong> / 最大约 <strong>25%</strong>（MLIT 再检证）（来源：01 · 并列不可合并）。</li>
-<li>受入上限 <strong>22,100 人</strong>（2026-01-23 阁议，现行）；在留者 843 人、充足率 <strong>3.8%</strong>（2026-08 末）（来源：01 · ISA）。</li>
-</ul>
-<h3 id="23"><a id="23-行业可持续性" aria-hidden="true"></a>2.3 行业可持续性</h3>
-<ul>
-<li>运賃：日銀 SPPI「道路貨物輸送」<strong>+4.6%</strong>（2026-09 速報）；标准运賃 +8%（令和 6 年告示第 209 号）；价格转嫁率 24.2% → <strong>34.7%</strong>（2023-09 → 2025-09）（来源：04 · 01）。</li>
-<li>倒産：TSR 2026-10 運輸業 <strong>38 件</strong>（+2.7%，连续 2 个月增）、人手不足関連 <strong>50 件</strong>（来源：04 · TSR / TDB）。</li>
-<li>自动化：截至 2026-02 全国 <strong>10 カ所</strong>实现 L4 社会实装；2027 年度前对求职者实质就业影响约等于 0（推断）（来源：05）。</li>
-</ul>
-<h3 id="24"><a id="24-判读" aria-hidden="true"></a>2.4 判读</h3>
-<p><strong>事实</strong>：窗口已开（充足率 3.8%、求人倍率 2.56），但名额口径存在 22,100 / 24,500 两组官方数字并存（来源：01 待复核）。收入高于全产业均值，但司机绝对收入仍偏低。
+</table></div><p><strong>总体判读</strong>（条件化，非 Go/No-Go）：当前处于「窗口已开、门槛明确、路径清晰」阶段，主要不确定性集中在<strong>驾照转换成功率</strong>与<strong>落地执行层</strong>。若驾照能在窗口期内取得，且中介渠道可核验，则进入条件基本成立；反之应暂缓或做条件化安排。</p><details class="diff-del-group"><summary>已更新 · 删除 3 处（点击展开）</summary><p><strong>五问间关系</strong>：问题 1 决定「值不值得考虑」；问题 2 决定「有没有资格」；问题 3 决定「怎么落地」；问题 4 决定「在哪里生活」；问题 5 决定「最坏情况的兜底」。前五问任一为「否 / 不确定」时，决策应暂缓或做条件化安排。</p><h3 id="0113">来源主题结论索引（01–13）</h3><table class="fixed">
+<thead>
+<tr>
+<th style="width:33%">主题</th>
+<th style="width:33%">本期关键结论</th>
+<th style="width:34%">对应问题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>01-ssw-driver</td>
+<td>受入上限 22,100；在留 843 人、充足率 3.8%；求人倍率 2.56；运输业月均现金给与 341,158 円；缺口 14%/34% 与 7%/25% 并列</td>
+<td>1 / 2 / 3</td>
+</tr>
+<tr>
+<td>02-career-driver</td>
+<td>薪资须区分含赏与 / 不含赏与；时间外上限月 45h / 年 360h；特定技能专门中介 / 登录支援机关为主渠道</td>
+<td>1 / 3</td>
+</tr>
+<tr>
+<td>03-career-management</td>
+<td>管理岗过渡主线为内部升格；资格 ≠ 岗位；48 个月分年计划</td>
+<td>5</td>
+</tr>
+<tr>
+<td>04-industry-logistics</td>
+<td>「少数大手 + 海量零细」二元结构；自动化「干线先于末端、岗位重组而非消失」；SPPI 道路貨物 +4.6%</td>
+<td>1</td>
+</tr>
+<tr>
+<td>05-industry-autonomous</td>
+<td>L4 制度化起步；2027 年度前对求职者实质就业影响约等于 0（推断）；中继输送催生新岗位</td>
+<td>1</td>
+</tr>
+<tr>
+<td>06-industry-technology</td>
+<td>IT 人才缺口中位 2030 年约 45 万；数字化岗位薪资带高于物流同业；公司内转岗为首选</td>
+<td>5</td>
+</tr>
+<tr>
+<td>07-economy-finance</td>
+<td>运输业月均 341,158 円；最低賃金 1,177 円；100 日元中间价 4.2355 元；CPI / 社保负担率待基线</td>
+<td>1 / 4 / 5</td>
+</tr>
+<tr>
+<td>08-visa-immigration</td>
+<td>本分野不得 2 号；永住要件令和 8-10-01 改定；育成就劳 2027-04-01 施行、MOC 不含中国</td>
+<td>2 / 5</td>
+</tr>
+<tr>
+<td>09-politics-law</td>
+<td>8 部法律栈；个人必熟 Top 5 条款；劳动纠纷维权五级阶梯</td>
+<td>3 / 5</td>
+</tr>
+<tr>
+<td>10-education-qualification</td>
+<td>外免切替 2025-10 起严格化；教习所费用行情；资格地图待基线</td>
+<td>2</td>
+</tr>
+<tr>
+<td>11-language-japanese</td>
+<td>中国大陆无 JFT-Basic 考点，主攻 JLPT N4（2027-07 目标）</td>
+<td>2</td>
+</tr>
+<tr>
+<td>12-culture-life</td>
+<td>健保 / 国保两条轨道；窗口自付 3 割；UR 收入基准已确立；多语言防灾渠道</td>
+<td>4</td>
+</tr>
+<tr>
+<td>13-regional-info</td>
+<td>7 维评分框架；病床 879,728；日语指导 84,759 / 外国籍 73,313；个人定居地待记录</td>
+<td>4</td>
+</tr>
+</tbody>
+</table></details><h2 id="s2" class="sec">二、问题 1：去不去（值不值）</h2><h3 id="21">2.1 收入面</h3><li>运输业·邮政业月均现金给与总额 <strong>341,158 円</strong>（+4.9%，2026-09，2026-11-06 公布；全产业对照 311,409 円、+4.6%）（来源：01 · 厚労省毎月勤労統計）。</li><li>全ト协 2025 年度版：男性大型司机月薪 <strong>39.5 万円</strong>（+4%）、全职务平均 <strong>35.98 万円</strong>（+5.3%）、含奖金 <strong>41.64 万円</strong>（+7.1%）（经 LogiShift 转引，原件待复核）（来源：01 · B/C 级）。</li><li>求人抽样：东京圈 <strong>22–45 万円</strong> / 大阪圈 <strong>28–40.5 万円</strong> / 地方 <strong>25–36 万円</strong>（聚合平台转载，C 级，原企业页未逐一回溯）（来源：01 · 9 样本）。</li><details class="diff-del-group"><summary>已更新 · 删除 1 处（点击展开）</summary><li>生活成本：单身·地方都市月度成本模型 <strong>10.5–17.0 万円/月</strong>（常见 12–14 万，手册估算，待核验）；100 日元中间价 <strong>4.2355 元</strong>（2026-11-10）（来源：07 · 登记册 / 手册估算）。</li></details><h3 id="22">2.2 缺口与窗口期</h3><li>有效求人倍率 <strong>2.56</strong>（2026-09，常用含パート，2026-10-30 公布；全产业 1.06）（来源：01 · 厚労省）。</li><li>司机缺口（并列口径）：现状 <strong>14%</strong> / 2030 年 <strong>34%</strong>（政策包示意图）≠ 2030 年度平均约 <strong>7%</strong> / 最大约 <strong>25%</strong>（MLIT 再检证）（来源：01 · 并列不可合并）。</li><li>受入上限 <strong>22,100 人</strong>（2026-01-23 阁议，现行）；在留者 843 人、充足率 <strong>3.8%</strong>（2026-08 末）（来源：01 · ISA）。</li><h3 id="23">2.3 行业可持续性</h3><details class="diff-del-group"><summary>已更新 · 删除 1 处（点击展开）</summary><li>运賃：日銀 SPPI「道路貨物輸送」<strong>+4.6%</strong>（2026-09 速報）；标准运賃 +8%（令和 6 年告示第 209 号）；价格转嫁率 24.2% → <strong>34.7%</strong>（2023-09 → 2025-09）（来源：04 / 01）。</li></details><li class="diff-mod"><span class="diff-badge">已更新 · 修改</span>运賃：日銀 SPPI「道路貨物輸送」<strong>+4.6%</strong>（2026-09 速報）；标准运賃 +8%（令和 6 年告示第 209 号）；价格转嫁率 24.2% → <strong>34.7%</strong>（2023-09 → 2025-09）（来源：04 · 01）。</li><li>倒産：TSR 2026-10 運輸業 <strong>38 件</strong>（+2.7%，连续 2 个月增）、人手不足関連 <strong>50 件</strong>（来源：04 · TSR / TDB）。</li><li>自动化：截至 2026-02 全国 <strong>10 カ所</strong>实现 L4 社会实装；2027 年度前对求职者实质就业影响约等于 0（推断）（来源：05）。</li><h3 id="24">2.4 判读</h3><p><strong>事实</strong>：窗口已开（充足率 3.8%、求人倍率 2.56），但名额口径存在 22,100 / 24,500 两组官方数字并存（来源：01 待复核）。收入高于全产业均值，但司机绝对收入仍偏低。
 <strong>推断</strong>：缺口与运賃传导决定雇主付费意愿，窗口期长度取决于缺口修正节奏；自动驾驶在 2027 年度前不构成实质就业威胁。
-<strong>⚠ 缺失</strong>：中国同岗到手收入对比（01 待复核）；生活成本细目（07 / 13 部分覆盖）。</p>
-<hr />
-<h2 id="s3"><a id="三问题-2能不能去门槛" aria-hidden="true"></a>三、问题 2：能不能去（门槛）</h2>
-<h3 id="31"><a id="31-在留资格要件" aria-hidden="true"></a>3.1 在留资格要件</h3>
-<ul>
-<li>特定技能 1 号「自動車運送業」分野；受入上限 <strong>22,100</strong>；<strong>本分野不得 2 号</strong>（来源：08 / 01 · ISA / MLIT）。</li>
-<li>卡车 A2.2 不变；出租车 / 巴士区分 <strong>2027-04-01 起 COE 申请须 B1 相当以上</strong>（JLPT N3 以上 + CEFR B1 判定）（来源：01 · 令和 8 年 10 月 9 日改正）。</li>
-<li>无健康检查义务、仅適性診断（来源：01）。</li>
-</ul>
-<h3 id="32"><a id="32-考试与考场" aria-hidden="true"></a>3.2 考试与考场</h3>
-<ul>
-<li>ClassNK 技能試験 <strong>6,500 円</strong>（US$45、越南 US$50）、证明书 <strong>15,000 円</strong>；JFT-Basic <strong>10,000 円</strong>；JLPT N4 <strong>450 元</strong>（来源：01 · ClassNK / Prometric / JLPT）。</li>
-<li>实施国 18，<strong>中国大陆无考点</strong>；中国考生实际路径为赴第三国考试或在日本国内受验（来源：01 · 2026-09 月报）。</li>
-</ul>
-<h3 id="33"><a id="33-驾照转换" aria-hidden="true"></a>3.3 驾照转换</h3>
-<ul>
-<li>外免切替 <strong>2025-10 起大幅严格化</strong>：知识确认合格率 <strong>42.8%</strong>、技能确认 <strong>13.1%</strong>（2025-10–12，警察庁，经 drivey.jp 转引）（来源：10 / 01）。</li>
-<li>教习所费用：普通教习全国官方均价（AT 限定）<strong>324,381 円</strong>（総務省 2026-09）；MT 通学 <strong>30–40 万円</strong>；大型 <strong>25–28 万円</strong>（来源：10 / 01）。</li>
-</ul>
-<h3 id="34"><a id="34-判读" aria-hidden="true"></a>3.4 判读</h3>
-<p><strong>事实</strong>：门槛明确，由「在留要件 + 考试 + 驾照 + 日语」四关构成；其中<strong>驾照转换成功率低</strong>（技能确认 13.1%）与<strong>中国大陆无考点</strong>是两大瓶颈。
+<strong>⚠ 缺失</strong>：中国同岗到手收入对比（01 待复核）；生活成本细目（07 / 13 部分覆盖）。</p><h2 id="s3" class="sec">三、问题 2：能不能去（门槛）</h2><h3 id="31">3.1 在留资格要件</h3><li>特定技能 1 号「自動車運送業」分野；受入上限 <strong>22,100</strong>；<strong>本分野不得 2 号</strong>（来源：08 / 01 · ISA / MLIT）。</li><li>卡车 A2.2 不变；出租车 / 巴士区分 <strong>2027-04-01 起 COE 申请须 B1 相当以上</strong>（JLPT N3 以上 + CEFR B1 判定）（来源：01 · 令和 8 年 10 月 9 日改正）。</li><li>无健康检查义务、仅適性診断（来源：01）。</li><h3 id="32">3.2 考试与考场</h3><li>ClassNK 技能試験 <strong>6,500 円</strong>（US$45、越南 US$50）、证明书 <strong>15,000 円</strong>；JFT-Basic <strong>10,000 円</strong>；JLPT N4 <strong>450 元</strong>（来源：01 · ClassNK / Prometric / JLPT）。</li><li>实施国 18，<strong>中国大陆无考点</strong>；中国考生实际路径为赴第三国考试或在日本国内受验（来源：01 · 2026-09 月报）。</li><details class="diff-del-group"><summary>已更新 · 删除 1 处（点击展开）</summary><li>日语路径：中国大陆无 JFT-Basic 考点，主攻 <strong>JLPT N4</strong>（目标 2027-07；每年 7 月 / 12 月两次）（来源：11）。</li></details><h3 id="33">3.3 驾照转换</h3><li>外免切替 <strong>2025-10 起大幅严格化</strong>：知识确认合格率 <strong>42.8%</strong>、技能确认 <strong>13.1%</strong>（2025-10–12，警察庁，经 drivey.jp 转引）（来源：10 / 01）。</li><li>教习所费用：普通教习全国官方均价（AT 限定）<strong>324,381 円</strong>（総務省 2026-09）；MT 通学 <strong>30–40 万円</strong>；大型 <strong>25–28 万円</strong>（来源：10 / 01）。</li><h3 id="34">3.4 判读</h3><p><strong>事实</strong>：门槛明确，由「在留要件 + 考试 + 驾照 + 日语」四关构成；其中<strong>驾照转换成功率低</strong>（技能确认 13.1%）与<strong>中国大陆无考点</strong>是两大瓶颈。
 <strong>推断</strong>：若中国驾照无法顺利转换，需预留 30–40 万円教习所预算与 6–12 个月时间；考试需规划赴第三国或赴日受验行程。
-<strong>⚠ 缺失</strong>：驾照转换的具体流程、书类、耗时细节（10 部分覆盖，待补专题）。</p>
-<hr />
-<h2 id="s4"><a id="四问题-3怎么去路径" aria-hidden="true"></a>四、问题 3：怎么去（路径）</h2>
-<h3 id="41"><a id="41-申请路径与时间线" aria-hidden="true"></a>4.1 申请路径与时间线</h3>
-<ul>
-<li>海外申请者先以「特定活动」（特定自动车运送业准备）入境（2025-02-17 起；卡车最长 <strong>6 个月</strong>）；未取得日本驾照则不能转入特定技能 1 号（来源：01 · ISA）。</li>
-<li>COE 手续费免费、标准审查 <strong>1–3 个月</strong>（来源：01 / 08 · ISA）。</li>
-</ul>
-<h3 id="42"><a id="42-中介与费用" aria-hidden="true"></a>4.2 中介与费用</h3>
-<ul>
-<li>招募必须走<strong>商务部资质对外劳务合作企业</strong> + 日方送出机关体系；无资质出国务工属违法（来源：01 · 商务部 2024）。</li>
-<li>签证费：円建约 <strong>15,000 円</strong>（单次）/ <strong>30,000 円</strong>（多次）；驻日领馆人民币口径 <strong>715 元</strong>（一次）/ <strong>1,430 元</strong>（二次・数次），上海 / 青岛 / 重庆三馆一致（来源：01 / 08）。</li>
-<li>登录支援机关：行情 <strong>2–4 万円/人·月</strong>；登录费 <strong>28,400 円</strong>；支援体制要件改正 <strong>2027-04-01 施行</strong>（来源：01）。</li>
-</ul>
-<h3 id="43"><a id="43-判读" aria-hidden="true"></a>4.3 判读</h3>
-<p><strong>事实</strong>：路径链条为「中介 → 特定活动入境 → 考试 → 驾照 → 特定技能 1 号」，关键耗时在驾照与考试。
+<strong>⚠ 缺失</strong>：驾照转换的具体流程、书类、耗时细节（10 部分覆盖，待补专题）。</p><h2 id="s4" class="sec">四、问题 3：怎么去（路径）</h2><h3 id="41">4.1 申请路径与时间线</h3><li>海外申请者先以「特定活动」（特定自动车运送业准备）入境（2025-02-17 起；卡车最长 <strong>6 个月</strong>）；未取得日本驾照则不能转入特定技能 1 号（来源：01 · ISA）。</li><li>COE 手续费免费、标准审查 <strong>1–3 个月</strong>（来源：01 / 08 · ISA）。</li><h3 id="42">4.2 中介与费用</h3><li>招募必须走<strong>商务部资质对外劳务合作企业</strong> + 日方送出机关体系；无资质出国务工属违法（来源：01 · 商务部 2024）。</li><li>签证费：円建约 <strong>15,000 円</strong>（单次）/ <strong>30,000 円</strong>（多次）；驻日领馆人民币口径 <strong>715 元</strong>（一次）/ <strong>1,430 元</strong>（二次・数次），上海 / 青岛 / 重庆三馆一致（来源：01 / 08）。</li><li>登录支援机关：行情 <strong>2–4 万円/人·月</strong>；登录费 <strong>28,400 円</strong>；支援体制要件改正 <strong>2027-04-01 施行</strong>（来源：01）。</li><details class="diff-del-group"><summary>已更新 · 删除 1 处（点击展开）</summary><h3 id="43-90">4.3 落地 90 天执行清单（配套件）</h3></details><div class="diff-block diff-new"><span class="diff-badge">已更新 · 新增</span><h3 id="43">4.3 判读</h3></div><details class="diff-del-group"><summary>已更新 · 删除 1 处（点击展开）</summary><p>本节为 00 的<strong>执行层配套件</strong>，把「问题 3：怎么去」与「问题 4：去哪」收敛成可执行的时间线。⚠ 待补研究项表示该步骤的事实尚未被 01–13 系统覆盖，需由 14-life-operations 等专题补齐。</p></details><div class="diff-block diff-new"><span class="diff-badge">已更新 · 新增</span><p><strong>事实</strong>：路径链条为「中介 → 特定活动入境 → 考试 → 驾照 → 特定技能 1 号」，关键耗时在驾照与考试。
 <strong>推断</strong>：中介是最大风险变量——无资质渠道属违法，且存在虚假招募与收费陷阱风险；建议只走商务部名单内企业，并逐一核验日方受入机关。
-<strong>⚠ 缺失</strong>：中介防骗专题（未建）；落地手续执行清单（未建，建议 14-life-operations）。</p>
-<hr />
-<h2 id="s5"><a id="五问题-4去哪定居地" aria-hidden="true"></a>五、问题 4：去哪（定居地）</h2>
-<h3 id="51"><a id="51-选择框架" aria-hidden="true"></a>5.1 选择框架</h3>
-<ul>
-<li>13 提供 <strong>7 维评分框架</strong>（交通 / 买东西 / 医疗 / 治安 / 教育 / 灾害 / 生活成本）与候选地域速览（来源：13）。</li>
-<li>家賃相场、医療機関、災害リスク、住みやすさ、気候为地域比较的五个关键面（来源：13 · 登记册）。</li>
-<li>地域间公共服务差异（医疗 / 教育资源地域差）需纳入（来源：13）。</li>
-</ul>
-<h3 id="52"><a id="52-判读" aria-hidden="true"></a>5.2 判读</h3>
-<p><strong>事实</strong>：框架与候选地域数据就绪，可作为选择依据。
-<strong>⚠ 缺失</strong>：<strong>个人定居地选择未记录</strong>——13 的定居地档案为空白模板，需在确定居住地后填写（含城市 / 区、入住时间、房租 / 通勤、自治体外籍支援窗口、免费日语教室、主要医院 / 夜间救急、常用店等字段）。</p>
-<hr />
-<h2 id="s6"><a id="六问题-5最坏怎么办退出" aria-hidden="true"></a>六、问题 5：最坏怎么办（退出）</h2>
-<h3 id="61"><a id="61-长期路径" aria-hidden="true"></a>6.1 长期路径</h3>
-<ul>
-<li>本分野<strong>不得 2 号</strong>；永住路径须经其他在留资格转接（来源：08 / 01）。</li>
-<li>永住 / 归化路径存在，但需满足居住年数、收入、纳税等要件（来源：08 · 登记册）。</li>
-<li>转职路径：司机 → 运行管理者 / 物流管理岗（来源：02 / 03）。</li>
-</ul>
-<h3 id="62"><a id="62-判读" aria-hidden="true"></a>6.2 判读</h3>
-<p><strong>事实</strong>：长期路径（永住 / 归化 / 转职）存在，但本分野不能直接升 2 号。
-<strong>⚠ 缺失</strong>：<strong>退出执行层</strong>未系统研究——年金脱退一时金、健康保险任意継続、退职手续、帰国前确定申告 / 离境、在留卡返还、再入国、退室与车辆处理等（建议建退出专题）。</p>
-<hr />
-<h2 id="s7"><a id="七暴露的缺失清单" aria-hidden="true"></a>七、暴露的缺失清单</h2>
-<p>按「决策价值 × 缺口完整度」排序：</p>
-<table class="fixed">
+<strong>⚠ 缺失</strong>：中介防骗专题（未建）；落地手续执行清单（未建，建议 14-life-operations）。</p></div><details class="diff-del-group"><summary>已更新 · 删除 15 处（点击展开）</summary><p><strong>时间线总览</strong></p><table class="fixed">
+<thead>
+<tr>
+<th style="width:25%">阶段</th>
+<th style="width:25%">窗口</th>
+<th style="width:25%">核心目标</th>
+<th style="width:25%">关键瓶颈</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>阶段 0 · 国内准备</td>
+<td>赴日前 6–12 个月</td>
+<td>日语 / 考试 / 驾照 / 中介</td>
+<td>考试考点、驾照转换</td>
+</tr>
+<tr>
+<td>阶段 1 · 在留资格申请</td>
+<td>赴日前 3–6 个月</td>
+<td>COE 申请与审查</td>
+<td>中介资质、书类</td>
+</tr>
+<tr>
+<td>阶段 2 · 赴日与落地</td>
+<td>抵达后 0–90 天</td>
+<td>住民登记 / 银行 / 手机 / 保险 / 驾照</td>
+<td>手续执行</td>
+</tr>
+<tr>
+<td>阶段 3 · 上岗与稳定</td>
+<td>90 天后</td>
+<td>上岗 / 永住 / 家属</td>
+<td>职场适应</td>
+</tr>
+</tbody>
+</table><p><strong>阶段 0 · 国内准备（赴日前 6–12 个月）</strong></p><table class="fixed">
+<thead>
+<tr>
+<th style="width:20%">#</th>
+<th style="width:20%">事项</th>
+<th style="width:20%">关键事实</th>
+<th style="width:20%">来源</th>
+<th style="width:20%">状态</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0.1</td>
+<td>日语学习启动</td>
+<td>JLPT 每年 7 月 / 12 月两次；JFT-Basic 为 SSW 路径主考试</td>
+<td>01 / 11</td>
+<td>已覆盖</td>
+</tr>
+<tr>
+<td>0.2</td>
+<td>日语考试报名</td>
+<td>JLPT N4 450 元；JFT-Basic 10,000 円；<strong>中国大陆无 SSW 考点</strong>，需赴第三国或赴日受验</td>
+<td>01</td>
+<td>已覆盖</td>
+</tr>
+<tr>
+<td>0.3</td>
+<td>技能試験报名</td>
+<td>ClassNK 技能試験 6,500 円、证明书 15,000 円</td>
+<td>01</td>
+<td>已覆盖</td>
+</tr>
+<tr>
+<td>0.4</td>
+<td>驾照转换评估</td>
+<td>外免切替 2025-10 起严格化（知识确认 42.8% / 技能确认 13.1%）；需先确认中国驾照类别与日本对应关系</td>
+<td>10 / 01</td>
+<td>部分覆盖</td>
+</tr>
+<tr>
+<td>0.5</td>
+<td>教习所预算</td>
+<td>普通 AT 官方均价 324,381 円；MT 通学 30–40 万円；大型 25–28 万円</td>
+<td>10 / 01</td>
+<td>已覆盖</td>
+</tr>
+<tr>
+<td>0.6</td>
+<td>中介核验</td>
+<td>只走<strong>商务部资质对外劳务合作企业</strong>名单；核验日方受入机关与送出机关</td>
+<td>01</td>
+<td>部分覆盖</td>
+</tr>
+<tr>
+<td>0.7</td>
+<td>资金准备</td>
+<td>初期费用（签证 / 机票 / 押金礼金 / 生活费储备）需专项测算</td>
+<td>—</td>
+<td>⚠ 待补研究</td>
+</tr>
+</tbody>
+</table><p><strong>阶段 1 · 在留资格申请（赴日前 3–6 个月）</strong></p><table class="fixed">
+<thead>
+<tr>
+<th style="width:20%">#</th>
+<th style="width:20%">事项</th>
+<th style="width:20%">关键事实</th>
+<th style="width:20%">来源</th>
+<th style="width:20%">状态</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.1</td>
+<td>COE 申请</td>
+<td>手续费免费、标准审查 1–3 个月</td>
+<td>01 / 08</td>
+<td>已覆盖</td>
+</tr>
+<tr>
+<td>1.2</td>
+<td>特定活动入境</td>
+<td>2025-02-17 起可先以「特定活动」（准备）入境，卡车最长 6 个月</td>
+<td>01</td>
+<td>已覆盖</td>
+</tr>
+<tr>
+<td>1.3</td>
+<td>签证费</td>
+<td>单次约 15,000 円 / 多次约 30,000 円；领馆人民币 715 元 / 1,430 元</td>
+<td>01 / 08</td>
+<td>已覆盖</td>
+</tr>
+<tr>
+<td>1.4</td>
+<td>登录支援机关</td>
+<td>行情 2–4 万円/人·月；登录费 28,400 円；支援体制要件改正 2027-04-01 施行</td>
+<td>01</td>
+<td>已覆盖</td>
+</tr>
+<tr>
+<td>1.5</td>
+<td>在留资格变更</td>
+<td>未取得日本驾照则不能转入特定技能 1 号</td>
+<td>01</td>
+<td>已覆盖</td>
+</tr>
+</tbody>
+</table><p><strong>阶段 2 · 赴日与落地（0–90 天）</strong></p><p>⚠ 本阶段为<strong>最大信息差区域</strong>：01–13 未系统覆盖落地手续执行层。以下步骤为框架，事实细节待 14-life-operations 补齐。</p><table class="fixed">
+<thead>
+<tr>
+<th style="width:20%">#</th>
+<th style="width:20%">事项</th>
+<th style="width:20%">关键事实</th>
+<th style="width:20%">来源</th>
+<th style="width:20%">状态</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2.1</td>
+<td>在留卡领取</td>
+<td>抵达后 14 日内在机场 / 市区町村完成在留卡登记</td>
+<td>08</td>
+<td>已覆盖</td>
+</tr>
+<tr>
+<td>2.2</td>
+<td>住民登记（転入届）</td>
+<td>迁入新住所后 14 日内向新自治体申报</td>
+<td>08 / 12</td>
+<td>已覆盖</td>
+</tr>
+<tr>
+<td>2.3</td>
+<td>国民健康保険加入</td>
+<td>加入后自付比例通常三成</td>
+<td>08 / 12 / 15</td>
+<td>已覆盖</td>
+</tr>
+<tr>
+<td>2.4</td>
+<td>年金加入</td>
+<td>国民年金 / 厚生年金区分</td>
+<td>07</td>
+<td>部分覆盖</td>
+</tr>
+<tr>
+<td>2.5</td>
+<td>银行口座开设</td>
+<td>外国人开户条件（在留期间 / 住所 / 印鉴）</td>
+<td>14</td>
+<td>部分覆盖</td>
+</tr>
+<tr>
+<td>2.6</td>
+<td>手机 / 网络契约</td>
+<td>运营商选择（docomo / au / softbank / 格安SIM）、光回线</td>
+<td>14</td>
+<td>⚠ 待补研究</td>
+</tr>
+<tr>
+<td>2.7</td>
+<td>水电燃气开通</td>
+<td>上下水道 / 電気 / ガス 使用开始手续</td>
+<td>12 / 13 / 14</td>
+<td>部分覆盖</td>
+</tr>
+<tr>
+<td>2.8</td>
+<td>住房签约</td>
+<td>賃貸借契約、敷金 / 礼金 / 更新料、保证人 / 保证会社</td>
+<td>12 / 14</td>
+<td>已覆盖</td>
+</tr>
+<tr>
+<td>2.9</td>
+<td>垃圾与町内会</td>
+<td>ゴミ出し分类、町内会加入</td>
+<td>12</td>
+<td>已覆盖</td>
+</tr>
+<tr>
+<td>2.10</td>
+<td>驾照转换 / 教习</td>
+<td>外免切替或合宿 / 通学；费用与耗时</td>
+<td>10 / 01</td>
+<td>部分覆盖</td>
+</tr>
+<tr>
+<td>2.11</td>
+<td>特定技能 1 号变更</td>
+<td>取得驾照后申请在留资格变更</td>
+<td>01 / 08</td>
+<td>已覆盖</td>
+</tr>
+<tr>
+<td>2.12</td>
+<td>紧急联络与防灾</td>
+<td>避難所、自治体防灾邮件 / LINE 登录</td>
+<td>12 / 13</td>
+<td>部分覆盖</td>
+</tr>
+</tbody>
+</table><p><strong>阶段 3 · 上岗与稳定（90 天后）</strong></p><table class="fixed">
+<thead>
+<tr>
+<th style="width:20%">#</th>
+<th style="width:20%">事项</th>
+<th style="width:20%">关键事实</th>
+<th style="width:20%">来源</th>
+<th style="width:20%">状态</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3.1</td>
+<td>上岗</td>
+<td>运行管理者 / 安全驾驶管理者等资格</td>
+<td>01 / 02 / 03</td>
+<td>已覆盖</td>
+</tr>
+<tr>
+<td>3.2</td>
+<td>税务申报</td>
+<td>確定申告 / 年末調整</td>
+<td>07</td>
+<td>已覆盖</td>
+</tr>
+<tr>
+<td>3.3</td>
+<td>永住 / 归化评估</td>
+<td>本分野不得 2 号；永住须经其他在留资格转接</td>
+<td>08</td>
+<td>部分覆盖</td>
+</tr>
+<tr>
+<td>3.4</td>
+<td>家属安排</td>
+<td>家族滞在、保育 / 学校</td>
+<td>08 / 10</td>
+<td>部分覆盖</td>
+</tr>
+<tr>
+<td>3.5</td>
+<td>退出预案</td>
+<td>转职 / 永住 / 回国路径与年金衔接</td>
+<td>16 / 08 / 07</td>
+<td>部分覆盖</td>
+</tr>
+</tbody>
+</table><p><strong>常见坑与答疑</strong></p><table class="fixed">
+<thead>
+<tr>
+<th style="width:50%">常见问题</th>
+<th style="width:50%">解答</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>刚抵达没有日本手机号，能办手续吗？</td>
+<td>住民登记、健康保険可凭在留卡与护照办理；手机契约通常需在留卡与银行账户</td>
+</tr>
+<tr>
+<td>没有在日保证人能租房吗？</td>
+<td>可通过保证会社；部分物件标注「保証人不要」</td>
+</tr>
+<tr>
+<td>银行开户被拒怎么办？</td>
+<td>改用邮局银行（ゆうちょ銀行）或外国人友好银行；先确认在留期限门槛</td>
+</tr>
+<tr>
+<td>水电燃气怎么开通？</td>
+<td>通过网络或电话申请，通常需 1–2 周；旧地址需办理解约</td>
+</tr>
+<tr>
+<td>不会日语能看病吗？</td>
+<td>都市圈大型医院较多语言对应；地方需提前确认或带翻译（见 15）</td>
+</tr>
+<tr>
+<td>在留卡遗失怎么办？</td>
+<td>14 日内向入管局申请再交付；卡片有 IC 芯片可补办</td>
+</tr>
+</tbody>
+</table><h3 id="44">4.4 判读</h3><p><strong>事实</strong>：路径链条为「中介 → 特定活动入境 → 考试 → 驾照 → 特定技能 1 号」，关键耗时在驾照与考试。
+<strong>推断</strong>：中介是最大风险变量——无资质渠道属违法，且存在虚假招募与收费陷阱风险；建议只走商务部名单内企业，并逐一核验日方受入机关。
+<strong>⚠ 缺失</strong>：中介防骗专题（未建）；落地手续执行清单细目（14 基线已建，消费入口待登记册回写）。</p></details><h2 id="s5" class="sec">五、问题 4：去哪（定居地）</h2><h3 id="51">5.1 选择框架</h3><li>13 提供 <strong>7 维评分框架</strong>（交通 / 买东西 / 医疗 / 治安 / 教育 / 灾害 / 生活成本）与候选地域速览（来源：13）。</li><li>家賃相场、医療機関、災害リスク、住みやすさ、気候为地域比较的五个关键面（来源：13 · 登记册）。</li><details class="diff-del-group"><summary>已更新 · 删除 1 处（点击展开）</summary><li>决策流程：Offer 阶段用 7 维框架打分（≥3.5 考虑）；入职前读该自治体「外国人生活ガイド」；落地 1 个月后实际体验 vs 预期复盘（来源：13）。</li></details><li class="diff-new"><span class="diff-badge">已更新 · 新增</span>地域间公共服务差异（医疗 / 教育资源地域差）需纳入（来源：13）。</li><details class="diff-del-group"><summary>已更新 · 删除 1 处（点击展开）</summary><li>地域差证据：病院一般病床 <strong>879,728 床</strong>（厚生労働省 令和 6 年医療施設調査，2024-10-01）；日本語指導が必要な児童生徒 <strong>84,759 人</strong>、其中外国籍 <strong>73,313 人</strong>（文部科学省，令和 7 年度）（来源：13）。</li></details><div class="diff-block diff-new"><span class="diff-badge">已更新 · 新增</span><h3 id="52">5.2 判读</h3></div><details class="diff-del-group"><summary>已更新 · 删除 1 处（点击展开）</summary><h3 id="52">5.2 生活成本与住房</h3></details><div class="diff-block diff-new"><span class="diff-badge">已更新 · 新增</span><p><strong>事实</strong>：框架与候选地域数据就绪，可作为选择依据。
+<strong>⚠ 缺失</strong>：<strong>个人定居地选择未记录</strong>——13 的定居地档案为空白模板，需在确定居住地后填写（含城市 / 区、入住时间、房租 / 通勤、自治体外籍支援窗口、免费日语教室、主要医院 / 夜间救急、常用店等字段）。</p></div><details class="diff-del-group"><summary>已更新 · 删除 18 处（点击展开）</summary><li>住房初期费用含敷金 / 礼金 / 仲介手数料 / 保证会社 / 更新料，合计可达 <strong>4–8 个月</strong>房租（来源：14 / 12）。</li><li>UR 賃貸住宅收入基准（2026-11-12 核实）：家賃 62,500 円未満 → 基准月收 = 家賃 4 倍；62,500–200,000 円 → 25 万円；200,000 円以上 → 40 万円；存款基准 = 家賃 100 倍可替代收入基准（来源：12）。</li><li>生活成本模型：10.5–17.0 万円/月（手册估算，待核验）；100 日元中间价 4.2355 元（2026-11-10）（来源：07）。</li><li>多语言防灾情报：气象厅多语言版、防災庁、NHK WORLD-JAPAN 多语言链接可访问；自治体防灾邮件 / LINE 具体渠道待定居地确定后复核（来源：13）。</li><h3 id="53">5.3 定居地档案（个人记录模板）</h3><p>本档案是 00 的<strong>个人记录件</strong>，承载「问题 4：去哪」的答案。与 13-regional-info 的定居地档案模板同源；<strong>个人记录与事实分离</strong>，事实项须可回溯。确定居住地后复制改名填写。</p><p><strong>一、基本信息</strong></p><table class="fixed">
+<thead>
+<tr>
+<th style="width:33%">字段</th>
+<th style="width:33%">内容</th>
+<th style="width:34%">备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>城市 / 区</td>
+<td></td>
+<td>例：群马县太田市</td>
+</tr>
+<tr>
+<td>入住时间</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>房租 / 通勤</td>
+<td>房租： 円 / 月；通勤： 分</td>
+<td></td>
+</tr>
+<tr>
+<td>住房形态</td>
+<td></td>
+<td>アパート / マンション / 寮 / 一戸建て</td>
+</tr>
+<tr>
+<td>保证人 / 保证会社</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table><p><strong>二、行政与公共服务</strong></p><table class="fixed">
+<thead>
+<tr>
+<th style="width:33%">字段</th>
+<th style="width:33%">内容</th>
+<th style="width:34%">备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>自治体外籍支援窗口</td>
+<td></td>
+<td>多语言窗口地址 / 电话 / 营业时间</td>
+</tr>
+<tr>
+<td>住民票 / 在留卡地址</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>免费 / 低额日语教室</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>自治体防灾邮件 / LINE</td>
+<td></td>
+<td>登录日期 / 渠道</td>
+</tr>
+<tr>
+<td>避難所</td>
+<td></td>
+<td>最近避難所名称 / 距离</td>
+</tr>
+</tbody>
+</table><p><strong>三、医疗</strong></p><table class="fixed">
+<thead>
+<tr>
+<th style="width:33%">字段</th>
+<th style="width:33%">内容</th>
+<th style="width:34%">备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>かかりつけ病院</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>主要医院 / 夜间救急</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>歯科</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>精神科 / 心理支援</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table><p><strong>四、生活</strong></p><table class="fixed">
+<thead>
+<tr>
+<th style="width:33%">字段</th>
+<th style="width:33%">内容</th>
+<th style="width:34%">备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>常用店（超市 / 药局 / 便利店）</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>公共交通（最近駅 / 路線 / IC卡）</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>银行 / 邮局</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>手机 / 网络</td>
+<td></td>
+<td>运营商 / 回路</td>
+</tr>
+<tr>
+<td>町内会 / 自治会</td>
+<td></td>
+<td>加入状态</td>
+</tr>
+</tbody>
+</table><p><strong>五、防灾与安全</strong></p><table class="fixed">
+<thead>
+<tr>
+<th style="width:33%">字段</th>
+<th style="width:33%">内容</th>
+<th style="width:34%">备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>灾害风险（地震 / 水害 / 土砂）</td>
+<td></td>
+<td>见 13 登记册「災害リスク」</td>
+</tr>
+<tr>
+<td>避難所 / 避難経路</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>防災セット / 備蓄</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>紧急联络方式</td>
+<td></td>
+<td>110 / 119 / 家属 / 公司</td>
+</tr>
+</tbody>
+</table><h3 id="54">5.4 判读</h3><p><strong>事实</strong>：框架与候选地域数据就绪，可作为选择依据。
+<strong>⚠ 缺失</strong>：<strong>个人定居地选择未记录</strong>——13 的定居地档案为空白模板，需在确定居住地后填写（含城市 / 区、入住时间、房租 / 通勤、自治体外籍支援窗口、免费日语教室、主要医院 / 夜间救急、常用店等字段）；登记册 #1–#3 活值待基线确立。</p></details><h2 id="s6" class="sec">六、问题 5：最坏怎么办（退出）</h2><h3 id="61">6.1 长期路径</h3><li>本分野<strong>不得 2 号</strong>；永住路径须经其他在留资格转接（来源：08 / 01）。</li><details class="diff-del-group"><summary>已更新 · 删除 1 处（点击展开）</summary><li>永住 / 归化路径存在，但需满足居住年数、收入、纳税等要件；永住许可要件于<strong>令和 8-10-01 改定</strong>（2027-04-01 起申请适用）：世帯年収・年金受給見込・日本語 B1・制度理解（来源：08 · 登记册）。</li></details><li class="diff-mod"><span class="diff-badge">已更新 · 修改</span>永住 / 归化路径存在，但需满足居住年数、收入、纳税等要件（来源：08 · 登记册）。</li><details class="diff-del-group"><summary>已更新 · 删除 1 处（点击展开）</summary><li>转职路径：司机 → 运行管理者 / 物流管理岗；管理岗过渡主线为内部升格（来源：02 / 03）。</li></details><li class="diff-mod"><span class="diff-badge">已更新 · 修改</span>转职路径：司机 → 运行管理者 / 物流管理岗（来源：02 / 03）。</li><details class="diff-del-group"><summary>已更新 · 删除 1 处（点击展开）</summary><li>数字化转型：公司内 DX / 系统担当 ＞ 3PL 大手系统岗 ＞ 物流 SaaS 实施顾问（推断）；IT 人才缺口中位 2030 年约 45 万（来源：06）。</li></details><div class="diff-block diff-new"><span class="diff-badge">已更新 · 新增</span><h3 id="62">6.2 判读</h3></div><details class="diff-del-group"><summary>已更新 · 删除 1 处（点击展开）</summary><h3 id="62-16">6.2 退出执行层（16 接入）</h3></details><div class="diff-block diff-new"><span class="diff-badge">已更新 · 新增</span><p><strong>事实</strong>：长期路径（永住 / 归化 / 转职）存在，但本分野不能直接升 2 号。
+<strong>⚠ 缺失</strong>：<strong>退出执行层</strong>未系统研究——年金脱退一时金、健康保险任意継続、退职手续、帰国前确定申告 / 离境、在留卡返还、再入国、退室与车辆处理等（建议建退出专题）。</p></div><details class="diff-del-group"><summary>已更新 · 删除 7 处（点击展开）</summary><li>16-exit-transition-return 已接入本主题（登记册 v1.1）：退出・转型・回国三段框架（退出：退職 / 雇用保険 / 健康保険任意継続 / 被用者保険退出 / 在留资格状态；转型：在留資格変更 / 特定活動 / 転職边界 / 2 号限制；回国：年金脱退执行 / 帰国前確定申告 / 在留卡 / 再入国 / 退室 / 通信・银行・车辆）。（来源：16 · 基线与初析）</li><li>⚠ 具体书类、期限、金额与窗口多数标「⚠ 待核实」，待事件触发或年度复盘补齐（来源：16 · 登记册）。</li><h3 id="63">6.3 年金 / 保险衔接</h3><li>健康保険任意継続（被用者保险退职后继续）≠ 国民健康保険加入；厚生年金脱退一时金只研究申请执行，金额计算口径归 07（来源：16 / 07）。</li><li>脱退后仍可能有住民税・年金后续纳付义务；对永住 / 归化的影响须结合 08 最新口径（来源：16 · 登记册）。</li><h3 id="64">6.4 判读</h3><p><strong>事实</strong>：长期路径（永住 / 归化 / 转职 / 数字化）存在，但本分野不能直接升 2 号；退出执行层已由 16 接入。
+<strong>⚠ 缺失</strong>：退出执行的具体金额 / 期限 / 要件待核验（16 登记册统一标「⚠ 待核实」）；年金 / 保险衔接的执行层待持续核实。</p></details><h2 id="s7" class="sec">七、暴露的缺失清单</h2><details class="diff-del-group"><summary>已更新 · 删除 1 处（点击展开）</summary><p>按「决策价值 × 缺口完整度」排序，作为补缺触发依据：</p></details><div class="diff-block diff-mod"><span class="diff-badge">已更新 · 修改</span><p>按「决策价值 × 缺口完整度」排序：</p></div><details class="diff-del-group"><summary>已更新 · 删除 1 处（点击展开）</summary><table class="fixed">
+<thead>
+<tr>
+<th style="width:20%">优先级</th>
+<th style="width:20%">缺失</th>
+<th style="width:20%">覆盖问题</th>
+<th style="width:20%">缺口证据</th>
+<th style="width:20%">状态</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>P1</td>
+<td>在日生活实务与行政手续（14-life-operations）</td>
+<td>怎么去 / 去哪</td>
+<td>公共交通 / 通信 / 水电 / 银行 / 保证人无系统研究</td>
+<td>14 基线已建（2026-11-14），消费入口待登记册回写</td>
+</tr>
+<tr>
+<td>P1</td>
+<td>医疗 · 健康 · 心理（15-health-wellbeing）</td>
+<td>去哪 / 最坏怎么办</td>
+<td>心理 / 精神科 / 分娩 / 介護 / 医疗通译无系统研究</td>
+<td>15 基线已建（2026-11-14），消费入口待登记册回写</td>
+</tr>
+<tr>
+<td>已接入</td>
+<td>退出 · 转型 · 回国（16-exit-transition-return）</td>
+<td>最坏怎么办</td>
+<td>16 基线与初析已建；具体金额 / 期限 / 要件待核验</td>
+<td>已接入（登记册 v1.1）</td>
+</tr>
+<tr>
+<td>P2</td>
+<td>家族 · 育儿</td>
+<td>怎么去 / 去哪</td>
+<td>保育 / 分娩 / 園 / 国際結婚 / 相続无研究</td>
+<td>08 部分覆盖（家族滞在 / 资格外活動許可）</td>
+</tr>
+<tr>
+<td>P2</td>
+<td>防灾 · 安全 · 治安</td>
+<td>去哪</td>
+<td>自治体防灾渠道 / 避難 / 治安无系统覆盖</td>
+<td>12 / 13 部分覆盖（国家级渠道就绪）</td>
+</tr>
+<tr>
+<td>P3</td>
+<td>劳务输出与中介防骗</td>
+<td>怎么去</td>
+<td>01 仅追踪中介资质，无防骗专题</td>
+<td>—</td>
+</tr>
+<tr>
+<td>P3</td>
+<td>类别级补漏</td>
+<td>全部</td>
+<td>公共交通 / 通信 / 心理 / 年金脱退等词库缺口</td>
+<td>词库导入</td>
+</tr>
+</tbody>
+</table></details><div class="diff-block diff-mod"><span class="diff-badge">已更新 · 修改</span><table class="fixed">
 <thead>
 <tr>
 <th style="width:25%">优先级</th>
@@ -225,35 +939,77 @@ nav a:hover { text-decoration: underline; }
 <td>01 仅追踪中介资质，无防骗专题</td>
 </tr>
 </tbody>
-</table>
-<hr />
-<h2 id="s8"><a id="八数据可靠性与局限说明" aria-hidden="true"></a>八、数据可靠性与局限说明</h2>
-<p><strong>核验程度分级</strong>：
+</table></div><h2 id="s8" class="sec">八、数据可靠性与局限说明</h2><details class="diff-del-group"><summary>已更新 · 删除 1 处（点击展开）</summary><h3 id="81">8.1 核验程度分级</h3></details><div class="diff-block diff-new"><span class="diff-badge">已更新 · 新增</span><p><strong>核验程度分级</strong>：
 - A 级（官方一手）：01 / 04 / 08 / 10 引用日本政府官方统计与政策页。
 - B 级（权威机构转引）：全ト协工资调查（经 LogiShift）、外免切替合格率（经 drivey.jp）。
-- C 级（平台抽样）：求人样本（聚合平台转载，原企业页未逐一回溯）。</p>
-<p><strong>已知口径冲突（并列呈现，不合并）</strong>：受入上限 22,100 ≠ 24,500；司机缺口 14%/34% ≠ 7%/25%；工资（厚労省）≠ 含赏与（全ト协）。</p>
-<p><strong>主要局限</strong>：
+- C 级（平台抽样）：求人样本（聚合平台转载，原企业页未逐一回溯）。</p></div><details class="diff-del-group"><summary>已更新 · 删除 1 处（点击展开）</summary><li><strong>A 级（官方一手）</strong>：01 / 04 / 07 / 08 / 10 引用日本政府官方统计与政策页；13 引用厚生労働省 / 文部科学省统计。</li></details><div class="diff-block diff-new"><span class="diff-badge">已更新 · 新增</span><p><strong>已知口径冲突（并列呈现，不合并）</strong>：受入上限 22,100 ≠ 24,500；司机缺口 14%/34% ≠ 7%/25%；工资（厚労省）≠ 含赏与（全ト协）。</p></div><details class="diff-del-group"><summary>已更新 · 删除 1 处（点击展开）</summary><li><strong>B 级（权威机构转引）</strong>：全ト协工资调查（经 LogiShift）、外免切替合格率（经 drivey.jp）、SGHD 決算短信（release.tdnet.info）。</li></details><div class="diff-block diff-new"><span class="diff-badge">已更新 · 新增</span><p><strong>主要局限</strong>：
 1. 本主题不新增一手来源，结论完全依赖 01–13 的更新节奏；
 2. 落地执行层、医疗、退出执行三块为空白，影响问题 3、5 的判读完整度；
-3. 个人定居地与个人情况（资金、家属、时间窗口）未记录，问题 4、5 无法收敛。</p>
-<hr />
-<h2 id="s9"><a id="九免责声明" aria-hidden="true"></a>九、免责声明</h2>
-<p><strong>本报告仅供参考，不构成投资建议或决策依据。</strong></p>
-<hr />
-<h2 id="s10"><a id="十参考来源清单" aria-hidden="true"></a>十、参考来源清单</h2>
-<ol>
-<li><a href="https://github.com/hmbphxkw76-byte/jp-life-work/blob/main/01-ssw-driver/reports/2026-11-ssw-driver.md">01 特定技能司机 · 基线报告</a> — 收入 / 缺口 / 考试 / 驾照 / 中介</li>
-<li><a href="https://github.com/hmbphxkw76-byte/jp-life-work/blob/main/01-ssw-driver/reports/2026-11-ssw-driver.md">01 初析报告</a> — 五问事实来源</li>
-<li><a href="https://github.com/hmbphxkw76-byte/jp-life-work/blob/main/04-industry-logistics/reports/2026-11-industry-logistics.md">04 物流行业 · 基线报告</a> — 运賃 / 倒産 / 2024 年問題</li>
-<li><a href="https://github.com/hmbphxkw76-byte/jp-life-work/blob/main/05-industry-autonomous/reports/2026-11-industry-autonomous.md">05 自动驾驶 · 基线报告</a> — L4 进展</li>
-<li><a href="https://github.com/hmbphxkw76-byte/jp-life-work/blob/main/07-economy-finance/reports/2026-11-economy-finance.md">07 经济与财务 · 基线报告</a> — 生活成本 / 税制</li>
-<li><a href="https://github.com/hmbphxkw76-byte/jp-life-work/blob/main/08-visa-immigration/reports/2026-11-visa-immigration.md">08 签证与移民 · 基线报告</a> — 在留 / 永住</li>
-<li><a href="https://github.com/hmbphxkw76-byte/jp-life-work/blob/main/10-education-qualification/reports/2026-11-education-qualification.md">10 教育与资格 · 基线报告</a> — 驾照路径与费用</li>
-<li><a href="https://github.com/hmbphxkw76-byte/jp-life-work/blob/main/13-regional-info/reports/2026-11-regional-info.md">13 地区信息 · 基线报告</a> — 地域选择框架</li>
-<li><a href="https://github.com/hmbphxkw76-byte/jp-life-work/blob/main/13-regional-info/reports/2026-11-regional-info.md">13 地区信息 · 初析报告</a> — 定居地档案模板</li>
-</ol>
-<hr />
-<p>本报告为 v1.0 首份季度复核，数据基准 2026-11-14。</p>
+3. 个人定居地与个人情况（资金、家属、时间窗口）未记录，问题 4、5 无法收敛。</p></div><details class="diff-del-group"><summary>已更新 · 删除 9 处（点击展开）</summary><li><strong>C 级（平台抽样）</strong>：求人样本（聚合平台转载，原企业页未逐一回溯）。</li><h3 id="82">8.2 已知口径冲突（并列呈现，不合并、不取均值）</h3><table class="fixed">
+<thead>
+<tr>
+<th style="width:50%">指标</th>
+<th style="width:50%">并列口径</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>受入上限</td>
+<td>22,100（2026-01-23 阁议，现行）≠ 24,500（ssw.go.jp 中文页未同步）</td>
+</tr>
+<tr>
+<td>司机缺口</td>
+<td>政策包 14% / 34% ≠ MLIT 再检证 7% / 25%</td>
+</tr>
+<tr>
+<td>工资</td>
+<td>厚労省毎月勤労統計（现金给与总额）≠ 全ト协「賃金・労働時間等の実態」（含赏与）</td>
+</tr>
+<tr>
+<td>运賃</td>
+<td>日銀 SPPI 道路貨物輸送 ≠ WebKit 運賃指数 ≠ 大分類「運輸・郵便」</td>
+</tr>
+<tr>
+<td>倒産</td>
+<td>帝国データバンク ≠ 東京商工リサーチ（定义・分類不同，不可相加）</td>
+</tr>
+<tr>
+<td>签证费</td>
+<td>円建（约 15,000 円）≠ 驻日领馆人民币口径（一次 715 元 / 二次・数次 1,430 元）</td>
+</tr>
+</tbody>
+</table><h3 id="83">8.3 主要局限</h3><li>本主题不新增一手来源，结论完全依赖 01–13（及已接入的 16）的更新节奏；</li><li>落地执行层、医疗两块虽有 14 / 15 基线，但本主题登记册消费入口尚未回写，问题 3、4、5 的判读完整度受限；</li><li>个人定居地与个人情况（资金、家属、时间窗口）未记录，问题 4、5 无法收敛。</li><h3 id="84">8.4 时间基准</h3><li>数据基准日：<strong>2026-11-14</strong>；引用来源主题的报告期以 2026-11 期为主，活值基准版本以各主题登记册为准。</li></details><h2 id="s9" class="sec">九、参考来源清单</h2><details class="diff-del-group"><summary>已更新 · 删除 1 处（点击展开）</summary><h3 id="0113_1">来源主题报告（01–13，只读引用）</h3></details><li class="diff-new"><span class="diff-badge">已更新 · 新增</span><a href="https://github.com/hmbphxkw76-byte/jp-life-work/blob/main/01-ssw-driver/reports/2026-11-ssw-driver.md">01 特定技能司机 · 基线报告</a> — 收入 / 缺口 / 考试 / 驾照 / 中介</li><details class="diff-del-group"><summary>已更新 · 删除 1 处（点击展开）</summary><li><a href="../../01-ssw-driver/reports/2026-11-ssw-driver.md">01-ssw-driver · 2026-11 月度报告</a> — 受入上限 / 在留者数 / 缺口 / 收入 / 考试 / 驾照 / 中介</li></details><li class="diff-new"><span class="diff-badge">已更新 · 新增</span><a href="https://github.com/hmbphxkw76-byte/jp-life-work/blob/main/01-ssw-driver/reports/2026-11-ssw-driver.md">01 初析报告</a> — 五问事实来源</li><details class="diff-del-group"><summary>已更新 · 删除 1 处（点击展开）</summary><li><a href="../../02-career-driver/reports/2026-11-career-driver.md">02-career-driver · 2026-11 月度报告</a> — 薪资结构 / 工时合规 / 求职渠道</li></details><li class="diff-new"><span class="diff-badge">已更新 · 新增</span><a href="https://github.com/hmbphxkw76-byte/jp-life-work/blob/main/04-industry-logistics/reports/2026-11-industry-logistics.md">04 物流行业 · 基线报告</a> — 运賃 / 倒産 / 2024 年問題</li><details class="diff-del-group"><summary>已更新 · 删除 1 处（点击展开）</summary><li><a href="../../03-career-management/reports/2026-11-career-management.md">03-career-management · 2026-11 月度报告</a> — 管理岗路径 / 晋升档案</li></details><li class="diff-new"><span class="diff-badge">已更新 · 新增</span><a href="https://github.com/hmbphxkw76-byte/jp-life-work/blob/main/05-industry-autonomous/reports/2026-11-industry-autonomous.md">05 自动驾驶 · 基线报告</a> — L4 进展</li><details class="diff-del-group"><summary>已更新 · 删除 1 处（点击展开）</summary><li><a href="../../04-industry-logistics/reports/2026-11-industry-logistics.md">04-industry-logistics · 2026-11 月度报告</a> — 行业结构 / 运賃 / 倒産 / 2024 年問題</li></details><li class="diff-new"><span class="diff-badge">已更新 · 新增</span><a href="https://github.com/hmbphxkw76-byte/jp-life-work/blob/main/07-economy-finance/reports/2026-11-economy-finance.md">07 经济与财务 · 基线报告</a> — 生活成本 / 税制</li><details class="diff-del-group"><summary>已更新 · 删除 1 处（点击展开）</summary><li><a href="../../05-industry-autonomous/reports/2026-11-industry-autonomous.md">05-industry-autonomous · 2026-11 月度报告</a> — L4 进展与岗位影响</li></details><li class="diff-new"><span class="diff-badge">已更新 · 新增</span><a href="https://github.com/hmbphxkw76-byte/jp-life-work/blob/main/08-visa-immigration/reports/2026-11-visa-immigration.md">08 签证与移民 · 基线报告</a> — 在留 / 永住</li><details class="diff-del-group"><summary>已更新 · 删除 1 处（点击展开）</summary><li><a href="../../06-industry-technology/reports/2026-11-industry-technology.md">06-industry-technology · 2026-11 月度报告</a> — 数字化技能 / IT 人才缺口 / 薪资带</li></details><li class="diff-new"><span class="diff-badge">已更新 · 新增</span><a href="https://github.com/hmbphxkw76-byte/jp-life-work/blob/main/10-education-qualification/reports/2026-11-education-qualification.md">10 教育与资格 · 基线报告</a> — 驾照路径与费用</li><details class="diff-del-group"><summary>已更新 · 删除 1 处（点击展开）</summary><li><a href="../../07-economy-finance/reports/2026-11-economy-finance.md">07-economy-finance · 2026-11 月度报告</a> — 生活成本 / 税制 / 社保 / 汇率</li></details><li class="diff-new"><span class="diff-badge">已更新 · 新增</span><a href="https://github.com/hmbphxkw76-byte/jp-life-work/blob/main/13-regional-info/reports/2026-11-regional-info.md">13 地区信息 · 基线报告</a> — 地域选择框架</li><details class="diff-del-group"><summary>已更新 · 删除 1 处（点击展开）</summary><li><a href="../../08-visa-immigration/reports/2026-11-visa-immigration.md">08-visa-immigration · 2026-11 月度报告</a> — 在留资格 / 永住归化 / 家属 / 育成就劳</li></details><li class="diff-new"><span class="diff-badge">已更新 · 新增</span><a href="https://github.com/hmbphxkw76-byte/jp-life-work/blob/main/13-regional-info/reports/2026-11-regional-info.md">13 地区信息 · 初析报告</a> — 定居地档案模板</li><details class="diff-del-group"><summary>已更新 · 删除 1 处（点击展开）</summary><li><a href="../../09-politics-law/reports/2026-11-politics-law.md">09-politics-law · 2026-11 月度报告</a> — 法律栈 / 维权渠道</li></details><div class="diff-block diff-new"><span class="diff-badge">已更新 · 新增</span><p>本报告为 v1.0 首份季度复核，数据基准 2026-11-14。</p></div><details class="diff-del-group"><summary>已更新 · 删除 11 处（点击展开）</summary><li><a href="../../10-education-qualification/reports/2026-11-education-qualification.md">10-education-qualification · 2026-11 月度报告</a> — 驾照路径与费用 / 资格地图</li><li><a href="../../11-language-japanese/reports/2026-11-language-japanese.md">11-language-japanese · 2026-11 月度报告</a> — 日语考试与学习路径</li><li><a href="../../12-culture-life/reports/2026-11-culture-life.md">12-culture-life · 2026-11 月度报告</a> — 生活文化 / 住房 / 防灾</li><li><a href="../../13-regional-info/reports/2026-11-regional-info.md">13-regional-info · 2026-11 月度报告</a> — 地域选择框架 / 定居地档案模板</li><h3 id="_5">已接入专题（只读引用）</h3><li><a href="../../14-life-operations/reports/2026-11-life-operations.md">14-life-operations · 2026-11 月度报告</a> — 落地手续 / 住房 / 交通 / 通信 / 银行 / 水电</li><li><a href="../../15-health-wellbeing/reports/2026-11-health-wellbeing.md">15-health-wellbeing · 2026-11 月度报告</a> — 医保 / 就医 / 牙科精神科 / 心理 / 体检 / 介護</li><li><a href="../../16-exit-transition-return/reports/2026-11-exit-transition-return.md">16-exit-transition-return · 2026-11 月度报告</a> — 退出 / 转型 / 回国执行层</li><h3 id="_6">本主题登记册</h3><li><a href="../data/decision_hub_registry.md">00-decision-hub · 指标登记册</a> — 五问指标状态 / 缺失清单 / 触发器状态</li><p>本报告为 v1.0（2026-11 月度），数据基准 2026-11-14。本主题不新增一手来源，所有结论引用来源主题；缺失项显式标记，待来源主题更新后增量复核。</p></details>
+</main>
+<footer class="footer" role="contentinfo" aria-label="页脚">
+  <p>赴日决策仪表盘 · 赴日决策仪表盘 · 2026-Q4 季度复核｜2026-12<br>
+  报告路径：00-decision-hub\reports\2026-12-decision-hub.html</p>
+  <p class="backlinks">
+    <a href="../../index.html#topic-00-decision-hub">← 返回主题</a>
+    <a href="../../index.html">返回首页</a>
+  </p>
+</footer>
+<script>
+(function () {
+  'use strict';
+  var main = document.getElementById('main-content');
+  var tgDiff = document.getElementById('tg-diff');
+  var tgDel = document.getElementById('tg-del');
+  if (main && tgDiff) {
+    tgDiff.addEventListener('click', function () {
+      var hide = main.classList.toggle('hide-diff');
+      tgDiff.textContent = hide ? '显示更新标记' : '隐藏更新标记';
+    });
+  }
+  if (tgDel) {
+    tgDel.addEventListener('click', function () {
+      var open = tgDel.getAttribute('data-open') === '1';
+      var groups = document.querySelectorAll('details.diff-del-group');
+      for (var i = 0; i < groups.length; i++) groups[i].open = !open;
+      tgDel.setAttribute('data-open', open ? '0' : '1');
+      tgDel.textContent = open ? '展开全部删除' : '收起全部删除';
+    });
+  }
+})();
+</script>
 </body>
 </html>

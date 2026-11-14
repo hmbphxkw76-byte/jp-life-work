@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>日本地域信息 · 2026-11 月度报告</title>
+<style>
+:root{
+  --radius-sm:8px; --radius:12px; --radius-lg:16px;
+  --shadow:0 1px 3px rgba(20,40,70,.06); --shadow-md:0 4px 14px rgba(20,40,70,.09);
+  --font-sans:"Microsoft YaHei","PingFang SC","Segoe UI",Arial,sans-serif;
+  --font-mono:"SFMono-Regular",Consolas,"Liberation Mono",monospace;
+  --focus-ring:0 0 0 3px rgba(63,111,176,.35);
+  --bg:#f4f6f9; --card:#ffffff; --ink:#15202b; --ink2:#465667; --ink3:#657180;
+  --line:#e1e7ee; --line2:#eef2f6;
+  --navy:#16324f; --navy2:#2f5597; --blue:#3f6fb0; --blue-l:#eaf1fa;
+  --red:#a83224; --red-d:#822116; --red-l:#fbece8;
+  --pre:#b8541c; --pre-l:#fdf1e4;
+  --green:#1c7444; --green-l:#eaf5ef;
+  --amber:#956612; --amber-l:#fdf4e2;
+  --gray:#646f7b; --gray-l:#eff2f4;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{font-family:var(--font-sans);background:var(--bg);color:var(--ink);line-height:1.76;font-size:14.5px}
+a{color:var(--navy2);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px 68px}
+
+/* ── 跳转链接 / 焦点环 ── */
+.skip-link{position:absolute;left:12px;top:-48px;z-index:100;background:var(--navy);
+  color:#fff;padding:8px 16px;border-radius:0 0 8px 8px;font-size:12.5px;transition:top .15s ease}
+.skip-link:focus{top:0;color:#fff;text-decoration:none}
+:focus-visible{outline:none;box-shadow:var(--focus-ring)}
+
+/* ── 题头 Hero ── */
+.hero{background:linear-gradient(128deg,#0f2338 0%,#16324f 52%,#2f5597 100%);
+  color:#fff;padding:46px 36px 34px;border-radius:0 0 18px 18px;margin-bottom:24px}
+.hero .eyebrow{font-size:11.5px;letter-spacing:2.4px;color:rgba(255,255,255,.62);text-transform:uppercase}
+.hero h1{font-size:28px;font-weight:700;letter-spacing:.4px;margin:8px 0 6px;line-height:1.35}
+.hero .sub{font-size:13.5px;color:rgba(255,255,255,.82);max-width:900px}
+.hero .meta{font-size:12.3px;color:rgba(255,255,255,.78);margin-top:16px;line-height:2}
+.hero .meta b{color:#fff}
+.hero .tag{display:inline-block;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.2);
+  border-radius:14px;padding:2px 11px;margin:5px 6px 0 0;font-size:11.5px}
+
+/* ── 报告导航（sticky） ── */
+.report-nav{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);
+  border-bottom:1px solid var(--line);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  margin-bottom:26px}
+.report-nav .wrap{padding-top:10px;padding-bottom:10px}
+.nav-url{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;font-size:11.5px;
+  line-height:1.6;color:var(--ink3);padding-bottom:6px;margin-bottom:6px;
+  border-bottom:1px dashed var(--line)}
+.nav-url-label{font-weight:700;color:var(--ink2);white-space:nowrap}
+.nav-url a{color:var(--blue);word-break:break-all}
+.nav-tabs{display:flex;flex-wrap:wrap;gap:6px}
+.nav-tabs a{color:var(--ink2);font-size:12.5px;padding:5px 10px;border-radius:6px;
+  transition:background .15s ease,color .15s ease}
+.nav-tabs a:hover{background:var(--blue-l);color:var(--blue)}
+
+/* ── 跨月对比工具条 ── */
+.diff-bar{display:flex;flex-wrap:wrap;align-items:center;gap:8px;
+  margin-top:8px;padding-top:8px;border-top:1px dashed var(--line);
+  font-size:12px;color:var(--ink3)}
+.diff-bar .diff-summary{flex:1;min-width:200px;line-height:1.6}
+.diff-bar .diff-summary b{color:var(--navy)}
+.diff-toggle{font-size:12px;border:1px solid var(--line);background:#fff;border-radius:7px;
+  padding:4px 11px;cursor:pointer;color:var(--navy2);font-family:inherit}
+.diff-toggle:hover{border-color:var(--blue)}
+
+/* ── 正文 ── */
+h2.sec{font-size:20px;color:var(--navy);margin:44px 0 4px;padding-left:12px;
+  border-left:4px solid var(--navy2);font-weight:700;scroll-margin-top:110px}
+h3{font-size:15.5px;color:var(--navy);margin:22px 0 8px;font-weight:700}
+h4{font-size:14px;color:var(--navy);margin:16px 0 6px;font-weight:700}
+p{margin:0 0 12px}
+ul,ol{padding-left:22px;margin:8px 0 14px}
+li{margin-bottom:6px}
+hr{border:0;border-top:1px solid var(--line);margin:26px 0}
+strong{color:var(--ink)}
+code{background:#f6f8fa;padding:2px 5px;border-radius:4px;font-family:var(--font-mono);font-size:12.5px}
+pre{background:#f6f8fa;padding:12px 14px;border-radius:8px;overflow-x:auto;margin:10px 0 16px}
+pre code{background:none;padding:0;font-size:12.3px;line-height:1.65}
+blockquote{border-left:4px solid var(--navy2);background:var(--blue-l);
+  padding:12px 16px;border-radius:0 8px 8px 0;margin:12px 0;color:var(--ink2)}
+blockquote p:last-child{margin-bottom:0}
+.lead{color:var(--ink2);font-size:13.8px;margin:6px 0 14px}
+
+/* ── 表格 ── */
+table{width:100%;border-collapse:collapse;font-size:12.6px;background:var(--card);
+  border-radius:8px;overflow:hidden;margin:12px 0 16px}
+th{background:var(--navy);color:#fff;padding:8px 10px;text-align:left;font-weight:600;
+  font-size:12px;vertical-align:bottom}
+td{padding:7px 10px;border-bottom:1px solid var(--line2);vertical-align:top;line-height:1.62}
+tbody tr:nth-child(even) td{background:#fafbfd}
+tbody tr:hover td{background:var(--blue-l)}
+td.num{font-variant-numeric:tabular-nums}
+
+/* ── 信息卡 / 注释 ── */
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;
+  padding:18px 20px;margin:14px 0;box-shadow:var(--shadow)}
+.card h3:first-child{margin-top:0}
+.note{background:var(--amber-l);border-left:4px solid var(--amber);padding:10px 14px;
+  border-radius:0 7px 7px 0;font-size:12.9px;margin:12px 0}
+.note.gap{background:var(--gray-l);border-left-color:var(--gray)}
+.note.check{background:var(--green-l);border-left-color:var(--green)}
+.note.correct{background:var(--red-l);border-left-color:var(--red)}
+.note.preline{background:var(--pre-l);border-left-color:var(--pre)}
+
+/* ── 差异高亮（跨月对比） ── */
+.diff-badge{display:inline-block;font-size:10.5px;font-weight:700;line-height:1;
+  border-radius:3px;padding:2px 6px;margin-right:6px;vertical-align:middle;white-space:nowrap}
+.diff-block{border-radius:6px;padding:4px 8px;margin:4px -8px}
+.diff-new{background:var(--green-l);box-shadow:inset 3px 0 0 var(--green)}
+.diff-new .diff-badge{background:var(--green);color:#fff}
+.diff-mod{background:var(--amber-l);box-shadow:inset 3px 0 0 var(--amber)}
+.diff-mod .diff-badge{background:var(--amber);color:#fff}
+.diff-del-group{margin:6px 0;border:1px dashed var(--line);border-radius:6px;background:#fbfcfe}
+.diff-del-group>summary{cursor:pointer;font-size:12px;color:var(--ink3);
+  padding:6px 10px;user-select:none;list-style:none}
+.diff-del-group>summary::-webkit-details-marker{display:none}
+.diff-del-group>summary::before{content:"▸ ";color:var(--gray)}
+.diff-del-group[open]>summary::before{content:"▾ "}
+.diff-del-group .diff-del-body{padding:2px 8px 8px;color:var(--ink3)}
+.diff-del-group .diff-del-body s,.diff-del-group .diff-del-body del{color:var(--red)}
+.diff-del-group .diff-badge{background:var(--gray-l);color:var(--gray)}
+/* 隐藏更新标记：对照阅读模式 */
+main.hide-diff .diff-badge{display:none}
+main.hide-diff .diff-block{background:none;box-shadow:none;padding:0;margin:0}
+main.hide-diff .diff-del-group{display:none}
+
+/* ── 页脚 ── */
+.footer{font-size:11.4px;color:var(--ink3);text-align:center;margin-top:22px;line-height:1.9}
+.footer .backlinks{margin-top:8px}
+.footer .backlinks a{margin:0 8px}
+
+/* ── 响应式 ── */
+@media(max-width:760px){
+  .hero{padding:30px 20px;border-radius:0 0 14px 14px}
+  .hero h1{font-size:21px}
+  .wrap{padding:0 14px 46px}
+  td,th{padding:6px 7px;font-size:11.7px}
+  h2.sec{font-size:17.5px}
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">跳转到主要内容</a>
+<header class="hero" role="banner" aria-label="报告题头">
+  <div class="eyebrow">日本地域信息 · 市场指标监测型</div>
+  <h1>日本地域信息 · 2026-11 月度报告</h1>
+  <div class="sub">版本：v1.0（2026-11 月度）｜数据基准日：2026-11-14</div>
+  <div class="meta"><b>版本</b>：v1.0（2026-11 月度）<br><b>数据基准日</b>：2026-11-14<br><b>主题类型</b>：市场指标监测型（market-monitoring）<br><b>受众定位</b>：面向拟在日本选择就业地 / 定居地、需要地域横向对比与决策框架的读者，兼具就业地选择与长期定居规划视角。<br><b>来源规则</b>：① 国土交通省（住居・地価統計）、総務省統計局（地域统计）、気象庁（警報・注意報 / 多言語防災気象情報）、防災庁（防灾政策与大规模灾情）、厚生労働省（医師・歯科医師・薬剤師統計）/ 文部科学省（外国人児童生徒调查）、各都道府県 / 市町村…</div>
+  <div><span class="tag">2026-11</span><span class="tag">市场指标监测型</span></div>
+</header>
+<nav class="report-nav" aria-label="报告导航">
+  <div class="wrap">
+    <div class="nav-url">
+      <span class="nav-url-label">报告路径</span>
+      <a href="2026-11-regional-info.html">13-regional-info\reports\2026-11-regional-info.html</a>
+    </div>
+    <div class="nav-tabs"><a href="#s1">一、结论先行</a><a href="#s2">二、关键数字卡</a><a href="#s3">三、月度指标逐项对比</a><a href="#s4">四、信号灯判定</a><a href="#s5">五、与首期基线的偏离</a><a href="#s6">六、数据缺口与未核验项</a><a href="#s7">七、下期观察清单</a><a href="#s8">八、台账更新编号与来源</a></div>
+    
+  </div>
+</nav>
+<main class="wrap" id="main-content" role="main" aria-label="报告正文">
+<h2 id="s1" class="sec">一、结论先行</h2>
+<h3 id="_2">数据变更摘要</h3>
+<p>本期为 2026-11 月度首跑，登记册（<a href="../data/regional_indicator_registry.md">data/regional_indicator_registry.md</a>）全部追踪项复核如下：</p>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:16%">登记册项</th>
+<th style="width:16%">指标</th>
+<th style="width:16%">上期值（首期基线 2026-11-12）</th>
+<th style="width:16%">本期值（2026-11-14）</th>
+<th style="width:16%">变动</th>
+<th style="width:20%">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>核心指标 #1</td>
+<td>目标地域司机求人件数</td>
+<td>待基线确立</td>
+<td>待基线确立</td>
+<td>无更新</td>
+<td>截至 2026-11-14 无更新</td>
+</tr>
+<tr>
+<td>核心指标 #2</td>
+<td>目标地域賃貸挂牌行情（预期指标）</td>
+<td>待基线确立</td>
+<td>待基线确立</td>
+<td>无更新</td>
+<td>截至 2026-11-14 无更新</td>
+</tr>
+<tr>
+<td>核心指标 #3</td>
+<td>目标地域外国人支援窗口</td>
+<td>待基线确立</td>
+<td>待基线确立</td>
+<td>无更新</td>
+<td>截至 2026-11-14 无更新</td>
+</tr>
+<tr>
+<td>核心指标 #4</td>
+<td>个人地域选定期</td>
+<td>待记录</td>
+<td>待记录</td>
+<td>无更新</td>
+<td>截至 2026-11-14 无更新</td>
+</tr>
+<tr>
+<td>观察项与触发器状态</td>
+<td>唯一观察项 / 首要触发器 / 触发器结论</td>
+<td>首期为空</td>
+<td>首期为空</td>
+<td>无更新</td>
+<td>本期无触发器命中，状态保持为空</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>登记册活值逐项抄录，未改写；「待基线确立 / 待记录」如实保留。</p>
+</blockquote>
+<h3 id="_3">核心结论（沿用首期基线）</h3>
+<p><strong>结论 1</strong>：本主题当前处于「框架就绪、活值待建」状态。证据：7 维评分框架与决策流程已建立（<a href="../handbook/01-region-choice.md">handbook/01-region-choice.md</a>）；登记册 #1–#4 均待基线确立 / 待记录。标注：事实。</p>
+<p><strong>结论 2</strong>：地域差在公共服务领域呈系统性存在。证据：病院一般病床 879,728 床（厚生労働省 令和 6 年医療施設調査，2024-10-01）；日本語指導が必要な児童生徒 84,759 人、其中外国籍 73,313 人、较上次 +27.0%（文部科学省，令和 7 年度）。标注：事实。</p>
+<p><strong>结论 3</strong>：横向比较须先固定口径，否则存在混算风险。证据：登记册口径清单列明登记口径 ≠ 挂牌口径、都道府県 ≠ 市町村、従業地 / 居住地口径须区分。标注：事实。</p>
+<p><strong>结论 4</strong>：不就学风险与日语指导资源存在地域差。证据：调查已全国实施但自治体间把握体制仍有差异；日语指导教室有无、教员配置密度因自治体差异大。标注：推断。</p>
+<p><strong>结论 5</strong>：候选地域速览为定性判断，不构成「最优地域」结论。证据：候选地域速览表（自述「待实地补充」）；business-config 第二节结论边界。标注：事实（属定性清单，非排名）。</p>
+<p><strong>结论 6</strong>：多语言防灾情报已具备国家级入口，自治体层登记动作待补齐。证据：气象厅多语言版、NHK WORLD-JAPAN 多语言链接可访问（2026-11-12 验证）；自治体防灾邮件 / LINE 具体渠道待定居地确定后复核。标注：事实 + 待办。</p>
+<h3 id="_4">风险与不确定性</h3>
+<ul>
+<li>登记册 4 项活值均未建立，报告无法给出数值化地域对比。</li>
+<li>门户数据为预期指标，不等于实际成交 / 登记值。</li>
+<li>统计域口径（都道府県 vs 市町村、従業地 vs 居住地）未固定前，地域差解读存在混算风险。</li>
+<li>基线报告遗留项：无顶部导航（本期已由 md2html 渲染管线统一生成，见第五节）。</li>
+<li>个人定居地档案为空白模板，个人地域选择尚未记录。</li>
+</ul>
+<h3 id="_5">已修正事实清单</h3>
+<p>本版继承历史报告已修正事实清单，无新增修正。历史已闭环复核项：病床数取令和 6 年医療施設調査（病院一般病床 879,728 床）；NHK WORLD-JAPAN 多语言入口已确认可访问；日语指导调查数值取令和 7 年度（外国籍 73,313 人）。</p>
+<h2 id="s2" class="sec">二、关键数字卡</h2>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:16%">#</th>
+<th style="width:16%">指标</th>
+<th style="width:16%">最新读数</th>
+<th style="width:16%">来源机构</th>
+<th style="width:16%">统计周期 / 时点</th>
+<th style="width:20%">核验状态</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>目标地域司机求人件数</td>
+<td>待基线确立</td>
+<td>HelloWork 地域检索</td>
+<td>逐次运行</td>
+<td>未取得</td>
+</tr>
+<tr>
+<td>2</td>
+<td>目标地域賃貸挂牌行情（预期指标）</td>
+<td>待基线确立</td>
+<td>賃貸门户</td>
+<td>逐次运行</td>
+<td>未取得</td>
+</tr>
+<tr>
+<td>3</td>
+<td>目标地域外国人支援窗口</td>
+<td>待基线确立</td>
+<td>自治体官网</td>
+<td>逐次运行</td>
+<td>未取得</td>
+</tr>
+<tr>
+<td>4</td>
+<td>个人地域选定期</td>
+<td>待记录</td>
+<td>自记录</td>
+<td>—</td>
+<td>未记录</td>
+</tr>
+<tr>
+<td>5</td>
+<td>病院的一般病床（全国）</td>
+<td>879,728 床</td>
+<td>厚生労働省 令和 6 年医療施設調査</td>
+<td>2024-10-01</td>
+<td>已核验</td>
+</tr>
+<tr>
+<td>6</td>
+<td>日本語指導が必要な児童生徒（公立）</td>
+<td>84,759 人</td>
+<td>文部科学省</td>
+<td>令和 7 年度</td>
+<td>已核验</td>
+</tr>
+<tr>
+<td>7</td>
+<td>其中外国籍</td>
+<td>73,313 人（较上次 +27.0%）</td>
+<td>文部科学省</td>
+<td>令和 7 年度</td>
+<td>已核验</td>
+</tr>
+<tr>
+<td>8</td>
+<td>外国人儿童就学把握体制</td>
+<td>第 6 回调查已全国实施（自治体间把握体制仍有差异）</td>
+<td>文部科学省</td>
+<td>令和 7 年 5 月 1 日现在</td>
+<td>已核验</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>读数解读：#1–#4 为登记册核心监测指标，活值尚未建立；#5–#8 为公共服务地域差视角的已核验官方数值，仅作横向对比入口，不构成地域排名。
+口径提醒：登记口径（地価公示）≠ 挂牌口径（賃貸门户）；预期指标 ≠ 实际成交 / 登记值；都道府県 ≠ 市町村。</p>
+</blockquote>
+<h2 id="s3" class="sec">三、月度指标逐项对比</h2>
+<h3 id="_8">监测范围与跨主题分工</h3>
+<p><strong>含</strong>（business-config 3.1）：地域选择框架（7 维评分框架、候选地域速览、决策流程）；地域间公共服务差异视角（医疗资源地域差、教育资源地域差）；地域生活笔记（定居地档案模板、生活发现、防灾与安全、地域防灾情报渠道、季度观察）。</p>
+<p><strong>不含</strong>（交叉引用，不在本主题展开）：</p>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:50%">对象</th>
+<th style="width:50%">归属主题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>地域选择框架中的薪资地域差</td>
+<td><a href="../../07-economy-finance/reports/2026-11-economy-finance.md">07-economy-finance</a></td>
+</tr>
+<tr>
+<td>求职渠道地域策略</td>
+<td><a href="../../02-career-driver/reports/2026-11-career-driver.md">02-career-driver</a></td>
+</tr>
+<tr>
+<td>保险体系与就医流程细节</td>
+<td><a href="../../12-culture-life/reports/2026-11-culture-life.md">12-culture-life</a></td>
+</tr>
+<tr>
+<td>就学手续与学制细节</td>
+<td><a href="../../10-education-qualification/reports/2026-11-education-qualification.md">10-education-qualification</a></td>
+</tr>
+<tr>
+<td>灾害时外国人支援政策环境</td>
+<td><a href="../../09-politics-law/reports/2026-11-politics-law.md">09-politics-law</a></td>
+</tr>
+<tr>
+<td>岗位密度 / 薪资地域差活值</td>
+<td><a href="../../01-ssw-driver/reports/2026-11-ssw-driver.md">01-ssw-driver</a>（只读引用）</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_9">监测维度与优先来源</h3>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:20%">维度</th>
+<th style="width:20%">定义</th>
+<th style="width:20%">对应指标（登记册 #）</th>
+<th style="width:20%">优先来源</th>
+<th style="width:20%">监测频率</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>岗位供给</td>
+<td>目标地域在招司机岗位密度</td>
+<td>核心指标 #1</td>
+<td>HelloWork 地域检索</td>
+<td>季度窗口 + 月度触发核对</td>
+</tr>
+<tr>
+<td>居住成本</td>
+<td>目标地域挂牌租金水平（预期指标）</td>
+<td>核心指标 #2</td>
+<td>賃貸门户</td>
+<td>季度窗口采集</td>
+</tr>
+<tr>
+<td>外国人支援</td>
+<td>自治体外籍支援窗口与多语服务可得性</td>
+<td>核心指标 #3</td>
+<td>自治体官网</td>
+<td>季度触发（制度变化）</td>
+</tr>
+<tr>
+<td>公共服务地域差</td>
+<td>医师数 / 病床数 / 日语指导体制的地域差</td>
+<td>—（登记册未设独立指标，由差异视角小节承载）</td>
+<td>厚生労働省 / 文部科学省 / e-stat</td>
+<td>季度触发（统计年度发布）+ 年度</td>
+</tr>
+<tr>
+<td>个人地域选定期</td>
+<td>自记录决策时点与定居复盘</td>
+<td>核心指标 #4</td>
+<td>自记录</td>
+<td>Offer 比较 / 定居后复盘触发即时核对</td>
+</tr>
+</tbody>
+</table>
+<h3 id="7">决策框架速览（7 维评分）与候选地域</h3>
+<p>评分框架（每地打分 1–5，详见 <a href="../handbook/01-region-choice.md">handbook/01-region-choice.md</a>）：</p>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:33%">维度</th>
+<th style="width:33%">权重</th>
+<th style="width:34%">关键问题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>岗位供给</td>
+<td>×3</td>
+<td>特定技能+干线岗位多吗？有 2 号移行先例的公司吗？</td>
+</tr>
+<tr>
+<td>薪资×成本</td>
+<td>×3</td>
+<td>名义薪资 − 房租/物价 = 可支配多少？</td>
+</tr>
+<tr>
+<td>外国人支援</td>
+<td>×2</td>
+<td>自治体窗口、多语医疗、日语教室</td>
+</tr>
+<tr>
+<td>同胞/前辈密度</td>
+<td>×1</td>
+<td>太少孤独，太多竞争——中间为佳</td>
+</tr>
+<tr>
+<td>交通/归国便利</td>
+<td>×1</td>
+<td>国际机场、港口</td>
+</tr>
+<tr>
+<td>灾害风险</td>
+<td>×1</td>
+<td>地震带/洪水地图/豪雪</td>
+</tr>
+<tr>
+<td>生活品质</td>
+<td>×1</td>
+<td>自然、育儿、医疗资源（长期定居视角）</td>
+</tr>
+</tbody>
+</table>
+<p>候选地域速览（定性，待实地补充）：</p>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:33%">地域</th>
+<th style="width:33%">优势</th>
+<th style="width:34%">注意</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>埼玉（本庄/深谷/熊谷）</td>
+<td>物流仓密集、近东京、成本中</td>
+<td>—</td>
+</tr>
+<tr>
+<td>群马（太田/伊势崎）</td>
+<td>传统物流重镇、外国人多</td>
+<td>冬季行车</td>
+</tr>
+<tr>
+<td>爱知（名古屋周边）</td>
+<td>岗位最厚、支援体制最成熟</td>
+<td>竞争也多</td>
+</tr>
+<tr>
+<td>静冈（富士/沼津）</td>
+<td>新东名自动驾驶实证沿线——观察特别加分</td>
+<td>—</td>
+</tr>
+<tr>
+<td>福冈（北九州/福冈）</td>
+<td>归国方便、薪资佳</td>
+<td>—</td>
+</tr>
+<tr>
+<td>北海道/东北</td>
+<td>薪资含冬季手当</td>
+<td>豪雪，初学者不宜</td>
+</tr>
+</tbody>
+</table>
+<p>决策流程：① Offer 阶段用本框架对候选地打分（≥3.5 考虑）；② 入职前读该自治体「外国人生活ガイド」（官网多有中文版）[Source: https://www.soumu.go.jp/, 2026]；③ 落地 1 个月后实际体验 vs 预期复盘，写入 <a href="../handbook/02-region-notes.md">handbook/02-region-notes.md</a>。</p>
+<h3 id="_10">核心指标逐项对比</h3>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:16%">#</th>
+<th style="width:16%">指标</th>
+<th style="width:16%">基线值（2026-11-12）</th>
+<th style="width:16%">本期值（2026-11-14）</th>
+<th style="width:16%">变动</th>
+<th style="width:20%">判读</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>目标地域司机求人件数</td>
+<td>待基线确立</td>
+<td>待基线确立</td>
+<td>无更新</td>
+<td>目标地域未定，采集动作待触发</td>
+</tr>
+<tr>
+<td>2</td>
+<td>目标地域賃貸挂牌行情（预期指标）</td>
+<td>待基线确立</td>
+<td>待基线确立</td>
+<td>无更新</td>
+<td>与 #1 同地域绑定，采集动作待触发</td>
+</tr>
+<tr>
+<td>3</td>
+<td>目标地域外国人支援窗口</td>
+<td>待基线确立</td>
+<td>待基线确立</td>
+<td>无更新</td>
+<td>自治体官网核对，待定居地确定</td>
+</tr>
+<tr>
+<td>4</td>
+<td>个人地域选定期</td>
+<td>待记录</td>
+<td>待记录</td>
+<td>无更新</td>
+<td>自记录，决策时点未到</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>逐项说明：#1 口径为 HelloWork 地域检索（在招口径 ≠ 实际雇佣人数），月度触发联动 02-career-driver 求人抽样；#2 登记口径（地価公示）≠ 挂牌口径（賃貸门户），预期指标 ≠ 实际成交 / 登记值；#3 优先来源自治体官网；#4 定居地档案模板字段当前为空白待填。</p>
+</blockquote>
+<h3 id="_11">公共服务地域差对比</h3>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:20%">对比视角</th>
+<th style="width:20%">指标口径</th>
+<th style="width:20%">数值</th>
+<th style="width:20%">来源</th>
+<th style="width:20%">时点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>病床数地域差</td>
+<td>病院の一般病床</td>
+<td>879,728 床（全国）</td>
+<td>厚生労働省 令和 6 年医療施設調査</td>
+<td>2024-10-01</td>
+</tr>
+<tr>
+<td>医师数地域差</td>
+<td>人口 10 万対医師数（従業地 / 居住地口径须区分）</td>
+<td>具体数值待核验</td>
+<td>厚生労働省 医師・歯科医師・薬剤師統計</td>
+<td>待核验</td>
+</tr>
+<tr>
+<td>日语指导体制</td>
+<td>日本語指導が必要な児童生徒（公立）</td>
+<td>84,759 人</td>
+<td>文部科学省</td>
+<td>令和 7 年度</td>
+</tr>
+<tr>
+<td>日语指导体制（外国籍）</td>
+<td>其中外国籍</td>
+<td>73,313 人（较上次 +27.0%）</td>
+<td>文部科学省</td>
+<td>令和 7 年度</td>
+</tr>
+<tr>
+<td>外国人儿童就学把握体制</td>
+<td>「外国人の子供の就学状況等調査」第 6 回</td>
+<td>调查已全国实施（自治体间把握体制仍有差异）</td>
+<td>文部科学省</td>
+<td>令和 7 年 5 月 1 日现在</td>
+</tr>
+</tbody>
+</table>
+<p>对决策的含义（推断）：医师向大都市圈集中——地方都市的夜间救急 / 专科就医半径先查到二次医疗圈；病床分布影响重伤 / 产育时的转院半径；不就学风险存在地域差；日语指导教室有无、教员配置密度因自治体差异大——子女同赴前直接问市区町村教育委员会。</p>
+<h3 id="_12">外国人支援与多语言防灾情报渠道</h3>
+<p>防灾情报分三层：国家预警 → 自治体通知 → 个人接收。定居地确定后，把第三层登记动作补进定居地档案。</p>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:33%">层级</th>
+<th style="width:33%">渠道</th>
+<th style="width:34%">入口与用法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>国家预警</td>
+<td>气象厅警報・注意報（大雨/洪水/大雪/地震/津波等）</td>
+<td><a href="https://www.jma.go.jp/bosai/warning/" title="来源：https://www.jma.go.jp/bosai/warning/, 2026">気象庁 警報・注意報</a>——台风季每日确认现住地与通勤圈</td>
+</tr>
+<tr>
+<td>国家预警（多语言）</td>
+<td>防災気象情報多语言版（含简体中文）</td>
+<td><a href="https://www.data.jma.go.jp/multi/yoho/index.html?lang=cn_zs" title="来源：https://www.data.jma.go.jp/multi/yoho/index.html?lang=cn_zs, 2026">気象庁 多言語ページ</a>——日语达标前靠它读懂预警等级</td>
+</tr>
+<tr>
+<td>自治体通知</td>
+<td>市区町村防灾邮件（防災メール）/ LINE 公式账号 / 防灾行政无线</td>
+<td>渠道因自治体而异：役所住民课登记住址时一并申请（具体渠道待定居地确定后复核）</td>
+</tr>
+<tr>
+<td>中央防灾</td>
+<td>防災庁（2026-11-02 由内阁府防灾改组发足）防灾政策与大规模灾情汇总</td>
+<td><a href="https://www.bousai.go.jp" title="来源：https://www.bousai.go.jp, 2026">防災庁</a>——大规模灾害时的中央级信息源</td>
+</tr>
+<tr>
+<td>多语言灾情（媒体）</td>
+<td>NHK WORLD-JAPAN 多语言链接（约 20 种语言新闻 + 地震/海啸等灾害信息）</td>
+<td><a href="https://www3.nhk.or.jp/nhkworld/en/multilingual_links/" title="来源：https://www3.nhk.or.jp/nhkworld/en/multilingual_links/, 2026">NHK WORLD-JAPAN 多言語リンク</a>——网络可达性风险时的备用信息源</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_13">口径冲突并列清单</h3>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:33%">指标</th>
+<th style="width:33%">并列口径</th>
+<th style="width:34%">处理</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>薪资地域差</td>
+<td>厚労省賃金統計（名义工资）≠ 求人平台月収（含手当）</td>
+<td>须同岗位分层</td>
+</tr>
+<tr>
+<td>租金</td>
+<td>登记口径（地価公示）≠ 挂牌口径（賃貸门户）</td>
+<td>并列呈现</td>
+</tr>
+<tr>
+<td>岗位密度</td>
+<td>HelloWork 地域件数（在招口径）≠ 实际雇佣人数</td>
+<td>并列呈现</td>
+</tr>
+<tr>
+<td>医疗服务</td>
+<td>人口 10 万対医師数（従業地 / 居住地口径须区分）≠ 病床数</td>
+<td>并列呈现</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>并列呈现，不合并、不取均值。</p>
+</blockquote>
+<h2 id="s4" class="sec">四、信号灯判定</h2>
+<blockquote>
+<p><strong>类型机制适配说明</strong>：本业务线为「个人地域决策支持」，非市场定价监测。市场指标监测型的 K/RL 阈值信号、供给情景重算、五态合成等机制<strong>不适用</strong>（无价格 / 成交 / 供给类指标）；改以 business-config 第八节追踪表 + 第七节触发器 + 监测日历承载监测职能（business-config 3.2）。本节按「追踪表 + 触发器状态」判读，不硬套阈值红线。</p>
+</blockquote>
+<h3 id="_15">追踪表（监测指标 × 优先来源 × 回写项）</h3>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:16%">#</th>
+<th style="width:16%">监测指标</th>
+<th style="width:16%">优先数据源</th>
+<th style="width:16%">对应章节</th>
+<th style="width:16%">回写登记册项</th>
+<th style="width:20%">本期状态</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>目标地域司机求人件数</td>
+<td>HelloWork 地域检索</td>
+<td>01</td>
+<td>核心指标 #1</td>
+<td>待基线确立</td>
+</tr>
+<tr>
+<td>2</td>
+<td>目标地域賃貸挂牌行情（预期指标）</td>
+<td>賃貸门户</td>
+<td>01 / 02</td>
+<td>核心指标 #2</td>
+<td>待基线确立</td>
+</tr>
+<tr>
+<td>3</td>
+<td>目标地域外国人支援窗口</td>
+<td>自治体官网</td>
+<td>01 / 02</td>
+<td>核心指标 #3</td>
+<td>待基线确立</td>
+</tr>
+<tr>
+<td>4</td>
+<td>个人地域选定期</td>
+<td>自记录</td>
+<td>01 / 02</td>
+<td>核心指标 #4</td>
+<td>待记录</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_16">触发器清单与命中状态</h3>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:25%">周期</th>
+<th style="width:25%">触发器</th>
+<th style="width:25%">指向</th>
+<th style="width:25%">本期命中</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>月度</td>
+<td>目标地域岗位密度 / 条件显著变化（联动 02-career-driver 求人抽样）</td>
+<td>01</td>
+<td>未命中（目标地域未定，采集未启动）</td>
+</tr>
+<tr>
+<td>月度</td>
+<td>防灾气象预警体系与配信渠道变化（気象庁 / 内閣府防災）</td>
+<td>02 防灾小节</td>
+<td>未命中（渠道核对约定：台风季 7–10 月与降雪期前各一次；本期非窗口）</td>
+</tr>
+<tr>
+<td>季度</td>
+<td>地域生活支援制度变化（自治体）</td>
+<td>02</td>
+<td>未命中（窗口未到）</td>
+</tr>
+<tr>
+<td>季度</td>
+<td>医师数等医疗·教育资源统计年度发布（厚労省 / 文科省）</td>
+<td>01 差异视角小节</td>
+<td>未命中（窗口未到）</td>
+</tr>
+<tr>
+<td>年度</td>
+<td>国交省地価统计 / 地域统计年度发布</td>
+<td>01</td>
+<td>未命中（窗口未到）</td>
+</tr>
+<tr>
+<td>年度</td>
+<td>个人选定目标地域</td>
+<td>01 / 02</td>
+<td>未命中（决策时点未到）</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_17">观察项与触发器状态</h3>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:33%">状态项</th>
+<th style="width:33%">内容</th>
+<th style="width:34%">更新于</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>唯一观察项</td>
+<td>首期为空</td>
+<td>—</td>
+</tr>
+<tr>
+<td>首要触发器</td>
+<td>首期为空</td>
+<td>—</td>
+</tr>
+<tr>
+<td>触发器结论</td>
+<td>首期为空</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_18">判读结论</h3>
+<ul>
+<li>本期无触发器命中；无触发器命中且窗口未到时<strong>不启动</strong>，不得为制造变化而虚构变化。</li>
+<li>监测日历：统计类来源按官方发布节奏（年度 / 季度）核对；门户类来源按季度窗口采集；个人决策时点（Offer 比较 / 定居后复盘）触发即时核对。</li>
+<li>本期状态：四项核心指标均未建立活值，信号层无新增判读，维持「框架就绪、活值待建」。</li>
+</ul>
+<h2 id="s5" class="sec">五、与首期基线的偏离</h2>
+<p><strong>基线参照</strong>：首期基线日期 2026-11-12（business-config 第一节）；基线报告数据基准日 2026-11-13（历史报告）。本期为 2026-11 月度首跑，基线即本期参照系。</p>
+<h3 id="_20">数值偏离</h3>
+<ul>
+<li>登记册 #1–#4：本期值与基线值一致（均为「待基线确立 / 待记录」），数值偏离为 0。</li>
+<li>已核验数值（病床 879,728 床；日语指导 84,759 人 / 外国籍 73,313 人、+27.0%）沿用基线，无修订、无推翻。</li>
+</ul>
+<h3 id="_21">结构与机制偏离</h3>
+<ul>
+<li>报告结构：基线为首份分析的自拟结构；本期按市场指标监测型九节骨架对齐重排（「信号灯判定」按追踪表口径判读）。</li>
+<li>遗留项状态：基线报告无 <code>.report-nav</code> 顶部导航（business-config 第十一节遗留项）。<code>.report-nav</code> 顶部导航由 md2html 渲染管线统一生成，遗留项已闭环。</li>
+<li>手册层：2026-11-14 原合并手册拆分为 <a href="../handbook/00-navigation.md">handbook/00-navigation.md</a> / <a href="../handbook/01-region-choice.md">01-region-choice.md</a> / <a href="../handbook/02-region-notes.md">02-region-notes.md</a>，原合并版存档于 <code>reports/archives/2026-11-regional-info-merged-v1.0.md</code>，正文事实未变。</li>
+</ul>
+<h3 id="_22">结论偏离</h3>
+<ul>
+<li>六条核心结论沿用基线，无新增或推翻；本期无新证据足以改变结论。</li>
+</ul>
+<h2 id="s6" class="sec">六、数据缺口与未核验项</h2>
+<h3 id="_24">未取得项</h3>
+<ul>
+<li>登记册 #1、#2、#3：待基线确立；登记册 #4：待记录。</li>
+<li>人口 10 万対医師数具体数值：待核验。</li>
+<li>自治体防灾邮件 / LINE 具体渠道与登记方式：待定居地确定后复核。</li>
+</ul>
+<h3 id="_25">待复核清单</h3>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:25%">#</th>
+<th style="width:25%">待复核项</th>
+<th style="width:25%">现状</th>
+<th style="width:25%">复核入口</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>目标地域司机求人件数</td>
+<td>待基线确立</td>
+<td>HelloWork 地域检索（登记册核心指标 #1）</td>
+</tr>
+<tr>
+<td>2</td>
+<td>目标地域賃貸挂牌行情</td>
+<td>待基线确立</td>
+<td>賃貸门户（登记册核心指标 #2，预期指标）</td>
+</tr>
+<tr>
+<td>3</td>
+<td>目标地域外国人支援窗口</td>
+<td>待基线确立</td>
+<td>自治体官网 / 総務省「外国人生活ガイド」入口（登记册核心指标 #3）</td>
+</tr>
+<tr>
+<td>4</td>
+<td>个人地域选定期与定居地档案</td>
+<td>待记录</td>
+<td>自记录（登记册核心指标 #4 / <a href="../handbook/02-region-notes.md">handbook/02-region-notes.md</a> 模板）</td>
+</tr>
+<tr>
+<td>5</td>
+<td>人口 10 万対医師数</td>
+<td>具体数值待核验</td>
+<td>厚生労働省 医師・歯科医師・薬剤師統計</td>
+</tr>
+<tr>
+<td>6</td>
+<td>自治体防灾邮件 / LINE 登记渠道</td>
+<td>待定居地确定后复核</td>
+<td><a href="../handbook/02-region-notes.md">handbook/02-region-notes.md</a>「地域防灾情报渠道」</td>
+</tr>
+<tr>
+<td>7</td>
+<td>顶部导航（<code>.report-nav</code>）</td>
+<td>遗留项</td>
+<td>business-config 第十一节</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_26">口径与统计域风险</h3>
+<ul>
+<li>登记口径（地価公示）≠ 挂牌口径（賃貸门户）；都道府県 ≠ 市町村；勤務地 ≠ 注册地 ≠ 通勤圈；従業地 / 居住地口径须区分。</li>
+<li>门户数据为预期指标，不等于实际成交 / 登记值。</li>
+<li>统计域未固定前，地域差解读存在混算风险。</li>
+</ul>
+<h2 id="s7" class="sec">七、下期观察清单</h2>
+<h3 id="_28">待答问题</h3>
+<ol>
+<li>目标地域（Offer 比较时）的司机求人件数如何采集并固定口径？</li>
+<li>賃貸挂牌行情（预期指标）的季度采集窗口与登记口径（地価公示）如何并列呈现？</li>
+<li>人口 10 万対医師数的具体数值何时可从厚生労働省统计取得，地域差结构如何？</li>
+<li>日语指导体制（教室有无、教员配置密度）在候选自治体间的差异如何核实？</li>
+<li>自治体防灾邮件 / LINE 登记渠道与多语服务在候选地如何确认？</li>
+<li>个人地域选定期与定居地档案何时建立并进入滚动维护？</li>
+</ol>
+<h3 id="_29">下一期重点核实项</h3>
+<ul>
+<li>登记册 #1–#4 待基线确立 / 待记录项。</li>
+<li>人口 10 万対医師数数值。</li>
+<li>自治体防灾渠道。</li>
+</ul>
+<h3 id="_30">数据补全计划与监测日历</h3>
+<ul>
+<li>月度窗口：核对 HelloWork 求人件数与门户挂牌行情。</li>
+<li>季度窗口：核对自治体支援制度变化；门户类来源按季度窗口采集。</li>
+<li>统计类来源：按官方发布节奏（年度 / 季度）核对，并按「增量留痕」原则回写登记册（保留历史值、不覆盖），不强制另存年度新版文件。</li>
+<li>个人决策时点（Offer 比较 / 定居后复盘）触发即时核对。</li>
+</ul>
+<h3 id="_31">季度观察（生活注意与本地活动）</h3>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:33%">季度</th>
+<th style="width:33%">天气 / 生活注意</th>
+<th style="width:34%">本地活动</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>春</td>
+<td>花粉</td>
+<td>赏花</td>
+</tr>
+<tr>
+<td>夏</td>
+<td>台风 / 热中症</td>
+<td>祭り · 花火</td>
+</tr>
+<tr>
+<td>秋</td>
+<td>台风尾巴</td>
+<td>红叶</td>
+</tr>
+<tr>
+<td>冬</td>
+<td>雪 / 日照短</td>
+<td>灯饰</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>核对约定：台风季（7–10 月）与降雪期前各核对一次防灾情报渠道可用性；气象厅预警 / 配信体系调整时更新渠道表。</p>
+</blockquote>
+<h2 id="s8" class="sec">八、台账更新编号与来源</h2>
+<h3 id="_33">登记册更新台账</h3>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:20%">编号</th>
+<th style="width:20%">台账项</th>
+<th style="width:20%">本期更新类型</th>
+<th style="width:20%">状态</th>
+<th style="width:20%">来源 / 复核入口</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>REG-01</td>
+<td>核心指标 #1 目标地域司机求人件数</td>
+<td>复核（无更新）</td>
+<td>待基线确立</td>
+<td>HelloWork 地域检索 · <a href="../data/regional_indicator_registry.md">登记册</a> 核心指标 #1</td>
+</tr>
+<tr>
+<td>REG-02</td>
+<td>核心指标 #2 目标地域賃貸挂牌行情（预期指标）</td>
+<td>复核（无更新）</td>
+<td>待基线确立</td>
+<td>賃貸门户 · 登记册核心指标 #2</td>
+</tr>
+<tr>
+<td>REG-03</td>
+<td>核心指标 #3 目标地域外国人支援窗口</td>
+<td>复核（无更新）</td>
+<td>待基线确立</td>
+<td>自治体官网 · 登记册核心指标 #3</td>
+</tr>
+<tr>
+<td>REG-04</td>
+<td>核心指标 #4 个人地域选定期</td>
+<td>复核（无更新）</td>
+<td>待记录</td>
+<td>自记录 · 登记册核心指标 #4</td>
+</tr>
+<tr>
+<td>OBS-01</td>
+<td>观察项与触发器状态</td>
+<td>复核（无更新）</td>
+<td>首期为空</td>
+<td>business-config 第七节 · 登记册同名节</td>
+</tr>
+<tr>
+<td>VER-1.0</td>
+<td>本报告版本</td>
+<td>首跑（九节骨架对齐）</td>
+<td>已发布</td>
+<td>本文件</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>活值统一维护于 <a href="../data/regional_indicator_registry.md">data/regional_indicator_registry.md</a>，正文不硬编码；本期无活值更新，登记册保留基线版本。待复核项的复核入口详见第六节清单。</p>
+</blockquote>
+<h3 id="_34">来源分级与核验状态</h3>
+<p><strong>A 官方一手</strong>（已核验，附完整 URL）：</p>
+<ol>
+<li>厚生労働省 医師・歯科医師・薬剤師統計 — https://www.mhlw.go.jp/toukei/list/33-20.html （2026 核对）</li>
+<li>厚生労働省 令和 6 年医療施設調査 — https://www.mhlw.go.jp/toukei/saikin/hw/iryosd/24/index.html （2024）</li>
+<li>文部科学省 帰国・外国人児童生徒等の現状 — https://www.mext.go.jp/a_menu/shotou/clarinet/genjyou/1295897.htm （2026 核对，令和 7 年度调查）</li>
+<li>気象庁 警報・注意報 — https://www.jma.go.jp/bosai/warning/ （2026 核对）</li>
+<li>気象庁 多言語ページ（防災気象情報多语言版） — https://www.data.jma.go.jp/multi/yoho/index.html?lang=cn_zs （2026 核对）</li>
+<li>防災庁 — https://www.bousai.go.jp （2026 核对；2026-11-02 发足）</li>
+<li>NHK WORLD-JAPAN 多言語リンク — https://www3.nhk.or.jp/nhkworld/en/multilingual_links/ （2026 核对）</li>
+<li>総務省自治体「外国人生活ガイド」入口 — https://www.soumu.go.jp/ （2026 核对）</li>
+</ol>
+<p><strong>B 权威转引 / 聚合</strong>：HelloWork 地域检索（岗位密度一手聚合，登记册 #1 优先来源）；JETRO 地域信息。</p>
+<p><strong>C 平台抽样 / 门户</strong>：賃貸 / 生活门户（挂牌口径，仅预期指标，登记册 #2 优先来源）；地域媒体。</p>
+<h3 id="_35">跨主题链接</h3>
+<ul>
+<li>薪资地域差 → <a href="../../07-economy-finance/reports/2026-11-economy-finance.md">../07-economy-finance/reports/2026-11-economy-finance.md</a></li>
+<li>求职渠道地域策略 → <a href="../../02-career-driver/reports/2026-11-career-driver.md">../02-career-driver/reports/2026-11-career-driver.md</a></li>
+<li>保险体系与就医流程细节 → <a href="../../12-culture-life/reports/2026-11-culture-life.md">../12-culture-life/reports/2026-11-culture-life.md</a></li>
+<li>就学手续与学制细节 → <a href="../../10-education-qualification/reports/2026-11-education-qualification.md">../10-education-qualification/reports/2026-11-education-qualification.md</a></li>
+<li>灾害时外国人支援政策环境 → <a href="../../09-politics-law/reports/2026-11-politics-law.md">../09-politics-law/reports/2026-11-politics-law.md</a></li>
+<li>岗位密度 / 薪资地域差活值（只读引用） → <a href="../../01-ssw-driver/reports/2026-11-ssw-driver.md">../01-ssw-driver/reports/2026-11-ssw-driver.md</a></li>
+<li>手册与登记册 → <a href="../handbook/00-navigation.md">handbook/00-navigation.md</a> · <a href="../handbook/01-region-choice.md">handbook/01-region-choice.md</a> · <a href="../handbook/02-region-notes.md">handbook/02-region-notes.md</a> · <a href="../data/regional_indicator_registry.md">data/regional_indicator_registry.md</a></li>
+</ul>
+</main>
+<footer class="footer" role="contentinfo" aria-label="页脚">
+  <p>日本地域信息 · 日本地域信息 · 2026-11 月度报告｜2026-11<br>
+  报告路径：13-regional-info\reports\2026-11-regional-info.html</p>
+  <p class="backlinks">
+    <a href="../../index.html#topic-13-regional-info">← 返回主题</a>
+    <a href="../../index.html">返回首页</a>
+  </p>
+</footer>
+<script>
+(function () {
+  'use strict';
+  var main = document.getElementById('main-content');
+  var tgDiff = document.getElementById('tg-diff');
+  var tgDel = document.getElementById('tg-del');
+  if (main && tgDiff) {
+    tgDiff.addEventListener('click', function () {
+      var hide = main.classList.toggle('hide-diff');
+      tgDiff.textContent = hide ? '显示更新标记' : '隐藏更新标记';
+    });
+  }
+  if (tgDel) {
+    tgDel.addEventListener('click', function () {
+      var open = tgDel.getAttribute('data-open') === '1';
+      var groups = document.querySelectorAll('details.diff-del-group');
+      for (var i = 0; i < groups.length; i++) groups[i].open = !open;
+      tgDel.setAttribute('data-open', open ? '0' : '1');
+      tgDel.textContent = open ? '展开全部删除' : '收起全部删除';
+    });
+  }
+})();
+</script>
+</body>
+</html>
