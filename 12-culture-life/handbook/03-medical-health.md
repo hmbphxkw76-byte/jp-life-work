@@ -3,7 +3,7 @@
 
 > 信息核对日期：2026-11-12。对应阶段 2–5：落地初期的就医门槛、司机岗位的工伤与健康风险、长期定居的医疗使用。
 >
-> **边界**：保险费率、高额疗养费上限等活值统一维护于 [data/culture_life_indicator_registry.md](../data/culture_life_indicator_registry.md)，本节只写制度结构与操作流程；税·社保·年金的缴纳义务与归档 → [03-税务社保年金](../../07-economy-finance/reports/2026-11-economy-finance.html#03-税务社保年金)。
+> **边界**：保险费率、高额疗养费上限等活值统一维护于 [data/culture_life_indicator_registry.md](../data/culture_life_indicator_registry.md)，本节只写制度结构与操作流程；税·社保·年金的缴纳义务与归档 → [03-税务社保年金](../../07-economy-finance/handbook/03-tax-social-insurance.md)。
 
 ## 一、医疗保险的两条轨道
 
@@ -16,7 +16,7 @@
 - 窗口自付比例为 3 割（未满 70 岁；70–74 岁 2 割；75 岁起转入后期高龄者医疗制度）——法律依据为[健康保険法第 74 条](https://laws.e-gov.go.jp/law/334AC0000000070 "来源：https://laws.e-gov.go.jp/law/334AC0000000070, 2026")
 - 外国人被保险者：国保有含简繁中文在内 19 语种的[在留外国人向指南](https://www.mhlw.go.jp/stf/newpage_21895.html "来源：https://www.mhlw.go.jp/stf/newpage_21895.html, 2026")
 - 高额疗养费制度：单月自付超过按所得区分的上限部分可申请给付；上限额每年调整，属活值，查厚労省或健保组合现行表，不写入本手册。官方示例（令和 8 年 8 月起新制度）：70 岁未满·年收约 370–510 万円者，100 万円治疗自付约 9.3 万円封顶 [Source: https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/juuyou/kougakuiryou/index.html, 2026]；令和 8·9 年 8 月各有见直し（监测触发器）
-- 易漏点：退职后健保资格丧失，须在 14 天内转入国民健康保险或办理任意継続；断保会在永住审查的"公的义务"项留下记录（→ [07-永住与长期在留规划](../../08-visa-immigration/reports/2026-11-visa-immigration.html#07-永住与长期在留规划)）
+- 易漏点：退职后健保资格丧失，须在 14 天内转入国民健康保险或办理任意継続；断保会在永住审查的"公的义务"项留下记录（→ [07-永住与长期在留规划](../../08-visa-immigration/handbook/07-permanent-residence.md)）
 
 ## 二、就医全流程
 
@@ -27,7 +27,7 @@
 5. **付款**：窗口付 3 割，保留领收书（医療費控除与公司报销都要）
 6. **夜间/假日**：先拨所在地「救急安心センター（#7119）」咨询再决定是否叫救护车（**非全国统一**，由自治体设置；截至令和 6 年 11 月共 36 地域，覆盖 36/47 都道府県——[消防庁 消防白書](https://www.fdma.go.jp/publication/hakusho/r6/report4/67976.html "来源：https://www.fdma.go.jp/publication/hakusho/r6/report4/67976.html, 2024")）；未开设地区拨「#8000（儿童急救咨询）」或直接 119
 
-> 与 07 的边界：医療費控除的申告操作 → [03-税务社保年金](../../07-economy-finance/reports/2026-11-economy-finance.html#03-税务社保年金)；本节只管"看病怎么走通"。
+> 与 07 的边界：医療費控除的申告操作 → [03-税务社保年金](../../07-economy-finance/handbook/03-tax-social-insurance.md)；本节只管"看病怎么走通"。
 
 ## 三、体检与预防（司机岗位特化）
 
@@ -85,7 +85,7 @@
 ## 关联
 
 - 保险费率、自付上限等活值 → [data/culture_life_indicator_registry.md](../data/culture_life_indicator_registry.md)
-- 税·社保·年金缴纳与归档 → [03-税务社保年金](../../07-economy-finance/reports/2026-11-economy-finance.html#03-税务社保年金)
+- 税·社保·年金缴纳与归档 → [03-税务社保年金](../../07-economy-finance/handbook/03-tax-social-insurance.md)
 - 现场安全制度与事故处理 → [03-安全规范与现场制度](../../02-career-driver/handbook/03-safety-rules.md)
 - 就医资源的地域差 → [13-地域信息 · 01-地域选择框架](../../13-regional-info/reports/2026-11-regional-info.html#01-地域选择框架)
 - 心理健康的生活经验视角（疲劳期情绪低谷）→ [02-生活指南与适应 · 四](02-living-guide.md#四心理健康与社群)

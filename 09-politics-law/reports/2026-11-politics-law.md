@@ -354,7 +354,7 @@
 4. **灾害时外国人支援体制**
    - 总务省推进避难所等对外国人被灾者的信息传达支援（情報難民ゼロ项目・灾害时外国人支援信息协调员），与 13-regional 防灾情报渠道互补
 
-→ 跟踪：[08-签证与在留 · 09](../../08-visa-immigration/reports/2026-11-visa-immigration.html#09-政策更新日志)
+→ 跟踪：[08-签证与在留 · 09](../../08-visa-immigration/handbook/09-policy-log.md)
 
 #### 四、跟踪清单（每季度）
 
@@ -363,7 +363,7 @@
 - [ ] 育成就劳分野方针发布
 - [ ] 自治体外国人施策（居住地变更时重查）
 
-→ 记录：[08-签证与在留 · 09](../../08-visa-immigration/reports/2026-11-visa-immigration.html#09-政策更新日志)
+→ 记录：[08-签证与在留 · 09](../../08-visa-immigration/handbook/09-policy-log.md)
 
 ---
 

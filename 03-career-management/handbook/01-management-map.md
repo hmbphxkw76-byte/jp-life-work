@@ -59,7 +59,7 @@
 
 ## 五、关联
 
-- 2 号与资格联动 → [08-签证与在留 · 05](../../08-visa-immigration/reports/2026-11-visa-immigration.html#05-特定技能2号与升级路径)
+- 2 号与资格联动 → [08-签证与在留 · 05](../../08-visa-immigration/handbook/05-ssw2-upgrade.md)
 - 知识体系细节 → [02-业务知识体系](02-business-knowledge.md)
 - 过渡主线计划 → [04-管理岗过渡学习计划](04-transition-plan.md)
 

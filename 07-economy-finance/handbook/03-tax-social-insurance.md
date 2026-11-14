@@ -1,7 +1,7 @@
 # 03 税务社保年金
 <!-- updated: 2026-11-14 | 拆分自 reports/2026-11-economy-finance.md 附录「03 税务社保年金」 -->
 
-> 信息核对日期：2026-11-11。定位：把"公的义务"从负担变成**永住证据链资产**（→ [08-签证与在留 · 07](../../08-visa-immigration/reports/2026-11-visa-immigration.html#07-永住与长期在留规划)）。
+> 信息核对日期：2026-11-11。定位：把"公的义务"从负担变成**永住证据链资产**（→ [08-签证与在留 · 07](../../08-visa-immigration/handbook/07-permanent-residence.md)）。
 >
 > **边界**：活值查 [data/economy_indicator_registry.md](../data/economy_indicator_registry.md)；跨主题边界与归属见文末「关联」。
 
@@ -41,13 +41,13 @@
 
 ## 五、关联
 
-- 公的义务与永住取消 → [08-签证与在留 · 07](../../08-visa-immigration/reports/2026-11-visa-immigration.html#07-永住与长期在留规划)
+- 公的义务与永住取消 → [08-签证与在留 · 07](../../08-visa-immigration/handbook/07-permanent-residence.md)
 - 法规框架 → [09-politics-law](../../09-politics-law)
 
 ## 关联
 
 - 活值 → [data/economy_indicator_registry.md](../data/economy_indicator_registry.md)
-- [08-签证与在留 · 07](../../08-visa-immigration/reports/2026-11-visa-immigration.html#07-永住与长期在留规划)
+- [08-签证与在留 · 07](../../08-visa-immigration/handbook/07-permanent-residence.md)
 - [09-politics-law](../../09-politics-law)
 
 ---

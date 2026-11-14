@@ -38,7 +38,7 @@ Y5–8  运行管理/配车    月给 30–40 万 + 赏与增加
 Y8–10 主任/管理岗      月给 35–45 万（永住世帯年收达标窗口）
 ```
 
-对照永住要件（世帯年收 ≥ 日本人世帯平均，→ [08-签证与在留 · 07](../../08-visa-immigration/reports/2026-11-visa-immigration.html#07-永住与长期在留规划)）：单身期收入增长曲线在 Y6–8 大概率达标；带家属后需重新核算。
+对照永住要件（世帯年收 ≥ 日本人世帯平均，→ [08-签证与在留 · 07](../../08-visa-immigration/handbook/07-permanent-residence.md)）：单身期收入增长曲线在 Y6–8 大概率达标；带家属后需重新核算。
 
 ## 四、额外收入选项（合规前提）
 
@@ -55,7 +55,7 @@ Y8–10 主任/管理岗      月给 35–45 万（永住世帯年收达标窗�
 
 - 活值 → [data/economy_indicator_registry.md](../data/economy_indicator_registry.md)
 - [02 薪资结构与工时合规](../../02-career-driver/handbook/02-salary-compliance.md)
-- [08-签证与在留 · 07](../../08-visa-immigration/reports/2026-11-visa-immigration.html#07-永住与长期在留规划)
+- [08-签证与在留 · 07](../../08-visa-immigration/handbook/07-permanent-residence.md)
 
 ---
 > 导航：[00-导航与使用约定](00-navigation.md) · [数据登记册](../data/economy_indicator_registry.md)

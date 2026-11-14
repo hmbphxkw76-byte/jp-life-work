@@ -46,7 +46,7 @@ Result     ：次月起误出库率从0.3%降至0.05%，方案被正式采用
 ## 五、与其他档案的关系
 
 - 收入/社保记录 → [02-司机职业 · 06](../../02-career-driver/handbook/06-work-conditions.md)（永住证据链主档，本文件是"能力线"）
-- 签证材料 → [08-签证与在留 · 07](../../08-visa-immigration/reports/2026-11-visa-immigration.html#07-永住与长期在留规划)
+- 签证材料 → [08-签证与在留 · 07](../../08-visa-immigration/handbook/07-permanent-residence.md)
 
 ## 关联
 

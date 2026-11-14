@@ -1,7 +1,7 @@
 # 04 管理岗过渡学习计划
 <!-- updated: 2026-11-14 | 拆分自 reports/2026-11-career-management.md 附录「04 管理岗过渡学习计划」 -->
 
-> 时间轴：从司机入职（约 2027 年秋）起 48 个月，衔接 [11-日语学习 · 04-N2备考计划](../../11-language-japanese/reports/2026-11-language-japanese.html#04-n2备考计划) 与 [08-签证与在留 · 05](../../08-visa-immigration/reports/2026-11-visa-immigration.html#05-特定技能2号与升级路径)。
+> 时间轴：从司机入职（约 2027 年秋）起 48 个月，衔接 [11-日语学习 · 04-N2备考计划](../../11-language-japanese/reports/2026-11-language-japanese.html#04-n2备考计划) 与 [08-签证与在留 · 05](../../08-visa-immigration/handbook/05-ssw2-upgrade.md)。
 >
 > **边界**：活值查 [data/career_logistics_indicator_registry.md](../data/career_logistics_indicator_registry.md)；N2 备考 → [11-language-japanese](../../11-language-japanese)；2 号移行 → [08-visa-immigration](../../08-visa-immigration)。
 

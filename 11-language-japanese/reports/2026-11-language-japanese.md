@@ -301,7 +301,7 @@
 （五十音+基础）            （入境材料齐备）  （入境后初期）        （管理岗准备期）
 ```
 
-M1 完成后即满足特定技能卡车路径的日语要件，可与技能试验并行推进（→ [08-签证与在留 · 03](../../08-visa-immigration/reports/2026-11-visa-immigration.html#03-考试与日语要求)）。
+M1 完成后即满足特定技能卡车路径的日语要件，可与技能试验并行推进（→ [08-签证与在留 · 03](../../08-visa-immigration/handbook/03-exams-japanese.md)）。
 
 #### 七、分计划文件
 
@@ -399,7 +399,7 @@ N4 考察约 300 汉字、1500 词汇、基本句型（て形/た形/普通形/�
 
 #### 一、为什么 N3 是职业关键级
 
-- 出租车/巴士路径的硬门槛（→ [08-签证与在留 · 02](../../08-visa-immigration/reports/2026-11-visa-immigration.html#02-特定技能1号-自动车运送业)）
+- 出租车/巴士路径的硬门槛（→ [08-签证与在留 · 02](../../08-visa-immigration/handbook/02-ssw1-driver.md)）
 - 入境后现场沟通、安全指示、客户对接的实际工作语言量
 - N3 → N2 的桥梁：N3 内容与职场日语重叠度最高，性价比最高
 
@@ -513,7 +513,7 @@ N2 备考期大概率与全职司机工作重叠（驾驶疲劳、早出晚归�
 #### 七、N2 之后
 
 - 面向阶段 3–4：商务日语（邮件/敬语体系完整化）、物流专业术语表（→ [../../03-career-management](../../03-career-management/reports/)、[../../04-industry-logistics](../../04-industry-logistics/reports/)）
-- 面向永住/长期定居：社会生活日语（税金、年金、保险用语，→ [08-签证与在留 · 07](../../08-visa-immigration/reports/2026-11-visa-immigration.html#07-永住与长期在留规划)）
+- 面向永住/长期定居：社会生活日语（税金、年金、保险用语，→ [08-签证与在留 · 07](../../08-visa-immigration/handbook/07-permanent-residence.md)）
 
 ---
 

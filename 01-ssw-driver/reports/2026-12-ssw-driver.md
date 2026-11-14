@@ -93,7 +93,7 @@
 
 要点：现行分野別運用方針为令和 8 年 1 月 23 日阁议决定，受入上限 **22,100 人**（旧方针 24,500 已废止；ssw.go.jp 日/中文页截至本版仍未同步更正，观察继续）。本版直接读取 ISA 受入见込数表（2026-11-06 更新版）确认：自動車運送業 1 号受入見込数 **22,100**、在留者数 **843**、充足率 **3.8%**、年間増加 **803**；1 号全体受入見込数 805,700、在留者 438,128、充足率 54.4%；2 号全体 23,348（其中建設 7,513、飲食料品製造 5,522、介護不在本表计 22,243 为「介護」在留資格口径）。本分野**在 2 号栏为空白**，即不得接收 2 号。[Source: https://www.moj.go.jp/isa/content/001472175.pdf, 2026; https://www.moj.go.jp/isa/content/001467291.pdf, 2026]
 
-制度细节（在留期间上限、家属、转职规则）见 [08 签证与在留资格知识手册 · 特定技能制度概览](../../08-visa-immigration/reports/2026-11-visa-immigration.html#01-特定技能制度概览) 与 [特定技能 1 号·自動車運送業](../../08-visa-immigration/reports/2026-11-visa-immigration.html#02-特定技能1号-自动车运送业)，本报告只记录变化。
+制度细节（在留期间上限、家属、转职规则）见 [08 签证与在留资格知识手册 · 特定技能制度概览](../../08-visa-immigration/handbook/01-ssw-overview.md) 与 [特定技能 1 号·自動車運送業](../../08-visa-immigration/handbook/02-ssw1-driver.md)，本报告只记录变化。
 
 ### 2.2 「自動車運送業」分野人材基准（本版有更新）
 <!-- updated: 2026-11-12 -->
@@ -116,13 +116,13 @@
 - **月报**：最新为 **2026 年 9 月分（2026-10-15 发布，news/29）**，实施国 18 个（塔吉克 CBT 自 2026-09 开通）；**2026 年 10 月分截至基准日未发布**；中国大陆仍无考点且无新增设点公告。[Source: https://sswt-portal.classnk.or.jp/news/, 2026; https://sswt-portal.classnk.or.jp/news/29, 2026]
 - **日本語試験（本版重点）**：出入国在留管理庁 2026-10-05 专页——“JLPT 报考人数过多，**令和 8 年 12 月考试的 N1–N5 全等级在报名受理期结束前已全部截止**”，并建议特定技能 1 号/育成就労申请者改用 JFT-Basic（A2.2、A1 合格即可满足；JFT-Basic 基本在全国 11 处、每月多次实施；可网上报名）。费用：JFT-Basic 日本国内 **10,000 円**（含消费税相当额，因国而异：越南 870,000 VND、菲律宾 2,010 PHP 等）；JLPT N4/N5 **450 元**、N1/N2 550 元（中国报名口径）。[Source: https://www.moj.go.jp/isa/content/001471906.pdf, 2026; https://www.prometric-jp.com/ssw/exam/fee/, 2026; https://jlpt.neea.cn/faq.html, 2026]
 - 操作含义（推断）：2026 年内已无法通过"12 月 JLPT N4"取得日语要件；可行的三条路径为 ①赴越南/菲律宾/印尼等有 JFT-Basic 考点的国家受验 ②以特定活动（準備）入境日本后在日受验 ③等待 2027 年上半年 JLPT（报名约在 2027-03 前后，需按当年公告确认，推断）。[Source: https://www.moj.go.jp/isa/content/001471906.pdf, 2026]
-- 考试与日语要求细节见 [03 考试与日语要求](../../08-visa-immigration/reports/2026-11-visa-immigration.html#03-考试与日语要求)。
+- 考试与日语要求细节见 [03 考试与日语要求](../../08-visa-immigration/handbook/03-exams-japanese.md)。
 
 ### 2.4 申请流程与费用（截至 2026-11-12 无更新）
 
 要点：特定活动（準備，卡车最长 6 个月）入境 → 外免切替/研修 → COE（免费、标准 1–3 个月）→ 签证 → 入境；签证费现行单次 **715 元人民币**（约 15,000 円，2026-07-01 至 2027-03-31 受理件适用）、二次/数次 **1,430 元**；在留更新/变更手续费 5,500 円。本版复核：上海总领事馆（2026-06-24 公告）、青岛总领事馆、重庆总领事馆三页一致。[Source: https://www.shanghai.cn.emb-japan.go.jp/itpr_ja/11_000001_00633.html, 2026; https://www.qingdao.cn.emb-japan.go.jp/itpr_ja/11_000001_02405.html, 2026; https://www.chongqing.cn.emb-japan.go.jp/itpr_zh/qianzhengshouye.html, 2026]
 
-流程与材料清单见 [04 申请流程与材料](../../08-visa-immigration/reports/2026-11-visa-immigration.html#04-申请流程与材料)。
+流程与材料清单见 [04 申请流程与材料](../../08-visa-immigration/handbook/04-application.md)。
 
 ### 2.5 登録支援機関（本版有更新：要件改正）
 <!-- updated: 2026-11-12 -->
@@ -144,7 +144,7 @@
 | 实习→SSW 免试 | 第 2 号技能实习良好修了者，**当分の間**免试并视为满足日语 A2 相当 | — | — | — |
 
 - 免试条款原文（继承，继续有效）：「第 2 号技能実習…を良好に修了した者については、当分の間、上記試験等を免除し…A2 相当…満たしているものとして取り扱う」——全文无"修了後 5 年以内"时限。[Source: https://www.moj.go.jp/isa/content/001434808.pdf, 2025]
-- 育成就労制度的定位与切换时点见 [06 育成就劳制度与新动向](../../08-visa-immigration/reports/2026-11-visa-immigration.html#06-育成就劳制度与新动向)。[Source: https://www.moj.go.jp/isa/content/001335263.pdf, 2025]
+- 育成就労制度的定位与切换时点见 [06 育成就劳制度与新动向](../../08-visa-immigration/handbook/06-trainee-labor.md)。[Source: https://www.moj.go.jp/isa/content/001335263.pdf, 2025]
 
 ---
 
@@ -288,7 +288,7 @@ EC・冷链・3PL 赛道判断见 [02 增长赛道](../../04-industry-logistics/
 1. **技能試験优先**：官方样本题＋全ト协テキスト；CBT 随时可考、80 分钟/60% 合格线、10 年有效；中国大陆无考点，需在日或第三国受验（越南、印尼等）。[Source: https://sswt-portal.classnk.or.jp/news/25, 2026; https://sswt-portal.classnk.or.jp/news/, 2026]
 2. **日语路径重排（本版）**：①首选 JFT-Basic A2.2（日本国内 11 处、每月多次；境外考点须查 JFT-Basic 官网当年度实施国）②次选 2027 年上半年 JLPT（报名窗口通常在 3 月前后，需按当年公告确认，推断）③已在日者可先以特定活动（準備）入境再受验。[Source: https://www.moj.go.jp/isa/content/001471906.pdf, 2026; https://www.prometric-jp.com/ssw/exam/fee/, 2026]
 3. **全流程费用速算（推断汇总）**：技能試験 6,500 円＋JFT-Basic 10,000 円（或 JLPT 450 元）＋签证 715 元＋COE 免费＋（如需在日考驾照另计 30–40 万円）——制度性现金门槛仍低，主要成本在驾照与支援环节。
-4. 备考顺序与教材见 [03 考试与日语要求](../../08-visa-immigration/reports/2026-11-visa-immigration.html#03-考试与日语要求)。
+4. 备考顺序与教材见 [03 考试与日语要求](../../08-visa-immigration/handbook/03-exams-japanese.md)。
 
 ### 6.2 招募渠道与中介资质（截至 2026-11-12 无更新）
 

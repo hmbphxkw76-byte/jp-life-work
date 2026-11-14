@@ -63,7 +63,7 @@
 
 ## 六、关联文件
 
-- 工资/社保记录归档 → [06-实际工作条件记录](06-work-conditions.md)、[08-签证与在留 · 07](../../08-visa-immigration/reports/2026-11-visa-immigration.html#07-永住与长期在留规划)
+- 工资/社保记录归档 → [06-实际工作条件记录](06-work-conditions.md)、[08-签证与在留 · 07](../../08-visa-immigration/handbook/07-permanent-residence.md)
 - 收入与日本经济大环境 → [../../07-economy-finance](../../07-economy-finance/reports/)
 
 ## 关联

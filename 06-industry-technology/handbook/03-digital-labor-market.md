@@ -5,7 +5,7 @@
 
 <!-- updated: 2026-11-12 | 新增章节 -->
 
-> 信息核对日期：2026-11-12。对应阶段 4 的市场面：转职/跳槽谈判前的行情基准。薪资类数据来自转职服务登录者统计与企业公开值，与个人实际报价有偏差，仅作参照带。在留资格与日语审查要件一律见 [05 特定技能2号与升级路径](../../08-visa-immigration/reports/2026-11-visa-immigration.html#05-特定技能2号与升级路径)，本章节只管"技能-岗位-行情"。
+> 信息核对日期：2026-11-12。对应阶段 4 的市场面：转职/跳槽谈判前的行情基准。薪资类数据来自转职服务登录者统计与企业公开值，与个人实际报价有偏差，仅作参照带。在留资格与日语审查要件一律见 [05 特定技能2号与升级路径](../../08-visa-immigration/handbook/05-ssw2-upgrade.md)，本章节只管"技能-岗位-行情"。
 
 ## 一、IT/数字化人才供需全景
 
@@ -57,7 +57,7 @@
 ## 关联
 
 - 活值 → [data/technology_industry_indicator_registry.md](../data/technology_industry_indicator_registry.md)
-- [05 特定技能2号与升级路径](../../08-visa-immigration/reports/2026-11-visa-immigration.html#05-特定技能2号与升级路径)
+- [05 特定技能2号与升级路径](../../08-visa-immigration/handbook/05-ssw2-upgrade.md)
 
 ---
 > 导航：[00-导航与使用约定](00-navigation.md) · [数据登记册](../data/technology_industry_indicator_registry.md)
