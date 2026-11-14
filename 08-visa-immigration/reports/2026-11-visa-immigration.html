@@ -5,168 +5,41 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>日本签证与在留资格 · 2026-11 月度报告</title>
 <style>
-:root{
-  --radius-sm:8px; --radius:12px; --radius-lg:16px;
-  --shadow:0 1px 3px rgba(20,40,70,.06); --shadow-md:0 4px 14px rgba(20,40,70,.09);
-  --font-sans:"Microsoft YaHei","PingFang SC","Segoe UI",Arial,sans-serif;
-  --font-mono:"SFMono-Regular",Consolas,"Liberation Mono",monospace;
-  --focus-ring:0 0 0 3px rgba(63,111,176,.35);
-  --bg:#f4f6f9; --card:#ffffff; --ink:#15202b; --ink2:#465667; --ink3:#657180;
-  --line:#e1e7ee; --line2:#eef2f6;
-  --navy:#16324f; --navy2:#2f5597; --blue:#3f6fb0; --blue-l:#eaf1fa;
-  --red:#a83224; --red-d:#822116; --red-l:#fbece8;
-  --pre:#b8541c; --pre-l:#fdf1e4;
-  --green:#1c7444; --green-l:#eaf5ef;
-  --amber:#956612; --amber-l:#fdf4e2;
-  --gray:#646f7b; --gray-l:#eff2f4;
-}
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-body{font-family:var(--font-sans);background:var(--bg);color:var(--ink);line-height:1.76;font-size:14.5px}
-a{color:var(--navy2);text-decoration:none}
-a:hover{text-decoration:underline}
-.wrap{max-width:1160px;margin:0 auto;padding:0 24px 68px}
-
-/* ── 跳转链接 / 焦点环 ── */
-.skip-link{position:absolute;left:12px;top:-48px;z-index:100;background:var(--navy);
-  color:#fff;padding:8px 16px;border-radius:0 0 8px 8px;font-size:12.5px;transition:top .15s ease}
-.skip-link:focus{top:0;color:#fff;text-decoration:none}
-:focus-visible{outline:none;box-shadow:var(--focus-ring)}
-
-/* ── 题头 Hero ── */
-.hero{background:linear-gradient(128deg,#0f2338 0%,#16324f 52%,#2f5597 100%);
-  color:#fff;padding:46px 36px 34px;border-radius:0 0 18px 18px;margin-bottom:24px}
-.hero .eyebrow{font-size:11.5px;letter-spacing:2.4px;color:rgba(255,255,255,.62);text-transform:uppercase}
-.hero h1{font-size:28px;font-weight:700;letter-spacing:.4px;margin:8px 0 6px;line-height:1.35}
-.hero .sub{font-size:13.5px;color:rgba(255,255,255,.82);max-width:900px}
-.hero .meta{font-size:12.3px;color:rgba(255,255,255,.78);margin-top:16px;line-height:2}
-.hero .meta b{color:#fff}
-.hero .tag{display:inline-block;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.2);
-  border-radius:14px;padding:2px 11px;margin:5px 6px 0 0;font-size:11.5px}
-
-/* ── 报告导航（sticky） ── */
-.report-nav{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);
-  border-bottom:1px solid var(--line);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
-  margin-bottom:26px}
-.report-nav .wrap{padding-top:10px;padding-bottom:10px}
-.nav-url{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;font-size:11.5px;
-  line-height:1.6;color:var(--ink3);padding-bottom:6px;margin-bottom:6px;
-  border-bottom:1px dashed var(--line)}
-.nav-url-label{font-weight:700;color:var(--ink2);white-space:nowrap}
-.nav-url a{color:var(--blue);word-break:break-all}
-.nav-tabs{display:flex;flex-wrap:wrap;gap:6px}
-.nav-tabs a{color:var(--ink2);font-size:12.5px;padding:5px 10px;border-radius:6px;
-  transition:background .15s ease,color .15s ease}
-.nav-tabs a:hover{background:var(--blue-l);color:var(--blue)}
-
-/* ── 跨月对比工具条 ── */
-.diff-bar{display:flex;flex-wrap:wrap;align-items:center;gap:8px;
-  margin-top:8px;padding-top:8px;border-top:1px dashed var(--line);
-  font-size:12px;color:var(--ink3)}
-.diff-bar .diff-summary{flex:1;min-width:200px;line-height:1.6}
-.diff-bar .diff-summary b{color:var(--navy)}
-.diff-toggle{font-size:12px;border:1px solid var(--line);background:#fff;border-radius:7px;
-  padding:4px 11px;cursor:pointer;color:var(--navy2);font-family:inherit}
-.diff-toggle:hover{border-color:var(--blue)}
-
-/* ── 正文 ── */
-h2.sec{font-size:20px;color:var(--navy);margin:44px 0 4px;padding-left:12px;
-  border-left:4px solid var(--navy2);font-weight:700;scroll-margin-top:110px}
-h3{font-size:15.5px;color:var(--navy);margin:22px 0 8px;font-weight:700}
-h4{font-size:14px;color:var(--navy);margin:16px 0 6px;font-weight:700}
-p{margin:0 0 12px}
-ul,ol{padding-left:22px;margin:8px 0 14px}
-li{margin-bottom:6px}
-hr{border:0;border-top:1px solid var(--line);margin:26px 0}
-strong{color:var(--ink)}
-code{background:#f6f8fa;padding:2px 5px;border-radius:4px;font-family:var(--font-mono);font-size:12.5px}
-pre{background:#f6f8fa;padding:12px 14px;border-radius:8px;overflow-x:auto;margin:10px 0 16px}
-pre code{background:none;padding:0;font-size:12.3px;line-height:1.65}
-blockquote{border-left:4px solid var(--navy2);background:var(--blue-l);
-  padding:12px 16px;border-radius:0 8px 8px 0;margin:12px 0;color:var(--ink2)}
-blockquote p:last-child{margin-bottom:0}
-.lead{color:var(--ink2);font-size:13.8px;margin:6px 0 14px}
-
-/* ── 表格 ── */
-table{width:100%;border-collapse:collapse;font-size:12.6px;background:var(--card);
-  border-radius:8px;overflow:hidden;margin:12px 0 16px}
-th{background:var(--navy);color:#fff;padding:8px 10px;text-align:left;font-weight:600;
-  font-size:12px;vertical-align:bottom}
-td{padding:7px 10px;border-bottom:1px solid var(--line2);vertical-align:top;line-height:1.62}
-tbody tr:nth-child(even) td{background:#fafbfd}
-tbody tr:hover td{background:var(--blue-l)}
-td.num{font-variant-numeric:tabular-nums}
-
-/* ── 信息卡 / 注释 ── */
-.card{background:var(--card);border:1px solid var(--line);border-radius:12px;
-  padding:18px 20px;margin:14px 0;box-shadow:var(--shadow)}
-.card h3:first-child{margin-top:0}
-.note{background:var(--amber-l);border-left:4px solid var(--amber);padding:10px 14px;
-  border-radius:0 7px 7px 0;font-size:12.9px;margin:12px 0}
-.note.gap{background:var(--gray-l);border-left-color:var(--gray)}
-.note.check{background:var(--green-l);border-left-color:var(--green)}
-.note.correct{background:var(--red-l);border-left-color:var(--red)}
-.note.preline{background:var(--pre-l);border-left-color:var(--pre)}
-
-/* ── 差异高亮（跨月对比） ── */
-.diff-badge{display:inline-block;font-size:10.5px;font-weight:700;line-height:1;
-  border-radius:3px;padding:2px 6px;margin-right:6px;vertical-align:middle;white-space:nowrap}
-.diff-block{border-radius:6px;padding:4px 8px;margin:4px -8px}
-.diff-new{background:var(--green-l);box-shadow:inset 3px 0 0 var(--green)}
-.diff-new .diff-badge{background:var(--green);color:#fff}
-.diff-mod{background:var(--amber-l);box-shadow:inset 3px 0 0 var(--amber)}
-.diff-mod .diff-badge{background:var(--amber);color:#fff}
-.diff-del-group{margin:6px 0;border:1px dashed var(--line);border-radius:6px;background:#fbfcfe}
-.diff-del-group>summary{cursor:pointer;font-size:12px;color:var(--ink3);
-  padding:6px 10px;user-select:none;list-style:none}
-.diff-del-group>summary::-webkit-details-marker{display:none}
-.diff-del-group>summary::before{content:"▸ ";color:var(--gray)}
-.diff-del-group[open]>summary::before{content:"▾ "}
-.diff-del-group .diff-del-body{padding:2px 8px 8px;color:var(--ink3)}
-.diff-del-group .diff-del-body s,.diff-del-group .diff-del-body del{color:var(--red)}
-.diff-del-group .diff-badge{background:var(--gray-l);color:var(--gray)}
-/* 隐藏更新标记：对照阅读模式 */
-main.hide-diff .diff-badge{display:none}
-main.hide-diff .diff-block{background:none;box-shadow:none;padding:0;margin:0}
-main.hide-diff .diff-del-group{display:none}
-
-/* ── 页脚 ── */
-.footer{font-size:11.4px;color:var(--ink3);text-align:center;margin-top:22px;line-height:1.9}
-.footer .backlinks{margin-top:8px}
-.footer .backlinks a{margin:0 8px}
-
-/* ── 响应式 ── */
-@media(max-width:760px){
-  .hero{padding:30px 20px;border-radius:0 0 14px 14px}
-  .hero h1{font-size:21px}
-  .wrap{padding:0 14px 46px}
-  td,th{padding:6px 7px;font-size:11.7px}
-  h2.sec{font-size:17.5px}
-}
+body { max-width: 1160px; margin: 24px auto; padding: 0 16px;
+      font-family: "Segoe UI", "Microsoft YaHei", sans-serif; color: #1a1a2e; line-height: 1.7; }
+h1, h2, h3 { color: #16213e; }
+table { border-collapse: collapse; width: 100%; overflow-x: auto; display: block; }
+th, td { border: 1px solid #cbd5e1; padding: 6px 10px; text-align: left; }
+th { background: #f1f5f9; }
+img { max-width: 100%; }
+code { background: #f6f8fa; padding: 2px 4px; border-radius: 3px; }
+blockquote { border-left: 4px solid #94a3b8; margin: 0; padding-left: 12px; color: #475569; }
+nav { margin: 12px 0 20px; padding: 8px 0; border-bottom: 1px solid #e2e8f0; }
+nav a { margin-right: 14px; color: #16213e; font-size: 14px; text-decoration: none; white-space: nowrap; }
+nav a:hover { text-decoration: underline; }
 </style>
 </head>
 <body>
-<a class="skip-link" href="#main-content">跳转到主要内容</a>
-<header class="hero" role="banner" aria-label="报告题头">
-  <div class="eyebrow">日本签证与在留资格 · 政策法规解读型</div>
-  <h1>日本签证与在留资格 · 2026-11 月度报告</h1>
-  <div class="sub">版本：v1.0（2026-11 月度）｜数据基准日：2026-11-14</div>
-  <div class="meta"><b>版本</b>：v1.0（2026-11 月度）<br><b>数据基准日</b>：2026-11-14<br><b>主题类型</b>：政策法规解读型（policy-analysis）<br><b>受众定位</b>：面向拟通过特定技能（SSW）赴日从事货运司机工作、并规划长期在留的读者，兼具制度查询与路径规划视角。<br><b>来源规则</b>：① 出入国在留管理庁（isa.go.jp / moj.go.jp）、ssw.go.jp、e-Gov 法令检索、国土交通省（mlit.go.jp）＞ ② JFT-Basic（国際交流基金 / Prometric）、JLPT（JEES）、外国人…</div>
-  <div><span class="tag">2026-11</span><span class="tag">政策法规解读型</span></div>
-</header>
-<nav class="report-nav" aria-label="报告导航">
-  <div class="wrap">
-    <div class="nav-url">
-      <span class="nav-url-label">报告路径</span>
-      <a href="2026-11-visa-immigration.html">08-visa-immigration\reports\2026-11-visa-immigration.html</a>
-    </div>
-    <div class="nav-tabs"><a href="#s1">一、执行摘要</a><a href="#s2">二、政策台账与监测机制</a><a href="#s3">三、监管框架总览</a><a href="#s4">四、重点政策逐条解读</a><a href="#s5">五、影响对象矩阵</a><a href="#s6">六、合规应对建议（建议章）</a><a href="#s7">七、生效时间线</a><a href="#s8">八、数据治理与局限</a><a href="#s9">九、参考来源清单</a></div>
-    
-  </div>
+<h1 id="2026-11"><a id="日本签证与在留资格--2026-11-月度报告" aria-hidden="true"></a>日本签证与在留资格 · 2026-11 月度报告</h1>
+<blockquote>
+<p><strong>版本</strong>：v1.0（2026-11 月度）　<strong>数据基准日</strong>：2026-11-14
+<strong>主题类型</strong>：政策法规解读型（policy-analysis）
+<strong>受众定位</strong>：面向拟通过特定技能（SSW）赴日从事货运司机工作、并规划长期在留的读者，兼具制度查询与路径规划视角。
+<strong>来源规则</strong>：① 出入国在留管理庁（isa.go.jp / moj.go.jp）、ssw.go.jp、e-Gov 法令检索、国土交通省（mlit.go.jp）＞ ② JFT-Basic（国際交流基金 / Prometric）、JLPT（JEES）、外国人技能実習機構（otit.go.jp）＞ ③ 全日本トラック協会、登录支援机关行业信息 ＞ ④ 指定取次 / 中介机构官网（仅流程参考，不作数据源）＞ ⑤ NHK、日本経済新聞、Nikkei Asia、外務省各领馆中文页（费用类可作一手）</p>
+</blockquote>
+<hr />
+<nav aria-label="报告导航">
+<a href="#s1">一、执行摘要</a>
+<a href="#s2">二、政策台账与监测机制</a>
+<a href="#s3">三、监管框架总览</a>
+<a href="#s4">四、重点政策逐条解读</a>
+<a href="#s5">五、影响对象矩阵</a>
+<a href="#s6">六、合规应对建议（建议章）</a>
+<a href="#s7">七、生效时间线</a>
+<a href="#s8">八、数据治理与局限</a>
+<a href="#s9">九、参考来源清单</a>
 </nav>
-<main class="wrap" id="main-content" role="main" aria-label="报告正文">
-<h2 id="s1" class="sec">一、执行摘要</h2>
+<h2 id="s1"><a id="一执行摘要" aria-hidden="true"></a>一、执行摘要</h2>
 <p><strong>核心判断</strong>（编号条目，每条含政策、条款与来源）：</p>
 <ol>
 <li><strong>受入上限</strong>：自动车运送业特定技能 1 号受入上限为 <strong>22,100 人</strong>（至 2029 年 3 月末＝令和 11 年 3 月末，2026-01-23 阁议）；ssw.go.jp 中文页仍显示 24,500，属未同步线索。2026-08 末该分野 1 号在留 <strong>843 人</strong>、充足率 3.8%。来源：moj.go.jp 分野运用方针；ISA 统计月报 2026-08 末速报原件 <a href="https://www.moj.go.jp/isa/content/001472175.pdf">https://www.moj.go.jp/isa/content/001472175.pdf</a>。标注：事实。</li>
@@ -179,7 +52,7 @@ main.hide-diff .diff-del-group{display:none}
 <p><strong>监管态势一句话</strong>：制度面「扩大受入（育成就劳 2027 年施行）＋管理强化（永住要件改定、接受机关审查加严）」并行；本分野入场通道（1 号）持续开放，但 <strong>5 年上限后的资格切换</strong>是长期定居的硬约束。</p>
 <p><strong>生效时间线要点</strong>：2026-07-01 签证费 715 元；2026-10-01 永住指南改定；2026-11-12 MOC 页更新；<strong>2027-04-01</strong> 育成就劳施行、1 号支援体制要件改正生效、出租车·巴士 B1 要求适用于 COE 申请；<strong>2029-03</strong> 受入上限到期（详见第七节）。</p>
 <p><strong>解读说明</strong>：本报告为 2026-11 月度（复用）生成，政策解读以官方原文为准，登记册活值优先；原文有歧义处并列两种以上解读（见第四、八节）。本报告输出政策文本解读与影响评估，不构成法律意见；建议章（第六节）与事实分离。</p>
-<h3 id="_2">数据变更摘要</h3>
+<h3 id="_2"><a id="数据变更摘要" aria-hidden="true"></a>数据变更摘要</h3>
 <table class="fixed">
 <thead>
 <tr>
@@ -273,7 +146,7 @@ main.hide-diff .diff-del-group{display:none}
 <blockquote>
 <p>注：本表逐项抄录登记册活值，未改写数值；本期为复用生成，登记册活值与 2026-11-12 验证运行一致，#10 #11 为该次维度扩充项，其余各项无新增变更。</p>
 </blockquote>
-<h3 id="_3">已修正事实清单</h3>
+<h3 id="_3"><a id="已修正事实清单" aria-hidden="true"></a>已修正事实清单</h3>
 <p>本版继承历史报告（2026-11-13）已修正事实清单，无新增修正。已修正要点：</p>
 <ul>
 <li><strong>2026-11-11 重大更正</strong>：特定技能 2 号仅 11 分野、<strong>自动车运送业无 2 号</strong>，「1 号→2 号」路径不存在；长期主线改为 1 号→技人国 / 高度专门职→永住。</li>
@@ -281,7 +154,7 @@ main.hide-diff .diff-del-group{display:none}
 <li><strong>育成就労 MOC 口径区分</strong>：ISA 页 <strong>7 国</strong> ≠ OTIT <strong>16 国</strong>（含暂定），均不含中国。</li>
 <li><strong>843 人原始出处</strong>：已取得 ISA 原件（2026-08 末速报：843 人 / 22,100 / 充足率 3.8%）。</li>
 </ul>
-<h2 id="s2" class="sec">二、政策台账与监测机制</h2>
+<h2 id="s2"><a id="二政策台账与监测机制" aria-hidden="true"></a>二、政策台账与监测机制</h2>
 <p><strong>台账结构</strong>：本主题活值统一维护于 <a href="../data/visa_immigration_indicator_registry.md">data/visa_immigration_indicator_registry.md</a>（11 项核心指标 + 研究边界档案）；prompt 模板内不填活值。</p>
 <p><strong>监测节拍</strong>：基线报告 <code>reports/2026-11-visa-immigration.md</code>（v1.0 首期固定）；事件触发解读 <code>reports/{{YYYY-MM}}-&lt;slug&gt;.md</code>；年度台账复盘同名路径。无触发器命中且窗口未到时不启动新解读，不得为制造变化而虚构变化。</p>
 <p><strong>追踪表</strong>（研究维度 × 优先来源 × 回写项）：</p>
@@ -396,7 +269,7 @@ main.hide-diff .diff-del-group{display:none}
 <li><a href="../../01-ssw-driver/reports/2026-11-ssw-driver.md">01-ssw-driver</a> 监测报告「已修正事实清单」追加 → 对应文档回写。</li>
 </ol>
 <p><strong>观察项与触发器状态</strong>（摘自登记册）：唯一观察项 · 首要触发器 · 触发器结论均为「首期为空」。</p>
-<h2 id="s3" class="sec">三、监管框架总览</h2>
+<h2 id="s3"><a id="三监管框架总览" aria-hidden="true"></a>三、监管框架总览</h2>
 <p><strong>制度分层口径</strong>：在留资格体系为 技術・人文知識・国際業務 / 高度専門職 / 特定技能 1 号 / 特定技能 2 号 / 技能実習 / 育成就労（2027-04-01 施行）；本分野为<strong>自动车运送业</strong>（2024 年度新设）——<strong>无 2 号</strong>（2 号仅 11 分野）；主线为 <strong>1 号（上限 5 年）→ 技人国 / 高度专门职 → 永住</strong>。</p>
 <p><strong>1 号 / 2 号对比</strong>：</p>
 <table class="fixed">
@@ -440,15 +313,15 @@ main.hide-diff .diff-del-group{display:none}
 <p><strong>与其他在留资格的关系</strong>：技能实习将自 2027 年 4 月被育成就劳取代（育成就劳原则上以 3 年内移行特定技能为目标）；技人国是后期转向物流技术 / 数字化岗位的备选资格；永住者为长期定居终点。</p>
 <p><strong>检索入口</strong>：ISA 特定技能总页 <a href="https://www.moj.go.jp/isa/applications/status/specifiedskilledworker.html">https://www.moj.go.jp/isa/applications/status/specifiedskilledworker.html</a>；自动车运送业分野页 <a href="https://www.moj.go.jp/isa/policies/ssw/automobiletransportation">https://www.moj.go.jp/isa/policies/ssw/automobiletransportation</a>；e-Gov 法令检索 <a href="https://laws.e-gov.go.jp">https://laws.e-gov.go.jp</a>。</p>
 <p><strong>跨主题分工</strong>：官方统计活值 → <a href="../../01-ssw-driver/reports/2026-11-ssw-driver.md">01-ssw-driver</a>（只读引用）；法规条文深度解读 → <a href="../../09-politics-law/reports/2026-11-politics-law.md">09-politics-law</a>；岗位薪资 → <a href="../../07-economy-finance/reports/2026-11-economy-finance.md">07-economy-finance</a>；日语学习 → <a href="../../11-language-japanese/reports/2026-11-language-japanese.md">11-language-japanese</a>；现场层执行 → <a href="../../02-career-driver/reports/2026-11-career-driver.md">02-career-driver</a>；行业结构 → <a href="../../04-industry-logistics/reports/2026-11-industry-logistics.md">04-industry-logistics</a>。</p>
-<h2 id="s4" class="sec">四、重点政策逐条解读</h2>
-<h3 id="41-22100-2026-01-23">4.1 受入上限：22,100 人（2026-01-23 阁议）</h3>
+<h2 id="s4"><a id="四重点政策逐条解读" aria-hidden="true"></a>四、重点政策逐条解读</h2>
+<h3 id="41-22100-2026-01-23"><a id="41-受入上限22100-人2026-01-23-阁议" aria-hidden="true"></a>4.1 受入上限：22,100 人（2026-01-23 阁议）</h3>
 <ul>
 <li><strong>条款摘编</strong>：自动车运送业分野特定技能 1 号受入上限 <strong>22,100 人</strong>，适用至 2029 年 3 月末；2026-08 末在留 843 人、充足率 3.8%。</li>
 <li><strong>解读</strong>：上限远未用满，短期入场空间充足；但 2029-03 到期后的延续政策未定。</li>
 <li><strong>口径并列（不合并）</strong>：<strong>22,100（现行，moj.go.jp）≠ 24,500（ssw.go.jp 中文页未同步）</strong>。本库一律采用 ISA 运用方针 22,100；中文页 24,500 仅作未同步线索。</li>
 <li><strong>来源</strong>：moj.go.jp 运用方针（2026）；ISA 统计月报 2026-08 末速报。</li>
 </ul>
-<h3 id="42">4.2 人才基准与日语要求（卡车 / 出租车 / 巴士）</h3>
+<h3 id="42"><a id="42-人才基准与日语要求卡车--出租车--巴士" aria-hidden="true"></a>4.2 人才基准与日语要求（卡车 / 出租车 / 巴士）</h3>
 <table class="fixed">
 <thead>
 <tr>
@@ -481,7 +354,7 @@ main.hide-diff .diff-del-group{display:none}
 <li><strong>歧义并列</strong>：B1 要求的变更·更新适用时间官方未明确，存在「2027-04-01 起全部适用」与「仅 COE 申请适用、变更·更新另待公告」两种解读，并列保留、不静默择一。</li>
 <li><strong>来源</strong>：ISA 自动车运送业分野运用方针；ISA 出租车·巴士日语要求页 <a href="https://www.moj.go.jp/isa/03_00198.html">https://www.moj.go.jp/isa/03_00198.html</a>。</li>
 </ul>
-<h3 id="43">4.3 评价试验与考试费用</h3>
+<h3 id="43"><a id="43-评价试验与考试费用" aria-hidden="true"></a>4.3 评价试验与考试费用</h3>
 <ul>
 <li><strong>受验资格</strong>：满 17 岁（印尼考场 18 岁）、有效驾照（日本或外国均可）、无日本国籍、国内受验需有在留资格。</li>
 <li><strong>考试构成</strong>：知识试 50 题，<strong>45 题以上正确</strong>为合格；技能试为实技评分。</li>
@@ -489,7 +362,7 @@ main.hide-diff .diff-del-group{display:none}
 <li><strong>日语考试</strong>：JFT-Basic 日本国内 <strong>10,000 円</strong>；JLPT 中国考区 N3/N4/N5 <strong>450 元</strong>、N1/N2 550 元。</li>
 <li><strong>来源</strong>：ClassNK Portal <a href="https://sswt-portal.classnk.or.jp/news/25">https://sswt-portal.classnk.or.jp/news/25</a>；Prometric <a href="https://www.prometric-jp.com/ssw/exam/fee/">https://www.prometric-jp.com/ssw/exam/fee/</a>；NEEA <a href="https://jlpt.neea.edu.cn/faq.html">https://jlpt.neea.edu.cn/faq.html</a>。</li>
 </ul>
-<h3 id="44">4.4 申请流程与材料</h3>
+<h3 id="44"><a id="44-申请流程与材料" aria-hidden="true"></a>4.4 申请流程与材料</h3>
 <ul>
 <li><strong>两条路径</strong>：A 海外直接申请（中国国内 → 日本：考试 + 雇佣契约 → 雇主受入计划书认定 → COE → 领馆签证 → 入境）；B 国内移行（持技能实习 / 育成就劳等资格者，完成同等技能·日语要件后由雇主申请在留资格变更许可）。</li>
 <li><strong>材料</strong>：本人 7 项（申请书、护照复印件与证件照、评价试验合格证明、日语能力证明、驾照复印件（外国驾照附翻译）、履历书、返纳保证书等）；雇主 5 项（受入计划书认定证明、雇佣契约书、支援计划书与实绩、公司登记与损益文件、雇用保险·社保加入证明）。</li>
@@ -498,7 +371,7 @@ main.hide-diff .diff-del-group{display:none}
 <li><strong>签证费</strong>：单次 <strong>715 元</strong>（2026-07-01 起，代办机构另收手续费）。</li>
 <li><strong>来源</strong>：领馆费用专页 <a href="https://www.shanghai.cn.emb-japan.go.jp/itpr_ja/11_000001_00633.html">https://www.shanghai.cn.emb-japan.go.jp/itpr_ja/11_000001_00633.html</a>；handbook 04。</li>
 </ul>
-<h3 id="45-2">4.5 特定技能 2 号与升级路径</h3>
+<h3 id="45-2"><a id="45-特定技能-2-号与升级路径" aria-hidden="true"></a>4.5 特定技能 2 号与升级路径</h3>
 <ul>
 <li><strong>前提</strong>：2 号仅 11 分野；<strong>自动车运送业不符合</strong>。移行要件（通则）：2 号技能评价试验合格 + 实务经验 + 日语 B1 相当以上（2027-04-01 起 COE 申请适用；变更·更新待公告）+ 接受机关要件。</li>
 <li><strong>对本案结论</strong>：「1 号司机 → 2 号」路径不存在；长期方案为 <strong>A 技人国（首选；大学毕业或 10 年相关经验；N2 为实务隐形门槛）</strong>、B 补学历→技人国（兜底）、C 高度专门职（70 分门槛；无学位基本不可达）。</li>
@@ -506,7 +379,7 @@ main.hide-diff .diff-del-group{display:none}
 <li><strong>时间表</strong>：Y1–Y2 日语 N2 → Y3 转岗 → Y4 提交技人国变更（最晚）→ Y5 完成变更 → Y6–Y10 收入 / 纳税 / 年金达标 → 永住申请。</li>
 <li><strong>来源</strong>：ssw.go.jp；ISA 技人国页 <a href="https://www.moj.go.jp/isa/applications/status/gijinkoku.html">https://www.moj.go.jp/isa/applications/status/gijinkoku.html</a>；handbook 05。</li>
 </ul>
-<h3 id="46-2027-04-01">4.6 育成就劳制度（2027-04-01 施行）</h3>
+<h3 id="46-2027-04-01"><a id="46-育成就劳制度2027-04-01-施行" aria-hidden="true"></a>4.6 育成就劳制度（2027-04-01 施行）</h3>
 <ul>
 <li><strong>条款摘编</strong>：2024-06-21 公布改正法，技能实习（约 40 年历史）将被育成就劳取代；原则上以 <strong>3 年内移行特定技能</strong>为目标；育成阶段可跨企业、跨地区转职；原则上仅从 MOC 签署国接收。</li>
 <li><strong>进展</strong>：2026-04-15 监理支援机关许可申请受理开始；2026-09-01 育成就劳计划认定申请受理开始；运用要领陆续公布——漁業 2026-11-06、宿泊 10-16、飲食料品製造業・資源循環 10-09、物流倉庫 08-28 等；<strong>自动车运送业未公布</strong>。</li>
@@ -514,14 +387,14 @@ main.hide-diff .diff-del-group{display:none}
 <li><strong>对本案影响</strong>：已有 N4 + 驾照可直接走 1 号更优；日语 / 技能暂不达标可走育成就劳；已持技能实习关注 2027 衔接。</li>
 <li><strong>来源</strong>：ISA 育成就劳页 <a href="https://www.moj.go.jp/isa/applications/index_00005.html">https://www.moj.go.jp/isa/applications/index_00005.html</a>；MOC 页 <a href="https://www.moj.go.jp/isa/applications/ssw/nyuukokukanri05_00002.html">https://www.moj.go.jp/isa/applications/ssw/nyuukokukanri05_00002.html</a>；OTIT <a href="https://www.otit.go.jp/employment_for_skill_development/05/">https://www.otit.go.jp/employment_for_skill_development/05/</a>。</li>
 </ul>
-<h3 id="47">4.7 永住许可要件与取消</h3>
+<h3 id="47"><a id="47-永住许可要件与取消" aria-hidden="true"></a>4.7 永住许可要件与取消</h3>
 <ul>
 <li><strong>原则要件（令和 8-10-01 改定版）</strong>：连续 10 年以上在留（其中 5 年以上就劳或受扶养）；持有现有资格最长在留期间；行为合规（纳税、社保、雇用保险）；独立生计；<strong>世帯年収</strong>持续达到「世帯人数相应的日本人世帯平均收入」以上（家族滞在等非就労资格者收入不计入）；健康保险·年金未履行满 3 年成为不许可 / 取消事由；<strong>年金受給見込額</strong>须达标（不足可用補填資産补足）；<strong>日本語能力</strong>纳入考虑要素。</li>
 <li><strong>2024 年改正（永住取消）</strong>：无正当理由<strong>连续 3 年以上未履行纳税或社会保险缴费义务</strong>、或出国未取得再入国许可而长期离境等，可取消永住。</li>
 <li><strong>10 年时间线</strong>：Y0 1 号入境 → Y1–5 更新（≤5 年）→ Y5 切换其他在留资格（2 号不可用）→ Y6–10 新资格 + 收入达标 → Y10 永住申请。关键控制点：Y5 前完成资格切换（<strong>推断</strong>：失败则须离境、连续性中断）。</li>
 <li><strong>来源</strong>：永住许可指南（令和 8-10-01 改定）<a href="https://www.moj.go.jp/isa/10_00279.html">https://www.moj.go.jp/isa/10_00279.html</a>；永住者取消指南 <a href="https://www.moj.go.jp/isa/11_00118.html">https://www.moj.go.jp/isa/11_00118.html</a>。</li>
 </ul>
-<h3 id="48">4.8 家族滞在与资格外活動許可</h3>
+<h3 id="48"><a id="48-家族滞在与资格外活動許可" aria-hidden="true"></a>4.8 家族滞在与资格外活動許可</h3>
 <ul>
 <li><strong>扶养人资格</strong>：教授、芸術、宗教、報道、高度専門職、経営・管理、法律・会計業務、医療、研究、教育、技術・人文知識・国際業務、企業内転勤、介護、興行、技能、<strong>特定技能 2 号</strong>、文化活動、<strong>留学</strong>等在留资格者扶养的<strong>配偶者或子</strong>；<strong>特定技能 1 号原则上不可带家属</strong>。</li>
 <li><strong>收入证明口径</strong>：须提交扶养者职业·收入证明（在職証明書等＋住民税课税〔或非课税〕证明书＋纳税证明书）；<strong>年收门槛无官方数值（待复核）</strong>。</li>
@@ -530,7 +403,7 @@ main.hide-diff .diff-del-group{display:none}
 <li><strong>子女衔接</strong>：带同最佳时点（推断）与技人国变更（Y4–Y5）同步；高中毕业后可变更为「定住者」直接就业，不符要件者经「特定活动」过渡。</li>
 <li><strong>来源</strong>：moj.go.jp「家族滞在」页；資格外活動許可页 <a href="https://www.moj.go.jp/isa/applications/procedures/nyuukokukanri07_00004.html">https://www.moj.go.jp/isa/applications/procedures/nyuukokukanri07_00004.html</a>；handbook 08。</li>
 </ul>
-<h2 id="s5" class="sec">五、影响对象矩阵</h2>
+<h2 id="s5"><a id="五影响对象矩阵" aria-hidden="true"></a>五、影响对象矩阵</h2>
 <table class="fixed">
 <thead>
 <tr>
@@ -624,37 +497,37 @@ main.hide-diff .diff-del-group{display:none}
 <blockquote>
 <p>注：矩阵逐格附条款依据；「量级」列中口径冲突处并列呈现，不取均值。</p>
 </blockquote>
-<h2 id="s6" class="sec">六、合规应对建议（建议章）</h2>
+<h2 id="s6"><a id="六合规应对建议建议章" aria-hidden="true"></a>六、合规应对建议（建议章）</h2>
 <blockquote>
 <p>本章为「建议」，与事实分离；重大合规决策须咨询执业法律专业人士。</p>
 </blockquote>
-<h3 id="61">6.1 入场前（建议）</h3>
+<h3 id="61"><a id="61-入场前建议" aria-hidden="true"></a>6.1 入场前（建议）</h3>
 <ol>
 <li><strong>考试路径</strong>：中国大陆无 JFT-Basic 考点 → 主攻 <strong>JLPT N4</strong>（2027 年 7 月场）；JFT-Basic 作为赴日后或顺路出境时的备用选项（与 N4 同等有效）。</li>
 <li><strong>驾照</strong>：优先外免切替；无本国驾照者评估在日考照预算（学费约 25–35 万日元、合宿制约 20–30 万日元）。</li>
 <li><strong>雇主核验</strong>：确认雇主持国土交通省「特定技能受入计划书」认定、加入「自動车运送业分野特定技能協議会」，卡车受入机关须取得 ClassNK 认证或 G マーク。</li>
 <li><strong>费用预算</strong>：评价试验 6,500 円（国内）/ 45 美元（海外）；JFT-Basic 10,000 円；JLPT 中国 450 / 550 元；签证费 715 元。</li>
 </ol>
-<h3 id="62">6.2 在留期间（建议）</h3>
+<h3 id="62"><a id="62-在留期间建议" aria-hidden="true"></a>6.2 在留期间（建议）</h3>
 <ol>
 <li><strong>更新与义务</strong>：每次期满前更新；地址变更 14 日内报备；避免连续 3 个月不从事原业务。</li>
 <li><strong>证据链</strong>：工资明细、考勤、社保记录长期留存，作为资格切换与永住申请的证据链。</li>
 </ol>
-<h3 id="63">6.3 资格切换与长期（建议）</h3>
+<h3 id="63"><a id="63-资格切换与长期建议" aria-hidden="true"></a>6.3 资格切换与长期（建议）</h3>
 <ol>
 <li><strong>Y2 内达 N2</strong>；<strong>Y2–Y3 争取运行管理 / 配车计划 / 仓配企划岗位</strong>并留档职务内容。</li>
 <li><strong>Y4 前提交技人国变更</strong>（最晚），留出审查缓冲；转岗失败则 10 年连续性中断（推断）。</li>
 <li><strong>高度专门职</strong>仅作旁路：Y7 前后若年收达约 600–700 万日元并取得 N1，可接近 70 分（推断）。</li>
 </ol>
-<h3 id="64">6.4 永住与家庭（建议）</h3>
+<h3 id="64"><a id="64-永住与家庭建议" aria-hidden="true"></a>6.4 永住与家庭（建议）</h3>
 <ol>
 <li>每年归档源泉征收票、住民税课税（非课税）证明书、纳税证明书——既是永住证据链，也是家族滞在的扶养能力证明。</li>
 <li>带同时点宜与技人国转岗涨薪联动，在 Y5 后、永住申请前 2–3 年完成，避免临申请时世帯人数骤增。</li>
 <li>配偶就业前申请资格外活動許可（包括许可，周 28 小时）。</li>
 </ol>
-<h3 id="65">6.5 育成就劳选择（建议）</h3>
+<h3 id="65"><a id="65-育成就劳选择建议" aria-hidden="true"></a>6.5 育成就劳选择（建议）</h3>
 <p>已有 N4 + 驾照者直接走 1 号更优；日语 / 技能暂不达标者可评估育成就劳「预备校」路径；已持技能实习者关注 2027 年衔接措施。</p>
-<h2 id="s7" class="sec">七、生效时间线</h2>
+<h2 id="s7"><a id="七生效时间线" aria-hidden="true"></a>七、生效时间线</h2>
 <table class="fixed">
 <thead>
 <tr>
@@ -758,7 +631,7 @@ main.hide-diff .diff-del-group{display:none}
 </tbody>
 </table>
 <p><strong>待生效与待细则清单</strong>：B1 要求的在留资格变更·更新适用时间（待公告）；自动车运送业育成就劳运用要领（未公布）；2026-10-09 要領別冊 新旧对照表（001472544.pdf，未取得）；2029-03 上限到期后的政策延续；中国 MOC 签署情况。</p>
-<h2 id="s8" class="sec">八、数据治理与局限</h2>
+<h2 id="s8"><a id="八数据治理与局限" aria-hidden="true"></a>八、数据治理与局限</h2>
 <p><strong>来源分级</strong>：</p>
 <ul>
 <li><strong>A 官方一手</strong>：出入国在留管理庁（isa.go.jp / moj.go.jp）、ssw.go.jp、e-Gov 法令检索、国土交通省。</li>
@@ -805,7 +678,7 @@ main.hide-diff .diff-del-group{display:none}
 </ol>
 <p><strong>文本时效声明</strong>：本报告以 <strong>2026-11-14</strong> 时点官方页面为准；历史报告信息核对日期为 2026-11-11 / 11-12，日本官方制度更新频繁，执行前务必以 ISA 官网最新公告为准。</p>
 <p><strong>解读局限</strong>：本主题只写制度要点与流程，法规条文深度解读归 <a href="../../09-politics-law/reports/2026-11-politics-law.md">09-politics-law</a>；永住年收财务与证据链归 <a href="../../07-economy-finance/reports/2026-11-economy-finance.md">07-economy-finance</a>；考试学习计划归 <a href="../../11-language-japanese/reports/2026-11-language-japanese.md">11-language-japanese</a>。</p>
-<h2 id="s9" class="sec">九、参考来源清单</h2>
+<h2 id="s9"><a id="九参考来源清单" aria-hidden="true"></a>九、参考来源清单</h2>
 <p><strong>官方一手（出入国在留管理庁 / 法务省 / ssw.go.jp / 国土交通省 / 领馆）</strong>：</p>
 <ol>
 <li>ISA 特定技能制度总页 <a href="https://www.moj.go.jp/isa/applications/status/specifiedskilledworker.html">https://www.moj.go.jp/isa/applications/status/specifiedskilledworker.html</a></li>
@@ -841,37 +714,5 @@ main.hide-diff .diff-del-group{display:none}
 <ol>
 <li><a href="../../01-ssw-driver/reports/2026-11-ssw-driver.md">01-ssw-driver</a> 登记册与最新报告（官方统计活值单一事实源）</li>
 </ol>
-</main>
-<footer class="footer" role="contentinfo" aria-label="页脚">
-  <p>日本签证与在留资格 · 日本签证与在留资格 · 2026-11 月度报告｜2026-11<br>
-  报告路径：08-visa-immigration\reports\2026-11-visa-immigration.html</p>
-  <p class="backlinks">
-    <a href="../../index.html#topic-08-visa-immigration">← 返回主题</a>
-    <a href="../../index.html">返回首页</a>
-  </p>
-</footer>
-<script>
-(function () {
-  'use strict';
-  var main = document.getElementById('main-content');
-  var tgDiff = document.getElementById('tg-diff');
-  var tgDel = document.getElementById('tg-del');
-  if (main && tgDiff) {
-    tgDiff.addEventListener('click', function () {
-      var hide = main.classList.toggle('hide-diff');
-      tgDiff.textContent = hide ? '显示更新标记' : '隐藏更新标记';
-    });
-  }
-  if (tgDel) {
-    tgDel.addEventListener('click', function () {
-      var open = tgDel.getAttribute('data-open') === '1';
-      var groups = document.querySelectorAll('details.diff-del-group');
-      for (var i = 0; i < groups.length; i++) groups[i].open = !open;
-      tgDel.setAttribute('data-open', open ? '0' : '1');
-      tgDel.textContent = open ? '展开全部删除' : '收起全部删除';
-    });
-  }
-})();
-</script>
 </body>
 </html>
