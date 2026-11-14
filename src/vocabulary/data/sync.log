@@ -123,3 +123,5 @@
 [2026-11-14T11:17:16] [verify] exit-transition-return -> ../../16-exit-transition-return/prompts/business-config.md：不通过（状态文件无同步记录）
 [2026-11-14T11:17:24] [sync] exit-transition-return -> ../../16-exit-transition-return/prompts/business-config.md：区块替换成功：新增 25 / 修改 0 / 删除 0，共 25 条（v1.1）；备份 sync-backups/exit-transition-return.business-config.md.20261114_111724.bak
 [2026-11-14T11:17:24] [verify] exit-transition-return -> business-config.md：通过（25 条覆盖完整，区间外内容一致，词汇库 v1.1）
+[2026-11-14T11:34:18] [verify] exit-transition-return -> business-config.md：通过（25 条覆盖完整，区间外内容一致，词汇库 v1.1）
+[2026-11-14T11:38:04] [verify] exit-transition-return -> business-config.md：通过（25 条覆盖完整，区间外内容一致，词汇库 v1.1）
