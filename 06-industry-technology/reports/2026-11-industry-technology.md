@@ -314,7 +314,7 @@
 
 #### 三、证明方式（比证书重要）
 
-- 自作工具：把自己做的配车表/KPI 看板/改善提案存档 → [03-管理岗过渡 · 05](../../03-career-management/reports/2026-11-career-management.html#05-成果档案与晋升材料)
+- 自作工具：把自己做的配车表/KPI 看板/改善提案存档 → [03-管理岗过渡 · 05](../../03-career-management/handbook/05-achievement-archive.md)
 - 公司内"数字担当"实绩（培训过几人、改善过什么）
 - 必要时补考：Microsoft MOS Excel、GAS/Python 微证书——锦上添花
 

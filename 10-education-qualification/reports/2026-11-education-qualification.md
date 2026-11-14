@@ -308,7 +308,7 @@
 
 - **一次只攻一个**：主线资格未完成不开新线
 - 公司能报销的先走公司（讲习类常有补助）
-- 每张证书扫描归档 → [03-管理岗过渡 · 05](../../03-career-management/reports/2026-11-career-management.html#05-成果档案与晋升材料)
+- 每张证书扫描归档 → [03-管理岗过渡 · 05](../../03-career-management/handbook/05-achievement-archive.md)
 
 ---
 
