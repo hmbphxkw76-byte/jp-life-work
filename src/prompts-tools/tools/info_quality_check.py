@@ -17,6 +17,13 @@
     python src/prompts-tools/tools/info_quality_check.py           # 全量评估（只报告）
     python src/prompts-tools/tools/info_quality_check.py --apply   # 评估 + 自动修复 + 复评
     python src/prompts-tools/tools/info_quality_check.py --check   # 仅检查（不写报告文件）
+
+判定口径（与项目架构约定对齐，决策见 src/report-audits/info-quality/rules-notes.md）：
+- C-03 跨文档重复仅针对研究正文 reports/*.md；各主题的 prompts / operations-guide /
+  handbook 是「自包含业务包」，共享模板句属设计内重复，不计为缺陷。
+- C-07 来源标注认可五类形式：URL、「来源」字样、`[机构]` 行内标签、登记册指针、手册指针
+  （报告惯例为「行内标签 + 文末来源清单」）。
+- C-10 登记册口径一致性仅解析「核心指标」活值表；历史版本快照为冻结存档，不参与判定。
 """
 from __future__ import annotations
 
@@ -147,6 +154,21 @@ def _substantive(block: str) -> bool:
     return len(_norm(block)) >= DUP_MIN_CHARS
 
 
+def _has_source(block: str) -> bool:
+    """项目认可的五类来源标注：URL、「来源」字样、`[机构]` 标签、登记册指针、手册指针。
+
+    报告正文的引用惯例是「行内机构标签 / 登记册指针 + 文末来源清单」，
+    因此行内标签与登记册 / 手册指针均计为已标注。
+    """
+    return bool(
+        "http" in block
+        or "来源" in block
+        or re.search(r"\[[^\]]{2,24}\]", block)
+        or "登记册" in block
+        or "手册" in block
+    )
+
+
 def _rel(path: Path) -> str:
     try:
         return str(path.relative_to(ROOT)).replace("\\", "/")
@@ -246,7 +268,7 @@ def check_report(u: dict, rp: Path, findings: list[Finding]) -> dict:
                                 "缺少「来源 / 参考来源」章节", "S-06"))
     subs_blocks = [b for b in _paragraphs(text) if _substantive(b)]
     fact_blocks = [b for b in subs_blocks if re.search(r"\d", b)]
-    sourced = sum(1 for b in fact_blocks if ("http" in b or "来源" in b))
+    sourced = sum(1 for b in fact_blocks if _has_source(b))
     stats["subs"] = len(fact_blocks)
     stats["sourced"] = sourced
     stats["source_cov"] = (sourced / len(fact_blocks)) if fact_blocks else 1.0
@@ -294,42 +316,54 @@ def check_report(u: dict, rp: Path, findings: list[Finding]) -> dict:
 def check_cross_topic(units: list[dict], findings: list[Finding]) -> dict:
     """维度二/四的跨主题检查：重复段落、失效引用、登记册口径冲突。"""
     # ── 重复段落（同文档内 + 跨文档）──
-    para_index: dict[str, list[tuple[str, str]]] = {}   # norm -> [(topic, rel)]
-    total_chars = 0
+    # ── 重复段落 ──
+    # 同文档内重复：全部 md（真实冗余信号，可自动去重）
+    file_chars: dict[str, int] = {}
+    dup_extra_chars = 0
     for u in units:
         for md in u["mds"]:
             text = _read(md)
+            counts: dict[str, int] = {}
+            chars = 0
             for b in _paragraphs(text):
                 if not _substantive(b):
                     continue
                 n = _norm(b)
                 if len(n) < DUP_MIN_CHARS:
                     continue
-                total_chars += len(n)
-                para_index.setdefault(n, []).append((u["topic"], _rel(md)))
-    dup_extra_chars = 0
+                chars += len(n)
+                counts[n] = counts.get(n, 0) + 1
+            rel_md = _rel(md)
+            file_chars[rel_md] = chars
+            for n, c in counts.items():
+                if c > 1:
+                    dup_extra_chars += len(n) * (c - 1)
+                    findings.append(Finding(
+                        "C-03", "P1", u["topic"], rel_md, "段落重复",
+                        f"同一实质段落在本文件内重复 {c} 次（约 {len(n)} 字）", "S-02"))
+    # 跨文档重复：仅研究正文 reports/*.md（提示级，不自动删）
+    # 说明：各主题的 prompts / operations-guide / handbook 为「自包含业务包」，
+    # 共享模板句属设计内重复（架构要求），不作为缺陷；研究正文才要求不交叉重复。
+    para_index: dict[str, list[tuple[str, str]]] = {}
+    for u in units:
+        for rp in u["reports"]:
+            text = _read(rp)
+            for b in _paragraphs(text):
+                if not _substantive(b):
+                    continue
+                n = _norm(b)
+                if len(n) < DUP_MIN_CHARS:
+                    continue
+                para_index.setdefault(n, []).append((u["topic"], _rel(rp)))
     for n, locs in para_index.items():
-        if len(locs) < 2:
-            continue
         topics = {t for t, _ in locs}
-        # 同文档内重复：逐文档计数
-        per_file: dict[str, int] = {}
-        for _, rel in locs:
-            per_file[rel] = per_file.get(rel, 0) + 1
-        for rel, cnt in per_file.items():
-            if cnt > 1:
-                dup_extra_chars += len(n) * (cnt - 1)
-                topic = next(t for t, r in locs if r == rel)
-                findings.append(Finding(
-                    "C-03", "P1", topic, rel, "段落重复",
-                    f"同一实质段落在本文件内重复 {cnt} 次（约 {len(n)} 字）", "S-02"))
-        # 跨文档重复：仅提示，不自动删（不同文档可合法复用模板句）
         if len(topics) > 1 and len(n) >= 120:
             findings.append(Finding(
                 "C-03", "P2", sorted(topics)[0], locs[0][1], "跨文档重复",
                 f"约 {len(n)} 字的段落同时出现在 {len(topics)} 个主题（{', '.join(sorted(topics))}），"
-                "疑似模板冗余，建议确认是否需保留", "S-02"))
-            dup_extra_chars += len(n) * (len(locs) - len(per_file))
+                "疑似研究正文交叉重复，建议确认是否需保留", "S-02"))
+            dup_extra_chars += len(n) * (len(locs) - len({r for _, r in locs}))
+    total_chars = sum(file_chars.values())
 
     # ── 失效引用 ──
     total_links = 0
@@ -363,7 +397,10 @@ def check_cross_topic(units: list[dict], findings: list[Finding]) -> dict:
         if u["registry"] is None:
             continue
         text = _read(u["registry"])
-        for row in REGISTRY_ROW_RE.findall(text):
+        # 仅解析「核心指标」活值表；历史版本快照为冻结存档，不参与口径一致性判定
+        sec = re.search(r"##\s*核心指标(.*?)(?=\n##\s|\Z)", text, re.S)
+        live = sec.group(1) if sec else ""
+        for row in REGISTRY_ROW_RE.findall(live):
             cells = [c.strip() for c in row.split("|")]
             if len(cells) < 2:
                 continue

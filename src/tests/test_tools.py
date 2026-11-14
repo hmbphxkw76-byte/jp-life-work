@@ -809,7 +809,10 @@ class TestInfoQualityCheck(unittest.TestCase):
         (self.root / "02-other" / "prompts" / "business-config.md").write_text(
             "# 其他主题 · 业务配置\n", encoding="utf-8")
         (self.root / "02-other" / "data" / "other_indicator_registry.md").write_text(
-            "# 其他主题 · 指标登记册\n", encoding="utf-8")
+            "# 其他主题 · 指标登记册\n\n## 核心指标\n\n"
+            "| # | 指标 | 口径 | 研究阶段 | 最新值 / 规则 | 来源机构 | 来源 URL | 版本日期 | 核验日期 | 核验状态 | 关联章节 | 更新时间 |\n"
+            "|---|---|---|---|---|---|---|---|---|---|---|---|\n"
+            "| 1 | 测试指标 | 测试口径 | 测试 | 1 | 测试机构 | https://example.com | 2026-11-14 | 2026-11-14 | 已核验 | 2 | 2026-11-14 |\n", encoding="utf-8")
         (self.root / "02-other" / "operations-guide.md").write_text(
             "# 其他主题 · 操作指南\n", encoding="utf-8")
         (self.root / "02-other" / "reports" / "target.md").write_text(
@@ -871,6 +874,49 @@ class TestInfoQualityCheck(unittest.TestCase):
         after_findings, after = self._findings()
         ver = verify(before, findings, after_findings, after, repairs)
         self.assertTrue(ver["passed"], ver["checks"])
+
+    # ── 判定口径（与项目架构约定对齐）──
+
+    def test_cross_doc_dup_only_for_reports(self):
+        """prompts 共享模板句不计缺陷；reports 研究正文交叉重复才计。"""
+        boiler = ("本段为共享模板说明，长度需超过一百二十字以触发跨文档重复检测阈值，"
+                  "用于验证明自包含业务包内的模板句不被误报为缺陷；该句同时写入两个主题，"
+                  "并在研究正文中重复出现，以区分「设计内模板复用」与「正文交叉重复」两类场景，"
+                  "确保检测口径与项目架构约定一致，避免误报与漏报同时发生。")
+        for topic in ("01-demo", "02-other"):
+            p = self.root / topic / "prompts" / "business-config.md"
+            p.write_text(p.read_text(encoding="utf-8") + "\n" + boiler + "\n", encoding="utf-8")
+        findings, _ = self._findings()
+        self.assertFalse(any(f.code == "C-03" and f.location == "跨文档重复" for f in findings))
+        # 研究正文出现同样段落 → 应报跨文档重复
+        for topic, name in (("01-demo", "2026-11-demo.md"), ("02-other", "target.md")):
+            p = self.root / topic / "reports" / name
+            p.write_text(p.read_text(encoding="utf-8") + "\n" + boiler + "\n", encoding="utf-8")
+        findings, _ = self._findings()
+        self.assertTrue(any(f.code == "C-03" and f.location == "跨文档重复" for f in findings))
+
+    def test_source_annotation_forms(self):
+        """五类来源标注形式均被认可。"""
+        from info_quality_check import _has_source
+        for text in ("见 https://example.com", "来源：机构", "[出入国在留管理庁]",
+                     "详见登记册 #5", "手册 03 有口径"):
+            self.assertTrue(_has_source(text), text)
+        self.assertFalse(_has_source("这是一段普通的陈述，没有任何引用。"))
+
+    def test_registry_snapshot_not_counted(self):
+        """历史版本快照口径差异不触发 C-10；活值表口径差异才触发。"""
+        findings, _ = self._findings()
+        self.assertFalse(any(f.code == "C-10" for f in findings))
+        reg = self.root / "02-other" / "data" / "other_indicator_registry.md"
+        reg.write_text(reg.read_text(encoding="utf-8")
+                       + "\n## 历史版本快照（v1.0）\n\n| # | 指标 | 最新值 / 规则（v1.0） | 核验状态 |\n"
+                         "|---|---|---|---|\n| 1 | 测试指标 | 快照口径不同 | 复核中 |\n", encoding="utf-8")
+        findings, _ = self._findings()
+        self.assertFalse(any(f.code == "C-10" for f in findings))
+        # 活值表口径改为不同 → 触发 C-10
+        reg.write_text(reg.read_text(encoding="utf-8").replace("测试口径", "不同口径"), encoding="utf-8")
+        findings, _ = self._findings()
+        self.assertTrue(any(f.code == "C-10" for f in findings))
 
 
 if __name__ == "__main__":
