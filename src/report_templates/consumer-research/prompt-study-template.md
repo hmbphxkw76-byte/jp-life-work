@@ -41,7 +41,7 @@
 | 年度复测 | `reports/{{YYYY-MM}}-<slug>.md`（+ 同名 html） | 同上 |
 
 - 专题调研命名不在 `prompts/tools` 标准正则内，`validate.py` 仅提示 WARN 不阻断，属预期行为；年度复测命名与标准正则兼容。
-- 交付格式：md 源稿 + 同目录自包含 HTML（`prompts/tools/md2html.py` 同步生成）；HTML 必须通过 `prompts/tools/lint_reports.py`（免责声明双条件强制）。
+- 交付格式：md 源稿 + 同目录自包含 HTML（`prompts/tools/md2html.py` 同步生成）；HTML 必须通过 `prompts/tools/lint_reports.py`。
 - 基线报告常驻 `reports/` 顶层，不进入归档。
 
 ## 五、执行方式（建议）
@@ -57,7 +57,7 @@
 - [ ] 事实发现与建议分离；不显著结论已降级标注
 - [ ] 已修正事实清单已继承并续写，无回退
 - [ ] 设计档案已回写；定性材料已脱敏
-- [ ] HTML 通过 lint（免责声明双条件 + 标签配对）
+- [ ] HTML 通过 lint（标签配对）
 
 ---
 ## 版本记录

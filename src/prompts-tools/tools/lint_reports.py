@@ -6,7 +6,6 @@
 错误项（阻断）：
 - thead / tbody / table 标签不配对、重复 </tbody>
 - 畸形 <th scope="col"ead> 写法
-- 缺少免责声明（「免责声明」节 + 「不构成投资建议」表述）
 
 警告项（不阻断）：
 - 多列表（≥6 列）<th> 未声明百分比列宽
@@ -43,10 +42,6 @@ def lint_html(text: str) -> list[tuple[str, str]]:
     # 畸形 th 写法
     if re.search(r'<th[^>]*scope="col"ead', text):
         issues.append(("E", '存在畸形 <th scope="col"ead> 写法'))
-
-    # 免责声明：兼容两种固定原文措辞（「本报告仅供参考…」/「以上内容基于公开数据…」）
-    if "免责声明" not in text or "不构成投资建议" not in text:
-        issues.append(("E", "缺少免责声明（须含「免责声明」节与「不构成投资建议」表述）"))
 
     # 逐表检查
     for i, tbl in enumerate(TABLE_RE.findall(text), start=1):

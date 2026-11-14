@@ -40,7 +40,7 @@
 ## 五、图表与渲染（基线期）
 
 - 交付格式：Markdown 源稿 + 同目录自包含 HTML（经 `prompts/tools/md2html.py` 同步生成）。
-- HTML 须通过 `prompts/tools/lint_reports.py`：「免责声明」节 + 「不构成投资建议或决策依据」表述为强制项。
+- HTML 须通过 `prompts/tools/lint_reports.py`。
 - 基线导航采用简化锚点目录，不强制升级为 `.report-nav`。
 
 ## 六、质量自检（在通用基座第九节之上追加）
@@ -50,7 +50,7 @@
 - [ ] 影响矩阵逐格附条款依据；歧义条款多解并列
 - [ ] 建议章与事实分离；不构成法律意见声明已写入
 - [ ] 政策台账已首建并回写；prompt 模板无硬编码活值
-- [ ] HTML 通过 lint（免责声明双条件 + 标签配对）
+- [ ] HTML 通过 lint（标签配对）
 
 ## 七、维护规范
 

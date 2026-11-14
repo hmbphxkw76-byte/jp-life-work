@@ -5,7 +5,7 @@
 #   2. 结构补全（ensure_region_topics.py）
 #   3. 归档策略（archive_reports.py，每主题保留最新 12 期）
 #   4. 生成全局索引（build_index.py → INDEX.md）
-#   5. 重建汇总页 / 阅读器（build_hub.py → index.html / reader.html）
+#   5. 重建汇总页（build_hub.py → index.html）
 #   6. 跑契约测试确认无回归后，提交并推送变更（无变更则跳过）
 #
 # 原 scheduled-update.yml（周期更新调度）已于 37c7a90 删除，本工作流为重建版，
@@ -66,7 +66,10 @@ jobs:
       - name: 生成全局索引（build_index.py）
         run: python src/prompts-tools/tools/build_index.py
 
-      - name: 重建汇总页 / 阅读器（build_hub.py）
+      - name: 同步报告 HTML（md2html.py）
+        run: python src/prompts-tools/tools/md2html.py
+
+      - name: 重建汇总页（build_hub.py）
         run: python src/prompts-tools/tools/build_hub.py
 
       - name: 契约测试（确认维护无回归）

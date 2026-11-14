@@ -42,7 +42,7 @@
 ## 五、图表与渲染（基线期）
 
 - 交付格式：Markdown 源稿 + 同目录自包含 HTML（经 `prompts/tools/md2html.py` 同步生成）；本类型默认 md+html 双格式（业务配置可声明例外）。
-- HTML 须通过 `prompts/tools/lint_reports.py`：表格标签配对、「免责声明」节 + 「不构成投资建议或决策依据」表述为强制项。
+- HTML 须通过 `prompts/tools/lint_reports.py`：表格标签配对。
 - 导航采用简化锚点目录，不强制升级为 `.report-nav`。
 
 ## 六、质量自检（在通用基座第九节之上追加）
@@ -52,7 +52,7 @@
 - [ ] 事实与推断分离；建议章标「建议 / 推断」
 - [ ] 指标追踪表齐全，登记册已首建并回写
 - [ ] 来源语言规则（{{SOURCE_LANGUAGE_RULE}}）执行结果已声明
-- [ ] HTML 通过 lint（免责声明双条件 + 标签配对）
+- [ ] HTML 通过 lint（标签配对）
 
 ## 七、维护规范
 

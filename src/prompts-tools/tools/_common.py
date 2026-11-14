@@ -85,15 +85,6 @@ REPORT_RES = (
     ("weekly", WEEKLY_RE),
 )
 
-# 各周期提示词文件名
-PROMPT_FILES = {
-    "baseline": "prompt-baseline-setup.md",
-    "monthly": "prompt-monthly-monitor.md",
-    "quarterly": "prompt-quarterly-analysis.md",
-    "annual": "prompt-annual-review.md",
-    "weekly": "prompt-weekly-monitor.md",
-}
-
 # 通用层根部必备文件（validate.py 使用；类型中立共享文件）
 REQUIRED_TEMPLATE_FILES = (
     "prompt-generic-base.md",
@@ -160,6 +151,26 @@ TEMPLATE_TYPE_DIRS = {
         "prompt-baseline-setup-template.md",
         "prompt-weekly-monitor-template.md",
     ),
+}
+
+# business-config 中的类型模板引用（如 ../../src/report_templates/employment-research/）
+TYPE_RE = re.compile(r"src/report_templates/([a-z][a-z0-9-]*)/")
+
+# 类型 ID -> 类型名回退表（与 template-registry.md 第二节一致；构建时解析失败启用）
+TYPE_LABEL_FALLBACK = {
+    "market-monitoring": "市场指标监测型",
+    "trend-weekly": "行业趋势周报型",
+    "employment-research": "职业就业调研型",
+    "competitive-intelligence": "竞争情报监测型",
+    "sentiment-monitoring": "舆情传播监测型",
+    "consumer-research": "消费者·用户调研型",
+    "industry-research": "行业深度研究型",
+    "market-sizing": "市场规模测算与预测型",
+    "investment-research": "投资分析与尽调型",
+    "policy-analysis": "政策法规解读型",
+    "feasibility-study": "可行性与市场进入型",
+    "flash-commentary": "快评·事件点评型",
+    "whitepaper": "白皮书·专题深度型",
 }
 
 # 通用层禁现的业务关键词（与 2026-11-13 重构验证口径一致）
@@ -275,17 +286,6 @@ def parse_period(s: str):
     if m:
         return "year", int(m.group(1)), None
     raise ValueError(f"无法识别的周期: {s}")
-
-
-def expected_output(cycle: str, y: int, n) -> str:
-    """某周期报告的落盘文件名（业务目录相对路径）。"""
-    if cycle == "monthly":
-        return f"{y}-{n:02d}_monthly.html"
-    if cycle == "quarterly":
-        return f"{y}-Q{n}_quarterly.html"
-    if cycle == "annual":
-        return f"{y}_annual.html"
-    return f"{y}-{n:02d}_baseline_report.html"
 
 
 def tasks_for_period(cycle: str, y: int, n):

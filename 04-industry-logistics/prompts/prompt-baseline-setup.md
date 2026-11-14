@@ -71,7 +71,7 @@
 
 ## 七、渲染与交付
 
-- 交付格式：md + 同目录自包含 HTML（`python src/prompts-tools/tools/md2html.py`）；HTML 须通过 `python src/prompts-tools/tools/lint_reports.py`（免责声明双条件）。
+- 交付格式：md + 同目录自包含 HTML（`python src/prompts-tools/tools/md2html.py`）；HTML 须通过 `python src/prompts-tools/tools/lint_reports.py`。
 - 基线导航采用简化锚点目录，不强制 `.report-nav`。
 - 落盘后将[业务配置第一节](./business-config.md)的 `{{BASELINE_REPORT_PATH}}` 指向本报告（重建场景）。
 

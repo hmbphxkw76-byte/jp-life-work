@@ -45,7 +45,7 @@
 | 年度 | `reports/{{YYYY-MM}}-<slug>.md`（+ 同名 html）+ 登记册年度新版 | 同上 |
 
 - 文件命名遵循仓库统一约定（`prompts/tools` 按此识别）；业务线如需保留旧版本文号，写入报告文首/文末标注，不进入文件名。
-- 交付格式：md 源稿 + 同目录自包含 HTML（`prompts/tools/md2html.py` 同步生成）；HTML 必须通过 `prompts/tools/lint_reports.py`（免责声明双条件强制）。
+- 交付格式：md 源稿 + 同目录自包含 HTML（`prompts/tools/md2html.py` 同步生成）；HTML 必须通过 `prompts/tools/lint_reports.py`。
 - 基线报告常驻 `reports/` 顶层，不进入归档；周期报告按归档保留策略执行。
 
 ## 五、执行方式（建议）
@@ -62,7 +62,7 @@
 - [ ] 薪酬交叉分层表、净薪 / 总包模型等核心框架保留
 - [ ] 来源语言规则执行结果已声明；零违规来源
 - [ ] 数据变更摘要 + 待复核清单已产出
-- [ ] HTML 通过 lint（免责声明双条件 + 标签配对）
+- [ ] HTML 通过 lint（标签配对）
 
 ---
 ## 版本记录

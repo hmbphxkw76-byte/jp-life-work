@@ -1,4 +1,4 @@
-# HTML 同步：报告 md 源变更时自动重新生成同名自包含 HTML、重建汇总页 / 阅读器并提交。
+# HTML 同步：报告 md 源变更时自动重新生成同名自包含 HTML（含跨月对比高亮）、重建汇总页并提交。
 name: html-sync
 
 on:
@@ -7,6 +7,7 @@ on:
     paths:
       - '**/reports/*.md'
       - 'src/prompts-tools/tools/build_hub.py'
+      - 'src/prompts-tools/tools/md2html.py'
       - 'src/prompts-tools/tools/report_diff.py'
   workflow_dispatch:
 
@@ -30,17 +31,16 @@ jobs:
       - name: 安装依赖
         run: pip install -r requirements.txt
 
+      # md2html 在构建期预渲染跨月对比高亮并写入报告页，报告变更后必须同步重建。
       - name: 重新生成报告 HTML（md2html.py）
         run: python src/prompts-tools/tools/md2html.py
 
-      # 阅读器内嵌全部月度报告并预渲染跨月对比，报告变更后必须同步重建，
-      # 否则 reader.html 的对比高亮与版本列表会过期（validate.yml --check 会拦截）。
-      - name: 重建汇总页 / 阅读器（build_hub.py）
+      - name: 重建汇总页（build_hub.py）
         run: python src/prompts-tools/tools/build_hub.py
 
       - name: 提交 HTML 与汇总页更新
         run: |
-          git add -A -- ':(glob)**/reports/*.html' index.html reader.html
+          git add -A -- ':(glob)**/reports/*.html' index.html
           if git diff --cached --quiet; then
             echo "HTML 与汇总页均一致，无变化，跳过提交"
             exit 0

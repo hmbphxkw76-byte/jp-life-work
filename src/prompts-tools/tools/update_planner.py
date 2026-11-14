@@ -67,10 +67,7 @@ def pick_prompt(prompts: list[str]) -> str:
 
 def target_month(period: str) -> str:
     """周期标识 -> 目标自然月（季度 / 年度取末月）。"""
-    try:
-        cycle, y, n = parse_period(period)
-    except ValueError:
-        raise
+    cycle, y, n = parse_period(period)
     if cycle == "month":
         return f"{y}-{n:02d}"
     if cycle == "quarter":

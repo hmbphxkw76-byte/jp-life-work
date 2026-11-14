@@ -42,7 +42,7 @@
 | 项目复盘 | `reports/{{YYYY-MM-DD}}-主题-复盘.md`（+ 同名 html） | 同上 |
 
 - 项目制命名不在 `prompts/tools` 标准正则内，`validate.py` 仅提示 WARN 不阻断，属预期行为。
-- 交付格式：md 源稿 + 同目录自包含 HTML（`prompts/tools/md2html.py` 同步生成）；HTML 必须通过 `prompts/tools/lint_reports.py`（免责声明双条件强制）。
+- 交付格式：md 源稿 + 同目录自包含 HTML（`prompts/tools/md2html.py` 同步生成）；HTML 必须通过 `prompts/tools/lint_reports.py`。
 - 基线报告常驻 `reports/` 顶层，不进入归档。
 
 ## 五、执行方式（建议）
@@ -58,7 +58,7 @@
 - [ ] 财务测算全假设可审计，三情景呈现
 - [ ] 引用来源报告与口径注明完整
 - [ ] 已修正事实清单已继承并续写，无回退
-- [ ] HTML 通过 lint（免责声明双条件 + 标签配对）
+- [ ] HTML 通过 lint（标签配对）
 
 ---
 ## 版本记录

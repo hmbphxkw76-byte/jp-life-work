@@ -17,11 +17,13 @@ from dataclasses import dataclass
 from html import escape
 from html.parser import HTMLParser
 
-# block 级元素：作为最小比对单元
-BLOCK_TAGS = {"h1", "h2", "h3", "h4", "h5", "h6", "p", "li", "tr", "pre", "hr", "dt", "dd"}
+# block 级元素：作为最小比对单元。
+# table 整体成块（而非逐 tr 比对）：逐行拆分会丢失 <table>/<thead>/<tbody> 容器，
+# 渲染时表格结构被破坏；整体比对保留完整结构，变更仍以整表高亮呈现。
+BLOCK_TAGS = {"h1", "h2", "h3", "h4", "h5", "h6", "p", "li", "tr", "pre", "hr", "dt", "dd", "table"}
 # 容器元素：继续向下递归，不整体成块
 CONTAINER_TAGS = {
-    "#document", "body", "blockquote", "table", "thead", "tbody", "tfoot",
+    "#document", "body", "blockquote", "thead", "tbody", "tfoot",
     "ul", "ol", "dl", "div", "nav", "section", "article", "aside", "header",
     "footer", "main", "figure", "figcaption", "details", "summary",
 }
@@ -181,9 +183,19 @@ def diff_blocks(prev_blocks: list[Block], curr_blocks: list[Block]) -> list[tupl
     return out
 
 
+def _strip_section_ids(html: str) -> str:
+    """删除态区块去掉自动章节 id（sN）。
+
+    删除块是历史内容，折叠进 <details> 仅供追溯；若保留其 id="sN"，会与当期
+    同名章节 id 重复（章节重排 / 标题变更时必然发生），导致 HTML 出现重复 id、
+    锚点导航错位。仅剔除 sN 段号 id，保留标题 slug 锚点（供跨期引用）。
+    """
+    return re.sub(r'\bid="s\d+"', "", html)
+
+
 def _group_del(blocks: list[Block]) -> str:
     """把连续删除块折叠为一组（默认收起，可展开追溯）。"""
-    inner = "".join(b.html for b in blocks)
+    inner = "".join(_strip_section_ids(b.html) for b in blocks)
     return (
         f'<details class="diff-del-group">'
         f'<summary>已更新 · 删除 {len(blocks)} 处（点击展开）</summary>'
