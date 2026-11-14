@@ -33,7 +33,7 @@ python src/prompts-tools/tools/validate.py      # 结构与命名校验，期望
 python src/prompts-tools/tools/lint_reports.py  # 报告内容校验，期望：0 错误
 ```
 
-> **退出码说明**：`validate.py` 0 = 通过；1 = 存在错误项；2 = 仅存在警告项（警告应仅来自其他未迁移主题）。`lint_reports.py` 0 = 通过；1 = 存在错误（免责声明缺失、表格规范等）。
+> **退出码说明**：`validate.py` 0 = 通过；1 = 存在错误项；2 = 仅存在警告项（警告应仅来自其他未迁移主题）。`lint_reports.py` 0 = 通过；1 = 存在错误（表格规范等）。
 
 并人工确认三点：
 
@@ -78,7 +78,7 @@ python src/prompts-tools/tools/lint_reports.py  # 报告内容校验，期望：
 python src/prompts-tools/tools/lint_reports.py
 ```
 
-人工核对：全篇引用回溯官方原文；免责声明为固定原文；基线导航为简化锚点；九章（或九节）结构与声明映射一致。
+人工核对：全篇引用回溯官方原文；基线导航为简化锚点；九章（或九节）结构与声明映射一致。
 
 ---
 
@@ -121,7 +121,7 @@ python src/prompts-tools/tools/lint_reports.py
 python src/prompts-tools/tools/lint_reports.py
 ```
 
-人工核对：解读锚点准确；已修正事实清单无回退；新旧对照完整；免责声明原文未改写；登记册与报告变更摘要一致。
+人工核对：解读锚点准确；已修正事实清单无回退；新旧对照完整；登记册与报告变更摘要一致。
 
 ---
 
@@ -157,7 +157,7 @@ python src/prompts-tools/tools/lint_reports.py
 python src/prompts-tools/tools/lint_reports.py
 ```
 
-人工核对：九锚点（或声明结构）全部跳转准确；上年判断原文保留；台账增量 / 状态变更已回写；免责声明原文未改写。
+人工核对：九锚点（或声明结构）全部跳转准确；上年判断原文保留；台账增量 / 状态变更已回写。
 
 ---
 
@@ -170,7 +170,6 @@ python src/prompts-tools/tools/lint_reports.py
 python src/prompts-tools/tools/classify_reports.py
 ```
 
-- [ ] 免责声明固定原文存在（含「免责声明」节 + 「不构成投资建议」表述）——**现有报告为遗留项，新产出报告必须满足**
 - [ ] 表格 `<thead>` / `<tbody>` 成对，多列表声明百分比列宽，无竖排塌缩
 - [ ] 来源链接可点击，`[Source: 完整URL, 年份]` 完整
 - [ ] 图注含单位、来源、统计周期与口径警示
@@ -198,7 +197,7 @@ git 提交报告 + 登记册（建议提交信息：`report: {YYYY-MM-DD} 签证
 | 现象 | 原因 | 处置 |
 |---|---|---|
 | `validate.py` 退出码 1 | 通用层缺文件 / 业务目录结构缺项 / 报告命名不合规 | 按 error 行补齐文件或改命名；不得为过检删除通用层内容 |
-| `lint_reports.py` 退出码 1 | 缺免责声明（须同时含「免责声明」节 + 「不构成投资建议」）、表格规范错误 | 按行修复 HTML；免责声明用固定原文 |
+| `lint_reports.py` 退出码 1 | 表格规范错误 | 按行修复 HTML |
 | `validate.py` 退出码 2 | 存在警告项 | 确认警告仅来自其他未迁移主题；本主题应零 WARN |
 | 基线报告缺失 | 误删或未恢复 | **停止周期更新**，先按 prompt-baseline-setup.md 灾难恢复 |
 | 上年判断被改写 | 差异合并时覆盖原文 | 恢复原文，复判结论另起段落并列呈现 |

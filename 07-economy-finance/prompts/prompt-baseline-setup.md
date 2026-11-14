@@ -71,7 +71,7 @@
 
 ## 七、渲染与交付
 
-- 交付格式：md + 同目录自包含 HTML（`python src/prompts-tools/tools/md2html.py`）；HTML 须通过 `python src/prompts-tools/tools/lint_reports.py`（免责声明双条件）。
+- 交付格式：md + 同目录自包含 HTML（`python src/prompts-tools/tools/md2html.py`）；HTML 须通过 `python src/prompts-tools/tools/lint_reports.py`。
 - 基线导航采用简化锚点目录，不强制 `.report-nav`。
 - 落盘后将[业务配置第一节](./business-config.md)的 `{{BASELINE_REPORT_PATH}}` 指向本报告（重建场景）。
 
@@ -83,7 +83,7 @@
 - [ ] 个人数据（自记录）与宏观行情（官方口径）未混算
 - [ ] 追踪表 6 项均已核对并填写「是否更新」
 - [ ] `{{REGISTRY_PATH}}` 已读已写：变更摘要与登记册一致；prompt 模板自身无硬编码活值
-- [ ] HTML 通过 lint（免责声明双条件 + 标签配对）
+- [ ] HTML 通过 lint（标签配对）
 
 ---
 
