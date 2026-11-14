@@ -19,3 +19,6 @@ src/vocabulary/data/topic-backups/
 .worktrees/
 .superpowers/
 docs/superpowers/
+
+# 本地工具备份目录（不入库）
+.catpaw/
