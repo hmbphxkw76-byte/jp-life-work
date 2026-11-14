@@ -21,9 +21,9 @@
 - 文件存在但过期 -> 退出码 1（阻断合并）
 - 文件不存在    -> 退出码 0 并提示（全新克隆尚未生成，由定时维护首建）
 
-比对前对「最近生成」时间戳做归一化（normalize_for_check）：时间戳为分钟级心跳
-（随定时维护提交，与 INDEX.md 同理），不参与最新性判定——否则重算内容必然
-与已提交文件相差时间戳一行，index.html 恒判过期。
+页脚不嵌入生成时间戳（避免 html-sync 每次产生仅时间戳变更的空提交）；
+normalize_for_check 保留一个归一化函数，用于抹平历史版本页脚残留的时间戳行，
+保证与旧提交内容可比。
 
 退出码（生成模式）：0 = 成功；1 = 写入失败。
 """
@@ -34,7 +34,6 @@ import html as html_mod
 import json
 import re
 import sys
-from datetime import datetime, timezone
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -646,7 +645,7 @@ def render_type_chips(topics: list[dict]) -> str:
     return "".join(btns)
 
 
-def render_hub(topics: list[dict], now_iso: str) -> str:
+def render_hub(topics: list[dict]) -> str:
     esc = html_mod.escape
     total_reports = sum(len(t["reports"]) for t in topics)
     cards = "".join(render_topic_card(t) for t in topics)
@@ -698,7 +697,6 @@ def render_hub(topics: list[dict], now_iso: str) -> str:
 </div>
 
 <footer class="footer">
-  <p class="muted">最近生成：{now_iso}</p>
   <p>由 <code>src/prompts-tools/tools/build_hub.py</code> 自动生成 · 主题与报告按目录自动发现，
   新增主题重新生成即扩展 · 报告源文件见各主题 <code>reports/</code> 目录</p>
 </footer>
@@ -1002,22 +1000,23 @@ def render_reader(data: dict) -> str:
 def build_outputs() -> dict[str, str]:
     topics = collect_topics()
     reader_data = build_reader_data(topics)
-    now_iso = datetime.now(tz=timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
     return {
-        "index.html": render_hub(topics, now_iso),
+        "index.html": render_hub(topics),
         "reader.html": render_reader(reader_data),
     }
 
 
-GENERATED_TS_RE = re.compile(r'(<p class="muted">最近生成：)[^<]*(</p>)')
+# 历史版本页脚曾含「最近生成」时间戳（分钟级心跳，随定时维护提交）；
+# 现页脚已移除时间戳，此正则仅用于与旧提交内容比对时抹平该行的残留差异。
+GENERATED_TS_RE = re.compile(r'\s*<p class="muted">最近生成：[^<]*</p>')
 
 
 def normalize_for_check(text: str) -> str:
-    """--check 比对专用归一化：抹平「最近生成」生成时刻时间戳（不参与一致性判定）。
+    """--check 比对专用归一化：移除历史版本页脚的「最近生成」时间戳行。
 
     纯函数，供 tests/ 直接调用。
     """
-    return GENERATED_TS_RE.sub(r"\g<1>TIMESTAMP\g<2>", text)
+    return GENERATED_TS_RE.sub("", text)
 
 
 def compare_outputs(outputs: dict[str, str]) -> tuple[list[str], list[str]]:
