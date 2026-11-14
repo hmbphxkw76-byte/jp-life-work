@@ -413,8 +413,9 @@ class TestExitTransitionReturnRegistry(unittest.TestCase):
         rows = [line for line in text.splitlines() if line.startswith("| ") and line.count("|") >= 10]
         self.assertGreaterEqual(len(rows), 14)
         self.assertIn("⚠ 待核实", text)
-        for field in ("来源 URL", "版本 / 发布日期", "核验状态", "关联章节", "更新时间"):
+        for field in ("来源 URL", "版本日期", "核验日期", "核验状态", "关联章节", "更新时间"):
             self.assertIn(field, text)
+        self.assertNotIn("4.3 / 6", text)
 
 
 class TestExitTransitionReturnReports(unittest.TestCase):
@@ -459,8 +460,9 @@ class TestExitTransitionReturnReports(unittest.TestCase):
             "（推断）",
         ):
             self.assertIn(value, text)
-        self.assertIn("[出入国在留管理庁", text)
-        self.assertIn("2026-11-14", text)
+        self.assertIn("[出入国在留管理庁](https://www.moj.go.jp/isa/)", text)
+        self.assertIn("核验日期：2026-11-14", text)
+        self.assertGreaterEqual(text.count("](https://"), 9)
 
     def test_initial_analysis_is_framework_companion(self):
         self.assertTrue(self.INITIAL.is_file())
@@ -516,6 +518,13 @@ class TestExitTransitionReturnHtml(unittest.TestCase):
     def test_baseline_html_has_nine_sections_and_resolving_anchors(self):
         text = self.BASELINE.read_text(encoding="utf-8")
         self.assertIn('id="s9"', text)
+        nav = re.search(r'<nav aria-label="报告导航">(.*?)</nav>', text, re.S)
+        self.assertIsNotNone(nav)
+        for anchor in re.findall(r'href="#(s\d+)"', nav.group(1)):
+            self.assertIn(f'id="{anchor}"', text)
+
+    def test_initial_analysis_html_has_resolving_anchors(self):
+        text = self.INITIAL.read_text(encoding="utf-8")
         nav = re.search(r'<nav aria-label="报告导航">(.*?)</nav>', text, re.S)
         self.assertIsNotNone(nav)
         for anchor in re.findall(r'href="#(s\d+)"', nav.group(1)):
