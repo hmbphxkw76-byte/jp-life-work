@@ -83,6 +83,15 @@ jobs:
           ]
           Path("/tmp/issue-body.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
           PY
+          # 去重：当月已有未关闭的清单 Issue 时更新其正文，避免重复创建
+          EXISTING=$(gh issue list --state open \
+            --search "in:title 【月度报告产出】$PERIOD" \
+            --json number --jq '.[0].number // empty')
+          if [ -n "$EXISTING" ]; then
+            echo "当月清单 Issue 已存在：#$EXISTING，更新其正文（去重）"
+            gh issue edit "$EXISTING" --body-file /tmp/issue-body.md
+            exit 0
+          fi
           gh issue create \
             --title "【月度报告产出】$PERIOD 任务清单" \
             --body-file /tmp/issue-body.md
