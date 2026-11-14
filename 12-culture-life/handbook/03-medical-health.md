@@ -54,7 +54,7 @@
 
 流程（司机现场版）：
 
-1. 事故/受伤 → 先确保安全与报警（→ [03-安全规范与现场制度](../../02-career-driver/reports/2026-11-career-driver.html#03-安全规范与现场制度)）
+1. 事故/受伤 → 先确保安全与报警（→ [03-安全规范与现场制度](../../02-career-driver/handbook/03-safety-rules.md)）
 2. 当日内口头+书面报告公司运行管理者，记录时间/地点/目击者/点呼记录
 3. 到労災指定医院就诊，明确说明「労災です」，走労災窗口而非医保窗口
 4. 公司提交「療養補償給付たる療養の給付請求書」；本人保留诊断书、领收书、事故报告副本
@@ -86,7 +86,7 @@
 
 - 保险费率、自付上限等活值 → [data/culture_life_indicator_registry.md](../data/culture_life_indicator_registry.md)
 - 税·社保·年金缴纳与归档 → [03-税务社保年金](../../07-economy-finance/reports/2026-11-economy-finance.html#03-税务社保年金)
-- 现场安全制度与事故处理 → [03-安全规范与现场制度](../../02-career-driver/reports/2026-11-career-driver.html#03-安全规范与现场制度)
+- 现场安全制度与事故处理 → [03-安全规范与现场制度](../../02-career-driver/handbook/03-safety-rules.md)
 - 就医资源的地域差 → [13-地域信息 · 01-地域选择框架](../../13-regional-info/reports/2026-11-regional-info.html#01-地域选择框架)
 - 心理健康的生活经验视角（疲劳期情绪低谷）→ [02-生活指南与适应 · 四](02-living-guide.md#四心理健康与社群)
 

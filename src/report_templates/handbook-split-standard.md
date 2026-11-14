@@ -250,7 +250,7 @@ src/report_templates/handbook-split-standard.md 第三至七节逐项执行：
 | 主题 | 状态 | 完成日期 | 提交 |
 |---|---|---|---|
 | 01-ssw-driver | ✅ 已完成 | 2026-11-14 | 2aa050a |
-| 02-career-driver | ⬜ 待处理 | — | — |
+| 02-career-driver | ✅ 已完成 | 2026-11-14 | 待回填 |
 | 03-career-management | ⬜ 待处理 | — | — |
 | 04-industry-logistics | ⬜ 待处理 | — | — |
 | 05-industry-autonomous | ⬜ 待处理 | — | — |

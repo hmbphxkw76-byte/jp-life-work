@@ -326,7 +326,7 @@
 #### 关联
 
 - 薪资地域差 → [07-经济与财务 · 01](../../07-economy-finance/reports/2026-11-economy-finance.html#01-收入结构与薪资行情)
-- 求职渠道地域策略 → [05 求职渠道与简历面试](../../02-career-driver/reports/2026-11-career-driver.html#05-求职渠道与简历面试)
+- 求职渠道地域策略 → [05 求职渠道与简历面试](../../02-career-driver/handbook/05-job-hunting.md)
 
 ---
 
