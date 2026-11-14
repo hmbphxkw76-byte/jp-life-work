@@ -1,4 +1,4 @@
-"""报告归档策略（CI: scheduled-maintenance 的 archive_reports 步骤）。
+"""报告归档策略（手动 / 待建定时任务的归档步骤）。
 
 每条业务线的 reports/ 只保留最新 N 期月度报告（默认 12 期，与阅读器展示
 窗口一致），超出的移动到 reports/archives/。报告已统一为 `YYYY-MM-<slug>`

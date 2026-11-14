@@ -1,4 +1,4 @@
-"""结构补全（幂等）（CI: scheduled-maintenance / ci.yml 的 ensure_region_topics 步骤）。
+"""结构补全（幂等）（validate.yml 的 ensure_region_topics 步骤）。
 
 扫描全部业务线目录（{地区}/{物业类型}），补齐标准子目录
 prompts/、reports/、data/（--check 模式只报告不创建）。

@@ -1,10 +1,10 @@
-"""自动化状态记录（CI: content-update / scheduled-maintenance 的 status 步骤与活跃度检查）。
+"""自动化状态记录（定时维护的状态记录与活跃度检查（当前无定时工作流，需手动运行））。
 
-状态文件：仓库根 automation-status.json（content-update / scheduled-maintenance
+状态文件：仓库根 automation-status.json（定时维护
 工作流提交该文件）。
 
 用法：
-    python prompts/tools/automation_status.py record --phase content-update \
+    python prompts/tools/automation_status.py record --phase maintenance \
         --result success --run-url <url>
     python prompts/tools/automation_status.py activity --threshold 45 [--porcelain]
 

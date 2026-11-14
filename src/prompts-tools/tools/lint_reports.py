@@ -1,4 +1,4 @@
-"""报告内容校验 lint（CI: scheduled-maintenance / content-update / ci.yml 的 lint 步骤）。
+"""报告内容校验 lint（validate.yml 的 lint 步骤（建议级，continue-on-error））。
 
 扫描各业务线 reports/*.html，执行监测报告通用规范的人工校验清单（第 9 节）中
 可程序化的项目。退出码：0 = 通过；1 = 存在错误项；2 = 仅存在警告项。

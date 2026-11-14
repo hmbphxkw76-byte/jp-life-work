@@ -1,4 +1,4 @@
-"""报告模板合规校验（CI: ci.yml 阻断式校验关卡 / scheduled-maintenance 定期合规审计）。
+"""报告模板合规校验（validate.yml 建议级关卡（continue-on-error））。
 
 依据 report_templates/compliance-rules.json（12 类报告类型的结构骨架规则），
 对业务线 reports/*.html 逐份校验：

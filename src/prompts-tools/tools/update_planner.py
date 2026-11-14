@@ -1,4 +1,4 @@
-"""内容更新任务清单（CI: content-update 的「生成任务清单」步骤）。
+"""内容更新任务清单（手动 / 待建定时任务的「生成任务清单」步骤）。
 
 按业务线与周期判断应执行的任务，输出 tasks.md（人读）与 tasks.json
 （--porcelain，供创建 Issue 的脚本判断是否为空）。
@@ -7,7 +7,7 @@
 季度节拍按季度末月归档（2026-Q4 -> 2026-12），与月度报告同一套命名 / 对比 /
 展示逻辑。任务清单按目标自然月判断报告是否已产出。
 
-用法（与 content-update.yml 一致）：
+用法：
     python prompts/tools/update_planner.py --porcelain --pending-only \
         [--project 01-ssw-driver] [--period 2026-11] > tasks.json
     python prompts/tools/update_planner.py --pending-only [--project ...] [--period ...] > tasks.md
@@ -36,7 +36,7 @@ from _common import (  # noqa: E402
 
 
 def default_period(now: datetime) -> str:
-    """与 content-update.yml 的「计算周期标识」逻辑一致：季首月用季度标识。"""
+    """与定时任务的周期计算逻辑一致：季首月用季度标识。"""
     month = now.month
     year = now.year
     if month in (1, 4, 7, 10):

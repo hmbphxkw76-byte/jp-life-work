@@ -1,4 +1,4 @@
-"""md -> HTML 同步（CI: html-sync / scheduled-maintenance 的 md2html 步骤）。
+"""md -> HTML 同步（html-sync.yml 的 md2html 步骤）。
 
 扫描各业务线 reports/*.md，转换为同名自包含 .html（与 monitoring-common-spec
 第 1 节「双格式交付」一致）。纯图表型简报（只出 HTML 的业务线）没有 md 源，

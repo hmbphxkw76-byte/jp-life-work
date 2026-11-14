@@ -1,4 +1,4 @@
-"""结构与规范校验（CI: scheduled-maintenance / content-update 的 validate 步骤）。
+"""结构与规范校验（validate.yml 的「结构与规范校验」步骤）。
 
 退出码：0 = 通过；1 = 存在错误项；2 = 仅存在警告项。
 

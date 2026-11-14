@@ -23,19 +23,19 @@ python -m unittest discover -s src/tests -v   # 单元测试（65 项）
 
 | 工具 | 类别 | 对应 CI 工作流步骤 |
 |---|---|---|
-| validate.py | 校验 | ci.yml / scheduled-maintenance「规范校验」 |
-| lint_reports.py | 校验 | ci.yml / scheduled-maintenance / content-update「报告内容校验」 |
-| compliance_check.py | 校验+引导+审计 | ci.yml / content-update「报告模板合规校验」；scheduled-maintenance「报告合规性审计」 |
-| classify_reports.py | 校验+修复 | scheduled-maintenance / content-update「报告自动归位」 |
-| ensure_region_topics.py | 校验+修复 | ci.yml / scheduled-maintenance「结构补全」 |
-| md2html.py | 生成 | html-sync / scheduled-maintenance「HTML 同步」 |
-| archive_reports.py | 生成 | scheduled-maintenance「归档策略」 |
-| build_index.py | 生成 | scheduled-maintenance「生成全局索引」 |
-| build_hub.py | 生成 | ci.yml --check / html-sync、scheduled-maintenance「汇总页 + 阅读器」 |
+| validate.py | 校验 | validate.yml「规范校验」 |
+| lint_reports.py | 校验 | validate.yml「报告内容校验」（建议级） |
+| compliance_check.py | 校验+引导+审计 | validate.yml「报告模板合规校验」（建议级） |
+| classify_reports.py | 校验+修复 | 手动 / 待建定时任务「报告自动归位」 |
+| ensure_region_topics.py | 校验+修复 | validate.yml「结构补全」 |
+| md2html.py | 生成 | html-sync.yml「HTML 同步」 |
+| archive_reports.py | 生成 | 手动 / 待建定时任务「归档策略」 |
+| build_index.py | 生成 | 手动 / 待建定时任务「生成全局索引」 |
+| build_hub.py | 生成 | validate.yml --check / html-sync.yml「汇总页 + 阅读器」 |
 | report_diff.py | 生成 | build_hub 依赖：跨月内容对比高亮（纯函数） |
 | migrate_monthly_reports.py | 迁移 | 一次性：存量报告合并重命名为月度系列 |
-| update_planner.py | 编排 | content-update「生成任务清单」 |
-| automation_status.py | 编排 | content-update / scheduled-maintenance「状态记录与活跃度」 |
+| update_planner.py | 编排 | 手动 / 待建定时任务「生成任务清单」 |
+| automation_status.py | 编排 | 手动 / 待建定时任务「状态记录与活跃度」 |
 
 ## 校验类
 
@@ -145,7 +145,7 @@ python prompts/tools/build_index.py
 ```
 
 按业务线汇总全部报告，生成根目录 `INDEX.md`（含「最近生成」时间戳，作为
-content-update 工作流的活跃度心跳）。
+定时维护的活跃度心跳；当前无定时工作流，需手动运行）。
 
 ### build_hub.py — 汇总页
 
@@ -167,7 +167,7 @@ python prompts/tools/build_hub.py --check  # 校验是否为最新
 ### update_planner.py — 内容更新任务清单
 
 ```bash
-# porcelain JSON（content-update 工作流用于判断清单是否为空）
+# porcelain JSON（供定时任务判断清单是否为空）
 python prompts/tools/update_planner.py --porcelain --pending-only > tasks.json
 # 人读 md 清单
 python prompts/tools/update_planner.py --pending-only > tasks.md
@@ -186,10 +186,10 @@ python prompts/tools/update_planner.py --project dubai/apartment --period 2026-Q
 
 ```bash
 # 记录一次执行（工作流 always 步骤调用）
-python prompts/tools/automation_status.py record --phase content-update \
+python prompts/tools/automation_status.py record --phase maintenance \
     --result success --run-url "<运行链接>"
 
-# 活跃度检查（scheduled-maintenance 用于 >45 天预警）
+# 活跃度检查（定时维护用于 >45 天预警）
 python prompts/tools/automation_status.py activity --threshold 45 --porcelain   # 输出天数或 unknown
 python prompts/tools/automation_status.py activity --threshold 45               # 人读说明
 ```
