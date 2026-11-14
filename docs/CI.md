@@ -1,0 +1,162 @@
+# CI 与自动化体系
+
+> 本文档说明 jp-life-work 报告管理体系的持续集成（CI）与定时自动化。
+> 代码位置：`.github/workflows/`；工具链：`src/prompts-tools/tools/`；测试：`src/tests/test_tools.py`。
+
+## 一、总览
+
+本体系的**目标**：让「报告源文件 → 交付物」的生成始终一致，规范不退化，变更可追溯。
+
+| 关注点 | 由谁保障 |
+|---|---|
+| 报告命名 / 结构 / 配对规范 | `validate.yml`（阻断） |
+| md → HTML、汇总页 / 阅读器 | `html-sync.yml`（push 触发） |
+| 归档 / 索引 / 结构维护 | `scheduled-maintenance.yml`（每月 1 日） |
+| 月度产出待办提醒 | `scheduled-report-tasks.yml`（每月 1 日） |
+| 内容零丢失 / 对比准确性 | `src/tests/test_tools.py`（69 项） |
+
+**CI 不产出报告研究内容**——报告由各主题 `prompts/business-config.md` 定义的研究流程人工/Agent 产出；CI 只校验与同步生成物。
+
+## 二、工作流清单
+
+### 1. `validate.yml` — 质量门禁（阻断式）
+
+- **触发**：`push` 到 main、pull_request（main 方向）
+- **权限**：`contents: read`
+- **checkout**：`fetch-depth: 0`（必须完整历史——迁移内容复核需取旧文件）
+
+| 步骤 | 命令 | 失败后果 |
+|---|---|---|
+| 契约测试 | `python -m unittest discover -s src/tests` | 阻断（退出码 1） |
+| 结构与规范校验 | `validate.py` | 阻断 |
+| 报告归位检查 | `classify_reports.py --check --unknown-warn` | 阻断 |
+| 结构补全检查 | `ensure_region_topics.py --check` | 阻断 |
+| 汇总页一致性 | `build_hub.py --check` | 阻断 |
+| 报告内容 lint | `lint_reports.py` | 建议级（continue-on-error） |
+| 模板合规校验 | `compliance_check.py` | 建议级（continue-on-error） |
+
+> 两个「建议级」关卡对**既有历史报告**的遗留项（缺免责声明 / 断头锚点）会报错，
+> 属预期，不影响门禁；新报告应全部通过。
+
+### 2. `html-sync.yml` — 生成物同步
+
+- **触发**：push（`**/reports/*.md`、`build_hub.py`、`report_diff.py` 变更）、手动
+- **步骤**：
+  1. `md2html.py` — 重新生成同名自包含 HTML
+  2. `build_hub.py` — 重建 `index.html` / `reader.html`
+  3. 提交并推送（无变更则跳过）
+
+### 3. `scheduled-maintenance.yml` — 每月定时维护
+
+- **触发**：`cron: "15 0 1 * *"`（每月 1 日 00:15 UTC = 09:15 JST）、手动
+- **步骤**（均幂等）：
+
+| 步骤 | 命令 | 作用 |
+|---|---|---|
+| 归位 | `classify_reports.py --apply` | 移动错位报告到所属主题 |
+| 补全 | `ensure_region_topics.py` | 补齐缺失的主题结构 |
+| 归档 | `archive_reports.py` | 每主题保留最新 12 期，超出移入 `reports/archives/` |
+| 索引 | `build_index.py` | 生成 `INDEX.md`（含活跃度心跳时间戳） |
+| 汇总页 | `build_hub.py` | 重建 `index.html` / `reader.html` |
+| 回归 | `unittest` | 确认维护未破坏契约 |
+| 提交 | `git commit` + `git push` | 有变更才提交 |
+
+- **退出码约定**：`0` 通过；`1` 错误（阻断）；`2` 警告（放行）。
+
+### 4. `scheduled-report-tasks.yml` — 月度产出提醒
+
+- **触发**：`cron: "20 0 1 * *"`（每月 1 日 00:20 UTC）、手动（可指定 `period`）
+- **步骤**：
+  1. `update_planner.py --period <YYYY-MM>` 生成当月任务清单
+  2. 用 `gh issue create` 开「【月度报告产出】YYYY-MM 任务清单」Issue
+- **去重**：先 `gh issue list --state open --search "in:title 【月度报告产出】<period>"`；
+  命中则 `gh issue edit` 更新正文并退出，否则新建。
+- **只提醒、不写内容**：Issue 仅列待办，报告仍需人工/Agent 产出。
+
+## 三、报告生命周期
+
+```
+人工/Agent 按 prompts/ 流程产出
+        │
+        ▼
+reports/YYYY-MM-<slug>.md  ──md2html.py──►  reports/YYYY-MM-<slug>.html
+        │                                            │
+        └──────────────build_hub.py──────────────────┘
+                              │
+                              ▼
+        index.html（主题索引） + reader.html（阅读器：版本切换 + 跨月对比高亮）
+                              │
+                    归档：每主题保留最新 12 期
+```
+
+## 四、命名与分类规范
+
+- **命名**：`YYYY-MM-<主题slug>.md` + 同名 `.html`；slug = 目录名去 `NN-` 前缀（`01-ssw-driver` → `ssw-driver`）。
+- **分类**：取消基线 / 初析 / 季度等类型标签，全部按**自然月**聚合。
+- **季度报告**：按季度末月归档（`2026-Q4` → `2026-12`），与月度报告同一套命名 / 对比 / 展示逻辑。
+- **同月合并**：同一主题同一自然月多份存量报告合并为一份（初析为主体、基线作附录，原文不删改）。
+- **展示**：单主题报告列表默认展示最近 **12 个自然月**，按时间倒序（最新在顶端），可展开更早。
+
+## 五、跨月对比高亮（reader.html）
+
+- **机制**：每期报告与上一期（同主题、最近一个更早自然月）做 block 级 LCS 比对（`report_diff.py`）。
+- **标记**：
+  - 新增 → 绿色 + 「已更新 · 新增」
+  - 修改 → 黄色 + 「已更新 · 修改」（带相似度阈值 0.35，低相似度按「删除 + 新增」处理）
+  - 删除 → 折叠组（默认收起，可展开追溯）+ 「已更新 · 删除」
+  - 未变更 → 原样展示
+- **版本切换**：hash 路由 `#topic=<slug>&month=<YYYY-MM>`，纯前端 show/hide（实测 ~11ms）。
+- **辅助开关**：「隐藏更新标记」对照阅读、「展开全部删除」。
+
+## 六、测试体系（`src/tests/test_tools.py`，69 项）
+
+| 场景 | 测试类 | 覆盖 |
+|---|---|---|
+| 命名格式合规性 | `TestNamingCompliance` | 命名正则、slug 归属、md/html 配对、无旧标签残留 |
+| 全量历史数据校验 | `TestHistoricalMigration` | 迁移清单完整性 + git 历史逐份复核内容零丢失 |
+| 跨月份对比准确性 | `TestDiffAccuracy` | 相同 / 新增 / 修改 / 删除 / 相似度阈值 / 首期 / 阅读器 diff 数据 |
+
+其他：命名解析（新 + 历史）、周期与任务推导、归档策略、lint / 合规、`build_hub` 归一化比对、活跃度天数、16 主题契约。
+
+## 七、手动命令速查
+
+```bash
+# 环境
+pip install -r requirements.txt
+
+# 测试与校验
+python -m unittest discover -s src/tests -v
+python src/prompts-tools/tools/validate.py
+python src/prompts-tools/tools/build_hub.py --check
+
+# 生成物
+python src/prompts-tools/tools/md2html.py          # md → HTML
+python src/prompts-tools/tools/build_hub.py        # index.html / reader.html
+python src/prompts-tools/tools/build_index.py      # INDEX.md
+
+# 维护
+python src/prompts-tools/tools/classify_reports.py --apply
+python src/prompts-tools/tools/ensure_region_topics.py
+python src/prompts-tools/tools/archive_reports.py
+
+# 任务与状态
+python src/prompts-tools/tools/update_planner.py --period 2026-12
+python src/prompts-tools/tools/automation_status.py activity
+```
+
+## 八、常见问题
+
+**Q：`build_hub.py --check` 报「汇总页已过期」？**
+报告或生成器变更后需重新生成：`python src/prompts-tools/tools/build_hub.py`，或直接 push 触发 `html-sync`。
+
+**Q：`validate.yml` 失败但本地测试通过？**
+多为浅克隆取不到历史（`TestHistoricalMigration`）。CI 已配置 `fetch-depth: 0`；本地请确认 git 历史完整。
+
+**Q：月度提醒 Issue 重复了？**
+工作流已内置去重：当月存在未关闭的同标题 Issue 时会更新正文而非新建。若仍重复，检查 Issue 是否被关闭后又被重建。
+
+**Q：历史报告 lint / 合规报错？**
+属既有遗留项（缺免责声明 / 断头锚点），CI 已标 `continue-on-error`，不影响门禁；新报告应全部通过。
+
+**Q：如何手动跑一次定时任务？**
+GitHub Actions 页面 → 对应 workflow → 「Run workflow」；或在本地按「手动命令速查」执行。

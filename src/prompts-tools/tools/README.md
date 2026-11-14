@@ -211,6 +211,8 @@ python prompts/tools/automation_status.py activity --threshold 45               
 
 ## 月度报告体系（2026-11 重构）
 
+> CI / 自动化全景（四条工作流、报告生命周期、测试体系）见 `docs/CI.md`。
+
 - **命名**：全部报告统一 `YYYY-MM-<主题slug>.md` + 同名 `.html`；主题 slug 取
   目录名去编号前缀（`01-ssw-driver` → `ssw-driver`）。
 - **分类**：取消基线 / 初析 / 季度等类型标签，全部按自然月聚合；季度报告按季度末月
