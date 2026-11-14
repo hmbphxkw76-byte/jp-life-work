@@ -168,11 +168,12 @@
     {
       "slug": "industry-autonomous",
       "month": "2026-11",
-      "target": "05-industry-autonomous/reports/2026-11-industry-autonomous.md",
+      "target": "05-industry-autonomous/reports/archives/2026-11-industry-autonomous-merged-v1.0.md",
       "source": "2026-11_baseline_report.md",
       "role": "appendix",
       "kind": "baseline",
-      "content_preserved": true
+      "content_preserved": true,
+      "note": "2026-11-14 手册已从报告附录拆分至 05-industry-autonomous/handbook/（00–04），原文全文改存档于 archives 合并版快照，内容零丢失"
     },
     {
       "slug": "industry-logistics",
