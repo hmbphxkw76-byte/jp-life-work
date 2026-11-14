@@ -3,10 +3,10 @@
     "ssw-driver=>../../01-ssw-driver/prompts/business-config.md": {
       "topic": "ssw-driver",
       "target": "../../01-ssw-driver/prompts/business-config.md",
-      "vocab_version": "v1.4",
-      "term_count": 105,
-      "synced_at": "2026-11-13T20:09:13",
-      "source_hash": "22e3060a2020e64f6461aa05e0c45ffa103d67976906457652e662eb7c25c148",
+      "vocab_version": "v1.5",
+      "term_count": 109,
+      "synced_at": "2026-11-14T10:19:57",
+      "source_hash": "3eb267b016f601957378cb8e737058c4888b41c1983779341c78e5d0a7bcd963",
       "term_hashes": {
         "SSW-001": "e291079e398be19e9b7baea86126d42984eac854c416be2a2506e4f89755c9f1",
         "SSW-002": "775e3ea327374f1ecdcfec44cdfe8c5b32a6a814acb2bb8ab9e08f767a1a2d8d",
@@ -112,7 +112,11 @@
         "SSW-102": "5cfa7ca9593e040cce327ce6cfd8aee9b6d79e12784e22bad342642556369c22",
         "SSW-103": "b7d4bdca380ad43ac8da793c4e32037a30f4f2c15db2da943f1beea5a3a4ce85",
         "SSW-104": "472497280b2fbf4a8eb885830c934e400837f70353c236dffc20dbb8ec9d4ab3",
-        "SSW-105": "71c5fa2ba97cdb1dc0fe407a81aa03597e273dd71d9e0f9cbe8bd63245fc9efa"
+        "SSW-105": "71c5fa2ba97cdb1dc0fe407a81aa03597e273dd71d9e0f9cbe8bd63245fc9efa",
+        "SSW-106": "1b16d14263cf899c6feca1c421db1b0964d598ba315bd5062ef6d3ec4f6d0a66",
+        "SSW-107": "a0a15424f1d1991aba83f54695857670bee224e964c5e6a2b3af32a8b5a790ca",
+        "SSW-108": "8e951e48158b9eb664d0868b3708fb96a2d622adaa385a7f87b7a85236ffb608",
+        "SSW-109": "b45c610af51803bb5567e6b8885838d8ff21655888f318786d5e06aadae4edff"
       }
     },
     "career-driver=>../../02-career-driver/prompts/business-config.md": {
@@ -628,10 +632,10 @@
     "economy-finance=>../../07-economy-finance/prompts/business-config.md": {
       "topic": "economy-finance",
       "target": "../../07-economy-finance/prompts/business-config.md",
-      "vocab_version": "v1.2",
-      "term_count": 73,
-      "synced_at": "2026-11-13T20:08:48",
-      "source_hash": "b8058dfdec56859c7a72701e74c9bba567c5b9d88609cb4c1329f01370900097",
+      "vocab_version": "v1.3",
+      "term_count": 77,
+      "synced_at": "2026-11-14T10:18:54",
+      "source_hash": "bea6dfe677cb8539db039ebf4abbcb0f4b592810f7111e17da8b9174c3f4ce34",
       "term_hashes": {
         "ECF-001": "12fbf61d40dcd98cbf33631fac6a9d410958d794f00a0dfb6b1bd41e98ea2696",
         "ECF-002": "b4a207571fdfaf5106475581f5fa51916e9bdc76b26e0dec202c02a54a3809cc",
@@ -705,16 +709,20 @@
         "ECF-070": "9f6c8003025fbc649bf76d5f4f73e505eaf755c38ea6ed131311c91c9ca48dae",
         "ECF-071": "e43c1b810b616145d6da07397921f0bb609679897d0a2acc31619a6d9458ca57",
         "ECF-072": "e7a06d4b09254993ea018891c1dc995dff170d3864406b069dc7a54a8cfe3fd7",
-        "ECF-073": "5a9379fcdc9c8a73c2195b6dfb317696f1221df437ee16bcfae0e47f800a5a34"
+        "ECF-073": "5a9379fcdc9c8a73c2195b6dfb317696f1221df437ee16bcfae0e47f800a5a34",
+        "ECF-074": "4cbf2f2167da5c8411ab5533878eee52abc6ef93a8f736da412e3e0b9edf3e52",
+        "ECF-075": "28b53bc25afccb393f72155f6190b13d878b063812d42b40c78780dfb312b67c",
+        "ECF-076": "ed9f5ea80b9030d8f031e70d64c14de1d3dd1361cde7a0e5c63322773f0c86bd",
+        "ECF-077": "a1938bc723a3416b44489ffcf3ea0bf1649994766e3ad799a5a2f684e72e51eb"
       }
     },
     "visa-immigration=>../../08-visa-immigration/prompts/business-config.md": {
       "topic": "visa-immigration",
       "target": "../../08-visa-immigration/prompts/business-config.md",
-      "vocab_version": "v1.2",
-      "term_count": 69,
-      "synced_at": "2026-11-13T20:08:49",
-      "source_hash": "f42e14f8e7148709ea0a6b4cd725d6573a515a18925a6fed862439f7d4baeed6",
+      "vocab_version": "v1.3",
+      "term_count": 74,
+      "synced_at": "2026-11-14T10:18:54",
+      "source_hash": "0350873a07c5a563d1c6758f09cbb53de773ec65d9bb67c7e3ce6fe6363e3693",
       "term_hashes": {
         "VIS-001": "fe6379489f6e0df33da0ea3f7453b1f5f1d78fedaafc5dec447cace51887cf1b",
         "VIS-002": "a9c21171d63324be11c7afb2582c016a02d73c7bd56736f483b4379434d2d003",
@@ -784,16 +792,21 @@
         "VIS-066": "46158851a334e9356220fb45c95a06a7e7d603df660aa31fffc459c1e014a4c2",
         "VIS-067": "45d2a3c22678c39581d1cd27f8c3404e3a49a4b69656b56ecd83e71e49d45afc",
         "VIS-068": "fe93c86bd2b2174c258ef9bda892f5a68a669fc91059f0a37057fcfada0d7fc3",
-        "VIS-069": "3b183b68558a6d194d017eb2e3e27c5207d26292ccdd1fbfd4c2f2eb184fc2d2"
+        "VIS-069": "3b183b68558a6d194d017eb2e3e27c5207d26292ccdd1fbfd4c2f2eb184fc2d2",
+        "VIS-070": "932bca6976fbe9cef2616619148ca250a980870c710e3e8658a6d86a84d92f4f",
+        "VIS-071": "5bcdfe36689ec181f8aad7aac849563a89a75b5cc8cca849c57fc245cef0f1ac",
+        "VIS-072": "10a04f02f9c481935ef92d7b1cd89c8b0c51debdbc278b83d94b59746b407758",
+        "VIS-073": "fc73e0bd006b88bfb0cae756a04aef5bdb6957742500aa9c76fdd6a98538f705",
+        "VIS-074": "fc4699423e8e22e681af51e793abf9054ce2e9792b4005d69065ee6ae6331ffc"
       }
     },
     "politics-law=>../../09-politics-law/prompts/business-config.md": {
       "topic": "politics-law",
       "target": "../../09-politics-law/prompts/business-config.md",
-      "vocab_version": "v1.2",
-      "term_count": 69,
-      "synced_at": "2026-11-13T20:08:49",
-      "source_hash": "9809bde3c5b3c65034a3feb550234c5c309df096d7a0092271501f411636b330",
+      "vocab_version": "v1.3",
+      "term_count": 72,
+      "synced_at": "2026-11-14T10:18:55",
+      "source_hash": "2fa22fd6597ed64c7094971fbbe7a5f434d88238e911adc6aec5df2c43ee6f84",
       "term_hashes": {
         "LAW-001": "ba41b9c192fa8c8913cb15f76e73c0c5d6462c51a0f3f0db2056aa10978f67c2",
         "LAW-002": "db90ec4e2e5e06dbfcb4b9995e80bf8c3a3c8788faf06af6abaec59ba36da852",
@@ -863,7 +876,10 @@
         "LAW-066": "5b7f8704d6beb9042f19c53e7112b32a7596e21b1e31ffa271f8f69f307d98a2",
         "LAW-067": "6aad4084ef402047657a03660765ed064f38d9d02e96c64f87ab47600b6b7903",
         "LAW-068": "fe5aa41e92cac313f6c7c8050e2ce217207053699a2fa0c5dd4173f8dbc76681",
-        "LAW-069": "6264d065aa1aaf3f2047bb804e67c8daba2ba0bd11a7bf3d8d967e2dab08e860"
+        "LAW-069": "6264d065aa1aaf3f2047bb804e67c8daba2ba0bd11a7bf3d8d967e2dab08e860",
+        "LAW-070": "4882e975f0f424ef8433a94405eed2ba6d64d8e6098bd2d83859d532ee749e96",
+        "LAW-071": "00f8d441a774ce1138e2ba700bebbe518ffdb8b8d89c05cab2b67ad32cd8bdbf",
+        "LAW-072": "4887cfc17b6e45cf2691890441e130cfb565bb412104fe4ac9e7345c4c49330b"
       }
     },
     "education-qualification=>../../10-education-qualification/prompts/business-config.md": {
@@ -1026,10 +1042,10 @@
     "culture-life=>../../12-culture-life/prompts/business-config.md": {
       "topic": "culture-life",
       "target": "../../12-culture-life/prompts/business-config.md",
-      "vocab_version": "v1.2",
-      "term_count": 70,
-      "synced_at": "2026-11-13T20:08:49",
-      "source_hash": "59a87d262202f457079098188cbf770c52654fdad7c925f2d10c23dd15301f13",
+      "vocab_version": "v1.3",
+      "term_count": 80,
+      "synced_at": "2026-11-14T10:19:57",
+      "source_hash": "e40cf6aebe263334eaf89a4bc534fb66e3a85845c904ff8173f954e0e644f1b6",
       "term_hashes": {
         "CUL-001": "191c2399a4177a1bc09f492eca7c82253a0a8306c694063f9c7de316a702ae87",
         "CUL-002": "5929962a4b4189c507c259580888e6c4d14761d6809e7455ce8428dc2c7cb2de",
@@ -1100,16 +1116,26 @@
         "CUL-067": "519b3aa3d19e25aa736d0326163098a0e4e6133b01361765d1de103a8a3fb41a",
         "CUL-068": "8672452bfb115b5b1f327ddd1abf02a6aa9204ae98d158f66d7642ac728fef86",
         "CUL-069": "4004d9955e898b4ff713ea40ab85d938c3cc1b88821f0f62d13486d88c944123",
-        "CUL-070": "8c2fb45556ce9f4126c9ae74514d1578c48fb97df9ecda29061ea355a3f0b2f9"
+        "CUL-070": "8c2fb45556ce9f4126c9ae74514d1578c48fb97df9ecda29061ea355a3f0b2f9",
+        "CUL-071": "5d219c1786e866833fafbef26951924b43bbb7c81a20da90d8ade62ab7548e74",
+        "CUL-072": "372ea1cd62f2ee8d1c7547f79b1caff7e96f1ff2b7ac8acab78c5aaffed803a1",
+        "CUL-073": "9b055f50cdf67a764d4f72da8525ddc5afefe01cc284ccb6ff54caed374deaaf",
+        "CUL-074": "aaa6f0a5f8a63e18a180d15367d98da62ac6751bd0bf9f1a2fc8c7cfcb588d7d",
+        "CUL-075": "256f117f5c10a7dd40153243c29101319397daf8bab6e064893dbaa4de67ed26",
+        "CUL-076": "3b2f395842a781dfb1ffef13dc37795fb31cb34f5278009f987051ff76c83f72",
+        "CUL-077": "dbc4e4908972a3985132722c7bea6a73afa8a6c4c4496c133dcba49cecc5fbd2",
+        "CUL-078": "ae5bb6b56959fe1716c40cb0910e973bae5427d9e9ae23a7def0aa474d6c903b",
+        "CUL-079": "290f296eaed02d8c506caa71dcef89345fd541c4ae5a8d9411d6fcf15e1c5243",
+        "CUL-080": "6a0433098335b4921d5c1c1c3bb9718ec894da80325578cc061448caab8020ed"
       }
     },
     "regional-info=>../../13-regional-info/prompts/business-config.md": {
       "topic": "regional-info",
       "target": "../../13-regional-info/prompts/business-config.md",
-      "vocab_version": "v1.2",
-      "term_count": 69,
-      "synced_at": "2026-11-13T20:08:49",
-      "source_hash": "dabe37bdca4ae1d6adb5565fbaad397de6490a27886a7b81ff8bd8f0983a3a31",
+      "vocab_version": "v1.3",
+      "term_count": 71,
+      "synced_at": "2026-11-14T10:18:54",
+      "source_hash": "5c817cced14ff8d135fa60763efb9d7f193bc1f56c93666b4e8682149af4053c",
       "term_hashes": {
         "REG-001": "b8b811a3990f6ca70663590b73f024238b9f05013ed3c0bf4a0e7e69516aaaff",
         "REG-002": "c13a7aaa7a34fe8e5af271904e7be28fe14b9ec41a6bafda782f697fe18c6ffa",
@@ -1179,7 +1205,74 @@
         "REG-066": "9a18d2ce1d9044f8146389c3368f1f179b26b2f48473195bd1334ad07beff3a8",
         "REG-067": "218754840db8738fe302c9f1fd8ca90b1e738a94c701093ccc0e487b4f7f0e3d",
         "REG-068": "a36673ec0e480a269f4c78fed2900fc77cf03a4a3852b4e004bc12b16ff8eb08",
-        "REG-069": "35eefcfc50ca8d9e48650727b04ba101140ac086c97662f683767ae6658b1d8f"
+        "REG-069": "35eefcfc50ca8d9e48650727b04ba101140ac086c97662f683767ae6658b1d8f",
+        "REG-070": "37f741fec444d3839469eac2e822813e2648159f51d7fc44a0d048d521bb4b52",
+        "REG-071": "0db0aa4296fa03673876534f46ccab93f8cd5fcebc3596c18187aea7b07b6b8f"
+      }
+    },
+    "life-operations=>../../14-life-operations/prompts/business-config.md": {
+      "topic": "life-operations",
+      "target": "../../14-life-operations/prompts/business-config.md",
+      "vocab_version": "v1.2",
+      "term_count": 25,
+      "synced_at": "2026-11-14T10:30:14",
+      "source_hash": "2f80f995f75353ea137eb214ac69ca8ecda4ebd5945a4d4913f28692b8a579cc",
+      "term_hashes": {
+        "LOP-001": "8d53c8c995d91c276d0b39e7a1623911f92f134e3efcf227e61e9fbf743d6cc7",
+        "LOP-002": "34e901998f55ef45ef0f7f402bb3e10014d072052a39464bb01a9a44d7556214",
+        "LOP-003": "0934f56a002dd63e7c844e8be6c60fe9fc7dda1b394dd46ec4cd2063c96ee626",
+        "LOP-004": "6e250170adba42f3acb94d27f0cb71b4832eb4d25c88d532df0458d47d89e816",
+        "LOP-005": "248326f706a0d82a520b289051c26b102a0c564b9dc3c4ed5ba3fa95aaadee62",
+        "LOP-006": "357d87042de3f20599e2e1fe42d4b302a00e6b73a0622e88d6bb36df0e78af66",
+        "LOP-007": "98afb4b5f486cb29105c36c60f929058b7c38e6ec66aeb3ca2a7d213ef76e2be",
+        "LOP-008": "e966c4a2aa1003bd03117ae3b4c4bd637150453378703123864a826df9e673e0",
+        "LOP-009": "82039534f1af6099eb3fb2e625bb4c819b17f3d9ffbc32ae339b7df76fe3a720",
+        "LOP-010": "553601a8da45eb1c1f67693ce655d0c71f5d537f1995f21d532eae59f26e0110",
+        "LOP-011": "9927bb482675ce30b32b851b33b3c1b08a5e7b8ef513c7a090bfbc0a71b9214b",
+        "LOP-012": "1e4ecab27287876826150c6b2864f9092e48c65d227ba2ddf955d2e6ab4f74ca",
+        "LOP-013": "814cb9a3d11d261bc38a72b10eabe505f687b96e68ca08829cf86f06bf2b4979",
+        "LOP-014": "71d9b5f913c9f5c346f141d052f7a75e68376f0c2002b051be47bb4ee07044f3",
+        "LOP-015": "0e7f4706fbb13a7a64da38caf6880b9bda0a12939fd1057b854556c5bd3598cb",
+        "LOP-016": "0a53f44b5daf967cdc9066dbf92f675a23ff99fac3701a49d3fd17db3ae984d6",
+        "LOP-017": "cfda33b6c2d044d99eb295a1c4389ef04ae5fb10f4c59879a0e6ebc86e516cbb",
+        "LOP-018": "3de0321ebb750eb313a66bcbabe28adf4f03fb850f0b9a07c91f80361ec731ee",
+        "LOP-019": "39a06fd784548d94dc32d38ebc2cfa7321c088068fb992a4aedba12041446973",
+        "LOP-020": "a47e1f479b71f883cf8203536ff122352b7ca82b3a834f50afd29f223cb2d806",
+        "LOP-021": "c4724380c6ddde8ebab9c98c6946a5f689ba56bc4457e2d9f679ee742603c8e5",
+        "LOP-022": "894cd233754d63fd7aca66785d9a7a00d56bb69250af321610eb539306d20025",
+        "LOP-023": "7e8e27faf905e086456cbb3376ebed2be559177b1f9b29d92193dd9a73cb09b7",
+        "LOP-024": "7c5efdb867065472ed19a74b4bf311660b7324cb3f55322b5439cfe94fd17fff",
+        "LOP-025": "3a1e6230a865be81c8694c6f4b753e10f4e47baec075fb01763d0629e8baed4b"
+      }
+    },
+    "health-wellbeing=>../../15-health-wellbeing/prompts/business-config.md": {
+      "topic": "health-wellbeing",
+      "target": "../../15-health-wellbeing/prompts/business-config.md",
+      "vocab_version": "v1.1",
+      "term_count": 20,
+      "synced_at": "2026-11-14T10:30:14",
+      "source_hash": "48ed1cca61cc3a981ac1adb7982e5040a7e86e966cfa3b3f59c020fd0aa19f1e",
+      "term_hashes": {
+        "HLW-001": "da6fee87e85e798ff448b7d5c6b19736cf769e3c79bc64c1b31b23daddc88339",
+        "HLW-002": "5f87080a63c293a11d1b2287b0ba2b35d9483355342336d6cec43b419a1b7372",
+        "HLW-003": "a58b7b0253c701b0a0ef8a202a53a9338dfffbcb797a55ac47154598aa20502c",
+        "HLW-004": "4fe58062eb9ce6597627762341dd0b7fdc13127d9e53973b696998edadeae852",
+        "HLW-005": "390753d8b5ebada7aeef83c1aec7368d923dacd7c520a128db51f78775a3815a",
+        "HLW-006": "866c33b4bf89d30eace6263424e4cdc4dd01ed8e566392ccdac097328ab7f3c9",
+        "HLW-007": "854daf034c1884877b528a4e40afaef1e89f965dd0b0463a7af152c74e0b8f5f",
+        "HLW-008": "9d841c7f97eee623b5d195a18a1a3f691276a2d58f758b13d8d9f7dc379d7c00",
+        "HLW-009": "8076c5c29eb7d1959c8ed591f2f3d5ea40fed8eeba0b0eb7ef91cbe9c607bb2f",
+        "HLW-010": "fcba06ac93f4cc3f15e6310a4bd68746ab8d7ffbdc680a5179697ee8607d3c86",
+        "HLW-011": "32c3e3567ad3578d556658b0d41d0a3c9d2bf1a0706d2ec167cd08fd779bb51f",
+        "HLW-012": "528d3dc4fcc7e86cc3b0dac65c56c9bc27a5832d26295b13902ca3b0226fd212",
+        "HLW-013": "7c19c5405a330cd7ce86531fd3f025a494034f6d80738c9691906110ffe766d2",
+        "HLW-014": "5f32b548b170c076f951f4c9db03bc065f34c00a03568d70b5590f5ff84ef3ca",
+        "HLW-015": "bba8bfbb00e53fb08809cd6e70774a5bf4d3654ead17bbf18eb7c8816b2563ab",
+        "HLW-016": "f9a0dc4d07eee60188d311da9104b952855cc83eacf599ce6f4818ac02af9e38",
+        "HLW-017": "942075f9129c3c47b6e8f60c52041154c70c8fffa96afed86b48db137092420e",
+        "HLW-018": "e33595d39a616443eb2873b4116e6651cf3d7fd6f3a47967f8adb18976d9d015",
+        "HLW-019": "f1ed0802ea80b55ffba0f21eb09f935198130beadbe19aa9d4d3fe229c14f02c",
+        "HLW-020": "bdf098ad05db5e5f55028c501d817eafb85196023cab704bc3db274f6e29b550"
       }
     }
   }

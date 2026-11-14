@@ -177,6 +177,32 @@
           "tags_include": []
         }
       ]
+    },
+    {
+      "topic": "life-operations",
+      "targets": [
+        {
+          "path": "../../14-life-operations/prompts/business-config.md",
+          "format": "digest",
+          "section_title": "## 词汇速览：在日生活实务（词汇库自动同步）",
+          "insert_before": "## 十二、版本记录",
+          "categories_include": [],
+          "tags_include": []
+        }
+      ]
+    },
+    {
+      "topic": "health-wellbeing",
+      "targets": [
+        {
+          "path": "../../15-health-wellbeing/prompts/business-config.md",
+          "format": "digest",
+          "section_title": "## 词汇速览：医疗·健康·心理（词汇库自动同步）",
+          "insert_before": "## 十二、版本记录",
+          "categories_include": [],
+          "tags_include": []
+        }
+      ]
     }
   ]
 }

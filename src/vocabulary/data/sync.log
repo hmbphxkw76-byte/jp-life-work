@@ -120,3 +120,13 @@
 [2026-11-13T20:09:21] [verify] language-japanese -> business-config.md：通过（69 条覆盖完整，区间外内容一致，词汇库 v1.2）
 [2026-11-13T20:09:21] [verify] culture-life -> business-config.md：通过（70 条覆盖完整，区间外内容一致，词汇库 v1.2）
 [2026-11-13T20:09:21] [verify] regional-info -> business-config.md：通过（69 条覆盖完整，区间外内容一致，词汇库 v1.2）
+[2026-11-14T10:18:54] [sync] culture-life -> ../../12-culture-life/prompts/business-config.md：区块替换成功：新增 10 / 修改 0 / 删除 0，共 80 条（v1.3）；备份 sync-backups/culture-life.business-config.md.20261114_101854.bak
+[2026-11-14T10:18:54] [sync] regional-info -> ../../13-regional-info/prompts/business-config.md：区块替换成功：新增 2 / 修改 0 / 删除 0，共 71 条（v1.3）；备份 sync-backups/regional-info.business-config.md.20261114_101854.bak
+[2026-11-14T10:18:54] [sync] economy-finance -> ../../07-economy-finance/prompts/business-config.md：区块替换成功：新增 4 / 修改 0 / 删除 0，共 77 条（v1.3）；备份 sync-backups/economy-finance.business-config.md.20261114_101854.bak
+[2026-11-14T10:18:54] [sync] visa-immigration -> ../../08-visa-immigration/prompts/business-config.md：区块替换成功：新增 5 / 修改 0 / 删除 0，共 74 条（v1.3）；备份 sync-backups/visa-immigration.business-config.md.20261114_101854.bak
+[2026-11-14T10:18:55] [sync] politics-law -> ../../09-politics-law/prompts/business-config.md：区块替换成功：新增 3 / 修改 0 / 删除 0，共 72 条（v1.3）；备份 sync-backups/politics-law.business-config.md.20261114_101855.bak
+[2026-11-14T10:18:55] [sync] ssw-driver -> ../../01-ssw-driver/prompts/business-config.md：区块替换成功：新增 4 / 修改 0 / 删除 0，共 109 条（v1.5）；备份 sync-backups/ssw-driver.business-config.md.20261114_101855.bak
+[2026-11-14T10:19:57] [sync] culture-life -> ../../12-culture-life/prompts/business-config.md：区块替换成功：新增 0 / 修改 1 / 删除 0，共 80 条（v1.3）；备份 sync-backups/culture-life.business-config.md.20261114_101957.bak
+[2026-11-14T10:19:57] [sync] ssw-driver -> ../../01-ssw-driver/prompts/business-config.md：区块替换成功：新增 0 / 修改 1 / 删除 0，共 109 条（v1.5）；备份 sync-backups/ssw-driver.business-config.md.20261114_101957.bak
+[2026-11-14T10:30:14] [sync] life-operations -> ../../14-life-operations/prompts/business-config.md：区块替换成功：新增 25 / 修改 0 / 删除 0，共 25 条（v1.2）；备份 sync-backups/life-operations.business-config.md.20261114_103014.bak
+[2026-11-14T10:30:14] [sync] health-wellbeing -> ../../15-health-wellbeing/prompts/business-config.md：区块替换成功：新增 20 / 修改 0 / 删除 0，共 20 条（v1.1）；备份 sync-backups/health-wellbeing.business-config.md.20261114_103014.bak

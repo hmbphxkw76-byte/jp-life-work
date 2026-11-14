@@ -37,3 +37,8 @@
 [2026-11-13T19:32:29] [topic-check] topics=13 errors=0 warnings=0 result=OK
 [2026-11-13T20:09:21] [topic-check] topics=13 errors=0 warnings=0 result=OK
 [2026-11-13T21:30:15] [topic-check] topics=13 errors=0 warnings=0 result=OK
+[2026-11-14T10:19:02] [topic-check] topics=13 errors=0 warnings=0 result=OK
+[2026-11-14T10:23:59] [topic-add] topic=life-operations prefix=LOP categories=在留与住民登记/住房与租赁/公共交通/通信与网络/银行与支付/水电燃气与基础设施/行政手续/场景与表达 dir_existed=False created=D:\文档\GitHub\jp-life-work\src\vocabulary\data\life-operations\imports;D:\文档\GitHub\jp-life-work\src\vocabulary\data\life-operations\exports;D:\文档\GitHub\jp-life-work\src\vocabulary\data\life-operations\terms.md backup=topics.20261114_102359.json result=OK
+[2026-11-14T10:28:53] [topic-add] topic=health-wellbeing prefix=HLW categories=医疗制度/就医实务/牙科与精神科/心理健康与适应/体检与预防/介護与福祉/场景与表达 dir_existed=False created=D:\文档\GitHub\jp-life-work\src\vocabulary\data\health-wellbeing\imports;D:\文档\GitHub\jp-life-work\src\vocabulary\data\health-wellbeing\exports;D:\文档\GitHub\jp-life-work\src\vocabulary\data\health-wellbeing\terms.md backup=topics.20261114_102853.json result=OK
+[2026-11-14T10:30:14] [topic-check] topics=15 errors=0 warnings=0 result=OK
+[2026-11-14T10:36:09] [topic-check] topics=15 errors=0 warnings=0 result=OK

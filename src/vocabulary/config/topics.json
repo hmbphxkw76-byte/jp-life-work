@@ -1,6 +1,6 @@
 {
-  "version": "v1.24",
-  "updated": "2026-11-13",
+  "version": "v1.26",
+  "updated": "2026-11-14",
   "comment": "主题注册表（vocabulary 子系统单一事实源）。本文件由 vocab_tool.py 自动维护，请勿手工编辑：新增主题用 topic-add（自动登记注册表 + 创建 data/<topic>/ 目录 + 重建索引 + 备份回滚 + 操作日志），移除用 topic-remove，一致性审计用 topic-check。storage/imports_dir/exports_dir 为相对 vocabulary/ 根目录的路径。",
   "topics": {
     "ssw-driver": {
@@ -212,6 +212,41 @@
         "地方经济与产业",
         "生活成本与设施",
         "地方政策与自治",
+        "场景与表达"
+      ]
+    },
+    "life-operations": {
+      "name": "在日生活实务",
+      "description": "赴日外国人落地执行层词汇：在留・住民・保险・年金、住房、公共交通、通信、银行、水电燃气、行政手续",
+      "id_prefix": "LOP",
+      "storage": "data/life-operations/terms.md",
+      "imports_dir": "data/life-operations/imports",
+      "exports_dir": "data/life-operations/exports",
+      "categories": [
+        "在留与住民登记",
+        "住房与租赁",
+        "公共交通",
+        "通信与网络",
+        "银行与支付",
+        "水电燃气与基础设施",
+        "行政手续",
+        "场景与表达"
+      ]
+    },
+    "health-wellbeing": {
+      "name": "医疗健康心理",
+      "description": "在日外国人医疗与健康管理词汇：医保制度、就医实务、多语言通译、牙科精神科、心理健康、体检预防、介護福祉",
+      "id_prefix": "HLW",
+      "storage": "data/health-wellbeing/terms.md",
+      "imports_dir": "data/health-wellbeing/imports",
+      "exports_dir": "data/health-wellbeing/exports",
+      "categories": [
+        "医疗制度",
+        "就医实务",
+        "牙科与精神科",
+        "心理健康与适应",
+        "体检与预防",
+        "介護与福祉",
         "场景与表达"
       ]
     }

@@ -113,7 +113,7 @@ report_templates/
 |---|---|---|---|---|---|
 | market-monitoring | 市场指标监测型 | prompt-baseline-setup-template.md | monthly / quarterly / annual（三份独立） | 月 / 季 / 年三周期 | dubai/apartment, jp/13-regional-info |
 | trend-weekly | 行业趋势周报型 | prompt-baseline-setup-template.md | prompt-weekly-monitor-template.md | 周报主节拍（数据截止日命名）+ 事件触发板块升级 | trends/ai-security |
-| employment-research | 职业就业调研型 | prompt-baseline-setup-template.md | prompt-update-template.md（一份覆盖三档节拍） | 季度主节拍 + 事件触发；月度核验轻运行；年度复盘 | dubai/cybersecurity, jp/01-ssw-driver, jp/02-career-driver, jp/03-career-management, jp/07-economy-finance, jp/10-education-qualification, jp/11-language-japanese, jp/12-culture-life |
+| employment-research | 职业就业调研型 | prompt-baseline-setup-template.md | prompt-update-template.md（一份覆盖三档节拍） | 季度主节拍 + 事件触发；月度核验轻运行；年度复盘 | dubai/cybersecurity, jp/01-ssw-driver, jp/02-career-driver, jp/03-career-management, jp/07-economy-finance, jp/10-education-qualification, jp/11-language-japanese, jp/12-culture-life, jp/14-life-operations, jp/15-health-wellbeing, jp/00-decision-hub（跨主题综合层） |
 | competitive-intelligence | 竞争情报监测型 | prompt-baseline-setup-template.md | prompt-monthly-update-template.md（覆盖两档） | 月度主更新（动态矩阵刷新）+ 事件触发升级 | 暂无 |
 | sentiment-monitoring | 舆情传播监测型 | prompt-baseline-setup-template.md | prompt-monthly-update-template.md（覆盖两档） | 月度舆情月报 + 事件触发预警升级 | 暂无 |
 | consumer-research | 消费者·用户调研型 | prompt-baseline-setup-template.md | prompt-study-template.md（项目制） | 项目制专题调研 + 年度满意度复测 | 暂无 |
@@ -173,3 +173,6 @@ report_templates/
 | v1.17 | 2026-11-13 | 第七条 employment-research 业务线接入 | jp/11-language-japanese 接入（基线已产出 2026-11，季度主节拍 + 事件触发；月度核验轻运行；年度复盘）；其现行六章结构与九节骨架的映射在业务 business-config 第三、九节声明，后续报告按九节骨架执行 |
 | v1.18 | 2026-11-13 | 第八条 employment-research 业务线接入 | jp/12-culture-life 接入（基线已产出 2026-11，季度主节拍 + 事件触发；月度核验轻运行；年度复盘）；其现行五章结构与九节骨架的映射在业务 business-config 第三、九节声明，后续报告按九节骨架执行 |
 | v1.19 | 2026-11-13 | 第二条 market-monitoring 业务线接入 | jp/13-regional-info 接入（基线已产出 2026-11，月 / 季 / 年三周期）；其现行两章结构与十节骨架的映射在业务 business-config 第三、九节声明，后续报告按十节骨架执行；因属个人地域决策支持场景，K/RL 阈值信号与供给情景机制不适用的适配在 business-config 第 3.2 节声明 |
+| v1.20 | 2026-11-14 | 跨主题决策层接入 | jp/00-decision-hub 接入（employment-research 型，跨主题综合层：五问框架 / 只读消费纪律 / 缺失清单；不落研究正文）；结构映射在 business-config 第三节声明 |
+| v1.21 | 2026-11-14 | 第九条 employment-research 业务线接入 | jp/14-life-operations 接入（基线已产出 2026-11，季度复核 + 事件触发）；个人执行层（在留 / 住民 / 住房 / 交通 / 通信 / 银行 / 水电 / 90 天清单）；结构映射在 business-config 第 3.2 节声明 |
+| v1.22 | 2026-11-14 | 第十条 employment-research 业务线接入 | jp/15-health-wellbeing 接入（基线已产出 2026-11，季度复核 + 事件触发）；个人健康管理（医保 / 就医 / 多语言通译 / 牙科精神科 / 心理 / 体检 / 介護）；结构映射在 business-config 第 3.2 节声明 |

@@ -17,7 +17,14 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "prompts-tools" / "
 import _common  # noqa: E402
 from archive_reports import select_archives  # noqa: E402
 from automation_status import days_since_latest  # noqa: E402
-from build_hub import build_outputs, normalize_for_check  # noqa: E402
+from build_hub import (  # noqa: E402
+    build_outputs,
+    classify_report,
+    collect_topics,
+    load_type_labels,
+    normalize_for_check,
+    period_to_date,
+)
 from compliance_check import check_report, cycle_rule, detect_type, load_rules  # noqa: E402
 from lint_reports import lint_html  # noqa: E402
 from update_planner import build_tasks, default_period  # noqa: E402
@@ -331,6 +338,109 @@ class TestBuildHubCheck(unittest.TestCase):
             normalize_for_check(build_outputs()["index.html"]),
             "报告清单未变时，已提交 index.html 归一化后应与重算内容一致",
         )
+
+
+class TestPeriodToDate(unittest.TestCase):
+    """周期标识 -> 代表日期（build_hub.py period_to_date）用例。"""
+
+    def test_full_date_passthrough(self):
+        self.assertEqual(period_to_date("2026-11-13"), "2026-11-13")
+
+    def test_month_uses_last_day(self):
+        self.assertEqual(period_to_date("2026-11"), "2026-11-30")
+        self.assertEqual(period_to_date("2026-02"), "2026-02-28")
+        self.assertEqual(period_to_date("2024-02"), "2024-02-29")  # 闰年
+
+    def test_quarter_uses_last_day(self):
+        self.assertEqual(period_to_date("2026-Q1"), "2026-03-31")
+        self.assertEqual(period_to_date("2026-Q4"), "2026-12-31")
+
+    def test_year_uses_dec31(self):
+        self.assertEqual(period_to_date("2026"), "2026-12-31")
+
+    def test_invalid_returns_empty(self):
+        self.assertEqual(period_to_date("2026-13"), "")
+        self.assertEqual(period_to_date("abc"), "")
+
+
+class TestClassifyReport(unittest.TestCase):
+    """报告文件名识别（build_hub.py classify_report）用例。"""
+
+    def test_standard_cycles(self):
+        self.assertEqual(
+            classify_report("2026-11_monthly.html"),
+            ("monthly", "2026-11", "月度", "2026-11-30"),
+        )
+        self.assertEqual(
+            classify_report("2026-Q4_quarterly.html"),
+            ("quarterly", "2026-Q4", "季度", "2026-12-31"),
+        )
+        self.assertEqual(
+            classify_report("2026_annual.html"),
+            ("annual", "2026", "年度", "2026-12-31"),
+        )
+        self.assertEqual(
+            classify_report("2026-11_baseline_report.html"),
+            ("baseline", "2026-11", "基线", "2026-11-30"),
+        )
+        self.assertEqual(
+            classify_report("2026-11-13_weekly.html"),
+            ("weekly", "2026-11-13", "周报", "2026-11-13"),
+        )
+
+    def test_special_initial_analysis(self):
+        self.assertEqual(
+            classify_report("2026-11-13_initial_analysis_report.html"),
+            ("special", "2026-11-13", "初析", "2026-11-13"),
+        )
+
+    def test_special_insert_report(self):
+        self.assertEqual(
+            classify_report("2026-11-20-制度改定插刷.html"),
+            ("special", "2026-11-20", "专题", "2026-11-20"),
+        )
+
+    def test_non_report_returns_none(self):
+        self.assertIsNone(classify_report("dubai_apartment_indicator_registry_2026-11.xlsx"))
+        self.assertIsNone(classify_report("random.html"))
+        self.assertIsNone(classify_report("2026-13-01-插刷.html"))  # 非法月份
+
+
+class TestLoadTypeLabels(unittest.TestCase):
+    def test_known_types_present(self):
+        labels = load_type_labels()
+        self.assertEqual(labels.get("employment-research"), "职业就业调研型")
+        self.assertEqual(labels.get("industry-research"), "行业深度研究型")
+        self.assertEqual(labels.get("policy-analysis"), "政策法规解读型")
+        self.assertEqual(labels.get("market-monitoring"), "市场指标监测型")
+
+
+class TestCollectTopics(unittest.TestCase):
+    """真实仓库状态回归：collect_topics 扫描结果结构完整。"""
+
+    def test_topics_structure(self):
+        topics = collect_topics()
+        self.assertGreaterEqual(len(topics), 13)
+        slugs = [t["slug"] for t in topics]
+        self.assertEqual(slugs, sorted(slugs))  # 按编号升序
+        for t in topics:
+            self.assertTrue(t["name"])
+            # 类型可能缺失（business-config 未声明类型模板）；有类型时必须能解析出类型名
+            if t["type"]:
+                self.assertTrue(t["type_label"])
+            dates = [r["date"] for r in t["reports"]]
+            self.assertEqual(dates, sorted(dates, reverse=True))  # 报告按日期降序
+            for r in t["reports"]:
+                self.assertTrue(r["title"])
+                self.assertTrue(r["path"].startswith(t["slug"] + "/reports/"))
+
+    def test_special_report_included(self):
+        # 初析件（非标准命名）必须纳入索引，否则「所有报告」不完整
+        topics = {t["slug"]: t for t in collect_topics()}
+        ssw = topics.get("01-ssw-driver")
+        self.assertIsNotNone(ssw)
+        paths = [r["path"] for r in ssw["reports"]]
+        self.assertIn("01-ssw-driver/reports/2026-11-13_initial_analysis_report.html", paths)
 
 
 class TestDaysSinceLatest(unittest.TestCase):

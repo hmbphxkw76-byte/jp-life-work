@@ -151,10 +151,21 @@ python prompts/tools/build_hub.py          # 生成 index.html + reader.html
 python prompts/tools/build_hub.py --check  # 校验是否为最新
 ```
 
-`index.html` 为按业务线分组的报告枢纽；`reader.html` 为阅读壳（侧栏 + iframe，
-`?report=<路径>` 直达）。`--check`：过期退出码 1；文件缺失（全新克隆）退出码 0 并提示，
-由定时维护首建。比对前对两侧做归一化——抹平「最近生成」生成时刻时间戳（分钟级心跳，
-不参与最新性判定），报告清单部分逐字节比对。
+`index.html` 为主题报告索引（自包含静态页，可直接 file:// 打开；**无顶栏**，进入主题后靠左侧「← 返回主题总览」回首页）：
+- Hero 只保留居中标题 + 统计行（主题数 / 报告总数）；
+- 主题卡片总览（编号 / 类型 / 简介 / 报告数 / 最新报告），支持关键词搜索与类型筛选；
+- 点击「进入主题」进入该主题的报告列表（hash 路由 `#topic-<slug>`，左侧 266px 主题导航），
+  报告按时间倒序排列，默认只展示近 1 年（窗口由浏览器端按查看日期动态计算），
+  可一键展开更早报告；无 JavaScript 时全部内容平铺可用。
+- 主题与报告均按目录自动发现（`iter_business_dirs` + `reports/*.html`，含插刷件等
+  非标准命名），新增主题 / 报告后重新生成即自动扩展；主题显示名与简介取自
+  `src/vocabulary/config/topics.json`，类型名取自 `src/report_templates/template-registry.md`。
+  完全空白的骨架目录（无报告且无 business-config）不占位，待其有内容后自动出现。
+
+`reader.html` 为阅读壳（侧栏 + iframe，`?report=<路径>` 直达）。
+`--check`：过期退出码 1；文件缺失（全新克隆）退出码 0 并提示，由定时维护首建。
+比对前对两侧做归一化——抹平「最近生成」生成时刻时间戳（分钟级心跳，不参与最新性判定），
+其余部分逐字节比对。
 
 ## 编排类
 

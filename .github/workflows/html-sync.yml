@@ -1,4 +1,4 @@
-# HTML 同步：报告 md 源变更时自动重新生成同名自包含 HTML 并提交。
+# HTML 同步：报告 md 源变更时自动重新生成同名自包含 HTML 与汇总页（index.html / reader.html）并提交。
 name: html-sync
 
 on:
@@ -6,6 +6,9 @@ on:
     branches: [main]
     paths:
       - '**/reports/*.md'
+      - 'src/prompts-tools/tools/build_hub.py'
+      - 'src/vocabulary/config/topics.json'
+      - 'src/report_templates/template-registry.md'
   workflow_dispatch:
 
 concurrency:
@@ -31,9 +34,12 @@ jobs:
       - name: 重新生成报告 HTML（md2html.py）
         run: python src/prompts-tools/tools/md2html.py
 
+      - name: 重新生成汇总页（build_hub.py）
+        run: python src/prompts-tools/tools/build_hub.py
+
       - name: 提交 HTML 更新
         run: |
-          git add -A -- ':(glob)**/reports/*.html'
+          git add -A -- ':(glob)**/reports/*.html' index.html reader.html
           if git diff --cached --quiet; then
             echo "HTML 与 md 源一致，无变化，跳过提交"
             exit 0
