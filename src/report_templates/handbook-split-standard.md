@@ -259,7 +259,7 @@ src/report_templates/handbook-split-standard.md 第三至七节逐项执行：
 | 08-visa-immigration | ✅ 已完成 | 2026-11-14 | 6f7e851 |
 | 09-politics-law | ✅ 已完成 | 2026-11-14 | dcc07ca |
 | 10-education-qualification | ✅ 已完成 | 2026-11-14 | a140ace |
-| 11-language-japanese | ⬜ 待处理 | — | — |
+| 11-language-japanese | ✅ 已完成 | 2026-11-14 | dd31206 |
 | 12-culture-life | ✅ 已完成 | 2026-11-14 | 4d3e200 |
 | 13-regional-info | ⬜ 待处理 | — | — |
 | 14-life-operations | ⬜ 待处理 | — | — |
