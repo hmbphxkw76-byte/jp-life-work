@@ -255,7 +255,7 @@ src/report_templates/handbook-split-standard.md 第三至七节逐项执行：
 | 04-industry-logistics | ✅ 已完成 | 2026-11-14 | 62b0e7e |
 | 05-industry-autonomous | ✅ 已完成 | 2026-11-14 | 1ca49ba |
 | 06-industry-technology | ✅ 已完成 | 2026-11-14 | 3f1703b |
-| 07-economy-finance | ⬜ 待处理 | — | — |
+| 07-economy-finance | ✅ 已完成 | 2026-11-14 | d60b9c9 |
 | 08-visa-immigration | ⬜ 待处理 | — | — |
 | 09-politics-law | ⬜ 待处理 | — | — |
 | 10-education-qualification | ⬜ 待处理 | — | — |
