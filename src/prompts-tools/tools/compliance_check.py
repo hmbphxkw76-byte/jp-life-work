@@ -4,8 +4,7 @@
 对业务线 reports/*.html 逐份校验：
 - 结构完整性：h2 节数与类型模板骨架一致（缺失=错误阻断；超额=警告，业务固化锚需人工确认）；
   已编号节（id="sN"）必须 s1..sN 连续且有序
-- 必填字段：<title> 非空、免责声明（「免责声明」节 + 「不构成投资建议」表述）、
-  周期报告（月/季/年）顶部导航（基线缺失降为警告）
+- 必填字段：<title> 非空、周期报告（月/季/年）顶部导航（基线缺失降为警告）
 - 内容格式：导航/正文锚点 href="#x" 必须存在对应 id（无断头锚点）
 
 报告类型自动识别：读取业务线 prompts/business-config.md 继承声明中的
@@ -109,13 +108,10 @@ def check_report(text: str, rule: dict, common: dict) -> list[tuple[str, str]]:
         if ids != want:
             issues.append(("E", f"章节编号不连续或不有序：实际 {','.join(ids)}，期望 {','.join(want)}"))
 
-    # 必填字段：title / 免责声明 / 顶部导航
+    # 必填字段：title / 顶部导航
     title = TITLE_RE.search(text)
     if common.get("require_title") and (not title or not strip_tags(title.group(1)).strip()):
         issues.append(("E", "缺少 <title> 或标题为空（必填字段）"))
-    for phrase in common.get("required_text", ()):
-        if phrase not in text:
-            issues.append(("E", f"缺少必填内容：「{phrase}」"))
     if rule.get("nav") and not re.search(r'<nav\b[^>]*aria-label="报告导航"', text):
         issues.append(("E", "周期报告缺少顶部导航 <nav aria-label=\"报告导航\">（通用规范第 5 节强制）"))
     elif not rule.get("nav") and not re.search(r"<nav\b", text):
@@ -158,7 +154,7 @@ def collect_targets(only_file: str | None):
                 type_id = detect_type(cfg.read_text(encoding="utf-8", errors="replace")) or ""
                 break
         out.append(
-            (p.relative_to(ROOT).as_posix(), text, type_id, cycle[0] if cycle else "",
+            (p.relative_to(ROOT).as_posix(), text, type_id, cycle,
              None if cycle else "文件名不符合报告命名约定，无法识别周期（按警告处理）")
         )
         return out
@@ -244,8 +240,8 @@ def run_audit(outdir: Path) -> tuple[int, int, int, Path]:
         f"- **审计时间**：{now}",
         f"- **审计范围**：全部业务线 reports/*.html（共 {total} 份）",
         f"- **匹配度**：{compliant}/{total}（{rate}）报告与对应类型模板规则完全匹配",
-        f"- **规则来源**：[compliance-rules.json](../report_templates/compliance-rules.json)"
-        f"（12 类报告类型结构骨架，与 [template-registry.md](../report_templates/template-registry.md) 登记一致）",
+        "- **规则来源**：[compliance-rules.json](../report_templates/compliance-rules.json)"
+        "（12 类报告类型结构骨架，与 [template-registry.md](../report_templates/template-registry.md) 登记一致）",
         f"- **结论**：{'全部合规 ✅' if violated == 0 else f'{violated} 份报告存在不符合项，需整改 ⚠️'}",
         "",
         "## 明细",
@@ -277,7 +273,7 @@ def run_scaffold(type_id: str, cycle: str | None) -> int:
     n = rule["sections"]
     print(f"# {t['name']}（{type_id}）· 周期：{cycle} — 模板自动填充引导\n")
     print(f"标准模板引用入口：report_templates/{type_id}/{rule.get('template', '（结构逐字继承基线）')}")
-    print(f"渲染规范：report_templates/monitoring-common-spec.md（跨类型最低渲染标准）\n")
+    print("渲染规范：report_templates/monitoring-common-spec.md（跨类型最低渲染标准）\n")
     print(f"## 报告结构骨架（{n} 节固定顺序，不得增删节、调整顺序）\n")
     for i, title in enumerate(titles, start=1):
         print(f"| {i} | {title} | id=\"s{i}\" |" if titles and len(titles) == n
@@ -286,7 +282,6 @@ def run_scaffold(type_id: str, cycle: str | None) -> int:
     print("- 节标题可按业务细化措辞，但节数、顺序、编号（id=\"s1\"..\"s%d\"）不得改变" % n)
     print("- 顶部导航 <nav class=\"report-nav\" aria-label=\"报告导航\">：锚点标签与节标题逐字一致"
           if rule.get("nav") else "- 基线报告保留简化锚点导航（<nav aria-label=\"报告导航\">）")
-    print("- 必填内容：「免责声明」节 + 「不构成投资建议」表述（固定原文，不得改写）")
     print("- <title> 非空；全部锚点 href=\"#x\" 必须有对应 id")
     print("- 表格 / 图表 / 来源链接格式见 monitoring-common-spec.md 第 2–5 节")
     print("\n完成后自检：python prompts/tools/compliance_check.py --file <报告路径>")

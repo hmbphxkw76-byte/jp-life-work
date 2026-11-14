@@ -5,41 +5,168 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>日本管理岗过渡 · 2026-11 月度报告</title>
 <style>
-body { max-width: 1160px; margin: 24px auto; padding: 0 16px;
-      font-family: "Segoe UI", "Microsoft YaHei", sans-serif; color: #1a1a2e; line-height: 1.7; }
-h1, h2, h3 { color: #16213e; }
-table { border-collapse: collapse; width: 100%; overflow-x: auto; display: block; }
-th, td { border: 1px solid #cbd5e1; padding: 6px 10px; text-align: left; }
-th { background: #f1f5f9; }
-img { max-width: 100%; }
-code { background: #f6f8fa; padding: 2px 4px; border-radius: 3px; }
-blockquote { border-left: 4px solid #94a3b8; margin: 0; padding-left: 12px; color: #475569; }
-nav { margin: 12px 0 20px; padding: 8px 0; border-bottom: 1px solid #e2e8f0; }
-nav a { margin-right: 14px; color: #16213e; font-size: 14px; text-decoration: none; white-space: nowrap; }
-nav a:hover { text-decoration: underline; }
+:root{
+  --radius-sm:8px; --radius:12px; --radius-lg:16px;
+  --shadow:0 1px 3px rgba(20,40,70,.06); --shadow-md:0 4px 14px rgba(20,40,70,.09);
+  --font-sans:"Microsoft YaHei","PingFang SC","Segoe UI",Arial,sans-serif;
+  --font-mono:"SFMono-Regular",Consolas,"Liberation Mono",monospace;
+  --focus-ring:0 0 0 3px rgba(63,111,176,.35);
+  --bg:#f4f6f9; --card:#ffffff; --ink:#15202b; --ink2:#465667; --ink3:#657180;
+  --line:#e1e7ee; --line2:#eef2f6;
+  --navy:#16324f; --navy2:#2f5597; --blue:#3f6fb0; --blue-l:#eaf1fa;
+  --red:#a83224; --red-d:#822116; --red-l:#fbece8;
+  --pre:#b8541c; --pre-l:#fdf1e4;
+  --green:#1c7444; --green-l:#eaf5ef;
+  --amber:#956612; --amber-l:#fdf4e2;
+  --gray:#646f7b; --gray-l:#eff2f4;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{font-family:var(--font-sans);background:var(--bg);color:var(--ink);line-height:1.76;font-size:14.5px}
+a{color:var(--navy2);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px 68px}
+
+/* ── 跳转链接 / 焦点环 ── */
+.skip-link{position:absolute;left:12px;top:-48px;z-index:100;background:var(--navy);
+  color:#fff;padding:8px 16px;border-radius:0 0 8px 8px;font-size:12.5px;transition:top .15s ease}
+.skip-link:focus{top:0;color:#fff;text-decoration:none}
+:focus-visible{outline:none;box-shadow:var(--focus-ring)}
+
+/* ── 题头 Hero ── */
+.hero{background:linear-gradient(128deg,#0f2338 0%,#16324f 52%,#2f5597 100%);
+  color:#fff;padding:46px 36px 34px;border-radius:0 0 18px 18px;margin-bottom:24px}
+.hero .eyebrow{font-size:11.5px;letter-spacing:2.4px;color:rgba(255,255,255,.62);text-transform:uppercase}
+.hero h1{font-size:28px;font-weight:700;letter-spacing:.4px;margin:8px 0 6px;line-height:1.35}
+.hero .sub{font-size:13.5px;color:rgba(255,255,255,.82);max-width:900px}
+.hero .meta{font-size:12.3px;color:rgba(255,255,255,.78);margin-top:16px;line-height:2}
+.hero .meta b{color:#fff}
+.hero .tag{display:inline-block;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.2);
+  border-radius:14px;padding:2px 11px;margin:5px 6px 0 0;font-size:11.5px}
+
+/* ── 报告导航（sticky） ── */
+.report-nav{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);
+  border-bottom:1px solid var(--line);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  margin-bottom:26px}
+.report-nav .wrap{padding-top:10px;padding-bottom:10px}
+.nav-url{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;font-size:11.5px;
+  line-height:1.6;color:var(--ink3);padding-bottom:6px;margin-bottom:6px;
+  border-bottom:1px dashed var(--line)}
+.nav-url-label{font-weight:700;color:var(--ink2);white-space:nowrap}
+.nav-url a{color:var(--blue);word-break:break-all}
+.nav-tabs{display:flex;flex-wrap:wrap;gap:6px}
+.nav-tabs a{color:var(--ink2);font-size:12.5px;padding:5px 10px;border-radius:6px;
+  transition:background .15s ease,color .15s ease}
+.nav-tabs a:hover{background:var(--blue-l);color:var(--blue)}
+
+/* ── 跨月对比工具条 ── */
+.diff-bar{display:flex;flex-wrap:wrap;align-items:center;gap:8px;
+  margin-top:8px;padding-top:8px;border-top:1px dashed var(--line);
+  font-size:12px;color:var(--ink3)}
+.diff-bar .diff-summary{flex:1;min-width:200px;line-height:1.6}
+.diff-bar .diff-summary b{color:var(--navy)}
+.diff-toggle{font-size:12px;border:1px solid var(--line);background:#fff;border-radius:7px;
+  padding:4px 11px;cursor:pointer;color:var(--navy2);font-family:inherit}
+.diff-toggle:hover{border-color:var(--blue)}
+
+/* ── 正文 ── */
+h2.sec{font-size:20px;color:var(--navy);margin:44px 0 4px;padding-left:12px;
+  border-left:4px solid var(--navy2);font-weight:700;scroll-margin-top:110px}
+h3{font-size:15.5px;color:var(--navy);margin:22px 0 8px;font-weight:700}
+h4{font-size:14px;color:var(--navy);margin:16px 0 6px;font-weight:700}
+p{margin:0 0 12px}
+ul,ol{padding-left:22px;margin:8px 0 14px}
+li{margin-bottom:6px}
+hr{border:0;border-top:1px solid var(--line);margin:26px 0}
+strong{color:var(--ink)}
+code{background:#f6f8fa;padding:2px 5px;border-radius:4px;font-family:var(--font-mono);font-size:12.5px}
+pre{background:#f6f8fa;padding:12px 14px;border-radius:8px;overflow-x:auto;margin:10px 0 16px}
+pre code{background:none;padding:0;font-size:12.3px;line-height:1.65}
+blockquote{border-left:4px solid var(--navy2);background:var(--blue-l);
+  padding:12px 16px;border-radius:0 8px 8px 0;margin:12px 0;color:var(--ink2)}
+blockquote p:last-child{margin-bottom:0}
+.lead{color:var(--ink2);font-size:13.8px;margin:6px 0 14px}
+
+/* ── 表格 ── */
+table{width:100%;border-collapse:collapse;font-size:12.6px;background:var(--card);
+  border-radius:8px;overflow:hidden;margin:12px 0 16px}
+th{background:var(--navy);color:#fff;padding:8px 10px;text-align:left;font-weight:600;
+  font-size:12px;vertical-align:bottom}
+td{padding:7px 10px;border-bottom:1px solid var(--line2);vertical-align:top;line-height:1.62}
+tbody tr:nth-child(even) td{background:#fafbfd}
+tbody tr:hover td{background:var(--blue-l)}
+td.num{font-variant-numeric:tabular-nums}
+
+/* ── 信息卡 / 注释 ── */
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;
+  padding:18px 20px;margin:14px 0;box-shadow:var(--shadow)}
+.card h3:first-child{margin-top:0}
+.note{background:var(--amber-l);border-left:4px solid var(--amber);padding:10px 14px;
+  border-radius:0 7px 7px 0;font-size:12.9px;margin:12px 0}
+.note.gap{background:var(--gray-l);border-left-color:var(--gray)}
+.note.check{background:var(--green-l);border-left-color:var(--green)}
+.note.correct{background:var(--red-l);border-left-color:var(--red)}
+.note.preline{background:var(--pre-l);border-left-color:var(--pre)}
+
+/* ── 差异高亮（跨月对比） ── */
+.diff-badge{display:inline-block;font-size:10.5px;font-weight:700;line-height:1;
+  border-radius:3px;padding:2px 6px;margin-right:6px;vertical-align:middle;white-space:nowrap}
+.diff-block{border-radius:6px;padding:4px 8px;margin:4px -8px}
+.diff-new{background:var(--green-l);box-shadow:inset 3px 0 0 var(--green)}
+.diff-new .diff-badge{background:var(--green);color:#fff}
+.diff-mod{background:var(--amber-l);box-shadow:inset 3px 0 0 var(--amber)}
+.diff-mod .diff-badge{background:var(--amber);color:#fff}
+.diff-del-group{margin:6px 0;border:1px dashed var(--line);border-radius:6px;background:#fbfcfe}
+.diff-del-group>summary{cursor:pointer;font-size:12px;color:var(--ink3);
+  padding:6px 10px;user-select:none;list-style:none}
+.diff-del-group>summary::-webkit-details-marker{display:none}
+.diff-del-group>summary::before{content:"▸ ";color:var(--gray)}
+.diff-del-group[open]>summary::before{content:"▾ "}
+.diff-del-group .diff-del-body{padding:2px 8px 8px;color:var(--ink3)}
+.diff-del-group .diff-del-body s,.diff-del-group .diff-del-body del{color:var(--red)}
+.diff-del-group .diff-badge{background:var(--gray-l);color:var(--gray)}
+/* 隐藏更新标记：对照阅读模式 */
+main.hide-diff .diff-badge{display:none}
+main.hide-diff .diff-block{background:none;box-shadow:none;padding:0;margin:0}
+main.hide-diff .diff-del-group{display:none}
+
+/* ── 页脚 ── */
+.footer{font-size:11.4px;color:var(--ink3);text-align:center;margin-top:22px;line-height:1.9}
+.footer .backlinks{margin-top:8px}
+.footer .backlinks a{margin:0 8px}
+
+/* ── 响应式 ── */
+@media(max-width:760px){
+  .hero{padding:30px 20px;border-radius:0 0 14px 14px}
+  .hero h1{font-size:21px}
+  .wrap{padding:0 14px 46px}
+  td,th{padding:6px 7px;font-size:11.7px}
+  h2.sec{font-size:17.5px}
+}
 </style>
 </head>
 <body>
-<h1 id="2026-11"><a id="日本管理岗过渡--2026-11-月度报告" aria-hidden="true"></a>日本管理岗过渡 · 2026-11 月度报告</h1>
-<blockquote>
-<p><strong>版本</strong>：v1.0（2026-11 月度）　<strong>数据基准日</strong>：2026-11-14
-<strong>主题类型</strong>：职业就业调研型（employment-research）
-<strong>受众定位</strong>：面向已在日本从事货运司机工作、计划向运行管理 / 配车 / 现场管理岗过渡的读者，兼具职业规划与现场管理视角。
-<strong>来源规则</strong>：① 国土交通省（mlit.go.jp 运送事业制度、安全管理）＞ ② 日本ロジスティクスシステム協会、全日本トラック協会（管理者讲习、安全管理责者）＞ ③ 主要物流企业官网 / IR（日通、佐川、雅玛多、SGHD 的职级与采用信息）＞ ④ 求人门户管理岗频道（预期指标）＞ ⑤ 行业媒体（LNEWS、物流ウィークリー，须回溯）；每条数据附可直接访问的 URL，并记录「机构 · 统计周期 · 发布日期 · 核验状态」。</p>
-</blockquote>
-<hr />
-<nav aria-label="报告导航">
-<a href="#s1">一、核心结论（摘要）</a>
-<a href="#s2">二、行业与政策发展趋势</a>
-<a href="#s3">三、人才供需与薪酬（核心模块）</a>
-<a href="#s4">四、雇主与企业类型细分</a>
-<a href="#s5">五、岗位技能要求</a>
-<a href="#s6">六、行业认可的职业资质与证书</a>
-<a href="#s7">七、就业落地路径建议（结论章）</a>
-<a href="#s8">八、数据可靠性与局限说明</a>
-<a href="#s9">九、参考来源清单</a>
+<a class="skip-link" href="#main-content">跳转到主要内容</a>
+<header class="hero" role="banner" aria-label="报告题头">
+  <div class="eyebrow">日本管理岗过渡 · 职业就业调研型</div>
+  <h1>日本管理岗过渡 · 2026-11 月度报告</h1>
+  <div class="sub">版本：v1.0（2026-11 月度）｜数据基准日：2026-11-14</div>
+  <div class="meta"><b>版本</b>：v1.0（2026-11 月度）<br><b>数据基准日</b>：2026-11-14<br><b>主题类型</b>：职业就业调研型（employment-research）<br><b>受众定位</b>：面向已在日本从事货运司机工作、计划向运行管理 / 配车 / 现场管理岗过渡的读者，兼具职业规划与现场管理视角。<br><b>来源规则</b>：① 国土交通省（mlit.go.jp 运送事业制度、安全管理）＞ ② 日本ロジスティクスシステム協会、全日本トラック協会（管理者讲习、安全管理责者）＞ ③ 主要物流企业官网 / IR（日通、佐川、雅玛多、SGHD 的职级与采用信息）＞ ④ …</div>
+  <div><span class="tag">2026-11</span><span class="tag">职业就业调研型</span></div>
+</header>
+<nav class="report-nav" aria-label="报告导航">
+  <div class="wrap">
+    <div class="nav-url">
+      <span class="nav-url-label">报告路径</span>
+      <a href="2026-11-career-management.html">03-career-management\reports\2026-11-career-management.html</a>
+    </div>
+    <div class="nav-tabs"><a href="#s1">一、核心结论（摘要）</a><a href="#s2">二、行业与政策发展趋势</a><a href="#s3">三、人才供需与薪酬（核心模块）</a><a href="#s4">四、雇主与企业类型细分</a><a href="#s5">五、岗位技能要求</a><a href="#s6">六、行业认可的职业资质与证书</a><a href="#s7">七、就业落地路径建议（结论章）</a><a href="#s8">八、数据可靠性与局限说明</a><a href="#s9">九、参考来源清单</a></div>
+    
+  </div>
 </nav>
-<h2 id="s1"><a id="一核心结论摘要" aria-hidden="true"></a>一、核心结论（摘要）</h2>
+<main class="wrap" id="main-content" role="main" aria-label="报告正文">
+<h2 id="s1" class="sec">一、核心结论（摘要）</h2>
 <p><strong>主题定义</strong>：运输 / 仓储公司内管理岗（运行管理者 / 运行管理辅助者 / 配车 / 仓库现场リーダー / 安全管理者 / 保管・仓库管理 / 事务所营业）的岗位地图与路径评估、业务知识体系、管理岗日语与沟通、48 个月分年学习计划、成果档案与晋升材料。</p>
 <p><strong>监测范围（含）</strong>：管理岗地图与路径评估；业务知识体系（仓储运营、运输管理 KPI、安全管理、系统与数据基础）；管理岗日语与沟通（会议 / 报告 / 邮件 / 现场指示、敬语最小集）；管理岗过渡学习计划（48 个月分年计划、周节奏、失败预案）；成果档案与晋升材料（KPI 月度表、STAR 成果卡、晋升面谈材料包）。</p>
 <p><strong>监测范围（不含）</strong>：制度规则与在留资格细节（→ 08-visa-immigration）；行业结构与 2024 年問題（→ 04-industry-logistics）；自动驾驶技术路线（→ 05-industry-autonomous）；技术数字化技能（→ 06-industry-technology）；法规条文解读（→ 09-politics-law）；收入环境与地域差（→ 07-economy-finance）；日语学习计划（→ 11-language-japanese）；资格与教育投资（→ 10-education-qualification）；现场层执行细节（→ 02-career-driver）；官方统计活值（→ 01-ssw-driver 主责，本主题只读引用）。</p>
@@ -59,7 +186,7 @@ nav a:hover { text-decoration: underline; }
 <li><strong>48 个月计划与周节奏以「最低维持量」保连续性</strong>（建议）：工作日总投入 ≤1h/天，避免司机疲劳期两头塌。</li>
 <li><strong>成果档案是晋升与 2 号移行 / 永住审查的共用材料</strong>（建议 / 推断）：KPI 月度表、STAR 卡与晋升面谈材料包同时服务内部晋升、转职简历与在留审查。</li>
 </ol>
-<h3 id="_2"><a id="数据变更摘要" aria-hidden="true"></a>数据变更摘要</h3>
+<h3 id="_2">数据变更摘要</h3>
 <p>登记册 4 项追踪指标截至 2026-11-14 的活值状态（来源：<code>data/career_logistics_indicator_registry.md</code>）：</p>
 <table class="fixed">
 <thead>
@@ -99,15 +226,15 @@ nav a:hover { text-decoration: underline; }
 </table>
 <p><strong>观察项与触发器状态</strong>（摘自登记册）：唯一观察项、首要触发器、触发器结论均为「首期为空」，无触发器命中；按 business-config 第七节「无触发器命中且窗口未到时<strong>不启动</strong>」，本期无变化可报。</p>
 <p><strong>结构变更备注</strong>（非数据变动）：2026-11-14 原合并版知识手册已按五大维度拆分至 <code>handbook/</code>（00–05 共 6 个文档），编号 01–05 与登记册指标、触发器映射保持一一对应；原合并版全文存档于 <code>reports/archives/2026-11-career-management-merged-v1.0.md</code>。本报告为该结构下的首期九节骨架版。</p>
-<h3 id="_3"><a id="已修正事实清单" aria-hidden="true"></a>已修正事实清单</h3>
+<h3 id="_3">已修正事实清单</h3>
 <p>本版为复用生成：继承历史报告（v1.0 首份分析，数据基准 2026-11-13）的口径裁决、来源分级与结论，<strong>无新增修正</strong>。历史报告未列独立「已修正事实清单」，其口径要点（讲习修了 ≠ 试验合格 ≠ 选任；资格≠岗位；STAR 卡示例数字为示例非事实）原样保留于第八、七节。</p>
-<h2 id="s2"><a id="二行业与政策发展趋势" aria-hidden="true"></a>二、行业与政策发展趋势</h2>
+<h2 id="s2" class="sec">二、行业与政策发展趋势</h2>
 <p>本节只写管理岗监测面可核验的制度与环境信号；行业结构、自动化产业面、法规条文分别归 04-industry-logistics、05-industry-autonomous、09-politics-law，本主题不重复展开。</p>
 <p><strong>法定需求侧信号（事实）</strong>：运行管理者按「每 15 台车 1 名、公司必置」设置，是最现实的第一个管理台阶；运行管理辅助者无法定资格，基础讲习修了即可（运行管理者试验中心，2026，A 级；<a href="https://www.unkan.or.jp/about.html">运行管理者试验中心</a>）。</p>
 <p><strong>资格制度三阶段（事实）</strong>：运行管理实务 1 年以上<strong>或</strong>基础讲习修了 → 通过运行管理者试验 → 公司选任；<strong>讲习修了 ≠ 试验合格 ≠ 选任</strong>，三者不可互称（business-config 第四节）。安全管理者需实务经验年数 + 選任時研修（中型以上车辆企业另设安全管理相关职务）。</p>
 <p><strong>2024 年問題的政策传导（触发器观察方向）</strong>：运賃适正化、M&amp;A 等对策可能改变管理岗职责与配车 / 运行管理的工作方式，属 business-config 第七节的触发器（命中 → 01 / 02 章）；截至 2026-11-14 无触发器命中、无可报变化，不虚构变化。</p>
 <p><strong>交叉引用</strong>：行业结构、2024 年問題产业面 → <a href="../../04-industry-logistics/reports/2026-11-industry-logistics.md">../04-industry-logistics/reports/2026-11-industry-logistics.md</a>；法规条文与政策解读 → <a href="../../09-politics-law/reports/2026-11-politics-law.md">../09-politics-law/reports/2026-11-politics-law.md</a>；自动驾驶技术路线 → <a href="../../05-industry-autonomous/reports/2026-11-industry-autonomous.md">../05-industry-autonomous/reports/2026-11-industry-autonomous.md</a>；技术数字化技能 → <a href="../../06-industry-technology/reports/2026-11-industry-technology.md">../06-industry-technology/reports/2026-11-industry-technology.md</a>。</p>
-<h2 id="s3"><a id="三人才供需与薪酬核心模块" aria-hidden="true"></a>三、人才供需与薪酬（核心模块）</h2>
+<h2 id="s3" class="sec">三、人才供需与薪酬（核心模块）</h2>
 <p><strong>需求侧分层（事实）</strong>：管理岗供给分层为「运行管理辅助者 → 运行管理者 → 配车 / 现场リーダー → 主任 / 系长 → 安全管理者」（business-config 第九节研究边界档案）；法定需求信号为运行管理者每 15 台车 1 名必置（见第二节）。</p>
 <p><strong>薪酬口径现状</strong>：登记册 #3「管理岗求人薪资口径」= <strong>待基线确立</strong>，本期无活值；求人门户的预期指标数据尚未采集（历史报告已列为待答问题）。官方统计活值（工资 / 缺口 / 求人倍率）由 01-ssw-driver 主责，本主题只读引用（<a href="../../01-ssw-driver/reports/2026-11-ssw-driver.md">../01-ssw-driver/reports/2026-11-ssw-driver.md</a>），不独立改值或回写。</p>
 <p><strong>口径并列（不合并、不取均值）</strong>：</p>
@@ -137,11 +264,11 @@ nav a:hover { text-decoration: underline; }
 </tr>
 </tbody>
 </table>
-<h2 id="s4"><a id="四雇主与企业类型细分" aria-hidden="true"></a>四、雇主与企业类型细分</h2>
+<h2 id="s4" class="sec">四、雇主与企业类型细分</h2>
 <p><strong>主体清单与入选标准（登记册边界档案）</strong>：企业样本入选标准 = 官网采用页可回溯、职级与采用条件可核实；样本进出须留痕；<strong>首期样本待基线运行后补记</strong>，截至 2026-11-14 无样本留痕。</p>
 <p><strong>目标企业范围（来源优先级 ③）</strong>：主要物流企业官网 / IR——日通、佐川、雅玛多、SGHD 的职级与采用信息。截至本期，登记册 #1「目标企业管理岗采用条件」仍为<strong>待基线确立</strong>，企业样本的具体采用条件、职级结构尚未采集（待复核清单见第八节）。</p>
 <p><strong>企业类型观察（本主题边界内）</strong>：运输公司按业务形态分为大型干线运输、3PL·仓储、配送类；管理岗设置差异体现在「运行管理者必置」与「运行管理辅助者 / 配车 / 现场リーダー」等无法定资格岗位的配置比例上。行业结构与企业动向的主责为 04-industry-logistics（<a href="../../04-industry-logistics/reports/2026-11-industry-logistics.md">../04-industry-logistics/reports/2026-11-industry-logistics.md</a>），本节只写管理岗采用条件维度，不重复行业面数字。</p>
-<h2 id="s5"><a id="五岗位技能要求" aria-hidden="true"></a>五、岗位技能要求</h2>
+<h2 id="s5" class="sec">五、岗位技能要求</h2>
 <p><strong>目标岗位地图</strong>（手册 01，信息核对日期 2026-11-11；来源：运行管理者试验中心 [Source: https://www.unkan.or.jp/about.html, 2026]）：</p>
 <table class="fixed">
 <thead>
@@ -211,7 +338,7 @@ nav a:hover { text-decoration: underline; }
 <li>敬语最小必需集：对上 = 尊敬语、对己 = 谦让语；现场用错的成本低于不敢用的成本——先敢说再修正。</li>
 <li>训练节奏：每天日報 3 行；每周会议发言 1 次 + 議事録 1 份；每月月報 1 份 + 邮件改写 2 封；每半年对照四大场景自评并记入成果档案。</li>
 </ul>
-<h2 id="s6"><a id="六行业认可的职业资质与证书" aria-hidden="true"></a>六、行业认可的职业资质与证书</h2>
+<h2 id="s6" class="sec">六、行业认可的职业资质与证书</h2>
 <p><strong>法定资格路径（事实）</strong>：运行管理者试验受验资格 = 运行管理实务 1 年以上<strong>或</strong>基础讲习修了；试验合格只给入场券，公司是否选任取决于信任与空缺（手册 01，来源：运行管理者试验中心，2026，A 级）。</p>
 <p><strong>术语口径（不得混用）</strong>：</p>
 <table class="fixed">
@@ -242,7 +369,7 @@ nav a:hover { text-decoration: underline; }
 </table>
 <p><strong>费用与日程</strong>：基础讲习「数千円，周末 1 日课程为主」（手册 04，<strong>待核验</strong>）；运行管理者试验费用与具体日程以试验中心官方公布为准。资格日程与费用的主责为 10-education-qualification（<a href="../../10-education-qualification/reports/2026-11-education-qualification.md">../10-education-qualification/reports/2026-11-education-qualification.md</a>），本主题只读引用、不独立改值；登记册 #2「管理者讲习 / 安全管理责者讲习日程」待基线确立。</p>
 <p><strong>证书归档</strong>：每张证书扫描归档，进入成果档案（手册 05），作为晋升面谈与 2 号移行 / 永住审查材料的组成部分。</p>
-<h2 id="s7"><a id="七就业落地路径建议结论章" aria-hidden="true"></a>七、就业落地路径建议（结论章）</h2>
+<h2 id="s7" class="sec">七、就业落地路径建议（结论章）</h2>
 <blockquote>
 <p>本节为建议 / 推断层，与前三节的事实数据分离。</p>
 </blockquote>
@@ -342,7 +469,7 @@ nav a:hover { text-decoration: underline; }
 </table>
 <p><strong>成果档案（手册 05，建议）</strong>：管理活动月度记录表（发言 / 議事録 / 带人、改善提案、采用结果；原始运营数字引用司机手册同月记录，避免两处各写一套）；STAR 成果卡（年度目标至少 4 张，示例数字「误出库率 0.3%→0.05%」为<strong>示例、非事实</strong>）；晋升面谈材料包（第 4 年 Q2 组装）；外部评价背书（表彰状 / 感谢状扫描、客户好评书面确认、研修修了证）。</p>
 <p><strong>风险提示（事实＋推断）</strong>：资格≠岗位；管理岗仍属特定技能框架内时业务范围受限——从「驾驶」扩展到「辅助管理」需确认雇主在受入计划书中的业务记载；若走 2 号，2 号业务本质仍是驾驶，真正的管理岗跳转可能需在留资格变更（如技术·人文·国际业务，需学历或 10 年实务），提前与行政书士咨询（→ <a href="../../08-visa-immigration/reports/2026-11-visa-immigration.md">../08-visa-immigration/reports/2026-11-visa-immigration.md</a>）。</p>
-<h2 id="s8"><a id="八数据可靠性与局限说明" aria-hidden="true"></a>八、数据可靠性与局限说明</h2>
+<h2 id="s8" class="sec">八、数据可靠性与局限说明</h2>
 <p><strong>核验程度分级</strong>：</p>
 <ul>
 <li><strong>A 级（官方一手）</strong>：运行管理者试验中心（unkan.or.jp，2026）——运行管理者设置标准与试验路径。</li>
@@ -374,7 +501,7 @@ nav a:hover { text-decoration: underline; }
 </table>
 <p><strong>未取得项</strong>：登记册 #1 #2 #3（待基线确立）、#4（待记录）；首期企业样本待基线运行后补记；手册 04 讲习费用「数千円」待核验；STAR 卡示例数字为示例非事实。</p>
 <p><strong>风险与不确定性</strong>：无统计活值、无企业样本、无求人薪资数据，全部结论为方法论与路径推断；48 个月时间轴以「司机入职约 2027 年秋」为假设起点，存在个人进度偏差；2 号移行与在留资格变更的官方口径未逐项核实（交叉引用 08-visa-immigration）。</p>
-<h3 id="_11"><a id="待复核清单" aria-hidden="true"></a>待复核清单</h3>
+<h3 id="_11">待复核清单</h3>
 <table class="fixed">
 <thead>
 <tr>
@@ -416,7 +543,7 @@ nav a:hover { text-decoration: underline; }
 </tr>
 </tbody>
 </table>
-<h2 id="s9"><a id="九参考来源清单" aria-hidden="true"></a>九、参考来源清单</h2>
+<h2 id="s9" class="sec">九、参考来源清单</h2>
 <p><strong>官方一手</strong>：</p>
 <ol>
 <li><a href="https://www.unkan.or.jp/about.html">运行管理者试验中心</a> — 运行管理者设置标准（每 15 台车 1 名）与试验路径，2026。</li>
@@ -446,5 +573,37 @@ nav a:hover { text-decoration: underline; }
 <li><a href="../../10-education-qualification/reports/2026-11-education-qualification.md">10-education-qualification 报告</a> — 资格日程与费用主责方，只读引用。</li>
 <li><a href="../../01-ssw-driver/reports/2026-11-ssw-driver.md">01-ssw-driver 报告</a> — 官方统计活值（工资 / 缺口 / 求人倍率），只读引用。</li>
 </ol>
+</main>
+<footer class="footer" role="contentinfo" aria-label="页脚">
+  <p>日本管理岗过渡 · 日本管理岗过渡 · 2026-11 月度报告｜2026-11<br>
+  报告路径：03-career-management\reports\2026-11-career-management.html</p>
+  <p class="backlinks">
+    <a href="../../index.html#topic-03-career-management">← 返回主题</a>
+    <a href="../../index.html">返回首页</a>
+  </p>
+</footer>
+<script>
+(function () {
+  'use strict';
+  var main = document.getElementById('main-content');
+  var tgDiff = document.getElementById('tg-diff');
+  var tgDel = document.getElementById('tg-del');
+  if (main && tgDiff) {
+    tgDiff.addEventListener('click', function () {
+      var hide = main.classList.toggle('hide-diff');
+      tgDiff.textContent = hide ? '显示更新标记' : '隐藏更新标记';
+    });
+  }
+  if (tgDel) {
+    tgDel.addEventListener('click', function () {
+      var open = tgDel.getAttribute('data-open') === '1';
+      var groups = document.querySelectorAll('details.diff-del-group');
+      for (var i = 0; i < groups.length; i++) groups[i].open = !open;
+      tgDel.setAttribute('data-open', open ? '0' : '1');
+      tgDel.textContent = open ? '展开全部删除' : '收起全部删除';
+    });
+  }
+})();
+</script>
 </body>
 </html>

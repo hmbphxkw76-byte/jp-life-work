@@ -10,7 +10,7 @@
 | 关注点 | 由谁保障 |
 |---|---|
 | 报告命名 / 结构 / 配对规范 | `validate.yml`（阻断） |
-| md → HTML、汇总页 / 阅读器 | `html-sync.yml`（push 触发） |
+| md → HTML、汇总页 | `html-sync.yml`（push 触发） |
 | 归档 / 索引 / 结构维护 | `scheduled-maintenance.yml`（每月 1 日） |
 | 月度产出待办提醒 | `scheduled-report-tasks.yml`（每月 1 日） |
 | 内容零丢失 / 对比准确性 | `src/tests/test_tools.py`（69 项） |
@@ -35,15 +35,15 @@
 | 报告内容 lint | `lint_reports.py` | 建议级（continue-on-error） |
 | 模板合规校验 | `compliance_check.py` | 建议级（continue-on-error） |
 
-> 两个「建议级」关卡对**既有历史报告**的遗留项（缺免责声明 / 断头锚点）会报错，
+> 两个「建议级」关卡对**既有历史报告**的遗留项（断头锚点）会报错，
 > 属预期，不影响门禁；新报告应全部通过。
 
 ### 2. `html-sync.yml` — 生成物同步
 
-- **触发**：push（`**/reports/*.md`、`build_hub.py`、`report_diff.py` 变更）、手动
+- **触发**：push（`**/reports/*.md`、`build_hub.py`、`md2html.py`、`report_diff.py` 变更）、手动
 - **步骤**：
-  1. `md2html.py` — 重新生成同名自包含 HTML
-  2. `build_hub.py` — 重建 `index.html` / `reader.html`
+  1. `md2html.py` — 重新生成同名自包含 HTML（含构建期跨月对比高亮）
+  2. `build_hub.py` — 重建 `index.html`
   3. 提交并推送（无变更则跳过）
 
 ### 3. `scheduled-maintenance.yml` — 每月定时维护
@@ -57,7 +57,8 @@
 | 补全 | `ensure_region_topics.py` | 补齐缺失的主题结构 |
 | 归档 | `archive_reports.py` | 每主题保留最新 12 期，超出移入 `reports/archives/` |
 | 索引 | `build_index.py` | 生成 `INDEX.md`（含活跃度心跳时间戳） |
-| 汇总页 | `build_hub.py` | 重建 `index.html` / `reader.html` |
+| 报告 HTML | `md2html.py` | 同步报告页（含跨月对比高亮） |
+| 汇总页 | `build_hub.py` | 重建 `index.html` |
 | 回归 | `unittest` | 确认维护未破坏契约 |
 | 提交 | `git commit` + `git push` | 有变更才提交 |
 
@@ -81,10 +82,14 @@
         ▼
 reports/YYYY-MM-<slug>.md  ──md2html.py──►  reports/YYYY-MM-<slug>.html
         │                                            │
+        │                                            ▼
+        │                              独立报告页（hero + report-nav
+        │                              + 构建期跨月对比高亮 + 返回链接）
+        │                                            │
         └──────────────build_hub.py──────────────────┘
                               │
                               ▼
-        index.html（主题索引） + reader.html（阅读器：版本切换 + 跨月对比高亮）
+        index.html（主题索引：卡片 + 详情页，报告链接新标签页直达独立报告页）
                               │
                     归档：每主题保留最新 12 期
 ```
@@ -97,16 +102,17 @@ reports/YYYY-MM-<slug>.md  ──md2html.py──►  reports/YYYY-MM-<slug>.htm
 - **同月合并**：同一主题同一自然月多份存量报告合并为一份（初析为主体、基线作附录，原文不删改）。
 - **展示**：单主题报告列表默认展示最近 **12 个自然月**，按时间倒序（最新在顶端），可展开更早。
 
-## 五、跨月对比高亮（reader.html）
+## 五、跨月对比高亮（独立报告页）
 
-- **机制**：每期报告与上一期（同主题、最近一个更早自然月）做 block 级 LCS 比对（`report_diff.py`）。
+- **机制**：每期报告与上一期（同主题、最近一个更早自然月）做 block 级 LCS 比对（`report_diff.py`），在 `md2html.py` 构建期预渲染进报告页。
 - **标记**：
   - 新增 → 绿色 + 「已更新 · 新增」
   - 修改 → 黄色 + 「已更新 · 修改」（带相似度阈值 0.35，低相似度按「删除 + 新增」处理）
   - 删除 → 折叠组（默认收起，可展开追溯）+ 「已更新 · 删除」
   - 未变更 → 原样展示
-- **版本切换**：hash 路由 `#topic=<slug>&month=<YYYY-MM>`，纯前端 show/hide（实测 ~11ms）。
-- **辅助开关**：「隐藏更新标记」对照阅读、「展开全部删除」。
+  - 表格整体成块比对，保留完整表格结构
+- **辅助开关**：报告页工具条「隐藏更新标记」对照阅读、「展开全部删除」。
+- **呈现**：报告页新标签页独立打开，页脚提供「← 返回主题 / 返回首页」。
 
 ## 六、测试体系（`src/tests/test_tools.py`，69 项）
 
@@ -114,7 +120,7 @@ reports/YYYY-MM-<slug>.md  ──md2html.py──►  reports/YYYY-MM-<slug>.htm
 |---|---|---|
 | 命名格式合规性 | `TestNamingCompliance` | 命名正则、slug 归属、md/html 配对、无旧标签残留 |
 | 全量历史数据校验 | `TestHistoricalMigration` | 迁移清单完整性 + git 历史逐份复核内容零丢失 |
-| 跨月份对比准确性 | `TestDiffAccuracy` | 相同 / 新增 / 修改 / 删除 / 相似度阈值 / 首期 / 阅读器 diff 数据 |
+| 跨月份对比准确性 | `TestDiffAccuracy` | 相同 / 新增 / 修改 / 删除 / 相似度阈值 / 首期 / 报告页 diff 高亮 |
 
 其他：命名解析（新 + 历史）、周期与任务推导、归档策略、lint / 合规、`build_hub` 归一化比对、活跃度天数、16 主题契约。
 
@@ -131,7 +137,7 @@ python src/prompts-tools/tools/build_hub.py --check
 
 # 生成物
 python src/prompts-tools/tools/md2html.py          # md → HTML
-python src/prompts-tools/tools/build_hub.py        # index.html / reader.html
+python src/prompts-tools/tools/build_hub.py        # index.html
 python src/prompts-tools/tools/build_index.py      # INDEX.md
 
 # 维护
@@ -156,7 +162,7 @@ python src/prompts-tools/tools/automation_status.py activity
 工作流已内置去重：当月存在未关闭的同标题 Issue 时会更新正文而非新建。若仍重复，检查 Issue 是否被关闭后又被重建。
 
 **Q：历史报告 lint / 合规报错？**
-属既有遗留项（缺免责声明 / 断头锚点），CI 已标 `continue-on-error`，不影响门禁；新报告应全部通过。
+属既有遗留项（断头锚点），CI 已标 `continue-on-error`，不影响门禁；新报告应全部通过。
 
 **Q：如何手动跑一次定时任务？**
 GitHub Actions 页面 → 对应 workflow → 「Run workflow」；或在本地按「手动命令速查」执行。

@@ -47,7 +47,6 @@ MANIFEST_MD = AUDIT_DIR / "report-migration-2026-11.md"
 
 # 角色：main = 月度报告主体；appendix = 附录（原文保留）
 MAIN_KINDS = {"initial", "monthly", "quarterly", "annual"}
-APPENDIX_KINDS = {"baseline", "weekly"}
 
 
 def role_of(kind: str, name: str) -> str:

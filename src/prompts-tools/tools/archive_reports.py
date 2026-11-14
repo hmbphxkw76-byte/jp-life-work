@@ -1,6 +1,6 @@
 """报告归档策略（scheduled-maintenance.yml 的归档步骤）。
 
-每条业务线的 reports/ 只保留最新 N 期月度报告（默认 12 期，与阅读器展示
+每条业务线的 reports/ 只保留最新 N 期月度报告（默认 12 期，与首页详情页展示
 窗口一致），超出的移动到 reports/archives/。报告已统一为 `YYYY-MM-<slug>`
 命名，归档按自然月倒序保留。
 
@@ -16,7 +16,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from _common import detect_month_report, iter_business_dirs  # noqa: E402
 
-# 每主题保留的最新期数（与 build_hub 阅读器默认窗口一致）
+# 每主题保留的最新期数（与 build_hub 首页详情页默认窗口一致）
 KEEP = 12
 
 

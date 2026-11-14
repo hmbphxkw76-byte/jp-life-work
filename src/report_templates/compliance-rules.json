@@ -1,9 +1,8 @@
 {
-  "version": "v1.1",
-  "updated": "2026-11-13",
-  "comment": "报告模板合规校验规则（CI: compliance_check.py）。section_titles 为类型模板骨架的模块名参考（业务提示词可细化措辞，不得增删节、调整顺序）；校验口径：h2 节数缺失=错误（阻断）、超额=警告（业务固化锚需人工确认）。quarterly 第 12 节页脚为 footer 元素（可选 h2），故 h2 期望值为 11。weekly 命名日期 = 数据截止日。",
+  "version": "v1.2",
+  "updated": "2026-11-14",
+  "comment": "报告模板合规校验规则（CI: compliance_check.py）。section_titles 为类型模板骨架的模块名参考（业务提示词可细化措辞，不得增删节、调整顺序）；校验口径：h2 节数缺失=错误（阻断）、超额=警告（业务固化锚需人工确认）。quarterly 第 11 节页脚为 footer 元素（可选 h2），故 h2 期望值为 10。weekly 命名日期 = 数据截止日。",
   "common": {
-    "required_text": ["免责声明", "不构成投资建议"],
     "require_title": true,
     "anchor_check": true,
     "nav_required_cycles": ["monthly", "quarterly", "annual", "weekly"]
@@ -20,21 +19,21 @@
           "template": "prompt-baseline-setup-template.md"
         },
         "monthly": {
-          "sections": 9,
+          "sections": 8,
           "nav": true,
-          "section_titles": ["结论先行", "关键数字卡", "月度指标逐项对比", "信号灯判定", "与首期基线的偏离", "数据缺口与未核验项", "下期观察清单", "台账更新编号与来源", "免责声明"],
+          "section_titles": ["结论先行", "关键数字卡", "月度指标逐项对比", "信号灯判定", "与首期基线的偏离", "数据缺口与未核验项", "下期观察清单", "台账更新编号与来源"],
           "template": "prompt-monthly-monitor-template.md"
         },
         "quarterly": {
-          "sections": 11,
+          "sections": 10,
           "nav": true,
-          "section_titles": ["结论先行", "关键数字卡", "多维全景", "先行指标传导分析", "信号矩阵与条件化决策框架", "升级复核", "供给情景重算", "与上期 / 首期基线对比", "数据治理与未核验清单", "下季度观察清单", "免责声明"],
+          "section_titles": ["结论先行", "关键数字卡", "多维全景", "先行指标传导分析", "信号矩阵与条件化决策框架", "升级复核", "供给情景重算", "与上期 / 首期基线对比", "数据治理与未核验清单", "下季度观察清单"],
           "template": "prompt-quarterly-analysis-template.md"
         },
         "annual": {
-          "sections": 11,
+          "sections": 10,
           "nav": true,
-          "section_titles": ["年度结论", "全年关键数字", "预测 vs 实际偏离", "多维年度全景", "官方先行指标年度基线", "多年供给情景与决策矩阵", "政策框架与未核验清单", "信号阈值回测与预警红线", "官方来源巡检", "台账修订说明", "免责声明"],
+          "section_titles": ["年度结论", "全年关键数字", "预测 vs 实际偏离", "多维年度全景", "官方先行指标年度基线", "多年供给情景与决策矩阵", "政策框架与未核验清单", "信号阈值回测与预警红线", "官方来源巡检", "台账修订说明"],
           "template": "prompt-annual-review-template.md"
         }
       }
@@ -98,7 +97,7 @@
     "investment-research": {
       "name": "投资分析与尽调型",
       "template_dir": "report_templates/investment-research/",
-      "section_titles": ["投资要点", "标的概况", "行业与市场输入", "财务分析与估值模型", "风险清单", "情景与敏感性", "合规与免责", "参考来源清单"],
+      "section_titles": ["投资要点", "标的概况", "行业与市场输入", "财务分析与估值模型", "风险清单", "情景与敏感性", "合规", "参考来源清单"],
       "cycles": {
         "baseline": { "sections": 8, "nav": false, "template": "prompt-baseline-setup-template.md" },
         "target_update": { "sections": 8, "nav": true, "template": "prompt-target-update-template.md" }

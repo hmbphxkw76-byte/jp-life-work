@@ -5,41 +5,168 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>在日生活实务与行政手续 · 2026-11 月度报告</title>
 <style>
-body { max-width: 1160px; margin: 24px auto; padding: 0 16px;
-      font-family: "Segoe UI", "Microsoft YaHei", sans-serif; color: #1a1a2e; line-height: 1.7; }
-h1, h2, h3 { color: #16213e; }
-table { border-collapse: collapse; width: 100%; overflow-x: auto; display: block; }
-th, td { border: 1px solid #cbd5e1; padding: 6px 10px; text-align: left; }
-th { background: #f1f5f9; }
-img { max-width: 100%; }
-code { background: #f6f8fa; padding: 2px 4px; border-radius: 3px; }
-blockquote { border-left: 4px solid #94a3b8; margin: 0; padding-left: 12px; color: #475569; }
-nav { margin: 12px 0 20px; padding: 8px 0; border-bottom: 1px solid #e2e8f0; }
-nav a { margin-right: 14px; color: #16213e; font-size: 14px; text-decoration: none; white-space: nowrap; }
-nav a:hover { text-decoration: underline; }
+:root{
+  --radius-sm:8px; --radius:12px; --radius-lg:16px;
+  --shadow:0 1px 3px rgba(20,40,70,.06); --shadow-md:0 4px 14px rgba(20,40,70,.09);
+  --font-sans:"Microsoft YaHei","PingFang SC","Segoe UI",Arial,sans-serif;
+  --font-mono:"SFMono-Regular",Consolas,"Liberation Mono",monospace;
+  --focus-ring:0 0 0 3px rgba(63,111,176,.35);
+  --bg:#f4f6f9; --card:#ffffff; --ink:#15202b; --ink2:#465667; --ink3:#657180;
+  --line:#e1e7ee; --line2:#eef2f6;
+  --navy:#16324f; --navy2:#2f5597; --blue:#3f6fb0; --blue-l:#eaf1fa;
+  --red:#a83224; --red-d:#822116; --red-l:#fbece8;
+  --pre:#b8541c; --pre-l:#fdf1e4;
+  --green:#1c7444; --green-l:#eaf5ef;
+  --amber:#956612; --amber-l:#fdf4e2;
+  --gray:#646f7b; --gray-l:#eff2f4;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{font-family:var(--font-sans);background:var(--bg);color:var(--ink);line-height:1.76;font-size:14.5px}
+a{color:var(--navy2);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px 68px}
+
+/* ── 跳转链接 / 焦点环 ── */
+.skip-link{position:absolute;left:12px;top:-48px;z-index:100;background:var(--navy);
+  color:#fff;padding:8px 16px;border-radius:0 0 8px 8px;font-size:12.5px;transition:top .15s ease}
+.skip-link:focus{top:0;color:#fff;text-decoration:none}
+:focus-visible{outline:none;box-shadow:var(--focus-ring)}
+
+/* ── 题头 Hero ── */
+.hero{background:linear-gradient(128deg,#0f2338 0%,#16324f 52%,#2f5597 100%);
+  color:#fff;padding:46px 36px 34px;border-radius:0 0 18px 18px;margin-bottom:24px}
+.hero .eyebrow{font-size:11.5px;letter-spacing:2.4px;color:rgba(255,255,255,.62);text-transform:uppercase}
+.hero h1{font-size:28px;font-weight:700;letter-spacing:.4px;margin:8px 0 6px;line-height:1.35}
+.hero .sub{font-size:13.5px;color:rgba(255,255,255,.82);max-width:900px}
+.hero .meta{font-size:12.3px;color:rgba(255,255,255,.78);margin-top:16px;line-height:2}
+.hero .meta b{color:#fff}
+.hero .tag{display:inline-block;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.2);
+  border-radius:14px;padding:2px 11px;margin:5px 6px 0 0;font-size:11.5px}
+
+/* ── 报告导航（sticky） ── */
+.report-nav{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);
+  border-bottom:1px solid var(--line);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  margin-bottom:26px}
+.report-nav .wrap{padding-top:10px;padding-bottom:10px}
+.nav-url{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;font-size:11.5px;
+  line-height:1.6;color:var(--ink3);padding-bottom:6px;margin-bottom:6px;
+  border-bottom:1px dashed var(--line)}
+.nav-url-label{font-weight:700;color:var(--ink2);white-space:nowrap}
+.nav-url a{color:var(--blue);word-break:break-all}
+.nav-tabs{display:flex;flex-wrap:wrap;gap:6px}
+.nav-tabs a{color:var(--ink2);font-size:12.5px;padding:5px 10px;border-radius:6px;
+  transition:background .15s ease,color .15s ease}
+.nav-tabs a:hover{background:var(--blue-l);color:var(--blue)}
+
+/* ── 跨月对比工具条 ── */
+.diff-bar{display:flex;flex-wrap:wrap;align-items:center;gap:8px;
+  margin-top:8px;padding-top:8px;border-top:1px dashed var(--line);
+  font-size:12px;color:var(--ink3)}
+.diff-bar .diff-summary{flex:1;min-width:200px;line-height:1.6}
+.diff-bar .diff-summary b{color:var(--navy)}
+.diff-toggle{font-size:12px;border:1px solid var(--line);background:#fff;border-radius:7px;
+  padding:4px 11px;cursor:pointer;color:var(--navy2);font-family:inherit}
+.diff-toggle:hover{border-color:var(--blue)}
+
+/* ── 正文 ── */
+h2.sec{font-size:20px;color:var(--navy);margin:44px 0 4px;padding-left:12px;
+  border-left:4px solid var(--navy2);font-weight:700;scroll-margin-top:110px}
+h3{font-size:15.5px;color:var(--navy);margin:22px 0 8px;font-weight:700}
+h4{font-size:14px;color:var(--navy);margin:16px 0 6px;font-weight:700}
+p{margin:0 0 12px}
+ul,ol{padding-left:22px;margin:8px 0 14px}
+li{margin-bottom:6px}
+hr{border:0;border-top:1px solid var(--line);margin:26px 0}
+strong{color:var(--ink)}
+code{background:#f6f8fa;padding:2px 5px;border-radius:4px;font-family:var(--font-mono);font-size:12.5px}
+pre{background:#f6f8fa;padding:12px 14px;border-radius:8px;overflow-x:auto;margin:10px 0 16px}
+pre code{background:none;padding:0;font-size:12.3px;line-height:1.65}
+blockquote{border-left:4px solid var(--navy2);background:var(--blue-l);
+  padding:12px 16px;border-radius:0 8px 8px 0;margin:12px 0;color:var(--ink2)}
+blockquote p:last-child{margin-bottom:0}
+.lead{color:var(--ink2);font-size:13.8px;margin:6px 0 14px}
+
+/* ── 表格 ── */
+table{width:100%;border-collapse:collapse;font-size:12.6px;background:var(--card);
+  border-radius:8px;overflow:hidden;margin:12px 0 16px}
+th{background:var(--navy);color:#fff;padding:8px 10px;text-align:left;font-weight:600;
+  font-size:12px;vertical-align:bottom}
+td{padding:7px 10px;border-bottom:1px solid var(--line2);vertical-align:top;line-height:1.62}
+tbody tr:nth-child(even) td{background:#fafbfd}
+tbody tr:hover td{background:var(--blue-l)}
+td.num{font-variant-numeric:tabular-nums}
+
+/* ── 信息卡 / 注释 ── */
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;
+  padding:18px 20px;margin:14px 0;box-shadow:var(--shadow)}
+.card h3:first-child{margin-top:0}
+.note{background:var(--amber-l);border-left:4px solid var(--amber);padding:10px 14px;
+  border-radius:0 7px 7px 0;font-size:12.9px;margin:12px 0}
+.note.gap{background:var(--gray-l);border-left-color:var(--gray)}
+.note.check{background:var(--green-l);border-left-color:var(--green)}
+.note.correct{background:var(--red-l);border-left-color:var(--red)}
+.note.preline{background:var(--pre-l);border-left-color:var(--pre)}
+
+/* ── 差异高亮（跨月对比） ── */
+.diff-badge{display:inline-block;font-size:10.5px;font-weight:700;line-height:1;
+  border-radius:3px;padding:2px 6px;margin-right:6px;vertical-align:middle;white-space:nowrap}
+.diff-block{border-radius:6px;padding:4px 8px;margin:4px -8px}
+.diff-new{background:var(--green-l);box-shadow:inset 3px 0 0 var(--green)}
+.diff-new .diff-badge{background:var(--green);color:#fff}
+.diff-mod{background:var(--amber-l);box-shadow:inset 3px 0 0 var(--amber)}
+.diff-mod .diff-badge{background:var(--amber);color:#fff}
+.diff-del-group{margin:6px 0;border:1px dashed var(--line);border-radius:6px;background:#fbfcfe}
+.diff-del-group>summary{cursor:pointer;font-size:12px;color:var(--ink3);
+  padding:6px 10px;user-select:none;list-style:none}
+.diff-del-group>summary::-webkit-details-marker{display:none}
+.diff-del-group>summary::before{content:"▸ ";color:var(--gray)}
+.diff-del-group[open]>summary::before{content:"▾ "}
+.diff-del-group .diff-del-body{padding:2px 8px 8px;color:var(--ink3)}
+.diff-del-group .diff-del-body s,.diff-del-group .diff-del-body del{color:var(--red)}
+.diff-del-group .diff-badge{background:var(--gray-l);color:var(--gray)}
+/* 隐藏更新标记：对照阅读模式 */
+main.hide-diff .diff-badge{display:none}
+main.hide-diff .diff-block{background:none;box-shadow:none;padding:0;margin:0}
+main.hide-diff .diff-del-group{display:none}
+
+/* ── 页脚 ── */
+.footer{font-size:11.4px;color:var(--ink3);text-align:center;margin-top:22px;line-height:1.9}
+.footer .backlinks{margin-top:8px}
+.footer .backlinks a{margin:0 8px}
+
+/* ── 响应式 ── */
+@media(max-width:760px){
+  .hero{padding:30px 20px;border-radius:0 0 14px 14px}
+  .hero h1{font-size:21px}
+  .wrap{padding:0 14px 46px}
+  td,th{padding:6px 7px;font-size:11.7px}
+  h2.sec{font-size:17.5px}
+}
 </style>
 </head>
 <body>
-<h1 id="2026-11"><a id="在日生活实务与行政手续--2026-11-月度报告" aria-hidden="true"></a>在日生活实务与行政手续 · 2026-11 月度报告</h1>
-<blockquote>
-<p><strong>版本</strong>：v1.0（2026-11 月度）　<strong>数据基准日</strong>：2026-11-14
-<strong>主题类型</strong>：职业就业调研型（employment-research）· 个人执行层
-<strong>受众定位</strong>：本人（拟赴日 / 已在日特定技能司机）的生活实务执行层。
-<strong>来源规则</strong>：① 総務省 / 厚生労働省 / 国土交通省 / 内閣府 / デジタル庁 / e-Gov / 各自治体官网 ＞ ② 金融 / 通信机构官网（各银行、携帯运营商、电力燃气公司）＞ ③ 行业专业机构 ＞ ④ 平台 / 门户抽样（转载须回溯官网）＞ ⑤ 主流媒体（仅作线索，须回原文）。</p>
-</blockquote>
-<hr />
-<nav aria-label="报告导航">
-<a href="#s1">一、核心结论（摘要）</a>
-<a href="#s2">二、行业与政策发展趋势</a>
-<a href="#s3">三、人才供需与薪酬（核心模块）</a>
-<a href="#s4">四、雇主与企业类型细分</a>
-<a href="#s5">五、岗位技能要求</a>
-<a href="#s6">六、行业认可的职业资质与证书</a>
-<a href="#s7">七、就业落地路径建议（结论章）</a>
-<a href="#s8">八、数据可靠性与局限说明</a>
-<a href="#s9">九、参考来源清单</a>
+<a class="skip-link" href="#main-content">跳转到主要内容</a>
+<header class="hero" role="banner" aria-label="报告题头">
+  <div class="eyebrow">在日生活实务与行政手续 · 职业就业调研型</div>
+  <h1>在日生活实务与行政手续 · 2026-11 月度报告</h1>
+  <div class="sub">版本：v1.0（2026-11 月度）｜数据基准日：2026-11-14</div>
+  <div class="meta"><b>版本</b>：v1.0（2026-11 月度）<br><b>数据基准日</b>：2026-11-14<br><b>主题类型</b>：职业就业调研型（employment-research）· 个人执行层<br><b>受众定位</b>：本人（拟赴日 / 已在日特定技能司机）的生活实务执行层。<br><b>来源规则</b>：① 総務省 / 厚生労働省 / 国土交通省 / 内閣府 / デジタル庁 / e-Gov / 各自治体官网 ＞ ② 金融 / 通信机构官网（各银行、携帯运营商、电力燃气公司）＞ ③ 行业专业机构 ＞ ④ 平台 / 门户抽样（转载须回溯官网）＞…</div>
+  <div><span class="tag">2026-11</span><span class="tag">职业就业调研型</span></div>
+</header>
+<nav class="report-nav" aria-label="报告导航">
+  <div class="wrap">
+    <div class="nav-url">
+      <span class="nav-url-label">报告路径</span>
+      <a href="2026-11-life-operations.html">14-life-operations\reports\2026-11-life-operations.html</a>
+    </div>
+    <div class="nav-tabs"><a href="#s1">一、核心结论（摘要）</a><a href="#s2">二、行业与政策发展趋势</a><a href="#s3">三、人才供需与薪酬（核心模块）</a><a href="#s4">四、雇主与企业类型细分</a><a href="#s5">五、岗位技能要求</a><a href="#s6">六、行业认可的职业资质与证书</a><a href="#s7">七、就业落地路径建议（结论章）</a><a href="#s8">八、数据可靠性与局限说明</a><a href="#s9">九、参考来源清单</a></div>
+    
+  </div>
 </nav>
-<h2 id="s1"><a id="一核心结论摘要" aria-hidden="true"></a>一、核心结论（摘要）</h2>
+<main class="wrap" id="main-content" role="main" aria-label="报告正文">
+<h2 id="s1" class="sec">一、核心结论（摘要）</h2>
 <p><strong>核心判断</strong>（每条含数据、口径与来源）：</p>
 <ol>
 <li><strong>落地手续有明确时限</strong>（事实）：在留卡与住民登记均为<strong>抵达 / 迁入后 14 日内</strong>；健康保険与年金随住民登记一并办理，逾期会影响后续手续。[出入国在留管理庁 / 総務省 / 厚生労働省]</li>
@@ -49,7 +176,7 @@ nav a:hover { text-decoration: underline; }
 <li><strong>水电燃气已自由化</strong>（事实）：电力（2016）与燃气（2017）全面自由化，可比较切换；开通需申请与使用开始。[資源エネルギー庁]</li>
 <li><strong>最大信息差在「执行细节」</strong>（事实）：本基线为初析级，通信费用 / 银行开户 / 自治体窗口 / 定期券行情的具体现行值标记「⚠ 待核实」，待次期或定居地确定后补齐。</li>
 </ol>
-<h3 id="_2"><a id="数据变更摘要" aria-hidden="true"></a>数据变更摘要</h3>
+<h3 id="_2">数据变更摘要</h3>
 <p>覆盖登记册全部 10 项追踪指标（活值以 <a href="../data/life_operations_indicator_registry.md">data/life_operations_indicator_registry.md</a> 为准，基准版本均为 v2026.11.14_1）：</p>
 <table class="fixed">
 <thead>
@@ -124,36 +251,36 @@ nav a:hover { text-decoration: underline; }
 </tbody>
 </table>
 <p><strong>观察项与触发器状态</strong>：首要待核实 = 通信费用 / 银行开户 / 自治体窗口的具体现行值；触发器 = 个人定居地确定 → 模块八重点更新（未命中）。</p>
-<h3 id="_3"><a id="已修正事实清单" aria-hidden="true"></a>已修正事实清单</h3>
+<h3 id="_3">已修正事实清单</h3>
 <p>本版继承历史报告已修正事实清单，无新增修正。历史报告未设独立清单，其口径裁决（见第八节）继续有效。</p>
-<h3 id="_4"><a id="调研说明" aria-hidden="true"></a>调研说明</h3>
+<h3 id="_4">调研说明</h3>
 <ul>
 <li><strong>来源语言规则</strong>：日文官方一手优先；运营商 / 金融機関官网次之；中文来源仅作线索。</li>
 <li><strong>时效窗口</strong>：官方一手最新；费用 / 要件以官方页与运营商官网为准。</li>
 <li><strong>标注约定</strong>：事实与推断分离；建议标「建议 / 推断」；缺失事实显式标记「⚠ 待核实」，不补值、不外推。</li>
 <li><strong>跨主题分工</strong>：在留资格制度、申请审查、永住归化 → <a href="../../08-visa-immigration/reports/2026-11-visa-immigration.md">08-visa-immigration</a>；税制、社保费、年金脱退、投资 → <a href="../../07-economy-finance/reports/2026-11-economy-finance.md">07-economy-finance</a>；日语学习、考试 → <a href="../../11-language-japanese/reports/2026-11-language-japanese.md">11-language-japanese</a>；文化习俗、礼仪、节庆 → <a href="../../12-culture-life/reports/2026-11-culture-life.md">12-culture-life</a>；地域选择、定居地档案 → <a href="../../13-regional-info/reports/2026-11-regional-info.md">13-regional-info</a>；驾照路径与费用、车辆成本 → <a href="../../10-education-qualification/reports/2026-11-education-qualification.md">10-education-qualification</a> / <a href="../../01-ssw-driver/reports/2026-11-ssw-driver.md">01-ssw-driver</a>。</li>
 </ul>
-<h2 id="s2"><a id="二行业与政策发展趋势" aria-hidden="true"></a>二、行业与政策发展趋势</h2>
-<h3 id="21"><a id="21-落地制度框架在留住民保险年金" aria-hidden="true"></a>2.1 落地制度框架（在留・住民・保险・年金）</h3>
+<h2 id="s2" class="sec">二、行业与政策发展趋势</h2>
+<h3 id="21">2.1 落地制度框架（在留・住民・保险・年金）</h3>
 <ul>
 <li><strong>在留卡</strong>：抵达后 14 日内在机场 / 市区町村完成登记；在留卡为身份与在留资格的唯一凭证，需随身携带。[出入国在留管理庁]</li>
 <li><strong>住民登记（転入届）</strong>：迁入新住所后 14 日内向新自治体申报；需护照 + 在留卡（或 COE）。迁出前向原自治体申报并领取転出証明書。[総務省]</li>
 <li><strong>健康保険</strong>：国民健康保険面向非公司职员等居民，自付比例通常 3 割（小学生未満 2 割、70–74 岁因收入 1–2 割）；被用者健康保険面向公司职员，自付通常 3 割，由公司与个人分担保费；高額療養費制度对超上限部分由公费承担差额。[厚生労働省]</li>
 <li><strong>年金</strong>：20 岁以上 60 岁以下住民有加入义务；国民年金（基础年金）与厚生年金（公司职员）并行；离开日本时可申请脱退一时金（需满足条件，详见 <a href="../../07-economy-finance/reports/2026-11-economy-finance.md">07-economy-finance</a>）。[日本年金機構]</li>
 </ul>
-<h3 id="22"><a id="22-市场化与自由化进程" aria-hidden="true"></a>2.2 市场化与自由化进程</h3>
+<h3 id="22">2.2 市场化与自由化进程</h3>
 <ul>
 <li><strong>电力</strong>：2016 年全面自由化，可从各电力公司选择。[資源エネルギー庁]</li>
 <li><strong>燃气</strong>：2017 年全面自由化，可从各燃气公司选择。[資源エネルギー庁]</li>
 <li><strong>通信</strong>：大手运营商（docomo / au / softbank）自有一回线；格安 SIM（MVNO）租用大手回路，月租通常显著低于大手，但回线与品质不同，不可直接比价；光回线为住宅主流方案，常与手机契约捆绑。[総務省]</li>
 <li><strong>交通</strong>：JR、私铁、地下铁构成城市公共交通主干；定期券为通勤 / 通学主流；IC 卡（Suica、PASMO 等）可乘车与电子支付，多数区间互通。[国土交通省 / JR 東日本]</li>
 </ul>
-<h3 id="23"><a id="23-政策与趋势观察触发器" aria-hidden="true"></a>2.3 政策与趋势观察（触发器）</h3>
+<h3 id="23">2.3 政策与趋势观察（触发器）</h3>
 <p>在留 / 住民 / 保险制度改定（要件、时限、费用）→ 模块二；租房相关法规变更（契约、敷金礼金、保证人）→ 模块三；公共交通 IC 卡 / 定期券规则变更 → 模块四；通信运营商资费 / 制度变更 → 模块五；银行开户 / 外汇 / 送金规则变更 → 模块六；水电燃气开通 / 费用变更 → 模块七；个人定居地确定 / 赴日 → 模块八（90 天清单）。无触发器命中且窗口未到时<strong>不启动</strong>。</p>
-<h2 id="s3"><a id="三人才供需与薪酬核心模块" aria-hidden="true"></a>三、人才供需与薪酬（核心模块）</h2>
-<h3 id="31"><a id="31-口径声明" aria-hidden="true"></a>3.1 口径声明</h3>
+<h2 id="s3" class="sec">三、人才供需与薪酬（核心模块）</h2>
+<h3 id="31">3.1 口径声明</h3>
 <p>本主题不维护「人才供需」与「薪酬」类数据：薪酬、税制与社保费归 <a href="../../07-economy-finance/reports/2026-11-economy-finance.md">07-economy-finance</a>；地域选择与生活成本归 <a href="../../13-regional-info/reports/2026-11-regional-info.md">13-regional-info</a>。本节呈现本主题核心的「落地成本口径」，不编造供需与薪酬数字。</p>
-<h3 id="32-c"><a id="32-租房初期费用结构事实--平台抽样-c-级" aria-hidden="true"></a>3.2 租房初期费用结构（事实 + 平台抽样 C 级）</h3>
+<h3 id="32-c">3.2 租房初期费用结构（事实 + 平台抽样 C 级）</h3>
 <table class="fixed">
 <thead>
 <tr>
@@ -195,7 +322,7 @@ nav a:hover { text-decoration: underline; }
 <li>契约类型：普通赁贷借（可更新）/ 定期赁贷借（期满返还）；更新料与解约预告期需在契约中确认。</li>
 <li>因地域 / 物件而异，本表为区间口径，不取单一数值。</li>
 </ul>
-<h3 id="33"><a id="33-交通--通信--水电费用口径-待核实" aria-hidden="true"></a>3.3 交通 / 通信 / 水电费用口径（⚠ 待核实）</h3>
+<h3 id="33">3.3 交通 / 通信 / 水电费用口径（⚠ 待核实）</h3>
 <table class="fixed">
 <thead>
 <tr>
@@ -227,14 +354,14 @@ nav a:hover { text-decoration: underline; }
 </tr>
 </tbody>
 </table>
-<h3 id="34"><a id="34-汇率与计价单位" aria-hidden="true"></a>3.4 汇率与计价单位</h3>
+<h3 id="34">3.4 汇率与计价单位</h3>
 <ul>
 <li>汇率交叉验证输入见 <a href="../../07-economy-finance/reports/2026-11-economy-finance.md">07-economy-finance</a> 登记册（中国外汇交易中心中间价）；本报告金额以日元计价，人民币换算须注明汇率时点。</li>
 </ul>
-<h2 id="s4"><a id="四雇主与企业类型细分" aria-hidden="true"></a>四、雇主与企业类型细分</h2>
-<h3 id="41"><a id="41-边界声明" aria-hidden="true"></a>4.1 边界声明</h3>
+<h2 id="s4" class="sec">四、雇主与企业类型细分</h2>
+<h3 id="41">4.1 边界声明</h3>
 <p>本主题不含雇主（企业）细分：货运司机雇主生态归 <a href="../../01-ssw-driver/reports/2026-11-ssw-driver.md">01-ssw-driver</a> 与 <a href="../../02-career-driver/reports/2026-11-career-driver.md">02-career-driver</a>。本节仅对本主题涉及的服务主体做类型细分。</p>
-<h3 id="42"><a id="42-服务主体类型" aria-hidden="true"></a>4.2 服务主体类型</h3>
+<h3 id="42">4.2 服务主体类型</h3>
 <table class="fixed">
 <thead>
 <tr>
@@ -286,10 +413,10 @@ nav a:hover { text-decoration: underline; }
 <blockquote>
 <p>入选标准：官方窗口、指定机构、运营商官方渠道；排除无资质中介。</p>
 </blockquote>
-<h2 id="s5"><a id="五岗位技能要求" aria-hidden="true"></a>五、岗位技能要求</h2>
-<h3 id="51"><a id="51-边界声明" aria-hidden="true"></a>5.1 边界声明</h3>
+<h2 id="s5" class="sec">五、岗位技能要求</h2>
+<h3 id="51">5.1 边界声明</h3>
 <p>本主题不含岗位技能：司机岗位技能与现场日语归 <a href="../../01-ssw-driver/reports/2026-11-ssw-driver.md">01-ssw-driver</a> / <a href="../../02-career-driver/reports/2026-11-career-driver.md">02-career-driver</a>；生活文化技能归 <a href="../../12-culture-life/reports/2026-11-culture-life.md">12-culture-life</a>。本节呈现「落地执行层能力要求」，即把每一步办成所需的书类、时限与语言能力。</p>
-<h3 id="52"><a id="52-执行层能力要求建议" aria-hidden="true"></a>5.2 执行层能力要求（建议）</h3>
+<h3 id="52">5.2 执行层能力要求（建议）</h3>
 <table class="fixed">
 <thead>
 <tr>
@@ -321,17 +448,17 @@ nav a:hover { text-decoration: underline; }
 </tr>
 </tbody>
 </table>
-<h3 id="53"><a id="53-常见坑-待核实项" aria-hidden="true"></a>5.3 常见坑（⚠ 待核实项）</h3>
+<h3 id="53">5.3 常见坑（⚠ 待核实项）</h3>
 <ul>
 <li>银行开户：在留期限门槛（3 个月 / 6 个月各银行口径不同）可能影响开户，需逐行核实。</li>
 <li>通信：格安 SIM 与大手回线 / 品质不同，不可直接比价。</li>
 <li>住房：部分房东 / 管理会社不接受外国人（推断，需平台抽样核实）。</li>
 <li>水电：开通流程与时限因事业者而异（推断待核实）。</li>
 </ul>
-<h2 id="s6"><a id="六行业认可的职业资质与证书" aria-hidden="true"></a>六、行业认可的职业资质与证书</h2>
-<h3 id="61"><a id="61-边界声明" aria-hidden="true"></a>6.1 边界声明</h3>
+<h2 id="s6" class="sec">六、行业认可的职业资质与证书</h2>
+<h3 id="61">6.1 边界声明</h3>
 <p>本主题不含职业资质证书：资格 / 学历路径归 <a href="../../10-education-qualification/reports/2026-11-education-qualification.md">10-education-qualification</a>；驾照路径归 <a href="../../01-ssw-driver/reports/2026-11-ssw-driver.md">01-ssw-driver</a> / 10。本节呈现落地所需的官方证件与资格口径。</p>
-<h3 id="62"><a id="62-落地所需官方证件与资格" aria-hidden="true"></a>6.2 落地所需官方证件与资格</h3>
+<h3 id="62">6.2 落地所需官方证件与资格</h3>
 <table class="fixed">
 <thead>
 <tr>
@@ -383,11 +510,11 @@ nav a:hover { text-decoration: underline; }
 <blockquote>
 <p>口径提醒：在留カード ≠ 在留資格 ≠ 住民票（身份 / 资格 / 住所证明三者不得混用）；国民健康保険 ≠ 被用者健康保険。</p>
 </blockquote>
-<h2 id="s7"><a id="七就业落地路径建议结论章" aria-hidden="true"></a>七、就业落地路径建议（结论章）</h2>
+<h2 id="s7" class="sec">七、就业落地路径建议（结论章）</h2>
 <blockquote>
 <p>以下均为「建议 / 推断」，与事实数据分离；不承诺结果。</p>
 </blockquote>
-<h3 id="71-90"><a id="71-行政手续-90-天清单执行顺序" aria-hidden="true"></a>7.1 行政手续 90 天清单（执行顺序）</h3>
+<h3 id="71-90">7.1 行政手续 90 天清单（执行顺序）</h3>
 <blockquote>
 <p>详见 <a href="../../00-decision-hub/reports/2026-11-decision-hub.md">00-decision-hub</a> 落地清单；本主题为执行要点。</p>
 </blockquote>
@@ -427,50 +554,50 @@ nav a:hover { text-decoration: underline; }
 </tr>
 </tbody>
 </table>
-<h3 id="72"><a id="72-住房执行路径建议" aria-hidden="true"></a>7.2 住房执行路径（建议）</h3>
+<h3 id="72">7.2 住房执行路径（建议）</h3>
 <ol>
 <li>先算初期费用：敷金 + 礼金 + 仲介手数料 + 保证会社 + 更新料（区间见 3.2），按 4–8 个月房租准备现金。</li>
 <li>无保证人时优先询保证会社方案；用国交省「外国人入住円滑化ガイドライン」与业者对话（→ <a href="../../12-culture-life/reports/2026-11-culture-life.md">12-culture-life</a> 7.3）。</li>
 <li>公营选项：UR 賃貸住宅对外国籍开放，收入基准见登记册 / 12 报告；市営 / 県営住宅走抽选。</li>
 <li>签约时序：在留卡 → 住民票 → 印章 → 银行口座 → 口座振替绑定房租与水电气。</li>
 </ol>
-<h3 id="73"><a id="73-公共交通执行路径建议" aria-hidden="true"></a>7.3 公共交通执行路径（建议）</h3>
+<h3 id="73">7.3 公共交通执行路径（建议）</h3>
 <ul>
 <li>通勤 / 通学优先办定期券；IC 卡（Suica / PASMO 等）覆盖乘车与电子支付，多数区间互通。</li>
 <li>换乘查询用乗換案内应用（时刻与费用）。</li>
 <li>⚠ 典型通勤区间定期券月费待核实（需按定居地具体区间查询）。</li>
 </ul>
-<h3 id="74"><a id="74-通信与网络执行路径建议" aria-hidden="true"></a>7.4 通信与网络执行路径（建议）</h3>
+<h3 id="74">7.4 通信与网络执行路径（建议）</h3>
 <ul>
 <li>刚抵达可先办格安 SIM（在留卡 + 支付手段）；光回线初装常有等待期，搬家前先确认可否「事前转移」。</li>
 <li>大手 / 格安 / 光回线具体月费待核实；不可直接比价（回线与品质不同）。</li>
 </ul>
-<h3 id="75"><a id="75-银行与支付执行路径建议" aria-hidden="true"></a>7.5 银行与支付执行路径（建议）</h3>
+<h3 id="75">7.5 银行与支付执行路径（建议）</h3>
 <ul>
 <li>开户通常需：在留卡 + 住民票 / 住所证明 + 印鉴；部分银行要求在留 6 个月以上（各银行口径不同，待核实）。</li>
 <li>推断：邮局银行（ゆうちょ銀行）、部分地方银行与网络银行对外国人较友好，可作过渡。</li>
 <li>支付：信用卡、电子マネー（Suica / PayPay 等）、银行振込并行；送金走银行或专业送金服务，汇率与手续费差异大。</li>
 </ul>
-<h3 id="76"><a id="76-水电燃气执行路径建议" aria-hidden="true"></a>7.6 水电燃气执行路径（建议）</h3>
+<h3 id="76">7.6 水电燃气执行路径（建议）</h3>
 <ul>
 <li>水道：向所在地水道局 / 役所做使用开始申报（入住前可办）。</li>
 <li>电气：向电力公司申込，一般入住当日合闸供电、事后补手续（一般惯例，推断待复核）。</li>
 <li>燃气：都市ガス需预约上门开栓（推断待复核）；プロパンガス为区域供应商。</li>
 <li>搬家时办理旧地址解约与新地址开通，通常通过网络或电话申请。</li>
 </ul>
-<h3 id="77"><a id="77-多语言窗口与个人记录建议" aria-hidden="true"></a>7.7 多语言窗口与个人记录（建议）</h3>
+<h3 id="77">7.7 多语言窗口与个人记录（建议）</h3>
 <ul>
 <li>定居地确定后先查本地自治体多语言窗口（清单待补），并回填登记册 #10。</li>
 <li>90 天清单按 7.1 顺序执行并逐项记录，个人填写状态回写登记册 #9。</li>
 </ul>
-<h2 id="s8"><a id="八数据可靠性与局限说明" aria-hidden="true"></a>八、数据可靠性与局限说明</h2>
-<h3 id="81"><a id="81-核验程度分级" aria-hidden="true"></a>8.1 核验程度分级</h3>
+<h2 id="s8" class="sec">八、数据可靠性与局限说明</h2>
+<h3 id="81">8.1 核验程度分级</h3>
 <ul>
 <li><strong>A 官方一手</strong>：出入国在留管理庁、総務省、厚生労働省、国土交通省、資源エネルギー庁、日本年金機構、金融庁。</li>
 <li><strong>B 机构官网</strong>：各银行、携帯运营商（docomo / au / softbank / MVNO）、电力燃气公司。</li>
 <li><strong>C 平台抽样</strong>：租房费用、通信费用（需回溯官网）；经验类标注个案。</li>
 </ul>
-<h3 id="82"><a id="82-已知口径冲突并列呈现不合并不取均值" aria-hidden="true"></a>8.2 已知口径冲突（并列呈现，不合并、不取均值）</h3>
+<h3 id="82">8.2 已知口径冲突（并列呈现，不合并、不取均值）</h3>
 <table class="fixed">
 <thead>
 <tr>
@@ -497,7 +624,7 @@ nav a:hover { text-decoration: underline; }
 </tr>
 </tbody>
 </table>
-<h3 id="83"><a id="83-未取得--待复核清单逐项给出复核入口" aria-hidden="true"></a>8.3 未取得 / 待复核清单（逐项给出复核入口）</h3>
+<h3 id="83">8.3 未取得 / 待复核清单（逐项给出复核入口）</h3>
 <table class="fixed">
 <thead>
 <tr>
@@ -539,15 +666,15 @@ nav a:hover { text-decoration: underline; }
 </tr>
 </tbody>
 </table>
-<h3 id="84"><a id="84-主要局限" aria-hidden="true"></a>8.4 主要局限</h3>
+<h3 id="84">8.4 主要局限</h3>
 <ol>
 <li>本基线为<strong>初析级</strong>，通信费用 / 银行开户 / 自治体窗口 / 定期券行情的具体现行值未核实。</li>
 <li>租房与通信费用因地域与方案差异大，用「区间 / 口径」呈现，不取单一数值。</li>
 <li>个人定居地未定，地域差异（如东京 vs 地方）无法收敛。</li>
 </ol>
-<h3 id="85"><a id="85-时间基准声明" aria-hidden="true"></a>8.5 时间基准声明</h3>
+<h3 id="85">8.5 时间基准声明</h3>
 <p>本报告数据基准日 2026-11-14；登记册活值基准版本 v2026.11.14_1；⚠ 待核实项在次期或定居地确定后补齐。</p>
-<h2 id="s9"><a id="九参考来源清单" aria-hidden="true"></a>九、参考来源清单</h2>
+<h2 id="s9" class="sec">九、参考来源清单</h2>
 <p><strong>官方一手（省厅 / 机构）</strong></p>
 <ol>
 <li><a href="https://www.moj.go.jp/isa/applications/procedures/01-1.html">出入国在留管理庁 · 在留卡</a> — 2026。</li>
@@ -580,5 +707,37 @@ nav a:hover { text-decoration: underline; }
 <ol>
 <li>租房平台与比价网站（转载须回溯官网）；在日生活门户经验类，标注个案。</li>
 </ol>
+</main>
+<footer class="footer" role="contentinfo" aria-label="页脚">
+  <p>在日生活实务与行政手续 · 在日生活实务与行政手续 · 2026-11 月度报告｜2026-11<br>
+  报告路径：14-life-operations\reports\2026-11-life-operations.html</p>
+  <p class="backlinks">
+    <a href="../../index.html#topic-14-life-operations">← 返回主题</a>
+    <a href="../../index.html">返回首页</a>
+  </p>
+</footer>
+<script>
+(function () {
+  'use strict';
+  var main = document.getElementById('main-content');
+  var tgDiff = document.getElementById('tg-diff');
+  var tgDel = document.getElementById('tg-del');
+  if (main && tgDiff) {
+    tgDiff.addEventListener('click', function () {
+      var hide = main.classList.toggle('hide-diff');
+      tgDiff.textContent = hide ? '显示更新标记' : '隐藏更新标记';
+    });
+  }
+  if (tgDel) {
+    tgDel.addEventListener('click', function () {
+      var open = tgDel.getAttribute('data-open') === '1';
+      var groups = document.querySelectorAll('details.diff-del-group');
+      for (var i = 0; i < groups.length; i++) groups[i].open = !open;
+      tgDel.setAttribute('data-open', open ? '0' : '1');
+      tgDel.textContent = open ? '展开全部删除' : '收起全部删除';
+    });
+  }
+})();
+</script>
 </body>
 </html>

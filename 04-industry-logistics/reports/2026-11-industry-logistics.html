@@ -5,48 +5,175 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>日本物流行业 · 2026-11 月度报告</title>
 <style>
-body { max-width: 1160px; margin: 24px auto; padding: 0 16px;
-      font-family: "Segoe UI", "Microsoft YaHei", sans-serif; color: #1a1a2e; line-height: 1.7; }
-h1, h2, h3 { color: #16213e; }
-table { border-collapse: collapse; width: 100%; overflow-x: auto; display: block; }
-th, td { border: 1px solid #cbd5e1; padding: 6px 10px; text-align: left; }
-th { background: #f1f5f9; }
-img { max-width: 100%; }
-code { background: #f6f8fa; padding: 2px 4px; border-radius: 3px; }
-blockquote { border-left: 4px solid #94a3b8; margin: 0; padding-left: 12px; color: #475569; }
-nav { margin: 12px 0 20px; padding: 8px 0; border-bottom: 1px solid #e2e8f0; }
-nav a { margin-right: 14px; color: #16213e; font-size: 14px; text-decoration: none; white-space: nowrap; }
-nav a:hover { text-decoration: underline; }
+:root{
+  --radius-sm:8px; --radius:12px; --radius-lg:16px;
+  --shadow:0 1px 3px rgba(20,40,70,.06); --shadow-md:0 4px 14px rgba(20,40,70,.09);
+  --font-sans:"Microsoft YaHei","PingFang SC","Segoe UI",Arial,sans-serif;
+  --font-mono:"SFMono-Regular",Consolas,"Liberation Mono",monospace;
+  --focus-ring:0 0 0 3px rgba(63,111,176,.35);
+  --bg:#f4f6f9; --card:#ffffff; --ink:#15202b; --ink2:#465667; --ink3:#657180;
+  --line:#e1e7ee; --line2:#eef2f6;
+  --navy:#16324f; --navy2:#2f5597; --blue:#3f6fb0; --blue-l:#eaf1fa;
+  --red:#a83224; --red-d:#822116; --red-l:#fbece8;
+  --pre:#b8541c; --pre-l:#fdf1e4;
+  --green:#1c7444; --green-l:#eaf5ef;
+  --amber:#956612; --amber-l:#fdf4e2;
+  --gray:#646f7b; --gray-l:#eff2f4;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{font-family:var(--font-sans);background:var(--bg);color:var(--ink);line-height:1.76;font-size:14.5px}
+a{color:var(--navy2);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px 68px}
+
+/* ── 跳转链接 / 焦点环 ── */
+.skip-link{position:absolute;left:12px;top:-48px;z-index:100;background:var(--navy);
+  color:#fff;padding:8px 16px;border-radius:0 0 8px 8px;font-size:12.5px;transition:top .15s ease}
+.skip-link:focus{top:0;color:#fff;text-decoration:none}
+:focus-visible{outline:none;box-shadow:var(--focus-ring)}
+
+/* ── 题头 Hero ── */
+.hero{background:linear-gradient(128deg,#0f2338 0%,#16324f 52%,#2f5597 100%);
+  color:#fff;padding:46px 36px 34px;border-radius:0 0 18px 18px;margin-bottom:24px}
+.hero .eyebrow{font-size:11.5px;letter-spacing:2.4px;color:rgba(255,255,255,.62);text-transform:uppercase}
+.hero h1{font-size:28px;font-weight:700;letter-spacing:.4px;margin:8px 0 6px;line-height:1.35}
+.hero .sub{font-size:13.5px;color:rgba(255,255,255,.82);max-width:900px}
+.hero .meta{font-size:12.3px;color:rgba(255,255,255,.78);margin-top:16px;line-height:2}
+.hero .meta b{color:#fff}
+.hero .tag{display:inline-block;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.2);
+  border-radius:14px;padding:2px 11px;margin:5px 6px 0 0;font-size:11.5px}
+
+/* ── 报告导航（sticky） ── */
+.report-nav{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);
+  border-bottom:1px solid var(--line);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  margin-bottom:26px}
+.report-nav .wrap{padding-top:10px;padding-bottom:10px}
+.nav-url{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;font-size:11.5px;
+  line-height:1.6;color:var(--ink3);padding-bottom:6px;margin-bottom:6px;
+  border-bottom:1px dashed var(--line)}
+.nav-url-label{font-weight:700;color:var(--ink2);white-space:nowrap}
+.nav-url a{color:var(--blue);word-break:break-all}
+.nav-tabs{display:flex;flex-wrap:wrap;gap:6px}
+.nav-tabs a{color:var(--ink2);font-size:12.5px;padding:5px 10px;border-radius:6px;
+  transition:background .15s ease,color .15s ease}
+.nav-tabs a:hover{background:var(--blue-l);color:var(--blue)}
+
+/* ── 跨月对比工具条 ── */
+.diff-bar{display:flex;flex-wrap:wrap;align-items:center;gap:8px;
+  margin-top:8px;padding-top:8px;border-top:1px dashed var(--line);
+  font-size:12px;color:var(--ink3)}
+.diff-bar .diff-summary{flex:1;min-width:200px;line-height:1.6}
+.diff-bar .diff-summary b{color:var(--navy)}
+.diff-toggle{font-size:12px;border:1px solid var(--line);background:#fff;border-radius:7px;
+  padding:4px 11px;cursor:pointer;color:var(--navy2);font-family:inherit}
+.diff-toggle:hover{border-color:var(--blue)}
+
+/* ── 正文 ── */
+h2.sec{font-size:20px;color:var(--navy);margin:44px 0 4px;padding-left:12px;
+  border-left:4px solid var(--navy2);font-weight:700;scroll-margin-top:110px}
+h3{font-size:15.5px;color:var(--navy);margin:22px 0 8px;font-weight:700}
+h4{font-size:14px;color:var(--navy);margin:16px 0 6px;font-weight:700}
+p{margin:0 0 12px}
+ul,ol{padding-left:22px;margin:8px 0 14px}
+li{margin-bottom:6px}
+hr{border:0;border-top:1px solid var(--line);margin:26px 0}
+strong{color:var(--ink)}
+code{background:#f6f8fa;padding:2px 5px;border-radius:4px;font-family:var(--font-mono);font-size:12.5px}
+pre{background:#f6f8fa;padding:12px 14px;border-radius:8px;overflow-x:auto;margin:10px 0 16px}
+pre code{background:none;padding:0;font-size:12.3px;line-height:1.65}
+blockquote{border-left:4px solid var(--navy2);background:var(--blue-l);
+  padding:12px 16px;border-radius:0 8px 8px 0;margin:12px 0;color:var(--ink2)}
+blockquote p:last-child{margin-bottom:0}
+.lead{color:var(--ink2);font-size:13.8px;margin:6px 0 14px}
+
+/* ── 表格 ── */
+table{width:100%;border-collapse:collapse;font-size:12.6px;background:var(--card);
+  border-radius:8px;overflow:hidden;margin:12px 0 16px}
+th{background:var(--navy);color:#fff;padding:8px 10px;text-align:left;font-weight:600;
+  font-size:12px;vertical-align:bottom}
+td{padding:7px 10px;border-bottom:1px solid var(--line2);vertical-align:top;line-height:1.62}
+tbody tr:nth-child(even) td{background:#fafbfd}
+tbody tr:hover td{background:var(--blue-l)}
+td.num{font-variant-numeric:tabular-nums}
+
+/* ── 信息卡 / 注释 ── */
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;
+  padding:18px 20px;margin:14px 0;box-shadow:var(--shadow)}
+.card h3:first-child{margin-top:0}
+.note{background:var(--amber-l);border-left:4px solid var(--amber);padding:10px 14px;
+  border-radius:0 7px 7px 0;font-size:12.9px;margin:12px 0}
+.note.gap{background:var(--gray-l);border-left-color:var(--gray)}
+.note.check{background:var(--green-l);border-left-color:var(--green)}
+.note.correct{background:var(--red-l);border-left-color:var(--red)}
+.note.preline{background:var(--pre-l);border-left-color:var(--pre)}
+
+/* ── 差异高亮（跨月对比） ── */
+.diff-badge{display:inline-block;font-size:10.5px;font-weight:700;line-height:1;
+  border-radius:3px;padding:2px 6px;margin-right:6px;vertical-align:middle;white-space:nowrap}
+.diff-block{border-radius:6px;padding:4px 8px;margin:4px -8px}
+.diff-new{background:var(--green-l);box-shadow:inset 3px 0 0 var(--green)}
+.diff-new .diff-badge{background:var(--green);color:#fff}
+.diff-mod{background:var(--amber-l);box-shadow:inset 3px 0 0 var(--amber)}
+.diff-mod .diff-badge{background:var(--amber);color:#fff}
+.diff-del-group{margin:6px 0;border:1px dashed var(--line);border-radius:6px;background:#fbfcfe}
+.diff-del-group>summary{cursor:pointer;font-size:12px;color:var(--ink3);
+  padding:6px 10px;user-select:none;list-style:none}
+.diff-del-group>summary::-webkit-details-marker{display:none}
+.diff-del-group>summary::before{content:"▸ ";color:var(--gray)}
+.diff-del-group[open]>summary::before{content:"▾ "}
+.diff-del-group .diff-del-body{padding:2px 8px 8px;color:var(--ink3)}
+.diff-del-group .diff-del-body s,.diff-del-group .diff-del-body del{color:var(--red)}
+.diff-del-group .diff-badge{background:var(--gray-l);color:var(--gray)}
+/* 隐藏更新标记：对照阅读模式 */
+main.hide-diff .diff-badge{display:none}
+main.hide-diff .diff-block{background:none;box-shadow:none;padding:0;margin:0}
+main.hide-diff .diff-del-group{display:none}
+
+/* ── 页脚 ── */
+.footer{font-size:11.4px;color:var(--ink3);text-align:center;margin-top:22px;line-height:1.9}
+.footer .backlinks{margin-top:8px}
+.footer .backlinks a{margin:0 8px}
+
+/* ── 响应式 ── */
+@media(max-width:760px){
+  .hero{padding:30px 20px;border-radius:0 0 14px 14px}
+  .hero h1{font-size:21px}
+  .wrap{padding:0 14px 46px}
+  td,th{padding:6px 7px;font-size:11.7px}
+  h2.sec{font-size:17.5px}
+}
 </style>
 </head>
 <body>
-<h1 id="2026-11"><a id="日本物流行业--2026-11-月度报告" aria-hidden="true"></a>日本物流行业 · 2026-11 月度报告</h1>
-<blockquote>
-<p><strong>版本</strong>：v1.0（2026-11 月度）　<strong>数据基准日</strong>：2026-11-14
-<strong>主题类型</strong>：行业深度研究型（industry-research）
-<strong>受众定位</strong>：面向在日本物流行业就业 / 拟进入该行业的个人，不以投资决策为视角；服务本规划「阶段 4 技术 / 数字化扩展」的行业判断，并为阶段 1–3 的雇主选择与岗位路线提供行业坐标。
-<strong>来源规则</strong>：官方一手优先：① 国土交通省（mlit.go.jp 物流白書・政策パッケージ）、内閣府・cas.go.jp ＞ ② 行业机构（帝国データバンク、日本物流団体連合会、JILPT）＞ ③ 研究机构（智库、日銀 SPPI）＞ ④ 主要企业 IR ＞ ⑤ 媒体（仅用于发现线索，须回溯原文）；中文来源仅作线索。</p>
-</blockquote>
-<hr />
-<nav aria-label="报告导航">
-<a href="#s1">一、执行摘要</a>
-<a href="#s2">二、研究范围与方法</a>
-<a href="#s3">三、产业链图谱</a>
-<a href="#s4">四、市场规模与格局</a>
-<a href="#s5">五、头部玩家与竞争格局</a>
-<a href="#s6">六、驱动因素与风险</a>
-<a href="#s7">七、趋势判断（推断）</a>
-<a href="#s8">八、数据治理与局限</a>
-<a href="#s9">九、参考来源清单</a>
+<a class="skip-link" href="#main-content">跳转到主要内容</a>
+<header class="hero" role="banner" aria-label="报告题头">
+  <div class="eyebrow">日本物流行业 · 行业深度研究型</div>
+  <h1>日本物流行业 · 2026-11 月度报告</h1>
+  <div class="sub">版本：v1.0（2026-11 月度）｜数据基准日：2026-11-14</div>
+  <div class="meta"><b>版本</b>：v1.0（2026-11 月度）<br><b>数据基准日</b>：2026-11-14<br><b>主题类型</b>：行业深度研究型（industry-research）<br><b>受众定位</b>：面向在日本物流行业就业 / 拟进入该行业的个人，不以投资决策为视角；服务本规划「阶段 4 技术 / 数字化扩展」的行业判断，并为阶段 1–3 的雇主选择与岗位路线提供行业坐标。<br><b>来源规则</b>：官方一手优先：① 国土交通省（mlit.go.jp 物流白書・政策パッケージ）、内閣府・cas.go.jp ＞ ② 行业机构（帝国データバンク、日本物流団体連合会、JILPT）＞ ③ 研究机构（智库、日銀 SPPI）＞ ④ 主要企业 IR …</div>
+  <div><span class="tag">2026-11</span><span class="tag">行业深度研究型</span></div>
+</header>
+<nav class="report-nav" aria-label="报告导航">
+  <div class="wrap">
+    <div class="nav-url">
+      <span class="nav-url-label">报告路径</span>
+      <a href="2026-11-industry-logistics.html">04-industry-logistics\reports\2026-11-industry-logistics.html</a>
+    </div>
+    <div class="nav-tabs"><a href="#s1">一、执行摘要</a><a href="#s2">二、研究范围与方法</a><a href="#s3">三、产业链图谱</a><a href="#s4">四、市场规模与格局</a><a href="#s5">五、头部玩家与竞争格局</a><a href="#s6">六、驱动因素与风险</a><a href="#s7">七、趋势判断（推断）</a><a href="#s8">八、数据治理与局限</a><a href="#s9">九、参考来源清单</a></div>
+    
+  </div>
 </nav>
-<h2 id="s1"><a id="一执行摘要" aria-hidden="true"></a>一、执行摘要</h2>
-<h3 id="_2"><a id="核心结论" aria-hidden="true"></a>核心结论</h3>
+<main class="wrap" id="main-content" role="main" aria-label="报告正文">
+<h2 id="s1" class="sec">一、执行摘要</h2>
+<h3 id="_2">核心结论</h3>
 <p><strong>结论 1</strong>：日本物流呈"少数大手 + 海量零细"的二元结构。证据：30 辆以下中小事業者占 85%（トラック白書，时点待更新）；物流业规模约 28 兆日元 / 229 万人（物团连，令和 2 年度）。标注：事实。</p>
 <p><strong>结论 2</strong>：增长赛道优先级为 3PL 仓库 SV ＞ 冷链 ＞ 宅配分拣中心 ＞ 绿色物流。证据：本规划视角的赛道优先级排序。标注：事实（规划排序，非行业统计）。</p>
 <p><strong>结论 3</strong>：自动化按"干线先于末端、岗位重组而非消失"的渐进路径推进，转型窗口在当下。证据：行业级结论；新東名深夜優先レーン 2025-03 起运营（国交省）；"全职司机消失被预期为 2030 年代以后"。标注：事实（行业级结论与实证状态）；其中"2030 年代以后"为预期性表述。</p>
 <p><strong>结论 4</strong>：道路货运价格处于上行读数。证据：SPPI 道路货运指数 113.3（+4.6%）（日銀 SPPI，时点待核验）。标注：推断（+4.6% 的口径与月次未核验前，仅作方向性判读）。</p>
 <p><strong>结论 5</strong>：司机缺口是最大结构性约束。证据：2030 年度 162,912 人（约 16 万）推算（国交省检讨会中间总结（NX 总研试算），2022 年推计）；趋势栏标注"持续关注修正"。标注：推算值本身为事实；作为约束的判断为推断。</p>
-<h3 id="_3"><a id="数据变更摘要" aria-hidden="true"></a>数据变更摘要</h3>
+<h3 id="_3">数据变更摘要</h3>
 <table class="fixed">
 <thead>
 <tr>
@@ -89,15 +216,15 @@ nav a:hover { text-decoration: underline; }
 </tbody>
 </table>
 <p>观察项与触发器状态（登记册同名节）：唯一观察项、首要触发器、触发器结论均为「首期为空」，截至 2026-11-14 无更新。</p>
-<h3 id="_4"><a id="已修正事实清单" aria-hidden="true"></a>已修正事实清单</h3>
+<h3 id="_4">已修正事实清单</h3>
 <p>本版继承历史报告（2026-11-13 基准）已修正事实清单，无新增修正；历史报告未载已修正事实条目。</p>
-<h2 id="s2"><a id="二研究范围与方法" aria-hidden="true"></a>二、研究范围与方法</h2>
-<h3 id="_6"><a id="监测范围" aria-hidden="true"></a>监测范围</h3>
+<h2 id="s2" class="sec">二、研究范围与方法</h2>
+<h3 id="_6">监测范围</h3>
 <p><strong>含</strong>：道路货物运送业（トラック・宅配便・路線貨物）、倉庫業・3PL（受託物流）、冷链（コールドチェーン）、国際物流・フォワーディング、物流自動化的产业面（导入率、投资、企业动向）。</p>
 <p><strong>不含</strong>（交叉引用，不在本主题展开）：自动驾驶技术路线、法规与实装细节（→ <a href="../../05-industry-autonomous/reports/2026-11-industry-autonomous.md">05-industry-autonomous</a>）；个人技能地图、岗位行情、转型路径（→ <a href="../../06-industry-technology/reports/2026-11-industry-technology.md">06-industry-technology</a>）；在留资格、特定技能制度细节（→ <a href="../../08-visa-immigration/reports/2026-11-visa-immigration.md">08-visa-immigration</a>）；行业法规条文与政策解读（→ <a href="../../09-politics-law/reports/2026-11-politics-law.md">09-politics-law</a>）；经济与收入环境（→ <a href="../../07-economy-finance/reports/2026-11-economy-finance.md">07-economy-finance</a>）。</p>
-<h3 id="_7"><a id="受众与视角" aria-hidden="true"></a>受众与视角</h3>
+<h3 id="_7">受众与视角</h3>
 <p>面向在日本物流行业就业 / 拟进入该行业的个人，保持中性全景刻画，不给投资评级、不出具 Go/No-Go 决策建议（边界归投资尽调型、可行性型）；趋势判断一律标「推断」。</p>
-<h3 id="_8"><a id="核心监测问题" aria-hidden="true"></a>核心监测问题</h3>
+<h3 id="_8">核心监测问题</h3>
 <ol>
 <li>日本物流产业的规模与结构（营业收入、从业人数、事业者数）最新读数是多少，"少数大手 + 海量零细"的二元结构是否延续？</li>
 <li>EC / 冷链 / 3PL 三条增长赛道的市场规模与就业形态如何演化？</li>
@@ -105,7 +232,7 @@ nav a:hover { text-decoration: underline; }
 <li>SPPI 道路货运指数、物流倒産件数等价格与结构指标的最新读数与趋势如何？</li>
 <li>「物流 2024 年问题」对策（司机时间外规制）对运力与运价的传导进展如何？</li>
 </ol>
-<h3 id="_9"><a id="方法维度拆解与验证链条" aria-hidden="true"></a>方法：维度拆解与验证链条</h3>
+<h3 id="_9">方法：维度拆解与验证链条</h3>
 <table class="fixed">
 <thead>
 <tr>
@@ -149,13 +276,13 @@ nav a:hover { text-decoration: underline; }
 </table>
 <p>维度间关系：产业规模与结构是基础盘，增长赛道是结构变化的先行信号，自动化是驱动结构变化的中期变量，行业数据（SPPI、倒産件数）是高频验证指标；四者构成"规模—赛道—技术—数据"的验证链条，数据冲突时以官方一手来源优先，并列呈现不合并。</p>
 <p>来源优先级与核验分级见第九节、第八节；官方统计活值（SPPI / 倒産 / 2024 年問題）以 <a href="../../01-ssw-driver/reports/2026-11-ssw-driver.md">01-ssw-driver</a> 登记册为只读交叉验证锚，本主题不独立回写。细分知识手册见 <a href="../handbook/00-navigation.md">handbook/</a>。</p>
-<h2 id="s3"><a id="三产业链图谱" aria-hidden="true"></a>三、产业链图谱</h2>
-<h3 id="_11"><a id="分层口径" aria-hidden="true"></a>分层口径</h3>
+<h2 id="s3" class="sec">三、产业链图谱</h2>
+<h3 id="_11">分层口径</h3>
 <pre><code>上游：车辆 / 仓储设备 / 燃料 / 物流信息系统
 中游：运输（幹線・路線）・倉庫・3PL・宅配
 下游：荷主（製造・小売・EC・医薬 / 生鮮）
 </code></pre>
-<h3 id="_12"><a id="上中下游构成" aria-hidden="true"></a>上中下游构成</h3>
+<h3 id="_12">上中下游构成</h3>
 <table class="fixed">
 <thead>
 <tr>
@@ -182,7 +309,7 @@ nav a:hover { text-decoration: underline; }
 </tr>
 </tbody>
 </table>
-<h3 id="_13"><a id="细分赛道" aria-hidden="true"></a>细分赛道</h3>
+<h3 id="_13">细分赛道</h3>
 <table class="fixed">
 <thead>
 <tr>
@@ -219,8 +346,8 @@ nav a:hover { text-decoration: underline; }
 </tr>
 </tbody>
 </table>
-<h2 id="s4"><a id="四市场规模与格局" aria-hidden="true"></a>四、市场规模与格局</h2>
-<h3 id="_15"><a id="产业规模与结构多口径并列" aria-hidden="true"></a>产业规模与结构（多口径并列）</h3>
+<h2 id="s4" class="sec">四、市场规模与格局</h2>
+<h3 id="_15">产业规模与结构（多口径并列）</h3>
 <table class="fixed">
 <thead>
 <tr>
@@ -277,21 +404,21 @@ nav a:hover { text-decoration: underline; }
 </tbody>
 </table>
 <p>结构性结论（事实）：日本物流是"少数大手 + 海量零细"的二元结构；个人职业策略上——大手学制度、中小拿机会。</p>
-<h3 id="ec-3pl"><a id="增长赛道ec--冷链--3pl--绿色物流" aria-hidden="true"></a>增长赛道（EC / 冷链 / 3PL / 绿色物流）</h3>
+<h3 id="ec-3pl">增长赛道（EC / 冷链 / 3PL / 绿色物流）</h3>
 <p><strong>EC 物流</strong>：驱动力为 EC 化率持续上升（食品、日用品带动）与宅配便处理量长期高位；就业形态为宅配司机（ルート）、分拣中心（仕分けセンター）作业与 line 管理、客服对应；特征为自动化最前沿——大手宅配的分拣中心大量导入自动分拣机、AMR 机器人；注意点为再配达対応、クレーム对应等客户接触强度高，日语要求高于普通货运。</p>
 <p><strong>冷链</strong>：驱动力为生鮮 EC、医药（ワクチン / 医药品 GSP）、外食供应链；岗位属性为温度带管理（冷藏 / 冷冻 / 定温）、温度记录与验证、HACCP 意识；薪资通常高于常温岗位（具体薪资结构与谈判口径归 <a href="../../02-career-driver/reports/2026-11-career-driver.md">02-career-driver</a>）；个人机会为冷链经验是稀缺技能标签（司机→冷链组长→品質管理辅助）；风险为温度异常的责任归属要在契约层面确认。</p>
 <p><strong>3PL</strong>：定义为荷主企业将物流全案外包——仓储 + 运输 + 系统 + 人员管理一揽子；岗位谱系为现场作业、SV（supervisor）、WMS 操作、KPI 报告担当、荷主折冲；对外国人最友好的增长点为语言多样性与现场翻译·带人能力是显性价值。</p>
 <p><strong>绿色物流</strong>：政策为 2050 碳中和目标 → EV / 氢燃料卡车导入、ECO 驾驶普及、共同配送；岗位影响为 ECO 驾驶数据管理、充电 / 加氢设施运营、燃费 KPI。</p>
-<h3 id="_16"><a id="赛道优先级本规划视角" aria-hidden="true"></a>赛道优先级（本规划视角）</h3>
+<h3 id="_16">赛道优先级（本规划视角）</h3>
 <pre><code>优先级1：3PL 仓库 SV      （管理×数字交叉点，阶段 3→4 的桥）
 优先级2：冷链专业经验     （稀缺标签，随时可叠加）
 优先级3：宅配分拣中心     （自动化暴露量最大，利于学技术）
 优先级4：绿色物流实绩     （作为附加成果，非独立赛道）
 </code></pre>
-<h2 id="s5"><a id="五头部玩家与竞争格局" aria-hidden="true"></a>五、头部玩家与竞争格局</h2>
-<h3 id="_18"><a id="玩家清单与入选标准" aria-hidden="true"></a>玩家清单与入选标准</h3>
+<h2 id="s5" class="sec">五、头部玩家与竞争格局</h2>
+<h3 id="_18">玩家清单与入选标准</h3>
 <p>入选标准：上市或公开数据可得的行业代表企业，按综合物流 / 宅配 / 干线 / 冷链 / 仓储分层；进出须留痕。首期清单：日本通運、SGHD（佐川急便）、ヤマト運輸、日本郵便、福山通運、西濃運輸、名鉄運輸、センコー、日本ロジスティクス、ニチレイロジ、グローバルゲート、ロジクエスト。</p>
-<h3 id="_19"><a id="分层竞争格局" aria-hidden="true"></a>分层竞争格局</h3>
+<h3 id="_19">分层竞争格局</h3>
 <table class="fixed">
 <thead>
 <tr>
@@ -328,28 +455,28 @@ nav a:hover { text-decoration: underline; }
 </tr>
 </tbody>
 </table>
-<h3 id="_20"><a id="竞争格局要点" aria-hidden="true"></a>竞争格局要点</h3>
+<h3 id="_20">竞争格局要点</h3>
 <ol>
 <li><strong>二元结构</strong>：少数大手 + 海量零细（30 辆以下中小占 85%），个人职业策略上大手学制度、中小拿机会。</li>
 <li><strong>自动化前沿在宅配分拣中心</strong>：大手宅配大量导入自动分拣机、AMR 机器人，是"会用新系统的人"的最短暴露路径。</li>
 <li><strong>3PL 是管理岗与数字化岗位的交叉点</strong>：3PL 仓库 SV 被评估为阶段 3→4 的桥（管理岗路径归 <a href="../../03-career-management/reports/2026-11-career-management.md">03-career-management</a>）。</li>
 <li><strong>产业面与技术面的分工</strong>：本主题只写产业面（规模、赛道、企业动向）；技术路线与法规细节归 <a href="../../05-industry-autonomous/reports/2026-11-industry-autonomous.md">05-industry-autonomous</a>。</li>
 </ol>
-<h2 id="s6"><a id="六驱动因素与风险" aria-hidden="true"></a>六、驱动因素与风险</h2>
-<h3 id="_22"><a id="政策大方向" aria-hidden="true"></a>政策大方向</h3>
+<h2 id="s6" class="sec">六、驱动因素与风险</h2>
+<h3 id="_22">政策大方向</h3>
 <ol>
 <li><strong>物流 2024 年问题</strong>：司机时间外规制 → 运力不足 → 运费上涨、荷主负担转嫁改革 → 具体进展以 <a href="../../01-ssw-driver/reports/2026-11-ssw-driver.md">01-ssw-driver</a> 登记册为准（只读锚）。</li>
 <li><strong>省人化省力化</strong>：自动驾驶卡车、仓库自动化、无人配送 → 技术面归 <a href="../../05-industry-autonomous/reports/2026-11-industry-autonomous.md">05-industry-autonomous</a>。</li>
 <li><strong>地域物流再生</strong>：人口稀疏地区配送维持 → 外国人材 + 共同配送。</li>
 <li><strong>外国人材受入扩大</strong>：特定技能（自动车运送业受入上限现行 22,100 人 / 5 年，2024–2029；使用率待查）+ 2027 育成就劳 → 制度细节归 <a href="../../08-visa-immigration/reports/2026-11-visa-immigration.md">08-visa-immigration</a>。</li>
 </ol>
-<h3 id="_23"><a id="自动化产业面三条行业级结论" aria-hidden="true"></a>自动化产业面（三条行业级结论）</h3>
+<h3 id="_23">自动化产业面（三条行业级结论）</h3>
 <ol>
 <li><strong>干线先于末端</strong>：高速干线（夜间、点对点）是最早被改造的场景；城市 / 最后一公里配送的自动化更远。</li>
 <li><strong>岗位不是消失而是重组</strong>：长途司机转向监控员 / 编组担当 / 中継司机；仓库纯体力岗减少，设备运营与数据岗增加；运行管理 / 配车岗位反而增强。</li>
 <li><strong>转型窗口在当下</strong>：全职司机消失被预期为 2030 年代以后，但"会用新系统的人"从今天就能开始积累。</li>
 </ol>
-<h3 id="10"><a id="岗位结构影响矩阵10-年预期" aria-hidden="true"></a>岗位结构影响矩阵（10 年预期）</h3>
+<h3 id="10">岗位结构影响矩阵（10 年预期）</h3>
 <table class="fixed">
 <thead>
 <tr>
@@ -386,13 +513,13 @@ nav a:hover { text-decoration: underline; }
 </tr>
 </tbody>
 </table>
-<h3 id="_24"><a id="其他实证与制度读数" aria-hidden="true"></a>其他实证与制度读数</h3>
+<h3 id="_24">其他实证与制度读数</h3>
 <ul>
 <li>新東名自动驾驶实证：深夜優先レーン运营中（国交省，2025-03 起；扩大区间待观察）。</li>
 <li>西濃運輸 × T2 中継输送自动驾驶实证开始（岐阜，2026-11-11 建档记录）。</li>
 <li>自动车运送业特定技能受入：上限 22,100 人 / 5 年（现行，ISA，2024–2029；使用率待查）。</li>
 </ul>
-<h3 id="_25"><a id="风险与不确定性" aria-hidden="true"></a>风险与不确定性</h3>
+<h3 id="_25">风险与不确定性</h3>
 <ul>
 <li>登记册 #1、#4 待基线确立，规模与赛道判断缺权威锚。</li>
 <li>SPPI 未标月次、WebKit 運賃指数无数值，運賃趋势无法交叉验证。</li>
@@ -400,7 +527,7 @@ nav a:hover { text-decoration: underline; }
 <li>司机缺口为 2022 年推计推算值，存在修正风险。</li>
 <li>中文来源仅作线索，须回溯日文官方原文。</li>
 </ul>
-<h2 id="s7"><a id="七趋势判断推断" aria-hidden="true"></a>七、趋势判断（推断）</h2>
+<h2 id="s7" class="sec">七、趋势判断（推断）</h2>
 <blockquote>
 <p>本节为推断层，与上文事实层分离；推断依据为历史报告结论与登记册活值，存在修正风险。</p>
 </blockquote>
@@ -411,14 +538,14 @@ nav a:hover { text-decoration: underline; }
 <li><strong>司机缺口构成中期约束（推断）</strong>：162,912 人（2022 年推计）作为结构性约束的判断为推断；官方修正可能改变幅度。</li>
 <li><strong>增长赛道分化（推断）</strong>：3PL、冷链、宅配分拣中心受自动化与 EC 驱动快于干线零细市场；绿色物流作为附加成果而非独立赛道。</li>
 </ol>
-<h2 id="s8"><a id="八数据治理与局限" aria-hidden="true"></a>八、数据治理与局限</h2>
-<h3 id="_28"><a id="核验程度分级" aria-hidden="true"></a>核验程度分级</h3>
+<h2 id="s8" class="sec">八、数据治理与局限</h2>
+<h3 id="_28">核验程度分级</h3>
 <ul>
 <li><strong>A 官方一手</strong>：国土交通省（物流白書・政策パッケージ、モビリティ・ロードマップ）、日銀 SPPI、国土交通省検討会中間とりまとめ、ISA。</li>
 <li><strong>B 权威转引 / 行业机构</strong>：全日本货物流通促进协会（物团连）、東京商工リサーチ、全国トラック協会（トラック白書）、帝国データバンク、智库报告。</li>
 <li><strong>C 平台抽样</strong>：本主题登记册无此类指标；媒体来源（LNEWS 等）仅用于发现线索，须回溯原文并标「需核实原文」。</li>
 </ul>
-<h3 id="_29"><a id="口径冲突并列清单不合并不取均值" aria-hidden="true"></a>口径冲突并列清单（不合并、不取均值）</h3>
+<h3 id="_29">口径冲突并列清单（不合并、不取均值）</h3>
 <table class="fixed">
 <thead>
 <tr>
@@ -455,14 +582,14 @@ nav a:hover { text-decoration: underline; }
 </tr>
 </tbody>
 </table>
-<h3 id="_30"><a id="未取得--待核验项" aria-hidden="true"></a>未取得 / 待核验项</h3>
+<h3 id="_30">未取得 / 待核验项</h3>
 <ul>
 <li>登记册 #1（物流白書最新版年份与关键数）、#4（EC / 冷链 / 3PL 市场规模估计）：待基线确立。</li>
 <li>SPPI 具体月次、WebKit 運賃指数数值：待核验。</li>
 <li>卡车运送事业者数时点：待更新（トラック白書）。</li>
 <li>自动车运送业特定技能受入使用率：待查（ISA）。</li>
 </ul>
-<h3 id="_31"><a id="待复核清单逐项复核入口" aria-hidden="true"></a>待复核清单（逐项复核入口）</h3>
+<h3 id="_31">待复核清单（逐项复核入口）</h3>
 <table class="fixed">
 <thead>
 <tr>
@@ -504,7 +631,7 @@ nav a:hover { text-decoration: underline; }
 </tr>
 </tbody>
 </table>
-<h3 id="_32"><a id="监测机制与触发器" aria-hidden="true"></a>监测机制与触发器</h3>
+<h3 id="_32">监测机制与触发器</h3>
 <p><strong>监测节奏</strong>：基线 <code>reports/2026-11-industry-logistics.md</code>（v1.0 首期固定）；年度刷新 <code>reports/{{YYYY-MM}}-&lt;slug&gt;.md</code>；重大事件插刷（追加件）。无触发器命中且年度窗口未到时<strong>不启动</strong>；不得为制造变化而虚构变化。</p>
 <p><strong>触发器清单</strong>：</p>
 <ol>
@@ -516,19 +643,19 @@ nav a:hover { text-decoration: underline; }
 <li>行业结构性事件（大型合并 / 大型倒産 / 监管重构 / 技术代际切换）→ 对应模块提前插刷</li>
 </ol>
 <p><strong>观察项与触发器状态</strong>：唯一观察项、首要触发器、触发器结论均为「首期为空」（截至 2026-11-14 无更新）。</p>
-<h3 id="_33"><a id="待答问题与下一期重点核实项" aria-hidden="true"></a>待答问题与下一期重点核实项</h3>
+<h3 id="_33">待答问题与下一期重点核实项</h3>
 <p><strong>待答问题</strong>：① 物流白書最新版关键数何时发布、与令和 2 年度值相比变化幅度如何？② EC / 冷链 / 3PL 权威估计何时可取得、各自增速排序如何？③ SPPI 月次更新后的同比走向与环比波动？④ 2024 年問題对策落地进度对运力与运价的传导效果？⑤ 新東名实证与西濃運輸 × T2 中継输送实证是否扩大区间 / 进入商用？⑥ 倒産件数（TDB / TSR 双口径）年度走势与大型倒産事件？</p>
 <p><strong>下一期重点核实项</strong>：物流白書最新版；SPPI 月次与口径；倒産双口径年度值；EC / 冷链 / 3PL 权威估计；特定技能受入使用率（ISA）。</p>
 <p><strong>数据补全计划</strong>：登记册 #1、#4 待基线确立项在年度刷新前补齐；建立 SPPI 月次台账与倒産 TDB / TSR 双口径并列台账；对 2022 年推计的司机缺口值跟踪官方修正。</p>
-<h2 id="s9"><a id="九参考来源清单" aria-hidden="true"></a>九、参考来源清单</h2>
-<h3 id="_35"><a id="官方一手" aria-hidden="true"></a>官方一手</h3>
+<h2 id="s9" class="sec">九、参考来源清单</h2>
+<h3 id="_35">官方一手</h3>
 <ol>
 <li>国土交通省（mlit.go.jp）— 物流白書・政策パッケージ・モビリティ・ロードマップ https://www.mlit.go.jp （2026 核对）；国交省白書 https://www.mlit.go.jp/hakusyo/mlit/r06/hakusho/r07/html/n1212000.html</li>
 <li>内閣府（cas.go.jp）</li>
 <li>国土交通省検討会中間とりまとめ（NX 総研試算）— 司机缺口 2030 年推计（2022 年推计）</li>
 <li>ISA — 自动车运送业特定技能受入上限 22,100 人 / 5 年（2024–2029；使用率待查）</li>
 </ol>
-<h3 id="_36"><a id="行业机构" aria-hidden="true"></a>行业机构</h3>
+<h3 id="_36">行业机构</h3>
 <ol>
 <li>全日本货物流通促进协会（物团连）https://www.butsuryu.or.jp （令和 2 年度统计）</li>
 <li>全国トラック協会（トラック白書）https://www.truck.or.jp</li>
@@ -536,22 +663,54 @@ nav a:hover { text-decoration: underline; }
 <li>東京商工リサーチ（TSR）— 道路货物运送业营业收入（2021，2.6 万社调查；物流倒産 FY2025 308 件）</li>
 <li>JILPT</li>
 </ol>
-<h3 id="_37"><a id="研究机构" aria-hidden="true"></a>研究机构</h3>
+<h3 id="_37">研究机构</h3>
 <ol>
 <li>日本銀行（SPPI）— 道路货运指数 113.3（+4.6%）（登记册 #2；月次待核验）</li>
 <li>智库报告（野村総合研究所、NTTデータ経営研究所等；登记册 #4 优先来源，具体报告待基线确立）</li>
 </ol>
-<h3 id="ir"><a id="主要企业-ir" aria-hidden="true"></a>主要企业 IR</h3>
+<h3 id="ir">主要企业 IR</h3>
 <ol>
 <li>SGHD（佐川急便）、日本通運、ヤマト運輸 — 决算短信 / IR（2026-11 核对时点见各社 IR 页面）</li>
 </ol>
-<h3 id="_38"><a id="媒体与线索" aria-hidden="true"></a>媒体与线索</h3>
+<h3 id="_38">媒体与线索</h3>
 <ol>
 <li>TRAEEY、物流ウィークリー、日通综合研究所『物流季报』（线索来源，须回溯原文）</li>
 </ol>
-<h3 id="_39"><a id="跨主题只读锚" aria-hidden="true"></a>跨主题只读锚</h3>
+<h3 id="_39">跨主题只读锚</h3>
 <ol>
 <li><a href="../../01-ssw-driver/reports/2026-11-ssw-driver.md">01-ssw-driver</a> 指标登记册 #7 / #8 / #9（SPPI、倒産、2024 年問題）— 只读交叉验证锚，本主题不独立回写</li>
 </ol>
+</main>
+<footer class="footer" role="contentinfo" aria-label="页脚">
+  <p>日本物流行业 · 日本物流行业 · 2026-11 月度报告｜2026-11<br>
+  报告路径：04-industry-logistics\reports\2026-11-industry-logistics.html</p>
+  <p class="backlinks">
+    <a href="../../index.html#topic-04-industry-logistics">← 返回主题</a>
+    <a href="../../index.html">返回首页</a>
+  </p>
+</footer>
+<script>
+(function () {
+  'use strict';
+  var main = document.getElementById('main-content');
+  var tgDiff = document.getElementById('tg-diff');
+  var tgDel = document.getElementById('tg-del');
+  if (main && tgDiff) {
+    tgDiff.addEventListener('click', function () {
+      var hide = main.classList.toggle('hide-diff');
+      tgDiff.textContent = hide ? '显示更新标记' : '隐藏更新标记';
+    });
+  }
+  if (tgDel) {
+    tgDel.addEventListener('click', function () {
+      var open = tgDel.getAttribute('data-open') === '1';
+      var groups = document.querySelectorAll('details.diff-del-group');
+      for (var i = 0; i < groups.length; i++) groups[i].open = !open;
+      tgDel.setAttribute('data-open', open ? '0' : '1');
+      tgDel.textContent = open ? '展开全部删除' : '收起全部删除';
+    });
+  }
+})();
+</script>
 </body>
 </html>

@@ -31,8 +31,8 @@ python -m unittest discover -s src/tests -v   # 单元测试（65 项）
 | md2html.py | 生成 | html-sync.yml「HTML 同步」 |
 | archive_reports.py | 生成 | scheduled-maintenance.yml「归档策略」 |
 | build_index.py | 生成 | scheduled-maintenance.yml「生成全局索引」 |
-| build_hub.py | 生成 | validate.yml --check / html-sync.yml「汇总页 + 阅读器」 |
-| report_diff.py | 生成 | build_hub 依赖：跨月内容对比高亮（纯函数） |
+| build_hub.py | 生成 | validate.yml --check / html-sync.yml「汇总页」 |
+| report_diff.py | 生成 | md2html 依赖：跨月内容对比高亮（纯函数） |
 | migrate_monthly_reports.py | 迁移 | 一次性：存量报告合并重命名为月度系列 |
 | update_planner.py | 编排 | 手动 / 待建定时任务「生成任务清单」 |
 | automation_status.py | 编排 | 手动 / 待建定时任务「状态记录与活跃度」 |
@@ -62,8 +62,7 @@ python prompts/tools/lint_reports.py
 ```
 
 扫描全部业务线 `reports/*.html`。**错误项（退出码 1）**：thead/tbody/table 标签不配对、
-重复 `</tbody>`、畸形 `<th scope="col"ead>`、缺免责声明（须含「免责声明」节 +
-「不构成投资建议」表述，兼容两种固定原文措辞）。**警告项（退出码 2）**：
+重复 `</tbody>`、畸形 `<th scope="col"ead>`。**警告项（退出码 2）**：
 ≥6 列表格 `<th>` 未声明百分比列宽、表格缺 `class="fixed"`、`<img>` 缺 alt。
 纯函数 `lint_html(text)` 可被测试直接调用。
 
@@ -86,8 +85,7 @@ python prompts/tools/compliance_check.py --audit        # 历史报告合规审�
 **校验口径**（结构完整性 / 必填字段 / 内容格式三类）：
 
 - **错误项（阻断合并）**：h2 节数少于类型模板骨架（结构缺失）、章节编号 `id="sN"`
-  不连续或不有序、缺 `<title>`、缺「免责声明」节或「不构成投资建议」表述、
-  月/季/年周期报告缺顶部导航、锚点 `href="#x"` 无对应 id（断头锚点）。
+  不连续或不有序、缺 `<title>`、月/季/年周期报告缺顶部导航、锚点 `href="#x"` 无对应 id（断头锚点）。
 - **警告项（不阻断）**：h2 节数超出骨架（如为业务固化锚需人工确认）、基线报告缺简化
   锚点导航、文件名不符合命名约定（无法识别周期）、业务线未注册类型。
 - `--audit` 对全部历史报告执行同口径校验，匹配度汇总与逐项明细写入
@@ -125,8 +123,11 @@ business-config.md 时告警。重复执行无副作用。
 python prompts/tools/md2html.py
 ```
 
-将业务线 `reports/*.md` 转换为同名自包含 HTML（内置样式：表格边框、图片自适应）。
-纯图表型简报（只出 HTML 的业务线）无 md 源时自动跳过。依赖 markdown 包。
+将业务线 `reports/*.md` 转换为同名自包含 HTML。报告页采用 macropulse-reports 设计
+范式（navy 设计令牌：skip-link + hero 题头 + sticky report-nav + main 章节 + footer），
+并在构建期预渲染**跨月对比高亮**（与上一期同主题报告比对，新增 / 修改加「已更新」标记，
+删除折叠可追溯，工具条可切换对照阅读）。纯图表型简报（只出 HTML 的业务线）无 md 源时
+自动跳过。依赖 markdown 包。
 
 ### archive_reports.py — 滚动归档（幂等）
 
@@ -134,7 +135,7 @@ python prompts/tools/md2html.py
 python prompts/tools/archive_reports.py
 ```
 
-每条业务线保留最新 12 期月度报告（与阅读器默认窗口一致），超出部分连同名
+每条业务线保留最新 12 期月度报告（与首页详情页默认窗口一致），超出部分连同名
 md / html 一并移入业务目录内 `reports/archives/`。保留策略为纯函数
 `select_archives(items, keep)`。
 
@@ -150,15 +151,14 @@ python prompts/tools/build_index.py
 ### build_hub.py — 汇总页
 
 ```bash
-python prompts/tools/build_hub.py          # 生成 index.html + reader.html
+python prompts/tools/build_hub.py          # 生成 index.html
 python prompts/tools/build_hub.py --check  # 校验是否为最新
 ```
 
 `index.html` 为按业务线分组的报告枢纽（主题卡片 + 详情页，详情页默认展示最近
-12 个月报告、按时间倒序）；`reader.html` 为报告阅读器，内嵌全部月度报告，支持
-**版本一键切换**（`<主题>?<月份>` hash 路由，纯前端 show/hide，响应 < 1s）与
-**跨月对比高亮**（每期自动与上一期同主题报告比对，新增 / 修改加「已更新」标记，
-删除折叠可追溯）。`--check`：过期退出码 1；文件缺失（全新克隆）退出码 0 并提示，
+12 个月报告、按时间倒序）；报告链接直达各主题 `reports/*.html` **独立报告页**
+（新标签页打开），报告页内含构建期预渲染的跨月对比高亮（见 md2html.py /
+report_diff.py）。`--check`：过期退出码 1；文件缺失（全新克隆）退出码 0 并提示，
 由定时维护首建。比对前对两侧做归一化——抹平「最近生成」生成时刻时间戳（分钟级心跳，
 不参与最新性判定），报告清单部分逐字节比对。
 
@@ -202,7 +202,7 @@ python prompts/tools/automation_status.py activity --threshold 45               
 |---|---|
 | 提交前本地自查 | `validate.py && lint_reports.py && compliance_check.py --check && build_hub.py --check` |
 | CI 报「汇总页已过期」 | 运行 `build_hub.py` 重新生成后提交 |
-| CI 报 lint 错误 | 按 `[E] 文件: 原因` 修复报告 HTML（多为标签不配对 / 缺免责声明） |
+| CI 报 lint 错误 | 按 `[E] 文件: 原因` 修复报告 HTML（多为标签不配对） |
 | CI 报模板合规错误 | 按 `[E] 文件: [类型/周期] 不符合项` 对照类型模板补齐（结构缺失 / 必填字段 / 断头锚点） |
 | 新报告开写前取骨架 | `compliance_check.py --scaffold <类型ID> [周期]` 输出骨架与自检要点 |
 | 查历史报告合规匹配度 | `compliance_check.py --audit` 后看 `report-audits/compliance-audit.md` |
@@ -230,5 +230,3 @@ python prompts/tools/automation_status.py activity --threshold 45               
 - 所有路径均为仓库内相对路径，业务线整体迁移（改目录名）不影响工具运行。
 - `archive_reports.py` 会移动历史报告到 `reports/archives/`，每主题保留最新 12 期；
   如需永久保留请自行调整 `archive_reports.KEEP`。
-- lint 的免责声明检查兼容两种固定原文（历史报告「以上内容基于公开数据…」与
-  通用模板「本报告仅供参考…」），两种都判合格。

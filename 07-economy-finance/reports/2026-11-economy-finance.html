@@ -5,41 +5,168 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>日本经济与财务 · 2026-11 月度报告</title>
 <style>
-body { max-width: 1160px; margin: 24px auto; padding: 0 16px;
-      font-family: "Segoe UI", "Microsoft YaHei", sans-serif; color: #1a1a2e; line-height: 1.7; }
-h1, h2, h3 { color: #16213e; }
-table { border-collapse: collapse; width: 100%; overflow-x: auto; display: block; }
-th, td { border: 1px solid #cbd5e1; padding: 6px 10px; text-align: left; }
-th { background: #f1f5f9; }
-img { max-width: 100%; }
-code { background: #f6f8fa; padding: 2px 4px; border-radius: 3px; }
-blockquote { border-left: 4px solid #94a3b8; margin: 0; padding-left: 12px; color: #475569; }
-nav { margin: 12px 0 20px; padding: 8px 0; border-bottom: 1px solid #e2e8f0; }
-nav a { margin-right: 14px; color: #16213e; font-size: 14px; text-decoration: none; white-space: nowrap; }
-nav a:hover { text-decoration: underline; }
+:root{
+  --radius-sm:8px; --radius:12px; --radius-lg:16px;
+  --shadow:0 1px 3px rgba(20,40,70,.06); --shadow-md:0 4px 14px rgba(20,40,70,.09);
+  --font-sans:"Microsoft YaHei","PingFang SC","Segoe UI",Arial,sans-serif;
+  --font-mono:"SFMono-Regular",Consolas,"Liberation Mono",monospace;
+  --focus-ring:0 0 0 3px rgba(63,111,176,.35);
+  --bg:#f4f6f9; --card:#ffffff; --ink:#15202b; --ink2:#465667; --ink3:#657180;
+  --line:#e1e7ee; --line2:#eef2f6;
+  --navy:#16324f; --navy2:#2f5597; --blue:#3f6fb0; --blue-l:#eaf1fa;
+  --red:#a83224; --red-d:#822116; --red-l:#fbece8;
+  --pre:#b8541c; --pre-l:#fdf1e4;
+  --green:#1c7444; --green-l:#eaf5ef;
+  --amber:#956612; --amber-l:#fdf4e2;
+  --gray:#646f7b; --gray-l:#eff2f4;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{font-family:var(--font-sans);background:var(--bg);color:var(--ink);line-height:1.76;font-size:14.5px}
+a{color:var(--navy2);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px 68px}
+
+/* ── 跳转链接 / 焦点环 ── */
+.skip-link{position:absolute;left:12px;top:-48px;z-index:100;background:var(--navy);
+  color:#fff;padding:8px 16px;border-radius:0 0 8px 8px;font-size:12.5px;transition:top .15s ease}
+.skip-link:focus{top:0;color:#fff;text-decoration:none}
+:focus-visible{outline:none;box-shadow:var(--focus-ring)}
+
+/* ── 题头 Hero ── */
+.hero{background:linear-gradient(128deg,#0f2338 0%,#16324f 52%,#2f5597 100%);
+  color:#fff;padding:46px 36px 34px;border-radius:0 0 18px 18px;margin-bottom:24px}
+.hero .eyebrow{font-size:11.5px;letter-spacing:2.4px;color:rgba(255,255,255,.62);text-transform:uppercase}
+.hero h1{font-size:28px;font-weight:700;letter-spacing:.4px;margin:8px 0 6px;line-height:1.35}
+.hero .sub{font-size:13.5px;color:rgba(255,255,255,.82);max-width:900px}
+.hero .meta{font-size:12.3px;color:rgba(255,255,255,.78);margin-top:16px;line-height:2}
+.hero .meta b{color:#fff}
+.hero .tag{display:inline-block;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.2);
+  border-radius:14px;padding:2px 11px;margin:5px 6px 0 0;font-size:11.5px}
+
+/* ── 报告导航（sticky） ── */
+.report-nav{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);
+  border-bottom:1px solid var(--line);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  margin-bottom:26px}
+.report-nav .wrap{padding-top:10px;padding-bottom:10px}
+.nav-url{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;font-size:11.5px;
+  line-height:1.6;color:var(--ink3);padding-bottom:6px;margin-bottom:6px;
+  border-bottom:1px dashed var(--line)}
+.nav-url-label{font-weight:700;color:var(--ink2);white-space:nowrap}
+.nav-url a{color:var(--blue);word-break:break-all}
+.nav-tabs{display:flex;flex-wrap:wrap;gap:6px}
+.nav-tabs a{color:var(--ink2);font-size:12.5px;padding:5px 10px;border-radius:6px;
+  transition:background .15s ease,color .15s ease}
+.nav-tabs a:hover{background:var(--blue-l);color:var(--blue)}
+
+/* ── 跨月对比工具条 ── */
+.diff-bar{display:flex;flex-wrap:wrap;align-items:center;gap:8px;
+  margin-top:8px;padding-top:8px;border-top:1px dashed var(--line);
+  font-size:12px;color:var(--ink3)}
+.diff-bar .diff-summary{flex:1;min-width:200px;line-height:1.6}
+.diff-bar .diff-summary b{color:var(--navy)}
+.diff-toggle{font-size:12px;border:1px solid var(--line);background:#fff;border-radius:7px;
+  padding:4px 11px;cursor:pointer;color:var(--navy2);font-family:inherit}
+.diff-toggle:hover{border-color:var(--blue)}
+
+/* ── 正文 ── */
+h2.sec{font-size:20px;color:var(--navy);margin:44px 0 4px;padding-left:12px;
+  border-left:4px solid var(--navy2);font-weight:700;scroll-margin-top:110px}
+h3{font-size:15.5px;color:var(--navy);margin:22px 0 8px;font-weight:700}
+h4{font-size:14px;color:var(--navy);margin:16px 0 6px;font-weight:700}
+p{margin:0 0 12px}
+ul,ol{padding-left:22px;margin:8px 0 14px}
+li{margin-bottom:6px}
+hr{border:0;border-top:1px solid var(--line);margin:26px 0}
+strong{color:var(--ink)}
+code{background:#f6f8fa;padding:2px 5px;border-radius:4px;font-family:var(--font-mono);font-size:12.5px}
+pre{background:#f6f8fa;padding:12px 14px;border-radius:8px;overflow-x:auto;margin:10px 0 16px}
+pre code{background:none;padding:0;font-size:12.3px;line-height:1.65}
+blockquote{border-left:4px solid var(--navy2);background:var(--blue-l);
+  padding:12px 16px;border-radius:0 8px 8px 0;margin:12px 0;color:var(--ink2)}
+blockquote p:last-child{margin-bottom:0}
+.lead{color:var(--ink2);font-size:13.8px;margin:6px 0 14px}
+
+/* ── 表格 ── */
+table{width:100%;border-collapse:collapse;font-size:12.6px;background:var(--card);
+  border-radius:8px;overflow:hidden;margin:12px 0 16px}
+th{background:var(--navy);color:#fff;padding:8px 10px;text-align:left;font-weight:600;
+  font-size:12px;vertical-align:bottom}
+td{padding:7px 10px;border-bottom:1px solid var(--line2);vertical-align:top;line-height:1.62}
+tbody tr:nth-child(even) td{background:#fafbfd}
+tbody tr:hover td{background:var(--blue-l)}
+td.num{font-variant-numeric:tabular-nums}
+
+/* ── 信息卡 / 注释 ── */
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;
+  padding:18px 20px;margin:14px 0;box-shadow:var(--shadow)}
+.card h3:first-child{margin-top:0}
+.note{background:var(--amber-l);border-left:4px solid var(--amber);padding:10px 14px;
+  border-radius:0 7px 7px 0;font-size:12.9px;margin:12px 0}
+.note.gap{background:var(--gray-l);border-left-color:var(--gray)}
+.note.check{background:var(--green-l);border-left-color:var(--green)}
+.note.correct{background:var(--red-l);border-left-color:var(--red)}
+.note.preline{background:var(--pre-l);border-left-color:var(--pre)}
+
+/* ── 差异高亮（跨月对比） ── */
+.diff-badge{display:inline-block;font-size:10.5px;font-weight:700;line-height:1;
+  border-radius:3px;padding:2px 6px;margin-right:6px;vertical-align:middle;white-space:nowrap}
+.diff-block{border-radius:6px;padding:4px 8px;margin:4px -8px}
+.diff-new{background:var(--green-l);box-shadow:inset 3px 0 0 var(--green)}
+.diff-new .diff-badge{background:var(--green);color:#fff}
+.diff-mod{background:var(--amber-l);box-shadow:inset 3px 0 0 var(--amber)}
+.diff-mod .diff-badge{background:var(--amber);color:#fff}
+.diff-del-group{margin:6px 0;border:1px dashed var(--line);border-radius:6px;background:#fbfcfe}
+.diff-del-group>summary{cursor:pointer;font-size:12px;color:var(--ink3);
+  padding:6px 10px;user-select:none;list-style:none}
+.diff-del-group>summary::-webkit-details-marker{display:none}
+.diff-del-group>summary::before{content:"▸ ";color:var(--gray)}
+.diff-del-group[open]>summary::before{content:"▾ "}
+.diff-del-group .diff-del-body{padding:2px 8px 8px;color:var(--ink3)}
+.diff-del-group .diff-del-body s,.diff-del-group .diff-del-body del{color:var(--red)}
+.diff-del-group .diff-badge{background:var(--gray-l);color:var(--gray)}
+/* 隐藏更新标记：对照阅读模式 */
+main.hide-diff .diff-badge{display:none}
+main.hide-diff .diff-block{background:none;box-shadow:none;padding:0;margin:0}
+main.hide-diff .diff-del-group{display:none}
+
+/* ── 页脚 ── */
+.footer{font-size:11.4px;color:var(--ink3);text-align:center;margin-top:22px;line-height:1.9}
+.footer .backlinks{margin-top:8px}
+.footer .backlinks a{margin:0 8px}
+
+/* ── 响应式 ── */
+@media(max-width:760px){
+  .hero{padding:30px 20px;border-radius:0 0 14px 14px}
+  .hero h1{font-size:21px}
+  .wrap{padding:0 14px 46px}
+  td,th{padding:6px 7px;font-size:11.7px}
+  h2.sec{font-size:17.5px}
+}
 </style>
 </head>
 <body>
-<h1 id="2026-11"><a id="日本经济与财务--2026-11-月度报告" aria-hidden="true"></a>日本经济与财务 · 2026-11 月度报告</h1>
-<blockquote>
-<p><strong>版本</strong>：v1.0（2026-11 月度）　<strong>数据基准日</strong>：2026-11-14
-<strong>主题类型</strong>：职业就业调研型（employment-research）
-<strong>受众定位</strong>：面向在日本从事货运司机工作、需要做个人财务规划的读者，兼具行情调研与自我管理视角。
-<strong>来源规则</strong>：① 総務省統計局（stat.go.jp 消费物价、家計調査）、厚生労働省（毎月勤労統計）、国税庁（税率）、日本年金機構 ＞ ② 中国国家统计局（工资对比输入——项目指定例外）、中国外汇交易中心（chinamoney.com.cn 汇率中间价）＞ ③ 地域自治体生活成本数据 ＞ ④ 比价门户（预期指标）；每条数据必须附可直接访问的 URL。</p>
-</blockquote>
-<hr />
-<nav aria-label="报告导航">
-<a href="#s1">一、核心结论（摘要）</a>
-<a href="#s2">二、行业与政策发展趋势</a>
-<a href="#s3">三、人才供需与薪酬（核心模块）</a>
-<a href="#s4">四、雇主与企业类型细分</a>
-<a href="#s5">五、岗位技能要求</a>
-<a href="#s6">六、行业认可的职业资质与证书</a>
-<a href="#s7">七、就业落地路径建议（结论章）</a>
-<a href="#s8">八、数据可靠性与局限说明</a>
-<a href="#s9">九、参考来源清单</a>
+<a class="skip-link" href="#main-content">跳转到主要内容</a>
+<header class="hero" role="banner" aria-label="报告题头">
+  <div class="eyebrow">日本经济与财务 · 职业就业调研型</div>
+  <h1>日本经济与财务 · 2026-11 月度报告</h1>
+  <div class="sub">版本：v1.0（2026-11 月度）｜数据基准日：2026-11-14</div>
+  <div class="meta"><b>版本</b>：v1.0（2026-11 月度）<br><b>数据基准日</b>：2026-11-14<br><b>主题类型</b>：职业就业调研型（employment-research）<br><b>受众定位</b>：面向在日本从事货运司机工作、需要做个人财务规划的读者，兼具行情调研与自我管理视角。<br><b>来源规则</b>：① 総務省統計局（stat.go.jp 消费物价、家計調査）、厚生労働省（毎月勤労統計）、国税庁（税率）、日本年金機構 ＞ ② 中国国家统计局（工资对比输入——项目指定例外）、中国外汇交易中心（chinamoney.com.cn 汇率中间价…</div>
+  <div><span class="tag">2026-11</span><span class="tag">职业就业调研型</span></div>
+</header>
+<nav class="report-nav" aria-label="报告导航">
+  <div class="wrap">
+    <div class="nav-url">
+      <span class="nav-url-label">报告路径</span>
+      <a href="2026-11-economy-finance.html">07-economy-finance\reports\2026-11-economy-finance.html</a>
+    </div>
+    <div class="nav-tabs"><a href="#s1">一、核心结论（摘要）</a><a href="#s2">二、行业与政策发展趋势</a><a href="#s3">三、人才供需与薪酬（核心模块）</a><a href="#s4">四、雇主与企业类型细分</a><a href="#s5">五、岗位技能要求</a><a href="#s6">六、行业认可的职业资质与证书</a><a href="#s7">七、就业落地路径建议（结论章）</a><a href="#s8">八、数据可靠性与局限说明</a><a href="#s9">九、参考来源清单</a></div>
+    
+  </div>
 </nav>
-<h2 id="s1"><a id="一核心结论摘要" aria-hidden="true"></a>一、核心结论（摘要）</h2>
+<main class="wrap" id="main-content" role="main" aria-label="报告正文">
+<h2 id="s1" class="sec">一、核心结论（摘要）</h2>
 <p><strong>主题定义与监测范围</strong>（摘自 business-config 3.1）：</p>
 <ul>
 <li><strong>含</strong>：收入结构与薪资行情（薪资基本盘、地域差、收入增长曲线、合规副收边界）；生活成本与储蓄规划（月度成本模型、储蓄率目标、汇款渠道）；税务社保年金（四大公的义务、年金与永住、归档清单）；长期财务规划（10 年里程碑、世帯年收达标模拟、大额决策时机）。</li>
@@ -61,7 +188,7 @@ nav a:hover { text-decoration: underline; }
 <li><strong>生活成本与储蓄率仅为规划估算</strong>（事实）：10.5–17.0 万円/月与 35% / 45% 目标线为手册估算值，在个人收支结算（待记录）补齐前不得作为结论使用。</li>
 <li><strong>税社负担结构清晰但缺活值</strong>（事实）：四大公的义务比例明确，但年金 / 社保个人负担率待基线确立，净收入模型无法闭合。</li>
 </ol>
-<h3 id="_2"><a id="数据变更摘要" aria-hidden="true"></a>数据变更摘要</h3>
+<h3 id="_2">数据变更摘要</h3>
 <p>登记册 6 项追踪指标截至 2026-11-14 的活值状态（来源：<code>data/economy_indicator_registry.md</code>）：</p>
 <table class="fixed">
 <thead>
@@ -113,9 +240,9 @@ nav a:hover { text-decoration: underline; }
 </table>
 <p><strong>观察项与触发器状态</strong>（摘自登记册）：唯一观察项、首要触发器、触发器结论均为「首期为空」；business-config 第七节的六个触发器（每月勤労統計月次更新、最低賃金年度改定、汇率大幅波动、税制 / 社保年金费率修订、消费物价统计月次更新、个人收支月度结算）本期均未命中，无可报变化。</p>
 <p><strong>结构变更备注</strong>（非数据变动）：2026-11-14 原合并版知识手册已按四大维度拆分至 <code>handbook/</code>（00–04 共 5 个文档），编号 01–04 与登记册指标、触发器映射保持一一对应；原合并版全文存档于 <code>reports/archives/2026-11-economy-finance-merged-v1.0.md</code>。本报告为该结构下的首期九节骨架版。</p>
-<h3 id="_3"><a id="已修正事实清单" aria-hidden="true"></a>已修正事实清单</h3>
+<h3 id="_3">已修正事实清单</h3>
 <p>本版为复用生成：继承历史报告（v1.0 首份分析，数据基准 2026-11-13）的口径裁决与来源分级，<strong>无新增修正</strong>。历史报告未列独立「已修正事实清单」；其口径要点（税引前月収 ≠ 手取り；家計調査 ≠ 勤労統計；最低賃金全国平均 ≠ 都道府県加权；运输業月均工资 ≠ 含赏与年收）原样保留于第三、八节。</p>
-<h2 id="s2"><a id="二行业与政策发展趋势" aria-hidden="true"></a>二、行业与政策发展趋势</h2>
+<h2 id="s2" class="sec">二、行业与政策发展趋势</h2>
 <p>本节承载经济制度环境与「公的义务」政策面（business-config 3.2：03 章税务社保年金 → 本节 / 第七节）。</p>
 <p><strong>收入制度的年度改定通道（事实）</strong>：最低賃金每年 10 月改定，手册经验法则为年涨 40–60 円；2025 年度全国加权平均 1,118 円/h（手册）与 2026 年度全国平均 1,177 円（登记册）并列，差值 59 円，落在经验区间内。年度核对项：每年 10 月刷新最低賃金与本行业薪资行情；每年 3 月对照前年收入 vs 计划曲线偏差（手册 01）。</p>
 <p><strong>税制与社保年金费率（事实，结构清晰、活值待补）</strong>：</p>
@@ -153,7 +280,7 @@ nav a:hover { text-decoration: underline; }
 <p>到手工资 ≈ 额面 −（所得税 + 住民税 + 社保个人负担）≈ 额面的 78–85%（手册估算，<strong>待核验</strong>）；登记册 #5「年金 / 社保个人负担率」待基线确立。</p>
 <p><strong>红线（事实）</strong>：住民税·社保滞纳 = 永住取消要件（3 年）+ 在留更新减分——零容忍（手册 03）；公的义务的缴纳记录同时是永住证据链资产。</p>
 <p><strong>政策面交叉引用</strong>：岗位薪资细节与工资构成 → <a href="../../02-career-driver/reports/2026-11-career-driver.md">../02-career-driver/reports/2026-11-career-driver.md</a>；法规框架解读 → <a href="../../09-politics-law/reports/2026-11-politics-law.md">../09-politics-law/reports/2026-11-politics-law.md</a>；永住年收要件与取消风险 → <a href="../../08-visa-immigration/reports/2026-11-visa-immigration.md">../08-visa-immigration/reports/2026-11-visa-immigration.md</a>；管理岗晋升与收入曲线 → <a href="../../03-career-management/reports/2026-11-career-management.md">../03-career-management/reports/2026-11-career-management.md</a>。</p>
-<h2 id="s3"><a id="三人才供需与薪酬核心模块" aria-hidden="true"></a>三、人才供需与薪酬（核心模块）</h2>
+<h2 id="s3" class="sec">三、人才供需与薪酬（核心模块）</h2>
 <p><strong>收入结构与薪资行情（手册 01，信息核对日期 2026-11-11）</strong>：</p>
 <table class="fixed">
 <thead>
@@ -289,7 +416,7 @@ nav a:hover { text-decoration: underline; }
 </tbody>
 </table>
 <p><strong>官方统计锚（只读）</strong>：运输業工资、100 日元汇率与净收入模型口径以 01-ssw-driver 登记册 #5 及其最新报告 3.5 节为锚（<a href="../../01-ssw-driver/reports/2026-11-ssw-driver.md">../01-ssw-driver/reports/2026-11-ssw-driver.md</a>），本主题不独立回写。</p>
-<h2 id="s4"><a id="四雇主与企业类型细分" aria-hidden="true"></a>四、雇主与企业类型细分</h2>
+<h2 id="s4" class="sec">四、雇主与企业类型细分</h2>
 <p>本节按「雇主形态如何影响收入与成本」的财务视角细分（business-config 3.2 未指定锚，本节为独立成节）。</p>
 <p><strong>雇主形态与净收入（手册 01 / 02）</strong>：</p>
 <table class="fixed">
@@ -319,7 +446,7 @@ nav a:hover { text-decoration: underline; }
 </tbody>
 </table>
 <p><strong>边界</strong>：岗位薪资细节、工资构成与工时合规归 02-career-driver（<a href="../../02-career-driver/reports/2026-11-career-driver.md">../02-career-driver/reports/2026-11-career-driver.md</a>）；行业结构、2024 年問題、企业动向归 04-industry-logistics（<a href="../../04-industry-logistics/reports/2026-11-industry-logistics.md">../04-industry-logistics/reports/2026-11-industry-logistics.md</a>）；本节不重复岗位层数字。</p>
-<h2 id="s5"><a id="五岗位技能要求" aria-hidden="true"></a>五、岗位技能要求</h2>
+<h2 id="s5" class="sec">五、岗位技能要求</h2>
 <p>本节承载「与收入直接相关的岗位能力与合规副收边界」（business-config 3.2 未指定锚，本节为独立成节）。</p>
 <p><strong>技能提升收入的三条路径（手册 01）</strong>：</p>
 <ul>
@@ -329,10 +456,10 @@ nav a:hover { text-decoration: underline; }
 </ul>
 <p><strong>合规红线（明令禁止，事实）</strong>：特定技能 1 号<strong>资格外活动原则不可</strong>——只能从事受入计划书记载的业务，违法打工 = 在留风险，禁止尝试副收打工。</p>
 <p><strong>能力底座（跨主题引用）</strong>：岗位技能细节与实操 → <a href="../../02-career-driver/reports/2026-11-career-driver.md">../02-career-driver/reports/2026-11-career-driver.md</a>；管理岗技能地图 → <a href="../../03-career-management/reports/2026-11-career-management.md">../03-career-management/reports/2026-11-career-management.md</a>；资格取得路径与费用主责 → <a href="../../10-education-qualification/reports/2026-11-education-qualification.md">../10-education-qualification/reports/2026-11-education-qualification.md</a>。</p>
-<h2 id="s6"><a id="六行业认可的职业资质与证书" aria-hidden="true"></a>六、行业认可的职业资质与证书</h2>
+<h2 id="s6" class="sec">六、行业认可的职业资质与证书</h2>
 <p><strong>资格与津贴对应（手册 01，费用为约值、待核验）</strong>：フォークリフト（3–10 万，3–5 日）与危険物乙 4（6 千，自学 + 考试）对应 +5 千–2 万 / 月津贴；けん引自动车运転者（15–25 万）对应干线牵引岗位；L 検（6–8 千）为物流知识体系化证明。</p>
 <p><strong>分工声明</strong>：物流 / 运输相关资格的日程、费用与取得路径主责为 10-education-qualification（<a href="../../10-education-qualification/reports/2026-11-education-qualification.md">../10-education-qualification/reports/2026-11-education-qualification.md</a>），本主题只从「收入回报」角度引用，不重复维护资格地图；驾照取得路径与费用归 01-ssw-driver（只读）。</p>
-<h2 id="s7"><a id="七就业落地路径建议结论章" aria-hidden="true"></a>七、就业落地路径建议（结论章）</h2>
+<h2 id="s7" class="sec">七、就业落地路径建议（结论章）</h2>
 <blockquote>
 <p>本节为建议 / 推断层，与事实数据分离。</p>
 </blockquote>
@@ -409,7 +536,7 @@ nav a:hover { text-decoration: underline; }
 <p><strong>年金与归档（手册 03，建议）</strong>：厚生年金按工资比例自动扣——不停职就不断缴，风险最低；ねんきん定期便每年生日月前后寄达 / My Number Portal 可查，<strong>每年存档一份</strong> = 缴费证据；脱退一时金若最终不永住归国可申请（最多 5 年分），本规划走永住则长期复利留下更划算。归档清单：每年 1–2 月前年源泉征收票；每年ねんきん定期便、住民税决定通知书；My Number Portal 按年导出缴费记录 PDF。</p>
 <p><strong>金融习惯（手册 04，建议）</strong>：活期 + 定期组合（Net 系银行利率略高）；iDeCo / つみたてNISA 在留资格稳定（2 号）后再开启——永住前投资账户的处理要向税务士确认；信用卡按时还款积累信用信息（Y1 就开始）。</p>
 <p><strong>年度复盘模板（手册 04）</strong>：每年 1 月对照刷新——储蓄余额 / 世帯年收 / 公的义务记录（零瑕疵）/ 大额决策进度；每年 10 月刷新最低賃金与行情数据。</p>
-<h2 id="s8"><a id="八数据可靠性与局限说明" aria-hidden="true"></a>八、数据可靠性与局限说明</h2>
+<h2 id="s8" class="sec">八、数据可靠性与局限说明</h2>
 <p><strong>核验程度分级</strong>：</p>
 <ul>
 <li><strong>A 官方一手</strong>：运输業月均工资（厚労省）、最低賃金（厚生労働省）、100 日元汇率（chinamoney.com.cn）、国税厅 / 厚生劳动省来源标注的统计。</li>
@@ -449,7 +576,7 @@ nav a:hover { text-decoration: underline; }
 </table>
 <p><strong>未取得项</strong>：CPI 综合指数（登记册 #4，待基线确立）、年金 / 社保个人负担率（#5，待基线确立）、个人月度收支结算（#6，待记录）；卡车司机平均年收、月给区间、到手工资比例、月度成本模型为手册估算，待核验。</p>
 <p><strong>风险与不确定性</strong>：手册中市场类数字（司机年收、月给、到手比例）无发布机构标注，核验前存在偏差风险；个人收支与 CPI 缺失使储蓄率与世帯年收模拟无法验证；永住年收要件与取消风险归 08-visa-immigration，本主题只提供财务证据链，不构成要件判断。</p>
-<h3 id="_11"><a id="待复核清单" aria-hidden="true"></a>待复核清单</h3>
+<h3 id="_11">待复核清单</h3>
 <table class="fixed">
 <thead>
 <tr>
@@ -496,7 +623,7 @@ nav a:hover { text-decoration: underline; }
 </tr>
 </tbody>
 </table>
-<h2 id="s9"><a id="九参考来源清单" aria-hidden="true"></a>九、参考来源清单</h2>
+<h2 id="s9" class="sec">九、参考来源清单</h2>
 <p><strong>官方一手</strong>：</p>
 <ol>
 <li><a href="https://www.mhlw.go.jp/">厚生労働省</a> — 毎月勤労統計 / 最低賃金，2025–2026。</li>
@@ -518,5 +645,37 @@ nav a:hover { text-decoration: underline; }
 <li><a href="../../08-visa-immigration/reports/2026-11-visa-immigration.md">08-visa-immigration 报告</a> — 永住年收要件与取消风险，只读引用。</li>
 <li><a href="../../03-career-management/reports/2026-11-career-management.md">03-career-management 报告</a> — 管理岗晋升与收入曲线，只读引用。</li>
 </ol>
+</main>
+<footer class="footer" role="contentinfo" aria-label="页脚">
+  <p>日本经济与财务 · 日本经济与财务 · 2026-11 月度报告｜2026-11<br>
+  报告路径：07-economy-finance\reports\2026-11-economy-finance.html</p>
+  <p class="backlinks">
+    <a href="../../index.html#topic-07-economy-finance">← 返回主题</a>
+    <a href="../../index.html">返回首页</a>
+  </p>
+</footer>
+<script>
+(function () {
+  'use strict';
+  var main = document.getElementById('main-content');
+  var tgDiff = document.getElementById('tg-diff');
+  var tgDel = document.getElementById('tg-del');
+  if (main && tgDiff) {
+    tgDiff.addEventListener('click', function () {
+      var hide = main.classList.toggle('hide-diff');
+      tgDiff.textContent = hide ? '显示更新标记' : '隐藏更新标记';
+    });
+  }
+  if (tgDel) {
+    tgDel.addEventListener('click', function () {
+      var open = tgDel.getAttribute('data-open') === '1';
+      var groups = document.querySelectorAll('details.diff-del-group');
+      for (var i = 0; i < groups.length; i++) groups[i].open = !open;
+      tgDel.setAttribute('data-open', open ? '0' : '1');
+      tgDel.textContent = open ? '展开全部删除' : '收起全部删除';
+    });
+  }
+})();
+</script>
 </body>
 </html>

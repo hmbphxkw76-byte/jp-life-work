@@ -5,41 +5,168 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>医疗·健康·心理 · 2026-11 月度报告</title>
 <style>
-body { max-width: 1160px; margin: 24px auto; padding: 0 16px;
-      font-family: "Segoe UI", "Microsoft YaHei", sans-serif; color: #1a1a2e; line-height: 1.7; }
-h1, h2, h3 { color: #16213e; }
-table { border-collapse: collapse; width: 100%; overflow-x: auto; display: block; }
-th, td { border: 1px solid #cbd5e1; padding: 6px 10px; text-align: left; }
-th { background: #f1f5f9; }
-img { max-width: 100%; }
-code { background: #f6f8fa; padding: 2px 4px; border-radius: 3px; }
-blockquote { border-left: 4px solid #94a3b8; margin: 0; padding-left: 12px; color: #475569; }
-nav { margin: 12px 0 20px; padding: 8px 0; border-bottom: 1px solid #e2e8f0; }
-nav a { margin-right: 14px; color: #16213e; font-size: 14px; text-decoration: none; white-space: nowrap; }
-nav a:hover { text-decoration: underline; }
+:root{
+  --radius-sm:8px; --radius:12px; --radius-lg:16px;
+  --shadow:0 1px 3px rgba(20,40,70,.06); --shadow-md:0 4px 14px rgba(20,40,70,.09);
+  --font-sans:"Microsoft YaHei","PingFang SC","Segoe UI",Arial,sans-serif;
+  --font-mono:"SFMono-Regular",Consolas,"Liberation Mono",monospace;
+  --focus-ring:0 0 0 3px rgba(63,111,176,.35);
+  --bg:#f4f6f9; --card:#ffffff; --ink:#15202b; --ink2:#465667; --ink3:#657180;
+  --line:#e1e7ee; --line2:#eef2f6;
+  --navy:#16324f; --navy2:#2f5597; --blue:#3f6fb0; --blue-l:#eaf1fa;
+  --red:#a83224; --red-d:#822116; --red-l:#fbece8;
+  --pre:#b8541c; --pre-l:#fdf1e4;
+  --green:#1c7444; --green-l:#eaf5ef;
+  --amber:#956612; --amber-l:#fdf4e2;
+  --gray:#646f7b; --gray-l:#eff2f4;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{font-family:var(--font-sans);background:var(--bg);color:var(--ink);line-height:1.76;font-size:14.5px}
+a{color:var(--navy2);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px 68px}
+
+/* ── 跳转链接 / 焦点环 ── */
+.skip-link{position:absolute;left:12px;top:-48px;z-index:100;background:var(--navy);
+  color:#fff;padding:8px 16px;border-radius:0 0 8px 8px;font-size:12.5px;transition:top .15s ease}
+.skip-link:focus{top:0;color:#fff;text-decoration:none}
+:focus-visible{outline:none;box-shadow:var(--focus-ring)}
+
+/* ── 题头 Hero ── */
+.hero{background:linear-gradient(128deg,#0f2338 0%,#16324f 52%,#2f5597 100%);
+  color:#fff;padding:46px 36px 34px;border-radius:0 0 18px 18px;margin-bottom:24px}
+.hero .eyebrow{font-size:11.5px;letter-spacing:2.4px;color:rgba(255,255,255,.62);text-transform:uppercase}
+.hero h1{font-size:28px;font-weight:700;letter-spacing:.4px;margin:8px 0 6px;line-height:1.35}
+.hero .sub{font-size:13.5px;color:rgba(255,255,255,.82);max-width:900px}
+.hero .meta{font-size:12.3px;color:rgba(255,255,255,.78);margin-top:16px;line-height:2}
+.hero .meta b{color:#fff}
+.hero .tag{display:inline-block;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.2);
+  border-radius:14px;padding:2px 11px;margin:5px 6px 0 0;font-size:11.5px}
+
+/* ── 报告导航（sticky） ── */
+.report-nav{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);
+  border-bottom:1px solid var(--line);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  margin-bottom:26px}
+.report-nav .wrap{padding-top:10px;padding-bottom:10px}
+.nav-url{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;font-size:11.5px;
+  line-height:1.6;color:var(--ink3);padding-bottom:6px;margin-bottom:6px;
+  border-bottom:1px dashed var(--line)}
+.nav-url-label{font-weight:700;color:var(--ink2);white-space:nowrap}
+.nav-url a{color:var(--blue);word-break:break-all}
+.nav-tabs{display:flex;flex-wrap:wrap;gap:6px}
+.nav-tabs a{color:var(--ink2);font-size:12.5px;padding:5px 10px;border-radius:6px;
+  transition:background .15s ease,color .15s ease}
+.nav-tabs a:hover{background:var(--blue-l);color:var(--blue)}
+
+/* ── 跨月对比工具条 ── */
+.diff-bar{display:flex;flex-wrap:wrap;align-items:center;gap:8px;
+  margin-top:8px;padding-top:8px;border-top:1px dashed var(--line);
+  font-size:12px;color:var(--ink3)}
+.diff-bar .diff-summary{flex:1;min-width:200px;line-height:1.6}
+.diff-bar .diff-summary b{color:var(--navy)}
+.diff-toggle{font-size:12px;border:1px solid var(--line);background:#fff;border-radius:7px;
+  padding:4px 11px;cursor:pointer;color:var(--navy2);font-family:inherit}
+.diff-toggle:hover{border-color:var(--blue)}
+
+/* ── 正文 ── */
+h2.sec{font-size:20px;color:var(--navy);margin:44px 0 4px;padding-left:12px;
+  border-left:4px solid var(--navy2);font-weight:700;scroll-margin-top:110px}
+h3{font-size:15.5px;color:var(--navy);margin:22px 0 8px;font-weight:700}
+h4{font-size:14px;color:var(--navy);margin:16px 0 6px;font-weight:700}
+p{margin:0 0 12px}
+ul,ol{padding-left:22px;margin:8px 0 14px}
+li{margin-bottom:6px}
+hr{border:0;border-top:1px solid var(--line);margin:26px 0}
+strong{color:var(--ink)}
+code{background:#f6f8fa;padding:2px 5px;border-radius:4px;font-family:var(--font-mono);font-size:12.5px}
+pre{background:#f6f8fa;padding:12px 14px;border-radius:8px;overflow-x:auto;margin:10px 0 16px}
+pre code{background:none;padding:0;font-size:12.3px;line-height:1.65}
+blockquote{border-left:4px solid var(--navy2);background:var(--blue-l);
+  padding:12px 16px;border-radius:0 8px 8px 0;margin:12px 0;color:var(--ink2)}
+blockquote p:last-child{margin-bottom:0}
+.lead{color:var(--ink2);font-size:13.8px;margin:6px 0 14px}
+
+/* ── 表格 ── */
+table{width:100%;border-collapse:collapse;font-size:12.6px;background:var(--card);
+  border-radius:8px;overflow:hidden;margin:12px 0 16px}
+th{background:var(--navy);color:#fff;padding:8px 10px;text-align:left;font-weight:600;
+  font-size:12px;vertical-align:bottom}
+td{padding:7px 10px;border-bottom:1px solid var(--line2);vertical-align:top;line-height:1.62}
+tbody tr:nth-child(even) td{background:#fafbfd}
+tbody tr:hover td{background:var(--blue-l)}
+td.num{font-variant-numeric:tabular-nums}
+
+/* ── 信息卡 / 注释 ── */
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;
+  padding:18px 20px;margin:14px 0;box-shadow:var(--shadow)}
+.card h3:first-child{margin-top:0}
+.note{background:var(--amber-l);border-left:4px solid var(--amber);padding:10px 14px;
+  border-radius:0 7px 7px 0;font-size:12.9px;margin:12px 0}
+.note.gap{background:var(--gray-l);border-left-color:var(--gray)}
+.note.check{background:var(--green-l);border-left-color:var(--green)}
+.note.correct{background:var(--red-l);border-left-color:var(--red)}
+.note.preline{background:var(--pre-l);border-left-color:var(--pre)}
+
+/* ── 差异高亮（跨月对比） ── */
+.diff-badge{display:inline-block;font-size:10.5px;font-weight:700;line-height:1;
+  border-radius:3px;padding:2px 6px;margin-right:6px;vertical-align:middle;white-space:nowrap}
+.diff-block{border-radius:6px;padding:4px 8px;margin:4px -8px}
+.diff-new{background:var(--green-l);box-shadow:inset 3px 0 0 var(--green)}
+.diff-new .diff-badge{background:var(--green);color:#fff}
+.diff-mod{background:var(--amber-l);box-shadow:inset 3px 0 0 var(--amber)}
+.diff-mod .diff-badge{background:var(--amber);color:#fff}
+.diff-del-group{margin:6px 0;border:1px dashed var(--line);border-radius:6px;background:#fbfcfe}
+.diff-del-group>summary{cursor:pointer;font-size:12px;color:var(--ink3);
+  padding:6px 10px;user-select:none;list-style:none}
+.diff-del-group>summary::-webkit-details-marker{display:none}
+.diff-del-group>summary::before{content:"▸ ";color:var(--gray)}
+.diff-del-group[open]>summary::before{content:"▾ "}
+.diff-del-group .diff-del-body{padding:2px 8px 8px;color:var(--ink3)}
+.diff-del-group .diff-del-body s,.diff-del-group .diff-del-body del{color:var(--red)}
+.diff-del-group .diff-badge{background:var(--gray-l);color:var(--gray)}
+/* 隐藏更新标记：对照阅读模式 */
+main.hide-diff .diff-badge{display:none}
+main.hide-diff .diff-block{background:none;box-shadow:none;padding:0;margin:0}
+main.hide-diff .diff-del-group{display:none}
+
+/* ── 页脚 ── */
+.footer{font-size:11.4px;color:var(--ink3);text-align:center;margin-top:22px;line-height:1.9}
+.footer .backlinks{margin-top:8px}
+.footer .backlinks a{margin:0 8px}
+
+/* ── 响应式 ── */
+@media(max-width:760px){
+  .hero{padding:30px 20px;border-radius:0 0 14px 14px}
+  .hero h1{font-size:21px}
+  .wrap{padding:0 14px 46px}
+  td,th{padding:6px 7px;font-size:11.7px}
+  h2.sec{font-size:17.5px}
+}
 </style>
 </head>
 <body>
-<h1 id="2026-11"><a id="医疗健康心理--2026-11-月度报告" aria-hidden="true"></a>医疗·健康·心理 · 2026-11 月度报告</h1>
-<blockquote>
-<p><strong>版本</strong>：v1.0（2026-11 月度）　<strong>数据基准日</strong>：2026-11-14
-<strong>主题类型</strong>：职业就业调研型（employment-research）· 个人健康管理
-<strong>受众定位</strong>：本人（拟赴日 / 已在日特定技能司机）
-<strong>来源规则</strong>：① 厚生労働省 / 日本年金機構官方一手；② 各学会 / 医疗机构官网；③ 多语言医疗支援机构</p>
-</blockquote>
-<hr />
-<nav aria-label="报告导航">
-<a href="#s1">一、核心结论（摘要）</a>
-<a href="#s2">二、行业与政策发展趋势（医保制度框架）</a>
-<a href="#s3">三、医疗资源供需与就医费用（核心模块）</a>
-<a href="#s4">四、医疗机构与介護设施类型细分</a>
-<a href="#s5">五、就医与健康管理的能力要求</a>
-<a href="#s6">六、健康相关资格与凭证</a>
-<a href="#s7">七、就医落地路径建议（结论章）</a>
-<a href="#s8">八、数据可靠性与局限说明</a>
-<a href="#s9">九、参考来源清单</a>
+<a class="skip-link" href="#main-content">跳转到主要内容</a>
+<header class="hero" role="banner" aria-label="报告题头">
+  <div class="eyebrow">医疗 · 职业就业调研型</div>
+  <h1>医疗·健康·心理 · 2026-11 月度报告</h1>
+  <div class="sub">版本：v1.0（2026-11 月度）｜数据基准日：2026-11-14</div>
+  <div class="meta"><b>版本</b>：v1.0（2026-11 月度）<br><b>数据基准日</b>：2026-11-14<br><b>主题类型</b>：职业就业调研型（employment-research）· 个人健康管理<br><b>受众定位</b>：本人（拟赴日 / 已在日特定技能司机）<br><b>来源规则</b>：① 厚生労働省 / 日本年金機構官方一手；② 各学会 / 医疗机构官网；③ 多语言医疗支援机构</div>
+  <div><span class="tag">2026-11</span><span class="tag">职业就业调研型</span></div>
+</header>
+<nav class="report-nav" aria-label="报告导航">
+  <div class="wrap">
+    <div class="nav-url">
+      <span class="nav-url-label">报告路径</span>
+      <a href="2026-11-health-wellbeing.html">15-health-wellbeing\reports\2026-11-health-wellbeing.html</a>
+    </div>
+    <div class="nav-tabs"><a href="#s1">一、核心结论（摘要）</a><a href="#s2">二、行业与政策发展趋势（医保制度框架）</a><a href="#s3">三、医疗资源供需与就医费用（核心模块）</a><a href="#s4">四、医疗机构与介護设施类型细分</a><a href="#s5">五、就医与健康管理的能力要求</a><a href="#s6">六、健康相关资格与凭证</a><a href="#s7">七、就医落地路径建议（结论章）</a><a href="#s8">八、数据可靠性与局限说明</a><a href="#s9">九、参考来源清单</a></div>
+    
+  </div>
 </nav>
-<h2 id="s1"><a id="一核心结论摘要" aria-hidden="true"></a>一、核心结论（摘要）</h2>
+<main class="wrap" id="main-content" role="main" aria-label="报告正文">
+<h2 id="s1" class="sec">一、核心结论（摘要）</h2>
 <p><strong>核心判断</strong>（每条含数据、口径、来源）：</p>
 <ol>
 <li><strong>医保是落地第一义务</strong>（事实）：住民登记后须加入健康保険（国保或被用者），窗口自付比例通常 <strong>3 割</strong>；未加入会累积高额费用。（来源：厚生労働省，2026）</li>
@@ -50,7 +177,7 @@ nav a:hover { text-decoration: underline; }
 <li><strong>体检与预防是成本最低的健康投资</strong>（事实）：雇主 / 自治体实施健康診断，应按时参加；特定技能司机有<strong>適性診断</strong>义务。（来源：厚生労働省，2026；→ 01-ssw-driver）</li>
 <li><strong>本基线为初析级</strong>（事实）：具体费用、自付上限、多语言窗口清单标记「⚠ 待核实」，待次期或定居地确定后补齐。</li>
 </ol>
-<h3 id="_2"><a id="数据变更摘要" aria-hidden="true"></a>数据变更摘要</h3>
+<h3 id="_2">数据变更摘要</h3>
 <blockquote>
 <p>登记册版本 <strong>v2026.11.14_1</strong>；8 项追踪项均无更新，最新值如下（登记册活值优先）。</p>
 </blockquote>
@@ -114,9 +241,9 @@ nav a:hover { text-decoration: underline; }
 </tr>
 </tbody>
 </table>
-<h3 id="_3"><a id="已修正事实清单" aria-hidden="true"></a>已修正事实清单</h3>
+<h3 id="_3">已修正事实清单</h3>
 <p>本版继承历史报告已修正事实清单，无新增修正。</p>
-<h3 id="_4"><a id="关键数字卡" aria-hidden="true"></a>关键数字卡</h3>
+<h3 id="_4">关键数字卡</h3>
 <table class="fixed">
 <thead>
 <tr>
@@ -153,27 +280,26 @@ nav a:hover { text-decoration: underline; }
 </tr>
 </tbody>
 </table>
-<hr />
-<h2 id="s2"><a id="二行业与政策发展趋势医保制度框架" aria-hidden="true"></a>二、行业与政策发展趋势（医保制度框架）</h2>
-<h3 id="21"><a id="21-两大体系与一层高龄者制度" aria-hidden="true"></a>2.1 两大体系与一层高龄者制度</h3>
+<h2 id="s2" class="sec">二、行业与政策发展趋势（医保制度框架）</h2>
+<h3 id="21">2.1 两大体系与一层高龄者制度</h3>
 <ul>
 <li><strong>国民健康保険</strong>（国保）：面向非公司职员、自营业、无业者等居民，自付通常 <strong>3 割</strong>；由市区町村运营。（事实）[厚生労働省]</li>
 <li><strong>被用者健康保険</strong>：公司职员加入，自付通常 3 割，由公司与个人分担保费。（事实）[厚生労働省]</li>
 <li><strong>后期高龄者医療</strong>：75 岁以上（或 65–74 岁有一定障碍者）加入，自付比例更低。（事实）[厚生労働省]</li>
 </ul>
-<h3 id="22"><a id="22-高额疗养费制度" aria-hidden="true"></a>2.2 高额疗养费制度</h3>
+<h3 id="22">2.2 高额疗养费制度</h3>
 <ul>
 <li>医疗费超过自付上限时，由公费承担差额；上限按<strong>年龄与收入</strong>分层。（事实）[厚生労働省]</li>
 <li>⚠ <strong>待核实</strong>：现行各收入层的具体上限额。</li>
 <li>与<strong>医療費控除</strong>（税制，→ 07-economy-finance）不同：前者为当月报销，后者为年度报税，二者不得混用。</li>
 </ul>
-<h3 id="23"><a id="23-外国人加入与制度分层" aria-hidden="true"></a>2.3 外国人加入与制度分层</h3>
+<h3 id="23">2.3 外国人加入与制度分层</h3>
 <ul>
 <li>住民登记后须办理健康保険加入；在留卡与住民票为必要书类。（事实）[厚生労働省 / 14-life-operations]</li>
 <li>短期停留与特定活动资格的医疗保障范围可能不同。（推断）</li>
 <li>制度分层：<strong>医保 / 医疗供给 / 精神健康 / 介護福祉</strong>四层。</li>
 </ul>
-<h3 id="24"><a id="24-政策改定触发器" aria-hidden="true"></a>2.4 政策改定触发器</h3>
+<h3 id="24">2.4 政策改定触发器</h3>
 <ul>
 <li>医保制度改定（自付比例、高额疗养费、后期高龄者）→ 本报告模块二；</li>
 <li>医疗费 / 药价改定 → 模块三；</li>
@@ -183,7 +309,7 @@ nav a:hover { text-decoration: underline; }
 <li>个人健康情况变化（伤病 / 家族）→ 事件触发。</li>
 </ul>
 <p>无触发器命中且窗口未到时<strong>不启动</strong>；不得为制造变化而虚构变化。</p>
-<h3 id="25"><a id="25-术语口径区分" aria-hidden="true"></a>2.5 术语口径区分</h3>
+<h3 id="25">2.5 术语口径区分</h3>
 <table class="fixed">
 <thead>
 <tr>
@@ -218,28 +344,27 @@ nav a:hover { text-decoration: underline; }
 </tr>
 </tbody>
 </table>
-<hr />
-<h2 id="s3"><a id="三医疗资源供需与就医费用核心模块" aria-hidden="true"></a>三、医疗资源供需与就医费用（核心模块）</h2>
-<h3 id="31"><a id="31-供给面" aria-hidden="true"></a>3.1 供给面</h3>
+<h2 id="s3" class="sec">三、医疗资源供需与就医费用（核心模块）</h2>
+<h3 id="31">3.1 供给面</h3>
 <ul>
 <li><strong>病床</strong>：全国病院一般病床 <strong>879,728 床</strong>（厚生労働省 令和 6 年医療施設調査，2024-10-01）。（事实，→ 13-regional-info）</li>
 <li><strong>医师</strong>：人口 10 万対医師数（従業地 / 居住地口径须区分）具体数值待核验；医师向大都市圈集中，地方都市的夜间救急 / 专科就医半径需先查到二次医疗圈。（事实 + 推断，→ 13-regional-info）</li>
 <li><strong>介護</strong>：介護保険 40 岁以上加入；介護サービス自付 1–3 割。（事实）[厚生労働省]</li>
 <li>地域间公共服务差异（医疗 / 教育资源地域差）需纳入个人选址判断。（推断，→ 13-regional-info）</li>
 </ul>
-<h3 id="32"><a id="32-费用面" aria-hidden="true"></a>3.2 费用面</h3>
+<h3 id="32">3.2 费用面</h3>
 <ul>
 <li><strong>就医流程</strong>：挂号 → 诊疗 → 处方 → 药房配药；部分医院需初诊料。（事实）</li>
 <li><strong>自付</strong>：适用保险后自付 3 割；初诊费用与检查费因医院而异。（事实；⚠ 行情待核实）</li>
 <li><strong>高额疗养费</strong>：医疗费超过自付上限时由公费承担差额，是大病负担的关键兜底。（事实；⚠ 现行上限额待核实）</li>
 <li><strong>多语言</strong>：都市圈大型医院较完善；地方中小医院可能仅日语；⚠ 清单待补。</li>
 </ul>
-<h3 id="33"><a id="33-净负担口径" aria-hidden="true"></a>3.3 净负担口径</h3>
+<h3 id="33">3.3 净负担口径</h3>
 <ul>
 <li>窗口自付 = 医疗费 × 自付比例；单月超过高额疗养费上限部分由公费承担。</li>
 <li>与<strong>医療費控除</strong>（年度税制）分离计算，不合并、不互抵。</li>
 </ul>
-<h3 id="34"><a id="34-口径并列不合并不取均值" aria-hidden="true"></a>3.4 口径并列（不合并、不取均值）</h3>
+<h3 id="34">3.4 口径并列（不合并、不取均值）</h3>
 <table class="fixed">
 <thead>
 <tr>
@@ -266,8 +391,7 @@ nav a:hover { text-decoration: underline; }
 </tr>
 </tbody>
 </table>
-<hr />
-<h2 id="s4"><a id="四医疗机构与介護设施类型细分" aria-hidden="true"></a>四、医疗机构与介護设施类型细分</h2>
+<h2 id="s4" class="sec">四、医疗机构与介護设施类型细分</h2>
 <table class="fixed">
 <thead>
 <tr>
@@ -314,28 +438,26 @@ nav a:hover { text-decoration: underline; }
 <li><strong>外国人对应</strong>：多语言窗口与医疗通译因机构而异；部分自治体 / 医院提供多语言通译服务，需提前预约。（⚠ 待核实）</li>
 <li><strong>未取得项</strong>：各类型常见治疗的自付行情；产前检查与多语言支援的外国人对应；障碍福祉（障害者手帳等）的具体服务。</li>
 </ul>
-<hr />
-<h2 id="s5"><a id="五就医与健康管理的能力要求" aria-hidden="true"></a>五、就医与健康管理的能力要求</h2>
-<h3 id="51"><a id="51-语言与沟通" aria-hidden="true"></a>5.1 语言与沟通</h3>
+<h2 id="s5" class="sec">五、就医与健康管理的能力要求</h2>
+<h3 id="51">5.1 语言与沟通</h3>
 <ul>
 <li>日语沟通是就医的基础；医疗通译（医療通訳 / 多言語診療）需提前确认是否提供与预约。（事实；⚠ 待核实）</li>
 <li>就诊时携带健康保険証与在留卡；处方笺交付后 <strong>4 日以内</strong> 有效（依据保険医療機関及び保険医療養担当規則第 20 条・第 21 条，→ 12-culture-life）。</li>
 </ul>
-<h3 id="52"><a id="52-手续与流程" aria-hidden="true"></a>5.2 手续与流程</h3>
+<h3 id="52">5.2 手续与流程</h3>
 <ul>
 <li>挂号 → 诊疗 → 处方 → 药房配药；保留领收书与明细。</li>
 <li>急救：<strong>119</strong> 为急救电话；救急病院按轮值制。（事实）[消防庁 / 厚生労働省]</li>
 <li>夜间 / 假日救急咨询：#7119（自治体设置，截至令和 6 年 11 月共 36 地域，覆盖 36/47 都道府县，→ 12-culture-life）。</li>
 </ul>
-<h3 id="53"><a id="53-健康管理与自我觉察" aria-hidden="true"></a>5.3 健康管理与自我觉察</h3>
+<h3 id="53">5.3 健康管理与自我觉察</h3>
 <ul>
 <li>常见风险：孤独、文化冲击、语言障碍、过劳。（事实 / 推断）</li>
 <li>支援渠道：精神保健福祉センター（自治体）；电话相談（いのちの電話 等）；カウンセリング（非医疗，自费）；雇主 / 支援机关的相談窓口。（⚠ 各渠道的多语言对应与费用待核实）</li>
 <li>特定技能司机：<strong>適性診断</strong>义务（→ 01-ssw-driver）；健康診断按时参加并保留记录。</li>
 </ul>
-<hr />
-<h2 id="s6"><a id="六健康相关资格与凭证" aria-hidden="true"></a>六、健康相关资格与凭证</h2>
-<h3 id="61"><a id="61-本人持有凭证" aria-hidden="true"></a>6.1 本人持有凭证</h3>
+<h2 id="s6" class="sec">六、健康相关资格与凭证</h2>
+<h3 id="61">6.1 本人持有凭证</h3>
 <table class="fixed">
 <thead>
 <tr>
@@ -367,56 +489,54 @@ nav a:hover { text-decoration: underline; }
 </tr>
 </tbody>
 </table>
-<h3 id="62"><a id="62-资格边界" aria-hidden="true"></a>6.2 资格边界</h3>
+<h3 id="62">6.2 资格边界</h3>
 <ul>
 <li>本主题<strong>不研究医疗执业资格</strong>（医师 / 歯科医师 / 看护师等），也不提供治疗建议。</li>
 <li>介護行业从业资格（如介護福祉士等）不在本主题范围；本主题只覆盖本人作为<strong>被保险者 / 患者</strong>的保障与使用。</li>
 <li>多语言医疗通译服务的提供主体因自治体 / 医院而异，非全国统一资格。（⚠ 待核实）</li>
 </ul>
-<h3 id="63"><a id="63-待核实" aria-hidden="true"></a>6.3 待核实</h3>
+<h3 id="63">6.3 待核实</h3>
 <ul>
 <li>障害者手帳 / 精神障害者保健福祉手帳的取得要件、认定流程与外国人对应；</li>
 <li>介護保険被保险者证的发证时点与所需书类。</li>
 </ul>
-<hr />
-<h2 id="s7"><a id="七就医落地路径建议结论章" aria-hidden="true"></a>七、就医落地路径建议（结论章）</h2>
+<h2 id="s7" class="sec">七、就医落地路径建议（结论章）</h2>
 <blockquote>
 <p>本章为「建议」，与事实数据分离；不替代医疗诊断。</p>
 </blockquote>
-<h3 id="71"><a id="71-落地时序建议" aria-hidden="true"></a>7.1 落地时序（建议）</h3>
+<h3 id="71">7.1 落地时序（建议）</h3>
 <ol>
 <li><strong>住民登记后立即</strong>：办理健康保険加入，确认保险证发放时点（→ 14-life-operations）。</li>
 <li><strong>抵达 1 个月内</strong>：确认居住地域的かかりつけ病院与夜间救急；记录附近药局。</li>
 <li><strong>抵达前</strong>：建立至少一个可联系的心理健康支援渠道；出现持续失眠 / 情绪低落时及早就医。（推断）</li>
 <li><strong>按雇主 / 自治体安排</strong>：按时参加健康診断与特定技能適性診断，保留记录。</li>
 </ol>
-<h3 id="72"><a id="72-就医实务要点建议" aria-hidden="true"></a>7.2 就医实务要点（建议）</h3>
+<h3 id="72">7.2 就医实务要点（建议）</h3>
 <ul>
 <li>就诊携带健康保険証与在留卡；处方笺 4 日以内交付；保留领收书与费用明细。</li>
 <li>大病就医前先了解高额疗养费上限与申请方式，避免一次性垫付压力。</li>
 <li>牙科 / 精神科就诊前确认保险适用项目与自付行情；首次就诊可能需初诊料。</li>
 <li>需要通译时，提前向自治体 / 医院确认是否提供与预约方式。</li>
 </ul>
-<h3 id="73"><a id="73-长期兜底建议" aria-hidden="true"></a>7.3 长期兜底（建议）</h3>
+<h3 id="73">7.3 长期兜底（建议）</h3>
 <ul>
 <li>介護保険 40 岁以上加入，非近期必需但属长期兜底知识；</li>
 <li>生活保护制度（→ 08-visa-immigration）与障碍福祉服务（⚠ 待核实）作为困难时的兜底索引。</li>
 </ul>
-<hr />
-<h2 id="s8"><a id="八数据可靠性与局限说明" aria-hidden="true"></a>八、数据可靠性与局限说明</h2>
-<h3 id="81"><a id="81-核验程度分级" aria-hidden="true"></a>8.1 核验程度分级</h3>
+<h2 id="s8" class="sec">八、数据可靠性与局限说明</h2>
+<h3 id="81">8.1 核验程度分级</h3>
 <ul>
 <li><strong>A 级（官方一手）</strong>：厚生労働省、日本年金機構、消防庁、内閣府（介護）。</li>
 <li><strong>B 级（学会 / 医疗机构官网）</strong>：日本医師会、日本歯科医師会、日本精神神経学会。</li>
 <li><strong>C 级（平台抽样）</strong>：本主题登记册无此类指标。</li>
 </ul>
-<h3 id="82"><a id="82-主要局限" aria-hidden="true"></a>8.2 主要局限</h3>
+<h3 id="82">8.2 主要局限</h3>
 <ol>
 <li>本报告为<strong>初析级</strong>，自付上限、初诊费用、多语言窗口、心理健康渠道的具体值未核实；</li>
 <li>医疗费用因医院与病种差异大，需用「区间 / 口径」呈现；</li>
 <li>个人定居地未定，地域差异无法收敛。</li>
 </ol>
-<h3 id="83"><a id="83-口径差异说明" aria-hidden="true"></a>8.3 口径差异说明</h3>
+<h3 id="83">8.3 口径差异说明</h3>
 <table class="fixed">
 <thead>
 <tr>
@@ -448,7 +568,7 @@ nav a:hover { text-decoration: underline; }
 </tr>
 </tbody>
 </table>
-<h3 id="84"><a id="84-待复核清单逐项复核入口" aria-hidden="true"></a>8.4 待复核清单（逐项复核入口）</h3>
+<h3 id="84">8.4 待复核清单（逐项复核入口）</h3>
 <table class="fixed">
 <thead>
 <tr>
@@ -500,14 +620,13 @@ nav a:hover { text-decoration: underline; }
 </tr>
 </tbody>
 </table>
-<h3 id="85"><a id="85-时间基准与来源语言" aria-hidden="true"></a>8.5 时间基准与来源语言</h3>
+<h3 id="85">8.5 时间基准与来源语言</h3>
 <ul>
 <li>数据基准日：<strong>2026-11-14</strong>；登记册版本 <strong>v2026.11.14_1</strong>。</li>
 <li>来源语言规则：日文官方一手优先；医疗机构 / 学会官网次之；中文来源仅作线索。</li>
 </ul>
-<hr />
-<h2 id="s9"><a id="九参考来源清单" aria-hidden="true"></a>九、参考来源清单</h2>
-<h3 id="_13"><a id="官方一手" aria-hidden="true"></a>官方一手</h3>
+<h2 id="s9" class="sec">九、参考来源清单</h2>
+<h3 id="_13">官方一手</h3>
 <ol>
 <li><a href="https://www.mhlw.go.jp/stf/seisakunitsuite/benko/hoken_kenkou/index.html">厚生労働省 · 健康保険</a> — 2026</li>
 <li><a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/kenkouhoken24.html">厚生労働省 · 高額療養費制度</a> — 2026</li>
@@ -515,13 +634,13 @@ nav a:hover { text-decoration: underline; }
 <li><a href="https://www.fdma.go.jp/">消防庁 · 救急</a> — 2026</li>
 <li><a href="https://www8.cao.go.jp/kaigo/">内閣府 · 介護</a> — 2026</li>
 </ol>
-<h3 id="_14"><a id="学会--医疗机构" aria-hidden="true"></a>学会 / 医疗机构</h3>
+<h3 id="_14">学会 / 医疗机构</h3>
 <ol>
 <li><a href="https://www.med.or.jp/">日本医師会</a> — 2026</li>
 <li><a href="https://www.jda.or.jp/">日本歯科医師会</a> — 2026</li>
 <li><a href="https://www.neuropsychology.jp/">日本精神神経学会</a> — 2026</li>
 </ol>
-<h3 id="_15"><a id="跨主题引用只读" aria-hidden="true"></a>跨主题引用（只读）</h3>
+<h3 id="_15">跨主题引用（只读）</h3>
 <ol>
 <li><a href="../../14-life-operations/reports/2026-11-life-operations.md">14-life-operations · 2026-11 月度报告</a> — 保险加入手续 / 住房与行政</li>
 <li><a href="../../07-economy-finance/reports/2026-11-economy-finance.md">07-economy-finance · 2026-11 月度报告</a> — 社保费 / 医疗費控除</li>
@@ -530,5 +649,37 @@ nav a:hover { text-decoration: underline; }
 <li><a href="../../13-regional-info/reports/2026-11-regional-info.md">13-regional-info · 2026-11 月度报告</a> — 地域医疗资源差异</li>
 <li><a href="../../01-ssw-driver/reports/2026-11-ssw-driver.md">01-ssw-driver · 2026-11 月度报告</a> — 特定技能司机適性診断</li>
 </ol>
+</main>
+<footer class="footer" role="contentinfo" aria-label="页脚">
+  <p>医疗 · 医疗·健康·心理 · 2026-11 月度报告｜2026-11<br>
+  报告路径：15-health-wellbeing\reports\2026-11-health-wellbeing.html</p>
+  <p class="backlinks">
+    <a href="../../index.html#topic-15-health-wellbeing">← 返回主题</a>
+    <a href="../../index.html">返回首页</a>
+  </p>
+</footer>
+<script>
+(function () {
+  'use strict';
+  var main = document.getElementById('main-content');
+  var tgDiff = document.getElementById('tg-diff');
+  var tgDel = document.getElementById('tg-del');
+  if (main && tgDiff) {
+    tgDiff.addEventListener('click', function () {
+      var hide = main.classList.toggle('hide-diff');
+      tgDiff.textContent = hide ? '显示更新标记' : '隐藏更新标记';
+    });
+  }
+  if (tgDel) {
+    tgDel.addEventListener('click', function () {
+      var open = tgDel.getAttribute('data-open') === '1';
+      var groups = document.querySelectorAll('details.diff-del-group');
+      for (var i = 0; i < groups.length; i++) groups[i].open = !open;
+      tgDel.setAttribute('data-open', open ? '0' : '1');
+      tgDel.textContent = open ? '展开全部删除' : '收起全部删除';
+    });
+  }
+})();
+</script>
 </body>
 </html>

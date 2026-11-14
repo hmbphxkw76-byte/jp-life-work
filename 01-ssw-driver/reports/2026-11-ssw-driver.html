@@ -5,44 +5,171 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>日本特定技能司机 · 2026-11 月度报告</title>
 <style>
-body { max-width: 1160px; margin: 24px auto; padding: 0 16px;
-      font-family: "Segoe UI", "Microsoft YaHei", sans-serif; color: #1a1a2e; line-height: 1.7; }
-h1, h2, h3 { color: #16213e; }
-table { border-collapse: collapse; width: 100%; overflow-x: auto; display: block; }
-th, td { border: 1px solid #cbd5e1; padding: 6px 10px; text-align: left; }
-th { background: #f1f5f9; }
-img { max-width: 100%; }
-code { background: #f6f8fa; padding: 2px 4px; border-radius: 3px; }
-blockquote { border-left: 4px solid #94a3b8; margin: 0; padding-left: 12px; color: #475569; }
-nav { margin: 12px 0 20px; padding: 8px 0; border-bottom: 1px solid #e2e8f0; }
-nav a { margin-right: 14px; color: #16213e; font-size: 14px; text-decoration: none; white-space: nowrap; }
-nav a:hover { text-decoration: underline; }
+:root{
+  --radius-sm:8px; --radius:12px; --radius-lg:16px;
+  --shadow:0 1px 3px rgba(20,40,70,.06); --shadow-md:0 4px 14px rgba(20,40,70,.09);
+  --font-sans:"Microsoft YaHei","PingFang SC","Segoe UI",Arial,sans-serif;
+  --font-mono:"SFMono-Regular",Consolas,"Liberation Mono",monospace;
+  --focus-ring:0 0 0 3px rgba(63,111,176,.35);
+  --bg:#f4f6f9; --card:#ffffff; --ink:#15202b; --ink2:#465667; --ink3:#657180;
+  --line:#e1e7ee; --line2:#eef2f6;
+  --navy:#16324f; --navy2:#2f5597; --blue:#3f6fb0; --blue-l:#eaf1fa;
+  --red:#a83224; --red-d:#822116; --red-l:#fbece8;
+  --pre:#b8541c; --pre-l:#fdf1e4;
+  --green:#1c7444; --green-l:#eaf5ef;
+  --amber:#956612; --amber-l:#fdf4e2;
+  --gray:#646f7b; --gray-l:#eff2f4;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{font-family:var(--font-sans);background:var(--bg);color:var(--ink);line-height:1.76;font-size:14.5px}
+a{color:var(--navy2);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px 68px}
+
+/* ── 跳转链接 / 焦点环 ── */
+.skip-link{position:absolute;left:12px;top:-48px;z-index:100;background:var(--navy);
+  color:#fff;padding:8px 16px;border-radius:0 0 8px 8px;font-size:12.5px;transition:top .15s ease}
+.skip-link:focus{top:0;color:#fff;text-decoration:none}
+:focus-visible{outline:none;box-shadow:var(--focus-ring)}
+
+/* ── 题头 Hero ── */
+.hero{background:linear-gradient(128deg,#0f2338 0%,#16324f 52%,#2f5597 100%);
+  color:#fff;padding:46px 36px 34px;border-radius:0 0 18px 18px;margin-bottom:24px}
+.hero .eyebrow{font-size:11.5px;letter-spacing:2.4px;color:rgba(255,255,255,.62);text-transform:uppercase}
+.hero h1{font-size:28px;font-weight:700;letter-spacing:.4px;margin:8px 0 6px;line-height:1.35}
+.hero .sub{font-size:13.5px;color:rgba(255,255,255,.82);max-width:900px}
+.hero .meta{font-size:12.3px;color:rgba(255,255,255,.78);margin-top:16px;line-height:2}
+.hero .meta b{color:#fff}
+.hero .tag{display:inline-block;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.2);
+  border-radius:14px;padding:2px 11px;margin:5px 6px 0 0;font-size:11.5px}
+
+/* ── 报告导航（sticky） ── */
+.report-nav{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);
+  border-bottom:1px solid var(--line);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  margin-bottom:26px}
+.report-nav .wrap{padding-top:10px;padding-bottom:10px}
+.nav-url{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;font-size:11.5px;
+  line-height:1.6;color:var(--ink3);padding-bottom:6px;margin-bottom:6px;
+  border-bottom:1px dashed var(--line)}
+.nav-url-label{font-weight:700;color:var(--ink2);white-space:nowrap}
+.nav-url a{color:var(--blue);word-break:break-all}
+.nav-tabs{display:flex;flex-wrap:wrap;gap:6px}
+.nav-tabs a{color:var(--ink2);font-size:12.5px;padding:5px 10px;border-radius:6px;
+  transition:background .15s ease,color .15s ease}
+.nav-tabs a:hover{background:var(--blue-l);color:var(--blue)}
+
+/* ── 跨月对比工具条 ── */
+.diff-bar{display:flex;flex-wrap:wrap;align-items:center;gap:8px;
+  margin-top:8px;padding-top:8px;border-top:1px dashed var(--line);
+  font-size:12px;color:var(--ink3)}
+.diff-bar .diff-summary{flex:1;min-width:200px;line-height:1.6}
+.diff-bar .diff-summary b{color:var(--navy)}
+.diff-toggle{font-size:12px;border:1px solid var(--line);background:#fff;border-radius:7px;
+  padding:4px 11px;cursor:pointer;color:var(--navy2);font-family:inherit}
+.diff-toggle:hover{border-color:var(--blue)}
+
+/* ── 正文 ── */
+h2.sec{font-size:20px;color:var(--navy);margin:44px 0 4px;padding-left:12px;
+  border-left:4px solid var(--navy2);font-weight:700;scroll-margin-top:110px}
+h3{font-size:15.5px;color:var(--navy);margin:22px 0 8px;font-weight:700}
+h4{font-size:14px;color:var(--navy);margin:16px 0 6px;font-weight:700}
+p{margin:0 0 12px}
+ul,ol{padding-left:22px;margin:8px 0 14px}
+li{margin-bottom:6px}
+hr{border:0;border-top:1px solid var(--line);margin:26px 0}
+strong{color:var(--ink)}
+code{background:#f6f8fa;padding:2px 5px;border-radius:4px;font-family:var(--font-mono);font-size:12.5px}
+pre{background:#f6f8fa;padding:12px 14px;border-radius:8px;overflow-x:auto;margin:10px 0 16px}
+pre code{background:none;padding:0;font-size:12.3px;line-height:1.65}
+blockquote{border-left:4px solid var(--navy2);background:var(--blue-l);
+  padding:12px 16px;border-radius:0 8px 8px 0;margin:12px 0;color:var(--ink2)}
+blockquote p:last-child{margin-bottom:0}
+.lead{color:var(--ink2);font-size:13.8px;margin:6px 0 14px}
+
+/* ── 表格 ── */
+table{width:100%;border-collapse:collapse;font-size:12.6px;background:var(--card);
+  border-radius:8px;overflow:hidden;margin:12px 0 16px}
+th{background:var(--navy);color:#fff;padding:8px 10px;text-align:left;font-weight:600;
+  font-size:12px;vertical-align:bottom}
+td{padding:7px 10px;border-bottom:1px solid var(--line2);vertical-align:top;line-height:1.62}
+tbody tr:nth-child(even) td{background:#fafbfd}
+tbody tr:hover td{background:var(--blue-l)}
+td.num{font-variant-numeric:tabular-nums}
+
+/* ── 信息卡 / 注释 ── */
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;
+  padding:18px 20px;margin:14px 0;box-shadow:var(--shadow)}
+.card h3:first-child{margin-top:0}
+.note{background:var(--amber-l);border-left:4px solid var(--amber);padding:10px 14px;
+  border-radius:0 7px 7px 0;font-size:12.9px;margin:12px 0}
+.note.gap{background:var(--gray-l);border-left-color:var(--gray)}
+.note.check{background:var(--green-l);border-left-color:var(--green)}
+.note.correct{background:var(--red-l);border-left-color:var(--red)}
+.note.preline{background:var(--pre-l);border-left-color:var(--pre)}
+
+/* ── 差异高亮（跨月对比） ── */
+.diff-badge{display:inline-block;font-size:10.5px;font-weight:700;line-height:1;
+  border-radius:3px;padding:2px 6px;margin-right:6px;vertical-align:middle;white-space:nowrap}
+.diff-block{border-radius:6px;padding:4px 8px;margin:4px -8px}
+.diff-new{background:var(--green-l);box-shadow:inset 3px 0 0 var(--green)}
+.diff-new .diff-badge{background:var(--green);color:#fff}
+.diff-mod{background:var(--amber-l);box-shadow:inset 3px 0 0 var(--amber)}
+.diff-mod .diff-badge{background:var(--amber);color:#fff}
+.diff-del-group{margin:6px 0;border:1px dashed var(--line);border-radius:6px;background:#fbfcfe}
+.diff-del-group>summary{cursor:pointer;font-size:12px;color:var(--ink3);
+  padding:6px 10px;user-select:none;list-style:none}
+.diff-del-group>summary::-webkit-details-marker{display:none}
+.diff-del-group>summary::before{content:"▸ ";color:var(--gray)}
+.diff-del-group[open]>summary::before{content:"▾ "}
+.diff-del-group .diff-del-body{padding:2px 8px 8px;color:var(--ink3)}
+.diff-del-group .diff-del-body s,.diff-del-group .diff-del-body del{color:var(--red)}
+.diff-del-group .diff-badge{background:var(--gray-l);color:var(--gray)}
+/* 隐藏更新标记：对照阅读模式 */
+main.hide-diff .diff-badge{display:none}
+main.hide-diff .diff-block{background:none;box-shadow:none;padding:0;margin:0}
+main.hide-diff .diff-del-group{display:none}
+
+/* ── 页脚 ── */
+.footer{font-size:11.4px;color:var(--ink3);text-align:center;margin-top:22px;line-height:1.9}
+.footer .backlinks{margin-top:8px}
+.footer .backlinks a{margin:0 8px}
+
+/* ── 响应式 ── */
+@media(max-width:760px){
+  .hero{padding:30px 20px;border-radius:0 0 14px 14px}
+  .hero h1{font-size:21px}
+  .wrap{padding:0 14px 46px}
+  td,th{padding:6px 7px;font-size:11.7px}
+  h2.sec{font-size:17.5px}
+}
 </style>
 </head>
 <body>
-<h1 id="2026-11"><a id="日本特定技能司机--2026-11-月度报告" aria-hidden="true"></a>日本特定技能司机 · 2026-11 月度报告</h1>
-<blockquote>
-<p><strong>版本</strong>：v1.0（2026-11 月度）　<strong>数据基准日</strong>：2026-11-14
-<strong>主题类型</strong>：职业就业调研型（employment-research）
-<strong>受众定位</strong>：面向拟通过特定技能（SSW）签证赴日从事货运司机工作的读者，兼具行业监测与求职落地顾问视角。
-<strong>来源规则</strong>：日文官方一手 + 英文权威优先；中文来源仅作线索，引用须回溯日 / 英原文（中国侧国家统计局、外汇交易中心、驻日领馆费用页为项目指定例外，仅用于中国侧输入）。</p>
-</blockquote>
-<hr />
-<nav aria-label="报告导航">
-<a href="#s1">一、核心结论（摘要）</a>
-<a href="#s2">二、行业与政策发展趋势</a>
-<a href="#s3">三、人才供需与薪酬（核心模块）</a>
-<a href="#s4">四、雇主与企业类型细分</a>
-<a href="#s5">五、岗位技能要求</a>
-<a href="#s6">六、行业认可的职业资质与证书</a>
-<a href="#s7">七、就业落地路径建议（结论章）</a>
-<a href="#s8">八、数据可靠性与局限说明</a>
-<a href="#s9">九、参考来源清单</a>
+<a class="skip-link" href="#main-content">跳转到主要内容</a>
+<header class="hero" role="banner" aria-label="报告题头">
+  <div class="eyebrow">日本特定技能司机 · 职业就业调研型</div>
+  <h1>日本特定技能司机 · 2026-11 月度报告</h1>
+  <div class="sub">版本：v1.0（2026-11 月度）｜数据基准日：2026-11-14</div>
+  <div class="meta"><b>版本</b>：v1.0（2026-11 月度）<br><b>数据基准日</b>：2026-11-14<br><b>主题类型</b>：职业就业调研型（employment-research）<br><b>受众定位</b>：面向拟通过特定技能（SSW）签证赴日从事货运司机工作的读者，兼具行业监测与求职落地顾问视角。<br><b>来源规则</b>：日文官方一手 + 英文权威优先；中文来源仅作线索，引用须回溯日 / 英原文（中国侧国家统计局、外汇交易中心、驻日领馆费用页为项目指定例外，仅用于中国侧输入）。</div>
+  <div><span class="tag">2026-11</span><span class="tag">职业就业调研型</span></div>
+</header>
+<nav class="report-nav" aria-label="报告导航">
+  <div class="wrap">
+    <div class="nav-url">
+      <span class="nav-url-label">报告路径</span>
+      <a href="2026-11-ssw-driver.html">01-ssw-driver\reports\2026-11-ssw-driver.html</a>
+    </div>
+    <div class="nav-tabs"><a href="#s1">一、核心结论（摘要）</a><a href="#s2">二、行业与政策发展趋势</a><a href="#s3">三、人才供需与薪酬（核心模块）</a><a href="#s4">四、雇主与企业类型细分</a><a href="#s5">五、岗位技能要求</a><a href="#s6">六、行业认可的职业资质与证书</a><a href="#s7">七、就业落地路径建议（结论章）</a><a href="#s8">八、数据可靠性与局限说明</a><a href="#s9">九、参考来源清单</a></div>
+    
+  </div>
 </nav>
-<h2 id="s1"><a id="一核心结论摘要" aria-hidden="true"></a>一、核心结论（摘要）</h2>
+<main class="wrap" id="main-content" role="main" aria-label="报告正文">
+<h2 id="s1" class="sec">一、核心结论（摘要）</h2>
 <p><strong>主题定义</strong>：特定技能「自動車運送業」分野（卡车 / 出租车 / 巴士运転者区分）的制度框架与在留路径、司机人才供需与薪资待遇、物流行业态势的指标面、L4 自动驾驶对司机岗位影响的结论面、就业落地路径。</p>
 <p><strong>监测边界</strong>：含本分野制度与要件、司机供需与薪酬、物流行业态势指标面、L4 结论面、就业落地路径；不含技能实习与其他分野在留资格（→ <a href="../../08-visa-immigration/reports/2026-11-visa-immigration.md">08-visa-immigration</a>）、普通货运司机宏观行情与现场操作细节（→ <a href="../../02-career-driver/reports/2026-11-career-driver.md">02-career-driver</a>）、行业结构与赛道（→ <a href="../../04-industry-logistics/reports/2026-11-industry-logistics.md">04-industry-logistics</a>）、自动驾驶技术路线与法规（→ <a href="../../05-industry-autonomous/reports/2026-11-industry-autonomous.md">05-industry-autonomous</a>）、法规条文解读（→ <a href="../../09-politics-law/reports/2026-11-politics-law.md">09-politics-law</a>）。</p>
-<h3 id="_2"><a id="数据变更摘要" aria-hidden="true"></a>数据变更摘要</h3>
+<h3 id="_2">数据变更摘要</h3>
 <blockquote>
 <p>本版为 2026-11 月度报告复用生成。登记册活值基准为 <strong>v2026.11.12_5</strong>（数据基准 2026-11-12），下表覆盖登记册全部 <strong>14 项追踪指标</strong>与 <strong>2 项交叉验证输入</strong>；未变动项注明「截至 2026-11-14 无更新」。</p>
 </blockquote>
@@ -160,7 +287,7 @@ nav a:hover { text-decoration: underline; }
 <li><strong>首要触发器</strong>：ISA 9 月末速报<strong>未发布</strong>——2026-11-06 换版仍为 2026-08 末（843 / 438,128 / 23,348）；按更新节奏预计 12 月上旬随 10 月分发布（推断）→ 触发后重点刷新 #1、#3。</li>
 <li><strong>新增触发器</strong>：两项 2027-04-01 生效要件已进入倒计时——①出租车 / 巴士区分 B1 相当以上（COE 申请）②登録支援機関支援体制要件改正 → 2027 年初须专项复核 #2、#12 及 2 号 / 育成就労衔接。</li>
 </ul>
-<h3 id="v20261112_5-20"><a id="已修正事实清单继承最新版-v20261112_5共-20-条本版无新增修正" aria-hidden="true"></a>已修正事实清单（继承最新版 v2026.11.12_5，共 20 条，本版无新增修正）</h3>
+<h3 id="v20261112_5-20">已修正事实清单（继承最新版 v2026.11.12_5，共 20 条，本版无新增修正）</h3>
 <ol>
 <li>受入上限：<strong>现行 22,100 人</strong>（2026-01-23 阁议决定将旧方针 24,500 人下调）；ssw.go.jp 日 / 中文版仍显示 24,500 系未同步，不得再称「两组官方数字并存待辨析」。[Source: https://www.moj.go.jp/isa/content/001472175.pdf, 2026]</li>
 <li>签证费：<strong>2026-07-01 起受理件单次 715 元人民币（约 15,000 円）</strong>，二次 / 数次 1,430 元；上海 / 青岛 / 重庆三馆一致，不得再引「200 元人民币」旧页。[Source: https://www.shanghai.cn.emb-japan.go.jp/itpr_ja/11_000001_00633.html, 2026]</li>
@@ -183,7 +310,7 @@ nav a:hover { text-decoration: underline; }
 <li>日语要件<strong>分区分化</strong>：卡车运転者区分维持 A2.2；出租车 / 巴士运転者区分自 <strong>2027-04-01 以后 COE 申请</strong>起须「日本語教育の参照枠 B1 相当以上」（JLPT N3 以上且被判定 CEFR B1；A2.2 仅限「非包车巴士＋B1 学习计划＋日语支援者同乘」等例外）。[Source: https://www.moj.go.jp/isa/03_00198.html, 2026]</li>
 <li>不得把「JLPT N4」当作 2026 年 12 月当期可报名路径——<strong>2026 年 12 月 JLPT N1–N5 全等级在报名截止前满员</strong>，出入国在留管理庁 2026-10-05 专页明确建议改考 JFT-Basic。[Source: https://www.moj.go.jp/isa/content/001471906.pdf, 2026]</li>
 </ol>
-<h3 id="_3"><a id="核心判断" aria-hidden="true"></a>核心判断</h3>
+<h3 id="_3">核心判断</h3>
 <ol>
 <li><strong>日语要件分区分化，卡车路径未变、出租 / 巴士路径收紧（制度级）</strong>：運用要領別冊（自動車運送業分野）于令和 8 年 10 月 9 日一部改正，ISA 2026-09-30 公布「B1 相当以上の確認開始時期」——卡车运転者区分仍为 A2.2（JFT-Basic A2.2 或 JLPT N4）；出租车 / 巴士运転者区分自 2027-04-01 以后的 COE 申请起须 B1 相当以上。对本项目受众（货运卡车）而言：<strong>短期门槛不变，但「先考 N4 再进日本」的旧叙事在出租 / 巴士旁路上已不可迁移</strong>；本分野仍不得接收 2 号。[Source: https://www.moj.go.jp/isa/03_00198.html, 2026; https://www.moj.go.jp/isa/content/001472534.pdf, 2026]</li>
 <li><strong>2026 年 12 月 JLPT 全等级满员，N4 当期路径实质关闭（可操作级）</strong>：出入国在留管理庁 2026-10-05 专页载明，令和 8 年 12 月考试的 N1–N5 全等级在报名受理期结束前即已截止，并建议改考 JFT-Basic（A2.2、A1 同样可用于特定技能 1 号与育成就労申请；日本国内基本 11 处、每月多次）。中国大陆考生的下一可用窗口从「2026-12 JLPT」改为「赴有考点国家 / 地区考 JFT-Basic」或「入境日本后受验」（推断）。[Source: https://www.moj.go.jp/isa/content/001471906.pdf, 2026; https://sswt-portal.classnk.or.jp/news/29, 2026]</li>
@@ -194,7 +321,7 @@ nav a:hover { text-decoration: underline; }
 <li><strong>登録支援機関侧成本将上升（推断）</strong>：支援体制要件改正（2027-04-01 施行）要求按事业所选任常勤支援責任者·支援担当者、支援业务限定人员、支援責任者受讲养成讲习，并设「担当者数 &gt; 受托机关数÷10、&gt; 在支援人数÷50」的下限比例。推断：中小登録支援機関的固定人力成本上升，2–4 万円/人·月的行情存在上修压力；但截至基准日无公开涨价证据，维持原区间。[Source: https://www.moj.go.jp/isa/10_00263.html, 2026]</li>
 <li><strong>其余指标截至 2026-11-14 无更新，全部继承</strong>：缺口精确值、求人 9 样本、中国侧签证费与中介入口、教习费区间均继承上一版；L4 口径由无官方来源的「许可 12 件」更正为国交省官方「実装 10 カ所（2026-02 时点）」。</li>
 </ol>
-<h3 id="_4"><a id="关键数字卡" aria-hidden="true"></a>关键数字卡</h3>
+<h3 id="_4">关键数字卡</h3>
 <table class="fixed">
 <thead>
 <tr>
@@ -306,7 +433,7 @@ nav a:hover { text-decoration: underline; }
 </tr>
 </tbody>
 </table>
-<h3 id="_5"><a id="调研说明" aria-hidden="true"></a>调研说明</h3>
+<h3 id="_5">调研说明</h3>
 <ul>
 <li><strong>来源语言规则</strong>：统计与制度类均取日文官方一手（ISA / MLIT / 厚労省 / 警察庁 / 内閣府 / 総務省 / 日銀）；行业机构（全ト协、TDB、TSR、大和总研）与考试实施机构（ClassNK、JPF、Prometric）次之；中文来源仅作线索，引用回溯日 / 英原文。中国侧国家统计局、外汇交易中心、驻日领馆费用页为项目指定例外，仅用于中国侧输入。</li>
 <li><strong>时效窗口</strong>：近 12 个月内数据优先；超过 24 个月标注年份（如「现役事业用卡车司机约 84 万人」为 2024 年口径）。</li>
@@ -314,9 +441,8 @@ nav a:hover { text-decoration: underline; }
 <li><strong>结论边界</strong>：允许框架性求职路径建议，不承诺就业结果、不保证薪资水平、不给「必过」式断言；不给投资评级、不出具 Go/No-Go 决策建议。</li>
 <li><strong>结构说明</strong>：本报告按职业就业调研型九节骨架组织；第 5 节「岗位技能要求」与第 6 节「行业认可的职业资质与证书」为按骨架新设的独立节（原由现行报告二、三、六合并承载试验信息与驾照路径）。</li>
 </ul>
-<hr />
-<h2 id="s2"><a id="二行业与政策发展趋势" aria-hidden="true"></a>二、行业与政策发展趋势</h2>
-<h3 id="21"><a id="21-制度框架与受入上限" aria-hidden="true"></a>2.1 制度框架与受入上限</h3>
+<h2 id="s2" class="sec">二、行业与政策发展趋势</h2>
+<h3 id="21">2.1 制度框架与受入上限</h3>
 <ul>
 <li><strong>分野设立</strong>：「自動車運送業」分野于 2024-03-29 阁议决定新增（同批：铁道、林业、木材产业），监管省厅为<strong>国土交通省</strong>；2024-12-19 上乗け基准告示施行后正式开始接收；分野運用方針已于 2026-01-23 重新阁议决定。[Source: https://www.moj.go.jp/isa/applications/ssw/2024.03.29.kakugikettei.html, 2024–2026; https://www.moj.go.jp/isa/policies/ssw/automobiletransportation, 2026]</li>
 <li><strong>受入上限（现行口径）</strong>：<strong>22,100 人</strong>（2024 年 4 月–2029 年 3 月末，2026-01-23 阁议决定的新运用方针）；旧方针 24,500 人<strong>已废止</strong>。ISA 受入见込数·在留者数表（2026-11-06 更新版）「自動車運送業」列示值即为 <strong>22,100</strong>；ssw.go.jp 日 / 中文版仍显示 24,500，属<strong>未同步观察项</strong>（连续五次），不作现行值使用。[Source: https://www.moj.go.jp/isa/content/001472175.pdf, 2026]</li>
@@ -368,7 +494,7 @@ nav a:hover { text-decoration: underline; }
 <ul>
 <li>⚠️ 引用数据时<strong>严禁将技能实习统计与特定技能混算</strong>；技能实习、特定技能 2 号分野适用性的完整官方口径以 ISA 原文为准。</li>
 </ul>
-<h3 id="22-2027-04-01-b1"><a id="22-自動車運送業分野人材基准2027-04-01-起-b1" aria-hidden="true"></a>2.2 「自動車運送業」分野人材基准（2027-04-01 起 B1）</h3>
+<h3 id="22-2027-04-01-b1">2.2 「自動車運送業」分野人材基准（2027-04-01 起 B1）</h3>
 <table class="fixed">
 <thead>
 <tr>
@@ -410,21 +536,21 @@ nav a:hover { text-decoration: underline; }
 <li><strong>運用要領別冊制定履历</strong>：令和 6 年 12 月 19 日公表 → 令和 7 年 2 月 17 日、7 月 15 日、<strong>令和 8 年 10 月 9 日</strong>三次一部改正；告示仍为令和 6 年国土交通省告示第 1362 号。[Source: https://www.moj.go.jp/isa/content/001472534.pdf, 2026]</li>
 <li><strong>技能实习 2 号良好修了者</strong>的免试 / 免日语待遇不因本次改正而变化（卡车侧原文口径维持「当分の間…証明は要しません」）。[Source: 同上]</li>
 </ul>
-<h3 id="23"><a id="23-试验与在留路径制度侧" aria-hidden="true"></a>2.3 试验与在留路径（制度侧）</h3>
+<h3 id="23">2.3 试验与在留路径（制度侧）</h3>
 <ul>
 <li><strong>技能試験</strong>（实施主体：一般财团法人日本海事协会 ClassNK）：CBT 无固定考期、考位有空随时可考；学科 30 问（○×）＋实技 20 问（三选一），共 80 分钟，各正答率 ≥60% 合格；试题日语（附注音）。实施地 18 国——<strong>中国大陆无考点</strong>；出差考试限企业申请（海外 50 枠起）。[Source: https://sswt-portal.classnk.or.jp/area?tab=3, 2026]</li>
 <li><strong>日本語試験</strong>：JFT-Basic 随時 CBT，海外 14 国 / 27 都市＋日本国内 10 都道府县——<strong>中国大陆不在实施地</strong>；JLPT 中国大陆每年 2 回（2026 年 7 月 5 日、12 月 6 日），N4 报名费 450 元人民币。<strong>2026 年 12 月 JLPT N1–N5 全等级报名截止前满员</strong>，官方建议改考 JFT-Basic。[Source: https://www.prometric-jp.com/zh-CHS/ssw/, 2026; https://jlpt.neea.cn/faq.html, 2026; https://www.moj.go.jp/isa/content/001471906.pdf, 2026]</li>
 <li><strong>申请流程</strong>：海外申请者先以「特定活动」（特定自动车运送业准备）入境（2025-02-17 起受理；卡车最长 6 个月），办理驾照（外免切替）与研修——<strong>未取得日本驾照则不能转入特定技能 1 号</strong>；雇主代办 COE（手续费免费、标准审查 1–3 个月）→ 驻外使领馆签证 → 入境。[Source: https://www.moj.go.jp/isa/applications/procedures/16-1, 2026]</li>
 <li><strong>登録支援機関</strong>：代雇主实施「义务性支援 10 项目」，不得再委托；登录 5 年有效，新登录手续费 28,400 円 / 更新 11,100 円；本分野受托支援机关须加入国交省协议会（免费）。<strong>支援体制要件改正 2027-04-01 施行</strong>（详见 6.3）。[Source: https://www.moj.go.jp/isa/policies/ssw/supportssw.html, 2026]</li>
 </ul>
-<h3 id="24-2024"><a id="24-物流行业态势2024-年问题与运賃适正化" aria-hidden="true"></a>2.4 物流行业态势：2024 年问题与运賃适正化</h3>
+<h3 id="24-2024">2.4 物流行业态势：2024 年问题与运賃适正化</h3>
 <ul>
 <li><strong>官方定调</strong>：2024 年度约 14% 运力缺口经官民对策「基本克服」；未发生全国性停运，总合物流施策大纲记载「部分地区出现运输限制」；再配送率降至 <strong>7.6%</strong>（2026-04）。[Source: https://www.mlit.go.jp/report/press/tokatsu01_hh_001025.html, 2026]</li>
 <li><strong>トラック适正化二法</strong>（令和 7 年法律第 60 号·第 61 号，2025-06-11 公布）：国家设定「适正原価」，荷主与运送双方均不得低于该水平收付。其中「公布后 1 年内」的 [1] 违法白トラ利用的货主规制、[2] 委托次数限制努力义务、[3] 对货物利用运送事业者的准用，<strong>施行日为 2026-04-01</strong>；[4] 许可更新制、[5]「適正原価」低于限制（含<strong>标准运赁废止</strong>）属「公布后 3 年内」，截至基准日<strong>未施行</strong>。2026-04 起禁止委托无许可「白牌卡车」（荷主罚 100 万円以下）。[Source: https://www.mlit.go.jp/jidosha/jidosha_mn4_000019.html, 2026]</li>
 <li><strong>物流効率化法</strong>（法律名变更）：2026-04 起对一定规模以上货主 / 物流事业者实施「特定事業者」指定与中長期計画·定期報告义务，货主须选任物流統括管理者。[Source: https://www.mlit.go.jp/seisakutokatsu/freight/seisakutokatsu_freight_mn1_000034.html, 2026]</li>
 <li><strong>结论（推断）</strong>：2026-04 起进入「可核查的合规期」——货主侧被要求书面化委托链与装载效率改善，司机侧的直接现金效果尚未可测；真正的运价硬约束（適正原価下限）仍在 2027 年以后窗口。<strong>若「标准运赁」正式废止而適正原価尚未告示，过渡期货主与事业者的谈判基准将出现空窗</strong>，需持续跟踪告示文本。[Source: https://www.mlit.go.jp/jidosha/jidosha_mn4_000019.html, 2026]</li>
 </ul>
-<h3 id="25"><a id="25-物流倒产双机构双口径并列" aria-hidden="true"></a>2.5 物流倒产（双机构双口径并列）</h3>
+<h3 id="25">2.5 物流倒产（双机构双口径并列）</h3>
 <table class="fixed">
 <thead>
 <tr>
@@ -455,7 +581,7 @@ nav a:hover { text-decoration: underline; }
 <li>⚠️ <strong>两个机构统计期间、定义与分類不同，不可直接比较或加总</strong>（TSR 934 与 TDB 950 不可视为同一统计的修订）。</li>
 <li><strong>结论（推断）</strong>：倒产总量连续 2 个月同比下降，但运输业与「人手不足型」倒产逆势上升，中小运输事业者被劳动力成本与司机流失双向挤压；对求职者的含义是「雇主稳定性筛查」比「行业景气判断」更重要。</li>
 </ul>
-<h3 id="26"><a id="26-智能驾驶展望结论面全部标推断" aria-hidden="true"></a>2.6 智能驾驶展望（结论面，全部标「推断」）</h3>
+<h3 id="26">2.6 智能驾驶展望（结论面，全部标「推断」）</h3>
 <ul>
 <li><strong>L4 实绩</strong>：国交省 2026-05-11 公开口径为<strong>截至 2026 年 2 月、全国 10 カ所实现 L4（特定自動運行）社会实装</strong>；官方未公布按「许可件数」汇总的统计，原登记册「12 件」无官方来源，已废止。[Source: https://www.magazine.mlit.go.jp/interview/vol62-c-1/, 2026]</li>
 <li><strong>新增线索</strong>：いすゞ在 RoAD to the L4 成果报告会（2026-03-05）披露路线巴士 <strong>2026 年度提出 L4 認可申請</strong>、<strong>2027 年度事业化</strong>目标；千叶县柏市「柏の叶」地区于 <strong>2025-11-12</strong> 取得县内首个 L4（特定自動運行）许可。[Source: https://www.road-to-the-l4.go.jp/publication/pdf/03-3_ISUZU_20260305.pdf, 2026; https://www.city.kashiwa.lg.jp/koho/pressrelease/r7houdou/12gatsu/r7121004.html, 2025]</li>
@@ -463,9 +589,8 @@ nav a:hover { text-decoration: underline; }
 <li><strong>实证进展</strong>：新东名骏河湾沼津 SA—滨松 SA 约 100km，2025-03 起深夜设「自动驾驶车优先车道」，L4 卡车公道实证进行中；2024-11-05 丰田通商等 4 社＋五十铃 / 日野 / 三菱扶桑 / UD 启动新东名大型卡车公道实证。[Source: https://www.isuzu-global.com/ja/newsroom/20241105_1.html, 2024]</li>
 <li><strong>岗位影响评估（推断）</strong>：①<strong>干线先于市内配送</strong>——高速公路区间、固定路线、夜间时段与 L4 卡车 ODD 匹配度最高，2027–2030 年更可能先出现「无人区间的中转接力」而非整段无人化；②<strong>市内配送替代最慢</strong>——混流交通、驻车装卸、客户交接仍依赖人，2030 年前岗位数量冲击有限；③<strong>特定技能司机的风险窗口</strong>——1 号在留上限 5 年，若 2027–2031 年干线无人化落地，首批入国者的第 3–5 年可能遇到长途岗位减少，建议在 3 年内完成大型驾照、運行管理者资格或叉车 / 仓库管理方向的技能叠加；④本分野不得转 2 号，「以 2 号续命」策略不可用。</li>
 </ul>
-<hr />
-<h2 id="s3"><a id="三人才供需与薪酬核心模块" aria-hidden="true"></a>三、人才供需与薪酬（核心模块）</h2>
-<h3 id="31"><a id="31-供需缺口多口径并列不合并" aria-hidden="true"></a>3.1 供需缺口（多口径并列，不合并）</h3>
+<h2 id="s3" class="sec">三、人才供需与薪酬（核心模块）</h2>
+<h3 id="31">3.1 供需缺口（多口径并列，不合并）</h3>
 <table class="fixed">
 <thead>
 <tr>
@@ -521,7 +646,7 @@ nav a:hover { text-decoration: underline; }
 <li>⚠️ <strong>口径提示</strong>：全产业有效求人倍率 1.19（季节调整值）与「汽车驾驶业 2.56」（职业别·常用含パート）口径不同，不得相除或直接对比，仅用于说明驾驶职业的相对紧缺程度（推断）。</li>
 <li>⚠️ 「トラックドライバー不足実態調査」调查名不存在；不足人数精确值以国交省检讨会中间总结（NX 总研试算）为准，政策包 14% / 34% 仅为示意图。</li>
 </ul>
-<h3 id="32"><a id="32-薪资统计厚労省--全ト协口径警示" aria-hidden="true"></a>3.2 薪资统计（厚労省 + 全ト协，口径警示）</h3>
+<h3 id="32">3.2 薪资统计（厚労省 + 全ト协，口径警示）</h3>
 <p><strong>厚労省毎月勤労統計 2026 年 9 月分</strong>（2026-11-06 公布，運輸業・郵便業，5 人以上事业所）：</p>
 <table class="fixed">
 <thead>
@@ -565,7 +690,7 @@ nav a:hover { text-decoration: underline; }
 <li><strong>口径警示（继承，务必保留）</strong>：341,158 円为「運輸業・郵便業」全体（含仓储、邮政、事务岗）现金给与，<strong>不含赏与</strong>；「司机平均年收 430 万円」类数字为<strong>含赏与</strong>口径。两者不可直接对比；若并列必须标注口径。</li>
 <li>年龄别年收（2023，白書）：大型司机 485 万円 / 中小型 438 万円（全产业 507 万円）。[Source: https://www.mlit.go.jp/hakusyo/mlit/r06/hakusho/r07/html/n1111000.html, 2025]</li>
 </ul>
-<h3 id="33-9-url"><a id="33-求人抽样9-样本四元组立档岗位--地域--月収--url" aria-hidden="true"></a>3.3 求人抽样（9 样本四元组立档，岗位 × 地域 × 月収 × URL）</h3>
+<h3 id="33-9-url">3.3 求人抽样（9 样本四元组立档，岗位 × 地域 × 月収 × URL）</h3>
 <p>登记册 #6 记 <strong>9 样本</strong>，全部完成四元组立档与官网回溯；下表列示其中已回溯样本（B 级为企业官网 / 采用站一手，C 级为聚合转载）。月给为平台 / 官网标注口径，含 / 不含手当须逐条核对。</p>
 <table class="fixed">
 <thead>
@@ -644,7 +769,7 @@ nav a:hover { text-decoration: underline; }
 <li><strong>来源分级</strong>：B 级（企业官网 / 采用站一手）——桑原服务、朝日运输、Mintoku Work、コフジ物流、中越グループ采用站、メジャーサービスジャパン、マルマサフード物流、株式会社大富；C 级（聚合转载）——genbars、works.aqsh、gojob、求人Box。</li>
 <li>企业待遇公告参考：佐川急便招聘面月收例 32 万円、年收 480 万起 [Source: https://www.trucknews.biz/article/r091138/, 2025]；雅玛多 SD 司机「年收 600 万円以上可」 [Source: https://www.kuronekoyamato.co.jp/ytc/corp/recruit/sales-driver/benefits-and-training.html, 2026]。</li>
 </ul>
-<h3 id="34-sppi"><a id="34-运賃指数sppi-口径拆分" aria-hidden="true"></a>3.4 运賃指数（SPPI 口径拆分）</h3>
+<h3 id="34-sppi">3.4 运賃指数（SPPI 口径拆分）</h3>
 <ul>
 <li>日銀企業向けサービス価格指数（SPPI，2020 年基准）<strong>2026 年 9 月速報</strong>（2026-10-27 公表）：「<strong>道路貨物輸送</strong>」前年同月比 <strong>+4.6%</strong>（8 月 +4.3%、+0.3pt 加速）——与本项目最相关的运价口径。[Source: https://www.boj.or.jp/statistics/pi/cspi_release/sppi2609.pdf, 2026]</li>
 <li>大分類「<strong>運輸・郵便</strong>」+8.4%（8 月 +6.8%），但加速主因为<strong>外航貨物輸送 +97.7%</strong>（国际海运市况），与国内卡车运价不可混同；「運輸・郵便（除く国際運輸）」+3.2%。[Source: 同上]</li>
@@ -653,7 +778,7 @@ nav a:hover { text-decoration: underline; }
 <li>标准运賃：令和 6 年告示第 209 号（2024-03）水准 <strong>+8%</strong> 并新增装卸费加算；价格转嫁率 2023-09 的 24.2% → 2025-09 的 <strong>34.7%</strong>（中小企业厅）。[Source: https://jta.or.jp/member/kaisei_jigyoho/unchin_new.html, 2024]</li>
 <li><strong>结论（推断）</strong>：国内卡车运价涨幅仍在 4–5% 区间稳步上行，但<strong>低于同期运输业现金给与 +4.9% 的名义工资涨幅</strong>（口径不同，仅并列观察）——单位运价对工资的覆盖在边际上收紧。</li>
 </ul>
-<h3 id="35-2026-11-12"><a id="35-净收入参考模型推断汇率-2026-11-12" aria-hidden="true"></a>3.5 净收入参考模型（推断，汇率 2026-11-12）</h3>
+<h3 id="35-2026-11-12">3.5 净收入参考模型（推断，汇率 2026-11-12）</h3>
 <p><strong>模型输入参数（均官方来源）</strong>：</p>
 <table class="fixed">
 <thead>
@@ -683,20 +808,19 @@ nav a:hover { text-decoration: underline; }
 </table>
 <p><strong>示例概算（月给总额 30 万円、东京、40 岁未满、单身无扶养——全部为推断）</strong>：社保约 4.4 万円＋所得税约 0.44 万＋住民税约 0.85 万 → <strong>到手约 24.3 万円/月</strong>（入职首年无前年住民税约 25.2 万円）。模型未含赏与、通勤手当等非课税 / 变动项。</p>
 <p><strong>中日对比（推断，自算折算）</strong>：日本司机到手约 24.3 万円/月，按中国外汇交易中心 2026-11-12 中间价（100 日元 = <strong>4.2024 元</strong>）折算约 <strong>1.02 万元人民币/月</strong>（243,000 円 × 0.042024 ≈ 10,212 元，自算）；对照中国交通运输、仓储和邮政业（城镇非私营单位）年均工资 <strong>133,981 元</strong>（约 11,165 元/月，2025 年数据，2026-05-15 发布，税前毛、年薪均摊）。<strong>判断（推断）</strong>：日本到手低于中国同行业税前毛均值，但显著高于中国同岗实际到手；中国侧为行业平均（含仓储邮政及管理、文职岗，非司机岗位精确值）。口径差异声明：日本侧为名义月额（含超勤等现金支付、未含赏与），中国侧为税前毛年薪 ÷12 均摊，两国社保 / 税扣除结构不同，折算采用单一时点中间价，未做期间平均——<strong>上述比较全部为推断，非同口径精确对位</strong>。[Source: https://www.chinamoney.com.cn/chinese/bkccpr/, 2026; https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html, 2026]</p>
-<hr />
-<h2 id="s4"><a id="四雇主与企业类型细分" aria-hidden="true"></a>四、雇主与企业类型细分</h2>
-<h3 id="41-ma"><a id="41-雇主生态与-mampa" aria-hidden="true"></a>4.1 雇主生态与 M&amp;A</h3>
+<h2 id="s4" class="sec">四、雇主与企业类型细分</h2>
+<h3 id="41-ma">4.1 雇主生态与 M&amp;A</h3>
 <ul>
 <li><strong>行业整合</strong>：SGHD 2024-07 将名糖运输、ヒューテックノオリン纳入集团，2025 年度收购 Morrison；日通出售低收益资产资金投入 M&amp;A。[Source: https://www.sg-hldgs.co.jp/ir/management/directormessage/, 2026; https://pdf.irpocket.com/C9147/doF3/OcDN/QgbQ.pdf, 2025]</li>
 <li><strong>政策支援</strong>：国交省依产业竞争力强化法认定「特别事业再编计划」；SMRJ 事业承继门户、政策金融公库承继 Matching 支援累计约 700 社（2022）。[Source: https://www.mlit.go.jp/jidosha/jidosha_tk5_000038.html; https://shoukei.smrj.go.jp/; https://www.jfc.go.jp/n/release/pdf/topics_220805a.pdf, 2022]</li>
 <li><strong>雇主类型（货运司机视角）</strong>：大型综合物流（佐川急便 / SGHD、雅玛多、日通、福山通运）——全国网络、特定技能接收先行、待遇公告高于行业均值；地方中坚运输企业——地方缺人明显、竞争小、直接应聘官网；仓储 / 冷链 / 特殊车辆专业业者——附加手当、时限严。行业结构与赛道分析见 <a href="../../04-industry-logistics/reports/2026-11-industry-logistics.md">04-industry-logistics</a>。</li>
 </ul>
-<h3 id="42-sghd"><a id="42-重点雇主核实sghd-财报" aria-hidden="true"></a>4.2 重点雇主核实（SGHD 财报）</h3>
+<h3 id="42-sghd">4.2 重点雇主核实（SGHD 财报）</h3>
 <ul>
 <li><strong>SGHD（9143）FY2027/3 第 2 四半期累计</strong>（2026.4–9，2026-11-06 官方決算短信）：営業収益 <strong>9,204 億 3,700 万円（+17.6%）</strong>、営業利益 <strong>414 億 4,000 万円（+7.5%）</strong>、経常利益 <strong>397 億 9,100 万円（+4.4%）</strong>、純利益 <strong>279 億 2,900 万円（+19.8%）</strong>；同时上调通期経常利益 3%、增配 1 円。[Source: https://www.release.tdnet.info/inbs/140120261106567754.pdf, 2026]</li>
 <li><strong>结论（推断）</strong>：增收显著快于增利（+17.6% vs +4.4%），符合「电商宅配量增＋人工成本上升」的组合；对外籍司机招聘的含义是<strong>用工需求仍在扩张，但薪资谈判空间受利润率约束</strong>。</li>
 </ul>
-<h3 id="43"><a id="43-运价改定与企业动向" aria-hidden="true"></a>4.3 运价改定与企业动向</h3>
+<h3 id="43">4.3 运价改定与企业动向</h3>
 <table class="fixed">
 <thead>
 <tr>
@@ -726,41 +850,39 @@ nav a:hover { text-decoration: underline; }
 <ul>
 <li><strong>运賃→工资传导（推断声明）</strong>：全日本トラック協会（全ト协）调查大型司机月薪 +4% 表明转嫁已部分传导；但 2026 春斗卡车业加薪率 3.85% 低于全产业 5.02%，表明传导不完全。两处判断均为<strong>推断</strong>。[Source: https://logishift.net/2026/08/06/post-7782/, 2026; https://www.jil.go.jp/kokunai/blt/backnumber/2026/06/blm_sanbetsu.html, 2026]</li>
 </ul>
-<h3 id="44"><a id="44-外国人雇佣动向" aria-hidden="true"></a>4.4 外国人雇佣动向</h3>
+<h3 id="44">4.4 外国人雇佣动向</h3>
 <ul>
 <li>佐川急便 2025 年以特定技能接收<strong>越南司机</strong>（业界首批案例之一）；2025-09 与 TDG 合办特定技能司机采用讲座。[Source: https://yuso.co.jp/20251014-12/, 2025; https://www.trucknews.biz/article/r091138/, 2025]</li>
 <li>特定技能专门中介 / 登录支援机关为风险最低的招募主渠道（与接受企业绑定、包支援义务）——详见 <a href="../../02-career-driver/reports/2026-11-career-driver.md">02-career-driver</a>。</li>
 </ul>
-<h3 id="45"><a id="45-未核实实体" aria-hidden="true"></a>4.5 未核实实体</h3>
+<h3 id="45">4.5 未核实实体</h3>
 <ul>
 <li>日通「月最大 5 万円加薪」报道无法溯源，已降级为未证实，不在本报告作为事实引用。</li>
 <li>各企业「特定技能受入计划书认定」状态未在本版逐家核实 → 见 8.4 待复核清单。</li>
 </ul>
-<hr />
-<h2 id="s5"><a id="五岗位技能要求" aria-hidden="true"></a>五、岗位技能要求</h2>
-<h3 id="51"><a id="51-岗位区分与技能日语要件" aria-hidden="true"></a>5.1 岗位区分与技能·日语要件</h3>
+<h2 id="s5" class="sec">五、岗位技能要求</h2>
+<h3 id="51">5.1 岗位区分与技能·日语要件</h3>
 <p>见 2.2 分野人材基准表。要点：本分野岗位按<strong>卡车运転者 / 出租车运転者 / 巴士运転者</strong>三区分管理，日语要件与技能要件各不相同；卡车为监测重点，技能要件为「評価試験（トラック）合格＋第一種運転免許」，日语为 A2.2 相当以上（JFT-Basic A2.2 或 JLPT N4）。业务范围为卡车 / 出租车 / 巴士驾驶员（限事业用车辆）及附带业务。[Source: https://www.moj.go.jp/isa/policies/ssw/automobiletransportation, 2026]</p>
-<h3 id="52"><a id="52-技能試験内容实施要领" aria-hidden="true"></a>5.2 技能試験内容实施要领</h3>
+<h3 id="52">5.2 技能試験内容实施要领</h3>
 <ul>
 <li><strong>形式</strong>：CBT 或纸面；学科 30 问（○×）＋实技 20 问（三选一），共 80 分钟，各正答率 ≥60% 合格；试题日语（附注音）。[Source: https://www.mlit.go.jp/jidosha/content/001851696.pdf, 2024-12 施行]</li>
 <li><strong>考期与考位</strong>：CBT 无固定考期、考位有空随时可考；实施地 18 国（日本、印度、印尼、乌兹别克、吉尔吉斯、柬埔寨、斯里兰卡、泰国、尼泊尔、巴基斯坦、孟加拉、菲律宾、马来西亚、缅甸、蒙古、老挝、越南、塔吉克）——<strong>中国大陆无考点</strong>；出差考试限企业申请（海外 50 枠起）。月报最新为 2026 年 9 月分（2026-10-15 发布）；2026 年 10 月分截至基准日未发布。[Source: https://sswt-portal.classnk.or.jp/area?tab=3, 2026; https://sswt-portal.classnk.or.jp/news/, 2026]</li>
 <li><strong>官方教材</strong>：官方免费样本题见 ClassNK Portal；全日本トラック協会发布面向外国人的学習用テキスト。[Source: https://sswt-portal.classnk.or.jp/area?tab=3-1, 2026; https://jta.or.jp/member/driver/ssw_text.html, 2026]</li>
 </ul>
-<h3 id="53"><a id="53-日本語試験要求" aria-hidden="true"></a>5.3 日本語試験要求</h3>
+<h3 id="53">5.3 日本語試験要求</h3>
 <ul>
 <li><strong>JFT-Basic</strong>：随時 CBT；海外 14 国 / 27 都市＋日本国内 10 都道府县——<strong>中国大陆不在实施地</strong>；2026-08 起增判 A1 / A2.1（育成就労对应）；日本国内受验费 <strong>10,000 円</strong>（含消费税相当额，因国而异）。[Source: https://www.prometric-jp.com/zh-CHS/ssw/, 2026; https://www.prometric-jp.com/ssw/exam/fee/, 2026]</li>
 <li><strong>JLPT</strong>：中国大陆每年 2 回（2026 年 7 月 5 日、12 月 6 日）；N4 / N5 报名费 <strong>450 元</strong>、N1 / N2 550 元。<strong>2026 年 12 月 N1–N5 全等级报名截止前满员</strong>。[Source: https://jlpt.neea.cn/faq.html, 2026]</li>
 <li><strong>适用口径</strong>：卡车区分 A2.2 相当以上（JFT-Basic A2.2 以上或 JLPT N4 以上）；出租车 / 巴士区分 2027-04-01 起 COE 申请须 B1 相当以上。技能实习 2 号良好修了者免试并视为满足 A2 相当。</li>
 </ul>
-<h3 id="54"><a id="54-考试准备路径建议--推断" aria-hidden="true"></a>5.4 考试准备路径（建议 / 推断）</h3>
+<h3 id="54">5.4 考试准备路径（建议 / 推断）</h3>
 <ol>
 <li><strong>技能試験优先</strong>：官方样本题＋全ト协テキスト为唯一官方教材；CBT 随时可考、80 分钟 / 60% 合格线、10 年有效；中国大陆无考点，需在日或第三国受验（越南、印尼等）。</li>
 <li><strong>日语路径重排（建议）</strong>：①首选 JFT-Basic A2.2（日本国内 11 处、每月多次；境外考点须查当年度实施国）②次选 2027 年上半年 JLPT（报名窗口通常在 3 月前后，需按当年公告确认，推断）③已在日者可先以特定活动（準備）入境再受验。</li>
 <li><strong>全流程费用速算（推断汇总）</strong>：技能試験 6,500 円＋JFT-Basic 10,000 円（或 JLPT 450 元）＋签证 715 元＋COE 免费＋（如需在日考驾照另计 30–40 万円）——制度性现金门槛仍低，主要成本在驾照与支援环节。</li>
 </ol>
-<hr />
-<h2 id="s6"><a id="六行业认可的职业资质与证书" aria-hidden="true"></a>六、行业认可的职业资质与证书</h2>
-<h3 id="61-2024"><a id="61-驾照体系与车种对应2024-年新制度后" aria-hidden="true"></a>6.1 驾照体系与车种对应（2024 年新制度后）</h3>
+<h2 id="s6" class="sec">六、行业认可的职业资质与证书</h2>
+<h3 id="61-2024">6.1 驾照体系与车种对应（2024 年新制度后）</h3>
 <table class="fixed">
 <thead>
 <tr>
@@ -801,7 +923,7 @@ nav a:hover { text-decoration: underline; }
 <li><strong>特定技能 1 号</strong>：第一种驾照即可；AT 限定需在期限内解除或换 MT。[Source: https://www.moj.go.jp/isa/policies/ssw/automobiletransportation, 2026]</li>
 <li><strong>外免切替（中国驾照）</strong>：中国不在 29 国免除对象；普通免许可换，<strong>准中 / 中型需另考</strong>；2025-10 起严格化（知识确认 50 题正确率 90%＋技能确认，审查基准 70%）。[Source: https://www.police.pref.chiba.jp/menkyoka/licence_info-11.html, 2025]</li>
 </ul>
-<h3 id="62"><a id="62-驾照取得路径与费用" aria-hidden="true"></a>6.2 驾照取得路径与费用</h3>
+<h3 id="62">6.2 驾照取得路径与费用</h3>
 <table class="fixed">
 <thead>
 <tr>
@@ -842,14 +964,14 @@ nav a:hover { text-decoration: underline; }
 <li><strong>口径说明</strong>：総務省口径为 AT 限定月次均价，くらシム / TRUCK-BANK 为 MT / 大型区间行情，两者口径不同，仅作区间级交叉验证，不作精确对位；<strong>全国无 MT 专用官方均价</strong>。hajimen.com「普通 MT 全国平均 308,090 円」为 2015 年调查值，不得作为现行均价引用。[Source: https://www.e-stat.go.jp/stat-search/database?layout=dataset&amp;statdisp_id=0003449368, 2026; https://kurasim.com/blog/driving-school-cost-guide, 2026; https://www.truck-bank.net/knowledge/06-license-regulations/license-acquisition-cost/, 2026]</li>
 <li>⚠️ 特定活动入境后未取得日本驾照则不能转特定技能 1 号——<strong>驾照是全流程的关键路径依赖</strong>。[Source: https://www.moj.go.jp/isa/applications/procedures/16-1, 2026]</li>
 </ul>
-<h3 id="63"><a id="63-登録支援機関制度与费用行情" aria-hidden="true"></a>6.3 登録支援機関（制度与费用行情）</h3>
+<h3 id="63">6.3 登録支援機関（制度与费用行情）</h3>
 <ul>
 <li><strong>职责</strong>：代雇主实施「义务性支援 10 项目」（事前指导、接送、住房·生活契约、生活指导、陪同行政手续、日语学习机会、咨询处理、交流促进、转职支援、每 3 个月以上面谈·通报）；不得再委托。[Source: https://www.moj.go.jp/isa/policies/ssw/supportssw.html, 2026]</li>
 <li><strong>登录要件</strong>：须能实施支援计划全部项目；登录 5 年有效，手续费新登录 <strong>28,400 円</strong> / 更新 11,100 円；本分野受托支援机关还须加入国交省协议会（免费）。</li>
 <li><strong>市场行情</strong>（官方不定价；第三方 2026-04 更新）：初期 0–10 万円＋<strong>月额 2–4 万円/人</strong>；登录机构逾 8,000 家；月额 1 万円以下属异常低价（推断性经验值，非官方定价）。[Source: https://foreignworker-guide.com/articles/how-to-choose-support-agency/, 2026]</li>
 <li><strong>支援体制要件改正（2027-04-01 施行）</strong>：①支援責任者及支援担当者按支援事业所各选任 1 名以上常勤役员或职员（可兼任）；②可从事支援业务者限定为支援責任者等；③支援責任者须受讲支援能力提升养成讲习（施行后当分の間未修了亦可）；④支援担当者数须超过「受托特定技能所属机关数 ÷10」且超过「在支援 1 号人数 ÷50」。[Source: https://www.moj.go.jp/isa/10_00263.html, 2026]</li>
 </ul>
-<h3 id="64"><a id="64-证书路线图分阶段建议" aria-hidden="true"></a>6.4 证书路线图（分阶段，建议）</h3>
+<h3 id="64">6.4 证书路线图（分阶段，建议）</h3>
 <table class="fixed">
 <thead>
 <tr>
@@ -876,47 +998,45 @@ nav a:hover { text-decoration: underline; }
 </tr>
 </tbody>
 </table>
-<hr />
-<h2 id="s7"><a id="七就业落地路径建议结论章" aria-hidden="true"></a>七、就业落地路径建议（结论章）</h2>
+<h2 id="s7" class="sec">七、就业落地路径建议（结论章）</h2>
 <blockquote>
 <p>本章为建议与推断层，与前三节事实数据分离；不承诺就业结果、不保证薪资水平、不给「必过」式断言。</p>
 </blockquote>
-<h3 id="71"><a id="71-入境路径与在留手续建议" aria-hidden="true"></a>7.1 入境路径与在留手续（建议）</h3>
+<h3 id="71">7.1 入境路径与在留手续（建议）</h3>
 <ol>
 <li><strong>路径主干</strong>：海外申请者先以「特定活动」（特定自动车运送业准备）入境（2025-02-17 起受理；卡车最长 6 个月），办理驾照（外免切替）与研修；未取得日本驾照则不能转入特定技能 1 号，变更审查期可特例在留最长 2 个月。[Source: https://www.moj.go.jp/isa/applications/procedures/16-1, 2026]</li>
 <li><strong>COE 与签证</strong>：雇主代办在留资格认定证明书（手续费免费、标准审查 1–3 个月）→ 驻外使领馆签证（单次 715 元、二次 / 数次 1,430 元，2026-07-01 起受理件）→ 入境。[Source: https://www.moj.go.jp/isa/applications/procedures/16-1, 2026]</li>
 <li><strong>在留落地</strong>：在留卡在成田 / 羽田 / 中部 / 关西 / 新千岁机场当场发放；入住后 <strong>14 日内</strong>向市区町村住民登记（逾期可处 20 万円以下罚金）；持 My Number 卡可在留诸申请电子化；引越し转出 / 转入可在线办理。[Source: https://www.moj.go.jp/isa/publications/faq/newimmiact_4_q-and-a_page3.html, 2026]</li>
 <li><strong>生活支援</strong>：受入机关负有支援义务（住房确保、生活 orientation 含银行 / 手机合同协助）；生活咨询总入口为入管厅外国人生活支援 Portal。[Source: https://www.moj.go.jp/isa/support/portal/, 2026]</li>
 </ol>
-<h3 id="72"><a id="72-招募渠道与中介资质建议" aria-hidden="true"></a>7.2 招募渠道与中介资质（建议）</h3>
+<h3 id="72">7.2 招募渠道与中介资质（建议）</h3>
 <ul>
 <li><strong>中国路径官方明示</strong>：<strong>商务部批准资质的对外劳务合作企业</strong>＋日方公共职业安定所（ハローワーク）。资质查询入口：商务部对外劳务合作企业名单（femhzs.mofcom.gov.cn）；无资质出国务工属违法。[Source: https://www.ssw.go.jp/cn/about/step/, 2026; https://ao.mofcom.gov.cn/aqtz/art/2024/art_f0ce83f61c9240d39e775a23fcff8827.html, 2024]</li>
 <li><strong>非法中介特征（推断汇总）</strong>：无法提供商务部资质编号、要求前置大额「保证金」、承诺「免考包过」（技能試験为 ClassNK 统一实施，无免考通道）。</li>
 <li><strong>渠道建议</strong>：特定技能专门中介 / 登录支援机关为风险最低主渠道（与接受企业绑定、包支援义务）；签约前核对「对外劳务合作经营资格证书」与日本侧受入机关名（可与 ISA 登录支援機関名单交叉核对）。</li>
 <li>渠道矩阵、地域选择、简历面试与契约审查的完整清单见 <a href="../../02-career-driver/reports/2026-11-career-driver.md">02-career-driver</a> 第 7 节。</li>
 </ul>
-<h3 id="73"><a id="73-薪酬谈判与成本速算建议--推断" aria-hidden="true"></a>7.3 薪酬谈判与成本速算（建议 / 推断）</h3>
+<h3 id="73">7.3 薪酬谈判与成本速算（建议 / 推断）</h3>
 <ul>
 <li><strong>谈判基准</strong>：特定技能 1 号硬性要求「工资与日本人同等以上」——面试时拿同岗位日本员工待遇基准对照；谈 offer 时先确认口径（含赏与年收 ≠ 月均现金给与）。</li>
 <li><strong>成本速算（推断汇总）</strong>：技能試験 6,500 円＋JFT-Basic 10,000 円（或 JLPT 450 元）＋签证 715 元＋COE 免费＋（如需在日考驾照另计 30–40 万円）＋支援费行情 2–4 万円/人·月。</li>
 <li><strong>警惕点（推断）</strong>：月给低于当地行情 20% 以上且无手当明细的特定技能转介合同；支援费异常低价（月额 1 万円以下）的登録支援機関可能降低法定支援质量。</li>
 </ul>
-<h3 id="74"><a id="74-风险提示与维权渠道建议" aria-hidden="true"></a>7.4 风险提示与维权渠道（建议）</h3>
+<h3 id="74">7.4 风险提示与维权渠道（建议）</h3>
 <ul>
 <li><strong>工资拖欠 / 不当解雇</strong>：劳动基准监督署受理；劳动条件咨询 Hotline <strong>0120-811-610</strong>（免费、匿名、多语言）。[Source: https://www.check-roudou.mhlw.go.jp/lp/hotline/, 2026]</li>
 <li><strong>外国人专门窗口</strong>：各都道府県労働局「外国人労働者相談コーナー」与「外国人特別相談·支援室」（东京 FRESC 有中文页面）。[Source: https://www.check-roudou.mhlw.go.jp/soudan/foreigner.html, 2026; https://jsite.mhlw.go.jp/tokyo-roudoukyoku/fresc_cn.html, 2026]</li>
 <li><strong>合规提示（推断）</strong>：登録支援機関侧 2027-04-01 起实施支援体制要件改正，若签约时对方以「人数上限」为由缩减支援频次，属于可核查的合规问题，应要求书面说明并向労働局咨询。</li>
 <li><strong>安全红线</strong>：酒测出车前后各一次，检出即当日停驾；特定技能者因酒精 / 药物事故几乎必然失去在留资格——安全规范与红线详见 <a href="../../02-career-driver/reports/2026-11-career-driver.md">02-career-driver</a> 第 2 节。</li>
 </ul>
-<hr />
-<h2 id="s8"><a id="八数据可靠性与局限说明" aria-hidden="true"></a>八、数据可靠性与局限说明</h2>
-<h3 id="81"><a id="81-核验程度分级" aria-hidden="true"></a>8.1 核验程度分级</h3>
+<h2 id="s8" class="sec">八、数据可靠性与局限说明</h2>
+<h3 id="81">8.1 核验程度分级</h3>
 <ul>
 <li><strong>A 级（官方原件直接读取）</strong>：ISA 受入见込数·在留者数表（001472175.pdf，2026-11-06 版）；ISA「B1 相当以上の確認開始時期」页（2026-09-30）；運用要領別冊 自動車運送業分野（001472534.pdf，令和 8 年 10 月 9 日一部改正）；ISA「JFT-Basic 活用」公告（001471906.pdf，2026-10-05）；ISA 支援体制要件改正页（10_00263.html，2026-07-28）；MLIT トラック適正化二法页与物流効率化法页；日銀 SPPI 2026 年 9 月速报（sppi2609.pdf，2026-10-27）；TSR / TDB 2026 年 10 月倒产页；上海 / 青岛 / 重庆总领事馆签证费页；厚労省毎月勤労統計 2026-09 分。</li>
 <li><strong>B 级（行业机构 / 企业一手）</strong>：ClassNK Portal 公告一览（最终更新 2026-10-15）；RoAD to the L4 いすゞ成果报告（2026-03-05）；柏市新闻发布（2025-12-10）；全ト协「2025 年度版」工资调查；SGHD 官方決算短信（release.tdnet.info）。</li>
 <li><strong>C 级（媒体 / 聚合转载）</strong>：kabutan SGHD 决算速报；logi-today 工资数值比对；求人聚合层（genbars / works.aqsh / gojob / 求人Box）；LogiShift / Cargo News 转引。</li>
 </ul>
-<h3 id="82"><a id="82-已知口径冲突并列呈现不合并不取均值" aria-hidden="true"></a>8.2 已知口径冲突（并列呈现，不合并、不取均值）</h3>
+<h3 id="82">8.2 已知口径冲突（并列呈现，不合并、不取均值）</h3>
 <table class="fixed">
 <thead>
 <tr>
@@ -963,14 +1083,14 @@ nav a:hover { text-decoration: underline; }
 </tr>
 </tbody>
 </table>
-<h3 id="83"><a id="83-未取得项" aria-hidden="true"></a>8.3 未取得项</h3>
+<h3 id="83">8.3 未取得项</h3>
 <ul>
 <li>ISA 9 月末速报（在留者数与充足率更新）——预计 12 月上旬随 10 月分发布（推断）。</li>
 <li>厚労省 2026 年 10 月分毎月勤労統計——约 12 月上旬公布。</li>
 <li>中型驾照全国均价——本主题素材未给出。</li>
 <li>中国同岗到手收入精确对比——需中文来源回溯，本版仅作区间级推断。</li>
 </ul>
-<h3 id="84"><a id="84-待复核清单逐项给出复核入口" aria-hidden="true"></a>8.4 待复核清单（逐项给出复核入口）</h3>
+<h3 id="84">8.4 待复核清单（逐项给出复核入口）</h3>
 <p><strong>已闭环（最新版复核后闭环，后续版本不得回退）</strong>：①L4 口径更正为国交省官方「截至 2026 年 2 月全国 10 カ所実装」；②厚労省 2026-09 分「自動車運転の職業」有效求人倍率 2.56（常用含パート，较上月 +0.02pt）；③SGHD 官方決算短信已核实（营收 / 营业利益 / 经常利益 / 纯利益四口径）；④中国外汇交易中心 2026-11-12 中间价 100 日元 = 4.2024 元。</p>
 <p><strong>仍待复核 / 观察中</strong>：</p>
 <table class="fixed">
@@ -1034,18 +1154,17 @@ nav a:hover { text-decoration: underline; }
 </tr>
 </tbody>
 </table>
-<h3 id="85"><a id="85-时间基准与来源语言规则执行声明" aria-hidden="true"></a>8.5 时间基准与来源语言规则执行声明</h3>
+<h3 id="85">8.5 时间基准与来源语言规则执行声明</h3>
 <ul>
 <li><strong>数据基准日</strong>：2026-11-14；登记册活值基准 v2026.11.12_5（数据基准 2026-11-12）。</li>
 <li><strong>来源语言规则</strong>：统计与制度类均取日文官方一手；中文来源仅作线索，引用回溯日 / 英原文；中国侧国家统计局、外汇交易中心、驻日领馆费用页为项目指定例外，仅用于中国侧输入。</li>
 <li><strong>时间基准声明</strong>：本报告全部活值以登记册 v2026.11.12_5 为准；凡官方未发布数据均用最近已发布值并注明，未发布项列入 8.3 / 8.4。</li>
 </ul>
-<hr />
-<h2 id="s9"><a id="九参考来源清单" aria-hidden="true"></a>九、参考来源清单</h2>
+<h2 id="s9" class="sec">九、参考来源清单</h2>
 <blockquote>
 <p>按来源分级分组，完整 URL；分级依据业务配置第五节来源优先级。</p>
 </blockquote>
-<h3 id="1"><a id="①-日本政府官方一手" aria-hidden="true"></a>① 日本政府官方一手</h3>
+<h3 id="1">① 日本政府官方一手</h3>
 <ol>
 <li><a href="https://www.moj.go.jp/isa/policies/ssw/automobiletransportation">ISA 自動車運送業分野</a> — 出入国在留管理庁, 2026</li>
 <li><a href="https://www.moj.go.jp/isa/applications/ssw/2024.03.29.kakugikettei.html">ISA 2024.3.29 阁议决定</a> — 2024–2026</li>
@@ -1102,7 +1221,7 @@ nav a:hover { text-decoration: underline; }
 <li><a href="https://www8.cao.go.jp/koutu/taisaku/r05kou_haku/zenbun/genkyo/topics/topic_1.html">令和 5 年交通安全白書</a> — 2023</li>
 <li><a href="https://www.city.kashiwa.lg.jp/koho/pressrelease/r7houdou/12gatsu/r7121004.html">柏市 千葉県内初の特定自動運行（レベル4）開始</a> — 2025-12-10</li>
 </ol>
-<h3 id="2"><a id="②-权威组织--考试实施机构" aria-hidden="true"></a>② 权威组织 / 考试实施机构</h3>
+<h3 id="2">② 权威组织 / 考试实施机构</h3>
 <ol>
 <li><a href="https://sswt-portal.classnk.or.jp/area?tab=3">ClassNK 考试门户（考场 / 样本题）</a> — 2026</li>
 <li><a href="https://sswt-portal.classnk.or.jp/news/25">ClassNK 受验费改定公告（news/25）</a> — 2026-08-03</li>
@@ -1114,7 +1233,7 @@ nav a:hover { text-decoration: underline; }
 <li><a href="https://jlpt.neea.cn/faq.html">JLPT 中国报名 FAQ</a> — 2026</li>
 <li><a href="https://www.vn.emb-japan.go.jp/itpr_ja/11_000001_02534_TokuteiginouShiken_Jidoushaunsou.html">駐日ベトナム大使館技能試験页</a> — 2026</li>
 </ol>
-<h3 id="3"><a id="③-行业专业机构" aria-hidden="true"></a>③ 行业专业机构</h3>
+<h3 id="3">③ 行业专业机构</h3>
 <ol>
 <li><a href="https://jta.or.jp/member/kaisei_jigyoho/unchin_new.html">全日本トラック協会 标准运賃告示</a> — 2024</li>
 <li><a href="https://jta.or.jp/member/driver/ssw_text.html">全日本トラック協会 SSW 学習テキスト</a> — 2026</li>
@@ -1128,7 +1247,7 @@ nav a:hover { text-decoration: underline; }
 <li><a href="https://www.boj.or.jp/statistics/pi/sppi_2020/">日銀 企業向けサービス価格指数（2020 年基準）</a> — 2026</li>
 <li><a href="https://www.boj.or.jp/statistics/pi/cgpi_2020/">日銀 企業物価指数（2020 年基準）</a> — 2026</li>
 </ol>
-<h3 id="4-ir"><a id="④-媒体--行业媒体--企业-ir" aria-hidden="true"></a>④ 媒体 / 行业媒体 / 企业 IR</h3>
+<h3 id="4-ir">④ 媒体 / 行业媒体 / 企业 IR</h3>
 <ol>
 <li><a href="https://yuso.co.jp/20251014-12/">输送经济新闻：佐川越南特定技能司机</a> — 2025</li>
 <li><a href="https://www.trucknews.biz/article/r091138/">トラックニュース：特定技能采用讲座</a> — 2025</li>
@@ -1157,7 +1276,7 @@ nav a:hover { text-decoration: underline; }
 <li><a href="https://www.road-to-the-l4.go.jp/publication/pdf/03-3_ISUZU_20260305.pdf">RoAD to the L4 成果報告会 いすゞ自動車</a> — 2026-03-05</li>
 <li><a href="https://www.road-to-the-l4.go.jp/activity/theme03/">RoAD to the L4 主题 3</a> — 2025</li>
 </ol>
-<h3 id="5"><a id="⑤-平台抽样--行情" aria-hidden="true"></a>⑤ 平台抽样 / 行情</h3>
+<h3 id="5">⑤ 平台抽样 / 行情</h3>
 <ol>
 <li><a href="https://xn--pckua2a7gp15o89zb.com/運送業-トラックの仕事">求人Box 运送业求人</a> — 2026</li>
 <li><a href="https://mintoku.work/?specific_skills_industry=15">Mintoku Work 特定技能求人</a> — 2026</li>
@@ -1177,7 +1296,7 @@ nav a:hover { text-decoration: underline; }
 <li><a href="https://www.truck-bank.net/knowledge/06-license-regulations/license-acquisition-cost/">TRUCK-BANK 驾照取得费用</a> — 2026-06</li>
 <li><a href="https://hajimen.com/10-saitama/rank_detail?rank_name=t-0">hajimen.com 教习所排名（2015 年调查值，历史参考）</a> — 2015</li>
 </ol>
-<h3 id="6"><a id="⑥-中国侧输入项目指定例外" aria-hidden="true"></a>⑥ 中国侧输入（项目指定例外）</h3>
+<h3 id="6">⑥ 中国侧输入（项目指定例外）</h3>
 <ol>
 <li><a href="https://www.shanghai.cn.emb-japan.go.jp/itpr_ja/11_000001_00633.html">在上海日本国総領事館 签证费用（2026 年 7 月 1 日修改）</a> — 2026</li>
 <li><a href="https://www.qingdao.cn.emb-japan.go.jp/itpr_ja/11_000001_02405.html">在青岛日本国総領事館 査証手数料等の変更について</a> — 2026</li>
@@ -1190,7 +1309,7 @@ nav a:hover { text-decoration: underline; }
 <li><a href="https://www.ssw.go.jp/cn/about/step/">特定技能总合支援站（中文）· 步骤</a> — 2026</li>
 <li><a href="https://www.ssw.go.jp/cn/about/visa/automobile_transportation_business_1/">特定技能总合支援站（中文）· 自動車運送業分野</a> — 2026</li>
 </ol>
-<h3 id="_14"><a id="关联主题报告跨主题只读引用" aria-hidden="true"></a>关联主题报告（跨主题只读引用）</h3>
+<h3 id="_14">关联主题报告（跨主题只读引用）</h3>
 <ul>
 <li><a href="../../02-career-driver/reports/2026-11-career-driver.md">02-career-driver · 2026-11 月度报告</a>（司机岗位、薪资结构、安全规范、求职渠道）</li>
 <li><a href="../../03-career-management/reports/2026-11-career-management.md">03-career-management · 2026-11 月度报告</a>（管理岗过渡）</li>
@@ -1203,5 +1322,37 @@ nav a:hover { text-decoration: underline; }
 <li><a href="../../11-language-japanese/reports/2026-11-language-japanese.md">11-language-japanese · 2026-11 月度报告</a>（考试日程 / 费用 / 考位制度细节）</li>
 <li><a href="../../13-regional-info/reports/2026-11-regional-info.md">13-regional-info · 2026-11 月度报告</a>（求人四元组定位教训）</li>
 </ul>
+</main>
+<footer class="footer" role="contentinfo" aria-label="页脚">
+  <p>日本特定技能司机 · 日本特定技能司机 · 2026-11 月度报告｜2026-11<br>
+  报告路径：01-ssw-driver\reports\2026-11-ssw-driver.html</p>
+  <p class="backlinks">
+    <a href="../../index.html#topic-01-ssw-driver">← 返回主题</a>
+    <a href="../../index.html">返回首页</a>
+  </p>
+</footer>
+<script>
+(function () {
+  'use strict';
+  var main = document.getElementById('main-content');
+  var tgDiff = document.getElementById('tg-diff');
+  var tgDel = document.getElementById('tg-del');
+  if (main && tgDiff) {
+    tgDiff.addEventListener('click', function () {
+      var hide = main.classList.toggle('hide-diff');
+      tgDiff.textContent = hide ? '显示更新标记' : '隐藏更新标记';
+    });
+  }
+  if (tgDel) {
+    tgDel.addEventListener('click', function () {
+      var open = tgDel.getAttribute('data-open') === '1';
+      var groups = document.querySelectorAll('details.diff-del-group');
+      for (var i = 0; i < groups.length; i++) groups[i].open = !open;
+      tgDel.setAttribute('data-open', open ? '0' : '1');
+      tgDel.textContent = open ? '展开全部删除' : '收起全部删除';
+    });
+  }
+})();
+</script>
 </body>
 </html>
