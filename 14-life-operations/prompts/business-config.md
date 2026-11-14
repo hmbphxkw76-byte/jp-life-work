@@ -14,7 +14,7 @@
 {{BASELINE_DATE}}        = 2026-11-14（首期基线已产出）
 {{REGISTRY_PATH}}        = data/life_operations_indicator_registry.md
 {{REGISTRY_FORMAT}}      = md-table
-{{BASELINE_REPORT_PATH}} = reports/2026-11_baseline_report.md
+{{BASELINE_REPORT_PATH}} = reports/{{YYYY-MM}}-<slug>.md
 {{FRESHNESS_PRIORITY}}   = 官方一手最新；费用 / 要件以官方页与运营商官网为准
 {{SOURCE_LANGUAGE_RULE}} = 日文官方一手优先；运营商 / 金融機関官网次之；中文来源仅作线索
 {{REPO_RAW_URL_BASE}}    = https://github.com/hmbphxkw76-byte/jp-life-work/blob/main/14-life-operations
@@ -24,10 +24,10 @@
 
 | 周期 | 输出路径 | 说明 |
 |---|---|---|
-| 基线 | `reports/2026-11_baseline_report.md` + `.html` | v1.0（首期固定） |
-| 季度 | `reports/{{YYYY-Qn}}_quarterly.md` + `.html` | 季度复核；个人定居地确定后重点更新 |
-| 年度 | `reports/{{YYYY}}_annual.md` + `.html` | 年度复盘（手续 / 费用变更） |
-| 事件触发 | `reports/{{YYYY-MM-DD}}-主题.md` | 制度 / 费用 / 个人情况变更 |
+| 月度报告（首期） | `reports/{{YYYY-MM}}-<slug>.md` + `.html` | v1.0（首期固定） |
+| 季度报告（季度末月归档） | `reports/{{YYYY-MM}}-<slug>.md` + `.html` | 季度复核；个人定居地确定后重点更新 |
+| 年度报告（12 月归档） | `reports/{{YYYY-MM}}-<slug>.md` + `.html` | 年度复盘（手续 / 费用变更） |
+| 事件触发（并入当月报告） | `reports/{{YYYY-MM}}-<slug>.md` | 制度 / 费用 / 个人情况变更 |
 
 ---
 
@@ -206,4 +206,4 @@
 
 | 版本 | 日期 | 变更 | 说明 |
 |---|---|---|---|
-| v1.0 | 2026-11-14 | 初始版本 | 建立在日生活实务主题；确立与 08/07/12/13/10 的分工；结构映射声明；首期基线 `reports/2026-11_baseline_report.md` |
+| v1.0 | 2026-11-14 | 初始版本 | 建立在日生活实务主题；确立与 08/07/12/13/10 的分工；结构映射声明；首期基线 `reports/{{YYYY-MM}}-<slug>.md` |

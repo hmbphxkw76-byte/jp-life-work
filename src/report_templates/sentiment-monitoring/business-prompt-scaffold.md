@@ -73,7 +73,7 @@
 # {{REGION}} · {{TOPIC}} · 舆情月报提示词（舆情传播监测型 · 主更新节拍）
 
 > **用途**：周期性（每月）刷新声量与情感读数、热点事件榜与预警状态。可直接复制，替换顶部变量后提交给 AI 执行。
-> **产出**：中文九节更新版报告，落盘 `{{OUTPUT_PATH}}`（`reports/{{YYYY-MM}}_monthly.md`）。
+> **产出**：中文九节更新版报告，落盘 `{{OUTPUT_PATH}}`（`reports/{{YYYY-MM}}-<slug>.md`）。
 >
 > **继承声明（四层体系）**：本文件 = [通用基座](../../../report_templates/prompt-generic-base.md) × [监测报告通用规范](../../../report_templates/monitoring-common-spec.md) × [周期更新类型模板（舆情传播监测型）](../../../report_templates/sentiment-monitoring/prompt-monthly-update-template.md) × [业务专属配置](./business-config.md)。冲突时以本文件为准。
 
@@ -84,7 +84,7 @@
 {{PREVIOUS_REPORT_PATH}} = 最近一期月报路径（首期更新时为空，仅锚定基线）
 {{BASELINE_REPORT_PATH}} = reports/{{YYYY-MM}}_baseline_report.md
 {{REGISTRY_PATH}}        = data/（TODO）
-{{OUTPUT_PATH}}          = reports/{{YYYY-MM}}_monthly.md
+{{OUTPUT_PATH}}          = reports/{{YYYY-MM}}-<slug>.md
 {{REPORT_VERSION}}       = 本次版本号，格式 vYYYY.MM.DD
 ```
 
@@ -108,7 +108,7 @@
 # {{REGION}} · {{TOPIC}} · 预警专项提示词（舆情传播监测型）
 
 > **用途**：突发负面热点当期核实（确认非机器人 / 断章取义）与专项预警，不等待月度窗口。
-> **产出**：专项预警件 `{{OUTPUT_PATH}}`（`reports/{{YYYY-MM-DD}}-主题.md`）+ 台账增量回写。命名不在标准正则内，validate 仅 WARN 不阻断，属预期。
+> **产出**：专项预警件 `{{OUTPUT_PATH}}`（`reports/{{YYYY-MM}}-<slug>.md`）+ 台账增量回写。命名不在标准正则内，validate 仅 WARN 不阻断，属预期。
 
 ## 运行变量
 

@@ -74,7 +74,7 @@
 # {{REGION}} · {{TOPIC}} · 标的复核提示词（投资分析与尽调型 · 定期复核 + 事件触发）
 
 > **用途**：定期复核（财报 / 定期数据窗口）与事件触发复核（重大事项披露后）统一入口。可直接复制，替换顶部变量后提交给 AI 执行。
-> **产出**：更新版报告（`reports/{{YYYY-Qn}}_quarterly.md` 或 `reports/{{YYYY}}_annual.md`，由业务配置规定）或事件专项修订件 `reports/{{YYYY-MM-DD}}-主题.md`（命名不在标准正则内，validate 仅 WARN 不阻断，属预期）。
+> **产出**：更新版报告（`reports/{{YYYY-MM}}-<slug>.md` 或 `reports/{{YYYY-MM}}-<slug>.md`，由业务配置规定）或事件专项修订件 `reports/{{YYYY-MM}}-<slug>.md`（命名不在标准正则内，validate 仅 WARN 不阻断，属预期）。
 >
 > **继承声明（四层体系）**：本文件 = [通用基座](../../../report_templates/prompt-generic-base.md) × [监测报告通用规范](../../../report_templates/monitoring-common-spec.md) × [事件触发更新类型模板（投资分析与尽调型）](../../../report_templates/investment-research/prompt-target-update-template.md) × [业务专属配置](./business-config.md)。冲突时以本文件为准。
 

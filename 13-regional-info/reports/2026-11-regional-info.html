@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>日本地域信息 · 首份分析报告</title>
+<style>
+body { max-width: 1160px; margin: 24px auto; padding: 0 16px;
+      font-family: "Segoe UI", "Microsoft YaHei", sans-serif; color: #1a1a2e; line-height: 1.7; }
+h1, h2, h3 { color: #16213e; }
+table { border-collapse: collapse; width: 100%; overflow-x: auto; display: block; }
+th, td { border: 1px solid #cbd5e1; padding: 6px 10px; text-align: left; }
+th { background: #f1f5f9; }
+img { max-width: 100%; }
+code { background: #f6f8fa; padding: 2px 4px; border-radius: 3px; }
+blockquote { border-left: 4px solid #94a3b8; margin: 0; padding-left: 12px; color: #475569; }
+nav { margin: 12px 0 20px; padding: 8px 0; border-bottom: 1px solid #e2e8f0; }
+nav a { margin-right: 14px; color: #16213e; font-size: 14px; text-decoration: none; white-space: nowrap; }
+nav a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<h1 id="_1">日本地域信息 · 首份分析报告</h1>
+<blockquote>
+<p><strong>版本</strong>：v1.0（首份分析）　<strong>数据基准日</strong>：2026-11-13
+<strong>主题类型</strong>：市场指标监测型（market-monitoring）
+<strong>受众定位</strong>：面向拟在日本选择就业地 / 定居地、需要地域横向对比与决策框架的读者，兼具就业地选择与长期定居规划视角。
+<strong>来源规则</strong>：① 国土交通省（住居・地価統計）、総務省統計局（地域统计）、気象庁（警報・注意報 / 多言語防災気象情報）、防災庁（防灾政策与大规模灾情）、厚生労働省（医師・歯科医師・薬剤師統計）/ 文部科学省（外国人児童生徒调查）、各都道府県 / 市町村官网（business-config 第五节）。</p>
+</blockquote>
+<nav aria-label="报告导航">
+<a href="#s1">一、主题核心概述</a>
+<a href="#s2">二、关键维度拆解</a>
+<a href="#s3">三、当前现状梳理</a>
+<a href="#s4">四、初步结论</a>
+<a href="#s5">五、后续观察方向</a>
+<a href="#s6">六、核心指标速览</a>
+<a href="#s7">七、监测机制与触发器</a>
+<a href="#s8">八、数据可靠性与局限说明</a>
+<a href="#s9">九、免责声明</a>
+<a href="#s10">十、参考来源清单</a>
+<a href="#s11">日本地域信息知识手册</a>
+</nav>
+<h2 id="s1">一、主题核心概述</h2>
+<h3 id="11">1.1 主题定义与监测范围</h3>
+<p><strong>含</strong>（business-config 3.1）：面向个人地域决策支持——地域选择框架（7 维评分框架、候选地域速览、决策流程）；地域间公共服务差异视角（医疗资源地域差、教育资源地域差）；地域生活笔记（定居地档案模板、生活发现、防灾与安全、地域防灾情报渠道、季度观察）。
+<strong>不含</strong>（交叉引用，不在本主题展开）：薪资地域差；求职渠道地域策略；保险体系与就医流程细节；就学手续与学制细节；灾害时外国人支援政策环境；岗位密度 / 薪资地域差活值。</p>
+<h3 id="12">1.2 受众与用途</h3>
+<p>输出地域选择框架、地域差对比与决策输入；不给落户价位、不给单一「最优地域」结论；个人地域选择为自记录个案，标注记录日期；统计类数据注明都道府県 / 市町村口径（business-config 第二节）。</p>
+<h3 id="13">1.3 核心监测问题</h3>
+<ol>
+<li>候选地域在 7 维评分框架（岗位供给、薪资×成本、外国人支援、同胞密度、交通/归国便利、灾害风险、生活品质）下如何横向比较？</li>
+<li>目标地域的司机求人件数、賃貸挂牌行情等预期指标最新读数如何？</li>
+<li>地域间公共服务差异（医师数 / 病床数、日语指导体制）的最新官方数据与地域差结构如何？</li>
+<li>外国人支援窗口与多语言防灾情报渠道的可得性在自治体间差异如何？</li>
+<li>个人地域选定期与定居地档案何时可建立并滚动维护？</li>
+</ol>
+<h3 id="14">1.4 跨主题分工</h3>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:50%">对象</th>
+<th style="width:50%">归属主题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>薪资地域差</td>
+<td>07-economy-finance</td>
+</tr>
+<tr>
+<td>求职渠道地域策略</td>
+<td>02-career-driver</td>
+</tr>
+<tr>
+<td>保险体系与就医流程细节</td>
+<td>12-culture-life</td>
+</tr>
+<tr>
+<td>就学手续与学制细节</td>
+<td>10-education-qualification</td>
+</tr>
+<tr>
+<td>灾害时外国人支援政策环境</td>
+<td>09-politics-law</td>
+</tr>
+<tr>
+<td>岗位密度 / 薪资地域差活值</td>
+<td>01-ssw-driver（只读引用）</td>
+</tr>
+</tbody>
+</table>
+<h2 id="s2">二、关键维度拆解</h2>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:20%">维度</th>
+<th style="width:20%">定义</th>
+<th style="width:20%">对应指标（登记册 #）</th>
+<th style="width:20%">优先来源</th>
+<th style="width:20%">监测频率</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>岗位供给</td>
+<td>目标地域在招司机岗位密度</td>
+<td>核心指标 #1</td>
+<td>HelloWork 地域检索</td>
+<td>季度窗口 + 月度触发核对</td>
+</tr>
+<tr>
+<td>居住成本</td>
+<td>目标地域挂牌租金水平（预期指标）</td>
+<td>核心指标 #2</td>
+<td>賃貸门户</td>
+<td>季度窗口采集</td>
+</tr>
+<tr>
+<td>外国人支援</td>
+<td>自治体外籍支援窗口与多语服务可得性</td>
+<td>核心指标 #3</td>
+<td>自治体官网</td>
+<td>季度触发（制度变化）</td>
+</tr>
+<tr>
+<td>公共服务地域差</td>
+<td>医师数 / 病床数 / 日语指导体制的地域差</td>
+<td>—（登记册未设独立指标，基线报告差异视角小节承载）</td>
+<td>厚生労働省 / 文部科学省 / e-stat</td>
+<td>季度触发（统计年度发布）+ 年度</td>
+</tr>
+<tr>
+<td>个人地域选定期</td>
+<td>自记录决策时点与定居复盘</td>
+<td>核心指标 #4</td>
+<td>自记录</td>
+<td>Offer 比较 / 定居后复盘触发即时核对</td>
+</tr>
+</tbody>
+</table>
+<p>维度间关系：求人件数与賃貸行情是硬约束（收入与成本），外国人支援与公共服务地域差是软环境，个人选定期是决策时点；四者共同输入 7 维评分框架。当前登记册 #1–#4 均待基线确立 / 待记录，故本期只能给出框架与定性判断，不能给出数值化地域比较。</p>
+<h2 id="s3">三、当前现状梳理</h2>
+<h3 id="31">3.1 岗位供给（目标地域司机求人件数）</h3>
+<ul>
+<li>登记册 #1「目标地域司机求人件数」：<strong>待基线确立</strong>（优先数据源 HelloWork 地域检索）。</li>
+<li>口径与触发（登记册 / business-config 第七节）：求人件数 = HelloWork 地域检索，在招口径 ≠ 实际雇佣人数；目标地域岗位密度 / 条件显著变化（联动 02-career-driver 求人抽样）→ 01。</li>
+</ul>
+<h3 id="32">3.2 居住成本（賃貸挂牌行情）</h3>
+<ul>
+<li>登记册 #2「目标地域賃貸挂牌行情（预期指标）」：<strong>待基线确立</strong>（优先数据源 賃貸门户）。</li>
+<li>口径（business-config 第四节 / 登记册）：登记口径（地価公示）≠ 挂牌口径（賃貸门户），预期指标 ≠ 实际成交 / 登记值；薪资×成本维度按"名义薪资 − 房租 / 物价 = 可支配"评估，"地方" ≠ "东京圈"的薪资对比须同岗位分层。</li>
+</ul>
+<h3 id="33">3.3 外国人支援（支援窗口与多语服务）</h3>
+<ul>
+<li>登记册 #3「目标地域外国人支援窗口」：<strong>待基线确立</strong>（优先数据源 自治体官网）。</li>
+<li>候选地域速览（事实，基线报告，"待实地补充"）：埼玉（本庄 / 深谷 / 熊谷）物流仓密集、近东京、成本中；群马（太田 / 伊势崎）传统物流重镇、外国人多；爱知（名古屋周边）岗位最厚、支援体制最成熟；静冈（富士 / 沼津）新东名自动驾驶实证沿线；福冈（北九州 / 福冈）归国方便、薪资佳；北海道 / 东北 薪资含冬季手当、豪雪初学者不宜。</li>
+<li>决策流程（事实，基线报告）：Offer 阶段用 7 维框架打分（≥3.5 考虑）；入职前读该自治体「外国人生活ガイド」（官网多有中文版）；落地 1 个月后实际体验 vs 预期复盘，写入 02-地域生活笔记。</li>
+<li>多语言防灾情报渠道（事实，基线报告，2026-11-12 验证）：国家预警 = 气象厅警報・注意報（jma.go.jp）；多语言版 = 防災気象情報多语言版（含简体中文，data.jma.go.jp）；中央防灾 = 防災庁（2026-11-02 由内阁府防灾改组发足，bousai.go.jp）；多语言灾情媒体 = NHK WORLD-JAPAN 多语言链接（约 20 种语言，nhkworld）。</li>
+<li>待复核：自治体防灾邮件 / LINE 公式账号 / 防灾行政无线的具体渠道与登记方式（待定居地确定后补）。</li>
+</ul>
+<h3 id="34">3.4 公共服务地域差（医疗 / 教育资源）</h3>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:20%">对比视角</th>
+<th style="width:20%">指标口径</th>
+<th style="width:20%">数值</th>
+<th style="width:20%">来源</th>
+<th style="width:20%">时点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>病床数地域差</td>
+<td>病院の一般病床</td>
+<td>879,728 床（全国）</td>
+<td>厚生労働省 令和 6 年医療施設調査</td>
+<td>2024-10-01</td>
+</tr>
+<tr>
+<td>医师数地域差</td>
+<td>人口 10 万対医師数（従業地 / 居住地口径须区分）</td>
+<td>具体数值待核验</td>
+<td>厚生労働省 医師・歯科医師・薬剤師統計</td>
+<td>待核验</td>
+</tr>
+<tr>
+<td>日语指导体制</td>
+<td>日本語指導が必要な児童生徒（公立）</td>
+<td>84,759 人</td>
+<td>文部科学省</td>
+<td>令和 7 年度</td>
+</tr>
+<tr>
+<td>日语指导体制（外国籍）</td>
+<td>其中外国籍</td>
+<td>73,313 人（较上次 +27.0%）</td>
+<td>文部科学省</td>
+<td>令和 7 年度</td>
+</tr>
+<tr>
+<td>外国人儿童就学把握体制</td>
+<td>「外国人の子供の就学状況等調査」第 6 回</td>
+<td>调查已全国实施（自治体间把握体制仍有差异）</td>
+<td>文部科学省</td>
+<td>令和 7 年 5 月 1 日现在</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>对决策的含义（推断，基线报告标注）：医师向大都市圈集中——地方都市的夜间救急 / 专科就医半径先查到二次医疗圈；病床分布影响重伤 / 产育时的转院半径；不就学风险存在地域差；日语指导教室有无、教员配置密度因自治体差异大——子女同赴前直接问市区町村教育委员会。</li>
+</ul>
+<h3 id="35">3.5 个人地域选定期</h3>
+<ul>
+<li>登记册 #4「个人地域选定期」：<strong>待记录</strong>（优先数据源 自记录）。定居地档案模板（事实，基线报告 02 节）：确定居住地后复制改名（如 <code>02-地域生活笔记-群马太田.md</code>），含城市 / 区、入住时间、房租 / 通勤、自治体外籍支援窗口、免费日语教室、主要医院 / 夜间救急、常用店等字段；当前各字段为空白待填。</li>
+</ul>
+<h3 id="36">3.6 数据冲突并列（不可合并、不取均值）</h3>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:50%">指标</th>
+<th style="width:50%">并列口径</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>薪资地域差</td>
+<td>厚労省賃金統計（名义工资）≠ 求人平台月収（含手当）；须同岗位分层</td>
+</tr>
+<tr>
+<td>租金</td>
+<td>登记口径（地価公示）≠ 挂牌口径（賃貸门户）</td>
+</tr>
+<tr>
+<td>岗位密度</td>
+<td>HelloWork 地域件数（在招口径）≠ 实际雇佣人数</td>
+</tr>
+<tr>
+<td>医疗服务</td>
+<td>人口 10 万対医師数（従業地 / 居住地口径须区分）≠ 病床数</td>
+</tr>
+</tbody>
+</table>
+<h3 id="37">3.7 未取得 / 待核验项</h3>
+<ul>
+<li>登记册 #1、#2、#3：待基线确立；登记册 #4：待记录。</li>
+<li>人口 10 万対医師数具体数值：待核验；自治体防灾邮件 / LINE 具体渠道与登记方式：待定居地确定后复核。</li>
+<li>基线报告遗留项（business-config 第十一节）：无免责声明节、无 <code>.report-nav</code> 顶部导航，待下一期按模板重写时补齐。</li>
+</ul>
+<h2 id="s4">四、初步结论</h2>
+<p><strong>结论 1</strong>：本主题当前处于"框架就绪、活值待建"状态。证据：7 维评分框架与决策流程已建立（基线报告 01 节）；登记册 #1–#4 均待基线确立 / 待记录。标注：事实。</p>
+<p><strong>结论 2</strong>：地域差在公共服务领域呈系统性存在。证据：病院一般病床 879,728 床（厚生労働省 令和 6 年医療施設調査，2024-10-01）；日本語指導が必要な児童生徒 84,759 人、其中外国籍 73,313 人、较上次 +27.0%（文部科学省，令和 7 年度）。标注：事实。</p>
+<p><strong>结论 3</strong>：横向比较须先固定口径，否则存在混算风险。证据：登记册口径清单列明登记口径 ≠ 挂牌口径、都道府県 ≠ 市町村、従業地 / 居住地口径须区分。标注：事实。</p>
+<p><strong>结论 4</strong>：不就学风险与日语指导资源存在地域差。证据：调查已全国实施但自治体间把握体制仍有差异；日语指导教室有无、教员配置密度因自治体差异大（基线报告标注「推断」）。标注：推断。</p>
+<p><strong>结论 5</strong>：候选地域速览为定性判断，不构成「最优地域」结论。证据：基线报告候选地域速览表（自述"待实地补充"）；business-config 第二节结论边界。标注：事实（属定性清单，非排名）。</p>
+<p><strong>结论 6</strong>：多语言防灾情报已具备国家级入口，自治体层登记动作待补齐。证据：气象厅多语言版、NHK WORLD-JAPAN 多语言链接可访问（2026-11-12 验证）；自治体防灾邮件 / LINE 具体渠道待定居地确定后复核。标注：事实 + 待办。</p>
+<p><strong>风险与不确定性</strong>：</p>
+<ul>
+<li>登记册 4 项活值均未建立，报告无法给出数值化地域对比。</li>
+<li>门户数据为预期指标，不等于实际成交 / 登记值。</li>
+<li>统计域口径（都道府県 vs 市町村、従業地 vs 居住地）未固定前，地域差解读存在混算风险。</li>
+<li>基线报告无免责声明节与顶部导航（遗留项，待下一期重写补齐）。</li>
+<li>个人定居地档案为空白模板，个人地域选择尚未记录。</li>
+</ul>
+<h2 id="s5">五、后续观察方向</h2>
+<p><strong>待答问题</strong>（分析层）：</p>
+<ol>
+<li>目标地域（Offer 比较时）的司机求人件数如何采集并固定口径？</li>
+<li>賃貸挂牌行情（预期指标）的季度采集窗口与登记口径（地価公示）如何并列呈现？</li>
+<li>人口 10 万対医師数的具体数值何时可从厚生労働省统计取得，地域差结构如何？</li>
+<li>日语指导体制（教室有无、教员配置密度）在候选自治体间的差异如何核实？</li>
+<li>自治体防灾邮件 / LINE 登记渠道与多语服务在候选地如何确认？</li>
+<li>个人地域选定期与定居地档案何时建立并进入滚动维护？</li>
+</ol>
+<p><strong>下一期重点核实项</strong>：登记册 #1–#4 待基线确立 / 待记录项；人口 10 万対医師数数值；自治体防灾渠道。</p>
+<p><strong>数据补全计划</strong>：月度窗口核对 HelloWork 求人件数与门户挂牌行情；季度窗口核对自治体支援制度变化；统计类来源按官方发布节奏（年度 / 季度）核对并按「增量留痕」原则回写登记册（保留历史值、不覆盖）。</p>
+<h2 id="s6">六、核心指标速览</h2>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:20%">#</th>
+<th style="width:20%">指标</th>
+<th style="width:20%">最新值</th>
+<th style="width:20%">来源</th>
+<th style="width:20%">时点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>目标地域司机求人件数</td>
+<td>待基线确立</td>
+<td>HelloWork 地域检索</td>
+<td>待核验</td>
+</tr>
+<tr>
+<td>2</td>
+<td>目标地域賃貸挂牌行情（预期指标）</td>
+<td>待基线确立</td>
+<td>賃貸门户</td>
+<td>待核验</td>
+</tr>
+<tr>
+<td>3</td>
+<td>目标地域外国人支援窗口</td>
+<td>待基线确立</td>
+<td>自治体官网</td>
+<td>待核验</td>
+</tr>
+<tr>
+<td>4</td>
+<td>个人地域选定期</td>
+<td>待记录</td>
+<td>自记录</td>
+<td>待记录</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>注：本表逐项抄录登记册活值，未改写数值；「待基线确立 / 待记录」如实保留。</p>
+</blockquote>
+<h2 id="s7">七、监测机制与触发器</h2>
+<p><strong>监测节奏</strong>（摘自 business-config 第一节）：</p>
+<ul>
+<li>基线：<code>reports/2026-11-regional-info.md</code>（v1.0 首期固定）。</li>
+<li>月度：<code>reports/{{YYYY-MM}}-&lt;slug&gt;.md</code>。</li>
+<li>季度：<code>reports/{{YYYY-MM}}-&lt;slug&gt;.md</code>。</li>
+<li>年度：<code>reports/{{YYYY-MM}}-&lt;slug&gt;.md</code>。</li>
+<li>登记册年度处理：按「增量留痕」原则回写本登记册（保留历史值、不覆盖），不强制另存年度新版文件。</li>
+<li>无触发器命中且窗口未到时<strong>不启动</strong>；不得为制造变化而虚构变化。</li>
+</ul>
+<p><strong>触发器清单</strong>（摘自 business-config 第七节，逐条列出）：</p>
+<ol>
+<li>（月度）目标地域岗位密度 / 条件显著变化（联动 02-career-driver 求人抽样）→ 01</li>
+<li>（月度）防灾气象预警体系与配信渠道变化（気象庁 / 内閣府防災）→ 02 防灾小节</li>
+<li>（季度）地域生活支援制度变化（自治体）→ 02</li>
+<li>（季度）医师数等医疗·教育资源统计年度发布（厚労省 / 文科省）→ 01 差异视角小节</li>
+<li>（年度）国交省地価统计 / 地域统计年度发布 → 01</li>
+<li>（年度）个人选定目标地域 → 01 / 02</li>
+</ol>
+<p><strong>观察项与触发器状态</strong>（摘自登记册同名节）：</p>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:33%">状态项</th>
+<th style="width:33%">内容</th>
+<th style="width:34%">更新于</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>唯一观察项</td>
+<td>首期为空</td>
+<td>—</td>
+</tr>
+<tr>
+<td>首要触发器</td>
+<td>首期为空</td>
+<td>—</td>
+</tr>
+<tr>
+<td>触发器结论</td>
+<td>首期为空</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<h2 id="s8">八、数据可靠性与局限说明</h2>
+<p><strong>核验程度分级</strong>：</p>
+<ul>
+<li>A 官方一手：厚生労働省（医療施設調査、医師・歯科医師・薬剤師統計）、文部科学省（外国人児童生徒调查）、気象庁、防災庁、総務省統計局、国土交通省、各都道府県 / 市町村官网。</li>
+<li>B 权威转引 / 聚合：HelloWork 地域检索（岗位密度一手聚合）、JETRO 地域信息；C 平台抽样 / 门户：賃貸 / 生活门户（挂牌口径，仅预期指标）；地域媒体。</li>
+</ul>
+<p><strong>已知口径冲突</strong>（并列呈现，不合并、不取均值）：</p>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:33%">指标</th>
+<th style="width:33%">并列口径</th>
+<th style="width:34%">处理</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>薪资地域差</td>
+<td>厚労省賃金統計（名义工资）≠ 求人平台月収（含手当）</td>
+<td>须同岗位分层</td>
+</tr>
+<tr>
+<td>租金</td>
+<td>登记口径（地価公示）≠ 挂牌口径（賃貸门户）</td>
+<td>并列呈现</td>
+</tr>
+<tr>
+<td>岗位密度</td>
+<td>HelloWork 地域件数（在招口径）≠ 实际雇佣人数</td>
+<td>并列呈现</td>
+</tr>
+<tr>
+<td>医疗服务</td>
+<td>人口 10 万対医師数（従業地 / 居住地口径须区分）≠ 病床数</td>
+<td>并列呈现</td>
+</tr>
+</tbody>
+</table>
+<p><strong>未取得项</strong>：</p>
+<ul>
+<li>登记册 #1、#2、#3：待基线确立；登记册 #4：待记录；人口 10 万対医師数具体数值待核验。</li>
+<li>自治体防灾邮件 / LINE 具体渠道：待定居地确定后复核；基线报告遗留项：无免责声明节、无顶部导航（待下一期重写补齐）。</li>
+</ul>
+<h2 id="s9">九、免责声明</h2>
+<p><strong>本报告仅供参考，不构成投资建议或决策依据。</strong></p>
+<h2 id="s10">十、参考来源清单</h2>
+<ol>
+<li>厚生労働省 医師・歯科医師・薬剤師統計 — https://www.mhlw.go.jp/toukei/list/33-20.html （2026 核对）</li>
+<li>厚生労働省 令和 6 年医療施設調査 — https://www.mhlw.go.jp/toukei/saikin/hw/iryosd/24/index.html （2024）</li>
+<li>文部科学省 帰国・外国人児童生徒等の現状 — https://www.mext.go.jp/a_menu/shotou/clarinet/genjyou/1295897.htm （2026 核对，令和 7 年度调查）</li>
+<li>気象庁 警報・注意報 — https://www.jma.go.jp/bosai/warning/ （2026 核对）</li>
+<li>気象庁 多言語ページ（防災気象情報多语言版） — https://www.data.jma.go.jp/multi/yoho/index.html?lang=cn_zs （2026 核对）</li>
+<li>防災庁 — https://www.bousai.go.jp （2026 核对；2026-11-02 发足）</li>
+<li>NHK WORLD-JAPAN 多言語リンク — https://www3.nhk.or.jp/nhkworld/en/multilingual_links/ （2026 核对）</li>
+<li>総務省自治体「外国人生活ガイド」入口 — https://www.soumu.go.jp/ （2026 核对）</li>
+<li>HelloWork 地域检索（岗位密度聚合；登记册 #1 优先来源）；賃貸 / 生活门户（挂牌口径，仅预期指标；登记册 #2 优先来源）</li>
+</ol>
+<hr />
+<p>本报告为 v1.0 首份分析，数据基准 2026-11-13。</p>
+<hr />
+<blockquote>
+<p><strong>附录说明</strong>：以下为原报告《日本地域信息知识手册》（2026-11_baseline_report.md）全文，作为附录保留，内容未删改。</p>
+</blockquote>
+<h2 id="s11">日本地域信息知识手册</h2>
+<blockquote>
+<p><strong>版本</strong>：v1.0（合并整理版）　<strong>整理日期</strong>：2026-11-12
+<strong>说明</strong>：本文档由原分散的多份章节文档合并整理而成，保留全部原内容与层级关系。后续更新请直接维护本单份文档。</p>
+</blockquote>
+<hr />
+<h3 id="_13">导航与使用约定</h3>
+<h3 id="13-regional-info">13-regional-info 索引</h3>
+<p>地域信息区。覆盖地域选择决策与定居后的生活记录。</p>
+<h4 id="_14">文件一览</h4>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:33%">#</th>
+<th style="width:33%">文件</th>
+<th style="width:34%">内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>01</td>
+<td>地域选择框架</td>
+<td>7 维评分框架、候选地域速览、决策流程</td>
+</tr>
+<tr>
+<td>02</td>
+<td>地域生活笔记</td>
+<td>定居地档案模板（确定后复制使用）、防灾安全、季度观察</td>
+</tr>
+</tbody>
+</table>
+<h4 id="_15">关联目录</h4>
+<ul>
+<li>薪资地域差 → ../../07-economy-finance/reports/archives/01-收入结构与薪资行情</li>
+<li>落地手续 → ../../12-culture-life/reports/02-生活指南与适应</li>
+</ul>
+<h4 id="_16">使用约定</h4>
+<ul>
+<li>Offer 比较时用 01 打分；定居后以 02 为生活台账。</li>
+</ul>
+<h4 id="_17">更新日志</h4>
+<h5 id="2026-11-12">2026-11-12（维度扩充：章内增补）</h5>
+<p><strong>变更摘要</strong></p>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:20%">章节</th>
+<th style="width:20%">变更点</th>
+<th style="width:20%">旧值/旧说法</th>
+<th style="width:20%">新值（来源/年份）</th>
+<th style="width:20%">性质</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>01</td>
+<td>新增小节「地域间公共服务差异视角」</td>
+<td>无</td>
+<td>医疗/教育 2 个横向对比视角表（mhlw.go.jp、mext.go.jp、e-stat.go.jp 验证 2026-11-12），交叉引用 culture-life 03 医疗、education 03 子女教育</td>
+<td>新增</td>
+</tr>
+<tr>
+<td>02</td>
+<td>新增小节「地域防灾情报渠道」</td>
+<td>无</td>
+<td>国家预警/多语言/自治体/中央防灾 3 层渠道表（jma.go.jp、bousai.go.jp 验证 2026-11-12；防灾庁 2026-11-02 发足），反向引用 politics-law 02</td>
+<td>新增</td>
+</tr>
+</tbody>
+</table>
+<p><strong>待复核清单</strong></p>
+<ul>
+<li>目标定居地防灾邮件/LINE 具体渠道与登记方式（待定居地确定后补）</li>
+</ul>
+<blockquote>
+<p>2026-11-12 复核已闭环：病床数取令和 6 年医療施設調査（病院一般病床 879,728 床）；NHK WORLD-JAPAN 多语言入口已确认可访问；日语指导调查数值取令和 7 年度（外国籍 73,313 人）。</p>
+</blockquote>
+<hr />
+<h3 id="01">01 地域选择框架</h3>
+<blockquote>
+<p>选地域=选收入结构、生活成本、社群密度、灾害风险的综合决策。用于入职前与转职时。</p>
+</blockquote>
+<h4 id="15">一、评分框架（每地打分 1–5）</h4>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:33%">维度</th>
+<th style="width:33%">权重</th>
+<th style="width:34%">关键问题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>岗位供给</td>
+<td>×3</td>
+<td>特定技能+干线岗位多吗？有 2 号移行先例的公司吗？</td>
+</tr>
+<tr>
+<td>薪资×成本</td>
+<td>×3</td>
+<td>名义薪资 − 房租/物价 = 可支配多少？</td>
+</tr>
+<tr>
+<td>外国人支援</td>
+<td>×2</td>
+<td>自治体窗口、多语医疗、日语教室</td>
+</tr>
+<tr>
+<td>同胞/前辈密度</td>
+<td>×1</td>
+<td>太少孤独，太多竞争——中间为佳</td>
+</tr>
+<tr>
+<td>交通/归国便利</td>
+<td>×1</td>
+<td>国际机场、港口</td>
+</tr>
+<tr>
+<td>灾害风险</td>
+<td>×1</td>
+<td>地震带/洪水地图/豪雪</td>
+</tr>
+<tr>
+<td>生活品质</td>
+<td>×1</td>
+<td>自然、育儿、医疗资源（长期定居视角）</td>
+</tr>
+</tbody>
+</table>
+<h4 id="_18">二、候选地域速览（待实地补充）</h4>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:33%">地域</th>
+<th style="width:33%">优势</th>
+<th style="width:34%">注意</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>埼玉（本庄/深谷/熊谷）</td>
+<td>物流仓密集、近东京、成本中</td>
+<td>—</td>
+</tr>
+<tr>
+<td>群马（太田/伊势崎）</td>
+<td>传统物流重镇、外国人多</td>
+<td>冬季行车</td>
+</tr>
+<tr>
+<td>爱知（名古屋周边）</td>
+<td>岗位最厚、支援体制最成熟</td>
+<td>竞争也多</td>
+</tr>
+<tr>
+<td>静冈（富士/沼津）</td>
+<td><strong>新东名自动驾驶实证沿线</strong>——观察特别加分</td>
+<td>—</td>
+</tr>
+<tr>
+<td>福冈（北九州/福冈）</td>
+<td>归国方便、薪资佳</td>
+<td>—</td>
+</tr>
+<tr>
+<td>北海道/东北</td>
+<td>薪资含冬季手当</td>
+<td>豪雪，初学者不宜</td>
+</tr>
+</tbody>
+</table>
+<h4 id="_19">三、决策流程</h4>
+<ol>
+<li>Offer 阶段：用本框架对候选地打分（≥3.5 考虑）</li>
+<li>入职前：读该自治体「外国人生活ガイド」（官网多有中文版）[Source: https://www.soumu.go.jp/, 2026]</li>
+<li>落地 1 个月后：实际体验 vs 预期复盘，写入 <a href="#02-地域生活笔记">02-地域生活笔记</a></li>
+</ol>
+<h4 id="_20">地域间公共服务差异视角</h4>
+<!-- updated: 2026-11-12 | 新增小节 -->
+
+<blockquote>
+<p>评分框架的补充视角：公共服务水平在日本国内存在系统性地域差，转职/定居前横向比对。保险与就医流程、学制等制度细节由专门主题维护（见下方交叉引用），本节只做地域差视角与官方数据入口。</p>
+</blockquote>
+<p><strong>医疗资源地域差</strong></p>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:25%">对比视角</th>
+<th style="width:25%">指标口径</th>
+<th style="width:25%">官方数据入口</th>
+<th style="width:25%">对决策的含义（推断）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>医师数地域差</td>
+<td>人口 10 万対医師数（従業地/居住地口径须区分）</td>
+<td><a href="https://www.mhlw.go.jp/toukei/list/33-20.html" title="来源：https://www.mhlw.go.jp/toukei/list/33-20.html, 2026">厚生労働省 医師・歯科医師・薬剤師統計</a></td>
+<td>医师向大都市圈集中——地方都市的夜间救急/专科就医半径先查到二次医疗圈</td>
+</tr>
+<tr>
+<td>病床数地域差</td>
+<td>病院の一般病床（令和 6 年医療施設調査，2024-10-01：全国 879,728 床）</td>
+<td><a href="https://www.mhlw.go.jp/toukei/saikin/hw/iryosd/24/index.html" title="来源：https://www.mhlw.go.jp/toukei/saikin/hw/iryosd/24/index.html, 2024">厚生労働省 令和6年医療施設調査</a></td>
+<td>病床分布影响重伤/产育时的转院半径</td>
+</tr>
+</tbody>
+</table>
+<p>保险体系与就医流程细节 → <a href="../../12-culture-life/reports/2026-11-culture-life.html#03-医疗与健康">12-文化与生活 · 03-医疗与健康</a></p>
+<p><strong>教育资源地域差（外国人儿童受入体制）</strong></p>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:25%">对比视角</th>
+<th style="width:25%">指标口径</th>
+<th style="width:25%">官方数据入口</th>
+<th style="width:25%">对决策的含义（推断）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>外国人儿童就学把握体制</td>
+<td>各市町村就学状況把握与就学促进取组（「外国人の子供の就学状況等調査」第 6 回，令和 7 年 5 月 1 日现在）</td>
+<td><a href="https://www.mext.go.jp/a_menu/shotou/clarinet/genjyou/1295897.htm" title="来源：https://www.mext.go.jp/a_menu/shotou/clarinet/genjyou/1295897.htm, 2026">文部科学省 帰国・外国人児童生徒等の現状</a></td>
+<td>调查已全国实施，但自治体间把握体制仍有差异——不就学风险存在地域差（推断）</td>
+</tr>
+<tr>
+<td>日语指导体制差异</td>
+<td>日本語指導が必要な児童生徒（令和 7 年度：公立 84,759 人，其中外国籍 73,313 人，较上次 +27.0%）</td>
+<td><a href="https://www.mext.go.jp/a_menu/shotou/clarinet/genjyou/1295897.htm" title="来源：https://www.mext.go.jp/a_menu/shotou/clarinet/genjyou/1295897.htm, 2026">文部科学省 調査結果</a></td>
+<td>日语指导教室有无、教员配置密度因自治体差异大——子女同赴前直接问市区町村教育委员会</td>
+</tr>
+</tbody>
+</table>
+<p>就学手续与学制细节 → <a href="../../10-education-qualification/reports/2026-11-education-qualification.html#03-日本学校教育体系与子女教育">10-资格与教育投资 · 03-日本学校教育体系与子女教育</a></p>
+<h4 id="_21">关联</h4>
+<ul>
+<li>薪资地域差 → <a href="../../07-economy-finance/reports/2026-11-economy-finance.html#01-收入结构与薪资行情">07-经济与财务 · 01</a></li>
+<li>求职渠道地域策略 → <a href="../../02-career-driver/reports/2026-11-career-driver.html#05-求职渠道与简历面试">05 求职渠道与简历面试</a></li>
+</ul>
+<hr />
+<h3 id="02">02 地域生活笔记</h3>
+<blockquote>
+<p>模板文件：确定居住地后复制一份改名（如 <code>02-地域生活笔记-群马太田.md</code>），持续维护。</p>
+</blockquote>
+<h4 id="_22">一、定居地档案</h4>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:50%">项目</th>
+<th style="width:50%">记录</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>城市/区</td>
+<td></td>
+</tr>
+<tr>
+<td>入住时间</td>
+<td></td>
+</tr>
+<tr>
+<td>房租/通勤</td>
+<td></td>
+</tr>
+<tr>
+<td>自治体外籍支援窗口</td>
+<td>名称·地址·电话·多语种</td>
+</tr>
+<tr>
+<td>免费日语教室</td>
+<td>场次·地点</td>
+</tr>
+<tr>
+<td>主要医院/夜间救急</td>
+<td></td>
+</tr>
+<tr>
+<td>中華物産店/常用店</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h4 id="_23">二、生活发现（滚动追加）</h4>
+<ul>
+<li>公共设施（图书馆/体育馆/市民   pool）利用实记</li>
+<li>交通月票/通勤路线实际成本</li>
+<li>邻里关系与噪音规则（ゴミ出し日程表拍照存档）</li>
+</ul>
+<h4 id="_24">三、防灾与安全</h4>
+<ul>
+<li>避难所位置（役所防灾地图 app 确认）</li>
+<li>洪水/土砂风险地图查询结果</li>
+<li>地震时集合点（与家人约定）</li>
+</ul>
+<h4 id="_25">地域防灾情报渠道</h4>
+<!-- updated: 2026-11-12 | 新增小节 -->
+
+<blockquote>
+<p>防灾情报分三层：国家预警 → 自治体通知 → 个人接收。定居地确定后，把第三层的登记动作补进本章「一、定居地档案」。与 <a href="../../09-politics-law/reports/2026-11-politics-law.html#02-政治动向与移民政策环境">09-政治与法规 · 02-政治动向与移民政策环境</a>（灾害时外国人支援）互补。</p>
+</blockquote>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:33%">层级</th>
+<th style="width:33%">渠道</th>
+<th style="width:34%">入口与用法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>国家预警</td>
+<td>气象厅警報・注意報（大雨/洪水/大雪/地震/津波等）</td>
+<td><a href="https://www.jma.go.jp/bosai/warning/" title="来源：https://www.jma.go.jp/bosai/warning/, 2026">気象庁 警報・注意報</a>——台风季每日确认现住地与通勤圈</td>
+</tr>
+<tr>
+<td>国家预警（多语言）</td>
+<td>防災気象情報多语言版（含简体中文）</td>
+<td><a href="https://www.data.jma.go.jp/multi/yoho/index.html?lang=cn_zs" title="来源：https://www.data.jma.go.jp/multi/yoho/index.html?lang=cn_zs, 2026">気象庁 多言語ページ</a>——日语达标前靠它读懂预警等级</td>
+</tr>
+<tr>
+<td>自治体通知</td>
+<td>市区町村防灾邮件（防災メール）/LINE 公式账号/防灾行政无线</td>
+<td>渠道因自治体而异：役所住民课登记住址时一并申请（具体渠道待定居地确定后复核）</td>
+</tr>
+<tr>
+<td>中央防灾</td>
+<td>防災庁（2026-11-02 由内阁府防灾改组发足）防灾政策与大规模灾情汇总</td>
+<td><a href="https://www.bousai.go.jp" title="来源：https://www.bousai.go.jp, 2026">防災庁</a>——大规模灾害时的中央级信息源</td>
+</tr>
+<tr>
+<td>多语言灾情（媒体）</td>
+<td>NHK WORLD-JAPAN 多语言链接（约 20 种语言新闻 + 地震/海啸等灾害信息）</td>
+<td><a href="https://www3.nhk.or.jp/nhkworld/en/multilingual_links/" title="来源：https://www3.nhk.or.jp/nhkworld/en/multilingual_links/, 2026">NHK WORLD-JAPAN 多言語リンク</a>——网络可达性风险时的备用信息源</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>核对约定：台风季（7-10 月）与降雪期前各核对一次上述渠道可用性；气象厅预警/配信体系调整时更新本表。</li>
+</ul>
+<h4 id="_26">四、季度观察</h4>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:33%">季度</th>
+<th style="width:33%">天气/生活注意</th>
+<th style="width:34%">本地活动</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>春</td>
+<td>花粉</td>
+<td>赏花</td>
+</tr>
+<tr>
+<td>夏</td>
+<td>台风/热中症</td>
+<td>祭り·花火</td>
+</tr>
+<tr>
+<td>秋</td>
+<td>台风尾巴</td>
+<td>红叶</td>
+</tr>
+<tr>
+<td>冬</td>
+<td>雪/日照短</td>
+<td>灯饰</td>
+</tr>
+</tbody>
+</table>
+<hr />
+</body>
+</html>

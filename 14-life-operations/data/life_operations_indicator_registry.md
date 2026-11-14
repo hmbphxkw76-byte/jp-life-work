@@ -3,7 +3,7 @@
 > **用途**：10 项关键监测指标的**活值存放处**。每次运行更新本登记册 → 回写报告「数据变更摘要」。
 > **格式**：每项含 `最新值（来源/年份）` 与 `基准版本`。
 > **锚定**：已修正事实清单以最新版报告文首为单一事实源。
-> **配套**：业务参数见 [../prompts/business-config.md](../prompts/business-config.md)；基线报告见 [../reports/2026-11_baseline_report.md](../reports/2026-11_baseline_report.md)。
+> **配套**：业务参数见 [../prompts/business-config.md](../prompts/business-config.md)；基线报告见 [../reports/2026-11-life-operations.md](../reports/2026-11-life-operations.md)。
 
 | # | 指标 | 优先数据源 | 最新值（来源/年份） | 基准版本 |
 |---|---|---|---|---|

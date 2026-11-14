@@ -2,7 +2,7 @@
 
 > **用途**：6 项关键监测指标的**活值存放处**（提示词只保留指标定义与数据源，避免提示词被每次运行改写）。每次运行更新本登记册 → 回写报告"数据变更摘要"。
 > **格式**：每项含 `最新值（来源/年份）` 与 `基准版本`。首值取自 2026-11-12（prompt 追踪表硬编码值迁移）；#4–#6 为 2026-11-12 维度扩充（03 章）新增，其中 #4 已核实、#6 日语门槛分布待复核。
-> **配套**：业务参数见 [../prompts/business-config.md](../prompts/business-config.md)；基线报告见 [../reports/2026-11_baseline_report.md](../reports/2026-11_baseline_report.md)。
+> **配套**：业务参数见 [../prompts/business-config.md](../prompts/business-config.md)；基线报告见 [../reports/2026-11-industry-technology.md](../reports/2026-11-industry-technology.md)。
 
 ## 核心指标
 

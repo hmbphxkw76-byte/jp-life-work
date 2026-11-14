@@ -1,7 +1,7 @@
 """报告自动归位（CI: scheduled-maintenance / content-update 的 classify 步骤）。
 
 扫描散落在业务目录之外（仓库根、report_templates/ 等）的报告文件，
-按文件名中的地区 / 物业类型线索判定归属业务线。
+按文件名中的主题 slug 判定归属业务线，移动到该主题 reports/。
 
 用法：
     python prompts/tools/classify_reports.py --apply --unknown-warn
@@ -21,30 +21,32 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from _common import detect_report, iter_business_dirs, ROOT, TEMPLATE_ROOT  # noqa: E402
+from _common import detect_month_report, iter_business_dirs, ROOT, TEMPLATE_ROOT, topic_slug  # noqa: E402
 
 
 def strays() -> list[Path]:
     """收集业务目录之外的报告文件（仓库根一级 + src/report_templates/）。"""
     out: list[Path] = []
     for f in sorted(ROOT.iterdir()):
-        if f.is_file() and detect_report(f.name):
+        if f.is_file() and detect_month_report(f.name):
             out.append(f)
-    tpl = TEMPLATE_ROOT
-    if tpl.is_dir():
-        for f in sorted(tpl.rglob("*")):
-            if f.is_file() and detect_report(f.name):
+    if TEMPLATE_ROOT.is_dir():
+        for f in sorted(TEMPLATE_ROOT.rglob("*")):
+            if f.is_file() and detect_month_report(f.name):
                 out.append(f)
     return out
 
 
 def owner_of(name: str):
-    """按文件名包含的地区 / 物业类型词判定唯一归属业务线；无 / 多归属返回 None。"""
-    lower = name.lower()
+    """按文件名中的主题 slug 判定唯一归属业务线；无 / 多归属返回 None。"""
+    det = detect_month_report(name)
+    if not det:
+        return None
+    slug = det[1]
     hits = [
         b
         for b in iter_business_dirs()
-        if any(n and n.lower() in lower for n in (b.region, b.property_type))
+        if topic_slug(b.region if not b.property_type else b.property_type) == slug
     ]
     return hits[0] if len(hits) == 1 else None
 

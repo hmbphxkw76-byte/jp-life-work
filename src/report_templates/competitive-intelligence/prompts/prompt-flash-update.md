@@ -1,7 +1,7 @@
 # {{REGION}} · {{TOPIC}} · 事件触发专项提示词（竞争情报监测型 · 泛用版）
 
 > **用途**：重大竞品动作（融资 / 并购 / 换帅 / 定价重构 / 新产品线）当期核实与专项更新，不等待月度窗口。泛用版业务提示词：建新业务线时复制本文件至 `{REGION}/{PROPERTY}/prompts/`，替换变量与 TODO 后即可运行。
-> **产出**：专项更新件 `{{OUTPUT_PATH}}`（`reports/{{YYYY-MM-DD}}-主题.md`）+ 档案库增量回写。命名不在工具链标准正则内，validate 仅 WARN 不阻断，属预期。
+> **产出**：专项更新件 `{{OUTPUT_PATH}}`（`reports/{{YYYY-MM}}-<slug>.md`）+ 档案库增量回写。命名不在工具链标准正则内，validate 仅 WARN 不阻断，属预期。
 >
 > **继承声明（四层体系）**：本文件 = [通用基座](../../../prompt-generic-base.md) × [监测报告通用规范](../../monitoring-common-spec.md) × [周期更新类型模板（竞争情报监测型）](../prompt-monthly-update-template.md) × 业务专属配置（实例化后为 `./business-config.md`；泛用版暂缺，业务项以 TODO 标注）。冲突时以业务提示词（即本文件实例化版）为准。
 

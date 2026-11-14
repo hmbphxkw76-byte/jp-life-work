@@ -15,7 +15,7 @@
 {{STUDY_TYPE}}            = 本次专题类型（概念测试 / 满意度复测 / 画像刷新 / 决策路径，TODO：按业务配置枚举）
 {{BASELINE_REPORT_PATH}}  = reports/{{YYYY-MM}}_baseline_report.md
 {{REGISTRY_PATH}}         = data/（TODO）
-{{OUTPUT_PATH}}           = 专题件 reports/{{YYYY-MM-DD}}-（TODO：主题）.md；年度复测 reports/{{YYYY}}_annual.md
+{{OUTPUT_PATH}}           = 专题件 reports/{{YYYY-MM-DD}}-（TODO：主题）.md；年度复测 reports/{{YYYY-MM}}-<slug>.md
 {{REPORT_VERSION}}        = 本次版本号，格式 vYYYY.MM.DD
 ```
 

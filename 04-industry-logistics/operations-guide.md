@@ -38,7 +38,7 @@ python src/prompts-tools/tools/lint_reports.py  # 报告内容校验，期望：
 
 并人工确认三点：
 
-1. 基线报告 `reports/2026-11_baseline_report.md` + 同名 HTML 存在（年度刷新的对比锚，缺失则先走第 5 节灾难恢复）。
+1. 基线报告 `reports/2026-11-industry-logistics.md` + 同名 HTML 存在（年度刷新的对比锚，缺失则先走第 5 节灾难恢复）。
 2. 上期年度刷新报告存在（首年刷新除外），路径记入 `{{PREVIOUS_REPORT_PATH}}`。
 3. 对应周期提示词存在，且继承声明指向 [src/report_templates/industry-research/](../src/report_templates/industry-research/)。
 
@@ -49,7 +49,7 @@ python src/prompts-tools/tools/lint_reports.py  # 报告内容校验，期望：
 ### 1.1 启动入口与前置条件
 
 - 入口：[prompt-baseline-setup.md](./prompts/prompt-baseline-setup.md)
-- **重要**：本业务线基线已产出（`reports/2026-11_baseline_report.md` v1.0 + 登记册）。**正常运行永不重跑基线**。仅以下两种情形允许再次启动：
+- **重要**：本业务线基线已产出（`reports/2026-11-industry-logistics.md` v1.0 + 登记册）。**正常运行永不重跑基线**。仅以下两种情形允许再次启动：
   - 报告与登记册全部丢失（灾难恢复）；
   - 九节结构经维护规范批准重排（须在 business-config 版本记录留痕）。
 - 前置条件：无上期报告依赖；确认来源清单与官方发布节奏；确认 `{{REGISTRY_PATH}}` 不存在或已获准重建。
@@ -60,7 +60,7 @@ python src/prompts-tools/tools/lint_reports.py  # 报告内容校验，期望：
 |---|---|---|
 | `{{CURRENT_DATE}}` | 本次执行日期 | `2026-11-13` |
 | `{{BASELINE_DATE}}` | 首期基线日期（重建时改重建日期） | `2026-11-12` |
-| `{{OUTPUT_PATH}}` | 固定 `reports/2026-11_baseline_report.md` | 同左 |
+| `{{OUTPUT_PATH}}` | 固定 `reports/2026-11-industry-logistics.md` | 同左 |
 | `{{REPORT_VERSION}}` | 首期固定 `v1.0`；重建时递增 | `v1.0` |
 
 ### 1.3 执行步骤
@@ -95,9 +95,9 @@ python src/prompts-tools/tools/lint_reports.py
 | 变量 | 填写规则 | 示例（刷新 2027 年） |
 |---|---|---|
 | `{{CURRENT_DATE}}` | 本次执行日期 | `2027-11-15` |
-| `{{PREVIOUS_REPORT_PATH}}` | `reports/` 中最近一期年度刷新版（首年为空） | `reports/2026_annual.md` |
-| `{{BASELINE_REPORT_PATH}}` | 固定 `reports/2026-11_baseline_report.md` | 同左 |
-| `{{OUTPUT_PATH}}` | `reports/{{YYYY}}_annual.md`，年份＝刷新年 | `reports/2027_annual.md` |
+| `{{PREVIOUS_REPORT_PATH}}` | `reports/` 中最近一期年度刷新版（首年为空） | `reports/{{YYYY-MM}}-<slug>.md` |
+| `{{BASELINE_REPORT_PATH}}` | 固定 `reports/2026-11-industry-logistics.md` | 同左 |
+| `{{OUTPUT_PATH}}` | `reports/{{YYYY-MM}}-<slug>.md`，年份＝刷新年 | `reports/{{YYYY-MM}}-<slug>.md` |
 | `{{REPORT_VERSION}}` | `v` + 执行日期 | `v2027.11.15` |
 
 固定值（不填，读自业务配置第一节）：`{{REGISTRY_PATH}}`、`{{REPO_RAW_URL_BASE}}` 等。
@@ -136,7 +136,7 @@ python src/prompts-tools/tools/lint_reports.py
 
 ### 3.2 命名与范围
 
-- 追加件命名：`reports/{{YYYY-MM-DD}}-主题.md`（+ 同名 HTML）；该命名不在标准正则内，`validate.py` 仅 WARN 不阻断，属预期。
+- 追加件命名：`reports/{{YYYY-MM}}-<slug>.md`（+ 同名 HTML）；该命名不在标准正则内，`validate.py` 仅 WARN 不阻断，属预期。
 - 追加件须在开头声明触发事件、受影响模块、与基线 / 上期年度版的差异摘要。
 - 不替代年度刷新版；年度刷新仍按窗口执行。
 
@@ -186,7 +186,7 @@ git 提交报告 + 登记册（建议提交信息：`report: {YYYY} 物流行业
 | 官方页面无新数据 | 发布窗口未开 | 正常情形：按核验型轻运行处理，禁止虚构变化 |
 | 口径冲突无法裁决 | 多源口径不同 | 并列呈现并标注来源与年份，不取均值 |
 | 内联 JS 报错 | 图表语法错误 | `node --check` 定位；修复后重新落盘 |
-| 链接指向旧文件名 | 报告改名后未同步 | 全库 grep `日本物流行业知识手册` 并改为 `2026-11_baseline_report` |
+| 链接指向旧文件名 | 报告改名后未同步 | 全库 grep `日本物流行业知识手册` 并改为 `2026-11-<slug>` |
 
 ---
 

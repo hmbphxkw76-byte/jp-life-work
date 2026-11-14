@@ -39,8 +39,8 @@
 
 | 节拍 | 文件名（业务目录相对路径） | 版本号 |
 |---|---|---|
-| 新选题白皮书 | `reports/{{YYYY-MM-DD}}-主题.md`（+ 同名 html） | 写入报告内（vYYYY.MM.DD） |
-| 年度系列篇 | `reports/{{YYYY}}_annual.md`（+ 同名 html） | 同上 |
+| 新选题白皮书 | `reports/{{YYYY-MM}}-<slug>.md`（+ 同名 html） | 写入报告内（vYYYY.MM.DD） |
+| 年度系列篇 | `reports/{{YYYY-MM}}-<slug>.md`（+ 同名 html） | 同上 |
 | 框架修订篇 | `reports/{{YYYY-MM-DD}}-主题-修订.md`（+ 同名 html） | 同上 |
 
 - 新选题与修订篇命名不在 `prompts/tools` 标准正则内，`validate.py` 仅提示 WARN 不阻断，属预期行为；年度系列篇命名与标准正则兼容。

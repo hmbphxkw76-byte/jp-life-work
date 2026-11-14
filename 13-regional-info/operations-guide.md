@@ -37,7 +37,7 @@ python src/prompts-tools/tools/lint_reports.py      # 报告内容校验，期�
 
 并人工确认三点：
 
-1. 基线报告 `reports/2026-11_baseline_report.md` + 同名 HTML 存在（月 / 季 / 年的对比锚，缺失则先走第 5 节灾难恢复）。
+1. 基线报告 `reports/2026-11-regional-info.md` + 同名 HTML 存在（月 / 季 / 年的对比锚，缺失则先走第 5 节灾难恢复）。
 2. 上期同周期报告存在（首期除外），路径记入 `{{PREVIOUS_REPORT_PATH}}`。
 3. 对应周期提示词存在，且继承声明指向 [src/report_templates/market-monitoring/](../src/report_templates/market-monitoring/)。
 
@@ -48,7 +48,7 @@ python src/prompts-tools/tools/lint_reports.py      # 报告内容校验，期�
 ### 1.1 启动入口与前置条件
 
 - 入口：[prompt-baseline-setup.md](./prompts/prompt-baseline-setup.md)
-- **重要**：本业务线基线已产出（`reports/2026-11_baseline_report.md` v1.0 + 登记册）。**正常运行永不重跑基线**。仅以下两种情形允许再次启动：
+- **重要**：本业务线基线已产出（`reports/2026-11-regional-info.md` v1.0 + 登记册）。**正常运行永不重跑基线**。仅以下两种情形允许再次启动：
   - 报告与登记册全部丢失（灾难恢复）；
   - 十节结构经维护规范批准重排（须在 business-config 版本记录留痕）。
 - 前置条件：无上期报告依赖；确认来源清单与官方发布节奏；确认 `{{REGISTRY_PATH}}` 不存在或已获准重建。
@@ -59,7 +59,7 @@ python src/prompts-tools/tools/lint_reports.py      # 报告内容校验，期�
 |---|---|---|
 | `{{CURRENT_DATE}}` | 本次执行日期 | `2026-11-13` |
 | `{{BASELINE_DATE}}` | 首期基线日期（重建时改重建日期） | `2026-11-12` |
-| `{{OUTPUT_PATH}}` | 固定 `reports/2026-11_baseline_report.md` | 同左 |
+| `{{OUTPUT_PATH}}` | 固定 `reports/2026-11-regional-info.md` | 同左 |
 | `{{REPORT_VERSION}}` | 首期固定 `v1.0`；重建时递增 | `v1.0` |
 
 ### 1.3 执行步骤
@@ -94,9 +94,9 @@ python src/prompts-tools/tools/lint_reports.py
 | 变量 | 填写规则 | 示例（2026 年 12 月期） |
 |---|---|---|
 | `{{CURRENT_DATE}}` | 本次执行日期 | `2026-12-05` |
-| `{{PREVIOUS_REPORT_PATH}}` | `reports/` 中最近一期月度报告 | `reports/2026-11_monthly.md` |
-| `{{BASELINE_REPORT_PATH}}` | 固定 `reports/2026-11_baseline_report.md` | 同左 |
-| `{{OUTPUT_PATH}}` | `reports/{{YYYY-MM}}_monthly.md`，月份＝数据所属月 | `reports/2026-12_monthly.md` |
+| `{{PREVIOUS_REPORT_PATH}}` | `reports/` 中最近一期月度报告 | `reports/{{YYYY-MM}}-<slug>.md` |
+| `{{BASELINE_REPORT_PATH}}` | 固定 `reports/2026-11-regional-info.md` | 同左 |
+| `{{OUTPUT_PATH}}` | `reports/{{YYYY-MM}}-<slug>.md`，月份＝数据所属月 | `reports/{{YYYY-MM}}-<slug>.md` |
 | `{{REPORT_VERSION}}` | `v` + 执行日期 | `v2026.12.05` |
 
 固定值（不填，读自业务配置第一节）：`{{REGISTRY_PATH}}`、`{{REPO_RAW_URL_BASE}}` 等。
@@ -141,9 +141,9 @@ python src/prompts-tools/tools/classify_reports.py
 |---|---|---|
 | `{{CURRENT_DATE}}` | 本次执行日期 | `2027-04-08` |
 | `{{QUARTER}}` | 被分析季度，自然季 | `2027-Q1` |
-| `{{PREVIOUS_REPORT_PATH}}` | 最近一期季度报告 | `reports/2026-Q4_quarterly.md` |
-| `{{BASELINE_REPORT_PATH}}` | 固定 `reports/2026-11_baseline_report.md` | 同左 |
-| `{{OUTPUT_PATH}}` | `reports/{{YYYY-Qn}}_quarterly.md`，季度＝被分析季度 | `reports/2027-Q1_quarterly.md` |
+| `{{PREVIOUS_REPORT_PATH}}` | 最近一期季度报告 | `reports/2026-12-decision-hub.md` |
+| `{{BASELINE_REPORT_PATH}}` | 固定 `reports/2026-11-regional-info.md` | 同左 |
+| `{{OUTPUT_PATH}}` | `reports/{{YYYY-MM}}-<slug>.md`，季度＝被分析季度 | `reports/2027-03-<slug>.md` |
 | `{{REPORT_VERSION}}` | `v` + 执行日期 | `v2027.04.08` |
 
 ### 3.3 执行步骤
@@ -184,9 +184,9 @@ python src/prompts-tools/tools/classify_reports.py
 | `{{CURRENT_DATE}}` | 本次执行日期 | `2027-01-15` |
 | `{{YEAR}}` | 被复盘的年份 | `2026` |
 | `{{DATA_CUTOFF}}` | 数据截止日；未发布写最近已发布周期 | `2026-12-31` |
-| `{{PREVIOUS_REPORT_PATH}}` | 最近一期月度或季度报告 | `reports/2026-12_monthly.md` |
-| `{{BASELINE_REPORT_PATH}}` | 固定 `reports/2026-11_baseline_report.md` | 同左 |
-| `{{OUTPUT_PATH}}` | `reports/{{YEAR}}_annual.md` | `reports/2026_annual.md` |
+| `{{PREVIOUS_REPORT_PATH}}` | 最近一期月度或季度报告 | `reports/{{YYYY-MM}}-<slug>.md` |
+| `{{BASELINE_REPORT_PATH}}` | 固定 `reports/2026-11-regional-info.md` | 同左 |
+| `{{OUTPUT_PATH}}` | `reports/{{YYYY-MM}}-<slug>.md` | `reports/{{YYYY-MM}}-<slug>.md` |
 | `{{REPORT_VERSION}}` | `v` + 执行日期 | `v2027.01.15` |
 
 ### 4.3 执行步骤

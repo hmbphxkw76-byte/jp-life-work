@@ -23,14 +23,14 @@ python src/prompts-tools/tools/lint_reports.py
 
 ## 2. 基线（首期已产出，永不重跑）
 
-- 现状：`reports/2026-11_baseline_report.md` v1.0（数据基准 2026-11-14）。
+- 现状：`reports/2026-11-health-wellbeing.md` v1.0（数据基准 2026-11-14）。
 - 重启仅限：①灾难恢复；②结构重排（须留痕）。
 
 ## 3. 季度复核 / 事件触发
 
 - 入口：[prompt-update.md](./prompts/prompt-update.md)。
 - 触发器：见[业务配置第七节](./prompts/business-config.md)；无触发不启动。
-- 输出：`reports/{{YYYY-Qn}}_quarterly.md` 或 `reports/{{YYYY-MM-DD}}-主题.md`。
+- 输出：`reports/{{YYYY-MM}}-<slug>.md` 或 `reports/{{YYYY-MM}}-<slug>.md`。
 - 验证：`lint_reports.py` + `classify_reports.py`。
 
 ## 4. 与 14 / 07 / 08 / 13 的联动

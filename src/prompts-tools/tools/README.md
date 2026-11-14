@@ -7,8 +7,8 @@ CI 工具链使用说明。所有工具基于仓库根目录相对路径运行�
 ## 环境准备
 
 ```bash
-pip install -r requirements.txt   # openpyxl + markdown
-python -m unittest discover -s tests -v   # 单元测试（47 项）
+pip install -r requirements.txt   # markdown
+python -m unittest discover -s src/tests -v   # 单元测试（65 项）
 ```
 
 ## 退出码约定（校验类工具统一）
@@ -31,7 +31,9 @@ python -m unittest discover -s tests -v   # 单元测试（47 项）
 | md2html.py | 生成 | html-sync / scheduled-maintenance「HTML 同步」 |
 | archive_reports.py | 生成 | scheduled-maintenance「归档策略」 |
 | build_index.py | 生成 | scheduled-maintenance「生成全局索引」 |
-| build_hub.py | 生成 | ci.yml --check / html-sync、scheduled-maintenance「汇总页」 |
+| build_hub.py | 生成 | ci.yml --check / html-sync、scheduled-maintenance「汇总页 + 阅读器」 |
+| report_diff.py | 生成 | build_hub 依赖：跨月内容对比高亮（纯函数） |
+| migrate_monthly_reports.py | 迁移 | 一次性：存量报告合并重命名为月度系列 |
 | update_planner.py | 编排 | content-update「生成任务清单」 |
 | automation_status.py | 编排 | content-update / scheduled-maintenance「状态记录与活跃度」 |
 
@@ -50,7 +52,8 @@ python prompts/tools/validate.py
 通用层全目录（含类型子目录）无业务关键词
 （迪拜/公寓/Dubai/UAE/DLD/CBUAE/EIBOR 等，清单见 `_common.BUSINESS_KEYWORDS`）；
 业务线目录结构（`prompts/business-config.md` 及其 `{{REGION}}/{{TOPIC}}/{{REGISTRY_PATH}}`
-变量区）；`reports/` 内文件命名符合约定。
+变量区）；`reports/` 内文件命名符合月度约定 `YYYY-MM-<主题slug>.md/.html`，
+slug 与目录一致，且 md / html 成对存在。
 
 ### lint_reports.py — 报告内容校验
 
@@ -131,9 +134,9 @@ python prompts/tools/md2html.py
 python prompts/tools/archive_reports.py
 ```
 
-每类报告保留最新 N 期（monthly 12 / quarterly 8 / annual 5 / baseline 3），
-超出部分移入业务目录内 `reports/archives/`。保留策略为纯函数
-`select_archives(items, keep_map)`。
+每条业务线保留最新 12 期月度报告（与阅读器默认窗口一致），超出部分连同名
+md / html 一并移入业务目录内 `reports/archives/`。保留策略为纯函数
+`select_archives(items, keep)`。
 
 ### build_index.py — 全局索引
 
@@ -151,8 +154,11 @@ python prompts/tools/build_hub.py          # 生成 index.html + reader.html
 python prompts/tools/build_hub.py --check  # 校验是否为最新
 ```
 
-`index.html` 为按业务线分组的报告枢纽；`reader.html` 为阅读壳（侧栏 + iframe，
-`?report=<路径>` 直达）。`--check`：过期退出码 1；文件缺失（全新克隆）退出码 0 并提示，
+`index.html` 为按业务线分组的报告枢纽（主题卡片 + 详情页，详情页默认展示最近
+12 个月报告、按时间倒序）；`reader.html` 为报告阅读器，内嵌全部月度报告，支持
+**版本一键切换**（`<主题>?<月份>` hash 路由，纯前端 show/hide，响应 < 1s）与
+**跨月对比高亮**（每期自动与上一期同主题报告比对，新增 / 修改加「已更新」标记，
+删除折叠可追溯）。`--check`：过期退出码 1；文件缺失（全新克隆）退出码 0 并提示，
 由定时维护首建。比对前对两侧做归一化——抹平「最近生成」生成时刻时间戳（分钟级心跳，
 不参与最新性判定），报告清单部分逐字节比对。
 
@@ -171,9 +177,10 @@ python prompts/tools/update_planner.py --project dubai/apartment --period 2026-Q
 
 - `--period` 接受 `YYYY-MM` / `YYYY-Qn` / `YYYY`；缺省按当前 UTC 日期推导
   （季首月用季度标识，与工作流逻辑一致）。
-- 周期推导规则：月度期 → 月度任务；季首月追加季度任务；1 月追加上一自然年年度任务。
-- 任务状态：期望输出（如 `reports/2026-12_monthly.html`）已存在 → done，否则 pending；
-  `--pending-only` 只留 pending。参数错误退出码 2。
+- 报告已统一为月度命名：一个主题每月一份 `reports/{{YYYY-MM}}-<slug>.html`；
+  季度节拍按季度末月归档（2026-Q4 → 2026-12），年度取 12 月。
+- 任务状态：期望输出已存在 → done，否则 pending；`--pending-only` 只留 pending。
+  参数错误退出码 2。
 
 ### automation_status.py — 自动化状态与活跃度
 
@@ -202,10 +209,24 @@ python prompts/tools/automation_status.py activity --threshold 45               
 | 新增业务线后首跑 | `ensure_region_topics.py` → 补 business-config.md → 首期基线报告 |
 | 手动补跑月度任务清单 | `update_planner.py --project dubai/apartment --period 2026-12` |
 
+## 月度报告体系（2026-11 重构）
+
+- **命名**：全部报告统一 `YYYY-MM-<主题slug>.md` + 同名 `.html`；主题 slug 取
+  目录名去编号前缀（`01-ssw-driver` → `ssw-driver`）。
+- **分类**：取消基线 / 初析 / 季度等类型标签，全部按自然月聚合；季度报告按季度末月
+  归档，与月度报告同一套命名 / 对比 / 展示逻辑。
+- **同月合并**：同一主题同一自然月多份存量报告合并为一份，初析为主体、基线作附录，
+  原文内容不删改（见 `migrate_monthly_reports.py` 与 `report-audits/report-migration-2026-11.md`）。
+- **展示**：单主题报告列表默认展示最近 12 个月，按时间倒序（最新在顶端）。
+- **对比**：每期报告与上一期（同主题、最近一个更早自然月）全量比对，新增 / 修改
+  高亮并加「已更新」标记，删除折叠可追溯。
+- **三类校验**（`src/tests/test_tools.py`）：命名格式合规性、全量历史数据迁移完整性
+  （git 历史逐份复核内容零丢失）、跨月份对比准确性。
+
 ## 注意事项
 
 - 所有路径均为仓库内相对路径，业务线整体迁移（改目录名）不影响工具运行。
-- `archive_reports.py` 会移动历史报告到 `reports/archives/`——基线是对比锚，
-  保留策略已含 baseline 3 份；如需永久保留请自行调整 `_common` 之外的 KEEP 表。
+- `archive_reports.py` 会移动历史报告到 `reports/archives/`，每主题保留最新 12 期；
+  如需永久保留请自行调整 `archive_reports.KEEP`。
 - lint 的免责声明检查兼容两种固定原文（历史报告「以上内容基于公开数据…」与
   通用模板「本报告仅供参考…」），两种都判合格。

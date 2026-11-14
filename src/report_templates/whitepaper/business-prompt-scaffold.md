@@ -73,7 +73,7 @@
 # {{REGION}} · {{TOPIC}} · 专题续作提示词（白皮书·专题深度型 · 选题制）
 
 > **用途**：专题续作统一入口——新选题白皮书、年度系列篇、框架修订篇（当次类型由业务配置或运行时变量指定）。可直接复制，替换顶部变量后提交给 AI 执行。
-> **产出**：新选题件 `reports/{{YYYY-MM-DD}}-主题.md` 或框架修订件 `reports/{{YYYY-MM-DD}}-主题-修订.md`、年度系列篇 `reports/{{YYYY}}_annual.md`（+ 同名 html）。新选题与修订篇命名不在标准正则内，validate 仅 WARN 不阻断，属预期。
+> **产出**：新选题件 `reports/{{YYYY-MM}}-<slug>.md` 或框架修订件 `reports/{{YYYY-MM-DD}}-主题-修订.md`、年度系列篇 `reports/{{YYYY-MM}}-<slug>.md`（+ 同名 html）。新选题与修订篇命名不在标准正则内，validate 仅 WARN 不阻断，属预期。
 >
 > **继承声明（四层体系）**：本文件 = [通用基座](../../../report_templates/prompt-generic-base.md) × [监测报告通用规范](../../../report_templates/monitoring-common-spec.md) × [专题续作类型模板（白皮书·专题深度型）](../../../report_templates/whitepaper/prompt-topic-study-template.md) × [业务专属配置](./business-config.md)。冲突时以本文件为准。
 

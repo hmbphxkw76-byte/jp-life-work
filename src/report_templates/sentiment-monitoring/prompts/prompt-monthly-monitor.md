@@ -1,7 +1,7 @@
 # {{REGION}} · {{TOPIC}} · 舆情月报提示词（舆情传播监测型 · 泛用版）
 
 > **用途**：周期性（每月）刷新声量与情感读数、热点事件榜与预警状态。泛用版业务提示词：建新业务线时复制本文件至 `{REGION}/{PROPERTY}/prompts/`，替换变量与 TODO 后即可运行。
-> **产出**：中文九节更新版报告（md 源稿 + 同目录自包含 HTML），落盘 `{{OUTPUT_PATH}}`（`reports/{{YYYY-MM}}_monthly.md`）。
+> **产出**：中文九节更新版报告（md 源稿 + 同目录自包含 HTML），落盘 `{{OUTPUT_PATH}}`（`reports/{{YYYY-MM}}-<slug>.md`）。
 >
 > **继承声明（四层体系）**：本文件 = [通用基座](../../../prompt-generic-base.md) × [监测报告通用规范](../../monitoring-common-spec.md) × [周期更新类型模板（舆情传播监测型）](../prompt-monthly-update-template.md) × 业务专属配置（实例化后为 `./business-config.md`；泛用版暂缺，业务项以 TODO 标注）。冲突时以业务提示词（即本文件实例化版）为准。
 
@@ -15,7 +15,7 @@
 {{PREVIOUS_REPORT_PATH}}  = 最近一期月报路径（首期更新时为空，仅锚定基线）
 {{BASELINE_REPORT_PATH}}  = reports/{{YYYY-MM}}_baseline_report.md
 {{REGISTRY_PATH}}         = data/（TODO：舆情台账文件名）
-{{OUTPUT_PATH}}           = reports/{{YYYY-MM}}_monthly.md
+{{OUTPUT_PATH}}           = reports/{{YYYY-MM}}-<slug>.md
 {{REPORT_VERSION}}        = 本次版本号，格式 vYYYY.MM.DD
 ```
 

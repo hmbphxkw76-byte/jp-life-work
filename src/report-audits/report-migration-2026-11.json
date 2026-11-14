@@ -1,0 +1,328 @@
+{
+  "results": [
+    {
+      "slug": "career-driver",
+      "month": "2026-11",
+      "target": "02-career-driver/reports/2026-11-career-driver.md",
+      "source": "2026-11-13_initial_analysis_report.md",
+      "role": "main",
+      "kind": "initial",
+      "content_preserved": true
+    },
+    {
+      "slug": "career-driver",
+      "month": "2026-11",
+      "target": "02-career-driver/reports/2026-11-career-driver.md",
+      "source": "2026-11_baseline_report.md",
+      "role": "appendix",
+      "kind": "baseline",
+      "content_preserved": true
+    },
+    {
+      "slug": "career-management",
+      "month": "2026-11",
+      "target": "03-career-management/reports/2026-11-career-management.md",
+      "source": "2026-11-13_initial_analysis_report.md",
+      "role": "main",
+      "kind": "initial",
+      "content_preserved": true
+    },
+    {
+      "slug": "career-management",
+      "month": "2026-11",
+      "target": "03-career-management/reports/2026-11-career-management.md",
+      "source": "2026-11_baseline_report.md",
+      "role": "appendix",
+      "kind": "baseline",
+      "content_preserved": true
+    },
+    {
+      "slug": "culture-life",
+      "month": "2026-11",
+      "target": "12-culture-life/reports/2026-11-culture-life.md",
+      "source": "2026-11-13_initial_analysis_report.md",
+      "role": "main",
+      "kind": "initial",
+      "content_preserved": true
+    },
+    {
+      "slug": "culture-life",
+      "month": "2026-11",
+      "target": "12-culture-life/reports/2026-11-culture-life.md",
+      "source": "2026-11_baseline_report.md",
+      "role": "appendix",
+      "kind": "baseline",
+      "content_preserved": true
+    },
+    {
+      "slug": "decision-hub",
+      "month": "2026-12",
+      "target": "00-decision-hub/reports/2026-12-decision-hub.md",
+      "source": "2026-Q4_quarterly.md",
+      "role": "main",
+      "kind": "quarterly",
+      "content_preserved": true
+    },
+    {
+      "slug": "decision-hub",
+      "month": "2026-11",
+      "target": "00-decision-hub/reports/2026-11-decision-hub.md",
+      "source": "2026-11-13_landing_checklist.md",
+      "role": "main",
+      "kind": "special",
+      "content_preserved": true
+    },
+    {
+      "slug": "decision-hub",
+      "month": "2026-11",
+      "target": "00-decision-hub/reports/2026-11-decision-hub.md",
+      "source": "2026-11-13_settlement_profile.md",
+      "role": "appendix",
+      "kind": "special",
+      "content_preserved": true
+    },
+    {
+      "slug": "economy-finance",
+      "month": "2026-11",
+      "target": "07-economy-finance/reports/2026-11-economy-finance.md",
+      "source": "2026-11-13_initial_analysis_report.md",
+      "role": "main",
+      "kind": "initial",
+      "content_preserved": true
+    },
+    {
+      "slug": "economy-finance",
+      "month": "2026-11",
+      "target": "07-economy-finance/reports/2026-11-economy-finance.md",
+      "source": "2026-11_baseline_report.md",
+      "role": "appendix",
+      "kind": "baseline",
+      "content_preserved": true
+    },
+    {
+      "slug": "education-qualification",
+      "month": "2026-11",
+      "target": "10-education-qualification/reports/2026-11-education-qualification.md",
+      "source": "2026-11-13_initial_analysis_report.md",
+      "role": "main",
+      "kind": "initial",
+      "content_preserved": true
+    },
+    {
+      "slug": "education-qualification",
+      "month": "2026-11",
+      "target": "10-education-qualification/reports/2026-11-education-qualification.md",
+      "source": "2026-11_baseline_report.md",
+      "role": "appendix",
+      "kind": "baseline",
+      "content_preserved": true
+    },
+    {
+      "slug": "exit-transition-return",
+      "month": "2026-11",
+      "target": "16-exit-transition-return/reports/2026-11-exit-transition-return.md",
+      "source": "2026-11-14_initial_analysis_report.md",
+      "role": "main",
+      "kind": "initial",
+      "content_preserved": true
+    },
+    {
+      "slug": "exit-transition-return",
+      "month": "2026-11",
+      "target": "16-exit-transition-return/reports/2026-11-exit-transition-return.md",
+      "source": "2026-11_baseline_report.md",
+      "role": "appendix",
+      "kind": "baseline",
+      "content_preserved": true
+    },
+    {
+      "slug": "health-wellbeing",
+      "month": "2026-11",
+      "target": "15-health-wellbeing/reports/2026-11-health-wellbeing.md",
+      "source": "2026-11-13_initial_analysis_report.md",
+      "role": "main",
+      "kind": "initial",
+      "content_preserved": true
+    },
+    {
+      "slug": "health-wellbeing",
+      "month": "2026-11",
+      "target": "15-health-wellbeing/reports/2026-11-health-wellbeing.md",
+      "source": "2026-11_baseline_report.md",
+      "role": "appendix",
+      "kind": "baseline",
+      "content_preserved": true
+    },
+    {
+      "slug": "industry-autonomous",
+      "month": "2026-11",
+      "target": "05-industry-autonomous/reports/2026-11-industry-autonomous.md",
+      "source": "2026-11-13_initial_analysis_report.md",
+      "role": "main",
+      "kind": "initial",
+      "content_preserved": true
+    },
+    {
+      "slug": "industry-autonomous",
+      "month": "2026-11",
+      "target": "05-industry-autonomous/reports/2026-11-industry-autonomous.md",
+      "source": "2026-11_baseline_report.md",
+      "role": "appendix",
+      "kind": "baseline",
+      "content_preserved": true
+    },
+    {
+      "slug": "industry-logistics",
+      "month": "2026-11",
+      "target": "04-industry-logistics/reports/2026-11-industry-logistics.md",
+      "source": "2026-11-13_initial_analysis_report.md",
+      "role": "main",
+      "kind": "initial",
+      "content_preserved": true
+    },
+    {
+      "slug": "industry-logistics",
+      "month": "2026-11",
+      "target": "04-industry-logistics/reports/2026-11-industry-logistics.md",
+      "source": "2026-11_baseline_report.md",
+      "role": "appendix",
+      "kind": "baseline",
+      "content_preserved": true
+    },
+    {
+      "slug": "industry-technology",
+      "month": "2026-11",
+      "target": "06-industry-technology/reports/2026-11-industry-technology.md",
+      "source": "2026-11-13_initial_analysis_report.md",
+      "role": "main",
+      "kind": "initial",
+      "content_preserved": true
+    },
+    {
+      "slug": "industry-technology",
+      "month": "2026-11",
+      "target": "06-industry-technology/reports/2026-11-industry-technology.md",
+      "source": "2026-11_baseline_report.md",
+      "role": "appendix",
+      "kind": "baseline",
+      "content_preserved": true
+    },
+    {
+      "slug": "language-japanese",
+      "month": "2026-11",
+      "target": "11-language-japanese/reports/2026-11-language-japanese.md",
+      "source": "2026-11-13_initial_analysis_report.md",
+      "role": "main",
+      "kind": "initial",
+      "content_preserved": true
+    },
+    {
+      "slug": "language-japanese",
+      "month": "2026-11",
+      "target": "11-language-japanese/reports/2026-11-language-japanese.md",
+      "source": "2026-11_baseline_report.md",
+      "role": "appendix",
+      "kind": "baseline",
+      "content_preserved": true
+    },
+    {
+      "slug": "life-operations",
+      "month": "2026-11",
+      "target": "14-life-operations/reports/2026-11-life-operations.md",
+      "source": "2026-11-13_initial_analysis_report.md",
+      "role": "main",
+      "kind": "initial",
+      "content_preserved": true
+    },
+    {
+      "slug": "life-operations",
+      "month": "2026-11",
+      "target": "14-life-operations/reports/2026-11-life-operations.md",
+      "source": "2026-11_baseline_report.md",
+      "role": "appendix",
+      "kind": "baseline",
+      "content_preserved": true
+    },
+    {
+      "slug": "politics-law",
+      "month": "2026-11",
+      "target": "09-politics-law/reports/2026-11-politics-law.md",
+      "source": "2026-11-13_initial_analysis_report.md",
+      "role": "main",
+      "kind": "initial",
+      "content_preserved": true
+    },
+    {
+      "slug": "politics-law",
+      "month": "2026-11",
+      "target": "09-politics-law/reports/2026-11-politics-law.md",
+      "source": "2026-11_baseline_report.md",
+      "role": "appendix",
+      "kind": "baseline",
+      "content_preserved": true
+    },
+    {
+      "slug": "regional-info",
+      "month": "2026-11",
+      "target": "13-regional-info/reports/2026-11-regional-info.md",
+      "source": "2026-11-13_initial_analysis_report.md",
+      "role": "main",
+      "kind": "initial",
+      "content_preserved": true
+    },
+    {
+      "slug": "regional-info",
+      "month": "2026-11",
+      "target": "13-regional-info/reports/2026-11-regional-info.md",
+      "source": "2026-11_baseline_report.md",
+      "role": "appendix",
+      "kind": "baseline",
+      "content_preserved": true
+    },
+    {
+      "slug": "ssw-driver",
+      "month": "2026-12",
+      "target": "01-ssw-driver/reports/2026-12-ssw-driver.md",
+      "source": "2026-Q4_quarterly.md",
+      "role": "main",
+      "kind": "quarterly",
+      "content_preserved": true
+    },
+    {
+      "slug": "ssw-driver",
+      "month": "2026-11",
+      "target": "01-ssw-driver/reports/2026-11-ssw-driver.md",
+      "source": "2026-11-13_initial_analysis_report.md",
+      "role": "main",
+      "kind": "initial",
+      "content_preserved": true
+    },
+    {
+      "slug": "ssw-driver",
+      "month": "2026-11",
+      "target": "01-ssw-driver/reports/2026-11-ssw-driver.md",
+      "source": "2026-11_baseline_report.md",
+      "role": "appendix",
+      "kind": "baseline",
+      "content_preserved": true
+    },
+    {
+      "slug": "visa-immigration",
+      "month": "2026-11",
+      "target": "08-visa-immigration/reports/2026-11-visa-immigration.md",
+      "source": "2026-11-13_initial_analysis_report.md",
+      "role": "main",
+      "kind": "initial",
+      "content_preserved": true
+    },
+    {
+      "slug": "visa-immigration",
+      "month": "2026-11",
+      "target": "08-visa-immigration/reports/2026-11-visa-immigration.md",
+      "source": "2026-11_baseline_report.md",
+      "role": "appendix",
+      "kind": "baseline",
+      "content_preserved": true
+    }
+  ]
+}

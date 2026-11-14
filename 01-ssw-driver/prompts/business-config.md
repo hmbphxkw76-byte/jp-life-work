@@ -14,7 +14,7 @@
 {{BASELINE_DATE}}        = 2026-11-11（首期基线已产出）
 {{REGISTRY_PATH}}        = data/ssw_driver_indicator_registry.md
 {{REGISTRY_FORMAT}}      = md-table
-{{BASELINE_REPORT_PATH}} = reports/2026-11_baseline_report.md
+{{BASELINE_REPORT_PATH}} = reports/{{YYYY-MM}}-<slug>.md
 {{FRESHNESS_PRIORITY}}   = 近 12 个月内数据优先；超过 24 个月须标注年份并谨慎使用
 {{SOURCE_LANGUAGE_RULE}} = 日文官方一手 + 英文权威优先；中文来源仅作线索，引用须回溯日 / 英原文（中国侧国家统计局、外汇交易中心、驻日领馆费用页为项目指定例外，仅用于中国侧输入）
 {{REPO_RAW_URL_BASE}}    = https://github.com/hmbphxkw76-byte/jp-life-work/blob/main/01-ssw-driver
@@ -24,13 +24,13 @@
 
 | 周期 | 输出路径 | 版本号 | 上期报告 |
 |---|---|---|---|
-| 基线 | `reports/2026-11_baseline_report.md` + 同名 `.html` | v1.0（首期固定） | 无 |
+| 月度报告（首期） | `reports/{{YYYY-MM}}-<slug>.md` + 同名 `.html` | v1.0（首期固定） | 无 |
 | 月度核验 | 不重写报告；仅登记册「观察项与触发器状态」更新记录（命中触发器时升级为季度重点更新） | — | — |
-| 季度 | `reports/{{YYYY-Qn}}_quarterly.md` + 同名 `.html` | vYYYY.MM.DD | `reports/` 最近一期季度报告 |
-| 年度 | `reports/{{YYYY}}_annual.md` + 同名 `.html` | vYYYY.MM.DD | `reports/` 最近一期季度报告 |
-| 事件触发插刷 | `reports/{{YYYY-MM-DD}}-主题.md`（追加件） | vYYYY.MM.DD | 基线 / 最近一期季度报告 |
+| 季度报告（季度末月归档） | `reports/{{YYYY-MM}}-<slug>.md` + 同名 `.html` | vYYYY.MM.DD | `reports/` 最近一期报告 |
+| 年度报告（12 月归档） | `reports/{{YYYY-MM}}-<slug>.md` + 同名 `.html` | vYYYY.MM.DD | `reports/` 最近一期报告 |
+| 事件触发（并入当月报告） | `reports/{{YYYY-MM}}-<slug>.md`（追加件） | vYYYY.MM.DD | 本月报告 |
 
-**输出格式**：md 源稿 + 同目录自包含 HTML（双格式交付）。插刷追加件命名不在标准正则内，`validate.py` 仅提示 WARN 不阻断，属预期行为。
+**输出格式**：md 源稿 + 同目录自包含 HTML（双格式交付）。全部报告统一命名 `YYYY-MM-<slug>`，按自然月聚合；事件触发内容并入当月报告，不再单独保留类型标签。
 
 **登记册年度处理**：本业务线登记载体为 md-table，年度复盘按「增量留痕」原则回写本登记册（保留历史值、不覆盖），不强制另存年度新版文件。
 

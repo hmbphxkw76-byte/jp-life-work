@@ -1,7 +1,7 @@
 # {{REGION}} · {{TOPIC}} · 政策解读提示词（政策法规解读型 · 泛用版 · 事件触发 + 年度复盘）
 
 > **用途**：事件触发单份解读（新政策 / 修订 / 配套细则出台后）与年度台账复盘统一入口。泛用版业务提示词：建新业务线时复制本文件至 `{REGION}/{PROPERTY}/prompts/`，替换变量与 TODO 后即可运行。
-> **产出**：单份解读件 `{{OUTPUT_PATH}}`（`reports/{{YYYY-MM-DD}}-主题.md`）或年度复盘（`reports/{{YYYY}}_annual.md` + 台账年度新版 `{{OUTPUT_REGISTRY}}` 另存不覆盖）。解读件命名不在标准正则内，validate 仅 WARN 不阻断，属预期。
+> **产出**：单份解读件 `{{OUTPUT_PATH}}`（`reports/{{YYYY-MM}}-<slug>.md`）或年度复盘（`reports/{{YYYY-MM}}-<slug>.md` + 台账年度新版 `{{OUTPUT_REGISTRY}}` 另存不覆盖）。解读件命名不在标准正则内，validate 仅 WARN 不阻断，属预期。
 >
 > **继承声明（四层体系）**：本文件 = [通用基座](../../../prompt-generic-base.md) × [监测报告通用规范](../../monitoring-common-spec.md) × [事件触发解读类型模板（政策法规解读型）](../prompt-policy-review-template.md) × 业务专属配置（实例化后为 `./business-config.md`；泛用版暂缺，业务项以 TODO 标注）。冲突时以业务提示词（即本文件实例化版）为准。
 

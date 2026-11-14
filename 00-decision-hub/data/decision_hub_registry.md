@@ -2,7 +2,7 @@
 
 > **用途**：五问决策指标的**状态与引用存放处**。本登记册不保存研究正文，只保存「指标 → 来源主题 → 引用位置 → 收敛状态 → 缺失标记」。
 > **纪律**：所有数字与结论一律引用来源主题，本登记册不独立改值；来源主题更新时，本登记册只更新引用位置与状态。
-> **配套**：业务参数见 [../prompts/business-config.md](../prompts/business-config.md)；季度复核报告见 [../reports/2026-Q4_quarterly.md](../reports/2026-Q4_quarterly.md)。
+> **配套**：业务参数见 [../prompts/business-config.md](../prompts/business-config.md)；季度复核报告见 [../reports/2026-12-decision-hub.md](../reports/2026-12-decision-hub.md)。
 
 ## 一、五问指标状态表
 

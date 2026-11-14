@@ -14,7 +14,7 @@
 {{BASELINE_DATE}}        = 2026-11-12（首期基线日期，已产出）
 {{REGISTRY_PATH}}        = data/logistics_industry_indicator_registry.md
 {{REGISTRY_FORMAT}}      = md-table
-{{BASELINE_REPORT_PATH}} = reports/2026-11_baseline_report.md
+{{BASELINE_REPORT_PATH}} = reports/{{YYYY-MM}}-<slug>.md
 {{FRESHNESS_PRIORITY}}   = 最新官方页 > 上期值 > 预测值
 {{SOURCE_LANGUAGE_RULE}} = 日文官方一手 + 英文权威优先；中文来源仅作线索，不得作为唯一依据
 {{REPO_RAW_URL_BASE}}    = https://github.com/hmbphxkw76-byte/jp-life-work/blob/main/04-industry-logistics
@@ -24,9 +24,9 @@
 
 | 周期 | 输出路径 | 版本号 | 上期报告 |
 |---|---|---|---|
-| 基线 | `reports/2026-11_baseline_report.md` + 同名 `.html` | v1.0（首期固定） | 无 |
-| 年度刷新 | `reports/{{YYYY}}_annual.md` + 同名 `.html` | vYYYY.MM.DD | `reports/` 最近一期年度刷新版 |
-| 重大事件插刷 | `reports/{{YYYY-MM-DD}}-主题.md`（追加件） | vYYYY.MM.DD | 基线 / 最近一期年度刷新版 |
+| 月度报告（首期） | `reports/{{YYYY-MM}}-<slug>.md` + 同名 `.html` | v1.0（首期固定） | 无 |
+| 年度刷新（12 月归档） | `reports/{{YYYY-MM}}-<slug>.md` + 同名 `.html` | vYYYY.MM.DD | `reports/` 最近一期年度刷新版 |
+| 重大事件插刷 | `reports/{{YYYY-MM}}-<slug>.md`（追加件） | vYYYY.MM.DD | 基线 / 最近一期年度刷新版 |
 
 **输出格式**：md 源稿 + 同目录自包含 HTML（双格式交付；本业务线不适用纯 HTML 例外）。插刷追加件命名不在标准正则内，`validate.py` 仅提示 WARN 不阻断，属预期行为。
 

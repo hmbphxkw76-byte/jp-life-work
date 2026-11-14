@@ -1,7 +1,7 @@
 # 日本 · 资格与教育投资 · 首期基线报告提示词（职业就业调研型）
 
 > **用途**：执行「日本 资格与教育投资 就业调研机制」的**机制建立**任务：产出首期基线（深度调研）报告与配套指标登记册，作为后续所有周期更新的对比锚与制度基础。
-> **现状**：本业务线基线已于 2026-11 产出（[reports/2026-11_baseline_report.md](../reports/2026-11_baseline_report.md) + 同名 HTML，v1.0，数据基准 2026-11-12）。**正常运行永不重跑基线提示词**；仅在①报告与登记册全部丢失（灾难恢复），或②经维护规范批准的九节结构重排时启动。
+> **现状**：本业务线基线已于 2026-11 产出（[reports/{{YYYY-MM}}-<slug>.md](../reports/{{YYYY-MM}}-<slug>.md) + 同名 HTML，v1.0，数据基准 2026-11-12）。**正常运行永不重跑基线提示词**；仅在①报告与登记册全部丢失（灾难恢复），或②经维护规范批准的九节结构重排时启动。
 > **产出**：md 源稿 + 同目录自包含 HTML，落盘 `{{OUTPUT_PATH}}`；指标活值与研究边界档案回写 `{{REGISTRY_PATH}}`。
 >
 > **继承声明（四层体系）**：本文件 = [通用基座](../../src/report_templates/prompt-generic-base.md) × [监测报告通用规范](../../src/report_templates/monitoring-common-spec.md) × [基线报告类型模板（职业就业调研型）](../../src/report_templates/employment-research/prompt-baseline-setup-template.md) × [业务专属配置](./business-config.md)。冲突时以本文件为准。
@@ -13,7 +13,7 @@
 ```
 {{CURRENT_DATE}}         = 本次执行日期，格式 YYYY-MM-DD
 {{BASELINE_DATE}}        = 2026-11-12（首期已产出；重建时改为重建日期）
-{{OUTPUT_PATH}}          = reports/2026-11_baseline_report.md
+{{OUTPUT_PATH}}          = reports/{{YYYY-MM}}-<slug>.md
 {{REGISTRY_PATH}}        = data/education_indicator_registry.md
 {{REPORT_VERSION}}       = v1.0（首期固定；灾难恢复重建时递增）
 ```

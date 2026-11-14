@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>日本物流行业 · 首份分析报告</title>
+<style>
+body { max-width: 1160px; margin: 24px auto; padding: 0 16px;
+      font-family: "Segoe UI", "Microsoft YaHei", sans-serif; color: #1a1a2e; line-height: 1.7; }
+h1, h2, h3 { color: #16213e; }
+table { border-collapse: collapse; width: 100%; overflow-x: auto; display: block; }
+th, td { border: 1px solid #cbd5e1; padding: 6px 10px; text-align: left; }
+th { background: #f1f5f9; }
+img { max-width: 100%; }
+code { background: #f6f8fa; padding: 2px 4px; border-radius: 3px; }
+blockquote { border-left: 4px solid #94a3b8; margin: 0; padding-left: 12px; color: #475569; }
+nav { margin: 12px 0 20px; padding: 8px 0; border-bottom: 1px solid #e2e8f0; }
+nav a { margin-right: 14px; color: #16213e; font-size: 14px; text-decoration: none; white-space: nowrap; }
+nav a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<h1 id="_1">日本物流行业 · 首份分析报告</h1>
+<blockquote>
+<p><strong>版本</strong>：v1.0（首份分析）　<strong>数据基准日</strong>：2026-11-13
+<strong>主题类型</strong>：行业深度研究型（industry-research）
+<strong>受众定位</strong>：面向在日本物流行业就业 / 拟进入该行业的个人，不以投资决策为视角；服务本规划「阶段 4 技术 / 数字化扩展」的行业判断，并为阶段 1–3 的雇主选择与岗位路线提供行业坐标。
+<strong>来源规则</strong>：官方一手优先：① 国土交通省（mlit.go.jp 物流白書・政策パッケージ）、内閣府・cas.go.jp ＞ ② 行业机构（帝国データバンク、日本物流団体連合会、JILPT）＞ ③ 研究机构（智库、日銀 SPPI）＞ ④ 主要企业 IR ＞ ⑤ 媒体（仅用于发现线索，须回溯原文）；中文来源仅作线索。</p>
+</blockquote>
+<nav aria-label="报告导航">
+<a href="#s1">一、主题核心概述</a>
+<a href="#s2">二、关键维度拆解</a>
+<a href="#s3">三、当前现状梳理</a>
+<a href="#s4">四、初步结论</a>
+<a href="#s5">五、后续观察方向</a>
+<a href="#s6">六、核心指标速览</a>
+<a href="#s7">七、监测机制与触发器</a>
+<a href="#s8">八、数据可靠性与局限说明</a>
+<a href="#s9">九、免责声明</a>
+<a href="#s10">十、参考来源清单</a>
+<a href="#s11">日本物流行业知识手册</a>
+</nav>
+<h2 id="s1">一、主题核心概述</h2>
+<h3 id="11">1.1 主题定义与监测范围</h3>
+<p><strong>含</strong>（business-config 3.1）：日本物流产业的中观研究——道路货物运送业（トラック・宅配便・路線貨物）、倉庫業・3PL（受託物流）、冷链（コールドチェーン）、国際物流・フォワーディング、物流自動化的产业面（导入率、投资、企业动向）。
+<strong>不含</strong>（交叉引用，不在本主题展开）：自动驾驶技术路线、法规与实装细节；个人技能地图、岗位行情、转型路径；在留资格、特定技能制度细节；行业法规条文与政策解读；经济与收入环境。</p>
+<h3 id="12">1.2 受众与用途</h3>
+<p>面向在日本物流行业就业 / 拟进入该行业的个人，保持中性全景刻画，不给投资评级、不出具 Go/No-Go 决策建议（business-config 第二节）。</p>
+<h3 id="13">1.3 核心监测问题</h3>
+<ol>
+<li>日本物流产业的规模与结构（营业收入、从业人数、事业者数）最新读数是多少，"少数大手 + 海量零细"的二元结构是否延续？</li>
+<li>EC / 冷链 / 3PL 三条增长赛道的市场规模与就业形态如何演化？</li>
+<li>物流自动化的产业面（导入率、投资、企业动向）进展到哪一步，对岗位结构的影响路径如何？</li>
+<li>SPPI 道路货运指数、物流倒産件数等价格与结构指标的最新读数与趋势如何？</li>
+<li>「物流 2024 年问题」对策（司机时间外规制）对运力与运价的传导进展如何？</li>
+</ol>
+<h3 id="14">1.4 跨主题分工</h3>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:50%">对象</th>
+<th style="width:50%">归属主题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>自动驾驶技术路线、法规与实装细节</td>
+<td>05-industry-autonomous</td>
+</tr>
+<tr>
+<td>个人技能地图、岗位行情、转型路径</td>
+<td>06-industry-technology</td>
+</tr>
+<tr>
+<td>在留资格、特定技能制度细节</td>
+<td>08-visa-immigration</td>
+</tr>
+<tr>
+<td>行业法规条文与政策解读</td>
+<td>09-politics-law</td>
+</tr>
+<tr>
+<td>经济与收入环境</td>
+<td>07-economy-finance</td>
+</tr>
+</tbody>
+</table>
+<h2 id="s2">二、关键维度拆解</h2>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:20%">维度</th>
+<th style="width:20%">定义</th>
+<th style="width:20%">对应指标（登记册 #）</th>
+<th style="width:20%">优先来源</th>
+<th style="width:20%">监测频率</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>产业规模与结构</td>
+<td>营业收入、从业人数、事业者数与二元结构</td>
+<td>核心指标 #1</td>
+<td>物流白書、物团连、トラック白書</td>
+<td>年度刷新 + 事件插刷</td>
+</tr>
+<tr>
+<td>增长赛道规模</td>
+<td>EC / 冷链 / 3PL 分赛道规模与驱动</td>
+<td>核心指标 #4</td>
+<td>智库报告、行业团体</td>
+<td>事件插刷（权威新估计）</td>
+</tr>
+<tr>
+<td>自动化与技术趋势（产业面）</td>
+<td>导入率、投资、企业动向与岗位结构影响</td>
+<td>观察项</td>
+<td>国交省モビリティ・ロードマップ、行业团体</td>
+<td>季度扫描</td>
+</tr>
+<tr>
+<td>行业数据</td>
+<td>SPPI、倒産件数、運賃</td>
+<td>核心指标 #2 / #3</td>
+<td>日銀 SPPI、帝国データバンク</td>
+<td>月度（SPPI）+ 季度汇总</td>
+</tr>
+</tbody>
+</table>
+<p>维度间关系：产业规模与结构是基础盘，增长赛道是结构变化的先行信号，自动化是驱动结构变化的中期变量，行业数据（SPPI、倒産件数）是高频验证指标；四者构成"规模—赛道—技术—数据"的验证链条，数据冲突时以官方一手来源优先，并列呈现不合并。</p>
+<h2 id="s3">三、当前现状梳理</h2>
+<h3 id="31">3.1 产业规模与结构</h3>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:25%">指标</th>
+<th style="width:25%">数值</th>
+<th style="width:25%">来源</th>
+<th style="width:25%">时点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>物流业界主要业种营业收合计</td>
+<td>约 28 兆日元</td>
+<td>全日本货物流通促进协会（物团连）</td>
+<td>令和 2 年度</td>
+</tr>
+<tr>
+<td>物流业从业人数</td>
+<td>约 229 万人</td>
+<td>同上</td>
+<td>令和 2 年度</td>
+</tr>
+<tr>
+<td>道路货物运送业营业收</td>
+<td>约 21.6 兆日元（2.6 万社调查）</td>
+<td>東京商工リサーチ（TSR）</td>
+<td>2021</td>
+</tr>
+<tr>
+<td>卡车运送事业者数</td>
+<td>约 62,000 社</td>
+<td>トラック白書</td>
+<td>待更新</td>
+</tr>
+<tr>
+<td>中小事業者占比（30 辆以下口径）</td>
+<td>85%</td>
+<td>トラック白書</td>
+<td>待更新</td>
+</tr>
+<tr>
+<td>司机缺口（2030 年度推算）</td>
+<td>162,912 人（约 16 万）</td>
+<td>国交省检讨会中间总结（NX 总研试算）</td>
+<td>2022 年推计</td>
+</tr>
+</tbody>
+</table>
+<p>结构性结论（事实，基线报告）：日本物流是"少数大手 + 海量零细"的二元结构；个人职业策略上——大手学制度、中小拿机会。</p>
+<h3 id="32-ec-3pl">3.2 增长赛道规模（EC / 冷链 / 3PL）</h3>
+<ul>
+<li>EC / 冷链 / 3PL 市场规模估计：<strong>待基线确立</strong>（登记册 #4）。</li>
+<li>定性现状（事实，基线报告 02 节）：EC 物流由 EC 化率上升（食品、日用品带动）与宅配便处理量长期高位驱动，为大手分拣中心自动化最前沿；冷链由生鮮 EC、医药（GSP）、外食供应链驱动，薪资通常高于常温岗位；3PL 为荷主全案外包形态，语言多样性与现场翻译·带人能力是显性价值；绿色物流受 2050 碳中和目标推动。</li>
+<li>赛道优先级（本规划视角，事实性排序）：3PL 仓库 SV ＞ 冷链专业经验 ＞ 宅配分拣中心 ＞ 绿色物流实绩。</li>
+</ul>
+<h3 id="33">3.3 自动化与技术趋势（产业面）</h3>
+<ul>
+<li>三条行业级结论（事实，基线报告 03 节）：干线先于末端；岗位不是消失而是重组（长途司机转向监控员 / 编组担当 / 中継司机，仓库体力岗减少、设备运营与数据岗增加）；"转型窗口在当下"，全职司机消失被预期为 2030 年代以后。</li>
+<li>岗位结构影响矩阵（10 年预期，事实性预判，基线报告）：长途干线司机被自动化改造、城市 / 路线配送司机长期稳定、仓库体力作业逐渐减少、运行管理 / 配车增强、系统运管 / DX 高增长。</li>
+<li>新東名自动驾驶实证：深夜優先レーン运营中（国交省，2025-03 起；扩大区间待观察）。</li>
+<li>西濃運輸 × T2 中継输送自动驾驶实证开始（岐阜，基线报告 2026-11-11 建档记录）。</li>
+<li>基线报告 04 看板另列：自动车运送业特定技能受入上限 22,100 人 / 5 年（现行，ISA，2024–2029；使用率待查；制度细节归 08-visa-immigration）。</li>
+</ul>
+<h3 id="34-sppi">3.4 行业数据（SPPI、倒産件数、運賃）</h3>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:25%">指标</th>
+<th style="width:25%">最新值</th>
+<th style="width:25%">来源</th>
+<th style="width:25%">时点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SPPI 道路货运指数</td>
+<td>113.3（+4.6%，锚 01-ssw-driver #8）</td>
+<td>日銀 SPPI</td>
+<td>待核验（登记册首值迁移日 2026-11-12）</td>
+</tr>
+<tr>
+<td>物流倒産件数（TDB 口径）</td>
+<td>FY2025 321 件</td>
+<td>帝国データバンク</td>
+<td>FY2025</td>
+</tr>
+<tr>
+<td>物流倒産件数（TSR 口径）</td>
+<td>FY2025 308 件</td>
+<td>東京商工リサーチ</td>
+<td>FY2025</td>
+</tr>
+</tbody>
+</table>
+<h3 id="35">3.5 数据冲突并列（不可合并、不取均值）</h3>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:50%">指标</th>
+<th style="width:50%">并列口径</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>产业规模</td>
+<td>物团连（令和 2 年度，物流业营业收入 约 28 兆円）≠ TSR（2021，道路货物运送业营业收入 约 21.6 兆円）；登记册备注：与上项不可相减</td>
+</tr>
+<tr>
+<td>倒産</td>
+<td>帝国データバンク ≠ 東京商工リサーチ</td>
+</tr>
+<tr>
+<td>運賃</td>
+<td>日銀 SPPI ≠ WebKit 運賃指数（口径不同，禁止混算）</td>
+</tr>
+<tr>
+<td>司机缺口</td>
+<td>国交省検討会中間とりまとめ（NX 総研試算）≠ 各智库推算</td>
+</tr>
+<tr>
+<td>EC 化率</td>
+<td>経済産業省電子商取引実態調査 ≠ 各智库 / 行业团体估计</td>
+</tr>
+</tbody>
+</table>
+<h3 id="36">3.6 未取得 / 待核验项</h3>
+<ul>
+<li>物流白書最新版年份与关键数（登记册 #1）：待基线确立。</li>
+<li>EC / 冷链 / 3PL 市场规模估计（登记册 #4）：待基线确立。</li>
+<li>卡车运送事业者数时点：待更新（トラック白書）。</li>
+<li>SPPI 具体月次、WebKit 運賃指数数值：待核验。</li>
+<li>自动车运送业特定技能受入使用率：待查（ISA）。</li>
+</ul>
+<h2 id="s4">四、初步结论</h2>
+<p><strong>结论 1</strong>：日本物流呈"少数大手 + 海量零细"的二元结构。证据：30 辆以下中小事業者占 85%（トラック白書，时点待更新）；物流业规模约 28 兆日元 / 229 万人（物团连，令和 2 年度）。标注：事实。</p>
+<p><strong>结论 2</strong>：增长赛道优先级为 3PL 仓库 SV ＞ 冷链 ＞ 宅配分拣中心 ＞ 绿色物流。证据：基线报告 02 节赛道优先级排序（本规划视角）。标注：事实（规划排序，非行业统计）。</p>
+<p><strong>结论 3</strong>：自动化按"干线先于末端、岗位重组而非消失"的渐进路径推进，转型窗口在当下。证据：基线报告 03 节三条行业级结论；新東名深夜優先レーン 2025-03 起运营（国交省）；"全职司机消失被预期为 2030 年代以后"。标注：事实（行业级结论与实证状态）；其中"2030 年代以后"为预期性表述。</p>
+<p><strong>结论 4</strong>：道路货运价格处于上行读数。证据：SPPI 道路货运指数 113.3（+4.6%）（日銀 SPPI，时点待核验）。标注：推断（+4.6% 的口径与月次未核验前，仅作方向性判读）。</p>
+<p><strong>结论 5</strong>：司机缺口是最大结构性约束。证据：2030 年度 162,912 人（约 16 万）推算（国交省检讨会中间总结（NX 总研试算），2022 年推计）；基线报告趋势栏标注"持续关注修正"。标注：推算值本身为事实；作为约束的判断为推断。</p>
+<p><strong>风险与不确定性</strong>：</p>
+<ul>
+<li>登记册 #1、#4 待基线确立，规模与赛道判断缺权威锚。</li>
+<li>SPPI 未标月次、WebKit 運賃指数无数值，運賃趋势无法交叉验证。</li>
+<li>物团连（令和 2 年度）与 TSR（2021）口径与时点不一致，不可合并。</li>
+<li>司机缺口为 2022 年推计推算值，存在修正风险。</li>
+<li>中文来源仅作线索，须回溯日文官方原文。</li>
+</ul>
+<h2 id="s5">五、后续观察方向</h2>
+<p><strong>待答问题</strong>（分析层）：</p>
+<ol>
+<li>物流白書最新版的关键数（营收、从业、事业者数）何时发布，与令和 2 年度值相比变化幅度如何？</li>
+<li>EC / 冷链 / 3PL 市场规模的权威估计何时可取得，各自增速排序如何？</li>
+<li>SPPI 月次更新后，道路货运价格的同比走向与环比波动如何？</li>
+<li>「2024 年問題」对策（荷待ち 2h 以内、附带作业时间规则、パレット标准化）落地进度对运力与运价的传导效果如何？</li>
+<li>新東名自动驾驶实证与西濃運輸 × T2 中継输送实证是否扩大区间 / 进入商用？</li>
+<li>倒産件数（TDB / TSR 双口径）年度走势与大型倒産事件是否出现？</li>
+</ol>
+<p><strong>下一期重点核实项</strong>：物流白書最新版；SPPI 月次与口径；倒産双口径年度值；EC / 冷链 / 3PL 权威估计；特定技能受入使用率（ISA）。</p>
+<p><strong>数据补全计划</strong>：登记册 #1、#4 待基线确立项在年度刷新前补齐；建立 SPPI 月次台账与倒産 TDB / TSR 双口径并列台账；对 2022 年推计的司机缺口值跟踪官方修正。</p>
+<h2 id="s6">六、核心指标速览</h2>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:20%">#</th>
+<th style="width:20%">指标</th>
+<th style="width:20%">最新值</th>
+<th style="width:20%">来源</th>
+<th style="width:20%">时点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>物流白書最新版年份与关键数</td>
+<td>待基线确立</td>
+<td>mlit.go.jp</td>
+<td>待核验</td>
+</tr>
+<tr>
+<td>2</td>
+<td>SPPI 道路货运指数</td>
+<td>113.3（+4.6%，锚 01-ssw-driver #8）</td>
+<td>日銀 SPPI</td>
+<td>待核验（首值迁移日 2026-11-12）</td>
+</tr>
+<tr>
+<td>3</td>
+<td>物流倒産件数（年度）</td>
+<td>FY2025 321 件／TSR 308 件</td>
+<td>帝国データバンク</td>
+<td>FY2025</td>
+</tr>
+<tr>
+<td>4</td>
+<td>EC / 冷链 / 3PL 市场规模估计</td>
+<td>待基线确立</td>
+<td>智库报告</td>
+<td>待核验</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>注：本表逐项抄录登记册活值，未改写数值；「待基线确立」如实保留。</p>
+</blockquote>
+<h2 id="s7">七、监测机制与触发器</h2>
+<p><strong>监测节奏</strong>（摘自 business-config 第一节）：</p>
+<ul>
+<li>基线：<code>reports/2026-11-industry-logistics.md</code>（v1.0 首期固定）。</li>
+<li>年度刷新：<code>reports/{{YYYY-MM}}-&lt;slug&gt;.md</code>。</li>
+<li>重大事件插刷：<code>reports/{{YYYY-MM}}-&lt;slug&gt;.md</code>（追加件）。</li>
+<li>无触发器命中且年度窗口未到时<strong>不启动</strong>；不得为制造变化而虚构变化。</li>
+</ul>
+<p><strong>触发器清单</strong>（摘自 business-config 第七节，逐条列出）：</p>
+<ol>
+<li>物流白書 / 交通白書新版发布 → 01 日本物流产业概览</li>
+<li>EC / 冷链 / 3PL 市场规模权威新估计 → 02 增长赛道</li>
+<li><code>2024年問題</code> 对策新进展（锚 01 #9） → 01 / 04</li>
+<li>自动驾驶 / 自动化重大政策进展（本主题写产业影响；技术细节联动 05） → 03</li>
+<li>SPPI 月次更新（锚 01 #8） → 04 行业数据跟踪</li>
+<li>行业结构性事件（大型合并 / 大型倒産 / 监管重构 / 技术代际切换） → 对应模块提前插刷</li>
+</ol>
+<p><strong>观察项与触发器状态</strong>（摘自登记册同名节）：</p>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:33%">状态项</th>
+<th style="width:33%">内容</th>
+<th style="width:34%">更新于</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>唯一观察项</td>
+<td>首期为空</td>
+<td>—</td>
+</tr>
+<tr>
+<td>首要触发器</td>
+<td>首期为空</td>
+<td>—</td>
+</tr>
+<tr>
+<td>触发器结论</td>
+<td>首期为空</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<h2 id="s8">八、数据可靠性与局限说明</h2>
+<p><strong>核验程度分级</strong>：</p>
+<ul>
+<li>A 官方一手：国土交通省（物流白書・政策パッケージ、モビリティ・ロードマップ）、日銀 SPPI、国土交通省検討会中間とりまとめ、ISA。</li>
+<li>B 权威转引 / 行业机构：全日本货物流通促进协会（物团连）、東京商工リサーチ、全国トラック協会（トラック白書）、帝国データバンク、智库报告；C 平台抽样：本主题登记册无此类指标，媒体来源（LNEWS 等）仅用于发现线索，须回溯原文并标「需核实原文」。</li>
+</ul>
+<p><strong>已知口径冲突</strong>（并列呈现，不合并、不取均值）：</p>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:33%">指标</th>
+<th style="width:33%">并列口径</th>
+<th style="width:34%">处理</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>产业规模</td>
+<td>物团连（令和 2 年度，物流业营业收入 约 28 兆円）≠ TSR（2021，道路货物运送业营业收入 约 21.6 兆円）</td>
+<td>并列呈现，不可相减</td>
+</tr>
+<tr>
+<td>倒産</td>
+<td>帝国データバンク ≠ 東京商工リサーチ</td>
+<td>并列呈现</td>
+</tr>
+<tr>
+<td>運賃</td>
+<td>日銀 SPPI ≠ WebKit 運賃指数</td>
+<td>禁止混算</td>
+</tr>
+<tr>
+<td>司机缺口</td>
+<td>国交省検討会中間とりまとめ（NX 総研試算）≠ 各智库推算</td>
+<td>并列呈现</td>
+</tr>
+<tr>
+<td>EC 化率</td>
+<td>経済産業省電子商取引実態調査 ≠ 各智库 / 行业团体估计</td>
+<td>并列呈现</td>
+</tr>
+</tbody>
+</table>
+<p><strong>未取得项</strong>：</p>
+<ul>
+<li>登记册 #1（物流白書最新版年份与关键数）、#4（EC / 冷链 / 3PL 市场规模估计）：待基线确立。</li>
+<li>SPPI 具体月次、WebKit 運賃指数数值：待核验。</li>
+<li>卡车运送事业者数时点：待更新。</li>
+<li>自动车运送业特定技能受入使用率：待查（ISA）。</li>
+</ul>
+<h2 id="s9">九、免责声明</h2>
+<p><strong>本报告仅供参考，不构成投资建议或决策依据。</strong></p>
+<h2 id="s10">十、参考来源清单</h2>
+<ol>
+<li>国土交通省（mlit.go.jp）— https://www.mlit.go.jp （2026 核对）</li>
+<li>全日本货物流通促进协会（物团连）— https://www.butsuryu.or.jp （令和 2 年度统计）</li>
+<li>全国トラック協会（トラック白書）— https://www.truck.or.jp</li>
+<li>東京商工リサーチ（TSR）— 道路货物运送业营业收入（2021，2.6 万社调查）</li>
+<li>日本銀行（SPPI）— 道路货运指数（登记册 #2；月次待核验）</li>
+<li>帝国データバンク — 物流倒産件数（FY2025）</li>
+<li>国土交通省検討会中間とりまとめ（NX 総研試算）— 司机缺口 2030 年推计（2022 年推计）</li>
+<li>ISA — 自动车运送业特定技能受入上限 22,100 人 / 5 年（2024–2029）</li>
+<li>行业媒体：TRAEEY、物流ウィークリー、日通综合研究所『物流季报』（线索来源）；智库报告（登记册 #4 优先来源，具体报告待基线确立）</li>
+</ol>
+<hr />
+<p>本报告为 v1.0 首份分析，数据基准 2026-11-13。</p>
+<hr />
+<blockquote>
+<p><strong>附录说明</strong>：以下为原报告《日本物流行业知识手册》（2026-11_baseline_report.md）全文，作为附录保留，内容未删改。</p>
+</blockquote>
+<h2 id="s11">日本物流行业知识手册</h2>
+<blockquote>
+<p><strong>版本</strong>：v1.0（合并整理版）　<strong>整理日期</strong>：2026-11-12
+<strong>说明</strong>：本文档由原分散的多份章节文档合并整理而成，保留全部原内容与层级关系。后续更新请直接维护本单份文档。</p>
+</blockquote>
+<hr />
+<h3 id="_13">导航与使用约定</h3>
+<h3 id="04-industry-logistics">04-industry-logistics 索引</h3>
+<p>日本物流行业研究区。覆盖阶段 2–4：行业坐标、增长赛道、自动化趋势、数据跟踪。</p>
+<h4 id="_14">文件一览</h4>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:33%">#</th>
+<th style="width:33%">文件</th>
+<th style="width:34%">内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>01</td>
+<td>日本物流产业概览</td>
+<td>28 兆円/229 万人规模、6.2 万家二元结构、政策方向、对个人路线的含义</td>
+</tr>
+<tr>
+<td>02</td>
+<td>增长赛道：EC、冷链、3PL</td>
+<td>四大增长赛道与个人优先级排序</td>
+</tr>
+<tr>
+<td>03</td>
+<td>自动化与技术趋势</td>
+<td>自动驾驶卡车时间表、仓储自动化、岗位影响矩阵与对策</td>
+</tr>
+<tr>
+<td>04</td>
+<td>行业数据跟踪</td>
+<td>季度扫描清单、核心指标看板、判断更新日志</td>
+</tr>
+</tbody>
+</table>
+<h4 id="_15">关联目录</h4>
+<ul>
+<li>自动驾驶深研 → <a href="../../05-industry-autonomous/reports/">../../05-industry-autonomous</a></li>
+<li>技术岗所需技能 → <a href="../../06-industry-technology/reports/">../../06-industry-technology</a></li>
+<li>经济与收入环境 → <a href="../../07-economy-finance/reports/">../../07-economy-finance</a></li>
+<li>行业法规 → <a href="../../09-politics-law/reports/">../../09-politics-law</a></li>
+</ul>
+<h4 id="_16">使用约定</h4>
+<ul>
+<li>04-行业数据跟踪 每季度扫描一次；数据变化影响决策时写入"判断更新日志"。</li>
+</ul>
+<hr />
+<h3 id="01">01 日本物流产业概览</h3>
+<blockquote>
+<p>信息核对日期：2026-11-11。定位：理解自己所处的行业坐标系——公司规模、细分赛道、政策走向都影响个人路线选择。</p>
+</blockquote>
+<h4 id="_17">一、产业规模</h4>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:33%">指标</th>
+<th style="width:33%">数值</th>
+<th style="width:34%">来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>物流业界主要业种营业收合计</td>
+<td>约 <strong>28 兆日元</strong></td>
+<td>全日本货物流通促进协会（令和 2 年度）</td>
+</tr>
+<tr>
+<td>物流业从业人数</td>
+<td>约 <strong>229 万人</strong></td>
+<td>同上</td>
+</tr>
+<tr>
+<td>道路货物运送业（ truck 部分）营业收</td>
+<td>约 21.6 兆日元（2.6 万社调查）</td>
+<td>东京商工リサーチ 2021</td>
+</tr>
+<tr>
+<td>卡车运送事业者数</td>
+<td>约 <strong>62,000 社</strong></td>
+<td>トラック白书</td>
+</tr>
+<tr>
+<td>结构</td>
+<td><strong>30 辆以下的中小事業者占 85%</strong></td>
+<td>同上</td>
+</tr>
+</tbody>
+</table>
+<p><strong>结构性结论</strong>：日本物流是"少数大手 + 海量零细"的二元结构。个人职业策略上——大手学制度、中小拿机会。</p>
+<h4 id="_18">二、细分赛道</h4>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:33%">赛道</th>
+<th style="width:33%">代表企业</th>
+<th style="width:34%">特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>综合物流（3PL/国际）</td>
+<td>NIPPON EXPRESS（日通）、センコー、日本ロジスティクス</td>
+<td>全案受托，管理岗/技术岗最多</td>
+</tr>
+<tr>
+<td>宅配便</td>
+<td>ヤマト運輸、佐川急便（SGHD）、日本郵便</td>
+<td>EC 驱动，分拣中心自动化程度最高</td>
+</tr>
+<tr>
+<td>路线货运/干线</td>
+<td>福山通运、西濃運輸、名鉄運輸</td>
+<td>干线+区域，司机培养体系成熟</td>
+</tr>
+<tr>
+<td>冷链</td>
+<td>各大手冷链部门 + 专业者（ニチレイロジ等）</td>
+<td>医药/生鲜高要求高附加值</td>
+</tr>
+<tr>
+<td>仓储（保管業）</td>
+<td>グローバルゲート、ロジクエスト等仓库特化企业</td>
+<td>3PL 仓库多在地方立地</td>
+</tr>
+</tbody>
+</table>
+<h4 id="_19">三、政策大方向（个人判断依据）</h4>
+<ol>
+<li><strong>物流 2024 年问题</strong>：司机时间外规制 → 运力不足 → 运费上涨、荷主负担转嫁改革 → 具体进展见 <a href="#04-行业数据跟踪">04-行业数据跟踪</a></li>
+<li><strong>省人化省力化</strong>：自动驾驶卡车、仓库自动化、无人配送 → <a href="#03-自动化与技术趋势">03-自动化与技术趋势</a></li>
+<li><strong>地域物流再生</strong>：人口稀疏地区配送维持 → 外国人材 + 共同配送</li>
+<li><strong>外国人材受入扩大</strong>：特定技能（自动车运送业受入上限见监测项目指标 #2，现行 22,100 人/5 年）+ 2027 育成就劳 → <a href="../../08-visa-immigration/reports/日本签证与在留资格知识手册.html#06-育成就劳制度与新动向">../../08-visa-immigration/reports/archives/06-育成就劳制度与新动向</a></li>
+</ol>
+<h4 id="_20">四、对个人路线的含义</h4>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:50%">行业趋势</th>
+<th style="width:50%">对本规划的影响</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>司机缺口 2030 年度 162,912 人（约 16 万，推算，见监测项目 #4）</td>
+<td>1 号入场窗口期内岗位供给充足</td>
+</tr>
+<tr>
+<td>中小事業者 85%</td>
+<td>中小企业多但支援体制参差——选雇主看 2 号移行先例</td>
+</tr>
+<tr>
+<td>自动化先从干线/仓库开始</td>
+<td>先占"人机协作监督"类岗位（→ 阶段 4）</td>
+</tr>
+<tr>
+<td>荷主转嫁改革</td>
+<td>作业环境改善趋势，行业长期形象回升</td>
+</tr>
+</tbody>
+</table>
+<h4 id="_21">五、信息源（定期看）</h4>
+<ul>
+<li>国交省白書・物流政策：https://www.mlit.go.jp [Source: https://www.mlit.go.jp, 2026]</li>
+<li>トラック白书：https://www.truck.or.jp</li>
+<li>日本物流団体連合会（物团连）：https://www.butsuryu.or.jp</li>
+<li>行业媒体：TRAEEY、物流ウィークリー、日通综合研究所『物流季报』</li>
+</ul>
+<hr />
+<h3 id="02-ec3pl">02 增长赛道：EC、冷链、3PL</h3>
+<blockquote>
+<p>对应阶段 4「关注电商物流、冷链、3PL、绿色物流等行业趋势」。选择增长赛道 = 职业半衰期更长。</p>
+</blockquote>
+<h4 id="ec">一、EC 物流（电商物流）</h4>
+<ul>
+<li>驱动力：EC 化率持续上升（食品、日用品带动）；宅配便处理量长期高位</li>
+<li>就业形态：宅配司机（ルート）、分拣中心（仕分けセンター）作业与 line 管理、客服对应</li>
+<li>特征：<strong>自动化最前沿</strong>——大手宅配的分拣中心大量导入自动分拣机、AMR 机器人</li>
+<li>个人机会：分拣中心 现场_leader → 设备运营管理 → DX 担当（自然通往阶段 4）</li>
+<li>注意点：再配达対応、クレーム对应等客户接触强度高，日语要求高于普通货运</li>
+</ul>
+<h4 id="_22">二、冷链（コールドチェーン）</h4>
+<ul>
+<li>驱动力：生鮮 EC、医药（ワクチン/医药品 GSP）、外食供应链</li>
+<li>岗位属性：温度带管理（冷藏/冷冻/定温）、温度记录与验证、HACCP 意识</li>
+<li>薪资与门槛：通常高于常温岗位（具体薪资结构与谈判口径见 <a href="../../02-career-driver/reports/日本司机职业知识手册.html#02-薪资结构与工时合规">02-司机职业</a>）；责任重、要求细心</li>
+<li>个人机会：冷链经验是<strong>稀缺技能标签</strong>——司机→冷链组长→品質管理辅助是可行斜线</li>
+<li>风险：温度异常的责任归属要在契约层面确认</li>
+</ul>
+<h4 id="3pl">三、3PL（第三方物流）</h4>
+<ul>
+<li>定义：荷主企业将物流全案外包——仓储+运输+系统+人员管理一揽子</li>
+<li>岗位谱系：现场作业、SV（supervisor）、WMS 操作、KPI 报告担当、荷主折冲</li>
+<li>对外国人最友好的增长点：<strong>语言多样性与现场翻译·带人能力</strong>在 3PL 是显性价值</li>
+<li>个人机会：3PL 仓库 SV = 管理岗与数字化岗位的最短交叉点（→ <a href="../../03-career-management/reports/日本管理岗过渡知识手册.html#01-管理岗地图与路径评估">../../03-career-management/reports/archives/01-管理岗地图与路径评估</a>）</li>
+</ul>
+<h4 id="_23">四、绿色物流（グリーンロジスティクス）</h4>
+<ul>
+<li>政策：2050 碳中和目标 → EV/氢燃料卡车导入、ECO 驾驶普及、共同配送</li>
+<li>岗位影响：ECO 驾驶数据管理、充电/加氢设施运营、燃费 KPI</li>
+<li>个人切入：把「省燃费驾驶」做成可量化实绩（燃费管理是运行管理者的传统职责）——低成本拿"绿色"标签</li>
+</ul>
+<h4 id="_24">五、赛道优先级（本规划视角）</h4>
+<pre><code class="language-text">优先级1：3PL 仓库 SV      （管理×数字交叉点，阶段 3→4 的桥）
+优先级2：冷链专业经验     （稀缺标签，随时可叠加）
+优先级3：宅配分拣中心     （自动化暴露量最大，利于学技术）
+优先级4：绿色物流实绩     （作为附加成果，非独立赛道）
+</code></pre>
+<h4 id="_25">六、关联</h4>
+<ul>
+<li>自动化技术细节 → <a href="#03-自动化与技术趋势">03-自动化与技术趋势</a></li>
+<li>WMS/TMS 系统技能 → <a href="../../06-industry-technology/reports/">../../06-industry-technology</a></li>
+</ul>
+<hr />
+<h3 id="03">03 自动化与技术趋势</h3>
+<blockquote>
+<p>对应阶段 4「跟踪自动驾驶卡车、仓储自动化、无人配送对岗位结构的影响」。本节只保留行业级结论；技术路线、法规许可、仓储自动化谱系与个人技能对接详见 <a href="../../05-industry-autonomous/reports/日本自动驾驶与自动化知识手册.html">自动驾驶与自动化知识手册</a>。</p>
+</blockquote>
+<h4 id="_26">一、三条行业级结论</h4>
+<ol>
+<li><strong>干线先于末端</strong>：高速干线（夜间、点对点）是最早被改造的场景；城市/最后一公里配送的自动化更远。</li>
+<li><strong>岗位不是消失而是重组</strong>：长途司机转向监控员/编组担当/中継司机；仓库纯体力岗减少，设备运营与数据岗增加；运行管理/配车岗位反而增强。</li>
+<li><strong>转型窗口在当下</strong>：全职司机消失被预期为 2030 年代以后，但"会用新系统的人"从今天就能开始积累。</li>
+</ol>
+<h4 id="_27">二、岗位结构影响矩阵（个人对策）</h4>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:33%">岗位</th>
+<th style="width:33%">10 年预期</th>
+<th style="width:34%">个人对策</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>长途干线司机</td>
+<td>被自动化改造</td>
+<td>避免把干线城市线作为 15 年职业锚</td>
+</tr>
+<tr>
+<td>城市/路线配送司机</td>
+<td>长期稳定</td>
+<td>主线保留</td>
+</tr>
+<tr>
+<td>仓库体力作业</td>
+<td>逐渐减少</td>
+<td>尽早转向设备/系统侧</td>
+</tr>
+<tr>
+<td>运行管理/配车</td>
+<td><strong>增强</strong>（多模运输编组复杂化）</td>
+<td>本规划主线方向正确</td>
+</tr>
+<tr>
+<td>系统运管/DX</td>
+<td>高增长</td>
+<td>阶段 4 主攻</td>
+</tr>
+</tbody>
+</table>
+<h4 id="4">三、阶段 4 的行动映射</h4>
+<ol>
+<li>每季度扫一次国交省白書・モビリティ・ロードマップ更新 → 记入 <a href="#04-行业数据跟踪">04-行业数据跟踪</a></li>
+<li>关注自己公司导入的系统（WMS/TMS/ドラレコ数据）——<strong>在公司内成为"会用新系统的人"</strong> 是零成本的第一步</li>
+<li>技术路线与技能清单 → <a href="../../05-industry-autonomous/reports/日本自动驾驶与自动化知识手册.html">05-行业-自动驾驶</a>、<a href="../../06-industry-technology/reports/日本技术与数字化知识手册.html">06-行业-技术数字化</a></li>
+</ol>
+<hr />
+<h3 id="04">04 行业数据跟踪</h3>
+<blockquote>
+<p>每季度更新一次。目的：让职业决策基于最新数据而非过时印象。</p>
+</blockquote>
+<h4 id="_28">一、核心指标看板</h4>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:20%">指标</th>
+<th style="width:20%">最新值</th>
+<th style="width:20%">数据时点</th>
+<th style="width:20%">趋势</th>
+<th style="width:20%">来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>物流业营业收</td>
+<td>约 28 兆円</td>
+<td>令和 2 年度</td>
+<td>待更新</td>
+<td>物团连</td>
+</tr>
+<tr>
+<td>物流业从业人数</td>
+<td>约 229 万人</td>
+<td>令和 2 年度</td>
+<td>待更新</td>
+<td>同上</td>
+</tr>
+<tr>
+<td>卡车运送事业者数</td>
+<td>约 6.2 万社</td>
+<td>待更新</td>
+<td>中小 85%</td>
+<td>トラック白书</td>
+</tr>
+<tr>
+<td>司机缺口（2030 推算）</td>
+<td>162,912 人（约 16 万）</td>
+<td>2022 年推计</td>
+<td>持续关注修正</td>
+<td>国交省检讨会中间总结（NX 总研试算），见监测项目 #4</td>
+</tr>
+<tr>
+<td>新東名自动驾驶实证</td>
+<td>深夜優先レーン运营中</td>
+<td>2025-03 起</td>
+<td>扩大区间？</td>
+<td>国交省</td>
+</tr>
+<tr>
+<td>自动车运送业特定技能受入</td>
+<td>上限 22,100 人/5 年（现行）</td>
+<td>2024–2029</td>
+<td>使用率待查</td>
+<td>ISA，见监测项目 #2</td>
+</tr>
+</tbody>
+</table>
+<h4 id="1">二、季度扫描清单（每季度 1 次，勾选后填日期）</h4>
+<ul>
+<li>[ ] 国交省白書・プレスリリース「物流」相关更新（https://www.mlit.go.jp）</li>
+<li>[ ] モビリティ・ロードマップ改订</li>
+<li>[ ] トラック协会景气动向调查</li>
+<li>[ ] 大手 3 社（日通/佐川/雅玛多）决算短信要点</li>
+<li>[ ] 特定技能自动车运送业受入实绩（ISA 统计）</li>
+<li>[ ] 行业媒体头条 3 件（TRAEEY 等）</li>
+</ul>
+<h4 id="_29">三、数据记录区（倒序追加）</h4>
+<h5 id="2026-11-11">2026-11-11（建档）</h5>
+<ul>
+<li>物流 2024 年问题对策推进中：荷待ち 2h 以内、附带作业时间规则、パレット标准化（Newscoda 汇总）</li>
+<li>西濃運輸 × T2 中継输送自动驾驶实证开始（岐阜）</li>
+<li>物流 DX・标准化为白書主线课题</li>
+</ul>
+<h4 id="_30">四、判断更新日志</h4>
+<p>当数据变化足以影响个人路线时，在此记录"数据→判断→行动"：</p>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:25%">日期</th>
+<th style="width:25%">触发数据</th>
+<th style="width:25%">判断</th>
+<th style="width:25%">行动</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2026-11-11</td>
+<td>建档基线</td>
+<td>司机窗口期充足；自动化为渐进改造</td>
+<td>维持现有 5 阶段路线</td>
+</tr>
+</tbody>
+</table>
+<hr />
+</body>
+</html>

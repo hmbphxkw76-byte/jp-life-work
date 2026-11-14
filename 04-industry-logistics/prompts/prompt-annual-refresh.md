@@ -1,7 +1,7 @@
 # 日本 · 物流行业 · 年度刷新提示词（行业深度研究型）
 
 > **用途**：每年固定窗口对物流行业全景做全量刷新；行业结构性事件触发器命中时提前插刷对应模块。可直接复制，替换顶部变量后提交给 AI 执行。
-> **产出**：刷新版报告落盘 `{{OUTPUT_PATH}}`（`reports/{{YYYY}}_annual.md` + 同名 HTML）；插刷件 `reports/{{YYYY-MM-DD}}-主题.md`（命名不在标准正则内，validate 仅 WARN 不阻断，属预期）。
+> **产出**：刷新版报告落盘 `{{OUTPUT_PATH}}`（`reports/{{YYYY-MM}}-<slug>.md` + 同名 HTML）；插刷件 `reports/{{YYYY-MM}}-<slug>.md`（命名不在标准正则内，validate 仅 WARN 不阻断，属预期）。
 >
 > **继承声明（四层体系）**：本文件 = [通用基座](../../src/report_templates/prompt-generic-base.md) × [监测报告通用规范](../../src/report_templates/monitoring-common-spec.md) × [年度刷新类型模板（行业深度研究型）](../../src/report_templates/industry-research/prompt-annual-refresh-template.md) × [业务专属配置](./business-config.md)。冲突时以本文件为准。
 
@@ -12,9 +12,9 @@
 ```
 {{CURRENT_DATE}}         = 本次执行日期，格式 YYYY-MM-DD
 {{PREVIOUS_REPORT_PATH}} = 上一年度刷新版路径（首年刷新时为空，仅锚定基线）
-{{BASELINE_REPORT_PATH}} = reports/2026-11_baseline_report.md
+{{BASELINE_REPORT_PATH}} = reports/{{YYYY-MM}}-<slug>.md
 {{REGISTRY_PATH}}        = data/logistics_industry_indicator_registry.md
-{{OUTPUT_PATH}}          = reports/{{YYYY}}_annual.md
+{{OUTPUT_PATH}}          = reports/{{YYYY-MM}}-<slug>.md
 {{REPORT_VERSION}}       = 本次版本号，格式 vYYYY.MM.DD
 ```
 

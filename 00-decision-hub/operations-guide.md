@@ -13,9 +13,9 @@
 |---|---|
 | 业务参数 | `00-decision-hub/prompts/business-config.md` |
 | 指标登记册（状态 / 引用 / 缺失） | `00-decision-hub/data/decision_hub_registry.md` |
-| 季度复核报告 | `00-decision-hub/reports/{{YYYY-Qn}}_quarterly.md` |
-| 落地清单 | `00-decision-hub/reports/{{YYYY-MM-DD}}_landing_checklist.md` |
-| 定居地档案 | `00-decision-hub/reports/{{YYYY-MM-DD}}_settlement_profile.md` |
+| 季度复核报告 | `00-decision-hub/reports/{{YYYY-MM}}-<slug>.md` |
+| 落地清单 | `00-decision-hub/reports/{{YYYY-MM}}-decision-hub.md` |
+| 定居地档案 | `00-decision-hub/reports/{{YYYY-MM}}-decision-hub.md` |
 | 工具链 | `src/prompts-tools/tools/` |
 
 ### 0.2 前置检查
@@ -30,7 +30,7 @@ python src/prompts-tools/tools/lint_reports.py
 ## 1. 季度复核
 
 - **入口**：按[业务配置第六节](./prompts/business-config.md)的触发器判定；无触发不启动。
-- **运行变量**：`{{CADENCE}}` = 季；`{{OUTPUT_PATH}}` = `reports/{{YYYY-Qn}}_quarterly.md`。
+- **运行变量**：`{{CADENCE}}` = 季；`{{OUTPUT_PATH}}` = `reports/{{YYYY-MM}}-<slug>.md`。
 - **执行步骤**：
   1. 读取 01–13 各主题最新一期报告 / 登记册；
   2. 逐项刷新五问（结论 / 来源 / 缺失）；
@@ -43,7 +43,7 @@ python src/prompts-tools/tools/lint_reports.py
 ## 2. 事件触发复核
 
 - **触发**：个人情况变化（家属 / 资金 / 日语 / 时间窗口）或来源主题重大更新。
-- **输出**：`reports/{{YYYY-MM-DD}}-决策复核.md`。
+- **输出**：`reports/{{YYYY-MM}}-decision-hub.md`。
 - **范围**：只刷新受影响的问题，其余不动。
 
 ---

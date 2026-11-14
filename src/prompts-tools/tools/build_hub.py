@@ -1,17 +1,20 @@
-"""汇总页生成（CI: validate.yml --check 校验 / html-sync、scheduled-maintenance 重新生成）。
+"""汇总页 + 报告阅读器生成（CI: validate.yml --check 校验 / html-sync 重新生成）。
 
-生成 index.html（主题报告索引：主题卡片总览，点击进入主题查看全部报告，
-默认按时间倒序展示近 1 年报告，可展开更早报告）与 reader.html
-（在线阅读壳：侧栏列表 + iframe 加载报告，?report=<路径>）。
+生成两个自包含静态页（无外部依赖，可直接 file:// 打开）：
 
-index.html 为自包含静态页（无外部依赖，可直接 file:// 打开）：
-- 主题与报告均由构建时扫描发现（iter_business_dirs + reports/*.html），
-  新增主题 / 报告后重新生成即自动扩展，无需改动本文件；
-- 主题显示名与简介取自 src/vocabulary/config/topics.json（缺失时回退
-  business-config 标题 / 目录名）；报告类型取自 business-config 的类型
-  模板引用，类型名取自 src/report_templates/template-registry.md；
-- Hero 只保留居中标题 + 统计行（主题数 / 报告总数）。
-- 「近 1 年」窗口由浏览器端按查看日期动态计算，构建产物保持确定性。
+**index.html**（主题报告索引）
+- 主题与报告由构建时扫描发现（iter_business_dirs + reports/*.html）；
+- 报告统一按自然月份聚合，命名 `YYYY-MM-<主题slug>`，不再区分基线 / 初析 /
+  季度等类型；季度报告按季度末月归档（2026-Q4 -> 2026-12）；
+- 主题详情页默认展示最近 12 个月报告，按时间倒序（最新在顶端），可展开更早；
+- 报告链接跳转 reader.html 阅读器（带跨月对比高亮）。
+
+**reader.html**（报告阅读器）
+- 内嵌全部主题的月度报告（构建期预渲染），版本切换为纯前端 show/hide，
+  响应 < 1s；
+- 每期报告自动与上一期（同主题、最近一个更早自然月）做全量内容比对，
+  新增 / 修改片段高亮并加「已更新」标记，删除片段折叠可追溯；
+- 支持「隐藏更新标记」对照阅读与「展开全部删除」。
 
 --check 模式（validate.yml 使用）：重新计算内容与现有文件比对；
 - 文件存在且一致 -> 退出码 0
@@ -31,20 +34,21 @@ import html as html_mod
 import json
 import re
 import sys
-from calendar import monthrange
 from datetime import datetime, timezone
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from _common import ROOT, TEMPLATE_ROOT, detect_report, iter_business_dirs, report_title  # noqa: E402
-
-CYCLE_LABEL = {"monthly": "月度", "quarterly": "季度", "annual": "年度", "baseline": "基线", "weekly": "周报"}
-SPECIAL_LABEL = "专题"
-INITIAL_LABEL = "初析"
-
-# 非标准命名报告（如插刷件 {YYYY-MM-DD}-主题.html）：按日期前缀识别
-SPECIAL_RE = re.compile(r"^(\d{4}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12]\d|3[01]))[-_].+\.html$")
+from _common import (  # noqa: E402
+    ROOT,
+    TEMPLATE_ROOT,
+    detect_month_report,
+    iter_business_dirs,
+    month_to_date,
+    report_title,
+    topic_slug,
+)
+from report_diff import diff_summary, render_diffed_body, strip_body  # noqa: E402
 
 # 主题目录名：两位编号 + 短横线 + 短 slug（与 topics.json 的键对应）
 NUM_RE = re.compile(r"^(\d{2})-(.+)$")
@@ -71,56 +75,27 @@ TYPE_LABEL_FALLBACK = {
 
 TOPIC_REGISTRY = ROOT / "src" / "vocabulary" / "config" / "topics.json"
 
+# 阅读器默认展示窗口：最近 12 个自然月
+RECENT_MONTHS = 12
+
 
 # ──────────────────────────────────────────────
-# 纯函数：周期 / 报告名解析
+# 纯函数：报告分类
 # ──────────────────────────────────────────────
 
-def period_to_date(period: str) -> str:
-    """周期标识 -> 代表日期（ISO，取周期末日）：用于排序与「近 1 年」过滤。
+def classify_month_report(name: str):
+    """报告文件名 -> (period, slug, date)；非月度报告返回 None。
 
-    '2026-11' -> '2026-11-30'；'2026-Q4' -> '2026-12-31'；'2026' -> '2026-12-31'；
-    '2026-11-13'（周报 / 专题日期）-> 原样。无法识别时返回空串。
+    '2026-11-ssw-driver.html' -> ('2026-11', 'ssw-driver', '2026-11-30')
     """
-    if re.fullmatch(r"\d{4}-\d{2}-\d{2}", period):
-        return period
-    m = re.fullmatch(r"(\d{4})-(\d{2})", period)
-    if m:
-        y, mo = int(m.group(1)), int(m.group(2))
-        if 1 <= mo <= 12:
-            return f"{y:04d}-{mo:02d}-{monthrange(y, mo)[1]:02d}"
-        return ""
-    m = re.fullmatch(r"(\d{4})-Q([1-4])", period)
-    if m:
-        y, q = int(m.group(1)), int(m.group(2))
-        last = q * 3
-        return f"{y:04d}-{last:02d}-{monthrange(y, last)[1]:02d}"
-    m = re.fullmatch(r"(\d{4})", period)
-    if m:
-        y = int(m.group(1))
-        return f"{y:04d}-12-31"
-    return ""
-
-
-def classify_report(name: str):
-    """报告文件名 -> (cycle, period, label, date)；非报告返回 None。
-
-    标准命名（monthly / quarterly / annual / baseline / weekly）走 detect_report；
-    非标准命名（插刷件、初析件等 {YYYY-MM-DD}-主题.html）按日期前缀识别为
-    special（初析件单独标注「初析」）。date 为 period_to_date 的代表日期。
-    """
-    det = detect_report(name)
-    if det:
-        cycle, period, _ = det
-        date = period_to_date(period)
-        if not date:
-            return None
-        return cycle, period, CYCLE_LABEL.get(cycle, cycle), date
-    m = SPECIAL_RE.match(name)
-    if m:
-        label = INITIAL_LABEL if "initial_analysis" in name else SPECIAL_LABEL
-        return "special", m.group(1), label, m.group(1)
-    return None
+    det = detect_month_report(name)
+    if not det:
+        return None
+    period, slug, _ext = det
+    date = month_to_date(period)
+    if not date:
+        return None
+    return period, slug, date
 
 
 # ──────────────────────────────────────────────
@@ -184,12 +159,14 @@ def _topic_type(b) -> str:
 # ──────────────────────────────────────────────
 
 def collect_topic(b, registry: dict[str, dict], type_labels: dict[str, str]) -> dict:
-    """单条业务线 -> {slug, num, name, desc, type, type_label, reports[]}。
+    """单条业务线 -> {slug, rs, num, name, desc, type, type_label, reports[]}。
 
-    reports 按代表日期降序（同期按 period、标题降序），含非标准命名报告。
+    reports 按代表日期降序（同期按 period、标题降序）。
+    rs = 报告 slug（主题目录名去编号前缀）。
     """
     m = NUM_RE.match(b.rel)
     num, name_key = (m.group(1), m.group(2)) if m else ("", b.rel)
+    rs = topic_slug(b.region if not b.property_type else b.property_type)
     meta = registry.get(name_key) or {}
     type_id = _topic_type(b)
 
@@ -197,19 +174,21 @@ def collect_topic(b, registry: dict[str, dict], type_labels: dict[str, str]) -> 
     reports_dir = b.path / "reports"
     if reports_dir.is_dir():
         for f in sorted(reports_dir.glob("*.html")):
-            cls = classify_report(f.name)
+            cls = classify_month_report(f.name)
             if not cls:
                 continue
-            cycle, period, label, date = cls
+            period, rslug, date = cls
+            if rslug != rs:
+                continue
             title = report_title(f.read_text(encoding="utf-8", errors="replace")) or f.stem
             reports.append({
-                "title": title, "cycle": cycle, "label": label,
-                "period": period, "date": date, "path": f"{b.rel}/reports/{f.name}",
+                "title": title, "period": period, "date": date,
+                "path": f"{b.rel}/reports/{f.name}",
             })
     reports.sort(key=lambda r: (r["date"], r["period"], r["title"]), reverse=True)
 
     return {
-        "slug": b.rel, "num": num,
+        "slug": b.rel, "rs": rs, "num": num,
         "name": meta.get("name") or _fallback_name(b),
         "desc": meta.get("description") or "",
         "type": type_id, "type_label": type_labels.get(type_id, type_id),
@@ -220,8 +199,7 @@ def collect_topic(b, registry: dict[str, dict], type_labels: dict[str, str]) -> 
 def collect_topics() -> list[dict]:
     """扫描全部业务线 -> 主题列表（按目录名升序，即编号顺序）。
 
-    跳过完全空白的骨架目录（既无报告也无 business-config）：它们还没有任何可
-    展示的内容，等首次配置 / 产出报告后重新生成即自动出现在索引中。
+    跳过完全空白的骨架目录（既无报告也无 business-config）。
     """
     registry = load_topic_registry()
     type_labels = load_type_labels()
@@ -236,28 +214,35 @@ def collect_topics() -> list[dict]:
     return topics
 
 
-def collect_entries() -> dict[str, list]:
-    """-> {business_rel: [(cycle_label, period, relpath, title)]}，period 降序。
+# ──────────────────────────────────────────────
+# 阅读器数据（构建期预渲染跨月对比）
+# ──────────────────────────────────────────────
 
-    仅供 reader.html 使用（只收标准命名报告，行为保持不变）。
+def build_reader_data(topics: list[dict]) -> dict:
+    """-> {report_slug: {name, dir, months: {period: {title, body, stats, summary, path}}}}。
+
+    每期报告与上一期（同主题、最近一个更早自然月）比对，body 为含高亮标记的
+    HTML 片段；首期报告无上期对比，body 原样。
     """
-    grouped: dict[str, list] = {}
-    for b in iter_business_dirs():
-        reports = b.path / "reports"
-        if not reports.is_dir():
-            continue
-        for f in sorted(reports.glob("*.html")):
-            det = detect_report(f.name)
-            if not det:
-                continue
-            cycle, period, _ = det
-            text = f.read_text(encoding="utf-8", errors="replace")
-            grouped.setdefault(b.rel, []).append(
-                (CYCLE_LABEL.get(cycle, cycle), period, f"{b.rel}/reports/{f.name}", report_title(text))
-            )
-    for items in grouped.values():
-        items.sort(key=lambda e: e[1], reverse=True)
-    return grouped
+    data: dict[str, dict] = {}
+    for t in topics:
+        months: dict[str, dict] = {}
+        prev_body: str | None = None
+        prev_period: str | None = None
+        for r in sorted(t["reports"], key=lambda x: x["period"]):
+            html = (ROOT / r["path"]).read_text(encoding="utf-8", errors="replace")
+            body = strip_body(html)
+            diffed, stats = render_diffed_body(body, prev_body)
+            months[r["period"]] = {
+                "title": r["title"],
+                "body": diffed,
+                "stats": stats,
+                "summary": diff_summary(stats, r["period"], prev_period),
+                "path": r["path"],
+            }
+            prev_body, prev_period = body, r["period"]
+        data[t["rs"]] = {"name": t["name"], "dir": t["slug"], "months": months}
+    return data
 
 
 # ──────────────────────────────────────────────
@@ -385,7 +370,6 @@ html.js .topic-detail.active{display:block}
   font-variant-numeric:tabular-nums;white-space:nowrap;flex:none}
 .report-row .rbadge{font-size:11px;border-radius:3px;padding:1px 7px;
   background:var(--blue-l);color:var(--navy2);white-space:nowrap;font-weight:600;flex:none}
-.report-row .rbadge.special{background:var(--gray-l);color:var(--gray)}
 .report-row .rt{font-size:14px;font-weight:700;color:var(--navy);
   flex:1;min-width:220px;line-height:1.5}
 .report-row .rperiod{font-size:12px;color:var(--ink3);white-space:nowrap;flex:none}
@@ -426,17 +410,8 @@ HUB_JS = """
   root.classList.add('js');
 
   function pad(n) { return (n < 10 ? '0' : '') + n; }
-  function isoOf(d) {
-    return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate());
-  }
-  var TODAY = isoOf(new Date());
-  var RECENT_DAYS = 365;
-  var cutoff = new Date();
-  cutoff.setHours(0, 0, 0, 0);
-  cutoff.setDate(cutoff.getDate() - RECENT_DAYS);
-  var CUTOFF = isoOf(cutoff);
 
-  /* ---------- 视图路由（hash：#topic-<slug>） ---------- */
+  /* ---------- 视图路由（hash：#topic-<目录名>） ---------- */
   function slugFromHash() {
     var m = /^#topic-(.+)$/.exec(location.hash || '');
     if (!m) return null;
@@ -460,15 +435,19 @@ HUB_JS = """
   }
   window.addEventListener('hashchange', renderView);
 
-  /* ---------- 近 1 年报告过滤（按查看日期动态计算） ---------- */
+  /* ---------- 近 12 个月报告过滤（按查看日期动态计算） ---------- */
   var details = document.querySelectorAll('.topic-detail');
   for (var k = 0; k < details.length; k++) {
     (function (sec) {
       var rows = sec.querySelectorAll('.report-row');
       var total = rows.length;
       var older = 0;
+      // 最近 12 个自然月窗口：[当前月 - 11, 当前月]
+      var now = new Date();
+      var start = new Date(now.getFullYear(), now.getMonth() - (RECENT_MONTHS - 1), 1);
+      var startPeriod = start.getFullYear() + '-' + pad(start.getMonth() + 1);
       for (var i = 0; i < total; i++) {
-        if (rows[i].getAttribute('data-date') < CUTOFF) {
+        if (rows[i].getAttribute('data-period') < startPeriod) {
           rows[i].style.display = 'none';
           older++;
         }
@@ -479,8 +458,8 @@ HUB_JS = """
       function renderNote() {
         if (!note) return;
         note.textContent = (recent === total)
-          ? '近 1 年（截至 ' + TODAY + '）· 共 ' + total + ' 份'
-          : '近 1 年（截至 ' + TODAY + '）· 显示 ' + recent + ' / ' + total + ' 份';
+          ? '近 12 个月 · 共 ' + total + ' 份'
+          : '近 12 个月 · 显示 ' + recent + ' / ' + total + ' 份';
       }
       renderNote();
       if (toggle && older > 0) {
@@ -489,7 +468,7 @@ HUB_JS = """
         toggle.addEventListener('click', function () {
           var expanded = toggle.getAttribute('data-expanded') === '1';
           for (var i = 0; i < total; i++) {
-            var isOld = rows[i].getAttribute('data-date') < CUTOFF;
+            var isOld = rows[i].getAttribute('data-period') < startPeriod;
             rows[i].style.display = (expanded && isOld) ? 'none' : '';
           }
           if (expanded) {
@@ -498,7 +477,7 @@ HUB_JS = """
             renderNote();
           } else {
             toggle.setAttribute('data-expanded', '1');
-            toggle.textContent = '只看近 1 年';
+            toggle.textContent = '只看近 12 个月';
             if (note) {
               note.textContent = '已显示全部 ' + total + ' 份报告（含 ' + older + ' 份更早报告）';
             }
@@ -583,16 +562,17 @@ def _badge_text(t: dict) -> str:
 def render_topic_card(t: dict) -> str:
     esc = html_mod.escape
     reports = t["reports"]
-    latest = reports[0]["date"] if reports else ""
+    latest = reports[0]["period"] if reports else ""
     parts = [t["name"], t["slug"], t["type_label"], t["desc"]] + [r["title"] for r in reports]
     search = esc(" ".join(p for p in parts if p))
     links = "".join(
-        f'<a href="{esc(r["path"])}" target="_blank" rel="noopener" title="{esc(r["title"])}">'
-        f'{esc(r["label"])}</a>'
+        f'<a href="reader.html#topic={esc(t["rs"])}&month={esc(r["period"])}" '
+        f'title="{esc(r["title"])}">{esc(r["period"])}</a>'
         for r in reports[:4]
     )
     latest_btn = (
-        f'<a class="btn" href="{esc(reports[0]["path"])}" target="_blank" rel="noopener">最新报告 ↗</a>'
+        f'<a class="btn" href="reader.html#topic={esc(t["rs"])}&month={esc(reports[0]["period"])}">'
+        f'最新报告 ↗</a>'
         if reports else ""
     )
     empty = " is-empty" if not reports else ""
@@ -615,16 +595,17 @@ def render_topic_detail(t: dict) -> str:
     esc = html_mod.escape
     reports = t["reports"]
     rows = "".join(
-        f'<div class="report-row" data-date="{esc(r["date"])}">\n'
-        f'  <span class="rdate">{esc(r["date"])}</span>\n'
-        f'  <span class="rbadge{" special" if r["cycle"] == "special" else ""}">{esc(r["label"])}</span>\n'
-        f'  <a class="rt" href="{esc(r["path"])}" target="_blank" rel="noopener">{esc(r["title"])}</a>\n'
+        f'<div class="report-row" data-period="{esc(r["period"])}">\n'
+        f'  <span class="rdate">{esc(r["period"])}</span>\n'
+        f'  <span class="rbadge">月度</span>\n'
+        f'  <a class="rt" href="reader.html#topic={esc(t["rs"])}&month={esc(r["period"])}">'
+        f'{esc(r["title"])}</a>\n'
         f'  <span class="rperiod">{esc(r["period"])}</span>\n'
         f'</div>'
         for r in reports
     ) or '<p class="empty-note">该主题暂无已产出报告。</p>'
     crumb = f'主题 {t["num"]} · {t["type_label"]}' if t["type_label"] else f'主题 {t["num"]}'
-    latest = f' · 最新 {reports[0]["date"]}' if reports else ''
+    latest = f' · 最新 {reports[0]["period"]}' if reports else ''
     return (
         f'<section class="topic-detail" id="topic-{esc(t["slug"])}" data-topic="{esc(t["slug"])}">\n'
         f'  <div class="topic-head">\n'
@@ -680,6 +661,7 @@ def render_hub(topics: list[dict], now_iso: str) -> str:
 <title>jp-life-work · 报告索引</title>
 <style>{HUB_CSS}</style>
 <script>document.documentElement.classList.remove('no-js');document.documentElement.classList.add('js');</script>
+<script>var RECENT_MONTHS = {RECENT_MONTHS};</script>
 </head>
 <body>
 <div id="view-overview">
@@ -728,49 +710,303 @@ def render_hub(topics: list[dict], now_iso: str) -> str:
 
 
 # ──────────────────────────────────────────────
-# reader.html 渲染（保持既有行为）
+# reader.html 渲染（报告阅读器：版本切换 + 跨月对比高亮）
 # ──────────────────────────────────────────────
 
-def _style() -> str:
-    return (
-        "body{max-width:1160px;margin:24px auto;padding:0 16px;"
-        'font-family:"Segoe UI","Microsoft YaHei",sans-serif;color:#1a1a2e;line-height:1.6}'
-        "h1,h2{color:#16213e}a{color:#1d4ed8;text-decoration:none}a:hover{text-decoration:underline}"
-        "table{border-collapse:collapse;width:100%}th,td{border:1px solid #cbd5e1;padding:6px 10px;text-align:left}"
-        "th{background:#f1f5f9}.muted{color:#64748b;font-size:.9em}"
-    )
+READER_CSS = """
+:root{
+  --bg:#f4f6f9; --card:#ffffff; --ink:#15202b; --ink2:#465667; --ink3:#6d7c8c;
+  --line:#e1e7ee; --line2:#eef2f6;
+  --navy:#16324f; --navy2:#2f5597; --blue:#3f6fb0; --blue-l:#eaf1fa;
+  --green:#1c7444; --green-l:#eaf5ef;
+  --amber:#9a6a12; --amber-l:#fdf4e2;
+  --red:#a33a3a; --red-l:#fbecec;
+  --radius:12px; --shadow:0 1px 3px rgba(20,40,70,.06);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:"Microsoft YaHei","PingFang SC","Segoe UI",Arial,sans-serif;
+  background:var(--bg);color:var(--ink);line-height:1.7;font-size:14.5px}
+a{color:var(--navy2);text-decoration:none}
+a:hover{text-decoration:underline}
+[hidden]{display:none!important}
+
+/* ── 布局 ── */
+.reader{display:flex;min-height:100vh;align-items:flex-start}
+.rd-sidebar{width:280px;flex:none;position:sticky;top:0;height:100vh;overflow-y:auto;
+  border-right:1px solid var(--line);background:#fbfcfe;padding:14px 10px 40px}
+.rd-sidebar::-webkit-scrollbar{width:6px}
+.rd-sidebar::-webkit-scrollbar-thumb{background:#d3dce6;border-radius:3px}
+.rd-brand{display:flex;align-items:center;gap:8px;padding:4px 8px 12px;
+  border-bottom:1px solid var(--line);margin-bottom:10px}
+.rd-brand .logo{width:26px;height:26px;border-radius:7px;flex:none;
+  background:linear-gradient(128deg,#0f2338,#2f5597);color:#fff;display:flex;
+  align-items:center;justify-content:center;font-size:13px;font-weight:700}
+.rd-brand .name{font-size:13px;font-weight:700;color:var(--navy);line-height:1.35}
+.rd-brand .sub{font-size:10.5px;color:var(--ink3);font-weight:400}
+.rd-toc{display:flex;flex-direction:column;gap:2px}
+.rd-toc a{display:flex;align-items:baseline;gap:7px;font-size:12.5px;color:var(--ink2);
+  padding:5px 8px;border-radius:6px;line-height:1.4}
+.rd-toc a:hover{background:var(--blue-l);text-decoration:none}
+.rd-toc a.active{background:var(--blue-l);color:var(--navy);font-weight:700}
+.rd-toc .num{font-size:10.5px;color:var(--ink3);flex:none}
+.rd-toc .cnt{margin-left:auto;font-size:10.5px;color:var(--ink3);flex:none}
+
+.rd-main{flex:1;min-width:0;padding:18px 26px 70px;max-width:1180px}
+
+/* ── 报告头 ── */
+.rd-head{position:sticky;top:0;z-index:30;background:rgba(244,246,249,.95);
+  backdrop-filter:blur(6px);border-bottom:1px solid var(--line);
+  margin:-18px -26px 16px;padding:14px 26px 10px}
+.rd-head .crumb{font-size:11.5px;color:var(--ink3)}
+.rd-head h1{font-size:21px;color:var(--navy);margin:2px 0 6px;line-height:1.4}
+.rd-head .sum{font-size:12.5px;color:var(--ink2);margin-bottom:8px}
+.rd-head .sum b{color:var(--navy)}
+.rd-toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.rd-months{display:flex;flex-wrap:wrap;gap:6px}
+.rd-month{font-size:12px;border:1px solid var(--line);background:#fff;border-radius:14px;
+  padding:3px 11px;cursor:pointer;color:var(--ink2);font-family:inherit}
+.rd-month:hover{border-color:var(--blue)}
+.rd-month.on{background:var(--navy);border-color:var(--navy);color:#fff;font-weight:700}
+.rd-month.old{opacity:.55}
+.rd-toggle{font-size:12px;border:1px solid var(--line);background:#fff;border-radius:7px;
+  padding:4px 11px;cursor:pointer;color:var(--navy2);font-family:inherit}
+.rd-toggle:hover{border-color:var(--blue)}
+
+/* ── 图例 ── */
+.rd-legend{display:flex;flex-wrap:wrap;gap:12px;font-size:11.5px;color:var(--ink3);
+  margin:0 0 12px}
+.rd-legend .k{display:inline-flex;align-items:center;gap:5px}
+.rd-legend .sw{width:12px;height:12px;border-radius:3px;display:inline-block}
+
+/* ── 报告正文（沿用 md2html 通用模板风格） ── */
+.rd-body{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:22px 26px 30px;box-shadow:var(--shadow);max-width:1160px}
+.rd-body h1,.rd-body h2,.rd-body h3{color:#16213e}
+.rd-body table{border-collapse:collapse;width:100%;overflow-x:auto;display:block;
+  margin:10px 0;font-size:13px}
+.rd-body th,.rd-body td{border:1px solid #cbd5e1;padding:6px 10px;text-align:left}
+.rd-body th{background:#f1f5f9}
+.rd-body img{max-width:100%}
+.rd-body code{background:#f6f8fa;padding:2px 4px;border-radius:3px}
+.rd-body blockquote{border-left:4px solid #94a3b8;margin:8px 0;
+  padding-left:12px;color:#475569}
+.rd-body pre{background:#f6f8fa;padding:10px;border-radius:6px;overflow-x:auto}
+.rd-body pre code{background:none;padding:0}
+
+/* ── 差异高亮 ── */
+.diff-badge{display:inline-block;font-size:10.5px;font-weight:700;line-height:1;
+  border-radius:3px;padding:2px 6px;margin-right:6px;vertical-align:middle;
+  white-space:nowrap}
+.diff-block{border-radius:6px;padding:4px 8px;margin:4px -8px}
+.diff-new{background:var(--green-l);box-shadow:inset 3px 0 0 var(--green)}
+.diff-new .diff-badge{background:var(--green);color:#fff}
+.diff-mod{background:var(--amber-l);box-shadow:inset 3px 0 0 var(--amber)}
+.diff-mod .diff-badge{background:var(--amber);color:#fff}
+.diff-del-group{margin:6px 0;border:1px dashed var(--line);border-radius:6px;
+  background:#fbfcfe}
+.diff-del-group>summary{cursor:pointer;font-size:12px;color:var(--ink3);
+  padding:6px 10px;user-select:none;list-style:none}
+.diff-del-group>summary::-webkit-details-marker{display:none}
+.diff-del-group>summary::before{content:"▸ ";color:var(--gray)}
+.diff-del-group[open]>summary::before{content:"▾ "}
+.diff-del-group .diff-del-body{padding:2px 8px 8px;color:var(--ink3)}
+.diff-del-group .diff-del-body s,.diff-del-group .diff-del-body del{color:var(--red)}
+.diff-del-group .diff-badge{background:var(--gray-l);color:var(--gray)}
+/* 隐藏更新标记：对照阅读模式 */
+.rd-body.hide-diff .diff-badge{display:none}
+.rd-body.hide-diff .diff-block{background:none;box-shadow:none;padding:0;margin:0}
+.rd-body.hide-diff .diff-del-group{display:none}
+
+/* ── 空态 ── */
+.rd-empty{padding:50px 20px;text-align:center;color:var(--ink3);font-size:13.5px}
+
+/* ── 响应式 ── */
+@media (max-width: 960px){
+  .reader{flex-direction:column}
+  .rd-sidebar{position:static;width:100%;height:auto;max-height:240px;border-right:0;
+    border-bottom:1px solid var(--line)}
+  .rd-main{padding:14px 14px 50px}
+  .rd-head{margin:-14px -14px 14px;padding:12px 14px 8px}
+  .rd-body{padding:16px}
+}
+"""
+
+READER_JS = """
+(function () {
+  'use strict';
+  var DATA = JSON.parse(document.getElementById('report-data').textContent);
+  var RECENT_MONTHS = 12;
+
+  function pad(n) { return (n < 10 ? '0' : '') + n; }
+  function $(sel, root) { return (root || document).querySelector(sel); }
+  function $all(sel, root) { return Array.prototype.slice.call((root || document).querySelectorAll(sel)); }
+
+  /* ---------- 侧栏主题列表 ---------- */
+  function renderSidebar() {
+    var box = $('#rd-toc');
+    if (!box) return;
+    var html = '';
+    Object.keys(DATA).sort().forEach(function (rs) {
+      var t = DATA[rs];
+      var months = Object.keys(t.months).sort().reverse();
+      html += '<a href="#topic=' + rs + '&month=' + months[0] + '" data-rs="' + rs + '">'
+        + '<span class="num">' + (t.dir || '').replace(/^\\d+-/, '') + '</span>'
+        + '<span>' + escapeHtml(t.name) + '</span>'
+        + '<span class="cnt">' + months.length + ' 期</span></a>';
+    });
+    box.innerHTML = html;
+  }
+
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"]/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
+    });
+  }
+
+  /* ---------- 路由 ---------- */
+  function parseHash() {
+    var h = location.hash || '';
+    var m = /^#topic=([^&]+)(?:&month=(\\d{4}-\\d{2}))?/.exec(h);
+    if (!m) return null;
+    return { rs: decodeURIComponent(m[1]), month: m[2] || null };
+  }
+
+  function currentPeriods(rs) {
+    return Object.keys(DATA[rs].months).sort();  // 升序（时间正序）
+  }
+
+  function render() {
+    var route = parseHash();
+    var sidebar = $('#rd-toc');
+    if (!route || !DATA[route.rs]) {
+      // 默认落到第一个主题的最新一期
+      var first = Object.keys(DATA).sort()[0];
+      if (first) {
+        var months = currentPeriods(first);
+        location.replace('#topic=' + first + '&month=' + months[months.length - 1]);
+        return;
+      }
+      $('#rd-main').innerHTML = '<p class="rd-empty">暂无已产出报告。</p>';
+      return;
+    }
+    var t = DATA[route.rs];
+    var periods = currentPeriods(route.rs);
+    var month = route.month && t.months[route.month] ? route.month : periods[periods.length - 1];
+    var rec = t.months[month];
+
+    // 侧栏高亮
+    $all('a[data-rs]', sidebar).forEach(function (a) {
+      a.classList.toggle('active', a.getAttribute('data-rs') === route.rs);
+    });
+
+    // 头部
+    var now = new Date();
+    var start = new Date(now.getFullYear(), now.getMonth() - (RECENT_MONTHS - 1), 1);
+    var startPeriod = start.getFullYear() + '-' + pad(start.getMonth() + 1);
+    var monthsHtml = periods.map(function (p) {
+      var cls = 'rd-month' + (p === month ? ' on' : '') + (p < startPeriod ? ' old' : '');
+      return '<button class="' + cls + '" data-month="' + p + '">' + p + '</button>';
+    }).join('');
+    var stats = rec.stats || {};
+    $('#rd-head').innerHTML =
+      '<div class="crumb">' + escapeHtml(t.dir) + ' · ' + escapeHtml(t.name) + '</div>'
+      + '<h1>' + escapeHtml(rec.title || (month + ' 期报告')) + '</h1>'
+      + '<div class="sum">' + escapeHtml(rec.summary || '') + '</div>'
+      + '<div class="rd-toolbar">'
+      +   '<div class="rd-months">' + monthsHtml + '</div>'
+      +   '<button class="rd-toggle" id="tg-diff">隐藏更新标记</button>'
+      +   '<button class="rd-toggle" id="tg-del">展开全部删除</button>'
+      + '</div>';
+
+    // 正文
+    var body = $('#rd-body');
+    body.innerHTML = rec.body || '<p class="rd-empty">本期报告无内容。</p>';
+
+    // 月份切换
+    $all('.rd-month', $('#rd-head')).forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var p = btn.getAttribute('data-month');
+        if (p === month) return;
+        location.hash = '#topic=' + route.rs + '&month=' + p;  // 触发 hashchange -> render
+      });
+    });
+
+    // 对照阅读开关
+    var tgDiff = $('#tg-diff');
+    tgDiff.addEventListener('click', function () {
+      var hide = body.classList.toggle('hide-diff');
+      tgDiff.textContent = hide ? '显示更新标记' : '隐藏更新标记';
+    });
+
+    // 展开全部删除
+    var tgDel = $('#tg-del');
+    tgDel.addEventListener('click', function () {
+      var open = tgDel.getAttribute('data-open') === '1';
+      $all('details.diff-del-group', body).forEach(function (d) { d.open = !open; });
+      tgDel.setAttribute('data-open', open ? '0' : '1');
+      tgDel.textContent = open ? '展开全部删除' : '收起全部删除';
+    });
+
+    window.scrollTo(0, 0);
+  }
+
+  window.addEventListener('hashchange', render);
+  renderSidebar();
+  render();
+})();
+"""
 
 
-def render_reader(grouped) -> str:
-    rows = []
-    for rel, items in grouped.items():
-        for label, period, path, title in items:
-            text = html_mod.escape(f"{rel} · {label} {period}")
-            rows.append(f'<li><a href="?report={html_mod.escape(path)}">{text}</a></li>')
-    body = "<ul>" + "".join(rows) + "</ul>" if rows else "<p>暂无已产出报告。</p>"
-    return (
-        "<!DOCTYPE html>\n<html lang=\"zh-CN\">\n<head>\n<meta charset=\"utf-8\">\n"
-        "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n"
-        "<title>MacroPulse 阅读器</title>\n"
-        "<style>"
-        'body{margin:0;font-family:"Segoe UI","Microsoft YaHei",sans-serif;color:#1a1a2e;display:flex;height:100vh}'
-        "nav{width:300px;overflow:auto;border-right:1px solid #cbd5e1;padding:16px;box-sizing:border-box}"
-        "main{flex:1}iframe{width:100%;height:100%;border:0}"
-        "a{color:#1d4ed8;text-decoration:none}a:hover{text-decoration:underline}"
-        "</style>\n</head>\n<body>\n"
-        f"<nav><h2>报告列表</h2>{body}</nav>\n"
-        "<main><iframe id=\"frame\" title=\"报告内容\"></iframe></main>\n"
-        "<script>var p=new URLSearchParams(location.search).get('report');"
-        "if(p){document.getElementById('frame').src=p;}</script>\n"
-        "</body>\n</html>"
-    )
+def render_reader(data: dict) -> str:
+    payload = json.dumps(data, ensure_ascii=False).replace("</", "<\\/")
+    return f'''<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>jp-life-work · 报告阅读器</title>
+<style>{READER_CSS}</style>
+</head>
+<body>
+<div class="reader">
+  <aside class="rd-sidebar">
+    <div class="rd-brand">
+      <div class="logo">报</div>
+      <div class="name">日本生活与工作 · 报告阅读器</div>
+      <div class="sub">月度报告 · 跨月对比高亮</div>
+    </div>
+    <nav class="rd-toc" id="rd-toc"></nav>
+  </aside>
+  <main class="rd-main">
+    <div class="rd-head" id="rd-head"></div>
+    <div class="rd-legend">
+      <span class="k"><span class="sw" style="background:var(--green-l);box-shadow:inset 3px 0 0 var(--green)"></span>已更新 · 新增</span>
+      <span class="k"><span class="sw" style="background:var(--amber-l);box-shadow:inset 3px 0 0 var(--amber)"></span>已更新 · 修改</span>
+      <span class="k"><span class="sw" style="background:var(--gray-l)"></span>已更新 · 删除（折叠，可展开）</span>
+      <span class="k">未变更内容保持原样</span>
+    </div>
+    <div class="rd-body" id="rd-body"></div>
+  </main>
+</div>
+<script id="report-data" type="application/json">{payload}</script>
+<script>{READER_JS}</script>
+</body>
+</html>
+'''
 
+
+# ──────────────────────────────────────────────
+# 构建 / 校验
+# ──────────────────────────────────────────────
 
 def build_outputs() -> dict[str, str]:
     topics = collect_topics()
-    grouped = collect_entries()
+    reader_data = build_reader_data(topics)
     now_iso = datetime.now(tz=timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
-    return {"index.html": render_hub(topics, now_iso), "reader.html": render_reader(grouped)}
+    return {
+        "index.html": render_hub(topics, now_iso),
+        "reader.html": render_reader(reader_data),
+    }
 
 
 GENERATED_TS_RE = re.compile(r'(<p class="muted">最近生成：)[^<]*(</p>)')

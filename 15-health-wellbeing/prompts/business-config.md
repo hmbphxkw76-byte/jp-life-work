@@ -14,7 +14,7 @@
 {{BASELINE_DATE}}        = 2026-11-14（首期基线已产出）
 {{REGISTRY_PATH}}        = data/health_wellbeing_indicator_registry.md
 {{REGISTRY_FORMAT}}      = md-table
-{{BASELINE_REPORT_PATH}} = reports/2026-11_baseline_report.md
+{{BASELINE_REPORT_PATH}} = reports/{{YYYY-MM}}-<slug>.md
 {{FRESHNESS_PRIORITY}}   = 厚生労働省 / 日本年金機構官方一手最新；医疗机构行情按官网
 {{SOURCE_LANGUAGE_RULE}} = 日文官方一手优先；医疗机构 / 学会官网次之；中文来源仅作线索
 {{REPO_RAW_URL_BASE}}    = https://github.com/hmbphxkw76-byte/jp-life-work/blob/main/15-health-wellbeing
@@ -24,10 +24,10 @@
 
 | 周期 | 输出路径 | 说明 |
 |---|---|---|
-| 基线 | `reports/2026-11_baseline_report.md` + `.html` | v1.0（首期固定） |
-| 季度 | `reports/{{YYYY-Qn}}_quarterly.md` + `.html` | 季度复核 |
-| 年度 | `reports/{{YYYY}}_annual.md` + `.html` | 年度复盘（制度 / 费用变更） |
-| 事件触发 | `reports/{{YYYY-MM-DD}}-主题.md` | 制度改定 / 个人健康情况变化 |
+| 月度报告（首期） | `reports/{{YYYY-MM}}-<slug>.md` + `.html` | v1.0（首期固定） |
+| 季度报告（季度末月归档） | `reports/{{YYYY-MM}}-<slug>.md` + `.html` | 季度复核（季度末月归档） |
+| 年度报告（12 月归档） | `reports/{{YYYY-MM}}-<slug>.md` + `.html` | 年度复盘（制度 / 费用变更） |
+| 事件触发（并入当月报告） | `reports/{{YYYY-MM}}-<slug>.md` | 制度改定 / 个人健康情况变化 |
 
 ---
 
@@ -196,4 +196,4 @@
 
 | 版本 | 日期 | 变更 | 说明 |
 |---|---|---|---|
-| v1.0 | 2026-11-14 | 初始版本 | 建立医疗·健康·心理主题；确立与 07/08/09/12/13/14 的分工；首期基线 `reports/2026-11_baseline_report.md` |
+| v1.0 | 2026-11-14 | 初始版本 | 建立医疗·健康·心理主题；确立与 07/08/09/12/13/14 的分工；首期基线 `reports/{{YYYY-MM}}-<slug>.md` |

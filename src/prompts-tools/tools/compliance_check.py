@@ -31,7 +31,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from _common import detect_report, iter_business_dirs, ROOT, SRC, TEMPLATE_ROOT  # noqa: E402
+from _common import detect_month_report, iter_business_dirs, ROOT, SRC, TEMPLATE_ROOT  # noqa: E402
 
 RULES_PATH = TEMPLATE_ROOT / "compliance-rules.json"
 AUDIT_DIR = SRC / "report-audits"
@@ -149,7 +149,8 @@ def collect_targets(only_file: str | None):
     if only_file:
         p = ROOT / only_file
         text = p.read_text(encoding="utf-8", errors="replace")
-        cycle = detect_report(p.name)
+        det = detect_month_report(p.name)
+        cycle = "monthly" if det else ""
         type_id = ""
         for parent in p.parents:
             cfg = parent / "prompts" / "business-config.md"
@@ -167,13 +168,14 @@ def collect_targets(only_file: str | None):
         if not reports.is_dir():
             continue
         for f in sorted(reports.glob("*.html")):
-            detected = detect_report(f.name)
+            detected = detect_month_report(f.name)
             note_f = note
             cycle = ""
             if detected:
-                cycle = detected[0]
+                # 现行体系：全部报告按自然月聚合，统一按月度骨架校验
+                cycle = "monthly"
             else:
-                extra = "文件名不符合报告命名约定，无法识别周期（按警告处理）"
+                extra = "文件名不符合月度报告命名约定（YYYY-MM-<主题slug>），无法识别周期（按警告处理）"
                 note_f = f"{note}；{extra}" if note else extra
             out.append((f"{b.rel}/reports/{f.name}", f.read_text(encoding="utf-8", errors="replace"),
                         type_id, cycle, note_f))

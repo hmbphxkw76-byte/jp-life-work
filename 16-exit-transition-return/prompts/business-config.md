@@ -14,7 +14,7 @@
 {{BASELINE_DATE}}        = 2026-11-14（首期基线日期，已产出）
 {{REGISTRY_PATH}}        = data/exit_transition_return_indicator_registry.md
 {{REGISTRY_FORMAT}}      = md-table
-{{BASELINE_REPORT_PATH}} = reports/2026-11_baseline_report.md
+{{BASELINE_REPORT_PATH}} = reports/{{YYYY-MM}}-<slug>.md
 {{FRESHNESS_PRIORITY}}   = 最新官方页 > 上期值 > 预测值
 {{SOURCE_LANGUAGE_RULE}} = 日文官方一手 + 英文权威优先；中文来源仅作线索，引用须回溯日 / 英原文
 {{REPO_RAW_URL_BASE}}    = https://github.com/hmbphxkw76-byte/jp-life-work/blob/main/16-exit-transition-return
@@ -24,10 +24,10 @@
 
 | 周期 | 输出路径 | 版本号 | 上期报告 |
 |---|---|---|---|
-| 基线 | `reports/2026-11_baseline_report.md` + 同名 `.html` | v1.0（首期固定） | 无 |
-| 事件触发解读 | `reports/{{YYYY-MM-DD}}-主题.md`（+ 同名 `.html`） | vYYYY.MM.DD | 基线 / 最近一期解读 |
-| 年度台账复盘 | `reports/{{YYYY}}_annual.md` + 同名 `.html` | vYYYY.MM.DD | `reports/` 最近一期年度复盘 |
-| 个人情况变化 | `reports/{{YYYY-MM-DD}}-个人情况变化.md`（+ 同名 `.html`） | vYYYY.MM.DD | 基线 / 最近一期解读 |
+| 月度报告（首期） | `reports/{{YYYY-MM}}-<slug>.md` + 同名 `.html` | v1.0（首期固定） | 无 |
+| 事件触发解读 | `reports/{{YYYY-MM}}-<slug>.md`（+ 同名 `.html`） | vYYYY.MM.DD | 基线 / 最近一期解读 |
+| 年度台账复盘 | `reports/{{YYYY-MM}}-<slug>.md` + 同名 `.html` | vYYYY.MM.DD | `reports/` 最近一期年度复盘 |
+| 个人情况变化 | `reports/{{YYYY-MM}}-<slug>.md`（+ 同名 `.html`） | vYYYY.MM.DD | 基线 / 最近一期解读 |
 
 **输出格式**：md 源稿 + 同目录自包含 HTML（双格式交付）。事件触发解读件命名不在标准正则内，`validate.py` 仅提示 WARN 不阻断，属预期行为。
 
@@ -204,7 +204,7 @@
 - **报告结构**：基线按 3.3 声明映射；年度台账复盘按九节骨架（顶部九锚点导航）。
 - **免责声明**：固定原文「本报告仅供参考，不构成投资建议或决策依据。」。
 - **HTML 生成**：后续周期运行用 `src/prompts-tools/tools/md2html.py` 生成并过 `lint_reports.py`。
-- **初析件结构**：`2026-11-14_initial_analysis_report` 采用五模块 + 四个标准支撑节，属计划内框架级 companion；其非标准文件名会触发 `validate.py` WARN，`compliance_check.py` 对 h2 节数产生 WARN，属预期结构映射。
+- **结构映射**：本主题首月报告（2026-11）由框架件与基线件合并而成，h2 节数超出类型模板骨架，属业务固化锚；`compliance_check.py` 相应 WARN 为预期。
 
 ---
 

@@ -1,4 +1,4 @@
-# HTML 同步：报告 md 源变更时自动重新生成同名自包含 HTML 并提交。
+# HTML 同步：报告 md 源变更时自动重新生成同名自包含 HTML、重建汇总页 / 阅读器并提交。
 name: html-sync
 
 on:
@@ -6,6 +6,8 @@ on:
     branches: [main]
     paths:
       - '**/reports/*.md'
+      - 'src/prompts-tools/tools/build_hub.py'
+      - 'src/prompts-tools/tools/report_diff.py'
   workflow_dispatch:
 
 concurrency:
@@ -31,14 +33,19 @@ jobs:
       - name: 重新生成报告 HTML（md2html.py）
         run: python src/prompts-tools/tools/md2html.py
 
-      - name: 提交 HTML 更新
+      # 阅读器内嵌全部月度报告并预渲染跨月对比，报告变更后必须同步重建，
+      # 否则 reader.html 的对比高亮与版本列表会过期（validate.yml --check 会拦截）。
+      - name: 重建汇总页 / 阅读器（build_hub.py）
+        run: python src/prompts-tools/tools/build_hub.py
+
+      - name: 提交 HTML 与汇总页更新
         run: |
-          git add -A -- ':(glob)**/reports/*.html'
+          git add -A -- ':(glob)**/reports/*.html' index.html reader.html
           if git diff --cached --quiet; then
-            echo "HTML 与 md 源一致，无变化，跳过提交"
+            echo "HTML 与汇总页均一致，无变化，跳过提交"
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git commit -m "ci: html-sync 同步报告 HTML"
+          git commit -m "ci: html-sync 同步报告 HTML 与汇总页"
           git push

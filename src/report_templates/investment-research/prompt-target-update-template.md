@@ -37,8 +37,8 @@
 
 | 节拍 | 文件名（业务目录相对路径） | 版本号 |
 |---|---|---|
-| 定期复核 | `reports/{{YYYY-Qn}}_quarterly.md` 或 `reports/{{YYYY}}_annual.md`（+ 同名 html，由业务配置规定） | 写入报告内（vYYYY.MM.DD） |
-| 事件触发 | `reports/{{YYYY-MM-DD}}-主题.md` 专项修订件 | 同上 |
+| 定期复核 | `reports/{{YYYY-MM}}-<slug>.md` 或 `reports/{{YYYY-MM}}-<slug>.md`（+ 同名 html，由业务配置规定） | 写入报告内（vYYYY.MM.DD） |
+| 事件触发 | `reports/{{YYYY-MM}}-<slug>.md` 专项修订件 | 同上 |
 
 - 文件命名遵循仓库统一约定（`prompts/tools` 按此识别）；专项修订件命名不在标准正则内，`validate.py` 仅提示 WARN 不阻断，属预期行为。
 - 交付格式：md 源稿 + 同目录自包含 HTML（`prompts/tools/md2html.py` 同步生成）；HTML 必须通过 `prompts/tools/lint_reports.py`（免责声明双条件强制）。

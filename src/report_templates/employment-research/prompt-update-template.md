@@ -40,9 +40,9 @@
 
 | 节拍 | 文件名（业务目录相对路径） | 版本号 |
 |---|---|---|
-| 月度 | `reports/{{YYYY-MM}}_monthly.md`（+ 同名 html） | 写入报告内（vYYYY.MM.DD） |
-| 季度 | `reports/{{YYYY-Qn}}_quarterly.md`（+ 同名 html） | 同上 |
-| 年度 | `reports/{{YYYY}}_annual.md`（+ 同名 html）+ 登记册年度新版 | 同上 |
+| 月度 | `reports/{{YYYY-MM}}-<slug>.md`（+ 同名 html） | 写入报告内（vYYYY.MM.DD） |
+| 季度 | `reports/{{YYYY-MM}}-<slug>.md`（+ 同名 html） | 同上 |
+| 年度 | `reports/{{YYYY-MM}}-<slug>.md`（+ 同名 html）+ 登记册年度新版 | 同上 |
 
 - 文件命名遵循仓库统一约定（`prompts/tools` 按此识别）；业务线如需保留旧版本文号，写入报告文首/文末标注，不进入文件名。
 - 交付格式：md 源稿 + 同目录自包含 HTML（`prompts/tools/md2html.py` 同步生成）；HTML 必须通过 `prompts/tools/lint_reports.py`（免责声明双条件强制）。

@@ -1,7 +1,7 @@
 # 日本 · 地域信息 · 年度复盘提示词（市场指标监测型）
 
 > **用途**：周期性（每年）执行年度复盘。产出年度复盘报告，目标不是市场评论，而是：① 复盘全年；② 检验判断；③ 重置长期基线；④ 校准监测项；⑤ 更新情景；⑥ 更新登记册。
-> **产出**：年度报告落盘 `{{OUTPUT_PATH}}`（`reports/{{YEAR}}_annual.md` + 同名 HTML）。
+> **产出**：年度报告落盘 `{{OUTPUT_PATH}}`（`reports/{{YYYY-MM}}-<slug>.md` + 同名 HTML）。
 >
 > **继承声明（四层体系）**：本文件 = [通用基座](../../src/report_templates/prompt-generic-base.md) × [监测报告通用规范](../../src/report_templates/monitoring-common-spec.md) × [年度报告类型模板（市场指标监测型）](../../src/report_templates/market-monitoring/prompt-annual-review-template.md) × [业务专属配置](./business-config.md)。冲突时以本文件为准。
 
@@ -14,9 +14,9 @@
 {{YEAR}}                 = 被复盘的年份（如 2026）
 {{DATA_CUTOFF}}          = 数据截止日；未发布写最近已发布周期
 {{PREVIOUS_REPORT_PATH}} = 最近一期月度 / 季度报告路径
-{{BASELINE_REPORT_PATH}} = reports/2026-11_baseline_report.md
+{{BASELINE_REPORT_PATH}} = reports/{{YYYY-MM}}-<slug>.md
 {{REGISTRY_PATH}}        = data/regional_indicator_registry.md
-{{OUTPUT_PATH}}          = reports/{{YEAR}}_annual.md
+{{OUTPUT_PATH}}          = reports/{{YYYY-MM}}-<slug>.md
 {{REPORT_VERSION}}       = 本次版本号，格式 vYYYY.MM.DD
 ```
 
@@ -30,7 +30,7 @@
 
 年度为市场指标监测型的复盘节拍（见[年度类型模板第一节](../../src/report_templates/market-monitoring/prompt-annual-review-template.md)）：
 
-- **命名规则**：报告用「被复盘年份」（`reports/{{YEAR}}_annual.md`）。
+- **命名规则**：报告用「被复盘年份」（`reports/{{YYYY-MM}}-<slug>.md`）。
 - **判断 vs 实际偏离**：对上年的地域选择判断逐条复判，原文保留；偏离度 =（实际 ÷ 对照）− 1，绝对值 >30% 须重设假设并列出重设的三项假设，不做事后拟合。
 - **长期基线重置**：地域统计类长期锚取最近已发布年度值；年度数据存在时滞，不得用于月度择时；「实时值」与「年度基准」口径不得混用。
 - **触发器**（[业务配置第七节](./business-config.md)「年度」）：国交省地価统计 / 地域统计年度发布；个人选定目标地域。**无触发 → 降级为核验 / 收敛型轻运行。**

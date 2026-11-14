@@ -11,8 +11,8 @@
 {{CURRENT_DATE}}         = 本次执行日期
 {{CADENCE}}              = 季 / 年
 {{PREVIOUS_REPORT_PATH}} = reports/ 中最近一期同周期报告
-{{BASELINE_REPORT_PATH}} = reports/2026-11_baseline_report.md
-{{OUTPUT_PATH}}          = reports/{{YYYY-Qn}}_quarterly.md 或 reports/{{YYYY}}_annual.md
+{{BASELINE_REPORT_PATH}} = reports/{{YYYY-MM}}-<slug>.md
+{{OUTPUT_PATH}}          = reports/{{YYYY-MM}}-<slug>.md 或 reports/{{YYYY-MM}}-<slug>.md
 {{REGISTRY_PATH}}        = data/health_wellbeing_indicator_registry.md
 {{REPORT_VERSION}}       = vYYYY.MM.DD
 ```

@@ -22,9 +22,11 @@ from _common import (  # noqa: E402
     REQUIRED_TEMPLATE_FILES,
     TEMPLATE_ROOT,
     TEMPLATE_TYPE_DIRS,
-    detect_report,
+    detect_month_report,
     iter_business_dirs,
+    month_report_name,
     ROOT,
+    topic_slug,
 )
 
 ERRORS: list[str] = []
@@ -81,9 +83,17 @@ def check_business_dirs() -> None:
                 warn(f"{b.rel}: 缺少 {sub}/ 目录（空目录不入 git，首次产出后自动补齐）")
         reports = b.path / "reports"
         if reports.is_dir():
+            rs = topic_slug(b.region if not b.property_type else b.property_type)
             for f in sorted(reports.iterdir()):
-                if f.is_file() and detect_report(f.name) is None:
-                    warn(f"{b.rel}/reports/{f.name}: 文件名不符合报告命名约定")
+                if not f.is_file() or f.suffix not in (".md", ".html"):
+                    continue
+                det = detect_month_report(f.name)
+                if det is None:
+                    warn(f"{b.rel}/reports/{f.name}: 文件名不符合月度报告命名约定（YYYY-MM-<主题slug>）")
+                elif det[1] != rs:
+                    warn(f"{b.rel}/reports/{f.name}: 主题 slug「{det[1]}」与目录「{rs}」不一致")
+                elif f.suffix == ".html" and not (reports / month_report_name(det[0], rs, "md")).exists():
+                    warn(f"{b.rel}/reports/{f.name}: 缺少对应 md 源稿")
 
 
 def main() -> int:

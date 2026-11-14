@@ -16,7 +16,7 @@
 {{CADENCE}}              = 季（季度复核）+ 事件触发
 {{REGISTRY_PATH}}        = data/decision_hub_registry.md
 {{REGISTRY_FORMAT}}      = md-table
-{{BASELINE_REPORT_PATH}} = reports/2026-Q4_quarterly.md
+{{BASELINE_REPORT_PATH}} = reports/2026-12-decision-hub.md
 {{FRESHNESS_PRIORITY}}   = 以各来源主题最新一期报告 / 登记册为准；主题未更新时沿用其最近值并注明
 {{SOURCE_LANGUAGE_RULE}} = 沿用各来源主题的来源规则；本主题不新增一手来源，只做引用与缺失标注
 {{REPO_RAW_URL_BASE}}    = https://github.com/hmbphxkw76-byte/jp-life-work/blob/main/00-decision-hub
@@ -26,10 +26,10 @@
 
 | 周期 | 输出路径 | 说明 |
 |---|---|---|
-| 季度复核 | `reports/{{YYYY-Qn}}_quarterly.md` | 五问仪表盘；收敛 01–13 最新结论 + 暴露缺失 |
-| 事件触发 | `reports/{{YYYY-MM-DD}}-决策复核.md` | 个人情况变化 / 来源主题重大更新时触发 |
-| 落地清单 | `reports/{{YYYY-MM-DD}}_landing_checklist.md` | 落地 90 天执行清单（随手续研究补全而更新） |
-| 定居地档案 | `reports/{{YYYY-MM-DD}}_settlement_profile.md` | 个人定居记录（确定居住地后填写） |
+| 季度复核（季度末月归档） | `reports/{{YYYY-MM}}-<slug>.md` | 五问仪表盘；收敛 01–13 最新结论 + 暴露缺失 |
+| 事件触发（并入当月报告） | `reports/{{YYYY-MM}}-decision-hub.md` | 个人情况变化 / 来源主题重大更新时触发 |
+| 落地清单（并入当月报告） | `reports/{{YYYY-MM}}-decision-hub.md` | 落地 90 天执行清单（随手续研究补全而更新） |
+| 定居地档案（并入当月报告） | `reports/{{YYYY-MM}}-decision-hub.md` | 个人定居记录（确定居住地后填写） |
 
 ---
 
@@ -146,4 +146,4 @@
 
 | 版本 | 日期 | 变更 | 说明 |
 |---|---|---|---|
-| v1.0 | 2026-11-14 | 初始版本 | 建立跨主题决策层：五问框架、来源映射、只读消费纪律、缺失清单；首份季度复核报告 `reports/2026-Q4_quarterly.md` |
+| v1.0 | 2026-11-14 | 初始版本 | 建立跨主题决策层：五问框架、来源映射、只读消费纪律、缺失清单；首份季度复核报告 `reports/2026-12-decision-hub.md` |

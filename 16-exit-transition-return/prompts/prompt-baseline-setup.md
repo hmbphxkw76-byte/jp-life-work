@@ -1,7 +1,7 @@
 # 日本 退出·转型·回国 首期基线报告提示词（政策法规解读型）
 
 > **用途**：执行「日本 退出·转型·回国 政策解读机制」的**机制建立**任务：产出首期监管框架基线报告与配套政策台账。
-> **现状**：本业务线基线将于 2026-11 产出（[reports/2026-11_baseline_report.md](../reports/2026-11_baseline_report.md) + 同名 HTML，v1.0）。**正常运行永不重跑基线提示词**；仅在①报告与登记册全部丢失（灾难恢复），或②经维护规范批准的九节结构重排时启动。
+> **现状**：本业务线基线将于 2026-11 产出（[reports/{{YYYY-MM}}-<slug>.md](../reports/{{YYYY-MM}}-<slug>.md) + 同名 HTML，v1.0）。**正常运行永不重跑基线提示词**；仅在①报告与登记册全部丢失（灾难恢复），或②经维护规范批准的九节结构重排时启动。
 > **产出**：md 源稿 + 同目录自包含 HTML，落盘 `{{OUTPUT_PATH}}`；政策台账回写 `{{REGISTRY_PATH}}`。
 >
 > **继承声明（四层体系）**：本文件 = [通用基座](../../src/report_templates/prompt-generic-base.md) × [监测报告通用规范](../../src/report_templates/monitoring-common-spec.md) × [基线报告类型模板（政策法规解读型）](../../src/report_templates/policy-analysis/prompt-baseline-setup-template.md) × [业务专属配置](./business-config.md)。冲突时以本文件为准。
@@ -13,7 +13,7 @@
 ```
 {{CURRENT_DATE}}         = 本次执行日期，格式 YYYY-MM-DD
 {{BASELINE_DATE}}        = 2026-11-14（首期已产出；重建时改为重建日期）
-{{OUTPUT_PATH}}          = reports/2026-11_baseline_report.md
+{{OUTPUT_PATH}}          = reports/{{YYYY-MM}}-<slug>.md
 {{REGISTRY_PATH}}        = data/exit_transition_return_indicator_registry.md
 {{REPORT_VERSION}}       = v1.0（首期固定；灾难恢复重建时递增）
 ```

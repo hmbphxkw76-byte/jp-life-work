@@ -1,7 +1,7 @@
 # 日本 · 特定技能司机 · 周期更新提示词（职业就业调研型）
 
 > **用途**：覆盖职业就业调研型**三档节拍**——月度核验轻运行 / 季度主更新 / 年度复盘，以及重大事件触发器命中时的模块升级。可直接复制，替换顶部变量后提交给 AI 执行。
-> **产出**：季度 / 年度报告落盘 `{{OUTPUT_PATH}}`（`reports/{{YYYY-Qn}}_quarterly.md` 或 `reports/{{YYYY}}_annual.md` + 同名 HTML）；月度轻运行只更新登记册，不重写报告；事件触发插刷件 `reports/{{YYYY-MM-DD}}-主题.md`（命名不在标准正则内，validate 仅 WARN 不阻断，属预期）。
+> **产出**：季度 / 年度报告落盘 `{{OUTPUT_PATH}}`（`reports/{{YYYY-MM}}-<slug>.md` 或 `reports/{{YYYY-MM}}-<slug>.md` + 同名 HTML）；月度轻运行只更新登记册，不重写报告；事件触发插刷件 `reports/{{YYYY-MM}}-<slug>.md`（命名不在标准正则内，validate 仅 WARN 不阻断，属预期）。
 >
 > **继承声明（四层体系）**：本文件 = [通用基座](../../src/report_templates/prompt-generic-base.md) × [监测报告通用规范](../../src/report_templates/monitoring-common-spec.md) × [周期更新类型模板（职业就业调研型）](../../src/report_templates/employment-research/prompt-update-template.md) × [业务专属配置](./business-config.md)。冲突时以本文件为准。
 
@@ -13,9 +13,9 @@
 {{CURRENT_DATE}}         = 本次执行日期，格式 YYYY-MM-DD
 {{CADENCE}}              = 月 / 季 / 年（按本次节拍填写）
 {{PREVIOUS_REPORT_PATH}} = 上一期同周期报告路径（首期季度为空，仅锚定基线）
-{{BASELINE_REPORT_PATH}} = reports/2026-11_baseline_report.md
+{{BASELINE_REPORT_PATH}} = reports/{{YYYY-MM}}-<slug>.md
 {{REGISTRY_PATH}}        = data/ssw_driver_indicator_registry.md
-{{OUTPUT_PATH}}          = reports/{{YYYY-Qn}}_quarterly.md 或 reports/{{YYYY}}_annual.md
+{{OUTPUT_PATH}}          = reports/{{YYYY-MM}}-<slug>.md 或 reports/{{YYYY-MM}}-<slug>.md
 {{REPORT_VERSION}}       = 本次版本号，格式 vYYYY.MM.DD
 ```
 
@@ -87,7 +87,7 @@
 
 - 交付格式：md + 同目录自包含 HTML；季度 / 年度报告含顶部九锚点导航（`.report-nav`），`.nav-url` = `{{REPO_RAW_URL_BASE}}` + `/reports/{本期文件名}`。
 - HTML 须通过 `lint_reports.py` 免责声明双条件与标签配对校验。
-- 基线报告常驻 `reports/` 顶层不归档；周期报告按保留策略执行（季度保留 8 期、年度保留 5 期，超出移入 `reports/archives/`）。
+- 月度报告常驻 `reports/` 顶层；每主题保留最新 12 期，超出移入 `reports/archives/`。
 
 ## 八、质量自检（通用清单之外的本主题专属项）
 

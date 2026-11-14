@@ -73,7 +73,7 @@
 # {{REGION}} · {{TOPIC}} · 政策解读提示词（政策法规解读型 · 事件触发 + 年度复盘）
 
 > **用途**：事件触发单份解读（新政策 / 修订 / 配套细则出台后）与年度台账复盘统一入口。可直接复制，替换顶部变量后提交给 AI 执行。
-> **产出**：单份解读件 `{{OUTPUT_PATH}}`（`reports/{{YYYY-MM-DD}}-主题.md`）或年度复盘（`reports/{{YYYY}}_annual.md` + 台账年度新版另存不覆盖）。解读件命名不在标准正则内，validate 仅 WARN 不阻断，属预期。
+> **产出**：单份解读件 `{{OUTPUT_PATH}}`（`reports/{{YYYY-MM}}-<slug>.md`）或年度复盘（`reports/{{YYYY-MM}}-<slug>.md` + 台账年度新版另存不覆盖）。解读件命名不在标准正则内，validate 仅 WARN 不阻断，属预期。
 >
 > **继承声明（四层体系）**：本文件 = [通用基座](../../../report_templates/prompt-generic-base.md) × [监测报告通用规范](../../../report_templates/monitoring-common-spec.md) × [事件触发解读类型模板（政策法规解读型）](../../../report_templates/policy-analysis/prompt-policy-review-template.md) × [业务专属配置](./business-config.md)。冲突时以本文件为准。
 

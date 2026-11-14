@@ -3,7 +3,7 @@
 > **用途**：11 项关键监测指标的**活值存放处**（提示词只保留指标定义与数据源，避免提示词被每次运行改写）。每次运行更新本登记册 → 回写报告"数据变更摘要"。
 > **格式**：每项含 `最新值（来源/年份）` 与 `基准版本`。首值取自 2026-11-12 验证运行（prompt 追踪表硬编码值迁移）。
 > **锚定**：制度类数字（受入上限、试验要件、费用）以 01-ssw-driver 最新报告为单一事实源；本登记册不重复维护已修正事实清单。
-> **配套**：业务参数见 [../prompts/business-config.md](../prompts/business-config.md)；基线报告见 [../reports/2026-11_baseline_report.md](../reports/2026-11_baseline_report.md)。
+> **配套**：业务参数见 [../prompts/business-config.md](../prompts/business-config.md)；基线报告见 [../reports/2026-11-visa-immigration.md](../reports/2026-11-visa-immigration.md)。
 
 ## 核心指标
 

@@ -14,7 +14,7 @@
 {{BASELINE_DATE}}        = 2026-11-12（首期基线日期，已产出）
 {{REGISTRY_PATH}}        = data/politics_law_indicator_registry.md
 {{REGISTRY_FORMAT}}      = md-table
-{{BASELINE_REPORT_PATH}} = reports/2026-11_baseline_report.md
+{{BASELINE_REPORT_PATH}} = reports/{{YYYY-MM}}-<slug>.md
 {{FRESHNESS_PRIORITY}}   = 法规类近 12 个月内优先；政治动向标注事件日期
 {{SOURCE_LANGUAGE_RULE}} = 法规类须日文官方原文；政治动向类日英媒体可引但须回溯
 {{REPO_RAW_URL_BASE}}    = https://github.com/hmbphxkw76-byte/jp-life-work/blob/main/09-politics-law
@@ -24,9 +24,9 @@
 
 | 周期 | 输出路径 | 版本号 | 上期报告 |
 |---|---|---|---|
-| 基线 | `reports/2026-11_baseline_report.md` + 同名 `.html` | v1.0（首期固定） | 无 |
-| 事件触发解读 | `reports/{{YYYY-MM-DD}}-主题.md`（+ 同名 `.html`） | vYYYY.MM.DD | 基线 / 最近一期解读 |
-| 年度台账复盘 | `reports/{{YYYY}}_annual.md` + 同名 `.html` | vYYYY.MM.DD | `reports/` 最近一期年度复盘 |
+| 月度报告（首期） | `reports/{{YYYY-MM}}-<slug>.md` + 同名 `.html` | v1.0（首期固定） | 无 |
+| 事件触发解读 | `reports/{{YYYY-MM}}-<slug>.md`（+ 同名 `.html`） | vYYYY.MM.DD | 基线 / 最近一期解读 |
+| 年度台账复盘 | `reports/{{YYYY-MM}}-<slug>.md` + 同名 `.html` | vYYYY.MM.DD | `reports/` 最近一期年度复盘 |
 
 **输出格式**：md 源稿 + 同目录自包含 HTML（双格式交付）。事件触发解读件命名不在标准正则内，`validate.py` 仅提示 WARN 不阻断，属预期行为。
 

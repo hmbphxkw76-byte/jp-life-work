@@ -1,7 +1,7 @@
 # 日本 · 地域信息 · 月度监测提示词（市场指标监测型）
 
 > **用途**：周期性（每月）刷新月度监测简报。以一手 / 权威来源为依据、以指标登记册为编号骨架、以上一期报告与首期基线为对比锚，完成「核验 → 判定 → 偏离 → 缺口 → 观察」闭环。
-> **产出**：月度报告落盘 `{{OUTPUT_PATH}}`（`reports/{{YYYY-MM}}_monthly.md` + 同名 HTML）。
+> **产出**：月度报告落盘 `{{OUTPUT_PATH}}`（`reports/{{YYYY-MM}}-<slug>.md` + 同名 HTML）。
 >
 > **继承声明（四层体系）**：本文件 = [通用基座](../../src/report_templates/prompt-generic-base.md) × [监测报告通用规范](../../src/report_templates/monitoring-common-spec.md) × [月度报告类型模板（市场指标监测型）](../../src/report_templates/market-monitoring/prompt-monthly-monitor-template.md) × [业务专属配置](./business-config.md)。冲突时以本文件为准。
 
@@ -12,9 +12,9 @@
 ```
 {{CURRENT_DATE}}         = 本次执行日期，格式 YYYY-MM-DD
 {{PREVIOUS_REPORT_PATH}} = 上一期月度报告路径（首期月度为空，仅锚定基线）
-{{BASELINE_REPORT_PATH}} = reports/2026-11_baseline_report.md
+{{BASELINE_REPORT_PATH}} = reports/{{YYYY-MM}}-<slug>.md
 {{REGISTRY_PATH}}        = data/regional_indicator_registry.md
-{{OUTPUT_PATH}}          = reports/{{YYYY-MM}}_monthly.md
+{{OUTPUT_PATH}}          = reports/{{YYYY-MM}}-<slug>.md
 {{REPORT_VERSION}}       = 本次版本号，格式 vYYYY.MM.DD
 ```
 

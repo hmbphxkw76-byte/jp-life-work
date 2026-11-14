@@ -18,13 +18,64 @@ TEMPLATE_ROOT = SRC / "report_templates"
 # 顶层目录中不属于「地区 / 业务主题」的目录
 SKIP_TOP = {".git", ".github", "src", "report_templates", "prompts", "tests", "docs"}
 
-# 报告文件命名约定（与 monitoring-common-spec.md 第 1 节一致；月份限 01–12）
+# ──────────────────────────────────────────────
+# 现行命名规范：YYYY-MM-<主题slug>.md / .html（月度报告系列）
+# ──────────────────────────────────────────────
+# 2026-11-13 体系重构：取消基线 / 初析 / 季度等报告类型标签，全部报告按自然
+# 月份聚合，统一命名「YYYY-MM-主题名称」。主题名称取目录 slug（去 NN- 编号
+# 前缀，如 01-ssw-driver -> ssw-driver）。季度报告按季度末月归档（2026-Q4 ->
+# 2026-12），与月度报告同一套命名 / 对比 / 展示逻辑。
+MONTH_REPORT_RE = re.compile(r"^(\d{4}-(?:0[1-9]|1[0-2]))-([a-z][a-z0-9-]*)\.(html|md)$")
+
+# 目录名 -> 主题 slug（去掉两位编号前缀）
+DIR_SLUG_RE = re.compile(r"^\d{2}-(.+)$")
+
+
+def topic_slug(dir_name: str) -> str:
+    """业务目录名 -> 主题 slug（`01-ssw-driver` -> `ssw-driver`）。"""
+    m = DIR_SLUG_RE.match(dir_name)
+    return m.group(1) if m else dir_name
+
+
+def detect_month_report(name: str):
+    """按新命名规范识别月度报告 -> (period, slug, ext)；不匹配返回 None。
+
+    例：'2026-11-ssw-driver.html' -> ('2026-11', 'ssw-driver', 'html')
+    旧命名（baseline / initial_analysis / quarterly 等）不匹配，由
+    detect_legacy_report 单独识别（仅迁移期使用）。
+    """
+    m = MONTH_REPORT_RE.match(name)
+    if m:
+        return m.group(1), m.group(2), m.group(3)
+    return None
+
+
+def month_report_name(period: str, slug: str, ext: str = "md") -> str:
+    """构造月度报告文件名（`2026-11` + `ssw-driver` -> `2026-11-ssw-driver.md`）。"""
+    return f"{period}-{slug}.{ext}"
+
+
+def quarter_to_month(period: str):
+    """季度标识 -> 季度末月标识（`2026-Q4` -> `2026-12`）；非季度返回 None。"""
+    m = re.fullmatch(r"(\d{4})-Q([1-4])", period or "")
+    if not m:
+        return None
+    return f"{m.group(1)}-{(int(m.group(2)) * 3):02d}"
+
+
+# ──────────────────────────────────────────────
+# 历史命名（仅迁移脚本与归档读取使用；新产出不得再使用）
+# ──────────────────────────────────────────────
 MONTHLY_RE = re.compile(r"^(\d{4}-(?:0[1-9]|1[0-2]))_monthly\.(html|md)$")
 QUARTERLY_RE = re.compile(r"^(\d{4}-Q[1-4])_quarterly\.(html|md)$")
 ANNUAL_RE = re.compile(r"^(\d{4})_annual\.(html|md)$")
 BASELINE_RE = re.compile(r"^(\d{4}-(?:0[1-9]|1[0-2]))_baseline(?:_report)?\.(html|md)$")
 # 周报：period 为数据截止日（ISO 日期），与月/季/年的日历周期不同
 WEEKLY_RE = re.compile(r"^(\d{4}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12]\d|3[01]))_weekly\.(html|md)$")
+# 事件触发插刷件（日期前缀 + 自由主题名）
+LEGACY_SPECIAL_RE = re.compile(
+    r"^(\d{4}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12]\d|3[01]))[-_].+\.(html|md)$"
+)
 
 REPORT_RES = (
     ("monthly", MONTHLY_RE),
@@ -168,12 +219,42 @@ def detect_report(name: str):
     """按文件名识别报告 -> (cycle, period, ext)；不匹配返回 None。
 
     例：'2026-11_monthly.html' -> ('monthly', '2026-11', 'html')
+    仅识别历史命名（迁移期使用）；新命名请用 detect_month_report。
     """
     for cycle, rx in REPORT_RES:
         m = rx.match(name)
         if m:
             return cycle, m.group(1), m.group(2)
     return None
+
+
+def detect_legacy_report(name: str):
+    """识别历史命名报告 -> (kind, period, ext)；不匹配返回 None。
+
+    kind ∈ {baseline, initial, quarterly, annual, monthly, weekly, special}。
+    仅迁移脚本使用：把存量报告归入自然月并合并重命名。
+    """
+    det = detect_report(name)
+    if det:
+        return det
+    m = LEGACY_SPECIAL_RE.match(name)
+    if m:
+        kind = "initial" if "initial_analysis" in name else "special"
+        return kind, m.group(1), m.group(2)
+    return None
+
+
+def month_to_date(period: str) -> str:
+    """月度标识 -> 代表日期（ISO，取月末）；非法返回空串。"""
+    m = re.fullmatch(r"(\d{4})-(\d{2})", period or "")
+    if not m:
+        return ""
+    y, mo = int(m.group(1)), int(m.group(2))
+    if not 1 <= mo <= 12:
+        return ""
+    from calendar import monthrange
+
+    return f"{y:04d}-{mo:02d}-{monthrange(y, mo)[1]:02d}"
 
 
 def parse_period(s: str):

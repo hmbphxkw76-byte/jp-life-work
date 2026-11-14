@@ -38,7 +38,7 @@
 
 | 节拍 | 文件名（业务目录相对路径） | 版本号 |
 |---|---|---|
-| 项目论证 | `reports/{{YYYY-MM-DD}}-主题.md`（+ 同名 html） | 写入报告内（vYYYY.MM.DD） |
+| 项目论证 | `reports/{{YYYY-MM}}-<slug>.md`（+ 同名 html） | 写入报告内（vYYYY.MM.DD） |
 | 项目复盘 | `reports/{{YYYY-MM-DD}}-主题-复盘.md`（+ 同名 html） | 同上 |
 
 - 项目制命名不在 `prompts/tools` 标准正则内，`validate.py` 仅提示 WARN 不阻断，属预期行为。

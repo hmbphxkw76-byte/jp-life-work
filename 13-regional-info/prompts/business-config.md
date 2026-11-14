@@ -14,7 +14,7 @@
 {{BASELINE_DATE}}        = 2026-11-12（首期基线日期，已产出）
 {{REGISTRY_PATH}}        = data/regional_indicator_registry.md
 {{REGISTRY_FORMAT}}      = md-table
-{{BASELINE_REPORT_PATH}} = reports/2026-11_baseline_report.md
+{{BASELINE_REPORT_PATH}} = reports/{{YYYY-MM}}-<slug>.md
 {{FRESHNESS_PRIORITY}}   = 统计类近 12 个月内优先；挂牌行情标注采集日期
 {{SOURCE_LANGUAGE_RULE}} = 统计类须日文官方原文；门户数据仅预期指标
 {{REPO_RAW_URL_BASE}}    = https://github.com/hmbphxkw76-byte/jp-life-work/blob/main/13-regional-info
@@ -24,10 +24,10 @@
 
 | 周期 | 输出路径 | 版本号 | 上期报告 |
 |---|---|---|---|
-| 基线 | `reports/2026-11_baseline_report.md` + 同名 `.html` | v1.0（首期固定） | 无 |
-| 月度 | `reports/{{YYYY-MM}}_monthly.md` + 同名 `.html` | vYYYY.MM.DD | `reports/` 最近一期月度报告 |
-| 季度 | `reports/{{YYYY-Qn}}_quarterly.md` + 同名 `.html` | vYYYY.MM.DD | `reports/` 最近一期季度报告 |
-| 年度 | `reports/{{YEAR}}_annual.md` + 同名 `.html` | vYYYY.MM.DD | `reports/` 最近一期月度 / 季度报告 |
+| 月度报告（首期） | `reports/{{YYYY-MM}}-<slug>.md` + 同名 `.html` | v1.0（首期固定） | 无 |
+| 月度 | `reports/{{YYYY-MM}}-<slug>.md` + 同名 `.html` | vYYYY.MM.DD | `reports/` 最近一期月度报告 |
+| 季度报告（季度末月归档） | `reports/{{YYYY-MM}}-<slug>.md` + 同名 `.html` | vYYYY.MM.DD | `reports/` 最近一期报告 |
+| 年度报告（12 月归档） | `reports/{{YYYY-MM}}-<slug>.md` + 同名 `.html` | vYYYY.MM.DD | `reports/` 最近一期月度 / 季度报告 |
 
 **输出格式**：md 源稿 + 同目录自包含 HTML（双格式交付）。
 

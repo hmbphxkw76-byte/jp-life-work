@@ -37,7 +37,7 @@ python src/prompts-tools/tools/lint_reports.py      # 报告内容校验，期�
 
 并人工确认三点：
 
-1. 基线报告 `reports/2026-11_baseline_report.md` + 同名 HTML 存在（周期更新的对比锚，缺失则先走第 5 节灾难恢复）。
+1. 基线报告 `reports/2026-11-economy-finance.md` + 同名 HTML 存在（周期更新的对比锚，缺失则先走第 5 节灾难恢复）。
 2. 上期同周期报告存在（首期季度除外），路径记入 `{{PREVIOUS_REPORT_PATH}}`。
 3. 对应周期提示词存在，且继承声明指向 [src/report_templates/employment-research/](../src/report_templates/employment-research/)。
 
@@ -48,7 +48,7 @@ python src/prompts-tools/tools/lint_reports.py      # 报告内容校验，期�
 ### 1.1 启动入口与前置条件
 
 - 入口：[prompt-baseline-setup.md](./prompts/prompt-baseline-setup.md)
-- **重要**：本业务线基线已产出（`reports/2026-11_baseline_report.md` v1.0 + 登记册）。**正常运行永不重跑基线**。仅以下两种情形允许再次启动：
+- **重要**：本业务线基线已产出（`reports/2026-11-economy-finance.md` v1.0 + 登记册）。**正常运行永不重跑基线**。仅以下两种情形允许再次启动：
   - 报告与登记册全部丢失（灾难恢复）；
   - 九节结构经维护规范批准重排（须在 business-config 版本记录留痕）。
 - 前置条件：无上期报告依赖；确认来源清单与官方发布节奏；确认 `{{REGISTRY_PATH}}` 不存在或已获准重建。
@@ -59,7 +59,7 @@ python src/prompts-tools/tools/lint_reports.py      # 报告内容校验，期�
 |---|---|---|
 | `{{CURRENT_DATE}}` | 本次执行日期 | `2026-11-13` |
 | `{{BASELINE_DATE}}` | 首期基线日期（重建时改重建日期） | `2026-11-12` |
-| `{{OUTPUT_PATH}}` | 固定 `reports/2026-11_baseline_report.md` | 同左 |
+| `{{OUTPUT_PATH}}` | 固定 `reports/2026-11-economy-finance.md` | 同左 |
 | `{{REPORT_VERSION}}` | 首期固定 `v1.0`；重建时递增 | `v1.0` |
 
 ### 1.3 执行步骤
@@ -95,9 +95,9 @@ python src/prompts-tools/tools/lint_reports.py
 |---|---|---|
 | `{{CURRENT_DATE}}` | 本次执行日期 | `2027-04-15` |
 | `{{CADENCE}}` | 固定填 `季` | `季` |
-| `{{PREVIOUS_REPORT_PATH}}` | `reports/` 中最近一期季度报告（首期季度为空） | `reports/2026-Q4_quarterly.md` |
-| `{{BASELINE_REPORT_PATH}}` | 固定 `reports/2026-11_baseline_report.md` | 同左 |
-| `{{OUTPUT_PATH}}` | `reports/{{YYYY-Qn}}_quarterly.md`，季度＝数据所属季 | `reports/2027-Q1_quarterly.md` |
+| `{{PREVIOUS_REPORT_PATH}}` | `reports/` 中最近一期季度报告（首期季度为空） | `reports/2026-12-decision-hub.md` |
+| `{{BASELINE_REPORT_PATH}}` | 固定 `reports/2026-11-economy-finance.md` | 同左 |
+| `{{OUTPUT_PATH}}` | `reports/{{YYYY-MM}}-<slug>.md`，季度＝数据所属季 | `reports/2027-03-<slug>.md` |
 | `{{REPORT_VERSION}}` | `v` + 执行日期 | `v2027.04.15` |
 
 固定值（不填，读自业务配置第一节）：`{{REGISTRY_PATH}}`、`{{REPO_RAW_URL_BASE}}` 等。
@@ -113,7 +113,7 @@ python src/prompts-tools/tools/lint_reports.py
 
 ### 2.4 时间范围与数据范围规则
 
-- **报告季度 = 数据所属季**（非执行季）。文件名 `2027-Q1_quarterly.md` 覆盖 2027 年 Q1 窗口内可取得的最新数据。
+- **报告季度 = 数据所属季**（非执行季）。文件名 `2027-03-<slug>.md` 覆盖 2027 年 Q1 窗口内可取得的最新数据。
 - T+1 判定：本期与上期发布窗口同日或仅隔 1 日 → 报告明确标注「T+1 刷新」，价值在核验、口径澄清与阈值距离，不制造变化。
 - 时效取舍：统计类近 6 个月内优先；年度修订数据须标注生效年份。
 - 同一指标多版本并存时以官方最新发布为准，旧值仅作对比锚。
@@ -136,7 +136,7 @@ python src/prompts-tools/tools/classify_reports.py
 ### 2.7 年度复盘
 
 - 入口：同上 [prompt-update.md](./prompts/prompt-update.md)（`{{CADENCE}}` = 年）。
-- 运行变量：`{{OUTPUT_PATH}}` = `reports/{{YYYY}}_annual.md`；其余同 2.2。
+- 运行变量：`{{OUTPUT_PATH}}` = `reports/{{YYYY-MM}}-<slug>.md`；其余同 2.2。
 - 执行要点：预测对照（上年判断逐条复判，原文保留）+ 清单复审（已修正事实清单、口径冲突清单、研究边界档案）+ 路线图重排；登记册按「增量留痕」回写，不覆盖历史值。
 
 ---
@@ -149,7 +149,7 @@ python src/prompts-tools/tools/classify_reports.py
 
 ### 3.2 命名与范围
 
-- 追加件命名：`reports/{{YYYY-MM-DD}}-主题.md`（+ 同名 HTML）；该命名不在标准正则内，`validate.py` 仅 WARN 不阻断，属预期。
+- 追加件命名：`reports/{{YYYY-MM}}-<slug>.md`（+ 同名 HTML）；该命名不在标准正则内，`validate.py` 仅 WARN 不阻断，属预期。
 - 追加件须在开头声明触发事件、受影响模块、与基线 / 上期报告的差异摘要。
 - 不替代季度 / 年度报告；季度 / 年度仍按窗口执行。
 

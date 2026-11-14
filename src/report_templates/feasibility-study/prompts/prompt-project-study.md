@@ -1,7 +1,7 @@
 # {{REGION}} · {{TOPIC}} · 项目论证提示词（可行性与市场进入型 · 泛用版 · 项目制）
 
 > **用途**：项目制论证统一入口——新市场进入、新产品线、新设点等一次性项目（当次项目范围由 {{PROJECT_TYPE}} 指定）；另覆盖项目实施后复盘。泛用版业务提示词：建新业务线时复制本文件至 `{REGION}/{PROPERTY}/prompts/`，替换变量与 TODO 后即可运行。
-> **产出**：项目论证件 `{{OUTPUT_PATH}}`（`reports/{{YYYY-MM-DD}}-主题.md`）或复盘件 `reports/{{YYYY-MM-DD}}-主题-复盘.md`（+ 同名 html）。命名不在工具链标准正则内，validate 仅 WARN 不阻断，属预期。
+> **产出**：项目论证件 `{{OUTPUT_PATH}}`（`reports/{{YYYY-MM}}-<slug>.md`）或复盘件 `reports/{{YYYY-MM-DD}}-主题-复盘.md`（+ 同名 html）。命名不在工具链标准正则内，validate 仅 WARN 不阻断，属预期。
 >
 > **继承声明（四层体系）**：本文件 = [通用基座](../../../prompt-generic-base.md) × [监测报告通用规范](../../monitoring-common-spec.md) × [项目论证类型模板（可行性与市场进入型）](../prompt-study-template.md) × 业务专属配置（实例化后为 `./business-config.md`；泛用版暂缺，业务项以 TODO 标注）。冲突时以业务提示词（即本文件实例化版）为准。
 
