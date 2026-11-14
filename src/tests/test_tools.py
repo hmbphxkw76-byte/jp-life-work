@@ -918,6 +918,21 @@ class TestInfoQualityCheck(unittest.TestCase):
         findings, _ = self._findings()
         self.assertTrue(any(f.code == "C-10" for f in findings))
 
+    def test_prompt_system_matches_tool(self):
+        """体系文档与程序常量/口径一致（防止文档与实现漂移）。"""
+        repo_root = Path(info_quality_check.__file__).resolve().parents[3]
+        doc = repo_root / "信息质量评估提示词体系.md"
+        self.assertTrue(doc.exists(), f"缺少体系文档：{doc}")
+        text = doc.read_text(encoding="utf-8")
+        self.assertIn("v1.1", text)
+        self.assertIn("仅研究正文", text)
+        self.assertIn("五类", text)
+        self.assertIn("核心指标", text)
+        self.assertIn("事实段落来源标注覆盖率门槛", text)
+        # 文档声明的来源覆盖率门槛须与程序常量一致
+        self.assertEqual(info_quality_check.THRESH_SOURCE_COVERAGE, 0.20)
+        self.assertIn("20%", text.split("事实段落来源标注覆盖率门槛")[1].split("\n")[0])
+
 
 if __name__ == "__main__":
     unittest.main()
