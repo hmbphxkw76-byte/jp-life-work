@@ -10,6 +10,7 @@
 report_templates/
 ├── prompt-generic-base.md        # 通用基座（类型中立，全部类型共享）
 ├── monitoring-common-spec.md     # 渲染/排版/交付通用规范（跨类型共享最低标准）
+├── handbook-split-standard.md    # 知识手册拆分操作规范 + 可复用提示词模板（跨主题共享）
 ├── template-registry.md          # 本注册表（类型接入点）
 ├── report-classification.md      # 行业主流分类体系（六族十二类，新增类型选型参考）
 ├── compliance-rules.json         # 合规校验规则（12 类结构骨架 × 周期，CI 阻断式校验关卡依据）
@@ -177,3 +178,4 @@ report_templates/
 | v1.21 | 2026-11-14 | 第九条 employment-research 业务线接入 | jp/14-life-operations 接入（基线已产出 2026-11，季度复核 + 事件触发）；个人执行层（在留 / 住民 / 住房 / 交通 / 通信 / 银行 / 水电 / 90 天清单）；结构映射在 business-config 第 3.2 节声明 |
 | v1.22 | 2026-11-14 | 第十条 employment-research 业务线接入 | jp/15-health-wellbeing 接入（基线已产出 2026-11，季度复核 + 事件触发）；个人健康管理（医保 / 就医 / 多语言通译 / 牙科精神科 / 心理 / 体检 / 介護）；结构映射在 business-config 第 3.2 节声明 |
 | v1.23 | 2026-11-14 | 第三条 policy-analysis 业务线接入 | jp/16-exit-transition-return 接入（基线已产出 2026-11，事件触发单份解读 + 年度台账复盘）；政策执行层（退出 / 转型 / 回国）；不做 07 / 08 / 14 的制度正文复制；结构映射在 business-config 第 3.3 节声明 |
+| v1.24 | 2026-11-14 | 新增根部共享操作规范 handbook-split-standard.md | 沉淀 12-culture-life 手册拆分实践（提交 4d3e200）为跨主题可复用标准化提示词模板：双产物分离原则、编号即接口约束、归属映射/边界裁定表、执行清单 ①–⑧、链接锚点规范、验证清单（含 URL 守恒与仓库测试）、提交规范、HTML 预览页设计系统；供其余含合并附录手册的主题统一执行 |
