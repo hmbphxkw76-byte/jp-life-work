@@ -265,7 +265,7 @@ EC・冷链・3PL 赛道判断见 [02 增长赛道](../../04-industry-logistics/
 - 特定自動運行（L4）実装：国交省 2026-05-11 公开口径为 **截至 2026 年 2 月、全国 10 カ所实现 L4（特定自動運行）社会实装**；官方未公布按"许可件数"汇总的统计，原登记册"12 件"无官方来源，本版改用 10 カ所并标注口径。[Source: https://www.magazine.mlit.go.jp/interview/vol62-c-1/, 2026]
 - 新增线索 1：いすゞ在 RoAD to the L4 成果报告会（2026-03-05）披露路线巴士 **2026 年度提出 L4 認可申請**、**2027 年度事业化**目标（站前环岛除外、事业化前提长期实证）。[Source: https://www.road-to-the-l4.go.jp/publication/pdf/03-3_ISUZU_20260305.pdf, 2026]
 - 新增线索 2：千叶县柏市「柏の叶」地区于 **2025-11-12** 取得县内首个 L4（特定自動運行）许可，2025-12-10 公告。[Source: https://www.city.kashiwa.lg.jp/koho/pressrelease/r7houdou/12gatsu/r7121004.html, 2025]
-- 制度框架（继承）：《モビリティ・ロードマップ 2026》时间表（2027 年度社会实装、2030 年 1 万台、高速公路 L4 卡车 2026 年以后）、新东名约 100km 深夜实证、ODD 限制。细节见 [01 自动驾驶技术路线与时间表](../../05-industry-autonomous/reports/2026-11-industry-autonomous.html#01-自动驾驶技术路线与时间表) 与 [02 法规与许可制度](../../05-industry-autonomous/reports/2026-11-industry-autonomous.html#02-法规与许可制度)。[Source: https://www.digital.go.jp/assets/contents/node/basic_page/field_ref_resources/2415ad00-6a79-4ebc-8fb1-51a47b1b0552/11045673/20260721_meeting_mobility_01.pdf, 2026]
+- 制度框架（继承）：《モビリティ・ロードマップ 2026》时间表（2027 年度社会实装、2030 年 1 万台、高速公路 L4 卡车 2026 年以后）、新东名约 100km 深夜实证、ODD 限制。细节见 [01 自动驾驶技术路线与时间表](../../05-industry-autonomous/handbook/01-technology-roadmap.md) 与 [02 法规与许可制度](../../05-industry-autonomous/handbook/02-legal-permit.md)。[Source: https://www.digital.go.jp/assets/contents/node/basic_page/field_ref_resources/2415ad00-6a79-4ebc-8fb1-51a47b1b0552/11045673/20260721_meeting_mobility_01.pdf, 2026]
 
 **对司机岗位的影响评估（以下全部为推断）**：
 
@@ -274,7 +274,7 @@ EC・冷链・3PL 赛道判断见 [02 增长赛道](../../04-industry-logistics/
 3. **特定技能司机的风险窗口**：1 号在留上限 5 年，若 2027–2031 年干线无人化落地，首批入国者的第 3–5 年可能正好遇到"长途岗位减少"；建议在 3 年内完成大型驾照、運行管理者资格或叉车/仓库管理方向的技能叠加（推断）。
 4. **本分野不得转 2 号**意味着"以 2 号续命"的策略在本分野不可用，长期留日须走"特定技能→育成就労/其他分野"或"永住要件路线"（推断）。[Source: https://www.moj.go.jp/isa/content/001472534.pdf, 2026]
 
-仓储自动化与无人配送的岗位影响见 [03 仓储自动化与无人配送](../../05-industry-autonomous/reports/2026-11-industry-autonomous.html#03-仓储自动化与无人配送)。
+仓储自动化与无人配送的岗位影响见 [03 仓储自动化与无人配送](../../05-industry-autonomous/handbook/03-warehouse-automation.md)。
 
 ---
 
