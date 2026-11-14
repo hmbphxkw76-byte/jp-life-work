@@ -13,7 +13,8 @@
 | md → HTML、汇总页 | `html-sync.yml`（push 触发） |
 | 归档 / 索引 / 结构维护 | `scheduled-maintenance.yml`（每月 1 日） |
 | 月度产出待办提醒 | `scheduled-report-tasks.yml`（每月 1 日） |
-| 内容零丢失 / 对比准确性 | `src/tests/test_tools.py`（69 项） |
+| 内容零丢失 / 对比准确性 | `src/tests/test_tools.py`（76 项） |
+| 信息质量评估 / 混乱修复 | `info-quality.yml`（每周一 02:20 UTC） |
 
 **CI 不产出报告研究内容**——报告由各主题 `prompts/business-config.md` 定义的研究流程人工/Agent 产出；CI 只校验与同步生成物。
 
@@ -74,6 +75,17 @@
   命中则 `gh issue edit` 更新正文并退出，否则新建。
 - **只提醒、不写内容**：Issue 仅列待办，报告仍需人工/Agent 产出。
 
+### 5. `info-quality.yml` — 信息质量周期评估与闭环修复
+
+- **触发**：`cron: "20 2 * * 1"`（每周一 02:20 UTC = 11:20 JST）、手动
+- **规范**：`docs/信息质量评估提示词体系.md`
+- **步骤**：
+  1. `info_quality_check.py --apply` — 全量评估 → 混乱识别分类 → 自动修复 → 复评验证（退出码 0/1/2）
+  2. `md2html.py` — 同步被修复报告的 HTML
+  3. `unittest` — 含文档↔程序一致性校验
+  4. 提交三清单（无变更则跳过）；退出码 1 时 `::error::` 告警
+- **产物**：`src/report-audits/info-quality/`（评估台账 / 修复台账 / 验证报告 / 累计修复历史 / JSON）
+
 ## 三、报告生命周期
 
 ```
@@ -114,7 +126,7 @@ reports/YYYY-MM-<slug>.md  ──md2html.py──►  reports/YYYY-MM-<slug>.htm
 - **辅助开关**：报告页工具条「隐藏更新标记」对照阅读、「展开全部删除」。
 - **呈现**：报告页新标签页独立打开，页脚提供「← 返回主题 / 返回首页」。
 
-## 六、测试体系（`src/tests/test_tools.py`，69 项）
+## 六、测试体系（`src/tests/test_tools.py`，76 项）
 
 | 场景 | 测试类 | 覆盖 |
 |---|---|---|
@@ -148,6 +160,9 @@ python src/prompts-tools/tools/archive_reports.py
 # 任务与状态
 python src/prompts-tools/tools/update_planner.py --period 2026-12
 python src/prompts-tools/tools/automation_status.py activity
+
+# 信息质量
+python src/prompts-tools/tools/info_quality_check.py --apply
 ```
 
 ## 八、常见问题

@@ -921,7 +921,7 @@ class TestInfoQualityCheck(unittest.TestCase):
     def test_prompt_system_matches_tool(self):
         """体系文档与程序常量/口径一致（防止文档与实现漂移）。"""
         repo_root = Path(info_quality_check.__file__).resolve().parents[3]
-        doc = repo_root / "信息质量评估提示词体系.md"
+        doc = repo_root / "docs" / "信息质量评估提示词体系.md"
         self.assertTrue(doc.exists(), f"缺少体系文档：{doc}")
         text = doc.read_text(encoding="utf-8")
         self.assertIn("v1.1", text)
