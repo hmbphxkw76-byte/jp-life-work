@@ -44,7 +44,7 @@
 | 扶养者职业·收入证明 | 在職証明書等＋住民税课税（或非课税）证明书＋纳税证明书（一年间总所得与纳税状况） |
 | 共通 | 申请书、照片、返信用信封；已在国内的家属走**在留资格变更许可**申请，材料同上 |
 
-- 子女的就学手续、6-3-3-4 学制与外国人子女入学案内 → [10-资格与教育投资 · 03-日本学校教育体系与子女教育](../../10-education-qualification/reports/2026-11-education-qualification.html#03-日本学校教育体系与子女教育)（education 手册，只管学校侧）
+- 子女的就学手续、6-3-3-4 学制与外国人子女入学案内 → [10-资格与教育投资 · 03-日本学校教育体系与子女教育](../../10-education-qualification/handbook/03-school-education.md)（education 手册，只管学校侧）
 - **子女高中毕业后的签证衔接**：以家族滞在持续在留＋义务教育·高中毕业＋入境时未满 18 岁＋就业单位已内定＋履行公的义务等要件，可变更为「**定住者**」直接就业；不符要件者经「特定活动」过渡 [Source: https://www.moj.go.jp/isa/applications/resources/nyuukokukanri07_00122.html, 2026]
 
 ## 四、单身/成家路线对永住规划的财务影响
@@ -77,7 +77,7 @@
 ## 关联
 
 - 活值 → [data/visa_immigration_indicator_registry.md](../data/visa_immigration_indicator_registry.md)
-- [10-资格与教育投资 · 03-日本学校教育体系与子女教育](../../10-education-qualification/reports/2026-11-education-qualification.html#03-日本学校教育体系与子女教育)
+- [10-资格与教育投资 · 03-日本学校教育体系与子女教育](../../10-education-qualification/handbook/03-school-education.md)
 - [01 收入结构与薪资行情](../../07-economy-finance/handbook/01-income-salary.md)
 
 ---

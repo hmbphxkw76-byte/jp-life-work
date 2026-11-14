@@ -58,7 +58,7 @@
 2. 当日内口头+书面报告公司运行管理者，记录时间/地点/目击者/点呼记录
 3. 到労災指定医院就诊，明确说明「労災です」，走労災窗口而非医保窗口
 4. 公司提交「療養補償給付たる療養の給付請求書」；本人保留诊断书、领收书、事故报告副本
-5. 公司拖延或否认 → 劳动基准监督署（労基署）相談，或走 [09-政治与法规 · 03-维权与合规工具箱](../../09-politics-law/reports/2026-11-politics-law.html#03-维权与合规工具箱)
+5. 公司拖延或否认 → 劳动基准监督署（労基署）相談，或走 [09-政治与法规 · 03-维权与合规工具箱](../../09-politics-law/handbook/03-rights-compliance.md)
 
 - 咨询与资料：[療養（補償）等給付の請求手続](https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/gyousei/rousai/040325-14.html "来源：https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/gyousei/rousai/040325-14.html, 2026")（労災保険相談ダイヤル 0570-006031，月–金 8:30–17:15）；[外国人劳动者向劳灾保险给付手册](https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/gyousei/rousai/gaikoku-pamphlet.html "来源：https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/gyousei/rousai/gaikoku-pamphlet.html, 2026")有含中文在内 14 语种版本
 
