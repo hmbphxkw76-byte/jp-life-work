@@ -7,7 +7,7 @@
 
 ## 一、仓储运营（Warehouse Operations）
 
-> 3PL 的市场结构、赛道优先级与增长逻辑见 [04-行业-物流 · 02](../../04-industry-logistics/reports/2026-11-industry-logistics.html#02-增长赛道ec冷链3pl)；本节只写运营管理。
+> 3PL 的市场结构、赛道优先级与增长逻辑见 [04-industry-logistics · 02](../../04-industry-logistics/handbook/02-growth-segments.md)；本节只写运营管理。
 
 ### 学习要点
 

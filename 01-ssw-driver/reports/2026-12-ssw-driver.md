@@ -236,7 +236,7 @@
 
 口径提示：TSR「運輸業 38 件」为産業分類口径（含旅客・貨物）；TDB「人手不足倒産 56 件」为原因分類且覆盖全産業，两者不可相加；TDB 与 TSR 的倒产定义（負債額下限、法人/個人）不同，950 vs 934 不可视为同一统计的修订。[Source: https://www.tsr-net.co.jp/news/status/detail/1203416_1610.html, 2026; https://www.tdb.co.jp/report/bankruptcy/aggregation/20261110-bankruptcy202610/, 2026]
 
-行业结构与赛道分析见 [01 日本物流产业概览](../../04-industry-logistics/reports/2026-11-industry-logistics.html#01-日本物流产业概览)；指标看板与季度扫描见 [04 行业数据跟踪](../../04-industry-logistics/reports/2026-11-industry-logistics.html#04-行业数据跟踪)。
+行业结构与赛道分析见 [01 日本物流产业概览](../../04-industry-logistics/handbook/01-logistics-overview.md)；指标看板与季度扫描见 [04 行业数据跟踪](../../04-industry-logistics/handbook/04-data-tracking.md)。
 
 ### 4.2 「2024 年问题」与运賃适正化（本版有更新：施行日落地）
 <!-- updated: 2026-11-12 -->
@@ -254,7 +254,7 @@
 
 指标：SGHD（9143）FY2027/3 第 2 四半期累计（2026.4–9，2026-11-06 发布）：営業収益 **9,204 億円（+17.6%）**、経常利益 **397 億円（+4.4%）**、純利益 **279 億 2,900 万円（+19.8%）**；同时上调通期経常利益 3%、增配 1 円。结论（推断）：增收显著快于增利（+17.6% vs +4.4%），符合"电商宅配量增＋人工成本上升"的组合；对外籍司机招聘的含义是**用工需求仍在扩张，但薪资谈判空间受利润率约束**。日通"月最大 5 万円加薪"已删除（无法溯源）；佐川 2025 年接收越南司机（业界首批）继承。[Source: https://kabutan.jp/news/marketnews/?b=k202611060215, 2026]
 
-EC・冷链・3PL 赛道判断见 [02 增长赛道](../../04-industry-logistics/reports/2026-11-industry-logistics.html#02-增长赛道ec冷链3pl)。
+EC・冷链・3PL 赛道判断见 [02 增长赛道](../../04-industry-logistics/handbook/02-growth-segments.md)。
 
 ---
 
