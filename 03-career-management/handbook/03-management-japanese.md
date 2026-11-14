@@ -1,7 +1,7 @@
 # 03 管理岗日语与沟通
 <!-- updated: 2026-11-14 | 拆分自 reports/2026-11-career-management.md 附录「03 管理岗日语与沟通」 -->
 
-> 对应阶段 3「学习管理岗日语：会议、报告、邮件、现场指示」。前提：N3 达成（→ [11-日语学习 · 03-N3备考计划](../../11-language-japanese/reports/2026-11-language-japanese.html#03-n3备考计划)）。
+> 对应阶段 3「学习管理岗日语：会议、报告、邮件、现场指示」。前提：N3 达成（→ [11-日语学习 · 03-N3备考计划](../../11-language-japanese/handbook/03-n3-plan.md)）。
 >
 > **边界**：活值查 [data/career_logistics_indicator_registry.md](../data/career_logistics_indicator_registry.md)；日语学习计划与考试选择 → [11-language-japanese](../../11-language-japanese)。
 

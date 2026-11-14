@@ -87,7 +87,7 @@
 - 保险费率、自付上限等活值 → [data/culture_life_indicator_registry.md](../data/culture_life_indicator_registry.md)
 - 税·社保·年金缴纳与归档 → [03-税务社保年金](../../07-economy-finance/handbook/03-tax-social-insurance.md)
 - 现场安全制度与事故处理 → [03-安全规范与现场制度](../../02-career-driver/handbook/03-safety-rules.md)
-- 就医资源的地域差 → [13-地域信息 · 01-地域选择框架](../../13-regional-info/reports/2026-11-regional-info.html#01-地域选择框架)
+- 就医资源的地域差 → [13-地域信息 · 01-地域选择框架](../../13-regional-info/handbook/01-region-choice.md)
 - 心理健康的生活经验视角（疲劳期情绪低谷）→ [02-生活指南与适应 · 四](02-living-guide.md#四心理健康与社群)
 
 ---

@@ -62,7 +62,7 @@
 ## 五、关联
 
 - 管理岗过渡完整计划 → [../../03-career-management](../../03-career-management/reports/)
-- 日语职场表达 → [11-日语学习 · 03-N3备考计划](../../11-language-japanese/reports/2026-11-language-japanese.html#03-n3备考计划)（职场日语同步包）
+- 日语职场表达 → [11-日语学习 · 03-N3备考计划](../../11-language-japanese/handbook/03-n3-plan.md)（职场日语同步包）
 
 ## 关联
 
