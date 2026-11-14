@@ -6,6 +6,7 @@
 """
 from __future__ import annotations
 
+import json
 import sys
 import tempfile
 import unittest
@@ -301,6 +302,231 @@ class TestComplianceCheck(unittest.TestCase):
     def test_in_page_anchor_with_extra_id_resolves(self):
         html = self._html(extra_anchor=True, extra_id="missing-anchor")
         self.assertEqual(check_report(html, self.monthly_rule, self.common), [])
+
+
+class TestExitTransitionReturnTopic(unittest.TestCase):
+    """16-exit-transition-return 业务线机制校验。"""
+
+    def test_topic_structure_and_config_contract(self):
+        path = _common.ROOT / "16-exit-transition-return"
+        config = path / "prompts" / "business-config.md"
+        baseline_prompt = path / "prompts" / "prompt-baseline-setup.md"
+        review_prompt = path / "prompts" / "prompt-policy-review.md"
+        operations = path / "operations-guide.md"
+
+        self.assertTrue(config.is_file())
+        self.assertTrue(baseline_prompt.is_file())
+        self.assertTrue(review_prompt.is_file())
+        self.assertTrue(operations.is_file())
+
+        text = config.read_text(encoding="utf-8")
+        for value in (
+            "{{REGION}}",
+            "日本",
+            "{{TOPIC}}",
+            "退出·转型·回国",
+            "{{BASELINE_DATE}}",
+            "2026-11-14",
+            "data/exit_transition_return_indicator_registry.md",
+            "reports/2026-11_baseline_report.md",
+            "退出",
+            "转型",
+            "回国",
+            "07-economy-finance",
+            "08-visa-immigration",
+            "14-life-operations",
+        ):
+            self.assertIn(value, text)
+
+    def test_topic_registered_as_policy_analysis(self):
+        registry = (_common.TEMPLATE_ROOT / "template-registry.md").read_text(encoding="utf-8")
+        policy_row = next(
+            line for line in registry.splitlines()
+            if line.startswith("| policy-analysis |")
+        )
+        self.assertIn("jp/16-exit-transition-return", policy_row)
+        self.assertIn("v1.23", registry)
+
+
+class TestExitTransitionReturnVocabulary(unittest.TestCase):
+    """16-exit-transition-return 词汇库接入校验。"""
+
+    def test_vocab_topic_registered_and_bound(self):
+        config_path = _common.ROOT / "src" / "vocabulary" / "config" / "topics.json"
+        sync_path = _common.ROOT / "src" / "vocabulary" / "config" / "sync.json"
+        terms_path = _common.ROOT / "src" / "vocabulary" / "data" / "exit-transition-return" / "terms.md"
+        index_path = _common.ROOT / "src" / "vocabulary" / "INDEX.md"
+
+        config = json.loads(config_path.read_text(encoding="utf-8-sig"))
+        self.assertIn("exit-transition-return", config["topics"])
+        self.assertEqual(config["topics"]["exit-transition-return"]["id_prefix"], "ETR")
+
+        sync = json.loads(sync_path.read_text(encoding="utf-8-sig"))
+        binding = next(b for b in sync["bindings"] if b["topic"] == "exit-transition-return")
+        self.assertTrue(binding["targets"])
+        self.assertIn("16-exit-transition-return/prompts/business-config.md", binding["targets"][0]["path"])
+
+        self.assertTrue(terms_path.is_file())
+        terms = terms_path.read_text(encoding="utf-8")
+        self.assertIn("退職", terms)
+        self.assertIn("健康保険任意継続", terms)
+        self.assertIn("再入国許可", terms)
+        self.assertIn("ETR-", terms)
+        self.assertIn("exit-transition-return", index_path.read_text(encoding="utf-8"))
+
+    def test_vocab_sync_block_present(self):
+        config = (_common.ROOT / "16-exit-transition-return" / "prompts" / "business-config.md").read_text(encoding="utf-8")
+        self.assertIn("<!-- VOCAB-SYNC:BEGIN topic=exit-transition-return", config)
+        self.assertIn("<!-- VOCAB-SYNC:END -->", config)
+        self.assertIn("## 词汇速览：退出·转型·回国（词汇库自动同步）", config)
+
+
+class TestExitTransitionReturnRegistry(unittest.TestCase):
+    """16-exit-transition-return 指标登记册校验。"""
+
+    def test_registry_covers_three_stages_and_required_fields(self):
+        path = _common.ROOT / "16-exit-transition-return" / "data" / "exit_transition_return_indicator_registry.md"
+        self.assertTrue(path.is_file())
+        text = path.read_text(encoding="utf-8")
+
+        for value in (
+            "退職",
+            "雇用保険",
+            "健康保険任意継続",
+            "厚生年金脱退一时金",
+            "在留資格取消",
+            "特定活動",
+            "特定技能2号",
+            "特定技能 1 号",
+            "転職",
+            "帰国前確定申告",
+            "再入国許可",
+            "みなし再入国",
+            "退室",
+            "研究边界档案",
+            "观察项与触发器状态",
+            "v1.0",
+        ):
+            self.assertIn(value, text)
+
+        rows = [line for line in text.splitlines() if line.startswith("| ") and line.count("|") >= 5]
+        self.assertGreaterEqual(len(rows), 20)
+        self.assertIn("⚠ 待核实", text)
+
+
+class TestExitTransitionReturnReports(unittest.TestCase):
+    """16-exit-transition-return 基线与初析报告内容契约。"""
+
+    BASELINE = _common.ROOT / "16-exit-transition-return" / "reports" / "2026-11_baseline_report.md"
+    INITIAL = _common.ROOT / "16-exit-transition-return" / "reports" / "2026-11-14_initial_analysis_report.md"
+
+    def test_baseline_has_nine_sections_and_three_stages(self):
+        self.assertTrue(self.BASELINE.is_file())
+        text = self.BASELINE.read_text(encoding="utf-8")
+        for heading in (
+            "一、核心结论（摘要）",
+            "二、退出·转型·回国制度台账与监测机制",
+            "三、制度框架与三段路径",
+            "四、退出与转型政策逐条解读",
+            "五、个人场景影响矩阵",
+            "六、退出·转型·回国行动建议（建议章）",
+            "七、制度变更与个人行动时间线",
+            "八、数据可靠性与局限说明",
+            "九、参考来源清单",
+        ):
+            self.assertIn(heading, text)
+        for value in (
+            "退出",
+            "转型",
+            "回国",
+            "退職",
+            "健康保険任意継続",
+            "厚生年金脱退一时金",
+            "在留資格取消",
+            "特定活動",
+            "特定技能2号",
+            "帰国前確定申告",
+            "再入国許可",
+            "みなし再入国",
+            "退室",
+            "免责声明",
+            "不构成投资建议",
+            "⚠ 待核实",
+            "（事实）",
+            "（推断）",
+        ):
+            self.assertIn(value, text)
+
+    def test_initial_analysis_is_framework_companion(self):
+        self.assertTrue(self.INITIAL.is_file())
+        text = self.INITIAL.read_text(encoding="utf-8")
+        for heading in (
+            "一、主题核心概述",
+            "二、关键维度拆解",
+            "三、当前现状梳理",
+            "四、初步结论",
+            "五、后续观察方向",
+        ):
+            self.assertIn(heading, text)
+        for value in (
+            "退出",
+            "转型",
+            "回国",
+            "免责声明",
+            "不构成投资建议",
+            "⚠ 待核实",
+        ):
+            self.assertIn(value, text)
+
+    def test_registry_updated_with_baseline_values(self):
+        registry = (_common.ROOT / "16-exit-transition-return" / "data" / "exit_transition_return_indicator_registry.md").read_text(encoding="utf-8")
+        self.assertIn("v2026.11.14_1", registry)
+        self.assertIn("⚠ 待核实", registry)
+        self.assertIn("2026-11-14", registry)
+
+
+class TestExitTransitionReturnHtml(unittest.TestCase):
+    """16-exit-transition-return HTML 交付物校验。"""
+
+    BASELINE = _common.ROOT / "16-exit-transition-return" / "reports" / "2026-11_baseline_report.html"
+    INITIAL = _common.ROOT / "16-exit-transition-return" / "reports" / "2026-11-14_initial_analysis_report.html"
+
+    def test_html_reports_exist_and_pass_lint(self):
+        for path in (self.BASELINE, self.INITIAL):
+            self.assertTrue(path.is_file())
+            text = path.read_text(encoding="utf-8")
+            self.assertIn("<title>", text)
+            self.assertIn("免责声明", text)
+            self.assertIn("不构成投资建议", text)
+            self.assertIn('<nav aria-label="报告导航">', text)
+            self.assertIn('id="s1"', text)
+            self.assertEqual([i for i in lint_html(text) if i[0] == "E"], [])
+
+    def test_html_reports_use_fixed_tables(self):
+        for path in (self.BASELINE, self.INITIAL):
+            text = path.read_text(encoding="utf-8")
+            self.assertIn('class="fixed"', text)
+
+
+class TestExitTransitionReturnIntegration(unittest.TestCase):
+    """16-exit-transition-return 与 00 决策枢纽、根索引的集成校验。"""
+
+    def test_decision_hub_references_topic(self):
+        path = _common.ROOT / "00-decision-hub" / "data" / "decision_hub_registry.md"
+        self.assertTrue(path.is_file())
+        text = path.read_text(encoding="utf-8")
+        self.assertIn("16-exit-transition-return", text)
+        self.assertIn("退出·转型·回国", text)
+        self.assertIn("已建 16", text)
+        self.assertIn("具体金额 / 期限 / 要件待核验", text)
+
+    def test_root_index_includes_topic(self):
+        path = _common.ROOT / "index.html"
+        self.assertTrue(path.is_file())
+        text = path.read_text(encoding="utf-8")
+        self.assertIn("16-exit-transition-return", text)
+        self.assertIn("退出·转型·回国", text)
+        self.assertIn("2026-11_baseline_report.html", text)
 
 
 class TestBuildHubCheck(unittest.TestCase):

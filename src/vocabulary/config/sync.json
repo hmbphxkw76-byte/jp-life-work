@@ -177,6 +177,19 @@
           "tags_include": []
         }
       ]
+    },
+    {
+      "topic": "exit-transition-return",
+      "targets": [
+        {
+          "path": "../../16-exit-transition-return/prompts/business-config.md",
+          "format": "digest",
+          "section_title": "## 词汇速览：退出·转型·回国（词汇库自动同步）",
+          "insert_before": "## 十二、版本记录",
+          "categories_include": [],
+          "tags_include": []
+        }
+      ]
     }
   ]
 }
