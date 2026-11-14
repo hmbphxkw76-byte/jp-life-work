@@ -1,5 +1,5 @@
 {
-  "version": "v1.25",
+  "version": "v1.31",
   "updated": "2026-11-14",
   "comment": "主题注册表（vocabulary 子系统单一事实源）。本文件由 vocab_tool.py 自动维护，请勿手工编辑：新增主题用 topic-add（自动登记注册表 + 创建 data/<topic>/ 目录 + 重建索引 + 备份回滚 + 操作日志），移除用 topic-remove，一致性审计用 topic-check。storage/imports_dir/exports_dir 为相对 vocabulary/ 根目录的路径。",
   "topics": {
@@ -229,6 +229,106 @@
         "税务与住民",
         "离境与再入国",
         "资产与生活清理"
+      ]
+    },
+    "life-operations": {
+      "name": "在日生活实务",
+      "description": "在日生活实务全领域词汇：住民登记、住房租赁、通信网络、银行支付、水电燃气、行政手续",
+      "id_prefix": "LOP",
+      "storage": "data/life-operations/terms.md",
+      "imports_dir": "data/life-operations/imports",
+      "exports_dir": "data/life-operations/exports",
+      "categories": [
+        "在留与住民登记",
+        "住房与租赁",
+        "通信与网络",
+        "银行与支付",
+        "水电燃气与基础设施",
+        "行政手续",
+        "场景与表达"
+      ]
+    },
+    "health-wellbeing": {
+      "name": "医疗·健康·心理",
+      "description": "医疗健康与心理全领域词汇：医保制度、就医实务、精神科、心理健康、体检预防、介护福祉",
+      "id_prefix": "HLW",
+      "storage": "data/health-wellbeing/terms.md",
+      "imports_dir": "data/health-wellbeing/imports",
+      "exports_dir": "data/health-wellbeing/exports",
+      "categories": [
+        "医疗制度",
+        "就医实务",
+        "牙科与精神科",
+        "心理健康与适应",
+        "体检与预防",
+        "介护与福祉"
+      ]
+    },
+    "migration-compliance": {
+      "name": "劳务输出与中介合规",
+      "description": "劳务输出与中介合规全领域词汇：招募渠道、送出機関资质核验、合同审查、骗术图谱、法律后果",
+      "id_prefix": "MPC",
+      "storage": "data/migration-compliance/terms.md",
+      "imports_dir": "data/migration-compliance/imports",
+      "exports_dir": "data/migration-compliance/exports",
+      "categories": [
+        "招募与渠道",
+        "中介资质与核验",
+        "合同与费用",
+        "骗术与风险",
+        "法律后果与救济",
+        "黑名单与名单",
+        "场景与表达"
+      ]
+    },
+    "family-parenting": {
+      "name": "家族·育儿·人生事件",
+      "description": "家族育儿与人生事件全领域词汇：家族滞在、婚姻离婚、生育保育、教育、扶养、继承",
+      "id_prefix": "FAM",
+      "storage": "data/family-parenting/terms.md",
+      "imports_dir": "data/family-parenting/imports",
+      "exports_dir": "data/family-parenting/exports",
+      "categories": [
+        "家族滞在",
+        "婚姻与离婚",
+        "生育与育儿",
+        "保育与教育",
+        "扶养与支援",
+        "继承与终末",
+        "场景与表达"
+      ]
+    },
+    "safety-disaster": {
+      "name": "防灾·安全·治安",
+      "description": "防灾安全与治安全领域词汇：自治体防灾、避难情报、治安、领事保护、应急联络",
+      "id_prefix": "SFD",
+      "storage": "data/safety-disaster/terms.md",
+      "imports_dir": "data/safety-disaster/imports",
+      "exports_dir": "data/safety-disaster/exports",
+      "categories": [
+        "防灾体制",
+        "避难与情报",
+        "治安与人身",
+        "领事保护",
+        "应急联络",
+        "场景与表达"
+      ]
+    },
+    "overseas-china": {
+      "name": "中国侧行前与回国",
+      "description": "中国侧行前与回国衔接全领域词汇：护照户籍、档案社保、驾照转回、学历认证、无犯罪记录、公证认证",
+      "id_prefix": "OVC",
+      "storage": "data/overseas-china/terms.md",
+      "imports_dir": "data/overseas-china/imports",
+      "exports_dir": "data/overseas-china/exports",
+      "categories": [
+        "护照与户籍",
+        "档案与社保",
+        "驾照转回",
+        "学历认证",
+        "无犯罪记录",
+        "公证认证",
+        "场景与表达"
       ]
     }
   }

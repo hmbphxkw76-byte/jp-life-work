@@ -36,7 +36,7 @@ python src/prompts-tools/tools/lint_reports.py
 ## 4. 个人定居地联动
 
 - 定居地确定后，重点更新模块八（90 天清单）与登记册 #10（多语言窗口）。
-- 与 00-decision-hub 的[定居地档案](../../00-decision-hub/reports/2026-11-decision-hub.md)联动。
+- 与 00-decision-hub 的[定居地档案](../00-decision-hub/reports/2026-11-decision-hub.md)联动。
 
 ## 5. 版本记录
 

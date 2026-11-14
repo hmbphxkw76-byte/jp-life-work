@@ -8,7 +8,9 @@
   季度等类型；季度报告按季度末月归档（2026-Q4 -> 2026-12）；
 - 主题详情页默认展示最近 12 个月报告，按时间倒序（最新在顶端），可展开更早；
 - 报告链接直达各主题 `reports/*.html` 独立报告页（新标签页打开），报告页内含
-  构建期预渲染的跨月对比高亮（见 md2html.py / report_diff.py）。
+  构建期预渲染的跨月对比高亮（见 md2html.py / report_diff.py）；
+- 搜索层：构建期生成 `search-index.json`（报告标题 / 关键词 / 命中问题，关键词
+  由报告标题 + 章节 + 词库词条命中合成），并嵌入 index.html 供站内搜索使用。
 
 --check 模式（validate.yml 使用）：重新计算内容与现有文件比对；
 - 文件存在且一致 -> 退出码 0
@@ -189,6 +191,124 @@ def collect_topics() -> list[dict]:
 
 
 # ──────────────────────────────────────────────
+# 搜索索引（报告关键词 + 问题索引 + 词库打通）
+# ──────────────────────────────────────────────
+
+SEARCH_DIR = ROOT / "src" / "search"
+VOCAB_DATA = ROOT / "src" / "vocabulary" / "data"
+
+
+def _md_text(rel_path: str) -> str:
+    p = ROOT / rel_path
+    if not p.exists():
+        return ""
+    return p.read_text(encoding="utf-8", errors="replace")
+
+
+def _md_headings(text: str) -> list[str]:
+    out = []
+    for m in re.finditer(r"^##\s+(.+?)\s*$", text, re.M):
+        t = re.sub(r"[`*_#]", "", m.group(1)).strip()
+        if t:
+            out.append(t)
+    return out
+
+
+def _load_vocab_terms() -> list[tuple[str, str, str]]:
+    """(词条, 主题, 别名) 列表，来自各主题 terms.md（词库 → 搜索打通）。"""
+    rows: list[tuple[str, str, str]] = []
+    if not VOCAB_DATA.is_dir():
+        return rows
+    for f in sorted(VOCAB_DATA.glob("*/terms.md")):
+        topic = f.parent.name
+        try:
+            lines = f.read_text(encoding="utf-8", errors="replace").splitlines()
+        except OSError:
+            continue
+        for ln in lines:
+            if not ln.startswith("| ") or ln.count("|") < 6:
+                continue
+            cells = [c.strip() for c in ln.split("|")]
+            if len(cells) < 5:
+                continue
+            term = cells[2]
+            if not term or term in ("词条", "---"):
+                continue
+            rows.append((term, topic, cells[3]))
+    return rows
+
+
+def _report_keywords(rel_path: str, topic_name: str, type_label: str,
+                     period: str, vocab: list[tuple[str, str, str]]) -> list[str]:
+    text = _md_text(rel_path)
+    kws: list[str] = []
+
+    def add(k: str) -> None:
+        k = (k or "").strip()
+        if k and k not in kws:
+            kws.append(k)
+
+    add(topic_name)
+    add(type_label)
+    add(period)
+    for h in _md_headings(text)[:6]:
+        add(h)
+    m = re.search(r"关[键鍵]词[：:]\s*(.+)", text)
+    if m:
+        for k in re.split(r"[,，、;；\s]+", m.group(1)):
+            add(k)
+    hits = 0
+    for term, _t, aliases in vocab:
+        if hits >= 20:
+            break
+        if term and term in text:
+            add(term)
+            hits += 1
+            continue
+        for a in aliases.split(";"):
+            a = a.strip()
+            if a and len(a) >= 2 and a in text:
+                add(a)
+                hits += 1
+                break
+    return kws[:24]
+
+
+def collect_search_index(topics: list[dict]) -> dict:
+    """构建标准化搜索索引：报告（标题 / 关键词 / 命中问题）+ 问题清单。"""
+    vocab = _load_vocab_terms()
+    reports: list[dict] = []
+    for t in topics:
+        for r in t["reports"]:
+            md_rel = r["path"][:-5] + ".md" if r["path"].endswith(".html") else r["path"]
+            reports.append({
+                "topic": t["slug"], "topic_name": t["name"], "type": t["type"],
+                "title": r["title"], "period": r["period"], "path": r["path"],
+                "keywords": _report_keywords(md_rel, t["name"], t["type_label"],
+                                             r["period"], vocab),
+                "questions": [],
+            })
+    questions: list[dict] = []
+    qf = SEARCH_DIR / "question-index.json"
+    if qf.exists():
+        try:
+            data = json.loads(qf.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            data = {}
+        for item in data.get("questions", []):
+            q = (item.get("q") or "").strip()
+            path = item.get("path") or ""
+            if not q or not path:
+                continue
+            questions.append({"q": q, "path": path, "anchor": item.get("anchor", "")})
+            for rep in reports:
+                if rep["path"] == path:
+                    rep["questions"].append(q)
+                    break
+    return {"version": 1, "reports": reports, "questions": questions}
+
+
+# ──────────────────────────────────────────────
 # index.html 渲染
 # ──────────────────────────────────────────────
 
@@ -237,6 +357,15 @@ code{background:var(--gray-l);padding:1px 5px;border-radius:4px;font-size:12px}
 .chip:hover{border-color:var(--blue)}
 .chip.on{background:var(--navy);border-color:var(--navy);color:#fff}
 .filterbar .count{font-size:12px;color:var(--ink3);margin-left:auto;white-space:nowrap}
+.search-results{max-width:1160px;margin:0 auto;padding:0 24px}
+.search-results[hidden]{display:none}
+.sr-head{font-size:12.5px;color:var(--ink3);padding:10px 4px 4px}
+.sr-item{display:flex;gap:10px;align-items:baseline;padding:7px 10px;border:1px solid var(--line);
+  border-radius:8px;margin-bottom:6px;background:#fff;flex-wrap:wrap}
+.sr-item:hover{border-color:var(--blue);text-decoration:none}
+.sr-period{font-size:12px;color:var(--ink3);white-space:nowrap}
+.sr-title{font-size:13.5px;color:var(--navy);font-weight:600}
+.sr-topic{font-size:12px;color:var(--ink2);margin-left:auto}
 
 /* ── 主题卡片 ── */
 .main{max-width:1240px;margin:0 auto;padding:8px 24px 50px}
@@ -454,6 +583,49 @@ HUB_JS = """
     noResult.style.display = visible ? 'none' : '';
     if (countEl) countEl.textContent = '共 ' + visible + ' 个主题';
   }
+
+  /* ---------- 报告级命中（关键词 / 问题索引） ---------- */
+  var resultsBox = document.getElementById('search-results');
+  var SINDEX = window.SEARCH_INDEX || { reports: [], questions: [] };
+  function _esc(s) {
+    return String(s).replace(/[&<>"]/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
+    });
+  }
+  function renderReportHits() {
+    if (!resultsBox) return;
+    var q = state.q.trim().toLowerCase();
+    if (q.length < 2) {
+      resultsBox.hidden = true;
+      resultsBox.innerHTML = '';
+      return;
+    }
+    var hits = [];
+    var reps = SINDEX.reports || [];
+    for (var i = 0; i < reps.length; i++) {
+      var r = reps[i];
+      var hay = (r.topic_name + ' ' + r.title + ' ' + r.period + ' '
+        + (r.keywords || []).join(' ') + ' ' + (r.questions || []).join(' ')).toLowerCase();
+      if (hay.indexOf(q) >= 0) hits.push(r);
+      if (hits.length >= 20) break;
+    }
+    if (!hits.length) {
+      resultsBox.hidden = true;
+      resultsBox.innerHTML = '';
+      return;
+    }
+    var html = '<div class="sr-head">报告命中 ' + hits.length + ' 份</div>';
+    for (var j = 0; j < hits.length; j++) {
+      var h = hits[j];
+      html += '<a class="sr-item" href="' + _esc(h.path) + '" target="_blank" rel="noopener">'
+        + '<span class="sr-period">' + _esc(h.period) + '</span>'
+        + '<span class="sr-title">' + _esc(h.title) + '</span>'
+        + '<span class="sr-topic">' + _esc(h.topic_name) + '</span></a>';
+    }
+    resultsBox.innerHTML = html;
+    resultsBox.hidden = false;
+  }
+
   if (qInput) {
     var timer;
     qInput.addEventListener('input', function () {
@@ -461,6 +633,7 @@ HUB_JS = """
       timer = setTimeout(function () {
         state.q = qInput.value.trim().toLowerCase();
         applyFilter();
+        renderReportHits();
       }, 120);
     });
   }
@@ -595,15 +768,20 @@ def render_hub(topics: list[dict]) -> str:
     details = "".join(render_topic_detail(t) for t in topics)
     sidebar = render_sidebar(topics)
     chips = render_type_chips(topics)
+    search_index = collect_search_index(topics)
+    search_json = json.dumps(search_index, ensure_ascii=False).replace("<", "\\u003c")
     return f'''<!DOCTYPE html>
 <html lang="zh-CN" class="no-js">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="日本生活与工作知识库报告索引：特定技能·签证·就业·生活·退出·家庭·防灾·中国侧衔接。">
+<meta name="keywords" content="日本,在留,特定技能,签证,司机,生活,退出,家族,防灾,中介合规,搜索">
 <title>jp-life-work · 报告索引</title>
 <style>{HUB_CSS}</style>
 <script>document.documentElement.classList.remove('no-js');document.documentElement.classList.add('js');</script>
 <script>var RECENT_MONTHS = {RECENT_MONTHS};</script>
+<script>var SEARCH_INDEX = {search_json};</script>
 </head>
 <body>
 <div id="view-overview">
@@ -616,10 +794,12 @@ def render_hub(topics: list[dict]) -> str:
   </section>
 
   <div class="filterbar">
-    <input id="hub-search" type="search" placeholder="搜索主题 / 报告标题…">
+    <input id="hub-search" type="search" placeholder="搜索主题 / 报告 / 关键词…">
     <div class="chips" id="chips-type">{chips}</div>
     <span class="count" id="hub-count"></span>
   </div>
+
+  <div class="search-results" id="search-results" hidden></div>
 
   <main class="main">
     <div class="cards">{cards}</div>
@@ -652,7 +832,11 @@ def render_hub(topics: list[dict]) -> str:
 
 def build_outputs() -> dict[str, str]:
     topics = collect_topics()
-    return {"index.html": render_hub(topics)}
+    search_index = collect_search_index(topics)
+    return {
+        "index.html": render_hub(topics),
+        "search-index.json": json.dumps(search_index, ensure_ascii=False, indent=2) + "\n",
+    }
 
 
 # 历史版本页脚曾含「最近生成」时间戳（分钟级心跳，随定时维护提交）；

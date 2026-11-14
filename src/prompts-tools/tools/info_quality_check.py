@@ -1,0 +1,884 @@
+"""信息质量全量评估与闭环修复（InfoQuality-Guard 的程序化实现）。
+
+对应《信息质量评估提示词体系.md》的可执行子集：
+- 阶段 0 扫描建档：iter_business_dirs() 遍历全部主题目录；
+- 阶段 1 四维度评估：完整性 / 逻辑一致性 / 信息准确性 / 内容关联性，全部量化；
+- 阶段 2 混乱识别分类：C-01~C-12 中可程序化判定的场景（其余需语义判断，见报告说明）；
+- 阶段 3 自动修复：S-02 去重 / S-05 缺失补全（占位）/ S-08 引用修复；
+- 阶段 4 修复验证：修复后复评 + 回归校验；
+- 阶段 5 报告交付：评估台账 / 修复台账 / 验证报告 + 机器可读 JSON。
+
+退出码约定（与仓库既有工具一致）：
+- 0 = 通过（无 P0/P1 遗留）
+- 1 = 存在 P0/P1 遗留（需人工介入或下轮修复）
+- 2 = 仅存在 P2 遗留（放行）
+
+用法：
+    python src/prompts-tools/tools/info_quality_check.py           # 全量评估（只报告）
+    python src/prompts-tools/tools/info_quality_check.py --apply   # 评估 + 自动修复 + 复评
+    python src/prompts-tools/tools/info_quality_check.py --check   # 仅检查（不写报告文件）
+"""
+from __future__ import annotations
+
+import argparse
+import json
+import re
+import sys
+from dataclasses import asdict, dataclass, field
+from datetime import date
+from difflib import SequenceMatcher
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+
+from _common import ROOT, detect_month_report, iter_business_dirs, topic_slug  # noqa: E402
+
+# ──────────────────────────────────────────────
+# 内置默认参数（与提示词体系模块九一致，无需人工配置）
+# ──────────────────────────────────────────────
+THRESH_REQUIRED_COVERAGE = 0.95      # 必需要素覆盖率门槛
+THRESH_DUP_RATIO = 0.10              # 重复冗余率门槛
+THRESH_SOURCE_COVERAGE = 0.20        # 事实段落来源覆盖率门槛（低于此值判 C-07 提示）
+THRESH_CITE_VALID = 1.00             # 交叉引用有效率门槛
+STALE_MONTHS = 12                    # 报告时效窗口（月）
+DUP_MIN_CHARS = 40                   # 重复段落判定最小长度
+SIMILARITY_DUP = 0.80                # 高相似判定阈值（跨文档）
+
+AUDIT_DIR = ROOT / "src" / "report-audits" / "info-quality"
+
+# 主题级必需要素（文件/目录）
+REQUIRED_ITEMS = (
+    ("prompts/business-config.md", "业务配置（单一事实源）", "P0"),
+    ("data/（指标登记册）", "指标登记册", "P0"),
+    ("reports/（月度报告 md）", "月度报告", "P1"),
+    ("operations-guide.md", "操作指南", "P1"),
+)
+
+# 报告级必需要素
+REPORT_REQUIRED_MARKERS = (
+    ("免责声明", ("免责", "不构成法律意见"), "P1"),
+    ("来源标注", None, "P1"),   # 以覆盖率方式判定，见 check_report
+    ("执行摘要/结论", ("摘要", "结论"), "P1"),
+)
+
+H2_RE = re.compile(r"^(#{1,6})\s+(.*)$", re.MULTILINE)
+CN_NUM_RE = re.compile(r"^([一二三四五六七八九十]+)[、.]")
+MD_LINK_RE = re.compile(r"\[[^\]]*\]\(([^)]+)\)")
+TABLE_ROW_RE = re.compile(r"^\s*\|.*\|\s*$", re.MULTILINE)
+REGISTRY_ROW_RE = re.compile(r"^\|\s*\d+\s*\|(.+)\|\s*$", re.MULTILINE)
+
+P_LEVELS = {"P0": 0, "P1": 1, "P2": 2}
+
+
+@dataclass
+class Finding:
+    """一条混乱问题记录。"""
+
+    code: str          # C-01~C-12
+    level: str         # P0/P1/P2
+    topic: str         # 主题目录名
+    path: str          # 相对仓库根的路径
+    location: str      # 文档内位置描述
+    detail: str        # 判定依据描述
+    spec: str = ""     # 对应修复规范（S-xx）
+    status: str = "open"   # open / fixed / unfixable
+
+
+@dataclass
+class Repair:
+    """一条修复记录。"""
+
+    finding_code: str
+    topic: str
+    path: str
+    spec: str
+    action: str
+    before: str
+    after: str
+    result: str = "applied"   # applied / skipped
+
+
+@dataclass
+class Metrics:
+    """四维度量化指标（全项目聚合）。"""
+
+    topics_total: int = 0
+    topics_complete: int = 0
+    required_coverage: float = 0.0
+    missing_items: int = 0
+    contradictions: int = 0        # C-01/C-02/C-10
+    gaps: int = 0                  # C-04
+    source_coverage: float = 0.0
+    stale_reports: int = 0
+    dup_ratio: float = 0.0
+    attribution_errors: int = 0
+    cite_valid_ratio: float = 1.0
+    broken_links: int = 0
+    findings_by_level: dict = field(default_factory=dict)
+
+
+# ──────────────────────────────────────────────
+# 工具函数
+# ──────────────────────────────────────────────
+
+def _read(path: Path) -> str:
+    return path.read_text(encoding="utf-8", errors="replace")
+
+
+def _norm(text: str) -> str:
+    """段落归一化：去空白、去 Markdown 修饰符，用于重复判定。"""
+    t = re.sub(r"`*", "", text)
+    t = re.sub(r"[ \t\u3000]+", "", t)
+    return t.strip()
+
+
+def _paragraphs(text: str) -> list[str]:
+    """按空行切分段落块（保留表格/代码块整体）。"""
+    blocks = re.split(r"\n\s*\n", text)
+    return [b.strip() for b in blocks if b.strip()]
+
+
+def _substantive(block: str) -> bool:
+    """是否为实质性段落（排除表格、代码块、纯标题、引用块）。"""
+    if block.startswith("|") or block.startswith("```"):
+        return False
+    if H2_RE.match(block):
+        return False
+    return len(_norm(block)) >= DUP_MIN_CHARS
+
+
+def _rel(path: Path) -> str:
+    try:
+        return str(path.relative_to(ROOT)).replace("\\", "/")
+    except ValueError:
+        return str(path)
+
+
+# ──────────────────────────────────────────────
+# 阶段 0：扫描建档
+# ──────────────────────────────────────────────
+
+def scan_topics() -> list[dict]:
+    """遍历全部业务线主题目录，建立内容清单。"""
+    units = []
+    for b in iter_business_dirs():
+        p = b.path
+        mds = sorted(x for x in p.rglob("*.md") if x.is_file())
+        reports = sorted((p / "reports").glob("*.md")) if (p / "reports").is_dir() else []
+        units.append(
+            {
+                "topic": b.rel,
+                "slug": topic_slug(b.region),
+                "path": p,
+                "mds": mds,
+                "reports": reports,
+                "has_guide": (p / "operations-guide.md").exists(),
+                "has_config": (p / "prompts" / "business-config.md").exists(),
+                "registry": next(
+                    (x for x in sorted((p / "data").glob("*.md")) if "registry" in x.name),
+                    None,
+                ) if (p / "data").is_dir() else None,
+            }
+        )
+    return units
+
+
+# ──────────────────────────────────────────────
+# 阶段 1：四维度评估
+# ──────────────────────────────────────────────
+
+def check_topic_completeness(u: dict, findings: list[Finding]) -> tuple[int, int]:
+    """维度一：主题完整性。返回 (已具备要素数, 应备要素数)。"""
+    present = 0
+    total = len(REQUIRED_ITEMS)
+    if u["has_config"]:
+        present += 1
+    else:
+        findings.append(Finding("C-06", "P0", u["topic"], f"{u['topic']}/prompts/business-config.md",
+                                "文件缺失", "缺少业务配置（单一事实源）", "S-05"))
+    if u["registry"] is not None:
+        present += 1
+    else:
+        findings.append(Finding("C-06", "P0", u["topic"], f"{u['topic']}/data/",
+                                "目录/文件缺失", "缺少指标登记册 data/*_indicator_registry.md", "S-05"))
+    if u["reports"]:
+        present += 1
+    else:
+        findings.append(Finding("C-06", "P1", u["topic"], f"{u['topic']}/reports/",
+                                "目录/文件缺失", "缺少月度报告（reports/*.md）", "S-05"))
+    if u["has_guide"]:
+        present += 1
+    else:
+        findings.append(Finding("C-06", "P1", u["topic"], f"{u['topic']}/operations-guide.md",
+                                "文件缺失", "缺少操作指南 operations-guide.md", "S-05"))
+    return present, total
+
+
+def check_report(u: dict, rp: Path, findings: list[Finding]) -> dict:
+    """单份报告 md 的检查：归属、时效、结构、来源覆盖、断层、重复标题。"""
+    text = _read(rp)
+    rel = _rel(rp)
+    stats = {"source_cov": 1.0, "subs": 0, "sourced": 0}
+
+    # C-05 内容归属错误：报告 slug 与目录 slug 不一致
+    det = detect_month_report(rp.name)
+    if det and det[1] != u["slug"]:
+        findings.append(Finding("C-05", "P1", u["topic"], rel, "文件命名",
+                                f"报告 slug「{det[1]}」与目录 slug「{u['slug']}」不一致", "S-04"))
+
+    # C-06 报告结构要素
+    for label, markers, level in REPORT_REQUIRED_MARKERS:
+        if markers is None:
+            continue
+        if not any(m in text for m in markers):
+            findings.append(Finding("C-06", level, u["topic"], rel, "结构要素缺失",
+                                    f"缺少「{label}」要素", "S-05"))
+
+    # C-06 md/html 配对
+    if not rp.with_suffix(".html").exists():
+        findings.append(Finding("C-06", "P2", u["topic"], rel, "文件配对",
+                                "缺少对应 HTML 交付物（.md2html 同步）", "S-05"))
+
+    # 维度三：来源标注——结构性（必须有来源章节）+ 覆盖性（事实段落含来源比例）
+    heads = [t for _, t in H2_RE.findall(text)]
+    if not any(("来源" in h or "参考" in h or "出处" in h) for h in heads):
+        findings.append(Finding("C-07", "P1", u["topic"], rel, "结构要素缺失",
+                                "缺少「来源 / 参考来源」章节", "S-06"))
+    subs_blocks = [b for b in _paragraphs(text) if _substantive(b)]
+    fact_blocks = [b for b in subs_blocks if re.search(r"\d", b)]
+    sourced = sum(1 for b in fact_blocks if ("http" in b or "来源" in b))
+    stats["subs"] = len(fact_blocks)
+    stats["sourced"] = sourced
+    stats["source_cov"] = (sourced / len(fact_blocks)) if fact_blocks else 1.0
+    if fact_blocks and stats["source_cov"] < THRESH_SOURCE_COVERAGE:
+        findings.append(Finding("C-07", "P2", u["topic"], rel, "事实段落来源覆盖不足",
+                                f"含数字事实段落来源覆盖率 {stats['source_cov']:.0%} < {THRESH_SOURCE_COVERAGE:.0%}",
+                                "S-06"))
+
+    # C-08 时效：报告月份超出窗口且无更新标记
+    if det:
+        y, m = int(det[0][:4]), int(det[0][5:7])
+        age = (date.today().year - y) * 12 + (date.today().month - m)
+        if age > STALE_MONTHS and "更新" not in text:
+            findings.append(Finding("C-08", "P2", u["topic"], rel, "时效",
+                                    f"报告期间 {det[0]} 已超出 {STALE_MONTHS} 个月窗口且未见更新标记", "S-07"))
+
+    # C-04 逻辑断层：h2 中文序号跳号
+    h2s = H2_RE.findall(text)
+    nums = []
+    for _, title in h2s:
+        m = CN_NUM_RE.match(title.strip())
+        if m:
+            nums.append(m.group(1))
+    order = ["一", "二", "三", "四", "五", "六", "七", "八", "九", "十"]
+    seq = [order.index(n) for n in nums if n in order]
+    for a, b in zip(seq, seq[1:]):
+        if b - a > 1:
+            findings.append(Finding("C-04", "P2", u["topic"], rel, "章节序号",
+                                    f"h2 中文序号由「{order[a]}」跳至「{order[b]}」，存在逻辑断层嫌疑", "S-03"))
+            break
+
+    # C-02 同文档重复标题（表述矛盾/结构冗余嫌疑）
+    seen: dict[str, int] = {}
+    for _, title in h2s:
+        key = _norm(title)
+        if key in seen:
+            findings.append(Finding("C-02", "P2", u["topic"], rel, "重复标题",
+                                    f"标题「{title.strip()}」在文档内出现 {seen[key] + 1} 次", "S-01"))
+            seen[key] += 1
+        else:
+            seen[key] = 1
+    return stats
+
+
+def check_cross_topic(units: list[dict], findings: list[Finding]) -> dict:
+    """维度二/四的跨主题检查：重复段落、失效引用、登记册口径冲突。"""
+    # ── 重复段落（同文档内 + 跨文档）──
+    para_index: dict[str, list[tuple[str, str]]] = {}   # norm -> [(topic, rel)]
+    total_chars = 0
+    for u in units:
+        for md in u["mds"]:
+            text = _read(md)
+            for b in _paragraphs(text):
+                if not _substantive(b):
+                    continue
+                n = _norm(b)
+                if len(n) < DUP_MIN_CHARS:
+                    continue
+                total_chars += len(n)
+                para_index.setdefault(n, []).append((u["topic"], _rel(md)))
+    dup_extra_chars = 0
+    for n, locs in para_index.items():
+        if len(locs) < 2:
+            continue
+        topics = {t for t, _ in locs}
+        # 同文档内重复：逐文档计数
+        per_file: dict[str, int] = {}
+        for _, rel in locs:
+            per_file[rel] = per_file.get(rel, 0) + 1
+        for rel, cnt in per_file.items():
+            if cnt > 1:
+                dup_extra_chars += len(n) * (cnt - 1)
+                topic = next(t for t, r in locs if r == rel)
+                findings.append(Finding(
+                    "C-03", "P1", topic, rel, "段落重复",
+                    f"同一实质段落在本文件内重复 {cnt} 次（约 {len(n)} 字）", "S-02"))
+        # 跨文档重复：仅提示，不自动删（不同文档可合法复用模板句）
+        if len(topics) > 1 and len(n) >= 120:
+            findings.append(Finding(
+                "C-03", "P2", sorted(topics)[0], locs[0][1], "跨文档重复",
+                f"约 {len(n)} 字的段落同时出现在 {len(topics)} 个主题（{', '.join(sorted(topics))}），"
+                "疑似模板冗余，建议确认是否需保留", "S-02"))
+            dup_extra_chars += len(n) * (len(locs) - len(per_file))
+
+    # ── 失效引用 ──
+    total_links = 0
+    broken_links = 0
+    for u in units:
+        for md in u["mds"]:
+            text = _read(md)
+            for target in MD_LINK_RE.findall(text):
+                if target.startswith(("http://", "https://", "#", "mailto:")):
+                    continue
+                # 模板占位（{{...}} / <slug>）与全角括号收尾不是真实链接，跳过
+                tok = target.split()[0] if target.split() else ""
+                raw = re.split(r"[）)]", tok)[0].strip()
+                if not raw or "{{" in raw or "<" in raw:
+                    continue
+                path_part = raw.split("#")[0]
+                if not path_part:
+                    continue
+                total_links += 1
+                resolved = (md.parent / path_part).resolve()
+                if not resolved.exists():
+                    broken_links += 1
+                    findings.append(Finding(
+                        "C-09", "P2", u["topic"], _rel(md), "交叉引用",
+                        f"引用目标不存在：{raw}", "S-08"))
+    cite_valid = (1 - broken_links / total_links) if total_links else 1.0
+
+    # ── 登记册口径冲突（C-10）──
+    reg_defs: dict[str, dict[str, set[str]]] = {}
+    for u in units:
+        if u["registry"] is None:
+            continue
+        text = _read(u["registry"])
+        for row in REGISTRY_ROW_RE.findall(text):
+            cells = [c.strip() for c in row.split("|")]
+            if len(cells) < 2:
+                continue
+            name, caliber = cells[0], cells[1]
+            reg_defs.setdefault(name, {}).setdefault(u["topic"], set()).add(caliber)
+    for name, per_topic in reg_defs.items():
+        if len(per_topic) < 2:
+            continue
+        calibers = set().union(*per_topic.values())
+        if len(calibers) > 1:
+            findings.append(Finding(
+                "C-10", "P2", "|".join(sorted(per_topic)), "data/（登记册）", "口径不一致",
+                f"指标「{name}」在 {len(per_topic)} 个主题登记册中口径表述不一致", "S-09"))
+
+    dup_ratio = (dup_extra_chars / total_chars) if total_chars else 0.0
+    return {"dup_ratio": dup_ratio, "cite_valid": cite_valid, "total_links": total_links,
+            "broken_links": broken_links}
+
+
+def evaluate(units: list[dict]) -> tuple[list[Finding], Metrics]:
+    """阶段 1+2：执行全部检查，返回问题清单与聚合指标。"""
+    findings: list[Finding] = []
+    m = Metrics()
+    m.topics_total = len(units)
+
+    present_sum = 0
+    total_sum = 0
+    subs_all = 0
+    sourced_all = 0
+    for u in units:
+        p, t = check_topic_completeness(u, findings)
+        present_sum += p
+        total_sum += t
+        if p == t:
+            m.topics_complete += 1
+        for rp in u["reports"]:
+            st = check_report(u, rp, findings)
+            subs_all += st["subs"]
+            sourced_all += st["sourced"]
+
+    cross = check_cross_topic(units, findings)
+
+    m.required_coverage = present_sum / total_sum if total_sum else 1.0
+    m.missing_items = total_sum - present_sum
+    m.contradictions = sum(1 for f in findings if f.code in ("C-01", "C-02", "C-10"))
+    m.gaps = sum(1 for f in findings if f.code == "C-04")
+    m.source_coverage = sourced_all / subs_all if subs_all else 1.0
+    m.stale_reports = sum(1 for f in findings if f.code == "C-08")
+    m.dup_ratio = cross["dup_ratio"]
+    m.attribution_errors = sum(1 for f in findings if f.code == "C-05")
+    m.cite_valid_ratio = cross["cite_valid"]
+    m.broken_links = cross["broken_links"]
+    for lv in ("P0", "P1", "P2"):
+        m.findings_by_level[lv] = sum(1 for f in findings if f.level == lv and f.status == "open")
+    return findings, m
+
+
+# ──────────────────────────────────────────────
+# 阶段 3：自动修复
+# ──────────────────────────────────────────────
+
+PLACEHOLDER_CONFIG = """# {slug} · 业务配置（占位骨架，待补）
+
+> **状态**：本文件由 `info_quality_check.py` 依据《信息质量评估提示词体系》S-05 自动补建，内容待补。
+> **用途**：本主题的单一事实源（主题定位 / 适用场景 / 核心指标 / 更新规则 / 交付规则）。
+
+## 一、主题定位
+
+（待补）
+
+## 二、运行变量
+
+- 主题：{slug}
+- 登记册：data/{slug}_indicator_registry.md
+
+## 三、更新与交付规则
+
+（待补）
+"""
+
+PLACEHOLDER_REGISTRY = """# {slug} · 指标登记册（占位骨架，待补）
+
+> **状态**：本文件由 `info_quality_check.py` 依据《信息质量评估提示词体系》S-05 自动补建，内容待补。
+
+## 核心指标
+
+| # | 指标 | 口径 | 研究阶段 | 最新值 / 规则 | 来源机构 | 来源 URL | 版本日期 | 核验日期 | 核验状态 | 关联章节 | 更新时间 |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+"""
+
+PLACEHOLDER_GUIDE = """# {slug} · 操作指南（占位骨架，待补）
+
+> **状态**：本文件由 `info_quality_check.py` 依据《信息质量评估提示词体系》S-05 自动补建，内容待补。
+
+## 适用范围
+
+（待补）
+
+## 操作步骤
+
+（待补）
+"""
+
+# S-05 标准化免责声明（与项目既有口径一致：17/18/19/20 报告用语）
+STANDARD_DISCLAIMER = (
+    "> **免责声明**：本报告为信息整理与条件化建议，不构成法律意见或税务意见；"
+    "重大决策请咨询执业法律 / 税务专业人士。"
+)
+
+
+def _insert_disclaimer(path: Path) -> Repair | None:
+    """S-05：在报告头部（首个块之后）插入标准化免责声明块引用。"""
+    text = _read(path)
+    if "不构成法律意见" in text or "免责声明" in text:
+        return None
+    m = re.search(r"\n\s*\n", text)
+    first = text[: m.start()].strip() if m else text.strip()
+    if m is not None and first.startswith((">", "#")):
+        pos = m.end()
+    else:
+        nl = text.find("\n")
+        pos = nl + 1 if nl != -1 else len(text)
+    new_text = text[:pos] + STANDARD_DISCLAIMER + "\n\n" + text[pos:]
+    path.write_text(new_text, encoding="utf-8")
+    return Repair("C-06", "", _rel(path), "S-05", "插入标准化免责声明（头部块引用）",
+                  "（缺失）", STANDARD_DISCLAIMER)
+
+
+def _dedupe_within_file(path: Path) -> Repair | None:
+    """S-02：删除同文档内重复的实质段落（保留首次出现）。"""
+    text = _read(path)
+    blocks = re.split(r"(\n\s*\n)", text)
+    seen: dict[str, int] = {}
+    out: list[str] = []
+    removed = 0
+    for i, block in enumerate(blocks):
+        n = _norm(block)
+        if _substantive(block):
+            if n in seen:
+                removed += 1
+                continue
+            seen[n] = 1
+        out.append(block)
+    if not removed:
+        return None
+    new_text = "".join(out)
+    if not path.is_absolute():
+        path = ROOT / path
+    path.write_text(new_text, encoding="utf-8")
+    return Repair("C-03", "", _rel(path), "S-02", f"删除同文档内重复段落 {removed} 处",
+                  f"重复段落 ×{removed}", "已保留首次出现并删除后续副本")
+
+
+def _repoint(path: Path, old_target: str, new_target: Path) -> Repair | None:
+    new_rel = os_relpath(new_target, path.parent)
+    text = _read(path)
+    new_text = text.replace(old_target, new_rel)
+    if new_text == text:
+        return None
+    path.write_text(new_text, encoding="utf-8")
+    return Repair("C-09", "", _rel(path), "S-08", f"失效引用重指：{old_target} → {new_rel}",
+                  old_target, new_rel)
+
+
+def _fix_link(path: Path, target: str) -> Repair | None:
+    """S-08：失效的相对 md 链接，按唯一匹配重指。
+
+    两级匹配：① 精确文件名全局唯一；② 归档副本 `<X>-merged-vN.N.md` 回指
+    同主题 `reports/<X>.md`（唯一）。无法唯一确定时返回 None（转人工）。
+    """
+    path_part = target.split("#")[0]
+    name = Path(path_part).name
+    if not name:
+        return None
+    exact = [p for p in ROOT.rglob(name) if p.is_file() and ".git" not in p.parts]
+    if len(exact) == 1:
+        return _repoint(path, target, exact[0])
+    m = re.match(r"^(?P<base>.+?)(?:-merged-v[\d.]+)?\.md$", name)
+    if not m:
+        return None
+    base = m.group("base")
+    cands = [p for p in ROOT.rglob("*.md")
+             if p.is_file() and ".git" not in p.parts
+             and "reports" in p.parts and p.stem == base]
+    if len(cands) == 1:
+        return _repoint(path, target, cands[0])
+    return None
+
+
+def os_relpath(target: Path, start: Path) -> str:
+    import os
+    return os.path.relpath(target, start).replace("\\", "/")
+
+
+def repair(findings: list[Finding], units: list[dict]) -> list[Repair]:
+    """按修复规范执行自动修复，返回修复记录。"""
+    repairs: list[Repair] = []
+    by_path: dict[str, dict] = {u["topic"]: u for u in units}
+
+    for f in findings:
+        if f.status != "open":
+            continue
+        topic_dir = ROOT / f.topic
+        if f.code == "C-06":
+            if "免责声明" in f.detail:
+                rp = ROOT / f.path
+                if rp.exists():
+                    rep = _insert_disclaimer(rp)
+                    if rep:
+                        rep.topic = f.topic
+                        repairs.append(rep)
+                        f.status = "fixed"
+                    else:
+                        f.status = "unfixable"
+                continue
+            if "business-config.md" in f.path and not (topic_dir / "prompts").exists():
+                (topic_dir / "prompts").mkdir(parents=True, exist_ok=True)
+            if f.path.endswith("business-config.md") and not (topic_dir / "prompts" / "business-config.md").exists():
+                target = topic_dir / "prompts" / "business-config.md"
+                target.write_text(PLACEHOLDER_CONFIG.format(slug=topic_slug_of(f.topic)), encoding="utf-8")
+                repairs.append(Repair(f.code, f.topic, f.path, "S-05", "补建业务配置占位骨架",
+                                      "（缺失）", target.read_text(encoding="utf-8")[:80] + "…"))
+                f.status = "fixed"
+            elif f.path.endswith("data/") or "registry" in f.detail:
+                target = topic_dir / "data" / f"{topic_slug_of(f.topic)}_indicator_registry.md"
+                if not target.exists():
+                    target.parent.mkdir(parents=True, exist_ok=True)
+                    target.write_text(PLACEHOLDER_REGISTRY.format(slug=topic_slug_of(f.topic)), encoding="utf-8")
+                    repairs.append(Repair(f.code, f.topic, f.path, "S-05", "补建指标登记册占位骨架",
+                                          "（缺失）", target.read_text(encoding="utf-8")[:80] + "…"))
+                    f.status = "fixed"
+            elif f.path.endswith("reports/"):
+                # 报告缺失不自动造内容，仅标注待补
+                f.status = "unfixable"
+                f.detail += "（报告正文需人工/研究生成，不自动补建）"
+            elif f.path.endswith("operations-guide.md"):
+                target = topic_dir / "operations-guide.md"
+                if not target.exists():
+                    target.write_text(PLACEHOLDER_GUIDE.format(slug=topic_slug_of(f.topic)), encoding="utf-8")
+                    repairs.append(Repair(f.code, f.topic, f.path, "S-05", "补建操作指南占位骨架",
+                                          "（缺失）", target.read_text(encoding="utf-8")[:80] + "…"))
+                    f.status = "fixed"
+            elif "HTML" in f.detail:
+                f.status = "unfixable"
+                f.detail += "（由 md2html.py 同步生成，不在此自动补建）"
+            else:
+                f.status = "unfixable"
+
+        elif f.code == "C-03":
+            # 仅自动修复同文档内重复（跨文档重复只报告）
+            if "跨文档" in f.detail:
+                continue
+            rp = ROOT / f.path
+            if not rp.exists():
+                continue
+            rep = _dedupe_within_file(rp)
+            if rep:
+                rep.finding_code = "C-03"
+                rep.topic = f.topic
+                repairs.append(rep)
+                f.status = "fixed"
+
+        elif f.code == "C-09":
+            rp = ROOT / f.path
+            target = f.detail.split("：", 1)[-1]
+            rep = _fix_link(rp, target) if rp.exists() else None
+            if rep:
+                rep.finding_code = "C-09"
+                rep.topic = f.topic
+                repairs.append(rep)
+                f.status = "fixed"
+            else:
+                f.status = "unfixable"
+
+        else:
+            # C-01/C-02/C-04/C-05/C-07/C-08/C-10：需语义判断或外部信息，不自动修复
+            f.status = "unfixable"
+
+    return repairs
+
+
+def topic_slug_of(topic_rel: str) -> str:
+    top = topic_rel.split("/")[0]
+    return topic_slug(top)
+
+
+# ──────────────────────────────────────────────
+# 阶段 4：修复验证
+# ──────────────────────────────────────────────
+
+def verify(before: Metrics, before_findings: list[Finding], after_findings: list[Finding],
+           after: Metrics, repairs: list[Repair]) -> dict:
+    """复评 + 回归校验，返回验证结论。"""
+    new_issues = [f for f in after_findings if f.status == "open"]
+    # 回归 = 修复后新出现的失效引用（修复前不存在同位置同目标的断链）
+    before_broken = {(f.path, f.detail) for f in before_findings
+                     if f.code == "C-09" and f.status == "open"}
+    after_broken = {(f.path, f.detail) for f in after_findings
+                    if f.code == "C-09" and f.status == "open"}
+    regressed = [f for f in after_findings
+                 if f.code == "C-09" and f.status == "open"
+                 and (f.path, f.detail) not in before_broken]
+    before_open = sum(before.findings_by_level.values())
+    after_open = sum(after.findings_by_level.values())
+    p0p1_contra = sum(1 for f in after_findings
+                      if f.code in ("C-01", "C-02", "C-10")
+                      and f.level in ("P0", "P1") and f.status == "open")
+    checks = {
+        "required_coverage_ok": after.required_coverage >= THRESH_REQUIRED_COVERAGE,
+        "dup_ratio_ok": after.dup_ratio <= THRESH_DUP_RATIO,
+        "cite_valid_not_regressed": after.broken_links <= before.broken_links,
+        "p0p1_contradictions_zero": p0p1_contra == 0,
+        "no_new_open_findings": after_open <= before_open,
+        "no_regression": len(regressed) == 0,
+        "repairs_verified": all(
+            (ROOT / r.path).exists() for r in repairs if r.result == "applied"
+        ),
+    }
+    return {
+        "checks": checks,
+        "passed": all(checks.values()),
+        "before": asdict(before),
+        "after": asdict(after),
+        "open_after": [asdict(f) for f in new_issues],
+    }
+
+
+# ──────────────────────────────────────────────
+# 阶段 5：报告交付
+# ──────────────────────────────────────────────
+
+def _md_table(rows: list[list[str]]) -> str:
+    out = ["| " + " | ".join(rows[0]) + " |", "|" + "---|" * len(rows[0])]
+    for r in rows[1:]:
+        out.append("| " + " | ".join(r) + " |")
+    return "\n".join(out)
+
+
+def write_reports(findings: list[Finding], repairs: list[Repair],
+                  before: Metrics, after: Metrics, ver: dict, run_date: str) -> list[Path]:
+    AUDIT_DIR.mkdir(parents=True, exist_ok=True)
+    written = []
+
+    # 评估台账
+    rows = [["编号", "级别", "主题", "位置", "位置描述", "判定依据", "修复规范", "状态"]]
+    for f in sorted(findings, key=lambda x: (P_LEVELS[x.level], x.code, x.path)):
+        rows.append([f.code, f.level, f.topic, f.path, f.location, f.detail,
+                     f.spec or "—", {"open": "待处理", "fixed": "已修复", "unfixable": "需人工/外部"}[f.status]])
+    assessment = "\n".join([
+        "# 信息质量评估台账",
+        "",
+        f"> 运行日期：{run_date}　|　评估范围：全项目 {before.topics_total} 个主题",
+        f"> 数据来源：info_quality_check.py 程序化判定（《信息质量评估提示词体系》可执行子集）",
+        "",
+        "## 四维度量化指标（修复前）",
+        "",
+        _md_table([["维度", "指标", "实测值", "门槛", "判定"],
+                   ["完整性", "必需要素覆盖率", f"{before.required_coverage:.1%}",
+                    f"≥ {THRESH_REQUIRED_COVERAGE:.0%}", "达标" if before.required_coverage >= THRESH_REQUIRED_COVERAGE else "不达标"],
+                   ["完整性", "完整主题数", f"{before.topics_complete}/{before.topics_total}", "—", "—"],
+                   ["一致性", "矛盾/口径问题数", str(before.contradictions), "= 0", "达标" if before.contradictions == 0 else "不达标"],
+                   ["一致性", "逻辑断层数", str(before.gaps), "—", "—"],
+                   ["准确性", "来源标注覆盖率", f"{before.source_coverage:.1%}", f"≥ {THRESH_SOURCE_COVERAGE:.0%}", "达标" if before.source_coverage >= THRESH_SOURCE_COVERAGE else "不达标"],
+                   ["准确性", "过期未标注报告数", str(before.stale_reports), "= 0", "达标" if before.stale_reports == 0 else "不达标"],
+                   ["关联性", "重复冗余率", f"{before.dup_ratio:.1%}", f"≤ {THRESH_DUP_RATIO:.0%}", "达标" if before.dup_ratio <= THRESH_DUP_RATIO else "不达标"],
+                   ["关联性", "归属错误数", str(before.attribution_errors), "= 0", "达标" if before.attribution_errors == 0 else "不达标"],
+                   ["关联性", "交叉引用有效率", f"{before.cite_valid_ratio:.1%}", "= 100%", "达标" if before.cite_valid_ratio >= THRESH_CITE_VALID else "不达标"],
+                   ["问题分布", "P0 / P1 / P2", f"{before.findings_by_level['P0']} / {before.findings_by_level['P1']} / {before.findings_by_level['P2']}", "—", "—"],
+                   ]),
+        "",
+        "## 问题明细",
+        "",
+        _md_table(rows),
+        "",
+    ])
+    p = AUDIT_DIR / "assessment-ledger.md"
+    p.write_text(assessment, encoding="utf-8")
+    written.append(p)
+
+    # 修复台账
+    rows = [["问题编号", "主题", "位置", "修复规范", "修复动作", "修复前", "修复后", "结果"]]
+    for r in repairs:
+        rows.append([r.finding_code, r.topic, r.path, r.spec, r.action,
+                     r.before.replace("\n", " ")[:60], r.after.replace("\n", " ")[:60], r.result])
+    repair_md = "\n".join([
+        "# 信息质量修复台账",
+        "",
+        f"> 运行日期：{run_date}　|　自动修复 {len(repairs)} 条",
+        "",
+        _md_table(rows) if len(rows) > 1 else "（本轮无自动修复项）",
+        "",
+    ])
+    p = AUDIT_DIR / "repair-ledger.md"
+    p.write_text(repair_md, encoding="utf-8")
+    written.append(p)
+
+    # 验证报告
+    chk_rows = [[k, "通过" if v else "未通过"] for k, v in ver["checks"].items()]
+    report_md = "\n".join([
+        "# 信息质量验证报告",
+        "",
+        f"> 运行日期：{run_date}",
+        "",
+        "## 修复后指标（复评）",
+        "",
+        _md_table([["指标", "修复前", "修复后", "门槛"],
+                   ["必需要素覆盖率", f"{before.required_coverage:.1%}", f"{after.required_coverage:.1%}", f"≥ {THRESH_REQUIRED_COVERAGE:.0%}"],
+                   ["重复冗余率", f"{before.dup_ratio:.1%}", f"{after.dup_ratio:.1%}", f"≤ {THRESH_DUP_RATIO:.0%}"],
+                   ["交叉引用有效率", f"{before.cite_valid_ratio:.1%}", f"{after.cite_valid_ratio:.1%}", "= 100%"],
+                   ["矛盾/口径问题数", str(before.contradictions), str(after.contradictions), "= 0"],
+                   ["待处理问题数", str(sum(before.findings_by_level.values())),
+                    str(sum(after.findings_by_level.values())), "—"],
+                   ]),
+        "",
+        "## 校验项",
+        "",
+        _md_table([["校验项", "结果"]] + chk_rows),
+        "",
+        "## 遗留项（需人工/外部介入）",
+        "",
+    ] + [
+        f"- [{f.level}] {f.code} {f.topic}/{f.path}：{f.detail}"
+        for f in sorted(findings, key=lambda x: P_LEVELS[x.level]) if f.status == "unfixable"
+    ] + ["", f"**验证结论：{'全部通过' if ver['passed'] else '存在未通过校验项，见上表'}**", ""])
+    p = AUDIT_DIR / "verification-report.md"
+    p.write_text(report_md, encoding="utf-8")
+    written.append(p)
+
+    # 机器可读 JSON
+    payload = {
+        "run_date": run_date,
+        "topics_total": after.topics_total,
+        "metrics_before": asdict(before),
+        "metrics_after": asdict(after),
+        "findings": [asdict(f) for f in findings],
+        "repairs": [asdict(r) for r in repairs],
+        "verification": ver,
+    }
+    p = AUDIT_DIR / "info-quality.json"
+    p.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+    written.append(p)
+
+    # 累计修复历史（跨运行追加，便于周期审计）
+    if repairs:
+        hist = AUDIT_DIR / "repair-history.md"
+        entry = f"## {run_date}：自动修复 {len(repairs)} 条\n\n" + _md_table(rows) + "\n"
+        if hist.exists():
+            with hist.open("a", encoding="utf-8") as f:
+                f.write(entry)
+        else:
+            hist.write_text("# 信息质量修复历史（累计）\n\n" + entry, encoding="utf-8")
+        written.append(hist)
+    return written
+
+
+# ──────────────────────────────────────────────
+# 主流程
+# ──────────────────────────────────────────────
+
+def run(apply: bool = False, write: bool = True) -> int:
+    run_date = date.today().isoformat()
+    units = scan_topics()
+    if not units:
+        print("[ERROR] 未扫描到任何主题目录")
+        return 1
+
+    findings, before = evaluate(units)
+    repairs: list[Repair] = []
+    after_findings = findings
+    after = before
+
+    if apply:
+        import copy
+        before_findings = copy.deepcopy(findings)
+        repairs = repair(findings, units)
+        # 阶段 4：修复后复评
+        units2 = scan_topics()
+        after_findings, after = evaluate(units2)
+        ver = verify(before, before_findings, after_findings, after, repairs)
+    else:
+        ver = {"checks": {}, "passed": False, "before": asdict(before),
+               "after": asdict(before), "open_after": []}
+
+    # 控制台摘要
+    print(f"信息质量评估：{after.topics_total} 个主题")
+    print(f"  必需要素覆盖率 {after.required_coverage:.1%}（门槛 {THRESH_REQUIRED_COVERAGE:.0%}）")
+    print(f"  来源标注覆盖率 {after.source_coverage:.1%}（门槛 {THRESH_SOURCE_COVERAGE:.0%}）")
+    print(f"  重复冗余率 {after.dup_ratio:.1%}（门槛 {THRESH_DUP_RATIO:.0%}）")
+    print(f"  交叉引用有效率 {after.cite_valid_ratio:.1%}（门槛 100%）")
+    print(f"  问题：P0 {after.findings_by_level['P0']} / P1 {after.findings_by_level['P1']} / P2 {after.findings_by_level['P2']}")
+    if apply:
+        print(f"  自动修复 {len(repairs)} 条；验证{'全部通过' if ver['passed'] else '存在未通过项'}")
+
+    if write:
+        paths = write_reports(findings, repairs, before, after, ver, run_date)
+        print("  报告已写入：" + ", ".join(_rel(p) for p in paths))
+
+    open_p0 = sum(1 for f in after_findings if f.status == "open" and f.level == "P0")
+    open_p1 = sum(1 for f in after_findings if f.status == "open" and f.level == "P1")
+    open_p2 = sum(1 for f in after_findings if f.status == "open" and f.level == "P2")
+    if open_p0 or open_p1:
+        print(f"[ALERT] 存在 P0/P1 遗留 {open_p0 + open_p1} 项，需人工介入")
+        return 1
+    if open_p2:
+        return 2
+    return 0
+
+
+def main() -> int:
+    ap = argparse.ArgumentParser(description="信息质量全量评估与闭环修复")
+    ap.add_argument("--apply", action="store_true", help="评估 + 自动修复 + 复评")
+    ap.add_argument("--check", action="store_true", help="仅检查，不写报告文件")
+    args = ap.parse_args()
+    return run(apply=args.apply, write=not args.check)
+
+
+if __name__ == "__main__":
+    sys.exit(main())

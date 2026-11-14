@@ -1,6 +1,6 @@
 {
   "version": "v2.0",
-  "updated": "2026-11-13",
+  "updated": "2026-11-14",
   "comment": "词汇库 → 业务提示词自动同步配置。bindings[].topic 必须已在 topics.json 注册；source 缺省取 topics.json 的 storage；target.path 相对 src/vocabulary/ 根；insert_before 为区块缺失时的插入锚点（须为目标文件内唯一文本，区块替换时不参与匹配）；format=digest（按分类紧凑速览，缺省）| table（三列表格）；categories_include / tags_include 为可选过滤（空 = 全量）；section_title 为区块内标题（含 ## 前缀）。",
   "auto_trigger": true,
   "watch_interval_sec": 5,
@@ -185,6 +185,84 @@
           "path": "../../16-exit-transition-return/prompts/business-config.md",
           "format": "digest",
           "section_title": "## 词汇速览：退出·转型·回国（词汇库自动同步）",
+          "insert_before": "## 十二、版本记录",
+          "categories_include": [],
+          "tags_include": []
+        }
+      ]
+    },
+    {
+      "topic": "life-operations",
+      "targets": [
+        {
+          "path": "../../14-life-operations/prompts/business-config.md",
+          "format": "digest",
+          "section_title": "## 词汇速览：在日生活实务（词汇库自动同步）",
+          "insert_before": "## 十二、版本记录",
+          "categories_include": [],
+          "tags_include": []
+        }
+      ]
+    },
+    {
+      "topic": "health-wellbeing",
+      "targets": [
+        {
+          "path": "../../15-health-wellbeing/prompts/business-config.md",
+          "format": "digest",
+          "section_title": "## 词汇速览：医疗·健康·心理（词汇库自动同步）",
+          "insert_before": "## 十二、版本记录",
+          "categories_include": [],
+          "tags_include": []
+        }
+      ]
+    },
+    {
+      "topic": "migration-compliance",
+      "targets": [
+        {
+          "path": "../../17-migration-compliance/prompts/business-config.md",
+          "format": "digest",
+          "section_title": "## 词汇速览：劳务输出与中介合规（词汇库自动同步）",
+          "insert_before": "## 十二、版本记录",
+          "categories_include": [],
+          "tags_include": []
+        }
+      ]
+    },
+    {
+      "topic": "family-parenting",
+      "targets": [
+        {
+          "path": "../../18-family-parenting/prompts/business-config.md",
+          "format": "digest",
+          "section_title": "## 词汇速览：家族·育儿·人生事件（词汇库自动同步）",
+          "insert_before": "## 版本记录",
+          "categories_include": [],
+          "tags_include": []
+        }
+      ]
+    },
+    {
+      "topic": "safety-disaster",
+      "targets": [
+        {
+          "path": "../../19-safety-disaster/prompts/business-config.md",
+          "format": "digest",
+          "section_title": "## 词汇速览：防灾·安全·治安（词汇库自动同步）",
+          "insert_before": "## 版本记录",
+          "categories_include": [],
+          "tags_include": []
+        }
+      ]
+    },
+    {
+      "topic": "overseas-china",
+      "targets": [
+        {
+          "path": "../../20-overseas-china/prompts/business-config.md",
+          "format": "digest",
+          "section_title": "## 词汇速览：中国侧行前与回国（词汇库自动同步）",
           "insert_before": "## 十二、版本记录",
           "categories_include": [],
           "tags_include": []

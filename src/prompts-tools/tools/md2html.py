@@ -442,6 +442,22 @@ def render_page(
         for i, s in enumerate(sections, 1)
     )
 
+    # SEO 元数据：description 取主题 + 类型 + 期间 + 前四个章节标题；
+    # keywords 取主题 / 类型 / 期间 / 常驻检索词 + 章节标题（去重、限量）。
+    subject = "｜".join(x for x in (topic_name, type_label) if x)
+    titles = [_sec_title(s) for s in sections]
+    desc = f"{subject} {period} 报告：" + "、".join(titles[:4])
+    desc = desc[:160]
+    kw_seen: set[str] = set()
+    kws: list[str] = []
+    for k in [topic_name, type_label, period, "日本", "在留", "特定技能"] + titles:
+        k = (k or "").strip()
+        if k and k not in kw_seen:
+            kw_seen.add(k)
+            kws.append(k)
+    meta_desc = esc(desc, quote=True)
+    meta_kw = esc(",".join(kws[:12]), quote=True)
+
     diff_bar = ""
     body_sections = "\n".join(sections)
     if diff is not None:
@@ -460,6 +476,8 @@ def render_page(
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="{meta_desc}">
+<meta name="keywords" content="{meta_kw}">
 <title>{esc(title)}</title>
 <style>{REPORT_CSS}</style>
 </head>

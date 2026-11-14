@@ -1,0 +1,1086 @@
+{
+  "version": 1,
+  "reports": [
+    {
+      "topic": "00-decision-hub",
+      "topic_name": "赴日决策仪表盘",
+      "type": "employment-research",
+      "title": "赴日决策仪表盘 · 2026-Q4 季度复核",
+      "period": "2026-12",
+      "path": "00-decision-hub/reports/2026-12-decision-hub.html",
+      "keywords": [
+        "赴日决策仪表盘",
+        "职业就业调研型",
+        "2026-12",
+        "一、执行摘要（五问结论速览）",
+        "二、问题 1：去不去（值不值）",
+        "三、问题 2：能不能去（门槛）",
+        "四、问题 3：怎么去（路径）",
+        "五、问题 4：去哪（定居地）",
+        "六、问题 5：最坏怎么办（退出）",
+        "求人",
+        "転職",
+        "医療機関",
+        "医院",
+        "医保",
+        "PPI",
+        "日銀",
+        "毎月勤労統計",
+        "合格率",
+        "外免切替",
+        "退職",
+        "雇用保険",
+        "健康保険任意継続",
+        "厚生年金脱退一时金",
+        "在留資格取消"
+      ],
+      "questions": []
+    },
+    {
+      "topic": "00-decision-hub",
+      "topic_name": "赴日决策仪表盘",
+      "type": "employment-research",
+      "title": "赴日决策仪表盘 · 2026-11 月度报告",
+      "period": "2026-11",
+      "path": "00-decision-hub/reports/2026-11-decision-hub.html",
+      "keywords": [
+        "赴日决策仪表盘",
+        "职业就业调研型",
+        "2026-11",
+        "一、执行摘要（五问结论速览）",
+        "二、问题 1：去不去（值不值）",
+        "三、问题 2：能不能去（门槛）",
+        "四、问题 3：怎么去（路径）",
+        "五、问题 4：去哪（定居地）",
+        "六、问题 5：最坏怎么办（退出）",
+        "年収",
+        "求人",
+        "転職",
+        "晋升",
+        "賃貸",
+        "アパート",
+        "マンション",
+        "一戸建て",
+        "敷金",
+        "礼金",
+        "更新料",
+        "ゴミ出し",
+        "町内会",
+        "病院",
+        "医院"
+      ],
+      "questions": []
+    },
+    {
+      "topic": "01-ssw-driver",
+      "topic_name": "特定技能司机",
+      "type": "employment-research",
+      "title": "日本特定技能司机 · 2026-11 月度报告",
+      "period": "2026-11",
+      "path": "01-ssw-driver/reports/2026-11-ssw-driver.html",
+      "keywords": [
+        "特定技能司机",
+        "职业就业调研型",
+        "2026-11",
+        "一、核心结论（摘要）",
+        "二、行业与政策发展趋势",
+        "三、人才供需与薪酬（核心模块）",
+        "四、雇主与企业类型细分",
+        "五、岗位技能要求",
+        "六、行业认可的职业资质与证书",
+        "ドライバー",
+        "運行管理者",
+        "安全運転管理者",
+        "賞与",
+        "準中型",
+        "第二種運転免許",
+        "求人",
+        "ハローワーク",
+        "独立",
+        "研修",
+        "会議",
+        "企業物価指数",
+        "日銀",
+        "株式",
+        "所得税"
+      ],
+      "questions": [
+        "日本特定技能司机收入多少？",
+        "特定技能司机缺口还有多大？",
+        "特定技能1号考试有哪些？",
+        "中国大陆能考特定技能技能考试吗？"
+      ]
+    },
+    {
+      "topic": "02-career-driver",
+      "topic_name": "司机职业发展",
+      "type": "employment-research",
+      "title": "日本司机职业 · 2026-11 月度报告",
+      "period": "2026-11",
+      "path": "02-career-driver/reports/2026-11-career-driver.html",
+      "keywords": [
+        "司机职业发展",
+        "职业就业调研型",
+        "2026-11",
+        "一、核心结论（摘要）",
+        "二、行业与政策发展趋势",
+        "三、人才供需与薪酬（核心模块）",
+        "四、雇主与企业类型细分",
+        "五、岗位技能要求",
+        "六、行业认可的职业资质与证书",
+        "運行管理者",
+        "安全運転管理者",
+        "準中型",
+        "けん引免許",
+        "フォークリフト",
+        "玉掛け",
+        "運行管理者試験",
+        "安全運転管理者講習",
+        "衛生管理者",
+        "物流管理士",
+        "ロジスティクス管理士",
+        "求人",
+        "履歴書",
+        "ハローワーク",
+        "独立"
+      ],
+      "questions": [
+        "司机职业发展路径是什么？"
+      ]
+    },
+    {
+      "topic": "03-career-management",
+      "topic_name": "职业管理与晋升",
+      "type": "employment-research",
+      "title": "日本管理岗过渡 · 2026-11 月度报告",
+      "period": "2026-11",
+      "path": "03-career-management/reports/2026-11-career-management.html",
+      "keywords": [
+        "职业管理与晋升",
+        "职业就业调研型",
+        "2026-11",
+        "一、核心结论（摘要）",
+        "二、行业与政策发展趋势",
+        "三、人才供需与薪酬（核心模块）",
+        "四、雇主与企业类型细分",
+        "五、岗位技能要求",
+        "六、行业认可的职业资质与证书",
+        "主任",
+        "運行管理者",
+        "フォークリフト",
+        "求人",
+        "管理職",
+        "独立",
+        "リーダー",
+        "KPI",
+        "研修",
+        "改善提案",
+        "晋升",
+        "准点率",
+        "装载率",
+        "空驶率",
+        "通信制"
+      ],
+      "questions": []
+    },
+    {
+      "topic": "04-industry-logistics",
+      "topic_name": "物流行业",
+      "type": "industry-research",
+      "title": "日本物流行业 · 2026-11 月度报告",
+      "period": "2026-11",
+      "path": "04-industry-logistics/reports/2026-11-industry-logistics.html",
+      "keywords": [
+        "物流行业",
+        "行业深度研究型",
+        "2026-11",
+        "一、执行摘要",
+        "二、研究范围与方法",
+        "三、产业链图谱",
+        "四、市场规模与格局",
+        "五、头部玩家与竞争格局",
+        "六、驱动因素与风险",
+        "独立",
+        "KPI",
+        "クレーム",
+        "PPI",
+        "日本銀行",
+        "继承",
+        "物流",
+        "ロジスティクス",
+        "3PL",
+        "宅配便",
+        "共同配送",
+        "幹線",
+        "仕分け",
+        "WMS",
+        "荷主"
+      ],
+      "questions": [
+        "2024年问题是什么？"
+      ]
+    },
+    {
+      "topic": "05-industry-autonomous",
+      "topic_name": "自动驾驶与自动化",
+      "type": "industry-research",
+      "title": "日本自动驾驶与自动化 · 2026-11 月度报告",
+      "period": "2026-11",
+      "path": "05-industry-autonomous/reports/2026-11-industry-autonomous.html",
+      "keywords": [
+        "自动驾驶与自动化",
+        "行业深度研究型",
+        "2026-11",
+        "一、执行摘要",
+        "二、研究范围与方法",
+        "三、产业链图谱",
+        "四、市场规模与格局",
+        "五、头部玩家与竞争格局",
+        "六、驱动因素与风险",
+        "フォークリフト",
+        "独立",
+        "研修",
+        "改善提案",
+        "晋升",
+        "继承",
+        "レベル4",
+        "LiDAR",
+        "ミリ波レーダー",
+        "車載カメラ",
+        "ECU",
+        "知覚",
+        "予測",
+        "経路計画",
+        "制御"
+      ],
+      "questions": [
+        "自动驾驶会影响司机就业吗？"
+      ]
+    },
+    {
+      "topic": "06-industry-technology",
+      "topic_name": "技术行业",
+      "type": "industry-research",
+      "title": "日本技术与数字化 · 2026-11 月度报告",
+      "period": "2026-11",
+      "path": "06-industry-technology/reports/2026-11-industry-technology.html",
+      "keywords": [
+        "技术行业",
+        "行业深度研究型",
+        "2026-11",
+        "一、执行摘要",
+        "二、研究范围与方法",
+        "三、产业链图谱",
+        "四、市场规模与格局",
+        "五、头部玩家与竞争格局",
+        "六、驱动因素与风险",
+        "主任",
+        "年収",
+        "求人",
+        "独立",
+        "求人票",
+        "配車",
+        "KPI",
+        "改善提案",
+        "晋升",
+        "株式",
+        "国税",
+        "退職",
+        "雇用保険",
+        "资格变更",
+        "转职"
+      ],
+      "questions": []
+    },
+    {
+      "topic": "07-economy-finance",
+      "topic_name": "经济与财务",
+      "type": "employment-research",
+      "title": "日本经济与财务 · 2026-11 月度报告",
+      "period": "2026-11",
+      "path": "07-economy-finance/reports/2026-11-economy-finance.html",
+      "keywords": [
+        "经济与财务",
+        "职业就业调研型",
+        "2026-11",
+        "一、核心结论（摘要）",
+        "二、行业与政策发展趋势",
+        "三、人才供需与薪酬（核心模块）",
+        "四、雇主与企业类型细分",
+        "五、岗位技能要求",
+        "六、行业认可的职业资质与证书",
+        "主任",
+        "フォークリフト",
+        "求人",
+        "独立",
+        "晋升",
+        "水道",
+        "CPI",
+        "所得税",
+        "住民税",
+        "社保",
+        "NISA",
+        "iDeCo",
+        "最低賃金",
+        "家計調査",
+        "毎月勤労統計"
+      ],
+      "questions": [
+        "日本生活成本大概多少？"
+      ]
+    },
+    {
+      "topic": "08-visa-immigration",
+      "topic_name": "签证与移民",
+      "type": "policy-analysis",
+      "title": "日本签证与在留资格 · 2026-11 月度报告",
+      "period": "2026-11",
+      "path": "08-visa-immigration/reports/2026-11-visa-immigration.html",
+      "keywords": [
+        "签证与移民",
+        "政策法规解读型",
+        "2026-11",
+        "一、执行摘要",
+        "二、政策台账与监测机制",
+        "三、监管框架总览",
+        "四、重点政策逐条解读",
+        "五、影响对象矩阵",
+        "六、合规应对建议（建议章）",
+        "年収",
+        "独立",
+        "研修",
+        "住民税",
+        "社保",
+        "申告",
+        "大学",
+        "受験",
+        "OC",
+        "留学",
+        "外免切替",
+        "社会保险",
+        "在留資格変更",
+        "在留資格取消",
+        "特定活动"
+      ],
+      "questions": [
+        "特定技能在留资格要件是什么？",
+        "特定技能2号能不能申请？",
+        "永住申请条件是什么？",
+        "归化申请条件是什么？",
+        "被拒签了怎么办？",
+        "不许可理由书怎么看？",
+        "材料有瑕疵能补正吗？"
+      ]
+    },
+    {
+      "topic": "09-politics-law",
+      "topic_name": "政治与法律",
+      "type": "policy-analysis",
+      "title": "日本政治与法规 · 2026-11 月度报告",
+      "period": "2026-11",
+      "path": "09-politics-law/reports/2026-11-politics-law.html",
+      "keywords": [
+        "政治与法律",
+        "政策法规解读型",
+        "2026-11",
+        "一、执行摘要",
+        "二、政策台账与监测机制",
+        "三、监管框架总览",
+        "四、重点政策逐条解读",
+        "五、影响对象矩阵",
+        "六、合规应对建议（建议章）",
+        "派遣",
+        "保証金",
+        "住民税",
+        "社保",
+        "申告",
+        "社会保险",
+        "资格变更",
+        "在留資格取消",
+        "技能实习",
+        "转职",
+        "资格外活动",
+        "在留卡",
+        "再入国许可",
+        "视同再入国",
+        "继承"
+      ],
+      "questions": [
+        "在留资格被取消怎么办？",
+        "退去强制和収容是什么？",
+        "仮放免怎么申请？",
+        "出国命令是什么？",
+        "被遣返后还能再入境日本吗？"
+      ]
+    },
+    {
+      "topic": "10-education-qualification",
+      "topic_name": "教育与资格",
+      "type": "employment-research",
+      "title": "日本资格与教育投资 · 2026-11 月度报告",
+      "period": "2026-11",
+      "path": "10-education-qualification/reports/2026-11-education-qualification.html",
+      "keywords": [
+        "教育与资格",
+        "职业就业调研型",
+        "2026-11",
+        "一、核心结论（摘要）",
+        "二、行业与政策发展趋势",
+        "三、人才供需与薪酬（核心模块）",
+        "四、雇主与企业类型细分",
+        "五、岗位技能要求",
+        "六、行业认可的职业资质与证书",
+        "運行管理者",
+        "準中型",
+        "フォークリフト",
+        "危険物取扱者",
+        "募集",
+        "独立",
+        "労務管理",
+        "研修",
+        "市役所",
+        "住民票",
+        "中学",
+        "高等学校",
+        "短期大学",
+        "大学",
+        "大学院"
+      ],
+      "questions": [
+        "中国驾照怎么换日本驾照？",
+        "外免切替合格率多少？",
+        "外免切替费用多少？"
+      ]
+    },
+    {
+      "topic": "11-language-japanese",
+      "topic_name": "日语语言",
+      "type": "employment-research",
+      "title": "日本日语学习 · 2026-11 月度报告",
+      "period": "2026-11",
+      "path": "11-language-japanese/reports/2026-11-language-japanese.html",
+      "keywords": [
+        "日语语言",
+        "职业就业调研型",
+        "2026-11",
+        "一、核心结论（摘要）",
+        "二、行业与政策发展趋势",
+        "三、人才供需与薪酬（核心模块）",
+        "四、雇主与企业类型细分",
+        "五、岗位技能要求",
+        "六、行业认可的职业资质与证书",
+        "独立",
+        "会議",
+        "继承",
+        "RL",
+        "仕分け",
+        "納品書",
+        "可用性",
+        "估算",
+        "发布",
+        "招聘",
+        "日本語能力試験",
+        "N1",
+        "N2",
+        "N3",
+        "N4"
+      ],
+      "questions": []
+    },
+    {
+      "topic": "12-culture-life",
+      "topic_name": "文化与生活",
+      "type": "employment-research",
+      "title": "日本文化与生活 · 2026-11 月度报告",
+      "period": "2026-11",
+      "path": "12-culture-life/reports/2026-11-culture-life.html",
+      "keywords": [
+        "文化与生活",
+        "职业就业调研型",
+        "2026-11",
+        "一、核心结论（摘要）",
+        "二、行业与政策发展趋势",
+        "三、人才供需与薪酬（核心模块）",
+        "四、雇主与企业类型细分",
+        "五、岗位技能要求",
+        "六、行业认可的职业资质与证书",
+        "正社員",
+        "祭り",
+        "賃貸",
+        "敷金",
+        "礼金",
+        "火災保険",
+        "日本料理",
+        "スーパー",
+        "挨拶",
+        "区役所",
+        "病院",
+        "診療所",
+        "水道",
+        "防災",
+        "地震"
+      ],
+      "questions": []
+    },
+    {
+      "topic": "13-regional-info",
+      "topic_name": "地区信息",
+      "type": "market-monitoring",
+      "title": "日本地域信息 · 2026-11 月度报告",
+      "period": "2026-11",
+      "path": "13-regional-info/reports/2026-11-regional-info.html",
+      "keywords": [
+        "地区信息",
+        "市场指标监测型",
+        "2026-11",
+        "一、结论先行",
+        "二、关键数字卡",
+        "三、月度指标逐项对比",
+        "四、信号灯判定",
+        "五、与首期基线的偏离",
+        "六、数据缺口与未核验项",
+        "求人",
+        "独立",
+        "祭り",
+        "賃貸",
+        "病院",
+        "防災",
+        "地震",
+        "日本語指導",
+        "继承",
+        "RL",
+        "物流",
+        "可用性",
+        "发布",
+        "档案",
+        "内閣"
+      ],
+      "questions": []
+    },
+    {
+      "topic": "14-life-operations",
+      "topic_name": "在日生活实务",
+      "type": "employment-research",
+      "title": "在日生活实务与行政手续 · 2026-11 月度报告",
+      "period": "2026-11",
+      "path": "14-life-operations/reports/2026-11-life-operations.html",
+      "keywords": [
+        "在日生活实务",
+        "职业就业调研型",
+        "2026-11",
+        "一、核心结论（摘要）",
+        "二、行业与政策发展趋势",
+        "三、人才供需与薪酬（核心模块）",
+        "四、雇主与企业类型细分",
+        "五、岗位技能要求",
+        "六、行业认可的职业资质与证书",
+        "独立",
+        "賃貸",
+        "敷金",
+        "礼金",
+        "更新料",
+        "上下水道",
+        "転入届",
+        "転出",
+        "住民票",
+        "マイナンバーカード",
+        "高額療養費制度",
+        "医保",
+        "保証会社",
+        "印章",
+        "金融庁"
+      ],
+      "questions": [
+        "租房押金礼金怎么算？",
+        "在日本怎么转住民票？",
+        "日本银行开户难吗？",
+        "手机卡怎么选？"
+      ]
+    },
+    {
+      "topic": "15-health-wellbeing",
+      "topic_name": "医疗·健康·心理",
+      "type": "employment-research",
+      "title": "医疗·健康·心理 · 2026-11 月度报告",
+      "period": "2026-11",
+      "path": "15-health-wellbeing/reports/2026-11-health-wellbeing.html",
+      "keywords": [
+        "医疗·健康·心理",
+        "职业就业调研型",
+        "2026-11",
+        "一、核心结论（摘要）",
+        "二、行业与政策发展趋势（医保制度框架）",
+        "三、医疗资源供需与就医费用（核心模块）",
+        "四、医疗机构与介護设施类型细分",
+        "五、就医与健康管理的能力要求",
+        "六、健康相关资格与凭证",
+        "病院",
+        "診療所",
+        "住民票",
+        "マイナンバーカード",
+        "高額療養費制度",
+        "医療保険",
+        "社保",
+        "介護福祉士",
+        "国民健康保険",
+        "特定活动",
+        "在留卡",
+        "出産育児一時金",
+        "生活保护",
+        "继承",
+        "健康保険"
+      ],
+      "questions": [
+        "日本看病怎么付费？",
+        "精神科看病贵吗？"
+      ]
+    },
+    {
+      "topic": "16-exit-transition-return",
+      "topic_name": "退出·转型·回国",
+      "type": "policy-analysis",
+      "title": "退出·转型·回国 · 2026-11 月度报告",
+      "period": "2026-11",
+      "path": "16-exit-transition-return/reports/2026-11-exit-transition-return.html",
+      "keywords": [
+        "退出·转型·回国",
+        "政策法规解读型",
+        "2026-11",
+        "一、核心结论（摘要）",
+        "二、退出·转型·回国制度台账与监测机制",
+        "三、制度框架与三段路径",
+        "四、退出与转型政策逐条解读",
+        "五、个人场景影响矩阵",
+        "六、退出·转型·回国行动建议（建议章）",
+        "退職金",
+        "ハローワーク",
+        "転職",
+        "雇用保険被保険者証",
+        "晋升",
+        "借家",
+        "転出届",
+        "医療保険",
+        "本人確認",
+        "所得税",
+        "住民税",
+        "社保",
+        "確定申告",
+        "分離課税",
+        "退職"
+      ],
+      "questions": [
+        "退职后年金怎么办？",
+        "厚生年金脱退一时金怎么申请？",
+        "健康保险任意継続怎么办理？",
+        "回国前要做什么？",
+        "回国前确定申告怎么办？",
+        "在留卡怎么返还？"
+      ]
+    },
+    {
+      "topic": "17-migration-compliance",
+      "topic_name": "劳务输出与中介合规",
+      "type": "employment-research",
+      "title": "劳务输出与中介合规 · 2026-11 月度报告",
+      "period": "2026-11",
+      "path": "17-migration-compliance/reports/2026-11-migration-compliance.html",
+      "keywords": [
+        "劳务输出与中介合规",
+        "职业就业调研型",
+        "2026-11",
+        "一、核心结论（摘要）",
+        "二、中日中介监管框架与政策趋势",
+        "三、招募渠道与中介市场（核心模块）",
+        "四、渠道与主体类型细分",
+        "五、资质要件与核验技能",
+        "六、官方名单与公示（含黑名单）",
+        "求人",
+        "派遣",
+        "ハローワーク",
+        "労働条件通知書",
+        "求人票",
+        "保証金",
+        "投诉",
+        "社保",
+        "分散",
+        "留学",
+        "退职",
+        "社会保险",
+        "技能実習",
+        "解約",
+        "来源治理"
+      ],
+      "questions": [
+        "中介靠谱吗？怎么核验？",
+        "劳务输出黑名单怎么查？",
+        "中介合同要注意什么？",
+        "无资质中介有什么后果？"
+      ]
+    },
+    {
+      "topic": "18-family-parenting",
+      "topic_name": "家族·育儿·人生事件",
+      "type": "employment-research",
+      "title": "家族·育儿·人生事件 · 2026-11 月度报告",
+      "period": "2026-11",
+      "path": "18-family-parenting/reports/2026-11-family-parenting.html",
+      "keywords": [
+        "家族·育儿·人生事件",
+        "职业就业调研型",
+        "2026-11",
+        "一、核心结论（摘要）",
+        "二、家族·育儿政策与制度趋势",
+        "三、家庭经济·扶养与支援（核心模块）",
+        "四、家庭形态与服务主体细分",
+        "五、家庭事件办理的能力要求",
+        "六、育儿相关资格与凭证",
+        "扶養手当",
+        "年収",
+        "市役所",
+        "住民票",
+        "住民税",
+        "社保",
+        "扶养控除",
+        "幼稚園",
+        "編入",
+        "留学",
+        "転校",
+        "资格变更",
+        "特定活動",
+        "在留卡",
+        "来源治理"
+      ],
+      "questions": [
+        "家属怎么申请家族滞在？",
+        "孩子怎么上保育园？",
+        "日本育儿补贴有哪些？",
+        "在日本离婚怎么处理？"
+      ]
+    },
+    {
+      "topic": "19-safety-disaster",
+      "topic_name": "防灾·安全·治安",
+      "type": "market-monitoring",
+      "title": "防灾·安全·治安 · 2026-11 月度报告",
+      "period": "2026-11",
+      "path": "19-safety-disaster/reports/2026-11-safety-disaster.html",
+      "keywords": [
+        "防灾·安全·治安",
+        "市场指标监测型",
+        "2026-11",
+        "一、执行摘要：结论先行",
+        "二、持续监测机制设计",
+        "三、多维指标体系与来源",
+        "四、首期基线数据（2026-11-14）",
+        "五、先行指标判读",
+        "六、信号规则与决策框架",
+        "防災",
+        "地震",
+        "来源治理",
+        "继承",
+        "RL",
+        "可用性",
+        "发布",
+        "诈欺",
+        "护照",
+        "档案",
+        "领事保护",
+        "内閣",
+        "地方自治",
+        "法律",
+        "政策"
+      ],
+      "questions": [
+        "日本防灾怎么准备？",
+        "地震避难去哪里？",
+        "在日本遇到治安问题怎么办？"
+      ]
+    },
+    {
+      "topic": "20-overseas-china",
+      "topic_name": "中国侧行前与回国",
+      "type": "policy-analysis",
+      "title": "中国侧行前与回国衔接 · 2026-11 月度报告",
+      "period": "2026-11",
+      "path": "20-overseas-china/reports/2026-11-overseas-china.html",
+      "keywords": [
+        "中国侧行前与回国",
+        "政策法规解读型",
+        "2026-11",
+        "一、核心结论（摘要）",
+        "二、中国侧行前与回国衔接制度台账与监测机制",
+        "三、制度框架与两段路径",
+        "四、中国侧行前与回国政策逐条解读",
+        "五、个人场景影响矩阵",
+        "六、中国侧行前与回国行动建议（建议章）",
+        "派遣",
+        "社保",
+        "科目",
+        "留学",
+        "来源治理",
+        "在职证明",
+        "继承",
+        "健康诊断",
+        "RL",
+        "授权",
+        "发布",
+        "体检",
+        "对外劳务合作",
+        "商务部",
+        "护照"
+      ],
+      "questions": [
+        "中国护照到期怎么换？",
+        "回国后驾照怎么转回？",
+        "档案和社保怎么衔接？"
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "q": "日本特定技能司机收入多少？",
+      "path": "01-ssw-driver/reports/2026-11-ssw-driver.html",
+      "anchor": ""
+    },
+    {
+      "q": "特定技能司机缺口还有多大？",
+      "path": "01-ssw-driver/reports/2026-11-ssw-driver.html",
+      "anchor": ""
+    },
+    {
+      "q": "特定技能1号考试有哪些？",
+      "path": "01-ssw-driver/reports/2026-11-ssw-driver.html",
+      "anchor": ""
+    },
+    {
+      "q": "中国大陆能考特定技能技能考试吗？",
+      "path": "01-ssw-driver/reports/2026-11-ssw-driver.html",
+      "anchor": ""
+    },
+    {
+      "q": "中国驾照怎么换日本驾照？",
+      "path": "10-education-qualification/reports/2026-11-education-qualification.html",
+      "anchor": ""
+    },
+    {
+      "q": "外免切替合格率多少？",
+      "path": "10-education-qualification/reports/2026-11-education-qualification.html",
+      "anchor": ""
+    },
+    {
+      "q": "外免切替费用多少？",
+      "path": "10-education-qualification/reports/2026-11-education-qualification.html",
+      "anchor": ""
+    },
+    {
+      "q": "特定技能在留资格要件是什么？",
+      "path": "08-visa-immigration/reports/2026-11-visa-immigration.html",
+      "anchor": ""
+    },
+    {
+      "q": "特定技能2号能不能申请？",
+      "path": "08-visa-immigration/reports/2026-11-visa-immigration.html",
+      "anchor": ""
+    },
+    {
+      "q": "永住申请条件是什么？",
+      "path": "08-visa-immigration/reports/2026-11-visa-immigration.html",
+      "anchor": ""
+    },
+    {
+      "q": "归化申请条件是什么？",
+      "path": "08-visa-immigration/reports/2026-11-visa-immigration.html",
+      "anchor": ""
+    },
+    {
+      "q": "被拒签了怎么办？",
+      "path": "08-visa-immigration/reports/2026-11-visa-immigration.html",
+      "anchor": ""
+    },
+    {
+      "q": "不许可理由书怎么看？",
+      "path": "08-visa-immigration/reports/2026-11-visa-immigration.html",
+      "anchor": ""
+    },
+    {
+      "q": "材料有瑕疵能补正吗？",
+      "path": "08-visa-immigration/reports/2026-11-visa-immigration.html",
+      "anchor": ""
+    },
+    {
+      "q": "在留资格被取消怎么办？",
+      "path": "09-politics-law/reports/2026-11-politics-law.html",
+      "anchor": ""
+    },
+    {
+      "q": "退去强制和収容是什么？",
+      "path": "09-politics-law/reports/2026-11-politics-law.html",
+      "anchor": ""
+    },
+    {
+      "q": "仮放免怎么申请？",
+      "path": "09-politics-law/reports/2026-11-politics-law.html",
+      "anchor": ""
+    },
+    {
+      "q": "出国命令是什么？",
+      "path": "09-politics-law/reports/2026-11-politics-law.html",
+      "anchor": ""
+    },
+    {
+      "q": "被遣返后还能再入境日本吗？",
+      "path": "09-politics-law/reports/2026-11-politics-law.html",
+      "anchor": ""
+    },
+    {
+      "q": "退职后年金怎么办？",
+      "path": "16-exit-transition-return/reports/2026-11-exit-transition-return.html",
+      "anchor": ""
+    },
+    {
+      "q": "厚生年金脱退一时金怎么申请？",
+      "path": "16-exit-transition-return/reports/2026-11-exit-transition-return.html",
+      "anchor": ""
+    },
+    {
+      "q": "健康保险任意継続怎么办理？",
+      "path": "16-exit-transition-return/reports/2026-11-exit-transition-return.html",
+      "anchor": ""
+    },
+    {
+      "q": "回国前要做什么？",
+      "path": "16-exit-transition-return/reports/2026-11-exit-transition-return.html",
+      "anchor": ""
+    },
+    {
+      "q": "回国前确定申告怎么办？",
+      "path": "16-exit-transition-return/reports/2026-11-exit-transition-return.html",
+      "anchor": ""
+    },
+    {
+      "q": "在留卡怎么返还？",
+      "path": "16-exit-transition-return/reports/2026-11-exit-transition-return.html",
+      "anchor": ""
+    },
+    {
+      "q": "租房押金礼金怎么算？",
+      "path": "14-life-operations/reports/2026-11-life-operations.html",
+      "anchor": ""
+    },
+    {
+      "q": "在日本怎么转住民票？",
+      "path": "14-life-operations/reports/2026-11-life-operations.html",
+      "anchor": ""
+    },
+    {
+      "q": "日本银行开户难吗？",
+      "path": "14-life-operations/reports/2026-11-life-operations.html",
+      "anchor": ""
+    },
+    {
+      "q": "手机卡怎么选？",
+      "path": "14-life-operations/reports/2026-11-life-operations.html",
+      "anchor": ""
+    },
+    {
+      "q": "日本看病怎么付费？",
+      "path": "15-health-wellbeing/reports/2026-11-health-wellbeing.html",
+      "anchor": ""
+    },
+    {
+      "q": "精神科看病贵吗？",
+      "path": "15-health-wellbeing/reports/2026-11-health-wellbeing.html",
+      "anchor": ""
+    },
+    {
+      "q": "家属怎么申请家族滞在？",
+      "path": "18-family-parenting/reports/2026-11-family-parenting.html",
+      "anchor": ""
+    },
+    {
+      "q": "孩子怎么上保育园？",
+      "path": "18-family-parenting/reports/2026-11-family-parenting.html",
+      "anchor": ""
+    },
+    {
+      "q": "日本育儿补贴有哪些？",
+      "path": "18-family-parenting/reports/2026-11-family-parenting.html",
+      "anchor": ""
+    },
+    {
+      "q": "在日本离婚怎么处理？",
+      "path": "18-family-parenting/reports/2026-11-family-parenting.html",
+      "anchor": ""
+    },
+    {
+      "q": "日本防灾怎么准备？",
+      "path": "19-safety-disaster/reports/2026-11-safety-disaster.html",
+      "anchor": ""
+    },
+    {
+      "q": "地震避难去哪里？",
+      "path": "19-safety-disaster/reports/2026-11-safety-disaster.html",
+      "anchor": ""
+    },
+    {
+      "q": "在日本遇到治安问题怎么办？",
+      "path": "19-safety-disaster/reports/2026-11-safety-disaster.html",
+      "anchor": ""
+    },
+    {
+      "q": "中国护照到期怎么换？",
+      "path": "20-overseas-china/reports/2026-11-overseas-china.html",
+      "anchor": ""
+    },
+    {
+      "q": "回国后驾照怎么转回？",
+      "path": "20-overseas-china/reports/2026-11-overseas-china.html",
+      "anchor": ""
+    },
+    {
+      "q": "档案和社保怎么衔接？",
+      "path": "20-overseas-china/reports/2026-11-overseas-china.html",
+      "anchor": ""
+    },
+    {
+      "q": "中介靠谱吗？怎么核验？",
+      "path": "17-migration-compliance/reports/2026-11-migration-compliance.html",
+      "anchor": ""
+    },
+    {
+      "q": "劳务输出黑名单怎么查？",
+      "path": "17-migration-compliance/reports/2026-11-migration-compliance.html",
+      "anchor": ""
+    },
+    {
+      "q": "中介合同要注意什么？",
+      "path": "17-migration-compliance/reports/2026-11-migration-compliance.html",
+      "anchor": ""
+    },
+    {
+      "q": "无资质中介有什么后果？",
+      "path": "17-migration-compliance/reports/2026-11-migration-compliance.html",
+      "anchor": ""
+    },
+    {
+      "q": "日本生活成本大概多少？",
+      "path": "07-economy-finance/reports/2026-11-economy-finance.html",
+      "anchor": ""
+    },
+    {
+      "q": "司机职业发展路径是什么？",
+      "path": "02-career-driver/reports/2026-11-career-driver.html",
+      "anchor": ""
+    },
+    {
+      "q": "2024年问题是什么？",
+      "path": "04-industry-logistics/reports/2026-11-industry-logistics.html",
+      "anchor": ""
+    },
+    {
+      "q": "自动驾驶会影响司机就业吗？",
+      "path": "05-industry-autonomous/reports/2026-11-industry-autonomous.html",
+      "anchor": ""
+    }
+  ]
+}

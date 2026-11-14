@@ -1,0 +1,1137 @@
+{
+  "run_date": "2026-11-14",
+  "topics_total": 21,
+  "metrics_before": {
+    "topics_total": 21,
+    "topics_complete": 21,
+    "required_coverage": 1.0,
+    "missing_items": 0,
+    "contradictions": 2,
+    "gaps": 0,
+    "source_coverage": 0.41409691629955947,
+    "stale_reports": 0,
+    "dup_ratio": 0.0,
+    "attribution_errors": 0,
+    "cite_valid_ratio": 1.0,
+    "broken_links": 0,
+    "findings_by_level": {
+      "P0": 0,
+      "P1": 0,
+      "P2": 52
+    }
+  },
+  "metrics_after": {
+    "topics_total": 21,
+    "topics_complete": 21,
+    "required_coverage": 1.0,
+    "missing_items": 0,
+    "contradictions": 2,
+    "gaps": 0,
+    "source_coverage": 0.41409691629955947,
+    "stale_reports": 0,
+    "dup_ratio": 0.0,
+    "attribution_errors": 0,
+    "cite_valid_ratio": 1.0,
+    "broken_links": 0,
+    "findings_by_level": {
+      "P0": 0,
+      "P1": 0,
+      "P2": 52
+    }
+  },
+  "findings": [
+    {
+      "code": "C-07",
+      "level": "P2",
+      "topic": "05-industry-autonomous",
+      "path": "05-industry-autonomous/reports/2026-11-industry-autonomous.md",
+      "location": "事实段落来源覆盖不足",
+      "detail": "含数字事实段落来源覆盖率 19% < 20%",
+      "spec": "S-06",
+      "status": "unfixable"
+    },
+    {
+      "code": "C-07",
+      "level": "P2",
+      "topic": "07-economy-finance",
+      "path": "07-economy-finance/reports/2026-11-economy-finance.md",
+      "location": "事实段落来源覆盖不足",
+      "detail": "含数字事实段落来源覆盖率 19% < 20%",
+      "spec": "S-06",
+      "status": "unfixable"
+    },
+    {
+      "code": "C-07",
+      "level": "P2",
+      "topic": "14-life-operations",
+      "path": "14-life-operations/reports/2026-11-life-operations.md",
+      "location": "事实段落来源覆盖不足",
+      "detail": "含数字事实段落来源覆盖率 14% < 20%",
+      "spec": "S-06",
+      "status": "unfixable"
+    },
+    {
+      "code": "C-03",
+      "level": "P2",
+      "topic": "01-ssw-driver",
+      "path": "01-ssw-driver/operations-guide.md",
+      "location": "跨文档重复",
+      "detail": "约 180 字的段落同时出现在 7 个主题（01-ssw-driver, 02-career-driver, 03-career-management, 07-economy-finance, 10-education-qualification, 11-language-japanese, 12-culture-life），疑似模板冗余，建议确认是否需保留",
+      "spec": "S-02",
+      "status": "open"
+    },
+    {
+      "code": "C-03",
+      "level": "P2",
+      "topic": "01-ssw-driver",
+      "path": "01-ssw-driver/operations-guide.md",
+      "location": "跨文档重复",
+      "detail": "约 209 字的段落同时出现在 7 个主题（01-ssw-driver, 02-career-driver, 03-career-management, 07-economy-finance, 10-education-qualification, 11-language-japanese, 12-culture-life），疑似模板冗余，建议确认是否需保留",
+      "spec": "S-02",
+      "status": "open"
+    },
+    {
+      "code": "C-03",
+      "level": "P2",
+      "topic": "01-ssw-driver",
+      "path": "01-ssw-driver/operations-guide.md",
+      "location": "跨文档重复",
+      "detail": "约 129 字的段落同时出现在 7 个主题（01-ssw-driver, 02-career-driver, 03-career-management, 07-economy-finance, 10-education-qualification, 11-language-japanese, 12-culture-life），疑似模板冗余，建议确认是否需保留",
+      "spec": "S-02",
+      "status": "open"
+    },
+    {
+      "code": "C-03",
+      "level": "P2",
+      "topic": "01-ssw-driver",
+      "path": "01-ssw-driver/operations-guide.md",
+      "location": "跨文档重复",
+      "detail": "约 142 字的段落同时出现在 7 个主题（01-ssw-driver, 02-career-driver, 03-career-management, 07-economy-finance, 10-education-qualification, 11-language-japanese, 12-culture-life），疑似模板冗余，建议确认是否需保留",
+      "spec": "S-02",
+      "status": "open"
+    },
+    {
+      "code": "C-03",
+      "level": "P2",
+      "topic": "01-ssw-driver",
+      "path": "01-ssw-driver/operations-guide.md",
+      "location": "跨文档重复",
+      "detail": "约 153 字的段落同时出现在 7 个主题（01-ssw-driver, 02-career-driver, 03-career-management, 07-economy-finance, 10-education-qualification, 11-language-japanese, 12-culture-life），疑似模板冗余，建议确认是否需保留",
+      "spec": "S-02",
+      "status": "open"
+    },
+    {
+      "code": "C-03",
+      "level": "P2",
+      "topic": "01-ssw-driver",
+      "path": "01-ssw-driver/prompts/prompt-baseline-setup.md",
+      "location": "跨文档重复",
+      "detail": "约 145 字的段落同时出现在 3 个主题（01-ssw-driver, 02-career-driver, 03-career-management），疑似模板冗余，建议确认是否需保留",
+      "spec": "S-02",
+      "status": "open"
+    },
+    {
+      "code": "C-03",
+      "level": "P2",
+      "topic": "01-ssw-driver",
+      "path": "01-ssw-driver/prompts/prompt-baseline-setup.md",
+      "location": "跨文档重复",
+      "detail": "约 214 字的段落同时出现在 7 个主题（01-ssw-driver, 02-career-driver, 03-career-management, 07-economy-finance, 10-education-qualification, 11-language-japanese, 12-culture-life），疑似模板冗余，建议确认是否需保留",
+      "spec": "S-02",
+      "status": "open"
+    },
+    {
+      "code": "C-03",
+      "level": "P2",
+      "topic": "01-ssw-driver",
+      "path": "01-ssw-driver/prompts/prompt-baseline-setup.md",
+      "location": "跨文档重复",
+      "detail": "约 219 字的段落同时出现在 16 个主题（01-ssw-driver, 02-career-driver, 03-career-management, 04-industry-logistics, 05-industry-autonomous, 06-industry-technology, 07-economy-finance, 08-visa-immigration, 09-politics-law, 10-education-qualification, 11-language-japanese, 12-culture-life, 13-regional-info, 16-exit-transition-return, 17-migration-compliance, 20-overseas-china），疑似模板冗余，建议确认是否需保留",
+      "spec": "S-02",
+      "status": "open"
+    },
+    {
+      "code": "C-03",
+      "level": "P2",
+      "topic": "01-ssw-driver",
+      "path": "01-ssw-driver/prompts/prompt-update.md",
+      "location": "跨文档重复",
+      "detail": "约 555 字的段落同时出现在 7 个主题（01-ssw-driver, 02-career-driver, 03-career-management, 07-economy-finance, 10-education-qualification, 11-language-japanese, 12-culture-life），疑似模板冗余，建议确认是否需保留",
+      "spec": "S-02",
+      "status": "open"
+    },
+    {
+      "code": "C-03",
+      "level": "P2",
+      "topic": "01-ssw-driver",
+      "path": "01-ssw-driver/prompts/prompt-update.md",
+      "location": "跨文档重复",
+      "detail": "约 219 字的段落同时出现在 6 个主题（01-ssw-driver, 02-career-driver, 03-career-management, 07-economy-finance, 10-education-qualification, 12-culture-life），疑似模板冗余，建议确认是否需保留",
+      "spec": "S-02",
+      "status": "open"
+    },
+    {
+      "code": "C-03",
+      "level": "P2",
+      "topic": "01-ssw-driver",
+      "path": "01-ssw-driver/prompts/prompt-update.md",
+      "location": "跨文档重复",
+      "detail": "约 180 字的段落同时出现在 7 个主题（01-ssw-driver, 02-career-driver, 03-career-management, 07-economy-finance, 10-education-qualification, 11-language-japanese, 12-culture-life），疑似模板冗余，建议确认是否需保留",
+      "spec": "S-02",
+      "status": "open"
+    },
+    {
+      "code": "C-03",
+      "level": "P2",
+      "topic": "02-career-driver",
+      "path": "02-career-driver/operations-guide.md",
+      "location": "跨文档重复",
+      "detail": "约 184 字的段落同时出现在 2 个主题（02-career-driver, 03-career-management），疑似模板冗余，建议确认是否需保留",
+      "spec": "S-02",
+      "status": "open"
+    },
+    {
+      "code": "C-03",
+      "level": "P2",
+      "topic": "02-career-driver",
+      "path": "02-career-driver/prompts/business-config.md",
+      "location": "跨文档重复",
+      "detail": "约 187 字的段落同时出现在 3 个主题（02-career-driver, 03-career-management, 07-economy-finance），疑似模板冗余，建议确认是否需保留",
+      "spec": "S-02",
+      "status": "open"
+    },
+    {
+      "code": "C-03",
+      "level": "P2",
+      "topic": "02-career-driver",
+      "path": "02-career-driver/prompts/business-config.md",
+      "location": "跨文档重复",
+      "detail": "约 333 字的段落同时出现在 5 个主题（02-career-driver, 03-career-management, 10-education-qualification, 11-language-japanese, 12-culture-life），疑似模板冗余，建议确认是否需保留",
+      "spec": "S-02",
+      "status": "open"
+    },
+    {
+      "code": "C-03",
+      "level": "P2",
+      "topic": "02-career-driver",
+      "path": "02-career-driver/prompts/prompt-update.md",
+      "location": "跨文档重复",
+      "detail": "约 141 字的段落同时出现在 2 个主题（02-career-driver, 07-economy-finance），疑似模板冗余，建议确认是否需保留",
+      "spec": "S-02",
+      "status": "open"
+    },
+    {
+      "code": "C-03",
+      "level": "P2",
+      "topic": "03-career-management",
+      "path": "03-career-management/prompts/prompt-update.md",
+      "location": "跨文档重复",
+      "detail": "约 141 字的段落同时出现在 3 个主题（03-career-management, 11-language-japanese, 13-regional-info），疑似模板冗余，建议确认是否需保留",
+      "spec": "S-02",
+      "status": "open"
+    },
+    {
+      "code": "C-03",
+      "level": "P2",
+      "topic": "04-industry-logistics",
+      "path": "04-industry-logistics/operations-guide.md",
+      "location": "跨文档重复",
+      "detail": "约 140 字的段落同时出现在 3 个主题（04-industry-logistics, 05-industry-autonomous, 06-industry-technology），疑似模板冗余，建议确认是否需保留",
+      "spec": "S-02",
+      "status": "open"
+    },
+    {
+      "code": "C-03",
+      "level": "P2",
+      "topic": "04-industry-logistics",
+      "path": "04-industry-logistics/operations-guide.md",
+      "location": "跨文档重复",
+      "detail": "约 153 字的段落同时出现在 3 个主题（04-industry-logistics, 05-industry-autonomous, 06-industry-technology），疑似模板冗余，建议确认是否需保留",
+      "spec": "S-02",
+      "status": "open"
+    },
+    {
+      "code": "C-03",
+      "level": "P2",
+      "topic": "04-industry-logistics",
+      "path": "04-industry-logistics/prompts/business-config.md",
+      "location": "跨文档重复",
+      "detail": "约 184 字的段落同时出现在 2 个主题（04-industry-logistics, 05-industry-autonomous），疑似模板冗余，建议确认是否需保留",
+      "spec": "S-02",
+      "status": "open"
+    },
+    {
+      "code": "C-03",
+      "level": "P2",
+      "topic": "04-industry-logistics",
+      "path": "04-industry-logistics/prompts/prompt-annual-refresh.md",
+      "location": "跨文档重复",
+      "detail": "约 158 字的段落同时出现在 3 个主题（04-industry-logistics, 05-industry-autonomous, 06-industry-technology），疑似模板冗余，建议确认是否需保留",
+      "spec": "S-02",
+      "status": "open"
+    },
+    {
+      "code": "C-03",
+      "level": "P2",
+      "topic": "04-industry-logistics",
+      "path": "04-industry-logistics/prompts/prompt-annual-refresh.md",
+      "location": "跨文档重复",
+      "detail": "约 216 字的段落同时出现在 3 个主题（04-industry-logistics, 05-industry-autonomous, 06-industry-technology），疑似模板冗余，建议确认是否需保留",
+      "spec": "S-02",
+      "status": "open"
+    },
+    {
+      "code": "C-03",
+      "level": "P2",
+      "topic": "04-industry-logistics",
+      "path": "04-industry-logistics/prompts/prompt-annual-refresh.md",
+      "location": "跨文档重复",
+      "detail": "约 192 字的段落同时出现在 3 个主题（04-industry-logistics, 05-industry-autonomous, 06-industry-technology），疑似模板冗余，建议确认是否需保留",
+      "spec": "S-02",
+      "status": "open"
+    },
+    {
+      "code": "C-03",
+      "level": "P2",
+      "topic": "04-industry-logistics",
+      "path": "04-industry-logistics/prompts/prompt-baseline-setup.md",
+      "location": "跨文档重复",
+      "detail": "约 216 字的段落同时出现在 2 个主题（04-industry-logistics, 05-industry-autonomous），疑似模板冗余，建议确认是否需保留",
+      "spec": "S-02",
+      "status": "open"
+    },
+    {
+      "code": "C-03",
+      "level": "P2",
+      "topic": "05-industry-autonomous",
+      "path": "05-industry-autonomous/prompts/business-config.md",
+      "location": "跨文档重复",
+      "detail": "约 288 字的段落同时出现在 2 个主题（05-industry-autonomous, 06-industry-technology），疑似模板冗余，建议确认是否需保留",
+      "spec": "S-02",
+      "status": "open"
+    },
+    {
+      "code": "C-03",
+      "level": "P2",
+      "topic": "08-visa-immigration",
+      "path": "08-visa-immigration/operations-guide.md",
+      "location": "跨文档重复",
+      "detail": "约 214 字的段落同时出现在 4 个主题（08-visa-immigration, 09-politics-law, 16-exit-transition-return, 20-overseas-china），疑似模板冗余，建议确认是否需保留",
+      "spec": "S-02",
+      "status": "open"
+    },
+    {
+      "code": "C-03",
+      "level": "P2",
+      "topic": "08-visa-immigration",
+      "path": "08-visa-immigration/operations-guide.md",
+      "location": "跨文档重复",
+      "detail": "约 156 字的段落同时出现在 3 个主题（08-visa-immigration, 09-politics-law, 16-exit-transition-return），疑似模板冗余，建议确认是否需保留",
+      "spec": "S-02",
+      "status": "open"
+    },
+    {
+      "code": "C-03",
+      "level": "P2",
+      "topic": "08-visa-immigration",
+      "path": "08-visa-immigration/operations-guide.md",
+      "location": "跨文档重复",
+      "detail": "约 153 字的段落同时出现在 5 个主题（08-visa-immigration, 09-politics-law, 16-exit-transition-return, 17-migration-compliance, 20-overseas-china），疑似模板冗余，建议确认是否需保留",
+      "spec": "S-02",
+      "status": "open"
+    },
+    {
+      "code": "C-03",
+      "level": "P2",
+      "topic": "08-visa-immigration",
+      "path": "08-visa-immigration/prompts/prompt-baseline-setup.md",
+      "location": "跨文档重复",
+      "detail": "约 196 字的段落同时出现在 2 个主题（08-visa-immigration, 16-exit-transition-return），疑似模板冗余，建议确认是否需保留",
+      "spec": "S-02",
+      "status": "open"
+    },
+    {
+      "code": "C-03",
+      "level": "P2",
+      "topic": "08-visa-immigration",
+      "path": "08-visa-immigration/prompts/prompt-policy-review.md",
+      "location": "跨文档重复",
+      "detail": "约 498 字的段落同时出现在 4 个主题（08-visa-immigration, 09-politics-law, 16-exit-transition-return, 20-overseas-china），疑似模板冗余，建议确认是否需保留",
+      "spec": "S-02",
+      "status": "open"
+    },
+    {
+      "code": "C-03",
+      "level": "P2",
+      "topic": "08-visa-immigration",
+      "path": "08-visa-immigration/prompts/prompt-policy-review.md",
+      "location": "跨文档重复",
+      "detail": "约 127 字的段落同时出现在 5 个主题（08-visa-immigration, 09-politics-law, 16-exit-transition-return, 17-migration-compliance, 20-overseas-china），疑似模板冗余，建议确认是否需保留",
+      "spec": "S-02",
+      "status": "open"
+    },
+    {
+      "code": "C-03",
+      "level": "P2",
+      "topic": "08-visa-immigration",
+      "path": "08-visa-immigration/prompts/prompt-policy-review.md",
+      "location": "跨文档重复",
+      "detail": "约 159 字的段落同时出现在 2 个主题（08-visa-immigration, 09-politics-law），疑似模板冗余，建议确认是否需保留",
+      "spec": "S-02",
+      "status": "open"
+    },
+    {
+      "code": "C-03",
+      "level": "P2",
+      "topic": "08-visa-immigration",
+      "path": "08-visa-immigration/prompts/prompt-policy-review.md",
+      "location": "跨文档重复",
+      "detail": "约 251 字的段落同时出现在 2 个主题（08-visa-immigration, 09-politics-law），疑似模板冗余，建议确认是否需保留",
+      "spec": "S-02",
+      "status": "open"
+    },
+    {
+      "code": "C-03",
+      "level": "P2",
+      "topic": "08-visa-immigration",
+      "path": "08-visa-immigration/prompts/prompt-policy-review.md",
+      "location": "跨文档重复",
+      "detail": "约 194 字的段落同时出现在 5 个主题（08-visa-immigration, 09-politics-law, 16-exit-transition-return, 17-migration-compliance, 20-overseas-china），疑似模板冗余，建议确认是否需保留",
+      "spec": "S-02",
+      "status": "open"
+    },
+    {
+      "code": "C-03",
+      "level": "P2",
+      "topic": "10-education-qualification",
+      "path": "10-education-qualification/prompts/business-config.md",
+      "location": "跨文档重复",
+      "detail": "约 182 字的段落同时出现在 3 个主题（10-education-qualification, 11-language-japanese, 12-culture-life），疑似模板冗余，建议确认是否需保留",
+      "spec": "S-02",
+      "status": "open"
+    },
+    {
+      "code": "C-03",
+      "level": "P2",
+      "topic": "10-education-qualification",
+      "path": "10-education-qualification/prompts/prompt-baseline-setup.md",
+      "location": "跨文档重复",
+      "detail": "约 186 字的段落同时出现在 3 个主题（10-education-qualification, 11-language-japanese, 12-culture-life），疑似模板冗余，建议确认是否需保留",
+      "spec": "S-02",
+      "status": "open"
+    },
+    {
+      "code": "C-03",
+      "level": "P2",
+      "topic": "14-life-operations",
+      "path": "14-life-operations/operations-guide.md",
+      "location": "跨文档重复",
+      "detail": "约 211 字的段落同时出现在 2 个主题（14-life-operations, 15-health-wellbeing），疑似模板冗余，建议确认是否需保留",
+      "spec": "S-02",
+      "status": "open"
+    },
+    {
+      "code": "C-03",
+      "level": "P2",
+      "topic": "14-life-operations",
+      "path": "14-life-operations/prompts/prompt-baseline-setup.md",
+      "location": "跨文档重复",
+      "detail": "约 570 字的段落同时出现在 2 个主题（14-life-operations, 15-health-wellbeing），疑似模板冗余，建议确认是否需保留",
+      "spec": "S-02",
+      "status": "open"
+    },
+    {
+      "code": "C-03",
+      "level": "P2",
+      "topic": "14-life-operations",
+      "path": "14-life-operations/prompts/prompt-baseline-setup.md",
+      "location": "跨文档重复",
+      "detail": "约 148 字的段落同时出现在 2 个主题（14-life-operations, 15-health-wellbeing），疑似模板冗余，建议确认是否需保留",
+      "spec": "S-02",
+      "status": "open"
+    },
+    {
+      "code": "C-03",
+      "level": "P2",
+      "topic": "14-life-operations",
+      "path": "14-life-operations/prompts/prompt-update.md",
+      "location": "跨文档重复",
+      "detail": "约 302 字的段落同时出现在 2 个主题（14-life-operations, 15-health-wellbeing），疑似模板冗余，建议确认是否需保留",
+      "spec": "S-02",
+      "status": "open"
+    },
+    {
+      "code": "C-03",
+      "level": "P2",
+      "topic": "16-exit-transition-return",
+      "path": "16-exit-transition-return/operations-guide.md",
+      "location": "跨文档重复",
+      "detail": "约 121 字的段落同时出现在 3 个主题（16-exit-transition-return, 17-migration-compliance, 20-overseas-china），疑似模板冗余，建议确认是否需保留",
+      "spec": "S-02",
+      "status": "open"
+    },
+    {
+      "code": "C-03",
+      "level": "P2",
+      "topic": "16-exit-transition-return",
+      "path": "16-exit-transition-return/prompts/business-config.md",
+      "location": "跨文档重复",
+      "detail": "约 300 字的段落同时出现在 2 个主题（16-exit-transition-return, 20-overseas-china），疑似模板冗余，建议确认是否需保留",
+      "spec": "S-02",
+      "status": "open"
+    },
+    {
+      "code": "C-03",
+      "level": "P2",
+      "topic": "16-exit-transition-return",
+      "path": "16-exit-transition-return/prompts/prompt-baseline-setup.md",
+      "location": "跨文档重复",
+      "detail": "约 156 字的段落同时出现在 2 个主题（16-exit-transition-return, 20-overseas-china），疑似模板冗余，建议确认是否需保留",
+      "spec": "S-02",
+      "status": "open"
+    },
+    {
+      "code": "C-03",
+      "level": "P2",
+      "topic": "16-exit-transition-return",
+      "path": "16-exit-transition-return/prompts/prompt-policy-review.md",
+      "location": "跨文档重复",
+      "detail": "约 159 字的段落同时出现在 2 个主题（16-exit-transition-return, 20-overseas-china），疑似模板冗余，建议确认是否需保留",
+      "spec": "S-02",
+      "status": "open"
+    },
+    {
+      "code": "C-03",
+      "level": "P2",
+      "topic": "16-exit-transition-return",
+      "path": "16-exit-transition-return/prompts/prompt-policy-review.md",
+      "location": "跨文档重复",
+      "detail": "约 242 字的段落同时出现在 2 个主题（16-exit-transition-return, 20-overseas-china），疑似模板冗余，建议确认是否需保留",
+      "spec": "S-02",
+      "status": "open"
+    },
+    {
+      "code": "C-03",
+      "level": "P2",
+      "topic": "16-exit-transition-return",
+      "path": "16-exit-transition-return/prompts/prompt-policy-review.md",
+      "location": "跨文档重复",
+      "detail": "约 154 字的段落同时出现在 2 个主题（16-exit-transition-return, 20-overseas-china），疑似模板冗余，建议确认是否需保留",
+      "spec": "S-02",
+      "status": "open"
+    },
+    {
+      "code": "C-03",
+      "level": "P2",
+      "topic": "16-exit-transition-return",
+      "path": "16-exit-transition-return/prompts/prompt-policy-review.md",
+      "location": "跨文档重复",
+      "detail": "约 251 字的段落同时出现在 2 个主题（16-exit-transition-return, 20-overseas-china），疑似模板冗余，建议确认是否需保留",
+      "spec": "S-02",
+      "status": "open"
+    },
+    {
+      "code": "C-03",
+      "level": "P2",
+      "topic": "18-family-parenting",
+      "path": "18-family-parenting/prompts/prompt-baseline-setup.md",
+      "location": "跨文档重复",
+      "detail": "约 224 字的段落同时出现在 2 个主题（18-family-parenting, 19-safety-disaster），疑似模板冗余，建议确认是否需保留",
+      "spec": "S-02",
+      "status": "open"
+    },
+    {
+      "code": "C-10",
+      "level": "P2",
+      "topic": "01-ssw-driver|02-career-driver|07-economy-finance",
+      "path": "data/（登记册）",
+      "location": "口径不一致",
+      "detail": "指标「運輸業月均工资」在 3 个主题登记册中口径表述不一致",
+      "spec": "S-09",
+      "status": "unfixable"
+    },
+    {
+      "code": "C-10",
+      "level": "P2",
+      "topic": "16-exit-transition-return|17-migration-compliance|18-family-parenting|19-safety-disaster|20-overseas-china",
+      "path": "data/（登记册）",
+      "location": "口径不一致",
+      "detail": "指标「官方来源更新与口径冲突」在 5 个主题登记册中口径表述不一致",
+      "spec": "S-09",
+      "status": "unfixable"
+    }
+  ],
+  "repairs": [],
+  "verification": {
+    "checks": {
+      "required_coverage_ok": true,
+      "dup_ratio_ok": true,
+      "cite_valid_not_regressed": true,
+      "p0p1_contradictions_zero": true,
+      "no_new_open_findings": true,
+      "no_regression": true,
+      "repairs_verified": true
+    },
+    "passed": true,
+    "before": {
+      "topics_total": 21,
+      "topics_complete": 21,
+      "required_coverage": 1.0,
+      "missing_items": 0,
+      "contradictions": 2,
+      "gaps": 0,
+      "source_coverage": 0.41409691629955947,
+      "stale_reports": 0,
+      "dup_ratio": 0.0,
+      "attribution_errors": 0,
+      "cite_valid_ratio": 1.0,
+      "broken_links": 0,
+      "findings_by_level": {
+        "P0": 0,
+        "P1": 0,
+        "P2": 52
+      }
+    },
+    "after": {
+      "topics_total": 21,
+      "topics_complete": 21,
+      "required_coverage": 1.0,
+      "missing_items": 0,
+      "contradictions": 2,
+      "gaps": 0,
+      "source_coverage": 0.41409691629955947,
+      "stale_reports": 0,
+      "dup_ratio": 0.0,
+      "attribution_errors": 0,
+      "cite_valid_ratio": 1.0,
+      "broken_links": 0,
+      "findings_by_level": {
+        "P0": 0,
+        "P1": 0,
+        "P2": 52
+      }
+    },
+    "open_after": [
+      {
+        "code": "C-07",
+        "level": "P2",
+        "topic": "05-industry-autonomous",
+        "path": "05-industry-autonomous/reports/2026-11-industry-autonomous.md",
+        "location": "事实段落来源覆盖不足",
+        "detail": "含数字事实段落来源覆盖率 19% < 20%",
+        "spec": "S-06",
+        "status": "open"
+      },
+      {
+        "code": "C-07",
+        "level": "P2",
+        "topic": "07-economy-finance",
+        "path": "07-economy-finance/reports/2026-11-economy-finance.md",
+        "location": "事实段落来源覆盖不足",
+        "detail": "含数字事实段落来源覆盖率 19% < 20%",
+        "spec": "S-06",
+        "status": "open"
+      },
+      {
+        "code": "C-07",
+        "level": "P2",
+        "topic": "14-life-operations",
+        "path": "14-life-operations/reports/2026-11-life-operations.md",
+        "location": "事实段落来源覆盖不足",
+        "detail": "含数字事实段落来源覆盖率 14% < 20%",
+        "spec": "S-06",
+        "status": "open"
+      },
+      {
+        "code": "C-03",
+        "level": "P2",
+        "topic": "01-ssw-driver",
+        "path": "01-ssw-driver/operations-guide.md",
+        "location": "跨文档重复",
+        "detail": "约 180 字的段落同时出现在 7 个主题（01-ssw-driver, 02-career-driver, 03-career-management, 07-economy-finance, 10-education-qualification, 11-language-japanese, 12-culture-life），疑似模板冗余，建议确认是否需保留",
+        "spec": "S-02",
+        "status": "open"
+      },
+      {
+        "code": "C-03",
+        "level": "P2",
+        "topic": "01-ssw-driver",
+        "path": "01-ssw-driver/operations-guide.md",
+        "location": "跨文档重复",
+        "detail": "约 209 字的段落同时出现在 7 个主题（01-ssw-driver, 02-career-driver, 03-career-management, 07-economy-finance, 10-education-qualification, 11-language-japanese, 12-culture-life），疑似模板冗余，建议确认是否需保留",
+        "spec": "S-02",
+        "status": "open"
+      },
+      {
+        "code": "C-03",
+        "level": "P2",
+        "topic": "01-ssw-driver",
+        "path": "01-ssw-driver/operations-guide.md",
+        "location": "跨文档重复",
+        "detail": "约 129 字的段落同时出现在 7 个主题（01-ssw-driver, 02-career-driver, 03-career-management, 07-economy-finance, 10-education-qualification, 11-language-japanese, 12-culture-life），疑似模板冗余，建议确认是否需保留",
+        "spec": "S-02",
+        "status": "open"
+      },
+      {
+        "code": "C-03",
+        "level": "P2",
+        "topic": "01-ssw-driver",
+        "path": "01-ssw-driver/operations-guide.md",
+        "location": "跨文档重复",
+        "detail": "约 142 字的段落同时出现在 7 个主题（01-ssw-driver, 02-career-driver, 03-career-management, 07-economy-finance, 10-education-qualification, 11-language-japanese, 12-culture-life），疑似模板冗余，建议确认是否需保留",
+        "spec": "S-02",
+        "status": "open"
+      },
+      {
+        "code": "C-03",
+        "level": "P2",
+        "topic": "01-ssw-driver",
+        "path": "01-ssw-driver/operations-guide.md",
+        "location": "跨文档重复",
+        "detail": "约 153 字的段落同时出现在 7 个主题（01-ssw-driver, 02-career-driver, 03-career-management, 07-economy-finance, 10-education-qualification, 11-language-japanese, 12-culture-life），疑似模板冗余，建议确认是否需保留",
+        "spec": "S-02",
+        "status": "open"
+      },
+      {
+        "code": "C-03",
+        "level": "P2",
+        "topic": "01-ssw-driver",
+        "path": "01-ssw-driver/prompts/prompt-baseline-setup.md",
+        "location": "跨文档重复",
+        "detail": "约 145 字的段落同时出现在 3 个主题（01-ssw-driver, 02-career-driver, 03-career-management），疑似模板冗余，建议确认是否需保留",
+        "spec": "S-02",
+        "status": "open"
+      },
+      {
+        "code": "C-03",
+        "level": "P2",
+        "topic": "01-ssw-driver",
+        "path": "01-ssw-driver/prompts/prompt-baseline-setup.md",
+        "location": "跨文档重复",
+        "detail": "约 214 字的段落同时出现在 7 个主题（01-ssw-driver, 02-career-driver, 03-career-management, 07-economy-finance, 10-education-qualification, 11-language-japanese, 12-culture-life），疑似模板冗余，建议确认是否需保留",
+        "spec": "S-02",
+        "status": "open"
+      },
+      {
+        "code": "C-03",
+        "level": "P2",
+        "topic": "01-ssw-driver",
+        "path": "01-ssw-driver/prompts/prompt-baseline-setup.md",
+        "location": "跨文档重复",
+        "detail": "约 219 字的段落同时出现在 16 个主题（01-ssw-driver, 02-career-driver, 03-career-management, 04-industry-logistics, 05-industry-autonomous, 06-industry-technology, 07-economy-finance, 08-visa-immigration, 09-politics-law, 10-education-qualification, 11-language-japanese, 12-culture-life, 13-regional-info, 16-exit-transition-return, 17-migration-compliance, 20-overseas-china），疑似模板冗余，建议确认是否需保留",
+        "spec": "S-02",
+        "status": "open"
+      },
+      {
+        "code": "C-03",
+        "level": "P2",
+        "topic": "01-ssw-driver",
+        "path": "01-ssw-driver/prompts/prompt-update.md",
+        "location": "跨文档重复",
+        "detail": "约 555 字的段落同时出现在 7 个主题（01-ssw-driver, 02-career-driver, 03-career-management, 07-economy-finance, 10-education-qualification, 11-language-japanese, 12-culture-life），疑似模板冗余，建议确认是否需保留",
+        "spec": "S-02",
+        "status": "open"
+      },
+      {
+        "code": "C-03",
+        "level": "P2",
+        "topic": "01-ssw-driver",
+        "path": "01-ssw-driver/prompts/prompt-update.md",
+        "location": "跨文档重复",
+        "detail": "约 219 字的段落同时出现在 6 个主题（01-ssw-driver, 02-career-driver, 03-career-management, 07-economy-finance, 10-education-qualification, 12-culture-life），疑似模板冗余，建议确认是否需保留",
+        "spec": "S-02",
+        "status": "open"
+      },
+      {
+        "code": "C-03",
+        "level": "P2",
+        "topic": "01-ssw-driver",
+        "path": "01-ssw-driver/prompts/prompt-update.md",
+        "location": "跨文档重复",
+        "detail": "约 180 字的段落同时出现在 7 个主题（01-ssw-driver, 02-career-driver, 03-career-management, 07-economy-finance, 10-education-qualification, 11-language-japanese, 12-culture-life），疑似模板冗余，建议确认是否需保留",
+        "spec": "S-02",
+        "status": "open"
+      },
+      {
+        "code": "C-03",
+        "level": "P2",
+        "topic": "02-career-driver",
+        "path": "02-career-driver/operations-guide.md",
+        "location": "跨文档重复",
+        "detail": "约 184 字的段落同时出现在 2 个主题（02-career-driver, 03-career-management），疑似模板冗余，建议确认是否需保留",
+        "spec": "S-02",
+        "status": "open"
+      },
+      {
+        "code": "C-03",
+        "level": "P2",
+        "topic": "02-career-driver",
+        "path": "02-career-driver/prompts/business-config.md",
+        "location": "跨文档重复",
+        "detail": "约 187 字的段落同时出现在 3 个主题（02-career-driver, 03-career-management, 07-economy-finance），疑似模板冗余，建议确认是否需保留",
+        "spec": "S-02",
+        "status": "open"
+      },
+      {
+        "code": "C-03",
+        "level": "P2",
+        "topic": "02-career-driver",
+        "path": "02-career-driver/prompts/business-config.md",
+        "location": "跨文档重复",
+        "detail": "约 333 字的段落同时出现在 5 个主题（02-career-driver, 03-career-management, 10-education-qualification, 11-language-japanese, 12-culture-life），疑似模板冗余，建议确认是否需保留",
+        "spec": "S-02",
+        "status": "open"
+      },
+      {
+        "code": "C-03",
+        "level": "P2",
+        "topic": "02-career-driver",
+        "path": "02-career-driver/prompts/prompt-update.md",
+        "location": "跨文档重复",
+        "detail": "约 141 字的段落同时出现在 2 个主题（02-career-driver, 07-economy-finance），疑似模板冗余，建议确认是否需保留",
+        "spec": "S-02",
+        "status": "open"
+      },
+      {
+        "code": "C-03",
+        "level": "P2",
+        "topic": "03-career-management",
+        "path": "03-career-management/prompts/prompt-update.md",
+        "location": "跨文档重复",
+        "detail": "约 141 字的段落同时出现在 3 个主题（03-career-management, 11-language-japanese, 13-regional-info），疑似模板冗余，建议确认是否需保留",
+        "spec": "S-02",
+        "status": "open"
+      },
+      {
+        "code": "C-03",
+        "level": "P2",
+        "topic": "04-industry-logistics",
+        "path": "04-industry-logistics/operations-guide.md",
+        "location": "跨文档重复",
+        "detail": "约 140 字的段落同时出现在 3 个主题（04-industry-logistics, 05-industry-autonomous, 06-industry-technology），疑似模板冗余，建议确认是否需保留",
+        "spec": "S-02",
+        "status": "open"
+      },
+      {
+        "code": "C-03",
+        "level": "P2",
+        "topic": "04-industry-logistics",
+        "path": "04-industry-logistics/operations-guide.md",
+        "location": "跨文档重复",
+        "detail": "约 153 字的段落同时出现在 3 个主题（04-industry-logistics, 05-industry-autonomous, 06-industry-technology），疑似模板冗余，建议确认是否需保留",
+        "spec": "S-02",
+        "status": "open"
+      },
+      {
+        "code": "C-03",
+        "level": "P2",
+        "topic": "04-industry-logistics",
+        "path": "04-industry-logistics/prompts/business-config.md",
+        "location": "跨文档重复",
+        "detail": "约 184 字的段落同时出现在 2 个主题（04-industry-logistics, 05-industry-autonomous），疑似模板冗余，建议确认是否需保留",
+        "spec": "S-02",
+        "status": "open"
+      },
+      {
+        "code": "C-03",
+        "level": "P2",
+        "topic": "04-industry-logistics",
+        "path": "04-industry-logistics/prompts/prompt-annual-refresh.md",
+        "location": "跨文档重复",
+        "detail": "约 158 字的段落同时出现在 3 个主题（04-industry-logistics, 05-industry-autonomous, 06-industry-technology），疑似模板冗余，建议确认是否需保留",
+        "spec": "S-02",
+        "status": "open"
+      },
+      {
+        "code": "C-03",
+        "level": "P2",
+        "topic": "04-industry-logistics",
+        "path": "04-industry-logistics/prompts/prompt-annual-refresh.md",
+        "location": "跨文档重复",
+        "detail": "约 216 字的段落同时出现在 3 个主题（04-industry-logistics, 05-industry-autonomous, 06-industry-technology），疑似模板冗余，建议确认是否需保留",
+        "spec": "S-02",
+        "status": "open"
+      },
+      {
+        "code": "C-03",
+        "level": "P2",
+        "topic": "04-industry-logistics",
+        "path": "04-industry-logistics/prompts/prompt-annual-refresh.md",
+        "location": "跨文档重复",
+        "detail": "约 192 字的段落同时出现在 3 个主题（04-industry-logistics, 05-industry-autonomous, 06-industry-technology），疑似模板冗余，建议确认是否需保留",
+        "spec": "S-02",
+        "status": "open"
+      },
+      {
+        "code": "C-03",
+        "level": "P2",
+        "topic": "04-industry-logistics",
+        "path": "04-industry-logistics/prompts/prompt-baseline-setup.md",
+        "location": "跨文档重复",
+        "detail": "约 216 字的段落同时出现在 2 个主题（04-industry-logistics, 05-industry-autonomous），疑似模板冗余，建议确认是否需保留",
+        "spec": "S-02",
+        "status": "open"
+      },
+      {
+        "code": "C-03",
+        "level": "P2",
+        "topic": "05-industry-autonomous",
+        "path": "05-industry-autonomous/prompts/business-config.md",
+        "location": "跨文档重复",
+        "detail": "约 288 字的段落同时出现在 2 个主题（05-industry-autonomous, 06-industry-technology），疑似模板冗余，建议确认是否需保留",
+        "spec": "S-02",
+        "status": "open"
+      },
+      {
+        "code": "C-03",
+        "level": "P2",
+        "topic": "08-visa-immigration",
+        "path": "08-visa-immigration/operations-guide.md",
+        "location": "跨文档重复",
+        "detail": "约 214 字的段落同时出现在 4 个主题（08-visa-immigration, 09-politics-law, 16-exit-transition-return, 20-overseas-china），疑似模板冗余，建议确认是否需保留",
+        "spec": "S-02",
+        "status": "open"
+      },
+      {
+        "code": "C-03",
+        "level": "P2",
+        "topic": "08-visa-immigration",
+        "path": "08-visa-immigration/operations-guide.md",
+        "location": "跨文档重复",
+        "detail": "约 156 字的段落同时出现在 3 个主题（08-visa-immigration, 09-politics-law, 16-exit-transition-return），疑似模板冗余，建议确认是否需保留",
+        "spec": "S-02",
+        "status": "open"
+      },
+      {
+        "code": "C-03",
+        "level": "P2",
+        "topic": "08-visa-immigration",
+        "path": "08-visa-immigration/operations-guide.md",
+        "location": "跨文档重复",
+        "detail": "约 153 字的段落同时出现在 5 个主题（08-visa-immigration, 09-politics-law, 16-exit-transition-return, 17-migration-compliance, 20-overseas-china），疑似模板冗余，建议确认是否需保留",
+        "spec": "S-02",
+        "status": "open"
+      },
+      {
+        "code": "C-03",
+        "level": "P2",
+        "topic": "08-visa-immigration",
+        "path": "08-visa-immigration/prompts/prompt-baseline-setup.md",
+        "location": "跨文档重复",
+        "detail": "约 196 字的段落同时出现在 2 个主题（08-visa-immigration, 16-exit-transition-return），疑似模板冗余，建议确认是否需保留",
+        "spec": "S-02",
+        "status": "open"
+      },
+      {
+        "code": "C-03",
+        "level": "P2",
+        "topic": "08-visa-immigration",
+        "path": "08-visa-immigration/prompts/prompt-policy-review.md",
+        "location": "跨文档重复",
+        "detail": "约 498 字的段落同时出现在 4 个主题（08-visa-immigration, 09-politics-law, 16-exit-transition-return, 20-overseas-china），疑似模板冗余，建议确认是否需保留",
+        "spec": "S-02",
+        "status": "open"
+      },
+      {
+        "code": "C-03",
+        "level": "P2",
+        "topic": "08-visa-immigration",
+        "path": "08-visa-immigration/prompts/prompt-policy-review.md",
+        "location": "跨文档重复",
+        "detail": "约 127 字的段落同时出现在 5 个主题（08-visa-immigration, 09-politics-law, 16-exit-transition-return, 17-migration-compliance, 20-overseas-china），疑似模板冗余，建议确认是否需保留",
+        "spec": "S-02",
+        "status": "open"
+      },
+      {
+        "code": "C-03",
+        "level": "P2",
+        "topic": "08-visa-immigration",
+        "path": "08-visa-immigration/prompts/prompt-policy-review.md",
+        "location": "跨文档重复",
+        "detail": "约 159 字的段落同时出现在 2 个主题（08-visa-immigration, 09-politics-law），疑似模板冗余，建议确认是否需保留",
+        "spec": "S-02",
+        "status": "open"
+      },
+      {
+        "code": "C-03",
+        "level": "P2",
+        "topic": "08-visa-immigration",
+        "path": "08-visa-immigration/prompts/prompt-policy-review.md",
+        "location": "跨文档重复",
+        "detail": "约 251 字的段落同时出现在 2 个主题（08-visa-immigration, 09-politics-law），疑似模板冗余，建议确认是否需保留",
+        "spec": "S-02",
+        "status": "open"
+      },
+      {
+        "code": "C-03",
+        "level": "P2",
+        "topic": "08-visa-immigration",
+        "path": "08-visa-immigration/prompts/prompt-policy-review.md",
+        "location": "跨文档重复",
+        "detail": "约 194 字的段落同时出现在 5 个主题（08-visa-immigration, 09-politics-law, 16-exit-transition-return, 17-migration-compliance, 20-overseas-china），疑似模板冗余，建议确认是否需保留",
+        "spec": "S-02",
+        "status": "open"
+      },
+      {
+        "code": "C-03",
+        "level": "P2",
+        "topic": "10-education-qualification",
+        "path": "10-education-qualification/prompts/business-config.md",
+        "location": "跨文档重复",
+        "detail": "约 182 字的段落同时出现在 3 个主题（10-education-qualification, 11-language-japanese, 12-culture-life），疑似模板冗余，建议确认是否需保留",
+        "spec": "S-02",
+        "status": "open"
+      },
+      {
+        "code": "C-03",
+        "level": "P2",
+        "topic": "10-education-qualification",
+        "path": "10-education-qualification/prompts/prompt-baseline-setup.md",
+        "location": "跨文档重复",
+        "detail": "约 186 字的段落同时出现在 3 个主题（10-education-qualification, 11-language-japanese, 12-culture-life），疑似模板冗余，建议确认是否需保留",
+        "spec": "S-02",
+        "status": "open"
+      },
+      {
+        "code": "C-03",
+        "level": "P2",
+        "topic": "14-life-operations",
+        "path": "14-life-operations/operations-guide.md",
+        "location": "跨文档重复",
+        "detail": "约 211 字的段落同时出现在 2 个主题（14-life-operations, 15-health-wellbeing），疑似模板冗余，建议确认是否需保留",
+        "spec": "S-02",
+        "status": "open"
+      },
+      {
+        "code": "C-03",
+        "level": "P2",
+        "topic": "14-life-operations",
+        "path": "14-life-operations/prompts/prompt-baseline-setup.md",
+        "location": "跨文档重复",
+        "detail": "约 570 字的段落同时出现在 2 个主题（14-life-operations, 15-health-wellbeing），疑似模板冗余，建议确认是否需保留",
+        "spec": "S-02",
+        "status": "open"
+      },
+      {
+        "code": "C-03",
+        "level": "P2",
+        "topic": "14-life-operations",
+        "path": "14-life-operations/prompts/prompt-baseline-setup.md",
+        "location": "跨文档重复",
+        "detail": "约 148 字的段落同时出现在 2 个主题（14-life-operations, 15-health-wellbeing），疑似模板冗余，建议确认是否需保留",
+        "spec": "S-02",
+        "status": "open"
+      },
+      {
+        "code": "C-03",
+        "level": "P2",
+        "topic": "14-life-operations",
+        "path": "14-life-operations/prompts/prompt-update.md",
+        "location": "跨文档重复",
+        "detail": "约 302 字的段落同时出现在 2 个主题（14-life-operations, 15-health-wellbeing），疑似模板冗余，建议确认是否需保留",
+        "spec": "S-02",
+        "status": "open"
+      },
+      {
+        "code": "C-03",
+        "level": "P2",
+        "topic": "16-exit-transition-return",
+        "path": "16-exit-transition-return/operations-guide.md",
+        "location": "跨文档重复",
+        "detail": "约 121 字的段落同时出现在 3 个主题（16-exit-transition-return, 17-migration-compliance, 20-overseas-china），疑似模板冗余，建议确认是否需保留",
+        "spec": "S-02",
+        "status": "open"
+      },
+      {
+        "code": "C-03",
+        "level": "P2",
+        "topic": "16-exit-transition-return",
+        "path": "16-exit-transition-return/prompts/business-config.md",
+        "location": "跨文档重复",
+        "detail": "约 300 字的段落同时出现在 2 个主题（16-exit-transition-return, 20-overseas-china），疑似模板冗余，建议确认是否需保留",
+        "spec": "S-02",
+        "status": "open"
+      },
+      {
+        "code": "C-03",
+        "level": "P2",
+        "topic": "16-exit-transition-return",
+        "path": "16-exit-transition-return/prompts/prompt-baseline-setup.md",
+        "location": "跨文档重复",
+        "detail": "约 156 字的段落同时出现在 2 个主题（16-exit-transition-return, 20-overseas-china），疑似模板冗余，建议确认是否需保留",
+        "spec": "S-02",
+        "status": "open"
+      },
+      {
+        "code": "C-03",
+        "level": "P2",
+        "topic": "16-exit-transition-return",
+        "path": "16-exit-transition-return/prompts/prompt-policy-review.md",
+        "location": "跨文档重复",
+        "detail": "约 159 字的段落同时出现在 2 个主题（16-exit-transition-return, 20-overseas-china），疑似模板冗余，建议确认是否需保留",
+        "spec": "S-02",
+        "status": "open"
+      },
+      {
+        "code": "C-03",
+        "level": "P2",
+        "topic": "16-exit-transition-return",
+        "path": "16-exit-transition-return/prompts/prompt-policy-review.md",
+        "location": "跨文档重复",
+        "detail": "约 242 字的段落同时出现在 2 个主题（16-exit-transition-return, 20-overseas-china），疑似模板冗余，建议确认是否需保留",
+        "spec": "S-02",
+        "status": "open"
+      },
+      {
+        "code": "C-03",
+        "level": "P2",
+        "topic": "16-exit-transition-return",
+        "path": "16-exit-transition-return/prompts/prompt-policy-review.md",
+        "location": "跨文档重复",
+        "detail": "约 154 字的段落同时出现在 2 个主题（16-exit-transition-return, 20-overseas-china），疑似模板冗余，建议确认是否需保留",
+        "spec": "S-02",
+        "status": "open"
+      },
+      {
+        "code": "C-03",
+        "level": "P2",
+        "topic": "16-exit-transition-return",
+        "path": "16-exit-transition-return/prompts/prompt-policy-review.md",
+        "location": "跨文档重复",
+        "detail": "约 251 字的段落同时出现在 2 个主题（16-exit-transition-return, 20-overseas-china），疑似模板冗余，建议确认是否需保留",
+        "spec": "S-02",
+        "status": "open"
+      },
+      {
+        "code": "C-03",
+        "level": "P2",
+        "topic": "18-family-parenting",
+        "path": "18-family-parenting/prompts/prompt-baseline-setup.md",
+        "location": "跨文档重复",
+        "detail": "约 224 字的段落同时出现在 2 个主题（18-family-parenting, 19-safety-disaster），疑似模板冗余，建议确认是否需保留",
+        "spec": "S-02",
+        "status": "open"
+      },
+      {
+        "code": "C-10",
+        "level": "P2",
+        "topic": "01-ssw-driver|02-career-driver|07-economy-finance",
+        "path": "data/（登记册）",
+        "location": "口径不一致",
+        "detail": "指标「運輸業月均工资」在 3 个主题登记册中口径表述不一致",
+        "spec": "S-09",
+        "status": "open"
+      },
+      {
+        "code": "C-10",
+        "level": "P2",
+        "topic": "16-exit-transition-return|17-migration-compliance|18-family-parenting|19-safety-disaster|20-overseas-china",
+        "path": "data/（登记册）",
+        "location": "口径不一致",
+        "detail": "指标「官方来源更新与口径冲突」在 5 个主题登记册中口径表述不一致",
+        "spec": "S-09",
+        "status": "open"
+      }
+    ]
+  }
+}

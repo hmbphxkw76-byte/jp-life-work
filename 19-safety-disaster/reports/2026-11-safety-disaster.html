@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="日本｜市场指标监测型 2026-11 报告：一、执行摘要：结论先行、二、持续监测机制设计、三、多维指标体系与来源、四、首期基线数据（2026-11-14）">
+<meta name="keywords" content="日本,市场指标监测型,2026-11,在留,特定技能,一、执行摘要：结论先行,二、持续监测机制设计,三、多维指标体系与来源,四、首期基线数据（2026-11-14）,五、先行指标判读,六、信号规则与决策框架,七、月 / 季 / 年监测日历">
+<title>防灾·安全·治安 · 2026-11 月度报告</title>
+<style>
+:root{
+  --radius-sm:8px; --radius:12px; --radius-lg:16px;
+  --shadow:0 1px 3px rgba(20,40,70,.06); --shadow-md:0 4px 14px rgba(20,40,70,.09);
+  --font-sans:"Microsoft YaHei","PingFang SC","Segoe UI",Arial,sans-serif;
+  --font-mono:"SFMono-Regular",Consolas,"Liberation Mono",monospace;
+  --focus-ring:0 0 0 3px rgba(63,111,176,.35);
+  --bg:#f4f6f9; --card:#ffffff; --ink:#15202b; --ink2:#465667; --ink3:#657180;
+  --line:#e1e7ee; --line2:#eef2f6;
+  --navy:#16324f; --navy2:#2f5597; --blue:#3f6fb0; --blue-l:#eaf1fa;
+  --red:#a83224; --red-d:#822116; --red-l:#fbece8;
+  --pre:#b8541c; --pre-l:#fdf1e4;
+  --green:#1c7444; --green-l:#eaf5ef;
+  --amber:#956612; --amber-l:#fdf4e2;
+  --gray:#646f7b; --gray-l:#eff2f4;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{font-family:var(--font-sans);background:var(--bg);color:var(--ink);line-height:1.76;font-size:14.5px}
+a{color:var(--navy2);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px 68px}
+
+/* ── 跳转链接 / 焦点环 ── */
+.skip-link{position:absolute;left:12px;top:-48px;z-index:100;background:var(--navy);
+  color:#fff;padding:8px 16px;border-radius:0 0 8px 8px;font-size:12.5px;transition:top .15s ease}
+.skip-link:focus{top:0;color:#fff;text-decoration:none}
+:focus-visible{outline:none;box-shadow:var(--focus-ring)}
+
+/* ── 题头 Hero ── */
+.hero{background:linear-gradient(128deg,#0f2338 0%,#16324f 52%,#2f5597 100%);
+  color:#fff;padding:46px 36px 34px;border-radius:0 0 18px 18px;margin-bottom:24px}
+.hero .eyebrow{font-size:11.5px;letter-spacing:2.4px;color:rgba(255,255,255,.62);text-transform:uppercase}
+.hero h1{font-size:28px;font-weight:700;letter-spacing:.4px;margin:8px 0 6px;line-height:1.35}
+.hero .sub{font-size:13.5px;color:rgba(255,255,255,.82);max-width:900px}
+.hero .meta{font-size:12.3px;color:rgba(255,255,255,.78);margin-top:16px;line-height:2}
+.hero .meta b{color:#fff}
+.hero .tag{display:inline-block;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.2);
+  border-radius:14px;padding:2px 11px;margin:5px 6px 0 0;font-size:11.5px}
+
+/* ── 报告导航（sticky） ── */
+.report-nav{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);
+  border-bottom:1px solid var(--line);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  margin-bottom:26px}
+.report-nav .wrap{padding-top:10px;padding-bottom:10px}
+.nav-url{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;font-size:11.5px;
+  line-height:1.6;color:var(--ink3);padding-bottom:6px;margin-bottom:6px;
+  border-bottom:1px dashed var(--line)}
+.nav-url-label{font-weight:700;color:var(--ink2);white-space:nowrap}
+.nav-url a{color:var(--blue);word-break:break-all}
+.nav-tabs{display:flex;flex-wrap:wrap;gap:6px}
+.nav-tabs a{color:var(--ink2);font-size:12.5px;padding:5px 10px;border-radius:6px;
+  transition:background .15s ease,color .15s ease}
+.nav-tabs a:hover{background:var(--blue-l);color:var(--blue)}
+
+/* ── 跨月对比工具条 ── */
+.diff-bar{display:flex;flex-wrap:wrap;align-items:center;gap:8px;
+  margin-top:8px;padding-top:8px;border-top:1px dashed var(--line);
+  font-size:12px;color:var(--ink3)}
+.diff-bar .diff-summary{flex:1;min-width:200px;line-height:1.6}
+.diff-bar .diff-summary b{color:var(--navy)}
+.diff-toggle{font-size:12px;border:1px solid var(--line);background:#fff;border-radius:7px;
+  padding:4px 11px;cursor:pointer;color:var(--navy2);font-family:inherit}
+.diff-toggle:hover{border-color:var(--blue)}
+
+/* ── 正文 ── */
+h2.sec{font-size:20px;color:var(--navy);margin:44px 0 4px;padding-left:12px;
+  border-left:4px solid var(--navy2);font-weight:700;scroll-margin-top:110px}
+h3{font-size:15.5px;color:var(--navy);margin:22px 0 8px;font-weight:700}
+h4{font-size:14px;color:var(--navy);margin:16px 0 6px;font-weight:700}
+p{margin:0 0 12px}
+ul,ol{padding-left:22px;margin:8px 0 14px}
+li{margin-bottom:6px}
+hr{border:0;border-top:1px solid var(--line);margin:26px 0}
+strong{color:var(--ink)}
+code{background:#f6f8fa;padding:2px 5px;border-radius:4px;font-family:var(--font-mono);font-size:12.5px}
+pre{background:#f6f8fa;padding:12px 14px;border-radius:8px;overflow-x:auto;margin:10px 0 16px}
+pre code{background:none;padding:0;font-size:12.3px;line-height:1.65}
+blockquote{border-left:4px solid var(--navy2);background:var(--blue-l);
+  padding:12px 16px;border-radius:0 8px 8px 0;margin:12px 0;color:var(--ink2)}
+blockquote p:last-child{margin-bottom:0}
+.lead{color:var(--ink2);font-size:13.8px;margin:6px 0 14px}
+
+/* ── 表格 ── */
+table{width:100%;border-collapse:collapse;font-size:12.6px;background:var(--card);
+  border-radius:8px;overflow:hidden;margin:12px 0 16px}
+th{background:var(--navy);color:#fff;padding:8px 10px;text-align:left;font-weight:600;
+  font-size:12px;vertical-align:bottom}
+td{padding:7px 10px;border-bottom:1px solid var(--line2);vertical-align:top;line-height:1.62}
+tbody tr:nth-child(even) td{background:#fafbfd}
+tbody tr:hover td{background:var(--blue-l)}
+td.num{font-variant-numeric:tabular-nums}
+
+/* ── 信息卡 / 注释 ── */
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;
+  padding:18px 20px;margin:14px 0;box-shadow:var(--shadow)}
+.card h3:first-child{margin-top:0}
+.note{background:var(--amber-l);border-left:4px solid var(--amber);padding:10px 14px;
+  border-radius:0 7px 7px 0;font-size:12.9px;margin:12px 0}
+.note.gap{background:var(--gray-l);border-left-color:var(--gray)}
+.note.check{background:var(--green-l);border-left-color:var(--green)}
+.note.correct{background:var(--red-l);border-left-color:var(--red)}
+.note.preline{background:var(--pre-l);border-left-color:var(--pre)}
+
+/* ── 差异高亮（跨月对比） ── */
+.diff-badge{display:inline-block;font-size:10.5px;font-weight:700;line-height:1;
+  border-radius:3px;padding:2px 6px;margin-right:6px;vertical-align:middle;white-space:nowrap}
+.diff-block{border-radius:6px;padding:4px 8px;margin:4px -8px}
+.diff-new{background:var(--green-l);box-shadow:inset 3px 0 0 var(--green)}
+.diff-new .diff-badge{background:var(--green);color:#fff}
+.diff-mod{background:var(--amber-l);box-shadow:inset 3px 0 0 var(--amber)}
+.diff-mod .diff-badge{background:var(--amber);color:#fff}
+.diff-del-group{margin:6px 0;border:1px dashed var(--line);border-radius:6px;background:#fbfcfe}
+.diff-del-group>summary{cursor:pointer;font-size:12px;color:var(--ink3);
+  padding:6px 10px;user-select:none;list-style:none}
+.diff-del-group>summary::-webkit-details-marker{display:none}
+.diff-del-group>summary::before{content:"▸ ";color:var(--gray)}
+.diff-del-group[open]>summary::before{content:"▾ "}
+.diff-del-group .diff-del-body{padding:2px 8px 8px;color:var(--ink3)}
+.diff-del-group .diff-del-body s,.diff-del-group .diff-del-body del{color:var(--red)}
+.diff-del-group .diff-badge{background:var(--gray-l);color:var(--gray)}
+/* 隐藏更新标记：对照阅读模式 */
+main.hide-diff .diff-badge{display:none}
+main.hide-diff .diff-block{background:none;box-shadow:none;padding:0;margin:0}
+main.hide-diff .diff-del-group{display:none}
+
+/* ── 页脚 ── */
+.footer{font-size:11.4px;color:var(--ink3);text-align:center;margin-top:22px;line-height:1.9}
+.footer .backlinks{margin-top:8px}
+.footer .backlinks a{margin:0 8px}
+
+/* ── 响应式 ── */
+@media(max-width:760px){
+  .hero{padding:30px 20px;border-radius:0 0 14px 14px}
+  .hero h1{font-size:21px}
+  .wrap{padding:0 14px 46px}
+  td,th{padding:6px 7px;font-size:11.7px}
+  h2.sec{font-size:17.5px}
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">跳转到主要内容</a>
+<header class="hero" role="banner" aria-label="报告题头">
+  <div class="eyebrow">日本 · 市场指标监测型</div>
+  <h1>防灾·安全·治安 · 2026-11 月度报告</h1>
+  <div class="sub">版本：v1.0（2026-11 月度）｜数据基准日：2026-11-14</div>
+  <div class="meta"><b>版本</b>：v1.0（2026-11 月度）<br><b>数据基准日</b>：2026-11-14<br><b>主题类型</b>：市场指标监测型（market-monitoring）· 个人安全与防灾决策支持<br><b>受众定位</b>：本人（已在日或拟赴日的外国人，以特定技能司机为参照），需要理解本地防灾体制、获取外语灾害情报、应对治安与突发事件。<br><b>来源规则</b>：① 総務省消防庁、気象庁、内閣府 / 防災庁、外務省、警察庁 ＞ ② 地方自治体（防灾课・消防署・生活安全课）＞ ③ 観光庁 Safety tips、JNTO、NHK WORLD-JAPAN、地域国際化協会 ＞ ④ 媒体（仅线索，引用须回溯…<br><b>结论边界</b>：本报告为信息整理与条件化建议，不构成法律意见；不替代官方预警与应急指令；个人避难决策以自治体与気象庁最新发布为准。</div>
+  <div><span class="tag">2026-11</span><span class="tag">市场指标监测型</span></div>
+</header>
+<nav class="report-nav" aria-label="报告导航">
+  <div class="wrap">
+    <div class="nav-url">
+      <span class="nav-url-label">报告路径</span>
+      <a href="2026-11-safety-disaster.html">19-safety-disaster\reports\2026-11-safety-disaster.html</a>
+    </div>
+    <div class="nav-tabs"><a href="#s1">一、执行摘要：结论先行</a><a href="#s2">二、持续监测机制设计</a><a href="#s3">三、多维指标体系与来源</a><a href="#s4">四、首期基线数据（2026-11-14）</a><a href="#s5">五、先行指标判读</a><a href="#s6">六、信号规则与决策框架</a><a href="#s7">七、月 / 季 / 年监测日历</a><a href="#s8">八、数据治理：来源分级、口径优先与核验状态</a><a href="#s9">九、风险、局限与监测盲区</a><a href="#s10">十、交付物与后续运行方式</a></div>
+    
+  </div>
+</nav>
+<main class="wrap" id="main-content" role="main" aria-label="报告正文">
+<h2 id="s1" class="sec">一、执行摘要：结论先行</h2>
+<p><strong>第一句结论</strong>：在日本，防灾与安全的关键是「<strong>国家预警 → 自治体通知 → 个人接收</strong>」三层打通；本基线的信号矩阵为 <strong>绿灯 4 / 黄灯 2 / 灰灯 6</strong>，方向为「体制可用、个人接收层待登记」。</p>
+<p><strong>支撑论据</strong>（3 条编号）：</p>
+<ol>
+<li><strong>避难行动有明确分级口径</strong>（事实）：发布避难指示（警戒レベル 4）时全员避难、不等レベル 5；土砂 / 洪水危险区域实况看キキクル（<a href="https://www.jma.go.jp/jma/kishou/know/bosai/warning.html">気象庁</a>，2026-11-14 核验）。</li>
+<li><strong>外语情报渠道已成型但未个人化</strong>（事实 + 推断）：観光庁监修 Safety tips 提供 15 语种推送、気象庁多言語ページ含简体中文；但防災メール / 防灾行政无线为<strong>自治体层级</strong>，须在定居地登记住址时一并申请（<a href="https://www.mlit.go.jp/kankocho/seisaku_seido/kihonkeikaku/jizoku_kankochi/anzenkakuho/inbound/tool.html">観光庁 Safety tips</a>，2026）。</li>
+<li><strong>应急电话口径清晰但分诊因地区而异</strong>（事实）：警察 110、消防・救急 119、災害用伝言ダイヤル 171、救急安心センター #7119（截至令和 6 年 11 月共 36 地域、覆盖 36/47 都道府県）；未开设地区拨 #8000（儿童急救）或 119（<a href="https://www.fdma.go.jp/publication/hakusho/r6/report4/67976.html">消防庁 消防白書</a>，2024）。</li>
+</ol>
+<p><strong>先行信号综述</strong>：绿灯 4（気象厅预警体系、避难分级、Safety tips、应急电话）；黄灯 2（自治体避難所与配信渠道、救急安心センター覆盖）；灰灯 6（自治体清单、多语言登记、犯罪统计数值、领事保护机制、备蓄补助、个人定居地确定）。</p>
+<p><strong>关键数字卡</strong>：</p>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:25%">指标</th>
+<th style="width:25%">数值</th>
+<th style="width:25%">统计周期</th>
+<th style="width:25%">来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>救急安心センター #7119 覆盖</td>
+<td>36 / 47 都道府県</td>
+<td>令和 6 年 11 月</td>
+<td>消防庁</td>
+</tr>
+<tr>
+<td>Safety tips 语种数</td>
+<td>15 语种</td>
+<td>2026</td>
+<td>観光庁</td>
+</tr>
+<tr>
+<td>NHK WORLD-JAPAN 多语言</td>
+<td>约 20 种语言</td>
+<td>2026</td>
+<td>NHK</td>
+</tr>
+<tr>
+<td>应急电话</td>
+<td>110 / 119 / 171 / #7119 / 050-3816-2787</td>
+<td>2026</td>
+<td>警察庁・消防庁・JNTO</td>
+</tr>
+</tbody>
+</table>
+<p><strong>来源与时点</strong>：2026-11-14；官方入口页多无版本日期，深链待事件触发时补齐。</p>
+<h3 id="_2">数据变更摘要</h3>
+<p>本主题为首期基线，登记册 12+1 项指标均为首值；除第 13 项（来源治理，复核中）外，第 2 / 3 / 5 / 6 / 9 / 10 / 11 项为已核验，第 1 / 4 项为部分核验，第 7 / 8 / 12 项均标「⚠ 待核实」，截至 2026-11-14 无更新。</p>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:16%">#</th>
+<th style="width:16%">指标</th>
+<th style="width:16%">研究阶段</th>
+<th style="width:16%">最新值 / 规则</th>
+<th style="width:16%">来源机构</th>
+<th style="width:20%">核验状态</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>自治体防灾体制</td>
+<td>防灾体制</td>
+<td>避難所与防灾行政无线；⚠ 清单因自治体而异</td>
+<td>地方自治体 / 消防庁</td>
+<td>部分核验</td>
+</tr>
+<tr>
+<td>2</td>
+<td>気象警報・警戒レベル体系</td>
+<td>避难与情报</td>
+<td>分级预警</td>
+<td>気象庁</td>
+<td>已核验</td>
+</tr>
+<tr>
+<td>3</td>
+<td>避难行动（避難指示・勧告）</td>
+<td>避难与情报</td>
+<td>レベル 4 全员避难</td>
+<td>気象庁</td>
+<td>已核验</td>
+</tr>
+<tr>
+<td>4</td>
+<td>多语言防灾情报（防災メール・情報難民）</td>
+<td>避难与情报</td>
+<td>自治体配信 + 情報コーディネーター</td>
+<td>総務省 / 自治体</td>
+<td>部分核验</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Safety tips / 多言語防災気象情報</td>
+<td>避难与情报</td>
+<td>15 语种 / 含简体中文</td>
+<td>観光庁 / 気象庁</td>
+<td>已核验</td>
+</tr>
+<tr>
+<td>6</td>
+<td>灾害时外国人支援</td>
+<td>避难与情报</td>
+<td>情報コーディネーター</td>
+<td>総務省</td>
+<td>已核验</td>
+</tr>
+<tr>
+<td>7</td>
+<td>治安（警察庁犯罪统计・特殊诈欺）</td>
+<td>治安与人身</td>
+<td>⚠ 最新数值待核实</td>
+<td>警察庁</td>
+<td>⚠ 待核实</td>
+</tr>
+<tr>
+<td>8</td>
+<td>领事保护（外務省・在外公館）</td>
+<td>领事保护</td>
+<td>⚠ 具体机制待核实</td>
+<td>外務省</td>
+<td>⚠ 待核实</td>
+</tr>
+<tr>
+<td>9</td>
+<td>应急联络（110 / 119 / 171 / #7119 / Visitor Hotline）</td>
+<td>应急联络</td>
+<td>电话口径</td>
+<td>警察庁 / 消防庁 / JNTO</td>
+<td>已核验</td>
+</tr>
+<tr>
+<td>10</td>
+<td>家具固定与备蓄</td>
+<td>防灾体制</td>
+<td>3 天起步・滚动备蓄</td>
+<td>内閣府 / 防災庁</td>
+<td>已核验</td>
+</tr>
+<tr>
+<td>11</td>
+<td>消防庁 救急安心センター（#7119）</td>
+<td>应急联络</td>
+<td>36 / 47 都道府県</td>
+<td>消防庁</td>
+<td>已核验</td>
+</tr>
+<tr>
+<td>12</td>
+<td>ハザードマップ与风险地图</td>
+<td>防灾体制</td>
+<td>⚠ 具体图幅与入口待核实</td>
+<td>国土交通省 / 気象庁</td>
+<td>⚠ 待核实</td>
+</tr>
+<tr>
+<td>13</td>
+<td>官方来源更新与口径冲突</td>
+<td>全阶段</td>
+<td>逐条登记，不取均值</td>
+<td>全来源</td>
+<td>复核中</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_3">已修正事实清单</h3>
+<p>本版为首期基线（2026-11-14）；历史报告无已修正事实清单可继承，无新增修正。</p>
+<h2 id="s2" class="sec">二、持续监测机制设计</h2>
+<p><strong>数据流与传导路径</strong>：</p>
+<pre><code class="language-text">数据源层（気象庁 / 消防庁 / 防災庁 / 警察庁 / 外務省 / 自治体）
+  → 指标台账层（本登记册 12+1 项活值）
+  → 信号规则层（S01–S06）
+  → 决策输出层（个人接收登记 / 避难行动 / 事件触发解读）
+</code></pre>
+<p><strong>三级监测节拍</strong>：</p>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:25%">节拍</th>
+<th style="width:25%">目的</th>
+<th style="width:25%">核心指标</th>
+<th style="width:25%">输出物</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>月度</td>
+<td>核验与判定</td>
+<td>全部 12 项</td>
+<td>登记册更新记录；命中触发器升级为事件触发</td>
+</tr>
+<tr>
+<td>季度</td>
+<td>全维度复核</td>
+<td>防灾 / 情报 / 治安 / 领事 / 联络</td>
+<td>完整更新版报告（八节骨架）</td>
+</tr>
+<tr>
+<td>年度</td>
+<td>复盘与阈值回测</td>
+<td>全部 + 口径清单</td>
+<td>年度台账复盘</td>
+</tr>
+</tbody>
+</table>
+<p><strong>传导链</strong>（每条含先行变量 / 中间变量 / 典型时滞 / 验证指标）：</p>
+<ol>
+<li>气象现象（台风 / 大雨 / 地震）→ 気象庁警報・警戒レベル → 自治体避難指示 → 个人避难行动（时滞：分钟至小时；验证指标：避难所开放与安否）。</li>
+<li>自治体防灾计划改定 → 避難所 / 防災メール 渠道变化 → 个人接收登记（时滞：计划改定后一次性；验证指标：登记完成率）。</li>
+<li>犯罪统计 / 特殊诈欺手口更新 → 生活安全提醒 → 防诈行为（时滞：年度 / 半年度；验证指标：警察厅统计与窗口提醒）。</li>
+</ol>
+<p><strong>类型机制适配</strong>：本业务线为个人安全与防灾决策支持，非市场定价监测；市场指标监测型的 K/RL 阈值信号、供给情景重算、五态合成等机制不适用，改以追踪表 + 触发器 + 监测日历承载监测职能。</p>
+<h2 id="s3" class="sec">三、多维指标体系与来源</h2>
+<p><strong>维度总表</strong>：</p>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:20%">维度</th>
+<th style="width:20%">核心指标</th>
+<th style="width:20%">时序属性</th>
+<th style="width:20%">主要发布方</th>
+<th style="width:20%">口径警示</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>防灾体制</td>
+<td>自治体防災計画・避難所・防災行政无线</td>
+<td>事件 / 年度</td>
+<td>地方自治体 / 消防庁</td>
+<td>清单因自治体而异</td>
+</tr>
+<tr>
+<td>避难与情报</td>
+<td>警戒レベル / 防災メール / 多言語防災気象情報</td>
+<td>实时 / 事件</td>
+<td>気象庁 / 自治体 / 観光庁</td>
+<td>配信层级不同</td>
+</tr>
+<tr>
+<td>治安与人身</td>
+<td>犯罪统计 / 特殊诈欺</td>
+<td>年度 / 半年度</td>
+<td>警察庁 / 自治体</td>
+<td>统计数值待核实</td>
+</tr>
+<tr>
+<td>领事保护</td>
+<td>海外安全 / 护照・遗失</td>
+<td>事件</td>
+<td>外務省 / 在外公館</td>
+<td>机制待核实</td>
+</tr>
+<tr>
+<td>应急联络</td>
+<td>110 / 119 / 171 / #7119 / Visitor Hotline</td>
+<td>实时</td>
+<td>警察庁 / 消防庁 / JNTO</td>
+<td>分诊因地区而异</td>
+</tr>
+</tbody>
+</table>
+<p><strong>官方权威来源与发布节奏</strong>：</p>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:33%">来源</th>
+<th style="width:33%">发布节奏</th>
+<th style="width:34%">入口 URL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>気象庁</td>
+<td>实时 / 季节</td>
+<td>https://www.jma.go.jp/</td>
+</tr>
+<tr>
+<td>総務省消防庁</td>
+<td>年度（白書）/ 实时</td>
+<td>https://www.fdma.go.jp/</td>
+</tr>
+<tr>
+<td>内閣府 / 防災庁</td>
+<td>政策 / 大规模灾情</td>
+<td>https://www.bousai.go.jp</td>
+</tr>
+<tr>
+<td>外務省</td>
+<td>实时 / 事件</td>
+<td>https://www.mofa.go.jp/</td>
+</tr>
+<tr>
+<td>警察庁</td>
+<td>年度 / 半年度</td>
+<td>https://www.npa.go.jp/</td>
+</tr>
+<tr>
+<td>地方自治体</td>
+<td>事件 / 年度</td>
+<td>各自治体官网</td>
+</tr>
+</tbody>
+</table>
+<p><strong>口径冲突标注</strong>（并列不合并）：</p>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:50%">指标</th>
+<th style="width:50%">并列口径</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>避难行动</td>
+<td>避難指示（レベル 4）≠ 避難勧告 ≠ 警戒レベル 5</td>
+</tr>
+<tr>
+<td>情报渠道</td>
+<td>自治体防災メール ≠ 防災行政无线 ≠ 気象厅多言語防災気象情報</td>
+</tr>
+<tr>
+<td>急救咨询</td>
+<td>救急安心センター #7119（非全国统一）≠ #8000（儿童急救）≠ 119</td>
+</tr>
+</tbody>
+</table>
+<h2 id="s4" class="sec">四、首期基线数据（2026-11-14）</h2>
+<h3 id="41">4.1 防灾体制</h3>
+<ul>
+<li><strong>自治体防灾计划与避難所</strong>：自治体基于防灾计划指定避難所与避难场所，并以防災行政无线 / 防災メール配信。⚠ 具体避難所清单・开放条件因自治体而异。</li>
+<li><strong>ハザードマップ与风险地图</strong>：国交省・気象庁・自治体提供洪水・土砂等风险地图，用于确认现住地与通勤圈风险。⚠ 具体图幅与查询入口因自治体而异。</li>
+<li>来源：総務省消防庁 <a href="https://www.fdma.go.jp/">https://www.fdma.go.jp/</a> / 国土交通省 <a href="https://www.mlit.go.jp/">https://www.mlit.go.jp/</a> / 地方自治体。</li>
+</ul>
+<h3 id="42">4.2 避难与情报</h3>
+<ul>
+<li><strong>警戒レベル与避难行动</strong>（事实）：发布避难指示（警戒レベル 4）时全员避难、不等レベル 5；土砂 / 洪水危险区域实况看キキクル。</li>
+<li>来源：気象庁 <a href="https://www.jma.go.jp/jma/kishou/know/bosai/warning.html">https://www.jma.go.jp/jma/kishou/know/bosai/warning.html</a>；キキクル <a href="https://www.jma.go.jp/bosai/risk/">https://www.jma.go.jp/bosai/risk/</a>。</li>
+<li><strong>多语言情报</strong>（事实）：Safety tips 提供 15 语种紧急地震速报・海啸・特別警報推送与行动流程图、沟通卡；気象庁多言語ページ含简体中文。</li>
+<li>来源：観光庁 <a href="https://www.mlit.go.jp/kankocho/seisaku_seido/kihonkeikaku/jizoku_kankochi/anzenkakuho/inbound/tool.html">https://www.mlit.go.jp/kankocho/seisaku_seido/kihonkeikaku/jizoku_kankochi/anzenkakuho/inbound/tool.html</a>；気象庁多言語 <a href="https://www.data.jma.go.jp/multi/yoho/index.html?lang=cn_zs">https://www.data.jma.go.jp/multi/yoho/index.html?lang=cn_zs</a>。</li>
+<li><strong>自治体配信与情報難民</strong>（事实）：防災メール / LINE 公式账号 / 防灾行政无线因自治体而异，须在役所住民课登记住址时一并申请；総務省「情報難民ゼロ」项目培训災害時外国人支援情報コーディネーター。</li>
+<li>来源：総務省 <a href="https://www.soumu.go.jp/menu_seisaku/chiho/02gyosei05_03000060.html">https://www.soumu.go.jp/menu_seisaku/chiho/02gyosei05_03000060.html</a>。</li>
+</ul>
+<h3 id="43">4.3 治安与人身</h3>
+<ul>
+<li><strong>警察庁犯罪统计与特殊诈欺</strong>：警察庁发布犯罪统计；⚠ 最新年度数值・特殊诈欺手口清单待核实。</li>
+<li><strong>一般防诈口径</strong>（一般化观察）：自称役所 / 警察要求提供账号 = 诈骗；跨境「孩子的电话」类诈骗亦须同步提醒国内家人。</li>
+<li>来源：警察庁 <a href="https://www.npa.go.jp/">https://www.npa.go.jp/</a>；防诈正文与个案见 <a href="../../12-culture-life/reports/2026-11-culture-life.md">12-culture-life</a>。</li>
+</ul>
+<h3 id="44">4.4 领事保护</h3>
+<ul>
+<li><strong>外務省海外安全与在外公館</strong>：外務省发布海外安全情报，在外公館提供护照・遗失・紧急协助。⚠ 具体机制与申请口径待核实。</li>
+<li>来源：外務省 <a href="https://www.mofa.go.jp/">https://www.mofa.go.jp/</a>。</li>
+</ul>
+<h3 id="45">4.5 应急联络</h3>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:33%">号码</th>
+<th style="width:33%">用途</th>
+<th style="width:34%">备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>110</td>
+<td>警察紧急</td>
+<td>事件・事故・犯罪</td>
+</tr>
+<tr>
+<td>119</td>
+<td>消防・救急</td>
+<td>救急搬送・火灾</td>
+</tr>
+<tr>
+<td>171</td>
+<td>災害用伝言ダイヤル</td>
+<td>灾害时安否传言</td>
+</tr>
+<tr>
+<td>#7119</td>
+<td>救急安心センター</td>
+<td>急救咨询分诊；非全国统一</td>
+</tr>
+<tr>
+<td>050-3816-2787</td>
+<td>JNTO Japan Visitor Hotline</td>
+<td>英 / 中 / 韩 / 日 24h（事故・疾病・灾害支持）</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>来源：警察庁 / 消防庁 / 各运营商 / JNTO；#7119 覆盖见 <a href="https://www.fdma.go.jp/publication/hakusho/r6/report4/67976.html">消防庁 消防白書</a>（2024）。</li>
+</ul>
+<h3 id="46">4.6 住宅防护与备蓄</h3>
+<ul>
+<li>家具固定（L 型金具 / 顶柱 / 粘着垫）、玻璃防飞散膜、感震断路器；备蓄 3 天起步、滚动备蓄（ローリングストック）。</li>
+<li>来源：内閣府防災 <a href="https://www.bousai.go.jp/kohou/kouhoubousai/h28/83/special_03.html">https://www.bousai.go.jp/kohou/kouhoubousai/h28/83/special_03.html</a>（2016；季节性内容每年核对）。</li>
+</ul>
+<h2 id="s5" class="sec">五、先行指标判读</h2>
+<p><strong>信号网格</strong>：</p>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:20%">信号</th>
+<th style="width:20%">灯色</th>
+<th style="width:20%">结论</th>
+<th style="width:20%">依据数据</th>
+<th style="width:20%">来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>気象警報・警戒レベル</td>
+<td>绿</td>
+<td>体系可用</td>
+<td>分级预警口径</td>
+<td>気象庁</td>
+</tr>
+<tr>
+<td>避难行动</td>
+<td>绿</td>
+<td>口径明确</td>
+<td>レベル 4 全员避难</td>
+<td>気象庁</td>
+</tr>
+<tr>
+<td>多语言预警</td>
+<td>绿</td>
+<td>渠道可用</td>
+<td>Safety tips 15 语种 / 多言語ページ</td>
+<td>観光庁 / 気象庁</td>
+</tr>
+<tr>
+<td>应急电话</td>
+<td>绿</td>
+<td>号码明确</td>
+<td>110 / 119 / 171 / #7119 / Visitor Hotline</td>
+<td>警察庁・消防庁・JNTO</td>
+</tr>
+<tr>
+<td>自治体配信</td>
+<td>黄</td>
+<td>待个人登记</td>
+<td>防災メール / 无线因自治体而异</td>
+<td>自治体 / 総務省</td>
+</tr>
+<tr>
+<td>救急分诊</td>
+<td>黄</td>
+<td>覆盖不全</td>
+<td>36 / 47 都道府県</td>
+<td>消防庁</td>
+</tr>
+<tr>
+<td>治安数值</td>
+<td>灰</td>
+<td>未取得</td>
+<td>⚠ 最新统计待核实</td>
+<td>警察庁</td>
+</tr>
+<tr>
+<td>领事机制</td>
+<td>灰</td>
+<td>未取得</td>
+<td>⚠ 具体机制待核实</td>
+<td>外務省</td>
+</tr>
+<tr>
+<td>避難所清单</td>
+<td>灰</td>
+<td>未取得</td>
+<td>⚠ 因自治体而异</td>
+<td>自治体</td>
+</tr>
+<tr>
+<td>备蓄补助</td>
+<td>灰</td>
+<td>未取得</td>
+<td>⚠ 自治体补助口径待核实</td>
+<td>自治体</td>
+</tr>
+</tbody>
+</table>
+<p><strong>反向声音</strong>（至少 2–3 条）：</p>
+<ol>
+<li><strong>「有手机 App 就够」</strong>：网络可达性风险时 App / 邮件可能不可用；防灾行政无线与避难所现场广播是补充层（NHK WORLD-JAPAN 多语言链接为备用信息源）。</li>
+<li><strong>「#7119 全国通用」</strong>：实际为 36 地域 / 36 都道府県，未开设地区须拨 #8000 或 119。</li>
+<li><strong>「防災メール自动收到」</strong>：多数自治体须在住民登记时主动申请，不会自动开通。</li>
+</ol>
+<h2 id="s6" class="sec">六、信号规则与决策框架</h2>
+<p><strong>信号规则表</strong>（S01–S06，阈值为首期默认参数，须年度回测校准）：</p>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:14%">编号</th>
+<th style="width:14%">监测对象</th>
+<th style="width:14%">绿灯</th>
+<th style="width:14%">黄灯</th>
+<th style="width:14%">红灯</th>
+<th style="width:14%">确认标准</th>
+<th style="width:16%">动作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>S01</td>
+<td>気象警報・警戒レベル</td>
+<td>无警报</td>
+<td>注意报 / レベル 3</td>
+<td>警报 / レベル 4 以上</td>
+<td>気象庁发布</td>
+<td>按级别行动；レベル 4 全员避难</td>
+</tr>
+<tr>
+<td>S02</td>
+<td>自治体避難所开放</td>
+<td>已知位置</td>
+<td>位置未确认</td>
+<td>需开放但未确认</td>
+<td>自治体发布</td>
+<td>前往指定避难所</td>
+</tr>
+<tr>
+<td>S03</td>
+<td>多语言渠道可用性</td>
+<td>已登记</td>
+<td>部分可用</td>
+<td>不可用</td>
+<td>实测</td>
+<td>启用备用信息源</td>
+</tr>
+<tr>
+<td>S04</td>
+<td>大规模灾害 / 突发事件</td>
+<td>无</td>
+<td>局部影响</td>
+<td>大规模</td>
+<td>官方发布 + 现场</td>
+<td>启动事件触发解读</td>
+</tr>
+<tr>
+<td>S05</td>
+<td>特殊诈欺 / 生活安全</td>
+<td>无提醒</td>
+<td>一般提醒</td>
+<td>高发期</td>
+<td>警察庁 / 自治体</td>
+<td>防诈提醒与家人同步</td>
+</tr>
+<tr>
+<td>S06</td>
+<td>海外安全情报</td>
+<td>无</td>
+<td>注意</td>
+<td>高风险</td>
+<td>外務省发布</td>
+<td>领事保护与行程调整</td>
+</tr>
+</tbody>
+</table>
+<p><strong>条件化决策框架</strong>：</p>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:25%">条件组合</th>
+<th style="width:25%">周期判读</th>
+<th style="width:25%">框架性含义</th>
+<th style="width:25%">风险提示</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>台风季 + 现住地低洼</td>
+<td>月度 + 事件</td>
+<td>提前确认避难所与风险地图</td>
+<td>驾驶途中不强行回家</td>
+</tr>
+<tr>
+<td>日语未达标 + 定居地未定</td>
+<td>月度</td>
+<td>优先多语言渠道</td>
+<td>依赖单一渠道有盲区</td>
+</tr>
+<tr>
+<td>网络不可达</td>
+<td>事件</td>
+<td>启用无线 / 现场广播</td>
+<td>安否联络事先约定</td>
+</tr>
+<tr>
+<td>家人居住国内</td>
+<td>事件</td>
+<td>同步跨境防诈</td>
+<td>时差与汇款风险</td>
+</tr>
+</tbody>
+</table>
+<p><strong>边界说明</strong>：本表只给规则不给本期判定结论；阈值为首期默认参数，须年度回测校准。</p>
+<h2 id="s7" class="sec">七、月 / 季 / 年监测日历</h2>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:20%">周期</th>
+<th style="width:20%">时点</th>
+<th style="width:20%">任务</th>
+<th style="width:20%">主要来源</th>
+<th style="width:20%">输出与升级条件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>月度</td>
+<td>每月</td>
+<td>核验 12+1 项活值与触发器</td>
+<td>全来源</td>
+<td>登记册记录；命中触发器升级</td>
+</tr>
+<tr>
+<td>季度（台风季前）</td>
+<td>6 月 / 11 月</td>
+<td>核对气象与防灾渠道可用性</td>
+<td>気象庁 / 自治体</td>
+<td>渠道清单更新</td>
+</tr>
+<tr>
+<td>季度</td>
+<td>季度末</td>
+<td>全维度复核</td>
+<td>全来源</td>
+<td>完整更新版报告</td>
+</tr>
+<tr>
+<td>年度</td>
+<td>12 月</td>
+<td>年度台账复盘与阈值回测</td>
+<td>全来源</td>
+<td>年度复盘报告</td>
+</tr>
+<tr>
+<td>事件触发</td>
+<td>大规模灾害 / 事件</td>
+<td>单份解读</td>
+<td>官方原文</td>
+<td>事件触发解读件</td>
+</tr>
+<tr>
+<td>个人</td>
+<td>定居地确定时</td>
+<td>登记防災メール与避難所</td>
+<td>自治体</td>
+<td>个人接收清单</td>
+</tr>
+</tbody>
+</table>
+<h2 id="s8" class="sec">八、数据治理：来源分级、口径优先与核验状态</h2>
+<h3 id="81">8.1 来源分级表</h3>
+<ul>
+<li><strong>A 级（官方一手）</strong>：総務省消防庁 / 気象庁 / 内閣府・防災庁 / 外務省 / 警察庁 / 地方自治体。</li>
+<li><strong>B 级（机构官网 / 权威转引）</strong>：観光庁 Safety tips / JNTO / NHK WORLD-JAPAN / 地域国際化協会 / 各运营商。</li>
+<li><strong>C 级（平台抽样）</strong>：本主题登记册无此类指标。</li>
+</ul>
+<h3 id="82">8.2 口径优先级裁决规则 + 冲突案例</h3>
+<ul>
+<li>预警与避难：以気象庁与自治体最新发布为准；多语言版本仅作理解辅助，不替代日语原文。</li>
+<li>急救分诊：以消防庁与所在地自治体口径为准；#7119 非全国统一。</li>
+<li>冲突案例：见第 3 节口径冲突标注，并列呈现不合并、不取均值。</li>
+</ul>
+<h3 id="83">8.3 首期核验审计（未核验项）</h3>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:33%">项目</th>
+<th style="width:33%">状态</th>
+<th style="width:34%">处置</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>自治体避難所清单</td>
+<td>未取得</td>
+<td>定居地确定后登记</td>
+</tr>
+<tr>
+<td>警察庁最新犯罪统计数值</td>
+<td>未取得</td>
+<td>年度发布时补齐</td>
+</tr>
+<tr>
+<td>外務省领事保护具体机制</td>
+<td>未核验</td>
+<td>事件触发或年度复盘补齐</td>
+</tr>
+<tr>
+<td>备蓄补助口径</td>
+<td>未取得</td>
+<td>自治体最新页核验</td>
+</tr>
+</tbody>
+</table>
+<h3 id="84">8.4 来源约束执行结果</h3>
+<p>全部引用回溯官方原文；中文来源仅作线索；入口页多无版本日期，深链待事件触发时补齐。</p>
+<h2 id="s9" class="sec">九、风险、局限与监测盲区</h2>
+<p><strong>风险（条目式）</strong>：</p>
+<ul>
+<li>台风 / 大雨 / 地震 / 海啸等大规模灾害的突发性与网络可达性风险；</li>
+<li>外语情报个人接收层未登记导致「情報難民」化；</li>
+<li>特殊诈欺与跨境诈骗；</li>
+<li>海外安全事件与护照遗失。</li>
+</ul>
+<p><strong>本机制的局限</strong>：</p>
+<ol>
+<li><strong>数据缺口</strong>：自治体避難所清单、最新犯罪统计数值、领事保护具体机制未取得；</li>
+<li><strong>发布时滞</strong>：部分统计年度发布，实时性有限；</li>
+<li><strong>口径不可比</strong>：都道府県 / 市町村口径与「非常用」表述差异；</li>
+<li><strong>阈值未回测</strong>：S01–S06 为初期默认参数，未经年度回测；</li>
+<li><strong>非实时</strong>：本主题为月度核验，不替代官方实时预警；</li>
+<li><strong>个人差异</strong>：定居地、通勤路线、家庭构成不同，接收清单须个案化。</li>
+</ol>
+<h2 id="s10" class="sec">十、交付物与后续运行方式</h2>
+<p><strong>交付物表</strong>：</p>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:33%">交付物</th>
+<th style="width:33%">路径形式</th>
+<th style="width:34%">内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>基线报告</td>
+<td><code>reports/2026-11-safety-disaster.md</code></td>
+<td>十节基线</td>
+</tr>
+<tr>
+<td>指标登记册</td>
+<td><code>data/safety_disaster_indicator_registry.md</code></td>
+<td>12+1 项活值 + 研究边界档案</td>
+</tr>
+<tr>
+<td>业务配置</td>
+<td><code>prompts/business-config.md</code></td>
+<td>变量 / 边界 / 来源 / 触发器 / 追踪表</td>
+</tr>
+<tr>
+<td>周期提示词</td>
+<td><code>prompts/prompt-policy-review.md</code></td>
+<td>月度 / 事件触发 / 年度复盘 / 个人情况变化</td>
+</tr>
+<tr>
+<td>操作指引</td>
+<td><code>operations-guide.md</code></td>
+<td>启动与收尾流程</td>
+</tr>
+</tbody>
+</table>
+<p><strong>运行方式</strong>：月度核验 → 命中触发器升级为事件触发解读 → 季度全维度复核 → 年度台账复盘；无触发不启动，不得虚构变化。</p>
+</main>
+<footer class="footer" role="contentinfo" aria-label="页脚">
+  <p>日本 · 防灾·安全·治安 · 2026-11 月度报告｜2026-11<br>
+  报告路径：19-safety-disaster\reports\2026-11-safety-disaster.html</p>
+  <p class="backlinks">
+    <a href="../../index.html#topic-19-safety-disaster">← 返回主题</a>
+    <a href="../../index.html">返回首页</a>
+  </p>
+</footer>
+<script>
+(function () {
+  'use strict';
+  var main = document.getElementById('main-content');
+  var tgDiff = document.getElementById('tg-diff');
+  var tgDel = document.getElementById('tg-del');
+  if (main && tgDiff) {
+    tgDiff.addEventListener('click', function () {
+      var hide = main.classList.toggle('hide-diff');
+      tgDiff.textContent = hide ? '显示更新标记' : '隐藏更新标记';
+    });
+  }
+  if (tgDel) {
+    tgDel.addEventListener('click', function () {
+      var open = tgDel.getAttribute('data-open') === '1';
+      var groups = document.querySelectorAll('details.diff-del-group');
+      for (var i = 0; i < groups.length; i++) groups[i].open = !open;
+      tgDel.setAttribute('data-open', open ? '0' : '1');
+      tgDel.textContent = open ? '展开全部删除' : '收起全部删除';
+    });
+  }
+})();
+</script>
+</body>
+</html>

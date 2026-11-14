@@ -127,3 +127,77 @@
 [2026-11-14T11:38:04] [verify] exit-transition-return -> business-config.md：通过（25 条覆盖完整，区间外内容一致，词汇库 v1.1）
 [2026-11-14T11:54:03] [verify] exit-transition-return -> business-config.md：通过（25 条覆盖完整，区间外内容一致，词汇库 v1.1）
 [2026-11-14T12:01:08] [verify] exit-transition-return -> business-config.md：通过（25 条覆盖完整，区间外内容一致，词汇库 v1.1）
+[2026-11-14T20:57:56] [sync] visa-immigration -> ../../08-visa-immigration/prompts/business-config.md：区块替换成功：新增 10 / 修改 0 / 删除 0，共 79 条（v1.3）；备份 sync-backups/visa-immigration.business-config.md.20261114_205756.bak
+[2026-11-14T20:58:03] [sync] politics-law -> ../../09-politics-law/prompts/business-config.md：区块替换成功：新增 11 / 修改 0 / 删除 0，共 80 条（v1.3）；备份 sync-backups/politics-law.business-config.md.20261114_205803.bak
+[2026-11-14T20:58:58] [sync] politics-law -> ../../09-politics-law/prompts/business-config.md：区块替换成功：新增 0 / 修改 1 / 删除 0，共 80 条（v1.3）；备份 sync-backups/politics-law.business-config.md.20261114_205858.bak
+[2026-11-14T21:12:55] [sync] life-operations -> ../../14-life-operations/prompts/business-config.md：区块替换成功：新增 25 / 修改 0 / 删除 0，共 25 条（v1.1）；备份 sync-backups/life-operations.business-config.md.20261114_211255.bak
+[2026-11-14T21:12:55] [sync] health-wellbeing -> ../../15-health-wellbeing/prompts/business-config.md：区块替换成功：新增 19 / 修改 0 / 删除 0，共 19 条（v1.1）；备份 sync-backups/health-wellbeing.business-config.md.20261114_211255.bak
+[2026-11-14T21:13:07] [sync] migration-compliance -> ../../17-migration-compliance/prompts/business-config.md：区块替换成功：新增 28 / 修改 0 / 删除 0，共 28 条（v1.1）；备份 sync-backups/migration-compliance.business-config.md.20261114_211307.bak
+[2026-11-14T21:13:08] [sync] family-parenting -> ../../18-family-parenting/prompts/business-config.md：新区块插入成功：新增 35 / 修改 0 / 删除 0，共 35 条（v1.1）；备份 sync-backups/family-parenting.business-config.md.20261114_211308.bak
+[2026-11-14T21:13:08] [sync] safety-disaster -> ../../19-safety-disaster/prompts/business-config.md：新区块插入成功：新增 27 / 修改 0 / 删除 0，共 27 条（v1.1）；备份 sync-backups/safety-disaster.business-config.md.20261114_211308.bak
+[2026-11-14T21:13:08] [sync] overseas-china -> ../../20-overseas-china/prompts/business-config.md：区块替换成功：新增 34 / 修改 0 / 删除 0，共 34 条（v1.1）；备份 sync-backups/overseas-china.business-config.md.20261114_211308.bak
+[2026-11-14T21:13:15] [sync] ssw-driver -> ../../01-ssw-driver/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-14T21:13:15] [sync] career-driver -> ../../02-career-driver/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-14T21:13:15] [sync] career-management -> ../../03-career-management/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-14T21:13:15] [sync] industry-logistics -> ../../04-industry-logistics/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-14T21:13:15] [sync] industry-autonomous -> ../../05-industry-autonomous/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-14T21:13:15] [sync] industry-technology -> ../../06-industry-technology/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-14T21:13:15] [sync] economy-finance -> ../../07-economy-finance/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-14T21:13:15] [sync] visa-immigration -> ../../08-visa-immigration/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-14T21:13:15] [sync] politics-law -> ../../09-politics-law/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-14T21:13:15] [sync] education-qualification -> ../../10-education-qualification/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-14T21:13:15] [sync] language-japanese -> ../../11-language-japanese/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-14T21:13:15] [sync] culture-life -> ../../12-culture-life/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-14T21:13:15] [sync] regional-info -> ../../13-regional-info/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-14T21:13:16] [sync] exit-transition-return -> ../../16-exit-transition-return/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-14T21:13:16] [sync] life-operations -> ../../14-life-operations/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-14T21:13:16] [sync] health-wellbeing -> ../../15-health-wellbeing/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-14T21:13:16] [sync] migration-compliance -> ../../17-migration-compliance/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-14T21:13:16] [sync] family-parenting -> ../../18-family-parenting/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-14T21:13:16] [sync] safety-disaster -> ../../19-safety-disaster/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-14T21:13:16] [sync] overseas-china -> ../../20-overseas-china/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-14T21:14:44] [sync] ssw-driver -> ../../01-ssw-driver/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-14T21:14:44] [sync] career-driver -> ../../02-career-driver/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-14T21:14:44] [sync] career-management -> ../../03-career-management/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-14T21:14:44] [sync] industry-logistics -> ../../04-industry-logistics/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-14T21:14:44] [sync] industry-autonomous -> ../../05-industry-autonomous/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-14T21:14:45] [sync] industry-technology -> ../../06-industry-technology/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-14T21:14:45] [sync] economy-finance -> ../../07-economy-finance/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-14T21:14:45] [sync] visa-immigration -> ../../08-visa-immigration/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-14T21:14:45] [sync] politics-law -> ../../09-politics-law/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-14T21:14:45] [sync] education-qualification -> ../../10-education-qualification/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-14T21:14:45] [sync] language-japanese -> ../../11-language-japanese/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-14T21:14:45] [sync] culture-life -> ../../12-culture-life/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-14T21:14:45] [sync] regional-info -> ../../13-regional-info/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-14T21:14:45] [sync] exit-transition-return -> ../../16-exit-transition-return/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-14T21:14:45] [sync] life-operations -> ../../14-life-operations/prompts/business-config.md：区块替换成功：新增 0 / 修改 3 / 删除 0，共 25 条（v1.1）；备份 sync-backups/life-operations.business-config.md.20261114_211445.bak
+[2026-11-14T21:14:45] [sync] health-wellbeing -> ../../15-health-wellbeing/prompts/business-config.md：区块替换成功：新增 0 / 修改 4 / 删除 0，共 19 条（v1.1）；备份 sync-backups/health-wellbeing.business-config.md.20261114_211445.bak
+[2026-11-14T21:14:45] [sync] migration-compliance -> ../../17-migration-compliance/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-14T21:14:45] [sync] family-parenting -> ../../18-family-parenting/prompts/business-config.md：区块替换成功：新增 0 / 修改 1 / 删除 0，共 35 条（v1.1）；备份 sync-backups/family-parenting.business-config.md.20261114_211445.bak
+[2026-11-14T21:14:45] [sync] safety-disaster -> ../../19-safety-disaster/prompts/business-config.md：区块替换成功：新增 0 / 修改 3 / 删除 0，共 27 条（v1.1）；备份 sync-backups/safety-disaster.business-config.md.20261114_211445.bak
+[2026-11-14T21:14:45] [sync] overseas-china -> ../../20-overseas-china/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-14T21:23:13] [sync] education-qualification -> ../../10-education-qualification/prompts/business-config.md：区块替换成功：新增 2 / 修改 0 / 删除 0，共 70 条（v1.2）；备份 sync-backups/education-qualification.business-config.md.20261114_212313.bak
+[2026-11-14T21:23:14] [sync] economy-finance -> ../../07-economy-finance/prompts/business-config.md：区块替换成功：新增 4 / 修改 0 / 删除 0，共 77 条（v1.3）；备份 sync-backups/economy-finance.business-config.md.20261114_212314.bak
+[2026-11-14T21:23:14] [sync] politics-law -> ../../09-politics-law/prompts/business-config.md：区块替换成功：新增 2 / 修改 0 / 删除 0，共 82 条（v1.4）；备份 sync-backups/politics-law.business-config.md.20261114_212314.bak
+[2026-11-14T21:23:14] [sync] culture-life -> ../../12-culture-life/prompts/business-config.md：区块替换成功：新增 3 / 修改 0 / 删除 0，共 73 条（v1.3）；备份 sync-backups/culture-life.business-config.md.20261114_212314.bak
+[2026-11-14T21:23:15] [sync] migration-compliance -> ../../17-migration-compliance/prompts/business-config.md：区块替换成功：新增 1 / 修改 0 / 删除 0，共 29 条（v1.2）；备份 sync-backups/migration-compliance.business-config.md.20261114_212315.bak
+[2026-11-14T21:23:15] [sync] ssw-driver -> ../../01-ssw-driver/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-14T21:23:15] [sync] career-driver -> ../../02-career-driver/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-14T21:23:15] [sync] career-management -> ../../03-career-management/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-14T21:23:15] [sync] industry-logistics -> ../../04-industry-logistics/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-14T21:23:15] [sync] industry-autonomous -> ../../05-industry-autonomous/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-14T21:23:15] [sync] industry-technology -> ../../06-industry-technology/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-14T21:23:15] [sync] economy-finance -> ../../07-economy-finance/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-14T21:23:15] [sync] visa-immigration -> ../../08-visa-immigration/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-14T21:23:15] [sync] politics-law -> ../../09-politics-law/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-14T21:23:15] [sync] education-qualification -> ../../10-education-qualification/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-14T21:23:15] [sync] language-japanese -> ../../11-language-japanese/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-14T21:23:15] [sync] culture-life -> ../../12-culture-life/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-14T21:23:15] [sync] regional-info -> ../../13-regional-info/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-14T21:23:15] [sync] exit-transition-return -> ../../16-exit-transition-return/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-14T21:23:15] [sync] life-operations -> ../../14-life-operations/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-14T21:23:15] [sync] health-wellbeing -> ../../15-health-wellbeing/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-14T21:23:15] [sync] migration-compliance -> ../../17-migration-compliance/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-14T21:23:15] [sync] family-parenting -> ../../18-family-parenting/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-14T21:23:15] [sync] safety-disaster -> ../../19-safety-disaster/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-14T21:23:15] [sync] overseas-china -> ../../20-overseas-china/prompts/business-config.md：无变更（词汇库与提示词区间一致）

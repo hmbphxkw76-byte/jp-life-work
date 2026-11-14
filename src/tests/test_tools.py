@@ -35,6 +35,8 @@ from report_diff import (  # noqa: E402
     strip_body,
 )
 from update_planner import build_tasks, default_period, pick_prompt, target_month  # noqa: E402
+import info_quality_check  # noqa: E402
+from info_quality_check import evaluate, repair, scan_topics, verify  # noqa: E402
 
 
 # ──────────────────────────────────────────────
@@ -494,11 +496,16 @@ class TestBuildHubCheck(unittest.TestCase):
         )
 
     def test_hub_links_to_independent_report_pages(self):
-        """汇总页只生成 index.html，报告链接直达各主题 reports/*.html。"""
+        """汇总页生成 index.html + search-index.json，报告链接直达各主题 reports/*.html。"""
         outputs = build_outputs()
-        self.assertEqual(list(outputs), ["index.html"])
+        self.assertEqual(list(outputs), ["index.html", "search-index.json"])
         self.assertNotIn("reader.html", outputs["index.html"])
         self.assertIn('href="00-decision-hub/reports/2026-12-decision-hub.html" target="_blank"', outputs["index.html"])
+        # 搜索索引：覆盖全部报告，且含中文关键词与问题
+        index = json.loads(outputs["search-index.json"])
+        self.assertGreaterEqual(len(index["reports"]), 20)
+        self.assertTrue(all(r["keywords"] for r in index["reports"]))
+        self.assertGreaterEqual(len(index["questions"]), 40)
 
 
 # ──────────────────────────────────────────────
@@ -750,6 +757,120 @@ class TestDaysSinceLatest(unittest.TestCase):
         now = datetime(2026, 11, 13, tzinfo=timezone.utc)
         records = [{"timestamp": "2026-11-12T00:00:00"}]
         self.assertEqual(days_since_latest(now, records), 1)
+
+
+class TestInfoQualityCheck(unittest.TestCase):
+    """信息质量全量评估与闭环修复（info_quality_check.py）。"""
+
+    TOPIC_FILES = {
+        "prompts/business-config.md": "# 示例主题 · 业务配置\n\n{{REGION}} / {{TOPIC}}\n",
+        "data/demo_indicator_registry.md": (
+            "# 示例主题 · 指标登记册\n\n## 核心指标\n\n"
+            "| # | 指标 | 口径 | 研究阶段 | 最新值 / 规则 | 来源机构 | 来源 URL | 版本日期 | 核验日期 | 核验状态 | 关联章节 | 更新时间 |\n"
+            "|---|---|---|---|---|---|---|---|---|---|---|---|\n"
+            "| 1 | 测试指标 | 测试口径 | 测试 | 1 | 测试机构 | https://example.com | 2026-11-14 | 2026-11-14 | 已核验 | 2 | 2026-11-14 |\n"
+        ),
+        "operations-guide.md": "# 示例主题 · 操作指南\n\n## 适用范围\n\n测试。\n",
+    }
+
+    REPORT = (
+        "# 示例主题 · 2026-11 月度报告\n\n"
+        "> **版本**：v1.0（2026-11 月度）\n\n"
+        "## 一、执行摘要\n\n"
+        "结论先行：测试用段落，包含数字 2026。\n\n"
+        "## 二、正文\n\n"
+        "第一段实质内容，长度需要超过四十字符才能触发重复检测阈值，此处包含数字 123 用于测试。\n\n"
+        "第一段实质内容，长度需要超过四十字符才能触发重复检测阈值，此处包含数字 123 用于测试。\n\n"
+        "引用失效：[目标](../../03-missing/reports/target.md)。\n\n"
+        "## 三、参考来源清单\n\n"
+        "- [来源](https://example.com)\n"
+    )
+
+    def setUp(self):
+        self._tmp = tempfile.TemporaryDirectory()  # noqa: P201
+        self.root = Path(self._tmp.name)
+        self._orig_common = _common.ROOT
+        self._orig_iqc = info_quality_check.ROOT
+        _common.ROOT = self.root
+        info_quality_check.ROOT = self.root
+        (self.root / "01-demo" / "prompts").mkdir(parents=True)
+        (self.root / "01-demo" / "data").mkdir(parents=True)
+        (self.root / "01-demo" / "reports").mkdir(parents=True)
+        for rel, text in self.TOPIC_FILES.items():
+            p = self.root / "01-demo" / rel
+            p.parent.mkdir(parents=True, exist_ok=True)
+            p.write_text(text, encoding="utf-8")
+        (self.root / "01-demo" / "reports" / "2026-11-demo.md").write_text(
+            self.REPORT, encoding="utf-8")
+        # 链接修复目标的唯一真实位置（02-other 补全必需要素，保证覆盖率门槛可达）
+        (self.root / "02-other" / "prompts").mkdir(parents=True)
+        (self.root / "02-other" / "data").mkdir(parents=True)
+        (self.root / "02-other" / "reports").mkdir(parents=True)
+        (self.root / "02-other" / "prompts" / "business-config.md").write_text(
+            "# 其他主题 · 业务配置\n", encoding="utf-8")
+        (self.root / "02-other" / "data" / "other_indicator_registry.md").write_text(
+            "# 其他主题 · 指标登记册\n", encoding="utf-8")
+        (self.root / "02-other" / "operations-guide.md").write_text(
+            "# 其他主题 · 操作指南\n", encoding="utf-8")
+        (self.root / "02-other" / "reports" / "target.md").write_text(
+            "# 目标\n", encoding="utf-8")
+
+    def tearDown(self):
+        _common.ROOT = self._orig_common
+        info_quality_check.ROOT = self._orig_iqc
+        self._tmp.cleanup()
+
+    def _findings(self):
+        units = scan_topics()
+        return evaluate(units)
+
+    def test_completeness_and_structure_findings(self):
+        findings, metrics = self._findings()
+        self.assertEqual(metrics.topics_total, 2)   # 01-demo + 02-other（后者缺必需要素）
+        codes = {c for c, _ in {(f.code, f.level) for f in findings}}
+        self.assertIn("C-06", codes)
+        # 01-demo 缺免责声明 → P1
+        self.assertTrue(any(
+            f.code == "C-06" and f.level == "P1" and "免责声明" in f.detail
+            for f in findings))
+
+    def test_disclaimer_autofix_and_idempotent(self):
+        findings, _ = self._findings()
+        repairs = repair(findings, scan_topics())
+        self.assertTrue(any(r.spec == "S-05" for r in repairs))
+        text = (self.root / "01-demo" / "reports" / "2026-11-demo.md").read_text(encoding="utf-8")
+        self.assertIn("不构成法律意见", text)
+        # 复评：免责声明问题已消除
+        after, _ = self._findings()
+        self.assertFalse(any(
+            f.code == "C-06" and "免责声明" in f.detail and f.status == "open"
+            for f in after))
+        # 幂等：再次修复无新增
+        repairs2 = repair(after, scan_topics())
+        self.assertFalse(any(r.spec == "S-05" for r in repairs2))
+
+    def test_dedupe_within_file(self):
+        findings, _ = self._findings()
+        self.assertTrue(any(f.code == "C-03" and f.level == "P1" for f in findings))
+        repair(findings, scan_topics())
+        text = (self.root / "01-demo" / "reports" / "2026-11-demo.md").read_text(encoding="utf-8")
+        self.assertEqual(text.count("第一段实质内容"), 1)
+
+    def test_broken_link_repointed(self):
+        findings, _ = self._findings()
+        self.assertTrue(any(f.code == "C-09" for f in findings))
+        repairs = repair(findings, scan_topics())
+        self.assertTrue(any(r.spec == "S-08" for r in repairs))
+        text = (self.root / "01-demo" / "reports" / "2026-11-demo.md").read_text(encoding="utf-8")
+        self.assertIn("../../02-other/reports/target.md", text)
+        self.assertNotIn("03-missing", text)
+
+    def test_verify_passes_after_repair(self):
+        findings, before = self._findings()
+        repairs = repair(findings, scan_topics())
+        after_findings, after = self._findings()
+        ver = verify(before, findings, after_findings, after, repairs)
+        self.assertTrue(ver["passed"], ver["checks"])
 
 
 if __name__ == "__main__":

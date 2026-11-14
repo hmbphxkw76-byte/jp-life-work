@@ -1,9 +1,11 @@
 # 赴日决策仪表盘 · 2026-Q4 季度复核
 
-> **版本**：v1.0（首份季度复核）　**数据基准日**：2026-11-14
+> **免责声明**：本报告为信息整理与条件化建议，不构成法律意见或税务意见；重大决策请咨询执业法律 / 税务专业人士。
+
+> **版本**：v1.1（P0 与 Phase 2–4 状态刷新）　**数据基准日**：2026-11-14
 > **主题类型**：职业就业调研型（employment-research）· 跨主题综合层
 > **受众定位**：本人（拟通过特定技能签证赴日从事货运司机工作）的决策支持层
-> **来源规则**：本主题不新增一手来源，全部结论引用 01–13 主题报告 / 登记册；每个结论附「（来源：主题 NN）」标注
+> **来源规则**：本主题不新增一手来源，全部结论引用 01–20 主题报告 / 登记册；每个结论附「（来源：主题 NN）」标注
 
 ---
 
@@ -13,11 +15,11 @@
 |---|---|---|---|---|
 | 1 | 去不去（值不值） | 窗口已开、名额有限；收入高于全产业均值但绝对值偏低；自动驾驶暂不构成威胁 | 事实 + 推断 | 中国同岗到手对比 |
 | 2 | 能不能去（门槛） | 门槛明确；驾照转换与中国大陆无考点是两大瓶颈 | 事实 | 驾照转换流程细节 |
-| 3 | 怎么去（路径） | 路径清晰；中介风险与驾照耗时是关键变量 | 事实 + 推断 | 中介防骗、落地手续执行 |
+| 3 | 怎么去（路径） | 路径清晰；中介风险与驾照耗时是关键变量 | 事实 + 推断 | 中介合规已建 17、落地实务已建 14；深度待补 |
 | 4 | 去哪（定居地） | 有 7 维框架可用；个人选择未记录 | 框架就绪 | 个人定居地 |
-| 5 | 最坏怎么办（退出） | 永住 / 归化路径存在；本分野不得 2 号；退出执行未系统研究 | 部分事实 | 退出执行、年金脱退 |
+| 5 | 最坏怎么办（退出） | 永住 / 归化路径存在；本分野不得 2 号；退出执行已建 16 | 部分事实 | 16 的 12+1 项中 3 项部分核验 |
 
-**总体判读**（条件化，非 Go/No-Go）：当前处于「窗口已开、门槛明确、路径清晰」阶段，主要不确定性集中在**驾照转换成功率**与**落地执行层**。若驾照能在窗口期内取得，且中介渠道可核验，则进入条件基本成立；反之应暂缓或做条件化安排。
+**总体判读**（条件化，非 Go/No-Go）：当前处于「窗口已开、门槛明确、路径清晰」阶段，主要不确定性集中在**驾照转换成功率**与**落地执行层**。若驾照能在窗口期内取得，且中介渠道可核验，则进入条件基本成立；反之应暂缓或做条件化安排。**2026-11-14 状态刷新**：中介合规（17）、生活实务（14）、医疗健康（15）、退出执行（16）、家族育儿（18）、防灾安全（19）、中国侧衔接（20）均已接入；P0 三项核心能力（中介合规、不许可救济、取消/退去救济）已交付；16 的 12+1 项 10 项已核验、3 项部分核验。
 
 ---
 
@@ -91,8 +93,8 @@
 ### 4.3 判读
 
 **事实**：路径链条为「中介 → 特定活动入境 → 考试 → 驾照 → 特定技能 1 号」，关键耗时在驾照与考试。
-**推断**：中介是最大风险变量——无资质渠道属违法，且存在虚假招募与收费陷阱风险；建议只走商务部名单内企业，并逐一核验日方受入机关。
-**⚠ 缺失**：中介防骗专题（未建）；落地手续执行清单（未建，建议 14-life-operations）。
+**推断**：中介是最大风险变量——无资质渠道属违法，且存在虚假招募与收费陷阱风险；建议只走商务部名单内企业，并逐一核验日方受入机关。中介合规专题已建（17-migration-compliance），落地手续执行清单已建（14-life-operations）。
+**⚠ 缺失**：17 的认定送出機関中国状态、14 的银行 / 保证会社门槛待收敛。
 
 ---
 
@@ -121,8 +123,8 @@
 
 ### 6.2 判读
 
-**事实**：长期路径（永住 / 归化 / 转职）存在，但本分野不能直接升 2 号。
-**⚠ 缺失**：**退出执行层**未系统研究——年金脱退一时金、健康保险任意継続、退职手续、帰国前确定申告 / 离境、在留卡返还、再入国、退室与车辆处理等（建议建退出专题）。
+**事实**：长期路径（永住 / 归化 / 转职）存在，但本分野不能直接升 2 号。退出执行层已建（16-exit-transition-return）：12+1 项中 10 项已核验（退職、雇用保険、在留資格取消/変更、在留卡/再入国、転職/资格外活动、特定技能、来源治理等），3 项部分核验（健康保険任意継続、厚生年金脱退一时金、退室解約）。
+**⚠ 缺失**：健康保険任意継続深链、脱退一时金请求书类 / 窓口、退室解約预告期与账户关闭条件深链待补。
 
 ---
 
@@ -132,12 +134,16 @@
 
 | 优先级 | 缺失 | 覆盖问题 | 证据 |
 |---|---|---|---|
-| P1 | 在日生活实务与行政手续 | 怎么去 / 去哪 | 公共交通 / 通信 / 水电 / 银行 / 保证人无研究 |
-| P1 | 医疗 · 健康 · 心理 | 去哪 / 最坏怎么办 | 心理 / 精神科 / 分娩 / 介護 / 医疗通译无研究 |
-| P2 | 退出 · 转型 · 回国 | 最坏怎么办 | 年金脱退 / 任意継続 / 帰国手続き无研究 |
-| P2 | 家族 · 育儿 | 怎么去 / 去哪 | 保育 / 分娩 / 園 / 国際結婚 / 相続无研究 |
-| P2 | 防灾 · 安全 · 治安 | 去哪 | 自治体防灾渠道 / 避難 / 治安无系统覆盖 |
-| P3 | 劳务输出与中介防骗 | 怎么去 | 01 仅追踪中介资质，无防骗专题 |
+| 已接入 | 在日生活实务与行政手续（14） | 怎么去 / 去哪 | 词库实体 25 条；银行 / 保证会社门槛待收敛 |
+| 已接入 | 医疗 · 健康 · 心理（15） | 去哪 / 最坏怎么办 | 词库实体 19 条；心理 / 精神科待补 |
+| 已接入 | 退出 · 转型 · 回国（16） | 最坏怎么办 | 12+1 项 10 项已核验 / 3 项部分核验 |
+| 已接入 | 家族 · 育儿（18） | 怎么去 / 去哪 | 词库实体 35 条；保育 / 分娩 / 教育待补 |
+| 已接入 | 防灾 · 安全 · 治安（19） | 去哪 | 词库实体 27 条；自治体渠道待补 |
+| 已接入 | 劳务输出与中介合规（17） | 怎么去 | 词库实体 28 条；认定送出機関中国状态待核实 |
+| 已接入 | 中国侧行前与回国（20） | 怎么去 / 最坏怎么办 | 词库实体 34 条；与 16 形成闭环 |
+| P1 | 不许可 / 拒签救济 | 能不能去 | 08 已交付审查与救济章；再申请 / 补正时限待核实 |
+| P1 | 取消・退去・収容・仮放免救济 | 最坏怎么办 | 09 已交付在留风险与救济章；収容期限 / 仮放免要件待核实 |
+| P2 | 关键词体系与搜索层 | 全部 | 报告关键词 / 问题索引 / SEO 元数据 / 站内搜索待建 |
 
 ---
 
@@ -151,24 +157,30 @@
 **已知口径冲突（并列呈现，不合并）**：受入上限 22,100 ≠ 24,500；司机缺口 14%/34% ≠ 7%/25%；工资（厚労省）≠ 含赏与（全ト协）。
 
 **主要局限**：
-1. 本主题不新增一手来源，结论完全依赖 01–13 的更新节奏；
-2. 落地执行层、医疗、退出执行三块为空白，影响问题 3、5 的判读完整度；
-3. 个人定居地与个人情况（资金、家属、时间窗口）未记录，问题 4、5 无法收敛。
+1. 本主题不新增一手来源，结论依赖 01–20 的更新节奏；
+2. 14/15/16/17/18/19/20 已接入但部分仍为初析级（16 的 3 项部分核验、18/19/20 的首期待补），影响问题 3、5 的判读完整度；
+3. 个人定居地与个人情况（资金、家属、时间窗口）未记录，问题 4、5 无法完全收敛。
 
 ---
 
 ## 九、参考来源清单
 
-1. [01 特定技能司机 · 基线报告](https://github.com/hmbphxkw76-byte/jp-life-work/blob/main/01-ssw-driver/reports/2026-11-ssw-driver.md) — 收入 / 缺口 / 考试 / 驾照 / 中介
-2. [01 初析报告](https://github.com/hmbphxkw76-byte/jp-life-work/blob/main/01-ssw-driver/reports/2026-11-ssw-driver.md) — 五问事实来源
-3. [04 物流行业 · 基线报告](https://github.com/hmbphxkw76-byte/jp-life-work/blob/main/04-industry-logistics/reports/2026-11-industry-logistics.md) — 运賃 / 倒産 / 2024 年問題
-4. [05 自动驾驶 · 基线报告](https://github.com/hmbphxkw76-byte/jp-life-work/blob/main/05-industry-autonomous/reports/2026-11-industry-autonomous.md) — L4 进展
-5. [07 经济与财务 · 基线报告](https://github.com/hmbphxkw76-byte/jp-life-work/blob/main/07-economy-finance/reports/2026-11-economy-finance.md) — 生活成本 / 税制
-6. [08 签证与移民 · 基线报告](https://github.com/hmbphxkw76-byte/jp-life-work/blob/main/08-visa-immigration/reports/2026-11-visa-immigration.md) — 在留 / 永住
-7. [10 教育与资格 · 基线报告](https://github.com/hmbphxkw76-byte/jp-life-work/blob/main/10-education-qualification/reports/2026-11-education-qualification.md) — 驾照路径与费用
-8. [13 地区信息 · 基线报告](https://github.com/hmbphxkw76-byte/jp-life-work/blob/main/13-regional-info/reports/2026-11-regional-info.md) — 地域选择框架
-9. [13 地区信息 · 初析报告](https://github.com/hmbphxkw76-byte/jp-life-work/blob/main/13-regional-info/reports/2026-11-regional-info.md) — 定居地档案模板
+1. [01 特定技能司机 · 月度报告](https://github.com/hmbphxkw76-byte/jp-life-work/blob/main/01-ssw-driver/reports/2026-11-ssw-driver.md) — 收入 / 缺口 / 考试 / 驾照 / 中介
+2. [04 物流行业 · 月度报告](https://github.com/hmbphxkw76-byte/jp-life-work/blob/main/04-industry-logistics/reports/2026-11-industry-logistics.md) — 运賃 / 倒産 / 2024 年問題
+3. [05 自动驾驶 · 月度报告](https://github.com/hmbphxkw76-byte/jp-life-work/blob/main/05-industry-autonomous/reports/2026-11-industry-autonomous.md) — L4 进展
+4. [07 经济与财务 · 月度报告](https://github.com/hmbphxkw76-byte/jp-life-work/blob/main/07-economy-finance/reports/2026-11-economy-finance.md) — 生活成本 / 税制
+5. [08 签证与移民 · 月度报告](https://github.com/hmbphxkw76-byte/jp-life-work/blob/main/08-visa-immigration/reports/2026-11-visa-immigration.md) — 在留 / 永住 / 审查与救济
+6. [09 政治与法律 · 月度报告](https://github.com/hmbphxkw76-byte/jp-life-work/blob/main/09-politics-law/reports/2026-11-politics-law.md) — 在留风险与救济 / 劳动合规
+7. [10 教育与资格 · 月度报告](https://github.com/hmbphxkw76-byte/jp-life-work/blob/main/10-education-qualification/reports/2026-11-education-qualification.md) — 驾照路径与费用
+8. [13 地区信息 · 月度报告](https://github.com/hmbphxkw76-byte/jp-life-work/blob/main/13-regional-info/reports/2026-11-regional-info.md) — 地域选择框架
+9. [14 在日生活实务 · 月度报告](https://github.com/hmbphxkw76-byte/jp-life-work/blob/main/14-life-operations/reports/2026-11-life-operations.md) — 住民登记 / 住房 / 通信 / 银行 / 水电
+10. [15 医疗·健康·心理 · 月度报告](https://github.com/hmbphxkw76-byte/jp-life-work/blob/main/15-health-wellbeing/reports/2026-11-health-wellbeing.md) — 医保 / 就医 / 心理 / 介护
+11. [16 退出·转型·回国 · 月度报告](https://github.com/hmbphxkw76-byte/jp-life-work/blob/main/16-exit-transition-return/reports/2026-11-exit-transition-return.md) — 退职 / 年金 / 税 / 在留 / 退室
+12. [17 劳务输出与中介合规 · 月度报告](https://github.com/hmbphxkw76-byte/jp-life-work/blob/main/17-migration-compliance/reports/2026-11-migration-compliance.md) — 名单核验 / 骗术图谱 / 合同审查
+13. [18 家族·育儿·人生事件 · 月度报告](https://github.com/hmbphxkw76-byte/jp-life-work/blob/main/18-family-parenting/reports/2026-11-family-parenting.md) — 家族滞在 / 保育 / 教育 / 婚姻 / 继承
+14. [19 防灾·安全·治安 · 月度报告](https://github.com/hmbphxkw76-byte/jp-life-work/blob/main/19-safety-disaster/reports/2026-11-safety-disaster.md) — 防灾 / 避难 / 治安 / 领事
+15. [20 中国侧行前与回国 · 月度报告](https://github.com/hmbphxkw76-byte/jp-life-work/blob/main/20-overseas-china/reports/2026-11-overseas-china.md) — 护照 / 户籍 / 档案 / 驾照 / 认证
 
 ---
 
-本报告为 v1.0 首份季度复核，数据基准 2026-11-14。
+本报告为 v1.1（P0 与 Phase 2–4 状态刷新），数据基准 2026-11-14。
