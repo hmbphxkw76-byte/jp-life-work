@@ -87,7 +87,7 @@ def _now() -> str:
 def validate_l5_evidence(text: str) -> tuple[bool, list[str]]:
     """校验复核证据 JSON（格式见 src/report_templates/l5-semantic-review.md）。
 
-    返回 (是否有效, 问题列表)。六项缺一不可；no / uncertain 必须给出 basis。
+    返回 (是否有效, 问题列表)。六项缺一不可；no / uncertain 必须给出非空 basis。
     """
     if not text or not text.strip():
         return False, ["缺少 L5 语义复核证据（--evidence）"]
@@ -102,12 +102,18 @@ def validate_l5_evidence(text: str) -> tuple[bool, list[str]]:
         return False, [f"evidence.items 须为 {len(L5_CHECKLIST)} 项，实际 "
                         f"{len(items) if isinstance(items, list) else '非列表'}"]
     problems: list[str] = []
+    labels = [x[0] for x in L5_CHECKLIST]
     for i, it in enumerate(items, start=1):
         if not isinstance(it, dict):
             problems.append(f"第 {i} 项不是对象")
             continue
+        label = str(it.get("item", "")).strip()
+        if label != labels[i - 1]:
+            problems.append(f"第 {i} 项 item 标签不符：{label!r}（应为 {labels[i - 1]!r}）")
         res = str(it.get("result", "")).strip().lower()
-        basis = str(it.get("basis", "")).strip()
+        basis = it.get("basis")
+        basis = basis if isinstance(basis, str) else ""
+        basis = basis.strip()
         if res not in ("yes", "no", "uncertain"):
             problems.append(f"第 {i} 项 result 非法：{res!r}")
         if res in ("no", "uncertain") and not basis:
@@ -116,17 +122,30 @@ def validate_l5_evidence(text: str) -> tuple[bool, list[str]]:
 
 
 def l5_status_from_ledger() -> dict[str, bool]:
-    """从台账派生各报告 L5 状态：最近一次 re_review 是否有有效证据。"""
+    """从台账派生各报告 L5 状态。
+
+    仅当报告处于 audited 且当前指纹与绑定一致、且最近一次 re_review 证据有效时为 True。
+    """
+    state = rebuild_status(load_ledger())
+    ledger = load_ledger()
     status: dict[str, bool] = {}
-    for ev in load_ledger():
-        rep = ev.get("report")
-        if not rep:
-            continue
-        if ev.get("event") == "stage_pass" and ev.get("role") == "reviewer_l2":
-            ok, _ = validate_l5_evidence(ev.get("evidence", ""))
-            status[rep] = ok
-        elif ev.get("event") == "stage_fail" and ev.get("role") == "reviewer_l2":
+    for rep, v in state.items():
+        if v.get("state") != "audited":
             status[rep] = False
+            continue
+        cur_md, cur_html = _current_hashes(rep)
+        if not cur_md or cur_md != v.get("content_hash"):
+            status[rep] = False
+            continue
+        ok = False
+        for ev in ledger:
+            if ev.get("report") != rep or ev.get("role") != "reviewer_l2":
+                continue
+            if ev.get("event") == "stage_pass":
+                ok, _ = validate_l5_evidence(ev.get("evidence", ""))
+            elif ev.get("event") == "stage_fail":
+                ok = False
+        status[rep] = ok
     return status
 
 
@@ -139,13 +158,19 @@ def _hash(prev_hash: str, body: dict) -> str:
 
 
 def load_ledger() -> list[dict]:
+    """读取台账（跳过损坏行，不崩溃）。"""
     if not LEDGER.is_file():
         return []
     out = []
     for line in LEDGER.read_text(encoding="utf-8").splitlines():
         line = line.strip()
-        if line:
+        if not line:
+            continue
+        try:
             out.append(json.loads(line))
+        except json.JSONDecodeError:
+            continue
+    out.sort(key=lambda e: e.get("seq", 0))
     return out
 
 
@@ -180,7 +205,9 @@ def rebuild_status(ledger: list[dict]) -> dict:
         if target is not None:
             cur["state"] = target
         note = ev.get("note", "") or ""
-        if "审计编号 " in note:
+        if ev.get("audit_id"):
+            cur["audit_id"] = ev["audit_id"]
+        elif "审计编号 " in note:
             cur["audit_id"] = note.split("审计编号 ")[-1].split(" ")[0]
         if target == "audited":
             cur["finalized_at"] = ev["ts"]
@@ -201,9 +228,20 @@ def write_status(state: dict) -> Path:
 
 
 def _current_hashes(rel: str) -> tuple[str, str]:
-    """当前 (md, html) 双指纹；html 缺失时为 ""。"""
+    """当前 (md, html) 双指纹；md 缺失时返回 ("", "")（按失配处理）。"""
     md = ROOT / rel
+    if not md.is_file():
+        return "", ""
     return content_fingerprints(md, md.with_suffix(".html"))
+
+
+def _last_event(rep: str) -> dict | None:
+    """该报告在台账中的最后一条事件（用于环节间连续性校验）。"""
+    last = None
+    for ev in load_ledger():
+        if ev.get("report") == rep:
+            last = ev
+    return last
 
 
 def _next_audit_id(state: dict) -> str:
@@ -235,11 +273,16 @@ def cmd_init() -> int:
 
 def _report_arg(rel: str) -> str:
     rel = rel.replace("\\", "/")
-    if not (ROOT / rel).is_file():
+    try:
+        resolved = (ROOT / rel).resolve()
+        resolved.relative_to(ROOT.resolve())
+    except (ValueError, OSError):
+        raise SystemExit(f"[ERROR] 路径越出仓库根：{rel}")
+    if not resolved.is_file():
         raise SystemExit(f"[ERROR] 报告不存在：{rel}")
-    if not rel.endswith(".md"):
+    if resolved.suffix != ".md":
         raise SystemExit(f"[ERROR] 请传入 md 源稿路径：{rel}")
-    return rel
+    return resolved.relative_to(ROOT.resolve()).as_posix()
 
 
 def cmd_submit(rel: str | None, all_: bool, actor: str) -> int:
@@ -291,14 +334,31 @@ def cmd_review(stage: str, rel: str | None, all_: bool, result: str, actor: str,
         if cur != expected:
             print(f"[SKIP] {rep}：当前状态 {cur or '未登记'}，期望 {expected}")
             continue
+        # 环节间连续性：自上一环节以来内容不得变更
+        prev = _last_event(rep)
+        md_h, html_h = _current_hashes(rep)
+        if prev:
+            if prev.get("content_hash") and md_h and md_h != prev["content_hash"]:
+                print(f"[ERROR] {rep}：自上一环节（{prev.get('event')}）以来 md 内容已变更，"
+                      f"需重新 submit")
+                return 1
+            if prev.get("html_hash") and html_h and html_h != prev["html_hash"]:
+                print(f"[ERROR] {rep}：自上一环节（{prev.get('event')}）以来 HTML 已变更，"
+                      f"需重新 submit")
+                return 1
+        if stage == "final" and result == "pass" and not html_h:
+            print(f"[ERROR] {rep}：终审要求已生成 HTML 交付物（html_hash 为空）")
+            return 1
         body_note = note
+        audit_id = ""
         if stage == "final" and result == "pass":
             audit_id = _next_audit_id(state)
             body_note = f"{note}；审计编号 {audit_id}"
-        md_h, html_h = _current_hashes(rep)
+            state[rep]["audit_id"] = audit_id
         _append({"ts": _now(), "event": event, "report": rep, "actor": actor or DEFAULT_ACTOR[stage],
                  "role": role, "result": result, "note": body_note,
-                 "evidence": evidence or "", "content_hash": md_h, "html_hash": html_h})
+                 "evidence": evidence or "", "content_hash": md_h, "html_hash": html_h,
+                 "audit_id": audit_id})
         n += 1
     state = rebuild_status(load_ledger())
     write_status(state)
@@ -355,6 +415,24 @@ def cmd_verify() -> int:
             elif v.get("html_hash") and cur_html != v["html_hash"]:
                 problems.append(f"{rep}：HTML 指纹失配（当前 {cur_html[:19]} ≠ 绑定 "
                                 f"{v['html_hash'][:19]}），审计失效")
+    # 派生状态文件须与台账一致（防止信任分裂）
+    if STATUS.is_file():
+        try:
+            disk = json.loads(STATUS.read_text(encoding="utf-8")).get("reports", {})
+        except json.JSONDecodeError:
+            disk = None
+        if disk is None:
+            problems.append("audit-status.json 损坏（非法 JSON）")
+        else:
+            for rep, v in state.items():
+                d = disk.get(rep)
+                if not isinstance(d, dict):
+                    continue
+                if d.get("state") != v.get("state"):
+                    problems.append(f"{rep}：audit-status.json 状态 {d.get('state')} "
+                                    f"≠ 台账 {v.get('state')}")
+                if d.get("audit_id") != v.get("audit_id"):
+                    problems.append(f"{rep}：audit-status.json 审计编号与台账不一致")
     if problems:
         for p in problems:
             print(f"[X] {p}")

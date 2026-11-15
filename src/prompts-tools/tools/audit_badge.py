@@ -41,16 +41,25 @@ DISCLAIMER_RE = re.compile(r"免责|不构成法律意见")
 
 
 def _load_status() -> dict:
+    """审计状态优先由台账派生（防信任分裂），文件仅作回退。"""
+    try:
+        from audit_pipeline import load_ledger, rebuild_status
+        return rebuild_status(load_ledger())
+    except Exception:  # noqa: BLE001
+        pass
     if not STATUS.is_file():
         return {}
-    return json.loads(STATUS.read_text(encoding="utf-8")).get("reports", {})
+    try:
+        return json.loads(STATUS.read_text(encoding="utf-8")).get("reports", {})
+    except json.JSONDecodeError:
+        return {}
 
 
 def badge_text(audit_id: str, finalized_at: str, fp: str) -> str:
     day = (finalized_at or "")[:10] or "—"
     return (
         f"> **已审计** ✅ 审计编号 `{audit_id}`｜终审通过：{day}｜"
-        f"内容指纹 `sha256:{fp[:12]}`｜依据《审计报告标准化管理体系》{SPEC_VERSION}"
+        f"内容指纹 `{fp[:19]}`｜依据《审计报告标准化管理体系》{SPEC_VERSION}"
     )
 
 
@@ -115,9 +124,14 @@ def _targets(all_: bool, rel: str | None) -> list[str]:
     if not rel:
         raise SystemExit("[ERROR] 需要 --report <路径> 或 --all")
     rel = rel.replace("\\", "/")
-    if not (ROOT / rel).is_file():
+    try:
+        resolved = (ROOT / rel).resolve()
+        resolved.relative_to(ROOT.resolve())
+    except (ValueError, OSError):
+        raise SystemExit(f"[ERROR] 路径越出仓库根：{rel}")
+    if not resolved.is_file():
         raise SystemExit(f"[ERROR] 报告不存在：{rel}")
-    return [rel]
+    return [resolved.relative_to(ROOT.resolve()).as_posix()]
 
 
 def cmd_apply(all_: bool, rel: str | None) -> int:

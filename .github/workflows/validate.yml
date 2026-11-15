@@ -76,17 +76,19 @@ jobs:
       - name: 报告内容 lint（新报告阻断）
         run: |
           python src/prompts-tools/tools/lint_reports.py --new-only || code=$?
-          if [ "${code:-0}" -eq 1 ]; then
-            echo "::error::新报告 lint 存在错误项，阻断合并"
+          code=${code:-0}
+          if [ "$code" -ne 0 ] && [ "$code" -ne 2 ]; then
+            echo "::error::新报告 lint 存在错误项或命令异常，阻断合并（退出码 $code）"
             exit 1
           fi
-          echo "lint_reports.py 退出码 ${code:-0}（2=仅警告不阻断）"
+          echo "lint_reports.py 退出码 $code（2=仅警告不阻断）"
 
       - name: 模板合规校验（新报告阻断）
         run: |
           python src/prompts-tools/tools/compliance_check.py --new-only || code=$?
-          if [ "${code:-0}" -eq 1 ]; then
-            echo "::error::新报告模板合规存在错误项，阻断合并"
+          code=${code:-0}
+          if [ "$code" -ne 0 ] && [ "$code" -ne 2 ]; then
+            echo "::error::新报告模板合规存在错误项或命令异常，阻断合并（退出码 $code）"
             exit 1
           fi
-          echo "compliance_check.py 退出码 ${code:-0}（2=仅警告不阻断）"
+          echo "compliance_check.py 退出码 $code（2=仅警告不阻断）"

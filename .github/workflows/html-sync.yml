@@ -38,9 +38,16 @@ jobs:
       - name: 重建汇总页（build_hub.py）
         run: python src/prompts-tools/tools/build_hub.py
 
+      # 内容变更后：指纹失配 → 审计失效（stale），并撤销「已审计」标识。
+      - name: 审计失效同步（audit_pipeline.py --sync）
+        run: python src/prompts-tools/tools/audit_pipeline.py --sync
+
+      - name: 标识同步（audit_badge.py --sync）
+        run: python src/prompts-tools/tools/audit_badge.py --sync
+
       - name: 提交 HTML 与汇总页更新
         run: |
-          git add -A -- ':(glob)**/reports/*.html' index.html search-index.json
+          git add -A -- ':(glob)**/reports/*.html' index.html search-index.json src/report-audits/audit/
           if git diff --cached --quiet; then
             echo "HTML 与汇总页均一致，无变化，跳过提交"
             exit 0

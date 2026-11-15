@@ -18,14 +18,13 @@ import argparse
 import json
 import re
 import sys
+from datetime import date
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from _common import ROOT, detect_month_report, iter_business_dirs  # noqa: E402
+from _common import NEW_FROM, ROOT, detect_month_report, iter_business_dirs  # noqa: E402
 
-# 新报告认定：期间 >= NEW_FROM 视为新报告，纳入阻断级校验；历史报告由豁免清单管理。
-NEW_FROM = "2026-11"
 DEFAULT_WHITELIST = ROOT / "src" / "report-audits" / "audit" / "lint-whitelist.json"
 
 TABLE_RE = re.compile(r"<table\b.*?</table>", re.DOTALL)
@@ -82,7 +81,10 @@ def collect_report_htmls():
 
 
 def load_whitelist(path: Path) -> set[str]:
-    """读取豁免清单（JSON 数组，每项含 report / reason / review_by）-> 报告路径集合。"""
+    """读取豁免清单（JSON 数组，每项含 report / reason / review_by）-> 报告路径集合。
+
+    逾期（review_by < 今日）的条目不生效，恢复阻断并告警。
+    """
     if not path.is_file():
         return set()
     try:
@@ -91,7 +93,20 @@ def load_whitelist(path: Path) -> set[str]:
         return set()
     if isinstance(data, dict):
         data = data.get("items", [])
-    return {e.get("report", "") for e in data if isinstance(e, dict)}
+    today = date.today().isoformat()
+    active: set[str] = set()
+    expired: list[str] = []
+    for e in data:
+        if not isinstance(e, dict):
+            continue
+        rb = str(e.get("review_by", ""))
+        if rb and rb < today:
+            expired.append(e.get("report", ""))
+            continue
+        active.add(e.get("report", ""))
+    if expired:
+        print(f"[W] 豁免清单 {len(expired)} 项已逾期，恢复阻断：" + ", ".join(expired))
+    return active
 
 
 def _period(rel: str) -> str:

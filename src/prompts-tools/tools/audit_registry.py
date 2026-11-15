@@ -109,6 +109,7 @@ def discover() -> list[dict]:
                     "md": md.relative_to(ROOT).as_posix(),
                     "html": md.with_suffix(".html").relative_to(ROOT).as_posix(),
                     "content_hash": content_fingerprint(md),
+                    "html_hash": content_fingerprints(md, md.with_suffix(".html"))[1],
                     "audit_id": "",
                     "audit_state": "registered",
                     "finalized_at": "",
@@ -125,12 +126,18 @@ def _md_table(rows: list[list[str]]) -> str:
     return "\n".join(out)
 
 
+def _link_prefix(out_file: Path) -> str:
+    """从产物文件回到仓库根的相对前缀（保证 Markdown 链接可用）。"""
+    return "../" * (len(out_file.relative_to(ROOT).parts) - 1)
+
+
 def render_md(entries: list[dict], run_date: str) -> str:
     rows = [["报告", "主题", "期间", "类型", "内容指纹", "审计状态", "审计编号"]]
+    prefix = _link_prefix(REGISTRY_MD)
     for e in entries:
         rows.append(
-            [f"[{e['report']}](../{e['report']})", e["topic"], e["period"] or "—",
-             e["type_id"] or "—", f"`sha256:{e['content_hash'][:12]}`",
+            [f"[{e['report']}]({prefix}{e['report']})", e["topic"], e["period"] or "—",
+             e["type_id"] or "—", f"`{e['content_hash'][:19]}`",
              e["audit_state"], e["audit_id"] or "—"]
         )
     return "\n".join(
@@ -148,7 +155,12 @@ def render_md(entries: list[dict], run_date: str) -> str:
 
 
 def _audit_state() -> dict:
-    """读取审计状态（audit-status.json）-> {report: {audit_id, audit_state, finalized_at}}。"""
+    """审计状态优先由台账派生（防信任分裂），audit-status.json 仅作回退。"""
+    try:
+        from audit_pipeline import load_ledger, rebuild_status
+        return rebuild_status(load_ledger())
+    except Exception:  # noqa: BLE001
+        pass
     p = AUDIT_DIR / "audit-status.json"
     if not p.is_file():
         return {}
@@ -199,6 +211,8 @@ def check() -> tuple[int, list[str]]:
     for r in sorted(set(reg) & set(disc)):
         if reg[r]["content_hash"] != disc[r]["content_hash"]:
             problems.append(f"内容指纹失配（内容已变更）：{r}")
+        elif reg[r].get("html_hash") and reg[r]["html_hash"] != disc[r]["html_hash"]:
+            problems.append(f"HTML 指纹失配（HTML 已变更）：{r}")
     return len(problems), problems
 
 

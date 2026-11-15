@@ -7,7 +7,7 @@
     "by_severity": {
       "P0": 0,
       "P1": 0,
-      "P2": 7
+      "P2": 4
     }
   },
   "results": [
@@ -80,18 +80,10 @@
       "severity": {
         "P0": 0,
         "P1": 0,
-        "P2": 1
+        "P2": 0
       },
       "passed": true,
-      "findings": [
-        {
-          "code": "PF-REG",
-          "severity": "P2",
-          "location": "登记册指针",
-          "detail": "引用登记册 #7, #8 在登记册中不存在",
-          "spec": "S-08"
-        }
-      ]
+      "findings": []
     },
     {
       "report": "05-industry-autonomous/reports/2026-11-industry-autonomous.md",
@@ -99,18 +91,10 @@
       "severity": {
         "P0": 0,
         "P1": 0,
-        "P2": 1
+        "P2": 0
       },
       "passed": true,
-      "findings": [
-        {
-          "code": "PF-REG",
-          "severity": "P2",
-          "location": "登记册指针",
-          "detail": "引用登记册 #10 在登记册中不存在",
-          "spec": "S-08"
-        }
-      ]
+      "findings": []
     },
     {
       "report": "06-industry-technology/reports/2026-11-industry-technology.md",
@@ -162,18 +146,10 @@
       "severity": {
         "P0": 0,
         "P1": 0,
-        "P2": 1
+        "P2": 0
       },
       "passed": true,
-      "findings": [
-        {
-          "code": "PF-REG",
-          "severity": "P2",
-          "location": "登记册指针",
-          "detail": "引用登记册 #14 在登记册中不存在",
-          "spec": "S-08"
-        }
-      ]
+      "findings": []
     },
     {
       "report": "11-language-japanese/reports/2026-11-language-japanese.md",

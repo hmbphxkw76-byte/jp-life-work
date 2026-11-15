@@ -37,8 +37,8 @@ jobs:
         run: |
           python src/prompts-tools/tools/audit_sampling.py --apply || code=$?
           code=${code:-0}
-          if [ "$code" -eq 1 ]; then
-            echo "::error::抽检未达门槛（P0/P1 或合格率不足），不合格报告须重新审计"
+          if [ "$code" -ne 0 ] && [ "$code" -ne 2 ]; then
+            echo "::error::抽检未达门槛或命令异常（退出码 $code），不合格报告须重新审计"
             exit 1
           fi
           echo "audit_sampling 退出码 $code（2=仅 P2 放行）"

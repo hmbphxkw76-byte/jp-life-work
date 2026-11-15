@@ -15,6 +15,9 @@ ROOT = Path(__file__).resolve().parents[3]
 SRC = ROOT / "src"
 TEMPLATE_ROOT = SRC / "report_templates"
 
+# 新报告认定期间：>= 该期间视为新报告，纳入阻断级校验；历史报告由豁免清单管理。
+NEW_FROM = "2026-11"
+
 # 顶层目录中不属于「地区 / 业务主题」的目录
 SKIP_TOP = {".git", ".github", "src", "report_templates", "prompts", "tests", "docs"}
 

@@ -1036,6 +1036,12 @@ class TestAuditPreflight(unittest.TestCase):
         # 区间指针：#1–#2 而登记册只有 #1
         text_range = self.GOOD + "\n详见登记册 #1–#2。\n"
         self.assertIn("PF-REG", self._codes(text_range, registry_text=self.REG))
+        # 列表指针：#1、#4 而登记册只有 #1
+        text_list = self.GOOD + "\n详见登记册 #1、#4。\n"
+        self.assertIn("PF-REG", self._codes(text_list, registry_text=self.REG))
+        # 跨主题只读锚：不在本主题登记册校验
+        text_cross = self.GOOD + "\n详见 01-ssw-driver 登记册 #7 / #8。\n"
+        self.assertNotIn("PF-REG", self._codes(text_cross, registry_text=self.REG))
 
     def test_missing_html_pair(self):
         self.assertIn("PF-PAIR", self._codes(self.GOOD))
@@ -1097,6 +1103,8 @@ class TestAuditGuard(unittest.TestCase):
             encoding="utf-8")
         self.md = self.root / "01-demo" / "reports" / "2026-11-demo.md"
         self.md.write_text(self.REPORT_TEXT, encoding="utf-8")
+        (self.root / "01-demo" / "reports" / "2026-11-demo.html").write_text(
+            "<html><body>报告</body></html>", encoding="utf-8")
         self.audit_dir = self.root / "src" / "report-audits" / "audit"
         self.audit_dir.mkdir(parents=True)
 
@@ -1205,7 +1213,8 @@ class TestAuditGuard(unittest.TestCase):
     @staticmethod
     def _evidence(result="yes", basis=""):
         return json.dumps(
-            {"items": [{"item": "x", "result": result, "basis": basis} for _ in range(6)]},
+            {"items": [{"item": audit_check.L5_CHECKLIST[i][0], "result": result, "basis": basis}
+                       for i in range(len(audit_check.L5_CHECKLIST))]},
             ensure_ascii=False)
 
     def test_validate_l5_evidence(self):
@@ -1284,6 +1293,47 @@ class TestAuditGuard(unittest.TestCase):
             (_common.ROOT, audit_check.ROOT, audit_check.IQ_CACHE,
              info_quality_check.ROOT) = orig
 
+    def _add_report(self, slug="demo2", period="2026-12"):
+        d = self.root / "01-demo" / "reports"
+        md = d / f"{period}-{slug}.md"
+        md.write_text(self.REPORT_TEXT, encoding="utf-8")
+        md.with_suffix(".html").write_text("<html><body>x</body></html>", encoding="utf-8")
+        return md.relative_to(self.root).as_posix()
+
+    def test_final_all_unique_audit_ids(self):
+        rel2 = self._add_report()
+        audit_pipeline.cmd_init()
+        audit_pipeline.cmd_submit(None, True, "generator")
+        audit_pipeline.cmd_review("initial", None, True, "pass", "", "", None)
+        audit_pipeline.cmd_review("re_review", None, True, "pass", "", "", self._evidence())
+        audit_pipeline.cmd_review("final", None, True, "pass", "", "", None)
+        st = self._state()
+        ids = [st[self.REPORT_REL]["audit_id"], st[rel2]["audit_id"]]
+        self.assertTrue(all(ids))
+        self.assertNotEqual(ids[0], ids[1])
+        self.assertEqual(audit_pipeline.cmd_verify(), 0)
+
+    def test_stage_content_change_rejected(self):
+        audit_pipeline.cmd_init()
+        audit_pipeline.cmd_submit(None, True, "generator")
+        self.md.write_text(self.REPORT_TEXT + "\n变更\n", encoding="utf-8")
+        rc = audit_pipeline.cmd_review("initial", None, True, "pass", "", "", None)
+        self.assertEqual(rc, 1)
+        self.assertEqual(self._state()[self.REPORT_REL]["state"], "pending_initial")
+
+    def test_verify_detects_status_drift(self):
+        audit_pipeline.cmd_init()
+        audit_pipeline.cmd_submit(None, True, "generator")
+        for stage in ("initial", "re_review", "final"):
+            ev = self._evidence() if stage == "re_review" else None
+            audit_pipeline.cmd_review(stage, None, True, "pass", "", "", ev)
+        self.assertEqual(audit_pipeline.cmd_verify(), 0)
+        p = audit_pipeline.STATUS
+        data = json.loads(p.read_text(encoding="utf-8"))
+        data["reports"][self.REPORT_REL]["state"] = "registered"
+        p.write_text(json.dumps(data, ensure_ascii=False), encoding="utf-8")
+        self.assertNotEqual(audit_pipeline.cmd_verify(), 0)
+
 
 class TestNewOnlyGate(unittest.TestCase):
     """新报告阻断 / 历史报告豁免（lint_reports / compliance_check --new-only）。"""
@@ -1325,6 +1375,28 @@ class TestNewOnlyGate(unittest.TestCase):
                 self.assertTrue(any("SKIP" in l for l in lines2))
             finally:
                 _common.ROOT, compliance_check.ROOT = orig_common, orig_cc
+
+
+class TestAuditSampling(unittest.TestCase):
+    """分层抽检：覆盖目标与 P2 超期判定。"""
+
+    def test_select_sample_covers_each_topic(self):
+        entries = [{"report": f"{t:02d}-x/reports/2026-11-x.md", "topic": f"{t:02d}-x",
+                    "period": "2026-11", "type_id": "", "selected": 0} for t in range(1, 6)]
+        sample = audit_sampling.select_sample(entries, "2026-11")
+        self.assertEqual(len(sample), 5)
+        self.assertEqual(len({e["topic"] for e in sample}), 5)
+
+    def test_overdue_invalid_date(self):
+        with tempfile.TemporaryDirectory() as d:
+            p = Path(d) / "pending-p2.json"
+            p.write_text('{"items":[{"report":"a","review_by":"not-a-date"}]}', encoding="utf-8")
+            orig = audit_sampling.PENDING_P2
+            audit_sampling.PENDING_P2 = p
+            try:
+                self.assertEqual(len(audit_sampling.overdue_p2()), 1)
+            finally:
+                audit_sampling.PENDING_P2 = orig
 
 
 if __name__ == "__main__":

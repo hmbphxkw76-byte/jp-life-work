@@ -34,11 +34,11 @@
 | 报告归位检查 | `classify_reports.py --check --unknown-warn` | 阻断 |
 | 结构补全检查 | `ensure_region_topics.py --check` | 阻断 |
 | 汇总页一致性 | `build_hub.py --check` | 阻断 |
-| 报告内容 lint | `lint_reports.py` | 建议级（continue-on-error） |
-| 模板合规校验 | `compliance_check.py` | 建议级（continue-on-error） |
+| 报告内容 lint | `lint_reports.py --new-only` | 阻断（新报告；退出码 1） |
+| 模板合规校验 | `compliance_check.py --new-only` | 阻断（新报告；退出码 1） |
 
-> 两个「建议级」关卡对**既有历史报告**的遗留项（断头锚点）会报错，
-> 属预期，不影响门禁；新报告应全部通过。
+> 两个关卡对期间 >= 2026-11 的**新报告**阻断；历史报告由 `--new-only` 跳过，
+> 遗留项列入 `src/report-audits/audit/lint-whitelist.json` 豁免（逾期恢复阻断）。
 
 ### 2. `html-sync.yml` — 生成物同步
 
@@ -199,7 +199,7 @@ python src/prompts-tools/tools/info_quality_check.py --apply
 工作流已内置去重：当月存在未关闭的同标题 Issue 时会更新正文而非新建。若仍重复，检查 Issue 是否被关闭后又被重建。
 
 **Q：历史报告 lint / 合规报错？**
-属既有遗留项（断头锚点），CI 已标 `continue-on-error`，不影响门禁；新报告应全部通过。
+历史报告由 `--new-only` 跳过，不再报错；如个别报告需临时豁免，加入 `lint-whitelist.json`（含原因与复核日期，逾期恢复阻断）。
 
 **Q：如何手动跑一次定时任务？**
 GitHub Actions 页面 → 对应 workflow → 「Run workflow」；或在本地按「手动命令速查」执行。

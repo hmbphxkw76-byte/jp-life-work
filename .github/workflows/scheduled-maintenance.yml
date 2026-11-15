@@ -6,7 +6,7 @@
 #   3. 归档策略（archive_reports.py，每主题保留最新 12 期）
 #   4. 生成全局索引（build_index.py → INDEX.md）
 #   5. 重建汇总页（build_hub.py → index.html）
-#   6. 审计失效同步（audit_pipeline.py --sync：指纹失配 → stale）
+#   6. 审计失效同步（audit_pipeline.py --sync：指纹失配 → stale）+ 标识同步（audit_badge.py --sync）
 #   7. 跑契约测试确认无回归后，提交并推送变更（无变更则跳过）
 #
 # 原 scheduled-update.yml（周期更新调度）已于 37c7a90 删除，本工作流为重建版，
@@ -75,6 +75,9 @@ jobs:
 
       - name: 审计失效同步（audit_pipeline.py --sync）
         run: python src/prompts-tools/tools/audit_pipeline.py --sync
+
+      - name: 标识同步（audit_badge.py --sync）
+        run: python src/prompts-tools/tools/audit_badge.py --sync
 
       - name: 契约测试（确认维护无回归）
         run: python -m unittest discover -s src/tests

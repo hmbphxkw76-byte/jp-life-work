@@ -48,6 +48,8 @@ CHECK_REPORT_JSON = AUDIT_DIR / "audit-check-report.json"
 PENDING_P2 = AUDIT_DIR / "pending-p2.json"
 P2_REVIEW_DAYS = 30
 IQ_CACHE = ROOT / "src" / "report-audits" / "info-quality" / "findings-by-path.json"
+CACHE_VERSION = "1.1"
+BADGE_LINE_RE = re.compile(r"^>\s*\*\*已审计\*\*.*$", re.MULTILINE)
 
 TITLE_RE = re.compile(r"<title[^>]*>(.*?)</title>", re.DOTALL)
 H2_RE = re.compile(r"<h2\b[^>]*>(.*?)</h2>", re.DOTALL)
@@ -230,7 +232,8 @@ def check_elements(rel: str, md_path: Path, html_path: Path) -> list[AuditFindin
         add("E8", "P2", "缺少后续动作 / 观察清单")
 
     # E7 来源标注覆盖率
-    fact_blocks = [b for b in _paragraphs(text) if _substantive(b) and re.search(r"\d", b)]
+    fact_blocks = [b for b in _paragraphs(BADGE_LINE_RE.sub("", text))
+                   if _substantive(b) and re.search(r"\d", b)]
     if fact_blocks:
         cov = sum(1 for b in fact_blocks if _has_source(b)) / len(fact_blocks)
         if cov < THRESH_SOURCE_COVERAGE:
@@ -320,8 +323,13 @@ def _iq_findings_by_path() -> dict[str, list[AuditFinding]]:
 
 
 def _iq_cache_key() -> str:
-    """全库内容哈希（业务主题下全部 md 的路径 + 内容指纹）。"""
+    """全库内容哈希（业务主题下全部 md 的路径 + 内容指纹）+ 判定内核版本。"""
     h = hashlib.sha256()
+    h.update(CACHE_VERSION.encode("utf-8"))
+    try:
+        h.update(Path(info_quality_check.__file__).read_bytes())
+    except OSError:
+        pass
     for b in iter_business_dirs():
         for md in sorted(b.path.rglob("*.md")):
             h.update(md.relative_to(ROOT).as_posix().encode("utf-8"))
@@ -395,11 +403,16 @@ def write_pending_p2(results: list[ReportResult], run_date: str) -> list[dict]:
                 "report": r.report, "code": f.code, "location": f.location,
                 "detail": f.detail, "spec": f.spec,
                 "first_seen": first, "last_seen": run_date,
-                "review_by": (date.fromisoformat(run_date) + timedelta(days=P2_REVIEW_DAYS)).isoformat(),
+                "review_by": (date.fromisoformat(first) + timedelta(days=P2_REVIEW_DAYS)).isoformat(),
             })
     payload = {"version": "1.0", "updated": run_date, "count": len(items), "items": items}
     PENDING_P2.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
     return items
+
+
+def _link_prefix(out_file: Path) -> str:
+    """从产物文件回到仓库根的相对前缀。"""
+    return "../" * (len(out_file.relative_to(ROOT).parts) - 1)
 
 
 def _md_table(rows: list[list[str]]) -> str:
@@ -412,16 +425,19 @@ def _md_table(rows: list[list[str]]) -> str:
 def write_report(results: list[ReportResult], summary: dict, run_date: str) -> list[Path]:
     AUDIT_DIR.mkdir(parents=True, exist_ok=True)
     rows = [["报告", "层级结论", "P0", "P1", "P2", "结论"]]
+    prefix = _link_prefix(CHECK_REPORT_MD)
     for r in results:
         c = r.severity_counts
-        layers = " ".join(f"{k}{'✓' if v == 'pass' else '✗'}" for k, v in sorted(r.layers.items()))
-        rows.append([f"[{r.report}](../{r.report})", layers, str(c["P0"]), str(c["P1"]),
+        layers = " ".join(f"{k}{'✓' if v == 'pass' else ('?' if v == 'pending' else '✗')}"
+                          for k, v in sorted(r.layers.items()))
+        rows.append([f"[{r.report}]({prefix}{r.report})", layers, str(c["P0"]), str(c["P1"]),
                      str(c["P2"]), "通过" if r.passed else "不通过"])
     detail_rows = [["层级", "编号", "级别", "报告", "位置", "判定依据"]]
     for r in results:
         for f in sorted(r.findings, key=lambda x: (x.layer, x.severity, x.code)):
             detail_rows.append([f.layer, f.code, f.severity, r.report, f.location, f.detail])
-    layer_rows = [[k, str(v["pass"]), str(v["fail"]), str(v["P0"]), str(v["P1"]), str(v["P2"])]
+    layer_rows = [[k, str(v["pass"]), str(v["fail"]), str(v.get("pending", 0)),
+                   str(v["P0"]), str(v["P1"]), str(v["P2"])]
                   for k, v in sorted(summary["by_layer"].items())]
     if summary["failed"] == 0:
         conclusion = "全部通过"
@@ -443,7 +459,7 @@ def write_report(results: list[ReportResult], summary: dict, run_date: str) -> l
             "",
             "## 分层汇总",
             "",
-            _md_table([["层级", "pass", "fail", "P0", "P1", "P2"]] + layer_rows),
+            _md_table([["层级", "pass", "fail", "pending", "P0", "P1", "P2"]] + layer_rows),
             "",
             "## 发现明细",
             "",
@@ -505,7 +521,10 @@ def main() -> int:
                   f"（P0 {c['P0']} / P1 {c['P1']} / P2 {c['P2']}）")
             for f in sorted(res.findings, key=lambda x: (x.layer, x.severity)):
                 print(f"  [{f.layer}/{f.severity}] {f.code} {f.location}：{f.detail}")
-        return 0 if res.passed else 1
+        sc = res.severity_counts
+        if sc["P0"] or sc["P1"]:
+            return 1
+        return 2 if sc["P2"] else 0
 
     if args.all:
         results, summary = run_all()

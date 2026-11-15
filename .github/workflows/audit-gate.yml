@@ -2,6 +2,7 @@
 # P0/P1 阻断合并；P2 放行（记录于 audit-check-report）。
 #
 # 退出码约定：0=通过；1=存在 P0/P1 或登记册/台账/标识不一致（阻断）；2=仅 P2（放行）。
+# CI 判定：显式允许 {0,2}，其余非零（含参数错误、超时）一律阻断。
 name: audit-gate
 
 on:
@@ -36,8 +37,8 @@ jobs:
         run: |
           python src/prompts-tools/tools/audit_registry.py --check || code=$?
           code=${code:-0}
-          if [ "$code" -eq 1 ]; then
-            echo "::error::审计登记册不一致（遗漏 / 多余 / 指纹失配）"
+          if [ "$code" -ne 0 ] && [ "$code" -ne 2 ]; then
+            echo "::error::审计登记册不一致或命令异常（退出码 $code）"
             exit 1
           fi
           echo "audit_registry 退出码 $code"
@@ -46,8 +47,8 @@ jobs:
         run: |
           python src/prompts-tools/tools/audit_pipeline.py --verify || code=$?
           code=${code:-0}
-          if [ "$code" -eq 1 ]; then
-            echo "::error::审计台账校验失败（哈希链断裂 / 指纹失配 / 审计失效）"
+          if [ "$code" -ne 0 ] && [ "$code" -ne 2 ]; then
+            echo "::error::审计台账校验失败（哈希链/指纹/状态漂移，退出码 $code）"
             exit 1
           fi
           echo "audit_pipeline --verify 退出码 $code"
@@ -56,8 +57,8 @@ jobs:
         run: |
           python src/prompts-tools/tools/audit_badge.py --check || code=$?
           code=${code:-0}
-          if [ "$code" -eq 1 ]; then
-            echo "::error::「已审计」标识与审计状态不一致"
+          if [ "$code" -ne 0 ] && [ "$code" -ne 2 ]; then
+            echo "::error::「已审计」标识与审计状态不一致（退出码 $code）"
             exit 1
           fi
           echo "audit_badge 退出码 $code"
@@ -67,8 +68,8 @@ jobs:
         run: |
           python src/prompts-tools/tools/audit_check.py --all || code=$?
           code=${code:-0}
-          if [ "$code" -eq 1 ]; then
-            echo "::error::存在 P0/P1，禁止合并（见 src/report-audits/audit/audit-check-report.md）"
+          if [ "$code" -ne 0 ] && [ "$code" -ne 2 ]; then
+            echo "::error::存在 P0/P1 或命令异常，禁止合并（退出码 $code；见 src/report-audits/audit/audit-check-report.md）"
             exit 1
           fi
           echo "audit_check 退出码 $code（2=仅 P2 放行）"

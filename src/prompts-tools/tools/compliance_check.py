@@ -1,4 +1,4 @@
-"""报告模板合规校验（validate.yml 建议级关卡（continue-on-error））。
+"""报告模板合规校验（validate.yml 新报告阻断级关卡）。
 
 依据 report_templates/compliance-rules.json（12 类报告类型的结构骨架规则），
 对业务线 reports/*.html 逐份校验：
@@ -25,18 +25,15 @@ import argparse
 import json
 import re
 import sys
-from datetime import datetime, timezone
+from datetime import date, datetime, timezone
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from _common import detect_month_report, iter_business_dirs, ROOT, SRC, TEMPLATE_ROOT  # noqa: E402
+from _common import NEW_FROM, detect_month_report, iter_business_dirs, ROOT, SRC, TEMPLATE_ROOT  # noqa: E402
 
 RULES_PATH = TEMPLATE_ROOT / "compliance-rules.json"
 AUDIT_DIR = SRC / "report-audits"
-
-# 新报告认定：期间 >= NEW_FROM 纳入阻断级校验；历史报告由豁免清单管理。
-NEW_FROM = "2026-11"
 DEFAULT_WHITELIST = ROOT / "src" / "report-audits" / "audit" / "lint-whitelist.json"
 
 H2_RE = re.compile(r"<h2\b[^>]*>(.*?)</h2>", re.DOTALL)
@@ -315,7 +312,10 @@ def run_list_types() -> int:
 
 
 def load_whitelist(path: Path) -> set[str]:
-    """读取豁免清单（JSON 数组，每项含 report / reason / review_by）-> 报告路径集合。"""
+    """读取豁免清单（JSON 数组，每项含 report / reason / review_by）-> 报告路径集合。
+
+    逾期（review_by < 今日）的条目不生效，恢复阻断并告警。
+    """
     if not path.is_file():
         return set()
     try:
@@ -324,7 +324,20 @@ def load_whitelist(path: Path) -> set[str]:
         return set()
     if isinstance(data, dict):
         data = data.get("items", [])
-    return {e.get("report", "") for e in data if isinstance(e, dict)}
+    today = date.today().isoformat()
+    active: set[str] = set()
+    expired: list[str] = []
+    for e in data:
+        if not isinstance(e, dict):
+            continue
+        rb = str(e.get("review_by", ""))
+        if rb and rb < today:
+            expired.append(e.get("report", ""))
+            continue
+        active.add(e.get("report", ""))
+    if expired:
+        print(f"[W] 豁免清单 {len(expired)} 项已逾期，恢复阻断：" + ", ".join(expired))
+    return active
 
 
 def main() -> int:

@@ -26,7 +26,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from _common import ROOT  # noqa: E402
 from audit_check import _iq_findings_by_path, _l5_status, check_report, _rel  # noqa: E402
-from audit_registry import AUDIT_DIR, discover  # noqa: E402
+from audit_registry import AUDIT_DIR, _audit_state, discover  # noqa: E402
 import compliance_check  # noqa: E402
 
 SAMPLING_DIR = AUDIT_DIR / "sampling"
@@ -87,7 +87,16 @@ def overdue_p2() -> list[dict]:
     except json.JSONDecodeError:
         return []
     today = date.today().isoformat()
-    return [e for e in items if e.get("review_by", "") < today]
+    out = []
+    for e in items:
+        rb = e.get("review_by", "")
+        try:
+            overdue = bool(rb) and date.fromisoformat(rb) < date.today()
+        except ValueError:
+            overdue = True  # 非法期限视为超期
+        if overdue:
+            out.append(e)
+    return out
 
 
 def run_sample(period: str) -> dict:
@@ -95,16 +104,18 @@ def run_sample(period: str) -> dict:
     sample = select_sample(entries, period)
     iq = _iq_findings_by_path()
     l5 = _l5_status()
+    state = _audit_state()
     results = []
     for e in sample:
         rel = e["report"]
         md = ROOT / rel
         html = md.with_suffix(".html")
         res = check_report(rel, md, html, e["type_id"], iq, l5)
-        # 状态一致性：audited ⟺ 标识存在
-        status_ok = True
-        if e.get("audit_state") == "audited":
-            status_ok = "**已审计**" in md.read_text(encoding="utf-8", errors="replace")
+        # 状态一致性（双向）：audited ⟺ 标识存在
+        st = state.get(rel, {})
+        audit_state = st.get("state") or st.get("audit_state") or "registered"
+        has_badge = "**已审计**" in md.read_text(encoding="utf-8", errors="replace")
+        status_ok = (audit_state == "audited") == has_badge
         results.append({
             "report": rel, "topic": e["topic"], "period": e["period"],
             "passed": res.passed, "layers": res.layers,
@@ -139,12 +150,19 @@ def run_sample(period: str) -> dict:
     }
 
 
+def _link_prefix(out_file: Path) -> str:
+    """从产物文件回到仓库根的相对前缀。"""
+    return "../" * (len(out_file.relative_to(ROOT).parts) - 1)
+
+
 def write_report(payload: dict) -> list[Path]:
     SAMPLING_DIR.mkdir(parents=True, exist_ok=True)
+    md_path = SAMPLING_DIR / f"sampling-{payload['period']}.md"
+    prefix = _link_prefix(md_path)
     rows = [["报告", "主题", "期间", "L1", "L2", "L3", "L4", "状态一致", "结论"]]
     for r in payload["results"]:
         ly = r["layers"]
-        rows.append([f"[{r['report']}](../{r['report']})", r["topic"], r["period"],
+        rows.append([f"[{r['report']}]({prefix}{r['report']})", r["topic"], r["period"],
                      ly.get("L1", "—"), ly.get("L2", "—"), ly.get("L3", "—"), ly.get("L4", "—"),
                      "✓" if r["status_ok"] else "✗",
                      "通过" if (r["passed"] and r["status_ok"]) else "不通过"])
@@ -186,6 +204,9 @@ def main() -> int:
     args = ap.parse_args()
 
     period = args.period or date.today().isoformat()[:7]
+    if not re.fullmatch(r"\d{4}-\d{2}", period):
+        print(f"[ERROR] --period 须为 YYYY-MM：{period}", file=sys.stderr)
+        return 2
     payload = run_sample(period)
     if args.report:
         print(json.dumps(payload, ensure_ascii=False, indent=2))

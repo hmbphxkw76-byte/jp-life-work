@@ -47,7 +47,9 @@ P_LEVELS = {"P0": 0, "P1": 1, "P2": 2}
 MD_HEAD_RE = re.compile(r"^#{1,6}\s+(.*)$", re.MULTILINE)
 MD_H2_RE = re.compile(r"^##\s+", re.MULTILINE)
 REG_ROW_RE = re.compile(r"^\|\s*(\d+)\s*\|", re.MULTILINE)
-REG_PTR_RE = re.compile(r"登记册\s*#(\d+)(?:\s*[–-]\s*#(\d+))?")
+REG_PTR_RE = re.compile(r"(?:([0-9]{2}-[a-z][a-z0-9-]*)\s+)?登记册\s*((?:#\d+\s*[、/,，–\-]?\s*)+)")
+REG_NUM_RE = re.compile(r"#(\d+)")
+BADGE_LINE_RE = re.compile(r"^>\s*\*\*已审计\*\*.*$", re.MULTILINE)
 
 
 @dataclass
@@ -134,7 +136,8 @@ def check_text(rel: str, text: str, html: str = "", type_id: str = "",
     if h2_html < 1 and h2_md < 1:
         _add(out, "PF-E5", "P1", "必需要素", "正文无章节（h2 缺失）", "S-05")
 
-    fact_blocks = [b for b in _paragraphs(text) if _substantive(b) and re.search(r"\d", b)]
+    fact_blocks = [b for b in _paragraphs(BADGE_LINE_RE.sub("", text))
+                   if _substantive(b) and re.search(r"\d", b)]
     if fact_blocks:
         cov = sum(1 for b in fact_blocks if _has_source(b)) / len(fact_blocks)
         if cov < THRESH_SOURCE_COVERAGE:
@@ -172,9 +175,15 @@ def check_text(rel: str, text: str, html: str = "", type_id: str = "",
     if registry_text:
         nums: set[int] = set()
         for m in REG_PTR_RE.finditer(text):
-            a = int(m.group(1))
-            b = int(m.group(2)) if m.group(2) else a
-            nums.update(range(a, b + 1))
+            ls = text.rfind("\n", 0, m.start()) + 1
+            le = text.find("\n", m.end())
+            line = text[ls: le if le != -1 else len(text)]
+            # 同行出现其它主题目录 token → 跨主题只读锚，不在本主题登记册校验
+            cross = [t for t in re.findall(r"\b(\d{2}-[a-z][a-z0-9-]*)\b", line)
+                     if slug_dir and t != slug_dir]
+            if cross:
+                continue
+            nums.update(int(x) for x in REG_NUM_RE.findall(m.group(2)))
         if nums:
             valid = {int(x) for x in REG_ROW_RE.findall(registry_text)}
             missing = sorted(nums - valid)
@@ -265,12 +274,18 @@ def _md_table(rows: list[list[str]]) -> str:
     return "\n".join(out)
 
 
+def _link_prefix(out_file: Path) -> str:
+    """从产物文件回到仓库根的相对前缀。"""
+    return "../" * (len(out_file.relative_to(ROOT).parts) - 1)
+
+
 def write_report(results: list[dict], summary: dict, run_date: str) -> list[Path]:
     AUDIT_DIR.mkdir(parents=True, exist_ok=True)
     rows = [["报告", "P0", "P1", "P2", "结论"]]
+    prefix = _link_prefix(REPORT_MD)
     for r in results:
         c = r["severity"]
-        rows.append([f"[{r['report']}](../{r['report']})",
+        rows.append([f"[{r['report']}]({prefix}{r['report']})",
                      str(c["P0"]), str(c["P1"]), str(c["P2"]),
                      "通过" if r["passed"] else "不通过"])
     detail = [["编号", "级别", "报告", "位置", "判定依据"]]

@@ -7,38 +7,38 @@
 
 | 报告 | 层级结论 | P0 | P1 | P2 | 结论 |
 |---|---|---|---|---|---|
-| [00-decision-hub/reports/2026-11-decision-hub.md](../00-decision-hub/reports/2026-11-decision-hub.md) | L1✓ L2✓ L3✓ L4✓ L5✗ | 0 | 0 | 1 | 通过 |
-| [00-decision-hub/reports/2026-12-decision-hub.md](../00-decision-hub/reports/2026-12-decision-hub.md) | L1✓ L2✓ L3✓ L4✓ L5✗ | 0 | 0 | 2 | 通过 |
-| [01-ssw-driver/reports/2026-11-ssw-driver.md](../01-ssw-driver/reports/2026-11-ssw-driver.md) | L1✓ L2✓ L3✓ L4✓ L5✗ | 0 | 0 | 1 | 通过 |
-| [02-career-driver/reports/2026-11-career-driver.md](../02-career-driver/reports/2026-11-career-driver.md) | L1✓ L2✓ L3✓ L4✓ L5✗ | 0 | 0 | 1 | 通过 |
-| [03-career-management/reports/2026-11-career-management.md](../03-career-management/reports/2026-11-career-management.md) | L1✓ L2✓ L3✓ L4✓ L5✗ | 0 | 0 | 1 | 通过 |
-| [04-industry-logistics/reports/2026-11-industry-logistics.md](../04-industry-logistics/reports/2026-11-industry-logistics.md) | L1✓ L2✓ L3✓ L4✓ L5✗ | 0 | 0 | 1 | 通过 |
-| [05-industry-autonomous/reports/2026-11-industry-autonomous.md](../05-industry-autonomous/reports/2026-11-industry-autonomous.md) | L1✓ L2✓ L3✓ L4✓ L5✗ | 0 | 0 | 1 | 通过 |
-| [06-industry-technology/reports/2026-11-industry-technology.md](../06-industry-technology/reports/2026-11-industry-technology.md) | L1✓ L2✓ L3✓ L4✓ L5✗ | 0 | 0 | 1 | 通过 |
-| [07-economy-finance/reports/2026-11-economy-finance.md](../07-economy-finance/reports/2026-11-economy-finance.md) | L1✓ L2✓ L3✓ L4✓ L5✗ | 0 | 0 | 1 | 通过 |
-| [08-visa-immigration/reports/2026-11-visa-immigration.md](../08-visa-immigration/reports/2026-11-visa-immigration.md) | L1✓ L2✓ L3✓ L4✓ L5✗ | 0 | 0 | 1 | 通过 |
-| [09-politics-law/reports/2026-11-politics-law.md](../09-politics-law/reports/2026-11-politics-law.md) | L1✓ L2✓ L3✓ L4✓ L5✗ | 0 | 0 | 1 | 通过 |
-| [10-education-qualification/reports/2026-11-education-qualification.md](../10-education-qualification/reports/2026-11-education-qualification.md) | L1✓ L2✓ L3✓ L4✓ L5✗ | 0 | 0 | 1 | 通过 |
-| [11-language-japanese/reports/2026-11-language-japanese.md](../11-language-japanese/reports/2026-11-language-japanese.md) | L1✓ L2✓ L3✓ L4✓ L5✗ | 0 | 0 | 1 | 通过 |
-| [12-culture-life/reports/2026-11-culture-life.md](../12-culture-life/reports/2026-11-culture-life.md) | L1✓ L2✓ L3✓ L4✓ L5✗ | 0 | 0 | 2 | 通过 |
-| [13-regional-info/reports/2026-11-regional-info.md](../13-regional-info/reports/2026-11-regional-info.md) | L1✓ L2✓ L3✓ L4✓ L5✗ | 0 | 0 | 1 | 通过 |
-| [14-life-operations/reports/2026-11-life-operations.md](../14-life-operations/reports/2026-11-life-operations.md) | L1✓ L2✓ L3✓ L4✓ L5✗ | 0 | 0 | 1 | 通过 |
-| [15-health-wellbeing/reports/2026-11-health-wellbeing.md](../15-health-wellbeing/reports/2026-11-health-wellbeing.md) | L1✓ L2✓ L3✓ L4✓ L5✗ | 0 | 0 | 1 | 通过 |
-| [16-exit-transition-return/reports/2026-11-exit-transition-return.md](../16-exit-transition-return/reports/2026-11-exit-transition-return.md) | L1✓ L2✓ L3✓ L4✓ L5✗ | 0 | 0 | 1 | 通过 |
-| [17-migration-compliance/reports/2026-11-migration-compliance.md](../17-migration-compliance/reports/2026-11-migration-compliance.md) | L1✓ L2✓ L3✓ L4✓ L5✗ | 0 | 0 | 2 | 通过 |
-| [18-family-parenting/reports/2026-11-family-parenting.md](../18-family-parenting/reports/2026-11-family-parenting.md) | L1✓ L2✓ L3✓ L4✓ L5✗ | 0 | 0 | 1 | 通过 |
-| [19-safety-disaster/reports/2026-11-safety-disaster.md](../19-safety-disaster/reports/2026-11-safety-disaster.md) | L1✓ L2✓ L3✓ L4✓ L5✗ | 0 | 0 | 2 | 通过 |
-| [20-overseas-china/reports/2026-11-overseas-china.md](../20-overseas-china/reports/2026-11-overseas-china.md) | L1✓ L2✓ L3✓ L4✓ L5✗ | 0 | 0 | 1 | 通过 |
+| [00-decision-hub/reports/2026-11-decision-hub.md](../../../00-decision-hub/reports/2026-11-decision-hub.md) | L1✓ L2✓ L3✓ L4✓ L5? | 0 | 0 | 1 | 通过 |
+| [00-decision-hub/reports/2026-12-decision-hub.md](../../../00-decision-hub/reports/2026-12-decision-hub.md) | L1✓ L2✓ L3✓ L4✓ L5? | 0 | 0 | 2 | 通过 |
+| [01-ssw-driver/reports/2026-11-ssw-driver.md](../../../01-ssw-driver/reports/2026-11-ssw-driver.md) | L1✓ L2✓ L3✓ L4✓ L5? | 0 | 0 | 1 | 通过 |
+| [02-career-driver/reports/2026-11-career-driver.md](../../../02-career-driver/reports/2026-11-career-driver.md) | L1✓ L2✓ L3✓ L4✓ L5? | 0 | 0 | 1 | 通过 |
+| [03-career-management/reports/2026-11-career-management.md](../../../03-career-management/reports/2026-11-career-management.md) | L1✓ L2✓ L3✓ L4✓ L5? | 0 | 0 | 1 | 通过 |
+| [04-industry-logistics/reports/2026-11-industry-logistics.md](../../../04-industry-logistics/reports/2026-11-industry-logistics.md) | L1✓ L2✓ L3✓ L4✓ L5? | 0 | 0 | 1 | 通过 |
+| [05-industry-autonomous/reports/2026-11-industry-autonomous.md](../../../05-industry-autonomous/reports/2026-11-industry-autonomous.md) | L1✓ L2✓ L3✓ L4✓ L5? | 0 | 0 | 1 | 通过 |
+| [06-industry-technology/reports/2026-11-industry-technology.md](../../../06-industry-technology/reports/2026-11-industry-technology.md) | L1✓ L2✓ L3✓ L4✓ L5? | 0 | 0 | 1 | 通过 |
+| [07-economy-finance/reports/2026-11-economy-finance.md](../../../07-economy-finance/reports/2026-11-economy-finance.md) | L1✓ L2✓ L3✓ L4✓ L5? | 0 | 0 | 1 | 通过 |
+| [08-visa-immigration/reports/2026-11-visa-immigration.md](../../../08-visa-immigration/reports/2026-11-visa-immigration.md) | L1✓ L2✓ L3✓ L4✓ L5? | 0 | 0 | 1 | 通过 |
+| [09-politics-law/reports/2026-11-politics-law.md](../../../09-politics-law/reports/2026-11-politics-law.md) | L1✓ L2✓ L3✓ L4✓ L5? | 0 | 0 | 1 | 通过 |
+| [10-education-qualification/reports/2026-11-education-qualification.md](../../../10-education-qualification/reports/2026-11-education-qualification.md) | L1✓ L2✓ L3✓ L4✓ L5? | 0 | 0 | 1 | 通过 |
+| [11-language-japanese/reports/2026-11-language-japanese.md](../../../11-language-japanese/reports/2026-11-language-japanese.md) | L1✓ L2✓ L3✓ L4✓ L5? | 0 | 0 | 1 | 通过 |
+| [12-culture-life/reports/2026-11-culture-life.md](../../../12-culture-life/reports/2026-11-culture-life.md) | L1✓ L2✓ L3✓ L4✓ L5? | 0 | 0 | 2 | 通过 |
+| [13-regional-info/reports/2026-11-regional-info.md](../../../13-regional-info/reports/2026-11-regional-info.md) | L1✓ L2✓ L3✓ L4✓ L5? | 0 | 0 | 1 | 通过 |
+| [14-life-operations/reports/2026-11-life-operations.md](../../../14-life-operations/reports/2026-11-life-operations.md) | L1✓ L2✓ L3✓ L4✓ L5? | 0 | 0 | 1 | 通过 |
+| [15-health-wellbeing/reports/2026-11-health-wellbeing.md](../../../15-health-wellbeing/reports/2026-11-health-wellbeing.md) | L1✓ L2✓ L3✓ L4✓ L5? | 0 | 0 | 1 | 通过 |
+| [16-exit-transition-return/reports/2026-11-exit-transition-return.md](../../../16-exit-transition-return/reports/2026-11-exit-transition-return.md) | L1✓ L2✓ L3✓ L4✓ L5? | 0 | 0 | 1 | 通过 |
+| [17-migration-compliance/reports/2026-11-migration-compliance.md](../../../17-migration-compliance/reports/2026-11-migration-compliance.md) | L1✓ L2✓ L3✓ L4✓ L5? | 0 | 0 | 2 | 通过 |
+| [18-family-parenting/reports/2026-11-family-parenting.md](../../../18-family-parenting/reports/2026-11-family-parenting.md) | L1✓ L2✓ L3✓ L4✓ L5? | 0 | 0 | 1 | 通过 |
+| [19-safety-disaster/reports/2026-11-safety-disaster.md](../../../19-safety-disaster/reports/2026-11-safety-disaster.md) | L1✓ L2✓ L3✓ L4✓ L5? | 0 | 0 | 2 | 通过 |
+| [20-overseas-china/reports/2026-11-overseas-china.md](../../../20-overseas-china/reports/2026-11-overseas-china.md) | L1✓ L2✓ L3✓ L4✓ L5? | 0 | 0 | 1 | 通过 |
 
 ## 分层汇总
 
-| 层级 | pass | fail | P0 | P1 | P2 |
-|---|---|---|---|---|---|
-| L1 | 22 | 0 | 0 | 0 | 1 |
-| L2 | 22 | 0 | 0 | 0 | 1 |
-| L3 | 22 | 0 | 0 | 0 | 0 |
-| L4 | 22 | 0 | 0 | 0 | 2 |
-| L5 | 0 | 0 | 0 | 0 | 22 |
+| 层级 | pass | fail | pending | P0 | P1 | P2 |
+|---|---|---|---|---|---|---|
+| L1 | 22 | 0 | 0 | 0 | 0 | 1 |
+| L2 | 22 | 0 | 0 | 0 | 0 | 1 |
+| L3 | 22 | 0 | 0 | 0 | 0 | 0 |
+| L4 | 22 | 0 | 0 | 0 | 0 | 2 |
+| L5 | 0 | 0 | 22 | 0 | 0 | 22 |
 
 ## 发现明细
 
