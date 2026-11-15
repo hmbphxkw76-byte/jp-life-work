@@ -7,7 +7,7 @@
     "by_severity": {
       "P0": 0,
       "P1": 0,
-      "P2": 26
+      "P2": 20
     },
     "by_layer": {
       "L1": {
@@ -24,7 +24,7 @@
         "pending": 0,
         "P0": 0,
         "P1": 0,
-        "P2": 1
+        "P2": 0
       },
       "L3": {
         "pass": 22,
@@ -40,15 +40,15 @@
         "pending": 0,
         "P0": 0,
         "P1": 0,
-        "P2": 2
+        "P2": 0
       },
       "L5": {
-        "pass": 0,
+        "pass": 3,
         "fail": 0,
-        "pending": 22,
+        "pending": 19,
         "P0": 0,
         "P1": 0,
-        "P2": 22
+        "P2": 19
       }
     }
   },
@@ -101,34 +101,15 @@
         "L2": "pass",
         "L3": "pass",
         "L4": "pass",
-        "L5": "pending"
+        "L5": "pass"
       },
       "severity": {
         "P0": 0,
         "P1": 0,
-        "P2": 2
+        "P2": 0
       },
       "passed": true,
-      "findings": [
-        {
-          "layer": "L2",
-          "code": "E8",
-          "severity": "P2",
-          "report": "00-decision-hub/reports/2026-12-decision-hub.md",
-          "location": "必需要素",
-          "detail": "缺少后续动作 / 观察清单",
-          "spec": "S-05"
-        },
-        {
-          "layer": "L5",
-          "code": "L5-EVIDENCE",
-          "severity": "P2",
-          "report": "00-decision-hub/reports/2026-12-decision-hub.md",
-          "location": "语义复核",
-          "detail": "缺少有效 L5 语义复核证据（re_review --evidence，见 l5-semantic-review.md）",
-          "spec": ""
-        }
-      ],
+      "findings": [],
       "l5_checklist": [
         "结论与依据是否匹配（关键结论有「事实→推理→结论」链）",
         "表述是否与来源原文含义一致（无夸大 / 曲解）",
@@ -566,34 +547,15 @@
         "L2": "pass",
         "L3": "pass",
         "L4": "pass",
-        "L5": "pending"
+        "L5": "pass"
       },
       "severity": {
         "P0": 0,
         "P1": 0,
-        "P2": 2
+        "P2": 0
       },
       "passed": true,
-      "findings": [
-        {
-          "layer": "L4",
-          "code": "ABS-01",
-          "severity": "P2",
-          "report": "12-culture-life/reports/2026-11-culture-life.md",
-          "location": "绝对化表述",
-          "detail": "命中绝对化措辞 1 处（100%），语义确认后定级",
-          "spec": "S-10"
-        },
-        {
-          "layer": "L5",
-          "code": "L5-EVIDENCE",
-          "severity": "P2",
-          "report": "12-culture-life/reports/2026-11-culture-life.md",
-          "location": "语义复核",
-          "detail": "缺少有效 L5 语义复核证据（re_review --evidence，见 l5-semantic-review.md）",
-          "spec": ""
-        }
-      ],
+      "findings": [],
       "l5_checklist": [
         "结论与依据是否匹配（关键结论有「事实→推理→结论」链）",
         "表述是否与来源原文含义一致（无夸大 / 曲解）",
@@ -765,34 +727,15 @@
         "L2": "pass",
         "L3": "pass",
         "L4": "pass",
-        "L5": "pending"
+        "L5": "pass"
       },
       "severity": {
         "P0": 0,
         "P1": 0,
-        "P2": 2
+        "P2": 0
       },
       "passed": true,
-      "findings": [
-        {
-          "layer": "L4",
-          "code": "ABS-01",
-          "severity": "P2",
-          "report": "17-migration-compliance/reports/2026-11-migration-compliance.md",
-          "location": "绝对化表述",
-          "detail": "命中绝对化措辞 2 处（包过），语义确认后定级",
-          "spec": "S-10"
-        },
-        {
-          "layer": "L5",
-          "code": "L5-EVIDENCE",
-          "severity": "P2",
-          "report": "17-migration-compliance/reports/2026-11-migration-compliance.md",
-          "location": "语义复核",
-          "detail": "缺少有效 L5 语义复核证据（re_review --evidence，见 l5-semantic-review.md）",
-          "spec": ""
-        }
-      ],
+      "findings": [],
       "l5_checklist": [
         "结论与依据是否匹配（关键结论有「事实→推理→结论」链）",
         "表述是否与来源原文含义一致（无夸大 / 曲解）",

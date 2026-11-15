@@ -8,7 +8,7 @@
 | 报告 | P0 | P1 | P2 | 结论 |
 |---|---|---|---|---|
 | [00-decision-hub/reports/2026-11-decision-hub.md](../../../00-decision-hub/reports/2026-11-decision-hub.md) | 0 | 0 | 0 | 通过 |
-| [00-decision-hub/reports/2026-12-decision-hub.md](../../../00-decision-hub/reports/2026-12-decision-hub.md) | 0 | 0 | 1 | 通过 |
+| [00-decision-hub/reports/2026-12-decision-hub.md](../../../00-decision-hub/reports/2026-12-decision-hub.md) | 0 | 0 | 0 | 通过 |
 | [01-ssw-driver/reports/2026-11-ssw-driver.md](../../../01-ssw-driver/reports/2026-11-ssw-driver.md) | 0 | 0 | 0 | 通过 |
 | [02-career-driver/reports/2026-11-career-driver.md](../../../02-career-driver/reports/2026-11-career-driver.md) | 0 | 0 | 0 | 通过 |
 | [03-career-management/reports/2026-11-career-management.md](../../../03-career-management/reports/2026-11-career-management.md) | 0 | 0 | 0 | 通过 |
@@ -20,12 +20,12 @@
 | [09-politics-law/reports/2026-11-politics-law.md](../../../09-politics-law/reports/2026-11-politics-law.md) | 0 | 0 | 0 | 通过 |
 | [10-education-qualification/reports/2026-11-education-qualification.md](../../../10-education-qualification/reports/2026-11-education-qualification.md) | 0 | 0 | 0 | 通过 |
 | [11-language-japanese/reports/2026-11-language-japanese.md](../../../11-language-japanese/reports/2026-11-language-japanese.md) | 0 | 0 | 0 | 通过 |
-| [12-culture-life/reports/2026-11-culture-life.md](../../../12-culture-life/reports/2026-11-culture-life.md) | 0 | 0 | 1 | 通过 |
+| [12-culture-life/reports/2026-11-culture-life.md](../../../12-culture-life/reports/2026-11-culture-life.md) | 0 | 0 | 0 | 通过 |
 | [13-regional-info/reports/2026-11-regional-info.md](../../../13-regional-info/reports/2026-11-regional-info.md) | 0 | 0 | 0 | 通过 |
 | [14-life-operations/reports/2026-11-life-operations.md](../../../14-life-operations/reports/2026-11-life-operations.md) | 0 | 0 | 0 | 通过 |
 | [15-health-wellbeing/reports/2026-11-health-wellbeing.md](../../../15-health-wellbeing/reports/2026-11-health-wellbeing.md) | 0 | 0 | 0 | 通过 |
 | [16-exit-transition-return/reports/2026-11-exit-transition-return.md](../../../16-exit-transition-return/reports/2026-11-exit-transition-return.md) | 0 | 0 | 0 | 通过 |
-| [17-migration-compliance/reports/2026-11-migration-compliance.md](../../../17-migration-compliance/reports/2026-11-migration-compliance.md) | 0 | 0 | 1 | 通过 |
+| [17-migration-compliance/reports/2026-11-migration-compliance.md](../../../17-migration-compliance/reports/2026-11-migration-compliance.md) | 0 | 0 | 0 | 通过 |
 | [18-family-parenting/reports/2026-11-family-parenting.md](../../../18-family-parenting/reports/2026-11-family-parenting.md) | 0 | 0 | 0 | 通过 |
 | [19-safety-disaster/reports/2026-11-safety-disaster.md](../../../19-safety-disaster/reports/2026-11-safety-disaster.md) | 0 | 0 | 1 | 通过 |
 | [20-overseas-china/reports/2026-11-overseas-china.md](../../../20-overseas-china/reports/2026-11-overseas-china.md) | 0 | 0 | 0 | 通过 |
@@ -34,9 +34,6 @@
 
 | 编号 | 级别 | 报告 | 位置 | 判定依据 |
 |---|---|---|---|---|
-| PF-E8 | P2 | 00-decision-hub/reports/2026-12-decision-hub.md | 必需要素 | 缺少后续动作 / 观察清单 |
-| PF-ABS | P2 | 12-culture-life/reports/2026-11-culture-life.md | 绝对化表述 | 命中绝对化措辞 1 处（100%），语义确认后定级 |
-| PF-ABS | P2 | 17-migration-compliance/reports/2026-11-migration-compliance.md | 绝对化表述 | 命中绝对化措辞 2 处（包过），语义确认后定级 |
 | PF-SKELETON | P2 | 19-safety-disaster/reports/2026-11-safety-disaster.md | 类型骨架 | [market-monitoring/monthly] h2 节数 10 超出模板骨架 8 节（如为业务固化锚请人工确认，否则须对齐类型模板 prompt-monthly-monitor-template.md） |
 
 **总体结论：全部通过**

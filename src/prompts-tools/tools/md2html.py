@@ -578,7 +578,9 @@ def convert(md_path: Path) -> str:
     period = f"{m.group(1)}-{m.group(2)}" if m else ""
     business_dir = md_path.parents[1]
     topic_name, type_label = _topic_meta(business_dir)
-    rel_path = str(md_path.relative_to(ROOT).with_suffix(".html"))
+    # 报告路径须用 POSIX 分隔符：HTML 交付物与 CI（ubuntu）/ 本地（Windows）
+    # 必须逐字节一致，否则同一份 md 在不同平台渲染出不同产物（非确定性）。
+    rel_path = md_path.relative_to(ROOT).with_suffix(".html").as_posix()
     back_url = _back_url(md_path, business_dir.name)
 
     # 构建期跨月对比：与上一期（同主题、最近一个更早自然月）比对章节内容
