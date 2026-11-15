@@ -28,7 +28,7 @@
       "md": "00-decision-hub/reports/2026-12-decision-hub.md",
       "html": "00-decision-hub/reports/2026-12-decision-hub.html",
       "content_hash": "sha256:cbc1c1b757008d756ee8b58b20909b4fdec4b1d2212f0638288d0d2b24e96110",
-      "html_hash": "sha256:eb527f13985ebbe39d5e7034b4daa6ceac2483e2b28c3b729ec094f18479f288",
+      "html_hash": "sha256:8b852750221557dfd1136877331e74a21648062abbc055f2c1a760130893c672",
       "audit_id": "AUD-202611-022",
       "audit_state": "audited",
       "finalized_at": "2026-11-15T12:28:17+00:00"
@@ -163,7 +163,7 @@
       "md": "09-politics-law/reports/2026-11-politics-law.md",
       "html": "09-politics-law/reports/2026-11-politics-law.html",
       "content_hash": "sha256:8c5dfd950d91894bb7085c26d2802078df96f493852f4b1d8e57387ad0db145e",
-      "html_hash": "sha256:227f3a37868ccd6d3b2d3db4101e5065fb773c8bf62395c6f28f368c551bd1cc",
+      "html_hash": "sha256:b8f5687612ffb740d7caf4c75130aa8574c5aa01cace24e9adab24b5cbd324c1",
       "audit_id": "AUD-202611-005",
       "audit_state": "audited",
       "finalized_at": "2026-11-15T12:21:21+00:00"
