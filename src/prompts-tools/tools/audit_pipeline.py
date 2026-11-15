@@ -25,6 +25,7 @@
     python audit_pipeline.py --status               # 打印状态表
     python audit_pipeline.py --verify               # 校验台账哈希链 + 指纹绑定
     python audit_pipeline.py --sync                 # 对指纹失配的已审计报告写 revoke（→ stale）
+    python audit_pipeline.py --rebind               # 内容未变、仅 HTML 渲染漂移的失效报告重新绑定（→ audited）
 """
 from __future__ import annotations
 
@@ -68,6 +69,7 @@ TRANSITIONS = {
     ("pending_final", "stage_pass"): "audited",
     ("pending_final", "stage_fail"): "rejected",
     ("audited", "revoke"): "stale",
+    ("stale", "rebind"): "audited",
 }
 
 STATE_LABEL = {
@@ -209,7 +211,7 @@ def rebuild_status(ledger: list[dict]) -> dict:
             cur["audit_id"] = ev["audit_id"]
         elif "审计编号 " in note:
             cur["audit_id"] = note.split("审计编号 ")[-1].split(" ")[0]
-        if target == "audited":
+        if target == "audited" and ev["event"] != "rebind":
             cur["finalized_at"] = ev["ts"]
         if ev.get("content_hash"):
             cur["content_hash"] = ev["content_hash"]
@@ -442,6 +444,63 @@ def cmd_verify() -> int:
     return 0
 
 
+def _audited_content_hash(ledger: list[dict], rep: str) -> str:
+    """该报告最后一次终审通过（audit_chair stage_pass）时绑定的内容指纹。"""
+    h = ""
+    for ev in ledger:
+        if (ev.get("report") == rep and ev.get("event") == "stage_pass"
+                and ev.get("role") == "audit_chair"):
+            h = ev.get("content_hash") or h
+    return h
+
+
+def cmd_rebind(all_: bool = True, rel: str | None = None) -> int:
+    """对「md 内容未变、仅 HTML 渲染漂移」而失效的报告重新绑定指纹（stale → audited）。
+
+    HTML 是 md 的确定性派生产物：html-sync 重生成会让 HTML 指纹变化，但只要
+    md 内容指纹仍等于终审绑定值，原审计结论依然成立，不需重走流程。
+    md 内容已变的报告保持 stale，必须重新审计。
+
+    恢复时同步把「已审计」标识注入 md 与 HTML，并按注入后的最终形态绑定双指纹，
+    避免「绑定的是注入前 HTML」导致后续校验再次失配。
+    """
+    from audit_badge import _insert_after_disclaimer, _regenerate_html, _strip_badge, badge_text
+
+    ledger = load_ledger()
+    state = rebuild_status(ledger)
+    targets = [e["report"] for e in discover()] if all_ else [_report_arg(rel)]
+    n = 0
+    for rep in targets:
+        if state.get(rep, {}).get("state") != "stale":
+            continue
+        audited_hash = _audited_content_hash(ledger, rep)
+        audit_id = state[rep].get("audit_id", "")
+        if not audited_hash or not audit_id:
+            continue
+        cur_md, _ = _current_hashes(rep)
+        if cur_md != audited_hash:
+            print(f"[SKIP] {rep}：md 内容已变，需重新审计")
+            continue
+        md = ROOT / rep
+        text, _ = _strip_badge(md.read_text(encoding="utf-8"))
+        text = _insert_after_disclaimer(
+            text, badge_text(audit_id, state[rep].get("finalized_at", ""),
+                             cur_md.removeprefix("sha256:")))
+        md.write_text(text, encoding="utf-8")
+        _regenerate_html(md)
+        cur_md, cur_html = _current_hashes(rep)
+        _append({"ts": _now(), "event": "rebind", "report": rep, "actor": "system",
+                 "role": "system", "result": "ok",
+                 "note": "HTML 渲染漂移重新绑定（md 内容未变，原审计结论继续有效）",
+                 "content_hash": cur_md, "html_hash": cur_html,
+                 "audit_id": audit_id})
+        n += 1
+    write_status(rebuild_status(load_ledger()))
+    build_registry()
+    print(f"重新绑定：{n} 份（内容未变，恢复 audited）；其余保持 stale 待重审")
+    return 0
+
+
 def cmd_sync() -> int:
     ledger = load_ledger()
     state = rebuild_status(ledger)
@@ -478,6 +537,8 @@ def main() -> int:
     ap.add_argument("--status", action="store_true", help="打印状态表")
     ap.add_argument("--verify", action="store_true", help="校验台账哈希链与指纹绑定")
     ap.add_argument("--sync", action="store_true", help="同步指纹失配的审计失效报告")
+    ap.add_argument("--rebind", action="store_true",
+                    help="内容未变、仅 HTML 渲染漂移的失效报告重新绑定（stale → audited）")
     args = ap.parse_args()
 
     if args.init:
@@ -499,6 +560,8 @@ def main() -> int:
         return cmd_verify()
     if args.sync:
         return cmd_sync()
+    if args.rebind:
+        return cmd_rebind()
     ap.print_help()
     return 0
 

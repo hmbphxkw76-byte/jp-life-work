@@ -42,6 +42,10 @@ jobs:
       - name: 审计失效同步（audit_pipeline.py --sync）
         run: python src/prompts-tools/tools/audit_pipeline.py --sync
 
+      # HTML 是 md 的确定性派生物：md 内容未变、仅渲染漂移的失效报告重新绑定，不撤销审计。
+      - name: 渲染漂移重新绑定（audit_pipeline.py --rebind）
+        run: python src/prompts-tools/tools/audit_pipeline.py --rebind
+
       - name: 标识同步（audit_badge.py --sync）
         run: python src/prompts-tools/tools/audit_badge.py --sync
 
