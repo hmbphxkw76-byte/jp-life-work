@@ -40,7 +40,19 @@ python src/prompts-tools/tools/lint_reports.py
 - 在留 / 家属 / 生活保护 → 08-visa-immigration；
 - 地域医疗资源差异 → 13-regional-info。
 
-## 5. 版本记录
+## 5. 落盘后审计（提交前必做）
+
+```powershell
+python src/prompts-tools/tools/audit_preflight.py --report <报告相对路径>
+python src/prompts-tools/tools/audit_check.py --report <报告相对路径>
+python src/prompts-tools/tools/audit_pipeline.py --submit --report <报告相对路径>
+```
+
+- [ ] 审计自检（preflight / audit_check）无 P0/P1，且已 `audit_pipeline --submit` 提交初审
+
+---
+
+## 6. 版本记录
 
 | 版本 | 日期 | 变更 | 说明 |
 |---|---|---|---|

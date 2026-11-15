@@ -63,6 +63,13 @@ a:hover{text-decoration:underline}
 .skip-link:focus{top:0;color:#fff;text-decoration:none}
 :focus-visible{outline:none;box-shadow:var(--focus-ring)}
 
+/* ── 已审计徽章 ── */
+.audit-badge{display:inline-flex;align-items:center;gap:10px;flex-wrap:wrap;
+  background:var(--green-l);border:1px solid var(--green);border-radius:10px;
+  padding:8px 14px;margin:0 0 14px;font-size:12.5px;color:var(--green)}
+.audit-badge .audit-seal{font-weight:700;white-space:nowrap}
+.audit-badge .audit-meta{color:var(--ink2)}
+
 /* ── 题头 Hero ── */
 .hero{background:linear-gradient(128deg,#0f2338 0%,#16324f 52%,#2f5597 100%);
   color:#fff;padding:46px 36px 34px;border-radius:0 0 18px 18px;margin-bottom:24px}
@@ -361,6 +368,25 @@ def _split_body(body: str) -> tuple[str, str, str, list[str]]:
     return h1, blockquote, preamble, sections
 
 
+# 已审计标识块（md 文首 `> **已审计** ...`）。markdown 会把相邻 `>` 行合并为
+# 同一 blockquote，故按「p 元素」提取，而非要求独立 blockquote。
+AUDIT_BQ_RE = re.compile(r"<p><strong>已审计</strong>(.*?)</p>", re.DOTALL)
+
+
+def _extract_audit_badge(body: str) -> tuple[str, str]:
+    """从 body 提取「已审计」标识块 -> (去除标识后的 body, 标识纯文本)。
+
+    标识由 audit_badge.py 注入，属审计状态而非研究内容；提取后由 hero 区
+    绿色徽章渲染，不进入正文章节。
+    """
+    m = AUDIT_BQ_RE.search(body)
+    if not m:
+        return body, ""
+    inner = re.sub(r"<[^>]+>", "", m.group(1)).strip()
+    inner = inner.lstrip("✅").strip()
+    return body[: m.start()] + body[m.end():], inner
+
+
 def _topic_meta(business_dir: Path) -> tuple[str, str]:
     """业务目录 -> (主题显示名, 类型名)。
 
@@ -413,7 +439,7 @@ def _back_url(md_path: Path, topic_slug: str) -> str:
 def render_page(
     *, title: str, topic_name: str, type_label: str, period: str,
     rel_path: str, blockquote: str, sections: list[str], back_url: str,
-    diff: tuple[list[str], dict, str] | None = None,
+    diff: tuple[list[str], dict, str] | None = None, audit: str = "",
 ) -> str:
     """渲染独立报告页。
 
@@ -458,6 +484,13 @@ def render_page(
     meta_desc = esc(desc, quote=True)
     meta_kw = esc(",".join(kws[:12]), quote=True)
 
+    audit_html = (
+        f'<div class="audit-badge" role="status" aria-label="已审计报告">'
+        f'<span class="audit-seal">✓ 已审计</span>'
+        f'<span class="audit-meta">{esc(audit)}</span></div>'
+        if audit else ""
+    )
+
     diff_bar = ""
     body_sections = "\n".join(sections)
     if diff is not None:
@@ -488,6 +521,7 @@ def render_page(
   <h1>{esc(title)}</h1>
   {f'<div class="sub">{esc(sub)}</div>' if sub else ''}
   <div class="meta">{meta_html}</div>
+  {audit_html}
   <div>{tags}</div>
 </header>
 <nav class="report-nav" aria-label="报告导航">
@@ -534,6 +568,7 @@ def convert(md_path: Path) -> str:
     body = _fix_tables(body)
     body = _fix_headings(body)
     body = _fix_heading_anchors(body)
+    body, audit_text = _extract_audit_badge(body)
 
     h1, blockquote, _preamble, sections = _split_body(body)
     if h1 and not title:
@@ -562,7 +597,7 @@ def convert(md_path: Path) -> str:
     return render_page(
         title=title, topic_name=topic_name, type_label=type_label, period=period,
         rel_path=rel_path, blockquote=blockquote, sections=sections,
-        back_url=back_url, diff=diff,
+        back_url=back_url, diff=diff, audit=audit_text,
     )
 
 

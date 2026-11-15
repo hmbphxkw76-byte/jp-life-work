@@ -79,6 +79,7 @@
 2. 主代理读取 `{{PREVIOUS_REPORT_PATH}}` 与基线做差异合并，继承已修正事实清单，应用第三节更新要点。
 3. 冲突数据保留双份引用；无法核实项单列「待复核清单」。
 4. 回写报告与登记册后运行 `python src/prompts-tools/tools/md2html.py` 重新生成 HTML，并运行 `python src/prompts-tools/tools/lint_reports.py` 校验。
+5. 落盘后依次运行 `python src/prompts-tools/tools/audit_preflight.py --report <报告相对路径>`、`python src/prompts-tools/tools/audit_check.py --report <报告相对路径>`，修正全部 P0/P1 后执行 `python src/prompts-tools/tools/audit_pipeline.py --submit --report <报告相对路径>` 提交审计（未通过初审不得合并）。
 
 ## 七、渲染与交付
 

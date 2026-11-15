@@ -38,7 +38,19 @@ python src/prompts-tools/tools/lint_reports.py
 - 定居地确定后，重点更新模块八（90 天清单）与登记册 #10（多语言窗口）。
 - 与 00-decision-hub 的[定居地档案](../00-decision-hub/reports/2026-11-decision-hub.md)联动。
 
-## 5. 版本记录
+## 5. 落盘后审计（提交前必做）
+
+```powershell
+python src/prompts-tools/tools/audit_preflight.py --report <报告相对路径>
+python src/prompts-tools/tools/audit_check.py --report <报告相对路径>
+python src/prompts-tools/tools/audit_pipeline.py --submit --report <报告相对路径>
+```
+
+- [ ] 审计自检（preflight / audit_check）无 P0/P1，且已 `audit_pipeline --submit` 提交初审
+
+---
+
+## 6. 版本记录
 
 | 版本 | 日期 | 变更 | 说明 |
 |---|---|---|---|

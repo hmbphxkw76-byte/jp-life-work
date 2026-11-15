@@ -123,6 +123,9 @@ python src/prompts-tools/tools/lint_reports.py
 ```powershell
 python src/prompts-tools/tools/lint_reports.py
 python src/prompts-tools/tools/classify_reports.py
+python src/prompts-tools/tools/audit_preflight.py --report <报告相对路径>
+python src/prompts-tools/tools/audit_check.py --report <报告相对路径>
+python src/prompts-tools/tools/audit_pipeline.py --submit --report <报告相对路径>
 ```
 
 人工核对：九锚点（或声明结构）全部跳转准确；已修正事实清单无回退；口径并列表齐全；登记册与报告变更摘要一致。
@@ -169,6 +172,8 @@ python src/prompts-tools/tools/classify_reports.py
 - [ ] 图注含单位、来源、统计周期与口径警示
 - [ ] 锚点跳转准确（周期报告：`href="#sN"` 与 `<h2 id="sN">` 逐字对应）
 - [ ] 浏览器打开无控制台 error
+
+- [ ] 审计自检（preflight / audit_check）无 P0/P1，且已 `audit_pipeline --submit` 提交初审
 
 ### 4.2 归档
 

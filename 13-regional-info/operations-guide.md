@@ -122,6 +122,9 @@ python src/prompts-tools/tools/lint_reports.py
 ```powershell
 python src/prompts-tools/tools/lint_reports.py
 python src/prompts-tools/tools/classify_reports.py
+python src/prompts-tools/tools/audit_preflight.py --report <报告相对路径>
+python src/prompts-tools/tools/audit_check.py --report <报告相对路径>
+python src/prompts-tools/tools/audit_pipeline.py --submit --report <报告相对路径>
 ```
 
 人工核对：导航锚点全部跳转准确；已修正事实清单无回退；登记口径与挂牌口径并列；登记册与报告变更摘要一致。
@@ -269,3 +272,5 @@ git 提交报告 + 登记册（建议提交信息：`report: {YYYY-MM} 地域信
 4. **不虚构**：无触发器命中时降级为核验型轻运行；「没有数据」写成可核验陈述。
 5. **留痕**：所有修正逐条补记清单；登记册更新按「实质修订 / 新增口径记录 / 复核确认 / 未取得维持上期值 / 结论不变」分组。
 6. **边界**：只输出「条件 → 判断 → 框架性含义 → 风险提示」，不给落户价位、不给单一「最优地域」结论；薪资地域差转 07、求职渠道地域策略转 02、保险与就医流程转 12、就学手续与学制转 10、灾害时外国人支援政策环境转 09。
+
+- [ ] 审计自检（preflight / audit_check）无 P0/P1，且已 `audit_pipeline --submit` 提交初审

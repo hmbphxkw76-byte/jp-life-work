@@ -185,6 +185,9 @@ python src/prompts-tools/tools/lint_reports.py
 ```powershell
 python src/prompts-tools/tools/lint_reports.py
 python src/prompts-tools/tools/classify_reports.py
+python src/prompts-tools/tools/audit_preflight.py --report <报告相对路径>
+python src/prompts-tools/tools/audit_check.py --report <报告相对路径>
+python src/prompts-tools/tools/audit_pipeline.py --submit --report <报告相对路径>
 ```
 
 - [ ] 表格 `<thead>` / `<tbody>` 成对，多列表声明百分比列宽，无竖排塌缩
@@ -234,3 +237,5 @@ git 提交报告 + 登记册（建议提交信息：`report: {YYYY-MM-DD} 家族
 | 版本 | 日期 | 变更 | 说明 |
 |---|---|---|---|
 | v1.0 | 2026-11-14 | 初始版本 | 建立操作指引：基线 / 月度核验 / 季度更新 / 年度复盘 / 事件触发 / 个人情况变化六类入口 |
+
+- [ ] 审计自检（preflight / audit_check）无 P0/P1，且已 `audit_pipeline --submit` 提交初审

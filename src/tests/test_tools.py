@@ -21,6 +21,9 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "prompts-tools" / "tools"))
 
 import _common  # noqa: E402
+import audit_pipeline  # noqa: E402
+import audit_preflight  # noqa: E402
+import audit_registry  # noqa: E402
 from archive_reports import select_archives  # noqa: E402
 from automation_status import days_since_latest  # noqa: E402
 from build_hub import build_outputs, normalize_for_check  # noqa: E402
@@ -932,6 +935,251 @@ class TestInfoQualityCheck(unittest.TestCase):
         # 文档声明的来源覆盖率门槛须与程序常量一致
         self.assertEqual(info_quality_check.THRESH_SOURCE_COVERAGE, 0.20)
         self.assertIn("20%", text.split("事实段落来源标注覆盖率门槛")[1].split("\n")[0])
+
+
+class TestAuditPreflight(unittest.TestCase):
+    """落盘前快速自检（audit_preflight.py，左移预防层）。"""
+
+    REL = "01-demo/reports/2026-11-demo.md"
+
+    GOOD = (
+        "# 示例主题 · 2026-11 月度报告\n\n"
+        "> **版本**：v1.0　|　**数据基准日**：2026-11-01\n\n"
+        "> **免责声明**：本报告不构成法律意见。\n\n"
+        "## 一、核心结论\n\n"
+        "结论：2026 年测试数据 123 条，来源为官方统计（https://example.com）。\n\n"
+        "## 二、正文\n\n"
+        "实质段落，含数字 456，来源：[机构](https://example.com)。口径：测试口径。\n\n"
+        "## 三、后续观察\n\n"
+        "- 观察项：无。\n\n"
+        "## 四、参考来源清单\n\n"
+        "- [来源](https://example.com)\n"
+    )
+
+    REG = (
+        "# 示例主题 · 指标登记册\n\n## 核心指标\n\n"
+        "| # | 指标 | 口径 |\n|---|---|---|\n"
+        "| 1 | 测试指标 | 测试口径 |\n"
+    )
+
+    def setUp(self):
+        self._tmp = tempfile.TemporaryDirectory()  # noqa: P201
+        self.root = Path(self._tmp.name)
+        self._orig_root = audit_preflight.ROOT
+        audit_preflight.ROOT = self.root
+        (self.root / "01-demo" / "reports").mkdir(parents=True)
+        (self.root / "01-demo" / "reports" / "target.md").write_text("# 目标\n", encoding="utf-8")
+
+    def tearDown(self):
+        audit_preflight.ROOT = self._orig_root
+        self._tmp.cleanup()
+
+    def _codes(self, text, rel=None, **kw):
+        return {f.code for f in audit_preflight.check_text(rel or self.REL, text, **kw)}
+
+    def test_good_report_no_blocking_findings(self):
+        # 无 HTML 时仅报 PF-PAIR（P2），其余要素齐全、无 P0/P1
+        findings = audit_preflight.check_text(self.REL, self.GOOD)
+        self.assertEqual({f.code for f in findings}, {"PF-PAIR"})
+        self.assertFalse(any(f.severity in ("P0", "P1") for f in findings))
+
+    def test_naming_slug_mismatch(self):
+        codes = self._codes(self.GOOD, rel="01-demo/reports/2026-11-wrong.md")
+        self.assertIn("PF-NAME", codes)
+
+    def test_missing_elements(self):
+        text = self.GOOD.replace("> **免责声明**：本报告不构成法律意见。\n\n", "")
+        text = text.replace("## 一、核心结论", "## 一、引言")
+        text = text.replace("## 四、参考来源清单", "## 四、附录")
+        codes = self._codes(text)
+        self.assertIn("PF-E3", codes)   # 免责声明
+        self.assertIn("PF-E4", codes)   # 结论摘要
+        self.assertIn("PF-E6", codes)   # 来源章节
+
+    def test_missing_body_section(self):
+        text = "# 标题\n\n> **免责声明**：无。\n\n结论。"
+        self.assertIn("PF-E5", self._codes(text))
+
+    def test_source_coverage(self):
+        unsourced = ("实质段落含数字 789，长度超过四十字符以满足实质性阈值要求，"
+                     "但没有任何出处说明，此处仅为测试用途，故不构成已标注事实段落。")
+        text = ("# 标题\n\n> **免责声明**：无。\n\n## 一、核心结论\n\n结论。\n\n"
+                "## 二、正文\n\n" + unsourced + "\n\n"
+                "## 三、参考来源清单\n\n- [来源](https://example.com)\n")
+        self.assertIn("PF-E7", self._codes(text))
+        self.assertNotIn("PF-E7", self._codes(self.GOOD))
+
+    def test_absolute_wording(self):
+        text = self.GOOD + "\n本路线包过，稳过。\n"
+        self.assertIn("PF-ABS", self._codes(text))
+
+    def test_caliber_marker(self):
+        text = self.GOOD.replace("口径：测试口径。", "").replace("数据基准日", "数据日期")
+        self.assertIn("PF-CALIBER", self._codes(text))
+
+    def test_broken_relative_link(self):
+        text = self.GOOD + "\n引用失效：[目标](../../99-missing/target.md)。\n"
+        self.assertIn("PF-CITE", self._codes(text))
+        # 存在的相对引用不报
+        text_ok = self.GOOD + "\n引用有效：[目标](target.md)。\n"
+        self.assertNotIn("PF-CITE", self._codes(text_ok))
+
+    def test_registry_pointer(self):
+        text = self.GOOD + "\n详见登记册 #2。\n"
+        self.assertIn("PF-REG", self._codes(text, registry_text=self.REG))
+        text_ok = self.GOOD + "\n详见登记册 #1。\n"
+        self.assertNotIn("PF-REG", self._codes(text_ok, registry_text=self.REG))
+        # 区间指针：#1–#2 而登记册只有 #1
+        text_range = self.GOOD + "\n详见登记册 #1–#2。\n"
+        self.assertIn("PF-REG", self._codes(text_range, registry_text=self.REG))
+
+    def test_missing_html_pair(self):
+        self.assertIn("PF-PAIR", self._codes(self.GOOD))
+
+    def test_check_report_reads_files(self):
+        d = self.root / "01-demo" / "reports"
+        (d / "2026-11-demo.md").write_text(self.GOOD, encoding="utf-8")
+        findings = audit_preflight.check_report(self.REL)
+        # 无 HTML → 仅 PF-PAIR；其余要素齐全
+        self.assertEqual({f.code for f in findings}, {"PF-PAIR"})
+
+    def test_severity_counts(self):
+        fs = [audit_preflight.Finding("PF-X", "P1", "l", "d"),
+              audit_preflight.Finding("PF-Y", "P2", "l", "d")]
+        self.assertEqual(audit_preflight.severity_counts(fs),
+                         {"P0": 0, "P1": 1, "P2": 1})
+
+    def test_prompt_embeds_audit_entry(self):
+        """通用基座与主题提示词须嵌入三步审计入口，且命令路径存在。"""
+        repo_root = Path(audit_preflight.__file__).resolve().parents[3]
+        tools = repo_root / "src" / "prompts-tools" / "tools"
+        base = repo_root / "src" / "report_templates" / "prompt-generic-base.md"
+        text = base.read_text(encoding="utf-8")
+        for cmd in ("audit_preflight.py --report", "audit_check.py --report",
+                    "audit_pipeline.py --submit"):
+            self.assertIn(cmd, text)
+            tool = cmd.split()[0]
+            self.assertTrue((tools / tool).is_file(), f"命令指向的工具不存在：{tool}")
+        # 4 个 prompt-update 同步嵌入
+        for rel in ("01-ssw-driver", "02-career-driver", "03-career-management",
+                    "07-economy-finance"):
+            t = (repo_root / rel / "prompts" / "prompt-update.md").read_text(encoding="utf-8")
+            self.assertIn("audit_pipeline.py --submit", t)
+        # 操作指南覆盖（21 个主题）
+        guides = list(repo_root.glob("*/operations-guide.md"))
+        self.assertGreaterEqual(len(guides), 21)
+        missing = [g.as_posix() for g in guides if "audit_preflight.py" not in g.read_text(encoding="utf-8")]
+        self.assertEqual(missing, [], f"操作指南未嵌入审计入口：{missing}")
+
+
+class TestAuditGuard(unittest.TestCase):
+    """AuditGuard 契约：登记册双向一致 / 状态机 / 哈希链 / 指纹失效。"""
+
+    REPORT_REL = "01-demo/reports/2026-11-demo.md"
+    REPORT_TEXT = (
+        "# 示例主题 · 2026-11 月度报告\n\n"
+        "> **免责声明**：本报告不构成法律意见。\n\n"
+        "## 一、核心结论\n\n结论。\n\n"
+        "## 二、参考来源清单\n\n- [来源](https://example.com)\n"
+    )
+
+    def setUp(self):
+        self._tmp = tempfile.TemporaryDirectory()  # noqa: P201
+        self.root = Path(self._tmp.name)
+        for sub in ("prompts", "data", "reports"):
+            (self.root / "01-demo" / sub).mkdir(parents=True)
+        (self.root / "01-demo" / "prompts" / "business-config.md").write_text(
+            "# 示例主题 · 业务配置\n\n继承：[职业就业调研型](../../src/report_templates/employment-research/)\n",
+            encoding="utf-8")
+        self.md = self.root / "01-demo" / "reports" / "2026-11-demo.md"
+        self.md.write_text(self.REPORT_TEXT, encoding="utf-8")
+        self.audit_dir = self.root / "src" / "report-audits" / "audit"
+        self.audit_dir.mkdir(parents=True)
+
+        self._patches = [
+            (_common, "ROOT", self.root),
+            (audit_registry, "ROOT", self.root),
+            (audit_registry, "AUDIT_DIR", self.audit_dir),
+            (audit_registry, "REGISTRY_JSON", self.audit_dir / "report-registry.json"),
+            (audit_registry, "REGISTRY_MD", self.audit_dir / "report-registry.md"),
+            (audit_pipeline, "ROOT", self.root),
+            (audit_pipeline, "AUDIT_DIR", self.audit_dir),
+            (audit_pipeline, "LEDGER", self.audit_dir / "audit-ledger.jsonl"),
+            (audit_pipeline, "STATUS", self.audit_dir / "audit-status.json"),
+        ]
+        self._saved = [(m, n, getattr(m, n)) for m, n, _ in self._patches]
+        for m, n, v in self._patches:
+            setattr(m, n, v)
+
+    def tearDown(self):
+        for m, n, v in self._saved:
+            setattr(m, n, v)
+        self._tmp.cleanup()
+
+    def _state(self):
+        return audit_pipeline.rebuild_status(audit_pipeline.load_ledger())
+
+    def test_registry_build_and_check(self):
+        entries = audit_registry.build()
+        self.assertEqual(len(entries), 1)
+        n, problems = audit_registry.check()
+        self.assertEqual(n, 0)
+        # 内容变更 → 指纹失配
+        self.md.write_text(self.REPORT_TEXT + "\n追加内容\n", encoding="utf-8")
+        n, problems = audit_registry.check()
+        self.assertEqual(n, 1)
+        self.assertIn("指纹失配", problems[0])
+        # 未登记报告 → 遗漏
+        (self.root / "01-demo" / "reports" / "2026-12-demo.md").write_text(
+            "# 新报告\n", encoding="utf-8")
+        n, problems = audit_registry.check()
+        self.assertTrue(any("遗漏" in p for p in problems))
+
+    def test_pipeline_state_machine_and_verify(self):
+        audit_pipeline.cmd_init()
+        self.assertEqual(self._state()[self.REPORT_REL]["state"], "registered")
+        audit_pipeline.cmd_submit(None, True, "generator")
+        self.assertEqual(self._state()[self.REPORT_REL]["state"], "pending_initial")
+        audit_pipeline.cmd_review("initial", None, True, "pass", "", "", None)
+        self.assertEqual(self._state()[self.REPORT_REL]["state"], "pending_re_review")
+        audit_pipeline.cmd_review("re_review", None, True, "pass", "", "", None)
+        self.assertEqual(self._state()[self.REPORT_REL]["state"], "pending_final")
+        audit_pipeline.cmd_review("final", None, True, "pass", "", "", None)
+        st = self._state()[self.REPORT_REL]
+        self.assertEqual(st["state"], "audited")
+        self.assertTrue(st["audit_id"].startswith("AUD-"))
+        self.assertEqual(audit_pipeline.cmd_verify(), 0)
+
+    def test_ledger_hash_chain_and_tamper(self):
+        audit_pipeline.cmd_init()
+        audit_pipeline.cmd_submit(None, True, "generator")
+        ledger = audit_pipeline.load_ledger()
+        self.assertGreaterEqual(len(ledger), 2)
+        prev = "0" * 64
+        for ev in ledger:
+            body = {k: v for k, v in ev.items() if k not in ("seq", "prev_hash", "hash")}
+            self.assertEqual(ev["prev_hash"], prev)
+            self.assertEqual(audit_pipeline._hash(prev, body), ev["hash"])
+            prev = ev["hash"]
+        # 篡改末行 → 校验失败
+        p = audit_pipeline.LEDGER
+        lines = p.read_text(encoding="utf-8").splitlines()
+        rec = json.loads(lines[-1])
+        rec["result"] = "fail"
+        lines[-1] = json.dumps(rec, ensure_ascii=False)
+        p.write_text("\n".join(lines) + "\n", encoding="utf-8")
+        self.assertNotEqual(audit_pipeline.cmd_verify(), 0)
+
+    def test_fingerprint_mismatch_marks_stale(self):
+        audit_pipeline.cmd_init()
+        audit_pipeline.cmd_submit(None, True, "generator")
+        for stage in ("initial", "re_review", "final"):
+            audit_pipeline.cmd_review(stage, None, True, "pass", "", "", None)
+        self.assertEqual(audit_pipeline.cmd_verify(), 0)
+        self.md.write_text(self.REPORT_TEXT + "\n变更\n", encoding="utf-8")
+        self.assertNotEqual(audit_pipeline.cmd_verify(), 0)
+        audit_pipeline.cmd_sync()
+        self.assertEqual(self._state()[self.REPORT_REL]["state"], "stale")
 
 
 if __name__ == "__main__":
