@@ -9,6 +9,8 @@
 """
 from __future__ import annotations
 
+import contextlib
+import io
 import json
 import re
 import subprocess
@@ -21,6 +23,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "prompts-tools" / "tools"))
 
 import _common  # noqa: E402
+import audit_badge  # noqa: E402
 import audit_check  # noqa: E402
 import audit_pipeline  # noqa: E402
 import audit_preflight  # noqa: E402
@@ -1407,6 +1410,152 @@ class TestAuditGuard(unittest.TestCase):
         data["reports"][self.REPORT_REL]["state"] = "registered"
         p.write_text(json.dumps(data, ensure_ascii=False), encoding="utf-8")
         self.assertNotEqual(audit_pipeline.cmd_verify(), 0)
+
+
+class TestAuditGate(unittest.TestCase):
+    """合并门禁（audit_pipeline --gate）：完整性 + 受检报告审计状态。"""
+
+    REPORT_REL = "01-demo/reports/2026-11-demo.md"
+    REPORT_TEXT = (
+        "# 示例主题 · 2026-11 月度报告\n\n"
+        "> **免责声明**：本报告不构成法律意见。\n\n"
+        "## 一、核心结论\n\n结论。\n\n"
+        "## 二、参考来源清单\n\n- [来源](https://example.com)\n"
+    )
+
+    def setUp(self):
+        self._tmp = tempfile.TemporaryDirectory()  # noqa: P201
+        self.root = Path(self._tmp.name)
+        for sub in ("prompts", "data", "reports"):
+            (self.root / "01-demo" / sub).mkdir(parents=True)
+        (self.root / "01-demo" / "prompts" / "business-config.md").write_text(
+            "# 示例主题 · 业务配置\n\n继承：[职业就业调研型](../../src/report_templates/employment-research/)\n",
+            encoding="utf-8")
+        self.md = self.root / "01-demo" / "reports" / "2026-11-demo.md"
+        self.md.write_text(self.REPORT_TEXT, encoding="utf-8")
+        self.audit_dir = self.root / "src" / "report-audits" / "audit"
+        self.audit_dir.mkdir(parents=True)
+        self._patches = [
+            (_common, "ROOT", self.root),
+            (audit_registry, "ROOT", self.root),
+            (audit_registry, "AUDIT_DIR", self.audit_dir),
+            (audit_registry, "REGISTRY_JSON", self.audit_dir / "report-registry.json"),
+            (audit_registry, "REGISTRY_MD", self.audit_dir / "report-registry.md"),
+            (audit_pipeline, "ROOT", self.root),
+            (audit_pipeline, "AUDIT_DIR", self.audit_dir),
+            (audit_pipeline, "LEDGER", self.audit_dir / "audit-ledger.jsonl"),
+            (audit_pipeline, "STATUS", self.audit_dir / "audit-status.json"),
+            (audit_badge, "ROOT", self.root),
+            (md2html, "ROOT", self.root),
+        ]
+        self._saved = [(m, n, getattr(m, n)) for m, n, _ in self._patches]
+        for m, n, v in self._patches:
+            setattr(m, n, v)
+        # HTML 交付物取真实 md2html 输出，保证标识注入后重生成幂等（指纹稳定）
+        self.md.with_suffix(".html").write_text(md2html_convert(self.md), encoding="utf-8")
+
+    def tearDown(self):
+        for m, n, v in self._saved:
+            setattr(m, n, v)
+        self._tmp.cleanup()
+
+    @staticmethod
+    def _evidence():
+        return json.dumps(
+            {"items": [{"item": audit_check.L5_CHECKLIST[i][0], "result": "yes", "basis": ""}
+                       for i in range(len(audit_check.L5_CHECKLIST))]},
+            ensure_ascii=False)
+
+    def _audit(self, rep=None):
+        rep = rep or self.REPORT_REL
+        audit_pipeline.cmd_submit(rep, False, "generator")
+        audit_pipeline.cmd_review("initial", rep, False, "pass", "", "", None)
+        audit_pipeline.cmd_review("re_review", rep, False, "pass", "", "", self._evidence())
+        audit_pipeline.cmd_review("final", rep, False, "pass", "", "", None)
+        audit_badge.cmd_apply(False, rep)  # 注入「已审计」标识（标识不计入指纹）
+
+    def _changed_file(self, *reps):
+        p = self.root / "changed.txt"
+        p.write_text("\n".join(reps), encoding="utf-8")
+        return str(p)
+
+    def _gate(self, *args):
+        buf = io.StringIO()
+        with contextlib.redirect_stdout(buf):
+            rc = audit_pipeline.cmd_gate(*args)
+        return rc, buf.getvalue()
+
+    def test_gate_pass_when_audited(self):
+        self._audit()
+        audit_registry.build()
+        rc, out = self._gate(None, "origin/main", True)
+        self.assertEqual(rc, 0, out)
+        self.assertIn("门禁通过", out)
+
+    def test_gate_blocks_unaudited_changed_report(self):
+        audit_pipeline.cmd_init()
+        audit_registry.build()
+        f = self._changed_file(self.REPORT_REL)
+        rc, out = self._gate(f, "origin/main", False)
+        self.assertEqual(rc, 1)
+        self.assertIn("未审计通过", out)
+
+    def test_gate_blocks_missing_l5_evidence(self):
+        # 已审计但无有效 L5 证据：直接追加终审事件（绕过 re_review 证据校验）
+        audit_pipeline.cmd_init()
+        audit_pipeline.cmd_submit(self.REPORT_REL, False, "generator")
+        audit_pipeline.cmd_review("initial", self.REPORT_REL, False, "pass", "", "", None)
+        md_h, html_h = audit_pipeline._current_hashes(self.REPORT_REL)
+        audit_pipeline._append({"ts": audit_pipeline._now(), "event": "stage_pass",
+                                "report": self.REPORT_REL, "actor": "reviewer_l2",
+                                "role": "reviewer_l2", "result": "pass", "note": "复核",
+                                "evidence": "", "content_hash": md_h, "html_hash": html_h})
+        audit_pipeline._append({"ts": audit_pipeline._now(), "event": "stage_pass",
+                                "report": self.REPORT_REL, "actor": "audit_chair",
+                                "role": "audit_chair", "result": "pass", "note": "终审",
+                                "evidence": "", "content_hash": md_h, "html_hash": html_h,
+                                "audit_id": "AUD-TEST-001"})
+        audit_registry.build()
+        rc, out = self._gate(None, "origin/main", True)
+        self.assertEqual(rc, 1)
+        self.assertIn("缺少有效 L5", out)
+
+    def test_gate_blocks_fingerprint_mismatch(self):
+        self._audit()
+        audit_registry.build()
+        self.md.write_text(self.REPORT_TEXT + "\n审计后变更\n", encoding="utf-8")
+        rc, out = self._gate(None, "origin/main", True)
+        self.assertEqual(rc, 1)
+        self.assertTrue("内容指纹失配" in out or "指纹失配" in out)
+
+    def test_gate_detects_tampered_ledger(self):
+        self._audit()
+        audit_registry.build()
+        lines = audit_pipeline.LEDGER.read_text(encoding="utf-8").splitlines()
+        bad = json.loads(lines[-1])
+        bad["hash"] = "0" * 64
+        lines[-1] = json.dumps(bad, ensure_ascii=False)
+        audit_pipeline.LEDGER.write_text("\n".join(lines) + "\n", encoding="utf-8")
+        rc, out = self._gate(None, "origin/main", True)
+        self.assertEqual(rc, 1)
+        self.assertIn("hash 校验失败", out)
+
+    def test_gate_ignores_unchanged_reports(self):
+        self._audit()
+        # 另一份未审计报告存在，但不在本次变更清单内 → 增量门禁不拦
+        (self.root / "01-demo" / "reports" / "2026-12-demo.md").write_text(
+            "# 未审计\n", encoding="utf-8")
+        audit_pipeline.cmd_init()
+        audit_registry.build()
+        f = self._changed_file(self.REPORT_REL)
+        rc, out = self._gate(f, "origin/main", False)
+        self.assertEqual(rc, 0, out)
+
+    def test_workflow_uses_gate_entry(self):
+        wf = Path(__file__).resolve().parents[2] / ".github" / "workflows" / "audit-gate.yml"
+        text = wf.read_text(encoding="utf-8")
+        self.assertIn("audit_pipeline.py --gate", text)
+        self.assertIn("--changed", text)
 
 
 class TestNewOnlyGate(unittest.TestCase):

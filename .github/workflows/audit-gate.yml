@@ -1,7 +1,11 @@
-# 审计门禁：PR 与 main 推送时执行登记册 / 台账 / 标识 / 多层级校验。
-# P0/P1 阻断合并；P2 放行（记录于 audit-check-report）。
+# 审计门禁：PR 与 main 推送时执行「合并门禁 + 多层级校验」。
 #
-# 退出码约定：0=通过；1=存在 P0/P1 或登记册/台账/标识不一致（阻断）；2=仅 P2（放行）。
+# 合并门禁（audit_pipeline --gate）统一入口，一次覆盖：
+#   ① 台账哈希链完整性；② 登记册双向一致；③「已审计」标识一致；
+#   ④ 受检报告（默认本次变更，--strict 全库）须 audited + 指纹匹配 + 有效 L5 证据。
+# 未通过审计的变更报告一律阻断（退出码 1）。
+#
+# 退出码约定：0=通过；1=阻断（完整性问题 / 未通过审计 / P0 P1）；2=仅 P2（放行）。
 # CI 判定：显式允许 {0,2}，其余非零（含参数错误、超时）一律阻断。
 name: audit-gate
 
@@ -33,35 +37,29 @@ jobs:
       - name: 安装依赖
         run: pip install -r requirements.txt
 
-      - name: 登记册双向一致（audit_registry --check）
+      # 统一合并门禁：完整性 + 变更报告审计状态（含 L5 证据）。
+      - name: 合并门禁（audit_pipeline --gate）
         run: |
-          python src/prompts-tools/tools/audit_registry.py --check || code=$?
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            git diff --name-only "origin/${{ github.base_ref }}...HEAD" > .changed-files
+            gate_args="--changed .changed-files"
+          else
+            before="${{ github.event.before }}"
+            if [ -z "$before" ] || [ "$before" = "0000000000000000000000000000000000000000" ]; then
+              gate_args="--strict"
+            else
+              git diff --name-only "$before" "${{ github.sha }}" > .changed-files
+              gate_args="--changed .changed-files"
+            fi
+          fi
+          echo "门禁参数：--gate $gate_args"
+          python src/prompts-tools/tools/audit_pipeline.py --gate $gate_args || code=$?
           code=${code:-0}
           if [ "$code" -ne 0 ] && [ "$code" -ne 2 ]; then
-            echo "::error::审计登记册不一致或命令异常（退出码 $code）"
+            echo "::error::审计门禁阻断：存在未通过审计的变更报告或完整性问题（退出码 $code）"
             exit 1
           fi
-          echo "audit_registry 退出码 $code"
-
-      - name: 台账哈希链与指纹绑定（audit_pipeline --verify）
-        run: |
-          python src/prompts-tools/tools/audit_pipeline.py --verify || code=$?
-          code=${code:-0}
-          if [ "$code" -ne 0 ] && [ "$code" -ne 2 ]; then
-            echo "::error::审计台账校验失败（哈希链/指纹/状态漂移，退出码 $code）"
-            exit 1
-          fi
-          echo "audit_pipeline --verify 退出码 $code"
-
-      - name: 已审计标识一致（audit_badge --check）
-        run: |
-          python src/prompts-tools/tools/audit_badge.py --check || code=$?
-          code=${code:-0}
-          if [ "$code" -ne 0 ] && [ "$code" -ne 2 ]; then
-            echo "::error::「已审计」标识与审计状态不一致（退出码 $code）"
-            exit 1
-          fi
-          echo "audit_badge 退出码 $code"
+          echo "audit_pipeline --gate 退出码 $code"
 
       # 全量多层级校验：当前存量报告 P0/P1=0；新增/变更报告引入 P0/P1 即阻断。
       - name: 多层级校验（audit_check --all）

@@ -26,6 +26,7 @@
     python audit_pipeline.py --verify               # 校验台账哈希链 + 指纹绑定
     python audit_pipeline.py --sync                 # 对指纹失配的已审计报告写 revoke（→ stale）
     python audit_pipeline.py --rebind               # 内容未变、仅 HTML 渲染漂移的失效报告重新绑定（→ audited）
+    python audit_pipeline.py --gate                 # 合并门禁：完整性 + 变更报告审计状态（--strict 全库）
 """
 from __future__ import annotations
 
@@ -44,6 +45,7 @@ from audit_registry import (  # noqa: E402
     AUDIT_DIR,
     SPEC_VERSION,
     build as build_registry,
+    content_fingerprint,
     content_fingerprints,
     discover,
 )
@@ -405,8 +407,8 @@ def cmd_status() -> int:
     return 0
 
 
-def cmd_verify() -> int:
-    ledger = load_ledger()
+def _chain_problems(ledger: list[dict]) -> list[str]:
+    """重算台账哈希链，返回问题列表（空 = 完整）。"""
     problems: list[str] = []
     prev = "0" * 64
     for ev in ledger:
@@ -416,6 +418,12 @@ def cmd_verify() -> int:
         if _hash(prev, body) != ev.get("hash"):
             problems.append(f"事件 #{ev.get('seq')} hash 校验失败（疑似篡改）")
         prev = ev.get("hash", prev)
+    return problems
+
+
+def cmd_verify() -> int:
+    ledger = load_ledger()
+    problems: list[str] = _chain_problems(ledger)
 
     state = rebuild_status(ledger)
     ids = [v.get("audit_id") for v in state.values() if v.get("audit_id")]
@@ -573,6 +581,118 @@ def cmd_sync() -> int:
     return 0
 
 
+def _changed_report_paths(base: str, changed_file: str | None) -> list[str]:
+    """汇总本次变更的报告 md 相对路径（去重、排序）。
+
+    changed_file 给出时按清单（每行一个路径）；否则对 `base...HEAD` 跑 git diff。
+    仅保留 `*/reports/*.md`，HTML / 非报告变更不触发审计门禁。
+    """
+    raw: list[str] = []
+    if changed_file:
+        p = Path(changed_file)
+        if not p.is_file():
+            raise SystemExit(f"[ERROR] 变更清单不存在：{changed_file}")
+        raw = [ln.strip() for ln in p.read_text(encoding="utf-8").splitlines() if ln.strip()]
+    else:
+        import subprocess
+        try:
+            out = subprocess.run(
+                ["git", "diff", "--name-only", f"{base}...HEAD"],
+                cwd=str(ROOT), capture_output=True, text=True, check=True,
+            )
+            raw = [ln.strip() for ln in out.stdout.splitlines() if ln.strip()]
+        except (OSError, subprocess.CalledProcessError):
+            raw = []
+    reps = set()
+    for p in raw:
+        p = p.replace("\\", "/")
+        if p.endswith(".md") and "/reports/" in p:
+            reps.add(p)
+    return sorted(reps)
+
+
+def _badge_problems() -> list[str]:
+    """标识 ⟺ 状态一致性（与 audit_badge.cmd_check 同口径，供门禁复用）。"""
+    import audit_badge
+
+    status = audit_badge._load_status()
+    problems: list[str] = []
+    for e in discover():
+        rep = e["report"]
+        md = ROOT / rep
+        text = md.read_text(encoding="utf-8")
+        has = bool(audit_badge.BADGE_RE.search(text))
+        v = status.get(rep, {})
+        valid = v.get("state") == "audited" and content_fingerprint(md) == v.get("content_hash")
+        if has and not valid:
+            problems.append(f"{rep}：携带已审计标识但状态为 {v.get('state') or '未登记'} 或指纹失配")
+        if valid and not has:
+            problems.append(f"{rep}：状态 audited 但缺少已审计标识")
+        html = md.with_suffix(".html")
+        if html.is_file():
+            h_has = 'class="audit-badge"' in html.read_text(encoding="utf-8", errors="replace")
+            if h_has != has:
+                problems.append(f"{rep}：HTML 标识与 md 标识不一致")
+    return problems
+
+
+def cmd_gate(changed_file: str | None, base: str, strict: bool) -> int:
+    """合并门禁：完整性 + 受检报告审计状态（含 L5 证据）。
+
+    阻断条件（任一即退出码 1）：
+      - 台账哈希链断裂 / 篡改；
+      - 登记册与实际文件不一致；
+      - 「已审计」标识与状态不一致；
+      - 受检报告（默认本次变更，--strict 全库）未 audited、指纹失配或缺有效 L5 证据。
+    """
+    import audit_registry
+
+    ledger = load_ledger()
+    state = rebuild_status(ledger)
+    problems: list[str] = [f"台账：{p}" for p in _chain_problems(ledger)]
+
+    _n, reg = audit_registry.check()
+    problems += [f"登记册：{p}" for p in reg]
+    problems += [f"标识：{p}" for p in _badge_problems()]
+
+    if strict:
+        targets = [e["report"] for e in discover()]
+        mode = "全库严格模式"
+    else:
+        targets = _changed_report_paths(base, changed_file)
+        mode = f"增量模式（base={base}）"
+
+    l5 = l5_status_from_ledger()
+    blocked: list[str] = []
+    for rep in targets:
+        v = state.get(rep)
+        if not v:
+            blocked.append(f"{rep}：未登记审计（无台账事件）")
+            continue
+        if v.get("state") != "audited":
+            blocked.append(f"{rep}：状态 {v.get('state') or '未登记'}（未审计通过）")
+            continue
+        cur_md, cur_html = _current_hashes(rep)
+        if cur_md != v.get("content_hash"):
+            blocked.append(f"{rep}：内容指纹失配（审计后内容已变更）")
+        elif v.get("html_hash") and cur_html != v["html_hash"]:
+            blocked.append(f"{rep}：HTML 指纹失配（交付物已变更）")
+        elif not l5.get(rep, False):
+            blocked.append(f"{rep}：缺少有效 L5 语义复核证据")
+
+    print(f"审计门禁 · {mode}")
+    print(f"  台账事件 {len(ledger)} 条；登记报告 {len(state)} 份；受检报告 {len(targets)} 份")
+    for p in problems:
+        print(f"  [X] {p}")
+    for b in blocked:
+        print(f"  [拦截] {b}")
+    if problems or blocked:
+        print(f"→ 阻断合并：完整性问题 {len(problems)} 项、未通过审计 {len(blocked)} 份")
+        return 1
+    print("→ 门禁通过：完整性无问题，受检报告均已审计且证据有效")
+    return 0
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description="审计质量管控流程")
     ap.add_argument("--init", action="store_true", help="登记全部报告")
@@ -592,6 +712,11 @@ def main() -> int:
                     help="内容未变、仅 HTML 渲染漂移的失效报告重新绑定（stale → audited）")
     ap.add_argument("--backfill-l5", action="store_true",
                     help="存量报告 L5 补核专项：为已审计但缺证据的报告追加 evidence（新格式）")
+    ap.add_argument("--gate", action="store_true",
+                    help="合并门禁：完整性 + 受检报告审计状态（缺省仅本次变更）")
+    ap.add_argument("--changed", help="变更文件清单（每行一个路径）；缺省用 git diff base...HEAD")
+    ap.add_argument("--base", default="origin/main", help="增量比对基线（默认 origin/main）")
+    ap.add_argument("--strict", action="store_true", help="门禁检查全库报告（非仅变更）")
     args = ap.parse_args()
 
     if args.init:
@@ -619,6 +744,8 @@ def main() -> int:
         if not args.report and not args.all:
             ap.error("--backfill-l5 需要 --report <路径> 或 --all")
         return cmd_backfill_l5(args.report, args.all, args.evidence, args.actor or "")
+    if args.gate:
+        return cmd_gate(args.changed, args.base, args.strict)
     ap.print_help()
     return 0
 
