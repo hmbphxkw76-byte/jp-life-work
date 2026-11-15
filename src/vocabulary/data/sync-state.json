@@ -3,10 +3,10 @@
     "ssw-driver=>../../01-ssw-driver/prompts/business-config.md": {
       "topic": "ssw-driver",
       "target": "../../01-ssw-driver/prompts/business-config.md",
-      "vocab_version": "v1.4",
-      "term_count": 105,
-      "synced_at": "2026-11-13T20:09:13",
-      "source_hash": "22e3060a2020e64f6461aa05e0c45ffa103d67976906457652e662eb7c25c148",
+      "vocab_version": "v1.5",
+      "term_count": 109,
+      "synced_at": "2026-11-15T13:11:23",
+      "source_hash": "741f8465f2d461658053f50f086f4d4f560f48c09e92f483faac23563ba119ea",
       "term_hashes": {
         "SSW-001": "e291079e398be19e9b7baea86126d42984eac854c416be2a2506e4f89755c9f1",
         "SSW-002": "775e3ea327374f1ecdcfec44cdfe8c5b32a6a814acb2bb8ab9e08f767a1a2d8d",
@@ -112,7 +112,11 @@
         "SSW-102": "5cfa7ca9593e040cce327ce6cfd8aee9b6d79e12784e22bad342642556369c22",
         "SSW-103": "b7d4bdca380ad43ac8da793c4e32037a30f4f2c15db2da943f1beea5a3a4ce85",
         "SSW-104": "472497280b2fbf4a8eb885830c934e400837f70353c236dffc20dbb8ec9d4ab3",
-        "SSW-105": "71c5fa2ba97cdb1dc0fe407a81aa03597e273dd71d9e0f9cbe8bd63245fc9efa"
+        "SSW-105": "71c5fa2ba97cdb1dc0fe407a81aa03597e273dd71d9e0f9cbe8bd63245fc9efa",
+        "SSW-106": "1b16d14263cf899c6feca1c421db1b0964d598ba315bd5062ef6d3ec4f6d0a66",
+        "SSW-107": "a0a15424f1d1991aba83f54695857670bee224e964c5e6a2b3af32a8b5a790ca",
+        "SSW-108": "8e951e48158b9eb664d0868b3708fb96a2d622adaa385a7f87b7a85236ffb608",
+        "SSW-109": "b45c610af51803bb5567e6b8885838d8ff21655888f318786d5e06aadae4edff"
       }
     },
     "career-driver=>../../02-career-driver/prompts/business-config.md": {
@@ -1252,10 +1256,10 @@
     "life-operations=>../../14-life-operations/prompts/business-config.md": {
       "topic": "life-operations",
       "target": "../../14-life-operations/prompts/business-config.md",
-      "vocab_version": "v1.1",
-      "term_count": 25,
-      "synced_at": "2026-11-14T21:14:45",
-      "source_hash": "72241cbb7906ce2860cf61aa7e34423af84bca825c76b603bd4d409b4005b9e9",
+      "vocab_version": "v1.2",
+      "term_count": 26,
+      "synced_at": "2026-11-15T13:11:23",
+      "source_hash": "c0120cdcdf65737073b035e38cd39c35691cd2c69eb4c5dde154cfc208d3dbc6",
       "term_hashes": {
         "LOP-001": "050c9a0528c45d6f81edb07dc7abb3073e1d3ae07ee77b8999384930a79e8ae2",
         "LOP-002": "fd39bcf2d8179ad0ab0ebbfaeb114af6566cda7bba47caac9c5a3697c8b34ba9",
@@ -1281,16 +1285,17 @@
         "LOP-022": "15e5c4695aab72beddd5e89388205cea30f77fca2d0d043bc1a27de4c200c87d",
         "LOP-023": "d5eea55b1c0e1a6cb02d61a1b27400bbadc0985e8a32ca8e4c9eb2a7394c5bcc",
         "LOP-024": "e8db7315846984d403724b699a8e126c074b77f1f24d318dff0abf65ec70e319",
-        "LOP-025": "00af5530476b11eeb52c230901f25a254dedccf13452562d1dc7768e766f0efb"
+        "LOP-025": "00af5530476b11eeb52c230901f25a254dedccf13452562d1dc7768e766f0efb",
+        "LOP-026": "f3876d30389144d0bb99dd33630cb3658eaa84f8b5cf328d722d49bb9faf20b5"
       }
     },
     "health-wellbeing=>../../15-health-wellbeing/prompts/business-config.md": {
       "topic": "health-wellbeing",
       "target": "../../15-health-wellbeing/prompts/business-config.md",
-      "vocab_version": "v1.1",
-      "term_count": 19,
-      "synced_at": "2026-11-14T21:14:45",
-      "source_hash": "ad9bbb4ba5d06e62b3e16aad404a39a61fdf2eae48c6422b022d08127d003800",
+      "vocab_version": "v1.2",
+      "term_count": 20,
+      "synced_at": "2026-11-15T13:11:23",
+      "source_hash": "07dedbabe931962300061666bbaacef66172029a468927e413bc3aadfa6f5deb",
       "term_hashes": {
         "HLW-001": "8ce07df2c8bbbdc5515f7cde46e4eae005739e5ff5e53d42606c2a6ea1af3eb4",
         "HLW-002": "7cabb3f3e87c125ccac240330be909d4e235c3151aefa43201923b54f9cb2b29",
@@ -1310,7 +1315,8 @@
         "HLW-016": "945f338a64cf4ffbbc73fa6f3fbd2ffee4b03b790e171b4a3c421dde52930407",
         "HLW-017": "62afeb7416fddcfeee3229372dabd19aab0b9414738d56036cb5e1bb22ea3fd5",
         "HLW-018": "88edce3c5cce9bb061c4bfd17cb793e863f8e465e553ed35537f35f2a7456dfe",
-        "HLW-019": "a2813bbee7af3465ffca811af13d561e1c106150e1dcd8ad3eda88476a2ee05f"
+        "HLW-019": "a2813bbee7af3465ffca811af13d561e1c106150e1dcd8ad3eda88476a2ee05f",
+        "HLW-020": "07f7589d055b3b86cbb6655f1aa42265d9283ace16508eaf34c0feb99b966dda"
       }
     },
     "migration-compliance=>../../17-migration-compliance/prompts/business-config.md": {

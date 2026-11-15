@@ -201,3 +201,6 @@
 [2026-11-14T21:23:15] [sync] family-parenting -> ../../18-family-parenting/prompts/business-config.md：无变更（词汇库与提示词区间一致）
 [2026-11-14T21:23:15] [sync] safety-disaster -> ../../19-safety-disaster/prompts/business-config.md：无变更（词汇库与提示词区间一致）
 [2026-11-14T21:23:15] [sync] overseas-china -> ../../20-overseas-china/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-15T13:11:23] [sync] life-operations -> ../../14-life-operations/prompts/business-config.md：区块替换成功：新增 1 / 修改 0 / 删除 0，共 26 条（v1.2）；备份 sync-backups/life-operations.business-config.md.20261115_131123.bak
+[2026-11-15T13:11:23] [sync] health-wellbeing -> ../../15-health-wellbeing/prompts/business-config.md：区块替换成功：新增 1 / 修改 0 / 删除 0，共 20 条（v1.2）；备份 sync-backups/health-wellbeing.business-config.md.20261115_131123.bak
+[2026-11-15T13:11:23] [sync] ssw-driver -> ../../01-ssw-driver/prompts/business-config.md：区块替换成功：新增 4 / 修改 0 / 删除 0，共 109 条（v1.5）；备份 sync-backups/ssw-driver.business-config.md.20261115_131123.bak
