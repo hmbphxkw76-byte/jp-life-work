@@ -67,6 +67,8 @@
 | 地域选择、定居地档案 | 13-regional-info |
 | 驾照路径与费用、车辆成本 | 10-education-qualification / 01-ssw-driver |
 
+> **模块边界声明集中口径**：报告 / 骨架中的边界声明统一集中在「零、模块边界声明」章节（由 `src/prompts-tools/tools/skeleton_builder.py` 生成），不在各节重复。
+
 ### 3.2 结构固化锚（现行报告结构 → 九节骨架映射）
 
 首期按本主题专属结构产出，下表为与[职业就业调研型九节骨架](../../src/report_templates/employment-research/prompt-baseline-setup-template.md)的声明式映射：
