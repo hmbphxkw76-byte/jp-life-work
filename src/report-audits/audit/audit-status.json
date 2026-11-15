@@ -1,14 +1,14 @@
 {
   "version": "v1.0",
-  "updated": "2026-11-15T12:35:13+00:00",
+  "updated": "2026-11-15T12:39:25+00:00",
   "reports": {
     "00-decision-hub/reports/2026-11-decision-hub.md": {
       "state": "audited",
       "audit_id": "AUD-202611-010",
       "finalized_at": "2026-11-15T12:01:11+00:00",
       "content_hash": "sha256:ebec0eea8ad3b429f8fd8ecab2e97572e77565c4dcaa5c453f6ff14d56bc6950",
-      "html_hash": "sha256:28ee4f1c0523c486f7ffa68cb928c6a1a0e05875b7c08017a60689d1ded84932",
-      "last_seq": 252
+      "html_hash": "sha256:e532573d303055e131586dfb2ef9fe3d346d153d096b2e25f22b14519b2a57b0",
+      "last_seq": 312
     },
     "00-decision-hub/reports/2026-12-decision-hub.md": {
       "state": "audited",
@@ -23,16 +23,16 @@
       "audit_id": "AUD-202611-004",
       "finalized_at": "2026-11-15T12:01:12+00:00",
       "content_hash": "sha256:38b832f48050d803c8ca8e56bcc31a8730eed25f8929110a053668502a5b9b7a",
-      "html_hash": "sha256:6eb2a6efd7b9c20181e69919a68010820afe04d49d909050ffdc21afb6b3e428",
-      "last_seq": 256
+      "html_hash": "sha256:71599d84409a6e6f6af0129afc68a17283294277d071360865c1600a063fd639",
+      "last_seq": 313
     },
     "02-career-driver/reports/2026-11-career-driver.md": {
       "state": "audited",
       "audit_id": "AUD-202611-001",
       "finalized_at": "2026-11-15T12:01:13+00:00",
       "content_hash": "sha256:49df6ce141201626e6ddffa3b879aca4df858910bcbb0be41658b3b04435220b",
-      "html_hash": "sha256:5442b86684bdacdb6cf2a88b749b5b80f33bb71c8d152581d5156b33551c67c5",
-      "last_seq": 260
+      "html_hash": "sha256:b63c31975eb6e482a1abc7713579fe80317ce2b0fbf78136fd21364c25fc91a6",
+      "last_seq": 314
     },
     "03-career-management/reports/2026-11-career-management.md": {
       "state": "audited",
