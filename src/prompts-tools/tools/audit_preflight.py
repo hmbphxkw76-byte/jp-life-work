@@ -32,9 +32,8 @@ import info_quality_check  # noqa: E402
 from info_quality_check import (  # noqa: E402
     MD_LINK_RE,
     THRESH_SOURCE_COVERAGE,
+    _fact_units,
     _has_source,
-    _paragraphs,
-    _substantive,
 )
 from audit_check import ABSOLUTE_RE, H2_RE, _absolute_hits  # noqa: E402
 from lint_reports import lint_html  # noqa: E402
@@ -49,7 +48,6 @@ MD_H2_RE = re.compile(r"^##\s+", re.MULTILINE)
 REG_ROW_RE = re.compile(r"^\|\s*(\d+)\s*\|", re.MULTILINE)
 REG_PTR_RE = re.compile(r"(?:([0-9]{2}-[a-z][a-z0-9-]*)\s+)?登记册\s*((?:#\d+\s*[、/,，–\-]?\s*)+)")
 REG_NUM_RE = re.compile(r"#(\d+)")
-BADGE_LINE_RE = re.compile(r"^>\s*\*\*已审计\*\*.*$", re.MULTILINE)
 
 
 @dataclass
@@ -136,13 +134,13 @@ def check_text(rel: str, text: str, html: str = "", type_id: str = "",
     if h2_html < 1 and h2_md < 1:
         _add(out, "PF-E5", "P1", "必需要素", "正文无章节（h2 缺失）", "S-05")
 
-    fact_blocks = [b for b in _paragraphs(BADGE_LINE_RE.sub("", text))
-                   if _substantive(b) and re.search(r"\d", b)]
+    paras, rows = _fact_units(text)
+    fact_blocks = paras + rows
     if fact_blocks:
         cov = sum(1 for b in fact_blocks if _has_source(b)) / len(fact_blocks)
         if cov < THRESH_SOURCE_COVERAGE:
-            _add(out, "PF-E7", "P2", "事实段落来源覆盖不足",
-                 f"含数字事实段落来源覆盖率 {cov:.0%} < {THRESH_SOURCE_COVERAGE:.0%}", "S-06")
+            _add(out, "PF-E7", "P2", "事实单元来源覆盖不足",
+                 f"含数字事实单元（段落 + 表格行）来源覆盖率 {cov:.0%} < {THRESH_SOURCE_COVERAGE:.0%}", "S-06")
 
     if not any(k in text for k in ("观察", "触发", "后续", "待办", "下期")):
         _add(out, "PF-E8", "P2", "必需要素", "缺少后续动作 / 观察清单", "S-05")

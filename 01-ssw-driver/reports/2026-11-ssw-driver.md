@@ -548,51 +548,51 @@
 
 ### ④ 媒体 / 行业媒体 / 企业 IR
 
-75. [输送经济新闻：佐川越南特定技能司机](https://yuso.co.jp/20251014-12/) — 2025
-76. [トラックニュース：特定技能采用讲座](https://www.trucknews.biz/article/r091138/) — 2025
-77. [LogiShift 运賃指数](https://logishift.net/stats/truck-freight-rate-index/) — 2026
+75. [输送经济新闻：佐川越南特定技能司机](https://yuso.co.jp/20251014-12/) — 2025【需核实原文】
+76. [トラックニュース：特定技能采用讲座](https://www.trucknews.biz/article/r091138/) — 2025【需核实原文】
+77. [LogiShift 运賃指数](https://logishift.net/stats/truck-freight-rate-index/) — 2026【需核实原文】
 78. [LogiShift 全ト协工资调查转引](https://logishift.net/2026/08/06/post-7782/) — 2026
-79. [LOGISTICS TODAY 運輸・郵便業の給与 4.9% 増](https://www.logi-today.com/1019065) — 2026
-80. [JILPT 春斗数据](https://www.jil.go.jp/kokunai/blt/backnumber/2026/06/blm_sanbetsu.html) — 2026
-81. [JILPT 劳动政策论坛基调讲演](https://www.jil.go.jp/event/ro_forum/20260529/houkoku/01-keynote-shuto.html) — 2026
-82. [Cargo News 成约运賃指数](https://cargo-news.online/news/detail.php?id=12653) — 2026
-83. [カーゴニュース / EveryChoice 有效求人倍率](https://joboffer.everychoice.info/?p=153847) — 2026-11-10
-84. [SGHD 取缔役メッセージ](https://www.sg-hldgs.co.jp/ir/management/directormessage/) — 2026
-85. [SGHD 2027 年 3 月期第 2 四半期決算短信](https://www.release.tdnet.info/inbs/140120261106567754.pdf) — 2026-11-06
-86. [株探 SGHD 決算速报](https://kabutan.jp/news/marketnews/?b=k202611060215) — 2026-11-06
-87. [日通 企业价值提升 PDF](https://pdf.irpocket.com/C9147/doF3/OcDN/QgbQ.pdf) — 2025
-88. [佐川急便运价改定新闻稿](https://www2.sagawa-exp.co.jp/newsrelease/detail/2026/1002_2672.html) — 2026
-89. [雅玛多 SD 招募制度](https://www.kuronekoyamato.co.jp/ytc/corp/recruit/sales-driver/benefits-and-training.html) — 2026
-90. [雅玛多 HD 2024 改定公告（英文）](https://www.yamato-hd.co.jp/english/news/2023/pdf/newsrelease_20240112_en01.pdf) — 2024
-91. [桑原服务 采用页](https://kuwabaraservice.co.jp/recruit/) — 2026
-92. [朝日运输 采用页](https://asahi-unyu.biz/recruit/) — 2026
-93. [株式会社大富 采用页](https://www.oh-tomi.co.jp/recruit/) — 2026
-94. [西本急送 求人页](http://www.nishikyu.com/jobs/833) — 2026
-95. [コフジ物流 求人页](https://kofuji-recruit.jp/job/-/info/detail/M0000015) — 2026
-96. [中越运送 求人页](https://works.aqsh.co.jp/jobs/midcareer/15030-04340661) — 2026
-97. [メジャーサービスジャパン engage 页](https://en-gage.net/msj-msj_saiyo/) — 2026
-98. [マルマサフード物流 グループ会社页](https://www.kanemasa.co.jp/group_company06/) — 2026
-99. [RoAD to the L4 成果報告会 いすゞ自動車](https://www.road-to-the-l4.go.jp/publication/pdf/03-3_ISUZU_20260305.pdf) — 2026-03-05
-100. [RoAD to the L4 主题 3](https://www.road-to-the-l4.go.jp/activity/theme03/) — 2025
+79. [LOGISTICS TODAY 運輸・郵便業の給与 4.9% 増](https://www.logi-today.com/1019065) — 2026【需核实原文】
+80. [JILPT 春斗数据](https://www.jil.go.jp/kokunai/blt/backnumber/2026/06/blm_sanbetsu.html) — 2026【已核实】
+81. [JILPT 劳动政策论坛基调讲演](https://www.jil.go.jp/event/ro_forum/20260529/houkoku/01-keynote-shuto.html) — 2026【已核实】
+82. [Cargo News 成约运賃指数](https://cargo-news.online/news/detail.php?id=12653) — 2026【需核实原文】
+83. [カーゴニュース / EveryChoice 有效求人倍率](https://joboffer.everychoice.info/?p=153847) — 2026-11-10【转载】
+84. [SGHD 取缔役メッセージ](https://www.sg-hldgs.co.jp/ir/management/directormessage/) — 2026【已核实】
+85. [SGHD 2027 年 3 月期第 2 四半期決算短信](https://www.release.tdnet.info/inbs/140120261106567754.pdf) — 2026-11-06【已核实】
+86. [株探 SGHD 決算速报](https://kabutan.jp/news/marketnews/?b=k202611060215) — 2026-11-06【需核实原文】
+87. [日通 企业价值提升 PDF](https://pdf.irpocket.com/C9147/doF3/OcDN/QgbQ.pdf) — 2025【已核实】
+88. [佐川急便运价改定新闻稿](https://www2.sagawa-exp.co.jp/newsrelease/detail/2026/1002_2672.html) — 2026【已核实】
+89. [雅玛多 SD 招募制度](https://www.kuronekoyamato.co.jp/ytc/corp/recruit/sales-driver/benefits-and-training.html) — 2026【已核实】
+90. [雅玛多 HD 2024 改定公告（英文）](https://www.yamato-hd.co.jp/english/news/2023/pdf/newsrelease_20240112_en01.pdf) — 2024【已核实】
+91. [桑原服务 采用页](https://kuwabaraservice.co.jp/recruit/) — 2026【已核实】
+92. [朝日运输 采用页](https://asahi-unyu.biz/recruit/) — 2026【已核实】
+93. [株式会社大富 采用页](https://www.oh-tomi.co.jp/recruit/) — 2026【已核实】
+94. [西本急送 求人页](http://www.nishikyu.com/jobs/833) — 2026【已核实】
+95. [コフジ物流 求人页](https://kofuji-recruit.jp/job/-/info/detail/M0000015) — 2026【已核实】
+96. [中越运送 求人页](https://works.aqsh.co.jp/jobs/midcareer/15030-04340661) — 2026【已核实】
+97. [メジャーサービスジャパン engage 页](https://en-gage.net/msj-msj_saiyo/) — 2026【已核实】
+98. [マルマサフード物流 グループ会社页](https://www.kanemasa.co.jp/group_company06/) — 2026【已核实】
+99. [RoAD to the L4 成果報告会 いすゞ自動車](https://www.road-to-the-l4.go.jp/publication/pdf/03-3_ISUZU_20260305.pdf) — 2026-03-05【已核实】
+100. [RoAD to the L4 主题 3](https://www.road-to-the-l4.go.jp/activity/theme03/) — 2025【已核实】
 
 ### ⑤ 平台抽样 / 行情
 
-101. [求人Box 运送业求人](https://xn--pckua2a7gp15o89zb.com/運送業-トラックの仕事) — 2026
-102. [Mintoku Work 特定技能求人](https://mintoku.work/?specific_skills_industry=15) — 2026
-103. [Mintoku Work JOB B00888](https://mintoku.work/work/B00888) — 2026
-104. [genbars 关东求人详情（JOB 10151701）](https://en.genbars.jp/kanto/jobdetail/?id=10151701) — 2026
-105. [genbars 中型司机东京求人](https://en.genbars.jp/kw/all/中型ドライバー%20東京%20求人/) — 2026
-106. [engage 西本急送](https://en-gage.net/nishikyu_career/) — 2026
-107. [gojob 大富求人](https://gojob.go.goinc.jp/jobs/Z9S78ZH0) — 2026
-108. [works.aqsh 中越运送](https://works.aqsh.co.jp/jobs/midcareer/15030-04340661) — 2026
-109. [ten.1049.cc 中越グループ](https://ten.1049.cc/tp/chuetsu-group/job/21993171/) — 2026
-110. [气仙沼中央自动车学校料金](https://www.kesennuma-ds.com/price) — 2026
-111. [阿自马达 DS 大型学费](https://www.iac-ds.co.jp/ajima/driver-license/oogata/) — 2026
+101. [求人Box 运送业求人](https://xn--pckua2a7gp15o89zb.com/運送業-トラックの仕事) — 2026【样本】
+102. [Mintoku Work 特定技能求人](https://mintoku.work/?specific_skills_industry=15) — 2026【样本】
+103. [Mintoku Work JOB B00888](https://mintoku.work/work/B00888) — 2026【已回溯】
+104. [genbars 关东求人详情（JOB 10151701）](https://en.genbars.jp/kanto/jobdetail/?id=10151701) — 2026【已回溯】
+105. [genbars 中型司机东京求人](https://en.genbars.jp/kw/all/中型ドライバー%20東京%20求人/) — 2026【样本】
+106. [engage 西本急送](https://en-gage.net/nishikyu_career/) — 2026【样本】
+107. [gojob 大富求人](https://gojob.go.goinc.jp/jobs/Z9S78ZH0) — 2026【样本】
+108. [works.aqsh 中越运送](https://works.aqsh.co.jp/jobs/midcareer/15030-04340661) — 2026【已回溯】
+109. [ten.1049.cc 中越グループ](https://ten.1049.cc/tp/chuetsu-group/job/21993171/) — 2026【样本】
+110. [气仙沼中央自动车学校料金](https://www.kesennuma-ds.com/price) — 2026【已核实】
+111. [阿自马达 DS 大型学费](https://www.iac-ds.co.jp/ajima/driver-license/oogata/) — 2026【已核实】
 112. [drivey.jp 外免切替合格率（转引警察庁）](https://drivey.jp/blog/gaimen-kirikae-knowledge-test) — 2025–2026
-113. [foreignworker-guide 登録支援機関行情](https://foreignworker-guide.com/articles/how-to-choose-support-agency/) — 2026
-114. [総務省 e-Stat 自動車教習料（0003449368）](https://www.e-stat.go.jp/stat-search/database?layout=dataset&statdisp_id=0003449368) — 2026
-115. [くらシム 教习所费用指南](https://kurasim.com/blog/driving-school-cost-guide) — 2026-10-18
-116. [TRUCK-BANK 驾照取得费用](https://www.truck-bank.net/knowledge/06-license-regulations/license-acquisition-cost/) — 2026-06
+113. [foreignworker-guide 登録支援機関行情](https://foreignworker-guide.com/articles/how-to-choose-support-agency/) — 2026【需核实原文】
+114. [総務省 e-Stat 自動車教習料（0003449368）](https://www.e-stat.go.jp/stat-search/database?layout=dataset&statdisp_id=0003449368) — 2026【已核实】
+115. [くらシム 教习所费用指南](https://kurasim.com/blog/driving-school-cost-guide) — 2026-10-18【需核实原文】
+116. [TRUCK-BANK 驾照取得费用](https://www.truck-bank.net/knowledge/06-license-regulations/license-acquisition-cost/) — 2026-06【需核实原文】
 117. [hajimen.com 教习所排名（2015 年调查值，历史参考）](https://hajimen.com/10-saitama/rank_detail?rank_name=t-0) — 2015
 
 ### ⑥ 中国侧输入（项目指定例外）

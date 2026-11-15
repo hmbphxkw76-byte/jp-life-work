@@ -12,11 +12,11 @@
       "type_id": "employment-research",
       "md": "00-decision-hub/reports/2026-11-decision-hub.md",
       "html": "00-decision-hub/reports/2026-11-decision-hub.html",
-      "content_hash": "sha256:cfd32e3dd655002e7f12a0cc6e48396442538321233359693d5e851fbb437527",
+      "content_hash": "sha256:ebec0eea8ad3b429f8fd8ecab2e97572e77565c4dcaa5c453f6ff14d56bc6950",
       "html_hash": "sha256:28ee4f1c0523c486f7ffa68cb928c6a1a0e05875b7c08017a60689d1ded84932",
-      "audit_id": "AUD-202611-004",
+      "audit_id": "AUD-202611-010",
       "audit_state": "audited",
-      "finalized_at": "2026-11-15T02:58:17+00:00"
+      "finalized_at": "2026-11-15T12:01:11+00:00"
     },
     {
       "report": "00-decision-hub/reports/2026-12-decision-hub.md",
@@ -42,11 +42,11 @@
       "type_id": "employment-research",
       "md": "01-ssw-driver/reports/2026-11-ssw-driver.md",
       "html": "01-ssw-driver/reports/2026-11-ssw-driver.html",
-      "content_hash": "sha256:821cf70f24aa4d876e8bd89850380c4c7daa0ed94c3f4b1c45b06faaa1085c1c",
+      "content_hash": "sha256:38b832f48050d803c8ca8e56bcc31a8730eed25f8929110a053668502a5b9b7a",
       "html_hash": "sha256:6eb2a6efd7b9c20181e69919a68010820afe04d49d909050ffdc21afb6b3e428",
-      "audit_id": "AUD-202611-001",
+      "audit_id": "AUD-202611-004",
       "audit_state": "audited",
-      "finalized_at": "2026-11-14T16:07:56+00:00"
+      "finalized_at": "2026-11-15T12:01:12+00:00"
     },
     {
       "report": "02-career-driver/reports/2026-11-career-driver.md",
@@ -57,11 +57,11 @@
       "type_id": "employment-research",
       "md": "02-career-driver/reports/2026-11-career-driver.md",
       "html": "02-career-driver/reports/2026-11-career-driver.html",
-      "content_hash": "sha256:3f5ccda5783f208f033ae0d068fd18d6183b05e222ebc28a75f019ef6442d895",
+      "content_hash": "sha256:49df6ce141201626e6ddffa3b879aca4df858910bcbb0be41658b3b04435220b",
       "html_hash": "sha256:5442b86684bdacdb6cf2a88b749b5b80f33bb71c8d152581d5156b33551c67c5",
-      "audit_id": "AUD-202611-015",
+      "audit_id": "AUD-202611-001",
       "audit_state": "audited",
-      "finalized_at": "2026-11-15T02:58:17+00:00"
+      "finalized_at": "2026-11-15T12:01:13+00:00"
     },
     {
       "report": "03-career-management/reports/2026-11-career-management.md",
@@ -162,11 +162,11 @@
       "type_id": "policy-analysis",
       "md": "09-politics-law/reports/2026-11-politics-law.md",
       "html": "09-politics-law/reports/2026-11-politics-law.html",
-      "content_hash": "sha256:7f41151f814117e4f7cbb2395a586e0bddd3cc1c032b706becb53a2b2a55ff16",
+      "content_hash": "sha256:743289621ba0d74e819b363d4f0b3635ae6a47e45eabbd67145921d4a63f6183",
       "html_hash": "sha256:c94aadf8535ac3433f35305f5b4c9449fd7d6c429c6058f6aa191744a4f277e8",
-      "audit_id": "AUD-202611-006",
+      "audit_id": "AUD-202611-015",
       "audit_state": "audited",
-      "finalized_at": "2026-11-15T01:57:36+00:00"
+      "finalized_at": "2026-11-15T12:01:13+00:00"
     },
     {
       "report": "10-education-qualification/reports/2026-11-education-qualification.md",

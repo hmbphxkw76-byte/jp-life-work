@@ -914,12 +914,23 @@ class TestInfoQualityCheck(unittest.TestCase):
         self.assertTrue(any(f.code == "C-03" and f.location == "跨文档重复" for f in findings))
 
     def test_source_annotation_forms(self):
-        """五类来源标注形式均被认可。"""
+        """来源标注形式（2026-11-15 收紧括号口径）。"""
         from info_quality_check import _has_source
-        for text in ("见 https://example.com", "来源：机构", "[出入国在留管理庁]",
+        for text in ("见 https://example.com", "来源：机构",
+                     "[出入国在留管理庁](https://example.com)",   # Markdown 链接
                      "详见登记册 #5", "手册 03 有口径"):
             self.assertTrue(_has_source(text), text)
-        self.assertFalse(_has_source("这是一段普通的陈述，没有任何引用。"))
+        # 纯交叉引用括号（主题目录 / 路径文件 / 纯编号）不计
+        for text in ("[08-visa-immigration]", "[001472175.pdf]", "[#5]",
+                     "这是一段普通的陈述，没有任何引用。"):
+            self.assertFalse(_has_source(text), text)
+        # 白名单内的交叉引用括号计
+        from info_quality_check import CROSS_REF_SOURCE_WHITELIST
+        CROSS_REF_SOURCE_WHITELIST.add("白名单机构")
+        try:
+            self.assertTrue(_has_source("[白名单机构]"))
+        finally:
+            CROSS_REF_SOURCE_WHITELIST.discard("白名单机构")
 
     def test_registry_snapshot_not_counted(self):
         """历史版本快照口径差异不触发 C-10；活值表口径差异才触发。"""
@@ -1284,7 +1295,8 @@ class TestAuditGuard(unittest.TestCase):
         args = (self.REPORT_REL, self.md, self.md.with_suffix(".html"), "", {}, {})
         res = audit_check.check_report(*args)
         self.assertEqual(res.layers["L5"], "pending")
-        self.assertTrue(any(f.code == "L5-EVIDENCE" for f in res.findings))
+        f = next(x for x in res.findings if x.code == "L5-EVIDENCE")
+        self.assertEqual(f.severity, "P1")   # 2026-11-15 起缺证据提升为 P1（阻断）
         res2 = audit_check.check_report(
             self.REPORT_REL, self.md, self.md.with_suffix(".html"), "", {},
             {self.REPORT_REL: True})
@@ -1459,6 +1471,133 @@ class TestAuditSampling(unittest.TestCase):
         from unittest.mock import patch
         with patch.object(sys, "argv", ["audit_sampling.py", "--period", "2026/11"]):
             self.assertEqual(audit_sampling.main(), 2)
+
+
+class TestNewAuditRules(unittest.TestCase):
+    """2026-11-15 新标准：C-10 Schema 分支 / C-13 数值一致性 / C-14 分级标注 /
+    跨文档相似度 / L5 门禁 / 分类十三类 / 缓存版本统一 / 抽检 L5 pending。"""
+
+    def test_c10_schema_branch(self):
+        v2 = ("## 核心指标\n\n"
+              "| # | 指标 | 口径 | 研究阶段 | 最新值 / 规则 | 来源机构 | 来源 URL | 版本日期 | 核验日期 | 核验状态 | 关联章节 | 更新时间 |\n"
+              "|---|---|---|---|---|---|---|---|---|---|---|---|\n"
+              "| 1 | 测试指标 | 厚労省每月勤労統計 | 基线 | 341,158 円 | 厚労省 | https://x | 2026-11-01 | 2026-11-14 | 已核验 | 2 | 2026-11-14 |\n")
+        self.assertEqual(info_quality_check._registry_calibers(v2),
+                         {"测试指标": "厚労省每月勤労統計"})
+        v1 = ("| # | 指标 | 优先数据源 | 最新值（来源/年份） | 基准版本 |\n"
+              "|---|---|---|---|---|\n"
+              "| 1 | 测试指标 | 厚労省每月勤労統計 | 341,158 円（口径：现金给与总额） | v2026.11.12_5 |\n")
+        self.assertEqual(info_quality_check._registry_calibers(v1),
+                         {"测试指标": "厚労省每月勤労統計｜现金给与总额"})
+
+    def test_c13_value_sync_flags_missing_number(self):
+        from info_quality_check import check_value_sync, _significant_numbers
+        self.assertEqual(_significant_numbers("341,158 円（+4.9%，2026-09）"),
+                         {"341158", "4.9"})
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            topic = "01-ssw-driver"
+            (root / topic / "data").mkdir(parents=True)
+            (root / topic / "reports").mkdir(parents=True)
+            reg = root / topic / "data" / "ssw_driver_indicator_registry.md"
+            reg.write_text(
+                "| # | 指标 | 优先数据源 | 最新值（来源/年份） | 基准版本 |\n"
+                "|---|---|---|---|---|\n"
+                "| 1 | 测试指标 | 厚労省 | 341,158 円（2026-09） | v2026.11.12_5 |\n",
+                encoding="utf-8")
+            rep = root / topic / "reports" / "2026-11-ssw-driver.md"
+            rep.write_text(
+                "## 数据变更摘要\n\n"
+                "| # | 指标 | 本版活值（来源 · 时点） | 变更状态 |\n|---|---|---|---|\n"
+                "| 1 | 测试指标 | 999,999 円 | 已更新 |\n", encoding="utf-8")
+            orig = info_quality_check.ROOT
+            info_quality_check.ROOT = root
+            try:
+                u = {"topic": topic, "registry": reg}
+                findings = []
+                check_value_sync(u, rep, rep.read_text(encoding="utf-8"), findings)
+                self.assertTrue(any(f.code == "C-13" and "341158" in f.detail
+                                    for f in findings))
+                rep.write_text(rep.read_text(encoding="utf-8").replace("999,999", "341,158"),
+                               encoding="utf-8")
+                findings2 = []
+                check_value_sync(u, rep, rep.read_text(encoding="utf-8"), findings2)
+                self.assertFalse(any(f.code == "C-13" for f in findings2))
+            finally:
+                info_quality_check.ROOT = orig
+
+    def test_c14_grade_annotation(self):
+        from info_quality_check import check_grade_annotations
+        text = ("### ④ 媒体 / 行业媒体\n\n"
+                "75. [媒体报道](https://x) — 2025\n"
+                "76. [另一媒体](https://y) — 2025【需核实原文】\n\n"
+                "### ⑤ 平台抽样 / 行情\n\n"
+                "101. [平台](https://z) — 2026\n\n"
+                "### ④ 只读引用（主责主题）\n\n"
+                "14. [01-ssw-driver 登记册](https://w) — 2026-11-12\n")
+        findings = []
+        check_grade_annotations({"topic": "01-x"}, "01-x/reports/2026-11-x.md", text, findings)
+        self.assertEqual(len(findings), 2)   # 75 与 101；76 已标注、只读引用豁免
+        self.assertTrue(all(f.code == "C-14" and f.level == "P1" for f in findings))
+
+    def test_similarity_and_badge_strip(self):
+        from info_quality_check import _norm, _similar, _strip_badges
+        self.assertGreaterEqual(_similar(_norm("甲" * 200), _norm("甲" * 200)), 0.8)
+        self.assertLess(_similar("甲" * 200, "乙" * 200), 0.8)
+        self.assertNotIn("已审计", _strip_badges("> **已审计** ✅ AUD-1\n\n正文"))
+
+    def test_classification_matches_registry(self):
+        repo = Path(info_quality_check.__file__).resolve().parents[3]
+        cls = (repo / "src" / "report_templates" / "report-classification.md").read_text(encoding="utf-8")
+        reg = (repo / "src" / "report_templates" / "template-registry.md").read_text(encoding="utf-8")
+        cls_types = set(re.findall(r"\*\*已注册\*\*（([a-z][a-z0-9-]*)）", cls))
+        reg_types = set(re.findall(r"^\| ([a-z][a-z0-9-]*) \|", reg, re.M))
+        self.assertEqual(len(cls_types), 13)
+        self.assertEqual(cls_types, reg_types)
+        self.assertIn("六族十三类", cls)
+
+    def test_detect_types_multi_ref(self):
+        from compliance_check import detect_types
+        self.assertEqual(
+            detect_types("见 src/report_templates/employment-research/ 与 src/report_templates/policy-analysis/"),
+            ["employment-research", "policy-analysis"])
+        self.assertEqual(detect_types("仅 src/report_templates/market-monitoring/"),
+                         ["market-monitoring"])
+        self.assertEqual(detect_types("无引用"), [])
+
+    def test_iq_cache_version_unified(self):
+        src = Path(audit_check.__file__).read_text(encoding="utf-8")
+        self.assertIn('data.get("version") == CACHE_VERSION', src)
+        self.assertIn('"version": CACHE_VERSION', src)
+        self.assertNotIn('"version": "1.0", "key": key', src)
+
+    def test_sampling_reports_l5_pending(self):
+        from unittest.mock import patch
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            rel = "01-x/reports/2026-11-x.md"
+            md = root / rel
+            md.parent.mkdir(parents=True)
+            md.write_text("# x\n", encoding="utf-8")
+            entries = [{"report": rel, "topic": "01-x", "period": "2026-11",
+                        "type_id": "", "selected": 0}]
+            fake = audit_check.ReportResult(report=rel, topic="01-x",
+                                           period="2026-11", type_id="")
+            fake.layers = {"L1": "pass", "L2": "pass", "L3": "pass", "L4": "pass",
+                          "L5": "pending"}
+            fake.findings = []
+            with patch.object(audit_sampling, "ROOT", root), \
+                 patch.object(audit_check, "ROOT", root), \
+                 patch.object(audit_sampling, "discover", return_value=entries), \
+                 patch.object(audit_sampling, "_iq_findings_by_path", return_value={}), \
+                 patch.object(audit_sampling, "_l5_status", return_value={rel: False}), \
+                 patch.object(audit_sampling, "_audit_state", return_value={}), \
+                 patch.object(audit_sampling, "check_report", return_value=fake):
+                payload = audit_sampling.run_sample("2026-11")
+            self.assertEqual(payload["l5_pending"], 1)
+            self.assertEqual(payload["l5_pending_total"], 1)
+            self.assertEqual(payload["unfinished_verification"], 1)
+            self.assertNotIn("l5_pending", payload["checks"])
 
 
 if __name__ == "__main__":

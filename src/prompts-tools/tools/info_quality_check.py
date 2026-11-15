@@ -20,10 +20,19 @@
 
 判定口径（与项目架构约定对齐，决策见 src/report-audits/info-quality/rules-notes.md）：
 - C-03 跨文档重复仅针对研究正文 reports/*.md；各主题的 prompts / operations-guide /
-  handbook 是「自包含业务包」，共享模板句属设计内重复，不计为缺陷。
-- C-07 来源标注认可五类形式：URL、「来源」字样、`[机构]` 行内标签、登记册指针、手册指针
-  （报告惯例为「行内标签 + 文末来源清单」）。
-- C-10 登记册口径一致性仅解析「核心指标」活值表；历史版本快照为冻结存档，不参与判定。
+  handbook 是「自包含业务包」，共享模板句属设计内重复，不计为缺陷。跨文档重复按
+  归一化相似度 ≥ 80% 判定（恢复《信息质量评估提示词体系》模块二 2.4 口径）。
+- C-07 来源标注认可：URL、「来源」字样、登记册指针、手册指针、Markdown 链接，
+  以及白名单内的交叉引用括号；纯交叉引用括号（主题目录 / 路径文件 / 纯编号）不计。
+  事实单元自 2026-11-15 起纳入表格行；程序化门槛 20% 不变，报告维度「语义目标
+  完成度」单独统计并公示。
+- C-08 时效自 2026-11-15 起直接读取登记册「版本日期 / 核验日期」字段化值判定，
+  不再使用「报告期间 + 更新标记」旧逻辑。
+- C-10 登记册口径一致性按 Schema 分支：新表（含「口径」列）直接比较「口径」列；
+  旧表（「优先数据源 + 最新值内嵌口径」）沿用原比较逻辑。仅解析活值表，历史
+  版本快照为冻结存档，不参与判定。
+- C-13 报告 ↔ 登记册数值一致性（首期覆盖 01-ssw-driver 等核心主题，P1）。
+- C-14 ④/⑤ 级来源必须完成核验标注（分级字段化，P1）。
 """
 from __future__ import annotations
 
@@ -45,11 +54,21 @@ from _common import ROOT, detect_month_report, iter_business_dirs, topic_slug  #
 # ──────────────────────────────────────────────
 THRESH_REQUIRED_COVERAGE = 0.95      # 必需要素覆盖率门槛
 THRESH_DUP_RATIO = 0.10              # 重复冗余率门槛
-THRESH_SOURCE_COVERAGE = 0.20        # 事实段落来源覆盖率门槛（低于此值判 C-07 提示）
+THRESH_SOURCE_COVERAGE = 0.20        # 事实单元来源覆盖率程序化门槛（低于此值判 C-07 提示）
 THRESH_CITE_VALID = 1.00             # 交叉引用有效率门槛
 STALE_MONTHS = 12                    # 报告时效窗口（月）
+STALE_DAYS = STALE_MONTHS * 30       # 时效窗口（天，按 30 天/月折算）
 DUP_MIN_CHARS = 40                   # 重复段落判定最小长度
-SIMILARITY_DUP = 0.80                # 高相似判定阈值（跨文档）
+SIMILARITY_DUP = 0.80                # 高相似判定阈值（跨文档，模块二 2.4）
+
+# 报告 ↔ 登记册数值一致性首期覆盖主题（后续按主题扩展）
+VALUE_SYNC_TOPICS = ("01-ssw-driver",)
+
+# ④/⑤ 级来源允许的核验标注（分级字段化）
+GRADE_ANNOTATION_MARKERS = (
+    "已核验", "已核实", "已回溯", "需核实原文", "待核实", "单源待证",
+    "转引", "转载", "推断", "历史参考", "仅供参考", "样本", "未核实",
+)
 
 AUDIT_DIR = ROOT / "src" / "report-audits" / "info-quality"
 
@@ -73,6 +92,16 @@ CN_NUM_RE = re.compile(r"^([一二三四五六七八九十]+)[、.]")
 MD_LINK_RE = re.compile(r"\[[^\]]*\]\(([^)]+)\)")
 TABLE_ROW_RE = re.compile(r"^\s*\|.*\|\s*$", re.MULTILINE)
 REGISTRY_ROW_RE = re.compile(r"^\|\s*\d+\s*\|(.+)\|\s*$", re.MULTILINE)
+
+# 「已审计」标识块（审计状态，非研究内容）：相似度 / 覆盖率计算前统一剥离
+BADGE_LINE_RE = re.compile(r"^>\s*\*\*已审计\*\*.*$", re.MULTILINE)
+# 行内标签 / Markdown 链接文本（标签 2–24 字）
+BRACKET_RE = re.compile(r"\[([^\]]{2,24})\](\([^)]*\))?")
+TOPIC_DIR_RE = re.compile(r"^\d{2}-[a-z][a-z0-9-]*$")
+_CROSS_REF_BRACKET_RE = re.compile(r"\.(?:md|html|pdf|xlsx|json|csv)\b|[/#]")
+
+# 「交叉引用」白名单：允许计为来源标注的括号标签（单独维护，初始为空）
+CROSS_REF_SOURCE_WHITELIST: set[str] = set()
 
 P_LEVELS = {"P0": 0, "P1": 1, "P2": 2}
 
@@ -116,6 +145,7 @@ class Metrics:
     contradictions: int = 0        # C-01/C-02/C-10
     gaps: int = 0                  # C-04
     source_coverage: float = 0.0
+    semantic_completion: float = 0.0   # 语义目标完成度（向 100% 溯源目标，单独公示）
     stale_reports: int = 0
     dup_ratio: float = 0.0
     attribution_errors: int = 0
@@ -139,6 +169,11 @@ def _norm(text: str) -> str:
     return t.strip()
 
 
+def _similar(a: str, b: str) -> float:
+    """归一化段落相似度（SequenceMatcher ratio，模块二 2.4 重复判定内核）。"""
+    return SequenceMatcher(None, a, b).ratio()
+
+
 def _paragraphs(text: str) -> list[str]:
     """按空行切分段落块（保留表格/代码块整体）。"""
     blocks = re.split(r"\n\s*\n", text)
@@ -154,19 +189,196 @@ def _substantive(block: str) -> bool:
     return len(_norm(block)) >= DUP_MIN_CHARS
 
 
-def _has_source(block: str) -> bool:
-    """项目认可的五类来源标注：URL、「来源」字样、`[机构]` 标签、登记册指针、手册指针。
+def _strip_badges(text: str) -> str:
+    """剥离「已审计」标识块，避免标识字段干扰相似度与覆盖率计算。"""
+    return BADGE_LINE_RE.sub("", text)
 
-    报告正文的引用惯例是「行内机构标签 / 登记册指针 + 文末来源清单」，
-    因此行内标签与登记册 / 手册指针均计为已标注。
-    """
+
+def _is_cross_ref_bracket(tag: str) -> bool:
+    """纯交叉引用括号（主题目录 / 路径文件 / 纯编号）判定。"""
     return bool(
-        "http" in block
-        or "来源" in block
-        or re.search(r"\[[^\]]{2,24}\]", block)
-        or "登记册" in block
-        or "手册" in block
+        TOPIC_DIR_RE.match(tag)
+        or _CROSS_REF_BRACKET_RE.search(tag)
+        or re.fullmatch(r"#?\d+", tag)
     )
+
+
+def _has_source(block: str) -> bool:
+    """来源标注判定（2026-11-15 收紧括号口径）。
+
+    认可：① URL；② 「来源」字样；③ 登记册指针（含「登记册」）；
+    ④ 手册指针（含「手册」）；⑤ Markdown 链接（`[文本](url)`）；
+    ⑥ 白名单内的交叉引用括号。
+    纯交叉引用括号（主题目录 / 路径文件 / 纯编号，如 `[08-visa-immigration]`、
+    `[001472175.pdf]`）不计为来源标注；机构标签须同行存在 URL / 「来源」字样
+    （该情形已由 ① / ② 覆盖），不再单独计入。
+    """
+    if "http" in block or "来源" in block or "登记册" in block or "手册" in block:
+        return True
+    for m in BRACKET_RE.finditer(block):
+        tag, target = m.group(1), m.group(2)
+        if target:                      # Markdown 链接（含 URL）
+            return True
+        if tag in CROSS_REF_SOURCE_WHITELIST:
+            return True
+    return False
+
+
+def _fact_units(text: str) -> tuple[list[str], list[str]]:
+    """事实单元 = 含数字的实质段落 + 含数字的表格行（2026-11-15 起表格行纳入统计）。
+
+    返回 (段落单元, 表格行单元)；已剥离「已审计」标识块。
+    """
+    text = _strip_badges(text)
+    paras = [b for b in _paragraphs(text) if _substantive(b) and re.search(r"\d", b)]
+    rows: list[str] = []
+    for line in text.splitlines():
+        s = line.strip()
+        if (
+            s.startswith("|")
+            and "---" not in s
+            and not re.match(r"^\|\s*#", s)
+            and re.search(r"\d", s)
+        ):
+            rows.append(s)
+    return paras, rows
+
+
+def _split_row(line: str) -> list[str]:
+    """Markdown 表格行 -> 单元格列表（去首尾空管）。"""
+    return [c.strip() for c in line.strip().strip("|").split("|")]
+
+
+def _live_table(text: str) -> tuple[list[str], list[list[str]]] | None:
+    """定位登记册「活值表」：第一个表头同时含「指标」与（「口径」或「优先数据源」）的表。
+
+    返回 (表头, 数据行)；表头首个单元格为「#」。未找到返回 None。
+    历史版本快照等其它表不参与判定。
+    """
+    lines = text.splitlines()
+    i = 0
+    while i < len(lines):
+        s = lines[i].strip()
+        if s.startswith("|") and i + 1 < len(lines) and "---" in lines[i + 1]:
+            hdr = _split_row(s)
+            rows: list[list[str]] = []
+            j = i + 2
+            while j < len(lines) and lines[j].strip().startswith("|"):
+                rows.append(_split_row(lines[j].strip()))
+                j += 1
+            if "指标" in hdr and ("口径" in hdr or "优先数据源" in hdr):
+                return hdr, rows
+            i = j
+        else:
+            i += 1
+    return None
+
+
+def _registry_calibers(text: str) -> dict[str, str]:
+    """登记册活值表 -> {指标: 口径}（Schema 分支）。
+
+    新表（含「口径」列）：直接取「口径」列；
+    旧表（「优先数据源 + 最新值内嵌口径」）：取「优先数据源」，若「最新值」含显式
+    「口径 / 定义：…」标注则并列填入。
+    """
+    lt = _live_table(text)
+    if not lt:
+        return {}
+    hdr, rows = lt
+    out: dict[str, str] = {}
+    for cells in rows:
+        if len(cells) < 2 or not cells[0].isdigit():
+            continue
+        name = cells[1]
+        if not name:
+            continue
+        if "口径" in hdr:
+            idx = hdr.index("口径")
+            out[name] = _norm(cells[idx]) if idx < len(cells) else ""
+        elif "优先数据源" in hdr:
+            idx = hdr.index("优先数据源")
+            base = cells[idx] if idx < len(cells) else ""
+            extra = ""
+            for i, h in enumerate(hdr):
+                if "最新值" in h and i < len(cells):
+                    m = re.search(r"(?:口径|定义)[：:]([^；;，,）)]+)", cells[i])
+                    if m:
+                        extra = m.group(1).strip()
+                    break
+            out[name] = _norm(base + (f"｜{extra}" if extra else ""))
+    return out
+
+
+def _registry_latest_date(u: dict):
+    """登记册字段化日期最新值（C-08 判定依据）。
+
+    新表：取「核验日期」「版本日期」列；旧表：取「基准版本」中的 vYYYY.MM.DD。
+    无可用字段时返回 None（不判定，不再回退旧逻辑）。
+    """
+    reg = u.get("registry")
+    if reg is None:
+        return None
+    lt = _live_table(_read(reg))
+    if not lt:
+        return None
+    hdr, rows = lt
+    dates: list[date] = []
+    col_idx: list[int] = []
+    for i, h in enumerate(hdr):
+        if "核验日期" in h or "版本日期" in h or "基准版本" in h:
+            col_idx.append(i)
+    for cells in rows:
+        for i in col_idx:
+            if i >= len(cells):
+                continue
+            for y, m, d in re.findall(r"(\d{4})[.-](\d{1,2})[.-](\d{1,2})", cells[i]):
+                try:
+                    dates.append(date(int(y), int(m), int(d)))
+                except ValueError:
+                    continue
+    return max(dates) if dates else None
+
+
+def _significant_numbers(s: str) -> set[str]:
+    """抽取「数值型」数字（排除年份、1–2 位小数前零、YYYY.M 版本串与括号内文献号）。"""
+    s = re.sub(r"\[[^\]]*\]", " ", s)
+    out: set[str] = set()
+    for m in re.finditer(r"\d[\d,]*(?:\.\d+)?", s):
+        t = m.group(0).replace(",", "")
+        if re.fullmatch(r"(?:19|20)\d{2}", t):
+            continue
+        if re.fullmatch(r"\d{1,2}", t):
+            continue
+        if re.fullmatch(r"\d{4}\.\d{1,2}", t):
+            continue
+        out.add(t)
+    return out
+
+
+def _report_value_rows(text: str) -> dict[int, str]:
+    """报告「数据变更摘要」表 -> {#: 活值单元格}（用于 C-13 数值一致性）。"""
+    lines = text.splitlines()
+    i = 0
+    while i < len(lines):
+        s = lines[i].strip()
+        if s.startswith("|") and i + 1 < len(lines) and "---" in lines[i + 1]:
+            hdr = _split_row(s)
+            rows: list[list[str]] = []
+            j = i + 2
+            while j < len(lines) and lines[j].strip().startswith("|"):
+                rows.append(_split_row(lines[j].strip()))
+                j += 1
+            if "指标" in hdr and any("活值" in h for h in hdr):
+                vi = next(i2 for i2, h in enumerate(hdr) if "活值" in h)
+                out: dict[int, str] = {}
+                for cells in rows:
+                    if len(cells) > vi and cells[0].isdigit():
+                        out[int(cells[0])] = cells[vi]
+                return out
+            i = j
+        else:
+            i += 1
+    return {}
 
 
 def _rel(path: Path) -> str:
@@ -261,29 +473,36 @@ def check_report(u: dict, rp: Path, findings: list[Finding]) -> dict:
         findings.append(Finding("C-06", "P2", u["topic"], rel, "文件配对",
                                 "缺少对应 HTML 交付物（.md2html 同步）", "S-05"))
 
-    # 维度三：来源标注——结构性（必须有来源章节）+ 覆盖性（事实段落含来源比例）
+    # 维度三：来源标注——结构性（必须有来源章节）+ 覆盖性（事实单元含来源比例）
     heads = [t for _, t in H2_RE.findall(text)]
     if not any(("来源" in h or "参考" in h or "出处" in h) for h in heads):
         findings.append(Finding("C-07", "P1", u["topic"], rel, "结构要素缺失",
                                 "缺少「来源 / 参考来源」章节", "S-06"))
-    subs_blocks = [b for b in _paragraphs(text) if _substantive(b)]
-    fact_blocks = [b for b in subs_blocks if re.search(r"\d", b)]
+    paras, rows = _fact_units(text)
+    fact_blocks = paras + rows
     sourced = sum(1 for b in fact_blocks if _has_source(b))
     stats["subs"] = len(fact_blocks)
     stats["sourced"] = sourced
+    stats["subs_paras"] = len(paras)
+    stats["subs_rows"] = len(rows)
     stats["source_cov"] = (sourced / len(fact_blocks)) if fact_blocks else 1.0
     if fact_blocks and stats["source_cov"] < THRESH_SOURCE_COVERAGE:
-        findings.append(Finding("C-07", "P2", u["topic"], rel, "事实段落来源覆盖不足",
-                                f"含数字事实段落来源覆盖率 {stats['source_cov']:.0%} < {THRESH_SOURCE_COVERAGE:.0%}",
+        findings.append(Finding("C-07", "P2", u["topic"], rel, "事实单元来源覆盖不足",
+                                f"含数字事实单元（段落 + 表格行）来源覆盖率 {stats['source_cov']:.0%} "
+                                f"< {THRESH_SOURCE_COVERAGE:.0%}（程序化门槛；语义目标 100%）",
                                 "S-06"))
 
-    # C-08 时效：报告月份超出窗口且无更新标记
-    if det:
-        y, m = int(det[0][:4]), int(det[0][5:7])
-        age = (date.today().year - y) * 12 + (date.today().month - m)
-        if age > STALE_MONTHS and "更新" not in text:
+    # C-08 时效：直接读取登记册「版本日期 / 核验日期」字段化值（2026-11-15 起）
+    reg_date = _registry_latest_date(u)
+    if reg_date is not None:
+        age_days = (date.today() - reg_date).days
+        if age_days > STALE_DAYS:
             findings.append(Finding("C-08", "P2", u["topic"], rel, "时效",
-                                    f"报告期间 {det[0]} 已超出 {STALE_MONTHS} 个月窗口且未见更新标记", "S-07"))
+                                    f"登记册最新核验日期 {reg_date.isoformat()} 已超出 "
+                                    f"{STALE_MONTHS} 个月窗口（{age_days} 天）", "S-07"))
+
+    # C-14 分级字段化：④/⑤ 级来源条目必须带显式核验标注
+    check_grade_annotations(u, rel, text, findings)
 
     # C-04 逻辑断层：h2 中文序号跳号
     h2s = H2_RE.findall(text)
@@ -313,6 +532,59 @@ def check_report(u: dict, rp: Path, findings: list[Finding]) -> dict:
     return stats
 
 
+def check_grade_annotations(u: dict, rel: str, text: str, findings: list[Finding]) -> None:
+    """C-14：④/⑤ 级来源条目必须带显式核验标注（分级字段化）。
+
+    仅作用于含 ④/⑤ 来源分级小节的报告；「只读引用」类 ④ 小节（跨主题引用，非来源
+    清单）豁免。标注集合见 GRADE_ANNOTATION_MARKERS。
+    """
+    current: str | None = None
+    for line in text.splitlines():
+        h = re.match(r"^(#{2,4})\s*(.*)$", line.strip())
+        if h:
+            m = re.match(r"^([①②③④⑤])\s*(.*)$", h.group(2).strip())
+            if m and m.group(1) in ("④", "⑤") and "只读引用" not in m.group(2):
+                current = m.group(1)
+            else:
+                current = None
+            continue
+        if current and re.match(r"^\s*\d+\.\s+", line):
+            if not any(k in line for k in GRADE_ANNOTATION_MARKERS):
+                findings.append(Finding(
+                    "C-14", "P1", u["topic"], rel, "来源分级",
+                    f"{current} 级来源条目缺少核验标注（{'、'.join(GRADE_ANNOTATION_MARKERS)} 任一）",
+                    "S-06"))
+
+
+def check_value_sync(u: dict, rp: Path, text: str, findings: list[Finding]) -> None:
+    """C-13：报告 ↔ 登记册数值一致性（首期覆盖 VALUE_SYNC_TOPICS，P1）。
+
+    以登记册活值表「最新值」列为基准，抽取数值型数字；报告「数据变更摘要」对应
+    编号行若缺失该数值则判不一致。仅比数值存在性，不做单位 / 口径换算。
+    """
+    if u["topic"] not in VALUE_SYNC_TOPICS or u.get("registry") is None:
+        return
+    lt = _live_table(_read(u["registry"]))
+    if not lt:
+        return
+    hdr, rows = lt
+    vi = next((i for i, h in enumerate(hdr) if "最新值" in h), None)
+    if vi is None:
+        return
+    reg_vals = {int(c[0]): c[vi] for c in rows if len(c) > vi and c[0].isdigit()}
+    rep_vals = _report_value_rows(text)
+    rel = _rel(rp)
+    for no, reg_v in sorted(reg_vals.items()):
+        if no not in rep_vals:
+            continue
+        missing = _significant_numbers(reg_v) - _significant_numbers(rep_vals[no])
+        if missing:
+            findings.append(Finding(
+                "C-13", "P1", u["topic"], rel, "数据变更摘要",
+                f"指标 #{no} 登记册活值中的数值 {', '.join(sorted(missing))} "
+                f"未在报告「数据变更摘要」对应行出现", "S-09"))
+
+
 def check_cross_topic(units: list[dict], findings: list[Finding]) -> dict:
     """维度二/四的跨主题检查：重复段落、失效引用、登记册口径冲突。"""
     # ── 重复段落（同文档内 + 跨文档）──
@@ -322,7 +594,7 @@ def check_cross_topic(units: list[dict], findings: list[Finding]) -> dict:
     dup_extra_chars = 0
     for u in units:
         for md in u["mds"]:
-            text = _read(md)
+            text = _strip_badges(_read(md))
             counts: dict[str, int] = {}
             chars = 0
             for b in _paragraphs(text):
@@ -344,25 +616,37 @@ def check_cross_topic(units: list[dict], findings: list[Finding]) -> dict:
     # 跨文档重复：仅研究正文 reports/*.md（提示级，不自动删）
     # 说明：各主题的 prompts / operations-guide / handbook 为「自包含业务包」，
     # 共享模板句属设计内重复（架构要求），不作为缺陷；研究正文才要求不交叉重复。
-    para_index: dict[str, list[tuple[str, str]]] = {}
+    # 判定：归一化后相似度 ≥ SIMILARITY_DUP（模块二 2.4；含已审计标识剥离）。
+    para_index: list[tuple[str, str, str]] = []   # (topic, rel, norm)
     for u in units:
         for rp in u["reports"]:
-            text = _read(rp)
+            text = _strip_badges(_read(rp))
             for b in _paragraphs(text):
                 if not _substantive(b):
                     continue
                 n = _norm(b)
                 if len(n) < DUP_MIN_CHARS:
                     continue
-                para_index.setdefault(n, []).append((u["topic"], _rel(rp)))
-    for n, locs in para_index.items():
-        topics = {t for t, _ in locs}
-        if len(topics) > 1 and len(n) >= 120:
-            findings.append(Finding(
-                "C-03", "P2", sorted(topics)[0], locs[0][1], "跨文档重复",
-                f"约 {len(n)} 字的段落同时出现在 {len(topics)} 个主题（{', '.join(sorted(topics))}），"
-                "疑似研究正文交叉重复，建议确认是否需保留", "S-02"))
-            dup_extra_chars += len(n) * (len(locs) - len({r for _, r in locs}))
+                para_index.append((u["topic"], _rel(rp), n))
+    flagged: set[tuple[str, str]] = set()
+    for i in range(len(para_index)):
+        t1, r1, n1 = para_index[i]
+        if len(n1) < 120:
+            continue
+        for j in range(i + 1, len(para_index)):
+            t2, r2, n2 = para_index[j]
+            if t1 == t2 or len(n2) < 120:
+                continue
+            if (r1, r2) in flagged:
+                continue
+            if _similar(n1, n2) >= SIMILARITY_DUP:
+                flagged.add((r1, r2))
+                findings.append(Finding(
+                    "C-03", "P2", sorted((t1, t2))[0], r1, "跨文档重复",
+                    f"约 {min(len(n1), len(n2))} 字的段落与 {r2} 相似度 "
+                    f"≥ {SIMILARITY_DUP:.0%}，疑似研究正文交叉重复，建议确认是否需保留",
+                    "S-02"))
+                dup_extra_chars += min(len(n1), len(n2))
     total_chars = sum(file_chars.values())
 
     # ── 失效引用 ──
@@ -391,20 +675,14 @@ def check_cross_topic(units: list[dict], findings: list[Finding]) -> dict:
                         f"引用目标不存在：{raw}", "S-08"))
     cite_valid = (1 - broken_links / total_links) if total_links else 1.0
 
-    # ── 登记册口径冲突（C-10）──
+    # ── 登记册口径冲突（C-10，Schema 分支）──
     reg_defs: dict[str, dict[str, set[str]]] = {}
     for u in units:
         if u["registry"] is None:
             continue
-        text = _read(u["registry"])
-        # 仅解析「核心指标」活值表；历史版本快照为冻结存档，不参与口径一致性判定
-        sec = re.search(r"##\s*核心指标(.*?)(?=\n##\s|\Z)", text, re.S)
-        live = sec.group(1) if sec else ""
-        for row in REGISTRY_ROW_RE.findall(live):
-            cells = [c.strip() for c in row.split("|")]
-            if len(cells) < 2:
-                continue
-            name, caliber = cells[0], cells[1]
+        # 仅解析活值表（新表「口径」列 / 旧表「优先数据源 + 最新值内嵌口径」）；
+        # 历史版本快照为冻结存档，不参与口径一致性判定
+        for name, caliber in _registry_calibers(_read(u["registry"])).items():
             reg_defs.setdefault(name, {}).setdefault(u["topic"], set()).add(caliber)
     for name, per_topic in reg_defs.items():
         if len(per_topic) < 2:
@@ -438,6 +716,7 @@ def evaluate(units: list[dict]) -> tuple[list[Finding], Metrics]:
             m.topics_complete += 1
         for rp in u["reports"]:
             st = check_report(u, rp, findings)
+            check_value_sync(u, rp, _read(rp), findings)
             subs_all += st["subs"]
             sourced_all += st["sourced"]
 
@@ -448,6 +727,7 @@ def evaluate(units: list[dict]) -> tuple[list[Finding], Metrics]:
     m.contradictions = sum(1 for f in findings if f.code in ("C-01", "C-02", "C-10"))
     m.gaps = sum(1 for f in findings if f.code == "C-04")
     m.source_coverage = sourced_all / subs_all if subs_all else 1.0
+    m.semantic_completion = m.source_coverage   # 报告维度语义目标完成度（单独公示，不入退出码）
     m.stale_reports = sum(1 for f in findings if f.code == "C-08")
     m.dup_ratio = cross["dup_ratio"]
     m.attribution_errors = sum(1 for f in findings if f.code == "C-05")
@@ -764,6 +1044,7 @@ def write_reports(findings: list[Finding], repairs: list[Repair],
                    ["一致性", "矛盾/口径问题数", str(before.contradictions), "= 0", "达标" if before.contradictions == 0 else "不达标"],
                    ["一致性", "逻辑断层数", str(before.gaps), "—", "—"],
                    ["准确性", "来源标注覆盖率", f"{before.source_coverage:.1%}", f"≥ {THRESH_SOURCE_COVERAGE:.0%}", "达标" if before.source_coverage >= THRESH_SOURCE_COVERAGE else "不达标"],
+                   ["准确性", "语义目标完成度（向 100%，单独公示）", f"{before.semantic_completion:.1%}", "目标 100%（不阻断）", "—"],
                    ["准确性", "过期未标注报告数", str(before.stale_reports), "= 0", "达标" if before.stale_reports == 0 else "不达标"],
                    ["关联性", "重复冗余率", f"{before.dup_ratio:.1%}", f"≤ {THRESH_DUP_RATIO:.0%}", "达标" if before.dup_ratio <= THRESH_DUP_RATIO else "不达标"],
                    ["关联性", "归属错误数", str(before.attribution_errors), "= 0", "达标" if before.attribution_errors == 0 else "不达标"],
@@ -888,6 +1169,7 @@ def run(apply: bool = False, write: bool = True) -> int:
     print(f"信息质量评估：{after.topics_total} 个主题")
     print(f"  必需要素覆盖率 {after.required_coverage:.1%}（门槛 {THRESH_REQUIRED_COVERAGE:.0%}）")
     print(f"  来源标注覆盖率 {after.source_coverage:.1%}（门槛 {THRESH_SOURCE_COVERAGE:.0%}）")
+    print(f"  语义目标完成度 {after.semantic_completion:.1%}（向 100% 目标，单独公示；程序化门槛不变）")
     print(f"  重复冗余率 {after.dup_ratio:.1%}（门槛 {THRESH_DUP_RATIO:.0%}）")
     print(f"  交叉引用有效率 {after.cite_valid_ratio:.1%}（门槛 100%）")
     print(f"  问题：P0 {after.findings_by_level['P0']} / P1 {after.findings_by_level['P1']} / P2 {after.findings_by_level['P2']}")

@@ -5,17 +5,17 @@
 
 | 报告 | 主题 | 期间 | 类型 | 内容指纹 | 审计状态 | 审计编号 |
 |---|---|---|---|---|---|---|
-| [00-decision-hub/reports/2026-11-decision-hub.md](../../../00-decision-hub/reports/2026-11-decision-hub.md) | 00-decision-hub | 2026-11 | employment-research | `sha256:cfd32e3dd655` | audited | AUD-202611-004 |
+| [00-decision-hub/reports/2026-11-decision-hub.md](../../../00-decision-hub/reports/2026-11-decision-hub.md) | 00-decision-hub | 2026-11 | employment-research | `sha256:ebec0eea8ad3` | audited | AUD-202611-010 |
 | [00-decision-hub/reports/2026-12-decision-hub.md](../../../00-decision-hub/reports/2026-12-decision-hub.md) | 00-decision-hub | 2026-12 | employment-research | `sha256:1092e2f5b547` | audited | AUD-202611-023 |
-| [01-ssw-driver/reports/2026-11-ssw-driver.md](../../../01-ssw-driver/reports/2026-11-ssw-driver.md) | 01-ssw-driver | 2026-11 | employment-research | `sha256:821cf70f24aa` | audited | AUD-202611-001 |
-| [02-career-driver/reports/2026-11-career-driver.md](../../../02-career-driver/reports/2026-11-career-driver.md) | 02-career-driver | 2026-11 | employment-research | `sha256:3f5ccda5783f` | audited | AUD-202611-015 |
+| [01-ssw-driver/reports/2026-11-ssw-driver.md](../../../01-ssw-driver/reports/2026-11-ssw-driver.md) | 01-ssw-driver | 2026-11 | employment-research | `sha256:38b832f48050` | audited | AUD-202611-004 |
+| [02-career-driver/reports/2026-11-career-driver.md](../../../02-career-driver/reports/2026-11-career-driver.md) | 02-career-driver | 2026-11 | employment-research | `sha256:49df6ce14120` | audited | AUD-202611-001 |
 | [03-career-management/reports/2026-11-career-management.md](../../../03-career-management/reports/2026-11-career-management.md) | 03-career-management | 2026-11 | employment-research | `sha256:a0d53595f2b7` | audited | AUD-202611-016 |
 | [04-industry-logistics/reports/2026-11-industry-logistics.md](../../../04-industry-logistics/reports/2026-11-industry-logistics.md) | 04-industry-logistics | 2026-11 | industry-research | `sha256:edb272ce920c` | audited | AUD-202611-002 |
 | [05-industry-autonomous/reports/2026-11-industry-autonomous.md](../../../05-industry-autonomous/reports/2026-11-industry-autonomous.md) | 05-industry-autonomous | 2026-11 | industry-research | `sha256:d47389465722` | audited | AUD-202611-017 |
 | [06-industry-technology/reports/2026-11-industry-technology.md](../../../06-industry-technology/reports/2026-11-industry-technology.md) | 06-industry-technology | 2026-11 | industry-research | `sha256:6021ab1302d6` | audited | AUD-202611-003 |
 | [07-economy-finance/reports/2026-11-economy-finance.md](../../../07-economy-finance/reports/2026-11-economy-finance.md) | 07-economy-finance | 2026-11 | employment-research | `sha256:f75c2df4ecaa` | audited | AUD-202611-013 |
 | [08-visa-immigration/reports/2026-11-visa-immigration.md](../../../08-visa-immigration/reports/2026-11-visa-immigration.md) | 08-visa-immigration | 2026-11 | policy-analysis | `sha256:e1367eed61b1` | audited | AUD-202611-005 |
-| [09-politics-law/reports/2026-11-politics-law.md](../../../09-politics-law/reports/2026-11-politics-law.md) | 09-politics-law | 2026-11 | policy-analysis | `sha256:7f41151f8141` | audited | AUD-202611-006 |
+| [09-politics-law/reports/2026-11-politics-law.md](../../../09-politics-law/reports/2026-11-politics-law.md) | 09-politics-law | 2026-11 | policy-analysis | `sha256:743289621ba0` | audited | AUD-202611-015 |
 | [10-education-qualification/reports/2026-11-education-qualification.md](../../../10-education-qualification/reports/2026-11-education-qualification.md) | 10-education-qualification | 2026-11 | employment-research | `sha256:eeae3ee8e1d3` | audited | AUD-202611-018 |
 | [11-language-japanese/reports/2026-11-language-japanese.md](../../../11-language-japanese/reports/2026-11-language-japanese.md) | 11-language-japanese | 2026-11 | employment-research | `sha256:3859d90392b0` | audited | AUD-202611-007 |
 | [12-culture-life/reports/2026-11-culture-life.md](../../../12-culture-life/reports/2026-11-culture-life.md) | 12-culture-life | 2026-11 | employment-research | `sha256:2355b878b762` | audited | AUD-202611-014 |

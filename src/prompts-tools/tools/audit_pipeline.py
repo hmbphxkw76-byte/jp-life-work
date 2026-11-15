@@ -86,10 +86,16 @@ def _now() -> str:
 # L5 语义复核证据校验
 # ──────────────────────────────────────────────
 
+# evidence 版本：v2 起为带版本号的封套（{version, report, verdict, items, notes}）；
+# v1（无 version，仅 items）为存量格式，继续认可。
+L5_EVIDENCE_VERSION = "2.0"
+
+
 def validate_l5_evidence(text: str) -> tuple[bool, list[str]]:
     """校验复核证据 JSON（格式见 src/report_templates/l5-semantic-review.md）。
 
     返回 (是否有效, 问题列表)。六项缺一不可；no / uncertain 必须给出非空 basis。
+    v2 封套可选携带 version / verdict / notes；version 若存在须等于 L5_EVIDENCE_VERSION。
     """
     if not text or not text.strip():
         return False, ["缺少 L5 语义复核证据（--evidence）"]
@@ -99,11 +105,17 @@ def validate_l5_evidence(text: str) -> tuple[bool, list[str]]:
         return False, [f"evidence 不是合法 JSON：{e}"]
     if not isinstance(data, dict):
         return False, ["evidence 顶层须为 JSON 对象"]
+    problems: list[str] = []
+    ver = data.get("version")
+    if ver is not None and ver != L5_EVIDENCE_VERSION:
+        problems.append(f"evidence version 非法：{ver!r}（应为 {L5_EVIDENCE_VERSION} 或不填）")
+    verdict = data.get("verdict")
+    if verdict is not None and verdict not in ("pass", "fail"):
+        problems.append(f"evidence verdict 非法：{verdict!r}（仅 pass / fail）")
     items = data.get("items")
     if not isinstance(items, list) or len(items) != len(L5_CHECKLIST):
         return False, [f"evidence.items 须为 {len(L5_CHECKLIST)} 项，实际 "
                         f"{len(items) if isinstance(items, list) else '非列表'}"]
-    problems: list[str] = []
     labels = [x[0] for x in L5_CHECKLIST]
     for i, it in enumerate(items, start=1):
         if not isinstance(it, dict):
@@ -127,6 +139,7 @@ def l5_status_from_ledger() -> dict[str, bool]:
     """从台账派生各报告 L5 状态。
 
     仅当报告处于 audited 且当前指纹与绑定一致、且最近一次 re_review 证据有效时为 True。
+    2026-11-15 起 `l5_backfill`（存量补核专项）与 `stage_pass`（复核环节）同等有效。
     """
     state = rebuild_status(load_ledger())
     ledger = load_ledger()
@@ -143,7 +156,7 @@ def l5_status_from_ledger() -> dict[str, bool]:
         for ev in ledger:
             if ev.get("report") != rep or ev.get("role") != "reviewer_l2":
                 continue
-            if ev.get("event") == "stage_pass":
+            if ev.get("event") in ("stage_pass", "l5_backfill"):
                 ok, _ = validate_l5_evidence(ev.get("evidence", ""))
             elif ev.get("event") == "stage_fail":
                 ok = False
@@ -501,6 +514,44 @@ def cmd_rebind(all_: bool = True, rel: str | None = None) -> int:
     return 0
 
 
+def cmd_backfill_l5(rel: str | None, all_: bool, evidence: str | None, actor: str) -> int:
+    """存量报告 L5 补核专项：为已审计但缺有效 L5 证据的报告补录证据。
+
+    幂等：已有有效证据者跳过；证据须经 validate_l5_evidence 校验；以独立事件
+    l5_backfill（role=reviewer_l2）追加，保持哈希链与审计状态不变。
+    """
+    if not evidence:
+        raise SystemExit("[ERROR] 需要 --evidence <JSON>")
+    ok, problems = validate_l5_evidence(evidence)
+    if not ok:
+        for p in problems:
+            print(f"[X] {p}")
+        raise SystemExit("[ERROR] evidence 无效，补核未写入")
+    ledger = load_ledger()
+    state = rebuild_status(ledger)
+    l5 = l5_status_from_ledger()
+    targets = [e["report"] for e in discover()] if all_ else [_report_arg(rel)]
+    n = 0
+    for rep in targets:
+        cur = state.get(rep, {})
+        if cur.get("state") != "audited":
+            print(f"[SKIP] {rep}：状态 {cur.get('state') or '未登记'}，非 audited")
+            continue
+        if l5.get(rep, False):
+            print(f"[SKIP] {rep}：已有有效 L5 证据")
+            continue
+        md_h, html_h = _current_hashes(rep)
+        _append({"ts": _now(), "event": "l5_backfill", "report": rep,
+                 "actor": actor or "reviewer_l2", "role": "reviewer_l2",
+                 "result": "pass",
+                 "note": "存量报告 L5 补核专项（一次性，使用新 evidence 格式）",
+                 "evidence": evidence, "content_hash": md_h, "html_hash": html_h})
+        n += 1
+    write_status(rebuild_status(load_ledger()))
+    print(f"L5 补核：{n} 份（已追加 l5_backfill 证据）")
+    return 0
+
+
 def cmd_sync() -> int:
     ledger = load_ledger()
     state = rebuild_status(ledger)
@@ -539,6 +590,8 @@ def main() -> int:
     ap.add_argument("--sync", action="store_true", help="同步指纹失配的审计失效报告")
     ap.add_argument("--rebind", action="store_true",
                     help="内容未变、仅 HTML 渲染漂移的失效报告重新绑定（stale → audited）")
+    ap.add_argument("--backfill-l5", action="store_true",
+                    help="存量报告 L5 补核专项：为已审计但缺证据的报告追加 evidence（新格式）")
     args = ap.parse_args()
 
     if args.init:
@@ -562,6 +615,10 @@ def main() -> int:
         return cmd_sync()
     if args.rebind:
         return cmd_rebind()
+    if args.backfill_l5:
+        if not args.report and not args.all:
+            ap.error("--backfill-l5 需要 --report <路径> 或 --all")
+        return cmd_backfill_l5(args.report, args.all, args.evidence, args.actor or "")
     ap.print_help()
     return 0
 

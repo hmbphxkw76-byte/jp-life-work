@@ -9,7 +9,10 @@
   "rate": 1.0,
   "p0": 0,
   "p1": 0,
-  "p2": 25,
+  "p2": 15,
+  "l5_pending": 0,
+  "l5_pending_total": 0,
+  "unfinished_verification": 0,
   "overdue_p2_count": 0,
   "checks": {
     "struct_100": true,
@@ -30,12 +33,12 @@
         "L2": "pass",
         "L3": "pass",
         "L4": "pass",
-        "L5": "pending"
+        "L5": "pass"
       },
       "severity": {
         "P0": 0,
         "P1": 0,
-        "P2": 2
+        "P2": 0
       },
       "status_ok": true,
       "findings": []
@@ -50,7 +53,7 @@
         "L2": "pass",
         "L3": "pass",
         "L4": "pass",
-        "L5": "pending"
+        "L5": "pass"
       },
       "severity": {
         "P0": 0,
@@ -70,12 +73,12 @@
         "L2": "pass",
         "L3": "pass",
         "L4": "pass",
-        "L5": "pending"
+        "L5": "pass"
       },
       "severity": {
         "P0": 0,
         "P1": 0,
-        "P2": 1
+        "P2": 0
       },
       "status_ok": true,
       "findings": []
@@ -90,12 +93,12 @@
         "L2": "pass",
         "L3": "pass",
         "L4": "pass",
-        "L5": "pending"
+        "L5": "pass"
       },
       "severity": {
         "P0": 0,
         "P1": 0,
-        "P2": 1
+        "P2": 0
       },
       "status_ok": true,
       "findings": []
@@ -110,12 +113,12 @@
         "L2": "pass",
         "L3": "pass",
         "L4": "pass",
-        "L5": "pending"
+        "L5": "pass"
       },
       "severity": {
         "P0": 0,
         "P1": 0,
-        "P2": 1
+        "P2": 2
       },
       "status_ok": true,
       "findings": []
@@ -130,7 +133,7 @@
         "L2": "pass",
         "L3": "pass",
         "L4": "pass",
-        "L5": "pending"
+        "L5": "pass"
       },
       "severity": {
         "P0": 0,
@@ -150,12 +153,12 @@
         "L2": "pass",
         "L3": "pass",
         "L4": "pass",
-        "L5": "pending"
+        "L5": "pass"
       },
       "severity": {
         "P0": 0,
         "P1": 0,
-        "P2": 1
+        "P2": 0
       },
       "status_ok": true,
       "findings": []
@@ -170,7 +173,7 @@
         "L2": "pass",
         "L3": "pass",
         "L4": "pass",
-        "L5": "pending"
+        "L5": "pass"
       },
       "severity": {
         "P0": 0,
@@ -190,12 +193,12 @@
         "L2": "pass",
         "L3": "pass",
         "L4": "pass",
-        "L5": "pending"
+        "L5": "pass"
       },
       "severity": {
         "P0": 0,
         "P1": 0,
-        "P2": 1
+        "P2": 0
       },
       "status_ok": true,
       "findings": []
@@ -210,12 +213,12 @@
         "L2": "pass",
         "L3": "pass",
         "L4": "pass",
-        "L5": "pending"
+        "L5": "pass"
       },
       "severity": {
         "P0": 0,
         "P1": 0,
-        "P2": 1
+        "P2": 0
       },
       "status_ok": true,
       "findings": []
@@ -230,12 +233,12 @@
         "L2": "pass",
         "L3": "pass",
         "L4": "pass",
-        "L5": "pending"
+        "L5": "pass"
       },
       "severity": {
         "P0": 0,
         "P1": 0,
-        "P2": 1
+        "P2": 0
       },
       "status_ok": true,
       "findings": []
@@ -250,12 +253,12 @@
         "L2": "pass",
         "L3": "pass",
         "L4": "pass",
-        "L5": "pending"
+        "L5": "pass"
       },
       "severity": {
         "P0": 0,
         "P1": 0,
-        "P2": 1
+        "P2": 2
       },
       "status_ok": true,
       "findings": []
@@ -270,7 +273,7 @@
         "L2": "pass",
         "L3": "pass",
         "L4": "pass",
-        "L5": "pending"
+        "L5": "pass"
       },
       "severity": {
         "P0": 0,
@@ -290,12 +293,12 @@
         "L2": "pass",
         "L3": "pass",
         "L4": "pass",
-        "L5": "pending"
+        "L5": "pass"
       },
       "severity": {
         "P0": 0,
         "P1": 0,
-        "P2": 1
+        "P2": 0
       },
       "status_ok": true,
       "findings": []
@@ -310,7 +313,7 @@
         "L2": "pass",
         "L3": "pass",
         "L4": "pass",
-        "L5": "pending"
+        "L5": "pass"
       },
       "severity": {
         "P0": 0,
@@ -330,12 +333,12 @@
         "L2": "pass",
         "L3": "pass",
         "L4": "pass",
-        "L5": "pending"
+        "L5": "pass"
       },
       "severity": {
         "P0": 0,
         "P1": 0,
-        "P2": 1
+        "P2": 2
       },
       "status_ok": true,
       "findings": []
@@ -350,7 +353,7 @@
         "L2": "pass",
         "L3": "pass",
         "L4": "pass",
-        "L5": "pending"
+        "L5": "pass"
       },
       "severity": {
         "P0": 0,
@@ -370,12 +373,12 @@
         "L2": "pass",
         "L3": "pass",
         "L4": "pass",
-        "L5": "pending"
+        "L5": "pass"
       },
       "severity": {
         "P0": 0,
         "P1": 0,
-        "P2": 2
+        "P2": 0
       },
       "status_ok": true,
       "findings": []
@@ -390,7 +393,7 @@
         "L2": "pass",
         "L3": "pass",
         "L4": "pass",
-        "L5": "pending"
+        "L5": "pass"
       },
       "severity": {
         "P0": 0,
@@ -410,12 +413,12 @@
         "L2": "pass",
         "L3": "pass",
         "L4": "pass",
-        "L5": "pending"
+        "L5": "pass"
       },
       "severity": {
         "P0": 0,
         "P1": 0,
-        "P2": 2
+        "P2": 1
       },
       "status_ok": true,
       "findings": []
@@ -430,12 +433,12 @@
         "L2": "pass",
         "L3": "pass",
         "L4": "pass",
-        "L5": "pending"
+        "L5": "pass"
       },
       "severity": {
         "P0": 0,
         "P1": 0,
-        "P2": 1
+        "P2": 0
       },
       "status_ok": true,
       "findings": []
