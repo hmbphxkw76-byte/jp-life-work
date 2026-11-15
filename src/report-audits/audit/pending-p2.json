@@ -1,30 +1,10 @@
 {
   "version": "1.0",
   "updated": "2026-11-15",
-  "count": 26,
+  "count": 20,
   "items": [
     {
       "report": "00-decision-hub/reports/2026-11-decision-hub.md",
-      "code": "L5-EVIDENCE",
-      "location": "语义复核",
-      "detail": "缺少有效 L5 语义复核证据（re_review --evidence，见 l5-semantic-review.md）",
-      "spec": "",
-      "first_seen": "2026-11-15",
-      "last_seen": "2026-11-15",
-      "review_by": "2026-12-15"
-    },
-    {
-      "report": "00-decision-hub/reports/2026-12-decision-hub.md",
-      "code": "E8",
-      "location": "必需要素",
-      "detail": "缺少后续动作 / 观察清单",
-      "spec": "S-05",
-      "first_seen": "2026-11-15",
-      "last_seen": "2026-11-15",
-      "review_by": "2026-12-15"
-    },
-    {
-      "report": "00-decision-hub/reports/2026-12-decision-hub.md",
       "code": "L5-EVIDENCE",
       "location": "语义复核",
       "detail": "缺少有效 L5 语义复核证据（re_review --evidence，见 l5-semantic-review.md）",
@@ -144,26 +124,6 @@
       "review_by": "2026-12-15"
     },
     {
-      "report": "12-culture-life/reports/2026-11-culture-life.md",
-      "code": "ABS-01",
-      "location": "绝对化表述",
-      "detail": "命中绝对化措辞 1 处（100%），语义确认后定级",
-      "spec": "S-10",
-      "first_seen": "2026-11-15",
-      "last_seen": "2026-11-15",
-      "review_by": "2026-12-15"
-    },
-    {
-      "report": "12-culture-life/reports/2026-11-culture-life.md",
-      "code": "L5-EVIDENCE",
-      "location": "语义复核",
-      "detail": "缺少有效 L5 语义复核证据（re_review --evidence，见 l5-semantic-review.md）",
-      "spec": "",
-      "first_seen": "2026-11-15",
-      "last_seen": "2026-11-15",
-      "review_by": "2026-12-15"
-    },
-    {
       "report": "13-regional-info/reports/2026-11-regional-info.md",
       "code": "L5-EVIDENCE",
       "location": "语义复核",
@@ -195,26 +155,6 @@
     },
     {
       "report": "16-exit-transition-return/reports/2026-11-exit-transition-return.md",
-      "code": "L5-EVIDENCE",
-      "location": "语义复核",
-      "detail": "缺少有效 L5 语义复核证据（re_review --evidence，见 l5-semantic-review.md）",
-      "spec": "",
-      "first_seen": "2026-11-15",
-      "last_seen": "2026-11-15",
-      "review_by": "2026-12-15"
-    },
-    {
-      "report": "17-migration-compliance/reports/2026-11-migration-compliance.md",
-      "code": "ABS-01",
-      "location": "绝对化表述",
-      "detail": "命中绝对化措辞 2 处（包过），语义确认后定级",
-      "spec": "S-10",
-      "first_seen": "2026-11-15",
-      "last_seen": "2026-11-15",
-      "review_by": "2026-12-15"
-    },
-    {
-      "report": "17-migration-compliance/reports/2026-11-migration-compliance.md",
       "code": "L5-EVIDENCE",
       "location": "语义复核",
       "detail": "缺少有效 L5 语义复核证据（re_review --evidence，见 l5-semantic-review.md）",

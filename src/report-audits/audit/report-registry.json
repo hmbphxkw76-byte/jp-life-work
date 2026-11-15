@@ -27,11 +27,11 @@
       "type_id": "employment-research",
       "md": "00-decision-hub/reports/2026-12-decision-hub.md",
       "html": "00-decision-hub/reports/2026-12-decision-hub.html",
-      "content_hash": "sha256:43a320d77ffde32b7582bec259ced5d840f4ac26b3b18fa680f4914145761975",
-      "html_hash": "sha256:c605ced276046699d57a967eb4cbef1fcfbfb90bfab9971318aa805f91eac318",
-      "audit_id": "AUD-202611-014",
+      "content_hash": "sha256:1092e2f5b547e716da4935baa167918bb218ed4562a0d62e71b5a216fc7acf69",
+      "html_hash": "sha256:c6451748cf6f71c5f6a5be49b5a90a86332452e54377d2198862d22c54b53852",
+      "audit_id": "AUD-202611-023",
       "audit_state": "audited",
-      "finalized_at": "2026-11-15T02:58:17+00:00"
+      "finalized_at": "2026-11-15T09:18:18+00:00"
     },
     {
       "report": "01-ssw-driver/reports/2026-11-ssw-driver.md",
@@ -207,11 +207,11 @@
       "type_id": "employment-research",
       "md": "12-culture-life/reports/2026-11-culture-life.md",
       "html": "12-culture-life/reports/2026-11-culture-life.html",
-      "content_hash": "sha256:e39fc12de0af04d768978835e6165407748c51894e2d3533a0978d0e440bd5b5",
-      "html_hash": "sha256:df550e7a16df4602694e2fd571f957f1b5fccbb031f229c3b5019c4958cede45",
-      "audit_id": "AUD-202611-008",
+      "content_hash": "sha256:2355b878b762b418b54f704d149ac1d2f8f38c54277169e6f92ec4ae08efc2b0",
+      "html_hash": "sha256:b357c6cabe8d69f73146bbe1caf89cfd2ee5922003372fdddb68d4fc5d5b6314",
+      "audit_id": "AUD-202611-014",
       "audit_state": "audited",
-      "finalized_at": "2026-11-15T01:57:36+00:00"
+      "finalized_at": "2026-11-15T09:18:19+00:00"
     },
     {
       "report": "13-regional-info/reports/2026-11-regional-info.md",
@@ -282,11 +282,11 @@
       "type_id": "employment-research",
       "md": "17-migration-compliance/reports/2026-11-migration-compliance.md",
       "html": "17-migration-compliance/reports/2026-11-migration-compliance.html",
-      "content_hash": "sha256:1c24b12119990ed1ca8efa3ea091b8c00087fff5f85c9a49bc1ec241e15df868",
-      "html_hash": "sha256:26a40bc84c0fb65c66f63fc43fa5963d665ba3e8ef4bc90c50c72240f1dca4c3",
-      "audit_id": "AUD-202611-010",
+      "content_hash": "sha256:ee483bcf86d14994cce77e615dbbf6e7a5f8d9c0354d49c9683759b60d66d370",
+      "html_hash": "sha256:18af6df15d4bcde25a1c94a4bf73d3d8ac80c1a4c58517074f3c7d1cad9ec09c",
+      "audit_id": "AUD-202611-008",
       "audit_state": "audited",
-      "finalized_at": "2026-11-15T01:57:36+00:00"
+      "finalized_at": "2026-11-15T09:18:19+00:00"
     },
     {
       "report": "18-family-parenting/reports/2026-11-family-parenting.md",

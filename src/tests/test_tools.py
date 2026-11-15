@@ -745,6 +745,16 @@ class TestDiffAccuracy(unittest.TestCase):
         self.assertIn('href="../../index.html#topic-00-decision-hub"', html)
         self.assertIn('href="../../index.html"', html)
 
+    def test_report_page_path_uses_posix_separators(self):
+        """报告路径任意平台均须为 '/'，保证 HTML 产物逐字节确定（CI ubuntu = 本地 Windows）。"""
+        md = _common.ROOT / "01-ssw-driver" / "reports" / "2026-11-ssw-driver.md"
+        if not md.is_file():
+            self.skipTest("ssw-driver 报告源缺失")
+        html = md2html_convert(md)
+        self.assertIn("01-ssw-driver/reports/2026-11-ssw-driver.html", html)
+        self.assertNotIn("01-ssw-driver\\reports\\", html)
+        self.assertNotIn("报告路径：01-ssw-driver\\", html)
+
 
 class TestDaysSinceLatest(unittest.TestCase):
     def test_none_when_empty(self):

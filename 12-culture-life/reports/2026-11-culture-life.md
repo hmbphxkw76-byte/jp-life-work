@@ -258,7 +258,7 @@
 - 交通：原付 / 自転车需在役所登记（防窃）；市区通勤多靠电车 + 接驳。
 - 医疗：健保 70% 报销；工作日白天病院、夜間救急センター分诊；指定药店（调剤药局）处方制度。
 - 购物：业务スーパー / イオン / 100 円店 + 中華物産店。
-- 金钱与安全：现金文化仍强（部分小店），但 IC 卡 + 信用卡覆盖 95% 生活；诈骗（特殊诈欺）高发，自称役所 / 警察要账号 = 100% 诈骗；家人（国内）也要同步防「孩子的电话」类跨境诈骗。
+- 金钱与安全：现金文化仍强（部分小店），但 IC 卡 + 信用卡已覆盖绝大多数日常消费（定性判断，无官方覆盖率统计；14-life-operations 同项亦作定性表述）；诈骗（特殊诈欺）高发，自称役所 / 警察索要账号一律按诈骗处理；家人（国内）也要同步防「孩子的电话」类跨境诈骗。
 
 ### 7.3 住房与安家路径（建议）
 
@@ -279,7 +279,7 @@
 | 滚动备蓄 | ローリングストック：日常多吃一份、消耗即补——不额外花钱、不过期 |
 | 安否联络 | 事先约定集合点；电话不通用災害用伝言ダイヤル 171 与各运营商灾害用伝言板 |
 
-（来源：内閣府防災 https://www.bousai.go.jp/kohou/kouhoubousai/h28/83/special_03.html，2016；季节性防灾内容每年 6 月与 11 月各核对一次。）
+（来源：防災の手引き（内閣府 / 官邸）https://www.kantei.go.jp/jp/headline/bousai/index.html，最终更新 2026-10；原引 2016 年 bousai.go.jp 旧页已迁移；季节性防灾内容每年 6 月与 11 月各核对一次。）
 
 ### 7.5 社会融入与心理健康（建议 / 经验类）
 
@@ -340,7 +340,7 @@
 9. 厚生労働省（在留外国人向指南），https://www.mhlw.go.jp/stf/newpage_21895.html，2026。
 10. 厚生労働省（労働安全衛生法相关用语），https://anzeninfo.mhlw.go.jp/yougo/yougo51_1.html，2026。
 11. 消防庁（救急安心センター #7119），https://www.fdma.go.jp/publication/hakusho/r6/report4/67976.html，2024。
-12. 内閣府防災（防灾清单），https://www.bousai.go.jp/kohou/kouhoubousai/h28/83/special_03.html，2016。
+12. 防災の手引き（内閣府 / 官邸，防灾清单），https://www.kantei.go.jp/jp/headline/bousai/index.html，最终更新 2026-10。
 13. 気象庁（気象警報・警戒レベル），https://www.jma.go.jp/jma/kishou/know/bosai/warning.html，2026。
 14. 気象庁（キキクル），https://www.jma.go.jp/bosai/risk/，2026。
 15. 国土交通省 / 観光庁（Safety tips / JNTO Hotline），https://www.mlit.go.jp/kankocho/seisaku_seido/kihonkeikaku/jizoku_kankochi/anzenkakuho/inbound/tool.html，2026。
