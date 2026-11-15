@@ -204,7 +204,7 @@
 [2026-11-15T13:11:23] [sync] life-operations -> ../../14-life-operations/prompts/business-config.md：区块替换成功：新增 1 / 修改 0 / 删除 0，共 26 条（v1.2）；备份 sync-backups/life-operations.business-config.md.20261115_131123.bak
 [2026-11-15T13:11:23] [sync] health-wellbeing -> ../../15-health-wellbeing/prompts/business-config.md：区块替换成功：新增 1 / 修改 0 / 删除 0，共 20 条（v1.2）；备份 sync-backups/health-wellbeing.business-config.md.20261115_131123.bak
 [2026-11-15T13:11:23] [sync] ssw-driver -> ../../01-ssw-driver/prompts/business-config.md：区块替换成功：新增 4 / 修改 0 / 删除 0，共 109 条（v1.5）；备份 sync-backups/ssw-driver.business-config.md.20261115_131123.bak
-[2026-11-15T14:14:36] [sync] culture-life -> ../../12-culture-life/prompts/business-config.md：区块替换成功：新增 1 / 修改 0 / 删除 0，共 74 条（v1.4）；备份 sync-backups/culture-life.business-config.md.20261115_141436.bak
-[2026-11-15T14:14:36] [sync] economy-finance -> ../../07-economy-finance/prompts/business-config.md：区块替换成功：新增 1 / 修改 0 / 删除 0，共 78 条（v1.4）；备份 sync-backups/economy-finance.business-config.md.20261115_141436.bak
-[2026-11-15T14:14:36] [sync] politics-law -> ../../09-politics-law/prompts/business-config.md：区块替换成功：新增 3 / 修改 0 / 删除 0，共 85 条（v1.5）；备份 sync-backups/politics-law.business-config.md.20261115_141436.bak
-[2026-11-15T14:14:37] [sync] visa-immigration -> ../../08-visa-immigration/prompts/business-config.md：区块替换成功：新增 1 / 修改 0 / 删除 0，共 80 条（v1.4）；备份 sync-backups/visa-immigration.business-config.md.20261115_141436.bak
+[2026-11-15T14:28:33] [sync] life-operations -> ../../14-life-operations/prompts/business-config.md：区块替换成功：新增 1 / 修改 0 / 删除 0，共 27 条（v1.3）；备份 sync-backups/life-operations.business-config.md.20261115_142833.bak
+[2026-11-15T14:28:33] [sync] exit-transition-return -> ../../16-exit-transition-return/prompts/business-config.md：区块替换成功：新增 1 / 修改 0 / 删除 0，共 26 条（v1.2）；备份 sync-backups/exit-transition-return.business-config.md.20261115_142833.bak
+[2026-11-15T14:28:34] [sync] overseas-china -> ../../20-overseas-china/prompts/business-config.md：区块替换成功：新增 3 / 修改 0 / 删除 0，共 37 条（v1.2）；备份 sync-backups/overseas-china.business-config.md.20261115_142834.bak
+[2026-11-15T14:28:34] [sync] family-parenting -> ../../18-family-parenting/prompts/business-config.md：区块替换成功：新增 1 / 修改 0 / 删除 0，共 36 条（v1.2）；备份 sync-backups/family-parenting.business-config.md.20261115_142834.bak
