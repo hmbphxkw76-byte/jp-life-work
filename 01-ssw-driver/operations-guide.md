@@ -177,8 +177,7 @@ python src/prompts-tools/tools/classify_reports.py
 
 ### 4.2 归档
 
-- 基线报告常驻 `reports/` 顶层，不归档。
-- 季度报告保留最新 8 期、年度保留 5 期，超出移入 `reports/archives/`；插刷追加件随所属周期版归档。
+- 每主题保留最新 **12 期**（`archive_reports.py` `KEEP = 12`），超出移入 `reports/archives/`（md / html 成对移动，可回溯）；报告已统一按自然月聚合，不再区分季度 / 年度保留期数。
 - 登记册修改采用增量方式：保留历史值，不覆盖。
 
 ### 4.3 提交

@@ -11,11 +11,12 @@
 
 | 报告类型 | 文件名 | 落盘位置 |
 |---|---|---|
-| 基线报告 | `{YYYY-MM}_baseline_report.html` | `{业务目录}/reports/` |
-| 周报 | `{YYYY-MM-DD}_weekly.html`（日期 = 数据截止日） | 同上 |
-| 月度简报 | `{YYYY-MM}_monthly.html` | 同上 |
-| 季度报告 | `{YYYY-Qn}_quarterly.html` | 同上 |
-| 年度报告 | `{YYYY}_annual.html` | 同上 |
+| 月度报告（通用） | `{YYYY-MM}-<主题slug>.md` + 同名 `.html` | `{业务目录}/reports/` |
+| 季度报告 | `{YYYY-MM}-<主题slug>`（`YYYY-MM` = 季度末月，`2026-Q4` → `2026-12`） | 同上 |
+| 年度报告 | `{YYYY-MM}-<主题slug>`（`YYYY-MM` = 12 月） | 同上 |
+| 项目制 / 事件触发件 | `{YYYY-MM-DD}-<主题>.md`（日期 = 事件或执行日） | 同上 |
+
+> 主题 slug = 主题目录名去 `NN-` 前缀（`01-ssw-driver` → `ssw-driver`）。命名由 `validate.py` 校验（`YYYY-MM-<slug>` 与目录一致、md / html 成对）；项目制 / 事件触发件不在标准正则内，仅 WARN 不阻断。报告已统一按自然月聚合，旧 `_baseline_report` / `_monthly` / `_quarterly` / `_annual` 命名不再使用。
 
 - HTML 必须自包含：全部样式与 JS 内联，ECharts 内联加载，**不依赖外部数据文件**。
 
@@ -103,3 +104,4 @@
 | 版本 | 日期 | 变更 | 说明 |
 |---|---|---|---|
 | v1.0 | 2026-11-13 | 初始版本 | 从四份业务提示词中抽离渲染 / 排版 / 交付公共规范，完成通用化 |
+| v1.1 | 2026-11-15 | 命名规则对齐 | §1 命名表改为统一 `YYYY-MM-<slug>` 口径（季度按末月、年度按 12 月），删除旧 `_baseline_report` / `_monthly` / `_quarterly` / `_annual` 命名 |
