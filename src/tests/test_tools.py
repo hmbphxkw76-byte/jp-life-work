@@ -21,6 +21,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "prompts-tools" / "tools"))
 
 import _common  # noqa: E402
+import audit_check  # noqa: E402
 import audit_pipeline  # noqa: E402
 import audit_preflight  # noqa: E402
 import audit_registry  # noqa: E402
@@ -1144,7 +1145,8 @@ class TestAuditGuard(unittest.TestCase):
         self.assertEqual(self._state()[self.REPORT_REL]["state"], "pending_initial")
         audit_pipeline.cmd_review("initial", None, True, "pass", "", "", None)
         self.assertEqual(self._state()[self.REPORT_REL]["state"], "pending_re_review")
-        audit_pipeline.cmd_review("re_review", None, True, "pass", "", "", None)
+        audit_pipeline.cmd_review("re_review", None, True, "pass", "", "",
+                                       self._evidence())
         self.assertEqual(self._state()[self.REPORT_REL]["state"], "pending_final")
         audit_pipeline.cmd_review("final", None, True, "pass", "", "", None)
         st = self._state()[self.REPORT_REL]
@@ -1176,7 +1178,8 @@ class TestAuditGuard(unittest.TestCase):
         audit_pipeline.cmd_init()
         audit_pipeline.cmd_submit(None, True, "generator")
         for stage in ("initial", "re_review", "final"):
-            audit_pipeline.cmd_review(stage, None, True, "pass", "", "", None)
+            ev = self._evidence() if stage == "re_review" else None
+            audit_pipeline.cmd_review(stage, None, True, "pass", "", "", ev)
         self.assertEqual(audit_pipeline.cmd_verify(), 0)
         self.md.write_text(self.REPORT_TEXT + "\n变更\n", encoding="utf-8")
         self.assertNotEqual(audit_pipeline.cmd_verify(), 0)
@@ -1189,13 +1192,55 @@ class TestAuditGuard(unittest.TestCase):
         audit_pipeline.cmd_init()
         audit_pipeline.cmd_submit(None, True, "generator")
         for stage in ("initial", "re_review", "final"):
-            audit_pipeline.cmd_review(stage, None, True, "pass", "", "", None)
+            ev = self._evidence() if stage == "re_review" else None
+            audit_pipeline.cmd_review(stage, None, True, "pass", "", "", ev)
         self.assertEqual(audit_pipeline.cmd_verify(), 0)
         # 仅改 HTML（md 不变）→ HTML 指纹失配 → 审计失效
         html.write_text("<html><body>报告（改）</body></html>", encoding="utf-8")
         self.assertNotEqual(audit_pipeline.cmd_verify(), 0)
         audit_pipeline.cmd_sync()
         self.assertEqual(self._state()[self.REPORT_REL]["state"], "stale")
+
+    @staticmethod
+    def _evidence(result="yes", basis=""):
+        return json.dumps(
+            {"items": [{"item": "x", "result": result, "basis": basis} for _ in range(6)]},
+            ensure_ascii=False)
+
+    def test_validate_l5_evidence(self):
+        ok, probs = audit_pipeline.validate_l5_evidence("")
+        self.assertFalse(ok)
+        self.assertTrue(probs)
+        ok, _ = audit_pipeline.validate_l5_evidence(self._evidence())
+        self.assertTrue(ok)
+        ok, probs = audit_pipeline.validate_l5_evidence(self._evidence("no", ""))
+        self.assertFalse(ok)
+        ok, _ = audit_pipeline.validate_l5_evidence(self._evidence("uncertain", "需下月复核"))
+        self.assertTrue(ok)
+
+    def test_re_review_pass_requires_evidence(self):
+        audit_pipeline.cmd_init()
+        audit_pipeline.cmd_submit(None, True, "generator")
+        audit_pipeline.cmd_review("initial", None, True, "pass", "", "", None)
+        # 缺证据 → 拒绝且状态不变
+        rc = audit_pipeline.cmd_review("re_review", None, True, "pass", "", "", None)
+        self.assertEqual(rc, 1)
+        self.assertEqual(self._state()[self.REPORT_REL]["state"], "pending_re_review")
+        # 有效证据 → 通过
+        rc = audit_pipeline.cmd_review("re_review", None, True, "pass", "", "",
+                                       self._evidence())
+        self.assertEqual(rc, 0)
+        self.assertEqual(self._state()[self.REPORT_REL]["state"], "pending_final")
+
+    def test_audit_check_l5_pending_without_evidence(self):
+        args = (self.REPORT_REL, self.md, self.md.with_suffix(".html"), "", {}, {})
+        res = audit_check.check_report(*args)
+        self.assertEqual(res.layers["L5"], "pending")
+        self.assertTrue(any(f.code == "L5-EVIDENCE" for f in res.findings))
+        res2 = audit_check.check_report(
+            self.REPORT_REL, self.md, self.md.with_suffix(".html"), "", {},
+            {self.REPORT_REL: True})
+        self.assertEqual(res2.layers["L5"], "pass")
 
 
 class TestNewOnlyGate(unittest.TestCase):

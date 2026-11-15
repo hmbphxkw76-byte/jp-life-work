@@ -253,7 +253,8 @@ def check_local_consistency(rel: str, md_path: Path) -> list[AuditFinding]:
 # ──────────────────────────────────────────────
 
 def check_report(rel: str, md_path: Path, html_path: Path, type_id: str,
-                 iq_by_path: dict[str, list[AuditFinding]]) -> ReportResult:
+                 iq_by_path: dict[str, list[AuditFinding]],
+                 l5_status: dict[str, bool] | None = None) -> ReportResult:
     topic_dir = md_path.parents[1]
     det = detect_month_report(md_path.name)
     res = ReportResult(
@@ -270,6 +271,15 @@ def check_report(rel: str, md_path: Path, html_path: Path, type_id: str,
     for layer in ("L1", "L2", "L3", "L4", "L5"):
         ls = [f for f in res.findings if f.layer == layer]
         res.layers[layer] = "pass" if not any(f.severity in ("P0", "P1") for f in ls) else "fail"
+    # L5 不由本地规则判定，而是从审计台账的复核证据派生（未填证据 = pending，非 pass）
+    if l5_status is not None:
+        if l5_status.get(rel, False):
+            res.layers["L5"] = "pass"
+        else:
+            res.layers["L5"] = "pending"
+            res.findings.append(AuditFinding(
+                "L5", "L5-EVIDENCE", "P2", rel, "语义复核",
+                "缺少有效 L5 语义复核证据（re_review --evidence，见 l5-semantic-review.md）", ""))
     return res
 
 
@@ -287,9 +297,19 @@ def _iq_findings_by_path() -> dict[str, list[AuditFinding]]:
     return out
 
 
+def _l5_status() -> dict[str, bool]:
+    """从审计台账派生 L5 状态（懒加载，避免与 audit_pipeline 循环依赖）。"""
+    try:
+        from audit_pipeline import l5_status_from_ledger
+        return l5_status_from_ledger()
+    except Exception:  # noqa: BLE001
+        return {}
+
+
 def run_all() -> tuple[list[ReportResult], dict]:
     """全量校验 -> (逐报告结果, 汇总)。"""
     iq = _iq_findings_by_path()
+    l5 = _l5_status()
     results: list[ReportResult] = []
     for b in iter_business_dirs():
         reports = b.path / "reports"
@@ -300,7 +320,7 @@ def run_all() -> tuple[list[ReportResult], dict]:
         ) if (b.path / "prompts" / "business-config.md").is_file() else ""
         for md in sorted(reports.glob("*.md")):
             rel = _rel(md)
-            results.append(check_report(rel, md, md.with_suffix(".html"), type_id, iq))
+            results.append(check_report(rel, md, md.with_suffix(".html"), type_id, iq, l5))
     results.sort(key=lambda r: r.report)
 
     summary = {
@@ -308,7 +328,8 @@ def run_all() -> tuple[list[ReportResult], dict]:
         "passed": sum(1 for r in results if r.passed),
         "failed": sum(1 for r in results if not r.passed),
         "by_severity": {"P0": 0, "P1": 0, "P2": 0},
-        "by_layer": {f"L{i}": {"pass": 0, "fail": 0, "P0": 0, "P1": 0, "P2": 0} for i in range(1, 6)},
+        "by_layer": {f"L{i}": {"pass": 0, "fail": 0, "pending": 0, "P0": 0, "P1": 0, "P2": 0}
+                      for i in range(1, 6)},
     }
     for r in results:
         for k, v in r.severity_counts.items():
@@ -414,7 +435,7 @@ def main() -> int:
         if cfg.is_file():
             type_id = compliance_check.detect_type(_read(cfg)) or ""
         iq = _iq_findings_by_path()
-        res = check_report(rel, md, html, type_id, iq)
+        res = check_report(rel, md, html, type_id, iq, _l5_status())
         if args.json:
             print(json.dumps({"result": asdict(res)}, ensure_ascii=False, indent=2))
         else:

@@ -46,6 +46,7 @@ from audit_registry import (  # noqa: E402
     content_fingerprints,
     discover,
 )
+from audit_check import L5_CHECKLIST  # noqa: E402  （audit_check 不反向导入 audit_pipeline，无循环）
 
 LEDGER = AUDIT_DIR / "audit-ledger.jsonl"
 STATUS = AUDIT_DIR / "audit-status.json"
@@ -77,6 +78,56 @@ STATE_LABEL = {
 
 def _now() -> str:
     return datetime.now(timezone.utc).isoformat(timespec="seconds")
+
+
+# ──────────────────────────────────────────────
+# L5 语义复核证据校验
+# ──────────────────────────────────────────────
+
+def validate_l5_evidence(text: str) -> tuple[bool, list[str]]:
+    """校验复核证据 JSON（格式见 src/report_templates/l5-semantic-review.md）。
+
+    返回 (是否有效, 问题列表)。六项缺一不可；no / uncertain 必须给出 basis。
+    """
+    if not text or not text.strip():
+        return False, ["缺少 L5 语义复核证据（--evidence）"]
+    try:
+        data = json.loads(text)
+    except json.JSONDecodeError as e:
+        return False, [f"evidence 不是合法 JSON：{e}"]
+    if not isinstance(data, dict):
+        return False, ["evidence 顶层须为 JSON 对象"]
+    items = data.get("items")
+    if not isinstance(items, list) or len(items) != len(L5_CHECKLIST):
+        return False, [f"evidence.items 须为 {len(L5_CHECKLIST)} 项，实际 "
+                        f"{len(items) if isinstance(items, list) else '非列表'}"]
+    problems: list[str] = []
+    for i, it in enumerate(items, start=1):
+        if not isinstance(it, dict):
+            problems.append(f"第 {i} 项不是对象")
+            continue
+        res = str(it.get("result", "")).strip().lower()
+        basis = str(it.get("basis", "")).strip()
+        if res not in ("yes", "no", "uncertain"):
+            problems.append(f"第 {i} 项 result 非法：{res!r}")
+        if res in ("no", "uncertain") and not basis:
+            problems.append(f"第 {i} 项 {res} 缺少 basis 说明")
+    return (not problems), problems
+
+
+def l5_status_from_ledger() -> dict[str, bool]:
+    """从台账派生各报告 L5 状态：最近一次 re_review 是否有有效证据。"""
+    status: dict[str, bool] = {}
+    for ev in load_ledger():
+        rep = ev.get("report")
+        if not rep:
+            continue
+        if ev.get("event") == "stage_pass" and ev.get("role") == "reviewer_l2":
+            ok, _ = validate_l5_evidence(ev.get("evidence", ""))
+            status[rep] = ok
+        elif ev.get("event") == "stage_fail" and ev.get("role") == "reviewer_l2":
+            status[rep] = False
+    return status
 
 
 def _canonical(body: dict) -> str:
@@ -227,6 +278,13 @@ def cmd_review(stage: str, rel: str | None, all_: bool, result: str, actor: str,
     expected = {"initial": "pending_initial", "re_review": "pending_re_review",
                 "final": "pending_final"}[stage]
     event = "stage_pass" if result == "pass" else "stage_fail"
+    if stage == "re_review" and result == "pass":
+        ok, problems = validate_l5_evidence(evidence or "")
+        if not ok:
+            for p in problems:
+                print(f"[X] {p}")
+            print("[ERROR] re_review 通过必须附有效 L5 语义复核证据（见 l5-semantic-review.md）")
+            return 1
     n = 0
     for rep in targets:
         cur = state.get(rep, {}).get("state")
