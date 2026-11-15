@@ -49,6 +49,8 @@ def sha256_file(path: Path) -> str:
 # 已审计标识块（连同其前置空行一并剥离：注入 / 撤销标识不改变内容指纹）
 BADGE_RE = re.compile(r"^>\s*\*\*已审计\*\*.*$", re.MULTILINE)
 BADGE_BLOCK_RE = re.compile(r"\n{1,2}^>\s*\*\*已审计\*\*[^\n]*", re.MULTILINE)
+# HTML 已审计徽章（同理剥离：标识属审计状态，不计入内容指纹）
+AUDIT_BADGE_HTML_RE = re.compile(r'<div class="audit-badge".*?</div>', re.DOTALL)
 
 
 def content_fingerprint(path: Path) -> str:
@@ -60,6 +62,20 @@ def content_fingerprint(path: Path) -> str:
     text = path.read_text(encoding="utf-8", errors="replace")
     text = BADGE_BLOCK_RE.sub("", text)
     return "sha256:" + hashlib.sha256(text.encode("utf-8")).hexdigest()
+
+
+def html_fingerprint(path: Path) -> str:
+    """HTML 交付物指纹：剥离「已审计」徽章后的 SHA-256（与 md 指纹同理）。"""
+    text = path.read_text(encoding="utf-8", errors="replace")
+    text = AUDIT_BADGE_HTML_RE.sub("", text)
+    return "sha256:" + hashlib.sha256(text.encode("utf-8")).hexdigest()
+
+
+def content_fingerprints(md_path: Path, html_path: Path | None) -> tuple[str, str]:
+    """md + html 双指纹；html 缺失时第二项为空串（向后兼容）。"""
+    md = content_fingerprint(md_path)
+    html = html_fingerprint(html_path) if html_path and html_path.is_file() else ""
+    return md, html
 
 
 def type_id_of(topic_dir: Path) -> str:

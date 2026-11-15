@@ -94,7 +94,7 @@ def run_sample(period: str) -> dict:
         results.append({
             "report": rel, "topic": e["topic"], "period": e["period"],
             "passed": res.passed, "layers": res.layers,
-            "severity": res.severity_counts(), "status_ok": status_ok,
+            "severity": res.severity_counts, "status_ok": status_ok,
             "findings": [f for f in res.findings if f.severity in ("P0", "P1")],
         })
 

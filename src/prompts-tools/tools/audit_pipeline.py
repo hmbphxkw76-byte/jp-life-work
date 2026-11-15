@@ -43,7 +43,7 @@ from audit_registry import (  # noqa: E402
     AUDIT_DIR,
     SPEC_VERSION,
     build as build_registry,
-    content_fingerprint,
+    content_fingerprints,
     discover,
 )
 
@@ -120,7 +120,7 @@ def rebuild_status(ledger: list[dict]) -> dict:
         if not rep:
             continue
         cur = state.get(rep, {"state": None, "audit_id": "", "finalized_at": "",
-                              "content_hash": "", "last_seq": 0})
+                              "content_hash": "", "html_hash": "", "last_seq": 0})
         key = (cur["state"], ev["event"])
         target = TRANSITIONS.get(key)
         if target is None and ev["event"] == "submit" and cur["state"] is None:
@@ -135,6 +135,8 @@ def rebuild_status(ledger: list[dict]) -> dict:
             cur["finalized_at"] = ev["ts"]
         if ev.get("content_hash"):
             cur["content_hash"] = ev["content_hash"]
+        if ev.get("html_hash"):
+            cur["html_hash"] = ev["html_hash"]
         cur["last_seq"] = ev["seq"]
         state[rep] = cur
     return state
@@ -147,8 +149,10 @@ def write_status(state: dict) -> Path:
     return STATUS
 
 
-def _current_hash(rel: str) -> str:
-    return content_fingerprint(ROOT / rel)
+def _current_hashes(rel: str) -> tuple[str, str]:
+    """当前 (md, html) 双指纹；html 缺失时为 ""。"""
+    md = ROOT / rel
+    return content_fingerprints(md, md.with_suffix(".html"))
 
 
 def _next_audit_id(state: dict) -> str:
@@ -197,11 +201,12 @@ def cmd_submit(rel: str | None, all_: bool, actor: str) -> int:
         if cur not in (None, "registered", "rejected", "stale"):
             print(f"[SKIP] {rep}：当前状态 {cur}，不可提交")
             continue
+        md_h, html_h = _current_hashes(rep)
         _append({"ts": _now(), "event": "submit", "report": rep, "actor": actor,
                  "role": "generator", "result": "ok", "note": "提交初审",
-                 "content_hash": _current_hash(rep)})
+                 "content_hash": md_h, "html_hash": html_h})
         state[rep] = {"state": "pending_initial", "audit_id": "", "finalized_at": "",
-                      "content_hash": _current_hash(rep), "last_seq": 0}
+                      "content_hash": md_h, "html_hash": html_h, "last_seq": 0}
         n += 1
     write_status(state)
     build_registry()
@@ -232,9 +237,10 @@ def cmd_review(stage: str, rel: str | None, all_: bool, result: str, actor: str,
         if stage == "final" and result == "pass":
             audit_id = _next_audit_id(state)
             body_note = f"{note}；审计编号 {audit_id}"
+        md_h, html_h = _current_hashes(rep)
         _append({"ts": _now(), "event": event, "report": rep, "actor": actor or DEFAULT_ACTOR[stage],
                  "role": role, "result": result, "note": body_note,
-                 "evidence": evidence or "", "content_hash": _current_hash(rep)})
+                 "evidence": evidence or "", "content_hash": md_h, "html_hash": html_h})
         n += 1
     state = rebuild_status(load_ledger())
     write_status(state)
@@ -284,10 +290,13 @@ def cmd_verify() -> int:
         problems.append("审计编号重复")
     for rep, v in sorted(state.items()):
         if v["state"] == "audited":
-            cur = _current_hash(rep)
-            if cur != v.get("content_hash"):
-                problems.append(f"{rep}：内容指纹失配（当前 {cur[:19]} ≠ 绑定 "
+            cur_md, cur_html = _current_hashes(rep)
+            if cur_md != v.get("content_hash"):
+                problems.append(f"{rep}：内容指纹失配（当前 {cur_md[:19]} ≠ 绑定 "
                                 f"{(v.get('content_hash') or '')[:19]}），审计失效")
+            elif v.get("html_hash") and cur_html != v["html_hash"]:
+                problems.append(f"{rep}：HTML 指纹失配（当前 {cur_html[:19]} ≠ 绑定 "
+                                f"{v['html_hash'][:19]}），审计失效")
     if problems:
         for p in problems:
             print(f"[X] {p}")
@@ -304,11 +313,12 @@ def cmd_sync() -> int:
     for rep, v in sorted(state.items()):
         if v["state"] != "audited":
             continue
-        cur = _current_hash(rep)
-        if cur != v.get("content_hash"):
+        cur_md, cur_html = _current_hashes(rep)
+        if cur_md != v.get("content_hash") or (v.get("html_hash") and cur_html != v["html_hash"]):
             _append({"ts": _now(), "event": "revoke", "report": rep, "actor": "system",
                      "role": "system", "result": "ok",
-                     "note": "内容指纹失配，审计失效（stale）", "content_hash": cur})
+                     "note": "内容指纹失配，审计失效（stale）", "content_hash": cur_md,
+                     "html_hash": cur_html})
             n += 1
     state = rebuild_status(load_ledger())
     write_status(state)

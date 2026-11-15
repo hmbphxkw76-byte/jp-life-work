@@ -1183,6 +1183,20 @@ class TestAuditGuard(unittest.TestCase):
         audit_pipeline.cmd_sync()
         self.assertEqual(self._state()[self.REPORT_REL]["state"], "stale")
 
+    def test_html_fingerprint_mismatch_marks_stale(self):
+        html = self.root / "01-demo" / "reports" / "2026-11-demo.html"
+        html.write_text("<html><body>报告</body></html>", encoding="utf-8")
+        audit_pipeline.cmd_init()
+        audit_pipeline.cmd_submit(None, True, "generator")
+        for stage in ("initial", "re_review", "final"):
+            audit_pipeline.cmd_review(stage, None, True, "pass", "", "", None)
+        self.assertEqual(audit_pipeline.cmd_verify(), 0)
+        # 仅改 HTML（md 不变）→ HTML 指纹失配 → 审计失效
+        html.write_text("<html><body>报告（改）</body></html>", encoding="utf-8")
+        self.assertNotEqual(audit_pipeline.cmd_verify(), 0)
+        audit_pipeline.cmd_sync()
+        self.assertEqual(self._state()[self.REPORT_REL]["state"], "stale")
+
 
 class TestNewOnlyGate(unittest.TestCase):
     """新报告阻断 / 历史报告豁免（lint_reports / compliance_check --new-only）。"""
