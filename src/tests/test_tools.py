@@ -33,6 +33,7 @@ import audit_registry  # noqa: E402
 import audit_sampling  # noqa: E402
 import build_index  # noqa: E402
 import compliance_check  # noqa: E402
+import update_planner  # noqa: E402
 import vocab_tool  # noqa: E402
 import lint_reports  # noqa: E402
 import md2html  # noqa: E402
@@ -1962,6 +1963,57 @@ class TestNewAuditRules(unittest.TestCase):
             self.assertEqual(payload["l5_pending_total"], 1)
             self.assertEqual(payload["unfinished_verification"], 1)
             self.assertNotIn("l5_pending", payload["checks"])
+
+
+class TestUpdatePlannerAudit(unittest.TestCase):
+    """00 节点纳入 + 审计提醒（update_planner）。"""
+
+    def setUp(self):
+        self._tmp = tempfile.TemporaryDirectory()  # noqa: P201
+        self._root = Path(self._tmp.name)
+        self._orig_root = _common.ROOT
+        _common.ROOT = self._root
+        self._status = self._root / "audit-status.json"
+        self._orig_status = update_planner.AUDIT_STATUS_PATH
+        update_planner.AUDIT_STATUS_PATH = self._status
+
+    def tearDown(self):
+        _common.ROOT = self._orig_root
+        update_planner.AUDIT_STATUS_PATH = self._orig_status
+        self._tmp.cleanup()
+
+    def _make_business(self, rel, prompts=(), config=True):
+        base = self._root / rel
+        (base / "prompts").mkdir(parents=True)
+        (base / "reports").mkdir(parents=True)
+        if config:
+            (base / "prompts" / "business-config.md").write_text("# cfg\n", encoding="utf-8")
+        for p in prompts:
+            (base / "prompts" / p).write_text("", encoding="utf-8")
+        return _common.Business(rel)
+
+    def test_config_only_topic_included(self):
+        """无 prompt-*.md 但有 business-config.md 的主题（00-decision-hub）不得被漏掉。"""
+        biz = self._make_business("00-decision-hub")
+        tasks = build_tasks("2026-11", [biz])
+        self.assertEqual(len(tasks), 1)
+        self.assertEqual(tasks[0]["prompt"], "00-decision-hub/prompts/business-config.md")
+
+    def test_audit_reminder_states(self):
+        self._status.write_text(json.dumps({"reports": {
+            "00-decision-hub/reports/2026-11-decision-hub.md":
+                {"state": "audited", "audit_id": "AUD-X"}
+        }}), encoding="utf-8")
+        audited = build_tasks("2026-11", [self._make_business("00-decision-hub")])
+        self.assertEqual(audited[0]["audit"], "已审计（AUD-X）")
+        pending = build_tasks("2026-11", [self._make_business("01-demo")])
+        self.assertIn("未审计", pending[0]["audit"])
+
+    def test_render_lists_unaudited(self):
+        tasks = build_tasks("2026-11", [self._make_business("00-decision-hub")])
+        md = update_planner.render_md(tasks, "2026-11", [])
+        self.assertIn("审计提醒", md)
+        self.assertIn("未审计", md)
 
 
 class TestIndexGate(unittest.TestCase):

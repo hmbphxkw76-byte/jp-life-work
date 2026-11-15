@@ -9,6 +9,10 @@
 #
 # 产出后：提交 reports/YYYY-MM-<slug>.md 并 push，html-sync 自动生成报告页 HTML
 # （含跨月对比高亮）与汇总页；下期报告自动与本期比对并高亮「已更新」。
+#
+# 审计提醒：任务清单逐条标注审计状态，并汇总未审计报告；提交前必须完成
+# audit_preflight → audit_check → audit_pipeline --submit，否则合并门禁
+# audit_pipeline --gate 将拦截未审计的变更报告。
 name: scheduled-report-tasks
 
 on:
@@ -78,6 +82,8 @@ jobs:
               "### 产出后",
               "1. 提交 md 源稿并 push → `html-sync` 自动生成报告页 HTML（含跨月对比高亮）与汇总页。",
               "2. 下期报告将与本期自动比对，新增 / 修改片段加「已更新」标记（报告页工具条可切换对照阅读）。",
+              "3. 审计：提交前完成 `audit_preflight → audit_check → audit_pipeline --submit`；",
+              "   合并门禁 `audit_pipeline --gate` 将拦截未审计的变更报告（见上方「审计提醒」）。",
               "",
               "完成后请关闭本 Issue。",
           ]

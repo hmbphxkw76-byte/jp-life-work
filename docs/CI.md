@@ -79,6 +79,8 @@
 - **去重**：先 `gh issue list --state open --search "in:title 【月度报告产出】<period>"`；
   命中则 `gh issue edit` 更新正文并退出，否则新建。
 - **只提醒、不写内容**：Issue 仅列待办，报告仍需人工/Agent 产出。
+- **00 节点 + 审计提醒**：`update_planner.py` 纳入无 `prompt-*.md` 但已建 `business-config.md` 的主题（`00-decision-hub`），
+  逐条标注审计状态并汇总未审计报告；提交前须完成 `audit_preflight → audit_check → audit_pipeline --submit`。
 
 ### 5. `info-quality.yml` — 信息质量周期评估与闭环修复
 

@@ -25,6 +25,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from _common import (  # noqa: E402
+    ROOT,
     Business,
     iter_business_dirs,
     month_report_name,
@@ -33,6 +34,8 @@ from _common import (  # noqa: E402
     topic_slug,
 )
 import decision_log  # noqa: E402
+
+AUDIT_STATUS_PATH = ROOT / "src" / "report-audits" / "audit" / "audit-status.json"
 
 
 def default_period(now: datetime) -> str:
@@ -76,32 +79,58 @@ def target_month(period: str) -> str:
     return f"{y}-12"
 
 
+def audit_states() -> dict:
+    """读取审计状态（报告 rel -> {state, audit_id}）；缺失 / 损坏返回空。"""
+    try:
+        data = json.loads(AUDIT_STATUS_PATH.read_text(encoding="utf-8"))
+        return data.get("reports", {}) if isinstance(data, dict) else {}
+    except (OSError, json.JSONDecodeError):
+        return {}
+
+
+def audit_reminder(report_rel: str, states: dict) -> str:
+    """单份报告的审计提醒文案。"""
+    st = states.get(report_rel) or {}
+    if st.get("state") == "audited":
+        return f"已审计（{st.get('audit_id', '—')}）"
+    if st.get("state"):
+        return f"审计状态 {st.get('state')}（未终审）"
+    return "未审计 — 提交前完成 audit_preflight → audit_check → audit_pipeline --submit"
+
+
 def build_tasks(period: str, businesses: list[Business]) -> list[dict]:
     month = target_month(period)
+    states = audit_states()
     tasks = []
     for b in businesses:
-        # 扫描主题 prompts/ 下全部提示词（含 update / policy-review 等），
-        # 只要建立了任一提示词即纳入该月任务（具体节拍由提示词优先级选取）
+        # 扫描主题 prompts/ 下全部提示词（含 update / policy-review 等）；
+        # 无 prompt-*.md 但已建 business-config.md 的主题（如 00-decision-hub）同样纳入，
+        # 以 business-config.md 作为执行入口，避免跨主题节点被提醒机制漏掉。
         prompts_dir = b.path / "prompts"
         prompts = (
             sorted(p.name for p in prompts_dir.glob("prompt-*.md"))
             if prompts_dir.is_dir()
             else []
         )
-        if not prompts:
+        has_config = (prompts_dir / "business-config.md").exists()
+        if not prompts and not has_config:
             continue
         rs = topic_slug(b.region if not b.property_type else b.property_type)
         output = month_report_name(month, rs, "html")
+        md_output = month_report_name(month, rs, "md")
         status = "done" if (b.path / "reports" / output).exists() else "pending"
+        entry = pick_prompt(prompts) if prompts else "business-config.md"
+        md_rel = f"{b.rel}/reports/{md_output}"
         tasks.append(
             {
                 "project": b.rel,
                 "cycle": "monthly",
                 "cycle_label": "月度",
                 "period": month,
-                "prompt": f"{b.rel}/prompts/{pick_prompt(prompts)}",
+                "prompt": f"{b.rel}/prompts/{entry}",
                 "output": f"{b.rel}/reports/{output}",
                 "status": status,
+                "audit": audit_reminder(md_rel, states),
             }
         )
     return tasks
@@ -117,13 +146,26 @@ def decision_changes(limit: int = 5) -> list[dict]:
 
 def render_md(tasks: list[dict], period: str, decisions: list[dict] | None = None) -> str:
     lines = [f"## 内容更新任务清单（{period}）", ""]
+    unaudited = []
     for t in tasks:
         mark = "x" if t["status"] == "done" else " "
         state = "已产出" if t["status"] == "done" else "待产出"
+        audit = t.get("audit", "")
         lines.append(
             f"- [{mark}] {t['project']} · {t['cycle_label']} {t['period']}"
-            f" — 提示词 `{t['prompt']}` · 输出 `{t['output']}`（{state}）"
+            f" — 提示词 `{t['prompt']}` · 输出 `{t['output']}`（{state}；审计：{audit}）"
         )
+        if not audit.startswith("已审计"):
+            unaudited.append(t)
+    lines.append("")
+    lines.append(
+        f"**审计提醒**：{len(unaudited)} 份报告未审计通过。提交前必须完成 "
+        "`audit_preflight → audit_check → audit_pipeline --submit`；"
+        "合并门禁 `audit_pipeline --gate` 将拦截未审计的变更报告。"
+    )
+    lines.append("")
+    for t in unaudited:
+        lines.append(f"- {t['output']}：{t['audit']}")
     lines.append("")
     lines.append("**决策状态变化（近 {0} 条）**".format(len(decisions or [])))
     lines.append("")
