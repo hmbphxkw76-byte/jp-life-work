@@ -1331,6 +1331,25 @@ class TestAuditGuard(unittest.TestCase):
             (_common.ROOT, audit_check.ROOT, audit_check.IQ_CACHE,
              info_quality_check.ROOT) = orig
 
+    def test_iq_cache_key_ignores_line_endings(self):
+        """同一提交在 CRLF / LF 两种检出下必须算出同一个缓存键（跨环境确定性）。"""
+        orig = (audit_check.ROOT, info_quality_check.__file__)
+        audit_check.ROOT = self.root
+        try:
+            lf_key = audit_check._iq_cache_key()
+            with tempfile.TemporaryDirectory() as td:
+                crlf_copy = Path(td) / "info_quality_check.py"
+                # 先归一为 LF 再构造 CRLF 变体，避免在已是 CRLF 的检出里叠加成 \r\r\n
+                lf_bytes = Path(orig[1]).read_bytes().replace(b"\r\n", b"\n")
+                crlf_copy.write_bytes(lf_bytes.replace(b"\n", b"\r\n"))
+                info_quality_check.__file__ = str(crlf_copy)
+                try:
+                    self.assertEqual(lf_key, audit_check._iq_cache_key())
+                finally:
+                    info_quality_check.__file__ = orig[1]
+        finally:
+            audit_check.ROOT = orig[0]
+
     def _add_report(self, slug="demo2", period="2026-12"):
         d = self.root / "01-demo" / "reports"
         md = d / f"{period}-{slug}.md"
