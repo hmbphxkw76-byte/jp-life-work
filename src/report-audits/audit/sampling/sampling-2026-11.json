@@ -1,0 +1,444 @@
+{
+  "period": "2026-11",
+  "total_reports": 22,
+  "sample_size": 21,
+  "struct_ok": 21,
+  "elem_ok": 21,
+  "consist_ok": 21,
+  "passed": 21,
+  "rate": 1.0,
+  "p0": 0,
+  "p1": 0,
+  "p2": 25,
+  "overdue_p2_count": 0,
+  "checks": {
+    "struct_100": true,
+    "element_95": true,
+    "consistent_100": true,
+    "pass_95": true,
+    "p0p1_zero": true
+  },
+  "ok": true,
+  "results": [
+    {
+      "report": "00-decision-hub/reports/2026-12-decision-hub.md",
+      "topic": "00-decision-hub",
+      "period": "2026-12",
+      "passed": true,
+      "layers": {
+        "L1": "pass",
+        "L2": "pass",
+        "L3": "pass",
+        "L4": "pass",
+        "L5": "pending"
+      },
+      "severity": {
+        "P0": 0,
+        "P1": 0,
+        "P2": 2
+      },
+      "status_ok": true,
+      "findings": []
+    },
+    {
+      "report": "01-ssw-driver/reports/2026-11-ssw-driver.md",
+      "topic": "01-ssw-driver",
+      "period": "2026-11",
+      "passed": true,
+      "layers": {
+        "L1": "pass",
+        "L2": "pass",
+        "L3": "pass",
+        "L4": "pass",
+        "L5": "pending"
+      },
+      "severity": {
+        "P0": 0,
+        "P1": 0,
+        "P2": 1
+      },
+      "status_ok": true,
+      "findings": []
+    },
+    {
+      "report": "02-career-driver/reports/2026-11-career-driver.md",
+      "topic": "02-career-driver",
+      "period": "2026-11",
+      "passed": true,
+      "layers": {
+        "L1": "pass",
+        "L2": "pass",
+        "L3": "pass",
+        "L4": "pass",
+        "L5": "pending"
+      },
+      "severity": {
+        "P0": 0,
+        "P1": 0,
+        "P2": 1
+      },
+      "status_ok": true,
+      "findings": []
+    },
+    {
+      "report": "03-career-management/reports/2026-11-career-management.md",
+      "topic": "03-career-management",
+      "period": "2026-11",
+      "passed": true,
+      "layers": {
+        "L1": "pass",
+        "L2": "pass",
+        "L3": "pass",
+        "L4": "pass",
+        "L5": "pending"
+      },
+      "severity": {
+        "P0": 0,
+        "P1": 0,
+        "P2": 1
+      },
+      "status_ok": true,
+      "findings": []
+    },
+    {
+      "report": "04-industry-logistics/reports/2026-11-industry-logistics.md",
+      "topic": "04-industry-logistics",
+      "period": "2026-11",
+      "passed": true,
+      "layers": {
+        "L1": "pass",
+        "L2": "pass",
+        "L3": "pass",
+        "L4": "pass",
+        "L5": "pending"
+      },
+      "severity": {
+        "P0": 0,
+        "P1": 0,
+        "P2": 1
+      },
+      "status_ok": true,
+      "findings": []
+    },
+    {
+      "report": "05-industry-autonomous/reports/2026-11-industry-autonomous.md",
+      "topic": "05-industry-autonomous",
+      "period": "2026-11",
+      "passed": true,
+      "layers": {
+        "L1": "pass",
+        "L2": "pass",
+        "L3": "pass",
+        "L4": "pass",
+        "L5": "pending"
+      },
+      "severity": {
+        "P0": 0,
+        "P1": 0,
+        "P2": 1
+      },
+      "status_ok": true,
+      "findings": []
+    },
+    {
+      "report": "06-industry-technology/reports/2026-11-industry-technology.md",
+      "topic": "06-industry-technology",
+      "period": "2026-11",
+      "passed": true,
+      "layers": {
+        "L1": "pass",
+        "L2": "pass",
+        "L3": "pass",
+        "L4": "pass",
+        "L5": "pending"
+      },
+      "severity": {
+        "P0": 0,
+        "P1": 0,
+        "P2": 1
+      },
+      "status_ok": true,
+      "findings": []
+    },
+    {
+      "report": "07-economy-finance/reports/2026-11-economy-finance.md",
+      "topic": "07-economy-finance",
+      "period": "2026-11",
+      "passed": true,
+      "layers": {
+        "L1": "pass",
+        "L2": "pass",
+        "L3": "pass",
+        "L4": "pass",
+        "L5": "pending"
+      },
+      "severity": {
+        "P0": 0,
+        "P1": 0,
+        "P2": 1
+      },
+      "status_ok": true,
+      "findings": []
+    },
+    {
+      "report": "08-visa-immigration/reports/2026-11-visa-immigration.md",
+      "topic": "08-visa-immigration",
+      "period": "2026-11",
+      "passed": true,
+      "layers": {
+        "L1": "pass",
+        "L2": "pass",
+        "L3": "pass",
+        "L4": "pass",
+        "L5": "pending"
+      },
+      "severity": {
+        "P0": 0,
+        "P1": 0,
+        "P2": 1
+      },
+      "status_ok": true,
+      "findings": []
+    },
+    {
+      "report": "09-politics-law/reports/2026-11-politics-law.md",
+      "topic": "09-politics-law",
+      "period": "2026-11",
+      "passed": true,
+      "layers": {
+        "L1": "pass",
+        "L2": "pass",
+        "L3": "pass",
+        "L4": "pass",
+        "L5": "pending"
+      },
+      "severity": {
+        "P0": 0,
+        "P1": 0,
+        "P2": 1
+      },
+      "status_ok": true,
+      "findings": []
+    },
+    {
+      "report": "10-education-qualification/reports/2026-11-education-qualification.md",
+      "topic": "10-education-qualification",
+      "period": "2026-11",
+      "passed": true,
+      "layers": {
+        "L1": "pass",
+        "L2": "pass",
+        "L3": "pass",
+        "L4": "pass",
+        "L5": "pending"
+      },
+      "severity": {
+        "P0": 0,
+        "P1": 0,
+        "P2": 1
+      },
+      "status_ok": true,
+      "findings": []
+    },
+    {
+      "report": "11-language-japanese/reports/2026-11-language-japanese.md",
+      "topic": "11-language-japanese",
+      "period": "2026-11",
+      "passed": true,
+      "layers": {
+        "L1": "pass",
+        "L2": "pass",
+        "L3": "pass",
+        "L4": "pass",
+        "L5": "pending"
+      },
+      "severity": {
+        "P0": 0,
+        "P1": 0,
+        "P2": 1
+      },
+      "status_ok": true,
+      "findings": []
+    },
+    {
+      "report": "12-culture-life/reports/2026-11-culture-life.md",
+      "topic": "12-culture-life",
+      "period": "2026-11",
+      "passed": true,
+      "layers": {
+        "L1": "pass",
+        "L2": "pass",
+        "L3": "pass",
+        "L4": "pass",
+        "L5": "pending"
+      },
+      "severity": {
+        "P0": 0,
+        "P1": 0,
+        "P2": 2
+      },
+      "status_ok": true,
+      "findings": []
+    },
+    {
+      "report": "13-regional-info/reports/2026-11-regional-info.md",
+      "topic": "13-regional-info",
+      "period": "2026-11",
+      "passed": true,
+      "layers": {
+        "L1": "pass",
+        "L2": "pass",
+        "L3": "pass",
+        "L4": "pass",
+        "L5": "pending"
+      },
+      "severity": {
+        "P0": 0,
+        "P1": 0,
+        "P2": 1
+      },
+      "status_ok": true,
+      "findings": []
+    },
+    {
+      "report": "14-life-operations/reports/2026-11-life-operations.md",
+      "topic": "14-life-operations",
+      "period": "2026-11",
+      "passed": true,
+      "layers": {
+        "L1": "pass",
+        "L2": "pass",
+        "L3": "pass",
+        "L4": "pass",
+        "L5": "pending"
+      },
+      "severity": {
+        "P0": 0,
+        "P1": 0,
+        "P2": 1
+      },
+      "status_ok": true,
+      "findings": []
+    },
+    {
+      "report": "15-health-wellbeing/reports/2026-11-health-wellbeing.md",
+      "topic": "15-health-wellbeing",
+      "period": "2026-11",
+      "passed": true,
+      "layers": {
+        "L1": "pass",
+        "L2": "pass",
+        "L3": "pass",
+        "L4": "pass",
+        "L5": "pending"
+      },
+      "severity": {
+        "P0": 0,
+        "P1": 0,
+        "P2": 1
+      },
+      "status_ok": true,
+      "findings": []
+    },
+    {
+      "report": "16-exit-transition-return/reports/2026-11-exit-transition-return.md",
+      "topic": "16-exit-transition-return",
+      "period": "2026-11",
+      "passed": true,
+      "layers": {
+        "L1": "pass",
+        "L2": "pass",
+        "L3": "pass",
+        "L4": "pass",
+        "L5": "pending"
+      },
+      "severity": {
+        "P0": 0,
+        "P1": 0,
+        "P2": 1
+      },
+      "status_ok": true,
+      "findings": []
+    },
+    {
+      "report": "17-migration-compliance/reports/2026-11-migration-compliance.md",
+      "topic": "17-migration-compliance",
+      "period": "2026-11",
+      "passed": true,
+      "layers": {
+        "L1": "pass",
+        "L2": "pass",
+        "L3": "pass",
+        "L4": "pass",
+        "L5": "pending"
+      },
+      "severity": {
+        "P0": 0,
+        "P1": 0,
+        "P2": 2
+      },
+      "status_ok": true,
+      "findings": []
+    },
+    {
+      "report": "18-family-parenting/reports/2026-11-family-parenting.md",
+      "topic": "18-family-parenting",
+      "period": "2026-11",
+      "passed": true,
+      "layers": {
+        "L1": "pass",
+        "L2": "pass",
+        "L3": "pass",
+        "L4": "pass",
+        "L5": "pending"
+      },
+      "severity": {
+        "P0": 0,
+        "P1": 0,
+        "P2": 1
+      },
+      "status_ok": true,
+      "findings": []
+    },
+    {
+      "report": "19-safety-disaster/reports/2026-11-safety-disaster.md",
+      "topic": "19-safety-disaster",
+      "period": "2026-11",
+      "passed": true,
+      "layers": {
+        "L1": "pass",
+        "L2": "pass",
+        "L3": "pass",
+        "L4": "pass",
+        "L5": "pending"
+      },
+      "severity": {
+        "P0": 0,
+        "P1": 0,
+        "P2": 2
+      },
+      "status_ok": true,
+      "findings": []
+    },
+    {
+      "report": "20-overseas-china/reports/2026-11-overseas-china.md",
+      "topic": "20-overseas-china",
+      "period": "2026-11",
+      "passed": true,
+      "layers": {
+        "L1": "pass",
+        "L2": "pass",
+        "L3": "pass",
+        "L4": "pass",
+        "L5": "pending"
+      },
+      "severity": {
+        "P0": 0,
+        "P1": 0,
+        "P2": 1
+      },
+      "status_ok": true,
+      "findings": []
+    }
+  ]
+}

@@ -1398,6 +1398,11 @@ class TestAuditSampling(unittest.TestCase):
             finally:
                 audit_sampling.PENDING_P2 = orig
 
+    def test_period_validation(self):
+        from unittest.mock import patch
+        with patch.object(sys, "argv", ["audit_sampling.py", "--period", "2026/11"]):
+            self.assertEqual(audit_sampling.main(), 2)
+
 
 if __name__ == "__main__":
     unittest.main()
