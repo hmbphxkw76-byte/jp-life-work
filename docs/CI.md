@@ -148,13 +148,14 @@ reports/YYYY-MM-<slug>.md  ──md2html.py──►  reports/YYYY-MM-<slug>.htm
 - **辅助开关**：报告页工具条「隐藏更新标记」对照阅读、「展开全部删除」。
 - **呈现**：报告页新标签页独立打开，页脚提供「← 返回主题 / 返回首页」。
 
-## 六、测试体系（`src/tests/test_tools.py`，76 项）
+## 六、测试体系（`src/tests/`，140 项）
 
 | 场景 | 测试类 | 覆盖 |
 |---|---|---|
 | 命名格式合规性 | `TestNamingCompliance` | 命名正则、slug 归属、md/html 配对、无旧标签残留 |
 | 全量历史数据校验 | `TestHistoricalMigration` | 迁移清单完整性 + git 历史逐份复核内容零丢失 |
 | 跨月份对比准确性 | `TestDiffAccuracy` | 相同 / 新增 / 修改 / 删除 / 相似度阈值 / 首期 / 报告页 diff 高亮 |
+| 并行协作三层隔离 | `test_workflow_guard.py`（32 项） | 任务分支 / worktree、检出锁（占用 / 释放 / 强取 / 失效）、串行合并（happy / 冲突保留 / 校验阻断）、sync |
 
 其他：命名解析（新 + 历史）、周期与任务推导、归档策略、lint / 合规、`build_hub` 归一化比对、活跃度天数、16 主题契约。
 
@@ -203,3 +204,20 @@ python src/prompts-tools/tools/info_quality_check.py --apply
 
 **Q：如何手动跑一次定时任务？**
 GitHub Actions 页面 → 对应 workflow → 「Run workflow」；或在本地按「手动命令速查」执行。
+
+## 九、本地并行协作机制（`tools/workflow_guard.py`）
+
+CI 之外的**本地多会话 / 多任务并行**由三层隔离机制约束，避免合并错误：
+
+| 层 | 载体 | 命令 |
+|---|---|---|
+| 分支隔离（任务间） | `task/<name>` 分支 + `.worktrees/<name>` 独立工作树 | `task start / list / stop` |
+| 串行合并（main 级） | 全局 merge 锁 + 隔离合并工作树 `.worktrees/_merge` + 校验 + `--force-with-lease` | `merge` |
+| 共享检出锁（工作目录级） | `.git/workflow-guard/*.lock`（owner / 超时失效） | `lock acquire / release / run / status` |
+
+- **典型流程**：`task start <name>` → 在 `.worktrees/<name>/` 工作 → `merge <name>`
+  → `task stop <name>`；本地 main 对齐用 `sync`。
+- **与 CI 的边界**：Actions 在远端 runner 上直接推 `main`，不经过本地锁；
+  合并侧用 `--force-with-lease` 兜底，远端被 CI 推进时本地合并失败重试，不覆盖。
+- **详文档**：`tools/README.md`；**会话规约**：`.meituan-catpaw/5833106238/skills/workflow-guard/SKILL.md`；
+  **测试**：`src/tests/test_workflow_guard.py`。
