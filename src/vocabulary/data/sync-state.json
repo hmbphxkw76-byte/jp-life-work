@@ -632,10 +632,10 @@
     "economy-finance=>../../07-economy-finance/prompts/business-config.md": {
       "topic": "economy-finance",
       "target": "../../07-economy-finance/prompts/business-config.md",
-      "vocab_version": "v1.3",
-      "term_count": 77,
-      "synced_at": "2026-11-14T21:23:14",
-      "source_hash": "7219b52fec412af12c4fae0f01c3ff42b5526ea11e7068faaf641c6be7352cb6",
+      "vocab_version": "v1.4",
+      "term_count": 78,
+      "synced_at": "2026-11-15T14:14:36",
+      "source_hash": "fda24a3cc2a54b296cade5a967c50b38a3087159544a2f4a11f6dbdff7d47857",
       "term_hashes": {
         "ECF-001": "12fbf61d40dcd98cbf33631fac6a9d410958d794f00a0dfb6b1bd41e98ea2696",
         "ECF-002": "b4a207571fdfaf5106475581f5fa51916e9bdc76b26e0dec202c02a54a3809cc",
@@ -713,16 +713,17 @@
         "ECF-074": "bcbdcebfef01785562b8d445c6b1e1afe7dd160fb6b98037f0bd5efbc1b41218",
         "ECF-075": "16aed95a32890e5035d4e55630158814321114566dfb1f4e3629fd4b831b6e3b",
         "ECF-076": "c23fdd54b9b873eda2e9a550f833a2626905adc89e464611f851f3878b6dc355",
-        "ECF-077": "ff2617c742b7e8e8efd0f9709faf0b800125294788893ec107eb26ea96c106ce"
+        "ECF-077": "ff2617c742b7e8e8efd0f9709faf0b800125294788893ec107eb26ea96c106ce",
+        "ECF-078": "9752aed6993cc7a998f5404d8fdcba0b5d41c8173c9f19045169049b675d7894"
       }
     },
     "visa-immigration=>../../08-visa-immigration/prompts/business-config.md": {
       "topic": "visa-immigration",
       "target": "../../08-visa-immigration/prompts/business-config.md",
-      "vocab_version": "v1.3",
-      "term_count": 79,
-      "synced_at": "2026-11-14T20:57:56",
-      "source_hash": "36477f39334d6b398e1c8aba362cf0c884235c1fe54c8fd7e38aa668aeae82ca",
+      "vocab_version": "v1.4",
+      "term_count": 80,
+      "synced_at": "2026-11-15T14:14:37",
+      "source_hash": "93a2b6d29b4784c6b5ec9853423b865914930084d67b2fa10bba02fde8a1dbeb",
       "term_hashes": {
         "VIS-001": "fe6379489f6e0df33da0ea3f7453b1f5f1d78fedaafc5dec447cace51887cf1b",
         "VIS-002": "a9c21171d63324be11c7afb2582c016a02d73c7bd56736f483b4379434d2d003",
@@ -802,16 +803,17 @@
         "VIS-076": "f4e36641fd11227e4fd979e91a5e59f0e3596fc2a0ddd5f1c98c828ca7473711",
         "VIS-077": "eceec90d2d212e3532cbd5337ec08ea284082a8877704ac955a7f5583b07b120",
         "VIS-078": "c038af03e907836202b7961453416ce4e31ef3cd28fe99aab120d00acb3ab047",
-        "VIS-079": "26c1ff0a79b8211231e2120eff9d9c6e104f7f196c2cd0b4c959c55cf55c873c"
+        "VIS-079": "26c1ff0a79b8211231e2120eff9d9c6e104f7f196c2cd0b4c959c55cf55c873c",
+        "VIS-080": "b41aa857ab0c44587312d480001cc1a7656a8445a81a5395f6e2b36946574126"
       }
     },
     "politics-law=>../../09-politics-law/prompts/business-config.md": {
       "topic": "politics-law",
       "target": "../../09-politics-law/prompts/business-config.md",
-      "vocab_version": "v1.4",
-      "term_count": 82,
-      "synced_at": "2026-11-14T21:23:14",
-      "source_hash": "e18e1cba00be8e822f8150aedc47edd0cb36fb162927c25b1ba1127cb696c856",
+      "vocab_version": "v1.5",
+      "term_count": 85,
+      "synced_at": "2026-11-15T14:14:36",
+      "source_hash": "e6e4b80e68cc207f15580274f6a39b73df37be0c406ae789e4faf33d31b3f3fd",
       "term_hashes": {
         "LAW-001": "ba41b9c192fa8c8913cb15f76e73c0c5d6462c51a0f3f0db2056aa10978f67c2",
         "LAW-002": "db90ec4e2e5e06dbfcb4b9995e80bf8c3a3c8788faf06af6abaec59ba36da852",
@@ -894,7 +896,10 @@
         "LAW-079": "6c1a1551c4819f6b096d9e7fea4bd48994873b4aaa98a41c078505f164ae62da",
         "LAW-080": "97570491689885a75a685d2fbb58ed31df776111ac82cf77f59616f2394e32e4",
         "LAW-081": "dfe130f8e5d98c0d9ec3a49053482998862ddc1df58b2882798947f34b4af9ce",
-        "LAW-082": "b8bf1f1226666da67d80585e6e7ba78b5719c8ffd5ad0e64ebd8ce4da7781386"
+        "LAW-082": "b8bf1f1226666da67d80585e6e7ba78b5719c8ffd5ad0e64ebd8ce4da7781386",
+        "LAW-083": "ab0d2a50612cd274c224ab98bba3f81f89827e591bcbb34fc0a87123d8c5e67c",
+        "LAW-084": "e7026fc8959f386e33da9f1c02b6d5078bb5c50e269428d709944c9238a750f9",
+        "LAW-085": "9b69a8d96ce0c34985aeb1e59fdea0679d4568e5f46e8554924ac3742d054285"
       }
     },
     "education-qualification=>../../10-education-qualification/prompts/business-config.md": {
@@ -1059,10 +1064,10 @@
     "culture-life=>../../12-culture-life/prompts/business-config.md": {
       "topic": "culture-life",
       "target": "../../12-culture-life/prompts/business-config.md",
-      "vocab_version": "v1.3",
-      "term_count": 73,
-      "synced_at": "2026-11-14T21:23:14",
-      "source_hash": "bd0da77aae659648cc8e94d2e0925518a29f52afbfd9c683d84100512ce06e81",
+      "vocab_version": "v1.4",
+      "term_count": 74,
+      "synced_at": "2026-11-15T14:14:36",
+      "source_hash": "537b8c0186aadabb8f5d81a1d34199ef09b8596c970d69d599794af36401688e",
       "term_hashes": {
         "CUL-001": "191c2399a4177a1bc09f492eca7c82253a0a8306c694063f9c7de316a702ae87",
         "CUL-002": "5929962a4b4189c507c259580888e6c4d14761d6809e7455ce8428dc2c7cb2de",
@@ -1136,7 +1141,8 @@
         "CUL-070": "8c2fb45556ce9f4126c9ae74514d1578c48fb97df9ecda29061ea355a3f0b2f9",
         "CUL-071": "51574cafd67fc3af78a9d18fff1ed28d81c6ca84963bd2b2e216dbbe8fd425a8",
         "CUL-072": "b12e66c58c02f66412df113c62dd796310c6285716582e9ecc6e2cacba20f029",
-        "CUL-073": "257f84fd5fd324d4e0f714192bd5c7d0e1b5ba23184ee8b821f64119891384aa"
+        "CUL-073": "257f84fd5fd324d4e0f714192bd5c7d0e1b5ba23184ee8b821f64119891384aa",
+        "CUL-074": "6622ee4c2c4e7406cf22f83cf32447ef23627fe2e17fe8a665a6bfbda88cf6c4"
       }
     },
     "regional-info=>../../13-regional-info/prompts/business-config.md": {
