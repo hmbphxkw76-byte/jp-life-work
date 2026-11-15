@@ -192,6 +192,12 @@ def cmd_sync() -> int:
             md.write_text(text, encoding="utf-8")
             _regenerate_html(md)
             revoked += 1
+        elif valid and has:
+            # md 标识与状态均有效，但 HTML 交付物缺徽章（如渲染漂移后未重建）→ 重新生成
+            html = md.with_suffix(".html")
+            if html.is_file() and 'class="audit-badge"' not in html.read_text(encoding="utf-8", errors="replace"):
+                _regenerate_html(md)
+                applied += 1
     print(f"标识同步：注入 {applied} 份，撤销 {revoked} 份")
     return 0
 

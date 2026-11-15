@@ -28,6 +28,7 @@ import audit_registry  # noqa: E402
 import audit_sampling  # noqa: E402
 import compliance_check  # noqa: E402
 import lint_reports  # noqa: E402
+import md2html  # noqa: E402
 from archive_reports import select_archives  # noqa: E402
 from automation_status import days_since_latest  # noqa: E402
 from build_hub import build_outputs, normalize_for_check  # noqa: E402
@@ -1118,6 +1119,7 @@ class TestAuditGuard(unittest.TestCase):
             (audit_pipeline, "AUDIT_DIR", self.audit_dir),
             (audit_pipeline, "LEDGER", self.audit_dir / "audit-ledger.jsonl"),
             (audit_pipeline, "STATUS", self.audit_dir / "audit-status.json"),
+            (md2html, "ROOT", self.root),
         ]
         self._saved = [(m, n, getattr(m, n)) for m, n, _ in self._patches]
         for m, n, v in self._patches:
@@ -1162,6 +1164,32 @@ class TestAuditGuard(unittest.TestCase):
         self.assertEqual(st["state"], "audited")
         self.assertTrue(st["audit_id"].startswith("AUD-"))
         self.assertEqual(audit_pipeline.cmd_verify(), 0)
+
+    def test_rebind_after_render_drift(self):
+        """仅 HTML 渲染漂移 → 撤销后可 rebind 恢复；md 实质变更 → 不得恢复。"""
+        audit_pipeline.cmd_init()
+        audit_pipeline.cmd_submit(None, True, "generator")
+        audit_pipeline.cmd_review("initial", None, True, "pass", "", "", None)
+        audit_pipeline.cmd_review("re_review", None, True, "pass", "", "", self._evidence())
+        audit_pipeline.cmd_review("final", None, True, "pass", "", "", None)
+        self.assertEqual(self._state()[self.REPORT_REL]["state"], "audited")
+
+        # 仅 HTML 变化（模拟 html-sync 重生成，md 未变）
+        (self.root / "01-demo" / "reports" / "2026-11-demo.html").write_text(
+            "<html><body>重新渲染</body></html>", encoding="utf-8")
+        audit_pipeline.cmd_sync()
+        self.assertEqual(self._state()[self.REPORT_REL]["state"], "stale")
+        audit_pipeline.cmd_rebind()
+        self.assertEqual(self._state()[self.REPORT_REL]["state"], "audited")
+        self.assertEqual(audit_pipeline.cmd_verify(), 0)
+        self.assertIn("已审计", self.md.read_text(encoding="utf-8"))
+
+        # md 内容真的变了 → rebind 必须保持 stale（需重新走流程）
+        self.md.write_text(self.REPORT_TEXT + "\n实质修改\n", encoding="utf-8")
+        audit_pipeline.cmd_sync()
+        self.assertEqual(self._state()[self.REPORT_REL]["state"], "stale")
+        audit_pipeline.cmd_rebind()
+        self.assertEqual(self._state()[self.REPORT_REL]["state"], "stale")
 
     def test_ledger_hash_chain_and_tamper(self):
         audit_pipeline.cmd_init()
