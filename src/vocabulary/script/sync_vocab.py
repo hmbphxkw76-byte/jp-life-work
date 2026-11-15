@@ -388,6 +388,16 @@ def cmd_verify(cfg, topics, state, log_path, topic_filter) -> int:
             if not tpath.exists():
                 raise FileNotFoundError(f"目标提示词不存在：{tpath}")
             errs = verify_block(read_text_raw(tpath), tid, terms)
+            # 词库结构校验：非空 + ID 前缀（与 vocab_tool check_topic 同口径）
+            tmeta = topics["topics"][tid]
+            prefix = tmeta.get("id_prefix", "")
+            if not terms_all:
+                errs.append("词库词条数为 0")
+            elif prefix:
+                pat = re.compile(rf"^{re.escape(prefix)}-\d+$")
+                bad = [t["id"] for t in terms_all if not pat.match(t["id"])]
+                if bad:
+                    errs.append(f"ID 前缀不符 {len(bad)} 条（须为 {prefix}-<数字>，如 {'、'.join(bad[:3])}）")
             key = f"{tid}=>{tcfg['path']}"
             rec = state.get("targets", {}).get(key)
             drift = []

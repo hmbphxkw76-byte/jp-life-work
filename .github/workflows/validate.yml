@@ -131,3 +131,25 @@ jobs:
             exit 1
           fi
           echo "personal_finance_model.py 退出码 ${code:-0}"
+
+      # 词库校验：注册/目录结构（topic-check）+ 全主题结构（verify：重复 / 空值 / 分类 /
+      # ID 前缀 / 条目数下限）+ 同步区间一致性（sync check：提示词区块与词库同步）。
+      - name: 词库校验（topic-check / verify / sync check）
+        run: |
+          set +e
+          python src/vocabulary/script/vocab_tool.py topic-check; c1=$?
+          python src/vocabulary/script/vocab_tool.py verify; c2=$?
+          python src/vocabulary/script/sync_vocab.py check; c3=$?
+          set -e
+          # topic-check / verify：0/2 放行，1 阻断；sync check：存在待同步变更（2）也阻断
+          for c in "$c1" "$c2"; do
+            if [ "$c" -ne 0 ] && [ "$c" -ne 2 ]; then
+              echo "::error::词库校验失败（退出码 $c）：topic-check / verify 存在错误级项"
+              exit 1
+            fi
+          done
+          if [ "$c3" -ne 0 ]; then
+            echo "::error::词汇同步区间待更新（退出码 $c3）：运行 src/vocabulary/script/sync_vocab.py sync 后提交"
+            exit 1
+          fi
+          echo "词库校验通过（topic-check=$c1 verify=$c2 sync-check=$c3；2=仅警告不阻断）"

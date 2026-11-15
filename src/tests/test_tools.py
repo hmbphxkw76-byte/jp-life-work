@@ -17,10 +17,12 @@ import subprocess
 import sys
 import tempfile
 import unittest
+import unittest.mock
 from datetime import datetime, timezone
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "prompts-tools" / "tools"))
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "vocabulary" / "script"))
 
 import _common  # noqa: E402
 import audit_badge  # noqa: E402
@@ -30,6 +32,7 @@ import audit_preflight  # noqa: E402
 import audit_registry  # noqa: E402
 import audit_sampling  # noqa: E402
 import compliance_check  # noqa: E402
+import vocab_tool  # noqa: E402
 import lint_reports  # noqa: E402
 import md2html  # noqa: E402
 from archive_reports import select_archives  # noqa: E402
@@ -1945,6 +1948,78 @@ class TestNewAuditRules(unittest.TestCase):
             self.assertEqual(payload["l5_pending_total"], 1)
             self.assertEqual(payload["unfinished_verification"], 1)
             self.assertNotIn("l5_pending", payload["checks"])
+
+
+class TestVocabVerify(unittest.TestCase):
+    """词库 verify 校验规则（ID 前缀 / 条目数下限 / 重复 / 分类）。"""
+
+    HEADER = ("| ID | 词条 | 别名 | 分类 | 标签 | 定义 | 来源 | 首次登记 | 最近更新 |\n"
+              "| --- | --- | --- | --- | --- | --- | --- | --- | --- |\n")
+
+    def setUp(self):
+        self._tmp = tempfile.TemporaryDirectory()  # noqa: P201
+        self.root = Path(self._tmp.name)
+
+    def tearDown(self):
+        self._tmp.cleanup()
+
+    def _tmeta(self, prefix="DEM", categories=None, min_terms=1):
+        return {
+            "id": "demo",
+            "storage": self.root / "data" / "demo" / "terms.md",
+            "id_prefix": prefix,
+            "categories": categories or [],
+            "min_terms": min_terms,
+        }
+
+    def _write(self, tmeta, rows):
+        tmeta["storage"].parent.mkdir(parents=True, exist_ok=True)
+        tmeta["storage"].write_text("# 词库\n\n## 词汇表\n\n" + self.HEADER + rows,
+                                    encoding="utf-8")
+
+    def test_valid_passes(self):
+        tmeta = self._tmeta()
+        self._write(tmeta, "| DEM-001 | 词条甲 | 别名甲 | 分类A |  | 定义 | 来源 | 2026-11-14 | 2026-11-14 |\n")
+        errors, _warns = vocab_tool.check_topic(tmeta)
+        self.assertEqual(errors, [])
+
+    def test_bad_prefix_flagged(self):
+        tmeta = self._tmeta()
+        self._write(tmeta, "| XXX-001 | 词条甲 |  | 分类A |  | 定义 | 来源 | 2026-11-14 | 2026-11-14 |\n")
+        errors, _warns = vocab_tool.check_topic(tmeta)
+        self.assertTrue(any("ID 前缀不符" in e for e in errors))
+
+    def test_zero_terms_flagged(self):
+        tmeta = self._tmeta()
+        self._write(tmeta, "")
+        errors, _warns = vocab_tool.check_topic(tmeta)
+        self.assertTrue(any("词条数 0 低于下限" in e for e in errors))
+
+    def test_min_terms_flagged(self):
+        tmeta = self._tmeta(min_terms=3)
+        self._write(tmeta, "| DEM-001 | 词条甲 |  | 分类A |  | 定义 | 来源 | 2026-11-14 | 2026-11-14 |\n")
+        errors, _warns = vocab_tool.check_topic(tmeta)
+        self.assertTrue(any("低于下限 3" in e for e in errors))
+
+    def test_cmd_verify_loops_topics(self):
+        tmeta = self._tmeta()
+        self._write(tmeta, "| XXX-001 | 词条甲 |  | 分类A |  | 定义 | 来源 | 2026-11-14 | 2026-11-14 |\n")
+        cfg = {"topics": {"demo": {"storage": "data/demo/terms.md",
+                                    "imports_dir": "data/demo/imports",
+                                    "exports_dir": "data/demo/exports",
+                                    "id_prefix": "DEM", "categories": []}}}
+        buf = io.StringIO()
+        with unittest.mock.patch.object(vocab_tool, "TOOL_ROOT", self.root), \
+                contextlib.redirect_stdout(buf):
+            rc = vocab_tool.cmd_verify(cfg, None)
+        self.assertEqual(rc, 1)
+        self.assertIn("ID 前缀不符", buf.getvalue())
+
+    def test_ci_runs_vocab_verify(self):
+        wf = Path(__file__).resolve().parents[2] / ".github" / "workflows" / "validate.yml"
+        t = wf.read_text(encoding="utf-8")
+        self.assertIn("vocab_tool.py verify", t)
+        self.assertIn("sync_vocab.py check", t)
 
 
 class TestThreeSystemAlignment(unittest.TestCase):

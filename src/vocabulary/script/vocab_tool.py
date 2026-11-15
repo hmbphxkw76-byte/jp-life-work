@@ -387,14 +387,21 @@ def cmd_import(tmeta: dict, file_arg: str) -> int:
     return 2 if (skipped or invalid or warns) else 0
 
 
-def cmd_check(tmeta: dict) -> int:
+def check_topic(tmeta: dict) -> tuple[list, list]:
+    """单主题结构校验：存在性 / 重复 / 空值 / 分类 / ID 前缀 / 条目数下限 / 序号连续性。
+
+    返回 (errors, warns)；退出码语义由调用方映射（1=错误 / 2=警告 / 0=通过）。
+    """
     storage = tmeta["storage"]
     if not storage.exists():
-        print(f"[error] 词库不存在：{rel(storage)}")
-        return 1
-    terms, versions = load_storage(storage)
+        return [f"词库不存在：{rel(storage)}"], []
+    terms, _versions = load_storage(storage)
     allow = tmeta.get("categories") or None
+    prefix = tmeta.get("id_prefix", "")
+    min_terms = int(tmeta.get("min_terms", 1) or 1)
     errors, warns = [], []
+    if len(terms) < min_terms:
+        errors.append(f"词条数 {len(terms)} 低于下限 {min_terms}")
     seen, ids = {}, set()
     for t in terms:
         if t["id"] in ids:
@@ -417,11 +424,21 @@ def cmd_check(tmeta: dict) -> int:
                     errors.append(f"重复：{t['id']} 的{kind}「{v}」与 {seen[k][0]}({seen[k][1]}) 冲突")
             else:
                 seen[k] = (t["id"], kind)
-    pat = re.compile(rf"^{re.escape(tmeta['id_prefix'])}-(\d+)$")
-    nums = sorted(int(m.group(1)) for t in terms for m in [pat.match(t["id"])] if m)
-    if nums and nums != list(range(1, len(nums) + 1)):
-        warns.append(f"ID 序号不连续（{nums[0]}..{nums[-1]}）；如系人工删除条目所致属正常，建议保留连续性")
+    pat = re.compile(rf"^{re.escape(prefix)}-(\d+)$") if prefix else None
+    if pat:
+        bad = [t["id"] for t in terms if not pat.match(t["id"])]
+        if bad:
+            errors.append(f"ID 前缀不符 {len(bad)} 条（须为 {prefix}-<数字>，如 {'、'.join(bad[:3])}）")
+        nums = sorted(int(m.group(1)) for t in terms for m in [pat.match(t["id"])] if m)
+        if nums and nums != list(range(1, len(nums) + 1)):
+            warns.append(f"ID 序号不连续（{nums[0]}..{nums[-1]}）；如系人工删除条目所致属正常，建议保留连续性")
+    return errors, warns
 
+
+def cmd_check(tmeta: dict) -> int:
+    storage = tmeta["storage"]
+    terms, versions = load_storage(storage) if storage.exists() else ([], [])
+    errors, warns = check_topic(tmeta)
     print(f"[check] {rel(storage)}：共 {len(terms)} 条，版本 {versions[-1][0] if versions else '—'}")
     for e in errors:
         print(f"  [error] {e}")
@@ -434,6 +451,24 @@ def cmd_check(tmeta: dict) -> int:
         return 1
     print(f"[check] 结论：通过（0 项错误 / {len(warns)} 项警告）")
     return 2 if warns else 0
+
+
+def cmd_verify(cfg: dict, args) -> int:
+    """全主题词库校验：逐主题复用 check_topic（重复 / 空值 / 分类 / ID 前缀 / 条目数下限）。"""
+    errors, warns = [], []
+    for tid in cfg["topics"]:
+        tmeta = resolve_topic(cfg, tid)
+        e, w = check_topic(tmeta)
+        errors += [f"{tid}: {x}" for x in e]
+        warns += [f"{tid}: {x}" for x in w]
+    print(f"[verify] 注册主题 {len(cfg['topics'])} 个：{len(errors)} 项错误 / {len(warns)} 项警告")
+    for e in errors:
+        print(f"  [error] {e}")
+    for w in warns[:20]:
+        print(f"  [warn] {w}")
+    if len(warns) > 20:
+        print(f"  [warn] 其余 {len(warns) - 20} 条警告省略")
+    return 1 if errors else (2 if warns else 0)
 
 
 def cmd_tag(tmeta: dict, term_id: str, add: str, remove: str) -> int:
@@ -803,6 +838,7 @@ def main(argv=None) -> int:
     p.add_argument("--force", action="store_true", help="词库非空时确认移除注册")
     p.add_argument("--delete-data", action="store_true", help="同时删除 data/<topic>/ 数据目录")
     sub.add_parser("topic-check", help="主题注册表与目录结构一致性审计")
+    sub.add_parser("verify", help="全主题词库校验（重复 / 空值 / 分类 / ID 前缀 / 条目数下限）")
 
     args = ap.parse_args(argv)
     try:
@@ -818,6 +854,8 @@ def main(argv=None) -> int:
             return cmd_topic_remove(cfg, args)
         if args.cmd == "topic-check":
             return cmd_topic_check(cfg, args)
+        if args.cmd == "verify":
+            return cmd_verify(cfg, args)
         tmeta = resolve_topic(cfg, args.topic)
         if args.cmd == "init":
             return cmd_init(tmeta)
