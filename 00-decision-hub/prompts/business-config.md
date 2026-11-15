@@ -20,6 +20,14 @@
 {{FRESHNESS_PRIORITY}}   = 以各来源主题最新一期报告 / 登记册为准；主题未更新时沿用其最近值并注明
 {{SOURCE_LANGUAGE_RULE}} = 沿用各来源主题的来源规则；本主题不新增一手来源，只做引用与缺失标注
 {{REPO_RAW_URL_BASE}}    = https://github.com/hmbphxkw76-byte/jp-life-work/blob/main/00-decision-hub
+{{PERSONAL_PROFILE_PATH}} = data/personal_profile.md
+{{FINANCE_MODEL_PATH}}     = data/personal_finance_model.md
+{{ONEPAGER_PATH}}          = data/decision_onepager.md
+{{CONFIDENCE_STANDARD}}    = prompts/confidence-grade-standard.md
+{{DECISION_LOG_PATH}}      = data/decision_log.md
+{{DECISION_TREES_PATH}}    = data/decision_trees.md
+{{FACT_CARDS_PATH}}        = data/fact_cards.md
+{{FIVE_QUESTIONS_VIEW}}    = data/five_questions_view.md
 ```
 
 **各周期落盘规则**：
@@ -133,7 +141,28 @@
 
 ---
 
-## 八、渲染与交付差异
+## 八、决策支持件套（2026-11-15 结构化升级）
+
+| 件套 | 路径 | 作用 | 维护节奏 |
+|---|---|---|---|
+| 个人参数档案 | `data/personal_profile.md` | 六维度参数 + 五问「是 / 否 / 待定 + 依据」 | 个人输入后更新 |
+| 决策一页纸 | `data/decision_onepager.md` | Top 3 待办 + 缺失转待办台账 | 随复核增量 |
+| 个人财务模型 | `data/personal_finance_model.md` | 净储蓄率 / 回本周期（工具计算） | 登记册活值变更后重跑工具 |
+| 置信度分级 | `prompts/confidence-grade-standard.md` | 来源 × 时效 × 核验三维分级 | 框架维护 |
+| 决策树 | `data/decision_trees.md` | 驾照转换 / 中介渠道 | 事件触发 |
+| 决策日志 | `data/decision_log.md` | 决策状态变化时间线 | `decision_log.py` |
+| 事实卡片 | `data/fact_cards.md` | 高频共享数字单一源 | 值变更递增版本 |
+| 五问视图 | `data/five_questions_view.md` | 决策者专属聚合视图 | 随五问刷新 |
+
+**五问输出统一格式**：任何报告 / 登记册 / 一页纸引用五问结论，必须给出「是 / 否 / 待定」之一与对应依据 + 置信度分级码。
+
+**财务模型**：由 `src/prompts-tools/tools/personal_finance_model.py` 读取 01 / 07 / 14 / 10 / 17 登记册活值自动生成，不手改。
+
+**待核实闭环**：14 / 15 / 17 / 18 / 19 / 20 首轮核验截止 **2026-12-31**；由 `pending_verification.py` 跟踪。
+
+---
+
+## 九、渲染与交付差异
 
 - **导航基址**：`{{REPO_RAW_URL_BASE}}` + `/reports/{本期文件名}`。
 - **报告结构**：五问仪表盘按「五问 ×（结论 / 来源 / 缺失）」组织；落地清单按时间线组织；定居地档案按字段模板组织。
@@ -141,8 +170,9 @@
 
 ---
 
-## 九、版本记录
+## 十、版本记录
 
 | 版本 | 日期 | 变更 | 说明 |
 |---|---|---|---|
 | v1.0 | 2026-11-14 | 初始版本 | 建立跨主题决策层：五问框架、来源映射、只读消费纪律、缺失清单；首份季度复核报告 `reports/2026-12-decision-hub.md` |
+| v1.1 | 2026-11-15 | 决策支持件套 | 接入个人参数档案、决策一页纸（Top 3 待办）、个人财务模型、置信度分级、决策树、决策日志、事实卡片、五问视图；确立五问「是 / 否 / 待定 + 依据」统一格式 |
