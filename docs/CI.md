@@ -42,10 +42,10 @@
 
 ### 2. `html-sync.yml` — 生成物同步
 
-- **触发**：push（`**/reports/*.md`、`build_hub.py`、`md2html.py`、`report_diff.py` 变更）、手动
+- **触发**：push（`**/reports/*.md`、`build_hub.py`、`md2html.py`、`report_diff.py`、`topics.json`、`template-registry.md`、词库 `terms.md`、`src/search/**` 变更）、手动
 - **步骤**：
   1. `md2html.py` — 重新生成同名自包含 HTML（含构建期跨月对比高亮）
-  2. `build_hub.py` — 重建 `index.html`
+  2. `build_hub.py` — 重建 `index.html` 与 `search-index.json`
   3. 提交并推送（无变更则跳过）
 
 ### 3. `scheduled-maintenance.yml` — 每月定时维护

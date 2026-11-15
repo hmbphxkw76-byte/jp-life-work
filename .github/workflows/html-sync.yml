@@ -9,6 +9,12 @@ on:
       - 'src/prompts-tools/tools/build_hub.py'
       - 'src/prompts-tools/tools/md2html.py'
       - 'src/prompts-tools/tools/report_diff.py'
+      # build_hub 的其它输入：主题注册表 / 类型注册表 / 词库词条 / 检索问题索引
+      # 变更时 index.html 与 search-index.json 会过期，需一并重建。
+      - 'src/vocabulary/config/topics.json'
+      - 'src/report_templates/template-registry.md'
+      - 'src/vocabulary/data/**/terms.md'
+      - 'src/search/**'
   workflow_dispatch:
 
 concurrency:
