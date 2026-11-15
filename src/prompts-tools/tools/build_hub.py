@@ -849,8 +849,8 @@ def render_hub(topics: list[dict]) -> str:
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="日本生活与工作知识库报告索引：特定技能·签证·就业·生活·退出·家庭·防灾·中国侧衔接。">
-<meta name="keywords" content="日本,在留,特定技能,签证,司机,生活,退出,家族,防灾,中介合规,搜索">
+<meta name="description" content="日本生活与工作知识库报告索引：赴日决策五问、特定技能·签证·就业·生活·退出·家庭·防灾·中国侧衔接。">
+<meta name="keywords" content="日本,在留,特定技能,签证,司机,生活,退出,家族,防灾,中介合规,赴日决策,五问,定居地,搜索">
 <title>jp-life-work · 报告索引</title>
 <style>{HUB_CSS}</style>
 <script>document.documentElement.classList.remove('no-js');document.documentElement.classList.add('js');</script>
