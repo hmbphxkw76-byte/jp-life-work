@@ -322,12 +322,19 @@ def _iq_findings_by_path() -> dict[str, list[AuditFinding]]:
     return {p: [AuditFinding(**d) for d in items] for p, items in mapped.items()}
 
 
+def _hash_bytes(h: "hashlib._Hash", data: bytes) -> None:
+    """写入哈希前统一换行符：检出配置差异（core.autocrlf）会让同一提交在
+    不同工作区呈现 CRLF / LF 两种字节，若按原始字节哈希，缓存键会随检出
+    环境漂移（同一份内容算出两个键），既让缓存永不命中、又使生成物反复变脏。"""
+    h.update(data.replace(b"\r\n", b"\n"))
+
+
 def _iq_cache_key() -> str:
     """全库内容哈希（业务主题下全部 md 的路径 + 内容指纹）+ 判定内核版本。"""
     h = hashlib.sha256()
-    h.update(CACHE_VERSION.encode("utf-8"))
+    _hash_bytes(h, CACHE_VERSION.encode("utf-8"))
     try:
-        h.update(Path(info_quality_check.__file__).read_bytes())
+        _hash_bytes(h, Path(info_quality_check.__file__).read_bytes())
     except OSError:
         pass
     for b in iter_business_dirs():
