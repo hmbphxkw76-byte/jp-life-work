@@ -15,6 +15,7 @@
 | 月度产出待办提醒 | `scheduled-report-tasks.yml`（每月 1 日） |
 | 内容零丢失 / 对比准确性 | `src/tests/test_tools.py`（76 项） |
 | 信息质量评估 / 混乱修复 | `info-quality.yml`（每周一 02:20 UTC） |
+| 审计门禁（登记册 / 台账 / 标识 / L1–L5） | `audit-gate.yml`（阻断） |
 
 **CI 不产出报告研究内容**——报告由各主题 `prompts/business-config.md` 定义的研究流程人工/Agent 产出；CI 只校验与同步生成物。
 
@@ -85,6 +86,20 @@
   3. `unittest` — 含文档↔程序一致性校验
   4. 提交三清单（无变更则跳过）；退出码 1 时 `::error::` 告警
 - **产物**：`src/report-audits/info-quality/`（评估台账 / 修复台账 / 验证报告 / 累计修复历史 / JSON）
+
+### 6. `audit-gate.yml` — 审计门禁（阻断式）
+
+- **触发**：`push` 到 main、`pull_request`
+- **步骤与阻断条件**：
+
+| 步骤 | 命令 | 失败后果 |
+|---|---|---|
+| 登记册双向一致 | `audit_registry.py --check` | 阻断（退出码 1） |
+| 台账哈希链 + 指纹绑定 | `audit_pipeline.py --verify` | 阻断 |
+| 已审计标识一致 | `audit_badge.py --check` | 阻断 |
+| 多层级校验 | `audit_check.py --all` | 存在 P0/P1 阻断；仅 P2 放行 |
+
+- **配套**：新增报告须先按提示词三步（preflight → audit_check → audit_pipeline --submit）自检并提交审计；未通过初审不得合并。
 
 ## 三、报告生命周期
 

@@ -9,9 +9,9 @@
     "backstop": "第三层 后置兜底（周度全量 + 月度抽检 + 失效同步）"
   },
   "tasks": [
-    {"task_id": "T1", "layer": "left_shift", "title": "新增 audit_preflight.py（落盘前检查）", "owner": "system", "week": "W1", "status": "pending_acceptance", "acceptance": "判读一致率 ≥ 95%、误报率 ≤ 5%、单份 < 1s", "evidence": "TestAuditPreflight 12 项通过；22 份存量报告 preflight 阻断结论与 audit_check 单份本地判定 100% 一致；全量 0.27s（单份毫秒级）"},
-    {"task_id": "T2", "layer": "left_shift", "title": "提示词与操作指南嵌入审计入口", "owner": "generator", "week": "W1", "status": "pending", "acceptance": "三步可执行、命令路径正确、一致性测试通过", "evidence": ""},
-    {"task_id": "T3", "layer": "in_flow", "title": "AuditGuard 成果入库 + 契约测试", "owner": "system", "week": "W1", "status": "pending", "acceptance": "git 干净、unittest 全绿、--verify 通过", "evidence": ""},
+    {"task_id": "T1", "layer": "left_shift", "title": "新增 audit_preflight.py（落盘前检查）", "owner": "system", "week": "W1", "status": "done", "acceptance": "判读一致率 ≥ 95%、误报率 ≤ 5%、单份 < 1s", "evidence": "TestAuditPreflight 13 项通过；22 份存量报告 preflight 阻断结论与 audit_check 单份本地判定 100% 一致；全量 0.27s"},
+    {"task_id": "T2", "layer": "left_shift", "title": "提示词与操作指南嵌入审计入口", "owner": "generator", "week": "W1", "status": "done", "acceptance": "三步可执行、命令路径正确、一致性测试通过", "evidence": "通用基座第八/九节 + 4 个 prompt-update + 21 个操作指南嵌入；test_prompt_embeds_audit_entry 通过"},
+    {"task_id": "T3", "layer": "in_flow", "title": "AuditGuard 成果入库 + 契约测试", "owner": "system", "week": "W1", "status": "done", "acceptance": "git 干净、unittest 全绿、--verify 通过", "evidence": "提交 f4f2182 + 55c5100；TestAuditGuard 4 项通过；工作区干净；build_hub --check 通过；unittest 93 项 OK"},
     {"task_id": "T4", "layer": "in_flow", "title": "新增 audit-gate.yml 门禁", "owner": "system", "week": "W2", "status": "pending", "acceptance": "含 P1 的变更 PR 被阻断、门禁增量 ≤ 60s", "evidence": ""},
     {"task_id": "T5", "layer": "in_flow", "title": "统一门禁口径 + 历史豁免清单", "owner": "system", "week": "W2", "status": "pending", "acceptance": "新报告 lint/compliance 阻断、豁免项有因有期", "evidence": ""},
     {"task_id": "T6", "layer": "in_flow", "title": "L5 语义复核契约可执行化", "owner": "reviewer_l2", "week": "W3", "status": "pending", "acceptance": "L5 不再恒 pass、缺 evidence 的 pass 被拒", "evidence": ""},

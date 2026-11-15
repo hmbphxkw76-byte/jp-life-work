@@ -12,7 +12,7 @@
       "type_id": "employment-research",
       "md": "00-decision-hub/reports/2026-11-decision-hub.md",
       "html": "00-decision-hub/reports/2026-11-decision-hub.html",
-      "content_hash": "sha256:12c9ef04fd4b8e08915fb144149179123ab2a8bb834b85a491ce015b51851af2",
+      "content_hash": "sha256:cfd32e3dd655002e7f12a0cc6e48396442538321233359693d5e851fbb437527",
       "audit_id": "",
       "audit_state": "pending_final",
       "finalized_at": ""
@@ -125,9 +125,9 @@
       "md": "07-economy-finance/reports/2026-11-economy-finance.md",
       "html": "07-economy-finance/reports/2026-11-economy-finance.html",
       "content_hash": "sha256:f75c2df4ecaae1a29c88635e927b62d0dc86baacd43022104869aebb64c7c540",
-      "audit_id": "AUD-202611-004",
+      "audit_id": "AUD-202611-013",
       "audit_state": "audited",
-      "finalized_at": "2026-11-15T01:57:36+00:00"
+      "finalized_at": "2026-11-15T02:52:14+00:00"
     },
     {
       "report": "08-visa-immigration/reports/2026-11-visa-immigration.md",
@@ -224,7 +224,7 @@
       "html": "14-life-operations/reports/2026-11-life-operations.html",
       "content_hash": "sha256:6d2766f0a29d8c6805ec4999483627d834d090282a66c4a926b2b588266a1fa2",
       "audit_id": "",
-      "audit_state": "pending_re_review",
+      "audit_state": "pending_final",
       "finalized_at": ""
     },
     {
@@ -292,7 +292,7 @@
       "type_id": "market-monitoring",
       "md": "19-safety-disaster/reports/2026-11-safety-disaster.md",
       "html": "19-safety-disaster/reports/2026-11-safety-disaster.html",
-      "content_hash": "sha256:837875f3412834dc0ff61bdc8091033e7de2af1003052e7bf37451ec3028e755",
+      "content_hash": "sha256:2903f2cf22e4cfd66764baa74def737bcc647abec04928e7d0409cce47527a92",
       "audit_id": "",
       "audit_state": "pending_re_review",
       "finalized_at": ""

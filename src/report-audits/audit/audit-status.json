@@ -1,6 +1,6 @@
 {
   "version": "v1.0",
-  "updated": "2026-11-15T02:45:15+00:00",
+  "updated": "2026-11-15T02:52:52+00:00",
   "reports": {
     "00-decision-hub/reports/2026-11-decision-hub.md": {
       "state": "pending_final",
@@ -35,7 +35,7 @@
       "audit_id": "",
       "finalized_at": "",
       "content_hash": "sha256:a0d53595f2b7f67891f47e090b471580dde058e11349cae085e048b3a3b18de1",
-      "last_seq": 141
+      "last_seq": 154
     },
     "04-industry-logistics/reports/2026-11-industry-logistics.md": {
       "state": "audited",
@@ -60,10 +60,10 @@
     },
     "07-economy-finance/reports/2026-11-economy-finance.md": {
       "state": "audited",
-      "audit_id": "AUD-202611-004",
-      "finalized_at": "2026-11-15T01:57:36+00:00",
-      "content_hash": "sha256:b1e711ed9f85a999de16dec64f5083e5dd6a183597bf36abfed30aa2e915be20",
-      "last_seq": 101
+      "audit_id": "AUD-202611-013",
+      "finalized_at": "2026-11-15T02:52:14+00:00",
+      "content_hash": "sha256:f75c2df4ecaae1a29c88635e927b62d0dc86baacd43022104869aebb64c7c540",
+      "last_seq": 150
     },
     "08-visa-immigration/reports/2026-11-visa-immigration.md": {
       "state": "audited",
@@ -108,11 +108,11 @@
       "last_seq": 135
     },
     "14-life-operations/reports/2026-11-life-operations.md": {
-      "state": "pending_re_review",
+      "state": "pending_final",
       "audit_id": "",
       "finalized_at": "",
       "content_hash": "sha256:6d2766f0a29d8c6805ec4999483627d834d090282a66c4a926b2b588266a1fa2",
-      "last_seq": 143
+      "last_seq": 151
     },
     "15-health-wellbeing/reports/2026-11-health-wellbeing.md": {
       "state": "pending_final",
@@ -146,8 +146,8 @@
       "state": "pending_re_review",
       "audit_id": "",
       "finalized_at": "",
-      "content_hash": "sha256:837875f3412834dc0ff61bdc8091033e7de2af1003052e7bf37451ec3028e755",
-      "last_seq": 145
+      "content_hash": "sha256:2903f2cf22e4cfd66764baa74def737bcc647abec04928e7d0409cce47527a92",
+      "last_seq": 157
     },
     "20-overseas-china/reports/2026-11-overseas-china.md": {
       "state": "audited",

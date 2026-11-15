@@ -1,0 +1,74 @@
+# 审计门禁：PR 与 main 推送时执行登记册 / 台账 / 标识 / 多层级校验。
+# P0/P1 阻断合并；P2 放行（记录于 audit-check-report）。
+#
+# 退出码约定：0=通过；1=存在 P0/P1 或登记册/台账/标识不一致（阻断）；2=仅 P2（放行）。
+name: audit-gate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: audit-gate-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 安装依赖
+        run: pip install -r requirements.txt
+
+      - name: 登记册双向一致（audit_registry --check）
+        run: |
+          python src/prompts-tools/tools/audit_registry.py --check || code=$?
+          code=${code:-0}
+          if [ "$code" -eq 1 ]; then
+            echo "::error::审计登记册不一致（遗漏 / 多余 / 指纹失配）"
+            exit 1
+          fi
+          echo "audit_registry 退出码 $code"
+
+      - name: 台账哈希链与指纹绑定（audit_pipeline --verify）
+        run: |
+          python src/prompts-tools/tools/audit_pipeline.py --verify || code=$?
+          code=${code:-0}
+          if [ "$code" -eq 1 ]; then
+            echo "::error::审计台账校验失败（哈希链断裂 / 指纹失配 / 审计失效）"
+            exit 1
+          fi
+          echo "audit_pipeline --verify 退出码 $code"
+
+      - name: 已审计标识一致（audit_badge --check）
+        run: |
+          python src/prompts-tools/tools/audit_badge.py --check || code=$?
+          code=${code:-0}
+          if [ "$code" -eq 1 ]; then
+            echo "::error::「已审计」标识与审计状态不一致"
+            exit 1
+          fi
+          echo "audit_badge 退出码 $code"
+
+      # 全量多层级校验：当前存量报告 P0/P1=0；新增/变更报告引入 P0/P1 即阻断。
+      - name: 多层级校验（audit_check --all）
+        run: |
+          python src/prompts-tools/tools/audit_check.py --all || code=$?
+          code=${code:-0}
+          if [ "$code" -eq 1 ]; then
+            echo "::error::存在 P0/P1，禁止合并（见 src/report-audits/audit/audit-check-report.md）"
+            exit 1
+          fi
+          echo "audit_check 退出码 $code（2=仅 P2 放行）"
