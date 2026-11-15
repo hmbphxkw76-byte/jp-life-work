@@ -24,7 +24,7 @@ import json
 import re
 import sys
 from dataclasses import asdict, dataclass, field
-from datetime import date
+from datetime import date, timedelta
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -43,6 +43,8 @@ from lint_reports import lint_html  # noqa: E402
 AUDIT_DIR = ROOT / "src" / "report-audits" / "audit"
 CHECK_REPORT_MD = AUDIT_DIR / "audit-check-report.md"
 CHECK_REPORT_JSON = AUDIT_DIR / "audit-check-report.json"
+PENDING_P2 = AUDIT_DIR / "pending-p2.json"
+P2_REVIEW_DAYS = 30
 
 TITLE_RE = re.compile(r"<title[^>]*>(.*?)</title>", re.DOTALL)
 H2_RE = re.compile(r"<h2\b[^>]*>(.*?)</h2>", re.DOTALL)
@@ -341,6 +343,35 @@ def run_all() -> tuple[list[ReportResult], dict]:
     return results, summary
 
 
+def write_pending_p2(results: list[ReportResult], run_date: str) -> list[dict]:
+    """汇总 P2 发现到闭环台账（保留首次发现日期，更新最近发现与复核期限）。"""
+    existing: dict = {}
+    if PENDING_P2.is_file():
+        try:
+            old = json.loads(PENDING_P2.read_text(encoding="utf-8")).get("items", [])
+            for e in old:
+                existing[(e.get("report", ""), e.get("code", ""), e.get("location", ""))] = e
+        except json.JSONDecodeError:
+            existing = {}
+    items: list[dict] = []
+    for r in results:
+        for f in r.findings:
+            if f.severity != "P2":
+                continue
+            key = (r.report, f.code, f.location)
+            prev = existing.get(key, {})
+            first = prev.get("first_seen", run_date)
+            items.append({
+                "report": r.report, "code": f.code, "location": f.location,
+                "detail": f.detail, "spec": f.spec,
+                "first_seen": first, "last_seen": run_date,
+                "review_by": (date.fromisoformat(run_date) + timedelta(days=P2_REVIEW_DAYS)).isoformat(),
+            })
+    payload = {"version": "1.0", "updated": run_date, "count": len(items), "items": items}
+    PENDING_P2.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+    return items
+
+
 def _md_table(rows: list[list[str]]) -> str:
     out = ["| " + " | ".join(rows[0]) + " |", "|" + "---|" * len(rows[0])]
     for r in rows[1:]:
@@ -457,6 +488,8 @@ def main() -> int:
             }, ensure_ascii=False, indent=2))
         else:
             paths = write_report(results, summary, date.today().isoformat())
+            p2 = write_pending_p2(results, date.today().isoformat())
+            print(f"  P2 闭环台账：{len(p2)} 项 → {PENDING_P2.relative_to(ROOT)}")
             print(f"多层级校验：{summary['reports']} 份报告，"
                   f"通过 {summary['passed']} / 不通过 {summary['failed']}")
             print(f"  P0 {summary['by_severity']['P0']} / "

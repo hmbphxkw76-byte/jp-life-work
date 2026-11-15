@@ -25,6 +25,7 @@ import audit_check  # noqa: E402
 import audit_pipeline  # noqa: E402
 import audit_preflight  # noqa: E402
 import audit_registry  # noqa: E402
+import audit_sampling  # noqa: E402
 import compliance_check  # noqa: E402
 import lint_reports  # noqa: E402
 from archive_reports import select_archives  # noqa: E402
@@ -1241,6 +1242,29 @@ class TestAuditGuard(unittest.TestCase):
             self.REPORT_REL, self.md, self.md.with_suffix(".html"), "", {},
             {self.REPORT_REL: True})
         self.assertEqual(res2.layers["L5"], "pass")
+
+    def test_pending_p2_ledger_and_overdue(self):
+        res = audit_check.ReportResult(report=self.REPORT_REL, topic="01-demo",
+                                       period="2026-11", type_id="")
+        res.findings = [audit_check.AuditFinding(
+            "L4", "ABS-01", "P2", self.REPORT_REL, "绝对化", "命中绝对化措辞")]
+        p2path = self.audit_dir / "pending-p2.json"
+        orig_p2, orig_s = audit_check.PENDING_P2, audit_sampling.PENDING_P2
+        audit_check.PENDING_P2 = p2path
+        audit_sampling.PENDING_P2 = p2path
+        try:
+            items = audit_check.write_pending_p2([res], "2026-09-01")
+            self.assertEqual(len(items), 1)
+            self.assertEqual(items[0]["first_seen"], "2026-09-01")
+            self.assertEqual(items[0]["review_by"], "2026-10-01")
+            # 超期（review_by < 今日）
+            self.assertEqual(audit_sampling.overdue_p2(), items)
+            # 再次写入保留 first_seen
+            items2 = audit_check.write_pending_p2([res], "2026-11-01")
+            self.assertEqual(items2[0]["first_seen"], "2026-09-01")
+        finally:
+            audit_check.PENDING_P2 = orig_p2
+            audit_sampling.PENDING_P2 = orig_s
 
 
 class TestNewOnlyGate(unittest.TestCase):

@@ -17,7 +17,7 @@
     {"task_id": "T6", "layer": "in_flow", "title": "L5 语义复核契约可执行化", "owner": "reviewer_l2", "week": "W3", "status": "done", "acceptance": "L5 不再恒 pass、缺 evidence 的 pass 被拒", "evidence": "l5-semantic-review.md + validate_l5_evidence；cmd_review 拒收缺证据 pass；audit_check L5 派生 pending；TestAuditGuard 8 项通过"},
     {"task_id": "T7", "layer": "in_flow", "title": "md + html 双指纹绑定", "owner": "system", "week": "W2", "status": "done", "acceptance": "只改 html 触发 stale、正常同步有效", "evidence": "html_fingerprint 剥离徽章；verify/sync 双指纹；test_html_fingerprint_mismatch 通过；真实仓库 verify 通过"},
     {"task_id": "T8", "layer": "backstop", "title": "新增 audit-sampling.yml 月度抽检", "owner": "system", "week": "W3", "status": "done", "acceptance": "覆盖率 ≥ 20%、每主题 12 个月 ≥ 1 次", "evidence": "audit-sampling.yml（每月 1 日 00:25 UTC）；audit_sampling --report 试跑覆盖 22 份样本全部通过；docs/CI.md 第 7 节"},
-    {"task_id": "T9", "layer": "backstop", "title": "stale 自动同步 + P2 闭环台账", "owner": "system", "week": "W3", "status": "pending", "acceptance": "篡改 → stale、P2 全进台账且超期告警", "evidence": ""},
+    {"task_id": "T9", "layer": "backstop", "title": "stale 自动同步 + P2 闭环台账", "owner": "system", "week": "W3", "status": "done", "acceptance": "篡改 → stale、P2 全进台账且超期告警", "evidence": "scheduled-maintenance 加 --sync；audit_check 输出 pending-p2.json（26 项：22 L5-EVIDENCE/2 ABS/1 E8/1 SKELETON）；audit_sampling 超期告警；TestAuditGuard 9 项通过"},
     {"task_id": "T10", "layer": "backstop", "title": "IQ 结果缓存去冗余", "owner": "system", "week": "W4", "status": "pending", "acceptance": "audit_check --all 耗时降 ≥ 50%、结论一致率 100%", "evidence": ""}
   ],
   "verification": {

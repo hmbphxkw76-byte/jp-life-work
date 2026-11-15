@@ -25,11 +25,12 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from _common import ROOT  # noqa: E402
-from audit_check import _iq_findings_by_path, check_report, _rel  # noqa: E402
+from audit_check import _iq_findings_by_path, _l5_status, check_report, _rel  # noqa: E402
 from audit_registry import AUDIT_DIR, discover  # noqa: E402
 import compliance_check  # noqa: E402
 
 SAMPLING_DIR = AUDIT_DIR / "sampling"
+PENDING_P2 = AUDIT_DIR / "pending-p2.json"
 
 # 验收门槛
 TH_STRUCT = 1.00       # 结构合规率
@@ -77,16 +78,29 @@ def _md_table(rows: list[list[str]]) -> str:
     return "\n".join(out)
 
 
+def overdue_p2() -> list[dict]:
+    """P2 闭环台账中已超过复核期限（review_by < 今日）的条目。"""
+    if not PENDING_P2.is_file():
+        return []
+    try:
+        items = json.loads(PENDING_P2.read_text(encoding="utf-8")).get("items", [])
+    except json.JSONDecodeError:
+        return []
+    today = date.today().isoformat()
+    return [e for e in items if e.get("review_by", "") < today]
+
+
 def run_sample(period: str) -> dict:
     entries = discover()
     sample = select_sample(entries, period)
     iq = _iq_findings_by_path()
+    l5 = _l5_status()
     results = []
     for e in sample:
         rel = e["report"]
         md = ROOT / rel
         html = md.with_suffix(".html")
-        res = check_report(rel, md, html, e["type_id"], iq)
+        res = check_report(rel, md, html, e["type_id"], iq, l5)
         # 状态一致性：audited ⟺ 标识存在
         status_ok = True
         if e.get("audit_state") == "audited":
@@ -119,6 +133,7 @@ def run_sample(period: str) -> dict:
         "period": period, "total_reports": len(entries), "sample_size": total,
         "struct_ok": struct_ok, "elem_ok": elem_ok, "consist_ok": consist_ok,
         "passed": passed, "rate": rate, "p0": p0, "p1": p1, "p2": p2,
+        "overdue_p2_count": len(overdue_p2()),
         "checks": checks, "ok": all(checks.values()),
         "results": results,
     }
@@ -178,6 +193,9 @@ def main() -> int:
         paths = write_report(payload)
         print(f"抽检完成：{payload['sample_size']}/{payload['total_reports']} 份，"
               f"合格率 {payload['rate']:.0%}；P0 {payload['p0']} / P1 {payload['p1']} / P2 {payload['p2']}")
+        overdue = overdue_p2()
+        if overdue:
+            print(f"[W] P2 超期未闭环：{len(overdue)} 项（见 {PENDING_P2.relative_to(ROOT)}）")
         print("  报告已写入：" + ", ".join(_rel(p) for p in paths))
     if not payload["ok"]:
         return 1
