@@ -36,6 +36,13 @@ a:hover{text-decoration:underline}
 .skip-link:focus{top:0;color:#fff;text-decoration:none}
 :focus-visible{outline:none;box-shadow:var(--focus-ring)}
 
+/* ── 已审计徽章 ── */
+.audit-badge{display:inline-flex;align-items:center;gap:10px;flex-wrap:wrap;
+  background:var(--green-l);border:1px solid var(--green);border-radius:10px;
+  padding:8px 14px;margin:0 0 14px;font-size:12.5px;color:var(--green)}
+.audit-badge .audit-seal{font-weight:700;white-space:nowrap}
+.audit-badge .audit-meta{color:var(--ink2)}
+
 /* ── 题头 Hero ── */
 .hero{background:linear-gradient(128deg,#0f2338 0%,#16324f 52%,#2f5597 100%);
   color:#fff;padding:46px 36px 34px;border-radius:0 0 18px 18px;margin-bottom:24px}
@@ -155,13 +162,14 @@ main.hide-diff .diff-del-group{display:none}
   <h1>赴日决策仪表盘 · 2026-Q4 季度复核</h1>
   <div class="sub">版本：v1.1（P0 与 Phase 2–4 状态刷新）｜数据基准日：2026-11-14</div>
   <div class="meta"><b>免责声明</b>：本报告为信息整理与条件化建议，不构成法律意见或税务意见；重大决策请咨询执业法律 / 税务专业人士。<br><b>版本</b>：v1.1（P0 与 Phase 2–4 状态刷新）<br><b>数据基准日</b>：2026-11-14<br><b>主题类型</b>：职业就业调研型（employment-research）· 跨主题综合层<br><b>受众定位</b>：本人（拟通过特定技能签证赴日从事货运司机工作）的决策支持层<br><b>来源规则</b>：本主题不新增一手来源，全部结论引用 01–20 主题报告 / 登记册；每个结论附「（来源：主题 NN）」标注</div>
+  
   <div><span class="tag">2026-12</span><span class="tag">职业就业调研型</span></div>
 </header>
 <nav class="report-nav" aria-label="报告导航">
   <div class="wrap">
     <div class="nav-url">
       <span class="nav-url-label">报告路径</span>
-      <a href="2026-12-decision-hub.html">00-decision-hub/reports/2026-12-decision-hub.html</a>
+      <a href="2026-12-decision-hub.html">00-decision-hub\reports\2026-12-decision-hub.html</a>
     </div>
     <div class="nav-tabs"><a href="#s1">一、执行摘要（五问结论速览）</a><a href="#s2">二、问题 1：去不去（值不值）</a><a href="#s3">三、问题 2：能不能去（门槛）</a><a href="#s4">四、问题 3：怎么去（路径）</a><a href="#s5">五、问题 4：去哪（定居地）</a><a href="#s6">六、问题 5：最坏怎么办（退出）</a><a href="#s7">七、暴露的缺失清单</a><a href="#s8">八、数据可靠性与局限说明</a><a href="#s9">九、参考来源清单</a></div>
     <div class="diff-bar"><span class="diff-summary">2026-12 期与 2026-11 期对比：新增 21 处、修改 12 处、删除 92 处，未变更 46 处。</span><button class="diff-toggle" id="tg-diff">隐藏更新标记</button><button class="diff-toggle" id="tg-del">展开全部删除</button></div>
@@ -337,7 +345,7 @@ main.hide-diff .diff-del-group{display:none}
 <td>4</td>
 </tr>
 </tbody>
-</table></details><h2 id="s2" class="sec">二、问题 1：去不去（值不值）</h2><h3 id="21">2.1 收入面</h3><li>运输业·邮政业月均现金给与总额 <strong>341,158 円</strong>（+4.9%，2026-09，2026-11-06 公布；全产业对照 311,409 円、+4.6%）（来源：01 · 厚労省毎月勤労統計）。</li><li>全ト协 2025 年度版：男性大型司机月薪 <strong>39.5 万円</strong>（+4%）、全职务平均 <strong>35.98 万円</strong>（+5.3%）、含奖金 <strong>41.64 万円</strong>（+7.1%）（经 LogiShift 转引，原件待复核）（来源：01 · B/C 级）。</li><li>求人抽样：东京圈 <strong>22–45 万円</strong> / 大阪圈 <strong>28–40.5 万円</strong> / 地方 <strong>25–36 万円</strong>（聚合平台转载，C 级，原企业页未逐一回溯）（来源：01 · 9 样本）。</li><details class="diff-del-group"><summary>已更新 · 删除 1 处（点击展开）</summary><li>生活成本：单身·地方都市月度成本模型 <strong>10.5–17.0 万円/月</strong>（常见 12–14 万，手册估算，待核验）；100 日元中间价 <strong>4.2355 元</strong>（2026-11-10）（来源：07 · 登记册 / 手册估算）。</li></details><h3 id="22">2.2 缺口与窗口期</h3><li>有效求人倍率 <strong>2.56</strong>（2026-09，常用含パート，2026-10-30 公布；全产业 1.06）（来源：01 · 厚労省）。</li><li>司机缺口（并列口径）：现状 <strong>14%</strong> / 2030 年 <strong>34%</strong>（政策包示意图）≠ 2030 年度平均约 <strong>7%</strong> / 最大约 <strong>25%</strong>（MLIT 再检证）（来源：01 · 并列不可合并）。</li><li>受入上限 <strong>22,100 人</strong>（2026-01-23 阁议，现行）；在留者 843 人、充足率 <strong>3.8%</strong>（2026-08 末）（来源：01 · ISA）。</li><h3 id="23">2.3 行业可持续性</h3><details class="diff-del-group"><summary>已更新 · 删除 1 处（点击展开）</summary><li>运賃：日銀 SPPI「道路貨物輸送」<strong>+4.6%</strong>（2026-09 速報）；标准运賃 +8%（令和 6 年告示第 209 号）；价格转嫁率 24.2% → <strong>34.7%</strong>（2023-09 → 2025-09）（来源：04 / 01）。</li></details><li class="diff-mod"><span class="diff-badge">已更新 · 修改</span>运賃：日銀 SPPI「道路貨物輸送」<strong>+4.6%</strong>（2026-09 速報）；标准运賃 +8%（令和 6 年告示第 209 号）；价格转嫁率 24.2% → <strong>34.7%</strong>（2023-09 → 2025-09）（来源：04 · 01）。</li><li>倒産：TSR 2026-10 運輸業 <strong>38 件</strong>（+2.7%，连续 2 个月增）、人手不足関連 <strong>50 件</strong>（来源：04 · TSR / TDB）。</li><li>自动化：截至 2026-02 全国 <strong>10 カ所</strong>实现 L4 社会实装；2027 年度前对求职者实质就业影响约等于 0（推断）（来源：05）。</li><h3 id="24">2.4 判读</h3><p><strong>事实</strong>：窗口已开（充足率 3.8%、求人倍率 2.56），但名额口径存在 22,100 / 24,500 两组官方数字并存（来源：01 待复核）。收入高于全产业均值，但司机绝对收入仍偏低。
+</table></details><h2 id="s2" class="sec">二、问题 1：去不去（值不值）</h2><h3 id="21">2.1 收入面</h3><li>运输业·邮政业月均现金给与总额 <strong>341,158 円</strong>（+4.9%，2026-09，2026-11-06 公布；全产业对照 311,409 円、+4.6%）（来源：01 · 厚労省毎月勤労統計）。</li><li>全ト协 2025 年度版：男性大型司机月薪 <strong>39.5 万円</strong>（+4%）、全职务平均 <strong>35.98 万円</strong>（+5.3%）、含奖金 <strong>41.64 万円</strong>（+7.1%）（jta.or.jp 直读，A 级；原件待复核）（来源：01）。</li><li>求人抽样：东京圈 <strong>22–45 万円</strong> / 大阪圈 <strong>32–38 万円</strong>（桑原经官网回溯修正）/ 地方 <strong>25–36 万円</strong>（聚合平台转载为主，C 级；10 条样本中 9 条已官网回溯）（来源：01）。</li><details class="diff-del-group"><summary>已更新 · 删除 1 处（点击展开）</summary><li>生活成本：单身·地方都市月度成本模型 <strong>10.5–17.0 万円/月</strong>（常见 12–14 万，手册估算，待核验）；100 日元中间价 <strong>4.2355 元</strong>（2026-11-10）（来源：07 · 登记册 / 手册估算）。</li></details><h3 id="22">2.2 缺口与窗口期</h3><li>有效求人倍率 <strong>2.56</strong>（2026-09，常用含パート，2026-10-30 公布；全产业 <strong>1.19</strong>，季节调整值）（来源：01 · 厚労省）。</li><li>司机缺口（并列口径）：现状 <strong>14%</strong> / 2030 年 <strong>34%</strong>（政策包示意图）≠ 2030 年度平均约 <strong>7%</strong> / 最大约 <strong>25%</strong>（MLIT 再检证）（来源：01 · 并列不可合并）。</li><li>受入上限 <strong>22,100 人</strong>（2026-01-23 阁议，现行）；在留者 843 人、充足率 <strong>3.8%</strong>（2026-08 末）（来源：01 · ISA）。</li><h3 id="23">2.3 行业可持续性</h3><details class="diff-del-group"><summary>已更新 · 删除 1 处（点击展开）</summary><li>运賃：日銀 SPPI「道路貨物輸送」<strong>+4.6%</strong>（2026-09 速報）；标准运賃 +8%（令和 6 年告示第 209 号）；价格转嫁率 24.2% → <strong>34.7%</strong>（2023-09 → 2025-09）（来源：04 / 01）。</li></details><li class="diff-mod"><span class="diff-badge">已更新 · 修改</span>运賃：日銀 SPPI「道路貨物輸送」<strong>+4.6%</strong>（2026-09 速報）；标准运賃 +8%（令和 6 年告示第 209 号）；价格转嫁率 24.2% → <strong>34.7%</strong>（2023-09 → 2025-09）（来源：04 · 01）。</li><li>倒産：TSR 2026-10 運輸業 <strong>38 件</strong>（+2.7%，连续 2 个月增）、人手不足関連 <strong>50 件</strong>（来源：01 · TSR / TDB）。</li><li>自动化：截至 2026-02 全国 <strong>10 カ所</strong>实现 L4 社会实装；2027 年度前对求职者实质就业影响约等于 0（推断）（来源：01）。</li><h3 id="24">2.4 判读</h3><p><strong>事实</strong>：窗口已开（充足率 3.8%、求人倍率 2.56）；受入上限以 <strong>22,100 人</strong>为准（2026-01-23 阁议，现行），24,500 为已废止旧方针、ssw.go.jp 未同步（来源：01）。收入高于全产业均值，但司机绝对收入仍偏低。
 <strong>推断</strong>：缺口与运賃传导决定雇主付费意愿，窗口期长度取决于缺口修正节奏；自动驾驶在 2027 年度前不构成实质就业威胁。
 <strong>⚠ 缺失</strong>：中国同岗到手收入对比（01 待复核）；生活成本细目（07 / 13 部分覆盖）。</p><h2 id="s3" class="sec">三、问题 2：能不能去（门槛）</h2><h3 id="31">3.1 在留资格要件</h3><li>特定技能 1 号「自動車運送業」分野；受入上限 <strong>22,100</strong>；<strong>本分野不得 2 号</strong>（来源：08 / 01 · ISA / MLIT）。</li><li>卡车 A2.2 不变；出租车 / 巴士区分 <strong>2027-04-01 起 COE 申请须 B1 相当以上</strong>（JLPT N3 以上 + CEFR B1 判定）（来源：01 · 令和 8 年 10 月 9 日改正）。</li><li>无健康检查义务、仅適性診断（来源：01）。</li><h3 id="32">3.2 考试与考场</h3><li>ClassNK 技能試験 <strong>6,500 円</strong>（US$45、越南 US$50）、证明书 <strong>15,000 円</strong>；JFT-Basic <strong>10,000 円</strong>；JLPT N4 <strong>450 元</strong>（来源：01 · ClassNK / Prometric / JLPT）。</li><li>实施国 18，<strong>中国大陆无考点</strong>；中国考生实际路径为赴第三国考试或在日本国内受验（来源：01 · 2026-09 月报）。</li><details class="diff-del-group"><summary>已更新 · 删除 1 处（点击展开）</summary><li>日语路径：中国大陆无 JFT-Basic 考点，主攻 <strong>JLPT N4</strong>（目标 2027-07；每年 7 月 / 12 月两次）（来源：11）。</li></details><h3 id="33">3.3 驾照转换</h3><li>外免切替 <strong>2025-10 起大幅严格化</strong>：知识确认合格率 <strong>42.8%</strong>、技能确认 <strong>13.1%</strong>（2025-10–12，警察庁，经 drivey.jp 转引）（来源：10 / 01）。</li><li>教习所费用：普通教习全国官方均价（AT 限定）<strong>324,381 円</strong>（総務省 2026-09）；MT 通学 <strong>30–40 万円</strong>；大型 <strong>25–28 万円</strong>（来源：10 / 01）。</li><h3 id="34">3.4 判读</h3><p><strong>事实</strong>：门槛明确，由「在留要件 + 考试 + 驾照 + 日语」四关构成；其中<strong>驾照转换成功率低</strong>（技能确认 13.1%）与<strong>中国大陆无考点</strong>是两大瓶颈。
 <strong>推断</strong>：若中国驾照无法顺利转换，需预留 30–40 万円教习所预算与 6–12 个月时间；考试需规划赴第三国或赴日受验行程。
@@ -665,7 +673,7 @@ main.hide-diff .diff-del-group{display:none}
 </table><h3 id="44">4.4 判读</h3><p><strong>事实</strong>：路径链条为「中介 → 特定活动入境 → 考试 → 驾照 → 特定技能 1 号」，关键耗时在驾照与考试。
 <strong>推断</strong>：中介是最大风险变量——无资质渠道属违法，且存在虚假招募与收费陷阱风险；建议只走商务部名单内企业，并逐一核验日方受入机关。
 <strong>⚠ 缺失</strong>：中介防骗专题（未建）；落地手续执行清单细目（14 基线已建，消费入口待登记册回写）。</p></details><h2 id="s5" class="sec">五、问题 4：去哪（定居地）</h2><h3 id="51">5.1 选择框架</h3><li>13 提供 <strong>7 维评分框架</strong>（交通 / 买东西 / 医疗 / 治安 / 教育 / 灾害 / 生活成本）与候选地域速览（来源：13）。</li><li>家賃相场、医療機関、災害リスク、住みやすさ、気候为地域比较的五个关键面（来源：13 · 登记册）。</li><details class="diff-del-group"><summary>已更新 · 删除 1 处（点击展开）</summary><li>决策流程：Offer 阶段用 7 维框架打分（≥3.5 考虑）；入职前读该自治体「外国人生活ガイド」；落地 1 个月后实际体验 vs 预期复盘（来源：13）。</li></details><li class="diff-new"><span class="diff-badge">已更新 · 新增</span>地域间公共服务差异（医疗 / 教育资源地域差）需纳入（来源：13）。</li><details class="diff-del-group"><summary>已更新 · 删除 1 处（点击展开）</summary><li>地域差证据：病院一般病床 <strong>879,728 床</strong>（厚生労働省 令和 6 年医療施設調査，2024-10-01）；日本語指導が必要な児童生徒 <strong>84,759 人</strong>、其中外国籍 <strong>73,313 人</strong>（文部科学省，令和 7 年度）（来源：13）。</li></details><div class="diff-block diff-new"><span class="diff-badge">已更新 · 新增</span><h3 id="52">5.2 判读</h3></div><details class="diff-del-group"><summary>已更新 · 删除 1 处（点击展开）</summary><h3 id="52">5.2 生活成本与住房</h3></details><div class="diff-block diff-new"><span class="diff-badge">已更新 · 新增</span><p><strong>事实</strong>：框架与候选地域数据就绪，可作为选择依据。
-<strong>⚠ 缺失</strong>：<strong>个人定居地选择未记录</strong>——13 的定居地档案为空白模板，需在确定居住地后填写（含城市 / 区、入住时间、房租 / 通勤、自治体外籍支援窗口、免费日语教室、主要医院 / 夜间救急、常用店等字段）。</p></div><details class="diff-del-group"><summary>已更新 · 删除 18 处（点击展开）</summary><li>住房初期费用含敷金 / 礼金 / 仲介手数料 / 保证会社 / 更新料，合计可达 <strong>4–8 个月</strong>房租（来源：14 / 12）。</li><li>UR 賃貸住宅收入基准（2026-11-12 核实）：家賃 62,500 円未満 → 基准月收 = 家賃 4 倍；62,500–200,000 円 → 25 万円；200,000 円以上 → 40 万円；存款基准 = 家賃 100 倍可替代收入基准（来源：12）。</li><li>生活成本模型：10.5–17.0 万円/月（手册估算，待核验）；100 日元中间价 4.2355 元（2026-11-10）（来源：07）。</li><li>多语言防灾情报：气象厅多语言版、防災庁、NHK WORLD-JAPAN 多语言链接可访问；自治体防灾邮件 / LINE 具体渠道待定居地确定后复核（来源：13）。</li><h3 id="53">5.3 定居地档案（个人记录模板）</h3><p>本档案是 00 的<strong>个人记录件</strong>，承载「问题 4：去哪」的答案。与 13-regional-info 的定居地档案模板同源；<strong>个人记录与事实分离</strong>，事实项须可回溯。确定居住地后复制改名填写。</p><p><strong>一、基本信息</strong></p><table class="fixed">
+<strong>⚠ 缺失</strong>：<strong>个人定居地选择未记录</strong>——13 的定居地档案为空白模板，需在确定居住地后填写（含城市 / 区、入住时间、房租 / 通勤、自治体外籍支援窗口、免费日语教室、主要医院 / 夜间救急、常用店等字段）。</p></div><details class="diff-del-group"><summary>已更新 · 删除 18 处（点击展开）</summary><li>住房初期费用含敷金 / 礼金 / 仲介手数料 / 保证会社 / 更新料，合计可达 <strong>4–7 个月</strong>房租（与 14 表内上限合计一致）（来源：14 / 12）。</li><li>UR 賃貸住宅收入基准（2026-11-12 核实）：家賃 62,500 円未満 → 基准月收 = 家賃 4 倍；62,500–200,000 円 → 25 万円；200,000 円以上 → 40 万円；存款基准 = 家賃 100 倍可替代收入基准（来源：12）。</li><li>生活成本模型：10.5–17.0 万円/月（手册估算，待核验）；100 日元中间价 4.2355 元（2026-11-10）（来源：07）。</li><li>多语言防灾情报：气象厅多语言版、防災庁、NHK WORLD-JAPAN 多语言链接可访问；自治体防灾邮件 / LINE 具体渠道待定居地确定后复核（来源：13）。</li><h3 id="53">5.3 定居地档案（个人记录模板）</h3><p>本档案是 00 的<strong>个人记录件</strong>，承载「问题 4：去哪」的答案。与 13-regional-info 的定居地档案模板同源；<strong>个人记录与事实分离</strong>，事实项须可回溯。确定居住地后复制改名填写。</p><p><strong>一、基本信息</strong></p><table class="fixed">
 <thead>
 <tr>
 <th style="width:33%">字段</th>
@@ -966,9 +974,9 @@ main.hide-diff .diff-del-group{display:none}
 </tr>
 </tbody>
 </table></div><h2 id="s8" class="sec">八、数据可靠性与局限说明</h2><details class="diff-del-group"><summary>已更新 · 删除 1 处（点击展开）</summary><h3 id="81">8.1 核验程度分级</h3></details><div class="diff-block diff-new"><span class="diff-badge">已更新 · 新增</span><p><strong>核验程度分级</strong>：
-- A 级（官方一手）：01 / 04 / 08 / 10 引用日本政府官方统计与政策页。
-- B 级（权威机构转引）：全ト协工资调查（经 LogiShift）、外免切替合格率（经 drivey.jp）。
-- C 级（平台抽样）：求人样本（聚合平台转载，原企业页未逐一回溯）。</p></div><details class="diff-del-group"><summary>已更新 · 删除 1 处（点击展开）</summary><li><strong>A 级（官方一手）</strong>：01 / 04 / 07 / 08 / 10 引用日本政府官方统计与政策页；13 引用厚生労働省 / 文部科学省统计。</li></details><div class="diff-block diff-new"><span class="diff-badge">已更新 · 新增</span><p><strong>已知口径冲突（并列呈现，不合并）</strong>：受入上限 22,100 ≠ 24,500；司机缺口 14%/34% ≠ 7%/25%；工资（厚労省）≠ 含赏与（全ト协）。</p></div><details class="diff-del-group"><summary>已更新 · 删除 1 处（点击展开）</summary><li><strong>B 级（权威机构转引）</strong>：全ト协工资调查（经 LogiShift）、外免切替合格率（经 drivey.jp）、SGHD 決算短信（release.tdnet.info）。</li></details><div class="diff-block diff-new"><span class="diff-badge">已更新 · 新增</span><p><strong>主要局限</strong>：
+- A 级（官方一手）：01 / 04 / 08 / 10 引用日本政府官方统计与政策页；全ト协工资调查（jta.or.jp 直读）。
+- B 级（权威机构转引）：外免切替合格率（经 drivey.jp）。
+- C 级（平台抽样）：求人样本（聚合平台转载，原企业页未逐一回溯）。</p></div><details class="diff-del-group"><summary>已更新 · 删除 1 处（点击展开）</summary><li><strong>A 级（官方一手）</strong>：01 / 04 / 07 / 08 / 10 引用日本政府官方统计与政策页；13 引用厚生労働省 / 文部科学省统计；全ト协工资调查（jta.or.jp 直读）。</li></details><div class="diff-block diff-new"><span class="diff-badge">已更新 · 新增</span><p><strong>已知口径冲突（并列呈现，不合并）</strong>：受入上限 <strong>22,100</strong>（现行；24,500 已废止，不再并列）；司机缺口 14%/34% ≠ 7%/25%；工资（厚労省）≠ 含赏与（全ト协）。</p></div><details class="diff-del-group"><summary>已更新 · 删除 1 处（点击展开）</summary><li><strong>B 级（权威机构转引）</strong>：外免切替合格率（经 drivey.jp）、SGHD 決算短信（release.tdnet.info）。</li></details><div class="diff-block diff-new"><span class="diff-badge">已更新 · 新增</span><p><strong>主要局限</strong>：
 1. 本主题不新增一手来源，结论依赖 01–20 的更新节奏；
 2. 14/15/16/17/18/19/20 已接入但部分仍为初析级（16 的 3 项部分核验、18/19/20 的首期待补），影响问题 3、5 的判读完整度；
 3. 个人定居地与个人情况（资金、家属、时间窗口）未记录，问题 4、5 无法完全收敛。</p></div><details class="diff-del-group"><summary>已更新 · 删除 9 处（点击展开）</summary><li><strong>C 级（平台抽样）</strong>：求人样本（聚合平台转载，原企业页未逐一回溯）。</li><h3 id="82">8.2 已知口径冲突（并列呈现，不合并、不取均值）</h3><table class="fixed">
@@ -981,7 +989,7 @@ main.hide-diff .diff-del-group{display:none}
 <tbody>
 <tr>
 <td>受入上限</td>
-<td>22,100（2026-01-23 阁议，现行）≠ 24,500（ssw.go.jp 中文页未同步）</td>
+<td><strong>22,100</strong>（2026-01-23 阁议，现行）；24,500 为已废止旧方针（ssw.go.jp 未同步），不再并列</td>
 </tr>
 <tr>
 <td>司机缺口</td>
@@ -1008,7 +1016,7 @@ main.hide-diff .diff-del-group{display:none}
 </main>
 <footer class="footer" role="contentinfo" aria-label="页脚">
   <p>赴日决策仪表盘 · 赴日决策仪表盘 · 2026-Q4 季度复核｜2026-12<br>
-  报告路径：00-decision-hub/reports/2026-12-decision-hub.html</p>
+  报告路径：00-decision-hub\reports\2026-12-decision-hub.html</p>
   <p class="backlinks">
     <a href="../../index.html#topic-00-decision-hub">← 返回主题</a>
     <a href="../../index.html">返回首页</a>

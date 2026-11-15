@@ -27,7 +27,7 @@
 
 - **可行性**：按修得单位计学费、最长 10 年在学（放送大学），与全职工作并行是制度设计前提；文科省[マナパス](https://manapass.mext.go.jp/ "来源：https://manapass.mext.go.jp/, 2026")将其列为主要リカレント教育渠道
 - **学费带（在职取得学位）**：
-  - [放送大学](https://tobe.ouj.ac.jp/fee/ "来源：https://tobe.ouj.ac.jp/fee/, 2026")全科履修生：入学料 24,000 円+授课料 1 单位 6,000 円，毕业（124 单位）总费用 **768,000 円～**；10 年在学修满 124 单位总费用不变；3 年次编入（62 单位认定）例仅 406,000 円
+  - [放送大学](https://tobe.ouj.ac.jp/fee/ "来源：https://tobe.ouj.ac.jp/fee/, 2026")全科履修生：入学料 24,000 円+授课料 1 单位 6,000 円，毕业（124 单位）总费用 **768,000 円～**；10 年在学修满 124 单位总费用不变；3 年次编入（62 单位认定）例仅 396,000 円（24,000＋62×6,000）
   - 私立通信制：年 27–31 万円级——[近畿大学通信教育部](https://www.kindai.ac.jp/tsushin/course/regular/architecture/expense/ "来源：https://www.kindai.ac.jp/tsushin/course/regular/architecture/expense/, 2026")授课料 306,000 円/年、[东京通信大学](https://www.internet.ac.jp/english/ "来源：https://www.internet.ac.jp/english/, 2026")初年度 271,000 円～（4 年总 834,000 円～）
   - 与 02 章「学历账户」衔接：先单科目履修试水 → 全科履修；见 [02 学习体系与教育投资](02-learning-investment.md)
 - **注意**：学位取得与「专业相关性」需同步规划——技人国审查看学历专业与业务的相关性（见四）

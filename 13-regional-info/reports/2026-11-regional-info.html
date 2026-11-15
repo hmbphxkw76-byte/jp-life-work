@@ -36,6 +36,13 @@ a:hover{text-decoration:underline}
 .skip-link:focus{top:0;color:#fff;text-decoration:none}
 :focus-visible{outline:none;box-shadow:var(--focus-ring)}
 
+/* ── 已审计徽章 ── */
+.audit-badge{display:inline-flex;align-items:center;gap:10px;flex-wrap:wrap;
+  background:var(--green-l);border:1px solid var(--green);border-radius:10px;
+  padding:8px 14px;margin:0 0 14px;font-size:12.5px;color:var(--green)}
+.audit-badge .audit-seal{font-weight:700;white-space:nowrap}
+.audit-badge .audit-meta{color:var(--ink2)}
+
 /* ── 题头 Hero ── */
 .hero{background:linear-gradient(128deg,#0f2338 0%,#16324f 52%,#2f5597 100%);
   color:#fff;padding:46px 36px 34px;border-radius:0 0 18px 18px;margin-bottom:24px}
@@ -155,13 +162,14 @@ main.hide-diff .diff-del-group{display:none}
   <h1>日本地域信息 · 2026-11 月度报告</h1>
   <div class="sub">版本：v1.0（2026-11 月度）｜数据基准日：2026-11-14</div>
   <div class="meta"><b>免责声明</b>：本报告为信息整理与条件化建议，不构成法律意见或税务意见；重大决策请咨询执业法律 / 税务专业人士。<br><b>版本</b>：v1.0（2026-11 月度）<br><b>数据基准日</b>：2026-11-14<br><b>主题类型</b>：市场指标监测型（market-monitoring）<br><b>受众定位</b>：面向拟在日本选择就业地 / 定居地、需要地域横向对比与决策框架的读者，兼具就业地选择与长期定居规划视角。<br><b>来源规则</b>：① 国土交通省（住居・地価統計）、総務省統計局（地域统计）、気象庁（警報・注意報 / 多言語防災気象情報）、防災庁（防灾政策与大规模灾情）、厚生労働省（医師・歯科医師・薬剤師統計）/ 文部科学省（外国人児童生徒调查）、各都道府県 / 市町村…</div>
+  
   <div><span class="tag">2026-11</span><span class="tag">市场指标监测型</span></div>
 </header>
 <nav class="report-nav" aria-label="报告导航">
   <div class="wrap">
     <div class="nav-url">
       <span class="nav-url-label">报告路径</span>
-      <a href="2026-11-regional-info.html">13-regional-info/reports/2026-11-regional-info.html</a>
+      <a href="2026-11-regional-info.html">13-regional-info\reports\2026-11-regional-info.html</a>
     </div>
     <div class="nav-tabs"><a href="#s1">一、结论先行</a><a href="#s2">二、关键数字卡</a><a href="#s3">三、月度指标逐项对比</a><a href="#s4">四、信号灯判定</a><a href="#s5">五、与首期基线的偏离</a><a href="#s6">六、数据缺口与未核验项</a><a href="#s7">七、下期观察清单</a><a href="#s8">八、台账更新编号与来源</a></div>
     
@@ -230,7 +238,7 @@ main.hide-diff .diff-del-group{display:none}
 </blockquote>
 <h3 id="_3">核心结论（沿用首期基线）</h3>
 <p><strong>结论 1</strong>：本主题当前处于「框架就绪、活值待建」状态。证据：7 维评分框架与决策流程已建立（<a href="../handbook/01-region-choice.md">handbook/01-region-choice.md</a>）；登记册 #1–#4 均待基线确立 / 待记录。标注：事实。</p>
-<p><strong>结论 2</strong>：地域差在公共服务领域呈系统性存在。证据：病院一般病床 879,728 床（厚生労働省 令和 6 年医療施設調査，2024-10-01）；日本語指導が必要な児童生徒 84,759 人、其中外国籍 73,313 人、较上次 +27.0%（文部科学省，令和 7 年度）。标注：事实。</p>
+<p><strong>结论 2</strong>：地域差在公共服务领域<strong>可能</strong>呈系统性存在（<strong>推断</strong>）：现有证据仅为全国口径总数（病院一般病床 879,728 床、日本語指導が必要な児童生徒 84,759 人），<strong>不含地域分布数据</strong>；「医师向大都市圈集中」等为推断，待地域分布数据补齐后复核。标注：推断。</p>
 <p><strong>结论 3</strong>：横向比较须先固定口径，否则存在混算风险。证据：登记册口径清单列明登记口径 ≠ 挂牌口径、都道府県 ≠ 市町村、従業地 / 居住地口径须区分。标注：事实。</p>
 <p><strong>结论 4</strong>：不就学风险与日语指导资源存在地域差。证据：调查已全国实施但自治体间把握体制仍有差异；日语指导教室有无、教员配置密度因自治体差异大。标注：推断。</p>
 <p><strong>结论 5</strong>：候选地域速览为定性判断，不构成「最优地域」结论。证据：候选地域速览表（自述「待实地补充」）；business-config 第二节结论边界。标注：事实（属定性清单，非排名）。</p>
@@ -1042,7 +1050,7 @@ main.hide-diff .diff-del-group{display:none}
 </main>
 <footer class="footer" role="contentinfo" aria-label="页脚">
   <p>日本地域信息 · 日本地域信息 · 2026-11 月度报告｜2026-11<br>
-  报告路径：13-regional-info/reports/2026-11-regional-info.html</p>
+  报告路径：13-regional-info\reports\2026-11-regional-info.html</p>
   <p class="backlinks">
     <a href="../../index.html#topic-13-regional-info">← 返回主题</a>
     <a href="../../index.html">返回首页</a>

@@ -36,6 +36,13 @@ a:hover{text-decoration:underline}
 .skip-link:focus{top:0;color:#fff;text-decoration:none}
 :focus-visible{outline:none;box-shadow:var(--focus-ring)}
 
+/* ── 已审计徽章 ── */
+.audit-badge{display:inline-flex;align-items:center;gap:10px;flex-wrap:wrap;
+  background:var(--green-l);border:1px solid var(--green);border-radius:10px;
+  padding:8px 14px;margin:0 0 14px;font-size:12.5px;color:var(--green)}
+.audit-badge .audit-seal{font-weight:700;white-space:nowrap}
+.audit-badge .audit-meta{color:var(--ink2)}
+
 /* ── 题头 Hero ── */
 .hero{background:linear-gradient(128deg,#0f2338 0%,#16324f 52%,#2f5597 100%);
   color:#fff;padding:46px 36px 34px;border-radius:0 0 18px 18px;margin-bottom:24px}
@@ -155,13 +162,14 @@ main.hide-diff .diff-del-group{display:none}
   <h1>日本司机职业 · 2026-11 月度报告</h1>
   <div class="sub">版本：v1.0（2026-11 月度）｜数据基准日：2026-11-14</div>
   <div class="meta"><b>免责声明</b>：本报告为信息整理与条件化建议，不构成法律意见或税务意见；重大决策请咨询执业法律 / 税务专业人士。<br><b>版本</b>：v1.0（2026-11 月度）<br><b>数据基准日</b>：2026-11-14<br><b>主题类型</b>：职业就业调研型（employment-research）<br><b>受众定位</b>：面向准备或正在日本从事货运司机工作的读者，兼具求职顾问与现场落地指导视角。<br><b>来源规则</b>：统计与制度类须取日文官方原文（厚生労働省 / 国土交通省 / 警察庁）；求人样本标注平台与采集日期，官方统计活值只读引用 01-ssw-driver 登记册。</div>
+  
   <div><span class="tag">2026-11</span><span class="tag">职业就业调研型</span></div>
 </header>
 <nav class="report-nav" aria-label="报告导航">
   <div class="wrap">
     <div class="nav-url">
       <span class="nav-url-label">报告路径</span>
-      <a href="2026-11-career-driver.html">02-career-driver/reports/2026-11-career-driver.html</a>
+      <a href="2026-11-career-driver.html">02-career-driver\reports\2026-11-career-driver.html</a>
     </div>
     <div class="nav-tabs"><a href="#s1">一、核心结论（摘要）</a><a href="#s2">二、行业与政策发展趋势</a><a href="#s3">三、人才供需与薪酬（核心模块）</a><a href="#s4">四、雇主与企业类型细分</a><a href="#s5">五、岗位技能要求</a><a href="#s6">六、行业认可的职业资质与证书</a><a href="#s7">七、就业落地路径建议（结论章）</a><a href="#s8">八、数据可靠性与局限说明</a><a href="#s9">九、参考来源清单</a></div>
     
@@ -373,7 +381,7 @@ main.hide-diff .diff-del-group{display:none}
 <li><strong>事故与异常处理流程</strong>：事故发生→确保安全、救护优先→报警（110）→联系公司运行管理者→<strong>不可自行与对方「私了」</strong>；车辆异常→立即靠边→报告→等指示；货物异常（破损 / 短缺 / 温度异常）→拍照、保留传票、当日报告（冷链温度异常是高责任场景）；交通违规→点数制（6 点内停驾照 courses），特定技能者重大违规直接影响在留更新。</li>
 <li><strong>饮酒与药物（红线）</strong>：酒测出车前后各一次，<strong>检出即点呼不通过→当日停驾</strong>；前夜饮酒次日晨检出（残留酒精）也是事故实绩高发点——当天的酒当天止；特定技能者因酒精 / 药物事故＝几乎必然失去在留资格。</li>
 <li><strong>恶劣天气与季节性风险</strong>：冬季积雪（北陆 / 东北 / 北海道）——冬用轮胎、链子携带义务地区；台风（7–10 月）——停运判断权在公司，个人不硬闯；夏季高温——冷链货物风险、车厢内热中症。</li>
-<li><strong>入职初期 90 天安全路线图</strong>：W1–2 点呼 / 点检 / 传票流程背熟、跟乘先辈路线；W3–6 独立短路线、每日复盘（急刹 / 急转 / 礼让记录）；W7–12 全路线独立、学习异常处理与客户对应。安全实绩（无事故无违规月数）是阶段 3 管理岗评估与 2 号移行审查的正面材料。</li>
+<li><strong>入职初期 90 天安全路线图</strong>：W1–2 点呼 / 点检 / 传票流程背熟、跟乘先辈路线；W3–6 独立短路线、每日复盘（急刹 / 急转 / 礼让记录）；W7–12 全路线独立、学习异常处理与客户对应。安全实绩（无事故无违规月数）是阶段 3 管理岗评估与资格切换审查的正面材料。</li>
 <li><strong>局限说明</strong>：本维度无统计数字，属合规要点（事实），故在第 8 节一并声明其证据边界。</li>
 </ul>
 <h3 id="24">2.4 行业大势交叉引用</h3>
@@ -387,7 +395,7 @@ main.hide-diff .diff-del-group{display:none}
 <ul>
 <li><strong>卡车司机平均年收</strong>：<strong>约 430 万日元</strong>（月收约 27 万＋年间赏与约 106 万，<strong>含赏与年收口径</strong>；手册 02，2026 年市场数据，<strong>原始来源待核验</strong>）——与官方「月均现金给与 341,158 円（不含赏与）」<strong>不可直接对比</strong>。[Source: https://www.mhlw.go.jp/toukei/itiran/roudou/monthly/r08/2609p/2609p.html, 2026]</li>
 <li><strong>官方月均统计值</strong>：運輸業・郵便業 现金给与总额 <strong>341,158 円（+4.9%）</strong>（厚労省毎月勤労統計 2026-09，2026-11-06 公布；不含赏与）——官方活值以 <a href="https://github.com/hmbphxkw76-byte/jp-life-work/blob/main/01-ssw-driver/data/ssw_driver_indicator_registry.md">01-ssw-driver 登记册 #5</a> 为准。</li>
-<li><strong>全ト协賃金実態</strong>：<strong>2025 年度版</strong>（+5.3% 全职务；jta.or.jp，2026-07-01 公表）——男性大型司机月薪 39.5 万円（+4%）、含奖金 41.64 万円（+7.1%）（经行业媒体转引，原件待复核）。[Source: https://jta.or.jp/member/chosa/chinginjittai2025.html, 2026]</li>
+<li><strong>全ト协賃金実態</strong>：<strong>2025 年度版</strong>（+5.3% 全职务；jta.or.jp，2026-07-01 公表）——男性大型司机月薪 39.5 万円（+4%）；全职务平均含奖金 41.64 万円（+7.1%，<strong>全职务口径，非男性大型</strong>）（jta.or.jp 直读，A 级；原件待复核）。[Source: https://jta.or.jp/member/chosa/chinginjittai2025.html, 2026]</li>
 <li><strong>求人市场示例</strong>（手册 02，2026，<strong>原始来源待核验</strong>）：大型干线 月给 <strong>35–43 万</strong>；一般配送 <strong>25–33 万</strong>；冷链 / 危险品附加 <strong>2–5 万</strong>。</li>
 <li><strong>特定技能 1 号硬性要求</strong>：<strong>工资与日本人同等以上</strong>——面试时拿同岗位日本员工待遇基准对照。</li>
 </ul>
@@ -459,7 +467,7 @@ main.hide-diff .diff-del-group{display:none}
 </ul>
 <h3 id="34-01-ssw-driver">3.4 求人样本（只读引用 01-ssw-driver）</h3>
 <ul>
-<li>登记册 #3 记 <strong>9 样本</strong>全部完成四元组立档（岗位 × 地域 × 月収 × URL）与官网回溯；样本分层为东京圈 / 大阪圈 / 地方＋特定技能专项，月给区间汇总为东京圈 22–45 万円、大阪圈 28–40.5 万円、地方 25–36 万円（聚合平台转载口径）。逐条样本、核实状态与来源分级见 <a href="../../01-ssw-driver/reports/2026-11-ssw-driver.md">01-ssw-driver 第 3.3 节</a>。</li>
+<li>登记册 #3 记 <strong>10 条样本</strong>立档（岗位 × 地域 × 月収 × URL），其中 9 条完成官网回溯；样本分层为东京圈 / 大阪圈 / 地方＋特定技能专项，月给区间汇总为东京圈 22–45 万円、大阪圈 32–38 万円（桑原经官网回溯修正）、地方 25–36 万円（聚合平台转载口径）。逐条样本、核实状态与来源分级见 <a href="../../01-ssw-driver/reports/2026-11-ssw-driver.md">01-ssw-driver 第 3.3 节</a>。</li>
 <li><strong>口径提示</strong>：平台样本「月収」含 / 不含手当口径须逐条注明，不得与实收直接对比；本主题不独立改值。</li>
 </ul>
 <h2 id="s4" class="sec">四、雇主与企业类型细分</h2>
@@ -1004,7 +1012,7 @@ main.hide-diff .diff-del-group{display:none}
 </main>
 <footer class="footer" role="contentinfo" aria-label="页脚">
   <p>日本司机职业 · 日本司机职业 · 2026-11 月度报告｜2026-11<br>
-  报告路径：02-career-driver/reports/2026-11-career-driver.html</p>
+  报告路径：02-career-driver\reports\2026-11-career-driver.html</p>
   <p class="backlinks">
     <a href="../../index.html#topic-02-career-driver">← 返回主题</a>
     <a href="../../index.html">返回首页</a>

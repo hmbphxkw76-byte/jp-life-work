@@ -1,7 +1,7 @@
 # 05 成果档案与晋升材料
 <!-- updated: 2026-11-14 | 拆分自 reports/2026-11-career-management.md 附录「05 成果档案与晋升材料」 -->
 
-> 对应阶段 3「积累可量化成果：准点率、事故率、效率提升、成本节约」。这份档案直接用于：内部晋升面谈、转职简历、2 号移行·永住审查材料。
+> 对应阶段 3「积累可量化成果：准点率、事故率、效率提升、成本节约」。这份档案直接用于：内部晋升面谈、转职简历、资格切换·永住审查材料。
 >
 > **边界**：活值查 [data/career_logistics_indicator_registry.md](../data/career_logistics_indicator_registry.md)；收入 / 社保记录 → [02-career-driver](../../02-career-driver)；签证材料 → [08-visa-immigration](../../08-visa-immigration)。
 

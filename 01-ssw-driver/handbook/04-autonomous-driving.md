@@ -8,7 +8,7 @@
 ## 5.1 制度框架与实绩
 
 - 等级口径：SAE L0–L4（日本政府文件注记采用）；L4＝限定区域内系统替代全部驾驶操作、无需驾驶人。[Source: https://www8.cao.go.jp/koutu/taisaku/r05kou_haku/zenbun/genkyo/topics/topic_1.html, 2023]
-- 令和 4 年改正道交法（2022-04 施行）创设"特定自动运行许可"（无驾驶人公道运行，需都道府县公安委员会批准）。实绩：**截至 2026-05 许可累计 12 件**；2025 年度全国 60+ 地点实施实证（含有人驾驶辅助类）。[Source: https://www.npa.go.jp/bureau/traffic/selfdriving/index.html, 2026; https://www.digital.go.jp/assets/contents/node/basic_page/field_ref_resources/2415ad00-6a79-4ebc-8fb1-51a47b1b0552/11045673/20260721_meeting_mobility_01.pdf, 2026]
+- 令和 4 年改正道交法（2022-04 施行）创设"特定自动运行许可"（无驾驶人公道运行，需都道府县公安委员会批准）。实绩：**截至 2026-02 官方口径 10 カ所**（原「许可累计 12 件」无官方来源，已废止）；2025 年度全国 60+ 地点实施实证（含有人驾驶辅助类）。[Source: https://www.npa.go.jp/bureau/traffic/selfdriving/index.html, 2026; https://www.digital.go.jp/assets/contents/node/basic_page/field_ref_resources/2415ad00-6a79-4ebc-8fb1-51a47b1b0552/11045673/20260721_meeting_mobility_01.pdf, 2026]
 - 首辆 L4 车辆认证：2023-03-30 福井县永平寺町。[Source: https://www.mlit.go.jp/report/press/jidosha07_hh_000442.html, 2023]
 
 ## 5.2 官方时间表（《モビリティ・ロードマップ2026》，2026-07-21 数字社会推进会议决定）

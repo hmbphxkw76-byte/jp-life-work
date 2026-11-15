@@ -12,7 +12,7 @@
 - **「自動車運送業」分野**：2024-03-29 阁议决定新增（同批：铁道、林业、木材产业），监管省厅为**国土交通省**；2024-12-19 上乗せ基准告示施行后正式开始接收；分野运用方针已于 2026-01-23 重新阁议决定。[Source: https://www.moj.go.jp/isa/applications/ssw/2024.03.29.kakugikettei.html, 2024–2026; https://www.moj.go.jp/isa/policies/ssw/automobiletransportation, 2026]
 - **受入上限（冲突并列）**：
   - 22,100 人（2024 年 4 月–2029 年 3 月末，ISA 自動車運送業分野页）[Source: https://www.moj.go.jp/isa/policies/ssw/automobiletransportation, 2026-10-09 现在]
-  - 24,500 人（卡车/出租车/巴士合计，SSW 官网中文页）[Source: https://www.ssw.go.jp/about/visa/automobile_transportation_business_1/, 2026]
+  - 24,500 人（卡车/出租车/巴士合计，SSW 官网中文页）——**已废止**，现行以 2026-01-23 阁议 **22,100 人**为准 [Source: https://www.ssw.go.jp/about/visa/automobile_transportation_business_1/, 2026]
   - 两组官方数字并存，未辨析差异（疑为不同时点修订或含/不含某岗位），列入待复核。
 - **⚠️ 本分野仅设 1 号**：卡车司机不存在 2 号路径；1→2 号转换、育成就劳制度是否覆盖本分野"现时点未定"。[Source: https://www.mlit.go.jp/jidosha/content/002004573.pdf, 2026-06]
 

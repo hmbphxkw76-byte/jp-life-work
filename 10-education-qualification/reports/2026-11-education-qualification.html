@@ -36,6 +36,13 @@ a:hover{text-decoration:underline}
 .skip-link:focus{top:0;color:#fff;text-decoration:none}
 :focus-visible{outline:none;box-shadow:var(--focus-ring)}
 
+/* ── 已审计徽章 ── */
+.audit-badge{display:inline-flex;align-items:center;gap:10px;flex-wrap:wrap;
+  background:var(--green-l);border:1px solid var(--green);border-radius:10px;
+  padding:8px 14px;margin:0 0 14px;font-size:12.5px;color:var(--green)}
+.audit-badge .audit-seal{font-weight:700;white-space:nowrap}
+.audit-badge .audit-meta{color:var(--ink2)}
+
 /* ── 题头 Hero ── */
 .hero{background:linear-gradient(128deg,#0f2338 0%,#16324f 52%,#2f5597 100%);
   color:#fff;padding:46px 36px 34px;border-radius:0 0 18px 18px;margin-bottom:24px}
@@ -155,13 +162,14 @@ main.hide-diff .diff-del-group{display:none}
   <h1>日本资格与教育投资 · 2026-11 月度报告</h1>
   <div class="sub">版本：v1.0（2026-11 月度）｜数据基准日：2026-11-14</div>
   <div class="meta"><b>免责声明</b>：本报告为信息整理与条件化建议，不构成法律意见或税务意见；重大决策请咨询执业法律 / 税务专业人士。<br><b>版本</b>：v1.0（2026-11 月度）<br><b>数据基准日</b>：2026-11-14<br><b>主题类型</b>：职业就业调研型（employment-research）<br><b>受众定位</b>：面向拟在日本从事货运司机工作、需要职业资格与教育投资规划的读者，兼具资格路径与教育预算顾问视角。<br><b>来源规则</b>：① 文部科学省（mext.go.jp）、厚生労働省（技能士制度）、国土交通省（運行管理者等法定资格）＞ ② 各资格认定中央机构（フォークリフト運転技能講習登録機関、消防検定協会等）＞ ③ 全日本トラック協会 / 都道府県支部（讲习日程）＞ …</div>
+  
   <div><span class="tag">2026-11</span><span class="tag">职业就业调研型</span></div>
 </header>
 <nav class="report-nav" aria-label="报告导航">
   <div class="wrap">
     <div class="nav-url">
       <span class="nav-url-label">报告路径</span>
-      <a href="2026-11-education-qualification.html">10-education-qualification/reports/2026-11-education-qualification.html</a>
+      <a href="2026-11-education-qualification.html">10-education-qualification\reports\2026-11-education-qualification.html</a>
     </div>
     <div class="nav-tabs"><a href="#s1">一、核心结论（摘要）</a><a href="#s2">二、行业与政策发展趋势</a><a href="#s3">三、人才供需与薪酬（核心模块）</a><a href="#s4">四、雇主与企业类型细分</a><a href="#s5">五、岗位技能要求</a><a href="#s6">六、行业认可的职业资质与证书</a><a href="#s7">七、就业落地路径建议（结论章）</a><a href="#s8">八、数据可靠性与局限说明</a><a href="#s9">九、参考来源清单</a></div>
     
@@ -253,7 +261,7 @@ main.hide-diff .diff-del-group{display:none}
 <tr>
 <td>9</td>
 <td>公立学校給食費保護者負担平均月額</td>
-<td>待复核（R7 调查起算出方法变更；手册暂用区间 4,000–5,000 円级）</td>
+<td><strong>令和 7 年度公立小学月额 5,196 円</strong>（食材费相当；R7 调查起算出方法变更，已闭环）</td>
 <td>截至 2026-11-14 无更新</td>
 </tr>
 </tbody>
@@ -261,7 +269,7 @@ main.hide-diff .diff-del-group{display:none}
 <p><strong>观察项与触发器状态</strong>（摘自登记册）：唯一观察项、首要触发器、触发器结论均为「首期为空」；business-config 第七节九个触发器（资格制度 / 讲习义务变化、讲习日程与费用变化、目标岗位资格要求变化、个人取得资格、文科省就学 / 日本語指導政策变化、学校教育费用调查发布、大学制度改革 / 编入·社会人入学变化、技人国审查口径变化、通信制 / 社会人入试制度与学费带变化）本期均未命中，无可报变化。</p>
 <p><strong>结构变更备注</strong>（非数据变动）：2026-11-14 原合并版知识手册已按四大维度拆分至 <code>handbook/</code>（00–04 共 5 个文档），编号 01–04 与登记册指标、触发器映射保持一一对应；原合并版全文存档于 <code>reports/archives/2026-11-education-qualification-merged-v1.0.md</code>。本报告为该结构下的首期九节骨架版。</p>
 <h3 id="_3">已修正事实清单</h3>
-<p>本版为复用生成：继承历史报告（v1.0 首份分析，数据基准 2026-11-13）的口径裁决与来源分级，<strong>无新增修正</strong>。历史报告未列独立「已修正事实清单」；2026-11-12 维度扩充时已闭环的两项复核结论（公立小学給食費月额取令和 7 年度 5,196 円、食材费相当；编入制度「资格要件由国家规定、选考方式由各校自设」）原样保留于第二、七节。</p>
+<p>本版为复用生成：继承历史报告（v1.0 首份分析，数据基准 2026-11-13）的口径裁决与来源分级，<strong>无新增修正</strong>。2026-11-12 维度扩充时已闭环的两项复核结论（公立小学給食費月额取令和 7 年度 <strong>5,196 円</strong>，见来源清单 #6；编入制度「资格要件由国家规定、选考方式由各校自设」）已在本版落实。</p>
 <h2 id="s2" class="sec">二、行业与政策发展趋势</h2>
 <p>本节承载教育制度与政策环境（business-config 3.2：03 章 → 本节 / 第八节）。</p>
 <p><strong>学制框架（事实）</strong>：日本学制为 6-3-3-4（1947 年学校教育法确立），义务教育为小 6 + 中 3 共 9 年（<a href="https://www.mext.go.jp/en/policy/education/overview/index.htm">文科省 · 学校教育制度</a>，2026）。一贯制补充：義務教育学校（小中 1–9 年一贯）、中等教育学校（中高 6 年一贯）、高等专门学校（中卒入学 5 年一贯）；高等学校段階含全日制、定時制、通信制三种课程，均授予高中毕业资格。学期制度 4 月始业·3 月修了；转入插班以住民票办理时点为准。</p>
@@ -400,7 +408,7 @@ main.hide-diff .diff-del-group{display:none}
 </tbody>
 </table>
 <p><strong>入选标准（登记册边界档案）</strong>：官方发布页可回溯；费用行情须多源交叉验证；引用须为具体页面而非门户首页。</p>
-<p><strong>通信制大学学费带（登记册 #8，2026）</strong>：放送大学全科履修生入学料 24,000 円 + 授课料 1 单位 6,000 円，毕业（124 单位）总费用 <strong>768,000 円～</strong>；10 年在学修满 124 单位总费用不变；3 年次编入（62 单位认定）例仅 406,000 円（<a href="https://tobe.ouj.ac.jp/fee/">放送大学 · 学费</a>）。私立通信制年 27–31 万円级：近畿大学通信教育部授课料 306,000 円 / 年（<a href="https://www.kindai.ac.jp/tsushin/course/regular/architecture/expense/">近畿大学</a>）；东京通信大学初年度 271,000 円～（4 年总 834,000 円～）（<a href="https://www.internet.ac.jp/english/">东京通信大学</a>）。口径并列：放送大学（单位制总额）≠ 私立通信制（年额制）。</p>
+<p><strong>通信制大学学费带（登记册 #8，2026）</strong>：放送大学全科履修生入学料 24,000 円 + 授课料 1 单位 6,000 円，毕业（124 单位）总费用 <strong>768,000 円～</strong>；10 年在学修满 124 单位总费用不变；3 年次编入（62 单位认定）例仅 396,000 円（24,000＋62×6,000；<a href="https://tobe.ouj.ac.jp/fee/">放送大学 · 学费</a>）。私立通信制年 27–31 万円级：近畿大学通信教育部授课料 306,000 円 / 年（<a href="https://www.kindai.ac.jp/tsushin/course/regular/architecture/expense/">近畿大学</a>）；东京通信大学初年度 271,000 円～（4 年总 834,000 円～）（<a href="https://www.internet.ac.jp/english/">东京通信大学</a>）。口径并列：放送大学（单位制总额）≠ 私立通信制（年额制）。</p>
 <h2 id="s5" class="sec">五、岗位技能要求</h2>
 <p>本节承载资格地图（business-config 3.2：01 章 → 本节 / 第六节）。</p>
 <p><strong>必备资格（主线，手册 01，信息核对日期 2026-11-11）</strong>：</p>
@@ -669,8 +677,8 @@ main.hide-diff .diff-del-group{display:none}
 </tr>
 </tbody>
 </table>
-<p><strong>未取得项</strong>：#1、#2、#3（待基线确立）、#4（待记录）、#9（待复核）。</p>
-<p><strong>风险与不确定性</strong>：国际学校学费带为推断值，无官方统一统计，个案差异大；手册资格费用为「约」值，且未逐项标注核验状态，实际以登录机关 / 教习机构当期公示为准；编入试验选考细节国家无统一规则，逐校不同；登记册 #9 公立学校給食費因 R7 调查起算出方法变更待复核（手册暂用区间 4,000–5,000 円级）。</p>
+<p><strong>未取得项</strong>：#1、#2、#3（待基线确立）、#4（待记录）。</p>
+<p><strong>风险与不确定性</strong>：国际学校学费带为推断值，无官方统一统计，个案差异大；手册资格费用为「约」值，且未逐项标注核验状态，实际以登录机关 / 教习机构当期公示为准；编入试验选考细节国家无统一规则，逐校不同；登记册 #9 公立学校給食費已闭环为令和 7 年度 5,196 円（食材费相当）。</p>
 <h3 id="_11">待复核清单</h3>
 <table class="fixed">
 <thead>
@@ -698,8 +706,8 @@ main.hide-diff .diff-del-group{display:none}
 </tr>
 <tr>
 <td>4</td>
-<td>令和 8·9 年 8 月給食費调查口径变更后，公立学校給食費月額准确区间</td>
-<td>mext.go.jp 学校給食実施状況等調査（登记册 #9；手册暂用区间 4,000–5,000 円级）</td>
+<td>（已闭环）令和 7 年度公立学校給食費月額 5,196 円</td>
+<td>mext.go.jp 学校給食実施状況等調査（2026-07-30 公表）</td>
 </tr>
 <tr>
 <td>5</td>
@@ -765,7 +773,7 @@ main.hide-diff .diff-del-group{display:none}
 </main>
 <footer class="footer" role="contentinfo" aria-label="页脚">
   <p>日本资格与教育投资 · 日本资格与教育投资 · 2026-11 月度报告｜2026-11<br>
-  报告路径：10-education-qualification/reports/2026-11-education-qualification.html</p>
+  报告路径：10-education-qualification\reports\2026-11-education-qualification.html</p>
   <p class="backlinks">
     <a href="../../index.html#topic-10-education-qualification">← 返回主题</a>
     <a href="../../index.html">返回首页</a>

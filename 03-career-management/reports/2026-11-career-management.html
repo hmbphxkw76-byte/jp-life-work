@@ -36,6 +36,13 @@ a:hover{text-decoration:underline}
 .skip-link:focus{top:0;color:#fff;text-decoration:none}
 :focus-visible{outline:none;box-shadow:var(--focus-ring)}
 
+/* ── 已审计徽章 ── */
+.audit-badge{display:inline-flex;align-items:center;gap:10px;flex-wrap:wrap;
+  background:var(--green-l);border:1px solid var(--green);border-radius:10px;
+  padding:8px 14px;margin:0 0 14px;font-size:12.5px;color:var(--green)}
+.audit-badge .audit-seal{font-weight:700;white-space:nowrap}
+.audit-badge .audit-meta{color:var(--ink2)}
+
 /* ── 题头 Hero ── */
 .hero{background:linear-gradient(128deg,#0f2338 0%,#16324f 52%,#2f5597 100%);
   color:#fff;padding:46px 36px 34px;border-radius:0 0 18px 18px;margin-bottom:24px}
@@ -155,13 +162,14 @@ main.hide-diff .diff-del-group{display:none}
   <h1>日本管理岗过渡 · 2026-11 月度报告</h1>
   <div class="sub">版本：v1.0（2026-11 月度）｜数据基准日：2026-11-14</div>
   <div class="meta"><b>免责声明</b>：本报告为信息整理与条件化建议，不构成法律意见或税务意见；重大决策请咨询执业法律 / 税务专业人士。<br><b>版本</b>：v1.0（2026-11 月度）<br><b>数据基准日</b>：2026-11-14<br><b>主题类型</b>：职业就业调研型（employment-research）<br><b>受众定位</b>：面向已在日本从事货运司机工作、计划向运行管理 / 配车 / 现场管理岗过渡的读者，兼具职业规划与现场管理视角。<br><b>来源规则</b>：① 国土交通省（mlit.go.jp 运送事业制度、安全管理）＞ ② 日本ロジスティクスシステム協会、全日本トラック協会（管理者讲习、安全管理责者）＞ ③ 主要物流企业官网 / IR（日通、佐川、雅玛多、SGHD 的职级与采用信息）＞ ④ …</div>
+  
   <div><span class="tag">2026-11</span><span class="tag">职业就业调研型</span></div>
 </header>
 <nav class="report-nav" aria-label="报告导航">
   <div class="wrap">
     <div class="nav-url">
       <span class="nav-url-label">报告路径</span>
-      <a href="2026-11-career-management.html">03-career-management/reports/2026-11-career-management.html</a>
+      <a href="2026-11-career-management.html">03-career-management\reports\2026-11-career-management.html</a>
     </div>
     <div class="nav-tabs"><a href="#s1">一、核心结论（摘要）</a><a href="#s2">二、行业与政策发展趋势</a><a href="#s3">三、人才供需与薪酬（核心模块）</a><a href="#s4">四、雇主与企业类型细分</a><a href="#s5">五、岗位技能要求</a><a href="#s6">六、行业认可的职业资质与证书</a><a href="#s7">七、就业落地路径建议（结论章）</a><a href="#s8">八、数据可靠性与局限说明</a><a href="#s9">九、参考来源清单</a></div>
     
@@ -178,15 +186,15 @@ main.hide-diff .diff-del-group{display:none}
 <li>运行管理者试验与讲习的日程、费用与合格路径是什么？</li>
 <li>管理岗求人薪资口径（含 / 不含手当）处于什么水平？</li>
 <li>从司机到管理岗的过渡路径与决策时点如何安排？</li>
-<li>个人晋升档案（KPI / STAR 卡）如何支撑晋升与 2 号移行？</li>
+<li>个人晋升档案（KPI / STAR 卡）如何支撑晋升与资格切换（1 号→技人国 / 永住）？</li>
 </ol>
 <p><strong>初步结论</strong>：</p>
 <ol>
-<li><strong>管理岗过渡的主线是内部升格（路径 A）</strong>（建议 / 推断）：公司已认识你、资格与实绩连续、雇主支持 2 号移行；路径 B 转职过渡存在 2 号移行中断风险，须在转职前确认新公司做受入计划书变更。</li>
+<li><strong>管理岗过渡的主线是内部升格（路径 A）</strong>（建议 / 推断）：公司已认识你、资格与实绩连续、雇主支持长期留任与资格切换（<strong>自动车运送业无特定技能 2 号</strong>，见 08）；路径 B 转职过渡存在资格切换中断风险，须在转职前确认新公司做受入计划书变更。</li>
 <li><strong>本主题尚处知识整理期</strong>（事实）：登记册 4 项指标中 #1 #2 #3 为「待基线确立」、#4 为「待记录」；首期样本待基线运行后补记。</li>
 <li><strong>资格≠岗位，在留资格联动是主要制度约束</strong>（事实＋推断）：运行管理者试验合格只给入场券，公司是否选任取决于信任与空缺；管理岗跳转可能需在留资格变更（如技术·人文·国际业务，需学历或 10 年实务）。</li>
 <li><strong>48 个月计划与周节奏以「最低维持量」保连续性</strong>（建议）：工作日总投入 ≤1h/天，避免司机疲劳期两头塌。</li>
-<li><strong>成果档案是晋升与 2 号移行 / 永住审查的共用材料</strong>（建议 / 推断）：KPI 月度表、STAR 卡与晋升面谈材料包同时服务内部晋升、转职简历与在留审查。</li>
+<li><strong>成果档案是晋升与资格切换 / 永住审查的共用材料</strong>（建议 / 推断）：KPI 月度表、STAR 卡与晋升面谈材料包同时服务内部晋升、转职简历与在留审查。</li>
 </ol>
 <h3 id="_2">数据变更摘要</h3>
 <p>登记册 4 项追踪指标截至 2026-11-14 的活值状态（来源：<code>data/career_logistics_indicator_registry.md</code>）：</p>
@@ -227,7 +235,7 @@ main.hide-diff .diff-del-group{display:none}
 </tbody>
 </table>
 <p><strong>观察项与触发器状态</strong>（摘自登记册）：唯一观察项、首要触发器、触发器结论均为「首期为空」，无触发器命中；按 business-config 第七节「无触发器命中且窗口未到时<strong>不启动</strong>」，本期无变化可报。</p>
-<p><strong>结构变更备注</strong>（非数据变动）：2026-11-14 原合并版知识手册已按五大维度拆分至 <code>handbook/</code>（00–05 共 6 个文档），编号 01–05 与登记册指标、触发器映射保持一一对应；原合并版全文存档于 <code>reports/archives/2026-11-career-management-merged-v1.0.md</code>。本报告为该结构下的首期九节骨架版。</p>
+<p><strong>结构变更备注</strong>（非数据变动）：2026-11-14 原合并版知识手册已按五大维度拆分至 <code>handbook/</code>（00–05 共 6 个文档），编号 01–05 与登记册指标、触发器映射保持一一对应；原合并版不再单独存档，以拆分文档为准。本报告为该结构下的首期九节骨架版。</p>
 <h3 id="_3">已修正事实清单</h3>
 <p>本版为复用生成：继承历史报告（v1.0 首份分析，数据基准 2026-11-13）的口径裁决、来源分级与结论，<strong>无新增修正</strong>。历史报告未列独立「已修正事实清单」，其口径要点（讲习修了 ≠ 试验合格 ≠ 选任；资格≠岗位；STAR 卡示例数字为示例非事实）原样保留于第八、七节。</p>
 <h2 id="s2" class="sec">二、行业与政策发展趋势</h2>
@@ -370,7 +378,7 @@ main.hide-diff .diff-del-group{display:none}
 </tbody>
 </table>
 <p><strong>费用与日程</strong>：基础讲习「数千円，周末 1 日课程为主」（手册 04，<strong>待核验</strong>）；运行管理者试验费用与具体日程以试验中心官方公布为准。资格日程与费用的主责为 10-education-qualification（<a href="../../10-education-qualification/reports/2026-11-education-qualification.md">../10-education-qualification/reports/2026-11-education-qualification.md</a>），本主题只读引用、不独立改值；登记册 #2「管理者讲习 / 安全管理责者讲习日程」待基线确立。</p>
-<p><strong>证书归档</strong>：每张证书扫描归档，进入成果档案（手册 05），作为晋升面谈与 2 号移行 / 永住审查材料的组成部分。</p>
+<p><strong>证书归档</strong>：每张证书扫描归档，进入成果档案（手册 05），作为晋升面谈与资格切换 / 永住审查材料的组成部分。</p>
 <h2 id="s7" class="sec">七、就业落地路径建议（结论章）</h2>
 <blockquote>
 <p>本节为建议 / 推断层，与前三节的事实数据分离。</p>
@@ -388,12 +396,12 @@ main.hide-diff .diff-del-group{display:none}
 <tr>
 <td>A 内部升格（推荐主线）</td>
 <td>司机 → 运行管理辅助（讲习修了）→ 运行管理者试验合格 → 配车 / 现场リーダー → 主任 / 系长</td>
-<td>公司已认识你、资格与实绩连续、雇主支持 2 号移行</td>
+<td>公司已认识你、资格与实绩连续、雇主支持长期留任与资格切换</td>
 </tr>
 <tr>
 <td>B 转职过渡</td>
 <td>2–3 年司机经验 + N3 → 转职到仓储 / 3PL 公司的现场管理 / 配车岗</td>
-<td>仓库系岗位对日语口语要求低于纯管理，KPI 可量化；风险：在留资格变更需新雇主配合、2 号移行中断风险</td>
+<td>仓库系岗位对日语口语要求低于纯管理，KPI 可量化；风险：在留资格变更需新雇主配合、资格切换中断风险</td>
 </tr>
 <tr>
 <td>C 学历 / 资格加持（叠加项，非主线）</td>
@@ -402,7 +410,7 @@ main.hide-diff .diff-del-group{display:none}
 </tr>
 </tbody>
 </table>
-<p><strong>决策时点表（手册 01，建议）</strong>：入职即观察（本公司是否有辅助者→运行管理者晋升先例）→ 第 12 个月（启动基础讲习报名）→ 第 24 个月（运行管理者试验受验；N3 达成）→ 第 36 个月（竞聘配车 / リーダー；2 号移行申请同步）→ 第 48–60 个月（主任级 + N2；评估内部转 WMS / 事务方向）。</p>
+<p><strong>决策时点表（手册 01，建议）</strong>：入职即观察（本公司是否有辅助者→运行管理者晋升先例）→ 第 12 个月（启动基础讲习报名）→ 第 24 个月（运行管理者试验受验；N3 达成）→ 第 36 个月（竞聘配车 / リーダー；评估资格切换路径）→ 第 48–60 个月（主任级 + N2；评估内部转 WMS / 事务方向）。</p>
 <p><strong>48 个月分年计划（手册 04，主线）</strong>：</p>
 <table class="fixed">
 <thead>
@@ -428,9 +436,9 @@ main.hide-diff .diff-del-group{display:none}
 </tr>
 <tr>
 <td>第 3 年</td>
-<td>岗位落地 + 2 号移行</td>
+<td>岗位落地 + 资格切换评估</td>
 <td>12h/月</td>
-<td>2 号移行完成 + 管理辅助岗位在任 + 带人经验</td>
+<td>管理辅助岗位在任 + 带人经验 + 资格切换路径确认（本分野无 2 号）</td>
 </tr>
 <tr>
 <td>第 4 年</td>
@@ -440,7 +448,7 @@ main.hide-diff .diff-del-group{display:none}
 </tr>
 </tbody>
 </table>
-<p>总目标：运行管理者试验合格 + 公司内管理辅助岗位在任 + JLPT N2 合格 + 特定技能 2 号身份稳定 + 手持 3 年可量化管理辅助成果档案（建议）。</p>
+<p>总目标：运行管理者试验合格 + 公司内管理辅助岗位在任 + JLPT N2 合格 + 特定技能 1 号稳定更新 + 长期资格切换路径明确（本分野无 2 号）+ 手持 3 年可量化管理辅助成果档案（建议）。</p>
 <p><strong>每周节奏模板（手册 04，建议）</strong>：周一–五 日语 30min（N2 线）+ 日報 / 邮件练习 15min（45min/天）；周三晚业务知识 1h；周六资格学习 2h；周日 N2 主线 + 当周复盘 2h。原则：<strong>工作日总投入 ≤ 1h/天</strong>——司机疲劳期硬撑学习反而两头塌，宁可以「最低维持量」（30min）保住连续性。</p>
 <p><strong>失败预案（手册 04，建议）</strong>：</p>
 <table class="fixed">
@@ -464,13 +472,13 @@ main.hide-diff .diff-del-group{display:none}
 <td>接受 N3 状态进入主任竞聘（N2 非法定门槛），N2 改为长期目标</td>
 </tr>
 <tr>
-<td>2 号移行要件不满足</td>
-<td>用 1 号剩余年数续驾驶 + 提前考 2 号试验；必要时咨询行政书士</td>
+<td>资格切换要件不满足（本分野无 2 号）</td>
+<td>用 1 号剩余年数续驾驶 + 提前准备技人国 / 补学历；必要时咨询行政书士</td>
 </tr>
 </tbody>
 </table>
 <p><strong>成果档案（手册 05，建议）</strong>：管理活动月度记录表（发言 / 議事録 / 带人、改善提案、采用结果；原始运营数字引用司机手册同月记录，避免两处各写一套）；STAR 成果卡（年度目标至少 4 张，示例数字「误出库率 0.3%→0.05%」为<strong>示例、非事实</strong>）；晋升面谈材料包（第 4 年 Q2 组装）；外部评价背书（表彰状 / 感谢状扫描、客户好评书面确认、研修修了证）。</p>
-<p><strong>风险提示（事实＋推断）</strong>：资格≠岗位；管理岗仍属特定技能框架内时业务范围受限——从「驾驶」扩展到「辅助管理」需确认雇主在受入计划书中的业务记载；若走 2 号，2 号业务本质仍是驾驶，真正的管理岗跳转可能需在留资格变更（如技术·人文·国际业务，需学历或 10 年实务），提前与行政书士咨询（→ <a href="../../08-visa-immigration/reports/2026-11-visa-immigration.md">../08-visa-immigration/reports/2026-11-visa-immigration.md</a>）。</p>
+<p><strong>风险提示（事实＋推断）</strong>：资格≠岗位；管理岗仍属特定技能框架内时业务范围受限——从「驾驶」扩展到「辅助管理」需确认雇主在受入计划书中的业务记载；本分野<strong>无 2 号</strong>，真正的管理岗跳转可能需在留资格变更（如技术·人文·国际业务，需学历或 10 年实务），提前与行政书士咨询（→ <a href="../../08-visa-immigration/reports/2026-11-visa-immigration.md">../08-visa-immigration/reports/2026-11-visa-immigration.md</a>）。</p>
 <h2 id="s8" class="sec">八、数据可靠性与局限说明</h2>
 <p><strong>核验程度分级</strong>：</p>
 <ul>
@@ -502,7 +510,7 @@ main.hide-diff .diff-del-group{display:none}
 </tbody>
 </table>
 <p><strong>未取得项</strong>：登记册 #1 #2 #3（待基线确立）、#4（待记录）；首期企业样本待基线运行后补记；手册 04 讲习费用「数千円」待核验；STAR 卡示例数字为示例非事实。</p>
-<p><strong>风险与不确定性</strong>：无统计活值、无企业样本、无求人薪资数据，全部结论为方法论与路径推断；48 个月时间轴以「司机入职约 2027 年秋」为假设起点，存在个人进度偏差；2 号移行与在留资格变更的官方口径未逐项核实（交叉引用 08-visa-immigration）。</p>
+<p><strong>风险与不确定性</strong>：无统计活值、无企业样本、无求人薪资数据，全部结论为方法论与路径推断；48 个月时间轴以「司机入职约 2027 年秋」为假设起点，存在个人进度偏差；资格切换路径（1 号→技人国 / 永住；本分野<strong>无 2 号</strong>）官方口径见 08-visa-immigration。</p>
 <h3 id="_11">待复核清单</h3>
 <table class="fixed">
 <thead>
@@ -540,7 +548,7 @@ main.hide-diff .diff-del-group{display:none}
 </tr>
 <tr>
 <td>6</td>
-<td>2 号移行要件与在留资格变更的官方口径</td>
+<td>资格切换要件与在留资格变更的官方口径</td>
 <td><a href="../../08-visa-immigration/reports/2026-11-visa-immigration.md">../08-visa-immigration/reports/2026-11-visa-immigration.md</a></td>
 </tr>
 </tbody>
@@ -566,19 +574,19 @@ main.hide-diff .diff-del-group{display:none}
 <p><strong>内部知识库（本主题）</strong>：</p>
 <ol>
 <li><a href="https://github.com/hmbphxkw76-byte/jp-life-work/blob/main/03-career-management/data/career_logistics_indicator_registry.md">03-career-management 指标登记册</a> — 活值与边界档案，2026-11-12（2026-11-14 结构拆分后维护）。</li>
-<li>03-career-management 知识手册（handbook/01–05，拆分整理版）— 2026-11-14；原合并版存档 <code>reports/archives/2026-11-career-management-merged-v1.0.md</code>（2026-11-12）。</li>
+<li>03-career-management 知识手册（handbook/01–05，拆分整理版）— 2026-11-14；原合并版不再单独存档（2026-11-12）。</li>
 </ol>
 <p><strong>交叉引用主题</strong>：</p>
 <ol>
 <li><a href="../../02-career-driver/reports/2026-11-career-driver.md">02-career-driver 报告</a> — 现场层执行细节（点呼 / 点检 / 安全制度），只读引用。</li>
-<li><a href="../../08-visa-immigration/reports/2026-11-visa-immigration.md">08-visa-immigration 报告</a> — 2 号移行 / 永住证据链，只读引用。</li>
+<li><a href="../../08-visa-immigration/reports/2026-11-visa-immigration.md">08-visa-immigration 报告</a> — 资格切换 / 永住证据链，只读引用。</li>
 <li><a href="../../10-education-qualification/reports/2026-11-education-qualification.md">10-education-qualification 报告</a> — 资格日程与费用主责方，只读引用。</li>
 <li><a href="../../01-ssw-driver/reports/2026-11-ssw-driver.md">01-ssw-driver 报告</a> — 官方统计活值（工资 / 缺口 / 求人倍率），只读引用。</li>
 </ol>
 </main>
 <footer class="footer" role="contentinfo" aria-label="页脚">
   <p>日本管理岗过渡 · 日本管理岗过渡 · 2026-11 月度报告｜2026-11<br>
-  报告路径：03-career-management/reports/2026-11-career-management.html</p>
+  报告路径：03-career-management\reports\2026-11-career-management.html</p>
   <p class="backlinks">
     <a href="../../index.html#topic-03-career-management">← 返回主题</a>
     <a href="../../index.html">返回首页</a>

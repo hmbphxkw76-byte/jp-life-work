@@ -36,6 +36,13 @@ a:hover{text-decoration:underline}
 .skip-link:focus{top:0;color:#fff;text-decoration:none}
 :focus-visible{outline:none;box-shadow:var(--focus-ring)}
 
+/* ── 已审计徽章 ── */
+.audit-badge{display:inline-flex;align-items:center;gap:10px;flex-wrap:wrap;
+  background:var(--green-l);border:1px solid var(--green);border-radius:10px;
+  padding:8px 14px;margin:0 0 14px;font-size:12.5px;color:var(--green)}
+.audit-badge .audit-seal{font-weight:700;white-space:nowrap}
+.audit-badge .audit-meta{color:var(--ink2)}
+
 /* ── 题头 Hero ── */
 .hero{background:linear-gradient(128deg,#0f2338 0%,#16324f 52%,#2f5597 100%);
   color:#fff;padding:46px 36px 34px;border-radius:0 0 18px 18px;margin-bottom:24px}
@@ -155,13 +162,14 @@ main.hide-diff .diff-del-group{display:none}
   <h1>日本自动驾驶与自动化 · 2026-11 月度报告</h1>
   <div class="sub">版本：v1.0（2026-11 月度）｜数据基准日：2026-11-14</div>
   <div class="meta"><b>免责声明</b>：本报告为信息整理与条件化建议，不构成法律意见或税务意见；重大决策请咨询执业法律 / 税务专业人士。<br><b>版本</b>：v1.0（2026-11 月度）<br><b>数据基准日</b>：2026-11-14<br><b>主题类型</b>：行业深度研究型（industry-research）<br><b>受众定位</b>：面向计划或正在日本物流行业工作、关注自动化对岗位结构影响的读者，兼具技术跟踪与职业落地视角。<br><b>来源规则</b>：① 警察庁（npa.go.jp L4 许可）、国土交通省（自動運転路线图）、経済産業省 ＞ ② SOZ（ロボット開発機構）、NEDO 実证报告 ＞ ③ JAMA、主要车企（トヨタ、日野、いすゞ）与自动化厂商官网 ＞ ④ McKinsey /…</div>
+  
   <div><span class="tag">2026-11</span><span class="tag">行业深度研究型</span></div>
 </header>
 <nav class="report-nav" aria-label="报告导航">
   <div class="wrap">
     <div class="nav-url">
       <span class="nav-url-label">报告路径</span>
-      <a href="2026-11-industry-autonomous.html">05-industry-autonomous/reports/2026-11-industry-autonomous.html</a>
+      <a href="2026-11-industry-autonomous.html">05-industry-autonomous\reports\2026-11-industry-autonomous.html</a>
     </div>
     <div class="nav-tabs"><a href="#s1">一、执行摘要</a><a href="#s2">二、研究范围与方法</a><a href="#s3">三、产业链图谱</a><a href="#s4">四、市场规模与格局</a><a href="#s5">五、头部玩家与竞争格局</a><a href="#s6">六、驱动因素与风险</a><a href="#s7">七、趋势判断（推断）</a><a href="#s8">八、数据治理与局限</a><a href="#s9">九、参考来源清单</a></div>
     
@@ -170,7 +178,7 @@ main.hide-diff .diff-del-group{display:none}
 <main class="wrap" id="main-content" role="main" aria-label="报告正文">
 <h2 id="s1" class="sec">一、执行摘要</h2>
 <h3 id="_2">核心结论</h3>
-<p><strong>结论 1</strong>：L4 制度化已起步但规模化尚早。证据：2023 年（令和 5）道交法改正设立 L4 运行许可制度；登记册 #1 为 12 件；2025-03 起新東名一部区间实证运行。标注：事实。</p>
+<p><strong>结论 1</strong>：L4 制度化已起步但规模化尚早。证据：2023 年（令和 5）道交法改正设立 L4 运行许可制度；登记册 #1 为 <strong>10 カ所</strong>（截至 2026-02，官方口径；原「12 件」无官方来源已废止）；2025-03 起新東名一部区间实证运行。标注：事实。</p>
 <p><strong>结论 2</strong>：干线物流 L4 商用化目标窗口在 2030 前后。证据："2030 前后"目标窗口；登记册 #2 2026 路线图（2027 年度社会实装、2030 年 1 万台）。标注：事实（政策目标）。</p>
 <p><strong>结论 3</strong>：中継输送是主流落地方案，将拆解而非消灭长途司机岗位。证据：中継输送模式与新岗位分类（远隔监控员 / 换乘点运航管理者 / 编组调度）。标注：事实（模式判断）。</p>
 <p><strong>结论 4</strong>：仓储自动化比无人配送更接近商用。证据：技术谱系普及度分层（AGV/AMR 在 3PL 大仓快速导入；无人配送为部分城市实证·限定商用）。标注：事实。</p>
@@ -191,7 +199,7 @@ main.hide-diff .diff-del-group{display:none}
 <tr>
 <td>1</td>
 <td>L4 许可件数与区域</td>
-<td>12 件（锚 01-ssw-driver #10）（npa.go.jp / mlit.go.jp）</td>
+<td><strong>10 カ所</strong>（截至 2026-02；锚 01-ssw-driver #10；原「12 件」已废止）（npa.go.jp / mlit.go.jp）</td>
 <td>baseline</td>
 <td>截至 2026-11-14 无更新</td>
 </tr>
@@ -355,7 +363,7 @@ main.hide-diff .diff-del-group{display:none}
 </blockquote>
 <h3 id="l4">制度化进度（L4 许可）</h3>
 <ul>
-<li>登记册 #1 最新值：12 件（锚 01-ssw-driver #10；登记册首值迁移 2026-11-12），时点待核验。</li>
+<li>登记册 #1 最新值：<strong>10 カ所</strong>（截至 2026-02；锚 01-ssw-driver #10；原「12 件」无官方来源已废止），时点待核验。</li>
 <li>制度背景：2023 年（令和 5）道交法改正设立 L4 运行许可制度——在特定条件下由遠隔監視者替代车内驾驶人运行，需都道府县公安委员会许可。</li>
 <li>跟踪要点：公安委员会 L4 许可件数每年更新，用于观察商用化速度。</li>
 </ul>
@@ -453,7 +461,7 @@ main.hide-diff .diff-del-group{display:none}
 <h3 id="_22">竞争格局特征</h3>
 <ol>
 <li><strong>技术方与物流方组合推进</strong>：中継输送实证以"运输公司 × 技术公司"组合形式扩大（西濃運輸 × T2 等），单一主体独立商用尚未出现。</li>
-<li><strong>制度先行、商用滞后</strong>：L4 许可件数（12 件）与路线图目标（2030 年 1 万台）之间存在量级差，规模化取决于成本与法整备。</li>
+<li><strong>制度先行、商用滞后</strong>：L4 许可件数（10 カ所）与路线图目标（2030 年 1 万台）之间存在量级差，规模化取决于成本与法整备。</li>
 <li><strong>自动化两条战线节奏不同</strong>：干线自动驾驶（中継输送）与仓储自动化（AGV/AMR）先行，无人配送仍处部分城市实证·限定商用阶段。</li>
 <li><strong>产业面与技术面的分工</strong>：本主题写技术与制度面；物流产业规模、赛道、企业动向归 <a href="../../04-industry-logistics/reports/2026-11-industry-logistics.md">04-industry-logistics</a>。</li>
 </ol>
@@ -697,7 +705,7 @@ main.hide-diff .diff-del-group{display:none}
 </ol>
 <p><strong>观察项与触发器状态</strong>：唯一观察项、首要触发器、触发器结论均为「首期为空」（截至 2026-11-14 无更新）。</p>
 <h3 id="_38">待答问题与下一期重点核实项</h3>
-<p><strong>待答问题</strong>：① L4 许可件数与区域的最新读数是多少，与 12 件相比是否增长？② 新東名实证区间是否扩大，中継输送实证项目是否增加？③ 政府路线图（2026）是否修订，2027 年度社会实装目标进展如何？④ 仓储自动化（AGV/AMR）与无人配送的商用案例数量与规模如何？⑤ 遠隔監視者相关资格 / 研修制度是否建立？⑥ 货送法运用方针是否为自动驾驶运行追加新义务？</p>
+<p><strong>待答问题</strong>：① L4 许可件数与区域的最新读数是多少，与 10 カ所相比是否增长？② 新東名实证区间是否扩大，中継输送实证项目是否增加？③ 政府路线图（2026）是否修订，2027 年度社会实装目标进展如何？④ 仓储自动化（AGV/AMR）与无人配送的商用案例数量与规模如何？⑤ 遠隔監視者相关资格 / 研修制度是否建立？⑥ 货送法运用方针是否为自动驾驶运行追加新义务？</p>
 <p><strong>下一期重点核实项</strong>：登记册 #3、#4 待基线确立项；登记册 #1 时点；"缺口 14 万+"来源；基线报告跟踪要点 2 项。</p>
 <p><strong>数据补全计划</strong>：登记册 #3、#4 在年度刷新前补齐；建立 L4 许可件数与实证项目数的双口径并列台账；对基线报告跟踪要点逐项核对。</p>
 <h2 id="s9" class="sec">九、参考来源清单</h2>
@@ -728,7 +736,7 @@ main.hide-diff .diff-del-group{display:none}
 </main>
 <footer class="footer" role="contentinfo" aria-label="页脚">
   <p>日本自动驾驶与自动化 · 日本自动驾驶与自动化 · 2026-11 月度报告｜2026-11<br>
-  报告路径：05-industry-autonomous/reports/2026-11-industry-autonomous.html</p>
+  报告路径：05-industry-autonomous\reports\2026-11-industry-autonomous.html</p>
   <p class="backlinks">
     <a href="../../index.html#topic-05-industry-autonomous">← 返回主题</a>
     <a href="../../index.html">返回首页</a>
