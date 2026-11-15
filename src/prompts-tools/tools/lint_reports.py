@@ -14,13 +14,19 @@
 """
 from __future__ import annotations
 
+import argparse
+import json
 import re
 import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from _common import iter_business_dirs  # noqa: E402
+from _common import ROOT, detect_month_report, iter_business_dirs  # noqa: E402
+
+# 新报告认定：期间 >= NEW_FROM 视为新报告，纳入阻断级校验；历史报告由豁免清单管理。
+NEW_FROM = "2026-11"
+DEFAULT_WHITELIST = ROOT / "src" / "report-audits" / "audit" / "lint-whitelist.json"
 
 TABLE_RE = re.compile(r"<table\b.*?</table>", re.DOTALL)
 TH_RE = re.compile(r"<th\b[^>]*>", re.DOTALL)
@@ -75,13 +81,54 @@ def collect_report_htmls():
     return out
 
 
+def load_whitelist(path: Path) -> set[str]:
+    """读取豁免清单（JSON 数组，每项含 report / reason / review_by）-> 报告路径集合。"""
+    if not path.is_file():
+        return set()
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        return set()
+    if isinstance(data, dict):
+        data = data.get("items", [])
+    return {e.get("report", "") for e in data if isinstance(e, dict)}
+
+
+def _period(rel: str) -> str:
+    det = detect_month_report(Path(rel).name)
+    return det[0] if det else ""
+
+
+def _skip(rel: str, new_only: bool, whitelist: set[str]) -> bool:
+    """是否跳过该报告（白名单豁免或历史报告且 --new-only）。"""
+    if rel in whitelist:
+        return True
+    if new_only:
+        period = _period(rel)
+        if period and period < NEW_FROM:
+            return True
+    return False
+
+
 def main() -> int:
+    ap = argparse.ArgumentParser(description="报告内容校验 lint")
+    ap.add_argument("--new-only", action="store_true",
+                    help=f"仅校验期间 >= {NEW_FROM} 的新报告（历史报告跳过）")
+    ap.add_argument("--whitelist", default=str(DEFAULT_WHITELIST),
+                    help="历史遗留豁免清单（JSON）")
+    args = ap.parse_args()
+
+    whitelist = load_whitelist(Path(args.whitelist))
     targets = collect_report_htmls()
     if not targets:
         print("lint：未发现报告 HTML，跳过")
         return 0
-    errors = warnings = 0
+    errors = warnings = skipped = 0
     for rel, path in targets:
+        if _skip(rel, args.new_only, whitelist):
+            print(f"[SKIP] {rel}（{'白名单豁免' if rel in whitelist else '历史报告'}）")
+            skipped += 1
+            continue
         text = path.read_text(encoding="utf-8", errors="replace")
         issues = lint_html(text)
         if not issues:
@@ -97,9 +144,9 @@ def main() -> int:
         print(f"lint 失败：{errors} 项错误，{warnings} 项警告")
         return 1
     if warnings:
-        print(f"lint 存在 {warnings} 项警告（无错误，不阻断）")
+        print(f"lint 存在 {warnings} 项警告（无错误，不阻断）；跳过 {skipped} 份")
         return 2
-    print(f"lint 通过：{len(targets)} 份报告全部合格")
+    print(f"lint 通过：{len(targets) - skipped} 份报告全部合格（跳过 {skipped} 份）")
     return 0
 
 

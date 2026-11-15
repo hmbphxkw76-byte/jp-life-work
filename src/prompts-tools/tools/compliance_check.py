@@ -35,6 +35,10 @@ from _common import detect_month_report, iter_business_dirs, ROOT, SRC, TEMPLATE
 RULES_PATH = TEMPLATE_ROOT / "compliance-rules.json"
 AUDIT_DIR = SRC / "report-audits"
 
+# 新报告认定：期间 >= NEW_FROM 纳入阻断级校验；历史报告由豁免清单管理。
+NEW_FROM = "2026-11"
+DEFAULT_WHITELIST = ROOT / "src" / "report-audits" / "audit" / "lint-whitelist.json"
+
 H2_RE = re.compile(r"<h2\b[^>]*>(.*?)</h2>", re.DOTALL)
 H2_ID_RE = re.compile(r"<h2\b[^>]*\bid=\"(s\d+)\"")
 ID_ATTR_RE = re.compile(r"\bid=\"([^\"]+)\"")
@@ -178,8 +182,12 @@ def collect_targets(only_file: str | None):
     return out
 
 
-def run_check(only_file: str | None) -> tuple[int, int, list[str]]:
-    """执行全量校验 -> (errors, warnings, 输出行)。"""
+def run_check(only_file: str | None, new_only: bool = False,
+             whitelist: set[str] | None = None) -> tuple[int, int, list[str]]:
+    """执行全量校验 -> (errors, warnings, 输出行)。
+
+    new_only=True 时仅校验期间 >= NEW_FROM 的报告；whitelist 中的报告跳过。
+    """
     rules = load_rules()
     common = rules.get("common", {})
     targets = collect_targets(only_file)
@@ -189,6 +197,14 @@ def run_check(only_file: str | None) -> tuple[int, int, list[str]]:
         lines.append("合规校验：未发现报告 HTML，跳过")
         return 0, 0, lines
     for rel, text, type_id, cycle, note in targets:
+        if whitelist and rel in whitelist:
+            lines.append(f"[SKIP] {rel}（白名单豁免）")
+            continue
+        if new_only:
+            det = detect_month_report(Path(rel).name)
+            period = det[0] if det else ""
+            if period and period < NEW_FROM:
+                continue
         if note:
             lines.append(f"[W] {rel}: {note}")
             warnings += 1
@@ -298,10 +314,27 @@ def run_list_types() -> int:
     return 0
 
 
+def load_whitelist(path: Path) -> set[str]:
+    """读取豁免清单（JSON 数组，每项含 report / reason / review_by）-> 报告路径集合。"""
+    if not path.is_file():
+        return set()
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        return set()
+    if isinstance(data, dict):
+        data = data.get("items", [])
+    return {e.get("report", "") for e in data if isinstance(e, dict)}
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description="报告模板合规校验")
     ap.add_argument("--check", action="store_true", help="全量校验（缺省行为，参数仅为显式声明）")
     ap.add_argument("--file", help="只校验单份报告（仓库相对路径）")
+    ap.add_argument("--new-only", action="store_true",
+                    help=f"仅校验期间 >= {NEW_FROM} 的新报告（历史报告跳过）")
+    ap.add_argument("--whitelist", default=str(DEFAULT_WHITELIST),
+                    help="历史遗留豁免清单（JSON）")
     ap.add_argument("--audit", action="store_true", help="历史报告合规审计（写审计报告，不阻断）")
     ap.add_argument("--audit-out", default=str(AUDIT_DIR), help="审计报告输出目录")
     ap.add_argument("--scaffold", nargs="+", metavar="参数",
@@ -325,7 +358,8 @@ def main() -> int:
             return 2
         return 0
 
-    errors, warnings, lines = run_check(args.file)
+    errors, warnings, lines = run_check(args.file, new_only=args.new_only,
+                                      whitelist=load_whitelist(Path(args.whitelist)))
     for line in lines:
         print(line)
     if errors:

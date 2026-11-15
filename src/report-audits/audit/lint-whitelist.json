@@ -1,0 +1,5 @@
+{
+  "version": "1.0",
+  "note": "历史报告遗留豁免清单（lint_reports / compliance_check --whitelist 读取）。每项含 report（仓库相对路径）、reason（豁免原因）、review_by（复核日期，逾期恢复阻断）。由维护者评审维护，工具自动读取。",
+  "items": []
+}

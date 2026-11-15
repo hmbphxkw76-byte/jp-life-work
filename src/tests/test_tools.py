@@ -24,6 +24,8 @@ import _common  # noqa: E402
 import audit_pipeline  # noqa: E402
 import audit_preflight  # noqa: E402
 import audit_registry  # noqa: E402
+import compliance_check  # noqa: E402
+import lint_reports  # noqa: E402
 from archive_reports import select_archives  # noqa: E402
 from automation_status import days_since_latest  # noqa: E402
 from build_hub import build_outputs, normalize_for_check  # noqa: E402
@@ -1180,6 +1182,48 @@ class TestAuditGuard(unittest.TestCase):
         self.assertNotEqual(audit_pipeline.cmd_verify(), 0)
         audit_pipeline.cmd_sync()
         self.assertEqual(self._state()[self.REPORT_REL]["state"], "stale")
+
+
+class TestNewOnlyGate(unittest.TestCase):
+    """新报告阻断 / 历史报告豁免（lint_reports / compliance_check --new-only）。"""
+
+    def test_lint_skip_rules(self):
+        old = "01-demo/reports/2026-10-demo.html"
+        new = "01-demo/reports/2026-11-demo.html"
+        self.assertTrue(lint_reports._skip(old, True, set()))
+        self.assertFalse(lint_reports._skip(new, True, set()))
+        self.assertTrue(lint_reports._skip(new, True, {new}))
+        self.assertFalse(lint_reports._skip(old, False, set()))
+
+    def test_lint_whitelist_loader(self):
+        with tempfile.TemporaryDirectory() as d:
+            p = Path(d) / "w.json"
+            p.write_text('{"items":[{"report":"a","reason":"r","review_by":"2026-12-01"}]}',
+                         encoding="utf-8")
+            self.assertEqual(lint_reports.load_whitelist(p), {"a"})
+            self.assertEqual(lint_reports.load_whitelist(Path(d) / "missing.json"), set())
+
+    def test_compliance_new_only_filters_old(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            (root / "01-demo" / "prompts").mkdir(parents=True)
+            (root / "01-demo" / "reports").mkdir(parents=True)
+            (root / "01-demo" / "prompts" / "business-config.md").write_text(
+                "# 示例\n\n继承：[职业就业调研型](../../src/report_templates/employment-research/)\n",
+                encoding="utf-8")
+            html = "<html><title>t</title><body><h2>一、x</h2></body></html>"
+            (root / "01-demo" / "reports" / "2026-10-demo.html").write_text(html, encoding="utf-8")
+            (root / "01-demo" / "reports" / "2026-11-demo.html").write_text(html, encoding="utf-8")
+            orig_common, orig_cc = _common.ROOT, compliance_check.ROOT
+            _common.ROOT, compliance_check.ROOT = root, root
+            try:
+                _, _, lines = compliance_check.run_check(None, new_only=True)
+                self.assertTrue(all("2026-10" not in l for l in lines))
+                _, _, lines2 = compliance_check.run_check(
+                    None, new_only=True, whitelist={"01-demo/reports/2026-11-demo.html"})
+                self.assertTrue(any("SKIP" in l for l in lines2))
+            finally:
+                _common.ROOT, compliance_check.ROOT = orig_common, orig_cc
 
 
 if __name__ == "__main__":
