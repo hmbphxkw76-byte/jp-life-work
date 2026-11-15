@@ -6,8 +6,9 @@
 #   3. 归档策略（archive_reports.py，每主题保留最新 12 期）
 #   4. 生成全局索引（build_index.py → INDEX.md）
 #   5. 重建汇总页（build_hub.py → index.html）
-#   6. 审计失效同步（audit_pipeline.py --sync：指纹失配 → stale）+ 标识同步（audit_badge.py --sync）
-#   7. 跑契约测试确认无回归后，提交并推送变更（无变更则跳过）
+#   6. 决策支持件套刷新（personal_finance_model.py / pending_verification.py / fact_card_check.py --write）
+#   7. 审计失效同步（audit_pipeline.py --sync：指纹失配 → stale）+ 标识同步（audit_badge.py --sync）
+#   8. 跑契约测试（含流程复用一致性）确认无回归后，提交并推送变更（无变更则跳过）
 #
 # 原 scheduled-update.yml（周期更新调度）已于 37c7a90 删除，本工作流为重建版，
 # 只负责「维护生成物 + 结构」，不产出报告研究内容。
@@ -72,6 +73,16 @@ jobs:
 
       - name: 重建汇总页（build_hub.py）
         run: python src/prompts-tools/tools/build_hub.py
+
+      # ── 决策支持流程复用：刷新衍生件（与 validate.yml 门禁同一套工具）──
+      - name: 刷新个人财务模型（personal_finance_model.py）
+        run: python src/prompts-tools/tools/personal_finance_model.py
+
+      - name: 刷新待核实闭环（pending_verification.py）
+        run: python src/prompts-tools/tools/pending_verification.py
+
+      - name: 刷新事实卡片校验报告（fact_card_check.py --write）
+        run: python src/prompts-tools/tools/fact_card_check.py --write
 
       - name: 审计失效同步（audit_pipeline.py --sync）
         run: python src/prompts-tools/tools/audit_pipeline.py --sync

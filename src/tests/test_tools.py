@@ -1590,5 +1590,74 @@ class TestInfoQualityUpgrades(unittest.TestCase):
                 info_quality_check.ROOT = orig_iqc
 
 
+class TestProcessReuse(unittest.TestCase):
+    """流程复用一致性：刚优化的决策支持 / 信息质量流程必须被各阶段复用。
+
+    覆盖：CI 各工作流（validate / html-sync / scheduled-maintenance /
+    info-quality / audit-gate / scheduled-report-tasks）、00 业务配置与操作指引、
+    通用基座边界口径、检索层数据与生成器、CI 文档。
+    """
+
+    def _read(self, rel: str) -> str:
+        return (_common.ROOT / rel).read_text(encoding="utf-8", errors="replace")
+
+    def test_validate_gate_reuses_optimized_process(self):
+        t = self._read(".github/workflows/validate.yml")
+        for cmd in ("info_quality_check.py --check", "fact_card_check.py",
+                    "pending_verification.py --check", "personal_finance_model.py --check",
+                    "validate.py", "classify_reports.py", "ensure_region_topics.py",
+                    "build_hub.py --check", "lint_reports.py --new-only",
+                    "compliance_check.py --new-only"):
+            self.assertIn(cmd, t, f"validate.yml 缺少流程复用：{cmd}")
+
+    def test_maintenance_refreshes_decision_support(self):
+        t = self._read(".github/workflows/scheduled-maintenance.yml")
+        for cmd in ("personal_finance_model.py", "pending_verification.py",
+                    "fact_card_check.py --write", "build_hub.py", "audit_pipeline.py --sync"):
+            self.assertIn(cmd, t, f"scheduled-maintenance.yml 缺少件套刷新：{cmd}")
+
+    def test_other_stages_reuse_process(self):
+        self.assertIn("info_quality_check.py --apply",
+                      self._read(".github/workflows/info-quality.yml"))
+        self.assertIn("audit_check.py --all",
+                      self._read(".github/workflows/audit-gate.yml"))
+        html_sync = self._read(".github/workflows/html-sync.yml")
+        self.assertIn("build_hub.py", html_sync)
+        self.assertIn("audit_pipeline.py --sync", html_sync)
+        self.assertIn("update_planner.py",
+                      self._read(".github/workflows/scheduled-report-tasks.yml"))
+
+    def test_00_config_and_guide_reference_suite(self):
+        cfg = self._read("00-decision-hub/prompts/business-config.md")
+        for path in ("personal_profile.md", "decision_onepager.md", "personal_finance_model.md",
+                     "confidence-grade-standard.md", "decision_trees.md", "decision_log.md",
+                     "fact_cards.md", "five_questions_view.md"):
+            self.assertIn(path, cfg, f"00 business-config 未引用件套：{path}")
+        guide = self._read("00-decision-hub/operations-guide.md")
+        for tool in ("personal_finance_model.py", "decision_log.py",
+                     "pending_verification.py", "fact_card_check.py",
+                     "skeleton_builder.py"):
+            self.assertIn(tool, guide, f"00 operations-guide 未引用工具：{tool}")
+
+    def test_generic_base_boundary_convention(self):
+        self.assertIn("模块边界声明集中",
+                      self._read("src/report_templates/prompt-generic-base.md"))
+
+    def test_search_layer_reuse(self):
+        qi = json.loads(self._read("src/search/question-index.json"))
+        self.assertTrue(any(q.get("group") for q in qi["questions"]))
+        self.assertTrue((_common.ROOT / "src/search/five-questions.json").exists())
+        self.assertTrue((_common.ROOT / "src/search/keywords.json").exists())
+        hub = self._read("src/prompts-tools/tools/build_hub.py")
+        self.assertIn("load_keywords", hub)
+        self.assertIn("load_five_questions", hub)
+
+    def test_ci_doc_documents_reuse(self):
+        t = self._read("docs/CI.md")
+        self.assertIn("流程复用", t)
+        for cmd in ("personal_finance_model.py", "pending_verification.py", "fact_card_check.py"):
+            self.assertIn(cmd, t, f"docs/CI.md 未记录流程复用：{cmd}")
+
+
 if __name__ == "__main__":
     unittest.main()
