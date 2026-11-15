@@ -1266,6 +1266,24 @@ class TestAuditGuard(unittest.TestCase):
             audit_check.PENDING_P2 = orig_p2
             audit_sampling.PENDING_P2 = orig_s
 
+    def test_iq_cache_key_and_reuse(self):
+        orig = (_common.ROOT, audit_check.ROOT, audit_check.IQ_CACHE, info_quality_check.ROOT)
+        _common.ROOT = self.root
+        audit_check.ROOT = self.root
+        info_quality_check.ROOT = self.root
+        audit_check.IQ_CACHE = self.audit_dir / "findings-by-path.json"
+        try:
+            k1 = audit_check._iq_cache_key()
+            audit_check._iq_findings_by_path()
+            self.assertTrue(audit_check.IQ_CACHE.is_file())
+            self.assertEqual(k1, audit_check._iq_cache_key())
+            # 修改报告 → 缓存键变化（自动失效）
+            self.md.write_text(self.REPORT_TEXT + "\n变更\n", encoding="utf-8")
+            self.assertNotEqual(k1, audit_check._iq_cache_key())
+        finally:
+            (_common.ROOT, audit_check.ROOT, audit_check.IQ_CACHE,
+             info_quality_check.ROOT) = orig
+
 
 class TestNewOnlyGate(unittest.TestCase):
     """新报告阻断 / 历史报告豁免（lint_reports / compliance_check --new-only）。"""

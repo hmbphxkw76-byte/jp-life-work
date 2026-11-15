@@ -20,6 +20,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import re
 import sys
@@ -32,6 +33,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from _common import ROOT, detect_month_report, iter_business_dirs  # noqa: E402
 import compliance_check  # noqa: E402
 import info_quality_check  # noqa: E402
+from audit_registry import content_fingerprint  # noqa: E402
 from info_quality_check import (  # noqa: E402
     THRESH_SOURCE_COVERAGE,
     _has_source,
@@ -45,6 +47,7 @@ CHECK_REPORT_MD = AUDIT_DIR / "audit-check-report.md"
 CHECK_REPORT_JSON = AUDIT_DIR / "audit-check-report.json"
 PENDING_P2 = AUDIT_DIR / "pending-p2.json"
 P2_REVIEW_DAYS = 30
+IQ_CACHE = ROOT / "src" / "report-audits" / "info-quality" / "findings-by-path.json"
 
 TITLE_RE = re.compile(r"<title[^>]*>(.*?)</title>", re.DOTALL)
 H2_RE = re.compile(r"<h2\b[^>]*>(.*?)</h2>", re.DOTALL)
@@ -286,17 +289,44 @@ def check_report(rel: str, md_path: Path, html_path: Path, type_id: str,
 
 
 def _iq_findings_by_path() -> dict[str, list[AuditFinding]]:
-    """运行信息质量四维度评估，把发现映射到审计层级并按报告路径归组。"""
+    """运行信息质量四维度评估，把发现映射到审计层级并按报告路径归组。
+
+    带内容哈希缓存：业务包全部 md 未变时直接复用，避免每次全量重算（去冗余）。
+    """
+    key = _iq_cache_key()
+    if IQ_CACHE.is_file():
+        try:
+            data = json.loads(IQ_CACHE.read_text(encoding="utf-8"))
+            if data.get("version") == "1.0" and data.get("key") == key:
+                return {p: [AuditFinding(**d) for d in items]
+                        for p, items in data.get("findings", {}).items()}
+        except (json.JSONDecodeError, TypeError):
+            pass
+
     units = info_quality_check.scan_topics()
     findings, _metrics = info_quality_check.evaluate(units)
-    out: dict[str, list[AuditFinding]] = {}
+    mapped: dict[str, list[dict]] = {}
     for f in findings:
         layer = C_TO_LAYER.get(f.code, "L5")
-        out.setdefault(f.path, []).append(
-            AuditFinding(layer, f.code, f.level, f.path, f.location,
-                         f"{f.detail}（信息质量四维度）", f.spec)
-        )
-    return out
+        mapped.setdefault(f.path, []).append({
+            "layer": layer, "code": f.code, "severity": f.level,
+            "report": f.path, "location": f.location,
+            "detail": f"{f.detail}（信息质量四维度）", "spec": f.spec,
+        })
+    IQ_CACHE.parent.mkdir(parents=True, exist_ok=True)
+    IQ_CACHE.write_text(json.dumps({"version": "1.0", "key": key, "findings": mapped},
+                                ensure_ascii=False, indent=2), encoding="utf-8")
+    return {p: [AuditFinding(**d) for d in items] for p, items in mapped.items()}
+
+
+def _iq_cache_key() -> str:
+    """全库内容哈希（业务主题下全部 md 的路径 + 内容指纹）。"""
+    h = hashlib.sha256()
+    for b in iter_business_dirs():
+        for md in sorted(b.path.rglob("*.md")):
+            h.update(md.relative_to(ROOT).as_posix().encode("utf-8"))
+            h.update(content_fingerprint(md).encode("utf-8"))
+    return h.hexdigest()
 
 
 def _l5_status() -> dict[str, bool]:
