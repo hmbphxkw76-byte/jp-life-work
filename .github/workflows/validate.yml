@@ -71,6 +71,15 @@ jobs:
           fi
           echo "build_hub.py 退出码 ${code:-0}（汇总页缺失时 WARN 放行，由首次生成补建）"
 
+      - name: 全局索引一致性校验（build_index.py --check）
+        run: |
+          python src/prompts-tools/tools/build_index.py --check || code=$?
+          if [ "${code:-0}" -eq 1 ]; then
+            echo "::error::INDEX.md 已过期（本地运行 build_index.py 重新生成后提交）"
+            exit 1
+          fi
+          echo "build_index.py 退出码 ${code:-0}（2=索引缺失，由定时维护生成）"
+
       # 新报告阻断级：期间 >= 2026-11 的报告 lint / 模板合规必须无错误项；
       # 历史报告由 --new-only 跳过，遗留项列入 lint-whitelist.json 豁免。
       - name: 报告内容 lint（新报告阻断）

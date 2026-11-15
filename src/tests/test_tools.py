@@ -31,6 +31,7 @@ import audit_pipeline  # noqa: E402
 import audit_preflight  # noqa: E402
 import audit_registry  # noqa: E402
 import audit_sampling  # noqa: E402
+import build_index  # noqa: E402
 import compliance_check  # noqa: E402
 import vocab_tool  # noqa: E402
 import lint_reports  # noqa: E402
@@ -1961,6 +1962,44 @@ class TestNewAuditRules(unittest.TestCase):
             self.assertEqual(payload["l5_pending_total"], 1)
             self.assertEqual(payload["unfinished_verification"], 1)
             self.assertNotIn("l5_pending", payload["checks"])
+
+
+class TestIndexGate(unittest.TestCase):
+    """INDEX.md 合并门禁（build_index.py --check）。"""
+
+    def test_normalize_ignores_timestamps(self):
+        a = ("> 最近生成：2026-01-01 00:00 UTC（由 src/prompts-tools/tools/build_index.py 自动维护）\n"
+             "| 2026-11 | [x](x) | t | 2026-01-01 00:00 |\n")
+        b = ("> 最近生成：2026-02-02 11:11 UTC（由 src/prompts-tools/tools/build_index.py 自动维护）\n"
+             "| 2026-11 | [x](x) | t | 2026-02-02 11:11 |\n")
+        self.assertEqual(build_index.normalize_for_check(a), build_index.normalize_for_check(b))
+
+    def test_check_detects_drift(self):
+        with tempfile.TemporaryDirectory() as tmp:  # noqa: P201
+            root = Path(tmp)
+            (root / "01-demo" / "prompts").mkdir(parents=True)
+            (root / "01-demo" / "prompts" / "business-config.md").write_text(
+                "# 配置\n", encoding="utf-8")
+            (root / "01-demo" / "reports").mkdir(parents=True)
+            (root / "01-demo" / "reports" / "2026-11-demo.html").write_text(
+                "<html><head><title>演示</title></head><body></body></html>", encoding="utf-8")
+            (root / "INDEX.md").write_text(
+                "# 日本生活与工作 · 报告索引\n\n> 最近生成：x\n\n"
+                "## 01-demo\n\n| 月份 | 报告 | 标题 | 更新时间 (UTC) |\n|---|---|---|---|\n"
+                "| 2026-10 | [old](01-demo/reports/old.html) | 旧 | 2026-01-01 00:00 |\n",
+                encoding="utf-8")
+            buf = io.StringIO()
+            with unittest.mock.patch.object(build_index, "ROOT", root), \
+                    unittest.mock.patch.object(_common, "ROOT", root), \
+                    contextlib.redirect_stdout(buf):
+                rc = build_index.main(["--check"])
+            self.assertEqual(rc, 1)
+            self.assertIn("已过期", buf.getvalue())
+
+    def test_ci_runs_index_check(self):
+        wf = Path(__file__).resolve().parents[2] / ".github" / "workflows" / "validate.yml"
+        t = wf.read_text(encoding="utf-8")
+        self.assertIn("build_index.py --check", t)
 
 
 class TestVocabVerify(unittest.TestCase):

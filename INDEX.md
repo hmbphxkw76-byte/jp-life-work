@@ -1,6 +1,6 @@
 # 日本生活与工作 · 报告索引
 
-> 最近生成：2026-11-15 08:50 UTC（由 prompts/tools/build_index.py 自动维护）
+> 最近生成：2026-11-15 08:50 UTC（由 src/prompts-tools/tools/build_index.py 自动维护）
 
 ## 20-overseas-china
 

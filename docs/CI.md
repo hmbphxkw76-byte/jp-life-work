@@ -36,6 +36,8 @@
 | 报告归位检查 | `classify_reports.py --check --unknown-warn` | 阻断 |
 | 结构补全检查 | `ensure_region_topics.py --check` | 阻断 |
 | 汇总页一致性 | `build_hub.py --check` | 阻断 |
+| 全局索引一致性 | `build_index.py --check` | 阻断 |
+| 词库校验 | `vocab_tool.py topic-check` / `verify` + `sync_vocab.py check` | 阻断 |
 | 报告内容 lint | `lint_reports.py --new-only` | 阻断（新报告；退出码 1） |
 | 模板合规校验 | `compliance_check.py --new-only` | 阻断（新报告；退出码 1） |
 
@@ -60,7 +62,7 @@
 | 归位 | `classify_reports.py --apply` | 移动错位报告到所属主题 |
 | 补全 | `ensure_region_topics.py` | 补齐缺失的主题结构 |
 | 归档 | `archive_reports.py` | 每主题保留最新 12 期，超出移入 `reports/archives/` |
-| 索引 | `build_index.py` | 生成 `INDEX.md`（含活跃度心跳时间戳） |
+| 索引 | `build_index.py` | 生成 `INDEX.md`（含活跃度心跳时间戳）；PR 阶段由 `build_index.py --check` 校验一致 |
 | 报告 HTML | `md2html.py` | 同步报告页（含跨月对比高亮） |
 | 汇总页 | `build_hub.py` | 重建 `index.html` |
 | 回归 | `unittest` | 确认维护未破坏契约 |
