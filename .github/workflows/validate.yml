@@ -92,3 +92,42 @@ jobs:
             exit 1
           fi
           echo "compliance_check.py 退出码 $code（2=仅警告不阻断）"
+
+      # ── 决策支持 / 信息质量流程复用（DecisionSupport-Guard + InfoQuality-Guard）──
+      # 以下为「刚优化的流程」在 PR 门禁阶段的复用：结构化免责声明、空模块占比、
+      # 跨报告事实重复率、事实卡片五字段与指针、待核实闭环、个人财务模型一致性。
+      - name: 信息质量全量检查（info_quality_check --check）
+        run: |
+          python src/prompts-tools/tools/info_quality_check.py --check || code=$?
+          if [ "${code:-0}" -eq 1 ]; then
+            echo "::error::信息质量存在 P0/P1 遗留，阻断合并（见 src/report-audits/info-quality/）"
+            exit 1
+          fi
+          echo "info_quality_check.py 退出码 ${code:-0}（2=仅 P2 不阻断）"
+
+      - name: 事实卡片校验（fact_card_check）
+        run: |
+          python src/prompts-tools/tools/fact_card_check.py || code=$?
+          if [ "${code:-0}" -eq 1 ]; then
+            echo "::error::事实卡片五字段缺失或 [@FC-NNN] 指针失效，阻断合并"
+            exit 1
+          fi
+          echo "fact_card_check.py 退出码 ${code:-0}（2=仅 P2 不阻断）"
+
+      - name: 待核实项闭环检查（pending_verification --check）
+        run: |
+          python src/prompts-tools/tools/pending_verification.py --check || code=$?
+          if [ "${code:-0}" -eq 1 ]; then
+            echo "::error::存在未登记或已逾期的首轮核验项，阻断合并"
+            exit 1
+          fi
+          echo "pending_verification.py 退出码 ${code:-0}（2=临近截止不阻断）"
+
+      - name: 个人财务模型一致性（personal_finance_model --check）
+        run: |
+          python src/prompts-tools/tools/personal_finance_model.py --check || code=$?
+          if [ "${code:-0}" -ne 0 ]; then
+            echo "::error::个人财务模型缺失输入或已过期（须重跑 personal_finance_model.py 并提交），阻断合并（退出码 $code）"
+            exit 1
+          fi
+          echo "personal_finance_model.py 退出码 ${code:-0}"

@@ -8,7 +8,7 @@ CI 工具链使用说明。所有工具基于仓库根目录相对路径运行�
 
 ```bash
 pip install -r requirements.txt   # markdown
-python -m unittest discover -s src/tests -v   # 单元测试（65 项）
+python -m unittest discover -s src/tests -v   # 单元测试（163 项）
 ```
 
 ## 退出码约定（校验类工具统一）
@@ -34,8 +34,15 @@ python -m unittest discover -s src/tests -v   # 单元测试（65 项）
 | build_hub.py | 生成 | validate.yml --check / html-sync.yml「汇总页」 |
 | report_diff.py | 生成 | md2html 依赖：跨月内容对比高亮（纯函数） |
 | migrate_monthly_reports.py | 迁移 | 一次性：存量报告合并重命名为月度系列 |
-| update_planner.py | 编排 | 手动 / 待建定时任务「生成任务清单」 |
+| update_planner.py | 编排 | scheduled-report-tasks.yml「生成月度任务清单」 |
 | automation_status.py | 编排 | 手动 / 待建定时任务「状态记录与活跃度」 |
+| info_quality_check.py | 校验+修复 | info-quality.yml「信息质量全量评估」+ validate.yml「信息质量检查」 |
+| audit_registry.py / audit_pipeline.py / audit_badge.py / audit_check.py / audit_sampling.py / audit_preflight.py | 审计 | audit-gate.yml / audit-sampling.yml / html-sync.yml |
+| personal_finance_model.py | 决策支持 | validate.yml「财务模型一致性」+ scheduled-maintenance.yml「刷新」 |
+| fact_card_check.py | 决策支持 | validate.yml「事实卡片校验」+ scheduled-maintenance.yml「刷新」 |
+| pending_verification.py | 决策支持 | validate.yml「待核实闭环」+ scheduled-maintenance.yml「刷新」 |
+| skeleton_builder.py | 生成 | 手动：报告骨架 / 空模块合并 |
+| decision_log.py | 编排 | 手动：决策状态变化时间线 |
 
 ## 校验类
 
@@ -195,6 +202,22 @@ python prompts/tools/automation_status.py activity --threshold 45               
 ```
 
 状态写入根目录 `automation-status.json`（追加式，工作流提交）。
+
+## 决策支持流程（DecisionSupport-Guard）
+
+00 模块的决策支持件套与 `info_quality_check` 升级构成「刚优化的流程」，各阶段复用同一套工具：
+
+| 工具 | 作用 | 复用阶段 |
+|---|---|---|
+| `personal_finance_model.py` | 读 01/07/14/10/17 登记册活值，算净储蓄率 / 回本周期 | `validate.yml` 一致性 + `scheduled-maintenance.yml` 刷新 |
+| `fact_card_check.py` | 事实卡片五字段 / `[@FC-NNN]` 指针 / 跨报告事实重复率 | 同上 |
+| `pending_verification.py` | 14/15/17/18/19/20 首轮核验截止跟踪 | 同上 |
+| `skeleton_builder.py` | 报告骨架生成 / 空模块合并 / 边界声明集中 | 生成期（按需） |
+| `decision_log.py` | 决策状态变化时间线 | `update_planner.py` 月度清单 |
+| `info_quality_check.py` | 结构化免责声明 / 空模块占比 / 事实重复率 | `info-quality.yml --apply` + `validate.yml --check` |
+
+- **复用一致性测试**：`src/tests/test_tools.py::TestProcessReuse` 断言各阶段均引用对应工具，漏接即失败。
+- **流程文档**：`docs/CI.md` 第九节（流程复用矩阵）。
 
 ## 常见场景速查
 

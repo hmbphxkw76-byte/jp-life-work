@@ -13,9 +13,11 @@
 | md → HTML、汇总页 | `html-sync.yml`（push 触发） |
 | 归档 / 索引 / 结构维护 | `scheduled-maintenance.yml`（每月 1 日） |
 | 月度产出待办提醒 | `scheduled-report-tasks.yml`（每月 1 日） |
-| 内容零丢失 / 对比准确性 | `src/tests/test_tools.py`（76 项） |
+| 内容零丢失 / 对比准确性 | `src/tests/test_tools.py` |
 | 信息质量评估 / 混乱修复 | `info-quality.yml`（每周一 02:20 UTC） |
 | 审计门禁（登记册 / 台账 / 标识 / L1–L5） | `audit-gate.yml`（阻断） |
+| 决策支持件套（参数 / 一页纸 / 财务模型 / 事实卡片 / 待核实闭环） | `validate.yml`（复用门禁）+ `scheduled-maintenance.yml`（刷新） |
+| 流程复用一致性 | `src/tests/test_tools.py::TestProcessReuse` |
 
 **CI 不产出报告研究内容**——报告由各主题 `prompts/business-config.md` 定义的研究流程人工/Agent 产出；CI 只校验与同步生成物。
 
@@ -148,7 +150,7 @@ reports/YYYY-MM-<slug>.md  ──md2html.py──►  reports/YYYY-MM-<slug>.htm
 - **辅助开关**：报告页工具条「隐藏更新标记」对照阅读、「展开全部删除」。
 - **呈现**：报告页新标签页独立打开，页脚提供「← 返回主题 / 返回首页」。
 
-## 六、测试体系（`src/tests/`，140 项）
+## 六、测试体系（`src/tests/`，163 项）
 
 | 场景 | 测试类 | 覆盖 |
 |---|---|---|
@@ -186,6 +188,14 @@ python src/prompts-tools/tools/automation_status.py activity
 
 # 信息质量
 python src/prompts-tools/tools/info_quality_check.py --apply
+
+# 决策支持 / 信息质量流程复用
+python src/prompts-tools/tools/info_quality_check.py --check
+python src/prompts-tools/tools/fact_card_check.py
+python src/prompts-tools/tools/pending_verification.py --check
+python src/prompts-tools/tools/personal_finance_model.py --check
+python src/prompts-tools/tools/skeleton_builder.py --topic 14-life-operations --mode compact
+python src/prompts-tools/tools/decision_log.py --timeline
 ```
 
 ## 八、常见问题
@@ -205,7 +215,27 @@ python src/prompts-tools/tools/info_quality_check.py --apply
 **Q：如何手动跑一次定时任务？**
 GitHub Actions 页面 → 对应 workflow → 「Run workflow」；或在本地按「手动命令速查」执行。
 
-## 九、本地并行协作机制（`tools/workflow_guard.py`）
+## 九、流程复用一致性（DecisionSupport-Guard）
+
+「刚优化的流程」= 00 决策支持件套（个人参数档案 / 决策一页纸 / 个人财务模型 / 事实卡片 / 置信度分级 / 决策树 / 决策日志 / 待核实闭环）+ `info_quality_check` 升级（结构化免责声明 / 空模块占比 / 跨报告事实重复率）。**所有后续阶段必须复用同一套工具，不得另起判定逻辑。**
+
+| 阶段 | 载体 | 复用的工具 / 产物 |
+|---|---|---|
+| PR / push 门禁 | `validate.yml` | `info_quality_check --check`、`fact_card_check`、`pending_verification --check`、`personal_finance_model --check` |
+| 生成物同步 | `html-sync.yml` | `build_hub.py`（嵌入关键词 / 五问视图）、`audit_pipeline --sync` |
+| 月度维护 | `scheduled-maintenance.yml` | `personal_finance_model.py`、`pending_verification.py`、`fact_card_check.py --write`、`build_hub.py` |
+| 信息质量周期 | `info-quality.yml` | `info_quality_check.py --apply` |
+| 审计门禁 | `audit-gate.yml` | `audit_check.py --all`（内嵌 info_quality_check 发现） |
+| 月度提醒 | `scheduled-report-tasks.yml` | `update_planner.py`（含「决策状态变化」字段） |
+| 生成期提示词 | `prompt-generic-base.md` / 00 `business-config.md` / `operations-guide.md` | 模块边界集中、五问「是/否/待定 + 依据」、件套路径 |
+| 检索层 | `build_hub.py` + `src/search/*` | `keywords.json` / `five-questions.json` / `question-index.json`（group） |
+
+- **复用一致性测试**：`TestProcessReuse`（`src/tests/test_tools.py`）逐项断言上述阶段均引用对应工具 / 产物；任一处漏接即测试失败，防止流程漂移。
+- **维护闭环**：`scheduled-maintenance.yml` 每月刷新财务模型 / 待核实闭环 / 事实卡片报告；`validate.yml` 在 PR 阶段校验其一致性。
+
+---
+
+## 十、本地并行协作机制（`tools/workflow_guard.py`）
 
 CI 之外的**本地多会话 / 多任务并行**由三层隔离机制约束，避免合并错误：
 
