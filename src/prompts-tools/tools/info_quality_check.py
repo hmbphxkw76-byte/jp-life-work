@@ -321,16 +321,13 @@ def _registry_calibers(text: str) -> dict[str, str]:
     return out
 
 
-def _registry_latest_date(u: dict):
-    """登记册字段化日期最新值（C-08 判定依据）。
+def registry_latest_date(text: str):
+    """登记册全文 -> 字段化日期最新值（C-08 判定依据；阶段闸 G2-STALE 共用）。
 
     新表：取「核验日期」「版本日期」列；旧表：取「基准版本」中的 vYYYY.MM.DD。
     无可用字段时返回 None（不判定，不再回退旧逻辑）。
     """
-    reg = u.get("registry")
-    if reg is None:
-        return None
-    lt = _live_table(_read(reg))
+    lt = _live_table(text)
     if not lt:
         return None
     hdr, rows = lt
@@ -590,7 +587,7 @@ def check_report(u: dict, rp: Path, findings: list[Finding]) -> dict:
                                 "S-06"))
 
     # C-08 时效：直接读取登记册「版本日期 / 核验日期」字段化值（2026-11-15 起）
-    reg_date = _registry_latest_date(u)
+    reg_date = registry_latest_date(_read(u["registry"])) if u.get("registry") else None
     if reg_date is not None:
         age_days = (date.today() - reg_date).days
         if age_days > STALE_DAYS:

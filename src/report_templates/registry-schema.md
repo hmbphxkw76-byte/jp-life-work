@@ -2,7 +2,7 @@
 
 > **定位**：`report_templates/` 通用层的**登记册结构标准**。规定指标登记册（`data/*_indicator_registry.md`）活值表的 Schema 定义、口径字段语义与判定规则，供登记册编写、`info_quality_check.py`（C-08 / C-10 / C-13）与人工审计共同消费。
 > **上位依据**：[通用基座 · 第七节 指标台账协议](./prompt-generic-base.md)、[监测报告通用规范](./monitoring-common-spec.md)。
-> **程序化实现**：`src/prompts-tools/tools/info_quality_check.py` 的 `_live_table()` / `_registry_calibers()` / `_registry_latest_date()` / `check_value_sync()`。
+> **程序化实现**：`src/prompts-tools/tools/info_quality_check.py` 的 `_live_table()` / `_registry_calibers()` / `registry_latest_date()` / `check_value_sync()`。
 
 ---
 
