@@ -84,7 +84,7 @@
 ## 8. 可访问性与校验
 
 - 内联 JS 必须通过 `node --check`；表格 / div 标签配对；锚点有效；浏览器打开预览无控制台 error。
-- HTML 可访问性校验：`python prompts/tools/lint_reports.py`（按可用性执行；本地环境缺脚本时以人工清单替代，见第 9 节）。
+- HTML 可访问性校验：`python src/prompts-tools/tools/lint_reports.py`（按可用性执行；本地环境缺脚本时以人工清单替代，见第 9 节）。
 
 ---
 

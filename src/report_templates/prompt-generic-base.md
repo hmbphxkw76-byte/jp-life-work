@@ -146,11 +146,12 @@ macropulse-reports/
 - 所有计划值、预测值不得与实绩混算；所有媒体转述必须标「需核实原文」。
 - 所有口径冲突必须并列，不得静默择一。
 - 报告完成后必须执行该报告类型模板的质量自检清单。
-- **落盘后、提交前必须完成「落盘前自检 → 多层级校验 → 提交审计」三步**（审计入口，缺一不得提交）：
-  1. `python src/prompts-tools/tools/audit_preflight.py --report <报告相对路径>`（快速自检，P0/P1 必须修正）；
-  2. `python src/prompts-tools/tools/audit_check.py --report <报告相对路径>`（L1–L5 多层级校验）；
-  3. `python src/prompts-tools/tools/audit_pipeline.py --submit --report <报告相对路径>`（提交初审，进入审计状态机）。
-  未通过自检或校验的报告不得提交；流程与状态见《审计报告标准化管理体系》。
+- **交付与审计协议（唯一口径，提示词 / AGENTS / CI 三体系一致）**：报告交付物 = `reports/YYYY-MM-<slug>.md` 源稿 + 同名自包含 `.html`。落盘后、提交前必须按序完成（缺一不得提交）：
+  1. **HTML 生成**：`python src/prompts-tools/tools/md2html.py`（仓库根目录执行；任务工作树内运行，共享检出目录禁止），随后 `python src/prompts-tools/tools/lint_reports.py --new-only` 校验交付物；
+  2. **落盘前自检**：`python src/prompts-tools/tools/audit_preflight.py --report <报告相对路径>`（P0/P1 必须修正）；
+  3. **多层级校验**：`python src/prompts-tools/tools/audit_check.py --report <报告相对路径>`（L1–L5，P0/P1 必须修正）；
+  4. **提交审计**：`python src/prompts-tools/tools/audit_pipeline.py --submit --report <报告相对路径>`（提交初审，进入审计状态机）。
+  合并门禁：`python src/prompts-tools/tools/audit_pipeline.py --gate`（PR / main 推送；受检报告须 `audited` + 指纹匹配 + 有效 L5 证据）。CI 侧 `html-sync` 负责推送后确定性重生成，`audit-gate` 负责门禁与全量校验。流程与状态见《审计报告标准化管理体系》。
 
 ---
 
@@ -162,9 +163,11 @@ macropulse-reports/
 - [ ] 已修正事实清单已从上期 / 基线继承并续写
 - [ ] 渲染与排版符合[监测报告通用规范](./monitoring-common-spec.md)
 - [ ] 已产出「数据变更摘要」与「待复核清单」
+- [ ] 已运行 `md2html.py` 生成同名 HTML 并通过 `lint_reports.py --new-only`
 - [ ] 已运行 `audit_preflight.py --report` 且无 P0/P1
 - [ ] 已运行 `audit_check.py --report` 并修正全部 P0/P1
 - [ ] 已 `audit_pipeline.py --submit` 提交初审（未通过初审不得合并）
+- [ ] 合并门禁 `audit_pipeline.py --gate` 通过（变更报告均已审计且证据有效）
 
 ---
 

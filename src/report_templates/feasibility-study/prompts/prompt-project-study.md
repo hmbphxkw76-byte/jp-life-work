@@ -49,7 +49,7 @@
 ## 五、渲染与交付
 
 - 交付包 = 报告（含判定打分表）+ 假设清单附录；结论与风险清单同时呈现。
-- 交付格式：md + 同目录自包含 HTML（`python prompts/tools/md2html.py`）；HTML 须通过 `python prompts/tools/lint_reports.py`。
+- 交付格式：md + 同目录自包含 HTML（`python src/prompts-tools/tools/md2html.py`）；HTML 须通过 `python src/prompts-tools/tools/lint_reports.py`。
 
 ---
 ## 版本记录

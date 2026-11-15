@@ -48,7 +48,7 @@
 
 ## 六、渲染与交付
 
-- 交付格式：md + 同目录自包含 HTML（`python prompts/tools/md2html.py`）；HTML 须通过 `python prompts/tools/lint_reports.py`；基线导航采用简化锚点目录。
+- 交付格式：md + 同目录自包含 HTML（`python src/prompts-tools/tools/md2html.py`）；HTML 须通过 `python src/prompts-tools/tools/lint_reports.py`；基线导航采用简化锚点目录。
 
 ---
 ## 版本记录

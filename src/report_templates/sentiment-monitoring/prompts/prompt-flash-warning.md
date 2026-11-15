@@ -33,7 +33,7 @@
 ## 二、联动与交付
 
 - 台账增量回写 `{{REGISTRY_PATH}}`；月度窗口到达时本专项内容并入月报风险预警模块。
-- 交付格式：md + 同目录自包含 HTML（`python prompts/tools/md2html.py`）；HTML 须通过 `python prompts/tools/lint_reports.py`。
+- 交付格式：md + 同目录自包含 HTML（`python src/prompts-tools/tools/md2html.py`）；HTML 须通过 `python src/prompts-tools/tools/lint_reports.py`。
 
 ---
 ## 版本记录

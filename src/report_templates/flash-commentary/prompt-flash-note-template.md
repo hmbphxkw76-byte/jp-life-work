@@ -42,7 +42,7 @@
 | 单份快评 | `reports/{{YYYY-MM-DD}}-主题-快评.md`（+ 同名 html） | 写入报告内（vYYYY.MM.DD + 完成时间） |
 
 - 快评命名不在 `prompts/tools` 标准正则内，`validate.py` 仅提示 WARN 不阻断，属预期行为。
-- 交付格式：md 源稿 + 同目录自包含 HTML（`prompts/tools/md2html.py` 同步生成）；HTML 必须通过 `prompts/tools/lint_reports.py`。
+- 交付格式：md 源稿 + 同目录自包含 HTML（`src/prompts-tools/tools/md2html.py` 同步生成）；HTML 必须通过 `src/prompts-tools/tools/lint_reports.py`。
 - 快评件按归档保留策略执行；归档不改变事后补验义务。
 
 ## 五、执行方式（建议）

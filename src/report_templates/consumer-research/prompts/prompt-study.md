@@ -48,7 +48,7 @@
 ## 五、渲染与交付
 
 - 交付包 = 报告 + 数据表附录（脱敏）+ 方法说明；事实发现与建议分离。
-- 交付格式：md + 同目录自包含 HTML（`python prompts/tools/md2html.py`）；HTML 须通过 `python prompts/tools/lint_reports.py`。
+- 交付格式：md + 同目录自包含 HTML（`python src/prompts-tools/tools/md2html.py`）；HTML 须通过 `python src/prompts-tools/tools/lint_reports.py`。
 
 ---
 ## 版本记录

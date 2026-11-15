@@ -38,8 +38,8 @@
 
 ## 五、图表与渲染（基线期）
 
-- 交付格式：Markdown 源稿 + 同目录自包含 HTML（经 `prompts/tools/md2html.py` 同步生成）。
-- HTML 须通过 `prompts/tools/lint_reports.py`。
+- 交付格式：Markdown 源稿 + 同目录自包含 HTML（经 `src/prompts-tools/tools/md2html.py` 同步生成）。
+- HTML 须通过 `src/prompts-tools/tools/lint_reports.py`。
 - 基线导航采用简化锚点目录，不强制升级为 `.report-nav`。
 
 ## 六、质量自检（在通用基座第九节之上追加）

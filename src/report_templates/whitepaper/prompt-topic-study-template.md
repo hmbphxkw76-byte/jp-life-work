@@ -44,7 +44,7 @@
 | 框架修订篇 | `reports/{{YYYY-MM-DD}}-主题-修订.md`（+ 同名 html） | 同上 |
 
 - 新选题与修订篇命名不在 `prompts/tools` 标准正则内，`validate.py` 仅提示 WARN 不阻断，属预期行为；年度系列篇命名与标准正则兼容。
-- 交付格式：md 源稿 + 同目录自包含 HTML（`prompts/tools/md2html.py` 同步生成）；HTML 必须通过 `prompts/tools/lint_reports.py`。
+- 交付格式：md 源稿 + 同目录自包含 HTML（`src/prompts-tools/tools/md2html.py` 同步生成）；HTML 必须通过 `src/prompts-tools/tools/lint_reports.py`。
 - 已发布白皮书常驻 `reports/` 顶层，不进入归档；勘误以勘误件形式发布，不改原稿。
 
 ## 五、执行方式（建议）

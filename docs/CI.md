@@ -96,15 +96,14 @@
 
 | 步骤 | 命令 | 失败后果 |
 |---|---|---|
-| 登记册双向一致 | `audit_registry.py --check` | 阻断（退出码 1） |
-| 台账哈希链 + 指纹绑定 | `audit_pipeline.py --verify` | 阻断 |
-| 已审计标识一致 | `audit_badge.py --check` | 阻断 |
+| 合并门禁（统一入口） | `audit_pipeline.py --gate`（`--changed` 增量 / `--strict` 全库） | 阻断（退出码 1） |
 | 多层级校验 | `audit_check.py --all` | 存在 P0/P1 阻断；仅 P2 放行 |
 
+- **合并门禁覆盖**：`--gate` 一次完成台账哈希链、登记册双向一致、已审计标识一致、受检报告审计状态（`audited` + md/HTML 指纹匹配 + 有效 L5 证据）；PR 默认只查本次变更报告，`--strict` 查全库。
 - **L5 证据门禁**：`audited` 报告必须附有效 L5 语义复核证据（`re_review --evidence` 或一次性 `--backfill-l5`），缺失即 `L5-EVIDENCE`（P1）阻断。
 - **信息质量新标准**（2026-11-15 起）：C-03 跨文档重复按相似度 ≥ 80%；C-07 事实单元含表格行、纯交叉引用括号不计；C-08 读登记册字段化日期；C-10 按登记册 Schema 分支；C-13 报告↔登记册数值一致性；C-14 ④/⑤ 级来源强制核验标注。
 
-- **配套**：新增报告须先按提示词三步（preflight → audit_check → audit_pipeline --submit）自检并提交审计；未通过初审不得合并。
+- **配套（与提示词 / AGENTS 同一口径）**：交付与审计协议 = HTML 生成（`md2html.py`）→ 落盘前自检（`audit_preflight`）→ 多层级校验（`audit_check`）→ 提交审计（`audit_pipeline --submit`）；未通过自检 / 校验 / 初审的报告不得合并。
 
 ### 7. `audit-sampling.yml` — 月度分层抽检
 

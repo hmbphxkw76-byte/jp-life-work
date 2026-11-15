@@ -40,7 +40,7 @@
 | 假设失效插刷 | `reports/{{YYYY-MM}}-<slug>.md` 追加件 | 同上 |
 
 - 文件命名遵循仓库统一约定（`prompts/tools` 按此识别）；插刷追加件命名不在标准正则内，`validate.py` 仅提示 WARN 不阻断，属预期行为。
-- 交付格式：md 源稿 + 同目录自包含 HTML（`prompts/tools/md2html.py` 同步生成）；HTML 必须通过 `prompts/tools/lint_reports.py`。
+- 交付格式：md 源稿 + 同目录自包含 HTML（`src/prompts-tools/tools/md2html.py` 同步生成）；HTML 必须通过 `src/prompts-tools/tools/lint_reports.py`。
 - 基线报告常驻 `reports/` 顶层，不进入归档；模型档案年度新版另存，不覆盖历史。
 
 ## 五、执行方式（建议）

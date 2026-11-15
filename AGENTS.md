@@ -46,8 +46,21 @@ jp-life-work：围绕日本生活与工作（签证 / 就业 / 行业 / 税制 /
 - 不要 `git push origin main`（除非用户明确指示，且确认已过校验）。
 - 不要 `git checkout/reset --hard`、`git clean`、`git stash` 而不持检出锁。
 - 不要在 task 分支未合并时 `task stop`（确需丢弃用 `--force`，且先告知用户）。
-- 不要运行 `build_hub.py` / `md2html.py`（按仓库既有纪律，这些由主会话统一执行）。
+- 不要在共享检出目录运行 `build_hub.py` / `md2html.py`；`md2html.py` 可在任务工作树内运行以生成本任务报告的 HTML（`build_hub.py` 仍由主会话统一执行）。
 - 本仓库改动仅限本仓库，不跨 repo。
+
+## 交付与审计协议（与提示词规范 / CI 同一口径）
+
+报告交付物 = `reports/YYYY-MM-<slug>.md` 源稿 + 同名自包含 `.html`。落盘后、提交前必须按序完成（缺一不得提交）：
+
+1. **HTML 生成**：`python src/prompts-tools/tools/md2html.py`（任务工作树内；共享检出目录禁止）+ `python src/prompts-tools/tools/lint_reports.py --new-only`；
+2. **落盘前自检**：`python src/prompts-tools/tools/audit_preflight.py --report <路径>`（P0/P1 必须修正）；
+3. **多层级校验**：`python src/prompts-tools/tools/audit_check.py --report <路径>`（L1–L5，P0/P1 必须修正）；
+4. **提交审计**：`python src/prompts-tools/tools/audit_pipeline.py --submit --report <路径>`。
+
+合并门禁：`python src/prompts-tools/tools/audit_pipeline.py --gate`（PR / main 推送；受检报告须 `audited` + 指纹匹配 + 有效 L5 证据）。
+CI 侧：`html-sync` 负责推送后确定性重生成 HTML / 汇总页；`audit-gate` 负责 `--gate` 与 `audit_check --all`。
+详见 `src/report_templates/prompt-generic-base.md` 第八节与《审计报告标准化管理体系》。
 
 ## 其它既有纪律（摘要）
 

@@ -38,9 +38,9 @@
 ## 三、结果验证
 
 ```powershell
-python prompts/tools/validate.py          # 0 错误
-python prompts/tools/lint_reports.py      # 0 错误
-python prompts/tools/build_index.py && python prompts/tools/build_hub.py
+python src/prompts-tools/tools/validate.py          # 0 错误
+python src/prompts-tools/tools/lint_reports.py      # 0 错误
+python src/prompts-tools/tools/build_index.py && python src/prompts-tools/tools/build_hub.py
 ```
 
 人工核对：九节标题与基线类型模板第二节逐字一致；主题矩阵三块互不重叠；台账章节定义与机制文档第四节一致。

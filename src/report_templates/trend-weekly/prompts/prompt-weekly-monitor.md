@@ -56,7 +56,7 @@
 ## 五、渲染与交付
 
 - 交付格式由业务配置声明：md 源稿 + 同目录自包含 HTML；或纯 HTML（md 源稿存 `sources/`，不参与 `md2html.py` 自动转换）。
-- HTML 须通过 `python prompts/tools/lint_reports.py` 与 `python prompts/tools/compliance_check.py --file {{OUTPUT_PATH}}`。
+- HTML 须通过 `python src/prompts-tools/tools/lint_reports.py` 与 `python src/prompts-tools/tools/compliance_check.py --file {{OUTPUT_PATH}}`。
 - 周报按归档保留策略执行（weekly 保留 12 期）。
 
 ---

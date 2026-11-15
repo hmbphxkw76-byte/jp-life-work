@@ -41,7 +41,7 @@
 | 年度台账复盘 | `reports/{{YYYY-MM}}-<slug>.md`（+ 同名 html）+ 台账年度新版 | 同上 |
 
 - 事件触发解读命名不在 `prompts/tools` 标准正则内，`validate.py` 仅提示 WARN 不阻断，属预期行为；年度复盘命名与标准正则兼容。
-- 交付格式：md 源稿 + 同目录自包含 HTML（`prompts/tools/md2html.py` 同步生成）；HTML 必须通过 `prompts/tools/lint_reports.py`。
+- 交付格式：md 源稿 + 同目录自包含 HTML（`src/prompts-tools/tools/md2html.py` 同步生成）；HTML 必须通过 `src/prompts-tools/tools/lint_reports.py`。
 - 基线报告常驻 `reports/` 顶层，不进入归档；解读件按归档保留策略执行。
 
 ## 五、执行方式（建议）

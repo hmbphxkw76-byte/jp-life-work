@@ -51,7 +51,7 @@
 
 ## 六、渲染与交付
 
-- 交付格式：md + 同目录自包含 HTML（`python prompts/tools/md2html.py`）；HTML 须通过 `python prompts/tools/lint_reports.py`。
+- 交付格式：md + 同目录自包含 HTML（`python src/prompts-tools/tools/md2html.py`）；HTML 须通过 `python src/prompts-tools/tools/lint_reports.py`。
 - 命名遵循仓库统一约定；基线报告常驻 `reports/` 顶层，不进入归档；模型档案年度新版另存，不覆盖历史。
 
 ---

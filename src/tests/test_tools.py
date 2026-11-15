@@ -1947,5 +1947,41 @@ class TestNewAuditRules(unittest.TestCase):
             self.assertNotIn("l5_pending", payload["checks"])
 
 
+class TestThreeSystemAlignment(unittest.TestCase):
+    """提示词规范 / AGENTS / CI 三体系技术口径一致性（P1-3/4）。"""
+
+    ROOT = Path(__file__).resolve().parents[2]
+
+    @classmethod
+    def _read(cls, *parts):
+        return (cls.ROOT / Path(*parts)).read_text(encoding="utf-8")
+
+    def test_protocol_commands_aligned(self):
+        base = self._read("src", "report_templates", "prompt-generic-base.md")
+        agents = self._read("AGENTS.md")
+        ci = self._read("docs", "CI.md")
+        for cmd in (
+            "src/prompts-tools/tools/md2html.py",
+            "src/prompts-tools/tools/audit_preflight.py",
+            "src/prompts-tools/tools/audit_check.py",
+            "audit_pipeline.py --submit",
+            "audit_pipeline.py --gate",
+        ):
+            self.assertIn(cmd, base, f"通用基座缺：{cmd}")
+            self.assertIn(cmd, agents, f"AGENTS.md 缺：{cmd}")
+        self.assertIn("audit_pipeline.py --gate", ci)
+
+    def test_no_stale_tool_paths_in_templates(self):
+        for p in (self.ROOT / "src" / "report_templates").rglob("*.md"):
+            t = p.read_text(encoding="utf-8")
+            self.assertNotIn("prompts/tools/", t, f"陈旧路径：{p.relative_to(self.ROOT)}")
+
+    def test_html_executor_single_track(self):
+        base = self._read("src", "report_templates", "prompt-generic-base.md")
+        agents = self._read("AGENTS.md")
+        self.assertIn("任务工作树内运行，共享检出目录禁止", base)
+        self.assertIn("任务工作树内运行以生成本任务报告的 HTML", agents)
+
+
 if __name__ == "__main__":
     unittest.main()

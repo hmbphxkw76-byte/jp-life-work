@@ -46,7 +46,7 @@ description: jp-life-work 并行会话三层隔离机制（任务分支 / 串行
 - 不要 `git checkout/reset --hard`、`git clean`、`git stash` 而不持检出锁。
 - 不要用 `lock acquire` 长时间占锁（超过 30 分钟会自动失效，可能被别人强取）。
 - 不要在 task 分支未合并时 `task stop`（确需丢弃用 `--force`，且先告知用户）。
-- 不要运行 `build_hub.py` / `md2html.py`（按仓库既有纪律，这些由主会话统一执行）。
+- 不要在共享检出目录运行 `build_hub.py` / `md2html.py`；`md2html.py` 可在任务工作树内运行以生成本任务报告的 HTML（`build_hub.py` 仍由主会话统一执行）。交付与审计协议见 `AGENTS.md`。
 
 ## 遇到锁被占用
 

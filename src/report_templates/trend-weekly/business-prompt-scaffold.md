@@ -51,9 +51,9 @@
 
 ## 结果验证
 
-- python prompts/tools/validate.py（0 错误）
-- python prompts/tools/lint_reports.py（0 错误）
-- python prompts/tools/build_index.py && python prompts/tools/build_hub.py
+- python src/prompts-tools/tools/validate.py（0 错误）
+- python src/prompts-tools/tools/lint_reports.py（0 错误）
+- python src/prompts-tools/tools/build_index.py && python src/prompts-tools/tools/build_hub.py
 ```
 
 ---
@@ -100,9 +100,9 @@
 
 ## 结果验证
 
-- python prompts/tools/lint_reports.py && python prompts/tools/classify_reports.py
-- python prompts/tools/compliance_check.py --file {{OUTPUT_PATH}}
-- python prompts/tools/build_index.py && python prompts/tools/build_hub.py
+- python src/prompts-tools/tools/lint_reports.py && python src/prompts-tools/tools/classify_reports.py
+- python src/prompts-tools/tools/compliance_check.py --file {{OUTPUT_PATH}}
+- python src/prompts-tools/tools/build_index.py && python src/prompts-tools/tools/build_hub.py
 ```
 
 ---

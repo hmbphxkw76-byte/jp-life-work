@@ -42,7 +42,7 @@
 
 - 文件命名遵循仓库统一约定（`prompts/tools` 按此识别）；**日期为数据截止日而非执行日**，跨月 / 跨年不换名。
 - 交付格式由业务配置声明：默认 md 源稿 + 同目录自包含 HTML；富样式手写 HTML 的业务线在业务配置声明「纯 HTML 交付」，md 源稿移存 `sources/`（不参与 `md2html.py` 自动转换，防止覆盖手工渲染）。
-- HTML 必须通过 `prompts/tools/lint_reports.py`与 `prompts/tools/compliance_check.py`（八节骨架）。
+- HTML 必须通过 `src/prompts-tools/tools/lint_reports.py`与 `src/prompts-tools/tools/compliance_check.py`（八节骨架）。
 - 周期报告按归档保留策略执行（weekly 保留 12 期）。
 
 ## 五、执行方式（建议）
