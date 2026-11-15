@@ -4,8 +4,8 @@
 按文件名中的主题 slug 判定归属业务线，移动到该主题 reports/。
 
 用法：
-    python prompts/tools/classify_reports.py --apply --unknown-warn
-    python prompts/tools/classify_reports.py --check --unknown-warn
+    python src/prompts-tools/tools/classify_reports.py --apply --unknown-warn
+    python src/prompts-tools/tools/classify_reports.py --check --unknown-warn
 
 退出码：
     0 = 无错位报告
@@ -90,7 +90,7 @@ def main() -> int:
         return 0
 
     if movable:
-        hint = "运行 python prompts/tools/classify_reports.py --apply 自动归位" if args.check else ""
+        hint = "运行 python src/prompts-tools/tools/classify_reports.py --apply 自动归位" if args.check else ""
         print(f"存在 {len(movable)} 份可自动归位的错位报告 {hint}")
         return 1
     if unknown and args.unknown_warn:

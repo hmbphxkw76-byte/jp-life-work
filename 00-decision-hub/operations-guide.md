@@ -1,7 +1,7 @@
 # 赴日决策仪表盘 · 报告操作指引（Agent 可执行版）
 
 > **适用范围**：`00-decision-hub` 的季度复核 / 事件触发复核 / 落地清单 / 定居地档案。
-> **单一事实源**：业务参数以 [prompts/business-config.md](./prompts/business-config.md) 为准；事实与数据一律引用 01–13 主题报告 / 登记册。
+> **单一事实源**：业务参数以 [prompts/business-config.md](./prompts/business-config.md) 为准；事实与数据一律引用 01–20 主题报告 / 登记册。
 
 ---
 
@@ -37,7 +37,7 @@ python src/prompts-tools/tools/lint_reports.py
 - **入口**：按[业务配置第六节](./prompts/business-config.md)的触发器判定；无触发不启动。
 - **运行变量**：`{{CADENCE}}` = 季；`{{OUTPUT_PATH}}` = `reports/{{YYYY-MM}}-<slug>.md`。
 - **执行步骤**：
-  1. 读取 01–13 各主题最新一期报告 / 登记册；
+  1. 读取 01–20 各主题最新一期报告 / 登记册；
   2. 逐项刷新五问（结论 / 来源 / 缺失）；
   3. 更新登记册「五问指标状态表」与「暴露的缺失清单」；
   4. 落盘 md + HTML，过 lint。
@@ -62,7 +62,7 @@ python src/prompts-tools/tools/lint_reports.py
 
 ## 4. Agent 执行约定
 
-1. **不新增一手来源**：只引用 01–13；缺失标「⚠ 缺失」，不补值、不外推。
+1. **不新增一手来源**：只引用 01–20；缺失标「⚠ 缺失」，不补值、不外推。
 2. **防回退**：来源主题的已修正事实清单须继承。
 3. **边界**：不给硬性 Go/No-Go、不给投资评级；只给「条件 → 判读 → 框架性含义 → 风险提示」。
 4. **留痕**：五问状态与缺失清单逐次更新。

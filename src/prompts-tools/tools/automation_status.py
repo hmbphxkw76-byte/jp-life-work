@@ -4,9 +4,9 @@
 工作流提交该文件）。
 
 用法：
-    python prompts/tools/automation_status.py record --phase maintenance \
+    python src/prompts-tools/tools/automation_status.py record --phase maintenance \
         --result success --run-url <url>
-    python prompts/tools/automation_status.py activity --threshold 45 [--porcelain]
+    python src/prompts-tools/tools/automation_status.py activity --threshold 45 [--porcelain]
 
 activity 输出：
     --porcelain -> 距最近一次记录的天数（整数）或 unknown（无记录）

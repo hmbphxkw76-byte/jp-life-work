@@ -1838,6 +1838,46 @@ class TestProcessReuse(unittest.TestCase):
         for cmd in ("personal_finance_model.py", "pending_verification.py", "fact_card_check.py"):
             self.assertIn(cmd, t, f"docs/CI.md 未记录流程复用：{cmd}")
 
+    def test_template_tool_paths_valid(self):
+        """模板文件路径合法性：src/report_templates 引用的工具路径必须真实存在。"""
+        root = _common.ROOT
+        pat = re.compile(r"src/prompts-tools/tools/[A-Za-z0-9_./-]+\.py")
+        checked = 0
+        for p in (root / "src" / "report_templates").rglob("*.md"):
+            for m in pat.finditer(p.read_text(encoding="utf-8", errors="replace")):
+                checked += 1
+                self.assertTrue((root / m.group(0)).is_file(),
+                                f"{p.relative_to(root)} 引用不存在的工具：{m.group(0)}")
+        self.assertGreater(checked, 0, "应至少校验到一条工具路径引用")
+
+    def test_compliance_template_files_exist(self):
+        """compliance-rules.json 的 template_dir / cycle.template 必须指向真实文件。"""
+        rules = load_rules()
+        root = _common.ROOT
+        for tid, t in rules["types"].items():
+            tdir = root / "src" / t["template_dir"]
+            self.assertTrue(tdir.is_dir(), f"{tid} template_dir 不存在：{t['template_dir']}")
+            for cycle, rule in t["cycles"].items():
+                tmpl = rule.get("template")
+                if tmpl:
+                    self.assertTrue((tdir / tmpl).is_file(),
+                                    f"{tid}/{cycle} 模板不存在：{tmpl}")
+
+    def test_prompts_reference_audit_tools(self):
+        """提示词必须引用审计工具：全部 prompt-*.md（业务提示词 + 类型模板）。"""
+        root = _common.ROOT
+        tools = ("audit_preflight.py", "audit_check.py", "audit_pipeline.py")
+        missing, total = [], 0
+        paths = list(root.glob("*/prompts/prompt-*.md")) + \
+            list((root / "src" / "report_templates").glob("*/prompt-*.md"))
+        for p in paths:
+            total += 1
+            t = p.read_text(encoding="utf-8", errors="replace")
+            if not any(x in t for x in tools):
+                missing.append(str(p.relative_to(root)))
+        self.assertEqual(missing, [], f"以下提示词未引用审计工具：{missing}")
+        self.assertGreater(total, 0, "应至少校验到一份提示词")
+
 
 class TestNewAuditRules(unittest.TestCase):
     """2026-11-15 新标准：C-10 Schema 分支 / C-13 数值一致性 / C-14 分级标注 /

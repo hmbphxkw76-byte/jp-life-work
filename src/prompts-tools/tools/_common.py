@@ -1,6 +1,6 @@
 """公共模块：仓库结构识别、报告命名解析、周期计算。
 
-所有 prompts/tools/*.py 共享；纯函数部分供 tests/ 直接调用。
+所有 src/prompts-tools/tools/*.py 共享；纯函数部分供 tests/ 直接调用。
 """
 from __future__ import annotations
 

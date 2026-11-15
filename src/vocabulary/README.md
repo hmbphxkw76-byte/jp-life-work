@@ -62,11 +62,11 @@ src/vocabulary/
 
 **核心不变量**：脚本代码中不出现任何主题名、分类名、词条内容；数据文件中不出现流程逻辑。二者仅通过 `topics.json` 连接。
 
-## 二、快速开始（13 主题词库已就位）
+## 二、快速开始（20 主题词库已就位）
 
 ```powershell
 python src/vocabulary/script/vocab_tool.py topics                                          # 查看已注册主题
-python src/vocabulary/script/vocab_tool.py check --topic ssw-driver                        # 质量校验（当前 68 条，0 错误 0 警告）
+python src/vocabulary/script/vocab_tool.py check --topic ssw-driver                        # 质量校验（当前 109 条，0 错误 0 警告）
 python src/vocabulary/script/vocab_tool.py export --topic ssw-driver --format all          # 一键导出 json/csv/jsonl
 python src/vocabulary/script/vocab_tool.py index                                           # 重新生成全主题索引
 ```

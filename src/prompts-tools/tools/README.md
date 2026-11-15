@@ -49,7 +49,7 @@ python -m unittest discover -s src/tests -v   # 单元测试（163 项）
 ### validate.py — 结构与规范校验
 
 ```bash
-python prompts/tools/validate.py
+python src/prompts-tools/tools/validate.py
 ```
 
 检查项：通用层根部 3 份共享文件齐全（`prompt-generic-base.md` / `monitoring-common-spec.md` /
@@ -65,7 +65,7 @@ slug 与目录一致，且 md / html 成对存在。
 ### lint_reports.py — 报告内容校验
 
 ```bash
-python prompts/tools/lint_reports.py
+python src/prompts-tools/tools/lint_reports.py
 ```
 
 扫描全部业务线 `reports/*.html`。**错误项（退出码 1）**：thead/tbody/table 标签不配对、
@@ -82,11 +82,11 @@ python prompts/tools/lint_reports.py
 `prompts/business-config.md` 继承声明中的 `report_templates/<类型ID>/` 引用。
 
 ```bash
-python prompts/tools/compliance_check.py --check        # 全量校验（CI 阻断式关卡）
-python prompts/tools/compliance_check.py --file <路径>   # 校验单份报告（开发自查）
-python prompts/tools/compliance_check.py --list-types   # 列出已注册类型与模板引用入口
-python prompts/tools/compliance_check.py --scaffold market-monitoring monthly   # 模板自动填充引导
-python prompts/tools/compliance_check.py --audit        # 历史报告合规审计（写审计报告，不阻断）
+python src/prompts-tools/tools/compliance_check.py --check        # 全量校验（CI 阻断式关卡）
+python src/prompts-tools/tools/compliance_check.py --file <路径>   # 校验单份报告（开发自查）
+python src/prompts-tools/tools/compliance_check.py --list-types   # 列出已注册类型与模板引用入口
+python src/prompts-tools/tools/compliance_check.py --scaffold market-monitoring monthly   # 模板自动填充引导
+python src/prompts-tools/tools/compliance_check.py --audit        # 历史报告合规审计（写审计报告，不阻断）
 ```
 
 **校验口径**（结构完整性 / 必填字段 / 内容格式三类）：
@@ -104,8 +104,8 @@ python prompts/tools/compliance_check.py --audit        # 历史报告合规审�
 ### classify_reports.py — 报告自动归位
 
 ```bash
-python prompts/tools/classify_reports.py --check --unknown-warn   # 只检查
-python prompts/tools/classify_reports.py --apply --unknown-warn   # 执行移动
+python src/prompts-tools/tools/classify_reports.py --check --unknown-warn   # 只检查
+python src/prompts-tools/tools/classify_reports.py --apply --unknown-warn   # 执行移动
 ```
 
 扫描散落在业务目录之外（仓库根、`report_templates/` 全目录含类型子目录）的报告文件，
@@ -115,8 +115,8 @@ python prompts/tools/classify_reports.py --apply --unknown-warn   # 执行移动
 ### ensure_region_topics.py — 结构补全（幂等）
 
 ```bash
-python prompts/tools/ensure_region_topics.py --check   # 只报告缺失
-python prompts/tools/ensure_region_topics.py           # 创建缺失子目录
+python src/prompts-tools/tools/ensure_region_topics.py --check   # 只报告缺失
+python src/prompts-tools/tools/ensure_region_topics.py           # 创建缺失子目录
 ```
 
 为每条业务线补齐 `prompts/`、`reports/`、`data/` 三个子目录；缺
@@ -127,7 +127,7 @@ business-config.md 时告警。重复执行无副作用。
 ### md2html.py — md → HTML 同步
 
 ```bash
-python prompts/tools/md2html.py
+python src/prompts-tools/tools/md2html.py
 ```
 
 将业务线 `reports/*.md` 转换为同名自包含 HTML。报告页采用 macropulse-reports 设计
@@ -139,7 +139,7 @@ python prompts/tools/md2html.py
 ### archive_reports.py — 滚动归档（幂等）
 
 ```bash
-python prompts/tools/archive_reports.py
+python src/prompts-tools/tools/archive_reports.py
 ```
 
 每条业务线保留最新 12 期月度报告（与首页详情页默认窗口一致），超出部分连同名
@@ -149,7 +149,7 @@ md / html 一并移入业务目录内 `reports/archives/`。保留策略为纯�
 ### build_index.py — 全局索引
 
 ```bash
-python prompts/tools/build_index.py
+python src/prompts-tools/tools/build_index.py
 ```
 
 按业务线汇总全部报告，生成根目录 `INDEX.md`（含「最近生成」时间戳，作为
@@ -158,8 +158,8 @@ python prompts/tools/build_index.py
 ### build_hub.py — 汇总页
 
 ```bash
-python prompts/tools/build_hub.py          # 生成 index.html
-python prompts/tools/build_hub.py --check  # 校验是否为最新
+python src/prompts-tools/tools/build_hub.py          # 生成 index.html
+python src/prompts-tools/tools/build_hub.py --check  # 校验是否为最新
 ```
 
 `index.html` 为按业务线分组的报告枢纽（主题卡片 + 详情页，详情页默认展示最近
@@ -175,11 +175,11 @@ report_diff.py）。`--check`：过期退出码 1；文件缺失（全新克隆�
 
 ```bash
 # porcelain JSON（供定时任务判断清单是否为空）
-python prompts/tools/update_planner.py --porcelain --pending-only > tasks.json
+python src/prompts-tools/tools/update_planner.py --porcelain --pending-only > tasks.json
 # 人读 md 清单
-python prompts/tools/update_planner.py --pending-only > tasks.md
+python src/prompts-tools/tools/update_planner.py --pending-only > tasks.md
 # 限定项目 / 周期
-python prompts/tools/update_planner.py --project dubai/apartment --period 2026-Q4
+python src/prompts-tools/tools/update_planner.py --project dubai/apartment --period 2026-Q4
 ```
 
 - `--period` 接受 `YYYY-MM` / `YYYY-Qn` / `YYYY`；缺省按当前 UTC 日期推导
@@ -193,12 +193,12 @@ python prompts/tools/update_planner.py --project dubai/apartment --period 2026-Q
 
 ```bash
 # 记录一次执行（工作流 always 步骤调用）
-python prompts/tools/automation_status.py record --phase maintenance \
+python src/prompts-tools/tools/automation_status.py record --phase maintenance \
     --result success --run-url "<运行链接>"
 
 # 活跃度检查（定时维护用于 >45 天预警）
-python prompts/tools/automation_status.py activity --threshold 45 --porcelain   # 输出天数或 unknown
-python prompts/tools/automation_status.py activity --threshold 45               # 人读说明
+python src/prompts-tools/tools/automation_status.py activity --threshold 45 --porcelain   # 输出天数或 unknown
+python src/prompts-tools/tools/automation_status.py activity --threshold 45               # 人读说明
 ```
 
 状态写入根目录 `automation-status.json`（追加式，工作流提交）。

@@ -13,11 +13,11 @@ report_templates/<类型ID>/ 引用；命名不识别的报告按警告处理（
 退出码：0 = 通过；1 = 存在错误项（CI 阻断合并）；2 = 仅警告项 / 审计发现不匹配项。
 
 用法：
-    python prompts/tools/compliance_check.py                # 全量校验（CI 关卡）
-    python prompts/tools/compliance_check.py --file <路径>   # 校验单份报告
-    python prompts/tools/compliance_check.py --list-types   # 列出已注册类型与模板引用入口
-    python prompts/tools/compliance_check.py --scaffold <类型ID> [周期]   # 模板自动填充引导
-    python prompts/tools/compliance_check.py --audit        # 历史报告合规审计（写报告，不阻断）
+    python src/prompts-tools/tools/compliance_check.py                # 全量校验（CI 关卡）
+    python src/prompts-tools/tools/compliance_check.py --file <路径>   # 校验单份报告
+    python src/prompts-tools/tools/compliance_check.py --list-types   # 列出已注册类型与模板引用入口
+    python src/prompts-tools/tools/compliance_check.py --scaffold <类型ID> [周期]   # 模板自动填充引导
+    python src/prompts-tools/tools/compliance_check.py --audit        # 历史报告合规审计（写报告，不阻断）
 """
 from __future__ import annotations
 
@@ -313,7 +313,7 @@ def run_scaffold(type_id: str, cycle: str | None) -> int:
           if rule.get("nav") else "- 基线报告保留简化锚点导航（<nav aria-label=\"报告导航\">）")
     print("- <title> 非空；全部锚点 href=\"#x\" 必须有对应 id")
     print("- 表格 / 图表 / 来源链接格式见 monitoring-common-spec.md 第 2–5 节")
-    print("\n完成后自检：python prompts/tools/compliance_check.py --file <报告路径>")
+    print("\n完成后自检：python src/prompts-tools/tools/compliance_check.py --file <报告路径>")
     return 0
 
 
@@ -323,7 +323,7 @@ def run_list_types() -> int:
     for tid, t in rules["types"].items():
         cycles = ", ".join(t.get("cycles", {}))
         print(f"- {tid}（{t['name']}）：周期 {cycles}；模板入口 {t['template_dir']}")
-    print("\n模板自动填充引导：python prompts/tools/compliance_check.py --scaffold <类型ID> [周期]")
+    print("\n模板自动填充引导：python src/prompts-tools/tools/compliance_check.py --scaffold <类型ID> [周期]")
     return 0
 
 

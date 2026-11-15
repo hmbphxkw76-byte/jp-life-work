@@ -8,9 +8,9 @@
 展示逻辑。任务清单按目标自然月判断报告是否已产出。
 
 用法：
-    python prompts/tools/update_planner.py --porcelain --pending-only \
+    python src/prompts-tools/tools/update_planner.py --porcelain --pending-only \
         [--project 01-ssw-driver] [--period 2026-11] > tasks.json
-    python prompts/tools/update_planner.py --pending-only [--project ...] [--period ...] > tasks.md
+    python src/prompts-tools/tools/update_planner.py --pending-only [--project ...] [--period ...] > tasks.md
 
 退出码：0 = 正常（含空清单）；2 = 参数错误（项目 / 周期无法识别）。
 """
