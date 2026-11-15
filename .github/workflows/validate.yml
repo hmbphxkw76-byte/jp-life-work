@@ -102,6 +102,17 @@ jobs:
           fi
           echo "compliance_check.py 退出码 $code（2=仅警告不阻断）"
 
+      # 阶段闸（左移·资产层）：采集 / 筛选 / 分类三阶段出口检查；
+      # 复用 info_quality_check 登记册解析与 _common 类型引用，退出码 1 阻断、2 放行。
+      - name: 阶段闸检查（采集 / 筛选 / 分类左移）
+        run: |
+          python src/prompts-tools/tools/stage_gate_check.py || code=$?
+          if [ "${code:-0}" -eq 1 ]; then
+            echo "::error::阶段闸存在 P0/P1（采集 / 筛选 / 分类层缺陷），阻断合并"
+            exit 1
+          fi
+          echo "stage_gate_check.py 退出码 ${code:-0}（2=仅 P2 提示，不阻断）"
+
       # ── 决策支持 / 信息质量流程复用（DecisionSupport-Guard + InfoQuality-Guard）──
       # 以下为「刚优化的流程」在 PR 门禁阶段的复用：结构化免责声明、空模块占比、
       # 跨报告事实重复率、事实卡片五字段与指针、待核实闭环、个人财务模型一致性。

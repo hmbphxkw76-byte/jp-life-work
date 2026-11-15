@@ -18,7 +18,7 @@ import sys
 import tempfile
 import unittest
 import unittest.mock
-from datetime import datetime, timezone
+from datetime import date, datetime, timezone
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "prompts-tools" / "tools"))
@@ -37,6 +37,7 @@ import update_planner  # noqa: E402
 import vocab_tool  # noqa: E402
 import lint_reports  # noqa: E402
 import md2html  # noqa: E402
+import stage_gate_check  # noqa: E402
 from archive_reports import select_archives  # noqa: E402
 from automation_status import days_since_latest  # noqa: E402
 from build_hub import build_outputs, normalize_for_check  # noqa: E402
@@ -2160,6 +2161,111 @@ class TestThreeSystemAlignment(unittest.TestCase):
         agents = self._read("AGENTS.md")
         self.assertIn("任务工作树内运行，共享检出目录禁止", base)
         self.assertIn("任务工作树内运行以生成本任务报告的 HTML", agents)
+
+
+class TestStageGateCheck(unittest.TestCase):
+    """阶段闸检查（stage_gate_check.py，全链路左移：采集 / 筛选 / 分类）。"""
+
+    def _codes(self, findings):
+        return {f.code for f in findings}
+
+    # ── 闸1 采集 ──
+    def test_gate1_good_config(self):
+        text = (
+            "# 业务配置\n\n"
+            "> 继承：[通用基座](src/report_templates/prompt-generic-base.md)"
+            " × [类型](src/report_templates/employment-research/)\n\n"
+            "{{REGION}} = 日本\n{{TOPIC}} = 测试主题\n"
+        )
+        self.assertEqual(stage_gate_check.gate1_collect(text), [])
+
+    def test_gate1_missing_inheritance(self):
+        codes = self._codes(stage_gate_check.gate1_collect("# 配置\n\n{{REGION}} = 日本\n"))
+        self.assertIn("G1-INHERIT", codes)
+
+    def test_gate1_missing_vars(self):
+        text = "继承：prompt-generic-base.md × src/report_templates/employment-research/\n"
+        self.assertIn("G1-VARS", self._codes(stage_gate_check.gate1_collect(text)))
+
+    # ── 闸2 筛选 ──
+    def test_gate2_missing_live_table(self):
+        codes = self._codes(stage_gate_check.gate2_filter("# 登记册\n\n无活值表\n"))
+        self.assertIn("G2-SCHEMA", codes)
+
+    def test_gate2_stale_date(self):
+        text = ("# 登记册\n\n| # | 指标 | 口径 | 核验日期 |\n|---|---|---|---|\n"
+                "| 1 | 指标A | 口径A | 2024-01-01 |\n")
+        self.assertIn("G2-STALE", self._codes(stage_gate_check.gate2_filter(text)))
+
+    def test_gate2_fresh_date_ok(self):
+        text = ("# 登记册\n\n| # | 指标 | 口径 | 核验日期 |\n|---|---|---|---|\n"
+                f"| 1 | 指标A | 口径A | {date.today().isoformat()} |\n")
+        self.assertEqual(stage_gate_check.gate2_filter(text), [])
+
+    def test_gate2_v1_table_ok(self):
+        text = ("# 登记册\n\n| # | 指标 | 优先数据源 | 最新值（来源/年份） | 基准版本 |\n"
+                "|---|---|---|---|---|\n| 1 | 指标A | 官方 | 100 | v2026.11.12_5 |\n")
+        self.assertEqual(stage_gate_check.gate2_filter(text), [])
+
+    # ── 闸3 分类 ──
+    def test_gate3_registered_type_ok(self):
+        text = "继承：prompt-generic-base.md × src/report_templates/employment-research/"
+        self.assertEqual(stage_gate_check.gate3_classify(text), [])
+
+    def test_gate3_unregistered_type(self):
+        text = "继承：prompt-generic-base.md × src/report_templates/not-a-type/"
+        self.assertIn("G3-TYPE", self._codes(stage_gate_check.gate3_classify(text)))
+
+    # ── 文件级（临时根） ──
+    def setUp(self):
+        self._tmp = tempfile.TemporaryDirectory()  # noqa: P201
+        self.root = Path(self._tmp.name)
+        self._orig_root = _common.ROOT
+
+    def tearDown(self):
+        _common.ROOT = self._orig_root
+        self._tmp.cleanup()
+
+    def _topic(self, name="01-demo", config=None, registry=None):
+        d = self.root / name
+        (d / "prompts").mkdir(parents=True, exist_ok=True)
+        (d / "data").mkdir(parents=True, exist_ok=True)
+        if config is not None:
+            (d / "prompts" / "business-config.md").write_text(config, encoding="utf-8")
+        if registry is not None:
+            (d / "data" / "x_indicator_registry.md").write_text(registry, encoding="utf-8")
+        return _common.Business(name)
+
+    _CFG = ("继承：prompt-generic-base.md × src/report_templates/employment-research/\n"
+            "{{REGION}} = 日本\n{{TOPIC}} = 测试\n")
+
+    def test_check_topic_missing_config(self):
+        _common.ROOT = self.root
+        self.assertIn("G1-CONFIG", self._codes(stage_gate_check.check_topic(self._topic(config=None))))
+
+    def test_check_topic_registry_path_missing(self):
+        _common.ROOT = self.root
+        cfg = (self._CFG + "{{REGISTRY_PATH}} = data/missing_indicator_registry.md\n")
+        b = self._topic(config=cfg, registry="| # | 指标 | 口径 |\n|---|---|\n| 1 | A | B |\n")
+        self.assertIn("G1-REGPATH", self._codes(stage_gate_check.check_topic(b)))
+
+    def test_check_topic_no_indicator_registry(self):
+        _common.ROOT = self.root
+        self.assertIn("G1-REGISTRY", self._codes(stage_gate_check.check_topic(self._topic(config=self._CFG))))
+
+    def test_check_topic_full_pass(self):
+        _common.ROOT = self.root
+        cfg = self._CFG + "{{REGISTRY_PATH}} = data/x_indicator_registry.md\n"
+        reg = ("# 登记册\n\n| # | 指标 | 口径 | 核验日期 |\n|---|---|---|---|\n"
+               f"| 1 | 指标A | 口径A | {date.today().isoformat()} |\n")
+        self.assertEqual(stage_gate_check.check_topic(self._topic(config=cfg, registry=reg)), [])
+
+    def test_real_repo_has_no_blocking_findings(self):
+        """全库实跑：阶段闸不得误伤既有主题（P0/P1 = 0）。"""
+        results, summary = stage_gate_check.run_all()
+        self.assertGreater(summary["topics"], 0)
+        self.assertEqual(summary["by_severity"]["P0"], 0)
+        self.assertEqual(summary["by_severity"]["P1"], 0)
 
 
 if __name__ == "__main__":

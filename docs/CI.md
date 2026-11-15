@@ -18,6 +18,7 @@
 | 审计门禁（登记册 / 台账 / 标识 / L1–L5） | `audit-gate.yml`（阻断） |
 | 决策支持件套（参数 / 一页纸 / 财务模型 / 事实卡片 / 待核实闭环） | `validate.yml`（复用门禁）+ `scheduled-maintenance.yml`（刷新） |
 | 流程复用一致性 | `src/tests/test_tools.py::TestProcessReuse` |
+| 阶段出口质量（采集 / 筛选 / 分类左移） | `validate.yml`（`stage_gate_check.py`） |
 
 **CI 不产出报告研究内容**——报告由各主题 `prompts/business-config.md` 定义的研究流程人工/Agent 产出；CI 只校验与同步生成物。
 
@@ -195,6 +196,9 @@ python src/prompts-tools/tools/automation_status.py activity
 # 信息质量
 python src/prompts-tools/tools/info_quality_check.py --apply
 
+# 阶段闸（采集 / 筛选 / 分类左移）
+python src/prompts-tools/tools/stage_gate_check.py
+
 # 决策支持 / 信息质量流程复用
 python src/prompts-tools/tools/info_quality_check.py --check
 python src/prompts-tools/tools/fact_card_check.py
@@ -257,3 +261,72 @@ CI 之外的**本地多会话 / 多任务并行**由三层隔离机制约束，�
   合并侧用 `--force-with-lease` 兜底，远端被 CI 推进时本地合并失败重试，不覆盖。
 - **详文档**：`tools/README.md`；**会话规约**：`.meituan-catpaw/5833106238/skills/workflow-guard/SKILL.md`；
   **测试**：`src/tests/test_workflow_guard.py`。
+
+---
+
+## 十一、信息生产全链路（闭环与阶段闸）
+
+> 上位模型：把「信息采集 → 筛选 → 分类 → 生成 → 输出 → 门禁 → 周期保障 → 决策消费」视为一条
+> 闭环生产线。本节定义**阶段出口闸（左移）**与闭环判据；报告交付层门禁（`audit_pipeline --gate` /
+> `audit_check`）与周期兜底见《审计报告标准化管理体系》。工具：`stage_gate_check.py`。
+
+### 11.1 闭环判据（四条，缺一不算闭环）
+
+1. **阶段出口设闸**：任一阶段产出过闸才进下一阶段（闸 1 / 2 / 3 / 5）；
+2. **缺陷路由 + 复评**：P0/P1 按缺陷性质路由回源阶段（采集 / 筛选 / 分类 / 生成 / 输出），修复后重过同一闸；
+3. **周期修复回写资产层**：`info-quality` / 抽检的修复与基线更新回写登记册、词库、提示词，而非只作用于报告；
+4. **补缺准入**：决策层缺失经「分级 · 责任主题 · 验收」准入后才触发补缺。
+
+### 11.2 阶段闸定义
+
+| 闸 | 位置 | 检查内容 | 载体 |
+|---|---|---|---|
+| 闸1 采集 | A→B | 四层继承声明；运行变量；`{{REGISTRY_PATH}}` 指向存在；指标登记册存在 | `stage_gate_check.py`（G1-*） |
+| 闸2 筛选 | B→C | 登记册活值表 Schema（v1 / v2）；核验日期时效（与 C-08 同口径） | `stage_gate_check.py`（G2-*） |
+| 闸3 分类 | C→D | 类型 ID 已在 template-registry 注册 | `stage_gate_check.py`（G3-*） |
+| 闸5 输出 | E→F | md/html 配对；`build_hub.py --check`；归档 / 索引一致 | `validate.yml`、`html-sync.yml` |
+| F 交付 | E 后 | L1–L5 + 审计状态 + 指纹 | `audit_pipeline --gate`、`audit_check --all` |
+| G 周期 | F 后 | 周度全量修复、月度抽检、stale 同步、P2 台账 | `info-quality.yml`、`audit-sampling.yml` |
+
+### 11.3 全链路图
+
+```mermaid
+flowchart LR
+    A["阶段1 信息采集<br/>提示词 · 登记册 · 触发器"]
+    B["阶段2 信息筛选<br/>来源分级 · 时效 · 冲突并列"]
+    C["阶段3 信息分类<br/>六族十三类 · 命名归位"]
+    D["阶段4 内容生成<br/>四层继承 · 登记册回写"]
+    E["阶段5 报告输出<br/>md→HTML→索引→归档"]
+    F["交付门禁<br/>validate + audit_pipeline --gate"]
+    G["周期保障<br/>html-sync · maintenance · info-quality · sampling"]
+    H["决策消费<br/>00 五问收敛 + 缺失暴露"]
+    I["补缺准入<br/>P1/P2/P3 · 责任主题 · 验收"]
+    R{"缺陷路由"}
+
+    A -->|"闸1 采集门禁"| B
+    B -->|"闸2 筛选门禁"| C
+    C -->|"闸3 分类门禁"| D
+    D --> E
+    E -->|"闸5 生成物门禁"| F
+    F -->|通过| G
+    G --> H
+    H --> I
+    I -->|触发补缺| A
+    F -.->|P0/P1| R
+    R -->|采集类| A
+    R -->|筛选类| B
+    R -->|分类类| C
+    R -->|生成类| D
+    R -->|输出类| E
+    D -.->|登记册回写| A
+    G -.->|修复 / 基线回写| A
+    G -.->|抽检不合格 · 重新审计| F
+```
+
+每个闸既是**出口**也是**复评口**：修复后重过同一闸，而不是直接放行。
+
+### 11.4 程序化边界（形态 vs 语义）
+
+- **形态 / 结构类**（可程序化、秒级、无网络）→ 进 CI 硬门禁：命名、配对、继承声明、登记册 Schema、类型注册、时效字段；
+- **语义类**（来源语言规则、六族十三类选型判别、口径冲突裁决、以偏概全）→ 不进 CI 硬门禁，由提示词自检 + L5 语义复核 + 季度跨领域角色（R2 / R4 / R5）承载。
+- **判定内核单一事实源**：闸复用 `info_quality_check.evaluate()` / `compliance_check` / `audit_registry` 的解析，不新写判定。
