@@ -50,6 +50,9 @@ THRESH_CITE_VALID = 1.00             # 交叉引用有效率门槛
 STALE_MONTHS = 12                    # 报告时效窗口（月）
 DUP_MIN_CHARS = 40                   # 重复段落判定最小长度
 SIMILARITY_DUP = 0.80                # 高相似判定阈值（跨文档）
+THRESH_EMPTY_MODULE = 0.20           # 空模块占比门槛（超过提示）
+THRESH_FACT_DUP = 0.10               # 跨报告事实重复率门槛
+FACT_MIN_CHARS = 12                  # 事实片段判定最小长度
 
 AUDIT_DIR = ROOT / "src" / "report-audits" / "info-quality"
 
@@ -61,12 +64,19 @@ REQUIRED_ITEMS = (
     ("operations-guide.md", "操作指南", "P1"),
 )
 
-# 报告级必需要素
+# 报告级必需要素（免责声明改为结构化校验，见 check_disclaimer）
 REPORT_REQUIRED_MARKERS = (
-    ("免责声明", ("免责", "不构成法律意见"), "P1"),
     ("来源标注", None, "P1"),   # 以覆盖率方式判定，见 check_report
     ("执行摘要/结论", ("摘要", "结论"), "P1"),
 )
+
+# 结构化免责声明必含要素（替代原「免责 / 不构成法律意见」子串匹配）
+DISCLAIMER_REQUIRED = (
+    "免责声明",        # 标题标识
+    "不构成法律意见",  # 法律免责
+    "专业人士",        # 转介专业人士
+)
+DISCLAIMER_TAX_HINT = "税务"
 
 H2_RE = re.compile(r"^(#{1,6})\s+(.*)$", re.MULTILINE)
 CN_NUM_RE = re.compile(r"^([一二三四五六七八九十]+)[、.]")
@@ -118,6 +128,8 @@ class Metrics:
     source_coverage: float = 0.0
     stale_reports: int = 0
     dup_ratio: float = 0.0
+    fact_dup_ratio: float = 0.0      # 跨报告事实重复率
+    empty_module_ratio: float = 0.0  # 空模块占比
     attribution_errors: int = 0
     cite_valid_ratio: float = 1.0
     broken_links: int = 0
@@ -174,6 +186,77 @@ def _rel(path: Path) -> str:
         return str(path.relative_to(ROOT)).replace("\\", "/")
     except ValueError:
         return str(path)
+
+
+def check_disclaimer(text: str) -> tuple[bool, str]:
+    """结构化免责声明校验（替代子串匹配）。
+
+    必含：「免责声明」标识 + 「不构成法律意见」+ 「专业人士」转介；
+    建议含：「税务」字样。缺项返回 (False, 缺项说明)。
+    """
+    missing = [k for k in DISCLAIMER_REQUIRED if k not in text]
+    if missing:
+        return False, "缺少要素：" + "、".join(missing)
+    if DISCLAIMER_TAX_HINT not in text:
+        return False, f"缺少要素：{DISCLAIMER_TAX_HINT}（建议含税务免责）"
+    return True, ""
+
+
+def empty_module_ratio(text: str) -> tuple[int, int]:
+    """h2 模块「空模块」占比 -> (空模块数, 总模块数)。
+
+    空模块 = 标题与下一标题之间无实质内容（无段落 / 表格行 / 列表）。
+    """
+    lines = text.splitlines()
+    heads = [i for i, ln in enumerate(lines) if re.match(r"^##\s+", ln)]
+    if not heads:
+        return 0, 0
+    empty = 0
+    for idx, start in enumerate(heads):
+        end = heads[idx + 1] if idx + 1 < len(heads) else len(lines)
+        content = [ln.strip() for ln in lines[start + 1:end]
+                   if ln.strip() and not ln.strip().startswith("#")]
+        if not content:
+            empty += 1
+    return empty, len(heads)
+
+
+def _fact_blocks(text: str) -> list[str]:
+    """提取含数字的事实片段（段落或表格行），归一化后用于跨报告重复判定。"""
+    out: list[str] = []
+    for b in _paragraphs(text):
+        if b.startswith("```"):
+            continue
+        for line in b.splitlines():
+            s = line.strip()
+            if not s or s.startswith("#"):
+                continue
+            if re.search(r"\d", s) and len(_norm(s)) >= FACT_MIN_CHARS:
+                out.append(_norm(s))
+    return out
+
+
+def fact_duplication(units: list[dict]) -> tuple[float, list[dict]]:
+    """跨报告事实重复率：同一事实片段（归一化）出现在 ≥2 份报告的比例。
+
+    返回 (rate, details)；rate = 重复出现的事实片段字符数 / 全部事实片段字符数。
+    """
+    index: dict[str, list[tuple[str, str]]] = {}
+    total_chars = 0
+    for u in units:
+        for rp in u["reports"]:
+            for n in _fact_blocks(_read(rp)):
+                index.setdefault(n, []).append((u["topic"], _rel(rp)))
+                total_chars += len(n)
+    dup_chars = 0
+    details: list[dict] = []
+    for n, locs in index.items():
+        topics = {t for t, _ in locs}
+        if len(topics) > 1:
+            dup_chars += len(n) * (len(locs) - 1)
+            details.append({"fact": n[:80], "topics": sorted(topics), "count": len(locs)})
+    rate = (dup_chars / total_chars) if total_chars else 0.0
+    return rate, details
 
 
 # ──────────────────────────────────────────────
@@ -240,7 +323,7 @@ def check_report(u: dict, rp: Path, findings: list[Finding]) -> dict:
     """单份报告 md 的检查：归属、时效、结构、来源覆盖、断层、重复标题。"""
     text = _read(rp)
     rel = _rel(rp)
-    stats = {"source_cov": 1.0, "subs": 0, "sourced": 0}
+    stats = {"source_cov": 1.0, "subs": 0, "sourced": 0, "empty_modules": 0, "total_modules": 0}
 
     # C-05 内容归属错误：报告 slug 与目录 slug 不一致
     det = detect_month_report(rp.name)
@@ -255,6 +338,20 @@ def check_report(u: dict, rp: Path, findings: list[Finding]) -> dict:
         if not any(m in text for m in markers):
             findings.append(Finding("C-06", level, u["topic"], rel, "结构要素缺失",
                                     f"缺少「{label}」要素", "S-05"))
+
+    # C-06 免责声明：结构化校验（标识 + 法律免责 + 专业人士 + 税务）
+    ok, dd = check_disclaimer(text)
+    if not ok:
+        findings.append(Finding("C-06", "P1", u["topic"], rel, "结构要素缺失",
+                                f"免责声明结构化校验未通过：{dd}", "S-05"))
+
+    # C-06 空模块占比
+    em, tm = empty_module_ratio(text)
+    stats["empty_modules"] = em
+    stats["total_modules"] = tm
+    if tm and em / tm > THRESH_EMPTY_MODULE:
+        findings.append(Finding("C-06", "P2", u["topic"], rel, "空模块占比",
+                                f"空模块 {em}/{tm}（{em / tm:.0%}）超过门槛 {THRESH_EMPTY_MODULE:.0%}", "S-10"))
 
     # C-06 md/html 配对
     if not rp.with_suffix(".html").exists():
@@ -416,8 +513,17 @@ def check_cross_topic(units: list[dict], findings: list[Finding]) -> dict:
                 f"指标「{name}」在 {len(per_topic)} 个主题登记册中口径表述不一致", "S-09"))
 
     dup_ratio = (dup_extra_chars / total_chars) if total_chars else 0.0
+
+    # ── 跨报告事实重复率（C-03 事实口径）──
+    fact_rate, fact_details = fact_duplication(units)
+    if fact_rate > THRESH_FACT_DUP:
+        findings.append(Finding(
+            "C-03", "P2", "全库", "reports/（跨报告）", "跨报告事实重复率",
+            f"{fact_rate:.1%} 超过门槛 {THRESH_FACT_DUP:.0%}（{len(fact_details)} 组跨报告重复事实）", "S-02"))
+
     return {"dup_ratio": dup_ratio, "cite_valid": cite_valid, "total_links": total_links,
-            "broken_links": broken_links}
+            "broken_links": broken_links, "fact_dup_ratio": fact_rate,
+            "fact_dup_details": fact_details}
 
 
 def evaluate(units: list[dict]) -> tuple[list[Finding], Metrics]:
@@ -430,6 +536,8 @@ def evaluate(units: list[dict]) -> tuple[list[Finding], Metrics]:
     total_sum = 0
     subs_all = 0
     sourced_all = 0
+    empty_sum = 0
+    modules_sum = 0
     for u in units:
         p, t = check_topic_completeness(u, findings)
         present_sum += p
@@ -440,6 +548,8 @@ def evaluate(units: list[dict]) -> tuple[list[Finding], Metrics]:
             st = check_report(u, rp, findings)
             subs_all += st["subs"]
             sourced_all += st["sourced"]
+            empty_sum += st["empty_modules"]
+            modules_sum += st["total_modules"]
 
     cross = check_cross_topic(units, findings)
 
@@ -450,6 +560,8 @@ def evaluate(units: list[dict]) -> tuple[list[Finding], Metrics]:
     m.source_coverage = sourced_all / subs_all if subs_all else 1.0
     m.stale_reports = sum(1 for f in findings if f.code == "C-08")
     m.dup_ratio = cross["dup_ratio"]
+    m.fact_dup_ratio = cross["fact_dup_ratio"]
+    m.empty_module_ratio = (empty_sum / modules_sum) if modules_sum else 0.0
     m.attribution_errors = sum(1 for f in findings if f.code == "C-05")
     m.cite_valid_ratio = cross["cite_valid"]
     m.broken_links = cross["broken_links"]
@@ -514,7 +626,8 @@ STANDARD_DISCLAIMER = (
 def _insert_disclaimer(path: Path) -> Repair | None:
     """S-05：在报告头部（首个块之后）插入标准化免责声明块引用。"""
     text = _read(path)
-    if "不构成法律意见" in text or "免责声明" in text:
+    ok, _ = check_disclaimer(text)
+    if ok:
         return None
     m = re.search(r"\n\s*\n", text)
     first = text[: m.start()].strip() if m else text.strip()
@@ -766,6 +879,8 @@ def write_reports(findings: list[Finding], repairs: list[Repair],
                    ["准确性", "来源标注覆盖率", f"{before.source_coverage:.1%}", f"≥ {THRESH_SOURCE_COVERAGE:.0%}", "达标" if before.source_coverage >= THRESH_SOURCE_COVERAGE else "不达标"],
                    ["准确性", "过期未标注报告数", str(before.stale_reports), "= 0", "达标" if before.stale_reports == 0 else "不达标"],
                    ["关联性", "重复冗余率", f"{before.dup_ratio:.1%}", f"≤ {THRESH_DUP_RATIO:.0%}", "达标" if before.dup_ratio <= THRESH_DUP_RATIO else "不达标"],
+                   ["关联性", "跨报告事实重复率", f"{before.fact_dup_ratio:.1%}", f"≤ {THRESH_FACT_DUP:.0%}", "达标" if before.fact_dup_ratio <= THRESH_FACT_DUP else "不达标"],
+                   ["完整性", "空模块占比", f"{before.empty_module_ratio:.1%}", f"≤ {THRESH_EMPTY_MODULE:.0%}", "达标" if before.empty_module_ratio <= THRESH_EMPTY_MODULE else "不达标"],
                    ["关联性", "归属错误数", str(before.attribution_errors), "= 0", "达标" if before.attribution_errors == 0 else "不达标"],
                    ["关联性", "交叉引用有效率", f"{before.cite_valid_ratio:.1%}", "= 100%", "达标" if before.cite_valid_ratio >= THRESH_CITE_VALID else "不达标"],
                    ["问题分布", "P0 / P1 / P2", f"{before.findings_by_level['P0']} / {before.findings_by_level['P1']} / {before.findings_by_level['P2']}", "—", "—"],
@@ -809,6 +924,8 @@ def write_reports(findings: list[Finding], repairs: list[Repair],
         _md_table([["指标", "修复前", "修复后", "门槛"],
                    ["必需要素覆盖率", f"{before.required_coverage:.1%}", f"{after.required_coverage:.1%}", f"≥ {THRESH_REQUIRED_COVERAGE:.0%}"],
                    ["重复冗余率", f"{before.dup_ratio:.1%}", f"{after.dup_ratio:.1%}", f"≤ {THRESH_DUP_RATIO:.0%}"],
+                   ["跨报告事实重复率", f"{before.fact_dup_ratio:.1%}", f"{after.fact_dup_ratio:.1%}", f"≤ {THRESH_FACT_DUP:.0%}"],
+                   ["空模块占比", f"{before.empty_module_ratio:.1%}", f"{after.empty_module_ratio:.1%}", f"≤ {THRESH_EMPTY_MODULE:.0%}"],
                    ["交叉引用有效率", f"{before.cite_valid_ratio:.1%}", f"{after.cite_valid_ratio:.1%}", "= 100%"],
                    ["矛盾/口径问题数", str(before.contradictions), str(after.contradictions), "= 0"],
                    ["待处理问题数", str(sum(before.findings_by_level.values())),
@@ -889,6 +1006,8 @@ def run(apply: bool = False, write: bool = True) -> int:
     print(f"  必需要素覆盖率 {after.required_coverage:.1%}（门槛 {THRESH_REQUIRED_COVERAGE:.0%}）")
     print(f"  来源标注覆盖率 {after.source_coverage:.1%}（门槛 {THRESH_SOURCE_COVERAGE:.0%}）")
     print(f"  重复冗余率 {after.dup_ratio:.1%}（门槛 {THRESH_DUP_RATIO:.0%}）")
+    print(f"  跨报告事实重复率 {after.fact_dup_ratio:.1%}（门槛 {THRESH_FACT_DUP:.0%}）")
+    print(f"  空模块占比 {after.empty_module_ratio:.1%}（门槛 {THRESH_EMPTY_MODULE:.0%}）")
     print(f"  交叉引用有效率 {after.cite_valid_ratio:.1%}（门槛 100%）")
     print(f"  问题：P0 {after.findings_by_level['P0']} / P1 {after.findings_by_level['P1']} / P2 {after.findings_by_level['P2']}")
     if apply:

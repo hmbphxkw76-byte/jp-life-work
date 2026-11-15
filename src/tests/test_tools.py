@@ -45,6 +45,11 @@ from report_diff import (  # noqa: E402
 from update_planner import build_tasks, default_period, pick_prompt, target_month  # noqa: E402
 import info_quality_check  # noqa: E402
 from info_quality_check import evaluate, repair, scan_topics, verify  # noqa: E402
+import personal_finance_model  # noqa: E402
+import fact_card_check  # noqa: E402
+import skeleton_builder  # noqa: E402
+import pending_verification  # noqa: E402
+import decision_log  # noqa: E402
 
 
 # ──────────────────────────────────────────────
@@ -1459,6 +1464,130 @@ class TestAuditSampling(unittest.TestCase):
         from unittest.mock import patch
         with patch.object(sys, "argv", ["audit_sampling.py", "--period", "2026/11"]):
             self.assertEqual(audit_sampling.main(), 2)
+
+
+class TestPersonalFinanceModel(unittest.TestCase):
+    """个人财务模型：净储蓄率 / 回本周期。"""
+
+    def test_model_computes_metrics(self):
+        m = personal_finance_model.build_model()
+        self.assertFalse(m["missing"])
+        metrics = m["metrics"]
+        self.assertIn("saving_rate_low", metrics)
+        self.assertIn("payback_months_low", metrics)
+        self.assertGreater(metrics["saving_rate_high"], metrics["saving_rate_low"])
+        self.assertGreater(metrics["payback_months_high"], metrics["payback_months_low"])
+        self.assertGreater(metrics["payback_months_low"], 0)
+
+    def test_render_md_contains_core_indicators(self):
+        md = personal_finance_model.render_md(personal_finance_model.build_model())
+        self.assertIn("净储蓄率", md)
+        self.assertIn("回本周期", md)
+
+    def test_months_prefer_total(self):
+        text = "敷金 0–2 个月；礼金 0–2 个月；合计可达 4–7 个月房租"
+        self.assertEqual(personal_finance_model._months(text), (4.0, 7.0))
+
+
+class TestFactCardCheck(unittest.TestCase):
+    """事实卡片：五字段 / 指针 / 重复率。"""
+
+    def test_cards_five_fields(self):
+        cards = fact_card_check.parse_cards()
+        self.assertGreaterEqual(len(cards), 16)
+        self.assertEqual(fact_card_check.check_fields(cards), [])
+
+    def test_pointers_resolvable(self):
+        cards = fact_card_check.parse_cards()
+        pointers = fact_card_check.collect_pointers()
+        self.assertEqual(fact_card_check.check_pointers(cards, pointers), [])
+        self.assertTrue(pointers)
+
+
+class TestSkeletonBuilder(unittest.TestCase):
+    """报告骨架与空模块合并。"""
+
+    def test_compact_and_full(self):
+        full = skeleton_builder.build_skeleton("14-life-operations", "full")
+        compact = skeleton_builder.build_skeleton("14-life-operations", "compact")
+        self.assertIn("零、模块边界声明", full)
+        self.assertIn("零、模块边界声明", compact)
+        self.assertIn("待补模块（合并）", compact)
+        self.assertNotIn("待补模块（合并）", full)
+
+    def test_merge_empty_modules(self):
+        text = "# T\n\n## 一、有内容\n\n内容\n\n## 二、空\n\n## 三、空\n\n## 四、有内容\n\n内容\n"
+        new, n = skeleton_builder.merge_empty_modules(text)
+        self.assertEqual(n, 1)
+        self.assertIn("待补模块（合并）", new)
+        self.assertIn("## 四、有内容", new)
+
+
+class TestPendingVerification(unittest.TestCase):
+    """待核实项闭环。"""
+
+    def test_all_six_registered(self):
+        rows, summary = pending_verification.run()
+        self.assertEqual(len(rows), 6)
+        self.assertEqual(summary["unregistered"], 0)
+        self.assertTrue(all(r["deadline"] == "2026-12-31" for r in rows))
+
+
+class TestDecisionLog(unittest.TestCase):
+    """决策日志。"""
+
+    def test_add_and_entries(self):
+        with tempfile.TemporaryDirectory() as d:
+            orig = decision_log.LOG_PATH
+            decision_log.LOG_PATH = Path(d) / "decision_log.md"
+            try:
+                decision_log.add("去不去", "判定", "待定", "是", "参数补齐", "00")
+                rows = decision_log.entries()
+                self.assertEqual(len(rows), 1)
+                self.assertEqual(rows[0]["决策问题"], "去不去")
+                self.assertIn("待定 → 是", decision_log.render_timeline())
+            finally:
+                decision_log.LOG_PATH = orig
+
+
+class TestInfoQualityUpgrades(unittest.TestCase):
+    """结构化免责声明 / 空模块占比 / 跨报告事实重复率。"""
+
+    def test_structured_disclaimer(self):
+        ok_text = ("> **免责声明**：本报告为信息整理与条件化建议，不构成法律意见或税务意见；"
+                   "重大决策请咨询执业法律 / 税务专业人士。")
+        self.assertTrue(info_quality_check.check_disclaimer(ok_text)[0])
+        self.assertFalse(info_quality_check.check_disclaimer("本报告仅供参考。")[0])
+        self.assertFalse(
+            info_quality_check.check_disclaimer("免责声明：不构成法律意见；咨询专业人士。")[0])
+
+    def test_empty_module_ratio(self):
+        text = "# T\n\n## 一、有\n\n内容\n\n## 二、空\n\n## 三、空\n"
+        self.assertEqual(info_quality_check.empty_module_ratio(text), (2, 3))
+
+    def test_fact_duplication_metric(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            orig_common = _common.ROOT
+            orig_iqc = info_quality_check.ROOT
+            _common.ROOT = root
+            info_quality_check.ROOT = root
+            try:
+                for t in ("01-a", "02-b"):
+                    (root / t / "prompts").mkdir(parents=True)
+                    (root / t / "data").mkdir(parents=True)
+                    (root / t / "reports").mkdir(parents=True)
+                    (root / t / "prompts" / "business-config.md").write_text("# x\n", encoding="utf-8")
+                    (root / t / "data" / "x_indicator_registry.md").write_text("# x\n", encoding="utf-8")
+                    (root / t / "reports" / f"2026-11-{t}.md").write_text(
+                        "# x\n\n## 一、x\n\n同一事实句：受入上限 22,100 人，2026-01-23 阁议。\n",
+                        encoding="utf-8")
+                rate, details = info_quality_check.fact_duplication(info_quality_check.scan_topics())
+                self.assertGreater(rate, 0)
+                self.assertTrue(details)
+            finally:
+                _common.ROOT = orig_common
+                info_quality_check.ROOT = orig_iqc
 
 
 if __name__ == "__main__":
