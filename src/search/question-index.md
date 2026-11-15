@@ -3,6 +3,17 @@
 > **用途**：把中文高频问题映射到具体报告页，供站内搜索与外部检索调用。
 > **数据源**：`question-index.json`（构建期由 `build_hub.py` 读入 `search-index.json` 并嵌入 `index.html` 搜索层）。
 > **维护**：新增问题编辑 JSON 后重新运行 `python src/prompts-tools/tools/build_hub.py`；本 MD 为同内容速览。
+> **v2**：问题新增 `group` 字段（q1 去不去 / q2 能不能去 / q3 怎么去 / q4 去哪 / q5 最坏怎么办），供五问聚合视图使用。
+
+## 五问聚合（决策者入口）
+
+| 问题 | 报告 |
+|---|---|
+| 去不去？值不值？ | [00 决策仪表盘](https://github.com/hmbphxkw76-byte/jp-life-work/blob/main/00-decision-hub/reports/2026-12-decision-hub.md) |
+| 能不能去？门槛是什么？ | [00 决策仪表盘](https://github.com/hmbphxkw76-byte/jp-life-work/blob/main/00-decision-hub/reports/2026-12-decision-hub.md) |
+| 怎么去？路径怎么走？ | [00 决策仪表盘](https://github.com/hmbphxkw76-byte/jp-life-work/blob/main/00-decision-hub/reports/2026-12-decision-hub.md) |
+| 去哪？定居地怎么选？ | [00 决策仪表盘](https://github.com/hmbphxkw76-byte/jp-life-work/blob/main/00-decision-hub/reports/2026-12-decision-hub.md) |
+| 最坏怎么办？退出路径？ | [00 决策仪表盘](https://github.com/hmbphxkw76-byte/jp-life-work/blob/main/00-decision-hub/reports/2026-12-decision-hub.md) |
 
 ## 行前与门槛
 

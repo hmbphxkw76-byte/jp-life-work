@@ -71,6 +71,12 @@
 | 给付 | 厚生労働省 / 内閣府 | 2026 | 出産育児一時金 ≠ 児童手当 ≠ 児童扶養手当 |
 | 长期资格 | 出入国在留管理庁 | 2026 | 定住者 ≠ 永住者 |
 
+## 核验闭环（首轮）
+- 首轮核验截止：2026-12-31
+- 核验入口（深链）：[2026-11 报告 · 待核实清单](../reports/2026-11-family-parenting.md)；家族滞在 https://www.moj.go.jp/isa/applications/status/dependent；就学 https://www.mext.go.jp/a_menu/shotou/shugaku/detail/1422256.htm
+- 待核实条目：出産育児一時金 / 児童手当 / 保育 / 国際結婚 / 離婚 / 相続
+- 版本日期：v2026.11.15_1
+
 ## 维护约定
 
 - 活值统一维护于本登记册；prompt 模板内不填活值。

@@ -196,6 +196,8 @@ def collect_topics() -> list[dict]:
 
 SEARCH_DIR = ROOT / "src" / "search"
 VOCAB_DATA = ROOT / "src" / "vocabulary" / "data"
+KEYWORDS_PATH = SEARCH_DIR / "keywords.json"
+FIVEQ_PATH = SEARCH_DIR / "five-questions.json"
 
 
 def _md_text(rel_path: str) -> str:
@@ -238,8 +240,29 @@ def _load_vocab_terms() -> list[tuple[str, str, str]]:
     return rows
 
 
+def load_keywords() -> dict[str, list[str]]:
+    """读取主题级关键词表（src/search/keywords.json）。"""
+    try:
+        data = json.loads(KEYWORDS_PATH.read_text(encoding="utf-8"))
+        topics = data.get("topics")
+        return topics if isinstance(topics, dict) else {}
+    except (OSError, ValueError):
+        return {}
+
+
+def load_five_questions() -> list[dict]:
+    """读取五问聚合视图数据（src/search/five-questions.json）。"""
+    try:
+        data = json.loads(FIVEQ_PATH.read_text(encoding="utf-8"))
+        qs = data.get("questions")
+        return qs if isinstance(qs, list) else []
+    except (OSError, ValueError):
+        return []
+
+
 def _report_keywords(rel_path: str, topic_name: str, type_label: str,
-                     period: str, vocab: list[tuple[str, str, str]]) -> list[str]:
+                     period: str, vocab: list[tuple[str, str, str]],
+                     extra: list[str] | None = None) -> list[str]:
     text = _md_text(rel_path)
     kws: list[str] = []
 
@@ -251,6 +274,8 @@ def _report_keywords(rel_path: str, topic_name: str, type_label: str,
     add(topic_name)
     add(type_label)
     add(period)
+    for k in (extra or [])[:12]:
+        add(k)
     for h in _md_headings(text)[:6]:
         add(h)
     m = re.search(r"关[键鍵]词[：:]\s*(.+)", text)
@@ -275,8 +300,10 @@ def _report_keywords(rel_path: str, topic_name: str, type_label: str,
 
 
 def collect_search_index(topics: list[dict]) -> dict:
-    """构建标准化搜索索引：报告（标题 / 关键词 / 命中问题）+ 问题清单。"""
+    """构建标准化搜索索引：报告（标题 / 关键词 / 命中问题）+ 问题清单 + 五问视图。"""
     vocab = _load_vocab_terms()
+    keywords = load_keywords()
+    five = load_five_questions()
     reports: list[dict] = []
     for t in topics:
         for r in t["reports"]:
@@ -285,7 +312,8 @@ def collect_search_index(topics: list[dict]) -> dict:
                 "topic": t["slug"], "topic_name": t["name"], "type": t["type"],
                 "title": r["title"], "period": r["period"], "path": r["path"],
                 "keywords": _report_keywords(md_rel, t["name"], t["type_label"],
-                                             r["period"], vocab),
+                                             r["period"], vocab,
+                                             extra=keywords.get(t["rs"])),
                 "questions": [],
             })
     questions: list[dict] = []
@@ -300,12 +328,14 @@ def collect_search_index(topics: list[dict]) -> dict:
             path = item.get("path") or ""
             if not q or not path:
                 continue
-            questions.append({"q": q, "path": path, "anchor": item.get("anchor", "")})
+            questions.append({"q": q, "path": path, "anchor": item.get("anchor", ""),
+                              "group": item.get("group", "")})
             for rep in reports:
                 if rep["path"] == path:
                     rep["questions"].append(q)
                     break
-    return {"version": 1, "reports": reports, "questions": questions}
+    return {"version": 2, "reports": reports, "questions": questions,
+            "five_questions": five}
 
 
 # ──────────────────────────────────────────────
@@ -399,6 +429,21 @@ code{background:var(--gray-l);padding:1px 5px;border-radius:4px;font-size:12px}
 .tcard.is-empty .desc,.tcard.is-empty .reports{display:none}
 .noresult{padding:44px 20px;text-align:center;color:var(--ink3);font-size:13.5px;
   grid-column:1/-1}
+
+/* ── 决策者五问视图 ── */
+.fq{max-width:1160px;margin:0 auto;padding:18px 24px 4px}
+.fq h2{font-size:18px;color:var(--navy);margin:0 0 2px}
+.fq-sub{font-size:12.5px;color:var(--ink3);margin:0 0 12px}
+.fq-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.fq-card{display:block;background:#fff;border:1px solid var(--line);border-radius:10px;
+  padding:12px 14px;box-shadow:var(--shadow)}
+.fq-card:hover{border-color:var(--blue);text-decoration:none}
+.fq-num{font-size:11px;color:var(--ink3)}
+.fq-label{display:block;font-size:14px;font-weight:700;color:var(--navy);margin:2px 0 6px}
+.fq-judgment{display:inline-block;font-size:12px;border-radius:4px;padding:1px 8px;
+  background:var(--amber-l);color:var(--amber);font-weight:600}
+.fq-basis{display:block;font-size:12px;color:var(--ink2);margin-top:6px;line-height:1.55}
+.fq-conf{font-size:11px;color:var(--ink3)}
 
 /* ── 主题详情页 ── */
 #view-detail{display:none}
@@ -749,6 +794,32 @@ def render_sidebar(topics: list[dict]) -> str:
     return f'<a class="back-link" href="#/">← 返回主题总览</a>\n{items}'
 
 
+def render_five_questions(five: list[dict]) -> str:
+    """决策者五问视图：五张卡片（判定 / 依据 / 置信度 / 来源链接）。"""
+    esc = html_mod.escape
+    cards = []
+    for i, q in enumerate(five, 1):
+        href = esc(q["links"][0]) if q.get("links") else "#"
+        cards.append(
+            f'<a class="fq-card" href="{href}" target="_blank" rel="noopener">'
+            f'<span class="fq-num">{i:02d}</span>'
+            f'<span class="fq-label">{esc(q.get("label", ""))}</span>'
+            f'<span class="fq-judgment">{esc(q.get("judgment", "待定"))}</span>'
+            f'<span class="fq-basis">{esc(q.get("basis", ""))}</span>'
+            f'<span class="fq-conf">置信度 {esc(q.get("confidence", ""))} · 待办 {esc(q.get("todo", ""))}</span>'
+            f'</a>'
+        )
+    if not cards:
+        return ""
+    return (
+        '<section class="fq">\n'
+        '  <h2>决策者五问视图</h2>\n'
+        '  <p class="fq-sub">去不去 · 能不能去 · 怎么去 · 去哪 · 最坏怎么办 —— 判定 / 依据 / 置信度 / 待办</p>\n'
+        f'  <div class="fq-grid">{"".join(cards)}</div>\n'
+        '</section>'
+    )
+
+
 def render_type_chips(topics: list[dict]) -> str:
     """类型筛选 chips：按主题编号顺序去重收集类型。"""
     esc = html_mod.escape
@@ -770,18 +841,22 @@ def render_hub(topics: list[dict]) -> str:
     chips = render_type_chips(topics)
     search_index = collect_search_index(topics)
     search_json = json.dumps(search_index, ensure_ascii=False).replace("<", "\\u003c")
+    five_json = json.dumps(search_index.get("five_questions", []),
+                           ensure_ascii=False).replace("<", "\\u003c")
+    five_section = render_five_questions(search_index.get("five_questions", []))
     return f'''<!DOCTYPE html>
 <html lang="zh-CN" class="no-js">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="日本生活与工作知识库报告索引：特定技能·签证·就业·生活·退出·家庭·防灾·中国侧衔接。">
-<meta name="keywords" content="日本,在留,特定技能,签证,司机,生活,退出,家族,防灾,中介合规,搜索">
+<meta name="description" content="日本生活与工作知识库报告索引：赴日决策五问、特定技能·签证·就业·生活·退出·家庭·防灾·中国侧衔接。">
+<meta name="keywords" content="日本,在留,特定技能,签证,司机,生活,退出,家族,防灾,中介合规,赴日决策,五问,定居地,搜索">
 <title>jp-life-work · 报告索引</title>
 <style>{HUB_CSS}</style>
 <script>document.documentElement.classList.remove('no-js');document.documentElement.classList.add('js');</script>
 <script>var RECENT_MONTHS = {RECENT_MONTHS};</script>
 <script>var SEARCH_INDEX = {search_json};</script>
+<script>var FIVE_QUESTIONS = {five_json};</script>
 </head>
 <body>
 <div id="view-overview">
@@ -793,8 +868,10 @@ def render_hub(topics: list[dict]) -> str:
     </div>
   </section>
 
+  {five_section}
+
   <div class="filterbar">
-    <input id="hub-search" type="search" placeholder="搜索主题 / 报告 / 关键词…">
+    <input id="hub-search" type="search" placeholder="搜索主题 / 报告 / 关键词 / 五问…">
     <div class="chips" id="chips-type">{chips}</div>
     <span class="count" id="hub-count"></span>
   </div>

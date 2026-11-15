@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "reports": [
     {
       "topic": "00-decision-hub",
@@ -25,16 +25,22 @@
         "PPI",
         "日銀",
         "毎月勤労統計",
+        "储蓄率",
         "合格率",
         "外免切替",
         "退職",
         "雇用保険",
         "健康保険任意継続",
         "厚生年金脱退一时金",
-        "在留資格取消",
-        "特定活动"
+        "在留資格取消"
       ],
-      "questions": []
+      "questions": [
+        "去不去？值不值？",
+        "能不能去？门槛是什么？",
+        "怎么去？路径怎么走？",
+        "去哪？定居地怎么选？",
+        "最坏怎么办？退出路径？"
+      ]
     },
     {
       "topic": "00-decision-hub",
@@ -838,249 +844,395 @@
   ],
   "questions": [
     {
+      "q": "去不去？值不值？",
+      "path": "00-decision-hub/reports/2026-12-decision-hub.html",
+      "anchor": "",
+      "group": "q1"
+    },
+    {
+      "q": "能不能去？门槛是什么？",
+      "path": "00-decision-hub/reports/2026-12-decision-hub.html",
+      "anchor": "",
+      "group": "q2"
+    },
+    {
+      "q": "怎么去？路径怎么走？",
+      "path": "00-decision-hub/reports/2026-12-decision-hub.html",
+      "anchor": "",
+      "group": "q3"
+    },
+    {
+      "q": "去哪？定居地怎么选？",
+      "path": "00-decision-hub/reports/2026-12-decision-hub.html",
+      "anchor": "",
+      "group": "q4"
+    },
+    {
+      "q": "最坏怎么办？退出路径？",
+      "path": "00-decision-hub/reports/2026-12-decision-hub.html",
+      "anchor": "",
+      "group": "q5"
+    },
+    {
       "q": "日本特定技能司机收入多少？",
       "path": "01-ssw-driver/reports/2026-11-ssw-driver.html",
-      "anchor": ""
+      "anchor": "",
+      "group": "q1"
     },
     {
       "q": "特定技能司机缺口还有多大？",
       "path": "01-ssw-driver/reports/2026-11-ssw-driver.html",
-      "anchor": ""
+      "anchor": "",
+      "group": "q1"
     },
     {
       "q": "特定技能1号考试有哪些？",
       "path": "01-ssw-driver/reports/2026-11-ssw-driver.html",
-      "anchor": ""
+      "anchor": "",
+      "group": "q2"
     },
     {
       "q": "中国大陆能考特定技能技能考试吗？",
       "path": "01-ssw-driver/reports/2026-11-ssw-driver.html",
-      "anchor": ""
+      "anchor": "",
+      "group": "q2"
     },
     {
       "q": "中国驾照怎么换日本驾照？",
       "path": "10-education-qualification/reports/2026-11-education-qualification.html",
-      "anchor": ""
+      "anchor": "",
+      "group": "q2"
     },
     {
       "q": "外免切替合格率多少？",
       "path": "10-education-qualification/reports/2026-11-education-qualification.html",
-      "anchor": ""
+      "anchor": "",
+      "group": "q2"
     },
     {
       "q": "外免切替费用多少？",
       "path": "10-education-qualification/reports/2026-11-education-qualification.html",
-      "anchor": ""
+      "anchor": "",
+      "group": "q2"
     },
     {
       "q": "特定技能在留资格要件是什么？",
       "path": "08-visa-immigration/reports/2026-11-visa-immigration.html",
-      "anchor": ""
+      "anchor": "",
+      "group": "q2"
     },
     {
       "q": "特定技能2号能不能申请？",
       "path": "08-visa-immigration/reports/2026-11-visa-immigration.html",
-      "anchor": ""
+      "anchor": "",
+      "group": "q2"
     },
     {
       "q": "永住申请条件是什么？",
       "path": "08-visa-immigration/reports/2026-11-visa-immigration.html",
-      "anchor": ""
+      "anchor": "",
+      "group": "q5"
     },
     {
       "q": "归化申请条件是什么？",
       "path": "08-visa-immigration/reports/2026-11-visa-immigration.html",
-      "anchor": ""
+      "anchor": "",
+      "group": "q5"
     },
     {
       "q": "被拒签了怎么办？",
       "path": "08-visa-immigration/reports/2026-11-visa-immigration.html",
-      "anchor": ""
+      "anchor": "",
+      "group": "q2"
     },
     {
       "q": "不许可理由书怎么看？",
       "path": "08-visa-immigration/reports/2026-11-visa-immigration.html",
-      "anchor": ""
+      "anchor": "",
+      "group": "q2"
     },
     {
       "q": "材料有瑕疵能补正吗？",
       "path": "08-visa-immigration/reports/2026-11-visa-immigration.html",
-      "anchor": ""
+      "anchor": "",
+      "group": "q2"
     },
     {
       "q": "在留资格被取消怎么办？",
       "path": "09-politics-law/reports/2026-11-politics-law.html",
-      "anchor": ""
+      "anchor": "",
+      "group": "q5"
     },
     {
       "q": "退去强制和収容是什么？",
       "path": "09-politics-law/reports/2026-11-politics-law.html",
-      "anchor": ""
+      "anchor": "",
+      "group": "q5"
     },
     {
       "q": "仮放免怎么申请？",
       "path": "09-politics-law/reports/2026-11-politics-law.html",
-      "anchor": ""
+      "anchor": "",
+      "group": "q5"
     },
     {
       "q": "出国命令是什么？",
       "path": "09-politics-law/reports/2026-11-politics-law.html",
-      "anchor": ""
+      "anchor": "",
+      "group": "q5"
     },
     {
       "q": "被遣返后还能再入境日本吗？",
       "path": "09-politics-law/reports/2026-11-politics-law.html",
-      "anchor": ""
+      "anchor": "",
+      "group": "q5"
     },
     {
       "q": "退职后年金怎么办？",
       "path": "16-exit-transition-return/reports/2026-11-exit-transition-return.html",
-      "anchor": ""
+      "anchor": "",
+      "group": "q5"
     },
     {
       "q": "厚生年金脱退一时金怎么申请？",
       "path": "16-exit-transition-return/reports/2026-11-exit-transition-return.html",
-      "anchor": ""
+      "anchor": "",
+      "group": "q5"
     },
     {
       "q": "健康保险任意継続怎么办理？",
       "path": "16-exit-transition-return/reports/2026-11-exit-transition-return.html",
-      "anchor": ""
+      "anchor": "",
+      "group": "q5"
     },
     {
       "q": "回国前要做什么？",
       "path": "16-exit-transition-return/reports/2026-11-exit-transition-return.html",
-      "anchor": ""
+      "anchor": "",
+      "group": "q5"
     },
     {
       "q": "回国前确定申告怎么办？",
       "path": "16-exit-transition-return/reports/2026-11-exit-transition-return.html",
-      "anchor": ""
+      "anchor": "",
+      "group": "q5"
     },
     {
       "q": "在留卡怎么返还？",
       "path": "16-exit-transition-return/reports/2026-11-exit-transition-return.html",
-      "anchor": ""
+      "anchor": "",
+      "group": "q5"
     },
     {
       "q": "租房押金礼金怎么算？",
       "path": "14-life-operations/reports/2026-11-life-operations.html",
-      "anchor": ""
+      "anchor": "",
+      "group": "q3"
     },
     {
       "q": "在日本怎么转住民票？",
       "path": "14-life-operations/reports/2026-11-life-operations.html",
-      "anchor": ""
+      "anchor": "",
+      "group": "q3"
     },
     {
       "q": "日本银行开户难吗？",
       "path": "14-life-operations/reports/2026-11-life-operations.html",
-      "anchor": ""
+      "anchor": "",
+      "group": "q3"
     },
     {
       "q": "手机卡怎么选？",
       "path": "14-life-operations/reports/2026-11-life-operations.html",
-      "anchor": ""
+      "anchor": "",
+      "group": "q3"
     },
     {
       "q": "日本看病怎么付费？",
       "path": "15-health-wellbeing/reports/2026-11-health-wellbeing.html",
-      "anchor": ""
+      "anchor": "",
+      "group": "q4"
     },
     {
       "q": "精神科看病贵吗？",
       "path": "15-health-wellbeing/reports/2026-11-health-wellbeing.html",
-      "anchor": ""
+      "anchor": "",
+      "group": "q4"
     },
     {
       "q": "家属怎么申请家族滞在？",
       "path": "18-family-parenting/reports/2026-11-family-parenting.html",
-      "anchor": ""
+      "anchor": "",
+      "group": "q3"
     },
     {
       "q": "孩子怎么上保育园？",
       "path": "18-family-parenting/reports/2026-11-family-parenting.html",
-      "anchor": ""
+      "anchor": "",
+      "group": "q4"
     },
     {
       "q": "日本育儿补贴有哪些？",
       "path": "18-family-parenting/reports/2026-11-family-parenting.html",
-      "anchor": ""
+      "anchor": "",
+      "group": "q4"
     },
     {
       "q": "在日本离婚怎么处理？",
       "path": "18-family-parenting/reports/2026-11-family-parenting.html",
-      "anchor": ""
+      "anchor": "",
+      "group": "q3"
     },
     {
       "q": "日本防灾怎么准备？",
       "path": "19-safety-disaster/reports/2026-11-safety-disaster.html",
-      "anchor": ""
+      "anchor": "",
+      "group": "q4"
     },
     {
       "q": "地震避难去哪里？",
       "path": "19-safety-disaster/reports/2026-11-safety-disaster.html",
-      "anchor": ""
+      "anchor": "",
+      "group": "q4"
     },
     {
       "q": "在日本遇到治安问题怎么办？",
       "path": "19-safety-disaster/reports/2026-11-safety-disaster.html",
-      "anchor": ""
+      "anchor": "",
+      "group": "q4"
     },
     {
       "q": "中国护照到期怎么换？",
       "path": "20-overseas-china/reports/2026-11-overseas-china.html",
-      "anchor": ""
+      "anchor": "",
+      "group": "q3"
     },
     {
       "q": "回国后驾照怎么转回？",
       "path": "20-overseas-china/reports/2026-11-overseas-china.html",
-      "anchor": ""
+      "anchor": "",
+      "group": "q5"
     },
     {
       "q": "档案和社保怎么衔接？",
       "path": "20-overseas-china/reports/2026-11-overseas-china.html",
-      "anchor": ""
+      "anchor": "",
+      "group": "q5"
     },
     {
       "q": "中介靠谱吗？怎么核验？",
       "path": "17-migration-compliance/reports/2026-11-migration-compliance.html",
-      "anchor": ""
+      "anchor": "",
+      "group": "q3"
     },
     {
       "q": "劳务输出黑名单怎么查？",
       "path": "17-migration-compliance/reports/2026-11-migration-compliance.html",
-      "anchor": ""
+      "anchor": "",
+      "group": "q3"
     },
     {
       "q": "中介合同要注意什么？",
       "path": "17-migration-compliance/reports/2026-11-migration-compliance.html",
-      "anchor": ""
+      "anchor": "",
+      "group": "q3"
     },
     {
       "q": "无资质中介有什么后果？",
       "path": "17-migration-compliance/reports/2026-11-migration-compliance.html",
-      "anchor": ""
+      "anchor": "",
+      "group": "q3"
     },
     {
       "q": "日本生活成本大概多少？",
       "path": "07-economy-finance/reports/2026-11-economy-finance.html",
-      "anchor": ""
+      "anchor": "",
+      "group": "q1"
     },
     {
       "q": "司机职业发展路径是什么？",
       "path": "02-career-driver/reports/2026-11-career-driver.html",
-      "anchor": ""
+      "anchor": "",
+      "group": "q1"
     },
     {
       "q": "2024年问题是什么？",
       "path": "04-industry-logistics/reports/2026-11-industry-logistics.html",
-      "anchor": ""
+      "anchor": "",
+      "group": "q1"
     },
     {
       "q": "自动驾驶会影响司机就业吗？",
       "path": "05-industry-autonomous/reports/2026-11-industry-autonomous.html",
-      "anchor": ""
+      "anchor": "",
+      "group": "q1"
+    }
+  ],
+  "five_questions": [
+    {
+      "id": "q1",
+      "label": "去不去（值不值）",
+      "judgment": "待定",
+      "basis": "窗口已开（充足率 3.8%）；收入高于全产业均值；缺中国同岗到手对比",
+      "confidence": "C2",
+      "todo": "T-01",
+      "links": [
+        "00-decision-hub/reports/2026-12-decision-hub.html",
+        "01-ssw-driver/reports/2026-11-ssw-driver.html",
+        "07-economy-finance/reports/2026-11-economy-finance.html"
+      ]
+    },
+    {
+      "id": "q2",
+      "label": "能不能去（门槛）",
+      "judgment": "待定",
+      "basis": "门槛四关明确；驾照转换成功率低（技能确认 13.1%）、中国大陆无考点；个人驾照类别未记录",
+      "confidence": "C2",
+      "todo": "T-02",
+      "links": [
+        "00-decision-hub/reports/2026-12-decision-hub.html",
+        "08-visa-immigration/reports/2026-11-visa-immigration.html",
+        "10-education-qualification/reports/2026-11-education-qualification.html"
+      ]
+    },
+    {
+      "id": "q3",
+      "label": "怎么去（路径）",
+      "judgment": "待定",
+      "basis": "路径链条清晰（中介→特定活动→考试→驾照→1号）；中介风险与落地执行细节待补",
+      "confidence": "C2",
+      "todo": "T-03 / T-08",
+      "links": [
+        "00-decision-hub/reports/2026-12-decision-hub.html",
+        "17-migration-compliance/reports/2026-11-migration-compliance.html",
+        "14-life-operations/reports/2026-11-life-operations.html"
+      ]
+    },
+    {
+      "id": "q4",
+      "label": "去哪（定居地）",
+      "judgment": "待定",
+      "basis": "13 的 7 维框架就绪；个人定居地未记录",
+      "confidence": "C2",
+      "todo": "T-01 / T-09",
+      "links": [
+        "00-decision-hub/reports/2026-12-decision-hub.html",
+        "13-regional-info/reports/2026-11-regional-info.html",
+        "12-culture-life/reports/2026-11-culture-life.html"
+      ]
+    },
+    {
+      "id": "q5",
+      "label": "最坏怎么办（退出）",
+      "judgment": "待定",
+      "basis": "永住 / 归化 / 转职路径存在；16 已接入，金额 / 期限 / 要件待核验",
+      "confidence": "C2",
+      "todo": "T-04 / T-12",
+      "links": [
+        "00-decision-hub/reports/2026-12-decision-hub.html",
+        "16-exit-transition-return/reports/2026-11-exit-transition-return.html",
+        "09-politics-law/reports/2026-11-politics-law.html"
+      ]
     }
   ]
 }

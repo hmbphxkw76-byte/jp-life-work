@@ -32,6 +32,7 @@ from _common import (  # noqa: E402
     quarter_to_month,
     topic_slug,
 )
+import decision_log  # noqa: E402
 
 
 def default_period(now: datetime) -> str:
@@ -106,7 +107,15 @@ def build_tasks(period: str, businesses: list[Business]) -> list[dict]:
     return tasks
 
 
-def render_md(tasks: list[dict], period: str) -> str:
+def decision_changes(limit: int = 5) -> list[dict]:
+    """读取决策日志最近条目（月度更新流程的「决策状态变化」字段）。"""
+    try:
+        return decision_log.entries(limit=limit)
+    except Exception:
+        return []
+
+
+def render_md(tasks: list[dict], period: str, decisions: list[dict] | None = None) -> str:
     lines = [f"## 内容更新任务清单（{period}）", ""]
     for t in tasks:
         mark = "x" if t["status"] == "done" else " "
@@ -115,6 +124,15 @@ def render_md(tasks: list[dict], period: str) -> str:
             f"- [{mark}] {t['project']} · {t['cycle_label']} {t['period']}"
             f" — 提示词 `{t['prompt']}` · 输出 `{t['output']}`（{state}）"
         )
+    lines.append("")
+    lines.append("**决策状态变化（近 {0} 条）**".format(len(decisions or [])))
+    lines.append("")
+    if decisions:
+        for d in decisions:
+            lines.append(f"- {d['日期']}｜{d['决策问题']} · {d['字段']}："
+                         f"{d['变化前']} → {d['变化后']}（依据：{d['依据']}）")
+    else:
+        lines.append("- （暂无变化记录）")
     lines.append("")
     return "\n".join(lines)
 
@@ -125,7 +143,13 @@ def main() -> int:
     ap.add_argument("--period", default="", help="周期标识（YYYY-MM / YYYY-Qn / YYYY），缺省按当前 UTC 日期")
     ap.add_argument("--pending-only", action="store_true", help="仅输出未完成任务")
     ap.add_argument("--porcelain", action="store_true", help="输出 JSON 数组")
+    ap.add_argument("--decisions", action="store_true", help="仅输出决策状态变化")
     args = ap.parse_args()
+
+    if args.decisions:
+        for d in decision_changes():
+            print(f"{d['日期']}｜{d['决策问题']}·{d['字段']}：{d['变化前']} → {d['变化后']}")
+        return 0
 
     businesses = iter_business_dirs()
     if args.project:
@@ -149,7 +173,7 @@ def main() -> int:
     if args.porcelain:
         print(json.dumps(tasks, ensure_ascii=False))
     else:
-        print(render_md(tasks, period), end="")
+        print(render_md(tasks, period, decision_changes()), end="")
     return 0
 
 

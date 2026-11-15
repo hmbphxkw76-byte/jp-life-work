@@ -1,0 +1,46 @@
+# 赴日决策 · 事实卡片（Fact Cards）
+
+> **用途**：跨主题**高频共享数字**的单一事实源。每张卡片含五字段（值 / 统计口径 / 数据时点 / 来源 URL / 版本号）；其他报告与登记册一律以 `[@FC-NNN]` 指针引用，不复制值。
+> **标准**：见 [fact-card-standard.md](../../src/report_templates/fact-card-standard.md)。
+> **纪律**：00 模块只读消费，不回写来源主题；冲突口径并列建卡，不合并、不取均值；值变更递增版本号并留痕。
+
+---
+
+## 一、卡片登记
+
+| ID | 值 | 统计口径 | 数据时点 | 来源 URL | 版本号 |
+|---|---|---|---|---|---|
+| FC-001 | 22,100 人 | ISA「特定技能 1 号分野别受入れ見込数」・自動車運送業（现行） | 2026-01-23 阁议（2024.4–2029.3） | https://www.moj.go.jp/isa/content/001472175.pdf | v1 |
+| FC-002 | 843 人 / 充足率 3.8% | ISA「分野别受入れ見込数・在留者数」・1 号 | 2026-08 末速报（2026-11-06 表） | https://www.moj.go.jp/isa/content/001472175.pdf | v1 |
+| FC-003 | 2.56 | 厚労省有效求人倍率・汽车驾驶业（常用含パート） | 2026-09（2026-10-30 公布） | https://www.mhlw.go.jp/stf/newpage_76960.html | v1 |
+| FC-004 | 341,158 円 | 厚労省毎月勤労統計・運輸業・郵便業现金给与总额（含加班、未含赏与） | 2026-09（2026-11-06 公布） | https://www.mhlw.go.jp/toukei/itiran/roudou/monthly/r08/2609p/xls/2609c01p.xlsx | v1 |
+| FC-005 | 324,381 円 | 総務省「小売物価統計調査」・普通教习所 AT 限定全国月次均价 | 2026-09 | https://www.e-stat.go.jp/stat-search/database?layout=dataset&statdisp_id=0003449368 | v1 |
+| FC-006 | 28,400 円；2–4 万円/人·月 | ISA 登録支援機関・新登录费与行情 | 2026 | https://www.moj.go.jp/isa/policies/ssw/supportssw.html | v1 |
+| FC-007 | 10.5–17.0 万円/月 | 手册 02 生活成本模型・单身地方都市（手册估算，**待核验**） | 2026（手册） | 无在线来源（见 07 报告 3.1） | v1 |
+| FC-008 | 10,000 円 | JFT-Basic 受验费（日本国内，含消费税相当额） | 2026 | https://www.prometric-jp.com/ssw/exam/fee/ | v1 |
+| FC-009 | 6,500 円；15,000 円 | ClassNK 技能试験费 / 证明书费 | 2026 | https://sswt-portal.classnk.or.jp/area?tab=3 | v1 |
+| FC-010 | 715 元 / 1,430 元 | 驻日领馆签证费・单次 / 二次・数次（上海 / 青岛 / 重庆一致） | 2026-07-01 起 | https://www.shanghai.cn.emb-japan.go.jp/itpr_ja/11_000001_00633.html | v1 |
+| FC-011 | 42.8% / 13.1% | 警察庁外免切替・知识确认 / 技能确认合格率 | 2025-10–12 | https://drivey.jp/blog/gaimen-kirikae-knowledge-test | v1 |
+| FC-012 | +4.6% | 日銀 SPPI「道路貨物輸送」 | 2026-09 速报 | https://www.boj.or.jp/statistics/pi/cspi_release/sppi2609.pdf | v1 |
+| FC-013 | 38 件 | TSR 倒产・運輸業（+2.7%，连续 2 个月增） | 2026-10 | https://www.tsr-net.co.jp/news/status/detail/1203416_1610.html | v1 |
+| FC-014 | 国务院令第 620 号 | 《对外劳务合作管理条例》・经营资格 / 名单 | 2012-08-01 施行 | https://www.gov.cn/gongbao/content/2012/content_2161721.htm | v1 |
+| FC-015 | 国务院令第 841 号 | 出境入境中介服务・备案制 | 2026-09-15 施行 | https://www.gov.cn/gongbao/2026/issue_12906/202608/content_7077791.html | v1 |
+| FC-016 | 4.2355 元 | 中国外汇交易中心・100 日元中间价 | 2026-11-10 | https://www.chinamoney.com.cn/ | v1 |
+
+---
+
+## 二、指针引用示例
+
+| 场景 | 写法 |
+|---|---|
+| 报告正文 | 受入上限 **22,100 人**[@FC-001]；在留 843 人、充足率 3.8%[@FC-002] |
+| 登记册活值 | 运输業月均工资 341,158 円（[@FC-004]） |
+| 冲突口径 | 司机缺口 14% / 34%（政策包）≠ 7% / 25%（MLIT 再检证）——分别建卡，不合并 |
+
+---
+
+## 三、变更记录
+
+| 版本 | 日期 | 变更 | 说明 |
+|---|---|---|---|
+| v1 | 2026-11-15 | 初始版本 | 建立 16 张事实卡片，覆盖 01 / 04 / 07 / 10 / 12 / 17 高频共享数字 |

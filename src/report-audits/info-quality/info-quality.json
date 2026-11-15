@@ -8,16 +8,18 @@
     "missing_items": 0,
     "contradictions": 0,
     "gaps": 0,
-    "source_coverage": 0.6282051282051282,
+    "source_coverage": 0.6310541310541311,
     "stale_reports": 0,
     "dup_ratio": 0.0,
+    "fact_dup_ratio": 0.008097068716962998,
+    "empty_module_ratio": 0.0,
     "attribution_errors": 0,
-    "cite_valid_ratio": 1.0,
-    "broken_links": 0,
+    "cite_valid_ratio": 0.9994269340974212,
+    "broken_links": 1,
     "findings_by_level": {
       "P0": 0,
-      "P1": 0,
-      "P2": 0
+      "P1": 4,
+      "P2": 1
     }
   },
   "metrics_after": {
@@ -27,20 +29,114 @@
     "missing_items": 0,
     "contradictions": 0,
     "gaps": 0,
-    "source_coverage": 0.6282051282051282,
+    "source_coverage": 0.6310541310541311,
     "stale_reports": 0,
     "dup_ratio": 0.0,
+    "fact_dup_ratio": 0.008097068716962998,
+    "empty_module_ratio": 0.0,
     "attribution_errors": 0,
-    "cite_valid_ratio": 1.0,
-    "broken_links": 0,
+    "cite_valid_ratio": 0.9994269340974212,
+    "broken_links": 1,
     "findings_by_level": {
       "P0": 0,
       "P1": 0,
-      "P2": 0
+      "P2": 1
     }
   },
-  "findings": [],
-  "repairs": [],
+  "findings": [
+    {
+      "code": "C-06",
+      "level": "P1",
+      "topic": "08-visa-immigration",
+      "path": "08-visa-immigration/reports/2026-11-visa-immigration.md",
+      "location": "结构要素缺失",
+      "detail": "免责声明结构化校验未通过：缺少要素：免责声明",
+      "spec": "S-05",
+      "status": "fixed"
+    },
+    {
+      "code": "C-06",
+      "level": "P1",
+      "topic": "09-politics-law",
+      "path": "09-politics-law/reports/2026-11-politics-law.md",
+      "location": "结构要素缺失",
+      "detail": "免责声明结构化校验未通过：缺少要素：免责声明",
+      "spec": "S-05",
+      "status": "fixed"
+    },
+    {
+      "code": "C-06",
+      "level": "P1",
+      "topic": "18-family-parenting",
+      "path": "18-family-parenting/reports/2026-11-family-parenting.md",
+      "location": "结构要素缺失",
+      "detail": "免责声明结构化校验未通过：缺少要素：免责声明",
+      "spec": "S-05",
+      "status": "fixed"
+    },
+    {
+      "code": "C-06",
+      "level": "P1",
+      "topic": "19-safety-disaster",
+      "path": "19-safety-disaster/reports/2026-11-safety-disaster.md",
+      "location": "结构要素缺失",
+      "detail": "免责声明结构化校验未通过：缺少要素：免责声明、专业人士",
+      "spec": "S-05",
+      "status": "fixed"
+    },
+    {
+      "code": "C-09",
+      "level": "P2",
+      "topic": "00-decision-hub",
+      "path": "00-decision-hub/data/decision_onepager.md",
+      "location": "交叉引用",
+      "detail": "引用目标不存在：./decision_log.md",
+      "spec": "S-08",
+      "status": "unfixable"
+    }
+  ],
+  "repairs": [
+    {
+      "finding_code": "C-06",
+      "topic": "08-visa-immigration",
+      "path": "08-visa-immigration/reports/2026-11-visa-immigration.md",
+      "spec": "S-05",
+      "action": "插入标准化免责声明（头部块引用）",
+      "before": "（缺失）",
+      "after": "> **免责声明**：本报告为信息整理与条件化建议，不构成法律意见或税务意见；重大决策请咨询执业法律 / 税务专业人士。",
+      "result": "applied"
+    },
+    {
+      "finding_code": "C-06",
+      "topic": "09-politics-law",
+      "path": "09-politics-law/reports/2026-11-politics-law.md",
+      "spec": "S-05",
+      "action": "插入标准化免责声明（头部块引用）",
+      "before": "（缺失）",
+      "after": "> **免责声明**：本报告为信息整理与条件化建议，不构成法律意见或税务意见；重大决策请咨询执业法律 / 税务专业人士。",
+      "result": "applied"
+    },
+    {
+      "finding_code": "C-06",
+      "topic": "18-family-parenting",
+      "path": "18-family-parenting/reports/2026-11-family-parenting.md",
+      "spec": "S-05",
+      "action": "插入标准化免责声明（头部块引用）",
+      "before": "（缺失）",
+      "after": "> **免责声明**：本报告为信息整理与条件化建议，不构成法律意见或税务意见；重大决策请咨询执业法律 / 税务专业人士。",
+      "result": "applied"
+    },
+    {
+      "finding_code": "C-06",
+      "topic": "19-safety-disaster",
+      "path": "19-safety-disaster/reports/2026-11-safety-disaster.md",
+      "spec": "S-05",
+      "action": "插入标准化免责声明（头部块引用）",
+      "before": "（缺失）",
+      "after": "> **免责声明**：本报告为信息整理与条件化建议，不构成法律意见或税务意见；重大决策请咨询执业法律 / 税务专业人士。",
+      "result": "applied"
+    }
+  ],
   "verification": {
     "checks": {
       "required_coverage_ok": true,
@@ -59,16 +155,18 @@
       "missing_items": 0,
       "contradictions": 0,
       "gaps": 0,
-      "source_coverage": 0.6282051282051282,
+      "source_coverage": 0.6310541310541311,
       "stale_reports": 0,
       "dup_ratio": 0.0,
+      "fact_dup_ratio": 0.008097068716962998,
+      "empty_module_ratio": 0.0,
       "attribution_errors": 0,
-      "cite_valid_ratio": 1.0,
-      "broken_links": 0,
+      "cite_valid_ratio": 0.9994269340974212,
+      "broken_links": 1,
       "findings_by_level": {
         "P0": 0,
-        "P1": 0,
-        "P2": 0
+        "P1": 4,
+        "P2": 1
       }
     },
     "after": {
@@ -78,18 +176,31 @@
       "missing_items": 0,
       "contradictions": 0,
       "gaps": 0,
-      "source_coverage": 0.6282051282051282,
+      "source_coverage": 0.6310541310541311,
       "stale_reports": 0,
       "dup_ratio": 0.0,
+      "fact_dup_ratio": 0.008097068716962998,
+      "empty_module_ratio": 0.0,
       "attribution_errors": 0,
-      "cite_valid_ratio": 1.0,
-      "broken_links": 0,
+      "cite_valid_ratio": 0.9994269340974212,
+      "broken_links": 1,
       "findings_by_level": {
         "P0": 0,
         "P1": 0,
-        "P2": 0
+        "P2": 1
       }
     },
-    "open_after": []
+    "open_after": [
+      {
+        "code": "C-09",
+        "level": "P2",
+        "topic": "00-decision-hub",
+        "path": "00-decision-hub/data/decision_onepager.md",
+        "location": "交叉引用",
+        "detail": "引用目标不存在：./decision_log.md",
+        "spec": "S-08",
+        "status": "open"
+      }
+    ]
   }
 }
