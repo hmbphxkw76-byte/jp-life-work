@@ -83,6 +83,7 @@ python tools/workflow_guard.py lock release checkout
 5. **冲突**：保留 `.worktrees/_merge` 供人工处理，远端不受影响。
    处理完重试 `merge <name>`；放弃用 `merge --cleanup`。
 6. **不改写任务分支**：默认 `--no-ff`，任务分支历史原样保留。
+7. **只合并已提交内容**：未提交的改动不会被带入合并，也不会被推上 main。
 
 ## 五、锁语义（第 3 层细节）
 

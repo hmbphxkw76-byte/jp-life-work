@@ -307,6 +307,16 @@ class TestSerialMerge(TempRepoCase):
         files = git_run(["ls-tree", "--name-only", "origin/main"], cwd=self.repo.path).stdout
         self.assertNotIn("feat.txt", files)
 
+    def test_merge_auto_detects_validate_py(self):
+        # 预置仓库自带的校验脚本并推上远端：默认路径应自动识别并执行
+        self.repo.write("src/prompts-tools/tools/validate.py", "import sys\nsys.exit(0)\n")
+        self.repo.commit_all("预置校验脚本")
+        self.repo.git("push", "origin", "main")
+        self._make_task()
+        proc = self.repo.tool("merge", "demo", check=False)
+        self.assertEqual(proc.returncode, 0)
+        self.assertIn("合并前校验", proc.stdout)
+
     def test_merge_verify_warn_passes(self):
         self._make_task()
         proc = self.repo.tool("merge", "demo", "--verify-cmd", "python -c \"import sys; sys.exit(2)\"",
