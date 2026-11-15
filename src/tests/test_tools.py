@@ -2268,5 +2268,77 @@ class TestStageGateCheck(unittest.TestCase):
         self.assertEqual(summary["by_severity"]["P1"], 0)
 
 
+class TestPipelineFlowSpec(unittest.TestCase):
+    """信息生产全链路执行规范 ↔ 仓库实现对齐守卫。
+
+    规范：docs/信息生产全链路执行规范.md（PIPELINE-FLOW-SPEC）。
+    任一断言失败即视为「流程设计 ↔ 仓库实现」漂移。
+    """
+
+    def _read(self, *parts):
+        return (_common.ROOT / Path(*parts)).read_text(encoding="utf-8")
+
+    def _wf(self, name):
+        return self._read(".github", "workflows", name)
+
+    def test_spec_covers_eight_sections(self):
+        text = self._read("docs", "信息生产全链路执行规范.md")
+        for h in ("一、总则", "二、阶段定义与核心交付物", "三、门禁节点执行规则",
+                  "四、缺陷路由", "五、周期保障执行内容与验收标准",
+                  "六、决策消费与补缺准入", "七、反馈链路触发条件", "八、全流程执行规范要求"):
+            self.assertIn("## " + h, text)
+
+    def test_spec_declares_five_gates(self):
+        text = self._read("docs", "信息生产全链路执行规范.md")
+        for g in ("闸1 采集", "闸2 筛选", "闸3 分类", "闸5 输出", "交付门禁"):
+            self.assertIn(g, text)
+
+    def test_spec_declares_five_routing_classes(self):
+        text = self._read("docs", "信息生产全链路执行规范.md")
+        for c in ("采集类", "筛选类", "分类类", "生成类", "输出类"):
+            self.assertIn(c, text)
+
+    def test_validate_yaml_wires_gates(self):
+        v = self._wf("validate.yml")
+        for step in ("stage_gate_check.py", "build_hub.py --check",
+                     "lint_reports.py --new-only", "compliance_check.py --new-only"):
+            self.assertIn(step, v)
+
+    def test_audit_gate_yaml_wires_gate_and_check(self):
+        a = self._wf("audit-gate.yml")
+        self.assertIn("audit_pipeline.py --gate", a)
+        self.assertIn("audit_check.py --all", a)
+
+    def test_cycle_workflows_schedules(self):
+        self.assertIn('cron: "15 0 1 * *"', self._wf("scheduled-maintenance.yml"))
+        self.assertIn('cron: "20 2 * * 1"', self._wf("info-quality.yml"))
+        self.assertIn('cron: "25 0 1 * *"', self._wf("audit-sampling.yml"))
+        self.assertIn('cron: "20 0 1 * *"', self._wf("scheduled-report-tasks.yml"))
+
+    def test_html_sync_chain(self):
+        h = self._wf("html-sync.yml")
+        for tool in ("md2html.py", "build_hub.py",
+                     "audit_pipeline.py --sync", "audit_badge.py --sync"):
+            self.assertIn(tool, h)
+
+    def test_pipeline_tools_exist(self):
+        for t in ("stage_gate_check.py", "audit_pipeline.py", "audit_check.py",
+                  "md2html.py", "build_hub.py", "build_index.py", "archive_reports.py"):
+            self.assertTrue(
+                (_common.ROOT / "src" / "prompts-tools" / "tools" / t).is_file(), t)
+
+    def test_acceptance_constants_match_spec(self):
+        self.assertIn("KEEP = 12",
+                      self._read("src", "prompts-tools", "tools", "archive_reports.py"))
+        s = self._read("src", "prompts-tools", "tools", "audit_sampling.py")
+        for c in ("TH_STRUCT = 1.00", "TH_ELEMENT = 0.95", "TH_PASS = 0.95"):
+            self.assertIn(c, s)
+
+    def test_spec_schedule_matches_workflows(self):
+        spec = self._read("docs", "信息生产全链路执行规范.md")
+        for ts in ("00:15 UTC", "02:20 UTC", "00:25 UTC"):
+            self.assertIn(ts, spec)
+
+
 if __name__ == "__main__":
     unittest.main()
