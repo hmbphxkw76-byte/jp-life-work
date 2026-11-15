@@ -344,6 +344,19 @@ class TestComplianceCheck(unittest.TestCase):
         issues = check_report(self._html(extra_anchor=True), self.monthly_rule, self.common)
         self.assertTrue(any(i[0] == "E" and "断头锚点" in i[1] for i in issues))
 
+    def test_every_type_has_monthly_skeleton(self):
+        """全部类型登记 monthly 骨架（nav=true），避免月度报告回落基线。"""
+        missing = [tid for tid, t in self.rules["types"].items()
+                   if "monthly" not in t.get("cycles", {})]
+        self.assertEqual(missing, [], f"以下类型缺 monthly 骨架：{missing}")
+        for tid, t in self.rules["types"].items():
+            self.assertTrue(t["cycles"]["monthly"].get("nav"), f"{tid} monthly 须 nav=true")
+
+    def test_monthly_not_inherited(self):
+        for tid in self.rules["types"]:
+            _rule, inherited = cycle_rule(self.rules, tid, "monthly")
+            self.assertFalse(inherited, f"{tid} monthly 仍回落基线")
+
 
 # ──────────────────────────────────────────────
 # 16-exit-transition-return 业务线
