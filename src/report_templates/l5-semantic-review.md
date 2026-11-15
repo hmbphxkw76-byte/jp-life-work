@@ -31,9 +31,15 @@
 
 ## 三、输出格式（严格 JSON，不得输出其它内容）
 
+**v2（2026-11-15 起，新格式）**：带版本号封套，`version` / `verdict` / `notes` 可选但推荐；
+`items` 六项固定不变。`audit_pipeline.validate_l5_evidence()` 同时认可 v1（无 `version`，
+仅 `report` + `items`）存量格式。
+
 ```json
 {
+  "version": "2.0",
   "report": "01-ssw-driver/reports/2026-11-ssw-driver.md",
+  "verdict": "pass",
   "items": [
     {"item": "结", "result": "yes", "basis": "结论与依据匹配：核心结论 3 条均附来源与推理链"},
     {"item": "表", "result": "yes", "basis": "表述与来源一致：抽查 10 条与原文一致"},
@@ -41,15 +47,19 @@
     {"item": "是", "result": "yes", "basis": "无以偏概全/过度推断：推断项均已标注「推断」"},
     {"item": "口", "result": "yes", "basis": "口径并列清晰：运賃/工资/倒産口径分别标注不可混用"},
     {"item": "跨", "result": "yes", "basis": "跨主题引用准确：引用 04/07/08 均为主责方"}
-  ]
+  ],
+  "notes": "30–60 字复核说明"
 }
 ```
 
+- `version` 若填写须为 `"2.0"`；`verdict` 仅取 `pass` / `fail`；
 - `result` 仅取 `yes` / `no` / `uncertain`；
-- `no` 或 `uncertain` 必须给出 `basis` 说明（否则视为无效证据）；
+- `no` 或 `uncertain` 必须给出 `basis` 说明；
 - 六项缺一不可。
 
 ## 四、执行约定
 
 - 只复核、不修改报告内容；发现问题在 `basis` 中说明，并在审计结论中记 `fail`。
 - 证据将写入台账 `evidence` 字段，供终审与门禁校验；缺证据的复核 `pass` 会被系统拒绝。
+- **存量补核**：已审计但缺证据的报告，由 `audit_pipeline.py --backfill-l5 --report <路径> --evidence <JSON>`
+  一次性补录（v2 格式），台账追加 `l5_backfill` 事件，状态与指纹不变。

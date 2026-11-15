@@ -94,6 +94,7 @@ REQUIRED_TEMPLATE_FILES = (
     "monitoring-common-spec.md",
     "template-registry.md",
     "report-classification.md",
+    "registry-schema.md",
     "compliance-rules.json",
 )
 

@@ -1,6 +1,6 @@
 # 报告模板类型注册表（template-registry）
 
-> **定位**：`report_templates/` 通用层的**类型分类注册表**。记录已注册的报告类型维度、各类型的模板清单与适用业务线，并规定新增类型 / 新增业务线的动态接入步骤。通用基座与跨类型渲染规范常驻本目录根部，类型专属模板按类型 ID 分目录存放——新增类型只加目录、不改既有结构。行业主流类型的**全谱系分类与选型参考**见 [report-classification.md](./report-classification.md)（六族十二类，本注册表只登记其中已模板化的类型）。
+> **定位**：`report_templates/` 通用层的**类型分类注册表**。记录已注册的报告类型维度、各类型的模板清单与适用业务线，并规定新增类型 / 新增业务线的动态接入步骤。通用基座与跨类型渲染规范常驻本目录根部，类型专属模板按类型 ID 分目录存放——新增类型只加目录、不改既有结构。行业主流类型的**全谱系分类与选型参考**见 [report-classification.md](./report-classification.md)（六族十三类，本注册表只登记其中已模板化的类型）；登记册结构标准见 [registry-schema.md](./registry-schema.md)。
 
 ---
 
@@ -12,7 +12,8 @@ report_templates/
 ├── monitoring-common-spec.md     # 渲染/排版/交付通用规范（跨类型共享最低标准）
 ├── handbook-split-standard.md    # 知识手册拆分操作规范 + 可复用提示词模板（跨主题共享）
 ├── template-registry.md          # 本注册表（类型接入点）
-├── report-classification.md      # 行业主流分类体系（六族十二类，新增类型选型参考）
+├── report-classification.md      # 行业主流分类体系（六族十三类，新增类型选型参考）
+├── registry-schema.md            # 指标登记册 Schema 规范（v1/v2 活值表与 C-08/C-10/C-13 判定）
 ├── compliance-rules.json         # 合规校验规则（12 类结构骨架 × 周期，CI 阻断式校验关卡依据）
 ├── market-monitoring/            # 类型一：市场指标监测型
 │   ├── prompt-baseline-setup-template.md
@@ -132,7 +133,7 @@ report_templates/
 
 ### 3.1 新增报告类型（不改动既有结构）
 
-0. 先查 [report-classification.md](./report-classification.md)：确认目标报告类型在六族十二类中的归属与边界（避免与既有类型交叉重叠），并参考第四节选型优先级决定是否模板化。
+0. 先查 [report-classification.md](./report-classification.md)：确认目标报告类型在六族十三类中的归属与边界（避免与既有类型交叉重叠），并参考第四节选型优先级决定是否模板化。
 1. 在 `report_templates/` 下新建类型目录（类型 ID，小写 kebab-case），撰写该类型的基线类型模板与周期类型模板（头部继承声明指向根部通用基座与渲染规范）。
 2. 模板内**严禁**出现任何业务关键词（地区 / 机构 / 专属指标，校验见 `prompts/tools/validate.py`）。
 3. 在本注册表第二节清单登记：类型 ID、名称、模板文件、节拍设计。
@@ -179,3 +180,4 @@ report_templates/
 | v1.22 | 2026-11-14 | 第十条 employment-research 业务线接入 | jp/15-health-wellbeing 接入（基线已产出 2026-11，季度复核 + 事件触发）；个人健康管理（医保 / 就医 / 多语言通译 / 牙科精神科 / 心理 / 体检 / 介護）；结构映射在 business-config 第 3.2 节声明 |
 | v1.23 | 2026-11-14 | 第三条 policy-analysis 业务线接入 | jp/16-exit-transition-return 接入（基线已产出 2026-11，事件触发单份解读 + 年度台账复盘）；政策执行层（退出 / 转型 / 回国）；不做 07 / 08 / 14 的制度正文复制；结构映射在 business-config 第 3.3 节声明 |
 | v1.24 | 2026-11-14 | 新增根部共享操作规范 handbook-split-standard.md | 沉淀 12-culture-life 手册拆分实践（提交 4d3e200）为跨主题可复用标准化提示词模板：双产物分离原则、编号即接口约束、归属映射/边界裁定表、执行清单 ①–⑧、链接锚点规范、验证清单（含 URL 守恒与仓库测试）、提交规范、HTML 预览页设计系统；供其余含合并附录手册的主题统一执行 |
+| v1.25 | 2026-11-15 | 归类为十三类标准 + 登记册 Schema | report-classification 统一为「六族十三类」；新增根部 registry-schema.md（v1/v2 活值表 Schema 与 C-08/C-10/C-13 判定规则），根部共享清单同步 |

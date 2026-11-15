@@ -133,6 +133,9 @@ def run_sample(period: str) -> dict:
     p1 = sum(r["severity"]["P1"] for r in results)
     p2 = sum(r["severity"]["P2"] for r in results)
     rate = (passed / total) if total else 1.0
+    # L5 pending 计入「未完成核验数」并公示（不强制阻断）
+    l5_pending = sum(1 for r in results if r["layers"].get("L5") == "pending")
+    l5_pending_total = sum(1 for e in entries if not l5.get(e["report"], False))
 
     checks = {
         "struct_100": (struct_ok == total) if total else True,
@@ -145,6 +148,8 @@ def run_sample(period: str) -> dict:
         "period": period, "total_reports": len(entries), "sample_size": total,
         "struct_ok": struct_ok, "elem_ok": elem_ok, "consist_ok": consist_ok,
         "passed": passed, "rate": rate, "p0": p0, "p1": p1, "p2": p2,
+        "l5_pending": l5_pending, "l5_pending_total": l5_pending_total,
+        "unfinished_verification": l5_pending,
         "overdue_p2_count": len(overdue_p2()),
         "checks": checks, "ok": all(checks.values()),
         "results": results,
@@ -176,6 +181,8 @@ def write_report(payload: dict) -> list[Path]:
             f"（分层抽样，每主题至少 1 份）",
             f"> 抽检合格率：{payload['passed']}/{payload['sample_size']}（{payload['rate']:.0%}）　|　"
             f"P0 {payload['p0']} / P1 {payload['p1']} / P2 {payload['p2']}",
+            f"> 未完成核验数（L5 pending）：样本 {payload['l5_pending']}/{payload['sample_size']}；"
+            f"全库 {payload['l5_pending_total']}/{payload['total_reports']}（公示项，不强制阻断）",
             f"> 依据《审计报告标准化管理体系》第七节验收门槛",
             "",
             "## 验收门槛判定",
@@ -215,6 +222,8 @@ def main() -> int:
         paths = write_report(payload)
         print(f"抽检完成：{payload['sample_size']}/{payload['total_reports']} 份，"
               f"合格率 {payload['rate']:.0%}；P0 {payload['p0']} / P1 {payload['p1']} / P2 {payload['p2']}")
+        print(f"  未完成核验数（L5 pending）：样本 {payload['l5_pending']}/{payload['sample_size']}；"
+              f"全库 {payload['l5_pending_total']}/{payload['total_reports']}（公示项，不阻断）")
         overdue = overdue_p2()
         if overdue:
             print(f"[W] P2 超期未闭环：{len(overdue)} 项（见 {PENDING_P2.relative_to(ROOT)}）")

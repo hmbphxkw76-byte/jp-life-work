@@ -36,9 +36,8 @@ import info_quality_check  # noqa: E402
 from audit_registry import content_fingerprint  # noqa: E402
 from info_quality_check import (  # noqa: E402
     THRESH_SOURCE_COVERAGE,
+    _fact_units,
     _has_source,
-    _paragraphs,
-    _substantive,
 )
 from lint_reports import lint_html  # noqa: E402
 
@@ -48,8 +47,7 @@ CHECK_REPORT_JSON = AUDIT_DIR / "audit-check-report.json"
 PENDING_P2 = AUDIT_DIR / "pending-p2.json"
 P2_REVIEW_DAYS = 30
 IQ_CACHE = ROOT / "src" / "report-audits" / "info-quality" / "findings-by-path.json"
-CACHE_VERSION = "1.1"
-BADGE_LINE_RE = re.compile(r"^>\s*\*\*已审计\*\*.*$", re.MULTILINE)
+CACHE_VERSION = "1.1"   # IQ 缓存版本：读 / 写 / 键三者共用同一常量（配置唯一事实源）
 
 TITLE_RE = re.compile(r"<title[^>]*>(.*?)</title>", re.DOTALL)
 H2_RE = re.compile(r"<h2\b[^>]*>(.*?)</h2>", re.DOTALL)
@@ -76,6 +74,7 @@ C_TO_LAYER = {
     "C-01": "L5", "C-02": "L4", "C-03": "L4", "C-04": "L5",
     "C-05": "L2", "C-06": "L2", "C-07": "L3", "C-08": "L3",
     "C-09": "L3", "C-10": "L4", "C-11": "L5", "C-12": "L5",
+    "C-13": "L4", "C-14": "L3",
 }
 
 # 报告必需要素（docs 第 3.1 节）
@@ -231,13 +230,13 @@ def check_elements(rel: str, md_path: Path, html_path: Path) -> list[AuditFindin
     if not any(k in text for k in ("观察", "触发", "后续", "待办", "下期")):
         add("E8", "P2", "缺少后续动作 / 观察清单")
 
-    # E7 来源标注覆盖率
-    fact_blocks = [b for b in _paragraphs(BADGE_LINE_RE.sub("", text))
-                   if _substantive(b) and re.search(r"\d", b)]
+    # E7 来源标注覆盖率（事实单元 = 段落 + 表格行）
+    paras, rows = _fact_units(text)
+    fact_blocks = paras + rows
     if fact_blocks:
         cov = sum(1 for b in fact_blocks if _has_source(b)) / len(fact_blocks)
         if cov < THRESH_SOURCE_COVERAGE:
-            add("E7", "P2", f"事实段落来源标注覆盖率 {cov:.0%} < {THRESH_SOURCE_COVERAGE:.0%}", "S-06")
+            add("E7", "P2", f"事实单元来源标注覆盖率 {cov:.0%} < {THRESH_SOURCE_COVERAGE:.0%}", "S-06")
     return out
 
 
@@ -286,8 +285,8 @@ def check_report(rel: str, md_path: Path, html_path: Path, type_id: str,
         else:
             res.layers["L5"] = "pending"
             res.findings.append(AuditFinding(
-                "L5", "L5-EVIDENCE", "P2", rel, "语义复核",
-                "缺少有效 L5 语义复核证据（re_review --evidence，见 l5-semantic-review.md）", ""))
+                "L5", "L5-EVIDENCE", "P1", rel, "语义复核",
+                "缺少有效 L5 语义复核证据（re_review --evidence / --backfill-l5，见 l5-semantic-review.md）", ""))
     return res
 
 
@@ -300,7 +299,7 @@ def _iq_findings_by_path() -> dict[str, list[AuditFinding]]:
     if IQ_CACHE.is_file():
         try:
             data = json.loads(IQ_CACHE.read_text(encoding="utf-8"))
-            if data.get("version") == "1.0" and data.get("key") == key:
+            if data.get("version") == CACHE_VERSION and data.get("key") == key:
                 return {p: [AuditFinding(**d) for d in items]
                         for p, items in data.get("findings", {}).items()}
         except (json.JSONDecodeError, TypeError):
@@ -317,7 +316,7 @@ def _iq_findings_by_path() -> dict[str, list[AuditFinding]]:
             "detail": f"{f.detail}（信息质量四维度）", "spec": f.spec,
         })
     IQ_CACHE.parent.mkdir(parents=True, exist_ok=True)
-    IQ_CACHE.write_text(json.dumps({"version": "1.0", "key": key, "findings": mapped},
+    IQ_CACHE.write_text(json.dumps({"version": CACHE_VERSION, "key": key, "findings": mapped},
                                 ensure_ascii=False, indent=2), encoding="utf-8")
     return {p: [AuditFinding(**d) for d in items] for p, items in mapped.items()}
 

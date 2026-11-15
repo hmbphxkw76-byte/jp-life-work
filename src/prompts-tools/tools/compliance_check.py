@@ -63,6 +63,19 @@ def detect_type(config_text: str):
     return m.group(1) if m else None
 
 
+def detect_types(config_text: str) -> list[str]:
+    """全部 report_templates/<类型ID>/ 引用（去重、保序）。
+
+    多引用（≥ 2 个类型）视为告警场景：类型继承应唯一，多引用会导致骨架 / 合规
+    校验口径不确定。
+    """
+    out: list[str] = []
+    for m in TYPE_REF_RE.finditer(config_text):
+        if m.group(1) not in out:
+            out.append(m.group(1))
+    return out
+
+
 def cycle_rule(rules: dict, type_id: str, cycle: str):
     """查 (类型, 周期) 规则。周期未单独登记时按「结构逐字继承基线」回落到基线节数。
 
@@ -134,10 +147,13 @@ def type_of_business(b) -> tuple[str, str | None]:
     if not config.exists():
         return "", f"{b.rel}: 缺少 prompts/business-config.md，无法自动识别报告类型"
     text = config.read_text(encoding="utf-8", errors="replace")
-    type_id = detect_type(text) or ""
-    if not type_id:
+    types = detect_types(text)
+    if not types:
         return "", f"{b.rel}: business-config.md 继承声明未引用 report_templates/<类型ID>/"
-    return type_id, None
+    if len(types) > 1:
+        return types[0], (f"{b.rel}: business-config.md 存在多个类型模板引用 {types}，"
+                          f"仅按首个 {types[0]} 校验（类型继承应唯一，请确认）")
+    return types[0], None
 
 
 def collect_targets(only_file: str | None):

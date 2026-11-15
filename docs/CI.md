@@ -101,6 +101,9 @@
 | 已审计标识一致 | `audit_badge.py --check` | 阻断 |
 | 多层级校验 | `audit_check.py --all` | 存在 P0/P1 阻断；仅 P2 放行 |
 
+- **L5 证据门禁**：`audited` 报告必须附有效 L5 语义复核证据（`re_review --evidence` 或一次性 `--backfill-l5`），缺失即 `L5-EVIDENCE`（P1）阻断。
+- **信息质量新标准**（2026-11-15 起）：C-03 跨文档重复按相似度 ≥ 80%；C-07 事实单元含表格行、纯交叉引用括号不计；C-08 读登记册字段化日期；C-10 按登记册 Schema 分支；C-13 报告↔登记册数值一致性；C-14 ④/⑤ 级来源强制核验标注。
+
 - **配套**：新增报告须先按提示词三步（preflight → audit_check → audit_pipeline --submit）自检并提交审计；未通过初审不得合并。
 
 ### 7. `audit-sampling.yml` — 月度分层抽检

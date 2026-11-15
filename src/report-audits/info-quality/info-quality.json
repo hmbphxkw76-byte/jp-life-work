@@ -8,18 +8,17 @@
     "missing_items": 0,
     "contradictions": 0,
     "gaps": 0,
-    "source_coverage": 0.6310541310541311,
+    "source_coverage": 0.37224938875305624,
+    "semantic_completion": 0.37224938875305624,
     "stale_reports": 0,
-    "dup_ratio": 0.0,
-    "fact_dup_ratio": 0.008097068716962998,
-    "empty_module_ratio": 0.0,
+    "dup_ratio": 0.0050238023583486086,
     "attribution_errors": 0,
-    "cite_valid_ratio": 0.9994269340974212,
-    "broken_links": 1,
+    "cite_valid_ratio": 1.0,
+    "broken_links": 0,
     "findings_by_level": {
       "P0": 0,
-      "P1": 4,
-      "P2": 1
+      "P1": 0,
+      "P2": 13
     }
   },
   "metrics_after": {
@@ -29,125 +28,155 @@
     "missing_items": 0,
     "contradictions": 0,
     "gaps": 0,
-    "source_coverage": 0.6310541310541311,
+    "source_coverage": 0.37224938875305624,
+    "semantic_completion": 0.37224938875305624,
     "stale_reports": 0,
-    "dup_ratio": 0.0,
-    "fact_dup_ratio": 0.008097068716962998,
-    "empty_module_ratio": 0.0,
+    "dup_ratio": 0.0050238023583486086,
     "attribution_errors": 0,
-    "cite_valid_ratio": 0.9994269340974212,
-    "broken_links": 1,
+    "cite_valid_ratio": 1.0,
+    "broken_links": 0,
     "findings_by_level": {
       "P0": 0,
       "P1": 0,
-      "P2": 1
+      "P2": 13
     }
   },
   "findings": [
     {
-      "code": "C-06",
-      "level": "P1",
-      "topic": "08-visa-immigration",
-      "path": "08-visa-immigration/reports/2026-11-visa-immigration.md",
-      "location": "结构要素缺失",
-      "detail": "免责声明结构化校验未通过：缺少要素：免责声明",
-      "spec": "S-05",
-      "status": "fixed"
-    },
-    {
-      "code": "C-06",
-      "level": "P1",
-      "topic": "09-politics-law",
-      "path": "09-politics-law/reports/2026-11-politics-law.md",
-      "location": "结构要素缺失",
-      "detail": "免责声明结构化校验未通过：缺少要素：免责声明",
-      "spec": "S-05",
-      "status": "fixed"
-    },
-    {
-      "code": "C-06",
-      "level": "P1",
-      "topic": "18-family-parenting",
-      "path": "18-family-parenting/reports/2026-11-family-parenting.md",
-      "location": "结构要素缺失",
-      "detail": "免责声明结构化校验未通过：缺少要素：免责声明",
-      "spec": "S-05",
-      "status": "fixed"
-    },
-    {
-      "code": "C-06",
-      "level": "P1",
-      "topic": "19-safety-disaster",
-      "path": "19-safety-disaster/reports/2026-11-safety-disaster.md",
-      "location": "结构要素缺失",
-      "detail": "免责声明结构化校验未通过：缺少要素：免责声明、专业人士",
-      "spec": "S-05",
-      "status": "fixed"
-    },
-    {
-      "code": "C-09",
+      "code": "C-07",
       "level": "P2",
-      "topic": "00-decision-hub",
-      "path": "00-decision-hub/data/decision_onepager.md",
-      "location": "交叉引用",
-      "detail": "引用目标不存在：./decision_log.md",
-      "spec": "S-08",
-      "status": "unfixable"
-    }
-  ],
-  "repairs": [
-    {
-      "finding_code": "C-06",
-      "topic": "08-visa-immigration",
-      "path": "08-visa-immigration/reports/2026-11-visa-immigration.md",
-      "spec": "S-05",
-      "action": "插入标准化免责声明（头部块引用）",
-      "before": "（缺失）",
-      "after": "> **免责声明**：本报告为信息整理与条件化建议，不构成法律意见或税务意见；重大决策请咨询执业法律 / 税务专业人士。",
-      "result": "applied"
+      "topic": "15-health-wellbeing",
+      "path": "15-health-wellbeing/reports/2026-11-health-wellbeing.md",
+      "location": "事实单元来源覆盖不足",
+      "detail": "含数字事实单元（段落 + 表格行）来源覆盖率 15% < 20%（程序化门槛；语义目标 100%）",
+      "spec": "S-06",
+      "status": "open"
     },
     {
-      "finding_code": "C-06",
-      "topic": "09-politics-law",
-      "path": "09-politics-law/reports/2026-11-politics-law.md",
-      "spec": "S-05",
-      "action": "插入标准化免责声明（头部块引用）",
-      "before": "（缺失）",
-      "after": "> **免责声明**：本报告为信息整理与条件化建议，不构成法律意见或税务意见；重大决策请咨询执业法律 / 税务专业人士。",
-      "result": "applied"
+      "code": "C-03",
+      "level": "P2",
+      "topic": "01-ssw-driver",
+      "path": "01-ssw-driver/reports/2026-11-ssw-driver.md",
+      "location": "跨文档重复",
+      "detail": "约 362 字的段落与 02-career-driver/reports/2026-11-career-driver.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留",
+      "spec": "S-02",
+      "status": "open"
     },
     {
-      "finding_code": "C-06",
+      "code": "C-03",
+      "level": "P2",
+      "topic": "04-industry-logistics",
+      "path": "04-industry-logistics/reports/2026-11-industry-logistics.md",
+      "location": "跨文档重复",
+      "detail": "约 140 字的段落与 05-industry-autonomous/reports/2026-11-industry-autonomous.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留",
+      "spec": "S-02",
+      "status": "open"
+    },
+    {
+      "code": "C-03",
+      "level": "P2",
+      "topic": "04-industry-logistics",
+      "path": "04-industry-logistics/reports/2026-11-industry-logistics.md",
+      "location": "跨文档重复",
+      "detail": "约 140 字的段落与 06-industry-technology/reports/2026-11-industry-technology.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留",
+      "spec": "S-02",
+      "status": "open"
+    },
+    {
+      "code": "C-03",
+      "level": "P2",
+      "topic": "05-industry-autonomous",
+      "path": "05-industry-autonomous/reports/2026-11-industry-autonomous.md",
+      "location": "跨文档重复",
+      "detail": "约 779 字的段落与 06-industry-technology/reports/2026-11-industry-technology.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留",
+      "spec": "S-02",
+      "status": "open"
+    },
+    {
+      "code": "C-03",
+      "level": "P2",
+      "topic": "07-economy-finance",
+      "path": "07-economy-finance/reports/2026-11-economy-finance.md",
+      "location": "跨文档重复",
+      "detail": "约 175 字的段落与 10-education-qualification/reports/2026-11-education-qualification.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留",
+      "spec": "S-02",
+      "status": "open"
+    },
+    {
+      "code": "C-03",
+      "level": "P2",
+      "topic": "11-language-japanese",
+      "path": "11-language-japanese/reports/2026-11-language-japanese.md",
+      "location": "跨文档重复",
+      "detail": "约 189 字的段落与 12-culture-life/reports/2026-11-culture-life.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留",
+      "spec": "S-02",
+      "status": "open"
+    },
+    {
+      "code": "C-03",
+      "level": "P2",
+      "topic": "11-language-japanese",
+      "path": "11-language-japanese/reports/2026-11-language-japanese.md",
+      "location": "跨文档重复",
+      "detail": "约 186 字的段落与 14-life-operations/reports/2026-11-life-operations.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留",
+      "spec": "S-02",
+      "status": "open"
+    },
+    {
+      "code": "C-03",
+      "level": "P2",
+      "topic": "12-culture-life",
+      "path": "12-culture-life/reports/2026-11-culture-life.md",
+      "location": "跨文档重复",
+      "detail": "约 229 字的段落与 14-life-operations/reports/2026-11-life-operations.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留",
+      "spec": "S-02",
+      "status": "open"
+    },
+    {
+      "code": "C-03",
+      "level": "P2",
+      "topic": "12-culture-life",
+      "path": "12-culture-life/reports/2026-11-culture-life.md",
+      "location": "跨文档重复",
+      "detail": "约 165 字的段落与 17-migration-compliance/reports/2026-11-migration-compliance.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留",
+      "spec": "S-02",
+      "status": "open"
+    },
+    {
+      "code": "C-03",
+      "level": "P2",
+      "topic": "14-life-operations",
+      "path": "14-life-operations/reports/2026-11-life-operations.md",
+      "location": "跨文档重复",
+      "detail": "约 165 字的段落与 17-migration-compliance/reports/2026-11-migration-compliance.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留",
+      "spec": "S-02",
+      "status": "open"
+    },
+    {
+      "code": "C-03",
+      "level": "P2",
+      "topic": "16-exit-transition-return",
+      "path": "16-exit-transition-return/reports/2026-11-exit-transition-return.md",
+      "location": "跨文档重复",
+      "detail": "约 204 字的段落与 20-overseas-china/reports/2026-11-overseas-china.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留",
+      "spec": "S-02",
+      "status": "open"
+    },
+    {
+      "code": "C-03",
+      "level": "P2",
       "topic": "18-family-parenting",
       "path": "18-family-parenting/reports/2026-11-family-parenting.md",
-      "spec": "S-05",
-      "action": "插入标准化免责声明（头部块引用）",
-      "before": "（缺失）",
-      "after": "> **免责声明**：本报告为信息整理与条件化建议，不构成法律意见或税务意见；重大决策请咨询执业法律 / 税务专业人士。",
-      "result": "applied"
-    },
-    {
-      "finding_code": "C-06",
-      "topic": "19-safety-disaster",
-      "path": "19-safety-disaster/reports/2026-11-safety-disaster.md",
-      "spec": "S-05",
-      "action": "插入标准化免责声明（头部块引用）",
-      "before": "（缺失）",
-      "after": "> **免责声明**：本报告为信息整理与条件化建议，不构成法律意见或税务意见；重大决策请咨询执业法律 / 税务专业人士。",
-      "result": "applied"
+      "location": "跨文档重复",
+      "detail": "约 204 字的段落与 20-overseas-china/reports/2026-11-overseas-china.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留",
+      "spec": "S-02",
+      "status": "open"
     }
   ],
+  "repairs": [],
   "verification": {
-    "checks": {
-      "required_coverage_ok": true,
-      "dup_ratio_ok": true,
-      "cite_valid_not_regressed": true,
-      "p0p1_contradictions_zero": true,
-      "no_new_open_findings": true,
-      "no_regression": true,
-      "repairs_verified": true
-    },
-    "passed": true,
+    "checks": {},
+    "passed": false,
     "before": {
       "topics_total": 21,
       "topics_complete": 21,
@@ -155,18 +184,17 @@
       "missing_items": 0,
       "contradictions": 0,
       "gaps": 0,
-      "source_coverage": 0.6310541310541311,
+      "source_coverage": 0.37224938875305624,
+      "semantic_completion": 0.37224938875305624,
       "stale_reports": 0,
-      "dup_ratio": 0.0,
-      "fact_dup_ratio": 0.008097068716962998,
-      "empty_module_ratio": 0.0,
+      "dup_ratio": 0.0050238023583486086,
       "attribution_errors": 0,
-      "cite_valid_ratio": 0.9994269340974212,
-      "broken_links": 1,
+      "cite_valid_ratio": 1.0,
+      "broken_links": 0,
       "findings_by_level": {
         "P0": 0,
-        "P1": 4,
-        "P2": 1
+        "P1": 0,
+        "P2": 13
       }
     },
     "after": {
@@ -176,31 +204,19 @@
       "missing_items": 0,
       "contradictions": 0,
       "gaps": 0,
-      "source_coverage": 0.6310541310541311,
+      "source_coverage": 0.37224938875305624,
+      "semantic_completion": 0.37224938875305624,
       "stale_reports": 0,
-      "dup_ratio": 0.0,
-      "fact_dup_ratio": 0.008097068716962998,
-      "empty_module_ratio": 0.0,
+      "dup_ratio": 0.0050238023583486086,
       "attribution_errors": 0,
-      "cite_valid_ratio": 0.9994269340974212,
-      "broken_links": 1,
+      "cite_valid_ratio": 1.0,
+      "broken_links": 0,
       "findings_by_level": {
         "P0": 0,
         "P1": 0,
-        "P2": 1
+        "P2": 13
       }
     },
-    "open_after": [
-      {
-        "code": "C-09",
-        "level": "P2",
-        "topic": "00-decision-hub",
-        "path": "00-decision-hub/data/decision_onepager.md",
-        "location": "交叉引用",
-        "detail": "引用目标不存在：./decision_log.md",
-        "spec": "S-08",
-        "status": "open"
-      }
-    ]
+    "open_after": []
   }
 }
