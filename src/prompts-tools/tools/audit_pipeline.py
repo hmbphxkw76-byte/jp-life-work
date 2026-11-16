@@ -26,6 +26,7 @@
     python audit_pipeline.py --verify               # 校验台账哈希链 + 指纹绑定
     python audit_pipeline.py --sync                 # 对指纹失配的已审计报告写 revoke（→ stale）
     python audit_pipeline.py --rebind               # 内容未变、仅 HTML 渲染漂移的失效报告重新绑定（→ audited）
+    python audit_pipeline.py --sampling-fail <清单>  # 抽检命中 P0/P1 的已审计报告置 stale（G→F 反馈链路）
     python audit_pipeline.py --gate                 # 合并门禁：完整性 + 变更报告审计状态（--strict 全库）
 """
 from __future__ import annotations
@@ -71,6 +72,7 @@ TRANSITIONS = {
     ("pending_final", "stage_pass"): "audited",
     ("pending_final", "stage_fail"): "rejected",
     ("audited", "revoke"): "stale",
+    ("audited", "sampling_fail"): "stale",
     ("stale", "rebind"): "audited",
 }
 
@@ -581,6 +583,30 @@ def cmd_sync() -> int:
     return 0
 
 
+def mark_sampling_failures(reports: list[str]) -> int:
+    """抽检命中 P0/P1：把对应已审计报告置 stale（G→F 反馈链路，规范七）。
+
+    仅处理当前状态为 audited 的报告；其余状态（含已 stale）跳过，避免重复失效。
+    事件类型 `sampling_fail`（role=system）经 TRANSITIONS 置 stale，
+    之后由 `audit_badge --sync` 撤销标识，报告须重走 submit → 初审 → 复核 → 终审。
+    """
+    ledger = load_ledger()
+    state = rebuild_status(ledger)
+    n = 0
+    for rep in reports:
+        if state.get(rep, {}).get("state") != "audited":
+            continue
+        cur_md, cur_html = _current_hashes(rep)
+        _append({"ts": _now(), "event": "sampling_fail", "report": rep,
+                 "actor": "system", "role": "system", "result": "fail",
+                 "note": "抽检命中 P0/P1，审计失效（stale），须重新走 submit → 初审 → 复核 → 终审",
+                 "content_hash": cur_md, "html_hash": cur_html})
+        n += 1
+    write_status(rebuild_status(load_ledger()))
+    build_registry()
+    return n
+
+
 def _changed_report_paths(base: str, changed_file: str | None) -> list[str]:
     """汇总本次变更的报告 md 相对路径（去重、排序）。
 
@@ -712,6 +738,8 @@ def main() -> int:
                     help="内容未变、仅 HTML 渲染漂移的失效报告重新绑定（stale → audited）")
     ap.add_argument("--backfill-l5", action="store_true",
                     help="存量报告 L5 补核专项：为已审计但缺证据的报告追加 evidence（新格式）")
+    ap.add_argument("--sampling-fail", metavar="清单",
+                    help="抽检不合格报告清单（每行一个路径）；命中 P0/P1 的已审计报告置 stale")
     ap.add_argument("--gate", action="store_true",
                     help="合并门禁：完整性 + 受检报告审计状态（缺省仅本次变更）")
     ap.add_argument("--changed", help="变更文件清单（每行一个路径）；缺省用 git diff base...HEAD")
@@ -744,6 +772,14 @@ def main() -> int:
         if not args.report and not args.all:
             ap.error("--backfill-l5 需要 --report <路径> 或 --all")
         return cmd_backfill_l5(args.report, args.all, args.evidence, args.actor or "")
+    if args.sampling_fail:
+        p = Path(args.sampling_fail)
+        if not p.is_file():
+            raise SystemExit(f"[ERROR] 清单不存在：{args.sampling_fail}")
+        reps = [ln.strip() for ln in p.read_text(encoding="utf-8").splitlines() if ln.strip()]
+        n = mark_sampling_failures(reps)
+        print(f"抽检不合格处置：{n} 份报告已置 stale（须重走审计流程）")
+        return 0
     if args.gate:
         return cmd_gate(args.changed, args.base, args.strict)
     ap.print_help()

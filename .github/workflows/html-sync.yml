@@ -55,9 +55,19 @@ jobs:
       - name: 标识同步（audit_badge.py --sync）
         run: python src/prompts-tools/tools/audit_badge.py --sync
 
-      - name: 提交 HTML 与汇总页更新
+      - name: 记录自动化状态
+        if: always()
         run: |
-          git add -A -- ':(glob)**/reports/*.html' index.html search-index.json src/report-audits/audit/
+          RESULT="${{ job.status == 'success' && 'success' || 'failure' }}"
+          python src/prompts-tools/tools/automation_status.py record \
+            --phase html-sync --result "$RESULT" \
+            --run-url "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+
+      - name: 提交 HTML 与汇总页更新
+        if: always()
+        run: |
+          git add -A -- ':(glob)**/reports/*.html' index.html search-index.json \
+            src/report-audits/audit/ automation-status.json
           if git diff --cached --quiet; then
             echo "HTML 与汇总页均一致，无变化，跳过提交"
             exit 0

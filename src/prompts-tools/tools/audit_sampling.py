@@ -8,8 +8,8 @@
   抽检合格率 ≥ 95%、P0/P1 = 0。
 
 用法：
-    python audit_sampling.py --apply [--period YYYY-MM]   # 执行抽检并写报告
-    python audit_sampling.py --report [--period YYYY-MM]  # 输出到 stdout
+    python audit_sampling.py --apply [--period YYYY-MM]   # 执行抽检并写报告（命中 P0/P1 自动置 stale）
+    python audit_sampling.py --report [--period YYYY-MM]  # 输出到 stdout（只读，不处置）
 
 退出码：0 = 达到门槛；1 = 未达门槛（P0/P1 或合格率不足）；2 = 仅 P2。
 """
@@ -204,6 +204,26 @@ def write_report(payload: dict) -> list[Path]:
     return [p, pj]
 
 
+def mark_sampling_failures(payload: dict) -> list[str]:
+    """抽检命中 P0/P1：把对应已审计报告置 stale（G→F 反馈链路，规范七）。
+
+    复用 audit_pipeline 的状态机（事件 sampling_fail），不新写判定；返回被处置的
+    报告路径列表。仅由 --apply 调用，--report 为只读预演不处置。
+    """
+    failed = sorted({r["report"] for r in payload["results"]
+                     if r["severity"]["P0"] or r["severity"]["P1"]})
+    if not failed:
+        return []
+    try:
+        from audit_pipeline import mark_sampling_failures as _mark
+    except ImportError:  # noqa: BLE001
+        print("[W] 无法导入 audit_pipeline，跳过抽检失效处置")
+        return []
+    n = _mark(failed)
+    print(f"抽检不合格处置：{n} 份报告已置 stale（须重走 submit → 初审 → 复核 → 终审）")
+    return failed
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description="报告合规抽检")
     ap.add_argument("--apply", action="store_true", help="执行抽检并写报告")
@@ -219,6 +239,8 @@ def main() -> int:
     if args.report:
         print(json.dumps(payload, ensure_ascii=False, indent=2))
     else:
+        # G→F 反馈链路：命中 P0/P1 的已审计报告自动置 stale，标识由工作流 badge --sync 撤销。
+        mark_sampling_failures(payload)
         paths = write_report(payload)
         print(f"抽检完成：{payload['sample_size']}/{payload['total_reports']} 份，"
               f"合格率 {payload['rate']:.0%}；P0 {payload['p0']} / P1 {payload['p1']} / P2 {payload['p2']}")

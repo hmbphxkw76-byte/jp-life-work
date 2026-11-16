@@ -8,7 +8,9 @@
 #   5. 重建汇总页（build_hub.py → index.html）
 #   6. 决策支持件套刷新（personal_finance_model.py / pending_verification.py / fact_card_check.py --write）
 #   7. 审计失效同步（audit_pipeline.py --sync：指纹失配 → stale）+ 标识同步（audit_badge.py --sync）
-#   8. 跑契约测试（含流程复用一致性）确认无回归后，提交并推送变更（无变更则跳过）
+#   8. 跑契约测试（含流程复用一致性）确认无回归
+#   9. 记录自动化状态（automation_status.py record）
+#  10. 提交并推送变更（无变更则跳过）
 #
 # 原 scheduled-update.yml（周期更新调度）已于 37c7a90 删除，本工作流为重建版，
 # 只负责「维护生成物 + 结构」，不产出报告研究内容。
@@ -92,6 +94,14 @@ jobs:
 
       - name: 契约测试（确认维护无回归）
         run: python -m unittest discover -s src/tests
+
+      - name: 记录自动化状态
+        if: always()
+        run: |
+          RESULT="${{ job.status == 'success' && 'success' || 'failure' }}"
+          python src/prompts-tools/tools/automation_status.py record \
+            --phase maintenance --result "$RESULT" \
+            --run-url "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
 
       - name: 提交维护产物
         run: |

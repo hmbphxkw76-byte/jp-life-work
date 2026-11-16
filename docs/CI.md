@@ -39,9 +39,14 @@
 | 结构补全检查 | `ensure_region_topics.py --check` | 阻断 |
 | 汇总页一致性 | `build_hub.py --check` | 阻断 |
 | 全局索引一致性 | `build_index.py --check` | 阻断 |
-| 词库校验 | `vocab_tool.py topic-check` / `verify` + `sync_vocab.py check` | 阻断 |
 | 报告内容 lint | `lint_reports.py --new-only` | 阻断（新报告；退出码 1） |
 | 模板合规校验 | `compliance_check.py --new-only` | 阻断（新报告；退出码 1） |
+| 阶段闸检查 | `stage_gate_check.py`（采集 / 筛选 / 分类） | 阻断（P0/P1） |
+| 信息质量全量检查 | `info_quality_check.py --check` | 阻断（P0/P1） |
+| 事实卡片校验 | `fact_card_check.py` | 阻断（P0/P1） |
+| 待核实闭环检查 | `pending_verification.py --check` | 阻断（未登记 / 逾期） |
+| 个人财务模型一致性 | `personal_finance_model.py --check` | 阻断（缺失 / 过期） |
+| 词库校验 | `vocab_tool.py topic-check` / `verify` + `sync_vocab.py check` | 阻断 |
 
 > 两个关卡对期间 >= 2026-11 的**新报告**阻断；历史报告由 `--new-only` 跳过，
 > 遗留项列入 `src/report-audits/audit/lint-whitelist.json` 豁免（逾期恢复阻断）。
@@ -52,7 +57,11 @@
 - **步骤**：
   1. `md2html.py` — 重新生成同名自包含 HTML（含构建期跨月对比高亮）
   2. `build_hub.py` — 重建 `index.html` 与 `search-index.json`
-  3. 提交并推送（无变更则跳过）
+  3. `audit_pipeline.py --sync` — 指纹失配 → `stale`
+  4. `audit_pipeline.py --rebind` — 渲染漂移重绑
+  5. `audit_badge.py --sync` — 标识同步
+  6. `automation_status.py record` — 记录执行状态
+  7. 提交并推送（无变更则跳过）
 
 ### 3. `scheduled-maintenance.yml` — 每月定时维护
 
@@ -67,7 +76,13 @@
 | 索引 | `build_index.py` | 生成 `INDEX.md`（含活跃度心跳时间戳）；PR 阶段由 `build_index.py --check` 校验一致 |
 | 报告 HTML | `md2html.py` | 同步报告页（含跨月对比高亮） |
 | 汇总页 | `build_hub.py` | 重建 `index.html` |
+| 财务模型 | `personal_finance_model.py` | 刷新个人财务模型 |
+| 待核实闭环 | `pending_verification.py` | 刷新待核实闭环 |
+| 事实卡片 | `fact_card_check.py --write` | 刷新事实卡片校验报告 |
+| 审计失效 | `audit_pipeline.py --sync` | 指纹失配 → `stale` |
+| 标识同步 | `audit_badge.py --sync` | 有效注入 / 失效撤销 |
 | 回归 | `unittest` | 确认维护未破坏契约 |
+| 自动化状态 | `automation_status.py record` | 记录维护执行状态 |
 | 提交 | `git commit` + `git push` | 有变更才提交 |
 
 - **退出码约定**：`0` 通过；`1` 错误（阻断）；`2` 警告（放行）。
@@ -78,6 +93,7 @@
 - **步骤**：
   1. `update_planner.py --period <YYYY-MM>` 生成当月任务清单
   2. 用 `gh issue create` 开「【月度报告产出】YYYY-MM 任务清单」Issue
+  3. `automation_status.py record` — 记录执行状态并提交状态文件
 - **去重**：先 `gh issue list --state open --search "in:title 【月度报告产出】<period>"`；
   命中则 `gh issue edit` 更新正文并退出，否则新建。
 - **只提醒、不写内容**：Issue 仅列待办，报告仍需人工/Agent 产出。
@@ -92,7 +108,9 @@
   1. `info_quality_check.py --apply` — 全量评估 → 混乱识别分类 → 自动修复 → 复评验证（退出码 0/1/2）
   2. `md2html.py` — 同步被修复报告的 HTML
   3. `unittest` — 含文档↔程序一致性校验
-  4. 提交三清单（无变更则跳过）；退出码 1 时 `::error::` 告警
+  4. 存在 P0/P1 遗留时 `::error::` 告警（退出码 1）
+  5. `automation_status.py record` — 记录执行状态
+  6. 提交三清单（无变更则跳过）
 - **产物**：`src/report-audits/info-quality/`（评估台账 / 修复台账 / 验证报告 / 累计修复历史 / JSON）
 
 ### 6. `audit-gate.yml` — 审计门禁（阻断式）
@@ -114,9 +132,13 @@
 ### 7. `audit-sampling.yml` — 月度分层抽检
 
 - **触发**：`cron: "25 0 1 * *"`（每月 1 日 00:25 UTC = 09:25 JST）、手动
-- **步骤**：`audit_sampling.py --apply`（分层抽样：每主题至少 1 份、总数 ≥ 20%，逐期轮换）→ 提交抽检报告
+- **步骤**：
+  1. `audit_sampling.py --apply`（分层抽样：每主题至少 1 份、总数 ≥ 20%，逐期轮换；命中 P0/P1 自动置 `stale`）
+  2. `audit_badge.py --sync`（撤销不合格报告的「已审计」标识）
+  3. `automation_status.py record`（记录执行状态）
+  4. 提交抽检报告与审计状态
 - **门槛**：结构合规率 = 100%、要素完整率 ≥ 95%、状态一致率 = 100%、抽检合格率 ≥ 95%、P0/P1 = 0
-- **不合格**：命中 P0/P1 → `::error::` 告警，报告进入重新审计流程
+- **不合格**：命中 P0/P1 → `::error::` 告警 + 自动置 `stale`（`sampling_fail`）+ 撤销标识，报告重走 `submit → 初审 → 复核 → 终审`
 
 ## 三、报告生命周期
 
@@ -158,7 +180,7 @@ reports/YYYY-MM-<slug>.md  ──md2html.py──►  reports/YYYY-MM-<slug>.htm
 - **辅助开关**：报告页工具条「隐藏更新标记」对照阅读、「展开全部删除」。
 - **呈现**：报告页新标签页独立打开，页脚提供「← 返回主题 / 返回首页」。
 
-## 六、测试体系（`src/tests/`，222 项）
+## 六、测试体系（`src/tests/`，226 项）
 
 | 场景 | 测试类 | 覆盖 |
 |---|---|---|
@@ -166,9 +188,9 @@ reports/YYYY-MM-<slug>.md  ──md2html.py──►  reports/YYYY-MM-<slug>.htm
 | 全量历史数据校验 | `TestHistoricalMigration` | 迁移清单完整性 + git 历史逐份复核内容零丢失 |
 | 跨月份对比准确性 | `TestDiffAccuracy` | 相同 / 新增 / 修改 / 删除 / 相似度阈值 / 首期 / 报告页 diff 高亮 |
 | 并行协作三层隔离 | `test_workflow_guard.py`（33 项） | 任务分支 / worktree、检出锁（占用 / 释放 / 强取 / 失效）、串行合并（happy / 冲突保留 / 校验阻断）、sync |
-| 工具契约 | `test_tools.py`（189 项） | 命名解析（新 + 历史）、周期与任务推导、归档策略、lint / 合规、`build_hub` 归一化比对、活跃度天数、全主题契约、流程复用与三体系一致性 |
+| 工具契约 | `test_tools.py`（193 项） | 命名解析（新 + 历史）、周期与任务推导、归档策略、lint / 合规、`build_hub` 归一化比对、活跃度天数、全主题契约、流程复用与三体系一致性 |
 
-> 合计 222 项（`python -m unittest discover -s src/tests`，当前全绿）。
+> 合计 226 项（`python -m unittest discover -s src/tests`，当前全绿）。
 
 ## 七、手动命令速查
 
@@ -292,3 +314,4 @@ CI 之外的**本地多会话 / 多任务并行**由三层隔离机制约束，�
 |---|---|---|---|
 | v1.0 | 2026-11-14 | 初始版本 | 建立 CI 与自动化全景：7 条工作流、报告生命周期、命名分类、跨月对比、测试体系、手动命令、复用一致性、并行协作 |
 | v1.2 | 2026-11-16 | 精简与修正 | 测试数修正为 222（189 + 33）；第十一节精简为指针 + 程序化边界，去除与总规范重复的全链路图与阶段闸表；手动命令补审计入口 |
+| v1.3 | 2026-11-16 | 对齐校验整改 | 步骤清单与实际工作流逐一对齐（validate 14 步 / html-sync 7 步 / maintenance 14 步 / info-quality 6 步 / sampling 4 步 / report-tasks 3 步）；补阶段闸、信息质量、事实卡片、待核实、财务模型、自动化状态条目；sampling 不合格处置改为自动置 `stale` |
