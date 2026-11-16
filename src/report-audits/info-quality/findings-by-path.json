@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "key": "4830583d4c3ab129d6e3462f0e973980251e3f13b1b1c7b81a1d82a8baeb51d8",
+  "key": "9415238060972ad665877dfa434d1ad07d0a17fe3b19f13ea50cc59dd97049cb",
   "findings": {
     "01-ssw-driver/reports/2026-11-ssw-driver.md": [
       {
@@ -124,7 +124,27 @@
         "severity": "P2",
         "report": "18-family-parenting/reports/2026-11-family-parenting.md",
         "location": "跨文档重复",
-        "detail": "约 204 字的段落与 20-overseas-china/reports/2026-11-overseas-china.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "detail": "约 173 字的段落与 19-safety-disaster/reports/2026-11-safety-disaster.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "18-family-parenting/reports/2026-11-family-parenting.md",
+        "location": "跨文档重复",
+        "detail": "约 158 字的段落与 20-overseas-china/reports/2026-11-overseas-china.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      }
+    ],
+    "19-safety-disaster/reports/2026-11-safety-disaster.md": [
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "19-safety-disaster/reports/2026-11-safety-disaster.md",
+        "location": "跨文档重复",
+        "detail": "约 158 字的段落与 20-overseas-china/reports/2026-11-overseas-china.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
         "spec": "S-02"
       }
     ]

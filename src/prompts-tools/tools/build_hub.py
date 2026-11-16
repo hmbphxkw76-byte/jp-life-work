@@ -7,6 +7,8 @@
 - 报告统一按自然月份聚合，命名 `YYYY-MM-<主题slug>`，不再区分基线 / 初析 /
   季度等类型；季度报告按季度末月归档（2026-Q4 -> 2026-12）；
 - 主题详情页默认展示最近 12 个月报告，按时间倒序（最新在顶端），可展开更早；
+- 最新报告提示：每个主题的最新一期报告在主题卡片与详情页列表中高亮「新」标识
+  （构建期确定性写入，取该主题 period 最大者；不改变近 12 个月窗口规则）；
 - 报告链接直达各主题 `reports/*.html` 独立报告页（新标签页打开），报告页内含
   构建期预渲染的跨月对比高亮（见 md2html.py / report_diff.py）；
 - 搜索层：构建期生成 `search-index.json`（报告标题 / 关键词 / 命中问题，关键词
@@ -159,9 +161,12 @@ def collect_topic(b, registry: dict[str, dict], type_labels: dict[str, str]) -> 
             title = report_title(f.read_text(encoding="utf-8", errors="replace")) or f.stem
             reports.append({
                 "title": title, "period": period, "date": date,
-                "path": f"{b.rel}/reports/{f.name}",
+                "path": f"{b.rel}/reports/{f.name}", "is_latest": False,
             })
     reports.sort(key=lambda r: (r["date"], r["period"], r["title"]), reverse=True)
+    if reports:
+        # 最新报告提示：仅标记该主题 period 最大者（构建期确定性，不依赖当前日期）
+        reports[0]["is_latest"] = True
 
     return {
         "slug": b.rel, "rs": rs, "num": num,
@@ -424,6 +429,10 @@ code{background:var(--gray-l);padding:1px 5px;border-radius:4px;font-size:12px}
 .btn:hover{text-decoration:none;border-color:var(--blue)}
 .btn.primary{background:var(--navy);border-color:var(--navy);color:#fff}
 .btn.primary:hover{background:var(--navy2);border-color:var(--navy2)}
+/* ── 最新报告提示（构建期确定性高亮） ── */
+.rnew{display:inline-block;font-size:10.5px;line-height:1.2;border-radius:3px;
+  padding:1px 5px;background:var(--green);color:#fff;font-weight:700;
+  vertical-align:1px;margin:0 2px;white-space:nowrap}
 .tcard.is-empty{border-style:dashed;background:#fbfcfe}
 .tcard.is-empty h4{color:var(--ink2)}
 .tcard.is-empty .desc,.tcard.is-empty .reports{display:none}
@@ -733,16 +742,16 @@ def render_topic_card(t: dict) -> str:
     )
     latest_btn = (
         f'<a class="btn" href="{esc(reports[0]["path"])}" target="_blank" rel="noopener">'
-        f'最新报告 ↗</a>'
+        f'最新报告 <span class="rnew">新</span> ↗</a>'
         if reports else ""
     )
     empty = " is-empty" if not reports else ""
     count = f'{len(reports)} 份报告' if reports else "暂无报告"
-    latest_note = f' · 最新 {latest}' if latest else ""
+    latest_note = f' · <span class="rnew">新</span> {esc(latest)}' if latest else ""
     return (
         f'<article class="tcard{empty}" data-type="{esc(t["type"])}" data-search="{search}">\n'
         f'  <div class="row1"><span class="badge">{_badge_text(t)}</span>'
-        f'<span class="count">{count}{esc(latest_note)}</span></div>\n'
+        f'<span class="count">{count}{latest_note}</span></div>\n'
         f'  <h4>{esc(t["name"])}</h4>\n'
         f'  <p class="desc">{esc(t["desc"])}</p>\n'
         f'  <div class="reports">{links}</div>\n'
@@ -758,7 +767,9 @@ def render_topic_detail(t: dict) -> str:
     rows = "".join(
         f'<div class="report-row" data-period="{esc(r["period"])}">\n'
         f'  <span class="rdate">{esc(r["period"])}</span>\n'
-        f'  <span class="rbadge">月度</span>\n'
+        + (f'  <span class="rnew" title="本主题最新一期报告">新</span>\n'
+           if r.get("is_latest") else "")
+        + f'  <span class="rbadge">月度</span>\n'
         f'  <a class="rt" href="{esc(r["path"])}" target="_blank" rel="noopener">'
         f'{esc(r["title"])}</a>\n'
         f'  <span class="rperiod">{esc(r["period"])}</span>\n'
@@ -766,7 +777,8 @@ def render_topic_detail(t: dict) -> str:
         for r in reports
     ) or '<p class="empty-note">该主题暂无已产出报告。</p>'
     crumb = f'主题 {t["num"]} · {t["type_label"]}' if t["type_label"] else f'主题 {t["num"]}'
-    latest = f' · 最新 {reports[0]["period"]}' if reports else ''
+    latest = (f' · 最新 <span class="rnew">新</span> {reports[0]["period"]}'
+              if reports else '')
     return (
         f'<section class="topic-detail" id="topic-{esc(t["slug"])}" data-topic="{esc(t["slug"])}">\n'
         f'  <div class="topic-head">\n'
