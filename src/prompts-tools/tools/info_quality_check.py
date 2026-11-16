@@ -31,7 +31,7 @@
 - C-10 登记册口径一致性按 Schema 分支：新表（含「口径」列）直接比较「口径」列；
   旧表（「优先数据源 + 最新值内嵌口径」）沿用原比较逻辑。仅解析活值表，历史
   版本快照为冻结存档，不参与判定。
-- C-13 报告 ↔ 登记册数值一致性（首期覆盖 01-ssw-driver 等核心主题，P1）。
+- C-13 报告 ↔ 登记册数值一致性（全量覆盖全部业务主题，P1）。
 - C-14 ④/⑤ 级来源必须完成核验标注（分级字段化，P1）。
 """
 from __future__ import annotations
@@ -64,8 +64,9 @@ THRESH_EMPTY_MODULE = 0.20           # 空模块占比门槛（超过提示）
 THRESH_FACT_DUP = 0.10               # 跨报告事实重复率门槛
 FACT_MIN_CHARS = 12                  # 事实片段判定最小长度
 
-# 报告 ↔ 登记册数值一致性首期覆盖主题（后续按主题扩展）
-VALUE_SYNC_TOPICS = ("01-ssw-driver",)
+# 报告 ↔ 登记册数值一致性覆盖范围：None = 全量业务主题（2026-11-16 起）；
+# 元组 = 限定主题（分期推进期使用）。00 决策层无登记册，自动跳过。
+VALUE_SYNC_TOPICS = None
 
 # ④/⑤ 级来源允许的核验标注（分级字段化）
 GRADE_ANNOTATION_MARKERS = (
@@ -651,12 +652,14 @@ def check_grade_annotations(u: dict, rel: str, text: str, findings: list[Finding
 
 
 def check_value_sync(u: dict, rp: Path, text: str, findings: list[Finding]) -> None:
-    """C-13：报告 ↔ 登记册数值一致性（首期覆盖 VALUE_SYNC_TOPICS，P1）。
+    """C-13：报告 ↔ 登记册数值一致性（全量覆盖 VALUE_SYNC_TOPICS，P1）。
 
     以登记册活值表「最新值」列为基准，抽取数值型数字；报告「数据变更摘要」对应
     编号行若缺失该数值则判不一致。仅比数值存在性，不做单位 / 口径换算。
     """
-    if u["topic"] not in VALUE_SYNC_TOPICS or u.get("registry") is None:
+    if u.get("registry") is None:
+        return
+    if VALUE_SYNC_TOPICS is not None and u["topic"] not in VALUE_SYNC_TOPICS:
         return
     lt = _live_table(_read(u["registry"]))
     if not lt:

@@ -1932,6 +1932,43 @@ class TestNewAuditRules(unittest.TestCase):
             finally:
                 info_quality_check.ROOT = orig
 
+    def test_c13_covers_all_topics(self):
+        """C-13 全量覆盖：VALUE_SYNC_TOPICS 为 None（全部业务主题），且 00 无登记册自动跳过。"""
+        self.assertIsNone(info_quality_check.VALUE_SYNC_TOPICS)
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            topic = "09-politics-law"
+            (root / topic / "data").mkdir(parents=True)
+            (root / topic / "reports").mkdir(parents=True)
+            reg = root / topic / "data" / "politics_law_indicator_registry.md"
+            reg.write_text(
+                "| # | 指标 | 优先数据源 | 最新值（来源/年份） | 基准版本 |\n"
+                "|---|---|---|---|---|\n"
+                "| 1 | 测试指标 | 法务省 | 1,234 件（2026-09） | v2026.11.12_5 |\n",
+                encoding="utf-8")
+            rep = root / topic / "reports" / "2026-11-politics-law.md"
+            rep.write_text(
+                "## 数据变更摘要\n\n"
+                "| # | 指标 | 本版活值（来源 · 时点） | 变更状态 |\n|---|---|---|---|\n"
+                "| 1 | 测试指标 | 999 件 | 已更新 |\n", encoding="utf-8")
+            orig = info_quality_check.ROOT
+            info_quality_check.ROOT = root
+            try:
+                findings = []
+                info_quality_check.check_value_sync(
+                    {"topic": topic, "registry": reg},
+                    rep, rep.read_text(encoding="utf-8"), findings)
+                self.assertTrue(any(f.code == "C-13" and "1234" in f.detail
+                                    for f in findings))
+                # 00 决策层无登记册：即使全量覆盖也不判定
+                findings0 = []
+                info_quality_check.check_value_sync(
+                    {"topic": "00-decision-hub", "registry": None},
+                    rep, rep.read_text(encoding="utf-8"), findings0)
+                self.assertFalse(any(f.code == "C-13" for f in findings0))
+            finally:
+                info_quality_check.ROOT = orig
+
     def test_c14_grade_annotation(self):
         from info_quality_check import check_grade_annotations
         text = ("### ④ 媒体 / 行业媒体\n\n"
