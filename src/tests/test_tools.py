@@ -1879,6 +1879,42 @@ class TestProcessReuse(unittest.TestCase):
         self.assertGreater(total, 0, "应至少校验到一份提示词")
 
 
+class TestReworkRounds(unittest.TestCase):
+    """修复返工上限（《信息质量评估提示词体系》模块六流程纪律 / 模块九参数表）。"""
+
+    def test_constant_matches_spec(self):
+        self.assertEqual(info_quality_check.MAX_REWORK_ROUNDS, 2)
+
+    def test_rework_loop_bounded(self):
+        """run(apply) 的「修复 → 复评 → 返工」循环以 MAX_REWORK_ROUNDS 为上界。"""
+        calls = {"repair": 0}
+        persistent = info_quality_check.Finding(
+            "C-01", "P0", "01-demo", "reports/2026-11-demo.md", "位置", "持续缺陷")
+
+        def fake_evaluate(units):
+            return [persistent], info_quality_check.Metrics(
+                findings_by_level={"P0": 1, "P1": 0, "P2": 0})
+
+        def fake_repair(findings, units):
+            calls["repair"] += 1
+            # 返回非空修复记录（本轮有实际修复），但不消除持续缺陷 → 迫使循环走到上界
+            return [info_quality_check.Repair(
+                "C-06", "01-demo", "prompts/business-config.md",
+                "S-05", "占位", "", "", "skipped")]
+
+        with unittest.mock.patch.object(info_quality_check, "scan_topics",
+                                       return_value=[{"topic": "01-demo"}]), \
+             unittest.mock.patch.object(info_quality_check, "evaluate",
+                                       side_effect=fake_evaluate), \
+             unittest.mock.patch.object(info_quality_check, "repair",
+                                       side_effect=fake_repair), \
+             unittest.mock.patch.object(info_quality_check, "write_reports", return_value=[]):
+            code = info_quality_check.run(apply=True, write=True)
+
+        self.assertEqual(calls["repair"], info_quality_check.MAX_REWORK_ROUNDS)
+        self.assertEqual(code, 1)   # 持续 P0 → 告警（转人工裁决）
+
+
 class TestNewAuditRules(unittest.TestCase):
     """2026-11-15 新标准：C-10 Schema 分支 / C-13 数值一致性 / C-14 分级标注 /
     跨文档相似度 / L5 门禁 / 分类十三类 / 缓存版本统一 / 抽检 L5 pending。"""
@@ -2439,6 +2475,19 @@ class TestPipelineFlowSpec(unittest.TestCase):
                      "info-quality.yml", "audit-sampling.yml",
                      "scheduled-report-tasks.yml"):
             self.assertIn("automation_status.py record", self._wf(name), name)
+
+    def test_audit_gate_pr_targets_main(self):
+        """audit-gate.yml 的 PR 触发须限定 main 方向（与 validate.yml / CI.md 二.6 同口径）。"""
+        a = self._wf("audit-gate.yml")
+        pr = a.split("pull_request:", 1)[1].split("concurrency:", 1)[0]
+        self.assertIn("branches: [main]", pr)
+
+    def test_audit_spec_version_matches_standard_doc(self):
+        """登记册 / 已审计标识引用的标准版本须与《审计报告标准化管理体系》现行版本一致。"""
+        text = self._read("docs", "审计报告标准化管理体系.md")
+        m = re.search(r"> \*\*版本\*\*：(v[\d.]+)", text)
+        self.assertIsNotNone(m, "审计标准文档缺少版本行")
+        self.assertEqual(audit_registry.SPEC_VERSION, m.group(1))
 
     def test_supplement_deadline_declared(self):
         """补缺准入「期限」要素须在登记册与总规范中同时显式化（O1/N4 闭环）。"""

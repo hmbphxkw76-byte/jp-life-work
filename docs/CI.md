@@ -84,8 +84,11 @@
 | 回归 | `unittest` | 确认维护未破坏契约 |
 | 自动化状态 | `automation_status.py record` | 记录维护执行状态 |
 | 提交 | `git commit` + `git push` | 有变更才提交 |
+| 自动化状态失败补记 | `git add -A -- automation-status.json` → `commit` + `push`（`if: always()`） | job 失败时主提交跳过，本步骤仍把本轮状态入库，避免「记录了却因未提交而丢失」 |
 
 - **退出码约定**：`0` 通过；`1` 错误（阻断）；`2` 警告（放行）。
+- **活跃度预警**：`automation_status.py activity --threshold 45` 为**手动 / 按需入口**（见第七节），
+  不纳入自动门禁；自动侧只保证各工作流 `record` 入库，供人工判断节拍是否断档。
 
 ### 4. `scheduled-report-tasks.yml` — 月度产出提醒
 
@@ -115,7 +118,7 @@
 
 ### 6. `audit-gate.yml` — 审计门禁（阻断式）
 
-- **触发**：`push` 到 main、`pull_request`
+- **触发**：`push` 到 main、`pull_request`（main 方向，与 `validate.yml` 同口径）
 - **步骤与阻断条件**：
 
 | 步骤 | 命令 | 失败后果 |
@@ -180,7 +183,7 @@ reports/YYYY-MM-<slug>.md  ──md2html.py──►  reports/YYYY-MM-<slug>.htm
 - **辅助开关**：报告页工具条「隐藏更新标记」对照阅读、「展开全部删除」。
 - **呈现**：报告页新标签页独立打开，页脚提供「← 返回主题 / 返回首页」。
 
-## 六、测试体系（`src/tests/`，251 项）
+## 六、测试体系（`src/tests/`，255 项）
 
 | 场景 | 测试类 | 覆盖 |
 |---|---|---|
@@ -190,9 +193,9 @@ reports/YYYY-MM-<slug>.md  ──md2html.py──►  reports/YYYY-MM-<slug>.htm
 | 并行协作三层隔离 | `test_workflow_guard.py`（33 项） | 任务分支 / worktree、检出锁（占用 / 释放 / 强取 / 失效）、串行合并（happy / 冲突保留 / 校验阻断）、sync |
 | 推送双通道 failover | `test_git_push.py`（6 项） | ssh 主通道成功、失败切 https、两条都失败时恰好各试一次（不重试） |
 | 工作区标准化清理 | `test_cleanup.py`（18 项） | 残留识别与清理、`--check` / `--dry-run` 契约、日志作用域限定、已跟踪文件 / 目录保护、CI 接线契约（每工作流前置 + 收尾 `always`） |
-| 工具契约 | `test_tools.py`（194 项） | 命名解析（新 + 历史）、周期与任务推导、归档策略、lint / 合规、`build_hub` 归一化比对、活跃度天数、全主题契约、流程复用与三体系一致性 |
+| 工具契约 | `test_tools.py`（198 项） | 命名解析（新 + 历史）、周期与任务推导、归档策略、lint / 合规、`build_hub` 归一化比对、活跃度天数、全主题契约、流程复用与三体系一致性 |
 
-> 合计 251 项（`python -m unittest discover -s src/tests`，当前全绿）。
+> 合计 255 项（`python -m unittest discover -s src/tests`，当前全绿）。
 
 ## 七、手动命令速查
 
@@ -335,7 +338,8 @@ python tools/cleanup_workspace.py --dry-run  # 预览将删除项
 
 ### 12.2 流水线接入（复合动作 `.github/actions/workspace-cleanup`）
 
-每条工作流的每个 job 固定两处调用，形成「阶段前置 → 阶段收尾」闭环：
+每条工作流的每个 job 固定两处调用，形成「阶段前置 → 阶段收尾」闭环
+（例外：`validate.yml` 的 `workspace-hygiene` 自检 job 本身就是清理链路验证，不接前置 / 收尾）：
 
 | 位置 | 调用 | 作用 |
 |---|---|---|
@@ -371,3 +375,4 @@ python tools/cleanup_workspace.py --dry-run  # 预览将删除项
 | v1.2 | 2026-11-16 | 精简与修正 | 测试数修正为 222（189 + 33）；第十一节精简为指针 + 程序化边界，去除与总规范重复的全链路图与阶段闸表；手动命令补审计入口 |
 | v1.3 | 2026-11-16 | 对齐校验整改 | 步骤清单与实际工作流逐一对齐（validate 14 步 / html-sync 7 步 / maintenance 14 步 / info-quality 6 步 / sampling 4 步 / report-tasks 3 步）；补阶段闸、信息质量、事实卡片、待核实、财务模型、自动化状态条目；sampling 不合格处置改为自动置 `stale` |
 | v1.4 | 2026-11-16 | 工作区卫生横切 | 新增 `tools/cleanup_workspace.py`（缓存 / 临时文件 / 日志清理，含 `--check` 门禁与已跟踪文件保护）与复合动作 `.github/actions/workspace-cleanup`；7 条工作流全部接入「阶段前置 + 阶段收尾（`if: always()`）」清理；`validate.yml` 新增 `workspace-hygiene` 自检 job（制造残留 → 清理 → `--check` 断言零残留）；运行日志改为不入库；测试数 227 → 251 |
+| v1.5 | 2026-11-16 | 第二轮对齐校验 | `audit-gate.yml` 的 `pull_request` 限定 `branches: [main]`（与 `validate.yml` 同口径）；十二.2 修正「每个 job」表述（`workspace-hygiene` 自检 job 例外）；二.3 补「自动化状态失败补记」步骤与活跃度预警口径；二.6 触发口径同步；测试数 251 → 255 |

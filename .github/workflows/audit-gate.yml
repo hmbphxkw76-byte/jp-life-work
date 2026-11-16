@@ -13,6 +13,8 @@ on:
   push:
     branches: [main]
   pull_request:
+    # 与 validate.yml 同口径：仅 main 方向 PR 触发审计门禁，避免非 main 目标分支误触发。
+    branches: [main]
 
 concurrency:
   group: audit-gate-${{ github.ref }}

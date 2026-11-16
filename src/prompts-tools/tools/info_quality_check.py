@@ -5,7 +5,8 @@
 - 阶段 1 四维度评估：完整性 / 逻辑一致性 / 信息准确性 / 内容关联性，全部量化；
 - 阶段 2 混乱识别分类：C-01~C-14（其中 C-11 / C-12 为语义类，不在程序化判定内；其余需语义判断，见报告说明）；
 - 阶段 3 自动修复：S-02 去重 / S-05 缺失补全（占位）/ S-08 引用修复；
-- 阶段 4 修复验证：修复后复评 + 回归校验；
+- 阶段 4 修复验证：修复后复评 + 回归校验；仍未达标的 P0/P1 回到阶段 3 返工，
+  最多 MAX_REWORK_ROUNDS 轮（提示词体系模块六「流程纪律」第 4 条）；
 - 阶段 5 报告交付：评估台账 / 修复台账 / 验证报告 + 机器可读 JSON。
 
 退出码约定（与仓库既有工具一致）：
@@ -63,6 +64,7 @@ SIMILARITY_DUP = 0.80                # 高相似判定阈值（跨文档，模�
 THRESH_EMPTY_MODULE = 0.20           # 空模块占比门槛（超过提示）
 THRESH_FACT_DUP = 0.10               # 跨报告事实重复率门槛
 FACT_MIN_CHARS = 12                  # 事实片段判定最小长度
+MAX_REWORK_ROUNDS = 2               # 修复最大返工轮次（提示词体系模块九：2 轮）
 
 # 报告 ↔ 登记册数值一致性覆盖范围：None = 全量业务主题（2026-11-16 起）；
 # 元组 = 限定主题（分期推进期使用）。00 决策层无登记册，自动跳过。
@@ -1247,6 +1249,32 @@ def write_reports(findings: list[Finding], repairs: list[Repair],
 # 主流程
 # ──────────────────────────────────────────────
 
+def _merge_findings(base: list[Finding], latest: list[Finding]) -> list[Finding]:
+    """把多轮返工的复评结果合并回首轮清单，保证评估台账 / 遗留项口径完整。
+
+    以首轮发现为骨架：仍存在的更新级别 / 详情 / 状态；已消失的按「已修复」记；
+    首轮之后新出现的追加。键 = (编号, 路径, 位置, 详情)。
+    """
+    def _key(f: Finding) -> tuple:
+        return (f.code, f.path, f.location, f.detail)
+
+    latest_by_key = {_key(f): f for f in latest}
+    out: list[Finding] = []
+    for f in base:
+        nf = latest_by_key.get(_key(f))
+        if nf is None:
+            if f.status == "open":
+                f.status = "fixed"
+        else:
+            f.level, f.detail, f.status = nf.level, nf.detail, nf.status
+        out.append(f)
+    seen = {_key(f) for f in out}
+    for f in latest:
+        if _key(f) not in seen:
+            out.append(f)
+    return out
+
+
 def run(apply: bool = False, write: bool = True) -> int:
     run_date = date.today().isoformat()
     units = scan_topics()
@@ -1258,14 +1286,25 @@ def run(apply: bool = False, write: bool = True) -> int:
     repairs: list[Repair] = []
     after_findings = findings
     after = before
+    rounds = 0
 
     if apply:
         import copy
         before_findings = copy.deepcopy(findings)
-        repairs = repair(findings, units)
-        # 阶段 4：修复后复评
-        units2 = scan_topics()
-        after_findings, after = evaluate(units2)
+        current = findings
+        # 阶段 3 + 阶段 4：修复 → 复评；仍有 P0/P1 且本轮有实际修复时返工，
+        # 最多 MAX_REWORK_ROUNDS 轮（仍不达标转人工裁决，由退出码 1 告警）。
+        while rounds < MAX_REWORK_ROUNDS:
+            rounds += 1
+            made = repair(current, units)
+            repairs.extend(made)
+            units = scan_topics()
+            current, after = evaluate(units)
+            open_p0p1 = [f for f in current
+                         if f.status == "open" and f.level in ("P0", "P1")]
+            if not made or not open_p0p1:
+                break
+        after_findings = _merge_findings(findings, current)
         ver = verify(before, before_findings, after_findings, after, repairs)
     else:
         ver = {"checks": {}, "passed": False, "before": asdict(before),
@@ -1282,10 +1321,11 @@ def run(apply: bool = False, write: bool = True) -> int:
     print(f"  交叉引用有效率 {after.cite_valid_ratio:.1%}（门槛 100%）")
     print(f"  问题：P0 {after.findings_by_level['P0']} / P1 {after.findings_by_level['P1']} / P2 {after.findings_by_level['P2']}")
     if apply:
-        print(f"  自动修复 {len(repairs)} 条；验证{'全部通过' if ver['passed'] else '存在未通过项'}")
+        print(f"  自动修复 {len(repairs)} 条（返工 {rounds} 轮，上限 {MAX_REWORK_ROUNDS} 轮）；"
+              f"验证{'全部通过' if ver['passed'] else '存在未通过项'}")
 
     if write:
-        paths = write_reports(findings, repairs, before, after, ver, run_date)
+        paths = write_reports(after_findings, repairs, before, after, ver, run_date)
         print("  报告已写入：" + ", ".join(_rel(p) for p in paths))
 
     open_p0 = sum(1 for f in after_findings if f.status == "open" and f.level == "P0")

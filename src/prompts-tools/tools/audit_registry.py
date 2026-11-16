@@ -34,7 +34,7 @@ from _common import (  # noqa: E402
 AUDIT_DIR = ROOT / "src" / "report-audits" / "audit"
 REGISTRY_JSON = AUDIT_DIR / "report-registry.json"
 REGISTRY_MD = AUDIT_DIR / "report-registry.md"
-SPEC_VERSION = "v1.0"
+SPEC_VERSION = "v1.4"   # 与 docs/审计报告标准化管理体系.md 现行版本一致（登记册表头 / 标识依据）
 
 
 # 已审计标识块（连同其前置空行一并剥离：注入 / 撤销标识不改变内容指纹）
