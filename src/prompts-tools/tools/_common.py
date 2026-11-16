@@ -4,6 +4,7 @@
 """
 from __future__ import annotations
 
+import os
 import re
 from dataclasses import dataclass
 from pathlib import Path
@@ -316,3 +317,38 @@ def report_title(html_text: str) -> str:
     if not m:
         return ""
     return re.sub(r"\s+", " ", m.group(1)).strip()
+
+
+# ──────────────────────────────────────────────
+# 原子写与路径安全（架构优化方向 B / C）
+# ──────────────────────────────────────────────
+
+def atomic_write(path, text: str, encoding: str = "utf-8") -> None:
+    """原子写入：临时文件 + ``os.replace``。
+
+    失败时清理临时文件、原文件保持不变（天然回滚），不产生半写状态。
+    ``newline=""`` 保留 ``text`` 中的换行风格（CRLF / LF 不转换）。
+    """
+    path = Path(path)
+    tmp = path.with_name(path.name + ".tmp")
+    try:
+        with open(tmp, "w", encoding=encoding, newline="") as fh:
+            fh.write(text)
+        os.replace(tmp, path)
+    except BaseException:
+        try:
+            tmp.unlink()
+        except OSError:
+            pass
+        raise
+
+
+def resolve_within(base, rel: str) -> Path:
+    """把 ``base`` 下的相对路径解析为绝对路径，并校验其位于 ``base`` 内。
+
+    越界抛出 :class:`ValueError`；调用方负责转换为友好错误。
+    """
+    base = Path(base).resolve()
+    target = (base / str(rel).replace("\\", "/")).resolve()
+    target.relative_to(base)
+    return target

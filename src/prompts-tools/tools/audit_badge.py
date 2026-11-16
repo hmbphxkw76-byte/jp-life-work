@@ -26,7 +26,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from _common import ROOT  # noqa: E402
+from _common import ROOT, atomic_write, resolve_within  # noqa: E402
 from audit_registry import (  # noqa: E402
     AUDIT_DIR,
     REGISTRY_JSON,
@@ -115,7 +115,7 @@ def _regenerate_html(md: Path) -> None:
     except ImportError:
         return
     html = md2html.convert(md)
-    md.with_suffix(".html").write_text(html, encoding="utf-8")
+    atomic_write(md.with_suffix(".html"), html)
 
 
 def _targets(all_: bool, rel: str | None) -> list[str]:
@@ -125,8 +125,7 @@ def _targets(all_: bool, rel: str | None) -> list[str]:
         raise SystemExit("[ERROR] 需要 --report <路径> 或 --all")
     rel = rel.replace("\\", "/")
     try:
-        resolved = (ROOT / rel).resolve()
-        resolved.relative_to(ROOT.resolve())
+        resolved = resolve_within(ROOT, rel)
     except (ValueError, OSError):
         raise SystemExit(f"[ERROR] 路径越出仓库根：{rel}")
     if not resolved.is_file():
@@ -150,7 +149,7 @@ def cmd_apply(all_: bool, rel: str | None) -> int:
         text = md.read_text(encoding="utf-8")
         text, _ = _strip_badge(text)
         text = _insert_after_disclaimer(text, badge_text(v["audit_id"], v.get("finalized_at", ""), fp))
-        md.write_text(text, encoding="utf-8")
+        atomic_write(md, text)
         _regenerate_html(md)
         n += 1
     print(f"已注入标识：{n} 份")
@@ -164,7 +163,7 @@ def cmd_revoke(all_: bool, rel: str | None) -> int:
         text = md.read_text(encoding="utf-8")
         new_text, removed = _strip_badge(text)
         if removed:
-            md.write_text(new_text, encoding="utf-8")
+            atomic_write(md, new_text)
             _regenerate_html(md)
             n += 1
     print(f"已撤销标识：{n} 份")
@@ -184,12 +183,12 @@ def cmd_sync() -> int:
         if valid and not has:
             fp = content_fingerprint(md).removeprefix("sha256:")
             text = _insert_after_disclaimer(text, badge_text(v["audit_id"], v.get("finalized_at", ""), fp))
-            md.write_text(text, encoding="utf-8")
+            atomic_write(md, text)
             _regenerate_html(md)
             applied += 1
         elif not valid and has:
             text, _ = _strip_badge(text)
-            md.write_text(text, encoding="utf-8")
+            atomic_write(md, text)
             _regenerate_html(md)
             revoked += 1
         elif valid and has:
@@ -200,7 +199,7 @@ def cmd_sync() -> int:
             if cur != expect:
                 text, _ = _strip_badge(text)
                 text = _insert_after_disclaimer(text, expect)
-                md.write_text(text, encoding="utf-8")
+                atomic_write(md, text)
                 _regenerate_html(md)
                 applied += 1
                 continue

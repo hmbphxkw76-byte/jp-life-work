@@ -26,6 +26,7 @@ python -m unittest discover -s src/tests -v   # 单元测试（255 项：tools 1
 | validate.py | 校验 | validate.yml「规范校验」 |
 | lint_reports.py | 校验 | validate.yml「报告内容 lint」（新报告阻断） |
 | compliance_check.py | 校验+引导+审计 | validate.yml「报告模板合规校验」（新报告阻断） |
+| stage_gate_check.py | 校验 | validate.yml「阶段闸检查」（采集 / 筛选 / 分类左移） |
 | classify_reports.py | 校验+修复 | scheduled-maintenance.yml「报告自动归位」 |
 | ensure_region_topics.py | 校验+修复 | validate.yml「结构补全」 |
 | md2html.py | 生成 | html-sync.yml「HTML 同步」 |
@@ -37,6 +38,7 @@ python -m unittest discover -s src/tests -v   # 单元测试（255 项：tools 1
 | update_planner.py | 编排 | scheduled-report-tasks.yml「生成月度任务清单」 |
 | automation_status.py | 编排 | 5 条工作流 `record` 入库 + 手动 `activity`（活跃度预警） |
 | info_quality_check.py | 校验+修复 | info-quality.yml「信息质量全量评估」+ validate.yml「信息质量检查」 |
+| auto_verify.py | 校验 | 手动：生成后自动验证（V1–V5）→ 写回「自动验证结果」→ 提交审计 |
 | audit_registry.py / audit_pipeline.py / audit_badge.py / audit_check.py / audit_sampling.py / audit_preflight.py | 审计 | audit-gate.yml / audit-sampling.yml / html-sync.yml |
 | personal_finance_model.py | 决策支持 | validate.yml「财务模型一致性」+ scheduled-maintenance.yml「刷新」 |
 | fact_card_check.py | 决策支持 | validate.yml「事实卡片校验」+ scheduled-maintenance.yml「刷新」 |

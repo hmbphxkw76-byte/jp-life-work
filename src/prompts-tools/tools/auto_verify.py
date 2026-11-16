@@ -44,7 +44,7 @@ import compliance_check  # noqa: E402
 import info_quality_check  # noqa: E402
 import lint_reports  # noqa: E402
 import md2html  # noqa: E402
-from _common import ROOT, detect_month_report, iter_business_dirs  # noqa: E402
+from _common import ROOT, atomic_write, detect_month_report, iter_business_dirs, resolve_within  # noqa: E402
 from info_quality_check import _live_table, _read as iq_read, _report_value_rows, _significant_numbers  # noqa: E402
 
 BASE_DATE_RE = re.compile(r"数据基准日\**\s*[:：]\s*([0-9]{4}-[0-9]{2}-[0-9]{2})")
@@ -166,7 +166,7 @@ def rule_v1_deliverables(rel: str, md_path: Path, html_path: Path) -> tuple[Rule
         findings.append({"code": "V1-HTML", "severity": "P1", "layer": "V1",
                          "location": "交付物", "detail": "缺少同名 HTML，自动生成", "spec": "S-05"})
         try:
-            html_path.write_text(md2html.convert(md_path.resolve()), encoding="utf-8")
+            atomic_write(html_path, md2html.convert(md_path.resolve()))
             regenerated = True
         except Exception as exc:  # noqa: BLE001
             findings.append({"code": "V1-HTML", "severity": "P0", "layer": "V1",
@@ -338,7 +338,7 @@ def write_back(md_path: Path, block: str) -> bool:
     else:
         new = text.rstrip("\n") + "\n\n" + block + "\n"
     if new != text:
-        md_path.write_text(new, encoding="utf-8")
+        atomic_write(md_path, new)
         return True
     return False
 
@@ -357,7 +357,7 @@ def write_log(result: VerifyResult, log_rel: str) -> Path:
         "log": log_rel,
     }
     p = result.log_path
-    p.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+    atomic_write(p, json.dumps(payload, ensure_ascii=False, indent=2))
     return p
 
 
@@ -391,7 +391,7 @@ def submit_audit(rel: str) -> tuple[bool, str]:
 
 def verify_report(rel: str, dry_run: bool = False, do_submit: bool = True) -> VerifyResult:
     rel = rel.replace("\\", "/")
-    md_path = ROOT / rel
+    md_path = resolve_within(ROOT, rel)
     html_path = md_path.with_suffix(".html")
     run_at = datetime.now().isoformat(timespec="seconds")
     result = VerifyResult(report=rel, run_at=run_at)
@@ -438,7 +438,7 @@ def verify_report(rel: str, dry_run: bool = False, do_submit: bool = True) -> Ve
     changed = write_back(md_path, block)
     result.actions["section_written"] = changed
     # 重新生成 HTML（含验证结果章节）
-    html_path.write_text(md2html.convert(md_path.resolve()), encoding="utf-8")
+    atomic_write(html_path, md2html.convert(md_path.resolve()))
     result.actions["html_regenerated"] = True
     # 写回后复核（确保未引入 P0/P1）
     recheck = verify_report(rel, dry_run=True, do_submit=False)
@@ -505,7 +505,11 @@ def main() -> int:
     rels = iter_reports() if args.all else [args.report.replace("\\", "/")]
     results: list[VerifyResult] = []
     for rel in rels:
-        if not (ROOT / rel).is_file():
+        try:
+            exists = resolve_within(ROOT, rel).is_file()
+        except (ValueError, OSError):
+            exists = False
+        if not exists:
             print(f"[ERROR] 报告不存在：{rel}", file=sys.stderr)
             return 2
         results.append(verify_report(rel, dry_run=args.dry_run,

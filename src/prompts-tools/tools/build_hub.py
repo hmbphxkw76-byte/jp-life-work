@@ -39,6 +39,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from _common import (  # noqa: E402
     ROOT,
     TEMPLATE_ROOT,
+    atomic_write,
     TYPE_LABEL_FALLBACK,
     TYPE_RE,
     detect_month_report,
@@ -973,7 +974,7 @@ def main() -> int:
 
     try:
         for name, content in outputs.items():
-            (ROOT / name).write_text(content, encoding="utf-8")
+            atomic_write(ROOT / name, content)
     except OSError as e:
         print(f"[ERROR] 写入汇总页失败: {e}")
         return 1

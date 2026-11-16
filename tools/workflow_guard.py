@@ -31,6 +31,7 @@ import getpass
 import json
 import os
 import re
+import shlex
 import socket
 import subprocess
 import sys
@@ -66,7 +67,7 @@ def _now() -> str:
 
 def _run(cmd: Sequence[str] | str, cwd: Optional[Path] = None, check: bool = True,
          capture: bool = True, shell: bool = False) -> subprocess.CompletedProcess:
-    # shell=True 时允许直接传字符串（如 --verify-cmd），否则按序列处理
+    # shell=True 时允许直接传字符串；否则按序列处理（默认关闭）
     argv = cmd if (shell and isinstance(cmd, str)) else list(cmd)
     proc = subprocess.run(
         argv, cwd=str(cwd) if cwd else None, capture_output=capture,
@@ -445,13 +446,15 @@ def _run_verify(wt: Path, args: argparse.Namespace) -> int:
     if cmd is None:
         default = wt / "src" / "prompts-tools" / "tools" / "validate.py"
         if default.exists():
-            cmd = f"{sys.executable} src/prompts-tools/tools/validate.py"
+            argv = [sys.executable, "src/prompts-tools/tools/validate.py"]
         else:
             print("[workflow-guard] 未发现 src/prompts-tools/tools/validate.py，跳过校验"
                   "（--verify-cmd 可指定）")
             return EXIT_OK
-    print(f"[workflow-guard] 合并前校验：{cmd}")
-    return _run(cmd, cwd=wt, check=False, shell=True).returncode
+    else:
+        argv = shlex.split(cmd)
+    print(f"[workflow-guard] 合并前校验：{' '.join(argv)}")
+    return _run(argv, cwd=wt, check=False, shell=False).returncode
 
 
 def cmd_merge(args: argparse.Namespace) -> int:
@@ -663,7 +666,7 @@ def build_parser() -> argparse.ArgumentParser:
     mp.add_argument("name", nargs="?", help="任务名（或分支名）")
     mp.add_argument("--cleanup", action="store_true", help="移除遗留的合并工作树后退出")
     mp.add_argument("--no-verify", action="store_true", help="跳过合并前校验")
-    mp.add_argument("--verify-cmd", help="自定义校验命令（shell 字符串，默认 validate.py）")
+    mp.add_argument("--verify-cmd", help="自定义校验命令（shlex 拆分为参数数组，默认 validate.py）")
     mp.add_argument("--ff-only", action="store_true", help="只允许快进合并")
     mp.add_argument("--wait", type=int, default=DEFAULT_WAIT, help="等待 merge 锁的秒数")
     mp.add_argument("--force", action="store_true")
