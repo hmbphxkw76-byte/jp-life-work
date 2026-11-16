@@ -72,11 +72,11 @@
       "type_id": "employment-research",
       "md": "03-career-management/reports/2026-11-career-management.md",
       "html": "03-career-management/reports/2026-11-career-management.html",
-      "content_hash": "sha256:b9f9f9ded036ac48a174009b28bb43c263d0fa16eaa4d0e7a9ee6262ec8c5fd6",
-      "html_hash": "sha256:32efbf30ebf8d01d3d0be2184120976ae41f3d1fcecb04a1c34c5d28dbecfd4d",
+      "content_hash": "sha256:a38582ba1de9678375c0f508f056f1738a488c94dad667aa1a37506d2e10a13e",
+      "html_hash": "sha256:30843621e2e7410caa6de74c28b5c6fe221646933ff63ccfc42b4158a5a4823f",
       "audit_id": "AUD-202611-013",
       "audit_state": "audited",
-      "finalized_at": "2026-11-16T05:26:01+00:00"
+      "finalized_at": "2026-11-16T06:34:02+00:00"
     },
     {
       "report": "04-industry-logistics/reports/2026-11-industry-logistics.md",

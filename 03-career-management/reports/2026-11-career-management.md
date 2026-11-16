@@ -2,7 +2,7 @@
 
 > **免责声明**：本报告为信息整理与条件化建议，不构成法律意见或税务意见；重大决策请咨询执业法律 / 税务专业人士。
 
-> **已审计** ✅ 审计编号 `AUD-202611-013`｜终审通过：2026-11-16｜内容指纹 `b9f9f9ded036ac48a17`｜依据《审计报告标准化管理体系》v1.4
+> **已审计** ✅ 审计编号 `AUD-202611-013`｜终审通过：2026-11-16｜内容指纹 `a38582ba1de9678375c`｜依据《审计报告标准化管理体系》v1.4
 
 > **版本**：v2026.11.16（2026-11 月度核验）　**数据基准日**：2026-11-16
 > **主题类型**：职业就业调研型（employment-research）
@@ -235,3 +235,11 @@
 9. [08-visa-immigration 报告](../../08-visa-immigration/reports/2026-11-visa-immigration.md) — 资格切换 / 永住证据链，只读引用。
 10. [10-education-qualification 报告](../../10-education-qualification/reports/2026-11-education-qualification.md) — 资格日程与费用主责方，只读引用。
 11. [01-ssw-driver 报告](../../01-ssw-driver/reports/2026-11-ssw-driver.md) — 官方统计活值（工资 / 缺口 / 求人倍率），只读引用。
+
+<!-- AUTO-VERIFY:START -->
+## 自动验证结果
+
+> 数据基准日：2026-11-16　|　规则集：auto-verify v1.0　|　结论：通过（P0 0 / P1 0 / P2 1）
+> 规则明细：V1 交付物与文件可访问 pass｜V2 必填字段与要素 pass｜V3 格式合规 warn｜V4 数据准确性与一致性 pass｜V5 关键指标数值范围 pass
+> 验证日志：src/report-audits/audit/verify/2026-11-career-management.json
+<!-- AUTO-VERIFY:END -->

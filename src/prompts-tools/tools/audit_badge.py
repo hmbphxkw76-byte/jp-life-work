@@ -193,6 +193,17 @@ def cmd_sync() -> int:
             _regenerate_html(md)
             revoked += 1
         elif valid and has:
+            # 内容漂移：audit_id / 指纹 / 终审日期过期的旧徽章 → 更新为当前记录
+            fp = content_fingerprint(md).removeprefix("sha256:")
+            expect = badge_text(v["audit_id"], v.get("finalized_at", ""), fp).strip()
+            cur = BADGE_RE.search(text).group(0).strip()
+            if cur != expect:
+                text, _ = _strip_badge(text)
+                text = _insert_after_disclaimer(text, expect)
+                md.write_text(text, encoding="utf-8")
+                _regenerate_html(md)
+                applied += 1
+                continue
             # md 标识与状态均有效，但 HTML 交付物缺徽章（如渲染漂移后未重建）→ 重新生成
             html = md.with_suffix(".html")
             if html.is_file() and 'class="audit-badge"' not in html.read_text(encoding="utf-8", errors="replace"):
@@ -216,6 +227,11 @@ def cmd_check() -> int:
             problems.append(f"{rep}：携带已审计标识但状态为 {v.get('state') or '未登记'} 或指纹失配")
         if valid and not has:
             problems.append(f"{rep}：状态 audited 但缺少已审计标识")
+        if valid and has:
+            fp = content_fingerprint(md).removeprefix("sha256:")
+            expect = badge_text(v["audit_id"], v.get("finalized_at", ""), fp).strip()
+            if BADGE_RE.search(text).group(0).strip() != expect:
+                problems.append(f"{rep}：徽章内容与当前审计记录不一致（audit_id / 指纹过期）")
         # HTML 侧
         html = md.with_suffix(".html")
         if html.is_file():
