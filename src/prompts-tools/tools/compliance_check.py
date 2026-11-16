@@ -1,6 +1,6 @@
 """报告模板合规校验（validate.yml 新报告阻断级关卡）。
 
-依据 report_templates/compliance-rules.json（12 类报告类型的结构骨架规则），
+依据 report_templates/compliance-rules.json（13 类报告类型的结构骨架规则），
 对业务线 reports/*.html 逐份校验：
 - 结构完整性：h2 节数与类型模板骨架一致（缺失=错误阻断；超额=警告，业务固化锚需人工确认）；
   已编号节（id="sN"）必须 s1..sN 连续且有序
@@ -42,6 +42,10 @@ ID_ATTR_RE = re.compile(r"\bid=\"([^\"]+)\"")
 HREF_ANCHOR_RE = re.compile(r"href=\"#([^\"]+)\"")
 TITLE_RE = re.compile(r"<title[^>]*>(.*?)</title>", re.DOTALL)
 TYPE_REF_RE = re.compile(r"report_templates/([a-z0-9]+(?:-[a-z0-9]+)*)/")
+# 周报命名：{YYYY-MM-DD}_weekly.html|md（日期 = 数据截止日）
+WEEKLY_NAME_RE = re.compile(r"^\d{4}-\d{2}-\d{2}_weekly\.(?:html|md)$")
+# 项目制 / 事件触发件命名：{YYYY-MM-DD}-<主题>.html|md
+DATE_PREFIX_RE = re.compile(r"^\d{4}-\d{2}-\d{2}-.+\.(?:html|md)$")
 
 
 def load_rules() -> dict:
@@ -85,6 +89,11 @@ def cycle_rule(rules: dict, type_id: str, cycle: str):
     if not t:
         return None, False
     r = dict(t.get("cycles", {}).get(cycle) or {})
+    if not r and cycle == "event":
+        # 项目制 / 事件触发件：按类型登记的事件周期校验；未登记则回落基线。
+        event_cycle = t.get("event_cycle")
+        if event_cycle:
+            r = dict(t.get("cycles", {}).get(event_cycle) or {})
     if not r:
         base = t["cycles"]["baseline"]
         r = {"sections": base["sections"], "nav": base.get("nav", False), "inherited": True}
@@ -163,7 +172,14 @@ def collect_targets(only_file: str | None):
         p = ROOT / only_file
         text = p.read_text(encoding="utf-8", errors="replace")
         det = detect_month_report(p.name)
-        cycle = "monthly" if det else ""
+        if det:
+            cycle = "monthly"
+        elif WEEKLY_NAME_RE.match(p.name):
+            cycle = "weekly"
+        elif DATE_PREFIX_RE.match(p.name):
+            cycle = "event"
+        else:
+            cycle = ""
         type_id = ""
         for parent in p.parents:
             cfg = parent / "prompts" / "business-config.md"
@@ -172,7 +188,8 @@ def collect_targets(only_file: str | None):
                 break
         out.append(
             (p.relative_to(ROOT).as_posix(), text, type_id, cycle,
-             None if cycle else "文件名不符合报告命名约定，无法识别周期（按警告处理）")
+             None if cycle else "文件名不符合报告命名约定（YYYY-MM-<slug> / YYYY-MM-DD_weekly / "
+                                        "YYYY-MM-DD-<主题>），无法识别周期（按警告处理）")
         )
         return out
     for b in iter_business_dirs():
@@ -183,12 +200,17 @@ def collect_targets(only_file: str | None):
         for f in sorted(reports.glob("*.html")):
             detected = detect_month_report(f.name)
             note_f = note
-            cycle = ""
             if detected:
-                # 现行体系：全部报告按自然月聚合，统一按月度骨架校验
+                # 现行体系：报告按自然月聚合，统一按月度骨架校验
                 cycle = "monthly"
+            elif WEEKLY_NAME_RE.match(f.name):
+                cycle = "weekly"
+            elif DATE_PREFIX_RE.match(f.name):
+                cycle = "event"
             else:
-                extra = "文件名不符合月度报告命名约定（YYYY-MM-<主题slug>），无法识别周期（按警告处理）"
+                cycle = ""
+                extra = ("文件名不符合报告命名约定（YYYY-MM-<slug> / YYYY-MM-DD_weekly / "
+                         "YYYY-MM-DD-<主题>），无法识别周期（按警告处理）")
                 note_f = f"{note}；{extra}" if note else extra
             out.append((f"{b.rel}/reports/{f.name}", f.read_text(encoding="utf-8", errors="replace"),
                         type_id, cycle, note_f))
@@ -270,7 +292,7 @@ def run_audit(outdir: Path) -> tuple[int, int, int, Path]:
         f"- **审计范围**：全部业务线 reports/*.html（共 {total} 份）",
         f"- **匹配度**：{compliant}/{total}（{rate}）报告与对应类型模板规则完全匹配",
         "- **规则来源**：[compliance-rules.json](../report_templates/compliance-rules.json)"
-        "（12 类报告类型结构骨架，与 [template-registry.md](../report_templates/template-registry.md) 登记一致）",
+        "（13 类报告类型结构骨架，与 [template-registry.md](../report_templates/template-registry.md) 登记一致）",
         f"- **结论**：{'全部合规 ✅' if violated == 0 else f'{violated} 份报告存在不符合项，需整改 ⚠️'}",
         "",
         "## 明细",
@@ -294,6 +316,8 @@ def run_scaffold(type_id: str, cycle: str | None) -> int:
     cycles = t.get("cycles", {})
     if cycle is None:
         cycle = "baseline" if "baseline" in cycles else next(iter(cycles))
+    if cycle == "event" and t.get("event_cycle"):
+        cycle = t["event_cycle"]
     if cycle not in cycles:
         print(f"[ERROR] 类型 {type_id} 无周期「{cycle}」；可用周期: {', '.join(cycles)}")
         return 1

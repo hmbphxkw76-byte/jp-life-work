@@ -1,9 +1,9 @@
 # {{REGION}} · {{TOPIC}} · 快评正文提示词（快评·事件点评型 · 泛用版 · 事件触发）
 
-> **用途**：重大事件（数据发布、政策出台、财报披露、突发事件）发生后 72 小时内输出单份快评。泛用版业务提示词：建新业务线时复制本文件至 `{REGION}/{PROPERTY}/prompts/`，替换变量与 TODO 后即可运行。
+> **用途**：重大事件（数据发布、政策出台、财报披露、突发事件）发生后 72 小时内输出单份快评。泛用版业务提示词：建新业务线时复制本文件至 `{TOPIC_DIR}/prompts/`，替换变量与 TODO 后即可运行。
 > **产出**：快评正文（md 源稿 + 同目录自包含 HTML），落盘 `{{OUTPUT_PATH}}`（`reports/{{YYYY-MM-DD}}-主题-快评.md`）。命名不在工具链标准正则内，validate 仅 WARN 不阻断，属预期。
 >
-> **继承声明（四层体系）**：本文件 = [通用基座](../../../prompt-generic-base.md) × [监测报告通用规范](../../monitoring-common-spec.md) × [快评正文类型模板（快评·事件点评型）](../prompt-flash-note-template.md) × 业务专属配置（实例化后为 `./business-config.md`；泛用版暂缺，业务项以 TODO 标注）。冲突时以业务提示词（即本文件实例化版）为准。
+> **继承声明（四层体系）**：本文件 = [通用基座](../../src/report_templates/prompt-generic-base.md) × [监测报告通用规范](../../src/report_templates/monitoring-common-spec.md) × [快评正文类型模板（快评·事件点评型）](../../src/report_templates/flash-commentary/prompt-flash-note-template.md) × 业务专属配置（实例化后为 `./business-config.md`；泛用版暂缺，业务项以 TODO 标注）。冲突时以业务提示词（即本文件实例化版）为准。
 
 ---
 
@@ -13,7 +13,7 @@
 {{REGION}} / {{TOPIC}}    = 固定值，见实例化后的 business-config.md
 {{CURRENT_DATE}}          = 本次执行日期，格式 YYYY-MM-DD
 {{EVENT_NAME}}            = 本次事件名称（TODO）
-{{BASELINE_REPORT_PATH}}  = reports/{{YYYY-MM}}_baseline_report.md（机制文档锚）
+{{BASELINE_REPORT_PATH}}  = reports/{{YYYY-MM}}-<slug>.md（机制文档锚）
 {{REGISTRY_PATH}}         = data/（TODO：预期台账文件名）
 {{OUTPUT_PATH}}           = reports/{{YYYY-MM-DD}}-（TODO：主题）-快评.md
 {{REPORT_VERSION}}        = 本次版本号（vYYYY.MM.DD + 完成时间）
@@ -48,6 +48,11 @@
 - 快评件按归档保留策略执行；归档不改变事后补验义务。
 
 ---
+
+## 落盘后审计（提交前必做）
+
+落盘后依次运行 `python src/prompts-tools/tools/auto_verify.py --report <报告相对路径>`（生成后自动验证 V1–V5，幂等写回「## 自动验证结果」并自动提交审计）、`python src/prompts-tools/tools/audit_preflight.py --report <报告相对路径>`、`python src/prompts-tools/tools/audit_check.py --report <报告相对路径>`，修正全部 P0/P1 后执行 `python src/prompts-tools/tools/audit_pipeline.py --submit --report <报告相对路径>` 提交审计（未通过初审不得合并）。
+
 ## 版本记录
 
 | 版本 | 日期 | 变更 | 说明 |

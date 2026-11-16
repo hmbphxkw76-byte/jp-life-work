@@ -1,9 +1,9 @@
 # {{REGION}} · {{TOPIC}} · 年度刷新提示词（行业深度研究型 · 泛用版）
 
-> **用途**：每年固定窗口对行业全景做全量刷新；重大结构性事件触发器命中时提前插刷对应模块。泛用版业务提示词：建新业务线时复制本文件至 `{REGION}/{PROPERTY}/prompts/`，替换变量与 TODO 后即可运行。
+> **用途**：每年固定窗口对行业全景做全量刷新；重大结构性事件触发器命中时提前插刷对应模块。泛用版业务提示词：建新业务线时复制本文件至 `{TOPIC_DIR}/prompts/`，替换变量与 TODO 后即可运行。
 > **产出**：刷新版报告落盘 `{{OUTPUT_PATH}}`（`reports/{{YYYY-MM}}-<slug>.md`）；插刷件 `reports/{{YYYY-MM}}-<slug>.md`（命名不在标准正则内，validate 仅 WARN 不阻断，属预期）。
 >
-> **继承声明（四层体系）**：本文件 = [通用基座](../../../prompt-generic-base.md) × [监测报告通用规范](../../monitoring-common-spec.md) × [年度刷新类型模板（行业深度研究型）](../prompt-annual-refresh-template.md) × 业务专属配置（实例化后为 `./business-config.md`；泛用版暂缺，业务项以 TODO 标注）。冲突时以业务提示词（即本文件实例化版）为准。
+> **继承声明（四层体系）**：本文件 = [通用基座](../../src/report_templates/prompt-generic-base.md) × [监测报告通用规范](../../src/report_templates/monitoring-common-spec.md) × [年度刷新类型模板（行业深度研究型）](../../src/report_templates/industry-research/prompt-annual-refresh-template.md) × 业务专属配置（实例化后为 `./business-config.md`；泛用版暂缺，业务项以 TODO 标注）。冲突时以业务提示词（即本文件实例化版）为准。
 
 ---
 
@@ -13,7 +13,7 @@
 {{REGION}} / {{TOPIC}}    = 固定值，见实例化后的 business-config.md
 {{CURRENT_DATE}}          = 本次执行日期，格式 YYYY-MM-DD
 {{PREVIOUS_REPORT_PATH}}  = 上一年度刷新版路径（首年刷新时为空，仅锚定基线）
-{{BASELINE_REPORT_PATH}}  = reports/{{YYYY-MM}}_baseline_report.md
+{{BASELINE_REPORT_PATH}}  = reports/{{YYYY-MM}}-<slug>.md
 {{REGISTRY_PATH}}         = data/（TODO：边界档案文件名）
 {{OUTPUT_PATH}}           = reports/{{YYYY-MM}}-<slug>.md
 {{REPORT_VERSION}}        = 本次版本号，格式 vYYYY.MM.DD
@@ -25,7 +25,7 @@
 
 ## 一、节拍与触发
 
-年度刷新 + 重大事件插刷设计见[年度刷新类型模板第一节](../prompt-annual-refresh-template.md)；插刷触发器清单（TODO：重大并购 / 监管重构 / 技术代际切换等 `事件 → 受影响模块`）由业务配置维护。
+年度刷新 + 重大事件插刷设计见[年度刷新类型模板第一节](../../src/report_templates/industry-research/prompt-annual-refresh-template.md)；插刷触发器清单（TODO：重大并购 / 监管重构 / 技术代际切换等 `事件 → 受影响模块`）由业务配置维护。
 
 ## 二、项目专属硬性约束
 
@@ -54,6 +54,11 @@
 - 命名遵循仓库统一约定；基线报告常驻 `reports/` 顶层，不进入归档。
 
 ---
+
+## 落盘后审计（提交前必做）
+
+落盘后依次运行 `python src/prompts-tools/tools/auto_verify.py --report <报告相对路径>`（生成后自动验证 V1–V5，幂等写回「## 自动验证结果」并自动提交审计）、`python src/prompts-tools/tools/audit_preflight.py --report <报告相对路径>`、`python src/prompts-tools/tools/audit_check.py --report <报告相对路径>`，修正全部 P0/P1 后执行 `python src/prompts-tools/tools/audit_pipeline.py --submit --report <报告相对路径>` 提交审计（未通过初审不得合并）。
+
 ## 版本记录
 
 | 版本 | 日期 | 变更 | 说明 |

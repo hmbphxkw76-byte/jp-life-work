@@ -1,12 +1,12 @@
 # 业务提示词脚手架（消费者·用户调研型）
 
-> **用途**：为消费者·用户调研型业务线批量实例化业务提示词的**复制模板**。执行[通用基座第 1.2 节](../prompt-generic-base.md)新增业务线步骤时，将本文件各节复制为 `{REGION}/{PROPERTY}/prompts/` 下的对应文件，填入变量与业务实例化内容（标注 TODO 的项）后即可运行。脚手架内链接均按**复制后位置**书写，脚手架自身不是直接执行入口。
+> **用途**：为消费者·用户调研型业务线批量实例化业务提示词的**复制模板**。执行[通用基座第 1.2 节](../prompt-generic-base.md)新增业务线步骤时，将本文件各节复制为 `{TOPIC_DIR}/prompts/` 下的对应文件，填入变量与业务实例化内容（标注 TODO 的项）后即可运行。脚手架内链接均按**复制后位置**书写，脚手架自身不是直接执行入口。
 
 ---
 
 ## 一、实例化步骤
 
-1. 建目录：`{REGION}/{PROPERTY}/` 下建 `prompts/`、`data/`、`reports/`。
+1. 建目录：`{TOPIC_DIR}/` 下建 `prompts/`、`data/`、`reports/`。
 2. 撰写 `business-config.md`：按第二节清单逐项实例化。
 3. 复制第三节 → `prompts/prompt-baseline-setup.md`；复制第四节 → `prompts/prompt-study.md`（专题调研 / 年度复测统一入口）。
 4. 替换变量区、删除 TODO 指引、补齐业务链接与固化锚。
@@ -33,16 +33,16 @@
 # {{REGION}} · {{TOPIC}} · 首期基线调研提示词（消费者·用户调研型）
 
 > **用途**：执行「{{REGION}} {{TOPIC}} 消费者调研机制」的**机制建立**任务：产出首期基线调研报告与配套调研设计档案。可直接复制，替换顶部变量后提交给 AI 执行。
-> **产出**：中文八节基线报告（md 源稿 + 同目录自包含 HTML），落盘 `{{OUTPUT_PATH}}`（`reports/{{YYYY-MM}}_baseline_report.md`）+ 调研设计档案（`{{REGISTRY_PATH}}`）。
+> **产出**：中文八节基线报告（md 源稿 + 同目录自包含 HTML），落盘 `{{OUTPUT_PATH}}`（`reports/{{YYYY-MM}}-<slug>.md`）+ 调研设计档案（`{{REGISTRY_PATH}}`）。
 >
-> **继承声明（四层体系）**：本文件 = [通用基座](../../../report_templates/prompt-generic-base.md) × [监测报告通用规范](../../../report_templates/monitoring-common-spec.md) × [基线报告类型模板（消费者·用户调研型）](../../../report_templates/consumer-research/prompt-baseline-setup-template.md) × [业务专属配置](./business-config.md)。冲突时以本文件为准。
+> **继承声明（四层体系）**：本文件 = [通用基座](../../src/report_templates/prompt-generic-base.md) × [监测报告通用规范](../../src/report_templates/monitoring-common-spec.md) × [基线报告类型模板（消费者·用户调研型）](../../src/report_templates/consumer-research/prompt-baseline-setup-template.md) × [业务专属配置](./business-config.md)。冲突时以本文件为准。
 
 ## 运行变量（每次运行前填写）
 
 ```
 {{CURRENT_DATE}}         = 本次执行日期
 {{BASELINE_DATE}}        = 首期基线日期
-{{OUTPUT_PATH}}          = reports/{{YYYY-MM}}_baseline_report.md
+{{OUTPUT_PATH}}          = reports/{{YYYY-MM}}-<slug>.md
 {{REGISTRY_PATH}}        = data/（TODO：设计档案文件名）
 {{REPORT_VERSION}}       = v1.0（首期基线固定）
 ```
@@ -62,7 +62,7 @@
 
 ## 三～八、结构骨架与联动
 
-八节固定骨架见[基线类型模板第三节](../../../report_templates/consumer-research/prompt-baseline-setup-template.md)；业务固化锚节标题（TODO：实例化后逐字继承）；追踪表见[业务配置](./business-config.md)（TODO）。
+八节固定骨架见[基线类型模板第三节](../../src/report_templates/consumer-research/prompt-baseline-setup-template.md)；业务固化锚节标题（TODO：实例化后逐字继承）；追踪表见[业务配置](./business-config.md)（TODO）。
 
 ## 九、渲染与交付
 
@@ -82,13 +82,13 @@
 ```
 {{CURRENT_DATE}}         = 本次执行日期
 {{STUDY_TYPE}}           = 本次专题类型（概念测试 / 满意度复测 / 画像刷新 / 决策路径，TODO：按业务配置枚举）
-{{BASELINE_REPORT_PATH}} = reports/{{YYYY-MM}}_baseline_report.md
+{{BASELINE_REPORT_PATH}} = reports/{{YYYY-MM}}-<slug>.md
 {{REGISTRY_PATH}}        = data/（TODO）
 {{OUTPUT_PATH}}          = 专题件 reports/{{YYYY-MM-DD}}-（TODO：主题）.md；年度复测 reports/{{YYYY-MM}}-<slug>.md
 {{REPORT_VERSION}}       = 本次版本号，格式 vYYYY.MM.DD
 ```
 
-**任务目标**：按[专题类型模板](../../../report_templates/consumer-research/prompt-study-template.md)项目协议执行「设计 → 采集 → 分析 → 建议」闭环；方法与口径与基线一致（变更显式声明）；样本不足或差异不显著时结论降级为「方向性发现」并标注；运行后回写设计档案。
+**任务目标**：按[专题类型模板](../../src/report_templates/consumer-research/prompt-study-template.md)项目协议执行「设计 → 采集 → 分析 → 建议」闭环；方法与口径与基线一致（变更显式声明）；样本不足或差异不显著时结论降级为「方向性发现」并标注；运行后回写设计档案。
 
 ## 一、项目模块要点（业务实例化，TODO 按 {{STUDY_TYPE}} 展开）
 
@@ -102,6 +102,13 @@
 交付包 = 报告 + 数据表附录（脱敏）+ 方法说明；事实发现与建议分离；渲染交付同基线提示词第九节。
 
 ---
+
+## 六、落盘后审计（提交前必做，适用于本脚手架全部提示词）
+
+落盘后依次运行 `python src/prompts-tools/tools/auto_verify.py --report <报告相对路径>`（生成后自动验证 V1–V5，幂等写回「## 自动验证结果」并自动提交审计）、`python src/prompts-tools/tools/audit_preflight.py --report <报告相对路径>`、`python src/prompts-tools/tools/audit_check.py --report <报告相对路径>`，修正全部 P0/P1 后执行 `python src/prompts-tools/tools/audit_pipeline.py --submit --report <报告相对路径>` 提交审计（未通过初审不得合并）。
+
+> 复制到业务 `prompts/` 后，须在**每一份**业务提示词末尾保留本节（与类型模板同口径）。
+
 ## 版本记录
 
 | 版本 | 日期 | 变更 | 说明 |

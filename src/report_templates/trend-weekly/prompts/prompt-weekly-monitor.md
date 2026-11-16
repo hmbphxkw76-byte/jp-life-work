@@ -1,9 +1,9 @@
 # {{REGION}} · {{TOPIC}} · 周报提示词（行业趋势周报型 · 泛用版）
 
-> **用途**：周期性（每周）刷新主题板块与数据看板，产出八节周报；触发器命中时对应板块重点更新。泛用版业务提示词：建新业务线时复制本文件至 `{REGION}/{PROPERTY}/prompts/`，替换变量与 TODO 后即可运行。
+> **用途**：周期性（每周）刷新主题板块与数据看板，产出八节周报；触发器命中时对应板块重点更新。泛用版业务提示词：建新业务线时复制本文件至 `{TOPIC_DIR}/prompts/`，替换变量与 TODO 后即可运行。
 > **产出**：中文八节周报（落盘 `{{OUTPUT_PATH}}`，命名 `{{YYYY-MM-DD}}_weekly`，日期 = 数据截止日）。
 >
-> **继承声明（四层体系）**：本文件 = [通用基座](../../../prompt-generic-base.md) × [监测报告通用规范](../../monitoring-common-spec.md) × [周期更新类型模板（行业趋势周报型）](../prompt-weekly-monitor-template.md) × 业务专属配置（实例化后为 `./business-config.md`；泛用版暂缺，业务项以 TODO 标注）。冲突时以业务提示词（即本文件实例化版）为准。
+> **继承声明（四层体系）**：本文件 = [通用基座](../../src/report_templates/prompt-generic-base.md) × [监测报告通用规范](../../src/report_templates/monitoring-common-spec.md) × [周期更新类型模板（行业趋势周报型）](../../src/report_templates/trend-weekly/prompt-weekly-monitor-template.md) × 业务专属配置（实例化后为 `./business-config.md`；泛用版暂缺，业务项以 TODO 标注）。冲突时以业务提示词（即本文件实例化版）为准。
 
 ---
 
@@ -14,9 +14,9 @@
 {{CURRENT_DATE}}          = 本次执行日期，格式 YYYY-MM-DD
 {{DATA_CUTOFF}}           = 数据截止日（周报命名与标题锚定此日期，非执行日）
 {{PREVIOUS_REPORT_PATH}}  = 最近一期周报路径（首期为空，仅锚定基线）
-{{BASELINE_REPORT_PATH}}  = reports/{{YYYY-MM}}_baseline_report.html
+{{BASELINE_REPORT_PATH}}  = reports/{{YYYY-MM}}-<slug>.md
 {{REGISTRY_PATH}}         = data/（TODO：台账文件名）
-{{OUTPUT_PATH}}           = reports/{{DATA_CUTOFF}}_weekly.html
+{{OUTPUT_PATH}}           = reports/{{DATA_CUTOFF}}_weekly.md
 {{REPORT_VERSION}}        = 本次版本号，格式 vYYYY.MM.DD
 ```
 
@@ -26,7 +26,7 @@
 
 ## 一、节拍与触发
 
-周节拍 + 事件触发升级设计见[周期类型模板第一节](../prompt-weekly-monitor-template.md)；触发器清单（TODO：重大发布 / 监管动作 / 安全事故 / 融资并购等 `事件 → 受影响板块`）由业务配置维护，命中即当期核实并升级，不等待下周窗口。
+周节拍 + 事件触发升级设计见[周期类型模板第一节](../../src/report_templates/trend-weekly/prompt-weekly-monitor-template.md)；触发器清单（TODO：重大发布 / 监管动作 / 安全事故 / 融资并购等 `事件 → 受影响板块`）由业务配置维护，命中即当期核实并升级，不等待下周窗口。
 
 ## 二、项目专属硬性约束
 
@@ -60,6 +60,11 @@
 - 周报按归档保留策略执行（weekly 保留 12 期）。
 
 ---
+
+## 落盘后审计（提交前必做）
+
+落盘后依次运行 `python src/prompts-tools/tools/auto_verify.py --report <报告相对路径>`（生成后自动验证 V1–V5，幂等写回「## 自动验证结果」并自动提交审计）、`python src/prompts-tools/tools/audit_preflight.py --report <报告相对路径>`、`python src/prompts-tools/tools/audit_check.py --report <报告相对路径>`，修正全部 P0/P1 后执行 `python src/prompts-tools/tools/audit_pipeline.py --submit --report <报告相对路径>` 提交审计（未通过初审不得合并）。
+
 ## 版本记录
 
 | 版本 | 日期 | 变更 | 说明 |
