@@ -1,12 +1,15 @@
-"""自动化状态记录（定时维护的状态记录与活跃度检查（当前无定时工作流，需手动运行））。
+"""自动化状态记录（定时维护的状态记录与活跃度检查）。
 
-状态文件：仓库根 automation-status.json（定时维护
-工作流提交该文件）。
+状态文件：仓库根 automation-status.json（各周期工作流提交该文件）。
 
 用法：
     python src/prompts-tools/tools/automation_status.py record --phase maintenance \
         --result success --run-url <url>
     python src/prompts-tools/tools/automation_status.py activity --threshold 45 [--porcelain]
+
+phase 取值：content-update（信息质量周度）/ maintenance（月度维护）/
+html-sync（生成物同步）/ info-quality（信息质量评估）/
+audit-sampling（月度抽检）/ scheduled-report-tasks（月度提醒）。
 
 activity 输出：
     --porcelain -> 距最近一次记录的天数（整数）或 unknown（无记录）
@@ -98,7 +101,10 @@ def main() -> int:
     sub = ap.add_subparsers(dest="command", required=True)
 
     p_rec = sub.add_parser("record", help="记录一次自动化执行")
-    p_rec.add_argument("--phase", required=True, choices=["content-update", "maintenance"])
+    p_rec.add_argument("--phase", required=True,
+                        choices=["content-update", "maintenance", "html-sync",
+                                 "info-quality", "audit-sampling",
+                                 "scheduled-report-tasks"])
     p_rec.add_argument("--result", required=True, choices=["success", "failure"])
     p_rec.add_argument("--run-url", default="")
 

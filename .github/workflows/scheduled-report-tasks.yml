@@ -6,6 +6,7 @@
 # 流程：
 #   1. 按当前 UTC 月份（或手动指定 --period）运行 update_planner.py 生成任务清单
 #   2. 以 Issue 形式发布（标题含月份，正文含待办清单与命名规范提醒）
+#   3. 记录自动化状态（automation_status.py record）并提交状态文件
 #
 # 产出后：提交 reports/YYYY-MM-<slug>.md 并 push，html-sync 自动生成报告页 HTML
 # （含跨月对比高亮）与汇总页；下期报告自动与本期比对并高亮「已更新」。
@@ -31,7 +32,7 @@ concurrency:
   cancel-in-progress: false
 
 permissions:
-  contents: read
+  contents: write
   issues: write
 
 jobs:
@@ -101,3 +102,20 @@ jobs:
           gh issue create \
             --title "【月度报告产出】$PERIOD 任务清单" \
             --body-file /tmp/issue-body.md
+
+      - name: 记录自动化状态并提交
+        if: always()
+        run: |
+          RESULT="${{ job.status == 'success' && 'success' || 'failure' }}"
+          python src/prompts-tools/tools/automation_status.py record \
+            --phase scheduled-report-tasks --result "$RESULT" \
+            --run-url "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+          git add -A -- automation-status.json
+          if git diff --cached --quiet; then
+            echo "自动化状态无变化，跳过提交"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git commit -m "chore: 记录月度提醒自动化状态"
+          git push

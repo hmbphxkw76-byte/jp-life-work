@@ -1,5 +1,7 @@
 # 月度审计抽检：每月 1 日 00:25 UTC（= 09:25 JST）执行分层抽检并提交报告。
-# 紧随定时维护（00:15）之后；命中 P0/P1 即告警，不合格报告进入重新审计流程。
+# 紧随定时维护（00:15）之后；命中 P0/P1 即告警，不合格报告进入重新审计流程：
+# audit_sampling --apply 内置 G→F 反馈链路（命中 P0/P1 → audit_pipeline 置 stale），
+# 随后 audit_badge --sync 撤销「已审计」标识，报告须重走 submit → 初审 → 复核 → 终审。
 #
 # 退出码：0=达到门槛；1=未达门槛（P0/P1 或合格率不足）；2=仅 P2。
 name: audit-sampling
@@ -34,6 +36,7 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: 分层抽检（audit_sampling --apply）
+        id: apply
         run: |
           python src/prompts-tools/tools/audit_sampling.py --apply || code=$?
           code=${code:-0}
@@ -43,14 +46,29 @@ jobs:
           fi
           echo "audit_sampling 退出码 $code（2=仅 P2 放行）"
 
-      - name: 提交抽检报告
+      # G→F：抽检命中 P0/P1 时 audit_sampling 已置 stale，此处撤销对应「已审计」标识。
+      - name: 标识同步（audit_badge.py --sync）
+        if: always()
+        run: python src/prompts-tools/tools/audit_badge.py --sync
+
+      - name: 记录自动化状态
+        if: always()
         run: |
-          git add -A -- src/report-audits/audit/sampling/
+          RESULT="${{ job.status == 'success' && 'success' || 'failure' }}"
+          python src/prompts-tools/tools/automation_status.py record \
+            --phase audit-sampling --result "$RESULT" \
+            --run-url "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+
+      - name: 提交抽检报告与审计状态
+        if: always()
+        run: |
+          git add -A -- ':(glob)**/reports/*.md' ':(glob)**/reports/*.html' \
+            src/report-audits/audit/ automation-status.json
           if git diff --cached --quiet; then
             echo "抽检报告无变化，跳过提交"
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git commit -m "chore(audit): 月度分层抽检报告"
+          git commit -m "chore(audit): 月度分层抽检报告（含不合格处置）"
           git push

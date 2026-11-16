@@ -4,7 +4,9 @@
 #   1. info_quality_check.py --apply：全量评估 → 混乱识别分类 → 自动修复 → 复评验证
 #   2. md2html.py：同步被修复报告的 HTML 交付物
 #   3. 契约测试确认无回归
-#   4. 提交评估 / 修复 / 验证三份清单（无变更则跳过）
+#   4. 存在 P0/P1 遗留时告警
+#   5. 记录自动化状态（automation_status.py record）
+#   6. 提交评估 / 修复 / 验证三清单（无变更则跳过）
 #
 # 退出码约定：0=通过（无 P0/P1 遗留）；1=存在 P0/P1 遗留（job 失败告警，需人工介入）；2=仅 P2。
 name: info-quality
@@ -40,6 +42,7 @@ jobs:
 
       # 退出码约定：0=通过；1=存在 P0/P1 遗留（需人工介入）；2=仅 P2 遗留（放行）
       - name: 信息质量全量评估 + 自动修复 + 复评
+        id: assess
         run: |
           python src/prompts-tools/tools/info_quality_check.py --apply || code=$?
           code=${code:-0}
@@ -52,7 +55,24 @@ jobs:
       - name: 契约测试（确认评估与修复无回归）
         run: python -m unittest discover -s src/tests
 
+      - name: 存在 P0/P1 遗留时告警
+        run: |
+          code=$(cat /tmp/iqc_exit_code)
+          if [ "$code" -eq 1 ]; then
+            echo "::error::信息质量评估存在 P0/P1 遗留，需人工介入（见 src/report-audits/info-quality/）"
+            exit 1
+          fi
+
+      - name: 记录自动化状态
+        if: always()
+        run: |
+          RESULT="${{ job.status == 'success' && 'success' || 'failure' }}"
+          python src/prompts-tools/tools/automation_status.py record \
+            --phase info-quality --result "$RESULT" \
+            --run-url "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+
       - name: 提交评估与修复产物
+        if: always()
         run: |
           git add -A
           if git diff --cached --quiet; then
@@ -63,11 +83,3 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git commit -m "chore: 信息质量周期评估（自动修复 + 三清单）"
           git push
-
-      - name: 存在 P0/P1 遗留时告警
-        run: |
-          code=$(cat /tmp/iqc_exit_code)
-          if [ "$code" -eq 1 ]; then
-            echo "::error::信息质量评估存在 P0/P1 遗留，需人工介入（见 src/report-audits/info-quality/）"
-            exit 1
-          fi

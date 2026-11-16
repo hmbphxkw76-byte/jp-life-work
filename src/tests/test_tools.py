@@ -2379,6 +2379,39 @@ class TestPipelineFlowSpec(unittest.TestCase):
         for ts in ("00:15 UTC", "02:20 UTC", "00:25 UTC"):
             self.assertIn(ts, spec)
 
+    def test_validate_pr_targets_main(self):
+        """validate.yml 的 PR 触发须限定 main 方向（与 CI.md 二.1 一致）。"""
+        v = self._wf("validate.yml")
+        pr = v.split("pull_request:", 1)[1].split("concurrency:", 1)[0]
+        self.assertIn("branches: [main]", pr)
+
+    def test_sampling_failure_auto_flip(self):
+        """G→F 反馈链路：抽检命中 P0/P1 须自动置 stale 并撤销标识。"""
+        self.assertEqual(audit_pipeline.TRANSITIONS[("audited", "sampling_fail")], "stale")
+        s = self._read("src", "prompts-tools", "tools", "audit_sampling.py")
+        self.assertIn("mark_sampling_failures", s)
+        self.assertIn("audit_pipeline", s)
+        wf = self._wf("audit-sampling.yml")
+        self.assertIn("audit_badge.py --sync", wf)
+        self.assertIn("sampling_fail", self._read("src", "prompts-tools", "tools",
+                                               "audit_pipeline.py"))
+
+    def test_automation_status_wired(self):
+        """四个周期工作流均须记录自动化状态（O5 闭环）。"""
+        for name in ("html-sync.yml", "scheduled-maintenance.yml",
+                     "info-quality.yml", "audit-sampling.yml",
+                     "scheduled-report-tasks.yml"):
+            self.assertIn("automation_status.py record", self._wf(name), name)
+
+    def test_supplement_deadline_declared(self):
+        """补缺准入「期限」要素须在登记册与总规范中同时显式化（O1/N4 闭环）。"""
+        reg = self._read("00-decision-hub", "data", "decision_hub_registry.md")
+        self.assertIn("| 期限 |", reg)
+        self.assertIn("补缺准入节奏", reg)
+        spec = self._read("docs", "信息生产全链路执行规范.md")
+        self.assertIn("验收 + 期限", spec)
+        self.assertIn("建议类型、**期限**", spec)
+
 
 if __name__ == "__main__":
     unittest.main()
