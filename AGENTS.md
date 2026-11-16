@@ -54,9 +54,16 @@ jp-life-work：围绕日本生活与工作（签证 / 就业 / 行业 / 税制 /
 报告交付物 = `reports/YYYY-MM-<slug>.md` 源稿 + 同名自包含 `.html`。落盘后、提交前必须按序完成（缺一不得提交）：
 
 1. **HTML 生成**：`python src/prompts-tools/tools/md2html.py`（任务工作树内；共享检出目录禁止）+ `python src/prompts-tools/tools/lint_reports.py --new-only`；
-2. **落盘前自检**：`python src/prompts-tools/tools/audit_preflight.py --report <路径>`（P0/P1 必须修正）；
-3. **多层级校验**：`python src/prompts-tools/tools/audit_check.py --report <路径>`（L1–L5，P0/P1 必须修正）；
-4. **提交审计**：`python src/prompts-tools/tools/audit_pipeline.py --submit --report <路径>`。
+2. **生成后自动验证（无人值守入口）**：`python src/prompts-tools/tools/auto_verify.py --report <路径>`
+   —— 依次执行 V1–V5 规则集（交付物可访问 / 必填字段与要素 / 格式合规 / 数据准确性与一致性 / 关键指标数值范围），
+   通过则**幂等写回**报告「## 自动验证结果」章节、重新生成 HTML 并**自动 `audit_pipeline --submit`**；
+   失败退出码 1 并打印逐条定位（规则 / 位置 / 详情），不写回、不提交。规则内核复用
+   `audit_preflight` / `audit_check` / `compliance_check` / `lint_reports`，运行日志写入
+   `src/report-audits/audit/verify/`（不入库）。可用 `--dry-run`（只验证不写回）/ `--no-submit`；
+3. **落盘前自检**：`python src/prompts-tools/tools/audit_preflight.py --report <路径>`（P0/P1 必须修正）；
+4. **多层级校验**：`python src/prompts-tools/tools/audit_check.py --report <路径>`（L1–L5，P0/P1 必须修正）；
+5. **提交审计**：`python src/prompts-tools/tools/audit_pipeline.py --submit --report <路径>`
+   （第 2 步 auto_verify 已通过时自动完成，可复核）。
 
 合并门禁：`python src/prompts-tools/tools/audit_pipeline.py --gate`（PR / main 推送；受检报告须 `audited` + 指纹匹配 + 有效 L5 证据）。
 CI 侧：`html-sync` 负责推送后确定性重生成 HTML / 汇总页；`audit-gate` 负责 `--gate` 与 `audit_check --all`。

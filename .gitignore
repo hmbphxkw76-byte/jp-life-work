@@ -17,6 +17,8 @@ src/vocabulary/data/topic-backups/
 
 # 运行日志（工具写入，不入库；由 tools/cleanup_workspace.py 统一清理）
 src/vocabulary/data/*.log
+# AutoVerify 运行日志（auto_verify.py 每次验证写入，含运行时刻，不入库）
+src/report-audits/audit/verify/
 
 # 测试 / 静态检查缓存（可再生；由 tools/cleanup_workspace.py 统一清理）
 .pytest_cache/

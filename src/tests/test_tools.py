@@ -27,6 +27,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "vocabulary" / "scr
 import _common  # noqa: E402
 import audit_badge  # noqa: E402
 import audit_check  # noqa: E402
+import auto_verify  # noqa: E402
 import audit_pipeline  # noqa: E402
 import audit_preflight  # noqa: E402
 import audit_registry  # noqa: E402
@@ -1429,6 +1430,51 @@ class TestAuditGuard(unittest.TestCase):
         data["reports"][self.REPORT_REL]["state"] = "registered"
         p.write_text(json.dumps(data, ensure_ascii=False), encoding="utf-8")
         self.assertNotEqual(audit_pipeline.cmd_verify(), 0)
+
+
+class TestAutoVerify(unittest.TestCase):
+    """AutoVerify 契约：规则集完整 / 写回幂等 / 稳定块 / 真实报告试运行。"""
+
+    def _result(self, base_date="2026-11-16"):
+        r = auto_verify.VerifyResult(report="demo/reports/2026-11-demo.md",
+                                     run_at="2026-11-16T00:00:00", base_date=base_date)
+        r.rules = [auto_verify.RuleResult("V1", "交付物与文件可访问", "pass", [], "")]
+        return r
+
+    def test_render_block_is_stable(self):
+        r = self._result()
+        b1 = auto_verify.render_block(r, "src/report-audits/audit/verify/demo.json")
+        b2 = auto_verify.render_block(r, "src/report-audits/audit/verify/demo.json")
+        self.assertEqual(b1, b2)
+        self.assertNotIn("验证时间", b1)
+        self.assertNotIn("内容指纹", b1)
+        self.assertIn("数据基准日：2026-11-16", b1)
+        self.assertIn(auto_verify.BLOCK_START, b1)
+        self.assertIn(auto_verify.BLOCK_END, b1)
+
+    def test_write_back_is_idempotent(self):
+        with tempfile.TemporaryDirectory() as d:
+            p = Path(d) / "r.md"
+            p.write_text("# 标题\n\n正文\n", encoding="utf-8")
+            block = auto_verify.render_block(self._result(), "log.json")
+            self.assertTrue(auto_verify.write_back(p, block))
+            self.assertFalse(auto_verify.write_back(p, block))
+            text = p.read_text(encoding="utf-8")
+            self.assertEqual(text.count(auto_verify.BLOCK_START), 1)
+            self.assertIn("## 自动验证结果", text)
+
+    def test_base_date_extraction(self):
+        self.assertEqual(auto_verify._base_date("> **数据基准日**：2026-11-16"), "2026-11-16")
+        self.assertEqual(auto_verify._base_date("无基准日"), "—")
+
+    def test_verify_real_report_dry_run(self):
+        entries = audit_registry.discover()
+        self.assertTrue(entries)
+        res = auto_verify.verify_report(entries[0]["md"], dry_run=True, do_submit=False)
+        self.assertEqual([r.id for r in res.rules], ["V1", "V2", "V3", "V4", "V5"])
+        self.assertTrue(res.passed)
+        self.assertTrue(res.actions.get("dry_run"))
+        self.assertFalse(res.actions.get("section_written"))
 
 
 class TestAuditGate(unittest.TestCase):
