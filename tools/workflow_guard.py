@@ -82,6 +82,43 @@ def git(args: Sequence[str], cwd: Optional[Path] = None, check: bool = True) -> 
     return _run(["git", *args], cwd=cwd, check=check)
 
 
+def _find_push_script(cwd: Optional[Path]) -> Optional[Path]:
+    """定位 ``tools/git_push.py``：优先当前工作树（如 ``_merge``），再回退本工具目录。"""
+    if cwd:
+        local_script = Path(cwd) / "tools" / "git_push.py"
+        if local_script.exists():
+            return local_script
+    shared = Path(__file__).resolve().with_name("git_push.py")
+    return shared if shared.exists() else None
+
+
+def push_with_failover(cwd: Optional[Path], remote: str, refspecs: Sequence[str],
+                       fallback: str = "origin-https",
+                       force_with_lease: bool = False) -> subprocess.CompletedProcess:
+    """经 ``tools/git_push.py`` 走 ssh / https 双通道 failover 推送。
+
+    主通道失败才切备用通道，每条通道只试一次；两条都失败即返回退出码 1（不重试）。
+    仅用于本仓库（GitHub），不使用 GitLab。脚本缺失时退化为单次 ``git push``。
+    """
+    script = _find_push_script(cwd)
+    if script is None:
+        print("[workflow-guard] 未找到 tools/git_push.py，退化为单次 git push（无 failover）。",
+              file=sys.stderr)
+        cmd = ["push"] + (["--force-with-lease"] if force_with_lease else []) \
+            + [remote, *refspecs]
+        return git(cmd, cwd=cwd, check=False)
+    cmd = [sys.executable, str(script), "--remote", remote, "--fallback", fallback]
+    if force_with_lease:
+        cmd.append("--force-with-lease")
+    cmd.extend(refspecs)
+    proc = _run(cmd, cwd=cwd, check=False)
+    if proc.stdout:
+        print(proc.stdout, end="")
+    if proc.stderr:
+        print(proc.stderr, end="", file=sys.stderr)
+    return proc
+
+
 def repo_root() -> Path:
     """共享检出（主工作树）根目录。"""
     return Path(git(["rev-parse", "--show-toplevel"]).stdout.strip()).resolve()
@@ -473,7 +510,8 @@ def cmd_merge(args: argparse.Namespace) -> int:
                 if rc == 2:
                     print("[workflow-guard] 校验有警告（退出码 2），按约定放行。")
 
-            p = git(["push", "--force-with-lease", remote, "HEAD:main"], cwd=wt, check=False)
+            p = push_with_failover(wt, remote, ["HEAD:main"],
+                                   fallback=args.push_fallback, force_with_lease=True)
             if p.returncode != 0:
                 # 远端在 fetch 之后又被推进（如 CI）：再整合一次并重试一次
                 git(["fetch", remote, "main"], cwd=root)
@@ -487,7 +525,8 @@ def cmd_merge(args: argparse.Namespace) -> int:
                     keep = True
                     print("[workflow-guard] 二次校验未通过，已阻断合并。", file=sys.stderr)
                     return _merge_fail_hint(wt)
-                p = git(["push", "--force-with-lease", remote, "HEAD:main"], cwd=wt, check=False)
+                p = push_with_failover(wt, remote, ["HEAD:main"],
+                                       fallback=args.push_fallback, force_with_lease=True)
                 if p.returncode != 0:
                     keep = True
                     raise GuardError(f"推送失败（远端可能被他人推进）：\n"
@@ -538,7 +577,9 @@ def cmd_sync(args: argparse.Namespace) -> int:
             n = git(["rev-list", "--count", f"{remote}/main..main"], cwd=root).stdout.strip()
             print(f"本地 main 领先远端 {n} 个提交（未推送）。")
             if args.push_local:
-                git(["push", remote, "main"], cwd=root)
+                p = push_with_failover(root, remote, ["main"], fallback=args.push_fallback)
+                if p.returncode != 0:
+                    raise GuardError("推送本地 main 失败（ssh / https 通道均不可用，已停止）。")
                 print(f"已推送本地 main → {remote}/main。")
             else:
                 print("  如需推送：sync --push-local（注意：此路径不经过合并校验）")
@@ -628,6 +669,8 @@ def build_parser() -> argparse.ArgumentParser:
     mp.add_argument("--force", action="store_true")
     mp.add_argument("--stale-timeout", type=int, default=DEFAULT_STALE_TIMEOUT)
     mp.add_argument("--remote", default="origin")
+    mp.add_argument("--push-fallback", default="origin-https",
+                    help="推送备用通道 remote（默认 origin-https；传空字符串则不 failover）")
     mp.set_defaults(func=cmd_merge)
 
     # sync
@@ -637,6 +680,8 @@ def build_parser() -> argparse.ArgumentParser:
     sp.add_argument("--force", action="store_true")
     sp.add_argument("--stale-timeout", type=int, default=DEFAULT_STALE_TIMEOUT)
     sp.add_argument("--remote", default="origin")
+    sp.add_argument("--push-fallback", default="origin-https",
+                    help="推送备用通道 remote（默认 origin-https；传空字符串则不 failover）")
     sp.set_defaults(func=cmd_sync)
 
     # status
