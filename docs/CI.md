@@ -183,7 +183,7 @@ reports/YYYY-MM-<slug>.md  ──md2html.py──►  reports/YYYY-MM-<slug>.htm
 - **辅助开关**：报告页工具条「隐藏更新标记」对照阅读、「展开全部删除」。
 - **呈现**：报告页新标签页独立打开，页脚提供「← 返回主题 / 返回首页」。
 
-## 六、测试体系（`src/tests/`，272 项）
+## 六、测试体系（`src/tests/`，279 项）
 
 | 场景 | 测试类 | 覆盖 |
 |---|---|---|
@@ -195,7 +195,7 @@ reports/YYYY-MM-<slug>.md  ──md2html.py──►  reports/YYYY-MM-<slug>.htm
 | 工作区标准化清理 | `test_cleanup.py`（18 项） | 残留识别与清理、`--check` / `--dry-run` 契约、日志作用域限定、已跟踪文件 / 目录保护、CI 接线契约（每工作流前置 + 收尾 `always`） |
 | 工具契约 | `test_tools.py`（198 项） | 命名解析（新 + 历史）、周期与任务推导、归档策略、lint / 合规、`build_hub` 归一化比对、活跃度天数、全主题契约、流程复用与三体系一致性 |
 
-> 合计 272 项（`python -m unittest discover -s src/tests`，当前全绿）。
+> 合计 279 项（`python -m unittest discover -s src/tests`，当前全绿）。
 
 ## 七、手动命令速查
 

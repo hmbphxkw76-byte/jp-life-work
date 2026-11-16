@@ -47,6 +47,14 @@ class TestIncrementalBuild(unittest.TestCase):
         changed = set(incremental_build.changed_reports("HEAD"))
         self.assertTrue(changed <= allr, f"增量选择越出全量集合：{sorted(changed - allr)}")
 
+    def test_md2html_changed_flag(self):
+        proc = subprocess.run(
+            [sys.executable, "src/prompts-tools/tools/md2html.py", "--changed"],
+            cwd=str(CROOT), capture_output=True, text=True, encoding="utf-8", errors="replace",
+        )
+        self.assertEqual(proc.returncode, 0, proc.stdout + proc.stderr)
+        self.assertIn("无变更报告", proc.stdout)
+
     def test_bench_output_shape(self):
         proc = subprocess.run(
             [sys.executable, "src/prompts-tools/tools/incremental_build.py", "--bench"],

@@ -846,6 +846,11 @@ def render_type_chips(topics: list[dict]) -> str:
     return "".join(btns)
 
 
+def embed_json(obj) -> str:
+    """嵌入 <script> 前转义 ``<``，防止 ``</script>`` 逃逸。"""
+    return json.dumps(obj, ensure_ascii=False).replace("<", "\\u003c")
+
+
 def render_hub(topics: list[dict]) -> str:
     total_reports = sum(len(t["reports"]) for t in topics)
     cards = "".join(render_topic_card(t) for t in topics)
@@ -853,9 +858,8 @@ def render_hub(topics: list[dict]) -> str:
     sidebar = render_sidebar(topics)
     chips = render_type_chips(topics)
     search_index = collect_search_index(topics)
-    search_json = json.dumps(search_index, ensure_ascii=False).replace("<", "\\u003c")
-    five_json = json.dumps(search_index.get("five_questions", []),
-                           ensure_ascii=False).replace("<", "\\u003c")
+    search_json = embed_json(search_index)
+    five_json = embed_json(search_index.get("five_questions", []))
     five_section = render_five_questions(search_index.get("five_questions", []))
     return f'''<!DOCTYPE html>
 <html lang="zh-CN" class="no-js">
