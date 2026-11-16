@@ -64,9 +64,10 @@ python tools/workflow_guard.py lock release checkout
 | `lock release <checkout\|merge> [--force]` | 放锁（非本人持有需 `--force`） |
 | `lock status` | 查看两把锁 |
 | `lock run <checkout\|merge> -- <命令...>` | 持锁执行命令，结束自动释放 |
-| `merge <name> [--no-verify] [--verify-cmd S] [--ff-only] [--wait N] [--cleanup]` | 串行合并入 main |
-| `sync [--push-local]` | 持检出锁对齐本地 main 与远端 |
+| `merge <name> [--no-verify] [--verify-cmd S] [--ff-only] [--wait N] [--cleanup] [--push-fallback S]` | 串行合并入 main |
+| `sync [--push-local] [--push-fallback S]` | 持检出锁对齐本地 main 与远端 |
 | `status` | 总览：锁 / 任务 / worktree |
+| `python tools/git_push.py --remote origin [--fallback origin-https] [--force-with-lease] <refspec...>` | ssh / https 双通道推送（都失败即停止） |
 
 退出码：`0` 成功；`1` 失败（锁被占用、合并冲突、校验阻断等）；`130` 中断。
 
@@ -78,8 +79,9 @@ python tools/workflow_guard.py lock release checkout
    `origin/main`），在里面合并、校验、推送，成功后自动清理。
 3. **校验**：默认在合并工作树里跑 `src/prompts-tools/tools/validate.py`
    （退出码 `1` 阻断、`2` 警告放行）；`--no-verify` 跳过，`--verify-cmd` 自定义。
-4. **推送**：`git push --force-with-lease <remote> HEAD:main`。远端在 fetch 之后又被
-   CI 推进时，自动再整合一次并重试一次；仍失败则报错，**绝不覆盖**。
+4. **推送**：经 `tools/git_push.py` 走 **ssh / https 双通道 failover**——先 `origin`（ssh），
+   失败切 `origin-https`（https）；两条都失败即停止、不重试。默认带 `--force-with-lease`。
+   远端在 fetch 之后又被 CI 推进时，自动再整合一次并重试一次；仍失败则报错，**绝不覆盖**。
 5. **冲突**：保留 `.worktrees/_merge` 供人工处理，远端不受影响。
    处理完重试 `merge <name>`；放弃用 `merge --cleanup`。
 6. **不改写任务分支**：默认 `--no-ff`，任务分支历史原样保留。
@@ -107,3 +109,18 @@ GitHub Actions 在远端 runner 上跑，不经过本地锁；它们直接向 `m
 - `.git/workflow-guard/*.lock`：锁。
 - 二者都在 `.git/` 内，不入库、不进提交、跨 worktree 共享。
 - 仓库重置 / 换机后状态自然消失，无需迁移。
+
+## 八、GitHub 双通道推送（ssh / https failover）
+
+- **背景**：GitHub 的 ssh 与 https 通道会各自网络抖动（如 443 被 reset、ssh 不通），
+  单通道在抖动时需要人工重试；而 git 原生多 `pushurl` **不会** failover
+  （实测 https 被 reset 后直接 fatal，不回退 ssh），所以 failover 必须由外层完成。
+- **机制**：`tools/git_push.py` 先走主通道 `origin`（ssh），失败切备用通道
+  `origin-https`（https）；**两条都失败即停止，不重试**（避免把抖动放大成刷屏重试）。
+  每条通道只调用一次 `git push`。
+- **配置（本 repo 本地 git config，不入库）**：
+  - `origin` → `git@github.com:hmbphxkw76-byte/jp-life-work.git`（ssh）
+  - `origin-https` → `https://github.com/hmbphxkw76-byte/jp-life-work.git`（https）
+- **接入点**：`merge` 与 `sync --push-local` 的推送均经此工具；`--push-fallback` 可覆盖备用通道
+  （传空字符串则不 failover）。
+- **仅限本 repo**：本 repo 永不使用 GitLab，推送 / 合并 / 提交只走 GitHub。
