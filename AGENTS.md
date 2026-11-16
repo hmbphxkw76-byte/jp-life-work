@@ -73,6 +73,9 @@ CI 侧：`html-sync` 负责推送后确定性重生成 HTML / 汇总页；`audit
 
 - 报告命名 `reports/YYYY-MM-<主题slug>.md` + `.html`；主题目录 `NN-<slug>/`。
 - 校验入口：`python src/prompts-tools/tools/validate.py`（退出码 1 阻断 / 2 警告放行）。
+- **批量更新唤醒词**：收到「本月报告全量更新」（别名：月度报告批量更新 / 一键更新本月报告 /
+  执行本月报告更新 / 月度更新 / 月更 / 全更）→ 读取并严格执行
+  `docs/月度批量更新唤醒词.md`（七步流程 + 平台挂载）。
 - **工作区卫生**：提交前运行 `python tools/cleanup_workspace.py`（缓存 / 临时文件 / 运行日志），
   随后 `git status` 应无未跟踪残留；`--check` 可用于自检（发现残留退出码 1）。
   运行日志不入库（`.gitignore`：`src/vocabulary/data/*.log`）。流水线各阶段由
