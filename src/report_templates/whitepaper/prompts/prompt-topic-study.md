@@ -1,9 +1,9 @@
 # {{REGION}} · {{TOPIC}} · 专题续作提示词（白皮书·专题深度型 · 泛用版 · 选题制）
 
-> **用途**：专题续作统一入口——新选题白皮书、年度系列篇、框架修订篇（当次类型由 {{STUDY_TYPE}} 指定）。泛用版业务提示词：建新业务线时复制本文件至 `{REGION}/{PROPERTY}/prompts/`，替换变量与 TODO 后即可运行。
+> **用途**：专题续作统一入口——新选题白皮书、年度系列篇、框架修订篇（当次类型由 {{STUDY_TYPE}} 指定）。泛用版业务提示词：建新业务线时复制本文件至 `{TOPIC_DIR}/prompts/`，替换变量与 TODO 后即可运行。
 > **产出**：新选题件 `reports/{{YYYY-MM}}-<slug>.md` 或框架修订件 `reports/{{YYYY-MM-DD}}-主题-修订.md`、年度系列篇 `reports/{{YYYY-MM}}-<slug>.md`（+ 同名 html）。新选题与修订篇命名不在工具链标准正则内，validate 仅 WARN 不阻断，属预期。
 >
-> **继承声明（四层体系）**：本文件 = [通用基座](../../../prompt-generic-base.md) × [监测报告通用规范](../../monitoring-common-spec.md) × [专题续作类型模板（白皮书·专题深度型）](../prompt-topic-study-template.md) × 业务专属配置（实例化后为 `./business-config.md`；泛用版暂缺，业务项以 TODO 标注）。冲突时以业务提示词（即本文件实例化版）为准。
+> **继承声明（四层体系）**：本文件 = [通用基座](../../src/report_templates/prompt-generic-base.md) × [监测报告通用规范](../../src/report_templates/monitoring-common-spec.md) × [专题续作类型模板（白皮书·专题深度型）](../../src/report_templates/whitepaper/prompt-topic-study-template.md) × 业务专属配置（实例化后为 `./business-config.md`；泛用版暂缺，业务项以 TODO 标注）。冲突时以业务提示词（即本文件实例化版）为准。
 
 ---
 
@@ -13,14 +13,14 @@
 {{REGION}} / {{TOPIC}}    = 固定值，见实例化后的 business-config.md
 {{CURRENT_DATE}}          = 本次执行日期，格式 YYYY-MM-DD
 {{STUDY_TYPE}}            = 本次类型（新选题 / 年度系列 / 框架修订，TODO：选题名称）
-{{BASELINE_REPORT_PATH}}  = reports/{{YYYY-MM}}_baseline_report.md
+{{BASELINE_REPORT_PATH}}  = reports/{{YYYY-MM}}-<slug>.md
 {{PREVIOUS_REPORT_PATH}}  = 最近一篇同系列白皮书路径（如无则空）
 {{REGISTRY_PATH}}         = data/（TODO）
 {{OUTPUT_PATH}}           = 由 {{STUDY_TYPE}} 决定（见用途）
 {{REPORT_VERSION}}        = 本次版本号，格式 vYYYY.MM.DD
 ```
 
-**任务目标**：按[专题续作类型模板](../prompt-topic-study-template.md)续作协议执行「选题准入 → 框架复用 / 修订 → 深度论证 → 审校发布」闭环；系列篇与上年篇逐节对照，上年观点原文保留、复判结论（维持 / 修正 / 撤回）显式声明；框架修订篇须新旧框架对照，不静默替换；无准入选题不启动。
+**任务目标**：按[专题续作类型模板](../../src/report_templates/whitepaper/prompt-topic-study-template.md)续作协议执行「选题准入 → 框架复用 / 修订 → 深度论证 → 审校发布」闭环；系列篇与上年篇逐节对照，上年观点原文保留、复判结论（维持 / 修正 / 撤回）显式声明；框架修订篇须新旧框架对照，不静默替换；无准入选题不启动。
 
 ---
 
@@ -53,6 +53,11 @@
 - 交付格式：md + 同目录自包含 HTML（`python src/prompts-tools/tools/md2html.py`）；HTML 须通过 `python src/prompts-tools/tools/lint_reports.py`。
 
 ---
+
+## 落盘后审计（提交前必做）
+
+落盘后依次运行 `python src/prompts-tools/tools/auto_verify.py --report <报告相对路径>`（生成后自动验证 V1–V5，幂等写回「## 自动验证结果」并自动提交审计）、`python src/prompts-tools/tools/audit_preflight.py --report <报告相对路径>`、`python src/prompts-tools/tools/audit_check.py --report <报告相对路径>`，修正全部 P0/P1 后执行 `python src/prompts-tools/tools/audit_pipeline.py --submit --report <报告相对路径>` 提交审计（未通过初审不得合并）。
+
 ## 版本记录
 
 | 版本 | 日期 | 变更 | 说明 |

@@ -40,7 +40,7 @@
 | 专题调研 | `reports/{{YYYY-MM}}-<slug>.md`（+ 同名 html） | 写入报告内（vYYYY.MM.DD） |
 | 年度复测 | `reports/{{YYYY-MM}}-<slug>.md`（+ 同名 html） | 同上 |
 
-- 专题调研命名不在 `prompts/tools` 标准正则内，`validate.py` 仅提示 WARN 不阻断，属预期行为；年度复测命名与标准正则兼容。
+- 专题调研命名不在 `src/prompts-tools/tools` 标准正则内，`validate.py` 仅提示 WARN 不阻断，属预期行为；年度复测命名与标准正则兼容。
 - 交付格式：md 源稿 + 同目录自包含 HTML（`src/prompts-tools/tools/md2html.py` 同步生成）；HTML 必须通过 `src/prompts-tools/tools/lint_reports.py`。
 - 基线报告常驻 `reports/` 顶层，不进入归档。
 
@@ -62,7 +62,7 @@
 ---
 ## 落盘后审计（提交前必做）
 
-落盘后依次运行 `python src/prompts-tools/tools/audit_preflight.py --report <报告相对路径>`、`python src/prompts-tools/tools/audit_check.py --report <报告相对路径>`，修正全部 P0/P1 后执行 `python src/prompts-tools/tools/audit_pipeline.py --submit --report <报告相对路径>` 提交审计（未通过初审不得合并）。
+落盘后依次运行 `python src/prompts-tools/tools/auto_verify.py --report <报告相对路径>`（生成后自动验证 V1–V5，幂等写回「## 自动验证结果」并自动提交审计）、`python src/prompts-tools/tools/audit_preflight.py --report <报告相对路径>`、`python src/prompts-tools/tools/audit_check.py --report <报告相对路径>`，修正全部 P0/P1 后执行 `python src/prompts-tools/tools/audit_pipeline.py --submit --report <报告相对路径>` 提交审计（未通过初审不得合并）。
 
 ## 版本记录
 

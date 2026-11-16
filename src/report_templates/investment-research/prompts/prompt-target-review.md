@@ -1,9 +1,9 @@
 # {{REGION}} · {{TOPIC}} · 标的复核提示词（投资分析与尽调型 · 泛用版 · 定期复核 + 事件触发）
 
-> **用途**：定期复核（财报 / 定期数据窗口）与事件触发复核（重大事项披露后）统一入口。泛用版业务提示词：建新业务线时复制本文件至 `{REGION}/{PROPERTY}/prompts/`，替换变量与 TODO 后即可运行。
-> **产出**：更新版报告（`reports/{{YYYY-MM}}-<slug>.md` 或 `reports/{{YYYY-MM}}-<slug>.md`，由业务配置规定）或事件专项修订件 `reports/{{YYYY-MM}}-<slug>.md`（命名不在标准正则内，validate 仅 WARN 不阻断，属预期）。
+> **用途**：定期复核（财报 / 定期数据窗口）与事件触发复核（重大事项披露后）统一入口。泛用版业务提示词：建新业务线时复制本文件至 `{TOPIC_DIR}/prompts/`，替换变量与 TODO 后即可运行。
+> **产出**：更新版报告 `reports/{{YYYY-MM}}-<slug>.md`（+ 同名 html，由业务配置规定）或事件专项修订件 `reports/{{YYYY-MM}}-<slug>.md`（命名不在标准正则内，validate 仅 WARN 不阻断，属预期）。
 >
-> **继承声明（四层体系）**：本文件 = [通用基座](../../../prompt-generic-base.md) × [监测报告通用规范](../../monitoring-common-spec.md) × [事件触发更新类型模板（投资分析与尽调型）](../prompt-target-update-template.md) × 业务专属配置（实例化后为 `./business-config.md`；泛用版暂缺，业务项以 TODO 标注）。冲突时以业务提示词（即本文件实例化版）为准。
+> **继承声明（四层体系）**：本文件 = [通用基座](../../src/report_templates/prompt-generic-base.md) × [监测报告通用规范](../../src/report_templates/monitoring-common-spec.md) × [事件触发更新类型模板（投资分析与尽调型）](../../src/report_templates/investment-research/prompt-target-update-template.md) × 业务专属配置（实例化后为 `./business-config.md`；泛用版暂缺，业务项以 TODO 标注）。冲突时以业务提示词（即本文件实例化版）为准。
 
 ---
 
@@ -14,7 +14,7 @@
 {{CURRENT_DATE}}          = 本次执行日期，格式 YYYY-MM-DD
 {{TRIGGER_TYPE}}          = 本次触发类型（定期复核 / 事件名称，TODO）
 {{PREVIOUS_REPORT_PATH}}  = 最近一期更新版路径（首次复核时为空，仅锚定首次覆盖）
-{{BASELINE_REPORT_PATH}}  = reports/{{YYYY-MM}}_baseline_report.md
+{{BASELINE_REPORT_PATH}}  = reports/{{YYYY-MM}}-<slug>.md
 {{REGISTRY_PATH}}         = data/（TODO：标的档案文件名）
 {{OUTPUT_PATH}}           = 由 {{TRIGGER_TYPE}} 决定（见用途）
 {{REPORT_VERSION}}        = 本次版本号，格式 vYYYY.MM.DD
@@ -26,7 +26,7 @@
 
 ## 一、节拍与触发
 
-定期复核 + 事件触发设计见[事件触发更新类型模板第一节](../prompt-target-update-template.md)；触发器清单（TODO：并购 / 管理层变动 / 诉讼 / 政策冲击等 `事件 → 受影响模块`）由业务配置维护；重大事项当期核实并复核结论，不等待定期窗口。
+定期复核 + 事件触发设计见[事件触发更新类型模板第一节](../../src/report_templates/investment-research/prompt-target-update-template.md)；触发器清单（TODO：并购 / 管理层变动 / 诉讼 / 政策冲击等 `事件 → 受影响模块`）由业务配置维护；重大事项当期核实并复核结论，不等待定期窗口。
 
 ## 二、项目专属硬性约束
 
@@ -55,6 +55,11 @@
 - 命名遵循仓库统一约定；首次覆盖报告常驻 `reports/` 顶层，不进入归档；更新版按归档保留策略执行。
 
 ---
+
+## 落盘后审计（提交前必做）
+
+落盘后依次运行 `python src/prompts-tools/tools/auto_verify.py --report <报告相对路径>`（生成后自动验证 V1–V5，幂等写回「## 自动验证结果」并自动提交审计）、`python src/prompts-tools/tools/audit_preflight.py --report <报告相对路径>`、`python src/prompts-tools/tools/audit_check.py --report <报告相对路径>`，修正全部 P0/P1 后执行 `python src/prompts-tools/tools/audit_pipeline.py --submit --report <报告相对路径>` 提交审计（未通过初审不得合并）。
+
 ## 版本记录
 
 | 版本 | 日期 | 变更 | 说明 |

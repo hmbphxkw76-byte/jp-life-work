@@ -8,7 +8,7 @@
 
 ## 一、基线期定位
 
-- **产出物是机制文档，不是报告正文**：九节机制文档落盘 `reports/{{YYYY-MM}}_baseline_report.html`，作为全部后续周报的结构与结论锚。
+- **产出物是机制文档，不是报告正文**：九节机制文档落盘 `reports/{{YYYY-MM}}-<slug>.md`（+ 同名 `.html`），作为全部后续周报的结构与结论锚。
 - **正常运行永不重跑基线**。仅两种情形允许重建：台账与报告全部丢失（灾难恢复）；八节固定结构经维护规范批准变更。
 
 ## 二、九节固定结构（顺序、标题逐字固化，不得增删改）
@@ -33,7 +33,7 @@
 
 ## 四、输出与命名
 
-- 文件名：`reports/{{YYYY-MM}}_baseline_report.html`（月份 = 机制建立月）。
+- 文件名：`reports/{{YYYY-MM}}-<slug>.md`（+ 同名 `.html`；月份 = 机制建立月）。
 - 九节结构、标题逐字固化；基线报告保留简化锚点导航（非 `.report-nav`）。
 - 基线报告常驻 `reports/` 顶层，不进入归档。
 
@@ -48,7 +48,7 @@
 ---
 ## 落盘后审计（提交前必做）
 
-落盘后依次运行 `python src/prompts-tools/tools/audit_preflight.py --report <报告相对路径>`、`python src/prompts-tools/tools/audit_check.py --report <报告相对路径>`，修正全部 P0/P1 后执行 `python src/prompts-tools/tools/audit_pipeline.py --submit --report <报告相对路径>` 提交审计（未通过初审不得合并）。
+落盘后依次运行 `python src/prompts-tools/tools/auto_verify.py --report <报告相对路径>`（生成后自动验证 V1–V5，幂等写回「## 自动验证结果」并自动提交审计）、`python src/prompts-tools/tools/audit_preflight.py --report <报告相对路径>`、`python src/prompts-tools/tools/audit_check.py --report <报告相对路径>`，修正全部 P0/P1 后执行 `python src/prompts-tools/tools/audit_pipeline.py --submit --report <报告相对路径>` 提交审计（未通过初审不得合并）。
 
 ## 版本记录
 

@@ -2,7 +2,7 @@
 
 > **用途**：监测机制**建立期**的报告类型模板。产出首期基线报告与配套指标台账，作为后续所有周期报告（月 / 季 / 年）的对比锚与制度基础。
 >
-> **继承声明（四层体系）**：业务提示词 = [通用基座](./prompt-generic-base.md) × [监测报告通用规范](./monitoring-common-spec.md) × 本文件 × 业务专属配置。质量规则见通用基座与通用规范；本文件规定基线报告的差异项与结构骨架；冲突时以业务提示词为准。
+> **继承声明（四层体系）**：业务提示词 = [通用基座](../prompt-generic-base.md) × [监测报告通用规范](../monitoring-common-spec.md) × 本文件 × 业务专属配置。质量规则见通用基座与通用规范；本文件规定基线报告的差异项与结构骨架；冲突时以业务提示词为准。
 
 ---
 
@@ -79,7 +79,7 @@
 
 ## 落盘后审计（提交前必做）
 
-落盘后依次运行 `python src/prompts-tools/tools/audit_preflight.py --report <报告相对路径>`、`python src/prompts-tools/tools/audit_check.py --report <报告相对路径>`，修正全部 P0/P1 后执行 `python src/prompts-tools/tools/audit_pipeline.py --submit --report <报告相对路径>` 提交审计（未通过初审不得合并）。
+落盘后依次运行 `python src/prompts-tools/tools/auto_verify.py --report <报告相对路径>`（生成后自动验证 V1–V5，幂等写回「## 自动验证结果」并自动提交审计）、`python src/prompts-tools/tools/audit_preflight.py --report <报告相对路径>`、`python src/prompts-tools/tools/audit_check.py --report <报告相对路径>`，修正全部 P0/P1 后执行 `python src/prompts-tools/tools/audit_pipeline.py --submit --report <报告相对路径>` 提交审计（未通过初审不得合并）。
 
 ## 版本记录
 

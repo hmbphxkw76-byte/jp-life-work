@@ -1,9 +1,9 @@
 # {{REGION}} · {{TOPIC}} · 快评机制建立提示词（快评·事件点评型 · 泛用版）
 
-> **用途**：执行「{{REGION}} {{TOPIC}} 快评机制」的**机制建立**任务：产出快评机制基线文档（事件监测日历、预期台账、快评框架）。**基线期不出快评正文**，只建机制。泛用版业务提示词：建新业务线时复制本文件至 `{REGION}/{PROPERTY}/prompts/`，替换变量与 TODO 后即可运行。
-> **产出**：机制文档（md 源稿 + 同目录自包含 HTML），落盘 `{{OUTPUT_PATH}}`（`reports/{{YYYY-MM}}_baseline_report.md`）+ 预期台账（`{{REGISTRY_PATH}}`）。
+> **用途**：执行「{{REGION}} {{TOPIC}} 快评机制」的**机制建立**任务：产出快评机制基线文档（事件监测日历、预期台账、快评框架）。**基线期不出快评正文**，只建机制。泛用版业务提示词：建新业务线时复制本文件至 `{TOPIC_DIR}/prompts/`，替换变量与 TODO 后即可运行。
+> **产出**：机制文档（md 源稿 + 同目录自包含 HTML），落盘 `{{OUTPUT_PATH}}`（`reports/{{YYYY-MM}}-<slug>.md`）+ 预期台账（`{{REGISTRY_PATH}}`）。
 >
-> **继承声明（四层体系）**：本文件 = [通用基座](../../../prompt-generic-base.md) × [监测报告通用规范](../../monitoring-common-spec.md) × [基线报告类型模板（快评·事件点评型）](../prompt-baseline-setup-template.md) × 业务专属配置（实例化后为 `./business-config.md`；泛用版暂缺，业务项以 TODO 标注）。冲突时以业务提示词（即本文件实例化版）为准。
+> **继承声明（四层体系）**：本文件 = [通用基座](../../src/report_templates/prompt-generic-base.md) × [监测报告通用规范](../../src/report_templates/monitoring-common-spec.md) × [基线报告类型模板（快评·事件点评型）](../../src/report_templates/flash-commentary/prompt-baseline-setup-template.md) × 业务专属配置（实例化后为 `./business-config.md`；泛用版暂缺，业务项以 TODO 标注）。冲突时以业务提示词（即本文件实例化版）为准。
 
 ---
 
@@ -13,7 +13,7 @@
 {{REGION}} / {{TOPIC}}    = 固定值，实例化时写入 business-config.md
 {{CURRENT_DATE}}          = 本次执行日期，格式 YYYY-MM-DD
 {{BASELINE_DATE}}         = 首期基线日期
-{{OUTPUT_PATH}}           = reports/{{YYYY-MM}}_baseline_report.md
+{{OUTPUT_PATH}}           = reports/{{YYYY-MM}}-<slug>.md
 {{REGISTRY_PATH}}         = data/（TODO：预期台账文件名）
 {{REGISTRY_FORMAT}}       = md-table（TODO：按业务配置）
 {{SOURCE_LANGUAGE_RULE}}  = （TODO：来源语言规则）
@@ -36,7 +36,7 @@
 
 ## 三、基线锚定
 
-机制文档属性、预期台账首建等通用差异见[基线类型模板第一节](../prompt-baseline-setup-template.md)。基线产出后，`{{BASELINE_REPORT_PATH}}` 即指向本机制文档；节标题为固化锚，正常运行**永不重跑**基线提示词。
+机制文档属性、预期台账首建等通用差异见[基线类型模板第一节](../../src/report_templates/flash-commentary/prompt-baseline-setup-template.md)。基线产出后，`{{BASELINE_REPORT_PATH}}` 即指向本机制文档；节标题为固化锚，正常运行**永不重跑**基线提示词。
 
 ## 四、追踪表（预期台账联动）
 
@@ -44,13 +44,18 @@
 
 ## 五、结构骨架
 
-八节固定骨架见[基线类型模板第三节](../prompt-baseline-setup-template.md)；业务固化锚节标题（TODO：实例化后声明并逐字继承）。
+八节固定骨架见[基线类型模板第三节](../../src/report_templates/flash-commentary/prompt-baseline-setup-template.md)；业务固化锚节标题（TODO：实例化后声明并逐字继承）。
 
 ## 六、渲染与交付
 
 - 交付格式：md + 同目录自包含 HTML（`python src/prompts-tools/tools/md2html.py`）；HTML 须通过 `python src/prompts-tools/tools/lint_reports.py`；基线导航采用简化锚点目录。
 
 ---
+
+## 落盘后审计（提交前必做）
+
+落盘后依次运行 `python src/prompts-tools/tools/auto_verify.py --report <报告相对路径>`（生成后自动验证 V1–V5，幂等写回「## 自动验证结果」并自动提交审计）、`python src/prompts-tools/tools/audit_preflight.py --report <报告相对路径>`、`python src/prompts-tools/tools/audit_check.py --report <报告相对路径>`，修正全部 P0/P1 后执行 `python src/prompts-tools/tools/audit_pipeline.py --submit --report <报告相对路径>` 提交审计（未通过初审不得合并）。
+
 ## 版本记录
 
 | 版本 | 日期 | 变更 | 说明 |

@@ -11,36 +11,34 @@
 ### 1.1 目录结构约定
 
 ```
-macropulse-reports/
-├── report_templates/                     # 通用层（本目录，禁止出现业务关键词）
-│   ├── prompt-generic-base.md            # 通用基座（本文件，类型中立）
-│   ├── monitoring-common-spec.md         # 监测报告通用规范（跨类型共享最低渲染标准）
-│   ├── template-registry.md              # 类型注册表（分类架构接入点）
-│   ├── market-monitoring/                # 类型：市场指标监测型
-│   │   ├── prompt-baseline-setup-template.md
-│   │   ├── prompt-monthly-monitor-template.md
-│   │   ├── prompt-quarterly-analysis-template.md
-│   │   └── prompt-annual-review-template.md
-│   └── employment-research/              # 类型：职业就业调研型
-│       ├── prompt-baseline-setup-template.md
-│       └── prompt-update-template.md
-└── {REGION}/{PROPERTY}/                  # 业务层（按「地区 / 业务类型」平铺）
+jp-life-work/
+├── src/
+│   ├── report_templates/                     # 通用层（禁止出现业务关键词）
+│   │   ├── prompt-generic-base.md            # 通用基座（本文件，类型中立）
+│   │   ├── monitoring-common-spec.md         # 监测报告通用规范（跨类型共享最低渲染标准）
+│   │   ├── template-registry.md              # 类型注册表（分类架构接入点）
+│   │   └── <类型ID>/                          # 类型模板目录（如 market-monitoring/）
+│   │       ├── prompt-baseline-setup-template.md
+│   │       └── prompt-<cycle>-template.md
+│   └── prompts-tools/tools/                  # 工具链（validate / md2html / compliance_check / audit_*）
+└── NN-<slug>/                                # 业务层（主题目录，如 01-ssw-driver；旧两层 {REGION}/{PROPERTY}/ 仍兼容）
     ├── prompts/
-    │   ├── business-config.md            # 业务专属配置（变量 / 来源 / 口径 / 阈值）
-    │   └── prompt-{cycle}.md             # 业务周期提示词（继承对应类型模板）
-    ├── data/                             # 指标台账
-    ├── script/                           # 业务专属脚本（可选）
-    └── reports/                          # 报告产出
+    │   ├── business-config.md                # 业务专属配置（变量 / 来源 / 口径 / 阈值）
+    │   └── prompt-<cycle>.md                 # 业务周期提示词（继承对应类型模板）
+    ├── data/                                 # 指标台账
+    ├── reports/                              # 报告产出
+    └── handbook/                             # 知识手册（可选，见 handbook-split-standard.md）
 ```
 
-- `report_templates/` 内任何文件**严禁**出现具体地区名、业务类型名、专属机构名、专属指标数值。
+- `src/report_templates/` 内任何文件**严禁**出现具体地区名、业务类型名、专属机构名、专属指标数值。
+- **链接深度口径**：业务提示词（位于 `NN-<slug>/prompts/`）对通用层的引用统一写 `../../src/report_templates/...`；脚手架 / 泛用版内嵌提示词的链接同样按此口径（复制后位置）书写。类型模板之间互引用用 `../`。
 - 通用逻辑修改只改通用层根部文件，自动对所有业务线生效；类型模板修改只对该类型业务线生效；业务线之间互不影响。类型清单与新增类型接入步骤见[类型注册表](./template-registry.md)。
 
 ### 1.2 新增业务线步骤（不改通用模板）
 
-1. 复制 `{REGION}/{PROPERTY}/` 结构，建立 `prompts/`、`data/`、`reports/`（可选 `script/`）。
+1. 建立 `NN-<slug>/` 主题目录（如 `01-ssw-driver`），含 `prompts/`、`data/`、`reports/`（可选 `script/`、`handbook/`）；旧两层 `{REGION}/{PROPERTY}/` 仍被工具链兼容。
 2. 撰写 `business-config.md`：填入变量区、来源优先级实例化、术语口径、受众定位、信号阈值。
-3. 按业务类型注册的节拍设计建立周期提示词（头部继承声明指向 `../../../report_templates/<类型ID>/` 下对应类型模板，类型清单见[类型注册表](./template-registry.md)），正文只写业务专属内容。
+3. 按业务类型注册的节拍设计建立周期提示词（头部继承声明指向 `../../src/report_templates/<类型ID>/` 下对应类型模板，类型清单见[类型注册表](./template-registry.md)），正文只写业务专属内容。
 4. 首期运行基线提示词，建立台账与基线锚。
 
 ---
@@ -64,6 +62,20 @@ macropulse-reports/
 {{REPORT_VERSION}}       = 本期版本号
 {{FRESHNESS_PRIORITY}}   = 时效优先级（业务配置固定值，默认：最新官方页 > 上期值 > 预测值）
 {{SOURCE_LANGUAGE_RULE}} = 来源语言规则（业务配置固定值，如：仅英文 / 仅日文官方+英文权威）
+{{REPO_RAW_URL_BASE}}   = 仓库原始文件基址（业务配置固定值，用于来源链接拼接）
+{{REGISTRY_FILE}}      = 登记册文件名（业务配置固定值，用于构造台账路径）
+```
+
+**类型专属变量（由类型模板扩展，统一登记于此；命名一律用 `{{}}` 双花括号）**：
+
+```
+{{CADENCE}}       取值扩展：周（trend-weekly 周报）
+{{DATA_CUTOFF}}    = 数据截止日（周报命名与标题锚定此日期，非执行日）
+{{EVENT_NAME}}     = 本次触发事件名称（事件触发型）
+{{STUDY_TYPE}}     = 本次专题类型（项目制：概念测试 / 满意度复测 / 画像刷新 / 决策路径）
+{{PROJECT_TYPE}}   = 本次项目类型（项目制：新项目论证 / 项目复盘）
+{{TRIGGER_TYPE}}   = 本次触发类型（事件触发 / 定期复核 / 新政策 / 修订 / 细则 / 年度复盘）
+{{YEAR}} / {{NEXT_YEAR}} / {{YYYY}} / {{YYYY-MM}} = 命名用时间变量（由 {{CURRENT_DATE}} 推导）
 ```
 
 **变量纪律**：
@@ -148,9 +160,10 @@ macropulse-reports/
 - 报告完成后必须执行该报告类型模板的质量自检清单。
 - **交付与审计协议（唯一口径，提示词 / AGENTS / CI 三体系一致）**：报告交付物 = `reports/YYYY-MM-<slug>.md` 源稿 + 同名自包含 `.html`。落盘后、提交前必须按序完成（缺一不得提交）：
   1. **HTML 生成**：`python src/prompts-tools/tools/md2html.py`（仓库根目录执行；任务工作树内运行，共享检出目录禁止），随后 `python src/prompts-tools/tools/lint_reports.py --new-only` 校验交付物；
-  2. **落盘前自检**：`python src/prompts-tools/tools/audit_preflight.py --report <报告相对路径>`（P0/P1 必须修正）；
-  3. **多层级校验**：`python src/prompts-tools/tools/audit_check.py --report <报告相对路径>`（L1–L5，P0/P1 必须修正）；
-  4. **提交审计**：`python src/prompts-tools/tools/audit_pipeline.py --submit --report <报告相对路径>`（提交初审，进入审计状态机）。
+  2. **生成后自动验证（无人值守入口）**：`python src/prompts-tools/tools/auto_verify.py --report <报告相对路径>`——依次执行 V1–V5 规则集，通过则幂等写回报告「## 自动验证结果」章节、重新生成 HTML 并自动 `audit_pipeline --submit`；失败退出码 1 并打印逐条定位，不写回、不提交（可用 `--dry-run` 只验证 / `--no-submit`）；
+  3. **落盘前自检**：`python src/prompts-tools/tools/audit_preflight.py --report <报告相对路径>`（P0/P1 必须修正）；
+  4. **多层级校验**：`python src/prompts-tools/tools/audit_check.py --report <报告相对路径>`（L1–L5，P0/P1 必须修正）；
+  5. **提交审计**：`python src/prompts-tools/tools/audit_pipeline.py --submit --report <报告相对路径>`（第 2 步已通过时自动完成，可复核）。
   合并门禁：`python src/prompts-tools/tools/audit_pipeline.py --gate`（PR / main 推送；受检报告须 `audited` + 指纹匹配 + 有效 L5 证据）。CI 侧 `html-sync` 负责推送后确定性重生成，`audit-gate` 负责门禁与全量校验。流程与状态见《审计报告标准化管理体系》。
 
 ---
@@ -164,6 +177,7 @@ macropulse-reports/
 - [ ] 渲染与排版符合[监测报告通用规范](./monitoring-common-spec.md)
 - [ ] 已产出「数据变更摘要」与「待复核清单」
 - [ ] 已运行 `md2html.py` 生成同名 HTML 并通过 `lint_reports.py --new-only`
+- [ ] 已运行 `auto_verify.py --report`（V1–V5 通过，报告含「## 自动验证结果」）
 - [ ] 已运行 `audit_preflight.py --report` 且无 P0/P1
 - [ ] 已运行 `audit_check.py --report` 并修正全部 P0/P1
 - [ ] 已 `audit_pipeline.py --submit` 提交初审（未通过初审不得合并）
@@ -178,5 +192,6 @@ macropulse-reports/
 | v1.0 | 2026-11-13 | 初始版本 | 从业务提示词中抽离通用约束、变量框架、来源分级、锚定与更新协议，完成通用化 |
 | v1.1 | 2026-11-13 | 类型分类架构 | 标题改类型中立；引入类型注册表与类型模板分目录（market-monitoring / employment-research）；1.2 接入步骤同步 |
 | v1.2 | 2026-11-15 | 边界集中 | 新增硬性约束第 7 条：模块边界声明统一集中在单独章节 |
+| v1.3 | 2026-11-16 | 链接口径 / 变量登记 / 自动验证 | 1.1 目录树改为 `src/report_templates/` + `NN-<slug>/` 单层主题目录并新增链接深度口径；第二节登记 `{{REPO_RAW_URL_BASE}}` / `{{REGISTRY_FILE}}` 与类型专属变量；第八节交付协议补 `auto_verify.py`（V1–V5）为第 2 步，九节自检同步 |
 
 **结束通用基座。**

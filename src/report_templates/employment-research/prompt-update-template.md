@@ -44,7 +44,7 @@
 | 季度 | `reports/{{YYYY-MM}}-<slug>.md`（+ 同名 html） | 同上 |
 | 年度 | `reports/{{YYYY-MM}}-<slug>.md`（+ 同名 html）+ 登记册年度新版 | 同上 |
 
-- 文件命名遵循仓库统一约定（`prompts/tools` 按此识别）；业务线如需保留旧版本文号，写入报告文首/文末标注，不进入文件名。
+- 文件命名遵循仓库统一约定（`src/prompts-tools/tools` 按此识别）；业务线如需保留旧版本文号，写入报告文首/文末标注，不进入文件名。
 - 交付格式：md 源稿 + 同目录自包含 HTML（`src/prompts-tools/tools/md2html.py` 同步生成）；HTML 必须通过 `src/prompts-tools/tools/lint_reports.py`。
 - 基线报告常驻 `reports/` 顶层，不进入归档；周期报告按归档保留策略执行。
 
@@ -67,7 +67,7 @@
 ---
 ## 落盘后审计（提交前必做）
 
-落盘后依次运行 `python src/prompts-tools/tools/audit_preflight.py --report <报告相对路径>`、`python src/prompts-tools/tools/audit_check.py --report <报告相对路径>`，修正全部 P0/P1 后执行 `python src/prompts-tools/tools/audit_pipeline.py --submit --report <报告相对路径>` 提交审计（未通过初审不得合并）。
+落盘后依次运行 `python src/prompts-tools/tools/auto_verify.py --report <报告相对路径>`（生成后自动验证 V1–V5，幂等写回「## 自动验证结果」并自动提交审计）、`python src/prompts-tools/tools/audit_preflight.py --report <报告相对路径>`、`python src/prompts-tools/tools/audit_check.py --report <报告相对路径>`，修正全部 P0/P1 后执行 `python src/prompts-tools/tools/audit_pipeline.py --submit --report <报告相对路径>` 提交审计（未通过初审不得合并）。
 
 ## 版本记录
 

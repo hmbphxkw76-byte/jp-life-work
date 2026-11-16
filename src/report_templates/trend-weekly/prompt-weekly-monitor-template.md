@@ -38,9 +38,9 @@
 
 | 节拍 | 文件名（业务目录相对路径） | 版本号 |
 |---|---|---|
-| 周报 | `reports/{{YYYY-MM-DD}}_weekly.html`（日期 = 数据截止日） | 写入报告内（vYYYY.MM.DD） |
+| 周报 | `reports/{{YYYY-MM-DD}}_weekly.md`（+ 同名 `.html`；日期 = 数据截止日） | 写入报告内（vYYYY.MM.DD） |
 
-- 文件命名遵循仓库统一约定（`prompts/tools` 按此识别）；**日期为数据截止日而非执行日**，跨月 / 跨年不换名。
+- 文件命名遵循仓库统一约定（`src/prompts-tools/tools` 按此识别）；**日期为数据截止日而非执行日**，跨月 / 跨年不换名。
 - 交付格式由业务配置声明：默认 md 源稿 + 同目录自包含 HTML；富样式手写 HTML 的业务线在业务配置声明「纯 HTML 交付」，md 源稿移存 `sources/`（不参与 `md2html.py` 自动转换，防止覆盖手工渲染）。
 - HTML 必须通过 `src/prompts-tools/tools/lint_reports.py`与 `src/prompts-tools/tools/compliance_check.py`（八节骨架）。
 - 周期报告按归档保留策略执行（weekly 保留 12 期）。
@@ -63,7 +63,7 @@
 ---
 ## 落盘后审计（提交前必做）
 
-落盘后依次运行 `python src/prompts-tools/tools/audit_preflight.py --report <报告相对路径>`、`python src/prompts-tools/tools/audit_check.py --report <报告相对路径>`，修正全部 P0/P1 后执行 `python src/prompts-tools/tools/audit_pipeline.py --submit --report <报告相对路径>` 提交审计（未通过初审不得合并）。
+落盘后依次运行 `python src/prompts-tools/tools/auto_verify.py --report <报告相对路径>`（生成后自动验证 V1–V5，幂等写回「## 自动验证结果」并自动提交审计）、`python src/prompts-tools/tools/audit_preflight.py --report <报告相对路径>`、`python src/prompts-tools/tools/audit_check.py --report <报告相对路径>`，修正全部 P0/P1 后执行 `python src/prompts-tools/tools/audit_pipeline.py --submit --report <报告相对路径>` 提交审计（未通过初审不得合并）。
 
 ## 版本记录
 

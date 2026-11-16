@@ -11,7 +11,7 @@
 | 节拍 | 定位 | 触发条件 | 输出 |
 |---|---|---|---|
 | 事件触发解读 | 单份政策解读：新政策 / 修订 / 配套细则出台后启动 | 监测渠道命中（政策发布、征求意见稿、正式生效） | 单份解读报告；政策台账增量更新 |
-| 年度台账复盘 | 政策台账全量复核 + 年度监管态势综述 | 每年固定窗口 | 年度复盘报告（`{{YYYY}}_annual.md`）+ 台账年度新版（另存，不覆盖历史） |
+| 年度台账复盘 | 政策台账全量复核 + 年度监管态势综述 | 每年固定窗口 | 年度复盘报告（`{{YYYY-MM}}-<slug>.md`）+ 台账年度新版（另存，不覆盖历史） |
 
 - **监测触发器**由业务配置维护（格式：`渠道 / 政策名称 → 动作`）；征求意见稿须登记但标注「非最终文本，以正式发布为准」。
 - 无触发时不启动新解读，仅在台账标注「截至本次日期无更新」。
@@ -40,7 +40,7 @@
 | 事件触发解读 | `reports/{{YYYY-MM}}-<slug>.md`（+ 同名 html） | 写入报告内（vYYYY.MM.DD） |
 | 年度台账复盘 | `reports/{{YYYY-MM}}-<slug>.md`（+ 同名 html）+ 台账年度新版 | 同上 |
 
-- 事件触发解读命名不在 `prompts/tools` 标准正则内，`validate.py` 仅提示 WARN 不阻断，属预期行为；年度复盘命名与标准正则兼容。
+- 事件触发解读命名不在 `src/prompts-tools/tools` 标准正则内，`validate.py` 仅提示 WARN 不阻断，属预期行为；年度复盘命名与标准正则兼容。
 - 交付格式：md 源稿 + 同目录自包含 HTML（`src/prompts-tools/tools/md2html.py` 同步生成）；HTML 必须通过 `src/prompts-tools/tools/lint_reports.py`。
 - 基线报告常驻 `reports/` 顶层，不进入归档；解读件按归档保留策略执行。
 
@@ -62,7 +62,7 @@
 ---
 ## 落盘后审计（提交前必做）
 
-落盘后依次运行 `python src/prompts-tools/tools/audit_preflight.py --report <报告相对路径>`、`python src/prompts-tools/tools/audit_check.py --report <报告相对路径>`，修正全部 P0/P1 后执行 `python src/prompts-tools/tools/audit_pipeline.py --submit --report <报告相对路径>` 提交审计（未通过初审不得合并）。
+落盘后依次运行 `python src/prompts-tools/tools/auto_verify.py --report <报告相对路径>`（生成后自动验证 V1–V5，幂等写回「## 自动验证结果」并自动提交审计）、`python src/prompts-tools/tools/audit_preflight.py --report <报告相对路径>`、`python src/prompts-tools/tools/audit_check.py --report <报告相对路径>`，修正全部 P0/P1 后执行 `python src/prompts-tools/tools/audit_pipeline.py --submit --report <报告相对路径>` 提交审计（未通过初审不得合并）。
 
 ## 版本记录
 

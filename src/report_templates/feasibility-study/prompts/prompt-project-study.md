@@ -1,9 +1,9 @@
 # {{REGION}} · {{TOPIC}} · 项目论证提示词（可行性与市场进入型 · 泛用版 · 项目制）
 
-> **用途**：项目制论证统一入口——新市场进入、新产品线、新设点等一次性项目（当次项目范围由 {{PROJECT_TYPE}} 指定）；另覆盖项目实施后复盘。泛用版业务提示词：建新业务线时复制本文件至 `{REGION}/{PROPERTY}/prompts/`，替换变量与 TODO 后即可运行。
+> **用途**：项目制论证统一入口——新市场进入、新产品线、新设点等一次性项目（当次项目范围由 {{PROJECT_TYPE}} 指定）；另覆盖项目实施后复盘。泛用版业务提示词：建新业务线时复制本文件至 `{TOPIC_DIR}/prompts/`，替换变量与 TODO 后即可运行。
 > **产出**：项目论证件 `{{OUTPUT_PATH}}`（`reports/{{YYYY-MM}}-<slug>.md`）或复盘件 `reports/{{YYYY-MM-DD}}-主题-复盘.md`（+ 同名 html）。命名不在工具链标准正则内，validate 仅 WARN 不阻断，属预期。
 >
-> **继承声明（四层体系）**：本文件 = [通用基座](../../../prompt-generic-base.md) × [监测报告通用规范](../../monitoring-common-spec.md) × [项目论证类型模板（可行性与市场进入型）](../prompt-study-template.md) × 业务专属配置（实例化后为 `./business-config.md`；泛用版暂缺，业务项以 TODO 标注）。冲突时以业务提示词（即本文件实例化版）为准。
+> **继承声明（四层体系）**：本文件 = [通用基座](../../src/report_templates/prompt-generic-base.md) × [监测报告通用规范](../../src/report_templates/monitoring-common-spec.md) × [项目论证类型模板（可行性与市场进入型）](../../src/report_templates/feasibility-study/prompt-study-template.md) × 业务专属配置（实例化后为 `./business-config.md`；泛用版暂缺，业务项以 TODO 标注）。冲突时以业务提示词（即本文件实例化版）为准。
 
 ---
 
@@ -13,13 +13,13 @@
 {{REGION}} / {{TOPIC}}    = 固定值，见实例化后的 business-config.md
 {{CURRENT_DATE}}          = 本次执行日期，格式 YYYY-MM-DD
 {{PROJECT_TYPE}}          = 本次类型（新项目论证 / 项目复盘，TODO：项目名称）
-{{BASELINE_REPORT_PATH}}  = reports/{{YYYY-MM}}_baseline_report.md
+{{BASELINE_REPORT_PATH}}  = reports/{{YYYY-MM}}-<slug>.md
 {{REGISTRY_PATH}}         = data/（TODO）
 {{OUTPUT_PATH}}           = 由 {{PROJECT_TYPE}} 决定（见用途）
 {{REPORT_VERSION}}        = 本次版本号，格式 vYYYY.MM.DD
 ```
 
-**任务目标**：按[项目论证类型模板](../prompt-study-template.md)项目协议执行「框架复核 → 多维论证 → 打分判定 → Go/No-Go」闭环；评估维度与判定标准复用基线（调整须声明理由）；复盘档完成假设回验与判定标准有效性复核；继承已修正事实清单；运行后回写框架档案。
+**任务目标**：按[项目论证类型模板](../../src/report_templates/feasibility-study/prompt-study-template.md)项目协议执行「框架复核 → 多维论证 → 打分判定 → Go/No-Go」闭环；评估维度与判定标准复用基线（调整须声明理由）；复盘档完成假设回验与判定标准有效性复核；继承已修正事实清单；运行后回写框架档案。
 
 ---
 
@@ -52,6 +52,11 @@
 - 交付格式：md + 同目录自包含 HTML（`python src/prompts-tools/tools/md2html.py`）；HTML 须通过 `python src/prompts-tools/tools/lint_reports.py`。
 
 ---
+
+## 落盘后审计（提交前必做）
+
+落盘后依次运行 `python src/prompts-tools/tools/auto_verify.py --report <报告相对路径>`（生成后自动验证 V1–V5，幂等写回「## 自动验证结果」并自动提交审计）、`python src/prompts-tools/tools/audit_preflight.py --report <报告相对路径>`、`python src/prompts-tools/tools/audit_check.py --report <报告相对路径>`，修正全部 P0/P1 后执行 `python src/prompts-tools/tools/audit_pipeline.py --submit --report <报告相对路径>` 提交审计（未通过初审不得合并）。
+
 ## 版本记录
 
 | 版本 | 日期 | 变更 | 说明 |

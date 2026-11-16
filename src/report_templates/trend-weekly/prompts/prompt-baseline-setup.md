@@ -1,9 +1,9 @@
 # {{REGION}} · {{TOPIC}} · 基线机制建立提示词（行业趋势周报型 · 泛用版）
 
-> **用途**：首期机制建立（一次性，正常运行永不重跑）。泛用版业务提示词：建新业务线时复制本文件至 `{REGION}/{PROPERTY}/prompts/`，替换变量与 TODO 后即可运行。
+> **用途**：首期机制建立（一次性，正常运行永不重跑）。泛用版业务提示词：建新业务线时复制本文件至 `{TOPIC_DIR}/prompts/`，替换变量与 TODO 后即可运行。
 > **产出**：中文九节机制文档（基线报告），落盘 `{{OUTPUT_PATH}}`。
 >
-> **继承声明（四层体系）**：本文件 = [通用基座](../../../prompt-generic-base.md) × [监测报告通用规范](../../monitoring-common-spec.md) × [基线类型模板（行业趋势周报型）](../prompt-baseline-setup-template.md) × 业务专属配置（实例化后为 `./business-config.md`；泛用版暂缺，业务项以 TODO 标注）。冲突时以业务提示词（即本文件实例化版）为准。
+> **继承声明（四层体系）**：本文件 = [通用基座](../../src/report_templates/prompt-generic-base.md) × [监测报告通用规范](../../src/report_templates/monitoring-common-spec.md) × [基线类型模板（行业趋势周报型）](../../src/report_templates/trend-weekly/prompt-baseline-setup-template.md) × 业务专属配置（实例化后为 `./business-config.md`；泛用版暂缺，业务项以 TODO 标注）。冲突时以业务提示词（即本文件实例化版）为准。
 
 ---
 
@@ -14,7 +14,7 @@
 {{CURRENT_DATE}}          = 本次执行日期，格式 YYYY-MM-DD
 {{CADENCE}}               = 固定填「周」（基线不区分节拍）
 {{REGISTRY_PATH}}         = data/（TODO：台账文件名）
-{{OUTPUT_PATH}}           = reports/{{YYYY-MM}}_baseline_report.html
+{{OUTPUT_PATH}}           = reports/{{YYYY-MM}}-<slug>.md
 {{REPORT_VERSION}}        = 固定 v1.0；灾难恢复重建时按版本记录递增
 ```
 
@@ -46,6 +46,11 @@ python src/prompts-tools/tools/build_index.py && python src/prompts-tools/tools/
 人工核对：九节标题与基线类型模板第二节逐字一致；主题矩阵三块互不重叠；台账章节定义与机制文档第四节一致。
 
 ---
+
+## 落盘后审计（提交前必做）
+
+落盘后依次运行 `python src/prompts-tools/tools/auto_verify.py --report <报告相对路径>`（生成后自动验证 V1–V5，幂等写回「## 自动验证结果」并自动提交审计）、`python src/prompts-tools/tools/audit_preflight.py --report <报告相对路径>`、`python src/prompts-tools/tools/audit_check.py --report <报告相对路径>`，修正全部 P0/P1 后执行 `python src/prompts-tools/tools/audit_pipeline.py --submit --report <报告相对路径>` 提交审计（未通过初审不得合并）。
+
 ## 版本记录
 
 | 版本 | 日期 | 变更 | 说明 |

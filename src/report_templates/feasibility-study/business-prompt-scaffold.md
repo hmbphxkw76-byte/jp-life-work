@@ -1,12 +1,12 @@
 # 业务提示词脚手架（可行性与市场进入型）
 
-> **用途**：为可行性与市场进入型业务线批量实例化业务提示词的**复制模板**。执行[通用基座第 1.2 节](../prompt-generic-base.md)新增业务线步骤时，将本文件各节复制为 `{REGION}/{PROPERTY}/prompts/` 下的对应文件，填入变量与业务实例化内容（标注 TODO 的项）后即可运行。脚手架内链接均按**复制后位置**书写，脚手架自身不是直接执行入口。
+> **用途**：为可行性与市场进入型业务线批量实例化业务提示词的**复制模板**。执行[通用基座第 1.2 节](../prompt-generic-base.md)新增业务线步骤时，将本文件各节复制为 `{TOPIC_DIR}/prompts/` 下的对应文件，填入变量与业务实例化内容（标注 TODO 的项）后即可运行。脚手架内链接均按**复制后位置**书写，脚手架自身不是直接执行入口。
 
 ---
 
 ## 一、实例化步骤
 
-1. 建目录：`{REGION}/{PROPERTY}/` 下建 `prompts/`、`data/`、`reports/`。
+1. 建目录：`{TOPIC_DIR}/` 下建 `prompts/`、`data/`、`reports/`。
 2. 撰写 `business-config.md`：按第二节清单逐项实例化。
 3. 复制第三节 → `prompts/prompt-baseline-setup.md`；复制第四节 → `prompts/prompt-project-study.md`（项目论证 + 项目复盘统一入口）。
 4. 替换变量区、删除 TODO 指引、补齐业务链接与固化锚。
@@ -33,16 +33,16 @@
 # {{REGION}} · {{TOPIC}} · 首期可行性论证提示词（可行性与市场进入型）
 
 > **用途**：执行「{{REGION}} {{TOPIC}} 可行性评估机制」的**机制建立**任务：产出首期可行性论证报告与配套评估框架档案。可直接复制，替换顶部变量后提交给 AI 执行。
-> **产出**：中文九节论证报告（md 源稿 + 同目录自包含 HTML），落盘 `{{OUTPUT_PATH}}`（`reports/{{YYYY-MM}}_baseline_report.md`）+ 评估框架档案（`{{REGISTRY_PATH}}`）。
+> **产出**：中文九节论证报告（md 源稿 + 同目录自包含 HTML），落盘 `{{OUTPUT_PATH}}`（`reports/{{YYYY-MM}}-<slug>.md`）+ 评估框架档案（`{{REGISTRY_PATH}}`）。
 >
-> **继承声明（四层体系）**：本文件 = [通用基座](../../../report_templates/prompt-generic-base.md) × [监测报告通用规范](../../../report_templates/monitoring-common-spec.md) × [基线报告类型模板（可行性与市场进入型）](../../../report_templates/feasibility-study/prompt-baseline-setup-template.md) × [业务专属配置](./business-config.md)。冲突时以本文件为准。
+> **继承声明（四层体系）**：本文件 = [通用基座](../../src/report_templates/prompt-generic-base.md) × [监测报告通用规范](../../src/report_templates/monitoring-common-spec.md) × [基线报告类型模板（可行性与市场进入型）](../../src/report_templates/feasibility-study/prompt-baseline-setup-template.md) × [业务专属配置](./business-config.md)。冲突时以本文件为准。
 
 ## 运行变量（每次运行前填写）
 
 ```
 {{CURRENT_DATE}}         = 本次执行日期
 {{BASELINE_DATE}}        = 首期基线日期
-{{OUTPUT_PATH}}          = reports/{{YYYY-MM}}_baseline_report.md
+{{OUTPUT_PATH}}          = reports/{{YYYY-MM}}-<slug>.md
 {{REGISTRY_PATH}}        = data/（TODO：框架档案文件名）
 {{REPORT_VERSION}}       = v1.0（首期基线固定）
 ```
@@ -61,7 +61,7 @@
 
 ## 三～九、结构骨架与联动
 
-九节固定骨架见[基线类型模板第三节](../../../report_templates/feasibility-study/prompt-baseline-setup-template.md)；业务固化锚节标题（TODO：实例化后逐字继承）；追踪表见[业务配置](./business-config.md)（TODO）。
+九节固定骨架见[基线类型模板第三节](../../src/report_templates/feasibility-study/prompt-baseline-setup-template.md)；业务固化锚节标题（TODO：实例化后逐字继承）；追踪表见[业务配置](./business-config.md)（TODO）。
 
 ## 十、渲染与交付
 
@@ -76,20 +76,20 @@
 > **用途**：项目制论证统一入口——新市场进入、新产品线、新设点等一次性项目（当次项目范围由业务配置或运行时变量指定）；另覆盖项目实施后复盘。可直接复制，替换顶部变量后提交给 AI 执行。
 > **产出**：项目论证件 `{{OUTPUT_PATH}}`（`reports/{{YYYY-MM}}-<slug>.md`）或复盘件 `reports/{{YYYY-MM-DD}}-主题-复盘.md`（+ 同名 html）。命名不在标准正则内，validate 仅 WARN 不阻断，属预期。
 >
-> **继承声明（四层体系）**：本文件 = [通用基座](../../../report_templates/prompt-generic-base.md) × [监测报告通用规范](../../../report_templates/monitoring-common-spec.md) × [项目论证类型模板（可行性与市场进入型）](../../../report_templates/feasibility-study/prompt-study-template.md) × [业务专属配置](./business-config.md)。冲突时以本文件为准。
+> **继承声明（四层体系）**：本文件 = [通用基座](../../src/report_templates/prompt-generic-base.md) × [监测报告通用规范](../../src/report_templates/monitoring-common-spec.md) × [项目论证类型模板（可行性与市场进入型）](../../src/report_templates/feasibility-study/prompt-study-template.md) × [业务专属配置](./business-config.md)。冲突时以本文件为准。
 
 ## 运行变量（每次运行前填写）
 
 ```
 {{CURRENT_DATE}}         = 本次执行日期
 {{PROJECT_TYPE}}         = 本次类型（新项目论证 / 项目复盘，TODO：项目名称）
-{{BASELINE_REPORT_PATH}} = reports/{{YYYY-MM}}_baseline_report.md
+{{BASELINE_REPORT_PATH}} = reports/{{YYYY-MM}}-<slug>.md
 {{REGISTRY_PATH}}        = data/（TODO）
 {{OUTPUT_PATH}}          = 由 {{PROJECT_TYPE}} 决定（见用途）
 {{REPORT_VERSION}}       = 本次版本号，格式 vYYYY.MM.DD
 ```
 
-**任务目标**：按[项目论证类型模板](../../../report_templates/feasibility-study/prompt-study-template.md)项目协议执行「框架复核 → 多维论证 → 打分判定 → Go/No-Go」闭环；评估维度与判定标准复用基线（调整须声明理由）；复盘档完成假设回验与判定标准有效性复核；运行后回写框架档案。
+**任务目标**：按[项目论证类型模板](../../src/report_templates/feasibility-study/prompt-study-template.md)项目协议执行「框架复核 → 多维论证 → 打分判定 → Go/No-Go」闭环；评估维度与判定标准复用基线（调整须声明理由）；复盘档完成假设回验与判定标准有效性复核；运行后回写框架档案。
 
 ## 一、各模块要点（业务实例化，TODO 按 {{PROJECT_TYPE}} 展开）
 
@@ -104,6 +104,13 @@
 交付包 = 报告（含判定打分表）+ 假设清单附录；结论与风险清单同时呈现；渲染交付同基线提示词第十节。
 
 ---
+
+## 六、落盘后审计（提交前必做，适用于本脚手架全部提示词）
+
+落盘后依次运行 `python src/prompts-tools/tools/auto_verify.py --report <报告相对路径>`（生成后自动验证 V1–V5，幂等写回「## 自动验证结果」并自动提交审计）、`python src/prompts-tools/tools/audit_preflight.py --report <报告相对路径>`、`python src/prompts-tools/tools/audit_check.py --report <报告相对路径>`，修正全部 P0/P1 后执行 `python src/prompts-tools/tools/audit_pipeline.py --submit --report <报告相对路径>` 提交审计（未通过初审不得合并）。
+
+> 复制到业务 `prompts/` 后，须在**每一份**业务提示词末尾保留本节（与类型模板同口径）。
+
 ## 版本记录
 
 | 版本 | 日期 | 变更 | 说明 |

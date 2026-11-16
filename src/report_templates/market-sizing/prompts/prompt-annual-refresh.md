@@ -1,9 +1,9 @@
 # {{REGION}} · {{TOPIC}} · 年度假设刷新提示词（市场规模测算与预测型 · 泛用版）
 
-> **用途**：每年固定窗口对模型假设做刷新与回测；关键假设失效信号触发器命中时专项插刷。泛用版业务提示词：建新业务线时复制本文件至 `{REGION}/{PROPERTY}/prompts/`，替换变量与 TODO 后即可运行。
+> **用途**：每年固定窗口对模型假设做刷新与回测；关键假设失效信号触发器命中时专项插刷。泛用版业务提示词：建新业务线时复制本文件至 `{TOPIC_DIR}/prompts/`，替换变量与 TODO 后即可运行。
 > **产出**：刷新版报告落盘 `{{OUTPUT_PATH}}`（`reports/{{YYYY-MM}}-<slug>.md`）+ 模型档案年度新版（`{{OUTPUT_REGISTRY}}`，另存不覆盖历史）；插刷件 `reports/{{YYYY-MM}}-<slug>.md`（命名不在标准正则内，validate 仅 WARN 不阻断，属预期）。
 >
-> **继承声明（四层体系）**：本文件 = [通用基座](../../../prompt-generic-base.md) × [监测报告通用规范](../../monitoring-common-spec.md) × [年度刷新类型模板（市场规模测算与预测型）](../prompt-annual-refresh-template.md) × 业务专属配置（实例化后为 `./business-config.md`；泛用版暂缺，业务项以 TODO 标注）。冲突时以业务提示词（即本文件实例化版）为准。
+> **继承声明（四层体系）**：本文件 = [通用基座](../../src/report_templates/prompt-generic-base.md) × [监测报告通用规范](../../src/report_templates/monitoring-common-spec.md) × [年度刷新类型模板（市场规模测算与预测型）](../../src/report_templates/market-sizing/prompt-annual-refresh-template.md) × 业务专属配置（实例化后为 `./business-config.md`；泛用版暂缺，业务项以 TODO 标注）。冲突时以业务提示词（即本文件实例化版）为准。
 
 ---
 
@@ -13,7 +13,7 @@
 {{REGION}} / {{TOPIC}}    = 固定值，见实例化后的 business-config.md
 {{CURRENT_DATE}}          = 本次执行日期，格式 YYYY-MM-DD
 {{PREVIOUS_REPORT_PATH}}  = 上一年度刷新版路径（首年刷新时为空，仅锚定基线）
-{{BASELINE_REPORT_PATH}}  = reports/{{YYYY-MM}}_baseline_report.md
+{{BASELINE_REPORT_PATH}}  = reports/{{YYYY-MM}}-<slug>.md
 {{REGISTRY_PATH}}         = data/（TODO：模型档案文件名）
 {{OUTPUT_PATH}}           = reports/{{YYYY-MM}}-<slug>.md
 {{OUTPUT_REGISTRY}}       = data/（TODO：模型档案年度新版文件名）
@@ -26,7 +26,7 @@
 
 ## 一、节拍与触发
 
-年度假设刷新 + 失效信号插刷设计见[年度刷新类型模板第一节](../prompt-annual-refresh-template.md)；失效信号清单（TODO：`失效信号 → 受影响模块`）由业务配置维护。
+年度假设刷新 + 失效信号插刷设计见[年度刷新类型模板第一节](../../src/report_templates/market-sizing/prompt-annual-refresh-template.md)；失效信号清单（TODO：`失效信号 → 受影响模块`）由业务配置维护。
 
 ## 二、项目专属硬性约束
 
@@ -55,6 +55,11 @@
 - 命名遵循仓库统一约定；基线报告常驻 `reports/` 顶层，不进入归档；模型档案年度新版另存，不覆盖历史。
 
 ---
+
+## 落盘后审计（提交前必做）
+
+落盘后依次运行 `python src/prompts-tools/tools/auto_verify.py --report <报告相对路径>`（生成后自动验证 V1–V5，幂等写回「## 自动验证结果」并自动提交审计）、`python src/prompts-tools/tools/audit_preflight.py --report <报告相对路径>`、`python src/prompts-tools/tools/audit_check.py --report <报告相对路径>`，修正全部 P0/P1 后执行 `python src/prompts-tools/tools/audit_pipeline.py --submit --report <报告相对路径>` 提交审计（未通过初审不得合并）。
+
 ## 版本记录
 
 | 版本 | 日期 | 变更 | 说明 |

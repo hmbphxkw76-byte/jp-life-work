@@ -1,12 +1,12 @@
 # 业务提示词脚手架（竞争情报监测型）
 
-> **用途**：为竞争情报监测型业务线批量实例化业务提示词的**复制模板**。执行[通用基座第 1.2 节](../prompt-generic-base.md)新增业务线步骤时，将本文件各节复制为 `{REGION}/{PROPERTY}/prompts/` 下的对应文件，填入变量与业务实例化内容（标注 TODO 的项）后即可运行。脚手架内链接均按**复制后位置**（业务提示词目录）书写，脚手架自身不是直接执行入口。
+> **用途**：为竞争情报监测型业务线批量实例化业务提示词的**复制模板**。执行[通用基座第 1.2 节](../prompt-generic-base.md)新增业务线步骤时，将本文件各节复制为 `{TOPIC_DIR}/prompts/` 下的对应文件，填入变量与业务实例化内容（标注 TODO 的项）后即可运行。脚手架内链接均按**复制后位置**（业务提示词目录）书写，脚手架自身不是直接执行入口。
 
 ---
 
 ## 一、实例化步骤
 
-1. 建目录：`{REGION}/{PROPERTY}/` 下建 `prompts/`、`data/`、`reports/`。
+1. 建目录：`{TOPIC_DIR}/` 下建 `prompts/`、`data/`、`reports/`。
 2. 撰写 `business-config.md`：按第二节清单逐项实例化。
 3. 复制第三节 → `prompts/prompt-baseline-setup.md`；复制第四节 → `prompts/prompt-monthly-monitor.md`；复制第五节 → `prompts/prompt-flash-update.md`（可选，事件触发专项）。
 4. 替换变量区、删除 TODO 指引、补齐业务链接与固化锚。
@@ -32,16 +32,16 @@
 # {{REGION}} · {{TOPIC}} · 首期基线报告提示词（竞争情报监测型）
 
 > **用途**：执行「{{REGION}} {{TOPIC}} 竞争情报持续监测机制」的**机制建立**任务：产出首期竞争格局基线报告与配套竞品档案库。可直接复制，替换顶部变量后提交给 AI 执行。
-> **产出**：中文九节基线报告（md 源稿 + 同目录自包含 HTML），落盘 `{{OUTPUT_PATH}}`（`reports/{{YYYY-MM}}_baseline_report.md`）+ 竞品档案库（`{{REGISTRY_PATH}}`）。
+> **产出**：中文九节基线报告（md 源稿 + 同目录自包含 HTML），落盘 `{{OUTPUT_PATH}}`（`reports/{{YYYY-MM}}-<slug>.md`）+ 竞品档案库（`{{REGISTRY_PATH}}`）。
 >
-> **继承声明（四层体系）**：本文件 = [通用基座](../../../report_templates/prompt-generic-base.md) × [监测报告通用规范](../../../report_templates/monitoring-common-spec.md) × [基线报告类型模板（竞争情报监测型）](../../../report_templates/competitive-intelligence/prompt-baseline-setup-template.md) × [业务专属配置](./business-config.md)。质量规则见通用基座与通用规范；基线差异与九节骨架见基线类型模板；业务变量、监测竞品清单、触发器、来源优先级见业务配置；冲突时以本文件为准。
+> **继承声明（四层体系）**：本文件 = [通用基座](../../src/report_templates/prompt-generic-base.md) × [监测报告通用规范](../../src/report_templates/monitoring-common-spec.md) × [基线报告类型模板（竞争情报监测型）](../../src/report_templates/competitive-intelligence/prompt-baseline-setup-template.md) × [业务专属配置](./business-config.md)。质量规则见通用基座与通用规范；基线差异与九节骨架见基线类型模板；业务变量、监测竞品清单、触发器、来源优先级见业务配置；冲突时以本文件为准。
 
 ## 运行变量（每次运行前填写）
 
 ```
 {{CURRENT_DATE}}         = 本次执行日期，格式 YYYY-MM-DD
 {{BASELINE_DATE}}        = 首期基线日期
-{{OUTPUT_PATH}}          = reports/{{YYYY-MM}}_baseline_report.md
+{{OUTPUT_PATH}}          = reports/{{YYYY-MM}}-<slug>.md
 {{REGISTRY_PATH}}        = data/（TODO：档案库文件名）
 {{REPORT_VERSION}}       = v1.0（首期基线固定）
 ```
@@ -60,7 +60,7 @@
 
 ## 三～九、结构骨架与联动
 
-九节固定骨架见[基线类型模板第三节](../../../report_templates/competitive-intelligence/prompt-baseline-setup-template.md)；业务固化锚节标题（TODO：实例化后逐字继承）；追踪表见[业务配置](./business-config.md)（TODO）。
+九节固定骨架见[基线类型模板第三节](../../src/report_templates/competitive-intelligence/prompt-baseline-setup-template.md)；业务固化锚节标题（TODO：实例化后逐字继承）；追踪表见[业务配置](./business-config.md)（TODO）。
 
 ## 十、渲染与交付
 
@@ -75,14 +75,14 @@
 > **用途**：周期性（每月）刷新竞争动态矩阵与竞品档案；重大动作触发器命中时亦走本提示词做对应模块重点更新。可直接复制，替换顶部变量后提交给 AI 执行。
 > **产出**：中文九节更新版报告（md 源稿 + 同目录自包含 HTML），落盘 `{{OUTPUT_PATH}}`（`reports/{{YYYY-MM}}-<slug>.md`）。
 >
-> **继承声明（四层体系）**：本文件 = [通用基座](../../../report_templates/prompt-generic-base.md) × [监测报告通用规范](../../../report_templates/monitoring-common-spec.md) × [周期更新类型模板（竞争情报监测型）](../../../report_templates/competitive-intelligence/prompt-monthly-update-template.md) × [业务专属配置](./business-config.md)。冲突时以本文件为准。
+> **继承声明（四层体系）**：本文件 = [通用基座](../../src/report_templates/prompt-generic-base.md) × [监测报告通用规范](../../src/report_templates/monitoring-common-spec.md) × [周期更新类型模板（竞争情报监测型）](../../src/report_templates/competitive-intelligence/prompt-monthly-update-template.md) × [业务专属配置](./business-config.md)。冲突时以本文件为准。
 
 ## 运行变量（每次运行前填写）
 
 ```
 {{CURRENT_DATE}}         = 本次执行日期，格式 YYYY-MM-DD
 {{PREVIOUS_REPORT_PATH}} = 最近一期月度报告路径（首期更新时为空，仅锚定基线）
-{{BASELINE_REPORT_PATH}} = reports/{{YYYY-MM}}_baseline_report.md
+{{BASELINE_REPORT_PATH}} = reports/{{YYYY-MM}}-<slug>.md
 {{REGISTRY_PATH}}        = data/（TODO）
 {{OUTPUT_PATH}}          = reports/{{YYYY-MM}}-<slug>.md
 {{REPORT_VERSION}}       = 本次版本号，格式 vYYYY.MM.DD
@@ -99,7 +99,7 @@
 
 ## 二～六、协议与交付
 
-更新协议与命名见[周期类型模板](../../../report_templates/competitive-intelligence/prompt-monthly-update-template.md)第二、四节；追踪表逐项核对回写 `{{REGISTRY_PATH}}`；渲染交付同基线提示词第十节。
+更新协议与命名见[周期类型模板](../../src/report_templates/competitive-intelligence/prompt-monthly-update-template.md)第二、四节；追踪表逐项核对回写 `{{REGISTRY_PATH}}`；渲染交付同基线提示词第十节。
 
 ---
 
@@ -114,16 +114,23 @@
 
 ```
 {{CURRENT_DATE}} = 本次执行日期
-{{BASELINE_REPORT_PATH}} = reports/{{YYYY-MM}}_baseline_report.md
+{{BASELINE_REPORT_PATH}} = reports/{{YYYY-MM}}-<slug>.md
 {{PREVIOUS_REPORT_PATH}} = 最近一期月度报告路径
 {{REGISTRY_PATH}} = data/（TODO）
 {{OUTPUT_PATH}} = reports/{{YYYY-MM-DD}}-（TODO：事件主题）.md
 {{REPORT_VERSION}} = 本次版本号，格式 vYYYY.MM.DD
 ```
 
-**任务目标**：按[周期类型模板第一节事件触发档](../../../report_templates/competitive-intelligence/prompt-monthly-update-template.md)执行对应模块重点刷新；事实与判断分离，完成档案库回写与升级记录。
+**任务目标**：按[周期类型模板第一节事件触发档](../../src/report_templates/competitive-intelligence/prompt-monthly-update-template.md)执行对应模块重点刷新；事实与判断分离，完成档案库回写与升级记录。
 
 ---
+
+## 六、落盘后审计（提交前必做，适用于本脚手架全部提示词）
+
+落盘后依次运行 `python src/prompts-tools/tools/auto_verify.py --report <报告相对路径>`（生成后自动验证 V1–V5，幂等写回「## 自动验证结果」并自动提交审计）、`python src/prompts-tools/tools/audit_preflight.py --report <报告相对路径>`、`python src/prompts-tools/tools/audit_check.py --report <报告相对路径>`，修正全部 P0/P1 后执行 `python src/prompts-tools/tools/audit_pipeline.py --submit --report <报告相对路径>` 提交审计（未通过初审不得合并）。
+
+> 复制到业务 `prompts/` 后，须在**每一份**业务提示词末尾保留本节（与类型模板同口径）。
+
 ## 版本记录
 
 | 版本 | 日期 | 变更 | 说明 |

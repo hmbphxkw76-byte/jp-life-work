@@ -1,9 +1,9 @@
 # {{REGION}} · {{TOPIC}} · 月度更新提示词（竞争情报监测型 · 泛用版）
 
-> **用途**：周期性（每月）刷新竞争动态矩阵与竞品档案；重大动作触发器命中时亦走本提示词做对应模块重点更新。泛用版业务提示词：建新业务线时复制本文件至 `{REGION}/{PROPERTY}/prompts/`，替换变量与 TODO 后即可运行。
+> **用途**：周期性（每月）刷新竞争动态矩阵与竞品档案；重大动作触发器命中时亦走本提示词做对应模块重点更新。泛用版业务提示词：建新业务线时复制本文件至 `{TOPIC_DIR}/prompts/`，替换变量与 TODO 后即可运行。
 > **产出**：中文九节更新版报告（md 源稿 + 同目录自包含 HTML），落盘 `{{OUTPUT_PATH}}`（`reports/{{YYYY-MM}}-<slug>.md`）。
 >
-> **继承声明（四层体系）**：本文件 = [通用基座](../../../prompt-generic-base.md) × [监测报告通用规范](../../monitoring-common-spec.md) × [周期更新类型模板（竞争情报监测型）](../prompt-monthly-update-template.md) × 业务专属配置（实例化后为 `./business-config.md`；泛用版暂缺，业务项以 TODO 标注）。冲突时以业务提示词（即本文件实例化版）为准。
+> **继承声明（四层体系）**：本文件 = [通用基座](../../src/report_templates/prompt-generic-base.md) × [监测报告通用规范](../../src/report_templates/monitoring-common-spec.md) × [周期更新类型模板（竞争情报监测型）](../../src/report_templates/competitive-intelligence/prompt-monthly-update-template.md) × 业务专属配置（实例化后为 `./business-config.md`；泛用版暂缺，业务项以 TODO 标注）。冲突时以业务提示词（即本文件实例化版）为准。
 
 ---
 
@@ -13,7 +13,7 @@
 {{REGION}} / {{TOPIC}}    = 固定值，见实例化后的 business-config.md
 {{CURRENT_DATE}}          = 本次执行日期，格式 YYYY-MM-DD
 {{PREVIOUS_REPORT_PATH}}  = 最近一期月度报告路径（首期更新时为空，仅锚定基线）
-{{BASELINE_REPORT_PATH}}  = reports/{{YYYY-MM}}_baseline_report.md
+{{BASELINE_REPORT_PATH}}  = reports/{{YYYY-MM}}-<slug>.md
 {{REGISTRY_PATH}}         = data/（TODO：竞品档案库文件名）
 {{OUTPUT_PATH}}           = reports/{{YYYY-MM}}-<slug>.md
 {{REPORT_VERSION}}        = 本次版本号，格式 vYYYY.MM.DD
@@ -25,7 +25,7 @@
 
 ## 一、节拍与触发
 
-月度主更新 + 事件触发升级两档设计见[周期类型模板第一节](../prompt-monthly-update-template.md)；触发器清单（TODO：融资 / 并购 / 换帅 / 定价重构 / 新产品线等 `事件 → 受影响模块`）由业务配置维护，命中即当期核实并升级，不等待月度窗口。
+月度主更新 + 事件触发升级两档设计见[周期类型模板第一节](../../src/report_templates/competitive-intelligence/prompt-monthly-update-template.md)；触发器清单（TODO：融资 / 并购 / 换帅 / 定价重构 / 新产品线等 `事件 → 受影响模块`）由业务配置维护，命中即当期核实并升级，不等待月度窗口。
 
 ## 二、项目专属硬性约束
 
@@ -53,6 +53,11 @@
 - 命名遵循仓库统一约定；基线报告常驻 `reports/` 顶层，不进入归档；周期报告按归档保留策略执行。
 
 ---
+
+## 落盘后审计（提交前必做）
+
+落盘后依次运行 `python src/prompts-tools/tools/auto_verify.py --report <报告相对路径>`（生成后自动验证 V1–V5，幂等写回「## 自动验证结果」并自动提交审计）、`python src/prompts-tools/tools/audit_preflight.py --report <报告相对路径>`、`python src/prompts-tools/tools/audit_check.py --report <报告相对路径>`，修正全部 P0/P1 后执行 `python src/prompts-tools/tools/audit_pipeline.py --submit --report <报告相对路径>` 提交审计（未通过初审不得合并）。
+
 ## 版本记录
 
 | 版本 | 日期 | 变更 | 说明 |

@@ -1910,12 +1910,14 @@ class TestProcessReuse(unittest.TestCase):
                                     f"{tid}/{cycle} 模板不存在：{tmpl}")
 
     def test_prompts_reference_audit_tools(self):
-        """提示词必须引用审计工具：全部 prompt-*.md（业务提示词 + 类型模板）。"""
+        """提示词必须引用审计工具：业务提示词 + 类型模板 + 泛用版 + 脚手架。"""
         root = _common.ROOT
-        tools = ("audit_preflight.py", "audit_check.py", "audit_pipeline.py")
+        tools = ("auto_verify.py", "audit_preflight.py", "audit_check.py", "audit_pipeline.py")
         missing, total = [], 0
         paths = list(root.glob("*/prompts/prompt-*.md")) + \
-            list((root / "src" / "report_templates").glob("*/prompt-*.md"))
+            list((root / "src" / "report_templates").glob("*/prompt-*.md")) + \
+            list((root / "src" / "report_templates").glob("*/prompts/prompt-*.md")) + \
+            list((root / "src" / "report_templates").glob("*/business-prompt-scaffold.md"))
         for p in paths:
             total += 1
             t = p.read_text(encoding="utf-8", errors="replace")
@@ -1923,6 +1925,107 @@ class TestProcessReuse(unittest.TestCase):
                 missing.append(str(p.relative_to(root)))
         self.assertEqual(missing, [], f"以下提示词未引用审计工具：{missing}")
         self.assertGreater(total, 0, "应至少校验到一份提示词")
+
+
+class TestTemplateComplianceGuard(unittest.TestCase):
+    """report_templates 模板合规守卫（2026-11-16 整改引入）。
+
+    覆盖三类此前无守卫的问题：相对链接可解析性、周期识别（月 / 周 / 项目事件）、旧命名残留。
+    """
+
+    ROOT = _common.ROOT
+    TPL = _common.ROOT / "src" / "report_templates"
+
+    def _links(self, p):
+        text = p.read_text(encoding="utf-8", errors="replace")
+        for m in re.finditer(r"\[[^\]]*\]\(([^)]+)\)", text):
+            t = m.group(1).strip()
+            if t.startswith(("http://", "https://", "#", "mailto:")) or t.startswith("<"):
+                continue
+            path = t.split("#")[0]
+            if not path or re.search(r"\{[^}]*\}", path):
+                continue
+            if path == "./business-config.md":  # 脚手架内待建文件占位
+                continue
+            yield path
+
+    def test_relative_links_resolve(self):
+        """存储即引用文件按存储位置解析；复制模板（脚手架 / 泛用版）按复制后位置解析。"""
+        broken = []
+        for p in sorted(self.TPL.rglob("*.md")):
+            rel = p.relative_to(self.TPL).as_posix()
+            if rel == "handbook-split-standard.md":
+                continue  # 该文件链接为手册结构示例占位，非真实引用
+            is_copy = "/prompts/" in rel or rel.endswith("business-prompt-scaffold.md")
+            for link in self._links(p):
+                if is_copy and link.startswith("../../"):
+                    resolved = (self.ROOT / link[6:]).resolve()
+                else:
+                    resolved = (p.parent / link).resolve()
+                if not resolved.exists():
+                    broken.append(f"{rel} -> {link}")
+        self.assertEqual(broken, [], f"模板相对链接断链：{broken}")
+
+    def test_no_legacy_naming(self):
+        """旧命名残留检查（_baseline_report / _annual / prompts/tools）。"""
+        offenders = []
+        for p in sorted(self.TPL.rglob("*.md")):
+            if p.name == "monitoring-common-spec.md":
+                continue  # 该文件保留「已废除命名」的规范性说明
+            t = p.read_text(encoding="utf-8", errors="replace")
+            for bad in ("_baseline_report", "_annual", "prompts/tools"):
+                if bad in t:
+                    offenders.append(f"{p.relative_to(self.TPL).as_posix()}: {bad}")
+        self.assertEqual(offenders, [], f"旧命名残留：{offenders}")
+
+    def test_stale_section_counts_absent(self):
+        """market-monitoring 三份周期模板不得再出现与骨架不符的节数文案。"""
+        stale = {
+            "market-monitoring/prompt-monthly-monitor-template.md":
+                ["9 节固定顺序", "9 节齐全", "与 9 节标题"],
+            "market-monitoring/prompt-quarterly-analysis-template.md":
+                ["12 节固定顺序", "12 节齐全"],
+            "market-monitoring/prompt-annual-review-template.md":
+                ["11 节固定顺序", "11 节齐全", "与 11 节标题"],
+        }
+        for rel, bads in stale.items():
+            t = (self.TPL / rel).read_text(encoding="utf-8")
+            for b in bads:
+                self.assertNotIn(b, t, f"{rel} 仍含过期节数文案：{b}")
+
+    def test_cycle_rule_weekly_and_event(self):
+        """周报与项目 / 事件件按命名映射到正确骨架（不回落基线）。"""
+        rules = load_rules()
+        weekly, inherited = cycle_rule(rules, "trend-weekly", "weekly")
+        self.assertEqual(weekly["sections"], 8)
+        self.assertFalse(inherited)
+        event, inherited = cycle_rule(rules, "flash-commentary", "event")
+        self.assertEqual(event["sections"], 4)
+        self.assertFalse(inherited)
+
+    def test_collect_targets_detects_cycles(self):
+        """collect_targets 按命名识别 monthly / weekly / event。"""
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            (root / "01-demo" / "prompts").mkdir(parents=True)
+            (root / "01-demo" / "reports").mkdir(parents=True)
+            (root / "01-demo" / "prompts" / "business-config.md").write_text(
+                "# x\n\n继承：[行业趋势周报型](../../src/report_templates/trend-weekly/)\n",
+                encoding="utf-8")
+            for name in ("2026-11-demo.html", "2026-11-15_weekly.html",
+                         "2026-11-15-事件-快评.html"):
+                (root / "01-demo" / "reports" / name).write_text(
+                    "<html><title>t</title><body></body></html>", encoding="utf-8")
+            orig_common, orig_cc = _common.ROOT, compliance_check.ROOT
+            _common.ROOT, compliance_check.ROOT = root, root
+            try:
+                targets = compliance_check.collect_targets(None)
+            finally:
+                _common.ROOT, compliance_check.ROOT = orig_common, orig_cc
+            cycles = {Path(rel).name: cyc for rel, _t, _tid, cyc, _n in targets}
+            self.assertEqual(cycles["2026-11-demo.html"], "monthly")
+            self.assertEqual(cycles["2026-11-15_weekly.html"], "weekly")
+            self.assertEqual(cycles["2026-11-15-事件-快评.html"], "event")
 
 
 class TestReworkRounds(unittest.TestCase):

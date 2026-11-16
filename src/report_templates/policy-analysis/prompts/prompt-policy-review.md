@@ -1,9 +1,9 @@
 # {{REGION}} · {{TOPIC}} · 政策解读提示词（政策法规解读型 · 泛用版 · 事件触发 + 年度复盘）
 
-> **用途**：事件触发单份解读（新政策 / 修订 / 配套细则出台后）与年度台账复盘统一入口。泛用版业务提示词：建新业务线时复制本文件至 `{REGION}/{PROPERTY}/prompts/`，替换变量与 TODO 后即可运行。
+> **用途**：事件触发单份解读（新政策 / 修订 / 配套细则出台后）与年度台账复盘统一入口。泛用版业务提示词：建新业务线时复制本文件至 `{TOPIC_DIR}/prompts/`，替换变量与 TODO 后即可运行。
 > **产出**：单份解读件 `{{OUTPUT_PATH}}`（`reports/{{YYYY-MM}}-<slug>.md`）或年度复盘（`reports/{{YYYY-MM}}-<slug>.md` + 台账年度新版 `{{OUTPUT_REGISTRY}}` 另存不覆盖）。解读件命名不在标准正则内，validate 仅 WARN 不阻断，属预期。
 >
-> **继承声明（四层体系）**：本文件 = [通用基座](../../../prompt-generic-base.md) × [监测报告通用规范](../../monitoring-common-spec.md) × [事件触发解读类型模板（政策法规解读型）](../prompt-policy-review-template.md) × 业务专属配置（实例化后为 `./business-config.md`；泛用版暂缺，业务项以 TODO 标注）。冲突时以业务提示词（即本文件实例化版）为准。
+> **继承声明（四层体系）**：本文件 = [通用基座](../../src/report_templates/prompt-generic-base.md) × [监测报告通用规范](../../src/report_templates/monitoring-common-spec.md) × [事件触发解读类型模板（政策法规解读型）](../../src/report_templates/policy-analysis/prompt-policy-review-template.md) × 业务专属配置（实例化后为 `./business-config.md`；泛用版暂缺，业务项以 TODO 标注）。冲突时以业务提示词（即本文件实例化版）为准。
 
 ---
 
@@ -13,7 +13,7 @@
 {{REGION}} / {{TOPIC}}    = 固定值，见实例化后的 business-config.md
 {{CURRENT_DATE}}          = 本次执行日期，格式 YYYY-MM-DD
 {{TRIGGER_TYPE}}          = 本次触发类型（新政策 / 修订 / 细则 / 年度复盘，TODO）
-{{BASELINE_REPORT_PATH}}  = reports/{{YYYY-MM}}_baseline_report.md
+{{BASELINE_REPORT_PATH}}  = reports/{{YYYY-MM}}-<slug>.md
 {{PREVIOUS_REPORT_PATH}}  = 上期解读 / 复盘路径（如无则空，仅锚定基线）
 {{REGISTRY_PATH}}         = data/（TODO：政策台账文件名）
 {{OUTPUT_PATH}}           = 由 {{TRIGGER_TYPE}} 决定（见用途）
@@ -27,7 +27,7 @@
 
 ## 一、节拍与触发
 
-事件触发解读 + 年度台账复盘设计见[事件触发解读类型模板第一节](../prompt-policy-review-template.md)；监测触发器清单（TODO：`渠道 / 政策名称 → 动作`）由业务配置维护。
+事件触发解读 + 年度台账复盘设计见[事件触发解读类型模板第一节](../../src/report_templates/policy-analysis/prompt-policy-review-template.md)；监测触发器清单（TODO：`渠道 / 政策名称 → 动作`）由业务配置维护。
 
 ## 二、项目专属硬性约束
 
@@ -56,6 +56,11 @@
 - 命名遵循仓库统一约定；基线报告常驻 `reports/` 顶层，不进入归档；解读件按归档保留策略执行。
 
 ---
+
+## 落盘后审计（提交前必做）
+
+落盘后依次运行 `python src/prompts-tools/tools/auto_verify.py --report <报告相对路径>`（生成后自动验证 V1–V5，幂等写回「## 自动验证结果」并自动提交审计）、`python src/prompts-tools/tools/audit_preflight.py --report <报告相对路径>`、`python src/prompts-tools/tools/audit_check.py --report <报告相对路径>`，修正全部 P0/P1 后执行 `python src/prompts-tools/tools/audit_pipeline.py --submit --report <报告相对路径>` 提交审计（未通过初审不得合并）。
+
 ## 版本记录
 
 | 版本 | 日期 | 变更 | 说明 |

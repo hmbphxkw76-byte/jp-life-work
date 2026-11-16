@@ -1,9 +1,9 @@
 # {{REGION}} · {{TOPIC}} · 预警专项提示词（舆情传播监测型 · 泛用版）
 
-> **用途**：突发负面热点当期核实（确认非机器人 / 断章取义）与专项预警，不等待月度窗口。泛用版业务提示词：建新业务线时复制本文件至 `{REGION}/{PROPERTY}/prompts/`，替换变量与 TODO 后即可运行。
+> **用途**：突发负面热点当期核实（确认非机器人 / 断章取义）与专项预警，不等待月度窗口。泛用版业务提示词：建新业务线时复制本文件至 `{TOPIC_DIR}/prompts/`，替换变量与 TODO 后即可运行。
 > **产出**：专项预警件 `{{OUTPUT_PATH}}`（`reports/{{YYYY-MM}}-<slug>.md`）+ 台账增量回写。命名不在工具链标准正则内，validate 仅 WARN 不阻断，属预期。
 >
-> **继承声明（四层体系）**：本文件 = [通用基座](../../../prompt-generic-base.md) × [监测报告通用规范](../../monitoring-common-spec.md) × [周期更新类型模板（舆情传播监测型）](../prompt-monthly-update-template.md) × 业务专属配置（实例化后为 `./business-config.md`；泛用版暂缺，业务项以 TODO 标注）。冲突时以业务提示词（即本文件实例化版）为准。
+> **继承声明（四层体系）**：本文件 = [通用基座](../../src/report_templates/prompt-generic-base.md) × [监测报告通用规范](../../src/report_templates/monitoring-common-spec.md) × [周期更新类型模板（舆情传播监测型）](../../src/report_templates/sentiment-monitoring/prompt-monthly-update-template.md) × 业务专属配置（实例化后为 `./business-config.md`；泛用版暂缺，业务项以 TODO 标注）。冲突时以业务提示词（即本文件实例化版）为准。
 
 ---
 
@@ -14,13 +14,13 @@
 {{CURRENT_DATE}}          = 本次执行日期
 {{EVENT_NAME}}            = 本次触发热点名称（TODO）
 {{PREVIOUS_REPORT_PATH}}  = 最近一期月报路径
-{{BASELINE_REPORT_PATH}}  = reports/{{YYYY-MM}}_baseline_report.md
+{{BASELINE_REPORT_PATH}}  = reports/{{YYYY-MM}}-<slug>.md
 {{REGISTRY_PATH}}         = data/（TODO）
 {{OUTPUT_PATH}}           = reports/{{YYYY-MM-DD}}-（TODO：事件主题）.md
 {{REPORT_VERSION}}        = 本次版本号，格式 vYYYY.MM.DD
 ```
 
-**任务目标**：按[周期类型模板第一节事件触发档](../prompt-monthly-update-template.md)执行对应模块重点刷新；完成人工复核与台账回写；预警只描述舆论态势与风险信号，不基于舆情给出投资或决策建议。
+**任务目标**：按[周期类型模板第一节事件触发档](../../src/report_templates/sentiment-monitoring/prompt-monthly-update-template.md)执行对应模块重点刷新；完成人工复核与台账回写；预警只描述舆论态势与风险信号，不基于舆情给出投资或决策建议。
 
 ---
 
@@ -36,6 +36,11 @@
 - 交付格式：md + 同目录自包含 HTML（`python src/prompts-tools/tools/md2html.py`）；HTML 须通过 `python src/prompts-tools/tools/lint_reports.py`。
 
 ---
+
+## 落盘后审计（提交前必做）
+
+落盘后依次运行 `python src/prompts-tools/tools/auto_verify.py --report <报告相对路径>`（生成后自动验证 V1–V5，幂等写回「## 自动验证结果」并自动提交审计）、`python src/prompts-tools/tools/audit_preflight.py --report <报告相对路径>`、`python src/prompts-tools/tools/audit_check.py --report <报告相对路径>`，修正全部 P0/P1 后执行 `python src/prompts-tools/tools/audit_pipeline.py --submit --report <报告相对路径>` 提交审计（未通过初审不得合并）。
+
 ## 版本记录
 
 | 版本 | 日期 | 变更 | 说明 |

@@ -106,8 +106,8 @@ report_templates/
 
 - **根部共享**：通用基座定义跨类型质量规则、变量框架、来源分级、锚定与台账协议；渲染规范定义 HTML 报告的最低渲染标准；合规规则文件登记各类型各周期的结构骨架校验规则（节数 / 必填字段 / 内容格式），供 `src/prompts-tools/tools/compliance_check.py` 的 CI 阻断式校验关卡与定期合规审计消费。任何类型的模板与业务提示词均继承根部文件。
 - **类型目录**：目录名 = 类型 ID（小写 kebab-case）；每类型必备一份基线类型模板（`prompt-baseline-setup-template.md`），周期模板按类型的节拍设计自定（文件名以 `prompt-` 开头、以 `-template.md` 结尾）。
-- **业务提示词脚手架**：market-monitoring 与 employment-research 已有完整业务线实践（dubai/apartment、dubai/cybersecurity）；其余 10 个类型各含一份 `business-prompt-scaffold.md`——复制式业务提示词脚手架（实例化步骤 + business-config 实例化清单 + 各周期业务提示词全文脚手架，链接按复制到 `{REGION}/{PROPERTY}/prompts/` 后的位置书写）。新增业务线时复制脚手架、填变量与 TODO 项即可运行；脚手架自身为类型中立文件，不含业务关键词。
-- **泛用版业务提示词（prompts/ 子目录）**：上述 10 个类型另将脚手架拆分为独立可运行的泛用版业务提示词，存放于 `report_templates/<类型ID>/prompts/`（`prompt-baseline-setup.md` + 各周期提示词 + 可选事件触发专项，共 23 份）。泛用版 = 绑定类型的业务提示词母版：变量区（{{REGION}}/{{TOPIC}} 等）+ 类型模板引用 + TODO 业务项；建新业务线时整目录复制到业务 `prompts/`、填变量与 TODO、补 `business-config.md` 即可运行。内容与脚手架正文一致，修改周期提示词内容时须同步类型模板、prompts/ 泛用版与脚手架三处。
+- **业务提示词脚手架**：market-monitoring 与 employment-research 已有完整业务线实践（dubai/apartment、dubai/cybersecurity）；其余 11 个类型各含一份 `business-prompt-scaffold.md`——复制式业务提示词脚手架（实例化步骤 + business-config 实例化清单 + 各周期业务提示词全文脚手架，链接按复制到 `{TOPIC_DIR}/prompts/` 后的位置书写，即 `../../src/report_templates/...`）。新增业务线时复制脚手架、填变量与 TODO 项即可运行；脚手架自身为类型中立文件，不含业务关键词。
+- **泛用版业务提示词（prompts/ 子目录）**：上述 11 个类型另将脚手架拆分为独立可运行的泛用版业务提示词，存放于 `report_templates/<类型ID>/prompts/`（`prompt-baseline-setup.md` + 各周期提示词 + 可选事件触发专项，共 24 份）。泛用版 = 绑定类型的业务提示词母版：变量区（{{REGION}}/{{TOPIC}} 等）+ 类型模板引用 + TODO 业务项；建新业务线时整目录复制到业务 `prompts/`、填变量与 TODO、补 `business-config.md` 即可运行。**要点一致**：周期提示词的任务目标 / 硬性约束 / 骨架引用须与类型模板、脚手架同口径；修改时同步类型模板、prompts/ 泛用版与脚手架三处。审计协议（落盘后审计节）在脚手架 / 泛用版层级承载，复制后须逐份保留。
 
 ## 二、已注册类型清单
 
@@ -127,7 +127,7 @@ report_templates/
 | flash-commentary | 快评·事件点评型 | prompt-baseline-setup-template.md（机制文档） | prompt-flash-note-template.md | 事件触发 72h 快评（基线期为机制建立，不出正文） | 暂无 |
 | whitepaper | 白皮书·专题深度型 | prompt-baseline-setup-template.md | prompt-topic-study-template.md（选题制） | 新选题白皮书 + 年度系列篇 + 框架修订篇 | 暂无 |
 
-> **命名兼容性说明**：节拍为月度 / 季度 / 年度 / 周度的类型，产出命名与 `prompts/tools` 标准正则（monthly / quarterly / annual / baseline / weekly）兼容；项目制与事件触发类型（consumer-research、feasibility-study、flash-commentary、policy-analysis、investment-research、whitepaper 的一次性件）使用 `{{YYYY-MM-DD}}-主题.md` 通用命名，`validate.py` 仅提示 WARN 不阻断，属预期行为。
+> **命名兼容性说明**：节拍为月度 / 季度 / 年度 / 周度的类型，产出命名与 `src/prompts-tools/tools` 标准正则（monthly / quarterly / annual / baseline / weekly）兼容；项目制与事件触发类型（consumer-research、feasibility-study、flash-commentary、policy-analysis、investment-research、whitepaper 的一次性件）使用 `{{YYYY-MM-DD}}-主题.md` 通用命名，`validate.py` 仅提示 WARN 不阻断，属预期行为。
 
 ## 三、动态接入步骤
 
@@ -143,7 +143,7 @@ report_templates/
 ### 3.2 已有类型下新增业务线
 
 1. 按[通用基座第 1.2 节](./prompt-generic-base.md)执行：建立 `{地区}/{业务类型}/` 目录（prompts / data / reports），撰写 `business-config.md`（业务单一事实源）。
-2. 按类型节拍设计建立业务周期提示词，头部继承声明指向 `../../../report_templates/<类型ID>/` 下对应类型模板。
+2. 按类型节拍设计建立业务周期提示词，头部继承声明指向 `../../src/report_templates/<类型ID>/` 下对应类型模板。
 3. 首期运行基线提示词，建立登记册与基线锚；业务线注册到本注册表第二节「已接入业务线」列。
 
 ### 3.3 类型退役 / 合并
@@ -181,3 +181,4 @@ report_templates/
 | v1.23 | 2026-11-14 | 第三条 policy-analysis 业务线接入 | jp/16-exit-transition-return 接入（基线已产出 2026-11，事件触发单份解读 + 年度台账复盘）；政策执行层（退出 / 转型 / 回国）；不做 07 / 08 / 14 的制度正文复制；结构映射在 business-config 第 3.3 节声明 |
 | v1.24 | 2026-11-14 | 新增根部共享操作规范 handbook-split-standard.md | 沉淀 12-culture-life 手册拆分实践（提交 4d3e200）为跨主题可复用标准化提示词模板：双产物分离原则、编号即接口约束、归属映射/边界裁定表、执行清单 ①–⑧、链接锚点规范、验证清单（含 URL 守恒与仓库测试）、提交规范、HTML 预览页设计系统；供其余含合并附录手册的主题统一执行 |
 | v1.25 | 2026-11-15 | 归类为十三类标准 + 登记册 Schema | report-classification 统一为「六族十三类」；新增根部 registry-schema.md（v1/v2 活值表 Schema 与 C-08/C-10/C-13 判定规则），根部共享清单同步 |
+| v1.26 | 2026-11-16 | 模板合规整改 | 脚手架计数 10→11、泛用版计数 23→24；链接口径统一为「复制后位置 `{TOPIC_DIR}/prompts/` → `../../src/report_templates/...`」；「内容与脚手架正文一致」改为「要点一致」并明确审计协议承载层级 |
