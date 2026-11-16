@@ -26,6 +26,7 @@ python -m unittest discover -s src/tests -v   # 单元测试（255 项：tools 1
 | validate.py | 校验 | validate.yml「规范校验」 |
 | lint_reports.py | 校验 | validate.yml「报告内容 lint」（新报告阻断） |
 | compliance_check.py | 校验+引导+审计 | validate.yml「报告模板合规校验」（新报告阻断） |
+| stage_gate_check.py | 校验 | validate.yml「阶段闸检查」（采集 / 筛选 / 分类左移） |
 | classify_reports.py | 校验+修复 | scheduled-maintenance.yml「报告自动归位」 |
 | ensure_region_topics.py | 校验+修复 | validate.yml「结构补全」 |
 | md2html.py | 生成 | html-sync.yml「HTML 同步」 |
@@ -33,10 +34,13 @@ python -m unittest discover -s src/tests -v   # 单元测试（255 项：tools 1
 | build_index.py | 生成 | scheduled-maintenance.yml「生成全局索引」 |
 | build_hub.py | 生成 | validate.yml --check / html-sync.yml「汇总页」 |
 | report_diff.py | 生成 | md2html 依赖：跨月内容对比高亮（纯函数） |
+| incremental_build.py | 生成 | 手动：增量生成 POC（按 git diff 选择报告；含 --bench 对比） |
+| generate_registry.py | 编排 | 手动：生成 `registry.json` 并渲染 README 快照（`--write` / `--check`） |
 | migrate_monthly_reports.py | 迁移 | 一次性：存量报告合并重命名为月度系列 |
 | update_planner.py | 编排 | scheduled-report-tasks.yml「生成月度任务清单」 |
 | automation_status.py | 编排 | 5 条工作流 `record` 入库 + 手动 `activity`（活跃度预警） |
 | info_quality_check.py | 校验+修复 | info-quality.yml「信息质量全量评估」+ validate.yml「信息质量检查」 |
+| auto_verify.py | 校验 | 手动：生成后自动验证（V1–V5）→ 写回「自动验证结果」→ 提交审计 |
 | audit_registry.py / audit_pipeline.py / audit_badge.py / audit_check.py / audit_sampling.py / audit_preflight.py | 审计 | audit-gate.yml / audit-sampling.yml / html-sync.yml |
 | personal_finance_model.py | 决策支持 | validate.yml「财务模型一致性」+ scheduled-maintenance.yml「刷新」 |
 | fact_card_check.py | 决策支持 | validate.yml「事实卡片校验」+ scheduled-maintenance.yml「刷新」 |
@@ -253,3 +257,7 @@ python src/prompts-tools/tools/automation_status.py activity --threshold 45     
 - 所有路径均为仓库内相对路径，业务线整体迁移（改目录名）不影响工具运行。
 - `archive_reports.py` 会移动历史报告到 `reports/archives/`，每主题保留最新 12 期；
   如需永久保留请自行调整 `archive_reports.KEEP`。
+
+<!-- REGISTRY:BEGIN -->
+> 注册表快照：工具 29 · 类型 13 · 主题 21 · 工作流 7（由 `generate_registry.py` 生成，勿手工编辑）
+<!-- REGISTRY:END -->

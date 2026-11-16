@@ -26,8 +26,8 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from _common import ROOT  # noqa: E402
-from audit_check import _iq_findings_by_path, _l5_status, check_report, _rel  # noqa: E402
-from audit_registry import AUDIT_DIR, _audit_state, discover  # noqa: E402
+from audit_check import check_report, iq_findings_by_path, l5_status, rel as rel_path  # noqa: E402
+from audit_registry import AUDIT_DIR, audit_state, discover  # noqa: E402
 import compliance_check  # noqa: E402
 
 SAMPLING_DIR = AUDIT_DIR / "sampling"
@@ -103,9 +103,9 @@ def overdue_p2() -> list[dict]:
 def run_sample(period: str) -> dict:
     entries = discover()
     sample = select_sample(entries, period)
-    iq = _iq_findings_by_path()
-    l5 = _l5_status()
-    state = _audit_state()
+    iq = iq_findings_by_path()
+    l5 = l5_status()
+    state = audit_state()
     results = []
     for e in sample:
         rel = e["report"]
@@ -114,9 +114,9 @@ def run_sample(period: str) -> dict:
         res = check_report(rel, md, html, e["type_id"], iq, l5)
         # 状态一致性（双向）：audited ⟺ 标识存在
         st = state.get(rel, {})
-        audit_state = st.get("state") or st.get("audit_state") or "registered"
+        state_label = st.get("state") or st.get("audit_state") or "registered"
         has_badge = "**已审计**" in md.read_text(encoding="utf-8", errors="replace")
-        status_ok = (audit_state == "audited") == has_badge
+        status_ok = (state_label == "audited") == has_badge
         results.append({
             "report": rel, "topic": e["topic"], "period": e["period"],
             "passed": res.passed, "layers": res.layers,
@@ -249,7 +249,7 @@ def main() -> int:
         overdue = overdue_p2()
         if overdue:
             print(f"[W] P2 超期未闭环：{len(overdue)} 项（见 {PENDING_P2.relative_to(ROOT)}）")
-        print("  报告已写入：" + ", ".join(_rel(p) for p in paths))
+        print("  报告已写入：" + ", ".join(rel_path(p) for p in paths))
     if not payload["ok"]:
         return 1
     if payload["p2"]:

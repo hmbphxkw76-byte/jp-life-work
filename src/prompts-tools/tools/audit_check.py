@@ -36,8 +36,8 @@ import info_quality_check  # noqa: E402
 from audit_registry import content_fingerprint  # noqa: E402
 from info_quality_check import (  # noqa: E402
     THRESH_SOURCE_COVERAGE,
-    _fact_units,
-    _has_source,
+    fact_units,
+    has_source,
 )
 from lint_reports import lint_html  # noqa: E402
 
@@ -231,10 +231,10 @@ def check_elements(rel: str, md_path: Path, html_path: Path) -> list[AuditFindin
         add("E8", "P2", "缺少后续动作 / 观察清单")
 
     # E7 来源标注覆盖率（事实单元 = 段落 + 表格行）
-    paras, rows = _fact_units(text)
+    paras, rows = fact_units(text)
     fact_blocks = paras + rows
     if fact_blocks:
-        cov = sum(1 for b in fact_blocks if _has_source(b)) / len(fact_blocks)
+        cov = sum(1 for b in fact_blocks if has_source(b)) / len(fact_blocks)
         if cov < THRESH_SOURCE_COVERAGE:
             add("E7", "P2", f"事实单元来源标注覆盖率 {cov:.0%} < {THRESH_SOURCE_COVERAGE:.0%}", "S-06")
     return out
@@ -563,6 +563,12 @@ def main() -> int:
 
     ap.print_help()
     return 0
+
+# ── 公开接口别名（架构优化方向 F / I-6）──
+absolute_hits = _absolute_hits
+iq_findings_by_path = _iq_findings_by_path
+l5_status = _l5_status
+rel = _rel
 
 
 if __name__ == "__main__":

@@ -19,6 +19,7 @@
 """
 from __future__ import annotations
 
+import argparse
 import html as html_mod
 import re
 import sys
@@ -613,7 +614,18 @@ def collect_md_reports():
 
 
 def main() -> int:
+    ap = argparse.ArgumentParser(description="md -> HTML 同步")
+    ap.add_argument("--changed", action="store_true", help="仅转换 git diff 变更的报告（增量）")
+    ap.add_argument("--base", default="main...HEAD", help="增量模式的 git diff 基点")
+    args = ap.parse_args()
     targets = collect_md_reports()
+    if args.changed:
+        from incremental_build import changed_reports
+        changed = set(changed_reports(args.base))
+        targets = [m for m in targets if m.relative_to(ROOT).as_posix() in changed]
+        if not targets:
+            print("md2html --changed：无变更报告，跳过")
+            return 0
     if not targets:
         print("md2html：无 md 报告源（纯图表型简报只出 HTML），跳过")
         return 0

@@ -180,6 +180,17 @@ jobs:
           fi
           echo "词库校验通过（topic-check=$c1 verify=$c2 sync-check=$c3；2=仅警告不阻断）"
 
+      # 静态检查（架构优化方向 E / ARCH-OPT）：warning 起步，不阻断存量
+      - name: 安装开发依赖（ruff / mypy）
+        run: pip install -r requirements-dev.txt
+        continue-on-error: true
+      - name: ruff 静态检查（warning 起步）
+        run: python -m ruff check src tools
+        continue-on-error: true
+      - name: mypy 静态检查（渐进式）
+        run: python -m mypy src/prompts-tools/tools src/vocabulary/script
+        continue-on-error: true
+
       # 阶段收尾：无论成败清理缓存、临时产物与 pip 缓存，保证流水线结束后无残留。
       - uses: ./.github/actions/workspace-cleanup
         if: always()

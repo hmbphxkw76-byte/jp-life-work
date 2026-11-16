@@ -32,10 +32,10 @@ import info_quality_check  # noqa: E402
 from info_quality_check import (  # noqa: E402
     MD_LINK_RE,
     THRESH_SOURCE_COVERAGE,
-    _fact_units,
-    _has_source,
+    fact_units,
+    has_source,
 )
-from audit_check import ABSOLUTE_RE, H2_RE, _absolute_hits  # noqa: E402
+from audit_check import ABSOLUTE_RE, H2_RE, absolute_hits  # noqa: E402
 from lint_reports import lint_html  # noqa: E402
 
 AUDIT_DIR = ROOT / "src" / "report-audits" / "audit"
@@ -134,10 +134,10 @@ def check_text(rel: str, text: str, html: str = "", type_id: str = "",
     if h2_html < 1 and h2_md < 1:
         _add(out, "PF-E5", "P1", "必需要素", "正文无章节（h2 缺失）", "S-05")
 
-    paras, rows = _fact_units(text)
+    paras, rows = fact_units(text)
     fact_blocks = paras + rows
     if fact_blocks:
-        cov = sum(1 for b in fact_blocks if _has_source(b)) / len(fact_blocks)
+        cov = sum(1 for b in fact_blocks if has_source(b)) / len(fact_blocks)
         if cov < THRESH_SOURCE_COVERAGE:
             _add(out, "PF-E7", "P2", "事实单元来源覆盖不足",
                  f"含数字事实单元（段落 + 表格行）来源覆盖率 {cov:.0%} < {THRESH_SOURCE_COVERAGE:.0%}", "S-06")
@@ -146,7 +146,7 @@ def check_text(rel: str, text: str, html: str = "", type_id: str = "",
         _add(out, "PF-E8", "P2", "必需要素", "缺少后续动作 / 观察清单", "S-05")
 
     # ── 一致性：绝对化表述 ──
-    hits = _absolute_hits(text)
+    hits = absolute_hits(text)
     if hits:
         _add(out, "PF-ABS", "P2", "绝对化表述",
              f"命中绝对化措辞 {len(hits)} 处（{', '.join(sorted(set(hits))[:5])}），语义确认后定级", "S-10")

@@ -1346,6 +1346,15 @@ def main() -> int:
     args = ap.parse_args()
     return run(apply=args.apply, write=not args.check)
 
+# ── 公开接口别名（架构优化方向 F / I-6）──
+# 跨模块复用统一走公开名；下划线旧名保留为别名，兼容既有内部调用。
+live_table = _live_table
+read = _read
+report_value_rows = _report_value_rows
+significant_numbers = _significant_numbers
+fact_units = _fact_units
+has_source = _has_source
+
 
 if __name__ == "__main__":
     sys.exit(main())

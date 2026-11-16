@@ -943,20 +943,20 @@ class TestInfoQualityCheck(unittest.TestCase):
 
     def test_source_annotation_forms(self):
         """来源标注形式（2026-11-15 收紧括号口径）。"""
-        from info_quality_check import _has_source
+        from info_quality_check import has_source
         for text in ("见 https://example.com", "来源：机构",
                      "[出入国在留管理庁](https://example.com)",   # Markdown 链接
                      "详见登记册 #5", "手册 03 有口径"):
-            self.assertTrue(_has_source(text), text)
+            self.assertTrue(has_source(text), text)
         # 纯交叉引用括号（主题目录 / 路径文件 / 纯编号）不计
         for text in ("[08-visa-immigration]", "[001472175.pdf]", "[#5]",
                      "这是一段普通的陈述，没有任何引用。"):
-            self.assertFalse(_has_source(text), text)
+            self.assertFalse(has_source(text), text)
         # 白名单内的交叉引用括号计
         from info_quality_check import CROSS_REF_SOURCE_WHITELIST
         CROSS_REF_SOURCE_WHITELIST.add("白名单机构")
         try:
-            self.assertTrue(_has_source("[白名单机构]"))
+            self.assertTrue(has_source("[白名单机构]"))
         finally:
             CROSS_REF_SOURCE_WHITELIST.discard("白名单机构")
 
@@ -1361,7 +1361,7 @@ class TestAuditGuard(unittest.TestCase):
         audit_check.IQ_CACHE = self.audit_dir / "findings-by-path.json"
         try:
             k1 = audit_check._iq_cache_key()
-            audit_check._iq_findings_by_path()
+            audit_check.iq_findings_by_path()
             self.assertTrue(audit_check.IQ_CACHE.is_file())
             self.assertEqual(k1, audit_check._iq_cache_key())
             # 修改报告 → 缓存键变化（自动失效）
@@ -2082,8 +2082,8 @@ class TestNewAuditRules(unittest.TestCase):
                          {"测试指标": "厚労省每月勤労統計｜现金给与总额"})
 
     def test_c13_value_sync_flags_missing_number(self):
-        from info_quality_check import check_value_sync, _significant_numbers
-        self.assertEqual(_significant_numbers("341,158 円（+4.9%，2026-09）"),
+        from info_quality_check import check_value_sync, significant_numbers
+        self.assertEqual(significant_numbers("341,158 円（+4.9%，2026-09）"),
                          {"341158", "4.9"})
         with tempfile.TemporaryDirectory() as d:
             root = Path(d)
@@ -2217,9 +2217,9 @@ class TestNewAuditRules(unittest.TestCase):
             with patch.object(audit_sampling, "ROOT", root), \
                  patch.object(audit_check, "ROOT", root), \
                  patch.object(audit_sampling, "discover", return_value=entries), \
-                 patch.object(audit_sampling, "_iq_findings_by_path", return_value={}), \
-                 patch.object(audit_sampling, "_l5_status", return_value={rel: False}), \
-                 patch.object(audit_sampling, "_audit_state", return_value={}), \
+                 patch.object(audit_sampling, "iq_findings_by_path", return_value={}), \
+                 patch.object(audit_sampling, "l5_status", return_value={rel: False}), \
+                 patch.object(audit_sampling, "audit_state", return_value={}), \
                  patch.object(audit_sampling, "check_report", return_value=fake):
                 payload = audit_sampling.run_sample("2026-11")
             self.assertEqual(payload["l5_pending"], 1)
