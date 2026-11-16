@@ -8,7 +8,7 @@ CI 工具链使用说明。所有工具基于仓库根目录相对路径运行�
 
 ```bash
 pip install -r requirements.txt   # markdown
-python -m unittest discover -s src/tests -v   # 单元测试（163 项）
+python -m unittest discover -s src/tests -v   # 单元测试（255 项：tools 198 / workflow_guard 33 / cleanup 18 / git_push 6）
 ```
 
 ## 退出码约定（校验类工具统一）
@@ -24,8 +24,8 @@ python -m unittest discover -s src/tests -v   # 单元测试（163 项）
 | 工具 | 类别 | 对应 CI 工作流步骤 |
 |---|---|---|
 | validate.py | 校验 | validate.yml「规范校验」 |
-| lint_reports.py | 校验 | validate.yml「报告内容校验」（建议级） |
-| compliance_check.py | 校验+引导+审计 | validate.yml「报告模板合规校验」（建议级） |
+| lint_reports.py | 校验 | validate.yml「报告内容 lint」（新报告阻断） |
+| compliance_check.py | 校验+引导+审计 | validate.yml「报告模板合规校验」（新报告阻断） |
 | classify_reports.py | 校验+修复 | scheduled-maintenance.yml「报告自动归位」 |
 | ensure_region_topics.py | 校验+修复 | validate.yml「结构补全」 |
 | md2html.py | 生成 | html-sync.yml「HTML 同步」 |
@@ -35,7 +35,7 @@ python -m unittest discover -s src/tests -v   # 单元测试（163 项）
 | report_diff.py | 生成 | md2html 依赖：跨月内容对比高亮（纯函数） |
 | migrate_monthly_reports.py | 迁移 | 一次性：存量报告合并重命名为月度系列 |
 | update_planner.py | 编排 | scheduled-report-tasks.yml「生成月度任务清单」 |
-| automation_status.py | 编排 | 手动 / 待建定时任务「状态记录与活跃度」 |
+| automation_status.py | 编排 | 5 条工作流 `record` 入库 + 手动 `activity`（活跃度预警） |
 | info_quality_check.py | 校验+修复 | info-quality.yml「信息质量全量评估」+ validate.yml「信息质量检查」 |
 | audit_registry.py / audit_pipeline.py / audit_badge.py / audit_check.py / audit_sampling.py / audit_preflight.py | 审计 | audit-gate.yml / audit-sampling.yml / html-sync.yml |
 | personal_finance_model.py | 决策支持 | validate.yml「财务模型一致性」+ scheduled-maintenance.yml「刷新」 |
@@ -52,9 +52,9 @@ python -m unittest discover -s src/tests -v   # 单元测试（163 项）
 python src/prompts-tools/tools/validate.py
 ```
 
-检查项：通用层根部 3 份共享文件齐全（`prompt-generic-base.md` / `monitoring-common-spec.md` /
-`template-registry.md`）；各类型模板目录必备文件齐全（`market-monitoring/`、
-`employment-research/`，清单见 `_common.TEMPLATE_TYPE_DIRS`，与
+检查项：通用层根部 6 份共享文件齐全（`prompt-generic-base.md` / `monitoring-common-spec.md` /
+`template-registry.md` / `report-classification.md` / `registry-schema.md` / `compliance-rules.json`）；
+各类型模板目录必备文件齐全（13 类，清单见 `_common.TEMPLATE_TYPE_DIRS`，与
 [report_templates/template-registry.md](../../report_templates/template-registry.md) 第二节登记一致）；
 通用层全目录（含类型子目录）无业务关键词
 （迪拜/公寓/Dubai/UAE/DLD/CBUAE/EIBOR 等，清单见 `_common.BUSINESS_KEYWORDS`）；
@@ -152,8 +152,8 @@ md / html 一并移入业务目录内 `reports/archives/`。保留策略为纯�
 python src/prompts-tools/tools/build_index.py
 ```
 
-按业务线汇总全部报告，生成根目录 `INDEX.md`（含「最近生成」时间戳，作为
-定时维护的活跃度心跳；当前无定时工作流，需手动运行）。
+按业务线汇总全部报告，生成根目录 `INDEX.md`（含「最近生成」时间戳，作为定时维护的
+活跃度心跳；由 `scheduled-maintenance.yml` 每月 1 日自动生成，`validate.yml` 以 `--check` 校验一致）。
 
 ### build_hub.py — 汇总页
 
@@ -196,7 +196,7 @@ python src/prompts-tools/tools/update_planner.py --project dubai/apartment --per
 python src/prompts-tools/tools/automation_status.py record --phase maintenance \
     --result success --run-url "<运行链接>"
 
-# 活跃度检查（定时维护用于 >45 天预警）
+# 活跃度检查（>45 天预警；手动 / 按需入口，未纳入自动门禁）
 python src/prompts-tools/tools/automation_status.py activity --threshold 45 --porcelain   # 输出天数或 unknown
 python src/prompts-tools/tools/automation_status.py activity --threshold 45               # 人读说明
 ```
