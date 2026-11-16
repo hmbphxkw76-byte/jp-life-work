@@ -19,6 +19,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from _common import (  # noqa: E402
     BUSINESS_KEYWORDS,
+    BUSINESS_TOPIC_MARKERS,
     REQUIRED_TEMPLATE_FILES,
     TEMPLATE_ROOT,
     TEMPLATE_TYPE_DIRS,
@@ -62,6 +63,13 @@ def check_templates() -> None:
         for kw in BUSINESS_KEYWORDS:
             if kw in text:
                 err(f"通用层出现业务关键词「{kw}」: {md.relative_to(ROOT)}")
+    # 类型层（不含根部规范）额外做业务主题词检测，防止单条业务线行业词污染通用模板
+    for type_id in TEMPLATE_TYPE_DIRS:
+        for md in (tpl_dir / type_id).rglob("*.md"):
+            text = md.read_text(encoding="utf-8", errors="replace")
+            for kw in BUSINESS_TOPIC_MARKERS:
+                if kw in text:
+                    err(f"类型层出现业务主题词「{kw}」: {md.relative_to(ROOT)}")
 
 
 def check_business_dirs() -> None:

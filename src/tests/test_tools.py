@@ -349,17 +349,56 @@ class TestComplianceCheck(unittest.TestCase):
         self.assertTrue(any(i[0] == "E" and "断头锚点" in i[1] for i in issues))
 
     def test_every_type_has_monthly_skeleton(self):
-        """全部类型登记 monthly 骨架（nav=true），避免月度报告回落基线。"""
+        """全部日历节拍类型登记 monthly 骨架（nav=true），避免月度报告回落基线。
+
+        flash-commentary 为事件触发型（72h 快评），无月度节拍，改以 flash_note 骨架承载。
+        """
+        no_monthly = {"flash-commentary"}
         missing = [tid for tid, t in self.rules["types"].items()
-                   if "monthly" not in t.get("cycles", {})]
+                   if "monthly" not in t.get("cycles", {}) and tid not in no_monthly]
         self.assertEqual(missing, [], f"以下类型缺 monthly 骨架：{missing}")
         for tid, t in self.rules["types"].items():
+            if tid in no_monthly:
+                self.assertIn("flash_note", t["cycles"], f"{tid} 缺 flash_note 骨架")
+                continue
             self.assertTrue(t["cycles"]["monthly"].get("nav"), f"{tid} monthly 须 nav=true")
 
     def test_monthly_not_inherited(self):
         for tid in self.rules["types"]:
+            if tid == "flash-commentary":
+                continue
             _rule, inherited = cycle_rule(self.rules, tid, "monthly")
             self.assertFalse(inherited, f"{tid} monthly 仍回落基线")
+
+    def test_declared_section_counts_match_rules(self):
+        """模板声明节数 / 结构表行数必须与 compliance-rules.json 的 sections 一致。
+
+        与 TestTemplateComplianceGuard.test_stale_section_counts_absent 互补：
+        后者硬编码已知陈旧文案，本用例做通用数值一致性校验。
+        """
+        cn = {"一": 1, "二": 2, "三": 3, "四": 4, "五": 5, "六": 6, "七": 7,
+              "八": 8, "九": 9, "十": 10, "十一": 11, "十二": 12}
+
+        def to_int(s):
+            return int(s) if s.isdigit() else cn[s]
+
+        root = _common.ROOT / "src"
+        decl_pat = re.compile(r"([一二三四五六七八九十]+|\d+)\s*(?:节|段)式?固定(?:顺序|结构)")
+        for tid, t in self.rules["types"].items():
+            for cyc, rule in t["cycles"].items():
+                tmpl = rule.get("template")
+                if not tmpl:
+                    continue
+                txt = (root / t["template_dir"] / tmpl).read_text(encoding="utf-8")
+                decl = [to_int(x) for x in decl_pat.findall(txt)]
+                if decl:
+                    self.assertIn(rule["sections"], decl,
+                                  f"{tid}/{cyc} 声明节数 {decl} 不含 {rule['sections']}")
+                rows = [r for r in re.findall(r"^\|\s*(\d+)\s*\|(.*)$", txt, re.M)
+                        if "页脚" not in r[1]]
+                if rows:
+                    self.assertEqual(len(rows), rule["sections"],
+                                     f"{tid}/{cyc} 结构表行数 {len(rows)} != {rule['sections']}")
 
 
 # ──────────────────────────────────────────────

@@ -49,8 +49,9 @@
 3. 首建台账 {{REGISTRY_PATH}}（数据看板追踪表 / 已修正事实清单 / 来源清单 / 触发器清单 / 版本记录）。
 4. 按基线类型模板第二节撰写九节机制文档（顺序标题逐字固化），落盘 {{OUTPUT_PATH}}。
 
-## 结果验证
+## 渲染与交付
 
+- 交付格式由业务配置声明：md + HTML 双格式，或纯 HTML（md 源稿存 `sources/`，不参与 md2html 自动转换）。
 - python src/prompts-tools/tools/validate.py（0 错误）
 - python src/prompts-tools/tools/lint_reports.py（0 错误）
 - python src/prompts-tools/tools/build_index.py && python src/prompts-tools/tools/build_hub.py
@@ -98,8 +99,9 @@
 3. 逐块更新主题板块；数据看板逐行核对并回写台账（逐项填「是否更新」）。
 4. 撰写八节周报，落盘 {{OUTPUT_PATH}}。
 
-## 结果验证
+## 渲染与交付
 
+- 交付格式由业务配置声明：md + HTML 双格式，或纯 HTML（md 源稿存 `sources/`，不参与 md2html 自动转换）。
 - python src/prompts-tools/tools/lint_reports.py && python src/prompts-tools/tools/classify_reports.py
 - python src/prompts-tools/tools/compliance_check.py --file {{OUTPUT_PATH}}
 - python src/prompts-tools/tools/build_index.py && python src/prompts-tools/tools/build_hub.py

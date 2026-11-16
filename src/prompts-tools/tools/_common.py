@@ -184,6 +184,13 @@ BUSINESS_KEYWORDS = (
     "Peak Trust", "ValuStrat", "DXBinteract", "PropertyIndex",
 )
 
+# 业务主题词标记（仅扫描 report_templates/<类型ID>/**，不含根部规范）：
+# 类型层出现任一即视为业务污染（如某条业务线的行业词被带入通用模板）。
+BUSINESS_TOPIC_MARKERS = (
+    "SSW", "司机", "卡车", "物流", "日语", "JLPT", "在留", "住民票",
+    "国民健康保険", "介护", "介護", "民宿", "厂房", "网络安全", "特定技能",
+)
+
 
 @dataclass(frozen=True)
 class Business:
