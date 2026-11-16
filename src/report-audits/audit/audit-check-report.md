@@ -1,6 +1,6 @@
 # 报告多层级校验报告（AuditGuard）
 
-> 校验日期：2026-11-15　|　报告总数：22　|　通过 22 / 不通过 0
+> 校验日期：2026-11-16　|　报告总数：22　|　通过 22 / 不通过 0
 > 层级：L1 结构 / L2 要素 / L3 溯源 / L4 一致性 / L5 语义（清单）；判定内核内嵌信息质量四维度。
 
 ## 逐报告结论
@@ -23,7 +23,7 @@
 | [12-culture-life/reports/2026-11-culture-life.md](../../../12-culture-life/reports/2026-11-culture-life.md) | L1✓ L2✓ L3✓ L4✓ L5✓ | 0 | 0 | 2 | 通过 |
 | [13-regional-info/reports/2026-11-regional-info.md](../../../13-regional-info/reports/2026-11-regional-info.md) | L1✓ L2✓ L3✓ L4✓ L5✓ | 0 | 0 | 0 | 通过 |
 | [14-life-operations/reports/2026-11-life-operations.md](../../../14-life-operations/reports/2026-11-life-operations.md) | L1✓ L2✓ L3✓ L4✓ L5✓ | 0 | 0 | 1 | 通过 |
-| [15-health-wellbeing/reports/2026-11-health-wellbeing.md](../../../15-health-wellbeing/reports/2026-11-health-wellbeing.md) | L1✓ L2✓ L3✓ L4✓ L5✓ | 0 | 0 | 2 | 通过 |
+| [15-health-wellbeing/reports/2026-11-health-wellbeing.md](../../../15-health-wellbeing/reports/2026-11-health-wellbeing.md) | L1✓ L2✓ L3✓ L4✓ L5✓ | 0 | 0 | 0 | 通过 |
 | [16-exit-transition-return/reports/2026-11-exit-transition-return.md](../../../16-exit-transition-return/reports/2026-11-exit-transition-return.md) | L1✓ L2✓ L3✓ L4✓ L5✓ | 0 | 0 | 1 | 通过 |
 | [17-migration-compliance/reports/2026-11-migration-compliance.md](../../../17-migration-compliance/reports/2026-11-migration-compliance.md) | L1✓ L2✓ L3✓ L4✓ L5✓ | 0 | 0 | 0 | 通过 |
 | [18-family-parenting/reports/2026-11-family-parenting.md](../../../18-family-parenting/reports/2026-11-family-parenting.md) | L1✓ L2✓ L3✓ L4✓ L5✓ | 0 | 0 | 1 | 通过 |
@@ -35,8 +35,8 @@
 | 层级 | pass | fail | pending | P0 | P1 | P2 |
 |---|---|---|---|---|---|---|
 | L1 | 22 | 0 | 0 | 0 | 0 | 1 |
-| L2 | 22 | 0 | 0 | 0 | 0 | 1 |
-| L3 | 22 | 0 | 0 | 0 | 0 | 1 |
+| L2 | 22 | 0 | 0 | 0 | 0 | 0 |
+| L3 | 22 | 0 | 0 | 0 | 0 | 0 |
 | L4 | 22 | 0 | 0 | 0 | 0 | 12 |
 | L5 | 22 | 0 | 0 | 0 | 0 | 0 |
 
@@ -54,8 +54,6 @@
 | L4 | C-03 | P2 | 12-culture-life/reports/2026-11-culture-life.md | 跨文档重复 | 约 229 字的段落与 14-life-operations/reports/2026-11-life-operations.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度） |
 | L4 | C-03 | P2 | 12-culture-life/reports/2026-11-culture-life.md | 跨文档重复 | 约 165 字的段落与 17-migration-compliance/reports/2026-11-migration-compliance.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度） |
 | L4 | C-03 | P2 | 14-life-operations/reports/2026-11-life-operations.md | 跨文档重复 | 约 165 字的段落与 17-migration-compliance/reports/2026-11-migration-compliance.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度） |
-| L2 | E7 | P2 | 15-health-wellbeing/reports/2026-11-health-wellbeing.md | 必需要素 | 事实单元来源标注覆盖率 15% < 20% |
-| L3 | C-07 | P2 | 15-health-wellbeing/reports/2026-11-health-wellbeing.md | 事实单元来源覆盖不足 | 含数字事实单元（段落 + 表格行）来源覆盖率 15% < 20%（程序化门槛；语义目标 100%）（信息质量四维度） |
 | L4 | C-03 | P2 | 16-exit-transition-return/reports/2026-11-exit-transition-return.md | 跨文档重复 | 约 204 字的段落与 20-overseas-china/reports/2026-11-overseas-china.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度） |
 | L4 | C-03 | P2 | 18-family-parenting/reports/2026-11-family-parenting.md | 跨文档重复 | 约 204 字的段落与 20-overseas-china/reports/2026-11-overseas-china.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度） |
 | L1 | L1-SKELETON | P2 | 19-safety-disaster/reports/2026-11-safety-disaster.md | 类型骨架 | [market-monitoring/monthly] h2 节数 10 超出模板骨架 8 节（如为业务固化锚请人工确认，否则须对齐类型模板 prompt-monthly-monitor-template.md） |
