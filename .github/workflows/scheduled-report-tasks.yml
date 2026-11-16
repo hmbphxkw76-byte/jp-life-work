@@ -46,7 +46,12 @@ jobs:
 
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: '3.12'
+
+      # 阶段前置：清理 runner 工作区残留（缓存 / 临时文件），保证各阶段起点干净。
+      - uses: ./.github/actions/workspace-cleanup
+        with:
+          mode: ci
 
       - name: 安装依赖
         run: pip install -r requirements.txt
@@ -119,3 +124,9 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git commit -m "chore: 记录月度提醒自动化状态"
           git push
+
+      # 阶段收尾：无论成败清理缓存、临时产物与 pip 缓存，保证流水线结束后无残留。
+      - uses: ./.github/actions/workspace-cleanup
+        if: always()
+        with:
+          mode: ci

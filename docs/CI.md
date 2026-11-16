@@ -180,7 +180,7 @@ reports/YYYY-MM-<slug>.md  ──md2html.py──►  reports/YYYY-MM-<slug>.htm
 - **辅助开关**：报告页工具条「隐藏更新标记」对照阅读、「展开全部删除」。
 - **呈现**：报告页新标签页独立打开，页脚提供「← 返回主题 / 返回首页」。
 
-## 六、测试体系（`src/tests/`，227 项）
+## 六、测试体系（`src/tests/`，251 项）
 
 | 场景 | 测试类 | 覆盖 |
 |---|---|---|
@@ -188,9 +188,11 @@ reports/YYYY-MM-<slug>.md  ──md2html.py──►  reports/YYYY-MM-<slug>.htm
 | 全量历史数据校验 | `TestHistoricalMigration` | 迁移清单完整性 + git 历史逐份复核内容零丢失 |
 | 跨月份对比准确性 | `TestDiffAccuracy` | 相同 / 新增 / 修改 / 删除 / 相似度阈值 / 首期 / 报告页 diff 高亮 |
 | 并行协作三层隔离 | `test_workflow_guard.py`（33 项） | 任务分支 / worktree、检出锁（占用 / 释放 / 强取 / 失效）、串行合并（happy / 冲突保留 / 校验阻断）、sync |
+| 推送双通道 failover | `test_git_push.py`（6 项） | ssh 主通道成功、失败切 https、两条都失败时恰好各试一次（不重试） |
+| 工作区标准化清理 | `test_cleanup.py`（18 项） | 残留识别与清理、`--check` / `--dry-run` 契约、日志作用域限定、已跟踪文件 / 目录保护、CI 接线契约（每工作流前置 + 收尾 `always`） |
 | 工具契约 | `test_tools.py`（194 项） | 命名解析（新 + 历史）、周期与任务推导、归档策略、lint / 合规、`build_hub` 归一化比对、活跃度天数、全主题契约、流程复用与三体系一致性 |
 
-> 合计 227 项（`python -m unittest discover -s src/tests`，当前全绿）。
+> 合计 251 项（`python -m unittest discover -s src/tests`，当前全绿）。
 
 ## 七、手动命令速查
 
@@ -308,6 +310,59 @@ CI 之外的**本地多会话 / 多任务并行**由三层隔离机制约束，�
 
 ---
 
+## 十二、工作区卫生与标准化清理（横切）
+
+**目标**：流水线运行前、运行中、运行结束后，runner 工作区与本地开发工作区都不留缓存、临时文件、过期日志等残留；清理规则单点维护，且可被门禁验证。
+
+### 12.1 单一事实源：`tools/cleanup_workspace.py`
+
+清理对象（仅限未入库产物）：
+
+- 缓存目录：`__pycache__/`、`.pytest_cache/`、`.mypy_cache/`、`.ruff_cache/`、`.hypothesis/`、`.trae-html-share-packages/`、`.screenshots/`；
+- 生成备份目录：`src/vocabulary/data/sync-backups/`、`src/vocabulary/data/topic-backups/`；
+- 单文件：`*.py[cod]`、`*$py.class`、`*.tmp`、`*.temp`、`.DS_Store`、`Thumbs.db`、`desktop.ini`；
+- 运行日志：`src/vocabulary/data/*.log`（作用域限定，不误删其他目录的同名文件）。
+
+**安全约束**：只清仓库根内路径；已被 `git ls-files` 覆盖的文件 / 目录一律跳过；不进入 `.git`；不跟随符号链接。
+
+退出码：`0` = 干净或已清理；`1` = `--check` 发现残留 / 参数错误 / 删除失败。
+
+```bash
+python tools/cleanup_workspace.py            # 清理
+python tools/cleanup_workspace.py --check    # 门禁：只检查，发现残留即退出码 1
+python tools/cleanup_workspace.py --dry-run  # 预览将删除项
+```
+
+### 12.2 流水线接入（复合动作 `.github/actions/workspace-cleanup`）
+
+每条工作流的每个 job 固定两处调用，形成「阶段前置 → 阶段收尾」闭环：
+
+| 位置 | 调用 | 作用 |
+|---|---|---|
+| 阶段前置（checkout + setup-python 之后） | `uses: ./.github/actions/workspace-cleanup`，`mode: ci` | 清掉 runner 带入的上游缓存 / 临时文件，保证阶段起点干净 |
+| 阶段收尾（job 最后一步，`if: always()`） | 同上 | 无论成败清理本阶段产生的缓存 / 临时产物，并 `pip cache purge` |
+
+- `mode: ci` 额外清理 pip 缓存（位于 runner HOME）；`check-only: 'true'` 只检查不删除，用于门禁。
+- 提交 / 推送类步骤（`git commit` / `git push`）**必须**排在收尾清理之前，避免清理早于交付。
+- 现已接入：`validate` / `audit-gate` / `html-sync` / `scheduled-maintenance` / `scheduled-report-tasks` / `info-quality` / `audit-sampling`（7 条）。
+
+### 12.3 门禁：`validate.yml` 的 `workspace-hygiene` job
+
+独立 job，自证清理链路有效，防止「清理规则失效 / 新增产物类型未纳入清理」静默退化：
+
+1. 安装依赖并跑契约测试（制造 `__pycache__`）；
+2. 显式制造残留：`.pytest_cache/`、`sync-backups/`、`sync.log`、`.DS_Store`；
+3. 执行标准化清理；
+4. 以 `--check` 断言**零残留**，有残留即失败。
+
+### 12.4 本地纪律
+
+- 提交前运行 `python tools/cleanup_workspace.py`，随后 `git status` 应无未跟踪残留；
+- 运行日志不入库（`.gitignore`：`src/vocabulary/data/*.log`），本地仍由工具正常写入；
+- `.worktrees/` 由 `tools/workflow_guard.py` 管理，不在清理脚本作用域内。
+
+---
+
 ## 版本记录
 
 | 版本 | 日期 | 变更 | 说明 |
@@ -315,3 +370,4 @@ CI 之外的**本地多会话 / 多任务并行**由三层隔离机制约束，�
 | v1.0 | 2026-11-14 | 初始版本 | 建立 CI 与自动化全景：7 条工作流、报告生命周期、命名分类、跨月对比、测试体系、手动命令、复用一致性、并行协作 |
 | v1.2 | 2026-11-16 | 精简与修正 | 测试数修正为 222（189 + 33）；第十一节精简为指针 + 程序化边界，去除与总规范重复的全链路图与阶段闸表；手动命令补审计入口 |
 | v1.3 | 2026-11-16 | 对齐校验整改 | 步骤清单与实际工作流逐一对齐（validate 14 步 / html-sync 7 步 / maintenance 14 步 / info-quality 6 步 / sampling 4 步 / report-tasks 3 步）；补阶段闸、信息质量、事实卡片、待核实、财务模型、自动化状态条目；sampling 不合格处置改为自动置 `stale` |
+| v1.4 | 2026-11-16 | 工作区卫生横切 | 新增 `tools/cleanup_workspace.py`（缓存 / 临时文件 / 日志清理，含 `--check` 门禁与已跟踪文件保护）与复合动作 `.github/actions/workspace-cleanup`；7 条工作流全部接入「阶段前置 + 阶段收尾（`if: always()`）」清理；`validate.yml` 新增 `workspace-hygiene` 自检 job（制造残留 → 清理 → `--check` 断言零残留）；运行日志改为不入库；测试数 227 → 251 |

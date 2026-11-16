@@ -124,3 +124,30 @@ GitHub Actions 在远端 runner 上跑，不经过本地锁；它们直接向 `m
 - **接入点**：`merge` 与 `sync --push-local` 的推送均经此工具；`--push-fallback` 可覆盖备用通道
   （传空字符串则不 failover）。
 - **仅限本 repo**：本 repo 永不使用 GitLab，推送 / 合并 / 提交只走 GitHub。
+
+## 九、工作区标准化清理（`tools/cleanup_workspace.py`）
+
+流水线各阶段（前置 / 收尾）与本地开发共用的清理入口，规则单点维护。
+
+**清理对象**（仅限未入库产物）：
+
+- 缓存目录：`__pycache__/`、`.pytest_cache/`、`.mypy_cache/`、`.ruff_cache/`、`.hypothesis/`、`.trae-html-share-packages/`、`.screenshots/`；
+- 生成备份目录：`src/vocabulary/data/sync-backups/`、`src/vocabulary/data/topic-backups/`；
+- 单文件：`*.py[cod]`、`*$py.class`、`*.tmp`、`*.temp`、`.DS_Store`、`Thumbs.db`、`desktop.ini`；
+- 运行日志：`src/vocabulary/data/*.log`（作用域限定，其他目录同名文件不动）。
+
+**安全约束**：只清仓库根内路径；已被 `git ls-files` 覆盖的文件 / 目录跳过；不进入 `.git`；不跟随符号链接。
+
+```bash
+python tools/cleanup_workspace.py            # 清理
+python tools/cleanup_workspace.py --check    # 只检查，发现残留退出码 1（门禁用）
+python tools/cleanup_workspace.py --dry-run  # 预览
+python tools/cleanup_workspace.py --root <dir>
+```
+
+**CI 接入**：复合动作 `.github/actions/workspace-cleanup/action.yml`；每条工作流在
+「checkout + setup-python 之后」与「job 最后一步（`if: always()`）」各调用一次，
+`mode: ci` 额外 `pip cache purge`。`validate.yml` 另有 `workspace-hygiene` job
+先制造残留再清理、以 `--check` 断言零残留。详见 `docs/CI.md` 第十二节。
+
+**退出码**：0 = 干净或已清理；1 = `--check` 发现残留 / 参数错误 / 删除失败。
