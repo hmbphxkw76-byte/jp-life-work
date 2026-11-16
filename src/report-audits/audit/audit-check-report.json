@@ -1,5 +1,5 @@
 {
-  "run_date": "2026-11-15",
+  "run_date": "2026-11-16",
   "summary": {
     "reports": 22,
     "passed": 22,
@@ -7,7 +7,7 @@
     "by_severity": {
       "P0": 0,
       "P1": 0,
-      "P2": 15
+      "P2": 13
     },
     "by_layer": {
       "L1": {
@@ -24,7 +24,7 @@
         "pending": 0,
         "P0": 0,
         "P1": 0,
-        "P2": 1
+        "P2": 0
       },
       "L3": {
         "pass": 22,
@@ -32,7 +32,7 @@
         "pending": 0,
         "P0": 0,
         "P1": 0,
-        "P2": 1
+        "P2": 0
       },
       "L4": {
         "pass": 22,
@@ -613,29 +613,10 @@
       "severity": {
         "P0": 0,
         "P1": 0,
-        "P2": 2
+        "P2": 0
       },
       "passed": true,
-      "findings": [
-        {
-          "layer": "L2",
-          "code": "E7",
-          "severity": "P2",
-          "report": "15-health-wellbeing/reports/2026-11-health-wellbeing.md",
-          "location": "必需要素",
-          "detail": "事实单元来源标注覆盖率 15% < 20%",
-          "spec": "S-06"
-        },
-        {
-          "layer": "L3",
-          "code": "C-07",
-          "severity": "P2",
-          "report": "15-health-wellbeing/reports/2026-11-health-wellbeing.md",
-          "location": "事实单元来源覆盖不足",
-          "detail": "含数字事实单元（段落 + 表格行）来源覆盖率 15% < 20%（程序化门槛；语义目标 100%）（信息质量四维度）",
-          "spec": "S-06"
-        }
-      ],
+      "findings": [],
       "l5_checklist": [
         "结论与依据是否匹配（关键结论有「事实→推理→结论」链）",
         "表述是否与来源原文含义一致（无夸大 / 曲解）",

@@ -1,18 +1,7 @@
 {
   "version": "1.1",
-  "key": "6068f3e1ff62154960c61e3b9869842ef882ac93a6d7e7914ec8d0b51c2126c4",
+  "key": "85b13f15f8ab1debad8a72a394a105f08148f7e26c4f6e1a81bc1e68b3d4309d",
   "findings": {
-    "15-health-wellbeing/reports/2026-11-health-wellbeing.md": [
-      {
-        "layer": "L3",
-        "code": "C-07",
-        "severity": "P2",
-        "report": "15-health-wellbeing/reports/2026-11-health-wellbeing.md",
-        "location": "事实单元来源覆盖不足",
-        "detail": "含数字事实单元（段落 + 表格行）来源覆盖率 15% < 20%（程序化门槛；语义目标 100%）（信息质量四维度）",
-        "spec": "S-06"
-      }
-    ],
     "01-ssw-driver/reports/2026-11-ssw-driver.md": [
       {
         "layer": "L4",

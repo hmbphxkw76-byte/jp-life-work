@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "updated": "2026-11-15",
-  "count": 15,
+  "updated": "2026-11-16",
+  "count": 13,
   "items": [
     {
       "report": "01-ssw-driver/reports/2026-11-ssw-driver.md",
@@ -10,7 +10,7 @@
       "detail": "约 362 字的段落与 02-career-driver/reports/2026-11-career-driver.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
       "spec": "S-02",
       "first_seen": "2026-11-15",
-      "last_seen": "2026-11-15",
+      "last_seen": "2026-11-16",
       "review_by": "2026-12-15"
     },
     {
@@ -20,7 +20,7 @@
       "detail": "约 140 字的段落与 05-industry-autonomous/reports/2026-11-industry-autonomous.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
       "spec": "S-02",
       "first_seen": "2026-11-15",
-      "last_seen": "2026-11-15",
+      "last_seen": "2026-11-16",
       "review_by": "2026-12-15"
     },
     {
@@ -30,7 +30,7 @@
       "detail": "约 140 字的段落与 06-industry-technology/reports/2026-11-industry-technology.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
       "spec": "S-02",
       "first_seen": "2026-11-15",
-      "last_seen": "2026-11-15",
+      "last_seen": "2026-11-16",
       "review_by": "2026-12-15"
     },
     {
@@ -40,7 +40,7 @@
       "detail": "约 779 字的段落与 06-industry-technology/reports/2026-11-industry-technology.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
       "spec": "S-02",
       "first_seen": "2026-11-15",
-      "last_seen": "2026-11-15",
+      "last_seen": "2026-11-16",
       "review_by": "2026-12-15"
     },
     {
@@ -50,7 +50,7 @@
       "detail": "约 175 字的段落与 10-education-qualification/reports/2026-11-education-qualification.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
       "spec": "S-02",
       "first_seen": "2026-11-15",
-      "last_seen": "2026-11-15",
+      "last_seen": "2026-11-16",
       "review_by": "2026-12-15"
     },
     {
@@ -60,7 +60,7 @@
       "detail": "约 189 字的段落与 12-culture-life/reports/2026-11-culture-life.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
       "spec": "S-02",
       "first_seen": "2026-11-15",
-      "last_seen": "2026-11-15",
+      "last_seen": "2026-11-16",
       "review_by": "2026-12-15"
     },
     {
@@ -70,7 +70,7 @@
       "detail": "约 186 字的段落与 14-life-operations/reports/2026-11-life-operations.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
       "spec": "S-02",
       "first_seen": "2026-11-15",
-      "last_seen": "2026-11-15",
+      "last_seen": "2026-11-16",
       "review_by": "2026-12-15"
     },
     {
@@ -80,7 +80,7 @@
       "detail": "约 229 字的段落与 14-life-operations/reports/2026-11-life-operations.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
       "spec": "S-02",
       "first_seen": "2026-11-15",
-      "last_seen": "2026-11-15",
+      "last_seen": "2026-11-16",
       "review_by": "2026-12-15"
     },
     {
@@ -90,7 +90,7 @@
       "detail": "约 165 字的段落与 17-migration-compliance/reports/2026-11-migration-compliance.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
       "spec": "S-02",
       "first_seen": "2026-11-15",
-      "last_seen": "2026-11-15",
+      "last_seen": "2026-11-16",
       "review_by": "2026-12-15"
     },
     {
@@ -100,27 +100,7 @@
       "detail": "约 165 字的段落与 17-migration-compliance/reports/2026-11-migration-compliance.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
       "spec": "S-02",
       "first_seen": "2026-11-15",
-      "last_seen": "2026-11-15",
-      "review_by": "2026-12-15"
-    },
-    {
-      "report": "15-health-wellbeing/reports/2026-11-health-wellbeing.md",
-      "code": "E7",
-      "location": "必需要素",
-      "detail": "事实单元来源标注覆盖率 15% < 20%",
-      "spec": "S-06",
-      "first_seen": "2026-11-15",
-      "last_seen": "2026-11-15",
-      "review_by": "2026-12-15"
-    },
-    {
-      "report": "15-health-wellbeing/reports/2026-11-health-wellbeing.md",
-      "code": "C-07",
-      "location": "事实单元来源覆盖不足",
-      "detail": "含数字事实单元（段落 + 表格行）来源覆盖率 15% < 20%（程序化门槛；语义目标 100%）（信息质量四维度）",
-      "spec": "S-06",
-      "first_seen": "2026-11-15",
-      "last_seen": "2026-11-15",
+      "last_seen": "2026-11-16",
       "review_by": "2026-12-15"
     },
     {
@@ -130,7 +110,7 @@
       "detail": "约 204 字的段落与 20-overseas-china/reports/2026-11-overseas-china.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
       "spec": "S-02",
       "first_seen": "2026-11-15",
-      "last_seen": "2026-11-15",
+      "last_seen": "2026-11-16",
       "review_by": "2026-12-15"
     },
     {
@@ -140,7 +120,7 @@
       "detail": "约 204 字的段落与 20-overseas-china/reports/2026-11-overseas-china.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
       "spec": "S-02",
       "first_seen": "2026-11-15",
-      "last_seen": "2026-11-15",
+      "last_seen": "2026-11-16",
       "review_by": "2026-12-15"
     },
     {
@@ -150,7 +130,7 @@
       "detail": "[market-monitoring/monthly] h2 节数 10 超出模板骨架 8 节（如为业务固化锚请人工确认，否则须对齐类型模板 prompt-monthly-monitor-template.md）",
       "spec": "S-11",
       "first_seen": "2026-11-15",
-      "last_seen": "2026-11-15",
+      "last_seen": "2026-11-16",
       "review_by": "2026-12-15"
     }
   ]
