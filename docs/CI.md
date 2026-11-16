@@ -1,7 +1,8 @@
 # CI 与自动化体系
 
+> **版本**：v1.2（2026-11-16 精简合并）
 > 本文档说明 jp-life-work 报告管理体系的持续集成（CI）与定时自动化。
-> 代码位置：`.github/workflows/`；工具链：`src/prompts-tools/tools/`；测试：`src/tests/test_tools.py`。
+> 代码位置：`.github/workflows/`（7 条工作流）；工具链：`src/prompts-tools/tools/`；测试：`src/tests/`。
 
 ## 一、总览
 
@@ -157,7 +158,7 @@ reports/YYYY-MM-<slug>.md  ──md2html.py──►  reports/YYYY-MM-<slug>.htm
 - **辅助开关**：报告页工具条「隐藏更新标记」对照阅读、「展开全部删除」。
 - **呈现**：报告页新标签页独立打开，页脚提供「← 返回主题 / 返回首页」。
 
-## 六、测试体系（`src/tests/`，163 项）
+## 六、测试体系（`src/tests/`，222 项）
 
 | 场景 | 测试类 | 覆盖 |
 |---|---|---|
@@ -165,8 +166,9 @@ reports/YYYY-MM-<slug>.md  ──md2html.py──►  reports/YYYY-MM-<slug>.htm
 | 全量历史数据校验 | `TestHistoricalMigration` | 迁移清单完整性 + git 历史逐份复核内容零丢失 |
 | 跨月份对比准确性 | `TestDiffAccuracy` | 相同 / 新增 / 修改 / 删除 / 相似度阈值 / 首期 / 报告页 diff 高亮 |
 | 并行协作三层隔离 | `test_workflow_guard.py`（33 项） | 任务分支 / worktree、检出锁（占用 / 释放 / 强取 / 失效）、串行合并（happy / 冲突保留 / 校验阻断）、sync |
+| 工具契约 | `test_tools.py`（189 项） | 命名解析（新 + 历史）、周期与任务推导、归档策略、lint / 合规、`build_hub` 归一化比对、活跃度天数、全主题契约、流程复用与三体系一致性 |
 
-其他：命名解析（新 + 历史）、周期与任务推导、归档策略、lint / 合规、`build_hub` 归一化比对、活跃度天数、全主题契约。
+> 合计 222 项（`python -m unittest discover -s src/tests`，当前全绿）。
 
 ## 七、手动命令速查
 
@@ -195,6 +197,12 @@ python src/prompts-tools/tools/automation_status.py activity
 
 # 信息质量
 python src/prompts-tools/tools/info_quality_check.py --apply
+
+# 审计
+python src/prompts-tools/tools/audit_preflight.py --report <报告.md>
+python src/prompts-tools/tools/audit_check.py --report <报告.md>
+python src/prompts-tools/tools/audit_pipeline.py --submit --report <报告.md>
+python src/prompts-tools/tools/audit_pipeline.py --gate
 
 # 阶段闸（采集 / 筛选 / 分类左移）
 python src/prompts-tools/tools/stage_gate_check.py
@@ -266,69 +274,21 @@ CI 之外的**本地多会话 / 多任务并行**由三层隔离机制约束，�
 
 ## 十一、信息生产全链路（闭环与阶段闸）
 
-> 上位模型：把「信息采集 → 筛选 → 分类 → 生成 → 输出 → 门禁 → 周期保障 → 决策消费」视为一条
-> 闭环生产线。本节定义**阶段出口闸（左移）**与闭环判据；报告交付层门禁（`audit_pipeline --gate` /
-> `audit_check`）与周期兜底见《审计报告标准化管理体系》。工具：`stage_gate_check.py`。
+> 本节只保留 CI 侧的程序化边界。阶段交付物、五闸执行规则、缺陷路由、周期保障与补缺准入的完整规范见 [信息生产全链路执行规范](信息生产全链路执行规范.md)；审计层门禁见 [审计报告标准化管理体系](审计报告标准化管理体系.md)。工具：`stage_gate_check.py`。
 
-### 11.1 闭环判据（四条，缺一不算闭环）
+### 11.1 程序化边界（形态 vs 语义）
 
-1. **阶段出口设闸**：任一阶段产出过闸才进下一阶段（闸 1 / 2 / 3 / 5）；
-2. **缺陷路由 + 复评**：P0/P1 按缺陷性质路由回源阶段（采集 / 筛选 / 分类 / 生成 / 输出），修复后重过同一闸；
-3. **周期修复回写资产层**：`info-quality` / 抽检的修复与基线更新回写登记册、词库、提示词，而非只作用于报告；
-4. **补缺准入**：决策层缺失经「分级 · 责任主题 · 验收」准入后才触发补缺。
-
-### 11.2 阶段闸定义
-
-| 闸 | 位置 | 检查内容 | 载体 |
-|---|---|---|---|
-| 闸1 采集 | A→B | 四层继承声明；运行变量；`{{REGISTRY_PATH}}` 指向存在；指标登记册存在 | `stage_gate_check.py`（G1-*） |
-| 闸2 筛选 | B→C | 登记册活值表 Schema（v1 / v2）；核验日期时效（与 C-08 同口径） | `stage_gate_check.py`（G2-*） |
-| 闸3 分类 | C→D | 类型 ID 已在 template-registry 注册 | `stage_gate_check.py`（G3-*） |
-| 闸5 输出 | E→F | md/html 配对；`build_hub.py --check`；归档 / 索引一致 | `validate.yml`、`html-sync.yml` |
-| F 交付 | E 后 | L1–L5 + 审计状态 + 指纹 | `audit_pipeline --gate`、`audit_check --all` |
-| G 周期 | F 后 | 周度全量修复、月度抽检、stale 同步、P2 台账 | `info-quality.yml`、`audit-sampling.yml` |
-
-### 11.3 全链路图
-
-```mermaid
-flowchart LR
-    A["阶段1 信息采集<br/>提示词 · 登记册 · 触发器"]
-    B["阶段2 信息筛选<br/>来源分级 · 时效 · 冲突并列"]
-    C["阶段3 信息分类<br/>六族十三类 · 命名归位"]
-    D["阶段4 内容生成<br/>四层继承 · 登记册回写"]
-    E["阶段5 报告输出<br/>md→HTML→索引→归档"]
-    F["交付门禁<br/>validate + audit_pipeline --gate"]
-    G["周期保障<br/>html-sync · maintenance · info-quality · sampling"]
-    H["决策消费<br/>00 五问收敛 + 缺失暴露"]
-    I["补缺准入<br/>P1/P2/P3 · 责任主题 · 验收"]
-    R{"缺陷路由"}
-
-    A -->|"闸1 采集门禁"| B
-    B -->|"闸2 筛选门禁"| C
-    C -->|"闸3 分类门禁"| D
-    D --> E
-    E -->|"闸5 生成物门禁"| F
-    F -->|通过| G
-    G --> H
-    H --> I
-    I -->|触发补缺| A
-    F -.->|P0/P1| R
-    R -->|采集类| A
-    R -->|筛选类| B
-    R -->|分类类| C
-    R -->|生成类| D
-    R -->|输出类| E
-    D -.->|登记册回写| A
-    G -.->|修复 / 基线回写| A
-    G -.->|抽检不合格 · 重新审计| F
-```
-
-每个闸既是**出口**也是**复评口**：修复后重过同一闸，而不是直接放行。
-
-### 11.4 程序化边界（形态 vs 语义）
-
-- **形态 / 结构类**（可程序化、秒级、无网络）→ 进 CI 硬门禁：命名、配对、继承声明、登记册 Schema、类型注册、时效字段；
+- **形态 / 结构类**（可程序化、秒级、无网络）→ 进 CI 硬门禁：命名、配对、继承声明、登记册 Schema、类型注册、时效字段（闸1 / 2 / 3，`stage_gate_check.py`）；
 - **语义类**（来源语言规则、六族十三类选型判别、口径冲突裁决、以偏概全）→ 不进 CI 硬门禁，由提示词自检 + L5 语义复核 + 季度跨领域角色（R2 / R4 / R5）承载。
 - **判定内核单一事实源**：闸复用 `info_quality_check.evaluate()` / `compliance_check` / `audit_registry` 的解析，不新写判定。
 
-> 详细执行规范（阶段交付物与校验标准 / 五门禁执行规则 / P0/P1 五类缺陷路由 / 周期保障验收 / 补缺准入 / 反馈链路 / 落地纪律）见 [信息生产全链路执行规范](信息生产全链路执行规范.md)。
+阶段闸定义、闭环判据与全链路图见总规范第三节与 1.2。
+
+---
+
+## 版本记录
+
+| 版本 | 日期 | 变更 | 说明 |
+|---|---|---|---|
+| v1.0 | 2026-11-14 | 初始版本 | 建立 CI 与自动化全景：7 条工作流、报告生命周期、命名分类、跨月对比、测试体系、手动命令、复用一致性、并行协作 |
+| v1.2 | 2026-11-16 | 精简与修正 | 测试数修正为 222（189 + 33）；第十一节精简为指针 + 程序化边界，去除与总规范重复的全链路图与阶段闸表；手动命令补审计入口 |

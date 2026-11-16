@@ -10,7 +10,7 @@
 - 闸3 分类：business-config 引用的类型 ID 已在 template-registry 注册。
 
 语义类（来源语言规则、六族十三类选型判别、口径冲突裁决）不在本层——由提示词自检、
-L5 语义复核与季度跨领域角色（R2 / R5）承载。详见 docs/CI.md「信息生产全链路」。
+L5 语义复核与季度跨领域角色（R2 / R5）承载。详见 docs/信息生产全链路执行规范.md 第三节。
 
 用法：
     python stage_gate_check.py                 # 全量
