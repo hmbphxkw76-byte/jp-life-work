@@ -156,7 +156,7 @@ report_templates/
 | 版本 | 日期 | 变更 | 说明 |
 |---|---|---|---|
 | v1.0 | 2026-11-13 | 初始版本 | 建立双类型分类架构（market-monitoring / employment-research）与动态接入规程 |
-| v1.1 | 2026-11-13 | 新增 report-classification.md | 通用层补充行业主流分类体系（六族十二类）作为新增类型选型参考；3.1 接入流程前置选型步骤 |
+| v1.1 | 2026-11-13 | 新增 report-classification.md | 通用层补充行业主流分类体系（六族十二类，历史口径）作为新增类型选型参考；3.1 接入流程前置选型步骤 |
 | v1.2 | 2026-11-13 | 全类型模板骨架接入 | 依 report-classification.md 将其余 10 个主流类型全部模板化并注册（competitive-intelligence / sentiment-monitoring / consumer-research / industry-research / market-sizing / investment-research / policy-analysis / feasibility-study / flash-commentary / whitepaper），每类型基线 + 周期模板各一份；_common.py TEMPLATE_TYPE_DIRS 同步登记；新增命名兼容性说明 |
 | v1.3 | 2026-11-13 | 业务提示词脚手架 | 其余 10 个类型各新增 business-prompt-scaffold.md（复制式业务提示词脚手架：实例化步骤 + business-config 清单 + 各周期提示词全文脚手架），对接通用基座 1.2 节新增业务线流程 |
 | v1.4 | 2026-11-13 | 合规校验规则接入 | 新增根部共享文件 compliance-rules.json（12 类 × 周期结构骨架校验规则）；src/prompts-tools/tools/compliance_check.py 提供 CI 阻断式模板合规校验关卡、--scaffold 模板自动填充引导与 --audit 历史报告合规审计；3.1 接入流程追加第 5 步（合规规则登记） |

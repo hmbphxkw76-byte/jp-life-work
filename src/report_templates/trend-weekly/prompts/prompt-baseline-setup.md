@@ -35,15 +35,12 @@
 2. **来源语言**：`{{SOURCE_LANGUAGE_RULE}}` 强制执行（TODO：如仅英文一手来源）。
 3. **事实与推断分离**：【事实】/【预测】/「推断」显式标注；转述标「需核实原文」。
 
-## 三、结果验证
+## 三、渲染与交付
 
-```powershell
-python src/prompts-tools/tools/validate.py          # 0 错误
-python src/prompts-tools/tools/lint_reports.py      # 0 错误
-python src/prompts-tools/tools/build_index.py && python src/prompts-tools/tools/build_hub.py
-```
-
-人工核对：九节标题与基线类型模板第二节逐字一致；主题矩阵三块互不重叠；台账章节定义与机制文档第四节一致。
+- 交付格式由业务配置声明：md 源稿 + 同目录自包含 HTML；或纯 HTML（md 源稿存 `sources/`，不参与 `md2html.py` 自动转换）。
+- HTML 须通过 `python src/prompts-tools/tools/lint_reports.py` 与 `python src/prompts-tools/tools/compliance_check.py --file {{OUTPUT_PATH}}`。
+- 校验：`python src/prompts-tools/tools/validate.py`（0 错误）；`python src/prompts-tools/tools/build_index.py && python src/prompts-tools/tools/build_hub.py`。
+- 人工核对：九节标题与基线类型模板第二节逐字一致；主题矩阵三块互不重叠；台账章节定义与机制文档第四节一致。
 
 ---
 
