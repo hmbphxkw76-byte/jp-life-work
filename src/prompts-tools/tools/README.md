@@ -34,6 +34,7 @@ python -m unittest discover -s src/tests -v   # 单元测试（255 项：tools 1
 | build_index.py | 生成 | scheduled-maintenance.yml「生成全局索引」 |
 | build_hub.py | 生成 | validate.yml --check / html-sync.yml「汇总页」 |
 | report_diff.py | 生成 | md2html 依赖：跨月内容对比高亮（纯函数） |
+| incremental_build.py | 生成 | 手动：增量生成 POC（按 git diff 选择报告；含 --bench 对比） |
 | migrate_monthly_reports.py | 迁移 | 一次性：存量报告合并重命名为月度系列 |
 | update_planner.py | 编排 | scheduled-report-tasks.yml「生成月度任务清单」 |
 | automation_status.py | 编排 | 5 条工作流 `record` 入库 + 手动 `activity`（活跃度预警） |

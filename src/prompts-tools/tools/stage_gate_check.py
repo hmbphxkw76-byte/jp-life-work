@@ -40,7 +40,7 @@ from _common import (  # noqa: E402
 from info_quality_check import (  # noqa: E402
     STALE_DAYS,
     STALE_MONTHS,
-    _live_table,
+    live_table,
     registry_latest_date,
 )
 
@@ -96,7 +96,7 @@ def gate1_collect(text: str) -> list[Finding]:
 def gate2_filter(registry_text: str) -> list[Finding]:
     """闸2 筛选：登记册活值表 Schema 与核验日期时效（C-08 同口径）。"""
     out: list[Finding] = []
-    if _live_table(registry_text) is None:
+    if live_table(registry_text) is None:
         out.append(Finding("G2-SCHEMA", "P1", "登记册活值表",
                            "未找到活值表（表头须含「指标」+「口径」或「优先数据源」）", "闸2"))
         return out

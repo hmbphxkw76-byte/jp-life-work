@@ -1,0 +1,4 @@
+# 开发 / 静态检查依赖（架构优化方向 E / I-7）。
+# 运行依赖仍为 requirements.txt；本文件仅供 CI 与本地 lint 使用。
+ruff>=0.8
+mypy>=1.13

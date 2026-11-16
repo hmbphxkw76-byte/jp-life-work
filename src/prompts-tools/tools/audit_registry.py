@@ -233,6 +233,9 @@ def main() -> int:
     ap.print_help()
     return 0
 
+# ── 公开接口别名（架构优化方向 F / I-6）──
+audit_state = _audit_state
+
 
 if __name__ == "__main__":
     sys.exit(main())

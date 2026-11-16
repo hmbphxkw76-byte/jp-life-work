@@ -45,7 +45,7 @@ import info_quality_check  # noqa: E402
 import lint_reports  # noqa: E402
 import md2html  # noqa: E402
 from _common import ROOT, atomic_write, detect_month_report, iter_business_dirs, resolve_within  # noqa: E402
-from info_quality_check import _live_table, _read as iq_read, _report_value_rows, _significant_numbers  # noqa: E402
+from info_quality_check import live_table, read as iq_read, report_value_rows, significant_numbers  # noqa: E402
 
 BASE_DATE_RE = re.compile(r"数据基准日\**\s*[:：]\s*([0-9]{4}-[0-9]{2}-[0-9]{2})")
 
@@ -257,7 +257,7 @@ def rule_v5_ranges(rel: str, text: str, registry: Path | None) -> RuleResult:
     if registry is None:
         return RuleResult("V5", "关键指标数值范围", "pass", [],
                           "无登记册，跳过（主题未建登记册）")
-    lt = _live_table(iq_read(registry))
+    lt = live_table(iq_read(registry))
     if not lt:
         return RuleResult("V5", "关键指标数值范围", "pass", [],
                           "登记册无活值表，跳过")
@@ -267,7 +267,7 @@ def rule_v5_ranges(rel: str, text: str, registry: Path | None) -> RuleResult:
         return RuleResult("V5", "关键指标数值范围", "pass", [],
                           "登记册无「最新值」列，跳过")
     reg_vals = {int(c[0]): c[vi] for c in rows if len(c) > vi and c[0].isdigit()}
-    rep_vals = _report_value_rows(text)
+    rep_vals = report_value_rows(text)
     if not rep_vals:
         return RuleResult("V5", "关键指标数值范围", "pass", [],
                           f"登记册 {len(reg_vals)} 项；报告无编号活值行，跳过比对")
@@ -275,7 +275,7 @@ def rule_v5_ranges(rel: str, text: str, registry: Path | None) -> RuleResult:
     for no, rv in sorted(reg_vals.items()):
         if no not in rep_vals:
             continue
-        missing = _significant_numbers(rv) - _significant_numbers(rep_vals[no])
+        missing = significant_numbers(rv) - significant_numbers(rep_vals[no])
         if missing:
             missing_total.append(f"#{no} 缺 {', '.join(sorted(missing))}")
     if missing_total:
@@ -414,8 +414,8 @@ def verify_report(rel: str, dry_run: bool = False, do_submit: bool = True) -> Ve
     # V2 / V3 / V4 / V5
     result.rules.append(rule_v2_fields(rel, text, html))
     result.rules.append(rule_v3_format(rel, html, type_id))
-    iq = audit_check._iq_findings_by_path()
-    l5 = audit_check._l5_status()
+    iq = audit_check.iq_findings_by_path()
+    l5 = audit_check.l5_status()
     result.rules.append(rule_v4_consistency(rel, md_path, html_path, type_id, iq, l5))
     result.rules.append(rule_v5_ranges(rel, text, registry))
 
