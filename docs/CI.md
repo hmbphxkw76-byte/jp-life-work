@@ -183,7 +183,7 @@ reports/YYYY-MM-<slug>.md  ──md2html.py──►  reports/YYYY-MM-<slug>.htm
 - **辅助开关**：报告页工具条「隐藏更新标记」对照阅读、「展开全部删除」。
 - **呈现**：报告页新标签页独立打开，页脚提供「← 返回主题 / 返回首页」。
 
-## 六、测试体系（`src/tests/`，279 项）
+## 六、测试体系（`src/tests/`，285 项）
 
 | 场景 | 测试类 | 覆盖 |
 |---|---|---|
@@ -193,9 +193,14 @@ reports/YYYY-MM-<slug>.md  ──md2html.py──►  reports/YYYY-MM-<slug>.htm
 | 并行协作三层隔离 | `test_workflow_guard.py`（33 项） | 任务分支 / worktree、检出锁（占用 / 释放 / 强取 / 失效）、串行合并（happy / 冲突保留 / 校验阻断）、sync |
 | 推送双通道 failover | `test_git_push.py`（6 项） | ssh 主通道成功、失败切 https、两条都失败时恰好各试一次（不重试） |
 | 工作区标准化清理 | `test_cleanup.py`（18 项） | 残留识别与清理、`--check` / `--dry-run` 契约、日志作用域限定、已跟踪文件 / 目录保护、CI 接线契约（每工作流前置 + 收尾 `always`） |
-| 工具契约 | `test_tools.py`（198 项） | 命名解析（新 + 历史）、周期与任务推导、归档策略、lint / 合规、`build_hub` 归一化比对、活跃度天数、全主题契约、流程复用与三体系一致性 |
+| 工具契约 | `test_tools.py`（208 项） | 命名解析（新 + 历史）、周期与任务推导、归档策略、lint / 合规、`build_hub` 归一化比对、活跃度天数、全主题契约、流程复用与三体系一致性、模板合规守卫（链接 / 命名 / 节数 / 周期） |
+| 架构守卫 | `test_arch_guard.py`（8 项） | 测试数与本文档一致、类型注册三处一致、目录 / 命名规范守卫 |
+| 增量构建 | `test_incremental_build.py`（4 项） | 增量构建判定与缓存一致性 |
+| 流水线端到端 | `test_pipeline_e2e.py`（2 项） | 审计状态机端到端 |
+| 登记册生成 | `test_registry_generator.py`（3 项） | 登记册生成契约 |
+| 安全回归 | `test_security_regression.py`（3 项） | 注入 / 越界路径回归 |
 
-> 合计 279 项（`python -m unittest discover -s src/tests`，当前全绿）。
+> 合计 285 项（`python -m unittest discover -s src/tests`，当前全绿）。
 
 ## 七、手动命令速查
 
