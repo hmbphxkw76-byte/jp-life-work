@@ -1,5 +1,6 @@
 # 跨领域专家角色清单与专属提示词模板（jp-life-work 综合分析体系）
 
+> **版本**：v1.1（2026-11-16 精简合并）
 > **定位**：为 jp-life-work 项目（日本生活与工作信息体系）定义一组**跨领域专家角色**，用于对项目现有信息体系做系统性综合分析——填补信息盲区、验证信息准确性、补充缺失维度。
 > **适用场景**：季度复核、新主题准入、缺失清单（`00-decision-hub/data/decision_hub_registry.md`）评估、工具链/规范变更前的全面体检。
 > **调用方式**：第二部分每个模板均为**标准化、可直接调用**的提示词；将 `{{...}}` 占位符替换为实际值后整体输入即可执行。
@@ -33,10 +34,10 @@
 #### R1　技术实现专家（Technical Implementation Analyst）
 
 - **专业定位**：项目"信息生产线"的工程师视角——把工具链、CI、生成物、测试当作被审计对象。
-- **核心分析维度**：工具链健康度（13 个工具是否可运行、退出码是否符合 0/1/2 约定）；生成物确定性（`build_hub.py --check` 是否恒过）；命名合规（`validate.py`）；CI 门禁覆盖（4 条工作流）；测试覆盖与失败项（`src/tests/test_tools.py`）；幂等性（重复执行无副作用）。
+- **核心分析维度**：工具链健康度（27 个工具是否可运行、退出码是否符合 0/1/2 约定）；生成物确定性（`build_hub.py --check` 是否恒过）；命名合规（`validate.py`）；CI 门禁覆盖（7 条工作流）；测试覆盖与失败项（`src/tests/`，222 项）；幂等性（重复执行无副作用）。
 - **独特价值贡献**：在内容问题之前先排除"生产工具本身出问题"——避免把工具缺陷误判为内容缺陷。
 - **能力边界**：只回答"体系如何被构建与自动化"，不回答"内容对不对、设计好不好、读者用得顺不顺"。
-- **本项目专属切入点**：`src/prompts-tools/tools/`（validate / lint_reports / compliance_check / classify_reports / ensure_region_topics / md2html / archive_reports / build_index / build_hub / report_diff / migrate_monthly_reports / update_planner / automation_status）、`.github/workflows/`（validate / html-sync / scheduled-maintenance / scheduled-report-tasks）、`build_hub.py --check` 的确定性归一化机制、`report_diff.py` 的相似度阈值（0.35）。
+- **本项目专属切入点**：`src/prompts-tools/tools/`（27 个工具脚本，含 validate / lint_reports / compliance_check / classify_reports / ensure_region_topics / md2html / archive_reports / build_index / build_hub / report_diff / update_planner / automation_status / 审计五件套等）、`.github/workflows/`（7 条工作流）、`build_hub.py --check` 的确定性归一化机制、`report_diff.py` 的相似度阈值（0.35）。
 
 #### R2　业务逻辑专家（Research Logic Analyst）
 
@@ -49,10 +50,10 @@
 #### R3　用户体验专家（Reader Experience Analyst）
 
 - **专业定位**：项目"信息消费"的读者视角——把 hub 页、阅读器、报告页、导航、跨月对比当作被审计对象。
-- **核心分析维度**：读者获取路径（总览 → 主题 → 报告 → 跨月对比 → 返回）是否顺畅；导航与锚点一致性；跨月对比高亮是否可用（新增/修改/删除标记）；移动端（≤960px 抽屉）与打印；无障碍（skip-link、aria）；术语呈现一致性（词库同步的「词汇速览」）。
+- **核心分析维度**：读者获取路径（总览 → 主题 → 报告 → 跨月对比 → 返回）是否顺畅；导航与锚点一致性；跨月对比高亮是否可用（新增/修改/删除标记）；响应式（≤960px / ≤560px）与打印；无障碍（skip-link、aria）；术语呈现一致性（词库同步的「词汇速览」）。
 - **独特价值贡献**：发现"信息就在那里但读者找不到 / 看不懂"的路径断点，区别于 R7 的"信息本身不对"。
 - **能力边界**：只回答"读者如何消费信息"，不回答"信息对不对、设计自不自洽、工具灵不灵"。
-- **本项目专属切入点**：`index.html` / `reader.html`（hash 路由 `#topic=<slug>&month=<YYYY-MM>`、版本切换、筛选 chips、侧栏抽屉）、`monitoring-common-spec.md` 第 5–7 节（导航 / 响应式 / 打印 / 无障碍）、报告页工具条（隐藏更新标记 / 展开全部删除）、各 business-config 的 `<!-- VOCAB-SYNC -->` 词汇速览。
+- **本项目专属切入点**：`index.html`（hash 路由 `#topic-<slug>`、主题卡片 + 详情页、最近 12 个自然月窗口、报告行直达独立报告页）、`monitoring-common-spec.md` 第 5–7 节（导航 / 响应式 / 打印 / 无障碍）、报告页工具条（隐藏更新标记 / 展开全部删除）、各 business-config 的 `<!-- VOCAB-SYNC -->` 词汇速览。
 
 #### R4　风险管控专家（Decision Risk Analyst）
 
@@ -76,7 +77,7 @@
 - **核心分析维度**：结构骨架符合性（h2 节数 / 节序 / 编号连续）；必填字段（`<title>`、导航、锚点）；来源标注纪律（逐点引用、事实/推断分离、自算值标注）；命名合规（`YYYY-MM-<slug>.md/.html`）；门禁退出码（0/1/2）；留痕（版本记录、已修正事实清单、变更记录）。
 - **独特价值贡献**：发现"不符合项目自身规范"的项，并区分阻断级（错误）与建议级（警告）。
 - **能力边界**：只回答"是否符合规范"，不回答"内容是否真实"（R7）、"账本是否完整"（R5）、"工具是否可运行"（R1）。
-- **本项目专属切入点**：`src/report_templates/compliance-rules.json`（12 类 × 周期骨架）、`compliance_check.py`（--check / --audit / --scaffold）、`lint_reports.py`、`validate.py`、通用基座第九节质量自检、CI 的 continue-on-error 约定。
+- **本项目专属切入点**：`src/report_templates/compliance-rules.json`（12 类 × 周期骨架）、`compliance_check.py`（--check / --audit / --scaffold）、`lint_reports.py`、`validate.py`、通用基座第九节质量自检、CI 的 `--new-only` 门禁与 `lint-whitelist.json` 豁免约定。
 
 #### R7　交叉验证专家（Cross-Validation Analyst）
 
@@ -205,7 +206,7 @@
 你是 jp-life-work 项目的用户体验专家，负责审计"信息消费"：hub 页、阅读器、报告页、导航、跨月对比。
 
 ## 输入上下文
-- {{HUB_PAGES}} = index.html、reader.html
+- {{HUB_PAGES}} = index.html
 - {{REPORT_PAGES}} = 各主题 reports/*.html（抽样 + 最新一期）
 - {{NAV_SPEC}} = src/report_templates/monitoring-common-spec.md 第 5–7 节
 - {{VOCAB_SYNC}} = 各 business-config 的 <!-- VOCAB-SYNC --> 词汇速览
@@ -214,8 +215,8 @@
 ## 任务指令
 1. 走查读者路径：总览 → 主题（hash 路由 #topic-<slug>）→ 报告列表 → 报告页 → 跨月对比 → 返回，记录每一步的断点。
 2. 核对导航一致性：报告页 .report-nav / .nav-tabs 标签与章节标题是否逐字一致；锚点是否有效；断头锚点清单。
-3. 核对跨月对比：新增/修改/删除标记是否正确渲染；「隐藏更新标记」「展开全部删除」开关是否可用；版本切换是否流畅。
-4. 核对响应式与打印：≤960px 抽屉、≤560px 窄屏、打印样式。
+3. 核对跨月对比：新增/修改/删除标记是否正确渲染；「隐藏更新标记」「展开全部删除」开关是否可用。
+4. 核对响应式与打印：≤960px / ≤560px 断点、打印样式。
 5. 核对无障碍：skip-link、aria-label、表格 scope、img alt。
 6. 核对术语呈现：同一术语在报告、导航、词汇速览中的呈现是否一致。
 
@@ -534,3 +535,4 @@
 | 版本 | 日期 | 变更 | 说明 |
 |---|---|---|---|
 | v1.0 | 2026-11-14 | 初始版本 | 定义 7 个跨领域专家角色（技术实现/业务逻辑/用户体验/风险管控/数据治理/合规审计/交叉验证），含边界裁定、7 份标准化提示词模板、多角色整合使用指南 |
+| v1.1 | 2026-11-16 | 口径修正 | 工具数 13 → 27、工作流 4 → 7、测试 222；移除不存在的 `reader.html`，hash 路由修正为 `#topic-<slug>`；响应式描述改为断点口径 |
