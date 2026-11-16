@@ -15,6 +15,14 @@ Thumbs.db
 src/vocabulary/data/sync-backups/
 src/vocabulary/data/topic-backups/
 
+# 运行日志（工具写入，不入库；由 tools/cleanup_workspace.py 统一清理）
+src/vocabulary/data/*.log
+
+# 测试 / 静态检查缓存（可再生；由 tools/cleanup_workspace.py 统一清理）
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
 # 本地 worktree 与执行计划工作区（不入库）
 .worktrees/
 .superpowers/

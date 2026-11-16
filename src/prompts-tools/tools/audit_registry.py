@@ -37,15 +37,6 @@ REGISTRY_MD = AUDIT_DIR / "report-registry.md"
 SPEC_VERSION = "v1.0"
 
 
-def sha256_file(path: Path) -> str:
-    """文件字节 SHA-256（小写 hex）。"""
-    h = hashlib.sha256()
-    with path.open("rb") as f:
-        for chunk in iter(lambda: f.read(65536), b""):
-            h.update(chunk)
-    return h.hexdigest()
-
-
 # 已审计标识块（连同其前置空行一并剥离：注入 / 撤销标识不改变内容指纹）
 BADGE_RE = re.compile(r"^>\s*\*\*已审计\*\*.*$", re.MULTILINE)
 BADGE_BLOCK_RE = re.compile(r"\n{1,2}^>\s*\*\*已审计\*\*[^\n]*", re.MULTILINE)

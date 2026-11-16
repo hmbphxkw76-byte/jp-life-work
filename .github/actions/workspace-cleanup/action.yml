@@ -1,0 +1,49 @@
+name: workspace-cleanup
+description: >
+  工作区标准化清理（缓存目录 / 临时文件 / 过期日志 / pip 缓存）。
+  供各工作流在「阶段前置」与「阶段收尾（always）」统一调用，
+  脚本实现见 tools/cleanup_workspace.py。
+inputs:
+  mode:
+    description: 运行模式（ci = 额外清理 pip 缓存；local = 仅仓库工作区）
+    required: false
+    default: ci
+  check-only:
+    description: 只检查不删除（发现残留即失败，用于门禁）
+    required: false
+    default: 'false'
+
+runs:
+  using: composite
+  steps:
+    - name: 清理工作区残留
+      shell: bash
+      env:
+        CLEANUP_CHECK_ONLY: ${{ inputs.check-only }}
+      run: |
+        set -euo pipefail
+        PY=python
+        if ! command -v "$PY" >/dev/null 2>&1; then
+          PY=python3
+        fi
+        if [ "$CLEANUP_CHECK_ONLY" = "true" ]; then
+          "$PY" tools/cleanup_workspace.py --check
+        else
+          "$PY" tools/cleanup_workspace.py
+        fi
+
+    # pip 缓存位于 runner 的 HOME 下，属运行期资源；CI 模式收尾时一并回收。
+    - name: 清理 pip 缓存
+      if: inputs.mode == 'ci' && inputs.check-only != 'true'
+      shell: bash
+      run: |
+        set -euo pipefail
+        PY=python
+        if ! command -v "$PY" >/dev/null 2>&1; then
+          PY=python3
+        fi
+        if "$PY" -m pip cache purge >/dev/null 2>&1; then
+          echo "[cleanup] pip 缓存已清理。"
+        else
+          echo "[cleanup] pip 缓存清理跳过（无缓存或 pip 不可用）。"
+        fi

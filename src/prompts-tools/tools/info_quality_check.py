@@ -108,8 +108,6 @@ REGISTRY_ROW_RE = re.compile(r"^\|\s*\d+\s*\|(.+)\|\s*$", re.MULTILINE)
 BADGE_LINE_RE = re.compile(r"^>\s*\*\*已审计\*\*.*$", re.MULTILINE)
 # 行内标签 / Markdown 链接文本（标签 2–24 字）
 BRACKET_RE = re.compile(r"\[([^\]]{2,24})\](\([^)]*\))?")
-TOPIC_DIR_RE = re.compile(r"^\d{2}-[a-z][a-z0-9-]*$")
-_CROSS_REF_BRACKET_RE = re.compile(r"\.(?:md|html|pdf|xlsx|json|csv)\b|[/#]")
 
 # 「交叉引用」白名单：允许计为来源标注的括号标签（单独维护，初始为空）
 CROSS_REF_SOURCE_WHITELIST: set[str] = set()
@@ -205,15 +203,6 @@ def _substantive(block: str) -> bool:
 def _strip_badges(text: str) -> str:
     """剥离「已审计」标识块，避免标识字段干扰相似度与覆盖率计算。"""
     return BADGE_LINE_RE.sub("", text)
-
-
-def _is_cross_ref_bracket(tag: str) -> bool:
-    """纯交叉引用括号（主题目录 / 路径文件 / 纯编号）判定。"""
-    return bool(
-        TOPIC_DIR_RE.match(tag)
-        or _CROSS_REF_BRACKET_RE.search(tag)
-        or re.fullmatch(r"#?\d+", tag)
-    )
 
 
 def _has_source(block: str) -> bool:
