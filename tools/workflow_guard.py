@@ -82,15 +82,31 @@ def git(args: Sequence[str], cwd: Optional[Path] = None, check: bool = True) -> 
     return _run(["git", *args], cwd=cwd, check=check)
 
 
+def _find_push_script(cwd: Optional[Path]) -> Optional[Path]:
+    """定位 ``tools/git_push.py``：优先当前工作树（如 ``_merge``），再回退本工具目录。"""
+    if cwd:
+        local_script = Path(cwd) / "tools" / "git_push.py"
+        if local_script.exists():
+            return local_script
+    shared = Path(__file__).resolve().with_name("git_push.py")
+    return shared if shared.exists() else None
+
+
 def push_with_failover(cwd: Optional[Path], remote: str, refspecs: Sequence[str],
                        fallback: str = "origin-https",
                        force_with_lease: bool = False) -> subprocess.CompletedProcess:
     """经 ``tools/git_push.py`` 走 ssh / https 双通道 failover 推送。
 
     主通道失败才切备用通道，每条通道只试一次；两条都失败即返回退出码 1（不重试）。
-    仅用于本仓库（GitHub），不使用 GitLab。
+    仅用于本仓库（GitHub），不使用 GitLab。脚本缺失时退化为单次 ``git push``。
     """
-    script = Path(__file__).resolve().with_name("git_push.py")
+    script = _find_push_script(cwd)
+    if script is None:
+        print("[workflow-guard] 未找到 tools/git_push.py，退化为单次 git push（无 failover）。",
+              file=sys.stderr)
+        cmd = ["push"] + (["--force-with-lease"] if force_with_lease else []) \
+            + [remote, *refspecs]
+        return git(cmd, cwd=cwd, check=False)
     cmd = [sys.executable, str(script), "--remote", remote, "--fallback", fallback]
     if force_with_lease:
         cmd.append("--force-with-lease")
