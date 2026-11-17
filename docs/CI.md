@@ -2,7 +2,7 @@
 
 > **版本**：v1.2（2026-11-16 精简合并）
 > 本文档说明 jp-life-work 报告管理体系的持续集成（CI）与定时自动化。
-> 代码位置：`.github/workflows/`（7 条工作流）；工具链：`src/prompts-tools/tools/`；测试：`src/tests/`。
+> 代码位置：`.github/workflows/`（8 条工作流）；工具链：`src/prompts-tools/tools/`；测试：`src/tests/`。
 
 ## 一、总览
 
@@ -20,6 +20,7 @@
 | 决策支持件套（参数 / 一页纸 / 财务模型 / 事实卡片 / 待核实闭环） | `validate.yml`（复用门禁）+ `scheduled-maintenance.yml`（刷新） |
 | 流程复用一致性 | `src/tests/test_tools.py::TestProcessReuse` |
 | 阶段出口质量（采集 / 筛选 / 分类左移） | `validate.yml`（`stage_gate_check.py`） |
+| 触发检测 / 编排状态（S0→S2） | `pipeline-orchestrator.yml`（每月 1 日 00:35 UTC） |
 
 **CI 不产出报告研究内容**——报告由各主题 `prompts/business-config.md` 定义的研究流程人工/Agent 产出；CI 只校验与同步生成物。
 
@@ -143,6 +144,18 @@
 - **门槛**：结构合规率 = 100%、要素完整率 ≥ 95%、状态一致率 = 100%、抽检合格率 ≥ 95%、P0/P1 = 0
 - **不合格**：命中 P0/P1 → `::error::` 告警 + 自动置 `stale`（`sampling_fail`）+ 撤销标识，报告重走 `submit → 初审 → 复核 → 终审`
 
+### 8. `pipeline-orchestrator.yml` — 端到端流水线编排（检测 + 计划）
+
+- **触发**：`cron: "35 0 1 * *"`（每月 1 日 00:35 UTC = 09:35 JST，与 00:15 / 00:20 / 00:25 错开）、手动（可指定 `--period`）
+- **步骤**：
+  1. `trigger_watch.py --apply`（派生 watchlist + freshness + 候选线索，写 `trigger-watch.json`）
+  2. `pipeline_runner.py run`（S0 检测 → S1 计划 → **S2 人工闸门自动暂停**，不产出正文）
+  3. `pipeline_status.py`（生成统一监控视图 `status.md` / `status.json`）
+  4. 候选命中时开提醒 Issue（去重：当期已存在则更新正文）
+  5. `automation_status.py record --phase pipeline` + 提交 `src/report-audits/pipeline/**`
+- **纪律**：**不含任何撰写步骤**；不跑 S3–S5 本地生成（由 `html-sync` / `validate` / `audit-gate` 承担）
+- **退出码**：`pipeline_runner run` 0 = 正常（含 S2 暂停）；1 = 阶段失败 / 状态损坏；2 = 参数错误
+
 ## 三、报告生命周期
 
 ```
@@ -183,7 +196,7 @@ reports/YYYY-MM-<slug>.md  ──md2html.py──►  reports/YYYY-MM-<slug>.htm
 - **辅助开关**：报告页工具条「隐藏更新标记」对照阅读、「展开全部删除」。
 - **呈现**：报告页新标签页独立打开，页脚提供「← 返回主题 / 返回首页」。
 
-## 六、测试体系（`src/tests/`，305 项）
+## 六、测试体系（`src/tests/`，307 项）
 
 | 场景 | 测试类 | 覆盖 |
 |---|---|---|
@@ -197,11 +210,11 @@ reports/YYYY-MM-<slug>.md  ──md2html.py──►  reports/YYYY-MM-<slug>.htm
 | 架构守卫 | `test_arch_guard.py`（8 项） | 测试数与本文档一致、类型注册三处一致、目录 / 命名规范守卫 |
 | 增量构建 | `test_incremental_build.py`（4 项） | 增量构建判定与缓存一致性 |
 | 流水线端到端 | `test_pipeline_e2e.py`（2 项） | 审计状态机端到端 |
-| 流水线编排 | `test_pipeline_orchestrator.py`（20 项） | 状态 shape / save-load 往返 / 损坏与 schema 负例（含非对象）、触发检测 watchlist 派生 / freshness / 幂等 / 只读默认、监控视图空状态 / 阻塞定位 / 损坏显式报错、编排器阶段顺序 / S2 闸门 / 续跑 / 损坏终止 / 非法周期 / 幂等 |
+| 流水线编排 | `test_pipeline_orchestrator.py`（22 项） | 状态 shape / save-load 往返 / 损坏与 schema 负例（含非对象）、触发检测 watchlist 派生 / freshness / 幂等 / 只读默认、监控视图空状态 / 阻塞定位 / 损坏显式报错、编排器阶段顺序 / S2 闸门 / 续跑 / 损坏终止 / 非法周期 / 幂等、CI 工作流定时 + 无撰写步骤 |
 | 登记册生成 | `test_registry_generator.py`（3 项） | 登记册生成契约 |
 | 安全回归 | `test_security_regression.py`（3 项） | 注入 / 越界路径回归 |
 
-> 合计 305 项（`python -m unittest discover -s src/tests`，当前全绿）。
+> 合计 307 项（`python -m unittest discover -s src/tests`，当前全绿）。
 
 ## 七、手动命令速查
 
@@ -354,7 +367,7 @@ python tools/cleanup_workspace.py --dry-run  # 预览将删除项
 
 - `mode: ci` 额外清理 pip 缓存（位于 runner HOME）；`check-only: 'true'` 只检查不删除，用于门禁。
 - 提交 / 推送类步骤（`git commit` / `git push`）**必须**排在收尾清理之前，避免清理早于交付。
-- 现已接入：`validate` / `audit-gate` / `html-sync` / `scheduled-maintenance` / `scheduled-report-tasks` / `info-quality` / `audit-sampling`（7 条）。
+- 现已接入：`validate` / `audit-gate` / `html-sync` / `scheduled-maintenance` / `scheduled-report-tasks` / `info-quality` / `audit-sampling` / `pipeline-orchestrator`（8 条）。
 
 ### 12.3 门禁：`validate.yml` 的 `workspace-hygiene` job
 
@@ -386,3 +399,4 @@ python tools/cleanup_workspace.py --dry-run  # 预览将删除项
 | v1.7 | 2026-11-17 | 流水线触发检测 | 新增 `trigger_watch.py`（watchlist 派生 / freshness / 候选线索 / 只读默认）及同文件 6 项用例；六节测试数 289 → 295 |
 | v1.8 | 2026-11-17 | 流水线监控视图 | 新增 `pipeline_status.py`（阶段进度 / 阻塞点 / 审计分布 / 心跳）及同文件 4 项用例；`automation_status` 新增 `pipeline` 心跳相位；六节测试数 295 → 299 |
 | v1.9 | 2026-11-17 | 流水线编排器 | 新增 `pipeline_runner.py`（六阶段状态机 / 断点续跑 / S2 人工闸门）及同文件 6 项用例；六节测试数 299 → 305 |
+| v2.0 | 2026-11-17 | 流水线 CI 接线 | 新增 `.github/workflows/pipeline-orchestrator.yml`（每月 1 日 00:35 UTC：触发检测 → S0→S2 → 监控视图 → 候选 Issue；不含撰写）及同文件 2 项用例；工作流 7 → 8，六节测试数 305 → 307 |

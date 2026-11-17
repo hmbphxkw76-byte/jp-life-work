@@ -1,0 +1,169 @@
+# 端到端流水线编排：每月 1 日 00:35 UTC（= 09:35 JST）跑「触发检测 → 计划 → 人工闸门」。
+#
+# 对应 docs/端到端流水线编排系统设计-2026-11-17.md §5.7：
+#   1. trigger_watch.py --apply：派生 watchlist + freshness + 候选线索，写 trigger-watch.json
+#   2. pipeline_runner.py run：S0 检测 → S1 计划 → S2 人工闸门（自动暂停，不产出正文）
+#   3. pipeline_status.py：生成统一监控视图 status.md / status.json
+#   4. 记录自动化状态（phase=pipeline）
+#   5. 提交 src/report-audits/pipeline/**（状态 + 快照 + 监控视图，审计留痕）
+#
+# 纪律：CI 只做「检测 + 计划 + 门禁」，**不跑研究正文撰写**（S2 为唯一人工环节）；
+# 不跑 S3 及之后的本地生成环节——生成 / 门禁由 html-sync / validate / audit-gate 承担。
+name: pipeline-orchestrator
+
+on:
+  schedule:
+    # 每月 1 日 00:35 UTC = 09:35 JST，与既有 cron（00:15 / 00:20 / 00:25）错开
+    - cron: "35 0 1 * *"
+  workflow_dispatch:
+    inputs:
+      period:
+        description: "周期标识（YYYY-MM / YYYY-Qn / YYYY），缺省按当前 UTC 月份"
+        required: false
+        default: ""
+
+concurrency:
+  group: pipeline-orchestrator
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  orchestrate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      # 阶段前置：清理 runner 工作区残留（缓存 / 临时文件），保证各阶段起点干净。
+      - uses: ./.github/actions/workspace-cleanup
+        with:
+          mode: ci
+
+      - name: 安装依赖
+        run: pip install -r requirements.txt
+
+      - name: 触发检测（trigger_watch.py --apply）
+        id: watch
+        run: |
+          PERIOD="${{ github.event.inputs.period }}"
+          if [ -z "$PERIOD" ]; then PERIOD=$(date -u +%Y-%m); fi
+          echo "period=$PERIOD" >> "$GITHUB_OUTPUT"
+          python src/prompts-tools/tools/trigger_watch.py --apply --period "$PERIOD"
+          COUNT=$(python -c "import json;print(len(json.load(open('src/report-audits/pipeline/trigger-watch.json',encoding='utf-8'))['candidates']))")
+          echo "candidates=$COUNT" >> "$GITHUB_OUTPUT"
+
+      # 退出码约定：0=正常（含 S2 暂停）；1=阶段失败 / 状态损坏；2=参数错误
+      - name: 编排 S0→S2（pipeline_runner.py run，遇 S2 人工闸门自动暂停）
+        run: |
+          PERIOD="${{ steps.watch.outputs.period }}"
+          python src/prompts-tools/tools/pipeline_runner.py run --period "$PERIOD" || code=$?
+          if [ "${code:-0}" -ne 0 ]; then
+            echo "::error::流水线编排失败（阶段失败 / 状态损坏 / 参数错误）"
+            exit 1
+          fi
+          echo "pipeline_runner.py 退出码 ${code:-0}"
+
+      - name: 生成统一监控视图（pipeline_status.py）
+        run: |
+          PERIOD="${{ steps.watch.outputs.period }}"
+          python src/prompts-tools/tools/pipeline_status.py --period "$PERIOD"
+
+      - name: 候选命中提醒 Issue（仅命中时）
+        if: ${{ steps.watch.outputs.candidates != '' && steps.watch.outputs.candidates != '0' }}
+        run: |
+          PERIOD="${{ steps.watch.outputs.period }}"
+          PERIOD="$PERIOD" python - <<'PY'
+          import json, os, subprocess
+          from pathlib import Path
+
+          period = os.environ["PERIOD"]
+          payload = json.loads(
+              Path("src/report-audits/pipeline/trigger-watch.json").read_text(encoding="utf-8")
+          )
+          cands = payload.get("candidates", [])
+          if not cands:
+              raise SystemExit(0)
+          lines = [
+              f"## 触发检测候选线索（{period}）",
+              "",
+              "> 命中 ≠ 核实：以下仅为登记册本地线索（待办 / 未落地标记），语义确认由 Agent 完成。",
+              "",
+          ]
+          for c in cands:
+              lines.append(f"- **{c['topic']}**：{c['trigger']}（来源：`{c['source']}`）")
+          lines += [
+              "",
+              "---",
+              "",
+              "### 后续",
+              "1. 人工 / Agent 按各主题 `prompts/business-config.md` 流程完成研究正文（S2）。",
+              "2. 完成后 `pipeline_runner.py resume --period {} --from-stage S3_build` 续跑生成与审计。".format(period),
+          ]
+          Path("/tmp/issue-body.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
+          PY
+          EXISTING=$(gh issue list --state open \
+            --search "in:title [pipeline] $PERIOD" \
+            --json number --jq '.[0].number // empty')
+          if [ -n "$EXISTING" ]; then
+            echo "当期候选 Issue 已存在：#$EXISTING，更新其正文（去重）"
+            gh issue edit "$EXISTING" --body-file /tmp/issue-body.md
+            exit 0
+          fi
+          gh issue create \
+            --title "[pipeline] $PERIOD 触发候选 ${{ steps.watch.outputs.candidates }} 条" \
+            --body-file /tmp/issue-body.md
+
+      - name: 提交流水线产物（状态 / 快照 / 监控视图）
+        run: |
+          git add -A -- src/report-audits/pipeline
+          if git diff --cached --quiet; then
+            echo "无变更，跳过提交"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git commit -m "chore(pipeline): 触发检测与编排状态同步"
+          git push
+
+      - name: 记录自动化状态
+        if: always()
+        run: |
+          RESULT="${{ job.status == 'success' && 'success' || 'failure' }}"
+          python src/prompts-tools/tools/automation_status.py record \
+            --phase pipeline --result "$RESULT" \
+            --run-url "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+
+      # 失败补记：主提交步骤随 job 成功路径执行；job 失败时仍把本轮自动化状态入库。
+      - name: 提交自动化状态（失败补记）
+        if: always()
+        run: |
+          if [ ! -f automation-status.json ]; then
+            echo "无自动化状态文件（record 未执行），跳过补记"
+            exit 0
+          fi
+          git add -A -- automation-status.json
+          if git diff --cached --quiet; then
+            echo "自动化状态无变化，跳过提交"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git commit -m "chore: 补记流水线编排自动化状态"
+          git push
+
+      # 阶段收尾：无论成败清理缓存、临时产物与 pip 缓存，保证流水线结束后无残留。
+      - uses: ./.github/actions/workspace-cleanup
+        if: always()
+        with:
+          mode: ci

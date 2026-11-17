@@ -197,5 +197,23 @@ class TestPipelineRunner(unittest.TestCase):
                 )
 
 
+class TestPipelineWorkflow(unittest.TestCase):
+    """任务 5：CI 工作流接线（定时 + 手动触发，不含撰写步骤）。"""
+
+    def test_workflow_exists_and_scheduled(self):
+        wf = (_common.ROOT / ".github" / "workflows" / "pipeline-orchestrator.yml").read_text(encoding="utf-8")
+        self.assertIn("trigger_watch.py", wf)
+        self.assertIn("pipeline_runner.py", wf)
+        self.assertIn("cron:", wf)
+        self.assertIn("workflow_dispatch:", wf)
+
+    def test_workflow_has_no_authoring_step(self):
+        # 纪律：CI 不得包含研究正文撰写步骤（S2 为唯一人工环节）
+        wf = (_common.ROOT / ".github" / "workflows" / "pipeline-orchestrator.yml").read_text(encoding="utf-8")
+        self.assertNotIn("md2html.py", wf)
+        self.assertNotIn("auto_verify.py", wf)
+        self.assertNotIn("audit_pipeline.py", wf)
+
+
 if __name__ == "__main__":
     unittest.main()
