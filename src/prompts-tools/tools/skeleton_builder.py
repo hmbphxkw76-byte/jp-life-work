@@ -26,7 +26,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from _common import ROOT, iter_business_dirs, topic_slug  # noqa: E402
+from _common import iter_business_dirs, topic_slug  # noqa: E402
 
 DEFAULT_SECTIONS = [
     "一、核心结论（摘要）",
