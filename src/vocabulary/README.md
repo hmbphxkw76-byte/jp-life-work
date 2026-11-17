@@ -1,6 +1,6 @@
 # 词汇库子系统（vocabulary）· 标准操作流程（SOP）
 
-> **一句话定位**：仓库级、主题无关的标准化动态词汇子系统，位于 `src/vocabulary/`。当前已按仓库 **01–13 业务线一一对应**登记 13 个主题、1052 条词条（4 个重点主题各 104–106 条，其余 9 个主题 68–74 条，6–7 个受控分类），经交叉校验全部完整覆盖对应业务线核心指标词，并全部同步至各业务线 `prompts/business-config.md`。新增任意领域词汇仅需执行一条 `topic-add` 命令，**零代码修改**。
+> **一句话定位**：仓库级、主题无关的标准化动态词汇子系统，位于 `src/vocabulary/`。当前登记 **20 个主题、1327 条词条**（每主题 6–7 个受控分类），经交叉校验覆盖各业务线核心指标词，并同步至 **20 条业务线**的 `prompts/business-config.md`。新增任意领域词汇仅需执行一条 `topic-add` 命令，**零代码修改**。
 
 ---
 
@@ -25,7 +25,7 @@ src/vocabulary/
     │   ├── terms.md                   # 结构化存储（9 列 md-table 契约，脚本统一读写）
     │   ├── imports/                   # 批量导入文件暂存（永久留痕）
     │   └── exports/                   # 导出产物（json / csv / jsonl，供上层对接）
-    └── …                              # 现有主题：与 01–13 业务线一一对应的 13 个主题
+    └── …                              # 现有主题：20 个（与 01–20 业务线对应）
 ```
 
 ### 1.1 目录职责映射
@@ -57,7 +57,7 @@ src/vocabulary/
 | 层 | 载体 | 职责 | 变更频率 |
 |---|---|---|---|
 | 配置层 | `config/topics.json` | 主题 ID、名称、ID 前缀、三类路径、受控分类词表 | 新增领域时改这里（唯一） |
-| 实现层 | `script/vocab_tool.py` | init/import/check/tag/export/index 全部逻辑，不含任何主题知识 | 极少（功能演进才改） |
+| 实现层 | `script/vocab_tool.py` | init/import/check/tag/export/index/verify 全部逻辑，不含任何主题知识 | 极少（功能演进才改） |
 | 数据层 | `data/<topic>/` | 词库存储、导入留痕、导出产物 | 每次词汇更新 |
 
 **核心不变量**：脚本代码中不出现任何主题名、分类名、词条内容；数据文件中不出现流程逻辑。二者仅通过 `topics.json` 连接。
@@ -73,7 +73,7 @@ python src/vocabulary/script/vocab_tool.py index                                
 
 ## 三、全链路标准操作流程（六步）
 
-所有命令在仓库根目录执行；退出码约定（对齐 `prompts/tools` 工具链）：**0=通过，1=错误（阻断），2=警告（有产出但有瑕疵）**。
+所有命令在仓库根目录执行；退出码约定（对齐 `src/prompts-tools/tools` 工具链）：**0=通过，1=错误（阻断），2=警告（有产出但有瑕疵）**。
 
 ### S1 词汇收集
 
@@ -189,6 +189,7 @@ python src/vocabulary/script/vocab_tool.py topic-add --topic financial-markets -
 | `tag` | `--topic` `--id` `--add` `--remove` | 词条标签增删（分号分隔，可只给其一） | 0/1 |
 | `export` | `--topic` `--format` `--out` | 导出 json/csv/jsonl/all | 0/1 |
 | `index` | `--config`（可选） | 生成全主题索引 INDEX.md | 0 |
+| `verify` | `--topic`（可选） | 全主题词库校验（重复 / 空值 / 分类 / ID 前缀 / 条目数下限） | 0/1/2 |
 | `topic-add` | `--topic` `--name` `--prefix` `--categories` `--description` | 注册新主题并自动创建目录结构（备份回滚 + 日志） | 0/1 |
 | `topic-remove` | `--topic` `--force` `--delete-data` | 移除主题注册（数据默认保留） | 0/1 |
 | `topic-check` | — | 注册表与目录结构一致性审计 | 0/1/2 |
@@ -201,17 +202,17 @@ python src/vocabulary/script/vocab_tool.py topic-add --topic financial-markets -
 
 ```json
 {
-  "topic": "ai-security",
-  "name": "AI 安全",
-  "version": "v1.1",
-  "generated_at": "2026-11-13T12:00:00",
-  "count": 47,
-  "categories": {"攻击技术": 11, "防御与检测": 11},
+  "topic": "ssw-driver",
+  "name": "特定技能司机",
+  "version": "v1.5",
+  "generated_at": "2026-11-15T15:32:23",
+  "count": 109,
+  "categories": {"驾驶与运输作业": 21, "在留资格与制度": 19},
   "terms": [
-    {"id": "AIS-001", "term": "红队", "aliases": ["Red Team", "攻击模拟队"],
-     "category": "组织与岗位", "tags": ["红队", "安全测试"],
-     "definition": "…", "source": "NIST SP 800-115",
-     "first_added": "2026-11-13", "last_updated": "2026-11-13"}
+    {"id": "SSW-001", "term": "特定技能", "aliases": ["Specified Skilled Worker"],
+     "category": "在留资格与制度", "tags": ["在留资格"],
+     "definition": "…", "source": "出入国在留管理庁",
+     "first_added": "2026-11-13", "last_updated": "2026-11-15"}
   ]
 }
 ```
@@ -285,7 +286,7 @@ python src/vocabulary/script/vocab_tool.py topic-add --topic financial-markets -
 
 ### 9.5 已接入绑定
 
-13 个主题与 01–13 业务线一一绑定，均写入各自 `prompts/business-config.md` 的「十二、版本记录」之前；2026-11-13 首次写入并通过 `verify`（每主题 68 条，区间外内容逐字节一致）。
+20 个主题与 01–20 业务线一一绑定，均写入各自 `prompts/business-config.md` 的版本记录之前；2026-11-13 首次写入并通过 `verify`（区间外内容逐字节一致），后续新增主题（14–20）随接入同步。
 
 | 业务线 | 词汇库主题 | 目标提示词 | 区块标题 |
 |---|---|---|---|
@@ -302,6 +303,13 @@ python src/vocabulary/script/vocab_tool.py topic-add --topic financial-markets -
 | 11 | language-japanese | `11-language-japanese/prompts/business-config.md` | `## 词汇速览：日语语言（词汇库自动同步）` |
 | 12 | culture-life | `12-culture-life/prompts/business-config.md` | `## 词汇速览：文化与生活（词汇库自动同步）` |
 | 13 | regional-info | `13-regional-info/prompts/business-config.md` | `## 词汇速览：地区信息（词汇库自动同步）` |
+| 14 | life-operations | `14-life-operations/prompts/business-config.md` | `## 词汇速览：在日生活实务（词汇库自动同步）` |
+| 15 | health-wellbeing | `15-health-wellbeing/prompts/business-config.md` | `## 词汇速览：医疗·健康·心理（词汇库自动同步）` |
+| 16 | exit-transition-return | `16-exit-transition-return/prompts/business-config.md` | `## 词汇速览：退出·转型·回国（词汇库自动同步）` |
+| 17 | migration-compliance | `17-migration-compliance/prompts/business-config.md` | `## 词汇速览：劳务输出与中介合规（词汇库自动同步）` |
+| 18 | family-parenting | `18-family-parenting/prompts/business-config.md` | `## 词汇速览：家族·育儿·人生事件（词汇库自动同步）` |
+| 19 | safety-disaster | `19-safety-disaster/prompts/business-config.md` | `## 词汇速览：防灾·安全·治安（词汇库自动同步）` |
+| 20 | overseas-china | `20-overseas-china/prompts/business-config.md` | `## 词汇速览：中国侧行前与回国（词汇库自动同步）` |
 
 > **说明**：同一目标文件绑定多个主题时，须使用不同的 `section_title`，避免区块标题重复。
 
@@ -355,3 +363,4 @@ python src/vocabulary/script/vocab_tool.py topic-add --topic financial-markets -
 | v1.9 | 2026-11-13 | 13 业务线词库重建 | 按 01–13 业务线一一对应重建主题体系：移除 ai-security、cybersecurity、economy、financial-markets 四个历史主题及其数据（含 07 旧同步区块），新建 13 个主题、每主题 68 条，共 884 条（6–7 个受控分类/主题）；13 条 sync.json v2.0 绑定全部写入各自 business-config.md 并通过 verify；`check` 13 主题 0 错误 0 警告，`topic-check` 0 错误 0 警告；vocab_tool.py 允许从空注册表引导 topic-add |
 | v2.0 | 2026-11-13 | 4 主题扩展至 102 条 | ssw-driver、career-driver、industry-logistics、industry-autonomous 各新增 34 条扩展种子（imports/2026-11-13_expansion-*.md），零重复、零跳过；4 主题词库 v1.2（各 102 条），全库 13 主题 1020 条；check 0 错误 0 警告，4 个业务线同步区块增量更新并通过 verify |
 | v2.1 | 2026-11-13 | 全库交叉校验与缺口补录 | 以 13 条业务线指标登记册核心指标词为基准逐词核对，发现 12 个主题共 32 项指标级缺口（如育成就劳 MOC、SPPI、物流白書、家計調査、時間外労働上限、納期遵守率等），经 imports/2026-11-13_gapfill*.md 全部补录入库（32 条，0 重复）；复核 13/13 主题完整覆盖，全库 1052 条；check / topic-check / sync verify 全部通过 |
+| v2.2 | 2026-11-17 | 文档治理更新 | 主题扩展至 20 个（14–20 接入）、全库 1327 条；README 修正主题/词条/绑定计数、补 `verify` 命令、旧路径 `prompts/tools` 与已删除主题示例（ai-security → ssw-driver）、9.5 绑定表补齐 20 行 |

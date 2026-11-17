@@ -1,6 +1,6 @@
 # 业务提示词脚手架（行业深度研究型）
 
-> **用途**：为行业深度研究型业务线批量实例化业务提示词的**复制模板**。执行[通用基座第 1.2 节](../prompt-generic-base.md)新增业务线步骤时，将本文件各节复制为 `{TOPIC_DIR}/prompts/` 下的对应文件，填入变量与业务实例化内容（标注 TODO 的项）后即可运行。脚手架内链接均按**复制后位置**书写，脚手架自身不是直接执行入口。
+> **用途**：为行业深度研究型业务线批量实例化业务提示词的**复制模板**。执行[通用基座第 1.2 节](../prompt-generic-base.md)新增业务线步骤时，将 [prompts/](./prompts/) 下的泛用版提示词复制为 `{TOPIC_DIR}/prompts/` 下的对应文件，填入变量与业务实例化内容（标注 TODO 的项）后即可运行。脚手架内链接均按**复制后位置**书写，脚手架自身不是直接执行入口。
 
 ---
 
@@ -27,82 +27,13 @@
 
 ---
 
-## 三、prompt-baseline-setup.md 脚手架（复制为 prompts/prompt-baseline-setup.md，以下为全文）
+## 三、prompt-baseline-setup.md（指针 · 正文见 prompts/）
+> **正文单一维护入口**：[prompts/prompt-baseline-setup.md](./prompts/prompt-baseline-setup.md)（泛用版母版）。
+> 建新业务线时复制该文件至 `{TOPIC_DIR}/prompts/` 并填变量与 TODO；本文档不重复维护正文，避免三处同步漂移。
 
-# {{REGION}} · {{TOPIC}} · 首期基线报告提示词（行业深度研究型）
-
-> **用途**：执行「{{REGION}} {{TOPIC}} 行业研究机制」的**机制建立**任务：产出首期行业全景基线报告与配套研究边界档案。可直接复制，替换顶部变量后提交给 AI 执行。
-> **产出**：中文九节基线报告（md 源稿 + 同目录自包含 HTML），落盘 `{{OUTPUT_PATH}}`（`reports/{{YYYY-MM}}-<slug>.md`）+ 研究边界档案（`{{REGISTRY_PATH}}`）。
->
-> **继承声明（四层体系）**：本文件 = [通用基座](../../src/report_templates/prompt-generic-base.md) × [监测报告通用规范](../../src/report_templates/monitoring-common-spec.md) × [基线报告类型模板（行业深度研究型）](../../src/report_templates/industry-research/prompt-baseline-setup-template.md) × [业务专属配置](./business-config.md)。冲突时以本文件为准。
-
-## 运行变量（每次运行前填写）
-
-```
-{{CURRENT_DATE}}         = 本次执行日期
-{{BASELINE_DATE}}        = 首期基线日期
-{{OUTPUT_PATH}}          = reports/{{YYYY-MM}}-<slug>.md
-{{REGISTRY_PATH}}        = data/（TODO：边界档案文件名）
-{{REPORT_VERSION}}       = v1.0（首期基线固定）
-```
-
-**任务目标**：产出九节行业全景基线报告（产业链图谱、规模与格局、头部玩家、驱动与风险、趋势判断）与边界档案首建；多口径规模并列不合并；运行后回写 `{{REGISTRY_PATH}}`；基线报告**无上期报告**，不读取 `{{PREVIOUS_REPORT_PATH}}`。
-
-## 一、项目专属硬性约束
-
-1. **中性立场**：不给投资评级、不出具 Go/No-Go 决策建议（边界归投资尽调型、可行性型）。
-2. **结论边界**：趋势判断一律标「推断」并配反向声音；口径冲突并列呈现。
-3. **受众定位**：见[业务配置](./business-config.md)（TODO：实例化）。
-
-## 二、来源优先级
-
-见[业务配置](./business-config.md)（TODO：① 官方统计 ② 财报 ③ 第三方研究 ④ 专家访谈）；每格活值附 `[来源, 年份]`。
-
-## 三～九、结构骨架与联动
-
-九节固定骨架见[基线类型模板第三节](../../src/report_templates/industry-research/prompt-baseline-setup-template.md)；业务固化锚节标题（TODO：实例化后逐字继承）；追踪表见[业务配置](./business-config.md)（TODO）。
-
-## 十、渲染与交付
-
-- md + 自包含 HTML（`python src/prompts-tools/tools/md2html.py`）；HTML 须通过 `python src/prompts-tools/tools/lint_reports.py`；基线导航采用简化锚点目录。
-
----
-
-## 四、prompt-annual-refresh.md 脚手架（复制为 prompts/prompt-annual-refresh.md，以下为全文）
-
-# {{REGION}} · {{TOPIC}} · 年度刷新提示词（行业深度研究型）
-
-> **用途**：每年固定窗口对行业全景做全量刷新；重大结构性事件触发器命中时提前插刷对应模块。可直接复制，替换顶部变量后提交给 AI 执行。
-> **产出**：刷新版报告落盘 `{{OUTPUT_PATH}}`（`reports/{{YYYY-MM}}-<slug>.md`）；插刷件 `reports/{{YYYY-MM}}-<slug>.md`（命名不在标准正则内，validate 仅 WARN 不阻断，属预期）。
->
-> **继承声明（四层体系）**：本文件 = [通用基座](../../src/report_templates/prompt-generic-base.md) × [监测报告通用规范](../../src/report_templates/monitoring-common-spec.md) × [年度刷新类型模板（行业深度研究型）](../../src/report_templates/industry-research/prompt-annual-refresh-template.md) × [业务专属配置](./business-config.md)。冲突时以本文件为准。
-
-## 运行变量（每次运行前填写）
-
-```
-{{CURRENT_DATE}}         = 本次执行日期
-{{PREVIOUS_REPORT_PATH}} = 上一年度刷新版路径（首年刷新时为空，仅锚定基线）
-{{BASELINE_REPORT_PATH}} = reports/{{YYYY-MM}}-<slug>.md
-{{REGISTRY_PATH}}        = data/（TODO）
-{{OUTPUT_PATH}}          = reports/{{YYYY-MM}}-<slug>.md
-{{REPORT_VERSION}}       = 本次版本号，格式 vYYYY.MM.DD
-```
-
-**任务目标**：完成「口径复核 → 数据刷新 → 格局更新 → 趋势复判」闭环；上年趋势判断逐条对照实际进展（命中 / 部分命中 / 未命中），复判结论与依据并列，**上年判断原文保留不删除**；九节结构与基线逐字一致；无触发且窗口未到时不启动，不得虚构变化。
-
-## 一、各模块更新要点（业务实例化，TODO 按九节展开）
-
-- **产业链**（TODO：环节进出、价值分布迁移、传导关系变化）。
-- **规模与格局**（TODO：最新口径规模与增速、集中度变化、口径修订留痕）。
-- **玩家**（TODO：清单复核与进出登记、逐家要点更新）。
-- **驱动与风险**（TODO：证据更新、新增风险、失效驱动归档）。
-- **趋势**（TODO：上年复判 + 新趋势推导，反向声音至少 2 条）。
-
-## 二～六、协议与交付
-
-更新协议与命名见[年度刷新类型模板](../../src/report_templates/industry-research/prompt-annual-refresh-template.md)第二、四节；渲染交付同基线提示词第十节。
-
----
+## 四、prompt-annual-refresh.md（指针 · 正文见 prompts/）
+> **正文单一维护入口**：[prompts/prompt-annual-refresh.md](./prompts/prompt-annual-refresh.md)（泛用版母版）。
+> 建新业务线时复制该文件至 `{TOPIC_DIR}/prompts/` 并填变量与 TODO；本文档不重复维护正文，避免三处同步漂移。
 
 ## 六、落盘后审计（提交前必做，适用于本脚手架全部提示词）
 
@@ -115,3 +46,4 @@
 | 版本 | 日期 | 变更 | 说明 |
 |---|---|---|---|
 | v1.0 | 2026-11-13 | 初始版本 | 依类型模板与业务提示词体例生成行业深度研究型业务提示词脚手架 |
+| v1.1 | 2026-11-17 | 正文指针化 | 提示词正文统一收口到 `prompts/` 泛用版母版，本脚手架只保留实例化步骤 / business-config 清单 / 审计协议，消除三处同步 |

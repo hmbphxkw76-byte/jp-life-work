@@ -10,12 +10,13 @@
 
 用法示例：
   python src/vocabulary/script/vocab_tool.py topics
-  python src/vocabulary/script/vocab_tool.py init --topic ai-security
-  python src/vocabulary/script/vocab_tool.py import --topic ai-security --file src/vocabulary/data/ai-security/imports/2026-11-13_seed-ai-security.md
-  python src/vocabulary/script/vocab_tool.py check --topic ai-security
-  python src/vocabulary/script/vocab_tool.py tag --topic ai-security --id AIS-001 --add 蓝队 --remove 红队
-  python src/vocabulary/script/vocab_tool.py export --topic ai-security --format all
+  python src/vocabulary/script/vocab_tool.py init --topic ssw-driver
+  python src/vocabulary/script/vocab_tool.py import --topic ssw-driver --file src/vocabulary/data/ssw-driver/imports/2026-11-13_seed-ssw-driver.md
+  python src/vocabulary/script/vocab_tool.py check --topic ssw-driver
+  python src/vocabulary/script/vocab_tool.py tag --topic ssw-driver --id SSW-001 --add 运输 --remove 资格
+  python src/vocabulary/script/vocab_tool.py export --topic ssw-driver --format all
   python src/vocabulary/script/vocab_tool.py index
+  python src/vocabulary/script/vocab_tool.py verify
 """
 
 from __future__ import annotations

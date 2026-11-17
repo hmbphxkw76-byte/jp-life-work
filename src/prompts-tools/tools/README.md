@@ -1,14 +1,14 @@
-# prompts/tools 使用文档
+# src/prompts-tools/tools 使用文档
 
 CI 工具链使用说明。所有工具基于仓库根目录相对路径运行（自动定位仓库根），
-在仓库根目录执行即可；通用层 + 业务层（`{地区}/{物业类型}/`）结构见
+在仓库根目录执行即可；通用层 `src/report_templates/` + 业务层 `NN-<slug>/` 结构见
 [report_templates/prompt-generic-base.md](../../report_templates/prompt-generic-base.md) 第 1.1 节。
 
 ## 环境准备
 
 ```bash
 pip install -r requirements.txt   # markdown
-python -m unittest discover -s src/tests -v   # 单元测试（255 项：tools 198 / workflow_guard 33 / cleanup 18 / git_push 6）
+python -m unittest discover -s src/tests -v   # 单元测试（308 项，以 docs/CI.md 与实测为准）
 ```
 
 ## 退出码约定（校验类工具统一）
@@ -41,7 +41,7 @@ python -m unittest discover -s src/tests -v   # 单元测试（255 项：tools 1
 | trigger_watch.py | 编排 | 手动 / pipeline-orchestrator.yml：触发检测（watchlist + freshness + 候选线索） |
 | pipeline_status.py | 编排 | 手动：统一监控视图（阶段进度 / 阻塞点 / 审计分布 / 心跳） |
 | pipeline_runner.py | 编排 | 手动 / pipeline-orchestrator.yml：六阶段状态机（断点续跑 / S2 人工闸门） |
-| automation_status.py | 编排 | 5 条工作流 `record` 入库 + 手动 `activity`（活跃度预警） |
+| automation_status.py | 编排 | 6 条工作流 `record` 入库 + 手动 `activity`（活跃度预警） |
 | info_quality_check.py | 校验+修复 | info-quality.yml「信息质量全量评估」+ validate.yml「信息质量检查」 |
 | auto_verify.py | 校验 | 手动：生成后自动验证（V1–V5）→ 写回「自动验证结果」→ 提交审计 |
 | audit_registry.py / audit_pipeline.py / audit_badge.py / audit_check.py / audit_sampling.py / audit_preflight.py | 审计 | audit-gate.yml / audit-sampling.yml / html-sync.yml |
@@ -82,7 +82,7 @@ python src/prompts-tools/tools/lint_reports.py
 
 ### compliance_check.py — 报告模板合规校验 / 模板引导 / 合规审计
 
-校验规则与 12 类报告类型模板骨架一一对应，规则文件为
+校验规则与 13 类报告类型模板骨架一一对应，规则文件为
 [report_templates/compliance-rules.json](../../report_templates/compliance-rules.json)
 （与 [template-registry.md](../../report_templates/template-registry.md) 第二节登记一致；
 周期未单独登记的类型按「结构逐字继承基线」回落校验）。报告类型自动识别：读取业务线
@@ -103,8 +103,8 @@ python src/prompts-tools/tools/compliance_check.py --audit        # 历史报告
 - **警告项（不阻断）**：h2 节数超出骨架（如为业务固化锚需人工确认）、基线报告缺简化
   锚点导航、文件名不符合命名约定（无法识别周期）、业务线未注册类型。
 - `--audit` 对全部历史报告执行同口径校验，匹配度汇总与逐项明细写入
-  `report-audits/compliance-audit.md`（定时维护提交留痕），发现不符合项退出码 2 并转
-  预警 Issue，不阻断维护流水线。
+  `report-audits/compliance-audit.md`（手动 / 按需入口，不纳入定时维护），发现不符合项
+  退出码 2 并转预警 Issue，不阻断维护流水线。
 - 纯函数 `check_report(text, rule, common)` / `detect_type(config_text)` /
   `cycle_rule(rules, type_id, cycle)` 可被测试直接调用。
 
@@ -186,7 +186,7 @@ python src/prompts-tools/tools/update_planner.py --porcelain --pending-only > ta
 # 人读 md 清单
 python src/prompts-tools/tools/update_planner.py --pending-only > tasks.md
 # 限定项目 / 周期
-python src/prompts-tools/tools/update_planner.py --project dubai/apartment --period 2026-Q4
+python src/prompts-tools/tools/update_planner.py --project 01-ssw-driver --period 2026-12
 ```
 
 - `--period` 接受 `YYYY-MM` / `YYYY-Qn` / `YYYY`；缺省按当前 UTC 日期推导
@@ -285,18 +285,18 @@ python src/prompts-tools/tools/automation_status.py activity --threshold 45     
 | 新报告开写前取骨架 | `compliance_check.py --scaffold <类型ID> [周期]` 输出骨架与自检要点 |
 | 查历史报告合规匹配度 | `compliance_check.py --audit` 后看 `report-audits/compliance-audit.md` |
 | 新增业务线后首跑 | `ensure_region_topics.py` → 补 business-config.md → 首期基线报告 |
-| 手动补跑月度任务清单 | `update_planner.py --project dubai/apartment --period 2026-12` |
+| 手动补跑月度任务清单 | `update_planner.py --project 01-ssw-driver --period 2026-12` |
 
 ## 月度报告体系（2026-11 重构）
 
-> CI / 自动化全景（7 条工作流、报告生命周期、测试体系）见 `docs/CI.md`。
+> CI / 自动化全景（8 条工作流、报告生命周期、测试体系）见 `docs/CI.md`。
 
 - **命名**：全部报告统一 `YYYY-MM-<主题slug>.md` + 同名 `.html`；主题 slug 取
   目录名去编号前缀（`01-ssw-driver` → `ssw-driver`）。
 - **分类**：取消基线 / 初析 / 季度等类型标签，全部按自然月聚合；季度报告按季度末月
   归档，与月度报告同一套命名 / 对比 / 展示逻辑。
 - **同月合并**：同一主题同一自然月多份存量报告合并为一份，初析为主体、基线作附录，
-  原文内容不删改（见 `migrate_monthly_reports.py` 与 `report-audits/report-migration-2026-11.md`）。
+  原文内容不删改（见 `migrate_monthly_reports.py` 与 `report-audits/report-migration-2026-11.json`）。
 - **展示**：单主题报告列表默认展示最近 12 个月，按时间倒序（最新在顶端）。
 - **对比**：每期报告与上一期（同主题、最近一个更早自然月）全量比对，新增 / 修改
   高亮并加「已更新」标记，删除折叠可追溯。

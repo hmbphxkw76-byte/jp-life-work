@@ -1,6 +1,6 @@
 # 业务提示词脚手架（行业趋势周报型）
 
-> **用途**：复制式业务提示词脚手架。建新业务线时：复制本文档内两份提示词全文到 `{TOPIC_DIR}/prompts/` 对应文件，替换变量与 TODO 项，补齐 `business-config.md` 即可运行。类型方法论见[周期更新类型模板](./prompt-weekly-monitor-template.md)与[基线类型模板](./prompt-baseline-setup-template.md)。
+> **用途**：复制式业务提示词脚手架。建新业务线时：将 [prompts/](./prompts/) 下的泛用版提示词复制到 `{TOPIC_DIR}/prompts/` 对应文件，替换变量与 TODO 项，补齐 `business-config.md` 即可运行。类型方法论见[周期更新类型模板](./prompt-weekly-monitor-template.md)与[基线类型模板](./prompt-baseline-setup-template.md)。
 
 ---
 
@@ -8,7 +8,7 @@
 
 1. 按[通用基座 1.2 节](../prompt-generic-base.md)建立 `{TOPIC_DIR}/` 目录（prompts / data / reports，可选 sources/）。
 2. 撰写 `prompts/business-config.md`（业务单一事实源）：变量区、受众定位、主题矩阵（3 块）、来源优先级实例化、触发器清单、交付格式声明。
-3. 将下文两份提示词全文分别复制为：
+3. 将 [prompts/](./prompts/) 下的两份泛用版提示词分别复制为：
    - `prompts/prompt-baseline-setup.md`（基线期，一次性）
    - `prompts/prompt-weekly-monitor.md`（周报运行期）
 4. 替换全部变量与 TODO；周期提示词头部继承声明指向 `../../src/report_templates/trend-weekly/` 下对应类型模板。
@@ -27,87 +27,13 @@
 
 ---
 
-## 三、基线提示词全文（复制为 prompt-baseline-setup.md）
+## 三、prompt-baseline-setup.md（指针 · 正文见 prompts/）
+> **正文单一维护入口**：[prompts/prompt-baseline-setup.md](./prompts/prompt-baseline-setup.md)（泛用版母版）。
+> 建新业务线时复制该文件至 `{TOPIC_DIR}/prompts/` 并填变量与 TODO；本文档不重复维护正文，避免三处同步漂移。
 
-```markdown
-# {{REGION}} · {{TOPIC}} · 基线机制建立提示词（行业趋势周报型）
-
-> **用途**：首期机制建立（一次性）：建立周报定位、主题矩阵、来源分级、台账与八节报告骨架。
-> **继承声明**：本文件 = [通用基座](../../src/report_templates/prompt-generic-base.md) × [监测报告通用规范](../../src/report_templates/monitoring-common-spec.md) × [基线类型模板（行业趋势周报型）](../../src/report_templates/trend-weekly/prompt-baseline-setup-template.md) × 业务专属配置（`./business-config.md`）。
-
-## 运行变量（必填）
-
-{{CURRENT_DATE}} = 本次执行日期
-{{CADENCE}} = 固定填「周」（基线不区分节拍）
-{{OUTPUT_PATH}} = reports/{{YYYY-MM}}-<slug>.md
-{{REPORT_VERSION}} = 固定 v1.0（灾难恢复重建时递增）
-
-## 执行步骤
-
-1. 完成监测范围与主题矩阵调研（TODO：三块板块定义，覆盖受众决策需求、互不重叠）。
-2. 完成来源清单与发布节奏调研（TODO：逐机构官方 URL / 频率 / 语言）。
-3. 首建台账 {{REGISTRY_PATH}}（数据看板追踪表 / 已修正事实清单 / 来源清单 / 触发器清单 / 版本记录）。
-4. 按基线类型模板第二节撰写九节机制文档（顺序标题逐字固化），落盘 {{OUTPUT_PATH}}。
-
-## 渲染与交付
-
-- 交付格式由业务配置声明：md + HTML 双格式，或纯 HTML（md 源稿存 `sources/`，不参与 md2html 自动转换）。
-- python src/prompts-tools/tools/validate.py（0 错误）
-- python src/prompts-tools/tools/lint_reports.py（0 错误）
-- python src/prompts-tools/tools/build_index.py && python src/prompts-tools/tools/build_hub.py
-```
-
----
-
-## 四、周报提示词全文（复制为 prompt-weekly-monitor.md）
-
-```markdown
-# {{REGION}} · {{TOPIC}} · 周报提示词（行业趋势周报型）
-
-> **用途**：周期性（每周）刷新主题板块与数据看板，产出八节周报；触发器命中时对应板块重点更新。
-> **继承声明**：本文件 = [通用基座](../../src/report_templates/prompt-generic-base.md) × [监测报告通用规范](../../src/report_templates/monitoring-common-spec.md) × [周期更新类型模板（行业趋势周报型）](../../src/report_templates/trend-weekly/prompt-weekly-monitor-template.md) × 业务专属配置（`./business-config.md`）。
-
-## 运行变量（每次运行前填写）
-
-{{CURRENT_DATE}} = 本次执行日期
-{{DATA_CUTOFF}} = 数据截止日（周报命名与标题锚定此日期）
-{{PREVIOUS_REPORT_PATH}} = 最近一期周报路径
-{{BASELINE_REPORT_PATH}} = 固定值，见 business-config.md
-{{REGISTRY_PATH}} = 固定值，见 business-config.md
-{{OUTPUT_PATH}} = reports/{{DATA_CUTOFF}}_weekly.md
-{{REPORT_VERSION}} = 本次版本号，格式 vYYYY.MM.DD
-
-## 任务目标
-
-以公开来源为依据、以上期周报为对比锚，完成「采集 → 核验 → 看板刷新 → 可执行启示」闭环；八节结构与基线逐字一致；继承已修正事实清单；无实质变化时降级为核验轻运行，不得虚构变化；T+1 在报告头部标注。
-
-## 八节固定结构（不得增删节、调整顺序）
-
-1. 本周要点 Top5（每条 = 结论 + 关键数字 + 来源；【事实】/【预测】显式标注）
-2. 主题板块一（TODO：按 business-config 主题矩阵实例化）
-3. 主题板块二（TODO）
-4. 主题板块三（TODO）
-5. 数据看板（指标 × 上期值 × 本期值 × 变化 × 来源 × 口径，与台账联动）
-6. 风险与不确定性（来源可靠性 / 反向证据 / 口径冲突 / 基准自报）
-7. 可执行启示（面向受众，标「推断」，只给条件 → 判读 → 框架性含义 → 风险提示）
-8. 参考来源（逐条 URL；转述标「需核实原文」）
-
-## 执行步骤
-
-1. 读 {{PREVIOUS_REPORT_PATH}} 与基线，继承已修正事实清单（防回退）。
-2. 按来源分级采集本周新事实（TODO：按 business-config 来源清单与渠道分工）。
-3. 逐块更新主题板块；数据看板逐行核对并回写台账（逐项填「是否更新」）。
-4. 撰写八节周报，落盘 {{OUTPUT_PATH}}。
-
-## 渲染与交付
-
-- 交付格式由业务配置声明：md + HTML 双格式，或纯 HTML（md 源稿存 `sources/`，不参与 md2html 自动转换）。
-- python src/prompts-tools/tools/lint_reports.py && python src/prompts-tools/tools/classify_reports.py
-- python src/prompts-tools/tools/compliance_check.py --file {{OUTPUT_PATH}}
-- python src/prompts-tools/tools/build_index.py && python src/prompts-tools/tools/build_hub.py
-```
-
----
+## 四、prompt-weekly-monitor.md（指针 · 正文见 prompts/）
+> **正文单一维护入口**：[prompts/prompt-weekly-monitor.md](./prompts/prompt-weekly-monitor.md)（泛用版母版）。
+> 建新业务线时复制该文件至 `{TOPIC_DIR}/prompts/` 并填变量与 TODO；本文档不重复维护正文，避免三处同步漂移。
 
 ## 五、落盘后审计（提交前必做，适用于本脚手架全部提示词）
 
@@ -122,3 +48,4 @@
 | 版本 | 日期 | 变更 | 说明 |
 |---|---|---|---|
 | v1.0 | 2026-11-13 | 初始版本 | 行业趋势周报型复制式业务提示词脚手架（基线 + 周报） |
+| v1.1 | 2026-11-17 | 正文指针化 | 提示词正文统一收口到 `prompts/` 泛用版母版，本脚手架只保留实例化步骤 / business-config 清单 / 审计协议，消除三处同步 |
