@@ -50,7 +50,7 @@
 
 | # | 项 | 结果 |
 |---|---|---|
-| 1 | `python -m unittest discover -s engine/tests` | ✅ `Ran 860 tests — OK (skipped=3)`（基线 844 + 新增守卫 13 + 比对脚本补测 3） |
+| 1 | `python -m unittest discover -s engine/tests` | ✅ `Ran 861 tests — OK (skipped=3)`（基线 844 + 新增守卫 14 + 比对脚本补测 3） |
 | 2 | `python engine/tools/validate.py` | ✅ 退出码 0 |
 | 3 | 双轴评审 | ✅ 本报告（Standards / Spec 双轴，无 P0/P1） |
 | 4 | `python engine/tools/coverage_gate.py` | ✅ 92.0% ≥ 80%（enforce=true） |
@@ -73,6 +73,7 @@
    - `PATH_REWRITES` 的 `tools/` 兜底项会二次命中新路径 `engine/tools/`（→ `engine/engine/scripts/`）；在其之前加入 `engine/tools/`、`engine/scripts/` 恒等映射；
    - 时间戳归一化仅覆盖「构建心跳」，无法覆盖 `INDEX.md` 头部「最近生成：… UTC」与报告行构建时间列，导致误报 MISMATCH；已扩展并补 3 项单测。
 5. **`review_gate.SCOPE_DIRS`** 的 `"tools/"` 同步为 `"engine/scripts/"`（方案 §3.4「各工具常量」口径）。
+6. **守卫扫描口径修正（合并后 CI 暴露）**：首版守卫用 `git grep`（仅搜已跟踪文件），未覆盖尚未 `add` 的新文件，导致守卫自身与本评审报告中的旧路径字面量漏检——本地绿、CI 红（`validate` 失败一次）。已改为**全量文件扫描**（含未跟踪文件，排除版本库 / 工作树 / 运行期产物 / 报告正文），并补 1 项回归用例 `test_scan_sees_untracked_files`；白名单相应纳入守卫自身与本评审报告。该失败属守卫假阴性，非产品回归，故修复前推而非 revert。
 
 ## 五、回滚判据核对（方案 §9）
 
