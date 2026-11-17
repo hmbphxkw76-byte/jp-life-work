@@ -68,7 +68,7 @@
 
 | 判据 | 结果 |
 |---|---|
-| `git grep "src/"`（排除台账 / 报告正文） | 仅白名单 6 项（迁移方案 / 比对脚本及其测试 / scripts README / 迁移守卫 / 迁移评审） |
+| `git grep "src/"`（排除台账 / 报告正文） | 仅白名单 6+1 项（迁移方案 / 比对脚本及其测试 / scripts README / 迁移守卫 / 迁移评审 / post-migration 评审） |
 | `git grep "prompts-tools"` | 同上白名单 |
 | `git grep '"src"'` | 同上白名单 |
 | `test_engine_migration.TestNoLiveSrcReferences` | 通过 |

@@ -1,6 +1,6 @@
 # 工具链开发规约（TOOLCHAIN-DEV-SPEC）
 
-> **版本**：v1.0（2026-11-17）
+> **版本**：v1.1（2026-11-17 迁移后治理）
 > **定位**：jp-life-work **工具链开发域**（代码交付）的开发流程与验收规约，选择性吸收 mainline 11 阶段规范的增量能力。
 > **上位依据**：[AGENTS.md](../../AGENTS.md)、[CI.md](../CI.md)（CI-SYSTEM）、[mainline 融合评估报告](mainline融合评估报告-2026-11-17.md)（MAINLINE-INTEGRATION-ASSESSMENT-2026-11）。
 > **适用对象**：`engine/`、`engine/scripts/`、`.github/workflows/` 及根配置（`requirements*.txt`、`.coveragerc`、`coverage-config.json`）的变更。
