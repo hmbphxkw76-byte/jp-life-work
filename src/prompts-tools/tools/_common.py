@@ -359,3 +359,20 @@ def resolve_within(base, rel: str) -> Path:
     target = (base / str(rel).replace("\\", "/")).resolve()
     target.relative_to(base)
     return target
+
+
+# ──────────────────────────────────────────────
+# 审计产物渲染共用（去重：原 5 处 _md_table / 4 处 _link_prefix 逐字重复）
+# ──────────────────────────────────────────────
+
+def md_table(rows: list[list[str]]) -> str:
+    """把二维行数据渲染为 Markdown 表格（审计类工具共用单一事实源）。"""
+    out = ["| " + " | ".join(rows[0]) + " |", "|" + "---|" * len(rows[0])]
+    for r in rows[1:]:
+        out.append("| " + " | ".join(r) + " |")
+    return "\n".join(out)
+
+
+def link_prefix(out_file: Path) -> str:
+    """从产物文件回到仓库根的相对前缀（保证 Markdown 链接可用）。"""
+    return "../" * (len(out_file.relative_to(ROOT).parts) - 1)

@@ -30,7 +30,13 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from _common import ROOT, detect_month_report, iter_business_dirs  # noqa: E402
+from _common import (  # noqa: E402
+    ROOT,
+    detect_month_report,
+    iter_business_dirs,
+    link_prefix,
+    md_table,
+)
 import compliance_check  # noqa: E402
 import info_quality_check  # noqa: E402
 from audit_registry import content_fingerprint  # noqa: E402
@@ -76,18 +82,6 @@ C_TO_LAYER = {
     "C-09": "L3", "C-10": "L4", "C-11": "L5", "C-12": "L5",
     "C-13": "L4", "C-14": "L3",
 }
-
-# 报告必需要素（docs 第 3.1 节）
-ELEMENTS = (
-    ("E1", "标题（含期间）", ("P1",)),
-    ("E2", "版本号 + 数据基准日", ("P2",)),
-    ("E3", "免责声明", ("P1",)),
-    ("E4", "结论摘要", ("P1",)),
-    ("E5", "正文（按类型骨架）", ("P1",)),
-    ("E6", "来源章节", ("P1",)),
-    ("E7", "来源标注（覆盖率 ≥ 20%）", ("P2",)),
-    ("E8", "后续动作 / 观察清单", ("P2",)),
-)
 
 L5_CHECKLIST = (
     "结论与依据是否匹配（关键结论有「事实→推理→结论」链）",
@@ -416,22 +410,10 @@ def write_pending_p2(results: list[ReportResult], run_date: str) -> list[dict]:
     return items
 
 
-def _link_prefix(out_file: Path) -> str:
-    """从产物文件回到仓库根的相对前缀。"""
-    return "../" * (len(out_file.relative_to(ROOT).parts) - 1)
-
-
-def _md_table(rows: list[list[str]]) -> str:
-    out = ["| " + " | ".join(rows[0]) + " |", "|" + "---|" * len(rows[0])]
-    for r in rows[1:]:
-        out.append("| " + " | ".join(r) + " |")
-    return "\n".join(out)
-
-
 def write_report(results: list[ReportResult], summary: dict, run_date: str) -> list[Path]:
     AUDIT_DIR.mkdir(parents=True, exist_ok=True)
     rows = [["报告", "层级结论", "P0", "P1", "P2", "结论"]]
-    prefix = _link_prefix(CHECK_REPORT_MD)
+    prefix = link_prefix(CHECK_REPORT_MD)
     for r in results:
         c = r.severity_counts
         layers = " ".join(f"{k}{'✓' if v == 'pass' else ('?' if v == 'pending' else '✗')}"
@@ -461,15 +443,15 @@ def write_report(results: list[ReportResult], summary: dict, run_date: str) -> l
             "",
             "## 逐报告结论",
             "",
-            _md_table(rows),
+            md_table(rows),
             "",
             "## 分层汇总",
             "",
-            _md_table([["层级", "pass", "fail", "pending", "P0", "P1", "P2"]] + layer_rows),
+            md_table([["层级", "pass", "fail", "pending", "P0", "P1", "P2"]] + layer_rows),
             "",
             "## 发现明细",
             "",
-            _md_table(detail_rows) if len(detail_rows) > 1 else "（无发现项）",
+            md_table(detail_rows) if len(detail_rows) > 1 else "（无发现项）",
             "",
             "## L5 语义复核清单（人工 / LLM 逐项确认）",
             "",

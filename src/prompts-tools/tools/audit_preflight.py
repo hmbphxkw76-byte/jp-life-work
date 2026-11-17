@@ -26,7 +26,13 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from _common import ROOT, detect_month_report, iter_business_dirs  # noqa: E402
+from _common import (  # noqa: E402
+    ROOT,
+    detect_month_report,
+    iter_business_dirs,
+    link_prefix,
+    md_table,
+)
 import compliance_check  # noqa: E402
 import info_quality_check  # noqa: E402
 from info_quality_check import (  # noqa: E402
@@ -265,22 +271,10 @@ def run_all() -> tuple[list[dict], dict]:
     return results, summary
 
 
-def _md_table(rows: list[list[str]]) -> str:
-    out = ["| " + " | ".join(rows[0]) + " |", "|" + "---|" * len(rows[0])]
-    for r in rows[1:]:
-        out.append("| " + " | ".join(r) + " |")
-    return "\n".join(out)
-
-
-def _link_prefix(out_file: Path) -> str:
-    """从产物文件回到仓库根的相对前缀。"""
-    return "../" * (len(out_file.relative_to(ROOT).parts) - 1)
-
-
 def write_report(results: list[dict], summary: dict, run_date: str) -> list[Path]:
     AUDIT_DIR.mkdir(parents=True, exist_ok=True)
     rows = [["报告", "P0", "P1", "P2", "结论"]]
-    prefix = _link_prefix(REPORT_MD)
+    prefix = link_prefix(REPORT_MD)
     for r in results:
         c = r["severity"]
         rows.append([f"[{r['report']}]({prefix}{r['report']})",
@@ -301,11 +295,11 @@ def write_report(results: list[dict], summary: dict, run_date: str) -> list[Path
         "",
         "## 逐报告结论",
         "",
-        _md_table(rows),
+        md_table(rows),
         "",
         "## 发现明细",
         "",
-        _md_table(detail) if len(detail) > 1 else "（无发现项）",
+        md_table(detail) if len(detail) > 1 else "（无发现项）",
         "",
         f"**总体结论：{conclusion}**",
         "",

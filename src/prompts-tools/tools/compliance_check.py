@@ -266,13 +266,13 @@ def run_check(only_file: str | None, new_only: bool = False,
 
 def run_audit(outdir: Path) -> tuple[int, int, int, Path]:
     """历史报告合规审计 -> (总数, 合规数, 违规报告数, 审计报告路径)。"""
-    errors, warnings, lines = run_check(None)
+    _, _, lines = run_check(None)
     rules = load_rules()
     targets = collect_targets(None)
     total = len(targets)
     # 违规报告数：按报告维度统计（含警告）
     violated = 0
-    for rel, _text, type_id, cycle, note in targets:
+    for _rel, _text, type_id, cycle, note in targets:
         bad = bool(note) or not type_id
         if type_id and not bad:
             rule, _ = cycle_rule(rules, type_id, cycle or "baseline")
@@ -321,7 +321,7 @@ def run_scaffold(type_id: str, cycle: str | None) -> int:
     if cycle not in cycles:
         print(f"[ERROR] 类型 {type_id} 无周期「{cycle}」；可用周期: {', '.join(cycles)}")
         return 1
-    rule, inherited = cycle_rule(rules, type_id, cycle)
+    rule, _inherited = cycle_rule(rules, type_id, cycle)
     titles = rule.get("section_titles") or t.get("section_titles") or []
     n = rule["sections"]
     print(f"# {t['name']}（{type_id}）· 周期：{cycle} — 模板自动填充引导\n")
