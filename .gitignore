@@ -12,15 +12,15 @@ Thumbs.db
 .screenshots/
 
 # 词汇库工具生成的备份与日志产物（工具自带轮转保留，不入库）
-src/vocabulary/data/sync-backups/
-src/vocabulary/data/topic-backups/
+engine/vocabulary/data/sync-backups/
+engine/vocabulary/data/topic-backups/
 
-# 运行日志（工具写入，不入库；由 tools/cleanup_workspace.py 统一清理）
-src/vocabulary/data/*.log
+# 运行日志（工具写入，不入库；由 engine/scripts/cleanup_workspace.py 统一清理）
+engine/vocabulary/data/*.log
 # AutoVerify 运行日志（auto_verify.py 每次验证写入，含运行时刻，不入库）
-src/report-audits/audit/verify/
+engine/report-audits/audit/verify/
 
-# 测试 / 静态检查缓存（可再生；由 tools/cleanup_workspace.py 统一清理）
+# 测试 / 静态检查缓存（可再生；由 engine/scripts/cleanup_workspace.py 统一清理）
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/

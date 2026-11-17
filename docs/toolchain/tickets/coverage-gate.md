@@ -12,6 +12,6 @@
 | T5 | TDD 实现 `review_gate.py`（红→绿） | `test_review_gate.py` 9 项通过 | ✅ |
 | T6 | 守卫测试 `test_toolchain_dev_spec.py` | 11 项通过 | ✅ |
 | T7 | `validate.yml` 接入覆盖率 job；`audit-gate.yml` 接入评审软门禁 | CI 接线含前置 / 收尾清理；步骤可执行 | ✅ |
-| T8 | `tools/README.md` 登记工具 + 合并前检查单；刷新 registry | `test_arch_guard` / `test_registry_generator` 通过 | ✅ |
+| T8 | `engine/scripts/README.md` 登记工具 + 合并前检查单；刷新 registry | `test_arch_guard` / `test_registry_generator` 通过 | ✅ |
 | T9 | 双轴评审报告归档 | `docs/toolchain/reviews/coverage-gate-review.md` 双轴无 P0/P1 | ✅ |
 | T10 | 工具链覆盖率达 ≥80%（enforce=true） | `coverage_gate.py` 退出码 0 | 进行中 |

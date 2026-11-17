@@ -3,7 +3,7 @@
 > **用途**：周期性（每年）执行年度复盘。产出年度复盘报告，目标不是市场评论，而是：① 复盘全年；② 检验判断；③ 重置长期基线；④ 校准监测项；⑤ 更新情景；⑥ 更新登记册。
 > **产出**：年度报告落盘 `{{OUTPUT_PATH}}`（`reports/{{YYYY-MM}}-<slug>.md` + 同名 HTML）。
 >
-> **继承声明（四层体系）**：本文件 = [通用基座](../../src/report_templates/prompt-generic-base.md) × [监测报告通用规范](../../src/report_templates/monitoring-common-spec.md) × [年度报告类型模板（市场指标监测型）](../../src/report_templates/market-monitoring/prompt-annual-review-template.md) × [业务专属配置](./business-config.md)。冲突时以本文件为准。
+> **继承声明（四层体系）**：本文件 = [通用基座](../../engine/report_templates/prompt-generic-base.md) × [监测报告通用规范](../../engine/report_templates/monitoring-common-spec.md) × [年度报告类型模板（市场指标监测型）](../../engine/report_templates/market-monitoring/prompt-annual-review-template.md) × [业务专属配置](./business-config.md)。冲突时以本文件为准。
 
 ---
 
@@ -28,7 +28,7 @@
 
 ## 一、节拍与触发
 
-年度为市场指标监测型的复盘节拍（见[年度类型模板第一节](../../src/report_templates/market-monitoring/prompt-annual-review-template.md)）：
+年度为市场指标监测型的复盘节拍（见[年度类型模板第一节](../../engine/report_templates/market-monitoring/prompt-annual-review-template.md)）：
 
 - **命名规则**：报告用「被复盘年份」（`reports/{{YYYY-MM}}-<slug>.md`）。
 - **判断 vs 实际偏离**：对上年的地域选择判断逐条复判，原文保留；偏离度 =（实际 ÷ 对照）− 1，绝对值 >30% 须重设假设并列出重设的三项假设，不做事后拟合。
@@ -54,7 +54,7 @@
 ## 四、基线锚定与防回退
 
 - 读取 `{{PREVIOUS_REPORT_PATH}}` 与 `{{BASELINE_REPORT_PATH}}`，继承结构与全部已核实结论。
-- 逐条继承「已修正事实清单」，产生修正后追加（格式见[通用基座第五节](../../src/report_templates/prompt-generic-base.md)）；严禁重新引入已被推翻的说法；无来源不得入清单。
+- 逐条继承「已修正事实清单」，产生修正后追加（格式见[通用基座第五节](../../engine/report_templates/prompt-generic-base.md)）；严禁重新引入已被推翻的说法；无来源不得入清单。
 - 上年判断逐条复判，原文保留；不得删除或改写上年判断。
 
 ## 五、追踪表与登记册联动
@@ -66,7 +66,7 @@
 1. 按调研维度并行启动研究子代理（年度地域统计复核 / 生活成本与自治体支援复核），全部限定日 / 英来源、逐点引用，每条数据附可直接访问的 URL；门户数据标注为预期指标。
 2. 主代理读取 `{{PREVIOUS_REPORT_PATH}}` 与基线做差异合并，继承已修正事实清单，应用第三节更新要点。
 3. 冲突数据保留双份引用；无法核实项单列「待复核清单」。
-4. 回写报告与登记册后运行 `python src/prompts-tools/tools/md2html.py` 重新生成 HTML，并运行 `python src/prompts-tools/tools/lint_reports.py` 校验。
+4. 回写报告与登记册后运行 `python engine/tools/md2html.py` 重新生成 HTML，并运行 `python engine/tools/lint_reports.py` 校验。
 
 ## 七、渲染与交付
 
@@ -88,7 +88,7 @@
 
 ## 落盘后审计（提交前必做）
 
-落盘后依次运行 `python src/prompts-tools/tools/audit_preflight.py --report <报告相对路径>`、`python src/prompts-tools/tools/audit_check.py --report <报告相对路径>`，修正全部 P0/P1 后执行 `python src/prompts-tools/tools/audit_pipeline.py --submit --report <报告相对路径>` 提交审计（未通过初审不得合并）。
+落盘后依次运行 `python engine/tools/audit_preflight.py --report <报告相对路径>`、`python engine/tools/audit_check.py --report <报告相对路径>`，修正全部 P0/P1 后执行 `python engine/tools/audit_pipeline.py --submit --report <报告相对路径>` 提交审计（未通过初审不得合并）。
 
 ## 版本记录
 

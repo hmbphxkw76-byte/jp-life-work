@@ -2,7 +2,7 @@
 
 > **定位**：本文件是 `03-career-management` 业务线的**单一业务事实源**：运行变量固定值、研究边界、结构固化锚、术语口径、来源优先级、触发器、追踪表、口径冲突清单、渲染差异全部集中于此。两份周期提示词（基线 / 周期更新）引用本文件，业务参数只在这里维护一份。
 >
-> **继承声明（四层体系）**：周期提示词 = [通用基座](../../src/report_templates/prompt-generic-base.md) × [监测报告通用规范](../../src/report_templates/monitoring-common-spec.md) × [职业就业调研型模板](../../src/report_templates/employment-research/) × 本文件。通用层修改自动对本业务线生效；本文件修改只影响本业务线。冲突时以周期提示词 ＞ 本文件 ＞ 类型模板 ＞ 通用基座 ＞ 通用规范。
+> **继承声明（四层体系）**：周期提示词 = [通用基座](../../engine/report_templates/prompt-generic-base.md) × [监测报告通用规范](../../engine/report_templates/monitoring-common-spec.md) × [职业就业调研型模板](../../engine/report_templates/employment-research/) × 本文件。通用层修改自动对本业务线生效；本文件修改只影响本业务线。冲突时以周期提示词 ＞ 本文件 ＞ 类型模板 ＞ 通用基座 ＞ 通用规范。
 
 ---
 
@@ -73,7 +73,7 @@
 
 ### 3.2 结构固化锚（现行报告结构 → 九节骨架映射）
 
-首期保留现行结构（2026-11 基线为现行结构），**不重写正文**；下表为该结构与[职业就业调研型九节骨架](../../src/report_templates/employment-research/prompt-baseline-setup-template.md)的声明式映射。后续报告按九节骨架执行，重排须走维护规范并在版本记录留痕；合规审计以本映射为判定依据。
+首期保留现行结构（2026-11 基线为现行结构），**不重写正文**；下表为该结构与[职业就业调研型九节骨架](../../engine/report_templates/employment-research/prompt-baseline-setup-template.md)的声明式映射。后续报告按九节骨架执行，重排须走维护规范并在版本记录留痕；合规审计以本映射为判定依据。
 
 | 现行章节（业务固化锚） | 对应九节骨架 | 说明 |
 |---|---|---|
@@ -189,14 +189,14 @@
 - **报告结构**：首期保留现行结构（见 3.2 声明映射）；后续按九节骨架（顶部九锚点导航）。
 - **图表**：数量由当期内容决定，不强制下限；出图须遵循通用规范第 2 节。
 - **顶部导航**：**遗留项**：现有报告无 `.report-nav` 顶部导航（正文不改，待下一期按模板重写时补齐）。
-- **HTML 生成**：迁移不重新生成 HTML（避免引入正文变化）；后续周期运行用 `src/prompts-tools/tools/md2html.py` 生成并过 `lint_reports.py`。
+- **HTML 生成**：迁移不重新生成 HTML（避免引入正文变化）；后续周期运行用 `engine/tools/md2html.py` 生成并过 `lint_reports.py`。
 
 ---
 
 <!-- VOCAB-SYNC:BEGIN topic=career-management do-not-edit -->
 ## 词汇速览：职业管理与晋升（词汇库自动同步）
 
-> 由 `src/vocabulary/script/sync_vocab.py` 自动维护：词汇库 career-management v1.2，共 72 条（同步于 2026-11-13T20:08:47）。标记区间内请勿手工编辑；词条变更走词汇库导入流程（src/vocabulary/README.md 第三节），同步机制见第九节。
+> 由 `engine/vocabulary/script/sync_vocab.py` 自动维护：词汇库 career-management v1.2，共 72 条（同步于 2026-11-13T20:08:47）。标记区间内请勿手工编辑；词条变更走词汇库导入流程（engine/vocabulary/README.md 第三节），同步机制见第九节。
 
 - **管理岗位与职责**（13）：運行管理者（運管）；安全運転管理者；支店長；営業所長（所長）；管理職（マネージャー）；中間管理職（ミドルマネジメント）；課長；係長；主任（チーフ）；リーダー（チームリーダー）；職務分掌（業務分掌）；権限委譲（委譲）；昇格（昇級、晋升、晋级）
 - **团队与运营管理**（12）：シフト管理（シフト作成）；勤怠管理（勤怠把握）；配車（配車計画）；人員配置（要員配置）；労務管理（労務）；モチベーション（やる気）；メンタルヘルス（メンタルヘルスケア）；ハラスメント（職場ハラスメント）；1on1（ワンオンワン）；フィードバック（FB）；報連相（報告連絡相談）；業務改善（改善活動）

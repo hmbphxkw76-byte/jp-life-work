@@ -60,7 +60,7 @@ jobs:
             fi
           fi
           echo "门禁参数：--gate $gate_args"
-          python src/prompts-tools/tools/audit_pipeline.py --gate $gate_args || code=$?
+          python engine/tools/audit_pipeline.py --gate $gate_args || code=$?
           code=${code:-0}
           if [ "$code" -ne 0 ] && [ "$code" -ne 2 ]; then
             echo "::error::审计门禁阻断：存在未通过审计的变更报告或完整性问题（退出码 $code）"
@@ -71,23 +71,23 @@ jobs:
       # 全量多层级校验：当前存量报告 P0/P1=0；新增/变更报告引入 P0/P1 即阻断。
       - name: 多层级校验（audit_check --all）
         run: |
-          python src/prompts-tools/tools/audit_check.py --all || code=$?
+          python engine/tools/audit_check.py --all || code=$?
           code=${code:-0}
           if [ "$code" -ne 0 ] && [ "$code" -ne 2 ]; then
-            echo "::error::存在 P0/P1 或命令异常，禁止合并（退出码 $code；见 src/report-audits/audit/audit-check-report.md）"
+            echo "::error::存在 P0/P1 或命令异常，禁止合并（退出码 $code；见 engine/report-audits/audit/audit-check-report.md）"
             exit 1
           fi
           echo "audit_check 退出码 $code（2=仅 P2 放行）"
 
       # 工具链变更双轴评审软门禁（TOOLCHAIN-DEV-SPEC 第七节；mainline 融合 P3，P2 软门禁）。
-      # 变更涉及工具链代码（src/prompts-tools/tools/、src/vocabulary/script/、tools/）时，
+      # 变更涉及工具链代码（engine/tools/、engine/vocabulary/script/、engine/scripts/）时，
       # 要求 docs/toolchain/reviews/ 存在双轴评审报告；缺失仅告警不阻断（软门禁），
       # 由「工具链变更 100% 评审覆盖」纪律与守卫测试兜底。
       - name: 工具链评审软门禁（review_gate）
         run: |
           code=0
           if [ -f .changed-files ]; then
-            python src/prompts-tools/tools/review_gate.py --changed .changed-files || code=$?
+            python engine/tools/review_gate.py --changed .changed-files || code=$?
           else
             echo "无变更清单，跳过工具链评审软门禁"
           fi

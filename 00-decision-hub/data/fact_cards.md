@@ -1,7 +1,7 @@
 # 赴日决策 · 事实卡片（Fact Cards）
 
 > **用途**：跨主题**高频共享数字**的单一事实源。每张卡片含五字段（值 / 统计口径 / 数据时点 / 来源 URL / 版本号）；其他报告与登记册一律以 `[@FC-NNN]` 指针引用，不复制值。
-> **标准**：见 [fact-card-standard.md](../../src/report_templates/fact-card-standard.md)。
+> **标准**：见 [fact-card-standard.md](../../engine/report_templates/fact-card-standard.md)。
 > **纪律**：00 模块只读消费，不回写来源主题；冲突口径并列建卡，不合并、不取均值；值变更递增版本号并留痕。
 
 ---

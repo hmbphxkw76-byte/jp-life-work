@@ -3,7 +3,7 @@
 > **用途**：运行期统一入口，覆盖月度核验轻运行 / 季度主更新 / 年度复盘 / 事件触发解读四种节拍。以官方一手来源为依据、以上一期报告与首期基线为对比锚，完成「核验 → 更新 → 建议 → 可靠性」闭环。
 > **产出**：季度 / 年度更新报告落盘 `{{OUTPUT_PATH}}`（`reports/{{YYYY-MM}}-<slug>.md`）；事件触发解读件 `reports/{{YYYY-MM}}-<slug>.md`（命名不在标准正则内时 `validate.py` 仅 WARN 不阻断，属预期）。
 >
-> **继承声明（四层体系）**：本文件 = [通用基座](../../src/report_templates/prompt-generic-base.md) × [监测报告通用规范](../../src/report_templates/monitoring-common-spec.md) × [周期更新类型模板（职业就业调研型）](../../src/report_templates/employment-research/prompt-update-template.md) × [业务专属配置](./business-config.md)。冲突时以本文件为准。
+> **继承声明（四层体系）**：本文件 = [通用基座](../../engine/report_templates/prompt-generic-base.md) × [监测报告通用规范](../../engine/report_templates/monitoring-common-spec.md) × [周期更新类型模板（职业就业调研型）](../../engine/report_templates/employment-research/prompt-update-template.md) × [业务专属配置](./business-config.md)。冲突时以本文件为准。
 
 ---
 
@@ -28,7 +28,7 @@
 
 ## 一、节拍与触发
 
-三档节拍 + 事件触发见[周期更新类型模板第一节](../../src/report_templates/employment-research/prompt-update-template.md)。业务触发器清单（`事件 → 受影响模块`）见[业务配置第七节](./business-config.md）：
+三档节拍 + 事件触发见[周期更新类型模板第一节](../../engine/report_templates/employment-research/prompt-update-template.md)。业务触发器清单（`事件 → 受影响模块`）见[业务配置第七节](./business-config.md）：
 
 ```
 - 家族滞在 扶养人资格 / 扶养审查口径变化 → 带同模块
@@ -65,7 +65,7 @@
 ## 四、基线锚定与防回退
 
 - 读取 `{{PREVIOUS_REPORT_PATH}}`（如无则空）与 `{{BASELINE_REPORT_PATH}}`，继承结构、口径裁决与全部已核实结论。
-- 逐条继承「已修正事实清单」（以来源主题最新报告文首为单一事实源），产生修正后追加（格式见[通用基座第五节](../../src/report_templates/prompt-generic-base.md)）；严禁重新引入已被推翻的说法；无来源不得入清单。
+- 逐条继承「已修正事实清单」（以来源主题最新报告文首为单一事实源），产生修正后追加（格式见[通用基座第五节](../../engine/report_templates/prompt-generic-base.md)）；严禁重新引入已被推翻的说法；无来源不得入清单。
 - 上年趋势判断逐条复判，原文保留；不得删除或改写上年判断。
 
 ## 五、追踪表与登记册联动
@@ -77,7 +77,7 @@
 1. 原文回溯先行：完成官方原文登记（URL、版本日期、文本完整性）后才启动逐条解读子代理。
 2. 主代理读取 `{{BASELINE_REPORT_PATH}}` 做框架对齐，继承已修正事实清单，应用第三节要点。
 3. 与现行制度冲突的解读须并列新旧对照；无法核实项单列「待复核清单」。
-4. 回写报告与登记册；如需 HTML，运行 `python src/prompts-tools/tools/md2html.py` 重新生成并运行 `python src/prompts-tools/tools/lint_reports.py` 校验。
+4. 回写报告与登记册；如需 HTML，运行 `python engine/tools/md2html.py` 重新生成并运行 `python engine/tools/lint_reports.py` 校验。
 
 ## 七、渲染与交付
 
@@ -101,7 +101,7 @@
 
 ## 落盘后审计（提交前必做）
 
-落盘后依次运行 `python src/prompts-tools/tools/audit_preflight.py --report <报告相对路径>`、`python src/prompts-tools/tools/audit_check.py --report <报告相对路径>`，修正全部 P0/P1 后执行 `python src/prompts-tools/tools/audit_pipeline.py --submit --report <报告相对路径>` 提交审计（未通过初审不得合并）。
+落盘后依次运行 `python engine/tools/audit_preflight.py --report <报告相对路径>`、`python engine/tools/audit_check.py --report <报告相对路径>`，修正全部 P0/P1 后执行 `python engine/tools/audit_pipeline.py --submit --report <报告相对路径>` 提交审计（未通过初审不得合并）。
 
 ## 版本记录
 

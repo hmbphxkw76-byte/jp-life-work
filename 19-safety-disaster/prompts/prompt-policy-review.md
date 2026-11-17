@@ -3,7 +3,7 @@
 > **用途**：运行期统一入口，覆盖月度监测 / 事件触发解读 / 年度台账复盘 / 个人情况变化四类节拍。以一手 / 权威来源为依据、以指标登记册为编号骨架、以上一期报告与首期基线为对比锚，完成「核验 → 判定 → 偏离 → 缺口 → 观察」闭环。
 > **产出**：月度报告落盘 `{{OUTPUT_PATH}}`（`reports/{{YYYY-MM}}-<slug>.md`）；事件触发解读件 `reports/{{YYYY-MM}}-<slug>.md`（命名不在标准正则内时 `validate.py` 仅 WARN 不阻断，属预期）。
 >
-> **继承声明（四层体系）**：本文件 = [通用基座](../../src/report_templates/prompt-generic-base.md) × [监测报告通用规范](../../src/report_templates/monitoring-common-spec.md) × [月度报告类型模板（市场指标监测型）](../../src/report_templates/market-monitoring/prompt-monthly-monitor-template.md) × [业务专属配置](./business-config.md)。冲突时以本文件为准。
+> **继承声明（四层体系）**：本文件 = [通用基座](../../engine/report_templates/prompt-generic-base.md) × [监测报告通用规范](../../engine/report_templates/monitoring-common-spec.md) × [月度报告类型模板（市场指标监测型）](../../engine/report_templates/market-monitoring/prompt-monthly-monitor-template.md) × [业务专属配置](./business-config.md)。冲突时以本文件为准。
 
 ---
 
@@ -62,7 +62,7 @@
 ## 四、基线锚定与防回退
 
 - 读取 `{{PREVIOUS_REPORT_PATH}}`（如无则空）与 `{{BASELINE_REPORT_PATH}}`，继承结构与全部已核实结论。
-- 逐条继承「已修正事实清单」，产生修正后追加（格式见[通用基座第五节](../../src/report_templates/prompt-generic-base.md)）；严禁重新引入已被推翻的说法；无来源不得入清单。
+- 逐条继承「已修正事实清单」，产生修正后追加（格式见[通用基座第五节](../../engine/report_templates/prompt-generic-base.md)）；严禁重新引入已被推翻的说法；无来源不得入清单。
 - 上年判断逐条复判，原文保留。
 
 ## 五、追踪表与登记册联动
@@ -74,7 +74,7 @@
 1. 按维度并行启动研究子代理（气象与避难 / 自治体防灾与多语言情报 / 治安与领事 / 应急联络），全部限定日 / 英来源、逐点引用。
 2. 主代理读取 `{{PREVIOUS_REPORT_PATH}}` 与基线做差异合并，继承已修正事实清单，应用第三节要点。
 3. 冲突数据保留双份引用；无法核实项单列「待复核清单」。
-4. 回写报告与登记册；如需 HTML，运行 `python src/prompts-tools/tools/md2html.py` 并运行 `python src/prompts-tools/tools/lint_reports.py` 校验。
+4. 回写报告与登记册；如需 HTML，运行 `python engine/tools/md2html.py` 并运行 `python engine/tools/lint_reports.py` 校验。
 
 ## 七、渲染与交付
 
@@ -96,7 +96,7 @@
 
 ## 落盘后审计（提交前必做）
 
-落盘后依次运行 `python src/prompts-tools/tools/audit_preflight.py --report <报告相对路径>`、`python src/prompts-tools/tools/audit_check.py --report <报告相对路径>`，修正全部 P0/P1 后执行 `python src/prompts-tools/tools/audit_pipeline.py --submit --report <报告相对路径>` 提交审计（未通过初审不得合并）。
+落盘后依次运行 `python engine/tools/audit_preflight.py --report <报告相对路径>`、`python engine/tools/audit_check.py --report <报告相对路径>`，修正全部 P0/P1 后执行 `python engine/tools/audit_pipeline.py --submit --report <报告相对路径>` 提交审计（未通过初审不得合并）。
 
 ## 版本记录
 

@@ -15,26 +15,26 @@
 | P1 | `requirements.txt` 固定 `coverage` 版本 | ✅ 已完成 | `coverage==7.17.3`（R5） |
 | P1 | `.coveragerc`（source 限定工具链代码） | ✅ 已完成 | `.coveragerc`（三目录 + R2 omit） |
 | P1 | `validate.yml` 新增 coverage job，阈值读单一事实源 | ✅ 已完成 | `validate.yml`「覆盖率」job；阈值只在 `coverage-config.json` |
-| P1 | 基线测量并记录 | ✅ 已完成 | `src/report-audits/toolchain/coverage-baseline.json`（92.77%） |
+| P1 | 基线测量并记录 | ✅ 已完成 | `engine/report-audits/toolchain/coverage-baseline.json`（92.77%） |
 | P1 | 阈值先设 60%（P2 观察，不阻断） | ✅ 已完成（分阶段轨迹） | `coverage-config.json.stage_history` 保留 60→80；观察期实测 92.8% 已越 60 |
 | P2 | 1–2 个真实工具链任务实践 规格→工单→TDD→双轴评审 | ✅ 已完成 | `specs/coverage-gate.md`、`tickets/coverage-gate.md`、TDD（先红后绿）、`reviews/coverage-gate-review.md` |
 | P2 | 守卫测试 `test_toolchain_dev_spec.py` | ✅ 已完成 | 11 项（规约 / 配置 / 检查单 / 评审范围 / 边界） |
 | P2 | 验收：试点走通；守卫通过；既有 285+ 无回归 | ✅ 已完成 | 803 项全绿（原 308） |
 | P3 | 工具链变更 100% 双轴评审归档 `docs/toolchain/reviews/` | ✅ 已完成 | `reviews/coverage-gate-review.md`（Standards + Spec 双轴 + 证据） |
-| P3 | `workflow_guard merge` 前置检查单（文档 + 守卫固化，不改内核） | ✅ 已完成 | `src/prompts-tools/tools/README.md`「合并前检查单」；`TestMergeChecklist` |
+| P3 | `workflow_guard merge` 前置检查单（文档 + 守卫固化，不改内核） | ✅ 已完成 | `engine/tools/README.md`「合并前检查单」；`TestMergeChecklist` |
 | P3 | 覆盖率阈值提升至 80%（阻断） | ✅ 已完成 | `coverage-config.json`：`threshold=80, enforce=true`；`coverage_gate.py` 实测退出码 0 |
 | P3 | 验收：评审覆盖 100% / 覆盖率 ≥80% / audit-gate 零绕过 | ✅ 已完成 | 92.8% ≥80%；`review_gate` 接入 `audit-gate.yml` |
 | CI 改造 | `validate.yml` 新增 coverage job | ✅ 已完成 | 见 validate.yml |
 | CI 改造 | `audit-gate.yml` 工具链评审软门禁 | ✅ 已完成 | 见 audit-gate.yml（告警式软门禁） |
 | CI 改造 | 其余 5 条工作流不改造 | ✅ 已完成 | 未改动其他 workflow |
 | CI 改造 | 更新 `test_arch_guard.py` 易变数字 | ✅ 已完成 | CI.md 测试数 308→803，守卫读取通过（未改测试代码，数字源在文档） |
-| CI 改造 | `docs/CI.md` 增「工具链开发规约」节；`tools/README.md` 增检查单 | ✅ 已完成 | CI.md 第十一节；tools/README.md 检查单节 |
+| CI 改造 | `docs/CI.md` 增「工具链开发规约」节；`engine/scripts/README.md` 增检查单 | ✅ 已完成 | CI.md 第十一节；engine/scripts/README.md 检查单节 |
 | 吸收 | 规格先行（≥2 文件或新工具先写 ≤1 页规格） | ✅ 已完成 | `specs/coverage-gate.md`（≤1 页，三要素） |
 | 吸收 | 工单化（≥2 文件拆工单，登记任务分支说明） | ✅ 已完成 | `tickets/coverage-gate.md`（T1–T10）；提交信息登记 |
 | 吸收 | TDD 红绿重构 | ✅ 已完成 | `test_coverage_gate.py` / `test_review_gate.py` 先红后绿 |
 | 吸收 | 覆盖率门禁 | ✅ 已完成 | `coverage_gate.py` + CI |
 | 吸收 | 双轴评审 | ✅ 已完成 | `reviews/coverage-gate-review.md` |
-| 吸收 | 合并前检查单 | ✅ 已完成 | tools/README.md 第五节 |
+| 吸收 | 合并前检查单 | ✅ 已完成 | engine/scripts/README.md 第五节 |
 | R1 | 明示适用文件范围 + 守卫断言边界 | ✅ 已完成 | 规约第二节；`TestSpecExists.test_boundary_declared` |
 | R2 | `.coveragerc` source 限定，不误伤 | ✅ 已完成 | source 三目录 + omit；`test_source_limited_to_toolchain` |
 | R3 | ≤2 文件免规格 | ✅ 已完成 | 规约第三节 |

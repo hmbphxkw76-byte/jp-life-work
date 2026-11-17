@@ -17,8 +17,8 @@
 | 指标登记册与研究边界档案 | `04-industry-logistics/data/logistics_industry_indicator_registry.md` |
 | 报告产物 | `04-industry-logistics/reports/` |
 | 报告归档 | `04-industry-logistics/reports/archives/` |
-| 工具链 | `src/prompts-tools/tools/`（退出码：0 过 / 1 错 / 2 警告） |
-| 通用层（只读，不改） | `src/report_templates/` |
+| 工具链 | `engine/tools/`（退出码：0 过 / 1 错 / 2 警告） |
+| 通用层（只读，不改） | `engine/report_templates/` |
 | 业务专属脚本（可选） | `04-industry-logistics/script/`（当前无脚本，故未建目录） |
 
 ### 0.2 两种启动方式
@@ -30,17 +30,17 @@
 
 ```powershell
 # 在仓库根目录执行
-python src/prompts-tools/tools/validate.py      # 结构与命名校验，期望：通过
-python src/prompts-tools/tools/lint_reports.py  # 报告内容校验，期望：0 错误
+python engine/tools/validate.py      # 结构与命名校验，期望：通过
+python engine/tools/lint_reports.py  # 报告内容校验，期望：0 错误
 ```
 
-> **工具链现状**：`src/prompts-tools/tools/_common.py` 的扫描根与业务目录识别仍按旧 `{地区}/{业务类型}/` 两级结构编写，尚未适配本仓库 `NN-主题/` 单层结构，自动扫描可能识别不到本主题。全库对齐阶段统一修复前，本主题以 4.1 节人工清单为准。
+> **工具链现状**：`engine/tools/_common.py` 的扫描根与业务目录识别仍按旧 `{地区}/{业务类型}/` 两级结构编写，尚未适配本仓库 `NN-主题/` 单层结构，自动扫描可能识别不到本主题。全库对齐阶段统一修复前，本主题以 4.1 节人工清单为准。
 
 并人工确认三点：
 
 1. 基线报告 `reports/2026-11-industry-logistics.md` + 同名 HTML 存在（年度刷新的对比锚，缺失则先走第 5 节灾难恢复）。
 2. 上期年度刷新报告存在（首年刷新除外），路径记入 `{{PREVIOUS_REPORT_PATH}}`。
-3. 对应周期提示词存在，且继承声明指向 [src/report_templates/industry-research/](../src/report_templates/industry-research/)。
+3. 对应周期提示词存在，且继承声明指向 [engine/report_templates/industry-research/](../engine/report_templates/industry-research/)。
 
 ---
 
@@ -76,7 +76,7 @@ python src/prompts-tools/tools/lint_reports.py  # 报告内容校验，期望：
 ### 1.4 结果验证
 
 ```powershell
-python src/prompts-tools/tools/lint_reports.py
+python engine/tools/lint_reports.py
 ```
 
 人工核对：全篇无中文来源作为唯一依据；基线导航为简化锚点；四章（或九节）结构与声明映射一致。
@@ -121,7 +121,7 @@ python src/prompts-tools/tools/lint_reports.py
 ### 2.5 结果验证
 
 ```powershell
-python src/prompts-tools/tools/lint_reports.py
+python engine/tools/lint_reports.py
 ```
 
 人工核对：九锚点（或声明结构）全部跳转准确；上年判断原文保留；口径并列表齐全；登记册与报告变更摘要一致。
@@ -147,10 +147,10 @@ python src/prompts-tools/tools/lint_reports.py
 ### 4.1 校验
 
 ```powershell
-python src/prompts-tools/tools/lint_reports.py
-python src/prompts-tools/tools/audit_preflight.py --report <报告相对路径>
-python src/prompts-tools/tools/audit_check.py --report <报告相对路径>
-python src/prompts-tools/tools/audit_pipeline.py --submit --report <报告相对路径>
+python engine/tools/lint_reports.py
+python engine/tools/audit_preflight.py --report <报告相对路径>
+python engine/tools/audit_check.py --report <报告相对路径>
+python engine/tools/audit_pipeline.py --submit --report <报告相对路径>
 ```
 
 工具链自动扫描未适配本仓库单层主题结构前，执行以下人工清单：

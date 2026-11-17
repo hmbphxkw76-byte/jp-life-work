@@ -43,7 +43,7 @@ jobs:
       - name: 分层抽检（audit_sampling --apply）
         id: apply
         run: |
-          python src/prompts-tools/tools/audit_sampling.py --apply || code=$?
+          python engine/tools/audit_sampling.py --apply || code=$?
           code=${code:-0}
           if [ "$code" -ne 0 ] && [ "$code" -ne 2 ]; then
             echo "::error::抽检未达门槛或命令异常（退出码 $code），不合格报告须重新审计"
@@ -54,13 +54,13 @@ jobs:
       # G→F：抽检命中 P0/P1 时 audit_sampling 已置 stale，此处撤销对应「已审计」标识。
       - name: 标识同步（audit_badge.py --sync）
         if: always()
-        run: python src/prompts-tools/tools/audit_badge.py --sync
+        run: python engine/tools/audit_badge.py --sync
 
       - name: 记录自动化状态
         if: always()
         run: |
           RESULT="${{ job.status == 'success' && 'success' || 'failure' }}"
-          python src/prompts-tools/tools/automation_status.py record \
+          python engine/tools/automation_status.py record \
             --phase audit-sampling --result "$RESULT" \
             --run-url "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
 
@@ -68,7 +68,7 @@ jobs:
         if: always()
         run: |
           git add -A -- ':(glob)**/reports/*.md' ':(glob)**/reports/*.html' \
-            src/report-audits/audit/ automation-status.json
+            engine/report-audits/audit/ automation-status.json
           if git diff --cached --quiet; then
             echo "抽检报告无变化，跳过提交"
             exit 0

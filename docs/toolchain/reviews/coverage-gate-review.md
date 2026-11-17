@@ -12,7 +12,7 @@
 
 | 条款 | 结论 | 证据 |
 |---|---|---|
-| 适用边界（仅代码） | ✅ | 变更仅落在 `src/`、`tools/`、`.github/workflows/`、根配置与 `docs/toolchain/`；未触碰 `*/reports/`、`*/prompts/`、`*/data/` |
+| 适用边界（仅代码） | ✅ | 变更仅落在 `engine/`、`engine/scripts/`、`.github/workflows/`、根配置与 `docs/toolchain/`；未触碰 `*/reports/`、`*/prompts/`、`*/data/` |
 | 六阶段顺序 | ✅ | 规格（S1）→ 工单（S2）→ TDD（S3）→ 实现（S4）→ 双轴评审（S5）→ 合并前检查单（S6）依次留痕；`docs/toolchain/{specs,tickets,reviews}/` 齐备 |
 | 命名规范 | ✅ | 工具 `coverage_gate.py` / `review_gate.py`（snake_case）；测试 `test_coverage_gate.py` / `test_review_gate.py` / `test_toolchain_dev_spec.py` |
 | 退出码契约 | ✅ | `coverage_gate` 0/1/2 语义与测试断言一致；`review_gate` 0/1 语义与测试断言一致；参数错误返回 1 |
@@ -20,7 +20,7 @@
 | 覆盖率单一事实源 | ✅ | 阈值 / 开关仅在 `coverage-config.json`；`.coveragerc` 只约束 `source` / `omit`；CI 脚本无硬编码阈值 |
 | 统计范围限定 | ✅ | `.coveragerc` source = 工具链三目录；`omit` 仅排除词库维护 / 一次性迁移 / 本地辅助脚本（依 R2） |
 | 不越权改内核 | ✅ | `workflow_guard.py` 语义未改；检查单以文档 + 守卫测试固化 |
-| 测试无回归 | ✅ | 全量 803 项全绿（`python -m unittest discover -s src/tests`）；`test_arch_guard` / `test_cleanup` CI 接线契约通过 |
+| 测试无回归 | ✅ | 全量 803 项全绿（`python -m unittest discover -s engine/tests`）；`test_arch_guard` / `test_cleanup` CI 接线契约通过 |
 
 **Standards 轴结论：无 P0 / P1。**
 

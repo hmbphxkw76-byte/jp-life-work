@@ -2,7 +2,7 @@
 
 > **定位**：本文件是 `11-language-japanese` 业务线的**单一业务事实源**：运行变量固定值、研究边界、结构固化锚、术语口径、来源优先级、触发器、追踪表、口径冲突清单、渲染差异全部集中于此。两份周期提示词（基线 / 周期更新）引用本文件，业务参数只在这里维护一份。
 >
-> **继承声明（四层体系）**：周期提示词 = [通用基座](../../src/report_templates/prompt-generic-base.md) × [监测报告通用规范](../../src/report_templates/monitoring-common-spec.md) × [职业就业调研型模板](../../src/report_templates/employment-research/) × 本文件。通用层修改自动对本业务线生效；本文件修改只影响本业务线。冲突时以周期提示词 ＞ 本文件 ＞ 类型模板 ＞ 通用基座 ＞ 通用规范。
+> **继承声明（四层体系）**：周期提示词 = [通用基座](../../engine/report_templates/prompt-generic-base.md) × [监测报告通用规范](../../engine/report_templates/monitoring-common-spec.md) × [职业就业调研型模板](../../engine/report_templates/employment-research/) × 本文件。通用层修改自动对本业务线生效；本文件修改只影响本业务线。冲突时以周期提示词 ＞ 本文件 ＞ 类型模板 ＞ 通用基座 ＞ 通用规范。
 
 ---
 
@@ -67,7 +67,7 @@
 
 ### 3.2 结构固化锚（现行报告结构 → 九节骨架映射）
 
-首期保留现行结构（2026-11 基线），**不重写正文**；下表为该结构与[职业就业调研型九节骨架](../../src/report_templates/employment-research/prompt-baseline-setup-template.md)的声明式映射。后续报告按九节骨架执行，重排须走维护规范并在版本记录留痕；合规审计以本映射为判定依据。
+首期保留现行结构（2026-11 基线），**不重写正文**；下表为该结构与[职业就业调研型九节骨架](../../engine/report_templates/employment-research/prompt-baseline-setup-template.md)的声明式映射。后续报告按九节骨架执行，重排须走维护规范并在版本记录留痕；合规审计以本映射为判定依据。
 
 | 现行章节（业务固化锚） | 对应九节骨架 | 说明 |
 |---|---|---|
@@ -183,14 +183,14 @@
 - **报告结构**：首期保留现行结构（见 3.2 声明映射）；后续按九节骨架（顶部九锚点导航）。
 - **图表**：数量由当期内容决定，不强制下限；出图须遵循通用规范第 2 节。
 - **顶部导航**：**遗留项**：现有报告无 `.report-nav` 顶部导航（正文不改，待下一期按模板重写时补齐）。
-- **HTML 生成**：迁移不重新生成 HTML（避免引入正文变化）；后续周期运行用 `src/prompts-tools/tools/md2html.py` 生成并过 `lint_reports.py`。
+- **HTML 生成**：迁移不重新生成 HTML（避免引入正文变化）；后续周期运行用 `engine/tools/md2html.py` 生成并过 `lint_reports.py`。
 
 ---
 
 <!-- VOCAB-SYNC:BEGIN topic=language-japanese do-not-edit -->
 ## 词汇速览：日语语言（词汇库自动同步）
 
-> 由 `src/vocabulary/script/sync_vocab.py` 自动维护：词汇库 language-japanese v1.2，共 69 条（同步于 2026-11-13T20:08:49）。标记区间内请勿手工编辑；词条变更走词汇库导入流程（src/vocabulary/README.md 第三节），同步机制见第九节。
+> 由 `engine/vocabulary/script/sync_vocab.py` 自动维护：词汇库 language-japanese v1.2，共 69 条（同步于 2026-11-13T20:08:49）。标记区间内请勿手工编辑；词条变更走词汇库导入流程（engine/vocabulary/README.md 第三节），同步机制见第九节。
 
 - **语言能力与考试**（13）：日本語能力試験（JLPT）；N1（一級）；N2（二級）；N3（三級）；N4（四級）；N5（五級）；JFT-Basic（国際交流基金日本語基礎テスト）；BJT（ビジネス日本語能力テスト）；聴解（聴解問題）；読解（読解問題）；言語知識（文字・語彙・文法）；合格基準（合格点）；受験料（検定料）
 - **语法与句型**（12）：助詞（てにをは）；活用（語形変化）；敬体（です・ます体）；常体（だ・である体）；受身（受け身）；使役（使役形）；条件形（条件表現）；意向形（意志形）；可能形（可能表現）；て形（てフォーム）；自動詞；他動詞

@@ -2,7 +2,7 @@
 
 > **定位**：本文件是 `07-economy-finance` 业务线的**单一业务事实源**：运行变量固定值、研究边界、结构固化锚、术语口径、来源优先级、触发器、追踪表、口径冲突清单、渲染差异全部集中于此。两份周期提示词（基线 / 周期更新）引用本文件，业务参数只在这里维护一份。
 >
-> **继承声明（四层体系）**：周期提示词 = [通用基座](../../src/report_templates/prompt-generic-base.md) × [监测报告通用规范](../../src/report_templates/monitoring-common-spec.md) × [职业就业调研型模板](../../src/report_templates/employment-research/) × 本文件。通用层修改自动对本业务线生效；本文件修改只影响本业务线。冲突时以周期提示词 ＞ 本文件 ＞ 类型模板 ＞ 通用基座 ＞ 通用规范。
+> **继承声明（四层体系）**：周期提示词 = [通用基座](../../engine/report_templates/prompt-generic-base.md) × [监测报告通用规范](../../engine/report_templates/monitoring-common-spec.md) × [职业就业调研型模板](../../engine/report_templates/employment-research/) × 本文件。通用层修改自动对本业务线生效；本文件修改只影响本业务线。冲突时以周期提示词 ＞ 本文件 ＞ 类型模板 ＞ 通用基座 ＞ 通用规范。
 
 ---
 
@@ -70,7 +70,7 @@
 
 ### 3.2 结构固化锚（现行报告结构 → 九节骨架映射）
 
-首期保留现行结构（2026-11 基线为现行结构），**不重写正文**；下表为该结构与[职业就业调研型九节骨架](../../src/report_templates/employment-research/prompt-baseline-setup-template.md)的声明式映射。后续报告按九节骨架执行，重排须走维护规范并在版本记录留痕；合规审计以本映射为判定依据。
+首期保留现行结构（2026-11 基线为现行结构），**不重写正文**；下表为该结构与[职业就业调研型九节骨架](../../engine/report_templates/employment-research/prompt-baseline-setup-template.md)的声明式映射。后续报告按九节骨架执行，重排须走维护规范并在版本记录留痕；合规审计以本映射为判定依据。
 
 | 现行章节（业务固化锚） | 对应九节骨架 | 说明 |
 |---|---|---|
@@ -186,14 +186,14 @@
 - **导航基址**：季度 / 年度报告 `.nav-url` = `{{REPO_RAW_URL_BASE}}` + `/reports/{本期文件名}`；基线报告保留简化锚点导航，不强制 `.report-nav`。
 - **报告结构**：首期保留现行结构（见 3.2 声明映射）；后续按九节骨架（顶部九锚点导航）。
 - **顶部导航**：**遗留项**：现有报告无 `.report-nav` 顶部导航（正文不改，待下一期按模板重写时补齐）。
-- **HTML 生成**：迁移不重新生成 HTML（避免引入正文变化）；后续周期运行用 `src/prompts-tools/tools/md2html.py` 生成并过 `lint_reports.py`。
+- **HTML 生成**：迁移不重新生成 HTML（避免引入正文变化）；后续周期运行用 `engine/tools/md2html.py` 生成并过 `lint_reports.py`。
 
 ---
 
 <!-- VOCAB-SYNC:BEGIN topic=economy-finance do-not-edit -->
 ## 词汇速览：经济与财务（词汇库自动同步）
 
-> 由 `src/vocabulary/script/sync_vocab.py` 自动维护：词汇库 economy-finance v1.3，共 77 条（同步于 2026-11-14T21:23:14）。标记区间内请勿手工编辑；词条变更走词汇库导入流程（src/vocabulary/README.md 第三节），同步机制见第九节。
+> 由 `engine/vocabulary/script/sync_vocab.py` 自动维护：词汇库 economy-finance v1.3，共 77 条（同步于 2026-11-14T21:23:14）。标记区间内请勿手工编辑；词条变更走词汇库导入流程（engine/vocabulary/README.md 第三节），同步机制见第九节。
 
 - **宏观与经济指标**（12）：国内総生産（GDP）；経済成長率（実質GDP成長率）；消費者物価指数（CPI）；コアCPI（生鮮食品除く総合）；企業物価指数（PPI）；失業率（完全失業率）；政策金利（誘導目標）；イールドカーブ（利回り曲線）；購買力平価（PPP）；円安（円安相場）；家計調査（家庭收支调查、世帯調査）；毎月勤労統計（勤労統計、月度劳动统计）
 - **金融机构与工具**（12）：日本銀行（日銀、BOJ）；金融庁（FSA）；連邦準備制度（FRB、Fed）；欧州中央銀行（ECB）；中国人民銀行（PBOC、中国人民銀）；国際通貨基金（IMF）；世界銀行（世銀）；国債（日本国債、JGB）；株式（株）；投資信託（投信）；ETF（上場投資信託）；為替（FX、外国為替）

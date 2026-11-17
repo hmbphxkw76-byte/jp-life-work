@@ -2,7 +2,7 @@ name: workspace-cleanup
 description: >
   工作区标准化清理（缓存目录 / 临时文件 / 过期日志 / pip 缓存）。
   供各工作流在「阶段前置」与「阶段收尾（always）」统一调用，
-  脚本实现见 tools/cleanup_workspace.py。
+  脚本实现见 engine/scripts/cleanup_workspace.py。
 inputs:
   mode:
     description: 运行模式（ci = 额外清理 pip 缓存；local = 仅仓库工作区）
@@ -27,9 +27,9 @@ runs:
           PY=python3
         fi
         if [ "$CLEANUP_CHECK_ONLY" = "true" ]; then
-          "$PY" tools/cleanup_workspace.py --check
+          "$PY" engine/scripts/cleanup_workspace.py --check
         else
-          "$PY" tools/cleanup_workspace.py
+          "$PY" engine/scripts/cleanup_workspace.py
         fi
 
     # pip 缓存位于 runner 的 HOME 下，属运行期资源；CI 模式收尾时一并回收。

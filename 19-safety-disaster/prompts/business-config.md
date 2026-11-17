@@ -2,7 +2,7 @@
 
 > **定位**：本文件是 `19-safety-disaster` 业务线的**单一业务事实源**：运行变量固定值、研究边界、结构固化锚、术语口径、来源优先级、触发器、追踪表、口径冲突清单、渲染差异全部集中于此。两份周期提示词（基线 / 月度监测与事件触发）引用本文件，业务参数只在这里维护一份。
 >
-> **继承声明（四层体系）**：周期提示词 = [通用基座](../../src/report_templates/prompt-generic-base.md) × [监测报告通用规范](../../src/report_templates/monitoring-common-spec.md) × [市场指标监测型模板](../../src/report_templates/market-monitoring/) × 本文件。通用层修改自动对本业务线生效；本文件修改只影响本业务线。冲突时以周期提示词 ＞ 本文件 ＞ 类型模板 ＞ 通用基座 ＞ 通用规范。
+> **继承声明（四层体系）**：周期提示词 = [通用基座](../../engine/report_templates/prompt-generic-base.md) × [监测报告通用规范](../../engine/report_templates/monitoring-common-spec.md) × [市场指标监测型模板](../../engine/report_templates/market-monitoring/) × 本文件。通用层修改自动对本业务线生效；本文件修改只影响本业务线。冲突时以周期提示词 ＞ 本文件 ＞ 类型模板 ＞ 通用基座 ＞ 通用规范。
 
 ---
 
@@ -68,7 +68,7 @@
 
 ### 3.2 结构固化锚（现行报告结构 → 十节骨架映射）
 
-首期按[市场指标监测型基线十节骨架](../../src/report_templates/market-monitoring/prompt-baseline-setup-template.md)实例化，节标题逐字固化如下（后续报告逐字继承，不得增删节或调整顺序）：
+首期按[市场指标监测型基线十节骨架](../../engine/report_templates/market-monitoring/prompt-baseline-setup-template.md)实例化，节标题逐字固化如下（后续报告逐字继承，不得增删节或调整顺序）：
 
 | 十节骨架 | 本主题固化标题 | 说明 |
 |---|---|---|
@@ -201,7 +201,7 @@
 
 ## 十一、词汇库导入说明
 
-本主题词库实体 `safety-disaster` 由 `src/vocabulary/data/safety-disaster/imports/2026-11-14_词条导入.md` 导入，并已在 `src/vocabulary/config/sync.json` 绑定；下方「词汇速览」区块由 `sync_vocab.py` 自动维护，请勿手工编辑。
+本主题词库实体 `safety-disaster` 由 `engine/vocabulary/data/safety-disaster/imports/2026-11-14_词条导入.md` 导入，并已在 `engine/vocabulary/config/sync.json` 绑定；下方「词汇速览」区块由 `sync_vocab.py` 自动维护，请勿手工编辑。
 
 ---
 
@@ -210,7 +210,7 @@
 - **导航基址**：月度 / 年度报告 `.nav-url` = `{{REPO_RAW_URL_BASE}}` + `/reports/{本期文件名}`；基线报告保留简化锚点导航，不强制 `.report-nav`。
 - **报告结构**：基线按十节骨架；月度按市场指标监测型八节骨架（顶部导航）。
 - **图表**：数量由当期内容决定，不强制下限；出图须遵循通用规范第 2 节。
-- **HTML 生成**：周期运行可用 `src/prompts-tools/tools/md2html.py` 生成并过 `lint_reports.py`。
+- **HTML 生成**：周期运行可用 `engine/tools/md2html.py` 生成并过 `lint_reports.py`。
 - **结构映射**：本主题为市场指标监测型在「防灾·安全·治安」域的实例化，监测机制按 3.2 适配说明执行。
 
 ---
@@ -218,7 +218,7 @@
 <!-- VOCAB-SYNC:BEGIN topic=safety-disaster do-not-edit -->
 ## 词汇速览：防灾·安全·治安（词汇库自动同步）
 
-> 由 `src/vocabulary/script/sync_vocab.py` 自动维护：词汇库 safety-disaster v1.1，共 27 条（同步于 2026-11-14T21:14:45）。标记区间内请勿手工编辑；词条变更走词汇库导入流程（src/vocabulary/README.md 第三节），同步机制见第九节。
+> 由 `engine/vocabulary/script/sync_vocab.py` 自动维护：词汇库 safety-disaster v1.1，共 27 条（同步于 2026-11-14T21:14:45）。标记区间内请勿手工编辑；词条变更走词汇库导入流程（engine/vocabulary/README.md 第三节），同步机制见第九节。
 
 - **防灾体制**（5）：防災計画（防灾计划）；避難所（避难所、疏散场所）；防災行政无线（防灾行政无线）；防災訓練（防灾训练、避难训练）；警戒レベル（警戒级别）
 - **避难与情报**（5）：避難指示（避难指示）；避難勧告（避难劝告）；防災メール（防灾邮件）；情報難民（情报难民）；多言語防災気象情報（多语言防灾气象情报）

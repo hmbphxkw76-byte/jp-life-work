@@ -2,7 +2,7 @@
 
 > **版本**：v1.0（2026-11-16）
 > **用途**：本目录是 jp-life-work 的**规范与审计标准单一入口**。后续开发、审计、协作以本目录文档为准。
-> **维护纪律**：规范类文档修订须同步更新 `src/tests/test_tools.py` 中对应守卫测试（如 `TestPipelineFlowSpec`、`test_ci_doc_documents_reuse`），并经合并门禁校验。
+> **维护纪律**：规范类文档修订须同步更新 `engine/tests/test_tools.py` 中对应守卫测试（如 `TestPipelineFlowSpec`、`test_ci_doc_documents_reuse`），并经合并门禁校验。
 
 ---
 
@@ -51,6 +51,6 @@ flowchart LR
 ## 三、维护规则
 
 1. **单一事实源**：同类规则只在一处定义，其他文档引用（如阈值、退出码、状态机）。
-2. **同步守卫**：修改总规范 / CI 文档的节标题、闸名、命令名时，须同步 `src/tests/test_tools.py`（`TestPipelineFlowSpec`、`test_ci_doc_documents_reuse`、`TestThreeSystemAlignment`）与引用它们的工具注释。
+2. **同步守卫**：修改总规范 / CI 文档的节标题、闸名、命令名时，须同步 `engine/tests/test_tools.py`（`TestPipelineFlowSpec`、`test_ci_doc_documents_reuse`、`TestThreeSystemAlignment`）与引用它们的工具注释。
 3. **版本记录**：每份文档变更须追加版本记录（日期 + 变更 + 说明）。
 4. **口径一致**：工具数、工作流数、测试数等易变数字以代码库实测为准，变更后同步更新全部文档。

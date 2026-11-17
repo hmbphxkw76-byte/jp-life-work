@@ -2,7 +2,7 @@
 
 > **定位**：本文件是 `20-overseas-china` 业务线的**单一业务事实源**：运行变量固定值、研究边界、结构固化锚、术语口径、来源优先级、触发器、追踪表、口径冲突清单、渲染差异全部集中于此。两份周期提示词（基线 / 事件触发解读）引用本文件，业务参数只在这里维护一份。
 >
-> **继承声明（四层体系）**：周期提示词 = [通用基座](../../src/report_templates/prompt-generic-base.md) × [监测报告通用规范](../../src/report_templates/monitoring-common-spec.md) × [政策法规解读型模板](../../src/report_templates/policy-analysis/) × 本文件。通用层修改自动对本业务线生效；本文件修改只影响本业务线。冲突时以周期提示词 ＞ 本文件 ＞ 类型模板 ＞ 通用基座 ＞ 通用规范。
+> **继承声明（四层体系）**：周期提示词 = [通用基座](../../engine/report_templates/prompt-generic-base.md) × [监测报告通用规范](../../engine/report_templates/monitoring-common-spec.md) × [政策法规解读型模板](../../engine/report_templates/policy-analysis/) × 本文件。通用层修改自动对本业务线生效；本文件修改只影响本业务线。冲突时以周期提示词 ＞ 本文件 ＞ 类型模板 ＞ 通用基座 ＞ 通用规范。
 
 ---
 
@@ -206,7 +206,7 @@
 
 - **导航基址**：年度台账复盘报告 `.nav-url` = `{{REPO_RAW_URL_BASE}}` + `/reports/{本期文件名}`；基线报告保留简化锚点导航，不强制 `.report-nav`。
 - **报告结构**：基线按 3.3 声明映射；年度台账复盘按九节骨架（顶部九锚点导航）。
-- **HTML 生成**：后续周期运行用 `src/prompts-tools/tools/md2html.py` 生成并过 `lint_reports.py`。
+- **HTML 生成**：后续周期运行用 `engine/tools/md2html.py` 生成并过 `lint_reports.py`。
 - **结构映射**：本主题首月报告（2026-11）由框架件与基线件合并而成，h2 节数超出类型模板骨架，属业务固化锚；`compliance_check.py` 相应 WARN 为预期。
 
 ---
@@ -214,7 +214,7 @@
 <!-- VOCAB-SYNC:BEGIN topic=overseas-china do-not-edit -->
 ## 词汇速览：中国侧行前与回国（词汇库自动同步）
 
-> 由 `src/vocabulary/script/sync_vocab.py` 自动维护：词汇库 overseas-china v1.2，共 37 条（同步于 2026-11-15T14:28:34）。标记区间内请勿手工编辑；词条变更走词汇库导入流程（src/vocabulary/README.md 第三节），同步机制见第九节。
+> 由 `engine/vocabulary/script/sync_vocab.py` 自动维护：词汇库 overseas-china v1.2，共 37 条（同步于 2026-11-15T14:28:34）。标记区间内请勿手工编辑；词条变更走词汇库导入流程（engine/vocabulary/README.md 第三节），同步机制见第九节。
 
 - **护照与户籍**（8）：护照（普通护照、中国护照）；护照换发（换发护照、更新护照）；护照补发（补发护照、遗失补照）；户籍（户口、常住户口）；户口登记（落户、户口申报）；户口注销（注销户口、出国境定居注销）；户籍恢复（恢复户口、回国恢复户口）；华侨回国定居（回国定居、华侨定居）
 - **档案与社保**（9）：人事档案（档案、流动人员人事档案）；档案转递（转档、档案转移）；留学存档（出国存档、留学生档案）；社会保险（社保、五险）；职工基本养老保险（职工养老、养老保险）；社保接续（社保转移、养老保险转移接续）；中日社保协定（中日社会保障协定、社保协定）；居住证（暂住证（旧）、居住证凭证）；港澳台居民居住证（港澳台居住证）

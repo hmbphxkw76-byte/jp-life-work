@@ -3,7 +3,7 @@
 > **用途**：周期性（每月）刷新月度监测简报。以一手 / 权威来源为依据、以指标登记册为编号骨架、以上一期报告与首期基线为对比锚，完成「核验 → 判定 → 偏离 → 缺口 → 观察」闭环。
 > **产出**：月度报告落盘 `{{OUTPUT_PATH}}`（`reports/{{YYYY-MM}}-<slug>.md` + 同名 HTML）。
 >
-> **继承声明（四层体系）**：本文件 = [通用基座](../../src/report_templates/prompt-generic-base.md) × [监测报告通用规范](../../src/report_templates/monitoring-common-spec.md) × [月度报告类型模板（市场指标监测型）](../../src/report_templates/market-monitoring/prompt-monthly-monitor-template.md) × [业务专属配置](./business-config.md)。冲突时以本文件为准。
+> **继承声明（四层体系）**：本文件 = [通用基座](../../engine/report_templates/prompt-generic-base.md) × [监测报告通用规范](../../engine/report_templates/monitoring-common-spec.md) × [月度报告类型模板（市场指标监测型）](../../engine/report_templates/market-monitoring/prompt-monthly-monitor-template.md) × [业务专属配置](./business-config.md)。冲突时以本文件为准。
 
 ---
 
@@ -26,7 +26,7 @@
 
 ## 一、节拍与触发
 
-月度运行以核验与判定为主（见[月度类型模板第一节](../../src/report_templates/market-monitoring/prompt-monthly-monitor-template.md)）：
+月度运行以核验与判定为主（见[月度类型模板第一节](../../engine/report_templates/market-monitoring/prompt-monthly-monitor-template.md)）：
 
 - **T+0 / T+1 判定**：统计类来源按官方发布节奏核对最新一期标题与发布日期，判断当期版本归属。与上期同日或仅隔 1 日时，明确写「本期为 T+1 刷新，官方发布窗口未开，价值在于核验、口径澄清与阈值距离」，不得为制造变化而虚构变化。
 - **触发器**（[业务配置第七节](./business-config.md)「月度」）：目标地域岗位密度 / 条件显著变化；防灾气象预警体系与配信渠道变化。**无触发 → 降级为核验 / 收敛型轻运行。**
@@ -50,7 +50,7 @@
 ## 四、基线锚定与防回退
 
 - 读取 `{{PREVIOUS_REPORT_PATH}}`（首期月度为空）与 `{{BASELINE_REPORT_PATH}}`，继承结构与全部已核实结论。
-- 逐条继承「已修正事实清单」，产生修正后追加（格式见[通用基座第五节](../../src/report_templates/prompt-generic-base.md)）；严禁重新引入已被推翻的说法；无来源不得入清单。
+- 逐条继承「已修正事实清单」，产生修正后追加（格式见[通用基座第五节](../../engine/report_templates/prompt-generic-base.md)）；严禁重新引入已被推翻的说法；无来源不得入清单。
 - 求人定位类修正以 01-ssw-driver 最新报告文首清单为单一事实源；本主题只读同步。
 
 ## 五、追踪表与登记册联动
@@ -62,7 +62,7 @@
 1. 按调研维度并行启动研究子代理（目标地域岗位密度与薪资地域差 / 生活成本与自治体外国人支援），全部限定日 / 英来源、逐点引用，每条数据附可直接访问的 URL；门户数据标注为预期指标。
 2. 主代理读取 `{{PREVIOUS_REPORT_PATH}}` 与基线做差异合并，继承已修正事实清单，应用第三节更新要点。
 3. 冲突数据保留双份引用；无法核实项单列「待复核清单」。
-4. 回写报告与登记册后运行 `python src/prompts-tools/tools/md2html.py` 重新生成 HTML，并运行 `python src/prompts-tools/tools/lint_reports.py` 校验。
+4. 回写报告与登记册后运行 `python engine/tools/md2html.py` 重新生成 HTML，并运行 `python engine/tools/lint_reports.py` 校验。
 
 ## 七、渲染与交付
 
@@ -84,7 +84,7 @@
 
 ## 落盘后审计（提交前必做）
 
-落盘后依次运行 `python src/prompts-tools/tools/audit_preflight.py --report <报告相对路径>`、`python src/prompts-tools/tools/audit_check.py --report <报告相对路径>`，修正全部 P0/P1 后执行 `python src/prompts-tools/tools/audit_pipeline.py --submit --report <报告相对路径>` 提交审计（未通过初审不得合并）。
+落盘后依次运行 `python engine/tools/audit_preflight.py --report <报告相对路径>`、`python engine/tools/audit_check.py --report <报告相对路径>`，修正全部 P0/P1 后执行 `python engine/tools/audit_pipeline.py --submit --report <报告相对路径>` 提交审计（未通过初审不得合并）。
 
 ## 版本记录
 

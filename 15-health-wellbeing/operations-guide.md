@@ -17,8 +17,8 @@
 ## 1. 通用前置检查
 
 ```powershell
-python src/prompts-tools/tools/validate.py
-python src/prompts-tools/tools/lint_reports.py
+python engine/tools/validate.py
+python engine/tools/lint_reports.py
 ```
 
 ## 2. 基线（首期已产出，永不重跑）
@@ -43,9 +43,9 @@ python src/prompts-tools/tools/lint_reports.py
 ## 5. 落盘后审计（提交前必做）
 
 ```powershell
-python src/prompts-tools/tools/audit_preflight.py --report <报告相对路径>
-python src/prompts-tools/tools/audit_check.py --report <报告相对路径>
-python src/prompts-tools/tools/audit_pipeline.py --submit --report <报告相对路径>
+python engine/tools/audit_preflight.py --report <报告相对路径>
+python engine/tools/audit_check.py --report <报告相对路径>
+python engine/tools/audit_pipeline.py --submit --report <报告相对路径>
 ```
 
 - [ ] 审计自检（preflight / audit_check）无 P0/P1，且已 `audit_pipeline --submit` 提交初审
