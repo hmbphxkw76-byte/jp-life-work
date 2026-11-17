@@ -6,7 +6,7 @@
 - 主题与实现解耦：全部主题参数读自 config/topics.json，新增任意领域词汇零代码修改。
 - 单一事实源：每个主题一个 md-table 词库文件（data/<topic>/terms.md），由本脚本统一读写，
   词汇表禁止手工编辑；别名/标签分隔符为半角分号「;」。
-- 退出码（对齐 prompts/tools 工具链约定）：0=通过；1=错误（阻断）；2=警告（有产出但有瑕疵）。
+- 退出码（对齐 src/prompts-tools/tools 工具链约定）：0=通过；1=错误（阻断）；2=警告（有产出但有瑕疵）。
 
 用法示例：
   python src/vocabulary/script/vocab_tool.py topics

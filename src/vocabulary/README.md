@@ -43,9 +43,9 @@ src/vocabulary/
 
 | 对象 | 约定 | 示例 |
 |---|---|---|
-| 主题 ID（目录名） | 小写 kebab-case，仅字母/数字/连字符 | `ai-security`、`financial-markets` |
-| ID 前缀 | 2–4 位大写字母，全局唯一 | `AIS`、`FIN`、`CYB` |
-| 词库文件 | 固定 `terms.md` | `data/economy/terms.md` |
+| 主题 ID（目录名） | 小写 kebab-case，仅字母/数字/连字符 | `ssw-driver`、`economy-finance` |
+| ID 前缀 | 2–4 位大写字母，全局唯一 | `SSW`、`ECON`、`LOG` |
+| 词库文件 | 固定 `terms.md` | `data/ssw-driver/terms.md` |
 | 导入文件 | `YYYY-MM-DD_<说明>.md`（也支持 `.csv` / `.json`） | `2026-11-13_seed-economy.md` |
 | 导出产物 | `{topic}_{YYYY-MM-DD}_export.{json,csv,jsonl}` | `economy_2026-11-13_export.json` |
 | 脚本 | 小写 snake_case + `.py` | `vocab_tool.py` |
@@ -142,7 +142,7 @@ python src/vocabulary/script/vocab_tool.py index                                
 新增主题**无需手工编辑注册表**（topics.json 已降级为脚本托管文件），一条命令完成全部目录关联：
 
 ```powershell
-python src/vocabulary/script/vocab_tool.py topic-add --topic financial-markets --name 金融市场 --prefix FIN --categories "宏观与经济指标;金融机构与组织;金融工具与产品;市场机制与交易;监管与政策;估值与风险" --description "金融市场全领域词汇"
+python src/vocabulary/script/vocab_tool.py topic-add --topic smart-logistics --name 智慧物流 --prefix SLG --categories "运输技术;自动化;数据平台;标准与监管" --description "智慧物流领域词汇"
 ```
 
 命令自动完成（实时同步主题↔目录映射）：
@@ -363,4 +363,4 @@ python src/vocabulary/script/vocab_tool.py topic-add --topic financial-markets -
 | v1.9 | 2026-11-13 | 13 业务线词库重建 | 按 01–13 业务线一一对应重建主题体系：移除 ai-security、cybersecurity、economy、financial-markets 四个历史主题及其数据（含 07 旧同步区块），新建 13 个主题、每主题 68 条，共 884 条（6–7 个受控分类/主题）；13 条 sync.json v2.0 绑定全部写入各自 business-config.md 并通过 verify；`check` 13 主题 0 错误 0 警告，`topic-check` 0 错误 0 警告；vocab_tool.py 允许从空注册表引导 topic-add |
 | v2.0 | 2026-11-13 | 4 主题扩展至 102 条 | ssw-driver、career-driver、industry-logistics、industry-autonomous 各新增 34 条扩展种子（imports/2026-11-13_expansion-*.md），零重复、零跳过；4 主题词库 v1.2（各 102 条），全库 13 主题 1020 条；check 0 错误 0 警告，4 个业务线同步区块增量更新并通过 verify |
 | v2.1 | 2026-11-13 | 全库交叉校验与缺口补录 | 以 13 条业务线指标登记册核心指标词为基准逐词核对，发现 12 个主题共 32 项指标级缺口（如育成就劳 MOC、SPPI、物流白書、家計調査、時間外労働上限、納期遵守率等），经 imports/2026-11-13_gapfill*.md 全部补录入库（32 条，0 重复）；复核 13/13 主题完整覆盖，全库 1052 条；check / topic-check / sync verify 全部通过 |
-| v2.2 | 2026-11-17 | 文档治理更新 | 主题扩展至 20 个（14–20 接入）、全库 1327 条；README 修正主题/词条/绑定计数、补 `verify` 命令、旧路径 `prompts/tools` 与已删除主题示例（ai-security → ssw-driver）、9.5 绑定表补齐 20 行 |
+| v2.2 | 2026-11-17 | 文档治理更新 | 主题扩展至 20 个（14–20 接入）、全库 1327 条；README 修正主题/词条/绑定计数、补 `verify` 命令、旧路径 `prompts/tools` 与已删除主题示例（ai-security → ssw-driver）、命名约定示例、9.5 绑定表补齐 20 行 |

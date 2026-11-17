@@ -1,4 +1,4 @@
-"""prompts/tools 单元测试（CI: validate.yml 的 unittest 步骤）。
+"""src/prompts-tools/tools 单元测试（CI: validate.yml 的 unittest 步骤）。
 
 覆盖：
 - 纯函数：报告名解析（新月度命名 + 历史命名）、周期解析、任务推导；

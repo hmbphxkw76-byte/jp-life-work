@@ -37,14 +37,10 @@
 
 > 生成物**不做手工编辑**；正文漂移时删除后由工具重生成。
 
-### 3. 历史归档（一次性留痕，无引用即删）
+### 3. 历史归档 / 已清理（无引用即删）
 
-已完成方案 / 结项验证 / 过期快照 / 一次性清理记录属此层，**完成即清理**。
-2026-11-17 治理已删除：`cleanup-2026-11-13.md`、`cleanup-2026-11-14.md`、
-`gap-analysis-2026-11.md`、`execution-plan-2026-11.md`、`compliance-audit.md`、
-`report-migration-2026-11.md`、`audit/verification-report-2026-11.md`、
-`audit/implementation-status.json`、`audit/preflight-report.md/.json`、
-`audit/sampling/sampling-2026-11.md/.json`、`info-quality/repair-ledger.md`。
+- **一次性留痕**（已完成方案 / 结项验证 / 一次性清理记录）：`cleanup-2026-11-13.md`、`cleanup-2026-11-14.md`、`gap-analysis-2026-11.md`、`execution-plan-2026-11.md`、`audit/verification-report-2026-11.md`、`audit/implementation-status.json`——完成即清理。
+- **已清理的生成物**（工具可重生成，**非**历史归档）：`compliance-audit.md`、`audit/preflight-report.md/.json`、`audit/sampling/sampling-2026-11.md/.json`、`info-quality/repair-ledger.md`、`report-migration-2026-11.md`——删除仅因快照过期，再次运行对应工具即重建。
 
 ---
 
@@ -61,3 +57,10 @@
 - `.github/workflows/html-sync.yml` / `audit-sampling.yml` 提交路径 `src/report-audits/audit/automation-status.json` 不存在（`automation_status.py` 实际写仓库根 `automation-status.json`）。
 - `audit-sampling.yml` 未 `git add sampling/`，抽检报告实际未由 CI 提交。
 - `src/report-audits/pipeline/`（`status.md` / `state-<period>.json` / `trigger-watch.json`）为运行期生成目录，首次实跑后由 CI 提交。
+
+
+## 四、版本记录
+
+| 版本 | 日期 | 变更 | 说明 |
+|---|---|---|---|
+| v1.0 | 2026-11-17 | 初始版本 | 建立审计留痕分层（活台账 / 生成物 / 历史归档）、生成器对照与新增/删除规则 |

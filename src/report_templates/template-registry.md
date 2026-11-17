@@ -162,7 +162,7 @@ report_templates/
 | v1.2 | 2026-11-13 | 全类型模板骨架接入 | 依 report-classification.md 将其余 10 个主流类型全部模板化并注册（competitive-intelligence / sentiment-monitoring / consumer-research / industry-research / market-sizing / investment-research / policy-analysis / feasibility-study / flash-commentary / whitepaper），每类型基线 + 周期模板各一份；_common.py TEMPLATE_TYPE_DIRS 同步登记；新增命名兼容性说明 |
 | v1.3 | 2026-11-13 | 业务提示词脚手架 | 其余 10 个类型各新增 business-prompt-scaffold.md（复制式业务提示词脚手架：实例化步骤 + business-config 清单 + 各周期提示词全文脚手架），对接通用基座 1.2 节新增业务线流程 |
 | v1.4 | 2026-11-13 | 合规校验规则接入 | 新增根部共享文件 compliance-rules.json（12 类 × 周期结构骨架校验规则）；src/prompts-tools/tools/compliance_check.py 提供 CI 阻断式模板合规校验关卡、--scaffold 模板自动填充引导与 --audit 历史报告合规审计；3.1 接入流程追加第 5 步（合规规则登记） |
-| v1.5 | 2026-11-13 | 泛用版业务提示词 | 其余 10 个类型各新增 prompts/ 子目录（共 23 份独立泛用版业务提示词：基线 + 主周期 + 竞争情报 / 舆情事件触发专项），由 business-prompt-scaffold.md 拆分；建新业务线时整目录复制填值即用 |
+| v1.5 | 2026-11-13 | 泛用版业务提示词 | 其余 10 个类型各新增 prompts/ 子目录（共 22 份独立泛用版业务提示词：基线 + 主周期 + 竞争情报 / 舆情事件触发专项），由 business-prompt-scaffold.md 拆分；建新业务线时整目录复制填值即用 |
 | v1.6 | 2026-11-13 | 新增类型十三：行业趋势周报型（trend-weekly） | 注册周节拍类型（基线机制文档 + 八节周报模板 + scaffold + 泛用 prompts ×2）；_common.py TEMPLATE_TYPE_DIRS 登记；compliance-rules.json 登记八节骨架；周报命名 `{YYYY-MM-DD}_weekly`（日期 = 数据截止日）纳入标准正则；首条业务线 trends/ai-security 接入 |
 | v1.7 | 2026-11-13 | 首条 industry-research 业务线接入 | jp/04-industry-logistics 接入（基线已产出 2026-11，年度刷新节拍）；其现行四章结构与九节骨架的映射在业务 business-config 第三、九节声明，后续刷新按九节骨架执行 |
 | v1.8 | 2026-11-13 | 第二条 employment-research 业务线接入 | jp/01-ssw-driver 接入（基线已产出 2026-11，季度主节拍 + 事件触发；月度核验轻运行；年度复盘）；其现行八章结构与九节骨架的映射在业务 business-config 第三、九节声明，后续报告按九节骨架执行 |
@@ -183,6 +183,7 @@ report_templates/
 | v1.23 | 2026-11-14 | 第三条 policy-analysis 业务线接入 | jp/16-exit-transition-return 接入（基线已产出 2026-11，事件触发单份解读 + 年度台账复盘）；政策执行层（退出 / 转型 / 回国）；不做 07 / 08 / 14 的制度正文复制；结构映射在 business-config 第 3.3 节声明 |
 | v1.24 | 2026-11-14 | 新增根部共享操作规范 handbook-split-standard.md | 沉淀 12-culture-life 手册拆分实践（提交 4d3e200）为跨主题可复用标准化提示词模板：双产物分离原则、编号即接口约束、归属映射/边界裁定表、执行清单 ①–⑧、链接锚点规范、验证清单（含 URL 守恒与仓库测试）、提交规范、HTML 预览页设计系统；供其余含合并附录手册的主题统一执行 |
 | v1.25 | 2026-11-15 | 归类为十三类标准 + 登记册 Schema | report-classification 统一为「六族十三类」；新增根部 registry-schema.md（v1/v2 活值表 Schema 与 C-08/C-10/C-13 判定规则），根部共享清单同步 |
-| v1.26 | 2026-11-16 | 模板合规整改 | 脚手架计数 10→11、泛用版计数 23→24；链接口径统一为「复制后位置 `{TOPIC_DIR}/prompts/` → `../../src/report_templates/...`」；「内容与脚手架正文一致」改为「要点一致」并明确审计协议承载层级 |
-| v1.27 | 2026-11-17 | 文档治理校准 | 目录树补齐 `fact-card-standard.md` / `l5-semantic-review.md`（两份根部文档此前未登记）；「12 类」更正为 13 类；第二节「已接入业务线」列更新为实际 20 主题目录（00–20）；补记 17–20 主题接入；泛用版计数校准为 24 份 |
+| v1.26 | 2026-11-16 | 模板合规整改 | 脚手架计数 10→11、泛用版计数 22→24；链接口径统一为「复制后位置 `{TOPIC_DIR}/prompts/` → `../../src/report_templates/...`」；「内容与脚手架正文一致」改为「要点一致」并明确审计协议承载层级 |
+| v1.27 | 2026-11-17 | 文档治理校准 | 目录树补齐 `fact-card-standard.md` / `l5-semantic-review.md`（两份根部文档此前未登记）；「12 类」更正为 13 类；第二节「已接入业务线」列更新为实际 21 主题目录（00–20）；补记 17–20 主题接入；泛用版计数校准为 24 份 |
 | v1.28 | 2026-11-17 | 脚手架正文指针化 | 11 份 `business-prompt-scaffold.md` 的提示词正文统一收口到各类型 `prompts/` 泛用版母版（24 份），脚手架只保留实例化步骤 / business-config 清单 / 审计协议，消除「类型模板 / prompts/ / 脚手架」三处同步 |
+| v1.29 | 2026-11-17 | 交叉核查校准 | 校准 v1.5 泛用版计数（23→22）与 v1.27 主题目录数（20→21）；补齐根部活文档版本记录 |

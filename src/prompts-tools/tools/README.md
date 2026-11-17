@@ -312,3 +312,10 @@ python src/prompts-tools/tools/automation_status.py activity --threshold 45     
 <!-- REGISTRY:BEGIN -->
 > 注册表快照：工具 32 · 类型 13 · 主题 21 · 工作流 8（由 `generate_registry.py` 生成，勿手工编辑）
 <!-- REGISTRY:END -->
+
+
+## 版本记录
+
+| 版本 | 日期 | 变更 | 说明 |
+|---|---|---|---|
+| v1.0 | 2026-11-17 | 初始版本 | 工具链使用说明（工具一览 / 工作流 / 测试 / 流水线全貌）；2026-11-17 校准测试数 308、工作流 8、类型 13 与旧路径 |
