@@ -215,5 +215,40 @@ class TestPipelineWorkflow(unittest.TestCase):
         self.assertNotIn("audit_pipeline.py", wf)
 
 
+class TestPipelineEndToEnd(unittest.TestCase):
+    """任务 7：全链路 S0→S5（合成状态 + dry-run），断言 S2 闸门与幂等。"""
+
+    def test_full_flow_with_author_gate(self):
+        with tempfile.TemporaryDirectory() as d:
+            with unittest.mock.patch.object(_common, "PIPELINE_DIR", Path(d)):
+                # 第一轮：S0 → S1 → S2 人工闸门（停）
+                self.assertEqual(pipeline_runner.run("2026-11", dry_run=True), 0)
+                st = _common.load_state("2026-11")
+                self.assertEqual(st["stages"]["S0_detect"]["status"], "completed")
+                self.assertEqual(st["stages"]["S1_plan"]["status"], "completed")
+                self.assertEqual(st["stages"]["S2_author"]["status"], "pending")
+                # S2 只产出待撰写清单，不产出正文
+                self.assertEqual(st["stages"]["S2_author"]["summary"]["gate"], "author")
+                self.assertIsInstance(st["stages"]["S2_author"]["summary"]["todo"], list)
+
+                # 人工完成 S2 后：S3 → S4 → S5 自动续跑
+                self.assertEqual(
+                    pipeline_runner.run("2026-11", from_stage="S3_build", dry_run=True), 0
+                )
+                st = _common.load_state("2026-11")
+                for name in pipeline_runner.STAGES:
+                    self.assertEqual(st["stages"][name]["status"], "completed", name)
+
+                # 幂等：再次从 S3 续跑，状态不变
+                self.assertEqual(
+                    pipeline_runner.run("2026-11", from_stage="S3_build", dry_run=True), 0
+                )
+                st2 = _common.load_state("2026-11")
+                self.assertEqual(
+                    {k: v["status"] for k, v in st["stages"].items()},
+                    {k: v["status"] for k, v in st2["stages"].items()},
+                )
+
+
 if __name__ == "__main__":
     unittest.main()
