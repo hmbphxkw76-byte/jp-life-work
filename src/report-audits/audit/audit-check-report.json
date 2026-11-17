@@ -1,5 +1,5 @@
 {
-  "run_date": "2026-11-16",
+  "run_date": "2026-11-17",
   "summary": {
     "reports": 22,
     "passed": 22,
@@ -7,7 +7,7 @@
     "by_severity": {
       "P0": 0,
       "P1": 0,
-      "P2": 13
+      "P2": 16
     },
     "by_layer": {
       "L1": {
@@ -16,7 +16,7 @@
         "pending": 0,
         "P0": 0,
         "P1": 0,
-        "P2": 1
+        "P2": 2
       },
       "L2": {
         "pass": 22,
@@ -40,7 +40,7 @@
         "pending": 0,
         "P0": 0,
         "P1": 0,
-        "P2": 12
+        "P2": 14
       },
       "L5": {
         "pass": 22,
@@ -190,10 +190,20 @@
       "severity": {
         "P0": 0,
         "P1": 0,
-        "P2": 0
+        "P2": 1
       },
       "passed": true,
-      "findings": [],
+      "findings": [
+        {
+          "layer": "L1",
+          "code": "L1-SKELETON",
+          "severity": "P2",
+          "report": "03-career-management/reports/2026-11-career-management.md",
+          "location": "类型骨架",
+          "detail": "[employment-research/monthly] h2 节数 10 超出模板骨架 9 节（如为业务固化锚请人工确认，否则须对齐类型模板 prompt-update-template.md）",
+          "spec": "S-11"
+        }
+      ],
       "l5_checklist": [
         "结论与依据是否匹配（关键结论有「事实→推理→结论」链）",
         "表述是否与来源原文含义一致（无夸大 / 曲解）",
@@ -707,7 +717,7 @@
       "severity": {
         "P0": 0,
         "P1": 0,
-        "P2": 1
+        "P2": 2
       },
       "passed": true,
       "findings": [
@@ -717,7 +727,16 @@
           "severity": "P2",
           "report": "18-family-parenting/reports/2026-11-family-parenting.md",
           "location": "跨文档重复",
-          "detail": "约 204 字的段落与 20-overseas-china/reports/2026-11-overseas-china.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+          "detail": "约 173 字的段落与 19-safety-disaster/reports/2026-11-safety-disaster.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+          "spec": "S-02"
+        },
+        {
+          "layer": "L4",
+          "code": "C-03",
+          "severity": "P2",
+          "report": "18-family-parenting/reports/2026-11-family-parenting.md",
+          "location": "跨文档重复",
+          "detail": "约 158 字的段落与 20-overseas-china/reports/2026-11-overseas-china.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
           "spec": "S-02"
         }
       ],
@@ -745,7 +764,7 @@
       "severity": {
         "P0": 0,
         "P1": 0,
-        "P2": 1
+        "P2": 2
       },
       "passed": true,
       "findings": [
@@ -757,6 +776,15 @@
           "location": "类型骨架",
           "detail": "[market-monitoring/monthly] h2 节数 10 超出模板骨架 8 节（如为业务固化锚请人工确认，否则须对齐类型模板 prompt-monthly-monitor-template.md）",
           "spec": "S-11"
+        },
+        {
+          "layer": "L4",
+          "code": "C-03",
+          "severity": "P2",
+          "report": "19-safety-disaster/reports/2026-11-safety-disaster.md",
+          "location": "跨文档重复",
+          "detail": "约 158 字的段落与 20-overseas-china/reports/2026-11-overseas-china.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+          "spec": "S-02"
         }
       ],
       "l5_checklist": [
