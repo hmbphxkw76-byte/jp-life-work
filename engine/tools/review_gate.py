@@ -3,7 +3,7 @@
 
 映射 mainline `pr-push-review` 的「评审覆盖」意图到本仓库的 worktree 合并模型：
 当变更涉及工具链代码（``engine/tools/``、``engine/vocabulary/script/``、
-``tools/``）时，要求 ``docs/toolchain/reviews/`` 存在至少一份双轴评审报告；
+``engine/scripts/``）时，要求 ``docs/toolchain/reviews/`` 存在至少一份双轴评审报告；
 否则退出码 1（软门禁，P2 观察期可由调用方决定是否阻断）。
 
 内容层变更（``*/reports/``、``*/prompts/`` 等）不在范围内，直接放行。
