@@ -9,7 +9,8 @@
 
 phase 取值：content-update（信息质量周度）/ maintenance（月度维护）/
 html-sync（生成物同步）/ info-quality（信息质量评估）/
-audit-sampling（月度抽检）/ scheduled-report-tasks（月度提醒）。
+audit-sampling（月度抽检）/ scheduled-report-tasks（月度提醒）/
+pipeline（端到端流水线编排心跳）。
 
 activity 输出：
     --porcelain -> 距最近一次记录的天数（整数）或 unknown（无记录）
@@ -104,7 +105,7 @@ def main() -> int:
     p_rec.add_argument("--phase", required=True,
                         choices=["content-update", "maintenance", "html-sync",
                                  "info-quality", "audit-sampling",
-                                 "scheduled-report-tasks"])
+                                 "scheduled-report-tasks", "pipeline"])
     p_rec.add_argument("--result", required=True, choices=["success", "failure"])
     p_rec.add_argument("--run-url", default="")
 

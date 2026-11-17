@@ -39,6 +39,7 @@ python -m unittest discover -s src/tests -v   # 单元测试（255 项：tools 1
 | migrate_monthly_reports.py | 迁移 | 一次性：存量报告合并重命名为月度系列 |
 | update_planner.py | 编排 | scheduled-report-tasks.yml「生成月度任务清单」 |
 | trigger_watch.py | 编排 | 手动 / pipeline-orchestrator.yml：触发检测（watchlist + freshness + 候选线索） |
+| pipeline_status.py | 编排 | 手动：统一监控视图（阶段进度 / 阻塞点 / 审计分布 / 心跳） |
 | automation_status.py | 编排 | 5 条工作流 `record` 入库 + 手动 `activity`（活跃度预警） |
 | info_quality_check.py | 校验+修复 | info-quality.yml「信息质量全量评估」+ validate.yml「信息质量检查」 |
 | auto_verify.py | 校验 | 手动：生成后自动验证（V1–V5）→ 写回「自动验证结果」→ 提交审计 |
@@ -210,6 +211,19 @@ python src/prompts-tools/tools/trigger_watch.py --apply --period 2026-11
   的待办线索（**命中 ≠ 核实**，无命中为空）。
 - 默认只读；`--apply` 才写快照。退出码 0 = 正常（含空清单）。
 
+### pipeline_status.py — 统一监控视图
+
+```bash
+python src/prompts-tools/tools/pipeline_status.py            # 人读 + 写 status.md / .json
+python src/prompts-tools/tools/pipeline_status.py --porcelain # 仅 JSON
+python src/prompts-tools/tools/pipeline_status.py --period 2026-11
+```
+
+- 读编排状态机（`state-<period>.json`）汇总阶段进度与阻塞点（首个非 completed 阶段），
+  叠加审计台账状态分布与 `automation-status.json` 最近心跳。
+- 状态文件缺失 → 空状态（冷启动）；损坏 / schema 不符 → `state_error` 明示，不静默续跑。
+- `STAGES` 为六阶段 canonical 顺序，`pipeline_runner.py` 复用。
+
 ### automation_status.py — 自动化状态与活跃度
 
 ```bash
@@ -223,6 +237,8 @@ python src/prompts-tools/tools/automation_status.py activity --threshold 45     
 ```
 
 状态写入根目录 `automation-status.json`（追加式，工作流提交）。
+`--phase` 可选 `content-update` / `maintenance` / `html-sync` / `info-quality` /
+`audit-sampling` / `scheduled-report-tasks` / `pipeline`（端到端流水线编排心跳）。
 
 ## 决策支持流程（DecisionSupport-Guard）
 
@@ -276,5 +292,5 @@ python src/prompts-tools/tools/automation_status.py activity --threshold 45     
   如需永久保留请自行调整 `archive_reports.KEEP`。
 
 <!-- REGISTRY:BEGIN -->
-> 注册表快照：工具 30 · 类型 13 · 主题 21 · 工作流 7（由 `generate_registry.py` 生成，勿手工编辑）
+> 注册表快照：工具 31 · 类型 13 · 主题 21 · 工作流 7（由 `generate_registry.py` 生成，勿手工编辑）
 <!-- REGISTRY:END -->

@@ -25,6 +25,7 @@
     "migrate_monthly_reports.py",
     "pending_verification.py",
     "personal_finance_model.py",
+    "pipeline_status.py",
     "report_diff.py",
     "skeleton_builder.py",
     "stage_gate_check.py",

@@ -18,6 +18,7 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src" / "prompts-tools" / "tools"))
 
 import _common  # noqa: E402
+import pipeline_status  # noqa: E402
 import trigger_watch  # noqa: E402
 
 
@@ -107,6 +108,41 @@ class TestTriggerWatch(unittest.TestCase):
                 (Path(d) / "state-2026-11.json").write_text("[]", encoding="utf-8")
                 with self.assertRaises(ValueError):
                     _common.load_state("2026-11")
+
+
+class TestPipelineStatus(unittest.TestCase):
+    """任务 4：统一监控视图（空状态 / 阻塞定位 / 渲染字段）。"""
+
+    def test_collect_empty_state(self):
+        p = pipeline_status.collect("2099-01")
+        self.assertEqual(p["stages"], {})
+        self.assertIsNone(p["blocking"])
+
+    def test_render_md_contains_key_fields(self):
+        md = pipeline_status.render_md({"period": "2026-11", "stages": {}, "blocking": None})
+        self.assertIn("2026-11", md)
+        self.assertIn("阻塞", md)
+
+    def test_collect_reports_blocking_stage(self):
+        with tempfile.TemporaryDirectory() as d:
+            with unittest.mock.patch.object(_common, "PIPELINE_DIR", Path(d)):
+                st = _common.new_state("2026-11")
+                st["stages"] = {
+                    "S0_detect": {"status": "completed"},
+                    "S1_plan": {"status": "running"},
+                    "S2_author": {"status": "pending"},
+                }
+                _common.save_state("2026-11", st)
+                p = pipeline_status.collect("2026-11")
+                self.assertEqual(p["blocking"], "S1_plan")
+
+    def test_collect_corrupt_state_surfaces_error(self):
+        with tempfile.TemporaryDirectory() as d:
+            with unittest.mock.patch.object(_common, "PIPELINE_DIR", Path(d)):
+                (Path(d) / "state-2026-11.json").write_text("{bad", encoding="utf-8")
+                p = pipeline_status.collect("2026-11")
+                self.assertIn("state_error", p)
+                self.assertTrue(p["state_error"])
 
 
 if __name__ == "__main__":
