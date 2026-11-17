@@ -92,7 +92,7 @@ python tools/branch_naming.py install --uninstall [--force]
 | monthly-update-2026-11 | `task/monthly-update-2026-11-bcbc4ed7` | `bcbc4ed7` | `bcbc4ed7-df02-40d5-b832-70055a0aff08` | 已合入 main（登记 active，未走 merge 登记） |
 | mainline-integration-assessment | `task/mainline-integration-assessment-c00bdcd2` | `c00bdcd2` | `c00bdcd2-f448-46d0-bd63-8b50c29dbb82` | merged（`ecd7696`） |
 | mainline-spec-landing | `task/mainline-spec-landing-88528c9a` | `88528c9a` | `88528c9a-6946-4848-b23c-516a98e6ce43` | merged（`0767ea3`） |
-| branch-naming-session-id | `task/branch-naming-session-id-f445e0a2` | `f445e0a2` | `f445e0a2-fb01-46f0-bd36-2dccbb14feaf` | merged（`2a633d2` → `c2c8fa2`） |
+| branch-naming-session-id | `task/branch-naming-session-id-f445e0a2` | `f445e0a2` | `f445e0a2-fb01-46f0-bd36-2dccbb14feaf` | merged（功能提交 `2a633d2`；修正 `597ed3b` / `43f0724`） |
 
 注：`mainline-spec-landing` 的任务登记与本地分支已在合并后清理（`task stop`），
 本表保留其历史映射；`monthly-update-2026-11` 登记状态仍为 `active`（分支已合入 main，
