@@ -199,5 +199,6 @@ jp-life-work/
 | v1.1 | 2026-11-13 | 类型分类架构 | 标题改类型中立；引入类型注册表与类型模板分目录（market-monitoring / employment-research）；1.2 接入步骤同步 |
 | v1.2 | 2026-11-15 | 边界集中 | 新增硬性约束第 7 条：模块边界声明统一集中在单独章节 |
 | v1.3 | 2026-11-16 | 链接口径 / 变量登记 / 自动验证 | 1.1 目录树改为 `src/report_templates/` + `NN-<slug>/` 单层主题目录并新增链接深度口径；第二节登记 `{{REPO_RAW_URL_BASE}}` / `{{REGISTRY_FILE}}` 与类型专属变量；第八节交付协议补 `auto_verify.py`（V1–V5）为第 2 步，九节自检同步 |
+| v1.4 | 2026-11-17 | 目录树校准 | 1.1 目录树补齐 `report-classification.md` / `registry-schema.md` / `compliance-rules.json` / `fact-card-standard.md` / `l5-semantic-review.md` / `handbook-split-standard.md`（根部实有 9 份） |
 
 **结束通用基座。**

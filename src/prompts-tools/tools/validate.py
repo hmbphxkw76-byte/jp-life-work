@@ -75,7 +75,7 @@ def check_templates() -> None:
 def check_business_dirs() -> None:
     businesses = iter_business_dirs()
     if not businesses:
-        warn("未识别到任何业务线目录（{地区}/{物业类型}）")
+        warn("未识别到任何业务线目录（NN-<slug>）")
         return
     for b in businesses:
         config = b.path / "prompts" / "business-config.md"
