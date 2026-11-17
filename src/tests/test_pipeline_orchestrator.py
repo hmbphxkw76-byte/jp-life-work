@@ -18,6 +18,7 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src" / "prompts-tools" / "tools"))
 
 import _common  # noqa: E402
+import pipeline_runner  # noqa: E402
 import pipeline_status  # noqa: E402
 import trigger_watch  # noqa: E402
 
@@ -143,6 +144,57 @@ class TestPipelineStatus(unittest.TestCase):
                 p = pipeline_status.collect("2026-11")
                 self.assertIn("state_error", p)
                 self.assertTrue(p["state_error"])
+
+
+class TestPipelineRunner(unittest.TestCase):
+    """任务 3：六阶段编排器（顺序固定 / S2 闸门 / 续跑 / 损坏终止）。"""
+
+    def test_stages_order_fixed(self):
+        self.assertEqual(pipeline_runner.STAGES[:3], ("S0_detect", "S1_plan", "S2_author"))
+
+    def test_run_pauses_at_author_gate(self):
+        with tempfile.TemporaryDirectory() as d:
+            with unittest.mock.patch.object(_common, "PIPELINE_DIR", Path(d)):
+                rc = pipeline_runner.run("2026-11", dry_run=True)
+                self.assertEqual(rc, 0)
+                st = _common.load_state("2026-11")
+                self.assertEqual(st["stages"]["S1_plan"]["status"], "completed")
+                self.assertEqual(st["stages"]["S2_author"]["status"], "pending")
+
+    def test_resume_from_s3_continues(self):
+        with tempfile.TemporaryDirectory() as d:
+            with unittest.mock.patch.object(_common, "PIPELINE_DIR", Path(d)):
+                pipeline_runner.run("2026-11", dry_run=True)
+                rc = pipeline_runner.run("2026-11", from_stage="S3_build", dry_run=True)
+                self.assertEqual(rc, 0)
+                self.assertEqual(
+                    _common.load_state("2026-11")["stages"]["S5_monitor"]["status"],
+                    "completed",
+                )
+
+    def test_corrupt_state_aborts(self):
+        with tempfile.TemporaryDirectory() as d:
+            with unittest.mock.patch.object(_common, "PIPELINE_DIR", Path(d)):
+                (Path(d) / "state-2026-11.json").write_text("{bad", encoding="utf-8")
+                rc = pipeline_runner.run("2026-11")
+                self.assertEqual(rc, 1)
+
+    def test_invalid_period_rejected(self):
+        with tempfile.TemporaryDirectory() as d:
+            with unittest.mock.patch.object(_common, "PIPELINE_DIR", Path(d)):
+                self.assertEqual(pipeline_runner.run("2026-13", dry_run=True), 2)
+
+    def test_run_is_idempotent(self):
+        with tempfile.TemporaryDirectory() as d:
+            with unittest.mock.patch.object(_common, "PIPELINE_DIR", Path(d)):
+                pipeline_runner.run("2026-11", dry_run=True)
+                first = _common.load_state("2026-11")["stages"]
+                pipeline_runner.run("2026-11", dry_run=True)
+                second = _common.load_state("2026-11")["stages"]
+                self.assertEqual(
+                    {k: v["status"] for k, v in first.items()},
+                    {k: v["status"] for k, v in second.items()},
+                )
 
 
 if __name__ == "__main__":

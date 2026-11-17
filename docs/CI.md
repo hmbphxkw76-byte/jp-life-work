@@ -183,7 +183,7 @@ reports/YYYY-MM-<slug>.md  ──md2html.py──►  reports/YYYY-MM-<slug>.htm
 - **辅助开关**：报告页工具条「隐藏更新标记」对照阅读、「展开全部删除」。
 - **呈现**：报告页新标签页独立打开，页脚提供「← 返回主题 / 返回首页」。
 
-## 六、测试体系（`src/tests/`，299 项）
+## 六、测试体系（`src/tests/`，305 项）
 
 | 场景 | 测试类 | 覆盖 |
 |---|---|---|
@@ -197,11 +197,11 @@ reports/YYYY-MM-<slug>.md  ──md2html.py──►  reports/YYYY-MM-<slug>.htm
 | 架构守卫 | `test_arch_guard.py`（8 项） | 测试数与本文档一致、类型注册三处一致、目录 / 命名规范守卫 |
 | 增量构建 | `test_incremental_build.py`（4 项） | 增量构建判定与缓存一致性 |
 | 流水线端到端 | `test_pipeline_e2e.py`（2 项） | 审计状态机端到端 |
-| 流水线编排 | `test_pipeline_orchestrator.py`（14 项） | 状态 shape / save-load 往返 / 损坏与 schema 负例（含非对象）、触发检测 watchlist 派生 / freshness / 幂等 / 只读默认、监控视图空状态 / 阻塞定位 / 损坏显式报错 |
+| 流水线编排 | `test_pipeline_orchestrator.py`（20 项） | 状态 shape / save-load 往返 / 损坏与 schema 负例（含非对象）、触发检测 watchlist 派生 / freshness / 幂等 / 只读默认、监控视图空状态 / 阻塞定位 / 损坏显式报错、编排器阶段顺序 / S2 闸门 / 续跑 / 损坏终止 / 非法周期 / 幂等 |
 | 登记册生成 | `test_registry_generator.py`（3 项） | 登记册生成契约 |
 | 安全回归 | `test_security_regression.py`（3 项） | 注入 / 越界路径回归 |
 
-> 合计 299 项（`python -m unittest discover -s src/tests`，当前全绿）。
+> 合计 305 项（`python -m unittest discover -s src/tests`，当前全绿）。
 
 ## 七、手动命令速查
 
@@ -385,3 +385,4 @@ python tools/cleanup_workspace.py --dry-run  # 预览将删除项
 | v1.6 | 2026-11-17 | 流水线编排状态层 | 新增 `src/tests/test_pipeline_orchestrator.py`（状态 shape / 往返 / 损坏与版本不符，4 项）；六节测试数 285 → 289 |
 | v1.7 | 2026-11-17 | 流水线触发检测 | 新增 `trigger_watch.py`（watchlist 派生 / freshness / 候选线索 / 只读默认）及同文件 6 项用例；六节测试数 289 → 295 |
 | v1.8 | 2026-11-17 | 流水线监控视图 | 新增 `pipeline_status.py`（阶段进度 / 阻塞点 / 审计分布 / 心跳）及同文件 4 项用例；`automation_status` 新增 `pipeline` 心跳相位；六节测试数 295 → 299 |
+| v1.9 | 2026-11-17 | 流水线编排器 | 新增 `pipeline_runner.py`（六阶段状态机 / 断点续跑 / S2 人工闸门）及同文件 6 项用例；六节测试数 299 → 305 |
