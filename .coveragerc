@@ -1,0 +1,35 @@
+# 覆盖率运行配置（工具链开发域 / TOOLCHAIN-DEV-SPEC 第六节）。
+#
+# 阈值与开关的单一事实源是 src/prompts-tools/tools/coverage-config.json；
+# 本文件只约束 coverage 的采集范围与报告行为，不在 CI 脚本硬编码阈值。
+#
+# 统计范围限定工具链代码（mainline 融合评估报告 P1 / 风险 R2）：
+#   src/prompts-tools/tools/  工具链主代码
+#   src/vocabulary/script/     词库维护脚本
+#   tools/                     并行协作 / 清理 / 推送脚本
+# omit 仅排除「非现行工具链」的一次性 / 辅助脚本，避免误伤分母。
+[run]
+source =
+    src/prompts-tools/tools
+    src/vocabulary/script
+    tools
+data_file = .coverage
+branch = False
+# omit 仅排除「非现行工具链」脚本（依据 mainline 融合评估报告风险 R2：
+# 「覆盖率误伤非工具链脚本（如词库同步）→ .coveragerc source 限定；只统计工具链代码」）：
+#   - 词库维护脚本：内容生产域的词库同步，非工具链代码
+#   - 一次性迁移脚本：历史迁移已完成，不再维护
+#   - 本地并行测试辅助：开发期辅助，非交付工具链
+omit =
+    src/vocabulary/script/sync_vocab.py
+    src/vocabulary/script/vocab_tool.py
+    src/prompts-tools/tools/migrate_monthly_reports.py
+    tools/run_tests_parallel.py
+
+[report]
+show_missing = True
+skip_covered = False
+exclude_lines =
+    pragma: no cover
+    if __name__ == .__main__.:
+    raise NotImplementedError

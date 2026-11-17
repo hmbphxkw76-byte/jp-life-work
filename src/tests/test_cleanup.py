@@ -108,6 +108,18 @@ class TestCollectAndClean(TempCase):
         self.assertNotIn("docs/notes.log", rels)
         self.assertNotIn("src/report-audits/run.log", rels)
 
+    def test_coverage_artifacts_scoped_without_hitting_coveragerc(self):
+        """覆盖率数据纳入清理，但不得误删配置文件 .coveragerc。"""
+        self._mk(".coverage", b"data")
+        self._mk(".coverage.12345", b"data")
+        coveragerc = self._mk(".coveragerc", b"[run]\n")
+        items = cw.collect_residue(self.root)
+        rels = {i.path.relative_to(self.root).as_posix() for i in items}
+        self.assertIn(".coverage", rels)
+        self.assertIn(".coverage.12345", rels)
+        self.assertNotIn(".coveragerc", rels)
+        self.assertTrue(coveragerc.exists())
+
 
 class TestCheckAndDryRun(TempCase):
     def test_check_flags_residue_with_exit_1(self):

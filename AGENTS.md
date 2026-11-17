@@ -80,5 +80,5 @@ CI 侧：`html-sync` 负责推送后确定性重生成 HTML / 汇总页；`audit
   随后 `git status` 应无未跟踪残留；`--check` 可用于自检（发现残留退出码 1）。
   运行日志不入库（`.gitignore`：`src/vocabulary/data/*.log`）。流水线各阶段由
   `.github/actions/workspace-cleanup` 自动执行前置 / 收尾清理，`validate.yml` 的
-  `workspace-hygiene` job 断言零残留。详见 `docs/CI.md` 第十二节与 `tools/README.md` 第九节。
+  `workspace-hygiene` job 断言零残留。详见 `docs/CI.md` 第十三节与 `tools/README.md` 第九节。
 - CI 流水线与本地协作机制：`docs/CI.md`；信息质量 / 审计体系：`docs/` 下对应文档。

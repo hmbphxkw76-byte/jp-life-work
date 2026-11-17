@@ -1,6 +1,6 @@
 # CI 与自动化体系
 
-> **版本**：v1.2（2026-11-16 精简合并）
+> **版本**：v2.2（2026-11-17 工具链开发规约落地）
 > 本文档说明 jp-life-work 报告管理体系的持续集成（CI）与定时自动化。
 > 代码位置：`.github/workflows/`（8 条工作流）；工具链：`src/prompts-tools/tools/`；测试：`src/tests/`。
 
@@ -21,6 +21,7 @@
 | 流程复用一致性 | `src/tests/test_tools.py::TestProcessReuse` |
 | 阶段出口质量（采集 / 筛选 / 分类左移） | `validate.yml`（`stage_gate_check.py`） |
 | 触发检测 / 编排状态（S0→S2） | `pipeline-orchestrator.yml`（每月 1 日 00:35 UTC） |
+| 工具链覆盖率 / 双轴评审 | `validate.yml`（`coverage_gate.py`）/ `audit-gate.yml`（`review_gate.py`） |
 
 **CI 不产出报告研究内容**——报告由各主题 `prompts/business-config.md` 定义的研究流程人工/Agent 产出；CI 只校验与同步生成物。
 
@@ -48,6 +49,7 @@
 | 待核实闭环检查 | `pending_verification.py --check` | 阻断（未登记 / 逾期） |
 | 个人财务模型一致性 | `personal_finance_model.py --check` | 阻断（缺失 / 过期） |
 | 词库校验 | `vocab_tool.py topic-check` / `verify` + `sync_vocab.py check` | 阻断 |
+| 覆盖率门禁 | `coverage_gate.py`（阈值读 `coverage-config.json`） | 阻断（enforce=true 未达标 / 测试失败） |
 
 > 两个关卡对期间 >= 2026-11 的**新报告**阻断；历史报告由 `--new-only` 跳过，
 > 遗留项列入 `src/report-audits/audit/lint-whitelist.json` 豁免（逾期恢复阻断）。
@@ -126,6 +128,7 @@
 |---|---|---|
 | 合并门禁（统一入口） | `audit_pipeline.py --gate`（`--changed` 增量 / `--strict` 全库） | 阻断（退出码 1） |
 | 多层级校验 | `audit_check.py --all` | 存在 P0/P1 阻断；仅 P2 放行 |
+| 工具链双轴评审软门禁 | `review_gate.py --changed .changed-files` | 软门禁（缺评审告警，不阻断） |
 
 - **合并门禁覆盖**：`--gate` 一次完成台账哈希链、登记册双向一致、已审计标识一致、受检报告审计状态（`audited` + md/HTML 指纹匹配 + 有效 L5 证据）；PR 默认只查本次变更报告，`--strict` 查全库。
 - **L5 证据门禁**：`audited` 报告必须附有效 L5 语义复核证据（`re_review --evidence` 或一次性 `--backfill-l5`），缺失即 `L5-EVIDENCE`（P1）阻断。
@@ -196,7 +199,7 @@ reports/YYYY-MM-<slug>.md  ──md2html.py──►  reports/YYYY-MM-<slug>.htm
 - **辅助开关**：报告页工具条「隐藏更新标记」对照阅读、「展开全部删除」。
 - **呈现**：报告页新标签页独立打开，页脚提供「← 返回主题 / 返回首页」。
 
-## 六、测试体系（`src/tests/`，308 项）
+## 六、测试体系（`src/tests/`，803 项）
 
 | 场景 | 测试类 | 覆盖 |
 |---|---|---|
@@ -205,7 +208,7 @@ reports/YYYY-MM-<slug>.md  ──md2html.py──►  reports/YYYY-MM-<slug>.htm
 | 跨月份对比准确性 | `TestDiffAccuracy` | 相同 / 新增 / 修改 / 删除 / 相似度阈值 / 首期 / 报告页 diff 高亮 |
 | 并行协作三层隔离 | `test_workflow_guard.py`（33 项） | 任务分支 / worktree、检出锁（占用 / 释放 / 强取 / 失效）、串行合并（happy / 冲突保留 / 校验阻断）、sync |
 | 推送双通道 failover | `test_git_push.py`（6 项） | ssh 主通道成功、失败切 https、两条都失败时恰好各试一次（不重试） |
-| 工作区标准化清理 | `test_cleanup.py`（18 项） | 残留识别与清理、`--check` / `--dry-run` 契约、日志作用域限定、已跟踪文件 / 目录保护、CI 接线契约（每工作流前置 + 收尾 `always`） |
+| 工作区标准化清理 | `test_cleanup.py`（19 项） | 残留识别与清理、`--check` / `--dry-run` 契约、日志作用域限定、已跟踪文件 / 目录保护、CI 接线契约（每工作流前置 + 收尾 `always`） |
 | 工具契约 | `test_tools.py`（208 项） | 命名解析（新 + 历史）、周期与任务推导、归档策略、lint / 合规、`build_hub` 归一化比对、活跃度天数、全主题契约、流程复用与三体系一致性、模板合规守卫（链接 / 命名 / 节数 / 周期） |
 | 架构守卫 | `test_arch_guard.py`（8 项） | 测试数与本文档一致、类型注册三处一致、目录 / 命名规范守卫 |
 | 增量构建 | `test_incremental_build.py`（4 项） | 增量构建判定与缓存一致性 |
@@ -213,8 +216,16 @@ reports/YYYY-MM-<slug>.md  ──md2html.py──►  reports/YYYY-MM-<slug>.htm
 | 流水线编排 | `test_pipeline_orchestrator.py`（23 项） | 状态 shape / save-load 往返 / 损坏与 schema 负例（含非对象）、触发检测 watchlist 派生 / freshness / 幂等 / 只读默认、监控视图空状态 / 阻塞定位 / 损坏显式报错、编排器阶段顺序 / S2 闸门 / 续跑 / 损坏终止 / 非法周期 / 幂等、CI 工作流定时 + 无撰写步骤 |
 | 登记册生成 | `test_registry_generator.py`（3 项） | 登记册生成契约 |
 | 安全回归 | `test_security_regression.py`（3 项） | 注入 / 越界路径回归 |
+| 工具链覆盖率门禁 | `test_coverage_gate.py`（15 项） | 配置读取 / 退出码判定 / 基线写入 / 报告测量 |
+| 工具链评审软门禁 | `test_review_gate.py`（9 项） | 范围判定 / 评审存在性 / 清单解析 |
+| 工具链开发规约守卫 | `test_toolchain_dev_spec.py`（11 项） | 规约阶段顺序 / 覆盖率单一事实源 / 合并前检查单 |
+| 工具链补测（审计家族） | `test_cov_audit.py`（69 项） | audit_pipeline / check / badge / preflight / sampling / registry / auto_verify |
+| 工具链补测（合规校验） | `test_cov_compliance.py`（122 项） | compliance / info_quality / lint / fact_card / validate / classify / ensure |
+| 工具链补测（生成类） | `test_cov_build.py`（57 项） | build_hub / build_index / md2html / skeleton / archive / incremental / registry / diff |
+| 工具链补测（编排决策） | `test_cov_pipeline.py`（111 项） | pipeline_runner / status / trigger / update_planner / automation / decision_log / stage_gate / pending / finance / _common |
+| 工具链补测（并行协作） | `test_cov_workflow.py`（100 项） | workflow_guard / git_push / cleanup / run_tests_parallel |
 
-> 合计 308 项（`python -m unittest discover -s src/tests`，当前全绿）。
+> 合计 803 项（`python -m unittest discover -s src/tests`，当前全绿）。
 
 ## 七、手动命令速查
 
@@ -252,6 +263,10 @@ python src/prompts-tools/tools/audit_pipeline.py --gate
 
 # 阶段闸（采集 / 筛选 / 分类左移）
 python src/prompts-tools/tools/stage_gate_check.py
+
+# 工具链开发域（TOOLCHAIN-DEV-SPEC）
+python src/prompts-tools/tools/coverage_gate.py            # 覆盖率门禁（--update-baseline / --porcelain）
+python src/prompts-tools/tools/review_gate.py --changed <变更清单>  # 双轴评审软门禁
 
 # 决策支持 / 信息质量流程复用
 python src/prompts-tools/tools/info_quality_check.py --check
@@ -318,11 +333,29 @@ CI 之外的**本地多会话 / 多任务并行**由三层隔离机制约束，�
 
 ---
 
-## 十一、信息生产全链路（闭环与阶段闸）
+## 十一、工具链开发规约（代码交付域）
+
+> 完整规约见 [工具链开发规约（TOOLCHAIN-DEV-SPEC）](toolchain/TOOLCHAIN-DEV-SPEC.md)。本节只保留 CI 侧的程序化边界。
+
+工具链变更（`src/`、`tools/`、`.github/workflows/`、根配置）走本规约六阶段（规格先行 → 工单化 → TDD → 实现 → 双轴评审 → 合并前检查单）；报告生产内容（`*/reports/`、`*/prompts/` 等）仍走五阶段 + AuditGuard，两层并行且边界清晰。
+
+| 关注点 | 载体 | 命令 / 判据 |
+|---|---|---|
+| 覆盖率门禁 | `validate.yml`「覆盖率」job | `coverage_gate.py`；阈值 / 开关读 `coverage-config.json` 单一事实源；统计范围由 `.coveragerc` 限定工具链三目录 |
+| 双轴评审软门禁 | `audit-gate.yml` | `review_gate.py --changed`；工具链变更须有 `docs/toolchain/reviews/*.md` |
+| 合并前检查单 | `tools/README.md` | 测试 / validate / 评审 / 覆盖率 / 工作区卫生五项齐备 |
+| 防漂移守卫 | `src/tests/test_toolchain_dev_spec.py` | 规约阶段顺序 / 单一事实源 / 检查单存在性 |
+
+- **豁免阈值**：≤2 文件且无新增工具的变更免规格 / 工单，但不得豁免双轴评审与合并前检查单。
+- **分阶段阈值**：P1/P2 观察期 60%（`enforce=false`）；P3 起 80%（`enforce=true`，阻断）。
+
+---
+
+## 十二、信息生产全链路（闭环与阶段闸）
 
 > 本节只保留 CI 侧的程序化边界。阶段交付物、五闸执行规则、缺陷路由、周期保障与补缺准入的完整规范见 [信息生产全链路执行规范](信息生产全链路执行规范.md)；审计层门禁见 [审计报告标准化管理体系](审计报告标准化管理体系.md)。工具：`stage_gate_check.py`。
 
-### 11.1 程序化边界（形态 vs 语义）
+### 12.1 程序化边界（形态 vs 语义）
 
 - **形态 / 结构类**（可程序化、秒级、无网络）→ 进 CI 硬门禁：命名、配对、继承声明、登记册 Schema、类型注册、时效字段（闸1 / 2 / 3，`stage_gate_check.py`）；
 - **语义类**（来源语言规则、六族十三类选型判别、口径冲突裁决、以偏概全）→ 不进 CI 硬门禁，由提示词自检 + L5 语义复核 + 季度跨领域角色（R2 / R4 / R5）承载。
@@ -332,18 +365,19 @@ CI 之外的**本地多会话 / 多任务并行**由三层隔离机制约束，�
 
 ---
 
-## 十二、工作区卫生与标准化清理（横切）
+## 十三、工作区卫生与标准化清理（横切）
 
 **目标**：流水线运行前、运行中、运行结束后，runner 工作区与本地开发工作区都不留缓存、临时文件、过期日志等残留；清理规则单点维护，且可被门禁验证。
 
-### 12.1 单一事实源：`tools/cleanup_workspace.py`
+### 13.1 单一事实源：`tools/cleanup_workspace.py`
 
 清理对象（仅限未入库产物）：
 
 - 缓存目录：`__pycache__/`、`.pytest_cache/`、`.mypy_cache/`、`.ruff_cache/`、`.hypothesis/`、`.trae-html-share-packages/`、`.screenshots/`；
 - 生成备份目录：`src/vocabulary/data/sync-backups/`、`src/vocabulary/data/topic-backups/`；
 - 单文件：`*.py[cod]`、`*$py.class`、`*.tmp`、`*.temp`、`.DS_Store`、`Thumbs.db`、`desktop.ini`；
-- 运行日志：`src/vocabulary/data/*.log`（作用域限定，不误删其他目录的同名文件）。
+- 运行日志：`src/vocabulary/data/*.log`（作用域限定，不误删其他目录的同名文件）；
+- 覆盖率产物：`.coverage*`（coverage 数据文件）、`htmlcov/`（HTML 报告目录）。
 
 **安全约束**：只清仓库根内路径；已被 `git ls-files` 覆盖的文件 / 目录一律跳过；不进入 `.git`；不跟随符号链接。
 
@@ -355,7 +389,7 @@ python tools/cleanup_workspace.py --check    # 门禁：只检查，发现残留
 python tools/cleanup_workspace.py --dry-run  # 预览将删除项
 ```
 
-### 12.2 流水线接入（复合动作 `.github/actions/workspace-cleanup`）
+### 13.2 流水线接入（复合动作 `.github/actions/workspace-cleanup`）
 
 每条工作流的每个 job 固定两处调用，形成「阶段前置 → 阶段收尾」闭环
 （例外：`validate.yml` 的 `workspace-hygiene` 自检 job 本身就是清理链路验证，不接前置 / 收尾）：
@@ -369,7 +403,7 @@ python tools/cleanup_workspace.py --dry-run  # 预览将删除项
 - 提交 / 推送类步骤（`git commit` / `git push`）**必须**排在收尾清理之前，避免清理早于交付。
 - 现已接入：`validate` / `audit-gate` / `html-sync` / `scheduled-maintenance` / `scheduled-report-tasks` / `info-quality` / `audit-sampling` / `pipeline-orchestrator`（8 条）。
 
-### 12.3 门禁：`validate.yml` 的 `workspace-hygiene` job
+### 13.3 门禁：`validate.yml` 的 `workspace-hygiene` job
 
 独立 job，自证清理链路有效，防止「清理规则失效 / 新增产物类型未纳入清理」静默退化：
 
@@ -378,7 +412,7 @@ python tools/cleanup_workspace.py --dry-run  # 预览将删除项
 3. 执行标准化清理；
 4. 以 `--check` 断言**零残留**，有残留即失败。
 
-### 12.4 本地纪律
+### 13.4 本地纪律
 
 - 提交前运行 `python tools/cleanup_workspace.py`，随后 `git status` 应无未跟踪残留；
 - 运行日志不入库（`.gitignore`：`src/vocabulary/data/*.log`），本地仍由工具正常写入；
@@ -401,3 +435,4 @@ python tools/cleanup_workspace.py --dry-run  # 预览将删除项
 | v1.9 | 2026-11-17 | 流水线编排器 | 新增 `pipeline_runner.py`（六阶段状态机 / 断点续跑 / S2 人工闸门）及同文件 6 项用例；六节测试数 299 → 305 |
 | v2.0 | 2026-11-17 | 流水线 CI 接线 | 新增 `.github/workflows/pipeline-orchestrator.yml`（每月 1 日 00:35 UTC：触发检测 → S0→S2 → 监控视图 → 候选 Issue；不含撰写）及同文件 2 项用例；工作流 7 → 8，六节测试数 305 → 307 |
 | v2.1 | 2026-11-17 | 流水线全链路验证 | 新增 E2E 用例（S0→S5 全链路 + S2 闸门 + 幂等，1 项）；六节测试数 307 → 308 |
+| v2.2 | 2026-11-17 | 工具链开发规约落地 | 新增 TOOLCHAIN-DEV-SPEC（六阶段 / 豁免阈值 / 覆盖率门禁 / 双轴评审 / 合并前检查单）；新增 `coverage_gate.py`、`review_gate.py`、`coverage-config.json`、`.coveragerc`；`validate.yml` 增覆盖率 job、`audit-gate.yml` 增评审软门禁；新增守卫测试 `test_toolchain_dev_spec.py` 与 5 个补测文件；工具链覆盖率 0 门禁 → 93%（阈值 80% 阻断）；六节测试数 308 → 803；新增第十一节 |
