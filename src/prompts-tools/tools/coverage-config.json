@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "threshold": 80,
+  "enforce": true,
+  "test_discovery": "src/tests",
+  "baseline": "src/report-audits/toolchain/coverage-baseline.json",
+  "stage_history": [
+    {"stage": "P1", "threshold": 60, "enforce": false, "note": "观察期，不阻断"},
+    {"stage": "P2", "threshold": 60, "enforce": false, "note": "试点观察，不阻断"},
+    {"stage": "P3", "threshold": 80, "enforce": true, "note": "转为阻断门禁"}
+  ]
+}

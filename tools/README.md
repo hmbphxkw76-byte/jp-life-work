@@ -134,7 +134,8 @@ GitHub Actions 在远端 runner 上跑，不经过本地锁；它们直接向 `m
 - 缓存目录：`__pycache__/`、`.pytest_cache/`、`.mypy_cache/`、`.ruff_cache/`、`.hypothesis/`、`.trae-html-share-packages/`、`.screenshots/`；
 - 生成备份目录：`src/vocabulary/data/sync-backups/`、`src/vocabulary/data/topic-backups/`；
 - 单文件：`*.py[cod]`、`*$py.class`、`*.tmp`、`*.temp`、`.DS_Store`、`Thumbs.db`、`desktop.ini`；
-- 运行日志：`src/vocabulary/data/*.log`（作用域限定，其他目录同名文件不动）。
+- 运行日志：`src/vocabulary/data/*.log`（作用域限定，其他目录同名文件不动）；
+- 覆盖率产物：`.coverage*`（coverage 数据文件）、`htmlcov/`（HTML 报告目录）。
 
 **安全约束**：只清仓库根内路径；已被 `git ls-files` 覆盖的文件 / 目录跳过；不进入 `.git`；不跟随符号链接。
 
@@ -148,6 +149,6 @@ python tools/cleanup_workspace.py --root <dir>
 **CI 接入**：复合动作 `.github/actions/workspace-cleanup/action.yml`；每条工作流在
 「checkout + setup-python 之后」与「job 最后一步（`if: always()`）」各调用一次，
 `mode: ci` 额外 `pip cache purge`。`validate.yml` 另有 `workspace-hygiene` job
-先制造残留再清理、以 `--check` 断言零残留。详见 `docs/CI.md` 第十二节。
+先制造残留再清理、以 `--check` 断言零残留。详见 `docs/CI.md` 第十三节。
 
 **退出码**：0 = 干净或已清理；1 = `--check` 发现残留 / 参数错误 / 删除失败。

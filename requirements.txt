@@ -1,3 +1,6 @@
-# 唯一外部依赖：md2html.py 渲染 Markdown（Python-Markdown）。
+# 运行期依赖：md2html.py 渲染 Markdown（Python-Markdown）。
 # 固定到确定版本，保证 CI 与本地构建可复现；升级须同步本地环境并回归 md2html 输出。
 markdown==3.11.3
+# 工具链覆盖率门禁（TOOLCHAIN-DEV-SPEC 第六节 / mainline 融合 P1、P3）；
+# 固定版本保证 CI 覆盖率可复现，阈值读 coverage-config.json 单一事实源。
+coverage==7.17.3

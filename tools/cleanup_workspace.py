@@ -39,6 +39,7 @@ CACHE_DIRS = {
     ".hypothesis",
     ".trae-html-share-packages",
     ".screenshots",
+    "htmlcov",
 }
 
 # 仓库内固定生成的备份目录（相对根，正斜杠）
@@ -56,6 +57,8 @@ FILE_RULES: tuple[tuple[str, str], ...] = (
     ("系统垃圾", ".DS_Store"),
     ("系统垃圾", "Thumbs.db"),
     ("系统垃圾", "desktop.ini"),
+    ("覆盖率数据", ".coverage"),
+    ("覆盖率数据", ".coverage.*"),
 )
 
 # 运行日志（工具写入，不入库）：仅匹配 data 目录下的 *.log

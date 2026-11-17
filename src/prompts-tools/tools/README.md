@@ -50,6 +50,8 @@ python -m unittest discover -s src/tests -v   # 单元测试（255 项：tools 1
 | pending_verification.py | 决策支持 | validate.yml「待核实闭环」+ scheduled-maintenance.yml「刷新」 |
 | skeleton_builder.py | 生成 | 手动：报告骨架 / 空模块合并 |
 | decision_log.py | 编排 | 手动：决策状态变化时间线 |
+| coverage_gate.py | 校验 | validate.yml「覆盖率门禁」；阈值读 `coverage-config.json` 单一事实源（`--update-baseline` / `--porcelain`） |
+| review_gate.py | 校验 | audit-gate.yml「工具链变更双轴评审软门禁」（`--changed <清单>`） |
 
 ## 校验类
 
@@ -303,6 +305,22 @@ python src/prompts-tools/tools/automation_status.py activity --threshold 45     
 - **三类校验**（`src/tests/test_tools.py`）：命名格式合规性、全量历史数据迁移完整性
   （git 历史逐份复核内容零丢失）、跨月份对比准确性。
 
+## 合并前检查单（工具链开发域）
+
+> 依据《工具链开发规约（TOOLCHAIN-DEV-SPEC）》第八节。`workflow_guard merge` 前逐项确认，
+> 五项齐备方可合并；守卫测试 `src/tests/test_toolchain_dev_spec.py::TestMergeChecklist` 断言本节存在。
+
+| # | 项 | 命令 | 判据 |
+|---|---|---|---|
+| 1 | 测试 | `python -m unittest discover -s src/tests` | 全绿（退出码 0） |
+| 2 | 规范校验 | `python src/prompts-tools/tools/validate.py` | 退出码 ∈ {0,2} |
+| 3 | 双轴评审 | 本任务 `docs/toolchain/reviews/<任务 slug>-review.md` | 存在且 Standards / Spec 双轴无 P0/P1 |
+| 4 | 覆盖率 | `python src/prompts-tools/tools/coverage_gate.py` | 达标（P3 起 ≥80%，enforce=true） |
+| 5 | 工作区卫生 | `python tools/cleanup_workspace.py --check` | 零残留（退出码 0） |
+
+- **豁免**：≤2 文件且无新增工具的变更免规格 / 工单，但**不得**豁免第 3–5 项。
+- **不改内核**：本检查单以文档规约 + 守卫测试固化，不改动 `workflow_guard` 的合并语义。
+
 ## 注意事项
 
 - 所有路径均为仓库内相对路径，业务线整体迁移（改目录名）不影响工具运行。
@@ -310,5 +328,5 @@ python src/prompts-tools/tools/automation_status.py activity --threshold 45     
   如需永久保留请自行调整 `archive_reports.KEEP`。
 
 <!-- REGISTRY:BEGIN -->
-> 注册表快照：工具 32 · 类型 13 · 主题 21 · 工作流 8（由 `generate_registry.py` 生成，勿手工编辑）
+> 注册表快照：工具 34 · 类型 13 · 主题 21 · 工作流 8（由 `generate_registry.py` 生成，勿手工编辑）
 <!-- REGISTRY:END -->
