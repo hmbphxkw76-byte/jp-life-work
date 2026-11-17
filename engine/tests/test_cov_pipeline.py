@@ -5,7 +5,7 @@
 automation_status / decision_log / stage_gate_check / pending_verification /
 personal_finance_model / _common 中尚未被既有测试触及的纯函数与 CLI 分支。
 
-运行：python -m unittest src.tests.test_cov_pipeline -v
+运行：python -m unittest engine.tests.test_cov_pipeline -v
 """
 from __future__ import annotations
 

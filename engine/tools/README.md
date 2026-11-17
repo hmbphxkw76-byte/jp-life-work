@@ -8,7 +8,7 @@ CI 工具链使用说明。所有工具基于仓库根目录相对路径运行�
 
 ```bash
 pip install -r requirements.txt   # markdown
-python -m unittest discover -s engine/tests -v   # 单元测试（861 项，以 docs/CI.md 与实测为准）
+python -m unittest discover -s engine/tests -v   # 单元测试（863 项，以 docs/CI.md 与实测为准）
 ```
 
 ## 退出码约定（校验类工具统一）
@@ -337,4 +337,4 @@ python engine/tools/automation_status.py activity --threshold 45               #
 | 版本 | 日期 | 变更 | 说明 |
 |---|---|---|---|
 | v1.0 | 2026-11-17 | 初始版本 | 工具链使用说明（工具一览 / 工作流 / 测试 / 流水线全貌）；2026-11-17 校准测试数 308、工作流 8、类型 13 与旧路径 |
-| v1.1 | 2026-11-17 | 迁移后治理 | 修复 `../../report_templates/` 断链为 `../report_templates/`；测试数 308 → 861；工作流 6 → 8 |
+| v1.1 | 2026-11-17 | 迁移后治理 | 修复 `../../report_templates/` 断链为 `../report_templates/`；测试数 308 → 863；工作流 6 → 8 |

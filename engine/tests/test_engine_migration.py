@@ -8,12 +8,14 @@
 3. 主题数：`iter_business_dirs()` 恒为 21（防 `engine/vocabulary` 误判为业务线）；
 4. 深度推导：各模块 `parents[N]` 推导出的 `ROOT` 必须等于仓库根（防漏改）；
 5. 活引用：`git grep "src/"` 在代码 / CI / 配置 / 文档中清零
-   （仅白名单：本迁移规格书、比对脚本自身及其映射测试、脚本 README 的映射说明）。
+   （仅白名单：本迁移规格书、比对脚本自身及其映射测试、脚本 README 的映射说明）；
+   并扩展扫描「裸 `tools/` 路径」与「旧模块路径 `src.xxx`」，防无斜杠旧路径形态回潮。
 
 运行：python -m unittest discover -s engine/tests
 """
 from __future__ import annotations
 
+import re
 import sys
 import tempfile
 import unittest
@@ -36,6 +38,18 @@ SRC_WHITELIST = {
     "docs/toolchain/reviews/post-migration-governance-review.md",  # 迁移后治理评审（描述旧→新映射）
 }
 
+# 裸 `tools/` 扫描的结构性豁免：以下文件中的 `tools/` **不是**「旧根 tools/ 目录」引用，
+# 而是 engine/ 子树示意图 / 合成 fixture，不属迁移残留（不得据此放宽其它文件）。
+TOOLS_TOKEN_EXCLUDE = {
+    "engine/report_templates/prompt-generic-base.md",  # engine/ 目录树中的 engine/tools 子节点
+    "engine/tests/test_cleanup.py",                    # 合成 fixture 路径（自测清理器行为）
+    "docs/toolchain/reviews/post-migration-governance-review.md",  # 评审中的目录终态校验命令字面量
+}
+
+# 旧路径的两种「无斜杠前缀」形态：裸 `tools/` 目录引用、旧模块路径 `src.<包>`。
+BARE_TOOLS_RE = re.compile(r"(?<![\w/])tools/")
+LEGACY_MODULE_RE = re.compile(r"src\.(?:tests|prompts|report|search|vocabulary|tools)\b")
+
 # 扫描时跳过的目录（版本库 / 任务工作树 / 运行期产物）
 SCAN_EXCLUDE_DIRS = {
     ".git", ".worktrees", ".migration-baseline", ".catpaw", ".catpaw-",
@@ -43,13 +57,8 @@ SCAN_EXCLUDE_DIRS = {
 }
 
 
-def _scan(pattern: str) -> list[str]:
-    """全量扫描（含未跟踪文件）中含 `pattern` 的文本文件相对路径。
-
-    不用 `git grep`：后者只搜已跟踪文件，会漏掉尚未 add 的新文件（本守卫自身
-    即属此类），造成「本地绿 / CI 红」的假阴性。
-    """
-    hits: list[str] = []
+def _iter_text_files():
+    """产出 (rel, text)：全量文件（含未跟踪），排除版本库 / 工作树 / 运行期产物 / 报告正文。"""
     for p in ROOT.rglob("*"):
         if not p.is_file():
             continue
@@ -64,9 +73,21 @@ def _scan(pattern: str) -> list[str]:
             text = p.read_text(encoding="utf-8")
         except (UnicodeDecodeError, OSError):
             continue
-        if pattern in text:
-            hits.append(rel)
-    return hits
+        yield rel, text
+
+
+def _scan(pattern: str) -> list[str]:
+    """全量扫描（含未跟踪文件）中含 `pattern` 的文本文件相对路径。
+
+    不用 `git grep`：后者只搜已跟踪文件，会漏掉尚未 add 的新文件（本守卫自身
+    即属此类），造成「本地绿 / CI 红」的假阴性。
+    """
+    return [rel for rel, text in _iter_text_files() if pattern in text]
+
+
+def _scan_re(pattern: re.Pattern[str]) -> list[str]:
+    """同 `_scan` 口径，但按正则匹配（用于裸 `tools/` 路径、旧模块路径 `src.xxx` 等形态）。"""
+    return [rel for rel, text in _iter_text_files() if pattern.search(text)]
 
 
 class TestLayoutTerminalState(unittest.TestCase):
@@ -142,6 +163,22 @@ class TestNoLiveSrcReferences(unittest.TestCase):
     def test_no_src_string_constant(self) -> None:
         leftover = set(_scan('"src"')) - SRC_WHITELIST
         self.assertEqual(leftover, set(), "存在 \"src\" 代码常量：" + ", ".join(sorted(leftover)))
+
+    def test_no_bare_tools_dir_references(self) -> None:
+        """裸 `tools/` 目录引用清零（防「根 tools/ → engine/scripts/」漏改回潮）。"""
+        leftover = set(_scan_re(BARE_TOOLS_RE)) - SRC_WHITELIST - TOOLS_TOKEN_EXCLUDE
+        self.assertEqual(
+            leftover, set(),
+            "存在非白名单的裸 tools/ 路径引用：" + ", ".join(sorted(leftover)),
+        )
+
+    def test_no_legacy_module_path_references(self) -> None:
+        """旧模块路径 `src.<包>` 清零（防 `src.tests` 之类漏改）。"""
+        leftover = set(_scan_re(LEGACY_MODULE_RE)) - SRC_WHITELIST
+        self.assertEqual(
+            leftover, set(),
+            "存在旧模块路径（src.xxx）：" + ", ".join(sorted(leftover)),
+        )
 
     def test_scan_sees_untracked_files(self) -> None:
         # 回归：扫描必须覆盖未跟踪文件（否则新文件中的旧路径引用会漏检）

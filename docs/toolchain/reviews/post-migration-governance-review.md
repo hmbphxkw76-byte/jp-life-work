@@ -4,7 +4,8 @@
 > **日期**：2026-11-17
 > **评审对象**：`task/post-migration-governance-736a856f` 分支全量变更
 > **评审人**：CatPaw（独立双轴）
-> **基线**：`origin/main` = `3a13f8c`（迁移已落地，目录终态达标）
+> **基线**：`origin/main` = `3a13f8c`（评审时点，迁移已落地、目录终态达标）；
+> 本分支已并入后续 `76d5656`（迁移缺口收口），故下方测试数与计数按合并后 863 项口径复核
 
 ---
 
@@ -40,7 +41,7 @@
 
 | 命令 | 退出码 | 摘要 |
 |---|---|---|
-| `python -m unittest discover -s engine/tests -v` | 0 | `Ran 861 tests ... OK (skipped=3)` |
+| `python -m unittest discover -s engine/tests -v` | 0 | `Ran 863 tests ... OK (skipped=3)` |
 | `python engine/tools/validate.py` | 0 | 结构与规范校验通过 |
 | `classify_reports.py --check --unknown-warn` | 0 | 无错位报告 |
 | `ensure_region_topics.py --check` | 0 | 结构齐全 |
@@ -93,13 +94,13 @@
 
 | 文件 | 变更 | 规范条款 | 测试 |
 |---|---|---|---|
-| `docs/README.md` | 补索引、版本记录、861 计数 | docs/README 维护规则 | `test_engine_migration`（白名单口径） |
+| `docs/README.md` | 补索引、版本记录、863 计数 | docs/README 维护规则 | `test_engine_migration`（白名单口径） |
 | `engine/README.md` | 索引补 scripts/README、coverage-config | engine/README 第五节 | — |
-| `engine/tools/README.md` | 断链修复、861 / 8 计数 | TOOLCHAIN-DEV-SPEC 第四节 | `test_arch_guard`（工具表） |
+| `engine/tools/README.md` | 断链修复、863 / 8 计数 | TOOLCHAIN-DEV-SPEC 第四节 | `test_arch_guard`（工具表） |
 | `engine/report-audits/README.md` | 第三节改「CI 接线对照」 | 审计留痕分层 | — |
 | `docs/CI.md` / `信息生产全链路执行规范.md` / `信息质量评估提示词体系.md` / `引擎层迁移方案` / `cross-domain-expert-roles.md` / `mainline融合评估报告` / `TOOLCHAIN-DEV-SPEC.md` | 头部版本 / 计数 / 旧路径口径 | 各文档维护规则 | `test_arch_guard`、`test_audit_spec_version_matches_standard_doc` |
 | `engine/scripts/cleanup_workspace.py` / `engine/tools/review_gate.py` | docstring 旧路径 | 架构边界 | — |
-| `engine/tools/{md2html,incremental_build,stage_gate_check,audit_check,audit_preflight,audit_badge,audit_pipeline,migrate_monthly_reports,info_quality_check}.py`、`engine/vocabulary/script/vocab_tool.py` | 类型注解 / 变量重命名（零行为变更） | TOOLCHAIN-DEV-SPEC 第五节 | 全量 861 + mypy 0 |
+| `engine/tools/{md2html,incremental_build,stage_gate_check,audit_check,audit_preflight,audit_badge,audit_pipeline,migrate_monthly_reports,info_quality_check}.py`、`engine/vocabulary/script/vocab_tool.py` | 类型注解 / 变量重命名（零行为变更） | TOOLCHAIN-DEV-SPEC 第五节 | 全量 863 + mypy 0 |
 | 删除 `docs/toolchain/implementation-confirmation-2026-11-17.md`、`docs/模板合规校验报告-2026-11-16.md` | 无入链一次性留痕 | docs/README 维护规则 | 用户确认（2026-11-17） |
 
 ---
@@ -129,3 +130,4 @@
 | 版本 | 日期 | 变更 |
 |---|---|---|
 | v1.0 | 2026-11-17 | 初始双轴评审：Standards / Spec 结论、验证证据、P2 挂账 |
+| v1.1 | 2026-11-17 | 合并收口 | 并入 `origin/main` 76d5656（迁移缺口收口）后复核：测试数 861 → 863，计数口径同步；冲突按「保留缺口收口修复 + 版本记录续编 v2.6」解决 |
