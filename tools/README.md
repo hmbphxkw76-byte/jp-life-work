@@ -162,3 +162,20 @@ python tools/cleanup_workspace.py --root <dir>
 - 手工校验：`python tools/branch_naming.py check <branch...>`（退出码 1 不合规）。
 - 钩子：`python tools/workflow_guard.py hooks` 安装 pre-push / pre-commit（`--check` / `--uninstall`）；
   新克隆 / 换机后必装。规范与异常处理见 `docs/branch-management.md`。
+
+## 十一、报告生成一致性比对（`tools/verify_report_parity.py`）
+
+引擎层迁移（`src/` → `engine/`、根 `tools/` → `engine/scripts/`）的「报告生成零差异」客观判据：迁移前写基线快照，迁移后归一化逐字节比对。
+
+**比对范围**：`index.html` / `INDEX.md` / `search-index.json` / `automation-status.json` / 各主题 `reports/*.{html,md}`；排除 `**/legacy/**` 与基线目录自身。
+
+**允许差异**：① 旧→新路径文本（`src/`→`engine/`、`tools/`→`engine/scripts/`）；② `INDEX.md` 的「最近生成（构建心跳）」时间戳；③ JSON 易变键（`generated_at` 等）。其余差异一律判为回归（MISMATCH）。
+
+```bash
+python tools/verify_report_parity.py --write-baseline .migration-baseline   # 迁移前
+python tools/verify_report_parity.py --compare  .migration-baseline          # 迁移后
+```
+
+**退出码**：0 全部一致；1 存在 MISMATCH / MISSING；2 用法或基线错误。基线目录不入库，收尾删除。
+
+**测试**：`src/tests/test_verify_report_parity.py`。方案出处：`docs/引擎层迁移方案-2026-11-17.md` 附录 B。

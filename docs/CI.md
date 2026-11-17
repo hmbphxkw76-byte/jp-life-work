@@ -199,7 +199,7 @@ reports/YYYY-MM-<slug>.md  ──md2html.py──►  reports/YYYY-MM-<slug>.htm
 - **辅助开关**：报告页工具条「隐藏更新标记」对照阅读、「展开全部删除」。
 - **呈现**：报告页新标签页独立打开，页脚提供「← 返回主题 / 返回首页」。
 
-## 六、测试体系（`src/tests/`，822 项）
+## 六、测试体系（`src/tests/`，844 项）
 
 | 场景 | 测试类 | 覆盖 |
 |---|---|---|
@@ -225,8 +225,9 @@ reports/YYYY-MM-<slug>.md  ──md2html.py──►  reports/YYYY-MM-<slug>.htm
 | 工具链补测（编排决策） | `test_cov_pipeline.py`（111 项） | pipeline_runner / status / trigger / update_planner / automation / decision_log / stage_gate / pending / finance / _common |
 | 工具链补测（并行协作） | `test_cov_workflow.py`（100 项） | workflow_guard / git_push / cleanup / run_tests_parallel |
 | 分支命名与会话标识 | `test_branch_naming.py`（19 项） | sid 派生 / 分支名校验 / pre-push / pre-commit / 钩子安装 |
+| 报告生成一致性比对 | `test_verify_report_parity.py`（22 项） | 归一化（单遍路径重写 / 时间戳 / JSON 易变键）、基线写入与覆盖清空、比对（一致 / 仅路径 / MISMATCH / MISSING / NEW）、退出码 0/1/2 |
 
-> 合计 822 项（`python -m unittest discover -s src/tests`，当前全绿）。
+> 合计 844 项（`python -m unittest discover -s src/tests`，当前全绿）。
 
 ## 七、手动命令速查
 
