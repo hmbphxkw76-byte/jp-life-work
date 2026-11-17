@@ -20,6 +20,11 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 TOOL = ROOT / "tools" / "workflow_guard.py"
 
+# 固定会话 ID：task start 自动追加 sid，保证分支名可断言
+SESSION_ID = "11111111-2222-3333-4444-555555555555"
+SID = "11111111"
+DEMO_BRANCH = f"task/demo-{SID}"
+
 spec = importlib.util.spec_from_file_location("workflow_guard", TOOL)
 assert spec and spec.loader
 wg = importlib.util.module_from_spec(spec)
@@ -31,7 +36,7 @@ GIT_ENV = {
     "GIT_AUTHOR_EMAIL": "guard@example.com",
     "GIT_COMMITTER_NAME": "Guard Test",
     "GIT_COMMITTER_EMAIL": "guard@example.com",
-    "CATPAW_CONVERSATION_ID": "",  # 让 owner 走 用户@主机 分支，避免宿主会话串味
+    "CATPAW_CONVERSATION_ID": SESSION_ID,  # 固定会话 ID，sid 可断言
 }
 
 
@@ -132,22 +137,23 @@ class TestTaskIsolation(TempRepoCase):
     def test_start_creates_branch_and_worktree(self):
         self.repo.tool("task", "start", "demo")
         self.assertEqual(
-            self.repo.git("rev-parse", "--verify", "--quiet", "task/demo").returncode, 0
+            self.repo.git("rev-parse", "--verify", "--quiet", DEMO_BRANCH).returncode, 0
         )
         wt = self.repo.path / ".worktrees" / "demo"
         self.assertTrue(wt.is_dir())
         branch = git_run(["branch", "--show-current"], cwd=wt).stdout.strip()
-        self.assertEqual(branch, "task/demo")
+        self.assertEqual(branch, DEMO_BRANCH)
         tasks = self.repo.tasks()
         self.assertEqual(len(tasks), 1)
         self.assertEqual(tasks[0]["name"], "demo")
-        self.assertEqual(tasks[0]["branch"], "task/demo")
+        self.assertEqual(tasks[0]["branch"], DEMO_BRANCH)
         self.assertEqual(tasks[0]["status"], "active")
+        self.assertEqual(tasks[0]["session"], SESSION_ID)
 
     def test_start_no_worktree_creates_branch_only(self):
         self.repo.tool("task", "start", "demo", "--no-worktree")
         self.assertEqual(
-            self.repo.git("rev-parse", "--verify", "--quiet", "task/demo").returncode, 0
+            self.repo.git("rev-parse", "--verify", "--quiet", DEMO_BRANCH).returncode, 0
         )
         self.assertFalse((self.repo.path / ".worktrees" / "demo").exists())
         self.assertIsNone(self.repo.tasks()[0]["worktree"])
@@ -171,7 +177,7 @@ class TestTaskIsolation(TempRepoCase):
         self.repo.tool("task", "start", "demo")
         self.repo.tool("task", "stop", "demo", "--force")
         self.assertEqual(
-            self.repo.git("rev-parse", "--verify", "--quiet", "task/demo",
+            self.repo.git("rev-parse", "--verify", "--quiet", DEMO_BRANCH,
                        check=False).returncode, 1
         )
         self.assertFalse((self.repo.path / ".worktrees" / "demo").exists())
@@ -363,10 +369,11 @@ class TestSyncAndStatus(TempRepoCase):
     def _advance_origin(self, name, text, msg):
         """从任务工作树直接推一个提交到 origin/main（仅测试装配用）。"""
         self.repo.tool("task", "start", "setup")
+        branch = self.repo.tasks()[0]["branch"]
         wt = Repo(self.repo.path / ".worktrees" / "setup")
         wt.write(name, text)
         wt.commit_all(msg)
-        wt.git("push", "origin", "task/setup:main")
+        wt.git("push", "origin", f"{branch}:main")
         self.repo.tool("task", "stop", "setup", "--force")
 
     def test_sync_up_to_date(self):

@@ -19,7 +19,7 @@ jp-life-work：围绕日本生活与工作（签证 / 就业 / 行业 / 税制 /
 
 1. **分支隔离（任务间）**——任务一律开分支 + 独立 worktree，不直接在共享检出目录改文件：
    ```bash
-   python tools/workflow_guard.py task start <name>     # 建 task/<name> + .worktrees/<name>
+   python tools/workflow_guard.py task start <name>     # 建 task/<name>-<sid> + .worktrees/<name>
    ```
    然后在 `.worktrees/<name>/` 里工作。
 
@@ -41,12 +41,20 @@ jp-life-work：围绕日本生活与工作（签证 / 就业 / 行业 / 税制 /
 
 5. **对齐本地 main** 用 `python tools/workflow_guard.py sync`，不要 `git pull` 硬拉。
 
+6. **分支命名与会话标识**——开发分支一律 `task/<name>-<sid>`（`sid` = 会话标识前 8 位），
+   由 `task start` 自动追加；新克隆 / 换机后先装钩子：
+   ```bash
+   python tools/workflow_guard.py hooks     # 安装 pre-push / pre-commit
+   ```
+   规范与异常处理见 `docs/branch-management.md`。
+
 ### 禁止事项
 
 - 不要 `git push origin main`（除非用户明确指示，且确认已过校验）。
 - 不要 `git checkout/reset --hard`、`git clean`、`git stash` 而不持检出锁。
 - 不要在 task 分支未合并时 `task stop`（确需丢弃用 `--force`，且先告知用户）。
 - 不要在共享检出目录运行 `build_hub.py` / `md2html.py`；`md2html.py` 可在任务工作树内运行以生成本任务报告的 HTML（`build_hub.py` 仍由主会话统一执行）。
+- 不要用 `--no-verify` 绕过分支命名钩子（钩子自身故障除外，且需在提交说明中记录）。
 - 本仓库改动仅限本仓库，不跨 repo。
 
 ## 交付与审计协议（与提示词规范 / CI 同一口径）

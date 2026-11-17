@@ -199,7 +199,7 @@ reports/YYYY-MM-<slug>.md  ──md2html.py──►  reports/YYYY-MM-<slug>.htm
 - **辅助开关**：报告页工具条「隐藏更新标记」对照阅读、「展开全部删除」。
 - **呈现**：报告页新标签页独立打开，页脚提供「← 返回主题 / 返回首页」。
 
-## 六、测试体系（`src/tests/`，803 项）
+## 六、测试体系（`src/tests/`，822 项）
 
 | 场景 | 测试类 | 覆盖 |
 |---|---|---|
@@ -320,16 +320,19 @@ CI 之外的**本地多会话 / 多任务并行**由三层隔离机制约束，�
 
 | 层 | 载体 | 命令 |
 |---|---|---|
-| 分支隔离（任务间） | `task/<name>` 分支 + `.worktrees/<name>` 独立工作树 | `task start / list / stop` |
+| 分支隔离（任务间） | `task/<name>-<sid>` 分支（`sid`=会话标识前 8 位）+ `.worktrees/<name>` 独立工作树 | `task start / list / stop` |
 | 串行合并（main 级） | 全局 merge 锁 + 隔离合并工作树 `.worktrees/_merge` + 校验 + `--force-with-lease` | `merge` |
 | 共享检出锁（工作目录级） | `.git/workflow-guard/*.lock`（owner / 超时失效） | `lock acquire / release / run / status` |
 
 - **典型流程**：`task start <name>` → 在 `.worktrees/<name>/` 工作 → `merge <name>`
   → `task stop <name>`；本地 main 对齐用 `sync`。
+- **分支命名**：开发分支 `task/<name>-<sid>`，`sid` = 会话标识（`CATPAW_CONVERSATION_ID`）前 8 位；
+  钩子 `python tools/workflow_guard.py hooks`（pre-push / pre-commit）自动校验，新克隆 / 换机后必装。
+  规范与台账：`docs/branch-management.md`。
 - **与 CI 的边界**：Actions 在远端 runner 上直接推 `main`，不经过本地锁；
   合并侧用 `--force-with-lease` 兜底，远端被 CI 推进时本地合并失败重试，不覆盖。
 - **详文档**：`tools/README.md`；**会话规约**：`.meituan-catpaw/5833106238/skills/workflow-guard/SKILL.md`；
-  **测试**：`src/tests/test_workflow_guard.py`。
+  **分支规范**：`docs/branch-management.md`；**测试**：`src/tests/test_workflow_guard.py`、`src/tests/test_branch_naming.py`。
 
 ---
 
@@ -436,3 +439,4 @@ python tools/cleanup_workspace.py --dry-run  # 预览将删除项
 | v2.0 | 2026-11-17 | 流水线 CI 接线 | 新增 `.github/workflows/pipeline-orchestrator.yml`（每月 1 日 00:35 UTC：触发检测 → S0→S2 → 监控视图 → 候选 Issue；不含撰写）及同文件 2 项用例；工作流 7 → 8，六节测试数 305 → 307 |
 | v2.1 | 2026-11-17 | 流水线全链路验证 | 新增 E2E 用例（S0→S5 全链路 + S2 闸门 + 幂等，1 项）；六节测试数 307 → 308 |
 | v2.2 | 2026-11-17 | 工具链开发规约落地 | 新增 TOOLCHAIN-DEV-SPEC（六阶段 / 豁免阈值 / 覆盖率门禁 / 双轴评审 / 合并前检查单）；新增 `coverage_gate.py`、`review_gate.py`、`coverage-config.json`、`.coveragerc`；`validate.yml` 增覆盖率 job、`audit-gate.yml` 增评审软门禁；新增守卫测试 `test_toolchain_dev_spec.py` 与 5 个补测文件；工具链覆盖率 0 门禁 → 93%（阈值 80% 阻断）；六节测试数 308 → 803；新增第十一节 |
+| v2.3 | 2026-11-17 | 分支命名与会话标识 | 新增 `tools/branch_naming.py`（`task/<name>-<sid>` 规范 / 校验 / 钩子安装）与 `tools/git-hooks/{pre-push,pre-commit}`；`workflow_guard task start` 自动追加会话 sid，新增 `hooks` 子命令；存量 4 条分支补全 sid 并建立台账（`docs/branch-management.md`）；新增 `test_branch_naming.py`（19 项）并适配既有守卫；六节测试数 803 → 822 |

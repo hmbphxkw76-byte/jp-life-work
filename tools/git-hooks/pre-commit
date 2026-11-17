@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+# jp-life-work 分支命名守卫（pre-commit）。
+# 源文件由 tools/branch_naming.py install 安装；修改请改 tools/git-hooks/pre-commit 后重装。
+# 当前分支为不合规 task/* 时阻断提交；main 与 detached HEAD 放行。
+set -euo pipefail
+
+root="$(git rev-parse --show-toplevel)"
+here="$(cd "$(dirname "$0")" && pwd)"
+if [ -f "$root/tools/branch_naming.py" ]; then
+  script="$root/tools/branch_naming.py"
+else
+  script="$here/branch_naming.py"
+fi
+if [ ! -f "$script" ]; then
+  echo "[branch-naming] 未找到校验脚本（tools/branch_naming.py 或 hooks 副本），已禁止提交。" >&2
+  exit 1
+fi
+
+py=""
+for candidate in "${BRANCH_NAMING_PY:-}" python python3; do
+  if [ -n "$candidate" ] && command -v "$candidate" >/dev/null 2>&1; then
+    py="$candidate"
+    break
+  fi
+done
+if [ -z "$py" ]; then
+  echo "[branch-naming] 未找到 python / python3，已禁止提交（可用 BRANCH_NAMING_PY 指定）。" >&2
+  exit 1
+fi
+
+exec "$py" "$script" hook pre-commit

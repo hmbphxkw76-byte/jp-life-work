@@ -11,7 +11,7 @@
 
 ```
 第 1 层  分支隔离（任务间）   task start / list / stop
-                                  每任务一条 task/<name> 分支 + 独立 worktree
+                                  每任务一条 task/<name>-<sid> 分支 + 独立 worktree
         │
 第 2 层  串行合并（main 级）  merge
                                   全局 merge 锁 + 隔离合并工作树 + 校验 + force-with-lease
@@ -57,7 +57,7 @@ python tools/workflow_guard.py lock release checkout
 
 | 命令 | 作用 |
 |---|---|
-| `task start <name> [--no-worktree] [--base <ref>]` | 建 `task/<name>` 分支（默认基于 `origin/main`）+ 独立 worktree |
+| `task start <name> [--no-worktree] [--base <ref>]` | 建 `task/<name>-<sid>` 分支（`sid`=会话标识前 8 位，默认基于 `origin/main`）+ 独立 worktree |
 | `task list` | 列出任务登记与 worktree 实况 |
 | `task stop <name> [--force]` | 删工作树与分支（未合并 / 有未提交改动需 `--force`） |
 | `lock acquire <checkout\|merge> [--op S] [--wait N] [--force]` | 拿锁 |
@@ -67,6 +67,7 @@ python tools/workflow_guard.py lock release checkout
 | `merge <name> [--no-verify] [--verify-cmd S] [--ff-only] [--wait N] [--cleanup] [--push-fallback S]` | 串行合并入 main |
 | `sync [--push-local] [--push-fallback S]` | 持检出锁对齐本地 main 与远端 |
 | `status` | 总览：锁 / 任务 / worktree |
+| `hooks [--check] [--uninstall] [--force]` | 安装 / 校验 / 卸载分支命名钩子（pre-push / pre-commit） |
 | `python tools/git_push.py --remote origin [--fallback origin-https] [--force-with-lease] <refspec...>` | ssh / https 双通道推送（都失败即停止） |
 
 退出码：`0` 成功；`1` 失败（锁被占用、合并冲突、校验阻断等）；`130` 中断。
@@ -94,6 +95,7 @@ python tools/workflow_guard.py lock release checkout
   不按进程存活判断——本工具每次调用都是独立短命进程，持有者是「会话」不是进程。
 - `lock run` 在 `finally` 中释放，命令异常也会放锁。
 - `owner` 优先取 `CATPAW_CONVERSATION_ID`，否则 `用户@主机`；非本人释放需 `--force`。
+  任务登记额外记录 `session`（完整会话 ID），用于分支名 `<sid>` 的反查与台账。
 - 两把锁相互独立：`checkout` 保护共享检出目录，`merge` 保护 main 合并。
 
 ## 六、与 CI 的关系
@@ -152,3 +154,11 @@ python tools/cleanup_workspace.py --root <dir>
 先制造残留再清理、以 `--check` 断言零残留。详见 `docs/CI.md` 第十三节。
 
 **退出码**：0 = 干净或已清理；1 = `--check` 发现残留 / 参数错误 / 删除失败。
+
+## 十、分支命名规范与会话标识（BRANCH-NAMING v1.0）
+
+- 开发分支模板：`task/<name>-<sid>`；`sid` = 会话标识 `CATPAW_CONVERSATION_ID`（UUID）前 8 位小写十六进制。
+- `task start` 自动追加 sid，无需手工输入；任务登记表 `session` 字段记录完整会话 ID。
+- 手工校验：`python tools/branch_naming.py check <branch...>`（退出码 1 不合规）。
+- 钩子：`python tools/workflow_guard.py hooks` 安装 pre-push / pre-commit（`--check` / `--uninstall`）；
+  新克隆 / 换机后必装。规范与异常处理见 `docs/branch-management.md`。
