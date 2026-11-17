@@ -44,6 +44,10 @@ gp = _load("git_push", "tools/git_push.py")
 cw = _load("cleanup_workspace", "tools/cleanup_workspace.py")
 rtp = _load("run_tests_parallel", "tools/run_tests_parallel.py")
 
+# 固定会话 ID：task start 自动追加 sid，分支名可断言
+SESSION_ID = "11111111-2222-3333-4444-555555555555"
+DEMO_BRANCH = "task/demo-11111111"
+
 
 def cp(rc: int, out: str = "", err: str = "") -> subprocess.CompletedProcess:
     return subprocess.CompletedProcess(["git"], rc, out, err)
@@ -333,30 +337,43 @@ class WgCmdCase(TempCase):
 
 
 class TestCovWgTaskCmd(WgCmdCase):
+    def setUp(self) -> None:
+        super().setUp()
+        p = mock.patch.dict(os.environ, {"CATPAW_CONVERSATION_ID": SESSION_ID})
+        p.start()
+        self.addCleanup(p.stop)
+
     def _start_args(self, name="demo", no_worktree=False, base=None):
         return argparse.Namespace(name=name, no_worktree=no_worktree,
                                   base=base, remote="origin")
 
     def test_start_no_worktree(self):
-        git = FakeGit({("rev-parse", "--verify", "--quiet", "task/demo"): (1, "", "")})
+        git = FakeGit({
+            ("rev-parse", "--verify", "--quiet", DEMO_BRANCH): (1, "", ""),
+            ("rev-parse", "--verify", "--quiet", "task/demo"): (1, "", ""),
+        })
         with mock.patch.object(wg, "git", git), \
                 mock.patch.object(wg, "default_base", return_value="origin/main"):
             rc = wg.cmd_task_start(self._start_args(no_worktree=True))
         self.assertEqual(rc, 0)
         tasks = wg.load_tasks(self.state)
-        self.assertEqual(tasks[0]["branch"], "task/demo")
+        self.assertEqual(tasks[0]["branch"], DEMO_BRANCH)
+        self.assertEqual(tasks[0]["session"], SESSION_ID)
         self.assertIsNone(tasks[0]["worktree"])
         self.assertEqual(tasks[0]["status"], "active")
 
     def test_start_with_worktree(self):
-        git = FakeGit({("rev-parse", "--verify", "--quiet", "task/demo"): (1, "", "")})
+        git = FakeGit({
+            ("rev-parse", "--verify", "--quiet", DEMO_BRANCH): (1, "", ""),
+            ("rev-parse", "--verify", "--quiet", "task/demo"): (1, "", ""),
+        })
         with mock.patch.object(wg, "git", git), \
                 mock.patch.object(wg, "default_base", return_value="main"):
             rc = wg.cmd_task_start(self._start_args())
         self.assertEqual(rc, 0)
         wt = self.root / ".worktrees" / "demo"
         self.assertEqual(wg.load_tasks(self.state)[0]["worktree"], str(wt))
-        self.assertTrue(git.called("worktree", "add", "-b", "task/demo", str(wt), "main"))
+        self.assertTrue(git.called("worktree", "add", "-b", DEMO_BRANCH, str(wt), "main"))
 
     def test_start_invalid_name(self):
         with self.assertRaises(wg.GuardError) as ctx:
@@ -370,7 +387,10 @@ class TestCovWgTaskCmd(WgCmdCase):
         self.assertIn("已存在", str(ctx.exception))
 
     def test_start_branch_exists(self):
-        git = FakeGit({("rev-parse", "--verify", "--quiet", "task/demo"): (0, "", "")})
+        git = FakeGit({
+            ("rev-parse", "--verify", "--quiet", DEMO_BRANCH): (0, "", ""),
+            ("rev-parse", "--verify", "--quiet", "task/demo"): (1, "", ""),
+        })
         with mock.patch.object(wg, "git", git):
             with self.assertRaises(wg.GuardError) as ctx:
                 wg.cmd_task_start(self._start_args(no_worktree=True))
@@ -378,7 +398,10 @@ class TestCovWgTaskCmd(WgCmdCase):
 
     def test_start_worktree_dir_exists(self):
         (self.root / ".worktrees" / "demo").mkdir(parents=True)
-        git = FakeGit({("rev-parse", "--verify", "--quiet", "task/demo"): (1, "", "")})
+        git = FakeGit({
+            ("rev-parse", "--verify", "--quiet", DEMO_BRANCH): (1, "", ""),
+            ("rev-parse", "--verify", "--quiet", "task/demo"): (1, "", ""),
+        })
         with mock.patch.object(wg, "git", git):
             with self.assertRaises(wg.GuardError) as ctx:
                 wg.cmd_task_start(self._start_args())

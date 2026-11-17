@@ -8,7 +8,8 @@
 三层隔离：
 
   1. 分支隔离（任务间）——``task start/list/stop``
-     每个任务一条 ``task/<name>`` 分支，默认再配一个独立 worktree
+     每个任务一条 ``task/<name>-<sid>`` 分支（``sid`` = 会话标识前 8 位，
+     规范见 ``docs/branch-management.md``），默认再配一个独立 worktree
      （``.worktrees/<name>``）。任务只碰自己的分支 / 工作树，互不越界。
   2. 串行合并（main 级）——``merge``
      全局 merge 锁保证同一时刻只有一个合并；合并动作在隔离的合并工作树
@@ -39,6 +40,12 @@ import time
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Optional, Sequence
+
+_TOOL_DIR = Path(__file__).resolve().parent
+if str(_TOOL_DIR) not in sys.path:
+    sys.path.insert(0, str(_TOOL_DIR))
+
+import branch_naming  # noqa: E402 - 同目录模块（分支命名单一事实源）
 
 EXIT_OK = 0
 EXIT_ERR = 1
@@ -293,9 +300,14 @@ def cmd_task_start(args: argparse.Namespace) -> int:
         )
     if find_task(tasks, name):
         raise GuardError(f"任务已存在：{name}（先 task stop，或换个名字）")
-    branch = f"task/{name}"
+    session = branch_naming.session_id()
+    branch = branch_naming.task_branch(name, session)
+    legacy = f"task/{name}"
     if git(["rev-parse", "--verify", "--quiet", branch], check=False).returncode == 0:
         raise GuardError(f"分支已存在：{branch}")
+    if git(["rev-parse", "--verify", "--quiet", legacy], check=False).returncode == 0:
+        print(f"[workflow-guard] 提示：存在旧格式分支 {legacy}（无会话标识）；"
+              f"本任务使用 {branch}", file=sys.stderr)
     base = args.base or default_base(root, args.remote)
 
     owner = current_owner()
@@ -303,7 +315,8 @@ def cmd_task_start(args: argparse.Namespace) -> int:
         git(["branch", branch, base])
         tasks.append({
             "name": name, "branch": branch, "worktree": None, "base": base,
-            "owner": owner, "pid": os.getpid(), "created": _now(), "status": "active",
+            "session": session, "owner": owner, "pid": os.getpid(),
+            "created": _now(), "status": "active",
         })
         save_tasks(state, tasks)
         print(f"[workflow-guard] 已建分支 {branch}（基于 {base}），未建 worktree。")
@@ -318,11 +331,12 @@ def cmd_task_start(args: argparse.Namespace) -> int:
     git(["worktree", "add", "-b", branch, str(wt), base])
     tasks.append({
         "name": name, "branch": branch, "worktree": str(wt), "base": base,
-        "owner": owner, "pid": os.getpid(), "created": _now(), "status": "active",
+        "session": session, "owner": owner, "pid": os.getpid(),
+        "created": _now(), "status": "active",
     })
     save_tasks(state, tasks)
     print(f"[workflow-guard] 任务 {name} 已建立：")
-    print(f"  分支   {branch}（基于 {base}）")
+    print(f"  分支   {branch}（基于 {base}，sid={branch_naming.session_sid(session)}）")
     print(f"  工作树 {wt}")
     print(f"  在该工作树里工作；完成后 `merge {name}`。")
     return EXIT_OK
@@ -609,6 +623,15 @@ def cmd_status(args: argparse.Namespace) -> int:
     return EXIT_OK
 
 
+def cmd_hooks(args: argparse.Namespace) -> int:
+    """Git 分支命名钩子的安装 / 校验 / 卸载（规范见 docs/branch-management.md）。"""
+    ok = branch_naming.install_hooks(check=args.check, uninstall=args.uninstall,
+                                     force=args.force)
+    if args.check and ok:
+        print("[workflow-guard] 分支命名钩子（pre-push / pre-commit）已安装且与源文件一致。")
+    return EXIT_OK if ok else EXIT_ERR
+
+
 # ──────────────────────────────────────────────
 # CLI
 # ──────────────────────────────────────────────
@@ -691,6 +714,13 @@ def build_parser() -> argparse.ArgumentParser:
     st = sub.add_parser("status", help="总览（锁 / 任务 / worktree）")
     st.add_argument("--stale-timeout", type=int, default=DEFAULT_STALE_TIMEOUT)
     st.set_defaults(func=cmd_status)
+
+    # hooks
+    hp = sub.add_parser("hooks", help="Git 分支命名钩子（安装 / 校验 / 卸载）")
+    hp.add_argument("--check", action="store_true", help="只校验是否已安装且与源文件一致")
+    hp.add_argument("--uninstall", action="store_true", help="卸载钩子")
+    hp.add_argument("--force", action="store_true", help="卸载时允许删除已修改的钩子")
+    hp.set_defaults(func=cmd_hooks)
 
     return p
 

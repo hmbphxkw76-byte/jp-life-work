@@ -14,7 +14,7 @@ description: jp-life-work 并行会话三层隔离机制（任务分支 / 串行
 
 1. **任务一律开分支 + 独立 worktree**，不直接在共享检出目录改文件：
    ```bash
-   python tools/workflow_guard.py task start <name>     # 建 task/<name> + .worktrees/<name>
+   python tools/workflow_guard.py task start <name>     # 建 task/<name>-<sid> + .worktrees/<name>
    ```
    然后在 `.worktrees/<name>/` 里工作。
 
@@ -35,7 +35,11 @@ description: jp-life-work 并行会话三层隔离机制（任务分支 / 串行
 4. **不碰别人的改动**：只提交自己任务范围内的文件；发现非本会话的未完成改动，
    原样保留、不暂存、不提交、不推送。
 
-5. **对齐本地 main** 用 `sync`，不要 `git pull` 硬拉：
+5. **分支命名与会话标识**：开发分支一律 `task/<name>-<sid>`（`sid` = 会话标识前 8 位），
+   由 `task start` 自动追加；新克隆 / 换机后先装钩子 `python tools/workflow_guard.py hooks`。
+   规范与异常处理见 `docs/branch-management.md`。
+
+6. **对齐本地 main** 用 `sync`，不要 `git pull` 硬拉：
    ```bash
    python tools/workflow_guard.py sync
    ```
@@ -45,6 +49,7 @@ description: jp-life-work 并行会话三层隔离机制（任务分支 / 串行
 - 不要 `git push origin main`（除非用户明确指示，且确认已过校验）。
 - 不要 `git checkout/reset --hard`、`git clean`、`git stash` 而不持检出锁。
 - 不要用 `lock acquire` 长时间占锁（超过 30 分钟会自动失效，可能被别人强取）。
+- 不要用 `--no-verify` 绕过分支命名钩子（钩子自身故障除外，且需记录）。
 - 不要在 task 分支未合并时 `task stop`（确需丢弃用 `--force`，且先告知用户）。
 - 不要在共享检出目录运行 `build_hub.py` / `md2html.py`；`md2html.py` 可在任务工作树内运行以生成本任务报告的 HTML（`build_hub.py` 仍由主会话统一执行）。交付与审计协议见 `AGENTS.md`。
 
