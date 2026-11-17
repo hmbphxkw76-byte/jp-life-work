@@ -109,7 +109,7 @@ def get_section(text: str, title: str) -> list:
 
 def parse_table(lines: list) -> list:
     """解析 md 表格为二维数组，自动剔除分隔行。"""
-    rows = []
+    rows: list[list[str]] = []
     for raw in lines:
         s = raw.strip()
         if not s.startswith("|"):
@@ -216,7 +216,7 @@ def resolve_import_file(file_arg: str) -> Path:
 
 def build_uniq(terms: list) -> dict:
     """词条 + 全部别名 → 归一化唯一索引（norm -> id）。"""
-    idx = {}
+    idx: dict[str, str] = {}
     for t in terms:
         for v in [t["term"]] + list(t["aliases"]):
             k = norm(v)
@@ -260,7 +260,7 @@ def read_import_file(path: Path) -> list:
 
     entries = []
     for i, row in enumerate(raw_rows, 2):
-        mapped = {"_line": i}
+        mapped: dict[str, object] = {"_line": i}
         for k, v in row.items():
             ck = HEADER_MAP.get(norm(k), norm(k))
             if ck in IMPORT_KEYS:
@@ -403,7 +403,8 @@ def check_topic(tmeta: dict) -> tuple[list, list]:
     errors, warns = [], []
     if len(terms) < min_terms:
         errors.append(f"词条数 {len(terms)} 低于下限 {min_terms}")
-    seen, ids = {}, set()
+    seen: dict[str, tuple[str, str]] = {}
+    ids: set[str] = set()
     for t in terms:
         if t["id"] in ids:
             errors.append(f"ID 重复：{t['id']}")
@@ -463,10 +464,10 @@ def cmd_verify(cfg: dict, args) -> int:
         errors += [f"{tid}: {x}" for x in e]
         warns += [f"{tid}: {x}" for x in w]
     print(f"[verify] 注册主题 {len(cfg['topics'])} 个：{len(errors)} 项错误 / {len(warns)} 项警告")
-    for e in errors:
-        print(f"  [error] {e}")
-    for w in warns[:20]:
-        print(f"  [warn] {w}")
+    for err in errors:
+        print(f"  [error] {err}")
+    for warn in warns[:20]:
+        print(f"  [warn] {warn}")
     if len(warns) > 20:
         print(f"  [warn] 其余 {len(warns) - 20} 条警告省略")
     return 1 if errors else (2 if warns else 0)
@@ -520,7 +521,7 @@ def cmd_export(tmeta: dict, fmt: str, out: str) -> int:
     version = versions[-1][0] if versions else "v1.0"
     exports_dir = tmeta["exports_dir"]
     exports_dir.mkdir(parents=True, exist_ok=True)
-    counts = {}
+    counts: dict[str, int] = {}
     for t in terms:
         counts[t["category"]] = counts.get(t["category"], 0) + 1
 
@@ -559,7 +560,7 @@ def cmd_index(cfg: dict) -> int:
             terms, versions = load_storage(tmeta["storage"])
         else:
             terms, versions = [], []
-        counts = {}
+        counts: dict[str, int] = {}
         for t in terms:
             counts[t["category"]] = counts.get(t["category"], 0) + 1
         dist = " / ".join(f"{k} {v}" for k, v in sorted(counts.items(), key=lambda kv: (-kv[1], kv[0])))
@@ -772,7 +773,7 @@ def cmd_topic_remove(cfg: dict, args) -> int:
 
 def cmd_topic_check(cfg: dict, args) -> int:
     errors, warns = [], []
-    prefixes = {}
+    prefixes: dict[str, str] = {}
     for tid, t in cfg["topics"].items():
         p = t.get("id_prefix", "")
         if not p:

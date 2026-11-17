@@ -35,6 +35,7 @@ SRC_WHITELIST = {
     "engine/scripts/README.md",               # 比对工具说明（描述旧→新映射）
     "engine/tests/test_engine_migration.py",  # 本守卫自身（含待检字面量）
     "docs/toolchain/reviews/engine-migration-review.md",  # 评审报告（描述旧→新映射）
+    "docs/toolchain/reviews/post-migration-governance-review.md",  # 迁移后治理评审（描述旧→新映射）
 }
 
 # 裸 `tools/` 扫描的结构性豁免：以下文件中的 `tools/` **不是**「旧根 tools/ 目录」引用，
@@ -42,6 +43,7 @@ SRC_WHITELIST = {
 TOOLS_TOKEN_EXCLUDE = {
     "engine/report_templates/prompt-generic-base.md",  # engine/ 目录树中的 engine/tools 子节点
     "engine/tests/test_cleanup.py",                    # 合成 fixture 路径（自测清理器行为）
+    "docs/toolchain/reviews/post-migration-governance-review.md",  # 评审中的目录终态校验命令字面量
 }
 
 # 旧路径的两种「无斜杠前缀」形态：裸 `tools/` 目录引用、旧模块路径 `src.<包>`。

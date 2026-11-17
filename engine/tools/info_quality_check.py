@@ -1045,8 +1045,8 @@ def repair(findings: list[Finding], units: list[dict]) -> list[Repair]:
 
         elif f.code == "C-09":
             rp = ROOT / f.path
-            target = f.detail.split("：", 1)[-1]
-            rep = _fix_link(rp, target) if rp.exists() else None
+            link_target = f.detail.split("：", 1)[-1]
+            rep = _fix_link(rp, link_target) if rp.exists() else None
             if rep:
                 rep.finding_code = "C-09"
                 rep.topic = f.topic
@@ -1224,8 +1224,8 @@ def write_reports(findings: list[Finding], repairs: list[Repair],
         hist = AUDIT_DIR / "repair-history.md"
         entry = f"## {run_date}：自动修复 {len(repairs)} 条\n\n" + md_table(rows) + "\n"
         if hist.exists():
-            with hist.open("a", encoding="utf-8") as f:
-                f.write(entry)
+            with hist.open("a", encoding="utf-8") as fh:
+                fh.write(entry)
         else:
             hist.write_text("# 信息质量修复历史（累计）\n\n" + entry, encoding="utf-8")
         written.append(hist)

@@ -73,6 +73,8 @@
 | `engine/report_templates/<类型ID>/*` | 活文档 | 13 类模板 + 泛用版提示词 + 脚手架 |
 | `engine/tools/README.md` | 活文档 | 工具链使用说明 |
 | `engine/tools/registry.json` | 生成物 | 工具 / 类型 / 主题 / 工作流快照 |
+| `engine/tools/coverage-config.json` | 配置 | 覆盖率阈值 / 开关单一事实源（TOOLCHAIN-DEV-SPEC 第六节） |
+| `engine/scripts/README.md` | 活文档 | 并行协作三层隔离 / 推送 failover / 工作区清理 / 分支命名说明 |
 | `engine/vocabulary/README.md` | 活文档 | 词汇库 SOP |
 | `engine/vocabulary/INDEX.md` | 生成物 | 全主题词汇索引 |
 | `engine/vocabulary/data/*/terms.md` | 工作文件 | 结构化词库（脚本托管，勿手改） |
@@ -93,3 +95,4 @@
 | 版本 | 日期 | 变更 | 说明 |
 |---|---|---|---|
 | v1.0 | 2026-11-17 | 初始版本 | 建立 engine/ 文档治理总纲：目录分类 / 四层文档分层 / 命名规范 / 版本更新机制 / 文档索引 / 维护纪律 |
+| v1.1 | 2026-11-17 | 迁移后治理 | 文档索引补 `engine/scripts/README.md` 与 `engine/tools/coverage-config.json` |

@@ -1,6 +1,6 @@
 # CI 与自动化体系
 
-> **版本**：v2.2（2026-11-17 工具链开发规约落地）
+> **版本**：v2.6（2026-11-17 迁移后治理）
 > 本文档说明 jp-life-work 报告管理体系的持续集成（CI）与定时自动化。
 > 代码位置：`.github/workflows/`（8 条工作流）；工具链：`engine/tools/`；测试：`engine/tests/`。
 
@@ -445,3 +445,4 @@ python engine/scripts/cleanup_workspace.py --dry-run  # 预览将删除项
 | v2.3 | 2026-11-17 | 分支命名与会话标识 | 新增 `engine/scripts/branch_naming.py`（`task/<name>-<sid>` 规范 / 校验 / 钩子安装）与 `engine/scripts/git-hooks/{pre-push,pre-commit}`；`workflow_guard task start` 自动追加会话 sid，新增 `hooks` 子命令；存量 4 条分支补全 sid 并建立台账（`docs/branch-management.md`）；新增 `test_branch_naming.py`（19 项）并适配既有守卫；六节测试数 803 → 822 |
 | v2.4 | 2026-11-17 | 引擎层迁移（SRC→ENGINE） | 旧引擎层目录整体迁至 `engine/`、根协作脚本迁至 `engine/scripts/`（纯路径迁移，零行为变更）；新增迁移守卫 `test_engine_migration.py`（14 项）与报告生成一致性比对 `test_verify_report_parity.py`（25 项）；六节测试数 822 → 861 |
 | v2.5 | 2026-11-17 | 引擎层迁移缺口收口 | 修复二次确认列出的 7 处旧路径文本残留（`TOOLCHAIN-DEV-SPEC` 适用范围 / 覆盖率范围、`review_gate` 与 `cleanup_workspace` docstring、`test_cov_pipeline` 运行命令、mainline 评估报告、代码冗余清理报告）；迁移守卫扩展「裸 tools 目录引用」与「旧模块路径 `src.<包>`」两项扫描（14 → 16 项）；六节测试数 861 → 863 |
+| v2.6 | 2026-11-17 | 迁移后治理 | 头部版本号与版本记录对齐；补 docs 索引与 toolchain 子目录索引；工具链类型注解补全（mypy 37 → 0）；删除 2 份无入链一次性留痕文档；新增迁移后治理双轴评审 |

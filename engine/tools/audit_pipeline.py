@@ -289,7 +289,9 @@ def cmd_init() -> int:
     return 0
 
 
-def _report_arg(rel: str) -> str:
+def _report_arg(rel: str | None) -> str:
+    if not rel:
+        raise SystemExit("[ERROR] 未指定报告路径")
     rel = rel.replace("\\", "/")
     try:
         resolved = (ROOT / rel).resolve()
@@ -629,10 +631,10 @@ def _changed_report_paths(base: str, changed_file: str | None) -> list[str]:
         except (OSError, subprocess.CalledProcessError):
             raw = []
     reps = set()
-    for p in raw:
-        p = p.replace("\\", "/")
-        if p.endswith(".md") and "/reports/" in p:
-            reps.add(p)
+    for rel in raw:
+        rel = rel.replace("\\", "/")
+        if rel.endswith(".md") and "/reports/" in rel:
+            reps.add(rel)
     return sorted(reps)
 
 

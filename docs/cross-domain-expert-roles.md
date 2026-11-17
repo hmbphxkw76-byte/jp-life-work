@@ -34,10 +34,10 @@
 #### R1　技术实现专家（Technical Implementation Analyst）
 
 - **专业定位**：项目"信息生产线"的工程师视角——把工具链、CI、生成物、测试当作被审计对象。
-- **核心分析维度**：工具链健康度（27 个工具是否可运行、退出码是否符合 0/1/2 约定）；生成物确定性（`build_hub.py --check` 是否恒过）；命名合规（`validate.py`）；CI 门禁覆盖（7 条工作流）；测试覆盖与失败项（`engine/tests/`，255 项）；幂等性（重复执行无副作用）。
+- **核心分析维度**：工具链健康度（34 个工具是否可运行、退出码是否符合 0/1/2 约定）；生成物确定性（`build_hub.py --check` 是否恒过）；命名合规（`validate.py`）；CI 门禁覆盖（8 条工作流）；测试覆盖与失败项（`engine/tests/`，863 项）；幂等性（重复执行无副作用）。
 - **独特价值贡献**：在内容问题之前先排除"生产工具本身出问题"——避免把工具缺陷误判为内容缺陷。
 - **能力边界**：只回答"体系如何被构建与自动化"，不回答"内容对不对、设计好不好、读者用得顺不顺"。
-- **本项目专属切入点**：`engine/tools/`（27 个工具脚本，含 validate / lint_reports / compliance_check / classify_reports / ensure_region_topics / md2html / archive_reports / build_index / build_hub / report_diff / update_planner / automation_status / 审计五件套等）、`.github/workflows/`（7 条工作流）、`build_hub.py --check` 的确定性归一化机制、`report_diff.py` 的相似度阈值（0.35）。
+- **本项目专属切入点**：`engine/tools/`（34 个工具脚本，含 validate / lint_reports / compliance_check / classify_reports / ensure_region_topics / md2html / archive_reports / build_index / build_hub / report_diff / update_planner / automation_status / 审计五件套等）、`.github/workflows/`（8 条工作流）、`build_hub.py --check` 的确定性归一化机制、`report_diff.py` 的相似度阈值（0.35）。
 
 #### R2　业务逻辑专家（Research Logic Analyst）
 
@@ -536,3 +536,4 @@
 |---|---|---|---|
 | v1.0 | 2026-11-14 | 初始版本 | 定义 7 个跨领域专家角色（技术实现/业务逻辑/用户体验/风险管控/数据治理/合规审计/交叉验证），含边界裁定、7 份标准化提示词模板、多角色整合使用指南 |
 | v1.1 | 2026-11-16 | 口径修正 | 工具数 13 → 27、工作流 4 → 7、测试 222；移除不存在的 `reader.html`，hash 路由修正为 `#topic-<slug>`；响应式描述改为断点口径 |
+| v1.2 | 2026-11-17 | 迁移后治理 | R1 计数与实测对齐：工具 27 → 34、工作流 7 → 8、测试 255 → 863 |

@@ -23,6 +23,7 @@ import sys
 from dataclasses import asdict, dataclass
 from datetime import date
 from pathlib import Path
+from typing import Any
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
@@ -259,7 +260,7 @@ def run_all() -> tuple[list[dict], dict]:
                 "passed": not any(f.severity in ("P0", "P1") for f in findings),
             })
     results.sort(key=lambda r: r["report"])
-    summary = {
+    summary: dict[str, Any] = {
         "reports": len(results),
         "passed": sum(1 for r in results if r["passed"]),
         "failed": sum(1 for r in results if not r["passed"]),
