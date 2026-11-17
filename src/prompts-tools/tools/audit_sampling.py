@@ -28,7 +28,6 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from _common import ROOT, link_prefix, md_table  # noqa: E402
 from audit_check import check_report, iq_findings_by_path, l5_status, rel as rel_path  # noqa: E402
 from audit_registry import AUDIT_DIR, audit_state, discover  # noqa: E402
-import compliance_check  # noqa: E402
 
 SAMPLING_DIR = AUDIT_DIR / "sampling"
 PENDING_P2 = AUDIT_DIR / "pending-p2.json"

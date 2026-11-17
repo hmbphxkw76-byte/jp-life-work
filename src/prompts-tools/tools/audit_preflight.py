@@ -41,7 +41,7 @@ from info_quality_check import (  # noqa: E402
     fact_units,
     has_source,
 )
-from audit_check import ABSOLUTE_RE, H2_RE, absolute_hits  # noqa: E402
+from audit_check import H2_RE, absolute_hits  # noqa: E402
 from lint_reports import lint_html  # noqa: E402
 
 AUDIT_DIR = ROOT / "src" / "report-audits" / "audit"
