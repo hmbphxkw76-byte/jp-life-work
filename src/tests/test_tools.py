@@ -445,7 +445,7 @@ class TestExitTransitionReturnTopic(unittest.TestCase):
             line for line in registry.splitlines()
             if line.startswith("| policy-analysis |")
         )
-        self.assertIn("jp/16-exit-transition-return", policy_row)
+        self.assertIn("16-exit-transition-return", policy_row)
 
 
 class TestExitTransitionReturnReports(unittest.TestCase):

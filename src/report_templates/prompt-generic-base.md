@@ -17,6 +17,12 @@ jp-life-work/
 │   │   ├── prompt-generic-base.md            # 通用基座（本文件，类型中立）
 │   │   ├── monitoring-common-spec.md         # 监测报告通用规范（跨类型共享最低渲染标准）
 │   │   ├── template-registry.md              # 类型注册表（分类架构接入点）
+│   │   ├── report-classification.md          # 行业主流分类体系（六族十三类）
+│   │   ├── registry-schema.md                # 指标登记册 Schema 规范
+│   │   ├── compliance-rules.json             # 合规校验规则（13 类 × 周期）
+│   │   ├── fact-card-standard.md             # 事实卡片标准
+│   │   ├── l5-semantic-review.md             # L5 语义复核提示词
+│   │   ├── handbook-split-standard.md        # 知识手册拆分操作规范
 │   │   └── <类型ID>/                          # 类型模板目录（如 market-monitoring/）
 │   │       ├── prompt-baseline-setup-template.md
 │   │       └── prompt-<cycle>-template.md

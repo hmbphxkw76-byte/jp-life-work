@@ -14,7 +14,9 @@ report_templates/
 ├── template-registry.md          # 本注册表（类型接入点）
 ├── report-classification.md      # 行业主流分类体系（六族十三类，新增类型选型参考）
 ├── registry-schema.md            # 指标登记册 Schema 规范（v1/v2 活值表与 C-08/C-10/C-13 判定）
-├── compliance-rules.json         # 合规校验规则（12 类结构骨架 × 周期，CI 阻断式校验关卡依据）
+├── compliance-rules.json         # 合规校验规则（13 类结构骨架 × 周期，CI 阻断式校验关卡依据）
+├── fact-card-standard.md         # 事实卡片标准（五字段 / [@FC-NNN] 指针 / 跨报告重复率）
+├── l5-semantic-review.md         # L5 语义复核提示词（审计 L5 六项清单）
 ├── market-monitoring/            # 类型一：市场指标监测型
 │   ├── prompt-baseline-setup-template.md
 │   ├── prompt-monthly-monitor-template.md
@@ -106,23 +108,23 @@ report_templates/
 
 - **根部共享**：通用基座定义跨类型质量规则、变量框架、来源分级、锚定与台账协议；渲染规范定义 HTML 报告的最低渲染标准；合规规则文件登记各类型各周期的结构骨架校验规则（节数 / 必填字段 / 内容格式），供 `src/prompts-tools/tools/compliance_check.py` 的 CI 阻断式校验关卡与定期合规审计消费。任何类型的模板与业务提示词均继承根部文件。
 - **类型目录**：目录名 = 类型 ID（小写 kebab-case）；每类型必备一份基线类型模板（`prompt-baseline-setup-template.md`），周期模板按类型的节拍设计自定（文件名以 `prompt-` 开头、以 `-template.md` 结尾）。
-- **业务提示词脚手架**：market-monitoring 与 employment-research 已有完整业务线实践（dubai/apartment、dubai/cybersecurity）；其余 11 个类型各含一份 `business-prompt-scaffold.md`——复制式业务提示词脚手架（实例化步骤 + business-config 实例化清单 + 各周期业务提示词全文脚手架，链接按复制到 `{TOPIC_DIR}/prompts/` 后的位置书写，即 `../../src/report_templates/...`）。新增业务线时复制脚手架、填变量与 TODO 项即可运行；脚手架自身为类型中立文件，不含业务关键词。
-- **泛用版业务提示词（prompts/ 子目录）**：上述 11 个类型另将脚手架拆分为独立可运行的泛用版业务提示词，存放于 `report_templates/<类型ID>/prompts/`（`prompt-baseline-setup.md` + 各周期提示词 + 可选事件触发专项，共 24 份）。泛用版 = 绑定类型的业务提示词母版：变量区（{{REGION}}/{{TOPIC}} 等）+ 类型模板引用 + TODO 业务项；建新业务线时整目录复制到业务 `prompts/`、填变量与 TODO、补 `business-config.md` 即可运行。**要点一致**：周期提示词的任务目标 / 硬性约束 / 骨架引用须与类型模板、脚手架同口径；修改时同步类型模板、prompts/ 泛用版与脚手架三处。审计协议（落盘后审计节）在脚手架 / 泛用版层级承载，复制后须逐份保留。
+- **业务提示词脚手架**：market-monitoring 与 employment-research 已有完整业务线实践；其余 11 个类型各含一份 `business-prompt-scaffold.md`——复制式业务提示词脚手架（实例化步骤 + business-config 实例化清单 + 提示词正文指针，链接按复制到 `{TOPIC_DIR}/prompts/` 后的位置书写，即 `../../src/report_templates/...`）。新增业务线时复制脚手架、填变量与 TODO 项即可运行；脚手架自身为类型中立文件，不含业务关键词。
+- **泛用版业务提示词（prompts/ 子目录）**：上述 11 个类型另将脚手架拆分为独立可运行的泛用版业务提示词，存放于 `report_templates/<类型ID>/prompts/`（`prompt-baseline-setup.md` + 各周期提示词 + 可选事件触发专项，共 24 份）。泛用版 = 绑定类型的业务提示词母版：变量区（{{REGION}}/{{TOPIC}} 等）+ 类型模板引用 + TODO 业务项；建新业务线时整目录复制到业务 `prompts/`、填变量与 TODO、补 `business-config.md` 即可运行。**要点一致**：周期提示词的任务目标 / 硬性约束 / 骨架引用须与类型模板同口径；修改时同步类型模板与 prompts/ 泛用版两处（脚手架仅保留实例化指南，不再重复正文）。审计协议（落盘后审计节）在脚手架 / 泛用版层级承载，复制后须逐份保留。
 
 ## 二、已注册类型清单
 
 | 类型 ID | 类型名称 | 基线模板 | 周期模板 | 节拍设计 | 已接入业务线 |
 |---|---|---|---|---|---|
-| market-monitoring | 市场指标监测型 | prompt-baseline-setup-template.md | monthly / quarterly / annual（三份独立） | 月 / 季 / 年三周期 | dubai/apartment, jp/13-regional-info |
-| trend-weekly | 行业趋势周报型 | prompt-baseline-setup-template.md | prompt-weekly-monitor-template.md | 周报主节拍（数据截止日命名）+ 事件触发板块升级 | trends/ai-security |
-| employment-research | 职业就业调研型 | prompt-baseline-setup-template.md | prompt-update-template.md（一份覆盖三档节拍） | 季度主节拍 + 事件触发；月度核验轻运行；年度复盘 | dubai/cybersecurity, jp/01-ssw-driver, jp/02-career-driver, jp/03-career-management, jp/07-economy-finance, jp/10-education-qualification, jp/11-language-japanese, jp/12-culture-life |
+| market-monitoring | 市场指标监测型 | prompt-baseline-setup-template.md | monthly / quarterly / annual（三份独立） | 月 / 季 / 年三周期 | 13-regional-info, 19-safety-disaster |
+| trend-weekly | 行业趋势周报型 | prompt-baseline-setup-template.md | prompt-weekly-monitor-template.md | 周报主节拍（数据截止日命名）+ 事件触发板块升级 | 暂无 |
+| employment-research | 职业就业调研型 | prompt-baseline-setup-template.md | prompt-update-template.md（一份覆盖三档节拍） | 季度主节拍 + 事件触发；月度核验轻运行；年度复盘 | 00-decision-hub, 01-ssw-driver, 02-career-driver, 03-career-management, 07-economy-finance, 10-education-qualification, 11-language-japanese, 12-culture-life, 14-life-operations, 15-health-wellbeing, 17-migration-compliance, 18-family-parenting |
 | competitive-intelligence | 竞争情报监测型 | prompt-baseline-setup-template.md | prompt-monthly-update-template.md（覆盖两档） | 月度主更新（动态矩阵刷新）+ 事件触发升级 | 暂无 |
 | sentiment-monitoring | 舆情传播监测型 | prompt-baseline-setup-template.md | prompt-monthly-update-template.md（覆盖两档） | 月度舆情月报 + 事件触发预警升级 | 暂无 |
 | consumer-research | 消费者·用户调研型 | prompt-baseline-setup-template.md | prompt-study-template.md（项目制） | 项目制专题调研 + 年度满意度复测 | 暂无 |
-| industry-research | 行业深度研究型 | prompt-baseline-setup-template.md | prompt-annual-refresh-template.md | 一次性深度全景 + 年度刷新（重大事件可插刷） | jp/04-industry-logistics, jp/05-industry-autonomous, jp/06-industry-technology |
+| industry-research | 行业深度研究型 | prompt-baseline-setup-template.md | prompt-annual-refresh-template.md | 一次性深度全景 + 年度刷新（重大事件可插刷） | 04-industry-logistics, 05-industry-autonomous, 06-industry-technology |
 | market-sizing | 市场规模测算与预测型 | prompt-baseline-setup-template.md | prompt-annual-refresh-template.md | 一次性测算建模 + 年度假设刷新与回测（失效信号可插刷） | 暂无 |
 | investment-research | 投资分析与尽调型 | prompt-baseline-setup-template.md | prompt-target-update-template.md | 首次覆盖 + 定期复核 + 事件触发结论修订 | 暂无 |
-| policy-analysis | 政策法规解读型 | prompt-baseline-setup-template.md | prompt-policy-review-template.md（覆盖两档） | 事件触发单份解读 + 年度台账复盘 | jp/08-visa-immigration, jp/09-politics-law, jp/16-exit-transition-return |
+| policy-analysis | 政策法规解读型 | prompt-baseline-setup-template.md | prompt-policy-review-template.md（覆盖两档） | 事件触发单份解读 + 年度台账复盘 | 08-visa-immigration, 09-politics-law, 16-exit-transition-return, 20-overseas-china |
 | feasibility-study | 可行性与市场进入型 | prompt-baseline-setup-template.md | prompt-study-template.md（项目制） | 项目制一次性论证 + 项目复盘 | 暂无 |
 | flash-commentary | 快评·事件点评型 | prompt-baseline-setup-template.md（机制文档） | prompt-flash-note-template.md | 事件触发 72h 快评（基线期为机制建立，不出正文） | 暂无 |
 | whitepaper | 白皮书·专题深度型 | prompt-baseline-setup-template.md | prompt-topic-study-template.md（选题制） | 新选题白皮书 + 年度系列篇 + 框架修订篇 | 暂无 |
@@ -182,3 +184,5 @@ report_templates/
 | v1.24 | 2026-11-14 | 新增根部共享操作规范 handbook-split-standard.md | 沉淀 12-culture-life 手册拆分实践（提交 4d3e200）为跨主题可复用标准化提示词模板：双产物分离原则、编号即接口约束、归属映射/边界裁定表、执行清单 ①–⑧、链接锚点规范、验证清单（含 URL 守恒与仓库测试）、提交规范、HTML 预览页设计系统；供其余含合并附录手册的主题统一执行 |
 | v1.25 | 2026-11-15 | 归类为十三类标准 + 登记册 Schema | report-classification 统一为「六族十三类」；新增根部 registry-schema.md（v1/v2 活值表 Schema 与 C-08/C-10/C-13 判定规则），根部共享清单同步 |
 | v1.26 | 2026-11-16 | 模板合规整改 | 脚手架计数 10→11、泛用版计数 23→24；链接口径统一为「复制后位置 `{TOPIC_DIR}/prompts/` → `../../src/report_templates/...`」；「内容与脚手架正文一致」改为「要点一致」并明确审计协议承载层级 |
+| v1.27 | 2026-11-17 | 文档治理校准 | 目录树补齐 `fact-card-standard.md` / `l5-semantic-review.md`（两份根部文档此前未登记）；「12 类」更正为 13 类；第二节「已接入业务线」列更新为实际 20 主题目录（00–20）；补记 17–20 主题接入；泛用版计数校准为 24 份 |
+| v1.28 | 2026-11-17 | 脚手架正文指针化 | 11 份 `business-prompt-scaffold.md` 的提示词正文统一收口到各类型 `prompts/` 泛用版母版（24 份），脚手架只保留实例化步骤 / business-config 清单 / 审计协议，消除「类型模板 / prompts/ / 脚手架」三处同步 |
