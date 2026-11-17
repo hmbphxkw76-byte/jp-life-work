@@ -88,3 +88,34 @@
 | 7 合并后 24h 内 `src/` 活引用回潮 | 待观察 |
 
 **结论**：Standards / Spec 双轴均无 P0/P1，五项检查单齐备，满足合并条件。
+
+---
+
+## 六、二次确认缺口收口（2026-11-17 追加）
+
+独立二次确认（全量文件扫描，含未跟踪；非 `git grep`）判定迁移**部分对齐**：A–H 全过，但发现 7 处
+「无斜杠前缀」旧路径文本残留，未被原迁移的全局替换覆盖，也未登记于 §四。本次逐条修复并补强守卫：
+
+| # | 位置 | 修复 |
+|---|---|---|
+| G1 | `docs/toolchain/TOOLCHAIN-DEV-SPEC.md:22` 适用范围表 | 第三项 `tools/` → `engine/scripts/` |
+| G2 | `docs/toolchain/TOOLCHAIN-DEV-SPEC.md:66` 覆盖率统计范围 | 第三项 `tools/` → `engine/scripts/` |
+| G3 | `engine/tools/review_gate.py` module docstring | 第三项 ``tools/`` → ``engine/scripts/`` |
+| G4 | `engine/scripts/cleanup_workspace.py:18` 安全约束 | 删除已不存在的 `src`、`tools` |
+| G5 | `engine/tests/test_cov_pipeline.py:8` 运行命令 | `src.tests.` → `engine.tests.` |
+| G6 | `docs/mainline融合评估报告-2026-11-17.md:239` | 第三项 `tools/` → `engine/scripts/` |
+| G7 | `docs/代码冗余与无效代码清理报告-2026-11-17.md:78` | `compileall -q src tools` → `compileall -q engine` |
+
+**守卫盲区补强**（`engine/tests/test_engine_migration.py`，14 → 16 项）：新增两项全量扫描断言——
+裸 `tools/` 目录引用（正则 `(?<![\w/])tools/`）、旧模块路径 `src.<包>`（正则 `src\.(?:tests|prompts|report|search|vocabulary|tools)\b`）。
+白名单沿用既有 6 项（映射表 / 规格书 / 评审报告 / 守卫自身），**未纳入任何 G1–G7 文件**；
+另设 `TOOLS_TOKEN_EXCLUDE` 仅豁免两处**非旧根 tools/ 引用**的结构性用法（`prompt-generic-base.md` 的
+engine/ 子树示意图、`test_cleanup.py` 的合成 fixture），并在代码注释中写明理由。
+
+**收口验证**：`unittest discover -s engine/tests` = **863 OK (skipped=3)**；`validate.py` 退出码 0；
+`build_hub --check` / `build_index --check` 均 0；`generate_registry --check` 一致（34/13/21/8）；
+`iter_business_dirs()` = 21；生成物 CRLF 归一后逐字节相等；三类扫描（`src/`、`"src"`、裸 `tools/`、`src.<包>`）
+白名单外 0 命中；`NN-*/reports/**` 与 `*/handbook/**` 零改动；`docs/CI.md` 测试数同步 861 → 863。
+
+**结论**：缺口全部收口，迁移与方案完全对齐；无行为变更、无生成物漂移。
+

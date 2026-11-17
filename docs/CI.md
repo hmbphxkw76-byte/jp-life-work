@@ -199,7 +199,7 @@ reports/YYYY-MM-<slug>.md  ──md2html.py──►  reports/YYYY-MM-<slug>.htm
 - **辅助开关**：报告页工具条「隐藏更新标记」对照阅读、「展开全部删除」。
 - **呈现**：报告页新标签页独立打开，页脚提供「← 返回主题 / 返回首页」。
 
-## 六、测试体系（`engine/tests/`，861 项）
+## 六、测试体系（`engine/tests/`，863 项）
 
 | 场景 | 测试类 | 覆盖 |
 |---|---|---|
@@ -226,9 +226,9 @@ reports/YYYY-MM-<slug>.md  ──md2html.py──►  reports/YYYY-MM-<slug>.htm
 | 工具链补测（并行协作） | `test_cov_workflow.py`（100 项） | workflow_guard / git_push / cleanup / run_tests_parallel |
 | 分支命名与会话标识 | `test_branch_naming.py`（19 项） | sid 派生 / 分支名校验 / pre-push / pre-commit / 钩子安装 |
 | 报告生成一致性比对 | `test_verify_report_parity.py`（25 项） | 归一化（单遍路径重写 / 时间戳 / JSON 易变键）、基线写入与覆盖清空、比对（一致 / 仅路径 / MISMATCH / MISSING / NEW）、退出码 0/1/2 |
-| 引擎层迁移守卫 | `test_engine_migration.py`（14 项） | 目录终态（engine 存在 / 旧引擎层与根协作脚本目录不存在）、SKIP_TOP / TYPE_RE、主题数 21、深度推导 ROOT、旧路径与代码常量活引用清零 |
+| 引擎层迁移守卫 | `test_engine_migration.py`（16 项） | 目录终态（engine 存在 / 旧引擎层与根协作脚本目录不存在）、SKIP_TOP / TYPE_RE、主题数 21、深度推导 ROOT、旧路径与代码常量活引用清零、裸 tools 目录引用与旧模块路径 `src.<包>` 清零 |
 
-> 合计 861 项（`python -m unittest discover -s engine/tests`，当前全绿）。
+> 合计 863 项（`python -m unittest discover -s engine/tests`，当前全绿）。
 
 ## 七、手动命令速查
 
@@ -444,3 +444,4 @@ python engine/scripts/cleanup_workspace.py --dry-run  # 预览将删除项
 | v2.2 | 2026-11-17 | 工具链开发规约落地 | 新增 TOOLCHAIN-DEV-SPEC（六阶段 / 豁免阈值 / 覆盖率门禁 / 双轴评审 / 合并前检查单）；新增 `coverage_gate.py`、`review_gate.py`、`coverage-config.json`、`.coveragerc`；`validate.yml` 增覆盖率 job、`audit-gate.yml` 增评审软门禁；新增守卫测试 `test_toolchain_dev_spec.py` 与 5 个补测文件；工具链覆盖率 0 门禁 → 93%（阈值 80% 阻断）；六节测试数 308 → 803；新增第十一节 |
 | v2.3 | 2026-11-17 | 分支命名与会话标识 | 新增 `engine/scripts/branch_naming.py`（`task/<name>-<sid>` 规范 / 校验 / 钩子安装）与 `engine/scripts/git-hooks/{pre-push,pre-commit}`；`workflow_guard task start` 自动追加会话 sid，新增 `hooks` 子命令；存量 4 条分支补全 sid 并建立台账（`docs/branch-management.md`）；新增 `test_branch_naming.py`（19 项）并适配既有守卫；六节测试数 803 → 822 |
 | v2.4 | 2026-11-17 | 引擎层迁移（SRC→ENGINE） | 旧引擎层目录整体迁至 `engine/`、根协作脚本迁至 `engine/scripts/`（纯路径迁移，零行为变更）；新增迁移守卫 `test_engine_migration.py`（14 项）与报告生成一致性比对 `test_verify_report_parity.py`（25 项）；六节测试数 822 → 861 |
+| v2.5 | 2026-11-17 | 引擎层迁移缺口收口 | 修复二次确认列出的 7 处旧路径文本残留（`TOOLCHAIN-DEV-SPEC` 适用范围 / 覆盖率范围、`review_gate` 与 `cleanup_workspace` docstring、`test_cov_pipeline` 运行命令、mainline 评估报告、代码冗余清理报告）；迁移守卫扩展「裸 tools 目录引用」与「旧模块路径 `src.<包>`」两项扫描（14 → 16 项）；六节测试数 861 → 863 |
