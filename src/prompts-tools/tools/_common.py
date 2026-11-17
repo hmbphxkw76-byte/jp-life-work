@@ -376,3 +376,56 @@ def md_table(rows: list[list[str]]) -> str:
 def link_prefix(out_file: Path) -> str:
     """从产物文件回到仓库根的相对前缀（保证 Markdown 链接可用）。"""
     return "../" * (len(out_file.relative_to(ROOT).parts) - 1)
+
+
+# ──────────────────────────────────────────────
+# 端到端流水线编排：状态层（2026-11-17 任务 1）
+# ──────────────────────────────────────────────
+# 状态文件只存路径 / 状态 / 时间戳 / 摘要，不存正文、不存凭据。
+import json  # noqa: E402
+
+# 编排状态与快照目录（设计文档 §3.4：src/report-audits/pipeline/）
+PIPELINE_DIR = SRC / "report-audits" / "pipeline"
+
+# 状态文件 schema 版本；缺失或不符即视为损坏，拒绝静默续跑（可重建）
+STATE_SCHEMA_VERSION = "1.0"
+
+
+def pipeline_state_path(period: str) -> Path:
+    """周期 -> 状态文件路径（`state-<period>.json`）。"""
+    return PIPELINE_DIR / f"state-{period}.json"
+
+
+def new_state(period: str) -> dict:
+    """新建空状态：仅 schema 版本、周期与空阶段表。"""
+    return {
+        "schema_version": STATE_SCHEMA_VERSION,
+        "period": period,
+        "stages": {},
+        "updated": "",
+    }
+
+
+def load_state(period: str) -> dict:
+    """读取周期状态。
+
+    文件缺失抛 :class:`FileNotFoundError`（调用方决定冷启动 / 报错）；
+    内容非合法 JSON、非对象或 ``schema_version`` 不符抛 :class:`ValueError`。
+    """
+    path = pipeline_state_path(period)
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as exc:
+        raise ValueError(f"状态文件损坏（非合法 JSON）：{path}") from exc
+    if not isinstance(data, dict) or data.get("schema_version") != STATE_SCHEMA_VERSION:
+        actual = data.get("schema_version") if isinstance(data, dict) else type(data).__name__
+        raise ValueError(
+            f"状态文件 schema 版本不符：{path}（期望 {STATE_SCHEMA_VERSION}，实际 {actual}）"
+        )
+    return data
+
+
+def save_state(period: str, state: dict) -> None:
+    """原子写入周期状态（目录不存在时自动创建）。"""
+    PIPELINE_DIR.mkdir(parents=True, exist_ok=True)
+    atomic_write(pipeline_state_path(period), json.dumps(state, ensure_ascii=False, indent=2))

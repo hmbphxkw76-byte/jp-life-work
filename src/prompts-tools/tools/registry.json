@@ -25,9 +25,12 @@
     "migrate_monthly_reports.py",
     "pending_verification.py",
     "personal_finance_model.py",
+    "pipeline_runner.py",
+    "pipeline_status.py",
     "report_diff.py",
     "skeleton_builder.py",
     "stage_gate_check.py",
+    "trigger_watch.py",
     "update_planner.py",
     "validate.py"
   ],
@@ -74,6 +77,7 @@
     "audit-sampling.yml",
     "html-sync.yml",
     "info-quality.yml",
+    "pipeline-orchestrator.yml",
     "scheduled-maintenance.yml",
     "scheduled-report-tasks.yml",
     "validate.yml"

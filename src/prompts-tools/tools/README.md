@@ -38,6 +38,9 @@ python -m unittest discover -s src/tests -v   # 单元测试（255 项：tools 1
 | generate_registry.py | 编排 | 手动：生成 `registry.json` 并渲染 README 快照（`--write` / `--check`） |
 | migrate_monthly_reports.py | 迁移 | 一次性：存量报告合并重命名为月度系列 |
 | update_planner.py | 编排 | scheduled-report-tasks.yml「生成月度任务清单」 |
+| trigger_watch.py | 编排 | 手动 / pipeline-orchestrator.yml：触发检测（watchlist + freshness + 候选线索） |
+| pipeline_status.py | 编排 | 手动：统一监控视图（阶段进度 / 阻塞点 / 审计分布 / 心跳） |
+| pipeline_runner.py | 编排 | 手动 / pipeline-orchestrator.yml：六阶段状态机（断点续跑 / S2 人工闸门） |
 | automation_status.py | 编排 | 5 条工作流 `record` 入库 + 手动 `activity`（活跃度预警） |
 | info_quality_check.py | 校验+修复 | info-quality.yml「信息质量全量评估」+ validate.yml「信息质量检查」 |
 | auto_verify.py | 校验 | 手动：生成后自动验证（V1–V5）→ 写回「自动验证结果」→ 提交审计 |
@@ -193,6 +196,52 @@ python src/prompts-tools/tools/update_planner.py --project dubai/apartment --per
 - 任务状态：期望输出已存在 → done，否则 pending；`--pending-only` 只留 pending。
   参数错误退出码 2。
 
+### trigger_watch.py — 触发检测（watchlist / freshness / 候选线索）
+
+```bash
+# 只读：JSON 输出到 stdout（默认行为）
+python src/prompts-tools/tools/trigger_watch.py --report --period 2026-11
+# 写快照：src/report-audits/pipeline/trigger-watch.json
+python src/prompts-tools/tools/trigger_watch.py --apply --period 2026-11
+```
+
+- watchlist **派生**自各主题 `prompts/business-config.md` §7 触发器与
+  `data/*_indicator_registry.md` 核验日期，不新增手工配置。
+- `window_due` 复用 `update_planner` 待办判定；`stale` 用 `info_quality_check`
+  的 `STALE_DAYS`（12 个月）阈值；`candidates` 仅取登记册「观察项与触发器状态」
+  的待办线索（**命中 ≠ 核实**，无命中为空）。
+- 默认只读；`--apply` 才写快照。退出码 0 = 正常（含空清单）。
+
+### pipeline_status.py — 统一监控视图
+
+```bash
+python src/prompts-tools/tools/pipeline_status.py            # 人读 + 写 status.md / .json
+python src/prompts-tools/tools/pipeline_status.py --porcelain # 仅 JSON
+python src/prompts-tools/tools/pipeline_status.py --period 2026-11
+```
+
+- 读编排状态机（`state-<period>.json`）汇总阶段进度与阻塞点（首个非 completed 阶段），
+  叠加审计台账状态分布与 `automation-status.json` 最近心跳。
+- 状态文件缺失 → 空状态（冷启动）；损坏 / schema 不符 → `state_error` 明示，不静默续跑。
+- `STAGES` 为六阶段 canonical 顺序，`pipeline_runner.py` 复用。
+
+### pipeline_runner.py — 端到端编排器（六阶段状态机）
+
+```bash
+# 从 S0 起跑（遇 S2 人工闸门自动暂停）
+python src/prompts-tools/tools/pipeline_runner.py run --period 2026-11 [--dry-run]
+# 人工完成 S2 正文后从 S3 续跑
+python src/prompts-tools/tools/pipeline_runner.py resume --period 2026-11 --from-stage S3_build
+# 只读状态
+python src/prompts-tools/tools/pipeline_runner.py status --period 2026-11
+```
+
+- 阶段：`S0_detect → S1_plan → S2_author（人工闸门）→ S3_build → S4_audit → S5_monitor`。
+- **S2 为唯一人工环节**：编排器只置 `pending` 并产出待撰写清单，绝不自动产出正文。
+- 状态持久化 `src/report-audits/pipeline/state-<period>.json`；断点续跑、幂等；
+  损坏 / schema 不符的状态文件直接终止（退出码 1）。
+- 提交 / 合并仍走 `tools/workflow_guard.py`；编排器不直接 push `main`。
+
 ### automation_status.py — 自动化状态与活跃度
 
 ```bash
@@ -206,6 +255,8 @@ python src/prompts-tools/tools/automation_status.py activity --threshold 45     
 ```
 
 状态写入根目录 `automation-status.json`（追加式，工作流提交）。
+`--phase` 可选 `content-update` / `maintenance` / `html-sync` / `info-quality` /
+`audit-sampling` / `scheduled-report-tasks` / `pipeline`（端到端流水线编排心跳）。
 
 ## 决策支持流程（DecisionSupport-Guard）
 
@@ -259,5 +310,5 @@ python src/prompts-tools/tools/automation_status.py activity --threshold 45     
   如需永久保留请自行调整 `archive_reports.KEEP`。
 
 <!-- REGISTRY:BEGIN -->
-> 注册表快照：工具 29 · 类型 13 · 主题 21 · 工作流 7（由 `generate_registry.py` 生成，勿手工编辑）
+> 注册表快照：工具 32 · 类型 13 · 主题 21 · 工作流 8（由 `generate_registry.py` 生成，勿手工编辑）
 <!-- REGISTRY:END -->
