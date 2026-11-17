@@ -17,8 +17,8 @@
 | 政策台账与指标登记册 | `17-migration-compliance/data/migration_compliance_indicator_registry.md` |
 | 报告产物 | `17-migration-compliance/reports/` |
 | 报告归档 | `17-migration-compliance/reports/archives/` |
-| 工具链 | `src/prompts-tools/tools/`（退出码：0 过 / 1 错 / 2 警告） |
-| 通用层（只读，不改） | `src/report_templates/` |
+| 工具链 | `engine/tools/`（退出码：0 过 / 1 错 / 2 警告） |
+| 通用层（只读，不改） | `engine/report_templates/` |
 
 ### 0.2 五种启动方式
 
@@ -32,8 +32,8 @@
 
 ```powershell
 # 在仓库根目录执行
-python src/prompts-tools/tools/validate.py      # 结构与命名校验，期望：本主题零 WARN / 零 ERROR
-python src/prompts-tools/tools/lint_reports.py  # 报告内容校验，期望：0 错误
+python engine/tools/validate.py      # 结构与命名校验，期望：本主题零 WARN / 零 ERROR
+python engine/tools/lint_reports.py  # 报告内容校验，期望：0 错误
 ```
 
 > **退出码说明**：`validate.py` 0 = 通过；1 = 存在错误项；2 = 仅存在警告项（警告应仅来自其他未迁移主题）。`lint_reports.py` 0 = 通过；1 = 存在错误（表格规范等）。
@@ -42,7 +42,7 @@ python src/prompts-tools/tools/lint_reports.py  # 报告内容校验，期望：
 
 1. 基线报告 `reports/2026-11-migration-compliance.md`（+ 同名 HTML）存在（解读的对比锚，缺失则先走第 5 节灾难恢复）。
 2. 上期解读 / 季度版 / 年度复盘报告存在（首期除外），路径记入 `{{PREVIOUS_REPORT_PATH}}`。
-3. 对应周期提示词存在，且继承声明指向 [src/report_templates/employment-research/](../src/report_templates/employment-research/)。
+3. 对应周期提示词存在，且继承声明指向 [engine/report_templates/employment-research/](../engine/report_templates/employment-research/)。
 
 ---
 
@@ -78,7 +78,7 @@ python src/prompts-tools/tools/lint_reports.py  # 报告内容校验，期望：
 ### 1.4 结果验证
 
 ```powershell
-python src/prompts-tools/tools/lint_reports.py
+python engine/tools/lint_reports.py
 ```
 
 人工核对：全篇引用回溯中日官方原文；基线导航为简化锚点；九节结构与声明映射一致。
@@ -121,7 +121,7 @@ python src/prompts-tools/tools/lint_reports.py
 ### 2.5 结果验证
 
 ```powershell
-python src/prompts-tools/tools/lint_reports.py
+python engine/tools/lint_reports.py
 ```
 
 人工核对：解读锚点准确；已修正事实清单无回退；中日新旧对照完整；登记册与报告变更摘要一致。
@@ -156,7 +156,7 @@ python src/prompts-tools/tools/lint_reports.py
 ### 3.4 结果验证
 
 ```powershell
-python src/prompts-tools/tools/lint_reports.py
+python engine/tools/lint_reports.py
 ```
 
 人工核对：九节结构逐字继承；来源语言规则执行结果已声明；追踪表逐项核对。
@@ -192,7 +192,7 @@ python src/prompts-tools/tools/lint_reports.py
 ### 4.4 结果验证
 
 ```powershell
-python src/prompts-tools/tools/lint_reports.py
+python engine/tools/lint_reports.py
 ```
 
 人工核对：九锚点（或声明结构）全部跳转准确；上年判断原文保留；台账增量 / 状态变更已回写。
@@ -226,7 +226,7 @@ python src/prompts-tools/tools/lint_reports.py
 ### 5.4 结果验证
 
 ```powershell
-python src/prompts-tools/tools/lint_reports.py
+python engine/tools/lint_reports.py
 ```
 
 人工核对：变化前后条件对照清晰；建议标「建议」；未核实项显式标记；登记册与报告一致。
@@ -238,11 +238,11 @@ python src/prompts-tools/tools/lint_reports.py
 ### 6.1 校验
 
 ```powershell
-python src/prompts-tools/tools/lint_reports.py
-python src/prompts-tools/tools/classify_reports.py
-python src/prompts-tools/tools/audit_preflight.py --report <报告相对路径>
-python src/prompts-tools/tools/audit_check.py --report <报告相对路径>
-python src/prompts-tools/tools/audit_pipeline.py --submit --report <报告相对路径>
+python engine/tools/lint_reports.py
+python engine/tools/classify_reports.py
+python engine/tools/audit_preflight.py --report <报告相对路径>
+python engine/tools/audit_check.py --report <报告相对路径>
+python engine/tools/audit_pipeline.py --submit --report <报告相对路径>
 ```
 
 - [ ] 表格 `<thead>` / `<tbody>` 成对，多列表声明百分比列宽，无竖排塌缩

@@ -2,7 +2,7 @@
 
 > **定位**：本文件是 `10-education-qualification` 业务线的**单一业务事实源**：运行变量固定值、研究边界、结构固化锚、术语口径、来源优先级、触发器、追踪表、口径冲突清单、渲染差异全部集中于此。两份周期提示词（基线 / 周期更新）引用本文件，业务参数只在这里维护一份。
 >
-> **继承声明（四层体系）**：周期提示词 = [通用基座](../../src/report_templates/prompt-generic-base.md) × [监测报告通用规范](../../src/report_templates/monitoring-common-spec.md) × [职业就业调研型模板](../../src/report_templates/employment-research/) × 本文件。通用层修改自动对本业务线生效；本文件修改只影响本业务线。冲突时以周期提示词 ＞ 本文件 ＞ 类型模板 ＞ 通用基座 ＞ 通用规范。
+> **继承声明（四层体系）**：周期提示词 = [通用基座](../../engine/report_templates/prompt-generic-base.md) × [监测报告通用规范](../../engine/report_templates/monitoring-common-spec.md) × [职业就业调研型模板](../../engine/report_templates/employment-research/) × 本文件。通用层修改自动对本业务线生效；本文件修改只影响本业务线。冲突时以周期提示词 ＞ 本文件 ＞ 类型模板 ＞ 通用基座 ＞ 通用规范。
 
 ---
 
@@ -68,7 +68,7 @@
 
 ### 3.2 结构固化锚（现行报告结构 → 九节骨架映射）
 
-首期保留现行结构（2026-11 基线），**不重写正文**；下表为该结构与[职业就业调研型九节骨架](../../src/report_templates/employment-research/prompt-baseline-setup-template.md)的声明式映射。后续报告按九节骨架执行，重排须走维护规范并在版本记录留痕；合规审计以本映射为判定依据。
+首期保留现行结构（2026-11 基线），**不重写正文**；下表为该结构与[职业就业调研型九节骨架](../../engine/report_templates/employment-research/prompt-baseline-setup-template.md)的声明式映射。后续报告按九节骨架执行，重排须走维护规范并在版本记录留痕；合规审计以本映射为判定依据。
 
 | 现行章节（业务固化锚） | 对应九节骨架 | 说明 |
 |---|---|---|
@@ -191,14 +191,14 @@
 - **报告结构**：首期保留现行结构（见 3.2 声明映射）；后续按九节骨架（顶部九锚点导航）。
 - **图表**：数量由当期内容决定，不强制下限；出图须遵循通用规范第 2 节。
 - **顶部导航**：**遗留项**：现有报告无 `.report-nav` 顶部导航（正文不改，待下一期按模板重写时补齐）。
-- **HTML 生成**：迁移不重新生成 HTML（避免引入正文变化）；后续周期运行用 `src/prompts-tools/tools/md2html.py` 生成并过 `lint_reports.py`。
+- **HTML 生成**：迁移不重新生成 HTML（避免引入正文变化）；后续周期运行用 `engine/tools/md2html.py` 生成并过 `lint_reports.py`。
 
 ---
 
 <!-- VOCAB-SYNC:BEGIN topic=education-qualification do-not-edit -->
 ## 词汇速览：教育与资格（词汇库自动同步）
 
-> 由 `src/vocabulary/script/sync_vocab.py` 自动维护：词汇库 education-qualification v1.2，共 70 条（同步于 2026-11-14T21:23:13）。标记区间内请勿手工编辑；词条变更走词汇库导入流程（src/vocabulary/README.md 第三节），同步机制见第九节。
+> 由 `engine/vocabulary/script/sync_vocab.py` 自动维护：词汇库 education-qualification v1.2，共 70 条（同步于 2026-11-14T21:23:13）。标记区间内请勿手工编辑；词条变更走词汇库导入流程（engine/vocabulary/README.md 第三节），同步机制见第九节。
 
 - **教育体系与阶段**（14）：幼稚園（幼稚園教育）；小学校；中学校（中学）；高等学校（高校）；高等専門学校（高専）；短期大学（短大）；大学（四年制大学）；大学院（院）；専門学校（専修学校専門課程）；通信制（通信制課程）；定時制（定時制課程）；義務教育（義務教育制度）；進学（進学希望）；転校（转学、编入）
 - **资格与认证**（13）：国家資格（国の資格）；公的資格（公的資格制度）；民間資格（民間検定）；業務独占資格（業務独占）；名称独占資格（名称独占）；運転免許（運転免許証、自動車免許）；フォークリフト（フォークリフト運転技能講習、フォークリフト免許）；危険物取扱者（危険物資格）；運行管理者（運行管理者資格）；介護福祉士（介護福祉士資格）；簿記（日商簿記、簿記検定）；ITパスポート（ITパスポート試験、iパス）；外免切替（外免切换、外国驾照换领）

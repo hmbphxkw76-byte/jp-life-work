@@ -49,22 +49,22 @@ jobs:
       - name: 信息质量全量评估 + 自动修复 + 复评
         id: assess
         run: |
-          python src/prompts-tools/tools/info_quality_check.py --apply || code=$?
+          python engine/tools/info_quality_check.py --apply || code=$?
           code=${code:-0}
           echo "info_quality_check.py 退出码 ${code}"
           echo "$code" > /tmp/iqc_exit_code
 
       - name: 同步报告 HTML（md2html.py）
-        run: python src/prompts-tools/tools/md2html.py
+        run: python engine/tools/md2html.py
 
       - name: 契约测试（确认评估与修复无回归）
-        run: python -m unittest discover -s src/tests
+        run: python -m unittest discover -s engine/tests
 
       - name: 存在 P0/P1 遗留时告警
         run: |
           code=$(cat /tmp/iqc_exit_code)
           if [ "$code" -eq 1 ]; then
-            echo "::error::信息质量评估存在 P0/P1 遗留，需人工介入（见 src/report-audits/info-quality/）"
+            echo "::error::信息质量评估存在 P0/P1 遗留，需人工介入（见 engine/report-audits/info-quality/）"
             exit 1
           fi
 
@@ -72,7 +72,7 @@ jobs:
         if: always()
         run: |
           RESULT="${{ job.status == 'success' && 'success' || 'failure' }}"
-          python src/prompts-tools/tools/automation_status.py record \
+          python engine/tools/automation_status.py record \
             --phase info-quality --result "$RESULT" \
             --run-url "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
 

@@ -1,8 +1,8 @@
 # 分支管理规范与操作手册（BRANCH-NAMING v1.0）
 
 > 适用范围：`jp-life-work` 仓库全部本地开发分支与推送操作。
-> 上位依据：`AGENTS.md` 硬性规约、`tools/README.md`（workflow_guard）、`docs/CI.md` 第十节。
-> 单一事实源：`tools/branch_naming.py`（命名 / 校验 / 钩子安装）；钩子源：`tools/git-hooks/`。
+> 上位依据：`AGENTS.md` 硬性规约、`engine/scripts/README.md`（workflow_guard）、`docs/CI.md` 第十节。
+> 单一事实源：`engine/scripts/branch_naming.py`（命名 / 校验 / 钩子安装）；钩子源：`engine/scripts/git-hooks/`。
 
 ## 一、命名规范
 
@@ -39,8 +39,8 @@ task/<task-slug>-<sid>
 ### 1.4 手工校验
 
 ```bash
-python tools/branch_naming.py session                 # 打印会话 ID 与 sid
-python tools/branch_naming.py check task/x-11111111   # 校验分支名（退出码 1 不合规）
+python engine/scripts/branch_naming.py session                 # 打印会话 ID 与 sid
+python engine/scripts/branch_naming.py check task/x-11111111   # 校验分支名（退出码 1 不合规）
 ```
 
 ## 二、Git 钩子
@@ -48,12 +48,12 @@ python tools/branch_naming.py check task/x-11111111   # 校验分支名（退出
 ### 2.1 安装（新克隆 / 换机后必做）
 
 ```bash
-python tools/branch_naming.py install            # 或：python tools/workflow_guard.py hooks
-python tools/branch_naming.py install --check    # 校验已安装且与源文件一致
-python tools/branch_naming.py install --uninstall [--force]
+python engine/scripts/branch_naming.py install            # 或：python engine/scripts/workflow_guard.py hooks
+python engine/scripts/branch_naming.py install --check    # 校验已安装且与源文件一致
+python engine/scripts/branch_naming.py install --uninstall [--force]
 ```
 
-安装内容：`pre-push`、`pre-commit` 与自包含副本 `branch_naming.py`（仓库无 `tools/` 时回退）。
+安装内容：`pre-push`、`pre-commit` 与自包含副本 `branch_naming.py`（仓库无 `engine/scripts/` 时回退）。
 安装位置：共享 git hooks 目录（`git rev-parse --git-path hooks`），跨 worktree 生效。
 `--uninstall` 遇到被手工修改的钩子会拒绝删除，需 `--force`。
 
@@ -73,10 +73,10 @@ python tools/branch_naming.py install --uninstall [--force]
 
 | 角色 | 执行标准 |
 |---|---|
-| 开发（Agent / 人） | 一律 `python tools/workflow_guard.py task start <name>` 建分支（自动带 sid）；在 `.worktrees/<name>/` 内工作；不在共享检出目录改文件 |
+| 开发（Agent / 人） | 一律 `python engine/scripts/workflow_guard.py task start <name>` 建分支（自动带 sid）；在 `.worktrees/<name>/` 内工作；不在共享检出目录改文件 |
 | 评审 | 只读任务分支 / worktree；不改名、不合并 |
-| 合并 | 只走 `python tools/workflow_guard.py merge <name>`（串行锁 + 隔离合并 + 校验 + `--force-with-lease`）；禁止直接 push `main` |
-| 收尾 | `python tools/workflow_guard.py task stop <name>`（已合并后清理分支与工作树） |
+| 合并 | 只走 `python engine/scripts/workflow_guard.py merge <name>`（串行锁 + 隔离合并 + 校验 + `--force-with-lease`）；禁止直接 push `main` |
+| 收尾 | `python engine/scripts/workflow_guard.py task stop <name>`（已合并后清理分支与工作树） |
 | 仓库维护 | 新克隆 / 换机后安装钩子（§2.1）；每季度核对台账与存量分支命名 |
 
 ## 四、存量分支梳理与映射台账
@@ -109,15 +109,15 @@ python tools/branch_naming.py install --uninstall [--force]
 |---|---|---|
 | 推送被 pre-push 拦截 | `阻断推送：分支名不合规…` | 用 `task start` 重建分支；不要绕过钩子（`--no-verify` 仅限钩子自身故障，且需记录） |
 | 提交被 pre-commit 拦截 | `阻断提交：分支名不合规…` | 切回合规任务分支或 `main`；不要在不合规分支上继续提交 |
-| 钩子误拦截 `main` / 合规分支 | 检查 `python tools/branch_naming.py check <branch>` | 若仍误判，`python tools/branch_naming.py install --check` 核对钩子版本；必要时 `install --uninstall` 后重装 |
+| 钩子误拦截 `main` / 合规分支 | 检查 `python engine/scripts/branch_naming.py check <branch>` | 若仍误判，`python engine/scripts/branch_naming.py install --check` 核对钩子版本；必要时 `install --uninstall` 后重装 |
 | 会话标识缺失 | 建分支时告警 `未设置 CATPAW_CONVERSATION_ID` | 设置会话 ID 后重命名分支补 sid（`git branch -m`），并更新台账 |
-| 钩子未安装（新克隆） | 不合规分支可推送 | 立即 `python tools/branch_naming.py install`；存量分支按 §4 流程补全 |
+| 钩子未安装（新克隆） | 不合规分支可推送 | 立即 `python engine/scripts/branch_naming.py install`；存量分支按 §4 流程补全 |
 | 分支已推送才发现不合规 | 远端存在旧名分支 | 本地重命名后推新分支，删除远端旧分支（`git push origin --delete <旧名>`），台账登记 |
-| 合并冲突 | `merge` 保留 `.worktrees/_merge` | 按 `tools/README.md` 第四节处理；重命名不影响合并（按任务名查登记） |
+| 合并冲突 | `merge` 保留 `.worktrees/_merge` | 按 `engine/scripts/README.md` 第四节处理；重命名不影响合并（按任务名查登记） |
 
 ## 六、验证清单（本次落地记录）
 
-- [x] 单元测试：`src/tests/test_branch_naming.py`（19 项：sid 派生 / 校验 / pre-push / pre-commit / 安装器）。
+- [x] 单元测试：`engine/tests/test_branch_naming.py`（19 项：sid 派生 / 校验 / pre-push / pre-commit / 安装器）。
 - [x] 既有测试适配：`test_workflow_guard.py`、`test_cov_workflow.py`（固定会话 ID，断言新分支格式）。
 - [x] 端到端（临时仓库 + 临时远端）：不合规 `task/bad` push 被拦截；不合规分支提交被拦截；
       合规 `task/good-11111111` 放行；`main` 放行；`task start` 生成分支并推送成功；

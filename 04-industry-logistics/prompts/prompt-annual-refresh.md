@@ -3,7 +3,7 @@
 > **用途**：每年固定窗口对物流行业全景做全量刷新；行业结构性事件触发器命中时提前插刷对应模块。可直接复制，替换顶部变量后提交给 AI 执行。
 > **产出**：刷新版报告落盘 `{{OUTPUT_PATH}}`（`reports/{{YYYY-MM}}-<slug>.md` + 同名 HTML）；插刷件 `reports/{{YYYY-MM}}-<slug>.md`（命名不在标准正则内，validate 仅 WARN 不阻断，属预期）。
 >
-> **继承声明（四层体系）**：本文件 = [通用基座](../../src/report_templates/prompt-generic-base.md) × [监测报告通用规范](../../src/report_templates/monitoring-common-spec.md) × [年度刷新类型模板（行业深度研究型）](../../src/report_templates/industry-research/prompt-annual-refresh-template.md) × [业务专属配置](./business-config.md)。冲突时以本文件为准。
+> **继承声明（四层体系）**：本文件 = [通用基座](../../engine/report_templates/prompt-generic-base.md) × [监测报告通用规范](../../engine/report_templates/monitoring-common-spec.md) × [年度刷新类型模板（行业深度研究型）](../../engine/report_templates/industry-research/prompt-annual-refresh-template.md) × [业务专属配置](./business-config.md)。冲突时以本文件为准。
 
 ---
 
@@ -24,7 +24,7 @@
 
 ## 一、节拍与触发
 
-年度刷新 + 重大事件插刷设计见[年度刷新类型模板第一节](../../src/report_templates/industry-research/prompt-annual-refresh-template.md)。业务触发器清单（`事件 → 受影响模块`）见[业务配置第七节](./business-config.md)：
+年度刷新 + 重大事件插刷设计见[年度刷新类型模板第一节](../../engine/report_templates/industry-research/prompt-annual-refresh-template.md)。业务触发器清单（`事件 → 受影响模块`）见[业务配置第七节](./business-config.md)：
 
 ```
 - 物流白書 / 交通白書新版发布 → 01 产业概览
@@ -56,7 +56,7 @@
 ## 四、基线锚定与防回退
 
 - 读取 `{{PREVIOUS_REPORT_PATH}}`（首年刷新为空）与 `{{BASELINE_REPORT_PATH}}`，继承结构与全部已核实结论。
-- 逐条继承「已修正事实清单」，产生修正后追加（格式见[通用基座第五节](../../src/report_templates/prompt-generic-base.md)）；严禁重新引入已被推翻的说法；无来源不得入清单。
+- 逐条继承「已修正事实清单」，产生修正后追加（格式见[通用基座第五节](../../engine/report_templates/prompt-generic-base.md)）；严禁重新引入已被推翻的说法；无来源不得入清单。
 - 上年趋势判断逐条复判，原文保留；不得删除或改写上年判断。
 
 ## 五、追踪表与登记册联动
@@ -68,7 +68,7 @@
 1. 按研究维度并行启动研究子代理（产业概览 / 增长赛道 / 自动化 / 行业数据），全部限定日 / 英来源、逐点引用，每条数据附可直接访问的 URL。
 2. 主代理读取 `{{PREVIOUS_REPORT_PATH}}` 与基线做差异合并，继承已修正事实清单，应用第三节更新要点。
 3. 冲突口径保留双份引用；无法核实项单列「待复核清单」。
-4. 回写报告与登记册后运行 `python src/prompts-tools/tools/md2html.py` 重新生成 HTML，并运行 `python src/prompts-tools/tools/lint_reports.py` 校验。
+4. 回写报告与登记册后运行 `python engine/tools/md2html.py` 重新生成 HTML，并运行 `python engine/tools/lint_reports.py` 校验。
 
 ## 七、渲染与交付
 
@@ -93,7 +93,7 @@
 
 ## 落盘后审计（提交前必做）
 
-落盘后依次运行 `python src/prompts-tools/tools/audit_preflight.py --report <报告相对路径>`、`python src/prompts-tools/tools/audit_check.py --report <报告相对路径>`，修正全部 P0/P1 后执行 `python src/prompts-tools/tools/audit_pipeline.py --submit --report <报告相对路径>` 提交审计（未通过初审不得合并）。
+落盘后依次运行 `python engine/tools/audit_preflight.py --report <报告相对路径>`、`python engine/tools/audit_check.py --report <报告相对路径>`，修正全部 P0/P1 后执行 `python engine/tools/audit_pipeline.py --submit --report <报告相对路径>` 提交审计（未通过初审不得合并）。
 
 ## 版本记录
 

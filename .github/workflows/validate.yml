@@ -37,13 +37,13 @@ jobs:
       - name: 安装依赖
         run: pip install -r requirements.txt
 
-      - name: 契约测试（src/tests）
-        run: python -m unittest discover -s src/tests -v
+      - name: 契约测试（engine/tests）
+        run: python -m unittest discover -s engine/tests -v
 
       # 各校验脚本退出码约定：0=通过；1=错误（阻断）；2=警告（放行）
       - name: 结构与规范校验（validate.py）
         run: |
-          python src/prompts-tools/tools/validate.py || code=$?
+          python engine/tools/validate.py || code=$?
           if [ "${code:-0}" -eq 1 ]; then
             echo "::error::validate.py 存在错误级违规，阻断合并"
             exit 1
@@ -52,7 +52,7 @@ jobs:
 
       - name: 报告自动归位检查（classify_reports.py）
         run: |
-          python src/prompts-tools/tools/classify_reports.py --check --unknown-warn || code=$?
+          python engine/tools/classify_reports.py --check --unknown-warn || code=$?
           if [ "${code:-0}" -eq 1 ]; then
             echo "::error::存在可自动归位的错位报告（本地运行 classify_reports.py --apply 修复后提交）"
             exit 1
@@ -61,7 +61,7 @@ jobs:
 
       - name: 结构补全检查（ensure_region_topics.py --check）
         run: |
-          python src/prompts-tools/tools/ensure_region_topics.py --check || code=$?
+          python engine/tools/ensure_region_topics.py --check || code=$?
           if [ "${code:-0}" -eq 1 ]; then
             echo "::error::结构补全检查失败"
             exit 1
@@ -70,7 +70,7 @@ jobs:
 
       - name: 汇总页一致性校验（build_hub.py --check）
         run: |
-          python src/prompts-tools/tools/build_hub.py --check || code=$?
+          python engine/tools/build_hub.py --check || code=$?
           if [ "${code:-0}" -eq 1 ]; then
             echo "::error::汇总页已过期（本地运行 build_hub.py 重新生成后提交）"
             exit 1
@@ -79,7 +79,7 @@ jobs:
 
       - name: 全局索引一致性校验（build_index.py --check）
         run: |
-          python src/prompts-tools/tools/build_index.py --check || code=$?
+          python engine/tools/build_index.py --check || code=$?
           if [ "${code:-0}" -eq 1 ]; then
             echo "::error::INDEX.md 已过期（本地运行 build_index.py 重新生成后提交）"
             exit 1
@@ -90,7 +90,7 @@ jobs:
       # 历史报告由 --new-only 跳过，遗留项列入 lint-whitelist.json 豁免。
       - name: 报告内容 lint（新报告阻断）
         run: |
-          python src/prompts-tools/tools/lint_reports.py --new-only || code=$?
+          python engine/tools/lint_reports.py --new-only || code=$?
           code=${code:-0}
           if [ "$code" -ne 0 ] && [ "$code" -ne 2 ]; then
             echo "::error::新报告 lint 存在错误项或命令异常，阻断合并（退出码 $code）"
@@ -100,7 +100,7 @@ jobs:
 
       - name: 模板合规校验（新报告阻断）
         run: |
-          python src/prompts-tools/tools/compliance_check.py --new-only || code=$?
+          python engine/tools/compliance_check.py --new-only || code=$?
           code=${code:-0}
           if [ "$code" -ne 0 ] && [ "$code" -ne 2 ]; then
             echo "::error::新报告模板合规存在错误项或命令异常，阻断合并（退出码 $code）"
@@ -112,7 +112,7 @@ jobs:
       # 复用 info_quality_check 登记册解析与 _common 类型引用，退出码 1 阻断、2 放行。
       - name: 阶段闸检查（采集 / 筛选 / 分类左移）
         run: |
-          python src/prompts-tools/tools/stage_gate_check.py || code=$?
+          python engine/tools/stage_gate_check.py || code=$?
           if [ "${code:-0}" -eq 1 ]; then
             echo "::error::阶段闸存在 P0/P1（采集 / 筛选 / 分类层缺陷），阻断合并"
             exit 1
@@ -124,16 +124,16 @@ jobs:
       # 跨报告事实重复率、事实卡片五字段与指针、待核实闭环、个人财务模型一致性。
       - name: 信息质量全量检查（info_quality_check --check）
         run: |
-          python src/prompts-tools/tools/info_quality_check.py --check || code=$?
+          python engine/tools/info_quality_check.py --check || code=$?
           if [ "${code:-0}" -eq 1 ]; then
-            echo "::error::信息质量存在 P0/P1 遗留，阻断合并（见 src/report-audits/info-quality/）"
+            echo "::error::信息质量存在 P0/P1 遗留，阻断合并（见 engine/report-audits/info-quality/）"
             exit 1
           fi
           echo "info_quality_check.py 退出码 ${code:-0}（2=仅 P2 不阻断）"
 
       - name: 事实卡片校验（fact_card_check）
         run: |
-          python src/prompts-tools/tools/fact_card_check.py || code=$?
+          python engine/tools/fact_card_check.py || code=$?
           if [ "${code:-0}" -eq 1 ]; then
             echo "::error::事实卡片五字段缺失或 [@FC-NNN] 指针失效，阻断合并"
             exit 1
@@ -142,7 +142,7 @@ jobs:
 
       - name: 待核实项闭环检查（pending_verification --check）
         run: |
-          python src/prompts-tools/tools/pending_verification.py --check || code=$?
+          python engine/tools/pending_verification.py --check || code=$?
           if [ "${code:-0}" -eq 1 ]; then
             echo "::error::存在未登记或已逾期的首轮核验项，阻断合并"
             exit 1
@@ -151,7 +151,7 @@ jobs:
 
       - name: 个人财务模型一致性（personal_finance_model --check）
         run: |
-          python src/prompts-tools/tools/personal_finance_model.py --check || code=$?
+          python engine/tools/personal_finance_model.py --check || code=$?
           if [ "${code:-0}" -ne 0 ]; then
             echo "::error::个人财务模型缺失输入或已过期（须重跑 personal_finance_model.py 并提交），阻断合并（退出码 $code）"
             exit 1
@@ -163,9 +163,9 @@ jobs:
       - name: 词库校验（topic-check / verify / sync check）
         run: |
           set +e
-          python src/vocabulary/script/vocab_tool.py topic-check; c1=$?
-          python src/vocabulary/script/vocab_tool.py verify; c2=$?
-          python src/vocabulary/script/sync_vocab.py check; c3=$?
+          python engine/vocabulary/script/vocab_tool.py topic-check; c1=$?
+          python engine/vocabulary/script/vocab_tool.py verify; c2=$?
+          python engine/vocabulary/script/sync_vocab.py check; c3=$?
           set -e
           # topic-check / verify：0/2 放行，1 阻断；sync check：存在待同步变更（2）也阻断
           for c in "$c1" "$c2"; do
@@ -175,7 +175,7 @@ jobs:
             fi
           done
           if [ "$c3" -ne 0 ]; then
-            echo "::error::词汇同步区间待更新（退出码 $c3）：运行 src/vocabulary/script/sync_vocab.py sync 后提交"
+            echo "::error::词汇同步区间待更新（退出码 $c3）：运行 engine/vocabulary/script/sync_vocab.py sync 后提交"
             exit 1
           fi
           echo "词库校验通过（topic-check=$c1 verify=$c2 sync-check=$c3；2=仅警告不阻断）"
@@ -185,10 +185,10 @@ jobs:
         run: pip install -r requirements-dev.txt
         continue-on-error: true
       - name: ruff 静态检查（warning 起步）
-        run: python -m ruff check src tools
+        run: python -m ruff check engine
         continue-on-error: true
       - name: mypy 静态检查（渐进式）
-        run: python -m mypy src/prompts-tools/tools src/vocabulary/script
+        run: python -m mypy engine/tools engine/vocabulary/script
         continue-on-error: true
 
       # 阶段收尾：无论成败清理缓存、临时产物与 pip 缓存，保证流水线结束后无残留。
@@ -221,7 +221,7 @@ jobs:
 
       - name: 覆盖率门禁（工具链）
         run: |
-          python src/prompts-tools/tools/coverage_gate.py || code=$?
+          python engine/tools/coverage_gate.py || code=$?
           code=${code:-0}
           if [ "$code" -ne 0 ] && [ "$code" -ne 2 ]; then
             echo "::error::工具链覆盖率未达标或测试失败（退出码 $code），阻断合并"
@@ -254,10 +254,10 @@ jobs:
 
       - name: 制造运行期残留（缓存 / 临时文件 / 日志）
         run: |
-          python -m unittest discover -s src/tests >/dev/null
-          mkdir -p .pytest_cache src/vocabulary/data/sync-backups
-          printf 'residue\n' > src/vocabulary/data/sync.log
-          printf 'x' > tools/.DS_Store
+          python -m unittest discover -s engine/tests >/dev/null
+          mkdir -p .pytest_cache engine/vocabulary/data/sync-backups
+          printf 'residue\n' > engine/vocabulary/data/sync.log
+          printf 'x' > engine/scripts/.DS_Store
 
       - name: 标准化清理
         uses: ./.github/actions/workspace-cleanup

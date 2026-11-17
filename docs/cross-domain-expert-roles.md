@@ -34,10 +34,10 @@
 #### R1　技术实现专家（Technical Implementation Analyst）
 
 - **专业定位**：项目"信息生产线"的工程师视角——把工具链、CI、生成物、测试当作被审计对象。
-- **核心分析维度**：工具链健康度（27 个工具是否可运行、退出码是否符合 0/1/2 约定）；生成物确定性（`build_hub.py --check` 是否恒过）；命名合规（`validate.py`）；CI 门禁覆盖（7 条工作流）；测试覆盖与失败项（`src/tests/`，255 项）；幂等性（重复执行无副作用）。
+- **核心分析维度**：工具链健康度（27 个工具是否可运行、退出码是否符合 0/1/2 约定）；生成物确定性（`build_hub.py --check` 是否恒过）；命名合规（`validate.py`）；CI 门禁覆盖（7 条工作流）；测试覆盖与失败项（`engine/tests/`，255 项）；幂等性（重复执行无副作用）。
 - **独特价值贡献**：在内容问题之前先排除"生产工具本身出问题"——避免把工具缺陷误判为内容缺陷。
 - **能力边界**：只回答"体系如何被构建与自动化"，不回答"内容对不对、设计好不好、读者用得顺不顺"。
-- **本项目专属切入点**：`src/prompts-tools/tools/`（27 个工具脚本，含 validate / lint_reports / compliance_check / classify_reports / ensure_region_topics / md2html / archive_reports / build_index / build_hub / report_diff / update_planner / automation_status / 审计五件套等）、`.github/workflows/`（7 条工作流）、`build_hub.py --check` 的确定性归一化机制、`report_diff.py` 的相似度阈值（0.35）。
+- **本项目专属切入点**：`engine/tools/`（27 个工具脚本，含 validate / lint_reports / compliance_check / classify_reports / ensure_region_topics / md2html / archive_reports / build_index / build_hub / report_diff / update_planner / automation_status / 审计五件套等）、`.github/workflows/`（7 条工作流）、`build_hub.py --check` 的确定性归一化机制、`report_diff.py` 的相似度阈值（0.35）。
 
 #### R2　业务逻辑专家（Research Logic Analyst）
 
@@ -69,7 +69,7 @@
 - **核心分析维度**：登记册完整性（指标 / 来源 / 引用位置 / 收敛状态 / 缺失标记是否齐全）；口径登记（同指标多口径是否登记）；状态与新鲜度（「截至 {{CURRENT_DATE}} 无更新」）；词库覆盖（20 主题 1327 条，0 个 0 条主题）；数据血缘（报告 → 登记册 → 来源）。
 - **独特价值贡献**：发现"账本本身"的缺口——指标未登记、口径未定义、词库空白、状态过期。
 - **能力边界**：只维护与评估"数据资产本身"，不核验"报告正文是否引用正确"（R7）、不评估"研究设计"（R2）、不审计"规范符合性"（R6）。
-- **本项目专属切入点**：各主题 `data/*_indicator_registry.md`（md-table 格式）、`src/vocabulary/`（INDEX.md / topics.json / 各主题 terms.md / exports）、`src/vocabulary/README.md` 的六步 SOP、通用基座第四节来源分级、`sync_vocab.py` 的 VOCAB-SYNC 标记区间。
+- **本项目专属切入点**：各主题 `data/*_indicator_registry.md`（md-table 格式）、`engine/vocabulary/`（INDEX.md / topics.json / 各主题 terms.md / exports）、`engine/vocabulary/README.md` 的六步 SOP、通用基座第四节来源分级、`sync_vocab.py` 的 VOCAB-SYNC 标记区间。
 
 #### R6　合规审计专家（Compliance Auditor）
 
@@ -77,7 +77,7 @@
 - **核心分析维度**：结构骨架符合性（h2 节数 / 节序 / 编号连续）；必填字段（`<title>`、导航、锚点）；来源标注纪律（逐点引用、事实/推断分离、自算值标注）；命名合规（`YYYY-MM-<slug>.md/.html`）；门禁退出码（0/1/2）；留痕（版本记录、已修正事实清单、变更记录）。
 - **独特价值贡献**：发现"不符合项目自身规范"的项，并区分阻断级（错误）与建议级（警告）。
 - **能力边界**：只回答"是否符合规范"，不回答"内容是否真实"（R7）、"账本是否完整"（R5）、"工具是否可运行"（R1）。
-- **本项目专属切入点**：`src/report_templates/compliance-rules.json`（12 类 × 周期骨架）、`compliance_check.py`（--check / --audit / --scaffold）、`lint_reports.py`、`validate.py`、通用基座第九节质量自检、CI 的 `--new-only` 门禁与 `lint-whitelist.json` 豁免约定。
+- **本项目专属切入点**：`engine/report_templates/compliance-rules.json`（12 类 × 周期骨架）、`compliance_check.py`（--check / --audit / --scaffold）、`lint_reports.py`、`validate.py`、通用基座第九节质量自检、CI 的 `--new-only` 门禁与 `lint-whitelist.json` 豁免约定。
 
 #### R7　交叉验证专家（Cross-Validation Analyst）
 
@@ -111,9 +111,9 @@
 你是 jp-life-work 项目的技术实现专家，负责审计"信息生产线"本身：工具链、CI、生成物、测试。
 
 ## 输入上下文
-- {{TARGET_PATHS}} = 待审计范围（默认：src/prompts-tools/tools/、.github/workflows/、src/tests/test_tools.py）
+- {{TARGET_PATHS}} = 待审计范围（默认：engine/tools/、.github/workflows/、engine/tests/test_tools.py）
 - {{GENERATED_ARTIFACTS}} = 生成物（默认：index.html、reader.html、各 reports/*.html）
-- {{CHECK_COMMANDS}} = 只读检查命令（默认：validate.py、lint_reports.py、compliance_check.py --check、build_hub.py --check、python -m unittest discover -s src/tests）
+- {{CHECK_COMMANDS}} = 只读检查命令（默认：validate.py、lint_reports.py、compliance_check.py --check、build_hub.py --check、python -m unittest discover -s engine/tests）
 - {{CURRENT_DATE}} = 本次执行日期（YYYY-MM-DD）
 
 ## 任务指令
@@ -208,7 +208,7 @@
 ## 输入上下文
 - {{HUB_PAGES}} = index.html
 - {{REPORT_PAGES}} = 各主题 reports/*.html（抽样 + 最新一期）
-- {{NAV_SPEC}} = src/report_templates/monitoring-common-spec.md 第 5–7 节
+- {{NAV_SPEC}} = engine/report_templates/monitoring-common-spec.md 第 5–7 节
 - {{VOCAB_SYNC}} = 各 business-config 的 <!-- VOCAB-SYNC --> 词汇速览
 - {{CURRENT_DATE}} = 本次执行日期（YYYY-MM-DD）
 
@@ -303,15 +303,15 @@
 
 ## 输入上下文
 - {{REGISTRIES}} = 各主题 data/*_indicator_registry.md
-- {{VOCAB}} = src/vocabulary/（INDEX.md、config/topics.json、各主题 terms.md、exports/）
-- {{SOURCE_TIERS}} = src/report_templates/prompt-generic-base.md 第四节
+- {{VOCAB}} = engine/vocabulary/（INDEX.md、config/topics.json、各主题 terms.md、exports/）
+- {{SOURCE_TIERS}} = engine/report_templates/prompt-generic-base.md 第四节
 - {{CURRENT_DATE}} = 本次执行日期（YYYY-MM-DD）
 
 ## 任务指令
 1. 登记册完整性：逐主题检查登记册是否含「指标 / 来源 / 引用位置 / 收敛状态 / 缺失标记」；缺项列入信息差。
 2. 口径登记：检查同指标多口径是否登记（不合并、不取均值）；术语口径是否区分。
 3. 状态与新鲜度：检查是否注明「截至 {{CURRENT_DATE}} 无更新」；过期值是否标注年份。
-4. 词库覆盖：核对 src/vocabulary/INDEX.md 的主题数与词条数；识别 0 词条主题与未建主题（截至 2026-11-15 全部 20 主题均非 0 条）。
+4. 词库覆盖：核对 engine/vocabulary/INDEX.md 的主题数与词条数；识别 0 词条主题与未建主题（截至 2026-11-15 全部 20 主题均非 0 条）。
 5. 数据血缘：抽查报告数字能否沿"报告 → 登记册 → 来源"回溯。
 6. 来源分级：检查登记册与词库来源是否符合四层分级与 {{SOURCE_LANGUAGE_RULE}}。
 
@@ -350,7 +350,7 @@
 
 ## 输入上下文
 - {{INHERITANCE}} = 四层继承体系（通用基座 × 通用规范 × 类型模板 × business-config）
-- {{COMPLIANCE_RULES}} = src/report_templates/compliance-rules.json
+- {{COMPLIANCE_RULES}} = engine/report_templates/compliance-rules.json
 - {{GATES}} = compliance_check.py（--check/--audit）、lint_reports.py、validate.py、.github/workflows/
 - {{REPORTS}} = 各主题 reports/*.html
 - {{CURRENT_DATE}} = 本次执行日期（YYYY-MM-DD）
@@ -484,9 +484,9 @@
 |---|---|---|
 | 缺失信息（P1/P2/P3） | 更新 `00-decision-hub/data/decision_hub_registry.md` 的缺失清单，触发补缺 | 00-decision-hub |
 | 报告数字与账本不符 | 修订登记册或报告（按主责分工），续写已修正事实清单 | 对应主题 |
-| 数据资产缺口（登记册/词库） | 补登记册指标、补词库词条（走 `vocab_tool.py` 导入流程） | 对应主题 / src/vocabulary |
+| 数据资产缺口（登记册/词库） | 补登记册指标、补词库词条（走 `vocab_tool.py` 导入流程） | 对应主题 / engine/vocabulary |
 | 规范违规 | 修复报告结构/字段，或按维护规范更新模板 | 对应主题 / report_templates |
-| 工具链缺陷 | 修复工具或 CI，补测试 | src/prompts-tools/tools |
+| 工具链缺陷 | 修复工具或 CI，补测试 | engine/tools |
 | 体验断点 | 修复 hub/报告页导航、高亮、无障碍 | index.html / reader.html / 报告页 |
 | 决策风险 | 写入风险矩阵，条件化决策（不硬性 Go/No-Go） | 00-decision-hub |
 

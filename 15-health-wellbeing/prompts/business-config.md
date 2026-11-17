@@ -2,7 +2,7 @@
 
 > **定位**：本文件是 `15-health-wellbeing` 业务线的**单一业务事实源**。本主题覆盖**在日医疗制度与个人健康管理**——从医保制度到就医实务、牙科精神科、心理健康、体检预防、介護福祉。
 >
-> **继承声明（四层体系）**：周期提示词 = [通用基座](../../src/report_templates/prompt-generic-base.md) × [监测报告通用规范](../../src/report_templates/monitoring-common-spec.md) × [职业就业调研型模板](../../src/report_templates/employment-research/) × 本文件。冲突时以周期提示词 ＞ 本文件 ＞ 类型模板 ＞ 通用基座 ＞ 通用规范。
+> **继承声明（四层体系）**：周期提示词 = [通用基座](../../engine/report_templates/prompt-generic-base.md) × [监测报告通用规范](../../engine/report_templates/monitoring-common-spec.md) × [职业就业调研型模板](../../engine/report_templates/employment-research/) × 本文件。冲突时以周期提示词 ＞ 本文件 ＞ 类型模板 ＞ 通用基座 ＞ 通用规范。
 
 ---
 
@@ -67,7 +67,7 @@
 | 地域医疗资源差异 | 13-regional-info |
 | 落地手续（保险加入） | 14-life-operations |
 
-> **模块边界声明集中口径**：报告 / 骨架中的边界声明统一集中在「零、模块边界声明」章节（由 `src/prompts-tools/tools/skeleton_builder.py` 生成），不在各节重复。
+> **模块边界声明集中口径**：报告 / 骨架中的边界声明统一集中在「零、模块边界声明」章节（由 `engine/tools/skeleton_builder.py` 生成），不在各节重复。
 
 ### 3.2 结构固化锚（现行报告结构 → 九节骨架映射）
 
@@ -183,7 +183,7 @@
 <!-- VOCAB-SYNC:BEGIN topic=health-wellbeing do-not-edit -->
 ## 词汇速览：医疗·健康·心理（词汇库自动同步）
 
-> 由 `src/vocabulary/script/sync_vocab.py` 自动维护：词汇库 health-wellbeing v1.3，共 35 条（同步于 2026-11-15T15:32:06）。标记区间内请勿手工编辑；词条变更走词汇库导入流程（src/vocabulary/README.md 第三节），同步机制见第九节。
+> 由 `engine/vocabulary/script/sync_vocab.py` 自动维护：词汇库 health-wellbeing v1.3，共 35 条（同步于 2026-11-15T15:32:06）。标记区间内请勿手工编辑；词条变更走词汇库导入流程（engine/vocabulary/README.md 第三节），同步机制见第九节。
 
 - **医疗制度**（7）：健康保険（国保、国民健康保険）；后期高龄（后期高龄者医疗、後期高齢者医療）；被保险者证（被保险者証、健康保険証）；保险费（保険料、保险料）；高额疗养（高額療養費、高额疗养费）；医疗费扣除（医療費控除、医疗费控税）；被用者健康保険（公司职员医保、被用者保险）
 - **就医实务**（10）：保健所（公共卫生中心）；医疗费（医療費、诊疗费）；患者登记（患者登録、就诊登记）；初診料（初诊费、初诊料）；再診料（复诊费、再诊料）；処方箋（处方笺、处方）；調剤薬局（调剂药局、配药局）；救急搬送（急救运送、急救搬运）；医療通訳（医疗翻译、医疗通译）；多言語診療（多语言诊疗、外语诊疗）

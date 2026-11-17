@@ -17,8 +17,8 @@
 | 指标登记册 | `18-family-parenting/data/family_parenting_indicator_registry.md` |
 | 报告产物 | `18-family-parenting/reports/` |
 | 报告归档 | `18-family-parenting/reports/archives/` |
-| 工具链 | `src/prompts-tools/tools/`（退出码：0 过 / 1 错 / 2 警告） |
-| 通用层（只读，不改） | `src/report_templates/` |
+| 工具链 | `engine/tools/`（退出码：0 过 / 1 错 / 2 警告） |
+| 通用层（只读，不改） | `engine/report_templates/` |
 
 ### 0.2 六种启动方式
 
@@ -33,8 +33,8 @@
 
 ```powershell
 # 在仓库根目录执行
-python src/prompts-tools/tools/validate.py      # 结构与命名校验
-python src/prompts-tools/tools/lint_reports.py  # 报告内容校验（HTML）
+python engine/tools/validate.py      # 结构与命名校验
+python engine/tools/lint_reports.py  # 报告内容校验（HTML）
 ```
 
 > **退出码说明**：`validate.py` 0 = 通过；1 = 存在错误项；2 = 仅存在警告项。`lint_reports.py` 0 = 通过；1 = 存在错误。
@@ -43,7 +43,7 @@ python src/prompts-tools/tools/lint_reports.py  # 报告内容校验（HTML）
 
 1. 基线报告 `reports/2026-11-family-parenting.md` 存在（解读的对比锚，缺失则先走第 5 节灾难恢复）。
 2. 上期报告存在（首期除外），路径记入 `{{PREVIOUS_REPORT_PATH}}`。
-3. 对应周期提示词存在，且继承声明指向 [src/report_templates/employment-research/](../src/report_templates/employment-research/)。
+3. 对应周期提示词存在，且继承声明指向 [engine/report_templates/employment-research/](../engine/report_templates/employment-research/)。
 
 ---
 
@@ -77,7 +77,7 @@ python src/prompts-tools/tools/lint_reports.py  # 报告内容校验（HTML）
 ### 1.4 结果验证
 
 ```powershell
-python src/prompts-tools/tools/lint_reports.py
+python engine/tools/lint_reports.py
 ```
 
 人工核对：全篇引用回溯官方原文；基线导航为简化锚点；九节结构与声明映射一致。
@@ -129,7 +129,7 @@ python src/prompts-tools/tools/lint_reports.py
 ### 3.4 结果验证
 
 ```powershell
-python src/prompts-tools/tools/lint_reports.py
+python engine/tools/lint_reports.py
 ```
 
 人工核对：解读锚点准确；已修正事实清单无回退；新旧对照完整；登记册与报告变更摘要一致。
@@ -183,11 +183,11 @@ python src/prompts-tools/tools/lint_reports.py
 ### 6.1 校验
 
 ```powershell
-python src/prompts-tools/tools/lint_reports.py
-python src/prompts-tools/tools/classify_reports.py
-python src/prompts-tools/tools/audit_preflight.py --report <报告相对路径>
-python src/prompts-tools/tools/audit_check.py --report <报告相对路径>
-python src/prompts-tools/tools/audit_pipeline.py --submit --report <报告相对路径>
+python engine/tools/lint_reports.py
+python engine/tools/classify_reports.py
+python engine/tools/audit_preflight.py --report <报告相对路径>
+python engine/tools/audit_check.py --report <报告相对路径>
+python engine/tools/audit_pipeline.py --submit --report <报告相对路径>
 ```
 
 - [ ] 表格 `<thead>` / `<tbody>` 成对，多列表声明百分比列宽，无竖排塌缩

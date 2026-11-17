@@ -21,13 +21,13 @@
 | 个人财务模型 | `00-decision-hub/data/personal_finance_model.md` |
 | 决策树 / 决策日志 / 事实卡片 / 五问视图 | `00-decision-hub/data/` |
 | 置信度分级 | `00-decision-hub/prompts/confidence-grade-standard.md` |
-| 工具链 | `src/prompts-tools/tools/` |
+| 工具链 | `engine/tools/` |
 
 ### 0.2 前置检查
 
 ```powershell
-python src/prompts-tools/tools/validate.py
-python src/prompts-tools/tools/lint_reports.py
+python engine/tools/validate.py
+python engine/tools/lint_reports.py
 ```
 
 ---
@@ -75,11 +75,11 @@ python src/prompts-tools/tools/lint_reports.py
 |---|---|---|
 | 个人参数档案 | 个人输入后更新六维度参数与五问判定 | 手工（`data/personal_profile.md`） |
 | 决策一页纸 | 随复核更新 Top 3 与待办状态 | 手工（`data/decision_onepager.md`） |
-| 个人财务模型 | 登记册活值变更后重跑 | `python src/prompts-tools/tools/personal_finance_model.py` |
-| 决策日志 | 决策状态变化时追加 | `python src/prompts-tools/tools/decision_log.py --add ...` |
-| 待核实闭环 | 跟踪 14/15/17/18/19/20 首轮截止 | `python src/prompts-tools/tools/pending_verification.py` |
-| 事实卡片 | 值变更递增版本；报告改指针 | `python src/prompts-tools/tools/fact_card_check.py` |
-| 报告骨架 | 生成骨架 / 合并空模块 | `python src/prompts-tools/tools/skeleton_builder.py` |
+| 个人财务模型 | 登记册活值变更后重跑 | `python engine/tools/personal_finance_model.py` |
+| 决策日志 | 决策状态变化时追加 | `python engine/tools/decision_log.py --add ...` |
+| 待核实闭环 | 跟踪 14/15/17/18/19/20 首轮截止 | `python engine/tools/pending_verification.py` |
+| 事实卡片 | 值变更递增版本；报告改指针 | `python engine/tools/fact_card_check.py` |
+| 报告骨架 | 生成骨架 / 合并空模块 | `python engine/tools/skeleton_builder.py` |
 | 检索层 | 关键词 / 问题索引 / 五问视图 | `build_hub.py`（主会话统一执行） |
 
 ---
@@ -87,9 +87,9 @@ python src/prompts-tools/tools/lint_reports.py
 ## 5. 落盘后审计（提交前必做）
 
 ```powershell
-python src/prompts-tools/tools/audit_preflight.py --report <报告相对路径>
-python src/prompts-tools/tools/audit_check.py --report <报告相对路径>
-python src/prompts-tools/tools/audit_pipeline.py --submit --report <报告相对路径>
+python engine/tools/audit_preflight.py --report <报告相对路径>
+python engine/tools/audit_check.py --report <报告相对路径>
+python engine/tools/audit_pipeline.py --submit --report <报告相对路径>
 ```
 
 - [ ] 审计自检（preflight / audit_check）无 P0/P1，且已 `audit_pipeline --submit` 提交初审

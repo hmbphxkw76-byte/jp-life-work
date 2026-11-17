@@ -3,7 +3,7 @@
 > **用途**：覆盖职业就业调研型**三档节拍**——月度核验轻运行 / 季度主更新 / 年度复盘，以及重大事件触发器命中时的模块升级。可直接复制，替换顶部变量后提交给 AI 执行。
 > **产出**：季度 / 年度报告落盘 `{{OUTPUT_PATH}}`（`reports/{{YYYY-MM}}-<slug>.md` 或 `reports/{{YYYY-MM}}-<slug>.md` + 同名 HTML）；月度轻运行只更新登记册，不重写报告；事件触发插刷件 `reports/{{YYYY-MM}}-<slug>.md`（命名不在标准正则内，validate 仅 WARN 不阻断，属预期）。
 >
-> **继承声明（四层体系）**：本文件 = [通用基座](../../src/report_templates/prompt-generic-base.md) × [监测报告通用规范](../../src/report_templates/monitoring-common-spec.md) × [周期更新类型模板（职业就业调研型）](../../src/report_templates/employment-research/prompt-update-template.md) × [业务专属配置](./business-config.md)。冲突时以本文件为准。
+> **继承声明（四层体系）**：本文件 = [通用基座](../../engine/report_templates/prompt-generic-base.md) × [监测报告通用规范](../../engine/report_templates/monitoring-common-spec.md) × [周期更新类型模板（职业就业调研型）](../../engine/report_templates/employment-research/prompt-update-template.md) × [业务专属配置](./business-config.md)。冲突时以本文件为准。
 
 ---
 
@@ -27,7 +27,7 @@
 
 ## 一、节拍与触发
 
-三档节拍设计见[周期更新类型模板第一节](../../src/report_templates/employment-research/prompt-update-template.md)：
+三档节拍设计见[周期更新类型模板第一节](../../engine/report_templates/employment-research/prompt-update-template.md)：
 
 | 节拍 | 定位 | 触发条件 | 输出 |
 |---|---|---|---|
@@ -69,7 +69,7 @@
 ## 四、基线锚定与防回退
 
 - 读取 `{{PREVIOUS_REPORT_PATH}}`（首期季度为空）与 `{{BASELINE_REPORT_PATH}}`，继承结构与全部已核实结论。
-- 逐条继承「已修正事实清单」，产生修正后追加（格式见[通用基座第五节](../../src/report_templates/prompt-generic-base.md)）；严禁重新引入已被推翻的说法；无来源不得入清单。
+- 逐条继承「已修正事实清单」，产生修正后追加（格式见[通用基座第五节](../../engine/report_templates/prompt-generic-base.md)）；严禁重新引入已被推翻的说法；无来源不得入清单。
 - 已修正事实清单以最新版报告文首为单一事实源；登记册不重复维护。
 
 ## 五、追踪表与登记册联动
@@ -81,7 +81,7 @@
 1. 按调研维度并行启动研究子代理（资格制度 / 讲习费用 / 学校教育与子女教育 / 高等教育与技人国学历路径），全部限定日 / 英来源、逐点引用，每条数据附可直接访问的 URL。
 2. 主代理读取 `{{PREVIOUS_REPORT_PATH}}` 与基线做差异合并，继承已修正事实清单，应用第三节更新要点。
 3. 冲突数据保留双份引用；无法核实项单列「待复核清单」。
-4. 回写报告与登记册后运行 `python src/prompts-tools/tools/md2html.py` 重新生成 HTML，并运行 `python src/prompts-tools/tools/lint_reports.py` 校验。
+4. 回写报告与登记册后运行 `python engine/tools/md2html.py` 重新生成 HTML，并运行 `python engine/tools/lint_reports.py` 校验。
 
 ## 七、渲染与交付
 
@@ -105,7 +105,7 @@
 
 ## 落盘后审计（提交前必做）
 
-落盘后依次运行 `python src/prompts-tools/tools/audit_preflight.py --report <报告相对路径>`、`python src/prompts-tools/tools/audit_check.py --report <报告相对路径>`，修正全部 P0/P1 后执行 `python src/prompts-tools/tools/audit_pipeline.py --submit --report <报告相对路径>` 提交审计（未通过初审不得合并）。
+落盘后依次运行 `python engine/tools/audit_preflight.py --report <报告相对路径>`、`python engine/tools/audit_check.py --report <报告相对路径>`，修正全部 P0/P1 后执行 `python engine/tools/audit_pipeline.py --submit --report <报告相对路径>` 提交审计（未通过初审不得合并）。
 
 ## 版本记录
 

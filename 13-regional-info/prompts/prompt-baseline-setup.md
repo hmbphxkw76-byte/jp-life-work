@@ -4,7 +4,7 @@
 > **现状**：本业务线基线已于 2026-11 产出（[reports/{{YYYY-MM}}-<slug>.md](../reports/{{YYYY-MM}}-<slug>.md) + 同名 HTML，v1.0，数据基准 2026-11-12）。**正常运行永不重跑基线提示词**；仅在①报告与登记册全部丢失（灾难恢复），或②经维护规范批准的十节结构重排时启动。
 > **产出**：md 源稿 + 同目录自包含 HTML，落盘 `{{OUTPUT_PATH}}`；指标活值与研究边界档案回写 `{{REGISTRY_PATH}}`。
 >
-> **继承声明（四层体系）**：本文件 = [通用基座](../../src/report_templates/prompt-generic-base.md) × [监测报告通用规范](../../src/report_templates/monitoring-common-spec.md) × [基线报告类型模板（市场指标监测型）](../../src/report_templates/market-monitoring/prompt-baseline-setup-template.md) × [业务专属配置](./business-config.md)。冲突时以本文件为准。
+> **继承声明（四层体系）**：本文件 = [通用基座](../../engine/report_templates/prompt-generic-base.md) × [监测报告通用规范](../../engine/report_templates/monitoring-common-spec.md) × [基线报告类型模板（市场指标监测型）](../../engine/report_templates/market-monitoring/prompt-baseline-setup-template.md) × [业务专属配置](./business-config.md)。冲突时以本文件为准。
 
 ---
 
@@ -42,7 +42,7 @@
 
 ## 四、报告结构
 
-十节固定骨架见[基线类型模板第三节](../../src/report_templates/market-monitoring/prompt-baseline-setup-template.md)：
+十节固定骨架见[基线类型模板第三节](../../engine/report_templates/market-monitoring/prompt-baseline-setup-template.md)：
 
 | 节 | 模块 |
 |---|---|
@@ -73,7 +73,7 @@
 
 ## 七、渲染与交付
 
-- 交付格式：md + 同目录自包含 HTML（`python src/prompts-tools/tools/md2html.py`）；HTML 须通过 `python src/prompts-tools/tools/lint_reports.py`。
+- 交付格式：md + 同目录自包含 HTML（`python engine/tools/md2html.py`）；HTML 须通过 `python engine/tools/lint_reports.py`。
 - 基线导航采用简化锚点目录，不强制 `.report-nav`。
 - 落盘后将[业务配置第一节](./business-config.md)的 `{{BASELINE_REPORT_PATH}}` 指向本报告（重建场景）。
 
@@ -91,7 +91,7 @@
 
 ## 落盘后审计（提交前必做）
 
-落盘后依次运行 `python src/prompts-tools/tools/audit_preflight.py --report <报告相对路径>`、`python src/prompts-tools/tools/audit_check.py --report <报告相对路径>`，修正全部 P0/P1 后执行 `python src/prompts-tools/tools/audit_pipeline.py --submit --report <报告相对路径>` 提交审计（未通过初审不得合并）。
+落盘后依次运行 `python engine/tools/audit_preflight.py --report <报告相对路径>`、`python engine/tools/audit_check.py --report <报告相对路径>`，修正全部 P0/P1 后执行 `python engine/tools/audit_pipeline.py --submit --report <报告相对路径>` 提交审计（未通过初审不得合并）。
 
 ## 版本记录
 

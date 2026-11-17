@@ -2,7 +2,7 @@
 
 > **定位**：本文件是 `16-exit-transition-return` 业务线的**单一业务事实源**：运行变量固定值、研究边界、结构固化锚、术语口径、来源优先级、触发器、追踪表、口径冲突清单、渲染差异全部集中于此。两份周期提示词（基线 / 事件触发解读）引用本文件，业务参数只在这里维护一份。
 >
-> **继承声明（四层体系）**：周期提示词 = [通用基座](../../src/report_templates/prompt-generic-base.md) × [监测报告通用规范](../../src/report_templates/monitoring-common-spec.md) × [政策法规解读型模板](../../src/report_templates/policy-analysis/) × 本文件。通用层修改自动对本业务线生效；本文件修改只影响本业务线。冲突时以周期提示词 ＞ 本文件 ＞ 类型模板 ＞ 通用基座 ＞ 通用规范。
+> **继承声明（四层体系）**：周期提示词 = [通用基座](../../engine/report_templates/prompt-generic-base.md) × [监测报告通用规范](../../engine/report_templates/monitoring-common-spec.md) × [政策法规解读型模板](../../engine/report_templates/policy-analysis/) × 本文件。通用层修改自动对本业务线生效；本文件修改只影响本业务线。冲突时以周期提示词 ＞ 本文件 ＞ 类型模板 ＞ 通用基座 ＞ 通用规范。
 
 ---
 
@@ -204,7 +204,7 @@
 
 - **导航基址**：年度台账复盘报告 `.nav-url` = `{{REPO_RAW_URL_BASE}}` + `/reports/{本期文件名}`；基线报告保留简化锚点导航，不强制 `.report-nav`。
 - **报告结构**：基线按 3.3 声明映射；年度台账复盘按九节骨架（顶部九锚点导航）。
-- **HTML 生成**：后续周期运行用 `src/prompts-tools/tools/md2html.py` 生成并过 `lint_reports.py`。
+- **HTML 生成**：后续周期运行用 `engine/tools/md2html.py` 生成并过 `lint_reports.py`。
 - **结构映射**：本主题首月报告（2026-11）由框架件与基线件合并而成，h2 节数超出类型模板骨架，属业务固化锚；`compliance_check.py` 相应 WARN 为预期。
 
 ---
@@ -212,7 +212,7 @@
 <!-- VOCAB-SYNC:BEGIN topic=exit-transition-return do-not-edit -->
 ## 词汇速览：退出·转型·回国（词汇库自动同步）
 
-> 由 `src/vocabulary/script/sync_vocab.py` 自动维护：词汇库 exit-transition-return v1.2，共 26 条（同步于 2026-11-15T14:28:33）。标记区间内请勿手工编辑；词条变更走词汇库导入流程（src/vocabulary/README.md 第三节），同步机制见第九节。
+> 由 `engine/vocabulary/script/sync_vocab.py` 自动维护：词汇库 exit-transition-return v1.2，共 26 条（同步于 2026-11-15T14:28:33）。标记区间内请勿手工编辑；词条变更走词汇库导入流程（engine/vocabulary/README.md 第三节），同步机制见第九节。
 
 - **退出与劳动**（3）：退職（辞职、退职）；雇用保険（失业保险、失业给付）；健康保険任意継続（任意继续、任意継続）
 - **转型与在留资格**（7）：在留資格変更（资格变更、变更许可）；在留資格取消（资格取消、取消处分）；特定活動（特定活动、告示活动）；技能実習（技能实习、实習）；転職（转职、跳槽）；资格外活动（资格外许可、アルバイト许可）；特定技能2号（特定技能二号、SSW2号）

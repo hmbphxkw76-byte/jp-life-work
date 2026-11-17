@@ -5,7 +5,7 @@
 #   2. pipeline_runner.py run：S0 检测 → S1 计划 → S2 人工闸门（自动暂停，不产出正文）
 #   3. pipeline_status.py：生成统一监控视图 status.md / status.json
 #   4. 记录自动化状态（phase=pipeline）
-#   5. 提交 src/report-audits/pipeline/**（状态 + 快照 + 监控视图，审计留痕）
+#   5. 提交 engine/report-audits/pipeline/**（状态 + 快照 + 监控视图，审计留痕）
 #
 # 纪律：CI 只做「检测 + 计划 + 门禁」，**不跑研究正文撰写**（S2 为唯一人工环节）；
 # 不跑 S3 及之后的本地生成环节——生成 / 门禁由 html-sync / validate / audit-gate 承担。
@@ -59,15 +59,15 @@ jobs:
           PERIOD="${{ github.event.inputs.period }}"
           if [ -z "$PERIOD" ]; then PERIOD=$(date -u +%Y-%m); fi
           echo "period=$PERIOD" >> "$GITHUB_OUTPUT"
-          python src/prompts-tools/tools/trigger_watch.py --apply --period "$PERIOD"
-          COUNT=$(python -c "import json;print(len(json.load(open('src/report-audits/pipeline/trigger-watch.json',encoding='utf-8'))['candidates']))")
+          python engine/tools/trigger_watch.py --apply --period "$PERIOD"
+          COUNT=$(python -c "import json;print(len(json.load(open('engine/report-audits/pipeline/trigger-watch.json',encoding='utf-8'))['candidates']))")
           echo "candidates=$COUNT" >> "$GITHUB_OUTPUT"
 
       # 退出码约定：0=正常（含 S2 暂停）；1=阶段失败 / 状态损坏；2=参数错误
       - name: 编排 S0→S2（pipeline_runner.py run，遇 S2 人工闸门自动暂停）
         run: |
           PERIOD="${{ steps.watch.outputs.period }}"
-          python src/prompts-tools/tools/pipeline_runner.py run --period "$PERIOD" || code=$?
+          python engine/tools/pipeline_runner.py run --period "$PERIOD" || code=$?
           if [ "${code:-0}" -ne 0 ]; then
             echo "::error::流水线编排失败（阶段失败 / 状态损坏 / 参数错误）"
             exit 1
@@ -77,7 +77,7 @@ jobs:
       - name: 生成统一监控视图（pipeline_status.py）
         run: |
           PERIOD="${{ steps.watch.outputs.period }}"
-          python src/prompts-tools/tools/pipeline_status.py --period "$PERIOD"
+          python engine/tools/pipeline_status.py --period "$PERIOD"
 
       - name: 候选命中提醒 Issue（仅命中时）
         if: ${{ steps.watch.outputs.candidates != '' && steps.watch.outputs.candidates != '0' }}
@@ -89,7 +89,7 @@ jobs:
 
           period = os.environ["PERIOD"]
           payload = json.loads(
-              Path("src/report-audits/pipeline/trigger-watch.json").read_text(encoding="utf-8")
+              Path("engine/report-audits/pipeline/trigger-watch.json").read_text(encoding="utf-8")
           )
           cands = payload.get("candidates", [])
           if not cands:
@@ -126,7 +126,7 @@ jobs:
 
       - name: 提交流水线产物（状态 / 快照 / 监控视图）
         run: |
-          git add -A -- src/report-audits/pipeline
+          git add -A -- engine/report-audits/pipeline
           if git diff --cached --quiet; then
             echo "无变更，跳过提交"
             exit 0
@@ -140,7 +140,7 @@ jobs:
         if: always()
         run: |
           RESULT="${{ job.status == 'success' && 'success' || 'failure' }}"
-          python src/prompts-tools/tools/automation_status.py record \
+          python engine/tools/automation_status.py record \
             --phase pipeline --result "$RESULT" \
             --run-url "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
 

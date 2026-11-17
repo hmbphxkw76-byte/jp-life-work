@@ -2,7 +2,7 @@
 
 > **版本**：v2.2（2026-11-17 工具链开发规约落地）
 > 本文档说明 jp-life-work 报告管理体系的持续集成（CI）与定时自动化。
-> 代码位置：`.github/workflows/`（8 条工作流）；工具链：`src/prompts-tools/tools/`；测试：`src/tests/`。
+> 代码位置：`.github/workflows/`（8 条工作流）；工具链：`engine/tools/`；测试：`engine/tests/`。
 
 ## 一、总览
 
@@ -14,11 +14,11 @@
 | md → HTML、汇总页 | `html-sync.yml`（push 触发） |
 | 归档 / 索引 / 结构维护 | `scheduled-maintenance.yml`（每月 1 日） |
 | 月度产出待办提醒 | `scheduled-report-tasks.yml`（每月 1 日） |
-| 内容零丢失 / 对比准确性 | `src/tests/test_tools.py` |
+| 内容零丢失 / 对比准确性 | `engine/tests/test_tools.py` |
 | 信息质量评估 / 混乱修复 | `info-quality.yml`（每周一 02:20 UTC） |
 | 审计门禁（登记册 / 台账 / 标识 / L1–L5） | `audit-gate.yml`（阻断） |
 | 决策支持件套（参数 / 一页纸 / 财务模型 / 事实卡片 / 待核实闭环） | `validate.yml`（复用门禁）+ `scheduled-maintenance.yml`（刷新） |
-| 流程复用一致性 | `src/tests/test_tools.py::TestProcessReuse` |
+| 流程复用一致性 | `engine/tests/test_tools.py::TestProcessReuse` |
 | 阶段出口质量（采集 / 筛选 / 分类左移） | `validate.yml`（`stage_gate_check.py`） |
 | 触发检测 / 编排状态（S0→S2） | `pipeline-orchestrator.yml`（每月 1 日 00:35 UTC） |
 | 工具链覆盖率 / 双轴评审 | `validate.yml`（`coverage_gate.py`）/ `audit-gate.yml`（`review_gate.py`） |
@@ -35,7 +35,7 @@
 
 | 步骤 | 命令 | 失败后果 |
 |---|---|---|
-| 契约测试 | `python -m unittest discover -s src/tests` | 阻断（退出码 1） |
+| 契约测试 | `python -m unittest discover -s engine/tests` | 阻断（退出码 1） |
 | 结构与规范校验 | `validate.py` | 阻断 |
 | 报告归位检查 | `classify_reports.py --check --unknown-warn` | 阻断 |
 | 结构补全检查 | `ensure_region_topics.py --check` | 阻断 |
@@ -52,11 +52,11 @@
 | 覆盖率门禁 | `coverage_gate.py`（阈值读 `coverage-config.json`） | 阻断（enforce=true 未达标 / 测试失败） |
 
 > 两个关卡对期间 >= 2026-11 的**新报告**阻断；历史报告由 `--new-only` 跳过，
-> 遗留项列入 `src/report-audits/audit/lint-whitelist.json` 豁免（逾期恢复阻断）。
+> 遗留项列入 `engine/report-audits/audit/lint-whitelist.json` 豁免（逾期恢复阻断）。
 
 ### 2. `html-sync.yml` — 生成物同步
 
-- **触发**：push（`**/reports/*.md`、`build_hub.py`、`md2html.py`、`report_diff.py`、`topics.json`、`template-registry.md`、词库 `terms.md`、`src/search/**` 变更）、手动
+- **触发**：push（`**/reports/*.md`、`build_hub.py`、`md2html.py`、`report_diff.py`、`topics.json`、`template-registry.md`、词库 `terms.md`、`engine/search/**` 变更）、手动
 - **步骤**：
   1. `md2html.py` — 重新生成同名自包含 HTML（含构建期跨月对比高亮）
   2. `build_hub.py` — 重建 `index.html` 与 `search-index.json`
@@ -117,7 +117,7 @@
   4. 存在 P0/P1 遗留时 `::error::` 告警（退出码 1）
   5. `automation_status.py record` — 记录执行状态
   6. 提交三清单（无变更则跳过）
-- **产物**：`src/report-audits/info-quality/`（评估台账 / 修复台账 / 验证报告 / 累计修复历史 / JSON）
+- **产物**：`engine/report-audits/info-quality/`（评估台账 / 修复台账 / 验证报告 / 累计修复历史 / JSON）
 
 ### 6. `audit-gate.yml` — 审计门禁（阻断式）
 
@@ -155,7 +155,7 @@
   2. `pipeline_runner.py run`（S0 检测 → S1 计划 → **S2 人工闸门自动暂停**，不产出正文）
   3. `pipeline_status.py`（生成统一监控视图 `status.md` / `status.json`）
   4. 候选命中时开提醒 Issue（去重：当期已存在则更新正文）
-  5. `automation_status.py record --phase pipeline` + 提交 `src/report-audits/pipeline/**`
+  5. `automation_status.py record --phase pipeline` + 提交 `engine/report-audits/pipeline/**`
 - **纪律**：**不含任何撰写步骤**；不跑 S3–S5 本地生成（由 `html-sync` / `validate` / `audit-gate` 承担）
 - **退出码**：`pipeline_runner run` 0 = 正常（含 S2 暂停）；1 = 阶段失败 / 状态损坏；2 = 参数错误
 
@@ -199,7 +199,7 @@ reports/YYYY-MM-<slug>.md  ──md2html.py──►  reports/YYYY-MM-<slug>.htm
 - **辅助开关**：报告页工具条「隐藏更新标记」对照阅读、「展开全部删除」。
 - **呈现**：报告页新标签页独立打开，页脚提供「← 返回主题 / 返回首页」。
 
-## 六、测试体系（`src/tests/`，844 项）
+## 六、测试体系（`engine/tests/`，860 项）
 
 | 场景 | 测试类 | 覆盖 |
 |---|---|---|
@@ -225,9 +225,10 @@ reports/YYYY-MM-<slug>.md  ──md2html.py──►  reports/YYYY-MM-<slug>.htm
 | 工具链补测（编排决策） | `test_cov_pipeline.py`（111 项） | pipeline_runner / status / trigger / update_planner / automation / decision_log / stage_gate / pending / finance / _common |
 | 工具链补测（并行协作） | `test_cov_workflow.py`（100 项） | workflow_guard / git_push / cleanup / run_tests_parallel |
 | 分支命名与会话标识 | `test_branch_naming.py`（19 项） | sid 派生 / 分支名校验 / pre-push / pre-commit / 钩子安装 |
-| 报告生成一致性比对 | `test_verify_report_parity.py`（22 项） | 归一化（单遍路径重写 / 时间戳 / JSON 易变键）、基线写入与覆盖清空、比对（一致 / 仅路径 / MISMATCH / MISSING / NEW）、退出码 0/1/2 |
+| 报告生成一致性比对 | `test_verify_report_parity.py`（25 项） | 归一化（单遍路径重写 / 时间戳 / JSON 易变键）、基线写入与覆盖清空、比对（一致 / 仅路径 / MISMATCH / MISSING / NEW）、退出码 0/1/2 |
+| 引擎层迁移守卫 | `test_engine_migration.py`（13 项） | 目录终态（engine 存在 / 旧引擎层与根协作脚本目录不存在）、SKIP_TOP / TYPE_RE、主题数 21、深度推导 ROOT、旧路径与代码常量活引用清零 |
 
-> 合计 844 项（`python -m unittest discover -s src/tests`，当前全绿）。
+> 合计 860 项（`python -m unittest discover -s engine/tests`，当前全绿）。
 
 ## 七、手动命令速查
 
@@ -236,53 +237,53 @@ reports/YYYY-MM-<slug>.md  ──md2html.py──►  reports/YYYY-MM-<slug>.htm
 pip install -r requirements.txt
 
 # 测试与校验
-python -m unittest discover -s src/tests -v
-python src/prompts-tools/tools/validate.py
-python src/prompts-tools/tools/build_hub.py --check
+python -m unittest discover -s engine/tests -v
+python engine/tools/validate.py
+python engine/tools/build_hub.py --check
 
 # 生成物
-python src/prompts-tools/tools/md2html.py          # md → HTML
-python src/prompts-tools/tools/build_hub.py        # index.html
-python src/prompts-tools/tools/build_index.py      # INDEX.md
+python engine/tools/md2html.py          # md → HTML
+python engine/tools/build_hub.py        # index.html
+python engine/tools/build_index.py      # INDEX.md
 
 # 维护
-python src/prompts-tools/tools/classify_reports.py --apply
-python src/prompts-tools/tools/ensure_region_topics.py
-python src/prompts-tools/tools/archive_reports.py
+python engine/tools/classify_reports.py --apply
+python engine/tools/ensure_region_topics.py
+python engine/tools/archive_reports.py
 
 # 任务与状态
-python src/prompts-tools/tools/update_planner.py --period 2026-12
-python src/prompts-tools/tools/automation_status.py activity
+python engine/tools/update_planner.py --period 2026-12
+python engine/tools/automation_status.py activity
 
 # 信息质量
-python src/prompts-tools/tools/info_quality_check.py --apply
+python engine/tools/info_quality_check.py --apply
 
 # 审计
-python src/prompts-tools/tools/audit_preflight.py --report <报告.md>
-python src/prompts-tools/tools/audit_check.py --report <报告.md>
-python src/prompts-tools/tools/audit_pipeline.py --submit --report <报告.md>
-python src/prompts-tools/tools/audit_pipeline.py --gate
+python engine/tools/audit_preflight.py --report <报告.md>
+python engine/tools/audit_check.py --report <报告.md>
+python engine/tools/audit_pipeline.py --submit --report <报告.md>
+python engine/tools/audit_pipeline.py --gate
 
 # 阶段闸（采集 / 筛选 / 分类左移）
-python src/prompts-tools/tools/stage_gate_check.py
+python engine/tools/stage_gate_check.py
 
 # 工具链开发域（TOOLCHAIN-DEV-SPEC）
-python src/prompts-tools/tools/coverage_gate.py            # 覆盖率门禁（--update-baseline / --porcelain）
-python src/prompts-tools/tools/review_gate.py --changed <变更清单>  # 双轴评审软门禁
+python engine/tools/coverage_gate.py            # 覆盖率门禁（--update-baseline / --porcelain）
+python engine/tools/review_gate.py --changed <变更清单>  # 双轴评审软门禁
 
 # 决策支持 / 信息质量流程复用
-python src/prompts-tools/tools/info_quality_check.py --check
-python src/prompts-tools/tools/fact_card_check.py
-python src/prompts-tools/tools/pending_verification.py --check
-python src/prompts-tools/tools/personal_finance_model.py --check
-python src/prompts-tools/tools/skeleton_builder.py --topic 14-life-operations --mode compact
-python src/prompts-tools/tools/decision_log.py --timeline
+python engine/tools/info_quality_check.py --check
+python engine/tools/fact_card_check.py
+python engine/tools/pending_verification.py --check
+python engine/tools/personal_finance_model.py --check
+python engine/tools/skeleton_builder.py --topic 14-life-operations --mode compact
+python engine/tools/decision_log.py --timeline
 ```
 
 ## 八、常见问题
 
 **Q：`build_hub.py --check` 报「汇总页已过期」？**
-报告或生成器变更后需重新生成：`python src/prompts-tools/tools/build_hub.py`，或直接 push 触发 `html-sync`。
+报告或生成器变更后需重新生成：`python engine/tools/build_hub.py`，或直接 push 触发 `html-sync`。
 
 **Q：`validate.yml` 失败但本地测试通过？**
 多为浅克隆取不到历史（`TestHistoricalMigration`）。CI 已配置 `fetch-depth: 0`；本地请确认 git 历史完整。
@@ -309,14 +310,14 @@ GitHub Actions 页面 → 对应 workflow → 「Run workflow」；或在本地�
 | 审计门禁 | `audit-gate.yml` | `audit_check.py --all`（内嵌 info_quality_check 发现） |
 | 月度提醒 | `scheduled-report-tasks.yml` | `update_planner.py`（含「决策状态变化」字段） |
 | 生成期提示词 | `prompt-generic-base.md` / 00 `business-config.md` / `operations-guide.md` | 模块边界集中、五问「是/否/待定 + 依据」、件套路径 |
-| 检索层 | `build_hub.py` + `src/search/*` | `keywords.json` / `five-questions.json` / `question-index.json`（group） |
+| 检索层 | `build_hub.py` + `engine/search/*` | `keywords.json` / `five-questions.json` / `question-index.json`（group） |
 
-- **复用一致性测试**：`TestProcessReuse`（`src/tests/test_tools.py`）逐项断言上述阶段均引用对应工具 / 产物；任一处漏接即测试失败，防止流程漂移。
+- **复用一致性测试**：`TestProcessReuse`（`engine/tests/test_tools.py`）逐项断言上述阶段均引用对应工具 / 产物；任一处漏接即测试失败，防止流程漂移。
 - **维护闭环**：`scheduled-maintenance.yml` 每月刷新财务模型 / 待核实闭环 / 事实卡片报告；`validate.yml` 在 PR 阶段校验其一致性。
 
 ---
 
-## 十、本地并行协作机制（`tools/workflow_guard.py`）
+## 十、本地并行协作机制（`engine/scripts/workflow_guard.py`）
 
 CI 之外的**本地多会话 / 多任务并行**由三层隔离机制约束，避免合并错误：
 
@@ -329,12 +330,12 @@ CI 之外的**本地多会话 / 多任务并行**由三层隔离机制约束，�
 - **典型流程**：`task start <name>` → 在 `.worktrees/<name>/` 工作 → `merge <name>`
   → `task stop <name>`；本地 main 对齐用 `sync`。
 - **分支命名**：开发分支 `task/<name>-<sid>`，`sid` = 会话标识（`CATPAW_CONVERSATION_ID`）前 8 位；
-  钩子 `python tools/workflow_guard.py hooks`（pre-push / pre-commit）自动校验，新克隆 / 换机后必装。
+  钩子 `python engine/scripts/workflow_guard.py hooks`（pre-push / pre-commit）自动校验，新克隆 / 换机后必装。
   规范与台账：`docs/branch-management.md`。
 - **与 CI 的边界**：Actions 在远端 runner 上直接推 `main`，不经过本地锁；
   合并侧用 `--force-with-lease` 兜底，远端被 CI 推进时本地合并失败重试，不覆盖。
-- **详文档**：`tools/README.md`；**会话规约**：`.meituan-catpaw/5833106238/skills/workflow-guard/SKILL.md`；
-  **分支规范**：`docs/branch-management.md`；**测试**：`src/tests/test_workflow_guard.py`、`src/tests/test_branch_naming.py`。
+- **详文档**：`engine/scripts/README.md`；**会话规约**：`.meituan-catpaw/5833106238/skills/workflow-guard/SKILL.md`；
+  **分支规范**：`docs/branch-management.md`；**测试**：`engine/tests/test_workflow_guard.py`、`engine/tests/test_branch_naming.py`。
 
 ---
 
@@ -342,14 +343,14 @@ CI 之外的**本地多会话 / 多任务并行**由三层隔离机制约束，�
 
 > 完整规约见 [工具链开发规约（TOOLCHAIN-DEV-SPEC）](toolchain/TOOLCHAIN-DEV-SPEC.md)。本节只保留 CI 侧的程序化边界。
 
-工具链变更（`src/`、`tools/`、`.github/workflows/`、根配置）走本规约六阶段（规格先行 → 工单化 → TDD → 实现 → 双轴评审 → 合并前检查单）；报告生产内容（`*/reports/`、`*/prompts/` 等）仍走五阶段 + AuditGuard，两层并行且边界清晰。
+工具链变更（`engine/`、`engine/scripts/`、`.github/workflows/`、根配置）走本规约六阶段（规格先行 → 工单化 → TDD → 实现 → 双轴评审 → 合并前检查单）；报告生产内容（`*/reports/`、`*/prompts/` 等）仍走五阶段 + AuditGuard，两层并行且边界清晰。
 
 | 关注点 | 载体 | 命令 / 判据 |
 |---|---|---|
 | 覆盖率门禁 | `validate.yml`「覆盖率」job | `coverage_gate.py`；阈值 / 开关读 `coverage-config.json` 单一事实源；统计范围由 `.coveragerc` 限定工具链三目录 |
 | 双轴评审软门禁 | `audit-gate.yml` | `review_gate.py --changed`；工具链变更须有 `docs/toolchain/reviews/*.md` |
-| 合并前检查单 | `tools/README.md` | 测试 / validate / 评审 / 覆盖率 / 工作区卫生五项齐备 |
-| 防漂移守卫 | `src/tests/test_toolchain_dev_spec.py` | 规约阶段顺序 / 单一事实源 / 检查单存在性 |
+| 合并前检查单 | `engine/scripts/README.md` | 测试 / validate / 评审 / 覆盖率 / 工作区卫生五项齐备 |
+| 防漂移守卫 | `engine/tests/test_toolchain_dev_spec.py` | 规约阶段顺序 / 单一事实源 / 检查单存在性 |
 
 - **豁免阈值**：≤2 文件且无新增工具的变更免规格 / 工单，但不得豁免双轴评审与合并前检查单。
 - **分阶段阈值**：P1/P2 观察期 60%（`enforce=false`）；P3 起 80%（`enforce=true`，阻断）。
@@ -374,14 +375,14 @@ CI 之外的**本地多会话 / 多任务并行**由三层隔离机制约束，�
 
 **目标**：流水线运行前、运行中、运行结束后，runner 工作区与本地开发工作区都不留缓存、临时文件、过期日志等残留；清理规则单点维护，且可被门禁验证。
 
-### 13.1 单一事实源：`tools/cleanup_workspace.py`
+### 13.1 单一事实源：`engine/scripts/cleanup_workspace.py`
 
 清理对象（仅限未入库产物）：
 
 - 缓存目录：`__pycache__/`、`.pytest_cache/`、`.mypy_cache/`、`.ruff_cache/`、`.hypothesis/`、`.trae-html-share-packages/`、`.screenshots/`；
-- 生成备份目录：`src/vocabulary/data/sync-backups/`、`src/vocabulary/data/topic-backups/`；
+- 生成备份目录：`engine/vocabulary/data/sync-backups/`、`engine/vocabulary/data/topic-backups/`；
 - 单文件：`*.py[cod]`、`*$py.class`、`*.tmp`、`*.temp`、`.DS_Store`、`Thumbs.db`、`desktop.ini`；
-- 运行日志：`src/vocabulary/data/*.log`（作用域限定，不误删其他目录的同名文件）；
+- 运行日志：`engine/vocabulary/data/*.log`（作用域限定，不误删其他目录的同名文件）；
 - 覆盖率产物：`.coverage*`（coverage 数据文件）、`htmlcov/`（HTML 报告目录）。
 
 **安全约束**：只清仓库根内路径；已被 `git ls-files` 覆盖的文件 / 目录一律跳过；不进入 `.git`；不跟随符号链接。
@@ -389,9 +390,9 @@ CI 之外的**本地多会话 / 多任务并行**由三层隔离机制约束，�
 退出码：`0` = 干净或已清理；`1` = `--check` 发现残留 / 参数错误 / 删除失败。
 
 ```bash
-python tools/cleanup_workspace.py            # 清理
-python tools/cleanup_workspace.py --check    # 门禁：只检查，发现残留即退出码 1
-python tools/cleanup_workspace.py --dry-run  # 预览将删除项
+python engine/scripts/cleanup_workspace.py            # 清理
+python engine/scripts/cleanup_workspace.py --check    # 门禁：只检查，发现残留即退出码 1
+python engine/scripts/cleanup_workspace.py --dry-run  # 预览将删除项
 ```
 
 ### 13.2 流水线接入（复合动作 `.github/actions/workspace-cleanup`）
@@ -419,9 +420,9 @@ python tools/cleanup_workspace.py --dry-run  # 预览将删除项
 
 ### 13.4 本地纪律
 
-- 提交前运行 `python tools/cleanup_workspace.py`，随后 `git status` 应无未跟踪残留；
-- 运行日志不入库（`.gitignore`：`src/vocabulary/data/*.log`），本地仍由工具正常写入；
-- `.worktrees/` 由 `tools/workflow_guard.py` 管理，不在清理脚本作用域内。
+- 提交前运行 `python engine/scripts/cleanup_workspace.py`，随后 `git status` 应无未跟踪残留；
+- 运行日志不入库（`.gitignore`：`engine/vocabulary/data/*.log`），本地仍由工具正常写入；
+- `.worktrees/` 由 `engine/scripts/workflow_guard.py` 管理，不在清理脚本作用域内。
 
 ---
 
@@ -432,13 +433,14 @@ python tools/cleanup_workspace.py --dry-run  # 预览将删除项
 | v1.0 | 2026-11-14 | 初始版本 | 建立 CI 与自动化全景：7 条工作流、报告生命周期、命名分类、跨月对比、测试体系、手动命令、复用一致性、并行协作 |
 | v1.2 | 2026-11-16 | 精简与修正 | 测试数修正为 222（189 + 33）；第十一节精简为指针 + 程序化边界，去除与总规范重复的全链路图与阶段闸表；手动命令补审计入口 |
 | v1.3 | 2026-11-16 | 对齐校验整改 | 步骤清单与实际工作流逐一对齐（validate 14 步 / html-sync 7 步 / maintenance 14 步 / info-quality 6 步 / sampling 4 步 / report-tasks 3 步）；补阶段闸、信息质量、事实卡片、待核实、财务模型、自动化状态条目；sampling 不合格处置改为自动置 `stale` |
-| v1.4 | 2026-11-16 | 工作区卫生横切 | 新增 `tools/cleanup_workspace.py`（缓存 / 临时文件 / 日志清理，含 `--check` 门禁与已跟踪文件保护）与复合动作 `.github/actions/workspace-cleanup`；7 条工作流全部接入「阶段前置 + 阶段收尾（`if: always()`）」清理；`validate.yml` 新增 `workspace-hygiene` 自检 job（制造残留 → 清理 → `--check` 断言零残留）；运行日志改为不入库；测试数 227 → 251 |
+| v1.4 | 2026-11-16 | 工作区卫生横切 | 新增 `engine/scripts/cleanup_workspace.py`（缓存 / 临时文件 / 日志清理，含 `--check` 门禁与已跟踪文件保护）与复合动作 `.github/actions/workspace-cleanup`；7 条工作流全部接入「阶段前置 + 阶段收尾（`if: always()`）」清理；`validate.yml` 新增 `workspace-hygiene` 自检 job（制造残留 → 清理 → `--check` 断言零残留）；运行日志改为不入库；测试数 227 → 251 |
 | v1.5 | 2026-11-16 | 第二轮对齐校验 | `audit-gate.yml` 的 `pull_request` 限定 `branches: [main]`（与 `validate.yml` 同口径）；十二.2 修正「每个 job」表述（`workspace-hygiene` 自检 job 例外）；二.3 补「自动化状态失败补记」步骤与活跃度预警口径；二.6 触发口径同步；测试数 251 → 255 |
-| v1.6 | 2026-11-17 | 流水线编排状态层 | 新增 `src/tests/test_pipeline_orchestrator.py`（状态 shape / 往返 / 损坏与版本不符，4 项）；六节测试数 285 → 289 |
+| v1.6 | 2026-11-17 | 流水线编排状态层 | 新增 `engine/tests/test_pipeline_orchestrator.py`（状态 shape / 往返 / 损坏与版本不符，4 项）；六节测试数 285 → 289 |
 | v1.7 | 2026-11-17 | 流水线触发检测 | 新增 `trigger_watch.py`（watchlist 派生 / freshness / 候选线索 / 只读默认）及同文件 6 项用例；六节测试数 289 → 295 |
 | v1.8 | 2026-11-17 | 流水线监控视图 | 新增 `pipeline_status.py`（阶段进度 / 阻塞点 / 审计分布 / 心跳）及同文件 4 项用例；`automation_status` 新增 `pipeline` 心跳相位；六节测试数 295 → 299 |
 | v1.9 | 2026-11-17 | 流水线编排器 | 新增 `pipeline_runner.py`（六阶段状态机 / 断点续跑 / S2 人工闸门）及同文件 6 项用例；六节测试数 299 → 305 |
 | v2.0 | 2026-11-17 | 流水线 CI 接线 | 新增 `.github/workflows/pipeline-orchestrator.yml`（每月 1 日 00:35 UTC：触发检测 → S0→S2 → 监控视图 → 候选 Issue；不含撰写）及同文件 2 项用例；工作流 7 → 8，六节测试数 305 → 307 |
 | v2.1 | 2026-11-17 | 流水线全链路验证 | 新增 E2E 用例（S0→S5 全链路 + S2 闸门 + 幂等，1 项）；六节测试数 307 → 308 |
 | v2.2 | 2026-11-17 | 工具链开发规约落地 | 新增 TOOLCHAIN-DEV-SPEC（六阶段 / 豁免阈值 / 覆盖率门禁 / 双轴评审 / 合并前检查单）；新增 `coverage_gate.py`、`review_gate.py`、`coverage-config.json`、`.coveragerc`；`validate.yml` 增覆盖率 job、`audit-gate.yml` 增评审软门禁；新增守卫测试 `test_toolchain_dev_spec.py` 与 5 个补测文件；工具链覆盖率 0 门禁 → 93%（阈值 80% 阻断）；六节测试数 308 → 803；新增第十一节 |
-| v2.3 | 2026-11-17 | 分支命名与会话标识 | 新增 `tools/branch_naming.py`（`task/<name>-<sid>` 规范 / 校验 / 钩子安装）与 `tools/git-hooks/{pre-push,pre-commit}`；`workflow_guard task start` 自动追加会话 sid，新增 `hooks` 子命令；存量 4 条分支补全 sid 并建立台账（`docs/branch-management.md`）；新增 `test_branch_naming.py`（19 项）并适配既有守卫；六节测试数 803 → 822 |
+| v2.3 | 2026-11-17 | 分支命名与会话标识 | 新增 `engine/scripts/branch_naming.py`（`task/<name>-<sid>` 规范 / 校验 / 钩子安装）与 `engine/scripts/git-hooks/{pre-push,pre-commit}`；`workflow_guard task start` 自动追加会话 sid，新增 `hooks` 子命令；存量 4 条分支补全 sid 并建立台账（`docs/branch-management.md`）；新增 `test_branch_naming.py`（19 项）并适配既有守卫；六节测试数 803 → 822 |
+| v2.4 | 2026-11-17 | 引擎层迁移（SRC→ENGINE） | 旧引擎层目录整体迁至 `engine/`、根协作脚本迁至 `engine/scripts/`（纯路径迁移，零行为变更）；新增迁移守卫 `test_engine_migration.py`（13 项）与报告生成一致性比对 `test_verify_report_parity.py`（25 项）；六节测试数 822 → 860 |

@@ -3,7 +3,7 @@
 > **版本**：v1.0（2026-11-17）
 > **定位**：jp-life-work **工具链开发域**（代码交付）的开发流程与验收规约，选择性吸收 mainline 11 阶段规范的增量能力。
 > **上位依据**：[AGENTS.md](../../AGENTS.md)、[CI.md](../CI.md)（CI-SYSTEM）、[mainline 融合评估报告](mainline融合评估报告-2026-11-17.md)（MAINLINE-INTEGRATION-ASSESSMENT-2026-11）。
-> **适用对象**：`src/`、`tools/`、`.github/workflows/` 及根配置（`requirements*.txt`、`.coveragerc`、`coverage-config.json`）的变更。
+> **适用对象**：`engine/`、`engine/scripts/`、`.github/workflows/` 及根配置（`requirements*.txt`、`.coveragerc`、`coverage-config.json`）的变更。
 
 ---
 
@@ -19,9 +19,9 @@
 
 | 层 | 路径 | 是否适用本规约 |
 |---|---|---|
-| 工具链代码 | `src/prompts-tools/tools/`、`src/vocabulary/script/`、`tools/` | ✅ 适用 |
+| 工具链代码 | `engine/tools/`、`engine/vocabulary/script/`、`tools/` | ✅ 适用 |
 | 工具链配置 / CI | `.github/workflows/`、`requirements*.txt`、`.coveragerc`、`coverage-config.json`、`mypy.ini`、`ruff.toml` | ✅ 适用 |
-| 工具链测试 | `src/tests/` | ✅ 适用 |
+| 工具链测试 | `engine/tests/` | ✅ 适用 |
 | 报告生产内容 | `*/reports/`、`*/prompts/`、`*/handbook/`、`*/data/`、`docs/`（除本规约及 `docs/toolchain/`） | ❌ 不适用，走五阶段 + AuditGuard |
 
 **越界即违规**：内容任务不得被强加代码阶段（规格 / 工单 / TDD / 覆盖率）；
@@ -36,20 +36,20 @@
 |---|---|---|---|
 | S1 | 规格先行（轻量 to-spec） | `docs/toolchain/specs/<任务 slug>.md`（≤1 页：动机 / 接口 / 验收标准） | 规格存在且含三要素；触发豁免时记录豁免理由 |
 | S2 | 工单化（tracer-bullet） | `docs/toolchain/tickets/<任务 slug>.md`（逐条可验证工单） | ≥2 文件变更已拆工单；每条工单有验收判据 |
-| S3 | TDD（红绿重构） | `src/tests/test_<模块>.py` 先行失败用例 | 新用例在实现前失败（红），实现后通过（绿） |
+| S3 | TDD（红绿重构） | `engine/tests/test_<模块>.py` 先行失败用例 | 新用例在实现前失败（红），实现后通过（绿） |
 | S4 | 实现 | 代码 + 必要文档 | 测试全绿；`validate.py` 退出码 ∈ {0,2} |
 | S5 | 双轴评审 | `docs/toolchain/reviews/<任务 slug>-review.md`（Standards + Spec 双轴结论 + 证据） | 双轴均无 P0/P1；结论含证据（命令 + 输出摘要） |
-| S6 | 合并前检查单 | `tools/README.md`「合并前检查单」逐项打勾 | 测试 / validate / 评审报告 / 工作区卫生四项齐备 |
+| S6 | 合并前检查单 | `engine/scripts/README.md`「合并前检查单」逐项打勾 | 测试 / validate / 评审报告 / 工作区卫生四项齐备 |
 
 **豁免阈值**：**≤2 文件且无新增工具的变更免 S1 规格**（在任务分支说明中记录豁免理由）；
 S2 工单化同步豁免。豁免不得用于规避 S5 双轴评审与 S6 合并前检查单。
 
 ## 四、命名规范
 
-- 工具脚本：`src/prompts-tools/tools/<snake_case>.py`（公共内核 `_common.py` 唯一例外）；
-- 测试：`src/tests/test_<模块>.py`，类 `Test<模块>`，方法 `test_<行为>`；
+- 工具脚本：`engine/tools/<snake_case>.py`（公共内核 `_common.py` 唯一例外）；
+- 测试：`engine/tests/test_<模块>.py`，类 `Test<模块>`，方法 `test_<行为>`；
 - 规格 / 工单 / 评审：`docs/toolchain/{specs,tickets,reviews}/<任务 slug>[-review].md`（kebab-case，**不得**使用 `YYYY-MM-` 报告命名，避免被 `classify_reports.py` 误判为错位报告）；
-- 覆盖率配置：单一事实源 `src/prompts-tools/tools/coverage-config.json`；运行配置 `.coveragerc`。
+- 覆盖率配置：单一事实源 `engine/tools/coverage-config.json`；运行配置 `.coveragerc`。
 
 ## 五、异常处理与退出码契约
 
@@ -58,15 +58,15 @@ S2 工单化同步豁免。豁免不得用于规避 S5 双轴评审与 S6 合并
 - 校验类工具必须显式返回上述退出码；参数错误返回 `2`。
 - 覆盖率未达阈值时：`enforce=true` → `1`（阻断）；`enforce=false` → `2`（观察，不阻断）。
 - 工具内部异常不得静默吞掉；失败即停，保留现场（日志 / 临时文件）供定位。
-- 不得 `git push origin main`；合并只经 `tools/workflow_guard.py merge`（三层隔离）。
+- 不得 `git push origin main`；合并只经 `engine/scripts/workflow_guard.py merge`（三层隔离）。
 
 ## 六、覆盖率门禁（单一事实源）
 
 - 阈值与开关只读 `coverage-config.json` 的 `threshold` / `enforce`，不得在 CI 脚本硬编码。
-- 统计范围限定工具链代码：`src/prompts-tools/tools/`、`src/vocabulary/script/`、`tools/`（`.coveragerc` 同源约束）。
+- 统计范围限定工具链代码：`engine/tools/`、`engine/vocabulary/script/`、`tools/`（`.coveragerc` 同源约束）。
 - **分阶段提升**：P1/P2 观察期 `threshold=60, enforce=false`；P3 起 `threshold=80, enforce=true`（阻断）。
-- 基线数值入库：`src/report-audits/toolchain/coverage-baseline.json`。
-- 门禁入口：`python src/prompts-tools/tools/coverage_gate.py`（`--update-baseline` 刷新基线，`--porcelain` 输出 JSON）。
+- 基线数值入库：`engine/report-audits/toolchain/coverage-baseline.json`。
+- 门禁入口：`python engine/tools/coverage_gate.py`（`--update-baseline` 刷新基线，`--porcelain` 输出 JSON）。
 
 ## 七、双轴评审（Standards + Spec）
 
@@ -81,22 +81,22 @@ S2 工单化同步豁免。豁免不得用于规避 S5 双轴评审与 S6 合并
 
 ## 八、合并前检查单（S6，映射 mainline `pr-push-review`）
 
-`workflow_guard merge` 前逐项确认（文档见 `tools/README.md`，守卫测试断言其存在）：
+`workflow_guard merge` 前逐项确认（文档见 `engine/scripts/README.md`，守卫测试断言其存在）：
 
-1. **测试**：`python -m unittest discover -s src/tests` 全绿；
-2. **规范校验**：`python src/prompts-tools/tools/validate.py` 退出码 ∈ {0,2}；
+1. **测试**：`python -m unittest discover -s engine/tests` 全绿；
+2. **规范校验**：`python engine/tools/validate.py` 退出码 ∈ {0,2}；
 3. **评审报告**：本任务 `docs/toolchain/reviews/<任务 slug>-review.md` 存在且双轴无 P0/P1；
 4. **覆盖率**：`coverage_gate.py` 达标（P3 起 ≥80% 阻断）；
-5. **工作区卫生**：`python tools/cleanup_workspace.py --check` 零残留。
+5. **工作区卫生**：`python engine/scripts/cleanup_workspace.py --check` 零残留。
 
 ## 九、守卫测试（防漂移）
 
-`src/tests/test_toolchain_dev_spec.py` 断言：
+`engine/tests/test_toolchain_dev_spec.py` 断言：
 
 - 本规约文件存在，且阶段顺序（S1→S6）与适用边界（第二节）不被篡改；
 - `coverage-config.json` 存在且 `threshold` / `enforce` 类型正确；
 - `.coveragerc` 存在且 `source` 只覆盖工具链三目录；
-- `tools/README.md` 含「合并前检查单」节，四项齐备。
+- `engine/scripts/README.md` 含「合并前检查单」节，四项齐备。
 
 ## 十、验收准则
 

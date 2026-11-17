@@ -62,7 +62,7 @@ jobs:
           PERIOD="${{ github.event.inputs.period }}"
           if [ -z "$PERIOD" ]; then PERIOD=$(date -u +%Y-%m); fi
           echo "period=$PERIOD" >> "$GITHUB_OUTPUT"
-          python src/prompts-tools/tools/update_planner.py --period "$PERIOD" > /tmp/tasks.md
+          python engine/tools/update_planner.py --period "$PERIOD" > /tmp/tasks.md
           cat /tmp/tasks.md
 
       - name: 发布月度提醒 Issue
@@ -112,7 +112,7 @@ jobs:
         if: always()
         run: |
           RESULT="${{ job.status == 'success' && 'success' || 'failure' }}"
-          python src/prompts-tools/tools/automation_status.py record \
+          python engine/tools/automation_status.py record \
             --phase scheduled-report-tasks --result "$RESULT" \
             --run-url "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
           git add -A -- automation-status.json

@@ -1,7 +1,7 @@
 # 赴日决策 · 五问聚合视图（决策者专属）
 
 > **用途**：按「五问」聚合的决策者专属视图——一屏给出五问判定、依据、置信度、关联参数与来源报告。
-> **数据来源**：[personal_profile.md](./personal_profile.md) / [decision_hub_registry.md](./decision_hub_registry.md) / [fact_cards.md](./fact_cards.md)；机器可读版见 `src/search/five-questions.json`（由 `build_hub.py` 接入 index.html 五问视图）。
+> **数据来源**：[personal_profile.md](./personal_profile.md) / [decision_hub_registry.md](./decision_hub_registry.md) / [fact_cards.md](./fact_cards.md)；机器可读版见 `engine/search/five-questions.json`（由 `build_hub.py` 接入 index.html 五问视图）。
 > **判定格式**：是 / 否 / 待定 + 依据。
 
 ---

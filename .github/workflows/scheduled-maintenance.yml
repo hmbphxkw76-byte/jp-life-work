@@ -53,7 +53,7 @@ jobs:
       # 退出码约定：0=通过；1=错误（阻断）；2=警告（放行）
       - name: 报告自动归位（classify_reports.py --apply）
         run: |
-          python src/prompts-tools/tools/classify_reports.py --apply || code=$?
+          python engine/tools/classify_reports.py --apply || code=$?
           if [ "${code:-0}" -eq 1 ]; then
             echo "::error::报告归位失败"
             exit 1
@@ -62,7 +62,7 @@ jobs:
 
       - name: 结构补全（ensure_region_topics.py）
         run: |
-          python src/prompts-tools/tools/ensure_region_topics.py || code=$?
+          python engine/tools/ensure_region_topics.py || code=$?
           if [ "${code:-0}" -eq 1 ]; then
             echo "::error::结构补全失败"
             exit 1
@@ -70,41 +70,41 @@ jobs:
           echo "ensure_region_topics.py 退出码 ${code:-0}"
 
       - name: 归档策略（archive_reports.py）
-        run: python src/prompts-tools/tools/archive_reports.py
+        run: python engine/tools/archive_reports.py
 
       - name: 生成全局索引（build_index.py）
-        run: python src/prompts-tools/tools/build_index.py
+        run: python engine/tools/build_index.py
 
       - name: 同步报告 HTML（md2html.py）
-        run: python src/prompts-tools/tools/md2html.py
+        run: python engine/tools/md2html.py
 
       - name: 重建汇总页（build_hub.py）
-        run: python src/prompts-tools/tools/build_hub.py
+        run: python engine/tools/build_hub.py
 
       # ── 决策支持流程复用：刷新衍生件（与 validate.yml 门禁同一套工具）──
       - name: 刷新个人财务模型（personal_finance_model.py）
-        run: python src/prompts-tools/tools/personal_finance_model.py
+        run: python engine/tools/personal_finance_model.py
 
       - name: 刷新待核实闭环（pending_verification.py）
-        run: python src/prompts-tools/tools/pending_verification.py
+        run: python engine/tools/pending_verification.py
 
       - name: 刷新事实卡片校验报告（fact_card_check.py --write）
-        run: python src/prompts-tools/tools/fact_card_check.py --write
+        run: python engine/tools/fact_card_check.py --write
 
       - name: 审计失效同步（audit_pipeline.py --sync）
-        run: python src/prompts-tools/tools/audit_pipeline.py --sync
+        run: python engine/tools/audit_pipeline.py --sync
 
       - name: 标识同步（audit_badge.py --sync）
-        run: python src/prompts-tools/tools/audit_badge.py --sync
+        run: python engine/tools/audit_badge.py --sync
 
       - name: 契约测试（确认维护无回归）
-        run: python -m unittest discover -s src/tests
+        run: python -m unittest discover -s engine/tests
 
       - name: 记录自动化状态
         if: always()
         run: |
           RESULT="${{ job.status == 'success' && 'success' || 'failure' }}"
-          python src/prompts-tools/tools/automation_status.py record \
+          python engine/tools/automation_status.py record \
             --phase maintenance --result "$RESULT" \
             --run-url "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
 

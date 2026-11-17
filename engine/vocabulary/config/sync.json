@@ -1,0 +1,273 @@
+{
+  "version": "v2.0",
+  "updated": "2026-11-14",
+  "comment": "词汇库 → 业务提示词自动同步配置。bindings[].topic 必须已在 topics.json 注册；source 缺省取 topics.json 的 storage；target.path 相对 engine/vocabulary/ 根；insert_before 为区块缺失时的插入锚点（须为目标文件内唯一文本，区块替换时不参与匹配）；format=digest（按分类紧凑速览，缺省）| table（三列表格）；categories_include / tags_include 为可选过滤（空 = 全量）；section_title 为区块内标题（含 ## 前缀）。",
+  "auto_trigger": true,
+  "watch_interval_sec": 5,
+  "backup_dir": "data/sync-backups",
+  "backup_keep": 5,
+  "state_file": "data/sync-state.json",
+  "log_file": "data/sync.log",
+  "bindings": [
+    {
+      "topic": "ssw-driver",
+      "targets": [
+        {
+          "path": "../../01-ssw-driver/prompts/business-config.md",
+          "format": "digest",
+          "section_title": "## 词汇速览：特定技能司机（词汇库自动同步）",
+          "insert_before": "## 十二、版本记录",
+          "categories_include": [],
+          "tags_include": []
+        }
+      ]
+    },
+    {
+      "topic": "career-driver",
+      "targets": [
+        {
+          "path": "../../02-career-driver/prompts/business-config.md",
+          "format": "digest",
+          "section_title": "## 词汇速览：司机职业发展（词汇库自动同步）",
+          "insert_before": "## 十二、版本记录",
+          "categories_include": [],
+          "tags_include": []
+        }
+      ]
+    },
+    {
+      "topic": "career-management",
+      "targets": [
+        {
+          "path": "../../03-career-management/prompts/business-config.md",
+          "format": "digest",
+          "section_title": "## 词汇速览：职业管理与晋升（词汇库自动同步）",
+          "insert_before": "## 十二、版本记录",
+          "categories_include": [],
+          "tags_include": []
+        }
+      ]
+    },
+    {
+      "topic": "industry-logistics",
+      "targets": [
+        {
+          "path": "../../04-industry-logistics/prompts/business-config.md",
+          "format": "digest",
+          "section_title": "## 词汇速览：物流行业（词汇库自动同步）",
+          "insert_before": "## 十二、版本记录",
+          "categories_include": [],
+          "tags_include": []
+        }
+      ]
+    },
+    {
+      "topic": "industry-autonomous",
+      "targets": [
+        {
+          "path": "../../05-industry-autonomous/prompts/business-config.md",
+          "format": "digest",
+          "section_title": "## 词汇速览：自动驾驶与自动化（词汇库自动同步）",
+          "insert_before": "## 十二、版本记录",
+          "categories_include": [],
+          "tags_include": []
+        }
+      ]
+    },
+    {
+      "topic": "industry-technology",
+      "targets": [
+        {
+          "path": "../../06-industry-technology/prompts/business-config.md",
+          "format": "digest",
+          "section_title": "## 词汇速览：技术行业（词汇库自动同步）",
+          "insert_before": "## 十二、版本记录",
+          "categories_include": [],
+          "tags_include": []
+        }
+      ]
+    },
+    {
+      "topic": "economy-finance",
+      "targets": [
+        {
+          "path": "../../07-economy-finance/prompts/business-config.md",
+          "format": "digest",
+          "section_title": "## 词汇速览：经济与财务（词汇库自动同步）",
+          "insert_before": "## 十二、版本记录",
+          "categories_include": [],
+          "tags_include": []
+        }
+      ]
+    },
+    {
+      "topic": "visa-immigration",
+      "targets": [
+        {
+          "path": "../../08-visa-immigration/prompts/business-config.md",
+          "format": "digest",
+          "section_title": "## 词汇速览：签证与移民（词汇库自动同步）",
+          "insert_before": "## 十二、版本记录",
+          "categories_include": [],
+          "tags_include": []
+        }
+      ]
+    },
+    {
+      "topic": "politics-law",
+      "targets": [
+        {
+          "path": "../../09-politics-law/prompts/business-config.md",
+          "format": "digest",
+          "section_title": "## 词汇速览：政治与法律（词汇库自动同步）",
+          "insert_before": "## 十二、版本记录",
+          "categories_include": [],
+          "tags_include": []
+        }
+      ]
+    },
+    {
+      "topic": "education-qualification",
+      "targets": [
+        {
+          "path": "../../10-education-qualification/prompts/business-config.md",
+          "format": "digest",
+          "section_title": "## 词汇速览：教育与资格（词汇库自动同步）",
+          "insert_before": "## 十二、版本记录",
+          "categories_include": [],
+          "tags_include": []
+        }
+      ]
+    },
+    {
+      "topic": "language-japanese",
+      "targets": [
+        {
+          "path": "../../11-language-japanese/prompts/business-config.md",
+          "format": "digest",
+          "section_title": "## 词汇速览：日语语言（词汇库自动同步）",
+          "insert_before": "## 十二、版本记录",
+          "categories_include": [],
+          "tags_include": []
+        }
+      ]
+    },
+    {
+      "topic": "culture-life",
+      "targets": [
+        {
+          "path": "../../12-culture-life/prompts/business-config.md",
+          "format": "digest",
+          "section_title": "## 词汇速览：文化与生活（词汇库自动同步）",
+          "insert_before": "## 十二、版本记录",
+          "categories_include": [],
+          "tags_include": []
+        }
+      ]
+    },
+    {
+      "topic": "regional-info",
+      "targets": [
+        {
+          "path": "../../13-regional-info/prompts/business-config.md",
+          "format": "digest",
+          "section_title": "## 词汇速览：地区信息（词汇库自动同步）",
+          "insert_before": "## 十二、版本记录",
+          "categories_include": [],
+          "tags_include": []
+        }
+      ]
+    },
+    {
+      "topic": "exit-transition-return",
+      "targets": [
+        {
+          "path": "../../16-exit-transition-return/prompts/business-config.md",
+          "format": "digest",
+          "section_title": "## 词汇速览：退出·转型·回国（词汇库自动同步）",
+          "insert_before": "## 十二、版本记录",
+          "categories_include": [],
+          "tags_include": []
+        }
+      ]
+    },
+    {
+      "topic": "life-operations",
+      "targets": [
+        {
+          "path": "../../14-life-operations/prompts/business-config.md",
+          "format": "digest",
+          "section_title": "## 词汇速览：在日生活实务（词汇库自动同步）",
+          "insert_before": "## 十二、版本记录",
+          "categories_include": [],
+          "tags_include": []
+        }
+      ]
+    },
+    {
+      "topic": "health-wellbeing",
+      "targets": [
+        {
+          "path": "../../15-health-wellbeing/prompts/business-config.md",
+          "format": "digest",
+          "section_title": "## 词汇速览：医疗·健康·心理（词汇库自动同步）",
+          "insert_before": "## 十二、版本记录",
+          "categories_include": [],
+          "tags_include": []
+        }
+      ]
+    },
+    {
+      "topic": "migration-compliance",
+      "targets": [
+        {
+          "path": "../../17-migration-compliance/prompts/business-config.md",
+          "format": "digest",
+          "section_title": "## 词汇速览：劳务输出与中介合规（词汇库自动同步）",
+          "insert_before": "## 十二、版本记录",
+          "categories_include": [],
+          "tags_include": []
+        }
+      ]
+    },
+    {
+      "topic": "family-parenting",
+      "targets": [
+        {
+          "path": "../../18-family-parenting/prompts/business-config.md",
+          "format": "digest",
+          "section_title": "## 词汇速览：家族·育儿·人生事件（词汇库自动同步）",
+          "insert_before": "## 版本记录",
+          "categories_include": [],
+          "tags_include": []
+        }
+      ]
+    },
+    {
+      "topic": "safety-disaster",
+      "targets": [
+        {
+          "path": "../../19-safety-disaster/prompts/business-config.md",
+          "format": "digest",
+          "section_title": "## 词汇速览：防灾·安全·治安（词汇库自动同步）",
+          "insert_before": "## 版本记录",
+          "categories_include": [],
+          "tags_include": []
+        }
+      ]
+    },
+    {
+      "topic": "overseas-china",
+      "targets": [
+        {
+          "path": "../../20-overseas-china/prompts/business-config.md",
+          "format": "digest",
+          "section_title": "## 词汇速览：中国侧行前与回国（词汇库自动同步）",
+          "insert_before": "## 十二、版本记录",
+          "categories_include": [],
+          "tags_include": []
+        }
+      ]
+    }
+  ]
+}
