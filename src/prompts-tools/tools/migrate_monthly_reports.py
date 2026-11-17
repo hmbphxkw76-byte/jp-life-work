@@ -252,7 +252,7 @@ def main() -> int:
             slot = plan_map[slug][month]
             target_name = slot["target"]
             sources = slot["sources"]
-            merged, notes = build_merge(sources)
+            merged, _notes = build_merge(sources)
 
             # 内容留存校验：每份来源的归一化全文必须出现在合并结果中
             norm_merged = normalize(merged)

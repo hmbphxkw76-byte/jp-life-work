@@ -21,7 +21,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from _common import ROOT, iter_business_dirs, topic_slug  # noqa: E402
+from _common import ROOT, iter_business_dirs  # noqa: E402
 
 OUT_PATH = ROOT / "00-decision-hub" / "data" / "personal_finance_model.md"
 

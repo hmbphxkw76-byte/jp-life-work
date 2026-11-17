@@ -29,7 +29,6 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from _common import ROOT, atomic_write, resolve_within  # noqa: E402
 from audit_registry import (  # noqa: E402
     AUDIT_DIR,
-    REGISTRY_JSON,
     SPEC_VERSION,
     content_fingerprint,
     discover,

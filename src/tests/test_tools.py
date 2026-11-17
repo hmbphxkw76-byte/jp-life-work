@@ -740,7 +740,7 @@ class TestDiffAccuracy(unittest.TestCase):
 
     def test_identical_reports_have_no_changes(self):
         html = "<body><h2>标题</h2><p>内容一致</p></body>"
-        body, stats = render_diffed_body(html, html)
+        _, stats = render_diffed_body(html, html)
         self.assertEqual(stats["new"], 0)
         self.assertEqual(stats["mod"], 0)
         self.assertEqual(stats["del"], 0)
@@ -2563,7 +2563,7 @@ class TestStageGateCheck(unittest.TestCase):
 
     def test_real_repo_has_no_blocking_findings(self):
         """全库实跑：阶段闸不得误伤既有主题（P0/P1 = 0）。"""
-        results, summary = stage_gate_check.run_all()
+        _, summary = stage_gate_check.run_all()
         self.assertGreater(summary["topics"], 0)
         self.assertEqual(summary["by_severity"]["P0"], 0)
         self.assertEqual(summary["by_severity"]["P1"], 0)

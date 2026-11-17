@@ -34,7 +34,6 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
-import re
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
@@ -152,7 +151,7 @@ def l5_status_from_ledger() -> dict[str, bool]:
         if v.get("state") != "audited":
             status[rep] = False
             continue
-        cur_md, cur_html = _current_hashes(rep)
+        cur_md, _cur_html = _current_hashes(rep)
         if not cur_md or cur_md != v.get("content_hash"):
             status[rep] = False
             continue

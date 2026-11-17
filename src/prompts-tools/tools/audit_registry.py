@@ -28,6 +28,8 @@ from _common import (  # noqa: E402
     TYPE_RE,
     detect_month_report,
     iter_business_dirs,
+    link_prefix,
+    md_table,
     topic_slug,
 )
 
@@ -110,21 +112,9 @@ def discover() -> list[dict]:
     return out
 
 
-def _md_table(rows: list[list[str]]) -> str:
-    out = ["| " + " | ".join(rows[0]) + " |", "|" + "---|" * len(rows[0])]
-    for r in rows[1:]:
-        out.append("| " + " | ".join(r) + " |")
-    return "\n".join(out)
-
-
-def _link_prefix(out_file: Path) -> str:
-    """从产物文件回到仓库根的相对前缀（保证 Markdown 链接可用）。"""
-    return "../" * (len(out_file.relative_to(ROOT).parts) - 1)
-
-
 def render_md(entries: list[dict], run_date: str) -> str:
     rows = [["报告", "主题", "期间", "类型", "内容指纹", "审计状态", "审计编号"]]
-    prefix = _link_prefix(REGISTRY_MD)
+    prefix = link_prefix(REGISTRY_MD)
     for e in entries:
         rows.append(
             [f"[{e['report']}]({prefix}{e['report']})", e["topic"], e["period"] or "—",
@@ -139,7 +129,7 @@ def render_md(entries: list[dict], run_date: str) -> str:
             f"依据《审计报告标准化管理体系》{SPEC_VERSION}",
             "> 本文件由 `audit_registry.py --init` 自动生成，请勿手工编辑。",
             "",
-            _md_table(rows),
+            md_table(rows),
             "",
         ]
     )

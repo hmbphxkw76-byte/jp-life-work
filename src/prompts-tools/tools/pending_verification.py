@@ -32,6 +32,7 @@ TOPICS = (
     "19-safety-disaster",
     "20-overseas-china",
 )
+# 文档口径的默认截止日：仅 docs/CI流水线对齐校验报告 引用，程序不消费（实际截止日解析自登记册文本）。
 DEFAULT_DEADLINE = "2026-12-31"
 OUT_PATH = ROOT / "src" / "report-audits" / "audit" / "pending-verification.json"
 

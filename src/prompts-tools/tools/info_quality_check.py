@@ -48,7 +48,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from _common import ROOT, detect_month_report, iter_business_dirs, topic_slug  # noqa: E402
+from _common import ROOT, detect_month_report, iter_business_dirs, md_table, topic_slug  # noqa: E402
 
 # ──────────────────────────────────────────────
 # 内置默认参数（与提示词体系模块九一致，无需人工配置）
@@ -103,9 +103,6 @@ DISCLAIMER_TAX_HINT = "税务"
 H2_RE = re.compile(r"^(#{1,6})\s+(.*)$", re.MULTILINE)
 CN_NUM_RE = re.compile(r"^([一二三四五六七八九十]+)[、.]")
 MD_LINK_RE = re.compile(r"\[[^\]]*\]\(([^)]+)\)")
-TABLE_ROW_RE = re.compile(r"^\s*\|.*\|\s*$", re.MULTILINE)
-REGISTRY_ROW_RE = re.compile(r"^\|\s*\d+\s*\|(.+)\|\s*$", re.MULTILINE)
-
 # 「已审计」标识块（审计状态，非研究内容）：相似度 / 覆盖率计算前统一剥离
 BADGE_LINE_RE = re.compile(r"^>\s*\*\*已审计\*\*.*$", re.MULTILINE)
 # 行内标签 / Markdown 链接文本（标签 2–24 字）
@@ -920,7 +917,7 @@ def _dedupe_within_file(path: Path) -> Repair | None:
     seen: dict[str, int] = {}
     out: list[str] = []
     removed = 0
-    for i, block in enumerate(blocks):
+    for block in blocks:
         n = _norm(block)
         if _substantive(block):
             if n in seen:
@@ -982,7 +979,6 @@ def os_relpath(target: Path, start: Path) -> str:
 def repair(findings: list[Finding], units: list[dict]) -> list[Repair]:
     """按修复规范执行自动修复，返回修复记录。"""
     repairs: list[Repair] = []
-    by_path: dict[str, dict] = {u["topic"]: u for u in units}
 
     for f in findings:
         if f.status != "open":
@@ -1082,8 +1078,6 @@ def verify(before: Metrics, before_findings: list[Finding], after_findings: list
     # 回归 = 修复后新出现的失效引用（修复前不存在同位置同目标的断链）
     before_broken = {(f.path, f.detail) for f in before_findings
                      if f.code == "C-09" and f.status == "open"}
-    after_broken = {(f.path, f.detail) for f in after_findings
-                    if f.code == "C-09" and f.status == "open"}
     regressed = [f for f in after_findings
                  if f.code == "C-09" and f.status == "open"
                  and (f.path, f.detail) not in before_broken]
@@ -1116,13 +1110,6 @@ def verify(before: Metrics, before_findings: list[Finding], after_findings: list
 # 阶段 5：报告交付
 # ──────────────────────────────────────────────
 
-def _md_table(rows: list[list[str]]) -> str:
-    out = ["| " + " | ".join(rows[0]) + " |", "|" + "---|" * len(rows[0])]
-    for r in rows[1:]:
-        out.append("| " + " | ".join(r) + " |")
-    return "\n".join(out)
-
-
 def write_reports(findings: list[Finding], repairs: list[Repair],
                   before: Metrics, after: Metrics, ver: dict, run_date: str) -> list[Path]:
     AUDIT_DIR.mkdir(parents=True, exist_ok=True)
@@ -1141,7 +1128,7 @@ def write_reports(findings: list[Finding], repairs: list[Repair],
         "",
         "## 四维度量化指标（修复前）",
         "",
-        _md_table([["维度", "指标", "实测值", "门槛", "判定"],
+        md_table([["维度", "指标", "实测值", "门槛", "判定"],
                    ["完整性", "必需要素覆盖率", f"{before.required_coverage:.1%}",
                     f"≥ {THRESH_REQUIRED_COVERAGE:.0%}", "达标" if before.required_coverage >= THRESH_REQUIRED_COVERAGE else "不达标"],
                    ["完整性", "完整主题数", f"{before.topics_complete}/{before.topics_total}", "—", "—"],
@@ -1160,7 +1147,7 @@ def write_reports(findings: list[Finding], repairs: list[Repair],
         "",
         "## 问题明细",
         "",
-        _md_table(rows),
+        md_table(rows),
         "",
     ])
     p = AUDIT_DIR / "assessment-ledger.md"
@@ -1177,7 +1164,7 @@ def write_reports(findings: list[Finding], repairs: list[Repair],
         "",
         f"> 运行日期：{run_date}　|　自动修复 {len(repairs)} 条",
         "",
-        _md_table(rows) if len(rows) > 1 else "（本轮无自动修复项）",
+        md_table(rows) if len(rows) > 1 else "（本轮无自动修复项）",
         "",
     ])
     p = AUDIT_DIR / "repair-ledger.md"
@@ -1193,7 +1180,7 @@ def write_reports(findings: list[Finding], repairs: list[Repair],
         "",
         "## 修复后指标（复评）",
         "",
-        _md_table([["指标", "修复前", "修复后", "门槛"],
+        md_table([["指标", "修复前", "修复后", "门槛"],
                    ["必需要素覆盖率", f"{before.required_coverage:.1%}", f"{after.required_coverage:.1%}", f"≥ {THRESH_REQUIRED_COVERAGE:.0%}"],
                    ["重复冗余率", f"{before.dup_ratio:.1%}", f"{after.dup_ratio:.1%}", f"≤ {THRESH_DUP_RATIO:.0%}"],
                    ["跨报告事实重复率", f"{before.fact_dup_ratio:.1%}", f"{after.fact_dup_ratio:.1%}", f"≤ {THRESH_FACT_DUP:.0%}"],
@@ -1206,7 +1193,7 @@ def write_reports(findings: list[Finding], repairs: list[Repair],
         "",
         "## 校验项",
         "",
-        _md_table([["校验项", "结果"]] + chk_rows),
+        md_table([["校验项", "结果"]] + chk_rows),
         "",
         "## 遗留项（需人工/外部介入）",
         "",
@@ -1235,7 +1222,7 @@ def write_reports(findings: list[Finding], repairs: list[Repair],
     # 累计修复历史（跨运行追加，便于周期审计）
     if repairs:
         hist = AUDIT_DIR / "repair-history.md"
-        entry = f"## {run_date}：自动修复 {len(repairs)} 条\n\n" + _md_table(rows) + "\n"
+        entry = f"## {run_date}：自动修复 {len(repairs)} 条\n\n" + md_table(rows) + "\n"
         if hist.exists():
             with hist.open("a", encoding="utf-8") as f:
                 f.write(entry)

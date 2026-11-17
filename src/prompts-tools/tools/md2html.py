@@ -637,8 +637,6 @@ def main() -> int:
             out.write_text(html, encoding="utf-8")
             print(f"[OK] {md} -> {out.name}")
             ok += 1
-        except SystemExit:
-            raise
         except Exception as e:  # noqa: BLE001
             print(f"[ERROR] 转换失败 {md}: {e}")
             return 1

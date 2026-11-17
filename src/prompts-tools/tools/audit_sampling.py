@@ -25,7 +25,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from _common import ROOT  # noqa: E402
+from _common import ROOT, link_prefix, md_table  # noqa: E402
 from audit_check import check_report, iq_findings_by_path, l5_status, rel as rel_path  # noqa: E402
 from audit_registry import AUDIT_DIR, audit_state, discover  # noqa: E402
 import compliance_check  # noqa: E402
@@ -38,6 +38,7 @@ TH_STRUCT = 1.00       # 结构合规率
 TH_ELEMENT = 0.95      # 要素完整率
 TH_CONSIST = 1.00      # 状态一致率
 TH_PASS = 0.95         # 抽检合格率
+# 说明：四项阈值均为「程序化验收门槛」，直接参与下方 checks 判定，非仅文档口径。
 
 
 def select_sample(entries: list[dict], period: str) -> list[dict]:
@@ -72,13 +73,6 @@ def select_sample(entries: list[dict], period: str) -> list[dict]:
     return picked
 
 
-def _md_table(rows: list[list[str]]) -> str:
-    out = ["| " + " | ".join(rows[0]) + " |", "|" + "---|" * len(rows[0])]
-    for r in rows[1:]:
-        out.append("| " + " | ".join(r) + " |")
-    return "\n".join(out)
-
-
 def overdue_p2() -> list[dict]:
     """P2 闭环台账中已超过复核期限（review_by < 今日）的条目。"""
     if not PENDING_P2.is_file():
@@ -87,7 +81,6 @@ def overdue_p2() -> list[dict]:
         items = json.loads(PENDING_P2.read_text(encoding="utf-8")).get("items", [])
     except json.JSONDecodeError:
         return []
-    today = date.today().isoformat()
     out = []
     for e in items:
         rb = e.get("review_by", "")
@@ -138,9 +131,9 @@ def run_sample(period: str) -> dict:
     l5_pending_total = sum(1 for e in entries if not l5.get(e["report"], False))
 
     checks = {
-        "struct_100": (struct_ok == total) if total else True,
+        "struct_100": (struct_ok / total >= TH_STRUCT) if total else True,
         "element_95": (elem_ok / total >= TH_ELEMENT) if total else True,
-        "consistent_100": (consist_ok == total) if total else True,
+        "consistent_100": (consist_ok / total >= TH_CONSIST) if total else True,
         "pass_95": rate >= TH_PASS,
         "p0p1_zero": (p0 + p1) == 0,
     }
@@ -156,15 +149,10 @@ def run_sample(period: str) -> dict:
     }
 
 
-def _link_prefix(out_file: Path) -> str:
-    """从产物文件回到仓库根的相对前缀。"""
-    return "../" * (len(out_file.relative_to(ROOT).parts) - 1)
-
-
 def write_report(payload: dict) -> list[Path]:
     SAMPLING_DIR.mkdir(parents=True, exist_ok=True)
     md_path = SAMPLING_DIR / f"sampling-{payload['period']}.md"
-    prefix = _link_prefix(md_path)
+    prefix = link_prefix(md_path)
     rows = [["报告", "主题", "期间", "L1", "L2", "L3", "L4", "状态一致", "结论"]]
     for r in payload["results"]:
         ly = r["layers"]
@@ -187,11 +175,11 @@ def write_report(payload: dict) -> list[Path]:
             "",
             "## 验收门槛判定",
             "",
-            _md_table([["校验项", "结果"]] + chk_rows),
+            md_table([["校验项", "结果"]] + chk_rows),
             "",
             "## 抽检明细",
             "",
-            _md_table(rows),
+            md_table(rows),
             "",
             f"**验收结论：{'达标 ✅' if payload['ok'] else '未达标 ⚠️（见未通过校验项）'}**",
             "",
