@@ -33,6 +33,7 @@ SRC_WHITELIST = {
     "engine/scripts/README.md",               # 比对工具说明（描述旧→新映射）
     "engine/tests/test_engine_migration.py",  # 本守卫自身（含待检字面量）
     "docs/toolchain/reviews/engine-migration-review.md",  # 评审报告（描述旧→新映射）
+    "docs/toolchain/reviews/post-migration-governance-review.md",  # 迁移后治理评审（描述旧→新映射）
 }
 
 # 扫描时跳过的目录（版本库 / 任务工作树 / 运行期产物）

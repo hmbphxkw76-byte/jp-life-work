@@ -440,7 +440,7 @@ def _back_url(md_path: Path, topic_slug: str) -> str:
 def render_page(
     *, title: str, topic_name: str, type_label: str, period: str,
     rel_path: str, blockquote: str, sections: list[str], back_url: str,
-    diff: tuple[list[str], dict, str] | None = None, audit: str = "",
+    diff: tuple[str, dict, str] | None = None, audit: str = "",
 ) -> str:
     """渲染独立报告页。
 

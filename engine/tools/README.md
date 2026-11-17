@@ -2,13 +2,13 @@
 
 CI 工具链使用说明。所有工具基于仓库根目录相对路径运行（自动定位仓库根），
 在仓库根目录执行即可；通用层 `engine/report_templates/` + 业务层 `NN-<slug>/` 结构见
-[report_templates/prompt-generic-base.md](../../report_templates/prompt-generic-base.md) 第 1.1 节。
+[report_templates/prompt-generic-base.md](../report_templates/prompt-generic-base.md) 第 1.1 节。
 
 ## 环境准备
 
 ```bash
 pip install -r requirements.txt   # markdown
-python -m unittest discover -s engine/tests -v   # 单元测试（308 项，以 docs/CI.md 与实测为准）
+python -m unittest discover -s engine/tests -v   # 单元测试（861 项，以 docs/CI.md 与实测为准）
 ```
 
 ## 退出码约定（校验类工具统一）
@@ -41,7 +41,7 @@ python -m unittest discover -s engine/tests -v   # 单元测试（308 项，以 
 | trigger_watch.py | 编排 | 手动 / pipeline-orchestrator.yml：触发检测（watchlist + freshness + 候选线索） |
 | pipeline_status.py | 编排 | 手动：统一监控视图（阶段进度 / 阻塞点 / 审计分布 / 心跳） |
 | pipeline_runner.py | 编排 | 手动 / pipeline-orchestrator.yml：六阶段状态机（断点续跑 / S2 人工闸门） |
-| automation_status.py | 编排 | 6 条工作流 `record` 入库 + 手动 `activity`（活跃度预警） |
+| automation_status.py | 编排 | 8 条工作流 `record` 入库 + 手动 `activity`（活跃度预警） |
 | info_quality_check.py | 校验+修复 | info-quality.yml「信息质量全量评估」+ validate.yml「信息质量检查」 |
 | auto_verify.py | 校验 | 手动：生成后自动验证（V1–V5）→ 写回「自动验证结果」→ 提交审计 |
 | audit_registry.py / audit_pipeline.py / audit_badge.py / audit_check.py / audit_sampling.py / audit_preflight.py | 审计 | audit-gate.yml / audit-sampling.yml / html-sync.yml |
@@ -64,7 +64,7 @@ python engine/tools/validate.py
 检查项：通用层根部 6 份共享文件齐全（`prompt-generic-base.md` / `monitoring-common-spec.md` /
 `template-registry.md` / `report-classification.md` / `registry-schema.md` / `compliance-rules.json`）；
 各类型模板目录必备文件齐全（13 类，清单见 `_common.TEMPLATE_TYPE_DIRS`，与
-[report_templates/template-registry.md](../../report_templates/template-registry.md) 第二节登记一致）；
+[report_templates/template-registry.md](../report_templates/template-registry.md) 第二节登记一致）；
 通用层全目录（含类型子目录）无业务关键词
 （迪拜/公寓/Dubai/UAE/DLD/CBUAE/EIBOR 等，清单见 `_common.BUSINESS_KEYWORDS`）；
 业务线目录结构（`prompts/business-config.md` 及其 `{{REGION}}/{{TOPIC}}/{{REGISTRY_PATH}}`
@@ -85,8 +85,8 @@ python engine/tools/lint_reports.py
 ### compliance_check.py — 报告模板合规校验 / 模板引导 / 合规审计
 
 校验规则与 13 类报告类型模板骨架一一对应，规则文件为
-[report_templates/compliance-rules.json](../../report_templates/compliance-rules.json)
-（与 [template-registry.md](../../report_templates/template-registry.md) 第二节登记一致；
+[report_templates/compliance-rules.json](../report_templates/compliance-rules.json)
+（与 [template-registry.md](../report_templates/template-registry.md) 第二节登记一致；
 周期未单独登记的类型按「结构逐字继承基线」回落校验）。报告类型自动识别：读取业务线
 `prompts/business-config.md` 继承声明中的 `report_templates/<类型ID>/` 引用。
 
@@ -337,3 +337,4 @@ python engine/tools/automation_status.py activity --threshold 45               #
 | 版本 | 日期 | 变更 | 说明 |
 |---|---|---|---|
 | v1.0 | 2026-11-17 | 初始版本 | 工具链使用说明（工具一览 / 工作流 / 测试 / 流水线全貌）；2026-11-17 校准测试数 308、工作流 8、类型 13 与旧路径 |
+| v1.1 | 2026-11-17 | 迁移后治理 | 修复 `../../report_templates/` 断链为 `../report_templates/`；测试数 308 → 861；工作流 6 → 8 |

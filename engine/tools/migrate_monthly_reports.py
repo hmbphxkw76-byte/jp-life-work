@@ -157,7 +157,7 @@ def collect_topic_sources(b) -> list[dict]:
     return out
 
 
-def plan() -> dict:
+def plan() -> tuple[dict, list[str]]:
     """全仓扫描 -> {slug: {month: {target, sources:[...], target_rel}}}。"""
     plan_map: dict[str, dict[str, dict]] = {}
     unknown: list[str] = []

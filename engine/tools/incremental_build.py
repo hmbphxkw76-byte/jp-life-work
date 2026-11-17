@@ -44,7 +44,7 @@ def changed_reports(base: str) -> list[str]:
 
 def all_reports() -> list[str]:
     """全部月度报告 md 相对路径。"""
-    out = []
+    out: list[str] = []
     for b in iter_business_dirs():
         rd = b.path / "reports"
         if rd.is_dir():

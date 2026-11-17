@@ -52,11 +52,12 @@
    生成物另确认工具可重生成；台账类删除须经人工确认。
 4. **运行日志**：`audit/verify/*.json` 为 `auto_verify.py` 运行日志，已 `.gitignore`，不入库。
 
-## 三、已知范围外接线问题（不在本目录治理范围，仅登记）
+## 三、CI 接线对照（提交范围）
 
-- `.github/workflows/html-sync.yml` / `audit-sampling.yml` 提交路径 `engine/report-audits/audit/automation-status.json` 不存在（`automation_status.py` 实际写仓库根 `automation-status.json`）。
-- `audit-sampling.yml` 未 `git add sampling/`，抽检报告实际未由 CI 提交。
-- `engine/report-audits/pipeline/`（`status.md` / `state-<period>.json` / `trigger-watch.json`）为运行期生成目录，首次实跑后由 CI 提交。
+- `html-sync.yml` / `audit-sampling.yml` / `scheduled-maintenance.yml` / `info-quality.yml`：`automation_status.py` 写**仓库根** `automation-status.json`，由各工作流 `git add` 根文件提交；本目录内 `audit/` 下的台账 / 报告由对应工作流一并 `git add engine/report-audits/audit/` 提交。
+- `audit_sampling.py --apply` 产物写 `audit/sampling-<YYYY-MM>.md` + `.json`，已含在上述提交范围内。
+- `engine/report-audits/pipeline/`（`status.md` / `state-<period>.json` / `trigger-watch.json`）为运行期生成目录，由 `pipeline-orchestrator.yml` 提交。
+- `audit/verify/*.json` 为 `auto_verify.py` 运行日志，已 `.gitignore`，不入库。
 
 
 ## 四、版本记录
@@ -64,3 +65,4 @@
 | 版本 | 日期 | 变更 | 说明 |
 |---|---|---|---|
 | v1.0 | 2026-11-17 | 初始版本 | 建立审计留痕分层（活台账 / 生成物 / 历史归档）、生成器对照与新增/删除规则 |
+| v1.1 | 2026-11-17 | 迁移后治理 | 第三节改为「CI 接线对照」，移除已失效的「范围外接线问题」描述 |

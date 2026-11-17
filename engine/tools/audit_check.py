@@ -27,6 +27,7 @@ import sys
 from dataclasses import asdict, dataclass, field
 from datetime import date, timedelta
 from pathlib import Path
+from typing import Any
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
@@ -363,7 +364,7 @@ def run_all() -> tuple[list[ReportResult], dict]:
             results.append(check_report(rel, md, md.with_suffix(".html"), type_id, iq, l5))
     results.sort(key=lambda r: r.report)
 
-    summary = {
+    summary: dict[str, Any] = {
         "reports": len(results),
         "passed": sum(1 for r in results if r.passed),
         "failed": sum(1 for r in results if not r.passed),

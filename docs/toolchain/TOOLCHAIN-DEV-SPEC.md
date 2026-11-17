@@ -19,7 +19,7 @@
 
 | 层 | 路径 | 是否适用本规约 |
 |---|---|---|
-| 工具链代码 | `engine/tools/`、`engine/vocabulary/script/`、`tools/` | ✅ 适用 |
+| 工具链代码 | `engine/tools/`、`engine/vocabulary/script/`、`engine/scripts/` | ✅ 适用 |
 | 工具链配置 / CI | `.github/workflows/`、`requirements*.txt`、`.coveragerc`、`coverage-config.json`、`mypy.ini`、`ruff.toml` | ✅ 适用 |
 | 工具链测试 | `engine/tests/` | ✅ 适用 |
 | 报告生产内容 | `*/reports/`、`*/prompts/`、`*/handbook/`、`*/data/`、`docs/`（除本规约及 `docs/toolchain/`） | ❌ 不适用，走五阶段 + AuditGuard |
@@ -63,7 +63,7 @@ S2 工单化同步豁免。豁免不得用于规避 S5 双轴评审与 S6 合并
 ## 六、覆盖率门禁（单一事实源）
 
 - 阈值与开关只读 `coverage-config.json` 的 `threshold` / `enforce`，不得在 CI 脚本硬编码。
-- 统计范围限定工具链代码：`engine/tools/`、`engine/vocabulary/script/`、`tools/`（`.coveragerc` 同源约束）。
+- 统计范围限定工具链代码：`engine/tools/`、`engine/vocabulary/script/`、`engine/scripts/`（`.coveragerc` 同源约束）。
 - **分阶段提升**：P1/P2 观察期 `threshold=60, enforce=false`；P3 起 `threshold=80, enforce=true`（阻断）。
 - 基线数值入库：`engine/report-audits/toolchain/coverage-baseline.json`。
 - 门禁入口：`python engine/tools/coverage_gate.py`（`--update-baseline` 刷新基线，`--porcelain` 输出 JSON）。
@@ -112,3 +112,4 @@ S2 工单化同步豁免。豁免不得用于规避 S5 双轴评审与 S6 合并
 | 版本 | 日期 | 变更 |
 |---|---|---|
 | v1.0 | 2026-11-17 | 初始版本：依据 mainline 融合评估报告落地，确立适用范围、六阶段、豁免阈值、覆盖率门禁、双轴评审与合并前检查单 |
+| v1.1 | 2026-11-17 | 迁移后治理 | 适用范围与覆盖率统计范围 `tools/` 更正为 `engine/scripts/`（引擎层迁移后口径） |

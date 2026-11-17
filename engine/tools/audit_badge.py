@@ -94,7 +94,7 @@ def _insert_after_disclaimer(text: str, badge: str) -> str:
 def _strip_badge(text: str) -> tuple[str, bool]:
     """移除已审计标识块（连同其前置空行）-> (新文本, 是否移除)。"""
     lines = text.splitlines()
-    out = []
+    out: list[str] = []
     removed = False
     for line in lines:
         if BADGE_RE.match(line):
@@ -194,7 +194,9 @@ def cmd_sync() -> int:
             # 内容漂移：audit_id / 指纹 / 终审日期过期的旧徽章 → 更新为当前记录
             fp = content_fingerprint(md).removeprefix("sha256:")
             expect = badge_text(v["audit_id"], v.get("finalized_at", ""), fp).strip()
-            cur = BADGE_RE.search(text).group(0).strip()
+            m = BADGE_RE.search(text)
+            assert m is not None, "valid 状态下应存在已审计标识"
+            cur = m.group(0).strip()
             if cur != expect:
                 text, _ = _strip_badge(text)
                 text = _insert_after_disclaimer(text, expect)
@@ -228,7 +230,9 @@ def cmd_check() -> int:
         if valid and has:
             fp = content_fingerprint(md).removeprefix("sha256:")
             expect = badge_text(v["audit_id"], v.get("finalized_at", ""), fp).strip()
-            if BADGE_RE.search(text).group(0).strip() != expect:
+            m = BADGE_RE.search(text)
+            assert m is not None, "valid 状态下应存在已审计标识"
+            if m.group(0).strip() != expect:
                 problems.append(f"{rep}：徽章内容与当前审计记录不一致（audit_id / 指纹过期）")
         # HTML 侧
         html = md.with_suffix(".html")
