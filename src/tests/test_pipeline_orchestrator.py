@@ -18,6 +18,7 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src" / "prompts-tools" / "tools"))
 
 import _common  # noqa: E402
+import trigger_watch  # noqa: E402
 
 
 class TestPipelineStateLayer(unittest.TestCase):
@@ -58,6 +59,54 @@ class TestPipelineStateLayer(unittest.TestCase):
                     p.write_text(json.dumps(bad, ensure_ascii=False), encoding="utf-8")
                     with self.assertRaises(ValueError):
                         _common.load_state("2026-11")
+
+
+class TestTriggerWatch(unittest.TestCase):
+    """任务 2：触发检测（watchlist 派生 / freshness / 幂等 / 只读默认）。"""
+
+    def test_build_watchlist_derived_from_business_config(self):
+        wl = trigger_watch.build_watchlist()
+        self.assertTrue(any(w["topic"] == "01-ssw-driver" for w in wl))
+        entry = next(w for w in wl if w["topic"] == "01-ssw-driver")
+        # 接口契约：每项含 topic / trigger / source / last_verified
+        for key in ("topic", "trigger", "source", "last_verified"):
+            self.assertIn(key, entry)
+        self.assertTrue(entry["trigger"].strip())
+
+    def test_scan_empty_when_no_window_due(self):
+        out = trigger_watch.scan("2026-11")
+        self.assertTrue(set(out) >= {"window_due", "stale", "candidates"})
+        # 2026-11 全部 21 个主题报告已产出 -> 无窗口到期
+        self.assertEqual(out["window_due"], [])
+
+    def test_scan_is_idempotent(self):
+        self.assertEqual(
+            trigger_watch.scan("2026-11"), trigger_watch.scan("2026-11")
+        )
+
+    def test_cli_report_is_read_only(self):
+        with tempfile.TemporaryDirectory() as d:
+            snap = Path(d) / "trigger-watch.json"
+            with unittest.mock.patch.object(trigger_watch, "SNAPSHOT", snap):
+                rc = trigger_watch.main_argv(["--report", "--period", "2026-11"])
+            self.assertEqual(rc, 0)
+            self.assertFalse(snap.exists())
+
+    def test_cli_apply_writes_snapshot(self):
+        with tempfile.TemporaryDirectory() as d:
+            snap = Path(d) / "trigger-watch.json"
+            with unittest.mock.patch.object(trigger_watch, "SNAPSHOT", snap):
+                rc = trigger_watch.main_argv(["--apply", "--period", "2026-11"])
+            self.assertEqual(rc, 0)
+            self.assertTrue(snap.is_file())
+
+    def test_load_non_object_raises(self):
+        # T1 评审 N3：schema 非对象（如 []）负例
+        with tempfile.TemporaryDirectory() as d:
+            with unittest.mock.patch.object(_common, "PIPELINE_DIR", Path(d)):
+                (Path(d) / "state-2026-11.json").write_text("[]", encoding="utf-8")
+                with self.assertRaises(ValueError):
+                    _common.load_state("2026-11")
 
 
 if __name__ == "__main__":

@@ -38,6 +38,7 @@ python -m unittest discover -s src/tests -v   # 单元测试（255 项：tools 1
 | generate_registry.py | 编排 | 手动：生成 `registry.json` 并渲染 README 快照（`--write` / `--check`） |
 | migrate_monthly_reports.py | 迁移 | 一次性：存量报告合并重命名为月度系列 |
 | update_planner.py | 编排 | scheduled-report-tasks.yml「生成月度任务清单」 |
+| trigger_watch.py | 编排 | 手动 / pipeline-orchestrator.yml：触发检测（watchlist + freshness + 候选线索） |
 | automation_status.py | 编排 | 5 条工作流 `record` 入库 + 手动 `activity`（活跃度预警） |
 | info_quality_check.py | 校验+修复 | info-quality.yml「信息质量全量评估」+ validate.yml「信息质量检查」 |
 | auto_verify.py | 校验 | 手动：生成后自动验证（V1–V5）→ 写回「自动验证结果」→ 提交审计 |
@@ -193,6 +194,22 @@ python src/prompts-tools/tools/update_planner.py --project dubai/apartment --per
 - 任务状态：期望输出已存在 → done，否则 pending；`--pending-only` 只留 pending。
   参数错误退出码 2。
 
+### trigger_watch.py — 触发检测（watchlist / freshness / 候选线索）
+
+```bash
+# 只读：JSON 输出到 stdout（默认行为）
+python src/prompts-tools/tools/trigger_watch.py --report --period 2026-11
+# 写快照：src/report-audits/pipeline/trigger-watch.json
+python src/prompts-tools/tools/trigger_watch.py --apply --period 2026-11
+```
+
+- watchlist **派生**自各主题 `prompts/business-config.md` §7 触发器与
+  `data/*_indicator_registry.md` 核验日期，不新增手工配置。
+- `window_due` 复用 `update_planner` 待办判定；`stale` 用 `info_quality_check`
+  的 `STALE_DAYS`（12 个月）阈值；`candidates` 仅取登记册「观察项与触发器状态」
+  的待办线索（**命中 ≠ 核实**，无命中为空）。
+- 默认只读；`--apply` 才写快照。退出码 0 = 正常（含空清单）。
+
 ### automation_status.py — 自动化状态与活跃度
 
 ```bash
@@ -259,5 +276,5 @@ python src/prompts-tools/tools/automation_status.py activity --threshold 45     
   如需永久保留请自行调整 `archive_reports.KEEP`。
 
 <!-- REGISTRY:BEGIN -->
-> 注册表快照：工具 29 · 类型 13 · 主题 21 · 工作流 7（由 `generate_registry.py` 生成，勿手工编辑）
+> 注册表快照：工具 30 · 类型 13 · 主题 21 · 工作流 7（由 `generate_registry.py` 生成，勿手工编辑）
 <!-- REGISTRY:END -->

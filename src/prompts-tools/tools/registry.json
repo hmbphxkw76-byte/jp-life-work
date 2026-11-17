@@ -28,6 +28,7 @@
     "report_diff.py",
     "skeleton_builder.py",
     "stage_gate_check.py",
+    "trigger_watch.py",
     "update_planner.py",
     "validate.py"
   ],

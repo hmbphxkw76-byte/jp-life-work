@@ -183,7 +183,7 @@ reports/YYYY-MM-<slug>.md  ──md2html.py──►  reports/YYYY-MM-<slug>.htm
 - **辅助开关**：报告页工具条「隐藏更新标记」对照阅读、「展开全部删除」。
 - **呈现**：报告页新标签页独立打开，页脚提供「← 返回主题 / 返回首页」。
 
-## 六、测试体系（`src/tests/`，289 项）
+## 六、测试体系（`src/tests/`，295 项）
 
 | 场景 | 测试类 | 覆盖 |
 |---|---|---|
@@ -197,11 +197,11 @@ reports/YYYY-MM-<slug>.md  ──md2html.py──►  reports/YYYY-MM-<slug>.htm
 | 架构守卫 | `test_arch_guard.py`（8 项） | 测试数与本文档一致、类型注册三处一致、目录 / 命名规范守卫 |
 | 增量构建 | `test_incremental_build.py`（4 项） | 增量构建判定与缓存一致性 |
 | 流水线端到端 | `test_pipeline_e2e.py`（2 项） | 审计状态机端到端 |
-| 状态层基础设施 | `test_pipeline_orchestrator.py`（4 项） | 状态 shape、save / load 往返、损坏 / schema 版本不符报错 |
+| 流水线编排 | `test_pipeline_orchestrator.py`（10 项） | 状态 shape / save-load 往返 / 损坏与 schema 负例（含非对象）、触发检测 watchlist 派生 / freshness / 幂等 / 只读默认 |
 | 登记册生成 | `test_registry_generator.py`（3 项） | 登记册生成契约 |
 | 安全回归 | `test_security_regression.py`（3 项） | 注入 / 越界路径回归 |
 
-> 合计 289 项（`python -m unittest discover -s src/tests`，当前全绿）。
+> 合计 295 项（`python -m unittest discover -s src/tests`，当前全绿）。
 
 ## 七、手动命令速查
 
@@ -383,3 +383,4 @@ python tools/cleanup_workspace.py --dry-run  # 预览将删除项
 | v1.4 | 2026-11-16 | 工作区卫生横切 | 新增 `tools/cleanup_workspace.py`（缓存 / 临时文件 / 日志清理，含 `--check` 门禁与已跟踪文件保护）与复合动作 `.github/actions/workspace-cleanup`；7 条工作流全部接入「阶段前置 + 阶段收尾（`if: always()`）」清理；`validate.yml` 新增 `workspace-hygiene` 自检 job（制造残留 → 清理 → `--check` 断言零残留）；运行日志改为不入库；测试数 227 → 251 |
 | v1.5 | 2026-11-16 | 第二轮对齐校验 | `audit-gate.yml` 的 `pull_request` 限定 `branches: [main]`（与 `validate.yml` 同口径）；十二.2 修正「每个 job」表述（`workspace-hygiene` 自检 job 例外）；二.3 补「自动化状态失败补记」步骤与活跃度预警口径；二.6 触发口径同步；测试数 251 → 255 |
 | v1.6 | 2026-11-17 | 流水线编排状态层 | 新增 `src/tests/test_pipeline_orchestrator.py`（状态 shape / 往返 / 损坏与版本不符，4 项）；六节测试数 285 → 289 |
+| v1.7 | 2026-11-17 | 流水线触发检测 | 新增 `trigger_watch.py`（watchlist 派生 / freshness / 候选线索 / 只读默认）及同文件 6 项用例；六节测试数 289 → 295 |
