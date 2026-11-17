@@ -14,9 +14,10 @@
 """
 from __future__ import annotations
 
-import subprocess
 import sys
+import tempfile
 import unittest
+import unittest.mock
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -24,24 +25,47 @@ sys.path.insert(0, str(ROOT / "engine" / "tools"))
 
 from _common import ROOT as CROOT, SKIP_TOP, TYPE_RE, iter_business_dirs  # noqa: E402
 
-# `git grep "src/"` 的合法残留白名单（历史规格 / 映射表本身），见方案 §3.5 与附录 B。
+# 旧路径活引用的合法残留白名单（历史规格 / 映射表本身 / 本守卫自身），见方案 §3.5 与附录 B。
 SRC_WHITELIST = {
     "docs/引擎层迁移方案-2026-11-17.md",     # 本迁移唯一事实源（含旧→新映射表）
     "engine/scripts/verify_report_parity.py",  # 归一化比对脚本（含映射表）
     "engine/tests/test_verify_report_parity.py",  # 映射表的单元测试
     "engine/scripts/README.md",               # 比对工具说明（描述旧→新映射）
+    "engine/tests/test_engine_migration.py",  # 本守卫自身（含待检字面量）
+    "docs/toolchain/reviews/engine-migration-review.md",  # 评审报告（描述旧→新映射）
+}
+
+# 扫描时跳过的目录（版本库 / 任务工作树 / 运行期产物）
+SCAN_EXCLUDE_DIRS = {
+    ".git", ".worktrees", ".migration-baseline", ".catpaw", ".catpaw-",
+    "__pycache__", ".pytest_cache", ".mypy_cache", ".ruff_cache", "htmlcov",
 }
 
 
-def _git_grep(pattern: str) -> list[str]:
-    """返回命中 `pattern` 的跟踪文件相对路径（core.quotepath=false）。"""
-    out = subprocess.run(
-        ["git", "-c", "core.quotepath=false", "grep", "-l", "-e", pattern],
-        cwd=str(ROOT), capture_output=True, text=True, encoding="utf-8",
-    )
-    if out.returncode not in (0, 1):  # 1 = 无命中
-        raise RuntimeError(f"git grep 失败：{out.stderr}")
-    return [ln for ln in out.stdout.splitlines() if ln.strip()]
+def _scan(pattern: str) -> list[str]:
+    """全量扫描（含未跟踪文件）中含 `pattern` 的文本文件相对路径。
+
+    不用 `git grep`：后者只搜已跟踪文件，会漏掉尚未 add 的新文件（本守卫自身
+    即属此类），造成「本地绿 / CI 红」的假阴性。
+    """
+    hits: list[str] = []
+    for p in ROOT.rglob("*"):
+        if not p.is_file():
+            continue
+        parts = p.relative_to(ROOT).parts
+        if any(part in SCAN_EXCLUDE_DIRS or part.startswith(".catpaw-")
+               for part in parts):
+            continue
+        rel = p.relative_to(ROOT).as_posix()
+        if "/reports/" in rel:  # §3.5 报告正文留痕
+            continue
+        try:
+            text = p.read_text(encoding="utf-8")
+        except (UnicodeDecodeError, OSError):
+            continue
+        if pattern in text:
+            hits.append(rel)
+    return hits
 
 
 class TestLayoutTerminalState(unittest.TestCase):
@@ -108,17 +132,31 @@ class TestNoLiveSrcReferences(unittest.TestCase):
     """`git grep "src/"` 与 `git grep '"src"'` 活引用清零（白名单除外）。"""
 
     def test_no_src_path_references(self) -> None:
-        hits = set(_git_grep("src/"))
-        hits = {h for h in hits if "/reports/" not in h}  # §3.5 报告正文留痕
-        leftover = hits - SRC_WHITELIST
+        leftover = set(_scan("src/")) - SRC_WHITELIST
         self.assertEqual(
             leftover, set(),
             "存在非白名单的 src/ 活引用：" + ", ".join(sorted(leftover)),
         )
 
     def test_no_src_string_constant(self) -> None:
-        leftover = set(_git_grep('"src"')) - SRC_WHITELIST
+        leftover = set(_scan('"src"')) - SRC_WHITELIST
         self.assertEqual(leftover, set(), "存在 \"src\" 代码常量：" + ", ".join(sorted(leftover)))
+
+    def test_scan_sees_untracked_files(self) -> None:
+        # 回归：扫描必须覆盖未跟踪文件（否则新文件中的旧路径引用会漏检）
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            (root / "engine").mkdir()
+            (root / "engine" / "tools").mkdir()
+            (root / "engine" / "scripts").mkdir()
+            (root / "engine" / "report_templates").mkdir()
+            (root / "engine" / "report-audits").mkdir()
+            (root / "engine" / "search").mkdir()
+            (root / "engine" / "vocabulary").mkdir()
+            (root / "engine" / "tests").mkdir()
+            (root / "leak.md").write_text("见 src/report_templates/x.md", encoding="utf-8")
+            with unittest.mock.patch.object(sys.modules[__name__], "ROOT", root):
+                self.assertIn("leak.md", _scan("src/"))
 
 
 class TestParityScriptPresent(unittest.TestCase):
