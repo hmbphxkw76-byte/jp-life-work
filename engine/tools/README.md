@@ -1,5 +1,7 @@
 # engine/tools 使用文档
 
+> **版本**：v1.1（2026-11-17 迁移后治理）
+
 CI 工具链使用说明。所有工具基于仓库根目录相对路径运行（自动定位仓库根），
 在仓库根目录执行即可；通用层 `engine/report_templates/` + 业务层 `NN-<slug>/` 结构见
 [report_templates/prompt-generic-base.md](../report_templates/prompt-generic-base.md) 第 1.1 节。
