@@ -177,7 +177,7 @@ python engine/tools/classify_reports.py
 
 ### 4.2 归档
 
-- 每主题保留最新 **12 期**（`archive_reports.py` `KEEP = 12`），超出移入 `reports/archives/`（md / html 成对移动，可回溯）；报告已统一按自然月聚合，不再区分季度 / 年度保留期数。
+- 按周期保留近 **18 / 24 / 60 个自然月**（月 / 季 / 年，由 `report_cycles.py` 自动识别），超出移入 `reports/archives/`（md / html 成对移动，可回溯）；报告已统一按自然月聚合，季度 / 年度按末月归档。
 - 登记册修改采用增量方式：保留历史值，不覆盖。
 
 ### 4.3 提交

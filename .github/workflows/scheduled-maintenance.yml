@@ -3,7 +3,7 @@
 # 维护内容（均为幂等操作）：
 #   1. 报告自动归位（classify_reports.py --apply）
 #   2. 结构补全（ensure_region_topics.py）
-#   3. 归档策略（archive_reports.py，每主题保留最新 12 期）
+#   3. 归档策略（archive_reports.py，按周期保留近 18 / 24 / 60 个自然月）
 #   4. 生成全局索引（build_index.py → INDEX.md）
 #   5. 重建汇总页（build_hub.py → index.html）
 #   6. 决策支持件套刷新（personal_finance_model.py / pending_verification.py / fact_card_check.py --write）

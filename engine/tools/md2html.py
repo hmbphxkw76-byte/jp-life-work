@@ -28,6 +28,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from _common import ROOT, TYPE_LABEL_FALLBACK, TYPE_RE, iter_business_dirs  # noqa: E402
+from report_cycles import cycle_profile_path  # noqa: E402
 from report_diff import diff_summary, render_diffed_body  # noqa: E402
 
 # ──────────────────────────────────────────────
@@ -441,6 +442,7 @@ def render_page(
     *, title: str, topic_name: str, type_label: str, period: str,
     rel_path: str, blockquote: str, sections: list[str], back_url: str,
     diff: tuple[str, dict, str] | None = None, audit: str = "",
+    cycle_label: str = "",
 ) -> str:
     """渲染独立报告页。
 
@@ -504,6 +506,10 @@ def render_page(
             '<button class="diff-toggle" id="tg-del">展开全部删除</button>'
             '</div>'
         )
+        diff_content = (f"prev={prev_period or 'none'};new={stats['new']};"
+                        f"mod={stats['mod']};del={stats['del']}")
+    else:
+        diff_content = "prev=none;new=0;mod=0;del=0"
 
     return f'''<!DOCTYPE html>
 <html lang="zh-CN">
@@ -512,6 +518,9 @@ def render_page(
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="{meta_desc}">
 <meta name="keywords" content="{meta_kw}">
+<meta name="report-period" content="{esc(period)}">
+<meta name="report-cycle" content="{esc(cycle_label)}">
+<meta name="report-diff" content="{esc(diff_content)}">
 <title>{esc(title)}</title>
 <style>{REPORT_CSS}</style>
 </head>
@@ -597,10 +606,11 @@ def convert(md_path: Path) -> str:
         prev_period = f"{pm.group(1)}-{pm.group(2)}" if pm else ""
         diff = (diffed, stats, prev_period)
 
+    cycle_label = cycle_profile_path(business_dir, business_dir.name)["label"]
     return render_page(
         title=title, topic_name=topic_name, type_label=type_label, period=period,
         rel_path=rel_path, blockquote=blockquote, sections=sections,
-        back_url=back_url, diff=diff, audit=audit_text,
+        back_url=back_url, diff=diff, audit=audit_text, cycle_label=cycle_label,
     )
 
 

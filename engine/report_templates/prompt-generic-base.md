@@ -17,9 +17,9 @@ jp-life-work/
 │   │   ├── prompt-generic-base.md            # 通用基座（本文件，类型中立）
 │   │   ├── monitoring-common-spec.md         # 监测报告通用规范（跨类型共享最低渲染标准）
 │   │   ├── template-registry.md              # 类型注册表（分类架构接入点）
-│   │   ├── report-classification.md          # 行业主流分类体系（六族十三类）
+│   │   ├── report-classification.md          # 行业主流分类体系（六族十二类）
 │   │   ├── registry-schema.md                # 指标登记册 Schema 规范
-│   │   ├── compliance-rules.json             # 合规校验规则（13 类 × 周期）
+│   │   ├── compliance-rules.json             # 合规校验规则（12 类 × 周期）
 │   │   ├── fact-card-standard.md             # 事实卡片标准
 │   │   ├── l5-semantic-review.md             # L5 语义复核提示词
 │   │   ├── handbook-split-standard.md        # 知识手册拆分操作规范
@@ -75,8 +75,7 @@ jp-life-work/
 **类型专属变量（由类型模板扩展，统一登记于此；命名一律用 `{{}}` 双花括号）**：
 
 ```
-{{CADENCE}}       取值扩展：周（trend-weekly 周报）
-{{DATA_CUTOFF}}    = 数据截止日（周报命名与标题锚定此日期，非执行日）
+{{CADENCE}}       取值：月 / 季 / 年（基线报告为机制建立期）
 {{EVENT_NAME}}     = 本次触发事件名称（事件触发型）
 {{STUDY_TYPE}}     = 本次专题类型（项目制：概念测试 / 满意度复测 / 画像刷新 / 决策路径）
 {{PROJECT_TYPE}}   = 本次项目类型（项目制：新项目论证 / 项目复盘）

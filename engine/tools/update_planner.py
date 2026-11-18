@@ -57,7 +57,6 @@ PROMPT_PRIORITY = [
     "prompt-quarterly-analysis.md",
     "prompt-annual-review.md",
     "prompt-annual-refresh.md",
-    "prompt-weekly-monitor.md",
 ]
 
 

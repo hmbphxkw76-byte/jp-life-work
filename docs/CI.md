@@ -75,7 +75,7 @@
 |---|---|---|
 | 归位 | `classify_reports.py --apply` | 移动错位报告到所属主题 |
 | 补全 | `ensure_region_topics.py` | 补齐缺失的主题结构 |
-| 归档 | `archive_reports.py` | 每主题保留最新 12 期，超出移入 `reports/archives/` |
+| 归档 | `archive_reports.py` | 按周期保留近 18 / 24 / 60 个自然月，超出移入 `reports/archives/` |
 | 索引 | `build_index.py` | 生成 `INDEX.md`（含活跃度心跳时间戳）；PR 阶段由 `build_index.py --check` 校验一致 |
 | 报告 HTML | `md2html.py` | 同步报告页（含跨月对比高亮） |
 | 汇总页 | `build_hub.py` | 重建 `index.html` |
@@ -176,7 +176,7 @@ reports/YYYY-MM-<slug>.md  ──md2html.py──►  reports/YYYY-MM-<slug>.htm
                               ▼
         index.html（主题索引：卡片 + 详情页，报告链接新标签页直达独立报告页）
                               │
-                    归档：每主题保留最新 12 期
+                    归档：按周期保留近 18 / 24 / 60 个自然月
 ```
 
 ## 四、命名与分类规范

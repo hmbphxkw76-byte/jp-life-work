@@ -36,6 +36,7 @@ python -m unittest discover -s engine/tests -v   # 单元测试（868 项，以 
 | build_index.py | 生成 | scheduled-maintenance.yml「生成全局索引」 |
 | build_hub.py | 生成 | validate.yml --check / html-sync.yml「汇总页」 |
 | report_diff.py | 生成 | md2html 依赖：跨月内容对比高亮（纯函数） |
+| report_cycles.py | 生成 | build_hub / build_index / archive_reports 依赖：周期窗口与归属自动识别（纯函数） |
 | incremental_build.py | 生成 | 手动：增量生成 POC（按 git diff 选择报告；含 --bench 对比） |
 | generate_registry.py | 编排 | 手动：生成 `registry.json` 并渲染 README 快照（`--write` / `--check`） |
 | migrate_monthly_reports.py | 迁移 | 一次性：存量报告合并重命名为月度系列 |
@@ -65,7 +66,7 @@ python engine/tools/validate.py
 
 检查项：通用层根部 6 份共享文件齐全（`prompt-generic-base.md` / `monitoring-common-spec.md` /
 `template-registry.md` / `report-classification.md` / `registry-schema.md` / `compliance-rules.json`）；
-各类型模板目录必备文件齐全（13 类，清单见 `_common.TEMPLATE_TYPE_DIRS`，与
+各类型模板目录必备文件齐全（12 类，清单见 `_common.TEMPLATE_TYPE_DIRS`，与
 [report_templates/template-registry.md](../report_templates/template-registry.md) 第二节登记一致）；
 通用层全目录（含类型子目录）无业务关键词
 （迪拜/公寓/Dubai/UAE/DLD/CBUAE/EIBOR 等，清单见 `_common.BUSINESS_KEYWORDS`）；
@@ -86,7 +87,7 @@ python engine/tools/lint_reports.py
 
 ### compliance_check.py — 报告模板合规校验 / 模板引导 / 合规审计
 
-校验规则与 13 类报告类型模板骨架一一对应，规则文件为
+校验规则与 12 类报告类型模板骨架一一对应，规则文件为
 [report_templates/compliance-rules.json](../report_templates/compliance-rules.json)
 （与 [template-registry.md](../report_templates/template-registry.md) 第二节登记一致；
 周期未单独登记的类型按「结构逐字继承基线」回落校验）。报告类型自动识别：读取业务线
@@ -153,9 +154,10 @@ python engine/tools/md2html.py
 python engine/tools/archive_reports.py
 ```
 
-每条业务线保留最新 12 期月度报告（与首页详情页默认窗口一致），超出部分连同名
-md / html 一并移入业务目录内 `reports/archives/`。保留策略为纯函数
-`select_archives(items, keep)`。
+每条业务线按周期类型保留近 N 个自然月报告（月度 18 / 季度 24 / 年度 60，
+由 `report_cycles.py` 自动识别；见 `engine/vocabulary/config/report-cycles.json`），
+超出部分连同名 md / html 一并移入业务目录内 `reports/archives/`。保留策略为纯函数
+`select_archives(items, keep_months, now=None)`。
 
 ### build_index.py — 全局索引
 
@@ -173,12 +175,13 @@ python engine/tools/build_hub.py          # 生成 index.html
 python engine/tools/build_hub.py --check  # 校验是否为最新
 ```
 
-`index.html` 为按业务线分组的报告枢纽（主题卡片 + 详情页，详情页默认展示最近
-12 个月报告、按时间倒序）；报告链接直达各主题 `reports/*.html` **独立报告页**
+`index.html` 为按业务线分组的报告枢纽（主题卡片 + 详情页，详情页展示窗口按周期
+类型：月度默认近 6 个月、可展开至 18；季度 24 个月；年度 60 个月，按时间倒序）；
+报告链接直达各主题 `reports/*.html` **独立报告页**
 （新标签页打开），报告页内含构建期预渲染的跨月对比高亮（见 md2html.py /
-report_diff.py）。`--check`：过期退出码 1；文件缺失（全新克隆）退出码 0 并提示，
-由定时维护首建。比对前对两侧做归一化——抹平「最近生成」生成时刻时间戳（分钟级心跳，
-不参与最新性判定），报告清单部分逐字节比对。
+report_diff.py）。列表按报告页 meta 高亮「已更新 / 无更新」。`--check`：过期退出码 1；
+文件缺失（全新克隆）退出码 0 并提示，由定时维护首建。比对前对两侧做归一化——
+抹平「最近生成」生成时刻时间戳（分钟级心跳，不参与最新性判定），清单逐字节比对。
 
 ## 编排类
 
@@ -301,7 +304,8 @@ python engine/tools/automation_status.py activity --threshold 45               #
   归档，与月度报告同一套命名 / 对比 / 展示逻辑。
 - **同月合并**：同一主题同一自然月多份存量报告合并为一份，初析为主体、基线作附录，
   原文内容不删改（见 `migrate_monthly_reports.py` 与 `report-audits/report-migration-2026-11.json`）。
-- **展示**：单主题报告列表默认展示最近 12 个月，按时间倒序（最新在顶端）。
+- **展示**：单主题报告列表按周期类型展示（月度默认近 6 个月、可展开至 18；
+  季度 24 个月；年度 60 个月），按时间倒序（最新在顶端）。
 - **对比**：每期报告与上一期（同主题、最近一个更早自然月）全量比对，新增 / 修改
   高亮并加「已更新」标记，删除折叠可追溯。
 - **三类校验**（`engine/tests/test_tools.py`）：命名格式合规性、全量历史数据迁移完整性
@@ -326,11 +330,12 @@ python engine/tools/automation_status.py activity --threshold 45               #
 ## 注意事项
 
 - 所有路径均为仓库内相对路径，业务线整体迁移（改目录名）不影响工具运行。
-- `archive_reports.py` 会移动历史报告到 `reports/archives/`，每主题保留最新 12 期；
-  如需永久保留请自行调整 `archive_reports.KEEP`。
+- `archive_reports.py` 会移动历史报告到 `reports/archives/`，每主题按周期保留
+  近 18 / 24 / 60 个自然月（月 / 季 / 年）；如需调整见
+  `engine/vocabulary/config/report-cycles.json`。
 
 <!-- REGISTRY:BEGIN -->
-> 注册表快照：工具 34 · 类型 13 · 主题 21 · 工作流 8（由 `generate_registry.py` 生成，勿手工编辑）
+> 注册表快照：工具 35 · 类型 12 · 主题 21 · 工作流 8（由 `generate_registry.py` 生成，勿手工编辑）
 <!-- REGISTRY:END -->
 
 

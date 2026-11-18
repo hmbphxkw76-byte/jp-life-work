@@ -1,6 +1,6 @@
 # 报告模板类型注册表（template-registry）
 
-> **定位**：`report_templates/` 通用层的**类型分类注册表**。记录已注册的报告类型维度、各类型的模板清单与适用业务线，并规定新增类型 / 新增业务线的动态接入步骤。通用基座与跨类型渲染规范常驻本目录根部，类型专属模板按类型 ID 分目录存放——新增类型只加目录、不改既有结构。行业主流类型的**全谱系分类与选型参考**见 [report-classification.md](./report-classification.md)（六族十三类，本注册表只登记其中已模板化的类型）；登记册结构标准见 [registry-schema.md](./registry-schema.md)。
+> **定位**：`report_templates/` 通用层的**类型分类注册表**。记录已注册的报告类型维度、各类型的模板清单与适用业务线，并规定新增类型 / 新增业务线的动态接入步骤。通用基座与跨类型渲染规范常驻本目录根部，类型专属模板按类型 ID 分目录存放——新增类型只加目录、不改既有结构。行业主流类型的**全谱系分类与选型参考**见 [report-classification.md](./report-classification.md)（六族十二类，本注册表只登记其中已模板化的类型）；登记册结构标准见 [registry-schema.md](./registry-schema.md)。
 
 ---
 
@@ -12,9 +12,9 @@ report_templates/
 ├── monitoring-common-spec.md     # 渲染/排版/交付通用规范（跨类型共享最低标准）
 ├── handbook-split-standard.md    # 知识手册拆分操作规范 + 可复用提示词模板（跨主题共享）
 ├── template-registry.md          # 本注册表（类型接入点）
-├── report-classification.md      # 行业主流分类体系（六族十三类，新增类型选型参考）
+├── report-classification.md      # 行业主流分类体系（六族十二类，新增类型选型参考）
 ├── registry-schema.md            # 指标登记册 Schema 规范（v1/v2 活值表与 C-08/C-10/C-13 判定）
-├── compliance-rules.json         # 合规校验规则（13 类结构骨架 × 周期，CI 阻断式校验关卡依据）
+├── compliance-rules.json         # 合规校验规则（12 类结构骨架 × 周期，CI 阻断式校验关卡依据）
 ├── fact-card-standard.md         # 事实卡片标准（五字段 / [@FC-NNN] 指针 / 跨报告重复率）
 ├── l5-semantic-review.md         # L5 语义复核提示词（审计 L5 六项清单）
 ├── market-monitoring/            # 类型一：市场指标监测型
@@ -22,13 +22,6 @@ report_templates/
 │   ├── prompt-monthly-monitor-template.md
 │   ├── prompt-quarterly-analysis-template.md
 │   └── prompt-annual-review-template.md
-├── trend-weekly/                 # 类型十三：行业趋势周报型
-│   ├── prompt-baseline-setup-template.md
-│   ├── prompt-weekly-monitor-template.md
-│   ├── business-prompt-scaffold.md
-│   └── prompts/
-│       ├── prompt-baseline-setup.md
-│       └── prompt-weekly-monitor.md
 ├── employment-research/          # 类型二：职业就业调研型
 │   ├── prompt-baseline-setup-template.md
 │   └── prompt-update-template.md
@@ -116,7 +109,6 @@ report_templates/
 | 类型 ID | 类型名称 | 基线模板 | 周期模板 | 节拍设计 | 已接入业务线 |
 |---|---|---|---|---|---|
 | market-monitoring | 市场指标监测型 | prompt-baseline-setup-template.md | monthly / quarterly / annual（三份独立） | 月 / 季 / 年三周期 | 13-regional-info, 19-safety-disaster |
-| trend-weekly | 行业趋势周报型 | prompt-baseline-setup-template.md | prompt-weekly-monitor-template.md | 周报主节拍（数据截止日命名）+ 事件触发板块升级 | 暂无 |
 | employment-research | 职业就业调研型 | prompt-baseline-setup-template.md | prompt-update-template.md（一份覆盖三档节拍） | 季度主节拍 + 事件触发；月度核验轻运行；年度复盘 | 00-decision-hub, 01-ssw-driver, 02-career-driver, 03-career-management, 07-economy-finance, 10-education-qualification, 11-language-japanese, 12-culture-life, 14-life-operations, 15-health-wellbeing, 17-migration-compliance, 18-family-parenting |
 | competitive-intelligence | 竞争情报监测型 | prompt-baseline-setup-template.md | prompt-monthly-update-template.md（覆盖两档） | 月度主更新（动态矩阵刷新）+ 事件触发升级 | 暂无 |
 | sentiment-monitoring | 舆情传播监测型 | prompt-baseline-setup-template.md | prompt-monthly-update-template.md（覆盖两档） | 月度舆情月报 + 事件触发预警升级 | 暂无 |
@@ -129,13 +121,13 @@ report_templates/
 | flash-commentary | 快评·事件点评型 | prompt-baseline-setup-template.md（机制文档） | prompt-flash-note-template.md | 事件触发 72h 快评（基线期为机制建立，不出正文） | 暂无 |
 | whitepaper | 白皮书·专题深度型 | prompt-baseline-setup-template.md | prompt-topic-study-template.md（选题制） | 新选题白皮书 + 年度系列篇 + 框架修订篇 | 暂无 |
 
-> **命名兼容性说明**：节拍为月度 / 季度 / 年度 / 周度的类型，产出命名与 `engine/tools` 标准正则（monthly / quarterly / annual / baseline / weekly）兼容；项目制与事件触发类型（consumer-research、feasibility-study、flash-commentary、policy-analysis、investment-research、whitepaper 的一次性件）使用 `{{YYYY-MM-DD}}-主题.md` 通用命名，`validate.py` 仅提示 WARN 不阻断，属预期行为。
+> **命名兼容性说明**：节拍为月度 / 季度 / 年度的类型，产出命名与 `engine/tools` 标准正则（monthly / quarterly / annual / baseline）兼容；项目制与事件触发类型（consumer-research、feasibility-study、flash-commentary、policy-analysis、investment-research、whitepaper 的一次性件）使用 `{{YYYY-MM-DD}}-主题.md` 通用命名，`validate.py` 仅提示 WARN 不阻断，属预期行为。周报节拍已取消，不再注册周类型。
 
 ## 三、动态接入步骤
 
 ### 3.1 新增报告类型（不改动既有结构）
 
-0. 先查 [report-classification.md](./report-classification.md)：确认目标报告类型在六族十三类中的归属与边界（避免与既有类型交叉重叠），并参考第四节选型优先级决定是否模板化。
+0. 先查 [report-classification.md](./report-classification.md)：确认目标报告类型在六族十二类中的归属与边界（避免与既有类型交叉重叠），并参考第四节选型优先级决定是否模板化。
 1. 在 `report_templates/` 下新建类型目录（类型 ID，小写 kebab-case），撰写该类型的基线类型模板与周期类型模板（头部继承声明指向根部通用基座与渲染规范）。
 2. 模板内**严禁**出现任何业务关键词（地区 / 机构 / 专属指标，校验见 `engine/tools/validate.py`）。
 3. 在本注册表第二节清单登记：类型 ID、名称、模板文件、节拍设计。
@@ -187,3 +179,4 @@ report_templates/
 | v1.27 | 2026-11-17 | 文档治理校准 | 目录树补齐 `fact-card-standard.md` / `l5-semantic-review.md`（两份根部文档此前未登记）；「12 类」更正为 13 类；第二节「已接入业务线」列更新为实际 21 主题目录（00–20）；补记 17–20 主题接入；泛用版计数校准为 24 份 |
 | v1.28 | 2026-11-17 | 脚手架正文指针化 | 11 份 `business-prompt-scaffold.md` 的提示词正文统一收口到各类型 `prompts/` 泛用版母版（24 份），脚手架只保留实例化步骤 / business-config 清单 / 审计协议，消除「类型模板 / prompts/ / 脚手架」三处同步 |
 | v1.29 | 2026-11-17 | 交叉核查校准 | 校准 v1.5 泛用版计数（23→22）与 v1.27 主题目录数（20→21）；补齐根部活文档版本记录 |
+| v1.30 | 2026-11-18 | 取消周报节拍 | 移除 trend-weekly 类型目录与注册（13 类→12 类）；_common.py 删除 WEEKLY_RE 与 weekly 周期；compliance-rules.json 移除 weekly 骨架；update_planner 移除 prompt-weekly-monitor；report-classification 降为六族十二类 |

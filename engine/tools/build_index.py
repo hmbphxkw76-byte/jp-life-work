@@ -16,6 +16,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from _common import ROOT, detect_month_report, iter_business_dirs, report_title  # noqa: E402
+from report_cycles import cycle_profile  # noqa: E402
 
 # --check 归一化：抹平「最近生成」时间戳与文件系统 mtime 列（后者随检出时间漂移）。
 GENERATED_TS_RE = re.compile(r"> 最近生成：[^\n]*")
@@ -29,12 +30,13 @@ def normalize_for_check(text: str) -> str:
 
 
 def collect_entries():
-    """-> [(business_rel, period, relpath, title, mtime_iso)]，period 降序。"""
+    """-> [(business_rel, period, relpath, title, mtime_iso, cycle_label)]，period 降序。"""
     entries = []
     for b in iter_business_dirs():
         reports = b.path / "reports"
         if not reports.is_dir():
             continue
+        profile = cycle_profile(b)
         for f in sorted(reports.glob("*.html")):
             det = detect_month_report(f.name)
             if not det:
@@ -43,7 +45,8 @@ def collect_entries():
             text = f.read_text(encoding="utf-8", errors="replace")
             mtime = datetime.fromtimestamp(f.stat().st_mtime, tz=timezone.utc)
             entries.append(
-                (b.rel, period, f"{b.rel}/reports/{f.name}", report_title(text), mtime)
+                (b.rel, period, f"{b.rel}/reports/{f.name}", report_title(text), mtime,
+                 profile["label"])
             )
     entries.sort(key=lambda e: (e[0], e[1]), reverse=True)
     return entries
@@ -60,12 +63,14 @@ def render_index(entries, now_iso: str) -> str:
         lines.append("暂无已产出报告。")
         return "\n".join(lines) + "\n"
     current = None
-    for rel, period, path, title, mtime in entries:
+    for rel, period, path, title, mtime, cycle_label in entries:
         if rel != current:
             current = rel
-            lines += [f"## {rel}", "", "| 月份 | 报告 | 标题 | 更新时间 (UTC) |", "|---|---|---|---|"]
+            lines += [f"## {rel}", "",
+                      "| 月份 | 周期 | 报告 | 标题 | 更新时间 (UTC) |",
+                      "|---|---|---|---|---|"]
         name = Path(path).name
-        lines.append(f"| {period} | [{name}]({path}) | {title or '—'} | {mtime:%Y-%m-%d %H:%M} |")
+        lines.append(f"| {period} | {cycle_label} | [{name}]({path}) | {title or '—'} | {mtime:%Y-%m-%d %H:%M} |")
     lines.append("")
     return "\n".join(lines)
 

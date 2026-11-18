@@ -600,9 +600,9 @@ class TestCovBuildIndex(unittest.TestCase):
         self.assertIn("暂无已产出报告。", build_index.render_index([], "2026-11-01 00:00 UTC"))
         m = datetime(2026, 11, 1, 12, 0, tzinfo=timezone.utc)
         entries = [
-            ("01-demo", "2026-11", "01-demo/reports/2026-11-demo.html", "十一月", m),
-            ("01-demo", "2026-10", "01-demo/reports/2026-10-demo.html", "十月", m),
-            ("02-x", "2026-11", "02-x/reports/2026-11-x.html", "乙", m),
+            ("01-demo", "2026-11", "01-demo/reports/2026-11-demo.html", "十一月", m, "月度"),
+            ("01-demo", "2026-10", "01-demo/reports/2026-10-demo.html", "十月", m, "月度"),
+            ("02-x", "2026-11", "02-x/reports/2026-11-x.html", "乙", m, "季度"),
         ]
         text = build_index.render_index(entries, "2026-11-01 00:00 UTC")
         self.assertIn("## 01-demo", text)
@@ -620,7 +620,7 @@ class TestCovBuildIndex(unittest.TestCase):
                                       lambda: [_common.Business("01-demo")]):
                 entries = build_index.collect_entries()
             self.assertEqual(len(entries), 1)
-            rel, period, path, title, _mtime = entries[0]
+            rel, period, path, title, _mtime, _cycle = entries[0]
             self.assertEqual((rel, period, path, title),
                              ("01-demo", "2026-11", "01-demo/reports/2026-11-demo.html", "演示"))
 
@@ -662,12 +662,14 @@ class TestCovBuildIndex(unittest.TestCase):
 # ──────────────────────────────────────────────
 
 class TestCovArchiveReports(unittest.TestCase):
-    def test_select_archives_tie_and_fewer(self):
+    def test_select_archives_window(self):
         items = [("2026-11", Path("b.html")), ("2026-11", Path("a.html")),
                  ("2026-10", Path("c.html"))]
-        self.assertEqual([p.name for p in archive_reports.select_archives(items, keep=2)],
+        # 保留 1 个月（仅 2026-11）-> 2026-10 归档
+        self.assertEqual([p.name for p in archive_reports.select_archives(items, 1, now="2026-11")],
                          ["c.html"])
-        self.assertEqual(archive_reports.select_archives(items[:2], keep=12), [])
+        # 保留 2 个月 -> 无归档
+        self.assertEqual(archive_reports.select_archives(items, 2, now="2026-11"), [])
 
     def _make_reports(self, root):
         rd = root / "01-demo" / "reports"
@@ -684,17 +686,17 @@ class TestCovArchiveReports(unittest.TestCase):
             with mock.patch.object(_common, "ROOT", root), \
                     mock.patch.object(archive_reports, "iter_business_dirs",
                                       lambda: [_common.Business("01-demo")]):
-                rc, out = _run(["archive_reports.py"], archive_reports.main)
+                rc, out = _run(["archive_reports.py", "--now", "2026-11"], archive_reports.main)
                 self.assertEqual(rc, 0)
                 self.assertIn("归档完成", out)
-                rc2, out2 = _run(["archive_reports.py"], archive_reports.main)
+                rc2, out2 = _run(["archive_reports.py", "--now", "2026-11"], archive_reports.main)
                 self.assertEqual(rc2, 0)
                 self.assertIn("无超出", out2)
             arch = rd / "archives"
             self.assertTrue((arch / "2025-01-demo.html").exists())
             self.assertTrue((arch / "2025-01-demo.md").exists())
             self.assertFalse((rd / "2025-01-demo.html").exists())
-            self.assertEqual(len(list(rd.glob("*.html"))), 12)
+            self.assertEqual(len(list(rd.glob("*.html"))), 8)
 
     def test_main_move_failure(self):
         with tempfile.TemporaryDirectory() as d:
@@ -705,7 +707,7 @@ class TestCovArchiveReports(unittest.TestCase):
                                       lambda: [_common.Business("01-demo")]), \
                     mock.patch.object(archive_reports.shutil, "move",
                                       side_effect=OSError("locked")):
-                rc, out = _run(["archive_reports.py"], archive_reports.main)
+                rc, out = _run(["archive_reports.py", "--now", "2026-11"], archive_reports.main)
             self.assertEqual(rc, 1)
             self.assertIn("归档失败", out)
 

@@ -28,6 +28,7 @@
     "personal_finance_model.py",
     "pipeline_runner.py",
     "pipeline_status.py",
+    "report_cycles.py",
     "report_diff.py",
     "review_gate.py",
     "skeleton_builder.py",
@@ -48,7 +49,6 @@
     "market-sizing",
     "policy-analysis",
     "sentiment-monitoring",
-    "trend-weekly",
     "whitepaper"
   ],
   "topics": [

@@ -80,7 +80,7 @@
 
 - 交付格式：md 源稿；月度报告含顶部导航（`.report-nav`），`.nav-url` = `{{REPO_RAW_URL_BASE}}` + `/reports/{本期文件名}`。
 - HTML 须通过 `lint_reports.py` 标签配对校验。
-- 基线报告常驻 `reports/` 顶层不归档；月度报告按保留策略执行（保留 12 期，超出移入 `reports/archives/`）。
+- 基线报告常驻 `reports/` 顶层不归档；报告按周期保留（月度 18 / 季度 24 / 年度 60 个自然月，超出移入 `reports/archives/`）。
 
 ## 八、质量自检（通用清单之外的本主题专属项）
 

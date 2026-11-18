@@ -252,15 +252,17 @@ class TestPickPrompt(unittest.TestCase):
 
 
 class TestSelectArchives(unittest.TestCase):
-    def test_keep_latest_12(self):
+    def test_keep_latest_18(self):
         items = [(f"2026-{m:02d}", Path(f"2026-{m:02d}-demo.html")) for m in range(1, 13)]
-        self.assertEqual(select_archives(items), [], "恰好 12 期时不应归档")
+        self.assertEqual(select_archives(items, 18, now="2026-11"), [], "18 个月窗口内不归档")
 
     def test_archive_oldest(self):
         items = [(f"2025-{m:02d}", Path(f"2025-{m:02d}-demo.html")) for m in range(1, 13)]
         items.append(("2026-01", Path("2026-01-demo.html")))
-        to_archive = select_archives(items)
-        self.assertEqual([p.name for p in to_archive], ["2025-01-demo.html"])
+        to_archive = select_archives(items, 18, now="2026-11")
+        # 窗口起点 2025-06，2025-01..2025-05 归档
+        self.assertEqual([p.name for p in to_archive],
+                         [f"2025-0{m}-demo.html" for m in range(1, 6)])
 
 
 # ──────────────────────────────────────────────
@@ -2032,27 +2034,23 @@ class TestTemplateComplianceGuard(unittest.TestCase):
             for b in bads:
                 self.assertNotIn(b, t, f"{rel} 仍含过期节数文案：{b}")
 
-    def test_cycle_rule_weekly_and_event(self):
-        """周报与项目 / 事件件按命名映射到正确骨架（不回落基线）。"""
+    def test_cycle_rule_event(self):
+        """项目 / 事件件按命名映射到正确骨架（不回落基线）。"""
         rules = load_rules()
-        weekly, inherited = cycle_rule(rules, "trend-weekly", "weekly")
-        self.assertEqual(weekly["sections"], 8)
-        self.assertFalse(inherited)
         event, inherited = cycle_rule(rules, "flash-commentary", "event")
         self.assertEqual(event["sections"], 4)
         self.assertFalse(inherited)
 
     def test_collect_targets_detects_cycles(self):
-        """collect_targets 按命名识别 monthly / weekly / event。"""
+        """collect_targets 按命名识别 monthly / event。"""
         with tempfile.TemporaryDirectory() as d:
             root = Path(d)
             (root / "01-demo" / "prompts").mkdir(parents=True)
             (root / "01-demo" / "reports").mkdir(parents=True)
             (root / "01-demo" / "prompts" / "business-config.md").write_text(
-                "# x\n\n继承：[行业趋势周报型](../../engine/report_templates/trend-weekly/)\n",
+                "# x\n\n继承：[快评·事件点评型](../../engine/report_templates/flash-commentary/)\n",
                 encoding="utf-8")
-            for name in ("2026-11-demo.html", "2026-11-15_weekly.html",
-                         "2026-11-15-事件-快评.html"):
+            for name in ("2026-11-demo.html", "2026-11-15-事件-快评.html"):
                 (root / "01-demo" / "reports" / name).write_text(
                     "<html><title>t</title><body></body></html>", encoding="utf-8")
             orig_common, orig_cc = _common.ROOT, compliance_check.ROOT
@@ -2063,7 +2061,6 @@ class TestTemplateComplianceGuard(unittest.TestCase):
                 _common.ROOT, compliance_check.ROOT = orig_common, orig_cc
             cycles = {Path(rel).name: cyc for rel, _t, _tid, cyc, _n in targets}
             self.assertEqual(cycles["2026-11-demo.html"], "monthly")
-            self.assertEqual(cycles["2026-11-15_weekly.html"], "weekly")
             self.assertEqual(cycles["2026-11-15-事件-快评.html"], "event")
 
 
@@ -2219,9 +2216,9 @@ class TestNewAuditRules(unittest.TestCase):
         reg = (repo / "engine" / "report_templates" / "template-registry.md").read_text(encoding="utf-8")
         cls_types = set(re.findall(r"\*\*已注册\*\*（([a-z][a-z0-9-]*)）", cls))
         reg_types = set(re.findall(r"^\| ([a-z][a-z0-9-]*) \|", reg, re.M))
-        self.assertEqual(len(cls_types), 13)
+        self.assertEqual(len(cls_types), 12)
         self.assertEqual(cls_types, reg_types)
-        self.assertIn("六族十三类", cls)
+        self.assertIn("六族十二类", cls)
 
     def test_detect_types_multi_ref(self):
         from compliance_check import detect_types
@@ -2629,8 +2626,10 @@ class TestPipelineFlowSpec(unittest.TestCase):
                 (_common.ROOT / "engine" / "tools" / t).is_file(), t)
 
     def test_acceptance_constants_match_spec(self):
-        self.assertIn("KEEP = 12",
-                      self._read("engine", "tools", "archive_reports.py"))
+        arc = self._read("engine", "tools", "archive_reports.py")
+        self.assertIn("keep_months", arc)
+        self.assertIn("cycle_profile", arc)
+        self.assertIn('"keep_months": 18', self._read("engine", "tools", "report_cycles.py"))
         s = self._read("engine", "tools", "audit_sampling.py")
         for c in ("TH_STRUCT = 1.00", "TH_ELEMENT = 0.95", "TH_PASS = 0.95"):
             self.assertIn(c, s)
