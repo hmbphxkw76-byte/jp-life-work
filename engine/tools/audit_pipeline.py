@@ -248,6 +248,9 @@ def _prune_ghosts(state: dict) -> list[str]:
 
 def write_status(state: dict) -> Path:
     AUDIT_DIR.mkdir(parents=True, exist_ok=True)
+    # 台账可能残留已删除报告的历史事件；写回前剔除幽灵状态，
+    # 否则 audit-status.json 会引用不存在的文件（内链门禁 / 对账误报）。
+    _prune_ghosts(state)
     payload = {"version": SPEC_VERSION, "updated": _now(), "reports": state}
     STATUS.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
     return STATUS

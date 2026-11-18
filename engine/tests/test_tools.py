@@ -418,11 +418,15 @@ class TestStructureCheck(unittest.TestCase):
         self.assertEqual(structure_check.missing_elements("# 标题\n\n正文"),
                          ["reliability", "confidence", "gap", "decision"])
 
-    def test_missing_elements_accepts_variants(self):
+    def test_missing_elements_standard_name(self):
         import structure_check
-        text = ("## 数据治理与局限\n\n## 置信度标注\n\n"
-                "## 缺失清单\n\n## 观察清单\n")
-        self.assertEqual(structure_check.missing_elements(text), [])
+        # P1-1：局限章节标准名统一为「数据可靠性与局限说明」，不再接受旧变体。
+        ok = ("## 数据可靠性与局限说明\n\n## 置信度标注\n\n"
+              "## 缺失清单\n\n## 观察清单\n")
+        self.assertEqual(structure_check.missing_elements(ok), [])
+        legacy = ("## 数据治理与局限\n\n## 置信度标注\n\n"
+                  "## 缺失清单\n\n## 观察清单\n")
+        self.assertIn("reliability", structure_check.missing_elements(legacy))
 
     def test_all_real_reports_pass(self):
         import structure_check
