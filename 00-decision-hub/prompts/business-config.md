@@ -16,7 +16,7 @@
 {{CADENCE}}              = 季（季度复核）+ 事件触发
 {{REGISTRY_PATH}}        = data/decision_hub_registry.md
 {{REGISTRY_FORMAT}}      = md-table
-{{BASELINE_REPORT_PATH}} = reports/2026-12-decision-hub.md
+{{BASELINE_REPORT_PATH}} = reports/2026-11-decision-hub.md
 {{FRESHNESS_PRIORITY}}   = 以各来源主题最新一期报告 / 登记册为准；主题未更新时沿用其最近值并注明
 {{SOURCE_LANGUAGE_RULE}} = 沿用各来源主题的来源规则；本主题不新增一手来源，只做引用与缺失标注
 {{REPO_RAW_URL_BASE}}    = https://github.com/hmbphxkw76-byte/jp-life-work/blob/main/00-decision-hub
@@ -181,6 +181,6 @@
 
 | 版本 | 日期 | 变更 | 说明 |
 |---|---|---|---|
-| v1.0 | 2026-11-14 | 初始版本 | 建立跨主题决策层：五问框架、来源映射、只读消费纪律、缺失清单；首份季度复核报告 `reports/2026-12-decision-hub.md` |
+| v1.0 | 2026-11-14 | 初始版本 | 建立跨主题决策层：五问框架、来源映射、只读消费纪律、缺失清单；首份季度复核报告 `reports/2026-11-decision-hub.md` |
 | v1.1 | 2026-11-15 | 决策支持件套 | 接入个人参数档案、决策一页纸（Top 3 待办）、个人财务模型、置信度分级、决策树、决策日志、事实卡片、五问视图；确立五问「是 / 否 / 待定 + 依据」统一格式 |
 | v1.2 | 2026-11-15 | 消费范围扩展 | 来源优先级与跨主题锚表由 01–13 扩展为 01–20，纳入 14–20 执行 / 保障主题 |

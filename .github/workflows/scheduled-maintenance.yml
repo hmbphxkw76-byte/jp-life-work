@@ -97,6 +97,17 @@ jobs:
       - name: 标识同步（audit_badge.py --sync）
         run: python engine/tools/audit_badge.py --sync
 
+      # 全量自动验证（非变异）：V1–V5 逐报告校验，P0/P1 即失败；
+      # --dry-run 只写 gitignored 运行日志，不回写报告、不改审计状态。
+      - name: 全量自动验证（auto_verify.py --all --dry-run）
+        run: |
+          python engine/tools/auto_verify.py --all --dry-run --json > engine/report-audits/audit/verify/auto-verify-all.json || code=$?
+          if [ "${code:-0}" -ne 0 ]; then
+            echo "::error::自动验证存在 P0/P1（见 auto-verify.json）"
+            exit 1
+          fi
+          echo "auto_verify.py 全量通过（P0/P1=0）"
+
       - name: 契约测试（确认维护无回归）
         run: python -m unittest discover -s engine/tests
 

@@ -144,7 +144,7 @@ python engine/tools/audit_pipeline.py --submit --report <报告相对路径>
 |---|---|---|
 | `{{CURRENT_DATE}}` | 本次执行日期 | `2027-04-08` |
 | `{{QUARTER}}` | 被分析季度，自然季 | `2027-Q1` |
-| `{{PREVIOUS_REPORT_PATH}}` | 最近一期季度报告 | `reports/2026-12-decision-hub.md` |
+| `{{PREVIOUS_REPORT_PATH}}` | 最近一期季度报告 | `reports/2026-11-decision-hub.md` |
 | `{{BASELINE_REPORT_PATH}}` | 固定 `reports/2026-11-regional-info.md` | 同左 |
 | `{{OUTPUT_PATH}}` | `reports/{{YYYY-MM}}-<slug>.md`，季度＝被分析季度 | `reports/2027-03-<slug>.md` |
 | `{{REPORT_VERSION}}` | `v` + 执行日期 | `v2027.04.08` |

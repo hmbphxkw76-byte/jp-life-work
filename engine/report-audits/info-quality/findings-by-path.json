@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "key": "9c5af15e155d6349633fe43fe402e74f3660489fc422396a6c91e4778f9d52ee",
+  "key": "cb95b795a3db47143351f242df26a0866362b9d763879a259743b48edadff157",
   "findings": {
     "00-decision-hub/reports/2026-11-decision-hub.md": [
       {
@@ -1930,17 +1930,6 @@
         "location": "跨文档重复",
         "detail": "约 225 字的段落与 20-overseas-china/reports/2026-11-overseas-china.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
         "spec": "S-02"
-      }
-    ],
-    "00-decision-hub/data/decision_hub_registry.md": [
-      {
-        "layer": "L3",
-        "code": "C-09",
-        "severity": "P2",
-        "report": "00-decision-hub/data/decision_hub_registry.md",
-        "location": "交叉引用",
-        "detail": "引用目标不存在：../reports/2026-12-decision-hub.md（信息质量四维度）",
-        "spec": "S-08"
       }
     ]
   }

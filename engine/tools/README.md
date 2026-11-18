@@ -46,7 +46,7 @@ python -m unittest discover -s engine/tests -v   # 单元测试（868 项，以 
 | pipeline_runner.py | 编排 | 手动 / pipeline-orchestrator.yml：六阶段状态机（断点续跑 / S2 人工闸门） |
 | automation_status.py | 编排 | 8 条工作流 `record` 入库 + 手动 `activity`（活跃度预警） |
 | info_quality_check.py | 校验+修复 | info-quality.yml「信息质量全量评估」+ validate.yml「信息质量检查」 |
-| auto_verify.py | 校验 | 手动：生成后自动验证（V1–V5）→ 写回「自动验证结果」→ 提交审计 |
+| auto_verify.py | 校验 | 手动：生成后自动验证（V1–V5）→ 写回「自动验证结果」→ 提交审计；scheduled-maintenance.yml「全量自动验证（dry-run）」 |
 | audit_registry.py / audit_pipeline.py / audit_badge.py / audit_check.py / audit_sampling.py / audit_preflight.py | 审计 | audit-gate.yml / audit-sampling.yml / html-sync.yml |
 | personal_finance_model.py | 决策支持 | validate.yml「财务模型一致性」+ scheduled-maintenance.yml「刷新」 |
 | fact_card_check.py | 决策支持 | validate.yml「事实卡片校验」+ scheduled-maintenance.yml「刷新」 |
@@ -55,6 +55,7 @@ python -m unittest discover -s engine/tests -v   # 单元测试（868 项，以 
 | decision_log.py | 编排 | 手动：决策状态变化时间线 |
 | coverage_gate.py | 校验 | validate.yml「覆盖率门禁」；阈值读 `coverage-config.json` 单一事实源（`--update-baseline` / `--porcelain`） |
 | review_gate.py | 校验 | audit-gate.yml「工具链变更双轴评审软门禁」（`--changed <清单>`） |
+| link_check.py | 校验 | validate.yml「内链存在性校验」（报告 / 手册 / 词条 / 汇总页 / 搜索数据的仓库相对链接 + audit-status 键对账） |
 
 ## 校验类
 
@@ -335,7 +336,7 @@ python engine/tools/automation_status.py activity --threshold 45               #
   `engine/vocabulary/config/report-cycles.json`。
 
 <!-- REGISTRY:BEGIN -->
-> 注册表快照：工具 35 · 类型 12 · 主题 21 · 工作流 8（由 `generate_registry.py` 生成，勿手工编辑）
+> 注册表快照：工具 36 · 类型 12 · 主题 21 · 工作流 8（由 `generate_registry.py` 生成，勿手工编辑）
 <!-- REGISTRY:END -->
 
 

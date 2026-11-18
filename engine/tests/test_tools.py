@@ -32,8 +32,10 @@ import audit_pipeline  # noqa: E402
 import audit_preflight  # noqa: E402
 import audit_registry  # noqa: E402
 import audit_sampling  # noqa: E402
+import build_hub  # noqa: E402
 import build_index  # noqa: E402
 import compliance_check  # noqa: E402
+import link_check  # noqa: E402
 import update_planner  # noqa: E402
 import vocab_tool  # noqa: E402
 import lint_reports  # noqa: E402
@@ -41,7 +43,7 @@ import md2html  # noqa: E402
 import stage_gate_check  # noqa: E402
 from archive_reports import select_archives  # noqa: E402
 from automation_status import days_since_latest  # noqa: E402
-from build_hub import build_outputs, normalize_for_check  # noqa: E402
+from build_hub import build_outputs, collect_topics, normalize_for_check, search_reference_errors  # noqa: E402
 from compliance_check import check_report, cycle_rule, detect_type, load_rules  # noqa: E402
 from lint_reports import lint_html  # noqa: E402
 from md2html import convert as md2html_convert  # noqa: E402
@@ -539,7 +541,7 @@ class TestExitTransitionReturnIntegration(unittest.TestCase):
         self.assertIn("退出·转型·回国", text)
         # 报告链接直达独立报告页（新标签页），不再依赖阅读器
         self.assertIn(
-            'href="00-decision-hub/reports/2026-12-decision-hub.html" target="_blank"',
+            'href="00-decision-hub/reports/2026-11-decision-hub.html" target="_blank"',
             text,
         )
         self.assertNotIn("reader.html", text)
@@ -577,12 +579,52 @@ class TestBuildHubCheck(unittest.TestCase):
         outputs = build_outputs()
         self.assertEqual(list(outputs), ["index.html", "search-index.json"])
         self.assertNotIn("reader.html", outputs["index.html"])
-        self.assertIn('href="00-decision-hub/reports/2026-12-decision-hub.html" target="_blank"', outputs["index.html"])
+        self.assertIn('href="00-decision-hub/reports/2026-11-decision-hub.html" target="_blank"', outputs["index.html"])
         # 搜索索引：覆盖全部报告，且含中文关键词与问题
         index = json.loads(outputs["search-index.json"])
         self.assertGreaterEqual(len(index["reports"]), 20)
         self.assertTrue(all(r["keywords"] for r in index["reports"]))
         self.assertGreaterEqual(len(index["questions"]), 40)
+
+    def test_search_references_resolve_to_real_reports(self):
+        """搜索数据引用的报告页必须真实存在（死链门禁）。"""
+        self.assertEqual(search_reference_errors(collect_topics()), [])
+
+    def test_search_reference_errors_detects_missing(self):
+        with tempfile.TemporaryDirectory() as td:
+            p = Path(td)
+            (p / "question-index.json").write_text(
+                json.dumps({"questions": [
+                    {"id": "q1", "label": "x",
+                     "path": "00-decision-hub/reports/2099-01-x.html"},
+                ]}, ensure_ascii=False),
+                encoding="utf-8",
+            )
+            with unittest.mock.patch.object(build_hub, "SEARCH_DIR", p):
+                errs = build_hub.search_reference_errors(
+                    [{"reports": [{"path": "00-decision-hub/reports/2026-11-decision-hub.html"}]}]
+                )
+        self.assertEqual(errs, ["00-decision-hub/reports/2099-01-x.html"])
+
+
+class TestLinkCheck(unittest.TestCase):
+    """内链存在性校验（link_check.py）用例。"""
+
+    def test_no_missing_internal_links(self):
+        self.assertEqual(link_check.check(), [])
+
+    def test_markdown_links_resolve_relative_to_file(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            (root / "docs").mkdir()
+            (root / "docs" / "target.md").write_text("x", encoding="utf-8")
+            (root / "docs" / "page.md").write_text(
+                "[ok](../docs/target.md) [bad](../docs/missing.md)", encoding="utf-8"
+            )
+            with unittest.mock.patch.object(link_check, "ROOT", root), \
+                 unittest.mock.patch.object(link_check, "GLOBS", ["docs/*.md"]):
+                missing = link_check.check(root)
+        self.assertEqual(missing, ["docs/missing.md"])
 
 
 # ──────────────────────────────────────────────

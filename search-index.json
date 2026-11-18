@@ -34,7 +34,13 @@
         "寮",
         "银行账户"
       ],
-      "questions": []
+      "questions": [
+        "去不去？值不值？",
+        "能不能去？门槛是什么？",
+        "怎么去？路径怎么走？",
+        "去哪？定居地怎么选？",
+        "最坏怎么办？退出路径？"
+      ]
     },
     {
       "topic": "01-ssw-driver",
@@ -804,31 +810,31 @@
   "questions": [
     {
       "q": "去不去？值不值？",
-      "path": "00-decision-hub/reports/2026-12-decision-hub.html",
+      "path": "00-decision-hub/reports/2026-11-decision-hub.html",
       "anchor": "",
       "group": "q1"
     },
     {
       "q": "能不能去？门槛是什么？",
-      "path": "00-decision-hub/reports/2026-12-decision-hub.html",
+      "path": "00-decision-hub/reports/2026-11-decision-hub.html",
       "anchor": "",
       "group": "q2"
     },
     {
       "q": "怎么去？路径怎么走？",
-      "path": "00-decision-hub/reports/2026-12-decision-hub.html",
+      "path": "00-decision-hub/reports/2026-11-decision-hub.html",
       "anchor": "",
       "group": "q3"
     },
     {
       "q": "去哪？定居地怎么选？",
-      "path": "00-decision-hub/reports/2026-12-decision-hub.html",
+      "path": "00-decision-hub/reports/2026-11-decision-hub.html",
       "anchor": "",
       "group": "q4"
     },
     {
       "q": "最坏怎么办？退出路径？",
-      "path": "00-decision-hub/reports/2026-12-decision-hub.html",
+      "path": "00-decision-hub/reports/2026-11-decision-hub.html",
       "anchor": "",
       "group": "q5"
     },
@@ -1136,7 +1142,7 @@
       "confidence": "C2",
       "todo": "T-01",
       "links": [
-        "00-decision-hub/reports/2026-12-decision-hub.html",
+        "00-decision-hub/reports/2026-11-decision-hub.html",
         "01-ssw-driver/reports/2026-11-ssw-driver.html",
         "07-economy-finance/reports/2026-11-economy-finance.html"
       ]
@@ -1149,7 +1155,7 @@
       "confidence": "C2",
       "todo": "T-02",
       "links": [
-        "00-decision-hub/reports/2026-12-decision-hub.html",
+        "00-decision-hub/reports/2026-11-decision-hub.html",
         "08-visa-immigration/reports/2026-11-visa-immigration.html",
         "10-education-qualification/reports/2026-11-education-qualification.html"
       ]
@@ -1162,7 +1168,7 @@
       "confidence": "C2",
       "todo": "T-03 / T-08",
       "links": [
-        "00-decision-hub/reports/2026-12-decision-hub.html",
+        "00-decision-hub/reports/2026-11-decision-hub.html",
         "17-migration-compliance/reports/2026-11-migration-compliance.html",
         "14-life-operations/reports/2026-11-life-operations.html"
       ]
@@ -1175,7 +1181,7 @@
       "confidence": "C2",
       "todo": "T-01 / T-09",
       "links": [
-        "00-decision-hub/reports/2026-12-decision-hub.html",
+        "00-decision-hub/reports/2026-11-decision-hub.html",
         "13-regional-info/reports/2026-11-regional-info.html",
         "12-culture-life/reports/2026-11-culture-life.html"
       ]
@@ -1188,7 +1194,7 @@
       "confidence": "C2",
       "todo": "T-04 / T-12",
       "links": [
-        "00-decision-hub/reports/2026-12-decision-hub.html",
+        "00-decision-hub/reports/2026-11-decision-hub.html",
         "16-exit-transition-return/reports/2026-11-exit-transition-return.html",
         "09-politics-law/reports/2026-11-politics-law.html"
       ]
