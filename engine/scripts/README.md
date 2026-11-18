@@ -194,3 +194,18 @@ python engine/scripts/verify_report_parity.py --compare  .migration-baseline    
 | 6 | 新增/改动工具已登记 | ✅ 未新增工具；`generate_registry.py --check` 通过（工具 34 / 类型 13 / 主题 21 / 工作流 8） |
 | 7 | 生成物确定性 | ✅ `build_hub.py --check` / `build_index.py --check` 均退出码 0 |
 | 8 | 架构边界 | ✅ `engine/tools/` 无 git 可变操作；`engine/scripts/` 不产出内容；`iter_business_dirs()` = 21 |
+
+## 十三、输入门禁可移植性（`engine/scripts/bootstrap_gate.py` / `check_gate.py`）
+
+> 「输入润色与确认门禁」的跨 IDE / 跨模型 / 跨机器部署与自检。方案见 `docs/输入门禁可移植性方案.md`。
+
+| 命令 | 作用 |
+|---|---|
+| `python engine/scripts/check_gate.py` | 只读自检：AGENTS.md 门禁节 / 机械判定口径、CLAUDE.md 导入、`.cursorrules`、工作区 skill、设计文档 |
+| `python engine/scripts/bootstrap_gate.py` | 校验模式（只读），输出报告 |
+| `python engine/scripts/bootstrap_gate.py --install` | 补齐缺失载体（`CLAUDE.md` / `.cursorrules`）并自检 |
+| `python engine/scripts/bootstrap_gate.py --install --personal` | 额外部署工作区 skill 到 `~/.meituan-catpaw/<uid>/skills/` |
+
+- 退出码：0 通过 / 1 有必备项缺失 / 2 非本仓库。
+- 新机器：`git clone` → `python engine/scripts/bootstrap_gate.py --install`。
+- 测试：`engine/tests/test_gate_scripts.py`。
