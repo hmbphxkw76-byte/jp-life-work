@@ -57,6 +57,8 @@ python -m unittest discover -s engine/tests -v   # 单元测试（881 项，以 
 | review_gate.py | 校验 | audit-gate.yml「工具链变更双轴评审软门禁」（`--changed <清单>`） |
 | link_check.py | 校验 | validate.yml「内链存在性校验」（报告 / 手册 / 词条 / 汇总页 / 搜索数据的仓库相对链接 + audit-status 键对账） |
 | structure_check.py | 校验 | validate.yml「报告必需要素结构校验」（数据可靠性与局限 / 置信度标注 / 信息差与未核验清单 / 决策建议） |
+| md_html_parity.py | 校验 | validate.yml「md↔HTML 一致性校验」（P1-3：渲染漂移 / 缺 HTML 阻断） |
+| prompt_check.py | 校验 | validate.yml「提示词结构门禁」（P1-11：命名 / 继承声明 / p3–p5 结构 / business-config 槽位与优先级） |
 
 ## 校验类
 
@@ -150,6 +152,35 @@ python engine/tools/structure_check.py --warn     # 仅告警（退出码 2）
 [report_templates/confidence-grade-standard.md](../report_templates/confidence-grade-standard.md)。
 退出码：0=通过；1=存在缺失（阻断）；2=仅告警。纯函数 `missing_elements(text)` /
 `check_report(path)` 可被测试直接调用。
+
+### md_html_parity.py — md ↔ HTML 一致性校验（P1-3）
+
+```bash
+python engine/tools/md_html_parity.py            # 全量校验（CI 阻断式关卡）
+python engine/tools/md_html_parity.py --report <路径>   # 单份校验
+python engine/tools/md_html_parity.py --json
+python engine/tools/md_html_parity.py --warn     # 仅告警（退出码 2）
+```
+
+HTML 是 md 的确定性派生物（`md2html.py` 幂等）。本工具重新渲染每份 md 源稿并与仓库
+已提交的 HTML 逐字节比对（仅统一换行），阻断「改了 md 未同步 HTML」或「HTML 被手工
+改动」造成的漂移。判定：`OK` / `MISSING`（缺同名 HTML）/ `MISMATCH`（漂移）/ `ERROR`
+（渲染失败）。退出码：0=全部一致；1=存在漂移/缺失（阻断）；2=仅告警。
+
+### prompt_check.py — 提示词结构门禁（P1-11）
+
+```bash
+python engine/tools/prompt_check.py            # 全量校验（CI 阻断式关卡）
+python engine/tools/prompt_check.py --json
+python engine/tools/prompt_check.py --warn     # 仅告警（退出码 2）
+```
+
+校验提示词体系的结构性约定：① 命名——业务提示词 `prompt-<kebab>.md`、类型模板
+`prompt-<kebab>-template.md`、泛用版 `prompts/prompt-<kebab>.md`；② 继承声明——基线 /
+周期提示词须引用 `../../engine/report_templates/`（四层继承体系）；③ 结构——
+`prompt-p3/p4/p5-*.md` 须含 `## 信息缺口` 节；④ 槽位——`business-config.md` 须含
+`{{REGION}}` / `{{TOPIC}}` / `{{REGISTRY_PATH}}` 与继承优先级口径。退出码：0=通过；
+1=存在违规（阻断）；2=仅告警。
 
 ## 生成类
 
@@ -352,7 +383,7 @@ python engine/tools/automation_status.py activity --threshold 45               #
   `engine/vocabulary/config/report-cycles.json`。
 
 <!-- REGISTRY:BEGIN -->
-> 注册表快照：工具 37 · 类型 12 · 主题 21 · 工作流 8（由 `generate_registry.py` 生成，勿手工编辑）
+> 注册表快照：工具 39 · 类型 12 · 主题 21 · 工作流 8（由 `generate_registry.py` 生成，勿手工编辑）
 <!-- REGISTRY:END -->
 
 
