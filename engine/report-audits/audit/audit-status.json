@@ -1,6 +1,6 @@
 {
   "version": "v1.4",
-  "updated": "2026-11-18T13:29:28+00:00",
+  "updated": "2026-11-18T14:58:02+00:00",
   "reports": {
     "00-decision-hub/reports/2026-11-decision-hub.md": {
       "state": "audited",
@@ -68,11 +68,11 @@
     },
     "08-visa-immigration/reports/2026-11-visa-immigration.md": {
       "state": "audited",
-      "audit_id": "AUD-202611-023",
-      "finalized_at": "2026-11-18T13:17:52+00:00",
-      "content_hash": "sha256:308334f9b430e88ddbb734980bdaef62829bcfa03c4291fb20bf580b1534cb0f",
-      "html_hash": "sha256:af5d71d7e4a80f0a742859803a05b265fe52d17b6515424e9f82a64de9887af5",
-      "last_seq": 774
+      "audit_id": "AUD-202611-003",
+      "finalized_at": "2026-11-18T14:58:02+00:00",
+      "content_hash": "sha256:fae71f97343a459592dcac90d61b48e9df7ba14ee03d114adbfb006318d24195",
+      "html_hash": "sha256:3f65026aa5c8491b3a52b2dc91719cd234a09acf54368b2675b72cd8e2c51ec5",
+      "last_seq": 785
     },
     "09-politics-law/reports/2026-11-politics-law.md": {
       "state": "audited",
