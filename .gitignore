@@ -27,6 +27,8 @@ engine/report-audits/audit/l5-meta-report.json
 engine/report-audits/audit/l5-meta-report.md
 engine/report-audits/audit/decision-metrics.json
 engine/report-audits/audit/decision-metrics.md
+# 来源条目 schema 索引（source_check.py 生成，可再生，不入库）
+engine/report-audits/audit/source-index.json
 
 # 测试 / 静态检查缓存（可再生；由 engine/scripts/cleanup_workspace.py 统一清理）
 .pytest_cache/

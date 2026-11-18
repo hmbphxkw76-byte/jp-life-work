@@ -166,6 +166,18 @@ jobs:
           fi
           echo "decision_metrics.py 退出码 $code（2=存在待定/缺失，仅告警）"
 
+      # 来源 schema（P1-2）：来源章节存在性阻断；条目时点 / 分级缺失仅告警，
+      # 并产出机读 source-index.json（来源条目四元组字段化）。
+      - name: 来源条目 schema 校验（source_check.py）
+        run: |
+          python engine/tools/source_check.py || code=$?
+          code=${code:-0}
+          if [ "$code" -ne 0 ] && [ "$code" -ne 2 ]; then
+            echo "::error::来源章节缺失（退出码 $code），阻断合并"
+            exit 1
+          fi
+          echo "source_check.py 退出码 $code（2=条目时点/分级缺失，仅告警）"
+
       # 新报告阻断级：期间 >= 2026-11 的报告 lint / 模板合规必须无错误项；
       # 历史报告由 --new-only 跳过，遗留项列入 lint-whitelist.json 豁免。
       - name: 报告内容 lint（新报告阻断）
