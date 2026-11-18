@@ -61,6 +61,7 @@ python -m unittest discover -s engine/tests -v   # 单元测试（881 项，以 
 | prompt_check.py | 校验 | validate.yml「提示词结构门禁」（P1-11：命名 / 继承声明 / p3–p5 结构 / business-config 槽位与优先级） |
 | l5_meta_check.py | 校验 | audit-gate.yml「L5 证据元评估」（P1-4：覆盖率 / 合格率 / basis 缺失 / 依据充分度） |
 | decision_metrics.py | 决策支持 | validate.yml「决策度量校验」（P1-6：五问收敛率 / 判定率 / 缺失 / 决策日志变化） |
+| source_check.py | 校验 | validate.yml「来源条目 schema 校验」（P1-2：来源章节 / URL 条目时点 / 分级，产出 source-index.json） |
 
 ## 校验类
 
@@ -209,6 +210,18 @@ python engine/tools/decision_metrics.py --check    # 仅校验可解析，不写
 从 `00-decision-hub` 的结构化登记册与决策日志计算：指标收敛率、五问判定率、缺失条目数、
 件套齐备度、决策变化次数。历史序列写入 `decision-metrics-history.jsonl`，供跨月趋势
 （P2-2 复用）。退出码：0=正常；1=结构解析失败（阻断）；2=存在待定 / 缺失（告警）。
+
+### source_check.py — 来源条目 schema 化（P1-2）
+
+```bash
+python engine/tools/source_check.py            # 全量校验并写 source-index.json
+python engine/tools/source_check.py --check    # 不写文件
+python engine/tools/source_check.py --json
+```
+
+把各报告来源章节的条目解析为机读四元组（来源文本 / 时点年份 / URL / 分级分组），产出
+`engine/report-audits/audit/source-index.json`。校验：来源章节存在性（阻断）；URL 条目
+时点年份、来源分级声明（告警）。退出码：0=通过；1=缺来源章节（阻断）；2=仅告警。
 
 ## 生成类
 
@@ -411,7 +424,7 @@ python engine/tools/automation_status.py activity --threshold 45               #
   `engine/vocabulary/config/report-cycles.json`。
 
 <!-- REGISTRY:BEGIN -->
-> 注册表快照：工具 41 · 类型 12 · 主题 21 · 工作流 8（由 `generate_registry.py` 生成，勿手工编辑）
+> 注册表快照：工具 42 · 类型 12 · 主题 21 · 工作流 8（由 `generate_registry.py` 生成，勿手工编辑）
 <!-- REGISTRY:END -->
 
 

@@ -37,6 +37,7 @@
     "report_diff.py",
     "review_gate.py",
     "skeleton_builder.py",
+    "source_check.py",
     "stage_gate_check.py",
     "structure_check.py",
     "trigger_watch.py",
