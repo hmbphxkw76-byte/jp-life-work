@@ -59,6 +59,8 @@ python -m unittest discover -s engine/tests -v   # 单元测试（881 项，以 
 | structure_check.py | 校验 | validate.yml「报告必需要素结构校验」（数据可靠性与局限 / 置信度标注 / 信息差与未核验清单 / 决策建议） |
 | md_html_parity.py | 校验 | validate.yml「md↔HTML 一致性校验」（P1-3：渲染漂移 / 缺 HTML 阻断） |
 | prompt_check.py | 校验 | validate.yml「提示词结构门禁」（P1-11：命名 / 继承声明 / p3–p5 结构 / business-config 槽位与优先级） |
+| l5_meta_check.py | 校验 | audit-gate.yml「L5 证据元评估」（P1-4：覆盖率 / 合格率 / basis 缺失 / 依据充分度） |
+| decision_metrics.py | 决策支持 | validate.yml「决策度量校验」（P1-6：五问收敛率 / 判定率 / 缺失 / 决策日志变化） |
 
 ## 校验类
 
@@ -181,6 +183,32 @@ python engine/tools/prompt_check.py --warn     # 仅告警（退出码 2）
 `prompt-p3/p4/p5-*.md` 须含 `## 信息缺口` 节；④ 槽位——`business-config.md` 须含
 `{{REGION}}` / `{{TOPIC}}` / `{{REGISTRY_PATH}}` 与继承优先级口径。退出码：0=通过；
 1=存在违规（阻断）；2=仅告警。
+
+### l5_meta_check.py — L5 语义复核证据元评估（P1-4）
+
+```bash
+python engine/tools/l5_meta_check.py            # 全量元评估并写报告
+python engine/tools/l5_meta_check.py --check    # 不写文件
+python engine/tools/l5_meta_check.py --json
+```
+
+独立解析全库 L5 证据（不复用抽检结论），产出证据质量门槛：覆盖率（门槛 100%）、
+合格率（`validate_l5_evidence` 六项结构）、basis 缺失（门槛 0）、basis 平均字数
+（<20 告警）、verdict=fail 计数。输出 `engine/report-audits/audit/l5-meta-report.{json,md}`。
+退出码：0=达标；1=覆盖缺口 / 无效证据 / basis 缺失（阻断）；2=仅告警。
+
+### decision_metrics.py — 五问 / 缺失决策度量（P1-6）
+
+```bash
+python engine/tools/decision_metrics.py            # 计算并写报告
+python engine/tools/decision_metrics.py --history  # 追加历史快照（跨月对比）
+python engine/tools/decision_metrics.py --trend    # 与上一快照对比
+python engine/tools/decision_metrics.py --check    # 仅校验可解析，不写文件
+```
+
+从 `00-decision-hub` 的结构化登记册与决策日志计算：指标收敛率、五问判定率、缺失条目数、
+件套齐备度、决策变化次数。历史序列写入 `decision-metrics-history.jsonl`，供跨月趋势
+（P2-2 复用）。退出码：0=正常；1=结构解析失败（阻断）；2=存在待定 / 缺失（告警）。
 
 ## 生成类
 
@@ -383,7 +411,7 @@ python engine/tools/automation_status.py activity --threshold 45               #
   `engine/vocabulary/config/report-cycles.json`。
 
 <!-- REGISTRY:BEGIN -->
-> 注册表快照：工具 39 · 类型 12 · 主题 21 · 工作流 8（由 `generate_registry.py` 生成，勿手工编辑）
+> 注册表快照：工具 41 · 类型 12 · 主题 21 · 工作流 8（由 `generate_registry.py` 生成，勿手工编辑）
 <!-- REGISTRY:END -->
 
 

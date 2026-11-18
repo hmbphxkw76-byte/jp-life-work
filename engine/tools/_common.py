@@ -421,3 +421,34 @@ def save_state(period: str, state: dict) -> None:
     """原子写入周期状态（目录不存在时自动创建）。"""
     PIPELINE_DIR.mkdir(parents=True, exist_ok=True)
     atomic_write(pipeline_state_path(period), json.dumps(state, ensure_ascii=False, indent=2))
+
+
+# ──────────────────────────────────────────────
+# 决策工具配置（硬编码外置的单一事实源）
+# ──────────────────────────────────────────────
+
+DECISION_CONFIG_PATH = ENGINE / "config" / "decision-tools.json"
+DECISION_CONFIG_SCHEMA = "1.0"
+
+
+def load_decision_config() -> dict:
+    """读取决策工具配置（``engine/config/decision-tools.json``）。
+
+    配置缺失 / 非合法 JSON / schema 版本不符抛 :class:`ValueError`。
+    决策类工具（财务模型、待核实闭环等）的阈值与定位常量一律以此为准，
+    代码内不得再写死；漂移由 ``test_decision_config`` 守卫。
+    """
+    try:
+        data = json.loads(DECISION_CONFIG_PATH.read_text(encoding="utf-8"))
+    except FileNotFoundError as exc:
+        raise ValueError(f"决策工具配置缺失：{DECISION_CONFIG_PATH}") from exc
+    except json.JSONDecodeError as exc:
+        raise ValueError(f"决策工具配置损坏（非合法 JSON）：{DECISION_CONFIG_PATH}") from exc
+    if not isinstance(data, dict) or data.get("schema_version") != DECISION_CONFIG_SCHEMA:
+        actual = data.get("schema_version") if isinstance(data, dict) else type(data).__name__
+        raise ValueError(
+            f"决策工具配置 schema 版本不符：{DECISION_CONFIG_PATH}"
+            f"（期望 {DECISION_CONFIG_SCHEMA}，实际 {actual}）"
+        )
+    return data
+

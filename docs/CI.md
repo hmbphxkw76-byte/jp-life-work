@@ -199,7 +199,7 @@ reports/YYYY-MM-<slug>.md  ──md2html.py──►  reports/YYYY-MM-<slug>.htm
 - **辅助开关**：报告页工具条「隐藏更新标记」对照阅读、「展开全部删除」。
 - **呈现**：报告页新标签页独立打开，页脚提供「← 返回主题 / 返回首页」。
 
-## 六、测试体系（`engine/tests/`，907 项）
+## 六、测试体系（`engine/tests/`，938 项）
 
 | 场景 | 测试类 | 覆盖 |
 |---|---|---|
@@ -449,3 +449,4 @@ python engine/scripts/cleanup_workspace.py --dry-run  # 预览将删除项
 | v2.7 | 2026-11-18 | 测试计数同步 | 测试数与实测对齐（863 → 868）；同步 `docs/README.md`、`docs/cross-domain-expert-roles.md`、`engine/tools/README.md` 当前计数 |
 | v2.8 | 2026-11-18 | P0-9 报告必需要素门禁 | 新增 `structure_check.py`（报告必需要素结构校验）与 `TestStructureCheck`（6 项）、`audit_check` E9–E11 用例（1 项）；`validate.yml` 增结构校验步骤；六节测试数 874 → 881 |
 | v2.9 | 2026-11-18 | P1 门禁三件套（P1-3 / P1-5 / P1-11） | 新增 `md_html_parity.py`（md↔HTML 漂移门禁，13 项）与 `prompt_check.py`（提示词命名/继承/结构/槽位门禁，13 项）；`validate.yml` 增两步阻断校验；`audit-gate.yml` 增全库审计兜底（`--gate --strict`）；工具 37 → 39；六节测试数 881 → 907 |
+| v2.10 | 2026-11-18 | P1 质量机制（P1-10 / P1-4 / P1-6） | 新增 `engine/config/decision-tools.json`（决策工具参数外置）与 `test_decision_config.py` 漂移守卫（9 项）；新增 `l5_meta_check.py`（L5 证据元评估，12 项）接入 `audit-gate.yml`；新增 `decision_metrics.py`（五问/缺失度量，10 项）接入 `validate.yml`；工具 39 → 41；六节测试数 907 → 938 |
