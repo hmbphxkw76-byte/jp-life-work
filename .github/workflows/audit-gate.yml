@@ -80,6 +80,18 @@ jobs:
           fi
           echo "audit_pipeline --gate --strict 退出码 $code"
 
+      # L5 证据元评估（P1-4）：覆盖率 / 合格率 / basis 缺失 / 依据充分度门槛，
+      # 独立于抽检复用结论，直接解析全库 L5 证据。
+      - name: L5 证据元评估（l5_meta_check）
+        run: |
+          python engine/tools/l5_meta_check.py --check || code=$?
+          code=${code:-0}
+          if [ "$code" -ne 0 ] && [ "$code" -ne 2 ]; then
+            echo "::error::L5 证据元评估存在覆盖缺口 / 无效证据 / basis 缺失（退出码 $code）"
+            exit 1
+          fi
+          echo "l5_meta_check 退出码 $code（2=仅告警）"
+
       # 全量多层级校验：当前存量报告 P0/P1=0；新增/变更报告引入 P0/P1 即阻断。
       - name: 多层级校验（audit_check --all）
         run: |

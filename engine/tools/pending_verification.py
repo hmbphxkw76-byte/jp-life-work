@@ -23,7 +23,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from _common import ROOT, iter_business_dirs  # noqa: E402
+from _common import ROOT, iter_business_dirs, load_decision_config  # noqa: E402
 
 def _topics() -> tuple[str, ...]:
     """纳入有跟踪需求的主题：登记册含「首轮核验截止」或 ⚠ 待核实项。"""
@@ -39,7 +39,10 @@ def _topics() -> tuple[str, ...]:
 
 
 # 文档口径的默认截止日：仅 docs/CI流水线对齐校验报告 引用，程序不消费（实际截止日解析自登记册文本）。
-DEFAULT_DEADLINE = "2026-12-31"
+# 阈值与默认值外置到 engine/config/decision-tools.json（单一事实源）。
+_PENDING_CFG = load_decision_config()["pending_verification"]
+DEFAULT_DEADLINE = _PENDING_CFG["default_deadline"]
+NEAR_WINDOW_DAYS = _PENDING_CFG["near_window_days"]
 OUT_PATH = ROOT / "engine" / "report-audits" / "audit" / "pending-verification.json"
 
 
@@ -72,7 +75,7 @@ def _parse(topic: str) -> dict:
         today = date.today()
         if d < today:
             status = "已逾期"
-        elif (d - today).days <= 30:
+        elif (d - today).days <= NEAR_WINDOW_DAYS:
             status = "临近"
         else:
             status = "进行中"

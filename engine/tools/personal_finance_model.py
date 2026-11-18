@@ -21,26 +21,22 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from _common import ROOT, iter_business_dirs  # noqa: E402
+from _common import ROOT, iter_business_dirs, load_decision_config  # noqa: E402
 
 OUT_PATH = ROOT / "00-decision-hub" / "data" / "personal_finance_model.md"
 
-# 代表房租：UR 賃貸住宅收入基准阈值 62,500 円（12-culture-life 登记册 / 00 报告 5.2）
+# 参数外置：代表房租 / 社保负担率 / 登记册定位均读自 engine/config/decision-tools.json
+# （单一事实源；硬编码漂移由 test_decision_config 守卫）。
+_FINANCE_CFG = load_decision_config()["personal_finance_model"]
+# 代表房租：UR 賃貸住宅收入基准阈值（12-culture-life 登记册 / 00 报告 5.2），
 # 作为初期费用「4–7 个月房租」的折算基准；非个人记录。
-REPRESENTATIVE_RENT = 62_500
-# 社保负担率：07 报告「年金·社保约工资的 14–15% 负担」，取上限 15%（保守）
-SOCIAL_INSURANCE_RATE = 0.15
+REPRESENTATIVE_RENT = _FINANCE_CFG["representative_rent_jpy"]
+# 社保负担率：07 报告「年金·社保约工资的 14–15% 负担」，取上限 15%（保守）。
+SOCIAL_INSURANCE_RATE = _FINANCE_CFG["social_insurance_rate"]
 
 # 登记册定位：(主题目录, 指标号, 值所在列索引)
 # 01/07/10/14 为 5 列（值在第 4 列，索引 3）；17 为 12 列（值在第 5 列，索引 4）。
-SOURCES = {
-    "income": ("01-ssw-driver", 5, 3),          # 運輸業月均工资
-    "living": ("07-economy-finance", 7, 3),     # 生活成本模型
-    "initial_months": ("14-life-operations", 4, 3),  # 租房初期费用（4–7 个月）
-    "driving": ("10-education-qualification", 10, 3),  # 教习所费用行情
-    "intermediary": ("17-migration-compliance", 12, 4),  # 中介・登录支援费
-    "exam": ("01-ssw-driver", 3, 3),            # 试验费用
-}
+SOURCES = {k: tuple(v) for k, v in _FINANCE_CFG["sources"].items()}
 
 
 # ──────────────────────────────────────────────

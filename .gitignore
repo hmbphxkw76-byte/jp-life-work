@@ -22,6 +22,11 @@ engine/report-audits/audit/verify/
 # 落盘前自检报告（audit_preflight.py --all 生成，可再生，不入库）
 engine/report-audits/audit/preflight-report.json
 engine/report-audits/audit/preflight-report.md
+# L5 证据元评估 / 决策度量报告（l5_meta_check.py / decision_metrics.py 生成，可再生，不入库）
+engine/report-audits/audit/l5-meta-report.json
+engine/report-audits/audit/l5-meta-report.md
+engine/report-audits/audit/decision-metrics.json
+engine/report-audits/audit/decision-metrics.md
 
 # 测试 / 静态检查缓存（可再生；由 engine/scripts/cleanup_workspace.py 统一清理）
 .pytest_cache/
