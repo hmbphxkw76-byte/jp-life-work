@@ -190,10 +190,10 @@
 
 ---
 
-<!-- VOCAB-SYNC:BEGIN topic=economy-finance do-not-edit -->
+<!-- VOCAB-SYNC:BEGIN topic=07-economy-finance do-not-edit -->
 ## 词汇速览：经济与财务（词汇库自动同步）
 
-> 由 `engine/vocabulary/script/sync_vocab.py` 自动维护：词汇库 economy-finance v1.3，共 77 条（同步于 2026-11-14T21:23:14）。标记区间内请勿手工编辑；词条变更走词汇库导入流程（engine/vocabulary/README.md 第三节），同步机制见第九节。
+> 由 `engine/vocabulary/script/sync_vocab.py` 自动维护：词汇库 07-economy-finance v1.3，共 77 条（同步于 2026-11-18T11:10:01）。标记区间内请勿手工编辑；词条变更走词汇库导入流程（engine/vocabulary/README.md 第三节），同步机制见第九节。
 
 - **宏观与经济指标**（12）：国内総生産（GDP）；経済成長率（実質GDP成長率）；消費者物価指数（CPI）；コアCPI（生鮮食品除く総合）；企業物価指数（PPI）；失業率（完全失業率）；政策金利（誘導目標）；イールドカーブ（利回り曲線）；購買力平価（PPP）；円安（円安相場）；家計調査（家庭收支调查、世帯調査）；毎月勤労統計（勤労統計、月度劳动统计）
 - **金融机构与工具**（12）：日本銀行（日銀、BOJ）；金融庁（FSA）；連邦準備制度（FRB、Fed）；欧州中央銀行（ECB）；中国人民銀行（PBOC、中国人民銀）；国際通貨基金（IMF）；世界銀行（世銀）；国債（日本国債、JGB）；株式（株）；投資信託（投信）；ETF（上場投資信託）；為替（FX、外国為替）

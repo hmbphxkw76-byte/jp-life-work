@@ -193,10 +193,10 @@
 
 ---
 
-<!-- VOCAB-SYNC:BEGIN topic=career-management do-not-edit -->
+<!-- VOCAB-SYNC:BEGIN topic=03-career-management do-not-edit -->
 ## 词汇速览：职业管理与晋升（词汇库自动同步）
 
-> 由 `engine/vocabulary/script/sync_vocab.py` 自动维护：词汇库 career-management v1.2，共 72 条（同步于 2026-11-18T09:09:08）。标记区间内请勿手工编辑；词条变更走词汇库导入流程（engine/vocabulary/README.md 第三节），同步机制见第九节。
+> 由 `engine/vocabulary/script/sync_vocab.py` 自动维护：词汇库 03-career-management v1.2，共 72 条（同步于 2026-11-18T11:10:00）。标记区间内请勿手工编辑；词条变更走词汇库导入流程（engine/vocabulary/README.md 第三节），同步机制见第九节。
 
 - **管理岗位与职责**（13）：運行管理者（運管）；安全運転管理者；支店長；営業所長（所長）；管理職（マネージャー）；中間管理職（ミドルマネジメント）；課長；係長；主任（チーフ）；リーダー（チームリーダー）；職務分掌（業務分掌）；権限委譲（委譲）；昇格（昇級、晋升、晋级）
 - **团队与运营管理**（12）：シフト管理（シフト作成）；勤怠管理（勤怠把握）；配車（配車計画）；人員配置（要員配置）；労務管理（労務）；モチベーション（やる気）；メンタルヘルス（メンタルヘルスケア）；ハラスメント（職場ハラスメント）；1on1（ワンオンワン）；フィードバック（FB）；報連相（報告連絡相談）；業務改善（改善活動）

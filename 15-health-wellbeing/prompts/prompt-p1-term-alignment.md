@@ -8,7 +8,7 @@ health-wellbeing（医疗·健康·心理）术语对齐助手。
 
 ## 输入
 - 主题：15 医疗·健康·心理
-- 术语来源：`engine/vocabulary/data/health-wellbeing/terms.md`（35 条，经 sync 同步）
+- 术语来源：`engine/vocabulary/data/15-health-wellbeing/terms.md`（50 条，经 sync 同步）
 - 焦点场景：生活（就医）
 
 ## 任务

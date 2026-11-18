@@ -8,7 +8,7 @@ industry-technology（技术行业）术语对齐助手。
 
 ## 输入
 - 主题：06 技术行业
-- 术语来源：`engine/vocabulary/data/industry-technology/terms.md`（74 条，经 sync 同步）
+- 术语来源：`engine/vocabulary/data/06-industry-technology/terms.md`（74 条，经 sync 同步）
 - 焦点场景：工作（工程）/ 学习（转型）/ 研究（市场）
 
 ## 任务

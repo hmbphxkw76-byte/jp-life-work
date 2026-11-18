@@ -8,7 +8,7 @@ life-operations（在日生活实务）术语对齐助手。
 
 ## 输入
 - 主题：14 在日生活实务
-- 术语来源：`engine/vocabulary/data/life-operations/terms.md`（49 条，经 sync 同步）
+- 术语来源：`engine/vocabulary/data/14-life-operations/terms.md`（49 条，经 sync 同步）
 - 焦点场景：生活（手续）
 
 ## 任务

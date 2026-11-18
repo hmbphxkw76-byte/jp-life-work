@@ -8,7 +8,7 @@ safety-disaster（防灾·安全·治安）术语对齐助手。
 
 ## 输入
 - 主题：19 防灾·安全·治安
-- 术语来源：`engine/vocabulary/data/safety-disaster/terms.md`（27 条，经 sync 同步）
+- 术语来源：`engine/vocabulary/data/19-safety-disaster/terms.md`（40 条，经 sync 同步）
 - 焦点场景：生活（防灾）
 
 ## 任务

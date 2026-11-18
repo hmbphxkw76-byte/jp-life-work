@@ -8,7 +8,7 @@ migration-compliance（劳务输出与中介合规）术语对齐助手。
 
 ## 输入
 - 主题：17 劳务输出与中介合规
-- 术语来源：`engine/vocabulary/data/migration-compliance/terms.md`（29 条，经 sync 同步）
+- 术语来源：`engine/vocabulary/data/17-migration-compliance/terms.md`（29 条，经 sync 同步）
 - 焦点场景：研究（合规）/ 生活（防骗）
 
 ## 任务

@@ -207,10 +207,10 @@
 
 ---
 
-<!-- VOCAB-SYNC:BEGIN topic=migration-compliance do-not-edit -->
+<!-- VOCAB-SYNC:BEGIN topic=17-migration-compliance do-not-edit -->
 ## 词汇速览：劳务输出与中介合规（词汇库自动同步）
 
-> 由 `engine/vocabulary/script/sync_vocab.py` 自动维护：词汇库 migration-compliance v1.2，共 29 条（同步于 2026-11-14T21:23:15）。标记区间内请勿手工编辑；词条变更走词汇库导入流程（engine/vocabulary/README.md 第三节），同步机制见第九节。
+> 由 `engine/vocabulary/script/sync_vocab.py` 自动维护：词汇库 17-migration-compliance v1.2，共 29 条（同步于 2026-11-18T11:10:01）。标记区间内请勿手工编辑；词条变更走词汇库导入流程（engine/vocabulary/README.md 第三节），同步机制见第九节。
 
 - **招募与渠道**（4）：送出機関（输出机构、送り出し機関）；对外劳务合作（外派劳务、对外劳务）；出境入境中介服务（出入境中介服务）；ハローワーク（公共职业安定所、Hello Work）
 - **中介资质与核验**（5）：認定送出機関（认定送出机构、认定送出机关）；对外劳务合作经营资格（经营资格、对外劳务合作资格）；备案（中介备案、备案登记）；受入れ計画（受入计划、接受计划）；登録支援機関（登录支援机关、登录支援机构）

@@ -10,11 +10,11 @@
 
 用法示例：
   python engine/vocabulary/script/vocab_tool.py topics
-  python engine/vocabulary/script/vocab_tool.py init --topic ssw-driver
-  python engine/vocabulary/script/vocab_tool.py import --topic ssw-driver --file engine/vocabulary/data/ssw-driver/imports/2026-11-13_seed-ssw-driver.md
-  python engine/vocabulary/script/vocab_tool.py check --topic ssw-driver
-  python engine/vocabulary/script/vocab_tool.py tag --topic ssw-driver --id SSW-001 --add 运输 --remove 资格
-  python engine/vocabulary/script/vocab_tool.py export --topic ssw-driver --format all
+  python engine/vocabulary/script/vocab_tool.py init --topic 01-ssw-driver
+  python engine/vocabulary/script/vocab_tool.py import --topic 01-ssw-driver --file engine/vocabulary/data/01-ssw-driver/imports/2026-11-13_seed-01-ssw-driver.md
+  python engine/vocabulary/script/vocab_tool.py check --topic 01-ssw-driver
+  python engine/vocabulary/script/vocab_tool.py tag --topic 01-ssw-driver --id SSW-001 --add 运输 --remove 资格
+  python engine/vocabulary/script/vocab_tool.py export --topic 01-ssw-driver --format all
   python engine/vocabulary/script/vocab_tool.py index
   python engine/vocabulary/script/vocab_tool.py verify
 """

@@ -8,7 +8,7 @@ career-management（职业管理与晋升）术语对齐助手。
 
 ## 输入
 - 主题：03 职业管理与晋升
-- 术语来源：`engine/vocabulary/data/career-management/terms.md`（72 条，经 sync 同步）
+- 术语来源：`engine/vocabulary/data/03-career-management/terms.md`（72 条，经 sync 同步）
 - 焦点场景：工作（管理）/ 研究（组织）
 
 ## 任务

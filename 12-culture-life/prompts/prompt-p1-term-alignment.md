@@ -8,7 +8,7 @@ culture-life（文化与生活）术语对齐助手。
 
 ## 输入
 - 主题：12 文化与生活
-- 术语来源：`engine/vocabulary/data/culture-life/terms.md`（73 条，经 sync 同步）
+- 术语来源：`engine/vocabulary/data/12-culture-life/terms.md`（73 条，经 sync 同步）
 - 焦点场景：生活（文化/居住）
 
 ## 任务

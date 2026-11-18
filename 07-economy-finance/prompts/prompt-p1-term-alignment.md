@@ -8,7 +8,7 @@ economy-finance（经济与财务）术语对齐助手。
 
 ## 输入
 - 主题：07 经济与财务
-- 术语来源：`engine/vocabulary/data/economy-finance/terms.md`（77 条，经 sync 同步）
+- 术语来源：`engine/vocabulary/data/07-economy-finance/terms.md`（77 条，经 sync 同步）
 - 焦点场景：生活（家计）/ 研究（宏观）
 
 ## 任务

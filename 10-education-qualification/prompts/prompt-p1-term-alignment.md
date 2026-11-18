@@ -8,7 +8,7 @@ education-qualification（教育与资格）术语对齐助手。
 
 ## 输入
 - 主题：10 教育与资格
-- 术语来源：`engine/vocabulary/data/education-qualification/terms.md`（70 条，经 sync 同步）
+- 术语来源：`engine/vocabulary/data/10-education-qualification/terms.md`（70 条，经 sync 同步）
 - 焦点场景：学习（考试）/ 工作（资格）
 
 ## 任务

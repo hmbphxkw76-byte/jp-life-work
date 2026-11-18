@@ -8,7 +8,7 @@ family-parenting（家族·育儿·人生事件）术语对齐助手。
 
 ## 输入
 - 主题：18 家族·育儿·人生事件
-- 术语来源：`engine/vocabulary/data/family-parenting/terms.md`（37 条，经 sync 同步）
+- 术语来源：`engine/vocabulary/data/18-family-parenting/terms.md`（50 条，经 sync 同步）
 - 焦点场景：生活（家族）
 
 ## 任务

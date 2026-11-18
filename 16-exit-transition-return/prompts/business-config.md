@@ -209,10 +209,10 @@
 
 ---
 
-<!-- VOCAB-SYNC:BEGIN topic=exit-transition-return do-not-edit -->
+<!-- VOCAB-SYNC:BEGIN topic=16-exit-transition-return do-not-edit -->
 ## 词汇速览：退出·转型·回国（词汇库自动同步）
 
-> 由 `engine/vocabulary/script/sync_vocab.py` 自动维护：词汇库 exit-transition-return v1.3，共 40 条（同步于 2026-11-18T09:46:11）。标记区间内请勿手工编辑；词条变更走词汇库导入流程（engine/vocabulary/README.md 第三节），同步机制见第九节。
+> 由 `engine/vocabulary/script/sync_vocab.py` 自动维护：词汇库 16-exit-transition-return v1.3，共 40 条（同步于 2026-11-18T11:10:01）。标记区间内请勿手工编辑；词条变更走词汇库导入流程（engine/vocabulary/README.md 第三节），同步机制见第九节。
 
 - **退出与劳动**（5）：退職（辞职、退职）；雇用保険（失业保险、失业给付）；健康保険任意継続（任意继续、任意継続）；再就職（再就业）；雇用（雇佣）
 - **转型与在留资格**（7）：在留資格変更（资格变更、变更许可）；在留資格取消（资格取消、取消处分）；特定活動（特定活动、告示活动）；技能実習（技能实习、实習）；転職（转职、跳槽）；资格外活动（资格外许可、アルバイト许可）；特定技能2号（特定技能二号、SSW2号）

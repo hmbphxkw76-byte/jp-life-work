@@ -8,7 +8,7 @@ industry-autonomous（自动驾驶与自动化）术语对齐助手。
 
 ## 输入
 - 主题：05 自动驾驶与自动化
-- 术语来源：`engine/vocabulary/data/industry-autonomous/terms.md`（106 条，经 sync 同步）
+- 术语来源：`engine/vocabulary/data/05-industry-autonomous/terms.md`（106 条，经 sync 同步）
 - 焦点场景：研究（技术/法规）/ 工作（岗位影响）
 
 ## 任务

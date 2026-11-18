@@ -146,7 +146,8 @@ def collect_topic(b, registry: dict[str, dict], type_labels: dict[str, str]) -> 
     m = NUM_RE.match(b.rel)
     num, name_key = (m.group(1), m.group(2)) if m else ("", b.rel)
     rs = topic_slug(b.region if not b.property_type else b.property_type)
-    meta = registry.get(name_key) or {}
+    # topics.json 键与主题目录名一致（NN-slug）；兼容旧 slug 键
+    meta = registry.get(b.rel) or registry.get(name_key) or {}
     type_id = _topic_type(b)
 
     reports = []

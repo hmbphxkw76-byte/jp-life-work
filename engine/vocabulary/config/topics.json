@@ -1,15 +1,15 @@
 {
-  "version": "v1.31",
-  "updated": "2026-11-14",
-  "comment": "主题注册表（vocabulary 子系统单一事实源）。本文件由 vocab_tool.py 自动维护，请勿手工编辑：新增主题用 topic-add（自动登记注册表 + 创建 data/<topic>/ 目录 + 重建索引 + 备份回滚 + 操作日志），移除用 topic-remove，一致性审计用 topic-check。storage/imports_dir/exports_dir 为相对 vocabulary/ 根目录的路径。",
+  "version": "v1.32",
+  "updated": "2026-11-18",
+  "comment": "主题注册表（vocabulary 子系统单一事实源）。本文件由 vocab_tool.py 自动维护，请勿手工编辑：新增主题用 topic-add（自动登记注册表 + 创建 data/<topic>/ 目录 + 重建索引 + 备份回滚 + 操作日志），移除用 topic-remove，一致性审计用 topic-check。storage/imports_dir/exports_dir 为相对 vocabulary/ 根目录的路径。 2026-11-18 目录对齐：data/ 子目录重命名为 NN-slug（与根目录 00-20 主题编号一一对应）。",
   "topics": {
-    "ssw-driver": {
+    "01-ssw-driver": {
       "name": "特定技能司机",
       "description": "日本特定技能司机（自動車運送業）全领域词汇：在留资格、岗位作业、劳动条件、证照考试、生活适应",
       "id_prefix": "SSW",
-      "storage": "data/ssw-driver/terms.md",
-      "imports_dir": "data/ssw-driver/imports",
-      "exports_dir": "data/ssw-driver/exports",
+      "storage": "data/01-ssw-driver/terms.md",
+      "imports_dir": "data/01-ssw-driver/imports",
+      "exports_dir": "data/01-ssw-driver/exports",
       "categories": [
         "在留资格与制度",
         "岗位与业务场景",
@@ -19,13 +19,13 @@
         "生活适应与表达"
       ]
     },
-    "career-driver": {
+    "02-career-driver": {
       "name": "司机职业发展",
       "description": "日本司机职业发展全领域词汇：职级晋升、薪资待遇、技能证照、求职雇佣、转型路径",
       "id_prefix": "CDR",
-      "storage": "data/career-driver/terms.md",
-      "imports_dir": "data/career-driver/imports",
-      "exports_dir": "data/career-driver/exports",
+      "storage": "data/02-career-driver/terms.md",
+      "imports_dir": "data/02-career-driver/imports",
+      "exports_dir": "data/02-career-driver/exports",
       "categories": [
         "职级与晋升路径",
         "薪资与待遇",
@@ -35,13 +35,13 @@
         "场景与表达"
       ]
     },
-    "career-management": {
+    "03-career-management": {
       "name": "职业管理与晋升",
       "description": "一线岗位向管理岗过渡的全领域词汇：管理职责、团队运营、绩效评估、人才培养、组织制度",
       "id_prefix": "CMG",
-      "storage": "data/career-management/terms.md",
-      "imports_dir": "data/career-management/imports",
-      "exports_dir": "data/career-management/exports",
+      "storage": "data/03-career-management/terms.md",
+      "imports_dir": "data/03-career-management/imports",
+      "exports_dir": "data/03-career-management/exports",
       "categories": [
         "管理岗位与职责",
         "团队与运营管理",
@@ -51,13 +51,13 @@
         "场景与表达"
       ]
     },
-    "industry-logistics": {
+    "04-industry-logistics": {
       "name": "物流行业",
       "description": "物流行业全领域词汇：行业结构、运输模式、仓配作业、法规政策、企业市场、数字化",
       "id_prefix": "LOG",
-      "storage": "data/industry-logistics/terms.md",
-      "imports_dir": "data/industry-logistics/imports",
-      "exports_dir": "data/industry-logistics/exports",
+      "storage": "data/04-industry-logistics/terms.md",
+      "imports_dir": "data/04-industry-logistics/imports",
+      "exports_dir": "data/04-industry-logistics/exports",
       "categories": [
         "行业结构与业态",
         "运输模式与枢纽",
@@ -68,13 +68,13 @@
         "场景与表达"
       ]
     },
-    "industry-autonomous": {
+    "05-industry-autonomous": {
       "name": "自动驾驶与自动化",
       "description": "自动驾驶与物流自动化全领域词汇：技术分级、传感器、算法架构、法规标准、商业化运营",
       "id_prefix": "AUT",
-      "storage": "data/industry-autonomous/terms.md",
-      "imports_dir": "data/industry-autonomous/imports",
-      "exports_dir": "data/industry-autonomous/exports",
+      "storage": "data/05-industry-autonomous/terms.md",
+      "imports_dir": "data/05-industry-autonomous/imports",
+      "exports_dir": "data/05-industry-autonomous/exports",
       "categories": [
         "自动驾驶技术",
         "车辆与传感器",
@@ -84,13 +84,13 @@
         "场景与表达"
       ]
     },
-    "industry-technology": {
+    "06-industry-technology": {
       "name": "技术行业",
       "description": "技术行业全领域词汇：技术栈架构、工程实践、数据AI、云基础设施、安全合规、岗位协作",
       "id_prefix": "TEC",
-      "storage": "data/industry-technology/terms.md",
-      "imports_dir": "data/industry-technology/imports",
-      "exports_dir": "data/industry-technology/exports",
+      "storage": "data/06-industry-technology/terms.md",
+      "imports_dir": "data/06-industry-technology/imports",
+      "exports_dir": "data/06-industry-technology/exports",
       "categories": [
         "技术栈与架构",
         "开发与工程实践",
@@ -101,13 +101,13 @@
         "场景与表达"
       ]
     },
-    "economy-finance": {
+    "07-economy-finance": {
       "name": "经济与财务",
       "description": "经济与个人财务全领域词汇：宏观指标、金融机构工具、市场交易、监管政策、个人税务、估值风险",
       "id_prefix": "ECF",
-      "storage": "data/economy-finance/terms.md",
-      "imports_dir": "data/economy-finance/imports",
-      "exports_dir": "data/economy-finance/exports",
+      "storage": "data/07-economy-finance/terms.md",
+      "imports_dir": "data/07-economy-finance/imports",
+      "exports_dir": "data/07-economy-finance/exports",
       "categories": [
         "宏观与经济指标",
         "金融机构与工具",
@@ -118,13 +118,13 @@
         "场景与表达"
       ]
     },
-    "visa-immigration": {
+    "08-visa-immigration": {
       "name": "签证与移民",
       "description": "日本签证与移民全领域词汇：在留资格、申请审查、永住归化、家属生活、法规政策",
       "id_prefix": "VIS",
-      "storage": "data/visa-immigration/terms.md",
-      "imports_dir": "data/visa-immigration/imports",
-      "exports_dir": "data/visa-immigration/exports",
+      "storage": "data/08-visa-immigration/terms.md",
+      "imports_dir": "data/08-visa-immigration/imports",
+      "exports_dir": "data/08-visa-immigration/exports",
       "categories": [
         "在留资格类型",
         "申请与审查流程",
@@ -134,13 +134,13 @@
         "场景与表达"
       ]
     },
-    "politics-law": {
+    "09-politics-law": {
       "name": "政治与法律",
       "description": "日本政治与法律全领域词汇：政治制度、法律体系、行政司法、劳动民事、政策选举",
       "id_prefix": "LAW",
-      "storage": "data/politics-law/terms.md",
-      "imports_dir": "data/politics-law/imports",
-      "exports_dir": "data/politics-law/exports",
+      "storage": "data/09-politics-law/terms.md",
+      "imports_dir": "data/09-politics-law/imports",
+      "exports_dir": "data/09-politics-law/exports",
       "categories": [
         "政治制度与机构",
         "法律体系与条文",
@@ -150,13 +150,13 @@
         "场景与表达"
       ]
     },
-    "education-qualification": {
+    "10-education-qualification": {
       "name": "教育与资格",
       "description": "日本教育与资格全领域词汇：教育体系、资格认证、考试备考、学费资助、院校专业",
       "id_prefix": "EDU",
-      "storage": "data/education-qualification/terms.md",
-      "imports_dir": "data/education-qualification/imports",
-      "exports_dir": "data/education-qualification/exports",
+      "storage": "data/10-education-qualification/terms.md",
+      "imports_dir": "data/10-education-qualification/imports",
+      "exports_dir": "data/10-education-qualification/exports",
       "categories": [
         "教育体系与阶段",
         "资格与认证",
@@ -166,13 +166,13 @@
         "场景与表达"
       ]
     },
-    "language-japanese": {
+    "11-language-japanese": {
       "name": "日语语言",
       "description": "日语语言全领域词汇：能力考试、语法句型、词汇表达、敬语语体、学习教学、职场日语",
       "id_prefix": "JPN",
-      "storage": "data/language-japanese/terms.md",
-      "imports_dir": "data/language-japanese/imports",
-      "exports_dir": "data/language-japanese/exports",
+      "storage": "data/11-language-japanese/terms.md",
+      "imports_dir": "data/11-language-japanese/imports",
+      "exports_dir": "data/11-language-japanese/exports",
       "categories": [
         "语言能力与考试",
         "语法与句型",
@@ -183,13 +183,13 @@
         "场景与表达"
       ]
     },
-    "culture-life": {
+    "12-culture-life": {
       "name": "文化与生活",
       "description": "日本文化与生活全领域词汇：文化节庆、日常居住、饮食消费、社交礼仪、公共服务",
       "id_prefix": "CUL",
-      "storage": "data/culture-life/terms.md",
-      "imports_dir": "data/culture-life/imports",
-      "exports_dir": "data/culture-life/exports",
+      "storage": "data/12-culture-life/terms.md",
+      "imports_dir": "data/12-culture-life/imports",
+      "exports_dir": "data/12-culture-life/exports",
       "categories": [
         "文化习俗与节庆",
         "日常生活与居住",
@@ -199,13 +199,13 @@
         "场景与表达"
       ]
     },
-    "regional-info": {
+    "13-regional-info": {
       "name": "地区信息",
       "description": "日本地区信息全领域词汇：行政区划、人口城市、地方经济产业、生活成本设施、地方自治政策",
       "id_prefix": "REG",
-      "storage": "data/regional-info/terms.md",
-      "imports_dir": "data/regional-info/imports",
-      "exports_dir": "data/regional-info/exports",
+      "storage": "data/13-regional-info/terms.md",
+      "imports_dir": "data/13-regional-info/imports",
+      "exports_dir": "data/13-regional-info/exports",
       "categories": [
         "行政区划与地理",
         "人口与城市",
@@ -215,13 +215,13 @@
         "场景与表达"
       ]
     },
-    "exit-transition-return": {
+    "16-exit-transition-return": {
       "name": "退出·转型·回国",
       "description": "在日外国人退出、转型与回国的执行层词汇",
       "id_prefix": "ETR",
-      "storage": "data/exit-transition-return/terms.md",
-      "imports_dir": "data/exit-transition-return/imports",
-      "exports_dir": "data/exit-transition-return/exports",
+      "storage": "data/16-exit-transition-return/terms.md",
+      "imports_dir": "data/16-exit-transition-return/imports",
+      "exports_dir": "data/16-exit-transition-return/exports",
       "categories": [
         "退出与劳动",
         "转型与在留资格",
@@ -231,13 +231,13 @@
         "资产与生活清理"
       ]
     },
-    "life-operations": {
+    "14-life-operations": {
       "name": "在日生活实务",
       "description": "在日生活实务全领域词汇：住民登记、住房租赁、通信网络、银行支付、水电燃气、行政手续",
       "id_prefix": "LOP",
-      "storage": "data/life-operations/terms.md",
-      "imports_dir": "data/life-operations/imports",
-      "exports_dir": "data/life-operations/exports",
+      "storage": "data/14-life-operations/terms.md",
+      "imports_dir": "data/14-life-operations/imports",
+      "exports_dir": "data/14-life-operations/exports",
       "categories": [
         "在留与住民登记",
         "住房与租赁",
@@ -248,13 +248,13 @@
         "场景与表达"
       ]
     },
-    "health-wellbeing": {
+    "15-health-wellbeing": {
       "name": "医疗·健康·心理",
       "description": "医疗健康与心理全领域词汇：医保制度、就医实务、精神科、心理健康、体检预防、介护福祉",
       "id_prefix": "HLW",
-      "storage": "data/health-wellbeing/terms.md",
-      "imports_dir": "data/health-wellbeing/imports",
-      "exports_dir": "data/health-wellbeing/exports",
+      "storage": "data/15-health-wellbeing/terms.md",
+      "imports_dir": "data/15-health-wellbeing/imports",
+      "exports_dir": "data/15-health-wellbeing/exports",
       "categories": [
         "医疗制度",
         "就医实务",
@@ -264,13 +264,13 @@
         "介护与福祉"
       ]
     },
-    "migration-compliance": {
+    "17-migration-compliance": {
       "name": "劳务输出与中介合规",
       "description": "劳务输出与中介合规全领域词汇：招募渠道、送出機関资质核验、合同审查、骗术图谱、法律后果",
       "id_prefix": "MPC",
-      "storage": "data/migration-compliance/terms.md",
-      "imports_dir": "data/migration-compliance/imports",
-      "exports_dir": "data/migration-compliance/exports",
+      "storage": "data/17-migration-compliance/terms.md",
+      "imports_dir": "data/17-migration-compliance/imports",
+      "exports_dir": "data/17-migration-compliance/exports",
       "categories": [
         "招募与渠道",
         "中介资质与核验",
@@ -281,13 +281,13 @@
         "场景与表达"
       ]
     },
-    "family-parenting": {
+    "18-family-parenting": {
       "name": "家族·育儿·人生事件",
       "description": "家族育儿与人生事件全领域词汇：家族滞在、婚姻离婚、生育保育、教育、扶养、继承",
       "id_prefix": "FAM",
-      "storage": "data/family-parenting/terms.md",
-      "imports_dir": "data/family-parenting/imports",
-      "exports_dir": "data/family-parenting/exports",
+      "storage": "data/18-family-parenting/terms.md",
+      "imports_dir": "data/18-family-parenting/imports",
+      "exports_dir": "data/18-family-parenting/exports",
       "categories": [
         "家族滞在",
         "婚姻与离婚",
@@ -298,13 +298,13 @@
         "场景与表达"
       ]
     },
-    "safety-disaster": {
+    "19-safety-disaster": {
       "name": "防灾·安全·治安",
       "description": "防灾安全与治安全领域词汇：自治体防灾、避难情报、治安、领事保护、应急联络",
       "id_prefix": "SFD",
-      "storage": "data/safety-disaster/terms.md",
-      "imports_dir": "data/safety-disaster/imports",
-      "exports_dir": "data/safety-disaster/exports",
+      "storage": "data/19-safety-disaster/terms.md",
+      "imports_dir": "data/19-safety-disaster/imports",
+      "exports_dir": "data/19-safety-disaster/exports",
       "categories": [
         "防灾体制",
         "避难与情报",
@@ -314,13 +314,13 @@
         "场景与表达"
       ]
     },
-    "overseas-china": {
+    "20-overseas-china": {
       "name": "中国侧行前与回国",
       "description": "中国侧行前与回国衔接全领域词汇：护照户籍、档案社保、驾照转回、学历认证、无犯罪记录、公证认证",
       "id_prefix": "OVC",
-      "storage": "data/overseas-china/terms.md",
-      "imports_dir": "data/overseas-china/imports",
-      "exports_dir": "data/overseas-china/exports",
+      "storage": "data/20-overseas-china/terms.md",
+      "imports_dir": "data/20-overseas-china/imports",
+      "exports_dir": "data/20-overseas-china/exports",
       "categories": [
         "护照与户籍",
         "档案与社保",

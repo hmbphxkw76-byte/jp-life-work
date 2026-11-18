@@ -8,7 +8,7 @@ regional-info（地区信息）术语对齐助手。
 
 ## 输入
 - 主题：13 地区信息
-- 术语来源：`engine/vocabulary/data/regional-info/terms.md`（69 条，经 sync 同步）
+- 术语来源：`engine/vocabulary/data/13-regional-info/terms.md`（69 条，经 sync 同步）
 - 焦点场景：生活（定居）/ 研究（地区）
 
 ## 任务
