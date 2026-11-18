@@ -105,6 +105,18 @@ CN_NUM_RE = re.compile(r"^([一二三四五六七八九十]+)[、.]")
 MD_LINK_RE = re.compile(r"\[[^\]]*\]\(([^)]+)\)")
 # 「已审计」标识块（审计状态，非研究内容）：相似度 / 覆盖率计算前统一剥离
 BADGE_LINE_RE = re.compile(r"^>\s*\*\*已审计\*\*.*$", re.MULTILINE)
+# 自动验证结果块（交付协议规定的机器生成块）：设计内重复，不计入相似度 / 重复判定
+AUTO_VERIFY_BLOCK_RE = re.compile(
+    r"<!-- AUTO-VERIFY:START -->.*?<!-- AUTO-VERIFY:END -->", re.DOTALL)
+# 设计内重复（模板化声明 / 纯交叉引用列表，非研究正文交叉重复）：
+# 与 prompts / operations-guide / handbook 的「自包含业务包」同口径，命中即不参与 C-03 跨文档判定。
+BOILERPLATE_BLOCK_RE = re.compile(
+    r"^\s*(?:"
+    r"\*\*(?:监测节奏|登记册字段|结构变更备注|数据变更摘要)\*\*"
+    r"|本主题(?:不含|不维护)"
+    r"|-\s*\[\d{2}-[a-z0-9-]+[^\]]*\]\(\.\./\.\./"
+    r")"
+)
 # 行内标签 / Markdown 链接文本（标签 2–24 字）
 BRACKET_RE = re.compile(r"\[([^\]]{2,24})\](\([^)]*\))?")
 
@@ -200,7 +212,8 @@ def _substantive(block: str) -> bool:
 
 
 def _strip_badges(text: str) -> str:
-    """剥离「已审计」标识块，避免标识字段干扰相似度与覆盖率计算。"""
+    """剥离机器生成块（自动验证结果）与「已审计」标识，避免干扰相似度与覆盖率计算。"""
+    text = AUTO_VERIFY_BLOCK_RE.sub("", text)
     return BADGE_LINE_RE.sub("", text)
 
 
@@ -708,6 +721,8 @@ def check_cross_topic(units: list[dict], findings: list[Finding]) -> dict:
             text = _strip_badges(_read(rp))
             for b in _paragraphs(text):
                 if not _substantive(b):
+                    continue
+                if BOILERPLATE_BLOCK_RE.match(b):
                     continue
                 n = _norm(b)
                 if len(n) < DUP_MIN_CHARS:

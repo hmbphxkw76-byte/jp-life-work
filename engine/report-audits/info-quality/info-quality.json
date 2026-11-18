@@ -1,5 +1,5 @@
 {
-  "run_date": "2026-11-16",
+  "run_date": "2026-11-18",
   "topics_total": 21,
   "metrics_before": {
     "topics_total": 21,
@@ -8,11 +8,11 @@
     "missing_items": 0,
     "contradictions": 0,
     "gaps": 0,
-    "source_coverage": 0.387038158691702,
-    "semantic_completion": 0.387038158691702,
+    "source_coverage": 0.3672546359113523,
+    "semantic_completion": 0.3672546359113523,
     "stale_reports": 0,
-    "dup_ratio": 0.005360481129376701,
-    "fact_dup_ratio": 0.0110174855605665,
+    "dup_ratio": 0.0,
+    "fact_dup_ratio": 0.010889480510615059,
     "empty_module_ratio": 0.0,
     "attribution_errors": 0,
     "cite_valid_ratio": 1.0,
@@ -20,7 +20,7 @@
     "findings_by_level": {
       "P0": 0,
       "P1": 0,
-      "P2": 14
+      "P2": 0
     }
   },
   "metrics_after": {
@@ -30,11 +30,11 @@
     "missing_items": 0,
     "contradictions": 0,
     "gaps": 0,
-    "source_coverage": 0.387038158691702,
-    "semantic_completion": 0.387038158691702,
+    "source_coverage": 0.3672546359113523,
+    "semantic_completion": 0.3672546359113523,
     "stale_reports": 0,
-    "dup_ratio": 0.005360481129376701,
-    "fact_dup_ratio": 0.0110174855605665,
+    "dup_ratio": 0.0,
+    "fact_dup_ratio": 0.010889480510615059,
     "empty_module_ratio": 0.0,
     "attribution_errors": 0,
     "cite_valid_ratio": 1.0,
@@ -42,163 +42,14 @@
     "findings_by_level": {
       "P0": 0,
       "P1": 0,
-      "P2": 14
+      "P2": 0
     }
   },
-  "findings": [
-    {
-      "code": "C-03",
-      "level": "P2",
-      "topic": "01-ssw-driver",
-      "path": "01-ssw-driver/reports/2026-11-ssw-driver.md",
-      "location": "跨文档重复",
-      "detail": "约 362 字的段落与 02-career-driver/reports/2026-11-career-driver.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留",
-      "spec": "S-02",
-      "status": "open"
-    },
-    {
-      "code": "C-03",
-      "level": "P2",
-      "topic": "04-industry-logistics",
-      "path": "04-industry-logistics/reports/2026-11-industry-logistics.md",
-      "location": "跨文档重复",
-      "detail": "约 140 字的段落与 05-industry-autonomous/reports/2026-11-industry-autonomous.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留",
-      "spec": "S-02",
-      "status": "open"
-    },
-    {
-      "code": "C-03",
-      "level": "P2",
-      "topic": "04-industry-logistics",
-      "path": "04-industry-logistics/reports/2026-11-industry-logistics.md",
-      "location": "跨文档重复",
-      "detail": "约 140 字的段落与 06-industry-technology/reports/2026-11-industry-technology.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留",
-      "spec": "S-02",
-      "status": "open"
-    },
-    {
-      "code": "C-03",
-      "level": "P2",
-      "topic": "05-industry-autonomous",
-      "path": "05-industry-autonomous/reports/2026-11-industry-autonomous.md",
-      "location": "跨文档重复",
-      "detail": "约 779 字的段落与 06-industry-technology/reports/2026-11-industry-technology.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留",
-      "spec": "S-02",
-      "status": "open"
-    },
-    {
-      "code": "C-03",
-      "level": "P2",
-      "topic": "07-economy-finance",
-      "path": "07-economy-finance/reports/2026-11-economy-finance.md",
-      "location": "跨文档重复",
-      "detail": "约 175 字的段落与 10-education-qualification/reports/2026-11-education-qualification.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留",
-      "spec": "S-02",
-      "status": "open"
-    },
-    {
-      "code": "C-03",
-      "level": "P2",
-      "topic": "11-language-japanese",
-      "path": "11-language-japanese/reports/2026-11-language-japanese.md",
-      "location": "跨文档重复",
-      "detail": "约 189 字的段落与 12-culture-life/reports/2026-11-culture-life.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留",
-      "spec": "S-02",
-      "status": "open"
-    },
-    {
-      "code": "C-03",
-      "level": "P2",
-      "topic": "11-language-japanese",
-      "path": "11-language-japanese/reports/2026-11-language-japanese.md",
-      "location": "跨文档重复",
-      "detail": "约 186 字的段落与 14-life-operations/reports/2026-11-life-operations.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留",
-      "spec": "S-02",
-      "status": "open"
-    },
-    {
-      "code": "C-03",
-      "level": "P2",
-      "topic": "12-culture-life",
-      "path": "12-culture-life/reports/2026-11-culture-life.md",
-      "location": "跨文档重复",
-      "detail": "约 229 字的段落与 14-life-operations/reports/2026-11-life-operations.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留",
-      "spec": "S-02",
-      "status": "open"
-    },
-    {
-      "code": "C-03",
-      "level": "P2",
-      "topic": "12-culture-life",
-      "path": "12-culture-life/reports/2026-11-culture-life.md",
-      "location": "跨文档重复",
-      "detail": "约 165 字的段落与 17-migration-compliance/reports/2026-11-migration-compliance.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留",
-      "spec": "S-02",
-      "status": "open"
-    },
-    {
-      "code": "C-03",
-      "level": "P2",
-      "topic": "14-life-operations",
-      "path": "14-life-operations/reports/2026-11-life-operations.md",
-      "location": "跨文档重复",
-      "detail": "约 165 字的段落与 17-migration-compliance/reports/2026-11-migration-compliance.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留",
-      "spec": "S-02",
-      "status": "open"
-    },
-    {
-      "code": "C-03",
-      "level": "P2",
-      "topic": "16-exit-transition-return",
-      "path": "16-exit-transition-return/reports/2026-11-exit-transition-return.md",
-      "location": "跨文档重复",
-      "detail": "约 204 字的段落与 20-overseas-china/reports/2026-11-overseas-china.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留",
-      "spec": "S-02",
-      "status": "open"
-    },
-    {
-      "code": "C-03",
-      "level": "P2",
-      "topic": "18-family-parenting",
-      "path": "18-family-parenting/reports/2026-11-family-parenting.md",
-      "location": "跨文档重复",
-      "detail": "约 173 字的段落与 19-safety-disaster/reports/2026-11-safety-disaster.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留",
-      "spec": "S-02",
-      "status": "open"
-    },
-    {
-      "code": "C-03",
-      "level": "P2",
-      "topic": "18-family-parenting",
-      "path": "18-family-parenting/reports/2026-11-family-parenting.md",
-      "location": "跨文档重复",
-      "detail": "约 158 字的段落与 20-overseas-china/reports/2026-11-overseas-china.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留",
-      "spec": "S-02",
-      "status": "open"
-    },
-    {
-      "code": "C-03",
-      "level": "P2",
-      "topic": "19-safety-disaster",
-      "path": "19-safety-disaster/reports/2026-11-safety-disaster.md",
-      "location": "跨文档重复",
-      "detail": "约 158 字的段落与 20-overseas-china/reports/2026-11-overseas-china.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留",
-      "spec": "S-02",
-      "status": "open"
-    }
-  ],
+  "findings": [],
   "repairs": [],
   "verification": {
-    "checks": {
-      "required_coverage_ok": true,
-      "dup_ratio_ok": true,
-      "cite_valid_not_regressed": true,
-      "p0p1_contradictions_zero": true,
-      "no_new_open_findings": true,
-      "no_regression": true,
-      "repairs_verified": true
-    },
-    "passed": true,
+    "checks": {},
+    "passed": false,
     "before": {
       "topics_total": 21,
       "topics_complete": 21,
@@ -206,11 +57,11 @@
       "missing_items": 0,
       "contradictions": 0,
       "gaps": 0,
-      "source_coverage": 0.387038158691702,
-      "semantic_completion": 0.387038158691702,
+      "source_coverage": 0.3672546359113523,
+      "semantic_completion": 0.3672546359113523,
       "stale_reports": 0,
-      "dup_ratio": 0.005360481129376701,
-      "fact_dup_ratio": 0.0110174855605665,
+      "dup_ratio": 0.0,
+      "fact_dup_ratio": 0.010889480510615059,
       "empty_module_ratio": 0.0,
       "attribution_errors": 0,
       "cite_valid_ratio": 1.0,
@@ -218,7 +69,7 @@
       "findings_by_level": {
         "P0": 0,
         "P1": 0,
-        "P2": 14
+        "P2": 0
       }
     },
     "after": {
@@ -228,11 +79,11 @@
       "missing_items": 0,
       "contradictions": 0,
       "gaps": 0,
-      "source_coverage": 0.387038158691702,
-      "semantic_completion": 0.387038158691702,
+      "source_coverage": 0.3672546359113523,
+      "semantic_completion": 0.3672546359113523,
       "stale_reports": 0,
-      "dup_ratio": 0.005360481129376701,
-      "fact_dup_ratio": 0.0110174855605665,
+      "dup_ratio": 0.0,
+      "fact_dup_ratio": 0.010889480510615059,
       "empty_module_ratio": 0.0,
       "attribution_errors": 0,
       "cite_valid_ratio": 1.0,
@@ -240,150 +91,9 @@
       "findings_by_level": {
         "P0": 0,
         "P1": 0,
-        "P2": 14
+        "P2": 0
       }
     },
-    "open_after": [
-      {
-        "code": "C-03",
-        "level": "P2",
-        "topic": "01-ssw-driver",
-        "path": "01-ssw-driver/reports/2026-11-ssw-driver.md",
-        "location": "跨文档重复",
-        "detail": "约 362 字的段落与 02-career-driver/reports/2026-11-career-driver.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留",
-        "spec": "S-02",
-        "status": "open"
-      },
-      {
-        "code": "C-03",
-        "level": "P2",
-        "topic": "04-industry-logistics",
-        "path": "04-industry-logistics/reports/2026-11-industry-logistics.md",
-        "location": "跨文档重复",
-        "detail": "约 140 字的段落与 05-industry-autonomous/reports/2026-11-industry-autonomous.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留",
-        "spec": "S-02",
-        "status": "open"
-      },
-      {
-        "code": "C-03",
-        "level": "P2",
-        "topic": "04-industry-logistics",
-        "path": "04-industry-logistics/reports/2026-11-industry-logistics.md",
-        "location": "跨文档重复",
-        "detail": "约 140 字的段落与 06-industry-technology/reports/2026-11-industry-technology.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留",
-        "spec": "S-02",
-        "status": "open"
-      },
-      {
-        "code": "C-03",
-        "level": "P2",
-        "topic": "05-industry-autonomous",
-        "path": "05-industry-autonomous/reports/2026-11-industry-autonomous.md",
-        "location": "跨文档重复",
-        "detail": "约 779 字的段落与 06-industry-technology/reports/2026-11-industry-technology.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留",
-        "spec": "S-02",
-        "status": "open"
-      },
-      {
-        "code": "C-03",
-        "level": "P2",
-        "topic": "07-economy-finance",
-        "path": "07-economy-finance/reports/2026-11-economy-finance.md",
-        "location": "跨文档重复",
-        "detail": "约 175 字的段落与 10-education-qualification/reports/2026-11-education-qualification.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留",
-        "spec": "S-02",
-        "status": "open"
-      },
-      {
-        "code": "C-03",
-        "level": "P2",
-        "topic": "11-language-japanese",
-        "path": "11-language-japanese/reports/2026-11-language-japanese.md",
-        "location": "跨文档重复",
-        "detail": "约 189 字的段落与 12-culture-life/reports/2026-11-culture-life.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留",
-        "spec": "S-02",
-        "status": "open"
-      },
-      {
-        "code": "C-03",
-        "level": "P2",
-        "topic": "11-language-japanese",
-        "path": "11-language-japanese/reports/2026-11-language-japanese.md",
-        "location": "跨文档重复",
-        "detail": "约 186 字的段落与 14-life-operations/reports/2026-11-life-operations.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留",
-        "spec": "S-02",
-        "status": "open"
-      },
-      {
-        "code": "C-03",
-        "level": "P2",
-        "topic": "12-culture-life",
-        "path": "12-culture-life/reports/2026-11-culture-life.md",
-        "location": "跨文档重复",
-        "detail": "约 229 字的段落与 14-life-operations/reports/2026-11-life-operations.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留",
-        "spec": "S-02",
-        "status": "open"
-      },
-      {
-        "code": "C-03",
-        "level": "P2",
-        "topic": "12-culture-life",
-        "path": "12-culture-life/reports/2026-11-culture-life.md",
-        "location": "跨文档重复",
-        "detail": "约 165 字的段落与 17-migration-compliance/reports/2026-11-migration-compliance.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留",
-        "spec": "S-02",
-        "status": "open"
-      },
-      {
-        "code": "C-03",
-        "level": "P2",
-        "topic": "14-life-operations",
-        "path": "14-life-operations/reports/2026-11-life-operations.md",
-        "location": "跨文档重复",
-        "detail": "约 165 字的段落与 17-migration-compliance/reports/2026-11-migration-compliance.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留",
-        "spec": "S-02",
-        "status": "open"
-      },
-      {
-        "code": "C-03",
-        "level": "P2",
-        "topic": "16-exit-transition-return",
-        "path": "16-exit-transition-return/reports/2026-11-exit-transition-return.md",
-        "location": "跨文档重复",
-        "detail": "约 204 字的段落与 20-overseas-china/reports/2026-11-overseas-china.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留",
-        "spec": "S-02",
-        "status": "open"
-      },
-      {
-        "code": "C-03",
-        "level": "P2",
-        "topic": "18-family-parenting",
-        "path": "18-family-parenting/reports/2026-11-family-parenting.md",
-        "location": "跨文档重复",
-        "detail": "约 173 字的段落与 19-safety-disaster/reports/2026-11-safety-disaster.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留",
-        "spec": "S-02",
-        "status": "open"
-      },
-      {
-        "code": "C-03",
-        "level": "P2",
-        "topic": "18-family-parenting",
-        "path": "18-family-parenting/reports/2026-11-family-parenting.md",
-        "location": "跨文档重复",
-        "detail": "约 158 字的段落与 20-overseas-china/reports/2026-11-overseas-china.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留",
-        "spec": "S-02",
-        "status": "open"
-      },
-      {
-        "code": "C-03",
-        "level": "P2",
-        "topic": "19-safety-disaster",
-        "path": "19-safety-disaster/reports/2026-11-safety-disaster.md",
-        "location": "跨文档重复",
-        "detail": "约 158 字的段落与 20-overseas-china/reports/2026-11-overseas-china.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留",
-        "spec": "S-02",
-        "status": "open"
-      }
-    ]
+    "open_after": []
   }
 }
