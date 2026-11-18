@@ -1,6 +1,6 @@
 {
   "version": "v1.4",
-  "updated": "2026-11-18T06:53:08+00:00",
+  "updated": "2026-11-18T06:56:42+00:00",
   "reports": {
     "00-decision-hub/reports/2026-11-decision-hub.md": {
       "state": "audited",
@@ -9,14 +9,6 @@
       "content_hash": "sha256:dc03ee02382fe701f4ffadae9ccb552235ad133585e30af0e23743bb22d3e397",
       "html_hash": "sha256:98dcc3b909be820cf9ab378bee7f5f57a176e3b27a6fc27f0dc866a533506334",
       "last_seq": 590
-    },
-    "00-decision-hub/reports/2026-12-decision-hub.md": {
-      "state": "stale",
-      "audit_id": "AUD-202611-010",
-      "finalized_at": "2026-11-16T06:01:50+00:00",
-      "content_hash": "sha256:0f8f0c722a5d72f3ddb9213ace05a0df452d60d607db24dc4e46085068f01f84",
-      "html_hash": "sha256:10b2343be89ee1a561ba959147c963070f6f461357e2e7ca8a119a3639263d5f",
-      "last_seq": 461
     },
     "01-ssw-driver/reports/2026-11-ssw-driver.md": {
       "state": "audited",

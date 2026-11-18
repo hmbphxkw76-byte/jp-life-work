@@ -238,6 +238,14 @@ def rebuild_status(ledger: list[dict]) -> dict:
     return state
 
 
+def _prune_ghosts(state: dict) -> list[str]:
+    """剔除指向不存在报告文件的幽灵状态（台账残留历史事件所致）。"""
+    ghosts = sorted(r for r in state if not (ROOT / r).is_file())
+    for r in ghosts:
+        state.pop(r, None)
+    return ghosts
+
+
 def write_status(state: dict) -> Path:
     AUDIT_DIR.mkdir(parents=True, exist_ok=True)
     payload = {"version": SPEC_VERSION, "updated": _now(), "reports": state}
@@ -519,7 +527,9 @@ def cmd_rebind(all_: bool = True, rel: str | None = None) -> int:
                  "content_hash": cur_md, "html_hash": cur_html,
                  "audit_id": audit_id})
         n += 1
-    write_status(rebuild_status(load_ledger()))
+    _st = rebuild_status(load_ledger())
+    _prune_ghosts(_st)
+    write_status(_st)
     build_registry()
     print(f"重新绑定：{n} 份（内容未变，恢复 audited）；其余保持 stale 待重审")
     return 0
@@ -578,10 +588,7 @@ def cmd_sync() -> int:
                      "html_hash": cur_html})
             n += 1
     state = rebuild_status(load_ledger())
-    # 对账：台账可能残留已删除报告的历史事件，状态文件不应保留指向不存在文件的条目
-    ghosts = sorted(r for r in state if not (ROOT / r).is_file())
-    for r in ghosts:
-        state.pop(r, None)
+    ghosts = _prune_ghosts(state)
     write_status(state)
     build_registry()
     print(f"同步完成：{n} 份审计失效（stale），需修改后重新走流程")
