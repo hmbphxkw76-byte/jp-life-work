@@ -1,0 +1,13 @@
+{
+  "schema_version": "1.0",
+  "updated": "2026-11-18",
+  "comment": "报告周期策略：月/季/年三档保留与展示窗口。keep_months=保留月数（超期移入 archives/）；default_months=默认展示月数（超出折叠进「更多」，等于 keep 时完整展示）。周期归属由 engine/tools/report_cycles.py 按主题 business-config / prompts 自动识别；overrides 可按主题目录名（如 13-regional-info）显式覆盖，便于扩展。",
+  "baseline_period": "2026-11",
+  "next_baseline_period": "2026-12",
+  "policy": {
+    "monthly": { "keep_months": 18, "default_months": 6, "label": "月度" },
+    "quarterly": { "keep_months": 24, "default_months": 24, "label": "季度" },
+    "annual": { "keep_months": 60, "default_months": 60, "label": "年度" }
+  },
+  "overrides": {}
+}

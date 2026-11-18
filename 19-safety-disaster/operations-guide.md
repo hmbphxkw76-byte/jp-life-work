@@ -209,7 +209,7 @@ python engine/tools/audit_pipeline.py --submit --report <报告相对路径>
 ### 6.2 归档
 
 - 基线报告常驻 `reports/` 顶层，不归档。
-- 月度报告保留最新 12 期，超出移入 `reports/archives/`；年度复盘保留最新 5 期。
+- 按周期保留近 18 / 24 / 60 个自然月（月度 18 / 季度 24 / 年度 60），超出移入 `reports/archives/`。
 - 登记册修改采用增量方式：保留历史值，不覆盖。
 
 ### 6.3 提交

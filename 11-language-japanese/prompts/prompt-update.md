@@ -82,7 +82,7 @@
 
 - 交付格式：md + 同目录自包含 HTML；季度 / 年度报告含顶部九锚点导航（`.report-nav`），`.nav-url` = `{{REPO_RAW_URL_BASE}}` + `/reports/{本期文件名}`。
 - HTML 须通过 `lint_reports.py` 标签配对校验。
-- 月度报告常驻 `reports/` 顶层；每主题保留最新 12 期，超出移入 `reports/archives/`。
+- 月度报告常驻 `reports/` 顶层；按周期保留（月度 18 / 季度 24 / 年度 60 个自然月），超出移入 `reports/archives/`。
 
 ## 八、质量自检（通用清单之外的本主题专属项）
 

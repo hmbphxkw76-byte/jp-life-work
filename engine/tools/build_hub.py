@@ -6,9 +6,13 @@
 - 主题与报告由构建时扫描发现（iter_business_dirs + reports/*.html）；
 - 报告统一按自然月份聚合，命名 `YYYY-MM-<主题slug>`，不再区分基线 / 初析 /
   季度等类型；季度报告按季度末月归档（2026-Q4 -> 2026-12）；
-- 主题详情页默认展示最近 12 个月报告，按时间倒序（最新在顶端），可展开更早；
+- 展示窗口按周期类型（月 / 季 / 年，由 report_cycles.py 自动识别）：
+  月度保留 18 个月、默认展示近 6 个月（「更多」展开至 18）；季度保留并展示
+  近 24 个月（8 期）；年度保留并展示近 60 个月（5 份）；
+- 环比更新提示：报告页 meta 携带跨期 diff 统计，汇总页据此高亮「已更新」
+  并给出新增 / 修改 / 删除计数；无更新显示「无更新」，内容保持不变；
 - 最新报告提示：每个主题的最新一期报告在主题卡片与详情页列表中高亮「新」标识
-  （构建期确定性写入，取该主题 period 最大者；不改变近 12 个月窗口规则）；
+  （构建期确定性写入，取该主题 period 最大者）；
 - 报告链接直达各主题 `reports/*.html` 独立报告页（新标签页打开），报告页内含
   构建期预渲染的跨月对比高亮（见 md2html.py / report_diff.py）；
 - 搜索层：构建期生成 `search-index.json`（报告标题 / 关键词 / 命中问题，关键词
@@ -39,23 +43,48 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from _common import (  # noqa: E402
     ROOT,
     TEMPLATE_ROOT,
-    atomic_write,
     TYPE_LABEL_FALLBACK,
     TYPE_RE,
+    atomic_write,
     detect_month_report,
     iter_business_dirs,
     month_to_date,
     report_title,
     topic_slug,
 )
+from report_cycles import cycle_profile  # noqa: E402
 
 # 主题目录名：两位编号 + 短横线 + 短 slug（与 topics.json 的键对应）
 NUM_RE = re.compile(r"^(\d{2})-(.+)$")
 
 TOPIC_REGISTRY = ROOT / "engine" / "vocabulary" / "config" / "topics.json"
 
-# 首页详情页默认展示窗口：最近 12 个自然月
-RECENT_MONTHS = 12
+# 首页详情页展示窗口按周期类型动态计算（月 6 / 季 24 / 年 60），
+# 由 report_cycles.py 依据主题 business-config / prompts 自动识别。
+# 报告页 meta（md2html 写入）供汇总页判定环比更新状态。
+REPORT_PERIOD_RE = re.compile(r'<meta name="report-period" content="([^"]*)">')
+REPORT_CYCLE_RE = re.compile(r'<meta name="report-cycle" content="([^"]*)">')
+REPORT_DIFF_RE = re.compile(r'<meta name="report-diff" content="([^"]*)">')
+
+
+def parse_report_meta(text: str) -> dict:
+    """解析报告页 meta -> {period, cycle_label, prev, new, mod, del}。"""
+    def g(rx) -> str:
+        m = rx.search(text)
+        return html_mod.unescape(m.group(1)) if m else ""
+    diff: dict[str, str] = {}
+    for part in g(REPORT_DIFF_RE).split(";"):
+        if "=" in part:
+            k, v = part.split("=", 1)
+            diff[k] = v
+    return {
+        "period": g(REPORT_PERIOD_RE),
+        "cycle_label": g(REPORT_CYCLE_RE),
+        "prev": diff.get("prev", "none"),
+        "new": int(diff.get("new", 0) or 0),
+        "mod": int(diff.get("mod", 0) or 0),
+        "del": int(diff.get("del", 0) or 0),
+    }
 
 
 # ──────────────────────────────────────────────
@@ -150,6 +179,7 @@ def collect_topic(b, registry: dict[str, dict], type_labels: dict[str, str]) -> 
     meta = registry.get(b.rel) or registry.get(name_key) or {}
     type_id = _topic_type(b)
 
+    profile = cycle_profile(b)
     reports = []
     reports_dir = b.path / "reports"
     if reports_dir.is_dir():
@@ -160,10 +190,18 @@ def collect_topic(b, registry: dict[str, dict], type_labels: dict[str, str]) -> 
             period, rslug, date = cls
             if rslug != rs:
                 continue
-            title = report_title(f.read_text(encoding="utf-8", errors="replace")) or f.stem
+            text = f.read_text(encoding="utf-8", errors="replace")
+            title = report_title(text) or f.stem
+            dm = parse_report_meta(text)
+            changed = dm["new"] + dm["mod"] + dm["del"]
+            updated = bool(dm["prev"] and dm["prev"] != "none" and changed > 0)
+            delta = (f"较上期 {dm['prev']}：新增 {dm['new']} / 修改 {dm['mod']} / 删除 {dm['del']}"
+                     if updated else "")
             reports.append({
                 "title": title, "period": period, "date": date,
                 "path": f"{b.rel}/reports/{f.name}", "is_latest": False,
+                "cycle_label": dm["cycle_label"] or profile["label"],
+                "updated": updated, "delta": delta, "prev_period": dm["prev"],
             })
     reports.sort(key=lambda r: (r["date"], r["period"], r["title"]), reverse=True)
     if reports:
@@ -175,6 +213,9 @@ def collect_topic(b, registry: dict[str, dict], type_labels: dict[str, str]) -> 
         "name": meta.get("name") or _fallback_name(b),
         "desc": meta.get("description") or "",
         "type": type_id, "type_label": type_labels.get(type_id, type_id),
+        "cycle": profile["primary"], "cycle_label": profile["label"],
+        "keep_months": profile["keep_months"], "default_months": profile["default_months"],
+        "cycle_source": profile["source"],
         "reports": reports,
     }
 
@@ -435,6 +476,12 @@ code{background:var(--gray-l);padding:1px 5px;border-radius:4px;font-size:12px}
 .rnew{display:inline-block;font-size:10.5px;line-height:1.2;border-radius:3px;
   padding:1px 5px;background:var(--green);color:#fff;font-weight:700;
   vertical-align:1px;margin:0 2px;white-space:nowrap}
+/* ── 环比更新标记 ── */
+.upd{display:inline-block;font-size:10.5px;line-height:1.2;border-radius:3px;
+  padding:1px 5px;font-weight:700;white-space:nowrap}
+.upd.y{background:var(--green-l);color:var(--green)}
+.upd.n{background:var(--gray-l);color:var(--gray)}
+.delta{font-size:11.5px;color:var(--ink3);white-space:nowrap}
 .tcard.is-empty{border-style:dashed;background:#fbfcfe}
 .tcard.is-empty h4{color:var(--ink2)}
 .tcard.is-empty .desc,.tcard.is-empty .reports{display:none}
@@ -563,52 +610,62 @@ HUB_JS = """
   }
   window.addEventListener('hashchange', renderView);
 
-  /* ---------- 近 12 个月报告过滤（按查看日期动态计算） ---------- */
+  /* ---------- 报告窗口过滤（月 / 季 / 年周期，按查看日期动态计算） ---------- */
   var details = document.querySelectorAll('.topic-detail');
   for (var k = 0; k < details.length; k++) {
     (function (sec) {
       var rows = sec.querySelectorAll('.report-row');
       var total = rows.length;
-      var older = 0;
-      // 最近 12 个自然月窗口：[当前月 - 11, 当前月]
-      var now = new Date();
-      var start = new Date(now.getFullYear(), now.getMonth() - (RECENT_MONTHS - 1), 1);
-      var startPeriod = start.getFullYear() + '-' + pad(start.getMonth() + 1);
+      var defaultMonths = parseInt(sec.getAttribute('data-default-months') || '6', 10);
+      var keepMonths = parseInt(sec.getAttribute('data-keep-months') || '18', 10);
+      var cycle = sec.getAttribute('data-cycle') || 'monthly';
+      function startPeriod(months) {
+        var now = new Date();
+        var d = new Date(now.getFullYear(), now.getMonth() - (months - 1), 1);
+        return d.getFullYear() + '-' + pad(d.getMonth() + 1);
+      }
+      var defaultStart = startPeriod(defaultMonths);
+      var keepStart = startPeriod(keepMonths);
+      var older = 0, beyond = 0;
       for (var i = 0; i < total; i++) {
-        if (rows[i].getAttribute('data-period') < startPeriod) {
+        var p = rows[i].getAttribute('data-period');
+        if (p < keepStart) {
           rows[i].style.display = 'none';
+          rows[i].setAttribute('data-beyond', '1');
+          beyond++;
+        } else if (p < defaultStart) {
+          rows[i].style.display = 'none';
+          rows[i].setAttribute('data-old', '1');
           older++;
         }
       }
-      var recent = total - older;
+      var shown = total - older - beyond;
       var note = sec.querySelector('.rf-note');
       var toggle = sec.querySelector('.rf-toggle');
       function renderNote() {
         if (!note) return;
-        note.textContent = (recent === total)
-          ? '近 12 个月 · 共 ' + total + ' 份'
-          : '近 12 个月 · 显示 ' + recent + ' / ' + total + ' 份';
+        note.textContent = '近 ' + defaultMonths + ' 个月 · 显示 ' + shown + ' / ' + total + ' 份'
+          + (beyond ? '（另有 ' + beyond + ' 份已归档）' : '');
       }
       renderNote();
       if (toggle && older > 0) {
         toggle.hidden = false;
-        toggle.textContent = '显示更早报告（' + older + '）';
+        toggle.textContent = '更多（' + older + '）';
         toggle.addEventListener('click', function () {
           var expanded = toggle.getAttribute('data-expanded') === '1';
           for (var i = 0; i < total; i++) {
-            var isOld = rows[i].getAttribute('data-period') < startPeriod;
+            if (rows[i].getAttribute('data-beyond') === '1') continue;
+            var isOld = rows[i].getAttribute('data-old') === '1';
             rows[i].style.display = (expanded && isOld) ? 'none' : '';
           }
           if (expanded) {
             toggle.setAttribute('data-expanded', '0');
-            toggle.textContent = '显示更早报告（' + older + '）';
+            toggle.textContent = '更多（' + older + '）';
             renderNote();
           } else {
             toggle.setAttribute('data-expanded', '1');
-            toggle.textContent = '只看近 12 个月';
-            if (note) {
-              note.textContent = '已显示全部 ' + total + ' 份报告（含 ' + older + ' 份更早报告）';
-            }
+            toggle.textContent = '收起';
+            if (note) note.textContent = '已显示全部 ' + (total - beyond) + ' 份（含 ' + older + ' 份更早报告）';
           }
         });
       }
@@ -748,7 +805,8 @@ def render_topic_card(t: dict) -> str:
         if reports else ""
     )
     empty = " is-empty" if not reports else ""
-    count = f'{len(reports)} 份报告' if reports else "暂无报告"
+    cycle_label = t.get("cycle_label", "月度")
+    count = f'{len(reports)} 份报告 · {cycle_label}' if reports else "暂无报告"
     latest_note = f' · <span class="rnew">新</span> {esc(latest)}' if latest else ""
     return (
         f'<article class="tcard{empty}" data-type="{esc(t["type"])}" data-search="{search}">\n'
@@ -766,15 +824,22 @@ def render_topic_card(t: dict) -> str:
 def render_topic_detail(t: dict) -> str:
     esc = html_mod.escape
     reports = t["reports"]
+    cycle = t.get("cycle", "monthly")
+    cycle_label = t.get("cycle_label", "月度")
+    default_months = int(t.get("default_months", 6))
+    keep_months = int(t.get("keep_months", 18))
     rows = "".join(
         f'<div class="report-row" data-period="{esc(r["period"])}">\n'
         f'  <span class="rdate">{esc(r["period"])}</span>\n'
-        + (f'  <span class="rnew" title="本主题最新一期报告">新</span>\n'
+        + ('  <span class="rnew" title="本主题最新一期报告">新</span>\n'
            if r.get("is_latest") else "")
-        + f'  <span class="rbadge">月度</span>\n'
-        f'  <a class="rt" href="{esc(r["path"])}" target="_blank" rel="noopener">'
+        + f'  <span class="rbadge">{esc(r.get("cycle_label") or cycle_label)}</span>\n'
+        + (f'  <span class="upd y" title="{esc(r.get("delta", ""))}">已更新</span>\n'
+           if r.get("updated") else '  <span class="upd n">无更新</span>\n')
+        + f'  <a class="rt" href="{esc(r["path"])}" target="_blank" rel="noopener">'
         f'{esc(r["title"])}</a>\n'
-        f'  <span class="rperiod">{esc(r["period"])}</span>\n'
+        + (f'  <span class="delta">{esc(r["delta"])}</span>\n' if r.get("delta") else "")
+        + f'  <span class="rperiod">{esc(r["period"])}</span>\n'
         f'</div>'
         for r in reports
     ) or '<p class="empty-note">该主题暂无已产出报告。</p>'
@@ -782,9 +847,11 @@ def render_topic_detail(t: dict) -> str:
     latest = (f' · 最新 <span class="rnew">新</span> {reports[0]["period"]}'
               if reports else '')
     return (
-        f'<section class="topic-detail" id="topic-{esc(t["slug"])}" data-topic="{esc(t["slug"])}">\n'
+        f'<section class="topic-detail" id="topic-{esc(t["slug"])}" data-topic="{esc(t["slug"])}"'
+        f' data-cycle="{esc(cycle)}" data-default-months="{default_months}"'
+        f' data-keep-months="{keep_months}">\n'
         f'  <div class="topic-head">\n'
-        f'    <div class="crumb">{esc(crumb)}</div>\n'
+        f'    <div class="crumb">{esc(crumb)} · {esc(cycle_label)}</div>\n'
         f'    <h2>{esc(t["name"])}</h2>\n'
         f'    <p class="desc">{esc(t["desc"])}</p>\n'
         f'    <div class="meta">共 {len(reports)} 份报告{latest}</div>\n'
@@ -872,7 +939,6 @@ def render_hub(topics: list[dict]) -> str:
 <title>jp-life-work · 报告索引</title>
 <style>{HUB_CSS}</style>
 <script>document.documentElement.classList.remove('no-js');document.documentElement.classList.add('js');</script>
-<script>var RECENT_MONTHS = {RECENT_MONTHS};</script>
 <script>var SEARCH_INDEX = {search_json};</script>
 <script>var FIVE_QUESTIONS = {five_json};</script>
 </head>

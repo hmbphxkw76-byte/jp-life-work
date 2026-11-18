@@ -10,7 +10,7 @@
 - 季度　`2026-Q4_quarterly.md`　　　　　　-> 2026-12（季度末月），主体
 - 专题　`2026-11-13_landing_checklist.md`　-> 2026-11，主体（清单类）
 - 专题　`2026-11-13_settlement_profile.md` -> 2026-11，附录（档案类）
-- 其余历史命名（monthly / annual / weekly / special）按同类规则归入自然月
+- 其余历史命名（monthly / annual / special）按同类规则归入自然月
 
 产物：
 - `<主题>/reports/YYYY-MM-<slug>.md` + 同名 `.html`（md2html 重新生成）
@@ -67,7 +67,7 @@ def month_of(kind: str, period: str) -> str:
         return f"{period}-12"
     if kind in ("monthly", "baseline"):
         return period
-    # initial / weekly / special：period 为 ISO 日期，取月前
+    # initial / special：period 为 ISO 日期，取月前
     return period[:7]
 
 

@@ -235,7 +235,7 @@ python engine/tools/classify_reports.py
 ### 5.2 归档
 
 - 基线报告常驻 `reports/` 顶层，不归档。
-- 月度报告保留最新 12 期、季度保留 8 期、年度保留 5 期，超出移入 `reports/archives/`。
+- 月度报告保留近 18 个月、季度保留 8 期（24 个月）、年度保留 5 期（60 个月），超出移入 `reports/archives/`。
 - 登记册修改采用增量方式：保留历史值，不覆盖。
 
 ### 5.3 提交

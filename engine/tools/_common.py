@@ -74,8 +74,6 @@ MONTHLY_RE = re.compile(r"^(\d{4}-(?:0[1-9]|1[0-2]))_monthly\.(html|md)$")
 QUARTERLY_RE = re.compile(r"^(\d{4}-Q[1-4])_quarterly\.(html|md)$")
 ANNUAL_RE = re.compile(r"^(\d{4})_annual\.(html|md)$")
 BASELINE_RE = re.compile(r"^(\d{4}-(?:0[1-9]|1[0-2]))_baseline(?:_report)?\.(html|md)$")
-# 周报：period 为数据截止日（ISO 日期），与月/季/年的日历周期不同
-WEEKLY_RE = re.compile(r"^(\d{4}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12]\d|3[01]))_weekly\.(html|md)$")
 # 事件触发插刷件（日期前缀 + 自由主题名）
 LEGACY_SPECIAL_RE = re.compile(
     r"^(\d{4}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12]\d|3[01]))[-_].+\.(html|md)$"
@@ -86,7 +84,6 @@ REPORT_RES = (
     ("quarterly", QUARTERLY_RE),
     ("annual", ANNUAL_RE),
     ("baseline", BASELINE_RE),
-    ("weekly", WEEKLY_RE),
 )
 
 # 通用层根部必备文件（validate.py 使用；类型中立共享文件）
@@ -152,10 +149,6 @@ TEMPLATE_TYPE_DIRS = {
         "prompt-baseline-setup-template.md",
         "prompt-topic-study-template.md",
     ),
-    "trend-weekly": (
-        "prompt-baseline-setup-template.md",
-        "prompt-weekly-monitor-template.md",
-    ),
 }
 
 # business-config 中的类型模板引用（如 ../../engine/report_templates/employment-research/）
@@ -164,7 +157,6 @@ TYPE_RE = re.compile(r"engine/report_templates/([a-z][a-z0-9-]*)/")
 # 类型 ID -> 类型名回退表（与 template-registry.md 第二节一致；构建时解析失败启用）
 TYPE_LABEL_FALLBACK = {
     "market-monitoring": "市场指标监测型",
-    "trend-weekly": "行业趋势周报型",
     "employment-research": "职业就业调研型",
     "competitive-intelligence": "竞争情报监测型",
     "sentiment-monitoring": "舆情传播监测型",
@@ -254,7 +246,7 @@ def detect_report(name: str):
 def detect_legacy_report(name: str):
     """识别历史命名报告 -> (kind, period, ext)；不匹配返回 None。
 
-    kind ∈ {baseline, initial, quarterly, annual, monthly, weekly, special}。
+    kind ∈ {baseline, initial, quarterly, annual, monthly, special}。
     仅迁移脚本使用：把存量报告归入自然月并合并重命名。
     """
     det = detect_report(name)

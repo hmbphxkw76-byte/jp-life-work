@@ -362,14 +362,14 @@ class TestCovComplianceComplianceCheck(_TempRootCase):
     def test_detect_type_and_types(self):
         self.assertIsNone(compliance_check.detect_type("无引用"))
         self.assertEqual(
-            compliance_check.detect_type("继承：[行业趋势周报型](../../engine/report_templates/trend-weekly/)"),
-            "trend-weekly")
+            compliance_check.detect_type("继承：[快评·事件点评型](../../engine/report_templates/flash-commentary/)"),
+            "flash-commentary")
         self.assertEqual(
             compliance_check.detect_types(
-                "a ../../engine/report_templates/trend-weekly/ b "
+                "a ../../engine/report_templates/flash-commentary/ b "
                 "../../engine/report_templates/employment-research/ c "
-                "../../engine/report_templates/trend-weekly/"),
-            ["trend-weekly", "employment-research"])
+                "../../engine/report_templates/flash-commentary/"),
+            ["flash-commentary", "employment-research"])
 
     def test_cycle_rule_unregistered(self):
         rules = _rules_doc()
@@ -377,10 +377,10 @@ class TestCovComplianceComplianceCheck(_TempRootCase):
 
     def test_cycle_rule_baseline_fallback_inherited(self):
         rules = _rules_doc()
-        rule, inherited = compliance_check.cycle_rule(rules, "demo-type", "weekly")
+        rule, inherited = compliance_check.cycle_rule(rules, "demo-type", "annual")
         self.assertTrue(inherited)
         self.assertEqual(rule["sections"], 2)
-        # weekly 不在 nav_required_cycles，baseline 亦未登记 nav → False
+        # annual 不在 nav_required_cycles，baseline 亦未登记 nav → False
         self.assertFalse(rule["nav"])
 
     def test_cycle_rule_event_cycle_fallback(self):
@@ -467,27 +467,24 @@ class TestCovComplianceComplianceCheck(_TempRootCase):
     def test_type_of_business_multiple_refs(self):
         self._business(
             "01-demo",
-            "a ../../engine/report_templates/trend-weekly/ b "
+            "a ../../engine/report_templates/flash-commentary/ b "
             "../../engine/report_templates/employment-research/\n")
         b = _common.Business("01-demo")
         type_id, note = compliance_check.type_of_business(b)
-        self.assertEqual(type_id, "trend-weekly")
+        self.assertEqual(type_id, "flash-commentary")
         self.assertIn("多个类型模板引用", note)
 
     # ── collect_targets ──
     def test_collect_targets_only_file_cycles(self):
         d = self._business("01-demo", "x ../../engine/report_templates/demo-type/\n")
-        for name in ("2026-11-demo.html", "2026-11-15_weekly.html",
-                     "2026-11-15-事件.html", "foo.html"):
+        for name in ("2026-11-demo.html", "2026-11-15-事件.html", "foo.html"):
             _write(d / "reports" / name, "<html></html>")
         cases = {}
-        for name in ("2026-11-demo.html", "2026-11-15_weekly.html",
-                     "2026-11-15-事件.html", "foo.html"):
+        for name in ("2026-11-demo.html", "2026-11-15-事件.html", "foo.html"):
             targets = compliance_check.collect_targets(f"01-demo/reports/{name}")
             rel, _text, type_id, cycle, note = targets[0]
             cases[name] = (cycle, type_id, note)
         self.assertEqual(cases["2026-11-demo.html"][0], "monthly")
-        self.assertEqual(cases["2026-11-15_weekly.html"][0], "weekly")
         self.assertEqual(cases["2026-11-15-事件.html"][0], "event")
         self.assertEqual(cases["foo.html"][0], "")
         self.assertIn("不符合报告命名约定", cases["foo.html"][2])   # 类型已识别，仅命名告警
@@ -553,8 +550,8 @@ class TestCovComplianceComplianceCheck(_TempRootCase):
         self.assertTrue(any("未在 compliance-rules.json 登记" in l for l in lines))
 
     def test_run_check_inherited_info(self):
-        # weekly 周期未单独登记 → 回落基线（INFO）
-        self._one_target(name="2026-11-15_weekly.html")
+        # event 周期未单独登记 → 回落基线（INFO）
+        self._one_target(name="2026-11-15-事件.html")
         errors, warnings, lines = compliance_check.run_check(None)
         self.assertTrue(any("[INFO]" in l and "按基线骨架" in l for l in lines))
 
@@ -589,7 +586,7 @@ class TestCovComplianceComplianceCheck(_TempRootCase):
     def test_run_scaffold_invalid_cycle(self):
         buf = io.StringIO()
         with redirect_stdout(buf):
-            code = compliance_check.run_scaffold("demo-type", "weekly")
+            code = compliance_check.run_scaffold("demo-type", "annual")
         self.assertEqual(code, 1)
         self.assertIn("无周期", buf.getvalue())
 
