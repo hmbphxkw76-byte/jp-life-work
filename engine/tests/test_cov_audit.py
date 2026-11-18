@@ -682,6 +682,26 @@ class TestCovAuditPipeline(unittest.TestCase):
 
 # ---------------------------------------------------------------- audit_check
 
+class TestAuditStatusGhost(unittest.TestCase):
+    """write_status 写回前剔除幽灵状态（报告文件不存在），避免内链门禁误报。"""
+
+    def test_write_status_prunes_ghosts(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            (root / "01-x").mkdir()
+            (root / "01-x" / "r.md").write_text("# t\n", encoding="utf-8")
+            with mock.patch.object(audit_pipeline, "ROOT", root), \
+                    mock.patch.object(audit_pipeline, "AUDIT_DIR", root / "audit"), \
+                    mock.patch.object(audit_pipeline, "STATUS", root / "audit" / "status.json"):
+                state = {"01-x/r.md": {"state": "audited"},
+                         "01-x/missing.md": {"state": "audited"}}
+                audit_pipeline.write_status(state)
+                written = json.loads(
+                    (root / "audit" / "status.json").read_text(encoding="utf-8"))
+            self.assertIn("01-x/r.md", written["reports"])
+            self.assertNotIn("01-x/missing.md", written["reports"])
+
+
 class TestCovAuditCheck(unittest.TestCase):
     def test_absolute_hits_filters(self):
         text = "不能包过。\n「包过」是引号。\n100% 包过。\n"
