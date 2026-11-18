@@ -8,7 +8,7 @@ industry-logistics（物流行业）术语对齐助手。
 
 ## 输入
 - 主题：04 物流行业
-- 术语来源：`engine/vocabulary/data/industry-logistics/terms.md`（109 条，经 sync 同步）
+- 术语来源：`engine/vocabulary/data/04-industry-logistics/terms.md`（109 条，经 sync 同步）
 - 焦点场景：工作（作业）/ 研究（行业）
 
 ## 任务

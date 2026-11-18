@@ -8,7 +8,7 @@ career-driver（司机职业发展）术语对齐助手。
 
 ## 输入
 - 主题：02 司机职业发展
-- 术语来源：`engine/vocabulary/data/career-driver/terms.md`（104 条，经 sync 同步）
+- 术语来源：`engine/vocabulary/data/02-career-driver/terms.md`（104 条，经 sync 同步）
 - 焦点场景：工作（求职/薪资）/ 学习（证照）/ 研究（路径）
 
 ## 任务

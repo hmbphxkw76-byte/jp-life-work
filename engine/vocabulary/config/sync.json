@@ -1,6 +1,6 @@
 {
-  "version": "v2.0",
-  "updated": "2026-11-14",
+  "version": "v2.1",
+  "updated": "2026-11-18",
   "comment": "词汇库 → 业务提示词自动同步配置。bindings[].topic 必须已在 topics.json 注册；source 缺省取 topics.json 的 storage；target.path 相对 engine/vocabulary/ 根；insert_before 为区块缺失时的插入锚点（须为目标文件内唯一文本，区块替换时不参与匹配）；format=digest（按分类紧凑速览，缺省）| table（三列表格）；categories_include / tags_include 为可选过滤（空 = 全量）；section_title 为区块内标题（含 ## 前缀）。",
   "auto_trigger": true,
   "watch_interval_sec": 5,
@@ -10,7 +10,7 @@
   "log_file": "data/sync.log",
   "bindings": [
     {
-      "topic": "ssw-driver",
+      "topic": "01-ssw-driver",
       "targets": [
         {
           "path": "../../01-ssw-driver/prompts/business-config.md",
@@ -23,7 +23,7 @@
       ]
     },
     {
-      "topic": "career-driver",
+      "topic": "02-career-driver",
       "targets": [
         {
           "path": "../../02-career-driver/prompts/business-config.md",
@@ -36,7 +36,7 @@
       ]
     },
     {
-      "topic": "career-management",
+      "topic": "03-career-management",
       "targets": [
         {
           "path": "../../03-career-management/prompts/business-config.md",
@@ -49,7 +49,7 @@
       ]
     },
     {
-      "topic": "industry-logistics",
+      "topic": "04-industry-logistics",
       "targets": [
         {
           "path": "../../04-industry-logistics/prompts/business-config.md",
@@ -62,7 +62,7 @@
       ]
     },
     {
-      "topic": "industry-autonomous",
+      "topic": "05-industry-autonomous",
       "targets": [
         {
           "path": "../../05-industry-autonomous/prompts/business-config.md",
@@ -75,7 +75,7 @@
       ]
     },
     {
-      "topic": "industry-technology",
+      "topic": "06-industry-technology",
       "targets": [
         {
           "path": "../../06-industry-technology/prompts/business-config.md",
@@ -88,7 +88,7 @@
       ]
     },
     {
-      "topic": "economy-finance",
+      "topic": "07-economy-finance",
       "targets": [
         {
           "path": "../../07-economy-finance/prompts/business-config.md",
@@ -101,7 +101,7 @@
       ]
     },
     {
-      "topic": "visa-immigration",
+      "topic": "08-visa-immigration",
       "targets": [
         {
           "path": "../../08-visa-immigration/prompts/business-config.md",
@@ -114,7 +114,7 @@
       ]
     },
     {
-      "topic": "politics-law",
+      "topic": "09-politics-law",
       "targets": [
         {
           "path": "../../09-politics-law/prompts/business-config.md",
@@ -127,7 +127,7 @@
       ]
     },
     {
-      "topic": "education-qualification",
+      "topic": "10-education-qualification",
       "targets": [
         {
           "path": "../../10-education-qualification/prompts/business-config.md",
@@ -140,7 +140,7 @@
       ]
     },
     {
-      "topic": "language-japanese",
+      "topic": "11-language-japanese",
       "targets": [
         {
           "path": "../../11-language-japanese/prompts/business-config.md",
@@ -153,7 +153,7 @@
       ]
     },
     {
-      "topic": "culture-life",
+      "topic": "12-culture-life",
       "targets": [
         {
           "path": "../../12-culture-life/prompts/business-config.md",
@@ -166,7 +166,7 @@
       ]
     },
     {
-      "topic": "regional-info",
+      "topic": "13-regional-info",
       "targets": [
         {
           "path": "../../13-regional-info/prompts/business-config.md",
@@ -179,7 +179,7 @@
       ]
     },
     {
-      "topic": "exit-transition-return",
+      "topic": "16-exit-transition-return",
       "targets": [
         {
           "path": "../../16-exit-transition-return/prompts/business-config.md",
@@ -192,7 +192,7 @@
       ]
     },
     {
-      "topic": "life-operations",
+      "topic": "14-life-operations",
       "targets": [
         {
           "path": "../../14-life-operations/prompts/business-config.md",
@@ -205,7 +205,7 @@
       ]
     },
     {
-      "topic": "health-wellbeing",
+      "topic": "15-health-wellbeing",
       "targets": [
         {
           "path": "../../15-health-wellbeing/prompts/business-config.md",
@@ -218,7 +218,7 @@
       ]
     },
     {
-      "topic": "migration-compliance",
+      "topic": "17-migration-compliance",
       "targets": [
         {
           "path": "../../17-migration-compliance/prompts/business-config.md",
@@ -231,7 +231,7 @@
       ]
     },
     {
-      "topic": "family-parenting",
+      "topic": "18-family-parenting",
       "targets": [
         {
           "path": "../../18-family-parenting/prompts/business-config.md",
@@ -244,7 +244,7 @@
       ]
     },
     {
-      "topic": "safety-disaster",
+      "topic": "19-safety-disaster",
       "targets": [
         {
           "path": "../../19-safety-disaster/prompts/business-config.md",
@@ -257,7 +257,7 @@
       ]
     },
     {
-      "topic": "overseas-china",
+      "topic": "20-overseas-china",
       "targets": [
         {
           "path": "../../20-overseas-china/prompts/business-config.md",

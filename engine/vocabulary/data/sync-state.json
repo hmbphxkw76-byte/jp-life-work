@@ -1,11 +1,11 @@
 {
   "targets": {
-    "ssw-driver=>../../01-ssw-driver/prompts/business-config.md": {
-      "topic": "ssw-driver",
+    "01-ssw-driver=>../../01-ssw-driver/prompts/business-config.md": {
+      "topic": "01-ssw-driver",
       "target": "../../01-ssw-driver/prompts/business-config.md",
       "vocab_version": "v1.5",
       "term_count": 109,
-      "synced_at": "2026-11-15T13:11:23",
+      "synced_at": "2026-11-18T11:10:00",
       "source_hash": "741f8465f2d461658053f50f086f4d4f560f48c09e92f483faac23563ba119ea",
       "term_hashes": {
         "SSW-001": "e291079e398be19e9b7baea86126d42984eac854c416be2a2506e4f89755c9f1",
@@ -119,12 +119,12 @@
         "SSW-109": "b45c610af51803bb5567e6b8885838d8ff21655888f318786d5e06aadae4edff"
       }
     },
-    "career-driver=>../../02-career-driver/prompts/business-config.md": {
-      "topic": "career-driver",
+    "02-career-driver=>../../02-career-driver/prompts/business-config.md": {
+      "topic": "02-career-driver",
       "target": "../../02-career-driver/prompts/business-config.md",
       "vocab_version": "v1.3",
       "term_count": 104,
-      "synced_at": "2026-11-18T09:09:08",
+      "synced_at": "2026-11-18T11:10:00",
       "source_hash": "1c15c8f0c6b568b6de44f1929e2b1591387c36041dcc7d0704ea35e99bb9cc99",
       "term_hashes": {
         "CDR-001": "27360c88f8ede226cec5f3499ef6729706b94bb35e11b0d1ea50e1c7556bd9b3",
@@ -233,12 +233,12 @@
         "CDR-104": "61b272b2e3557a1c1f0c1d69ac4c0b10a7ab989fe8f037455baaeaba2d323d7f"
       }
     },
-    "career-management=>../../03-career-management/prompts/business-config.md": {
-      "topic": "career-management",
+    "03-career-management=>../../03-career-management/prompts/business-config.md": {
+      "topic": "03-career-management",
       "target": "../../03-career-management/prompts/business-config.md",
       "vocab_version": "v1.2",
       "term_count": 72,
-      "synced_at": "2026-11-18T09:09:08",
+      "synced_at": "2026-11-18T11:10:01",
       "source_hash": "3052cd658f8e86886f757b087657e83d5e32f0a86969855516e1b0d03f2017ec",
       "term_hashes": {
         "CMG-001": "909866cab4cb76eb89819b737be87c3343097bd2359d6862efce1acb8caeac67",
@@ -315,12 +315,12 @@
         "CMG-072": "7d0e83b78ff70d7c45f8d936d1ba9e7febb419a5906b55b6a6576ffd7436ce46"
       }
     },
-    "industry-logistics=>../../04-industry-logistics/prompts/business-config.md": {
-      "topic": "industry-logistics",
+    "04-industry-logistics=>../../04-industry-logistics/prompts/business-config.md": {
+      "topic": "04-industry-logistics",
       "target": "../../04-industry-logistics/prompts/business-config.md",
       "vocab_version": "v1.4",
       "term_count": 109,
-      "synced_at": "2026-11-18T09:07:29",
+      "synced_at": "2026-11-18T11:10:01",
       "source_hash": "865f0c960ccfb6ccc2205b07614bf8b8087b8c9b148691e4c61a08a5633b1d98",
       "term_hashes": {
         "LOG-001": "6f46c07253d27c49ec4e13f939a33a8109faa96b8f6e57d759dc70dbbeb77986",
@@ -434,12 +434,12 @@
         "LOG-109": "2e511337845d7e6b6e10d2b1ed1507e7b6e5bb8c7c12c6c836901cf5d32e2b49"
       }
     },
-    "industry-autonomous=>../../05-industry-autonomous/prompts/business-config.md": {
-      "topic": "industry-autonomous",
+    "05-industry-autonomous=>../../05-industry-autonomous/prompts/business-config.md": {
+      "topic": "05-industry-autonomous",
       "target": "../../05-industry-autonomous/prompts/business-config.md",
       "vocab_version": "v1.4",
       "term_count": 106,
-      "synced_at": "2026-11-18T09:07:30",
+      "synced_at": "2026-11-18T11:10:01",
       "source_hash": "183f1a27236bea18213ff0c9ead69d9356b4b1192d67f0b5538f8830d0ec6e27",
       "term_hashes": {
         "AUT-001": "cb0ed9d5adb68ba8c2f4e67b864dc9d7aee9af24971374d6f29513e19d7c8139",
@@ -550,12 +550,12 @@
         "AUT-106": "31c32637ae083b50a4069212cb641bceb13a698ab50e6cf10f44b9f472b4008a"
       }
     },
-    "industry-technology=>../../06-industry-technology/prompts/business-config.md": {
-      "topic": "industry-technology",
+    "06-industry-technology=>../../06-industry-technology/prompts/business-config.md": {
+      "topic": "06-industry-technology",
       "target": "../../06-industry-technology/prompts/business-config.md",
       "vocab_version": "v1.2",
       "term_count": 74,
-      "synced_at": "2026-11-18T09:09:08",
+      "synced_at": "2026-11-18T11:10:01",
       "source_hash": "2ee0c80248913864e79a9cf78f2f4759efb91aa27ce1cd72fed852407c90aa18",
       "term_hashes": {
         "TEC-001": "74604f1eb06dccfa20a0fbd3ae9efb9f7d262b83928789e893d703d05fd095a0",
@@ -634,12 +634,12 @@
         "TEC-074": "9c8324d1f175d3829f2127fab1f9063af1209975149ca6b7b860b03bc573f513"
       }
     },
-    "economy-finance=>../../07-economy-finance/prompts/business-config.md": {
-      "topic": "economy-finance",
+    "07-economy-finance=>../../07-economy-finance/prompts/business-config.md": {
+      "topic": "07-economy-finance",
       "target": "../../07-economy-finance/prompts/business-config.md",
       "vocab_version": "v1.3",
       "term_count": 77,
-      "synced_at": "2026-11-14T21:23:14",
+      "synced_at": "2026-11-18T11:10:01",
       "source_hash": "7219b52fec412af12c4fae0f01c3ff42b5526ea11e7068faaf641c6be7352cb6",
       "term_hashes": {
         "ECF-001": "12fbf61d40dcd98cbf33631fac6a9d410958d794f00a0dfb6b1bd41e98ea2696",
@@ -721,12 +721,12 @@
         "ECF-077": "ff2617c742b7e8e8efd0f9709faf0b800125294788893ec107eb26ea96c106ce"
       }
     },
-    "visa-immigration=>../../08-visa-immigration/prompts/business-config.md": {
-      "topic": "visa-immigration",
+    "08-visa-immigration=>../../08-visa-immigration/prompts/business-config.md": {
+      "topic": "08-visa-immigration",
       "target": "../../08-visa-immigration/prompts/business-config.md",
       "vocab_version": "v1.3",
       "term_count": 79,
-      "synced_at": "2026-11-18T09:09:08",
+      "synced_at": "2026-11-18T11:10:01",
       "source_hash": "b1e857ddea3f6318bec7ac1c416598164922b1e294e6750c5abd651a95da6902",
       "term_hashes": {
         "VIS-001": "fe6379489f6e0df33da0ea3f7453b1f5f1d78fedaafc5dec447cace51887cf1b",
@@ -810,12 +810,12 @@
         "VIS-079": "26c1ff0a79b8211231e2120eff9d9c6e104f7f196c2cd0b4c959c55cf55c873c"
       }
     },
-    "politics-law=>../../09-politics-law/prompts/business-config.md": {
-      "topic": "politics-law",
+    "09-politics-law=>../../09-politics-law/prompts/business-config.md": {
+      "topic": "09-politics-law",
       "target": "../../09-politics-law/prompts/business-config.md",
       "vocab_version": "v1.4",
       "term_count": 82,
-      "synced_at": "2026-11-18T09:44:38",
+      "synced_at": "2026-11-18T11:10:01",
       "source_hash": "28366efcb4dd8ca22dd546863d60a1af42edc4e18c890fd5faf516f4fa6e5387",
       "term_hashes": {
         "LAW-001": "ba41b9c192fa8c8913cb15f76e73c0c5d6462c51a0f3f0db2056aa10978f67c2",
@@ -902,12 +902,12 @@
         "LAW-082": "d0ad3436f15b4e0e179a9a8f0e7ff8de3981a696e5b60663a8fd3f685f71f5b6"
       }
     },
-    "education-qualification=>../../10-education-qualification/prompts/business-config.md": {
-      "topic": "education-qualification",
+    "10-education-qualification=>../../10-education-qualification/prompts/business-config.md": {
+      "topic": "10-education-qualification",
       "target": "../../10-education-qualification/prompts/business-config.md",
       "vocab_version": "v1.2",
       "term_count": 70,
-      "synced_at": "2026-11-14T21:23:13",
+      "synced_at": "2026-11-18T11:10:01",
       "source_hash": "368acfd451a3fe1ce73b4b793b654bcb5a2cfc994afe6ec9f77821618f7e95f3",
       "term_hashes": {
         "EDU-001": "d4c8884a22df777b202ff021691aa266eceb8e1b70ca755b352fdbca97b68186",
@@ -982,12 +982,12 @@
         "EDU-070": "00d9256ed5289626ce010b9b5456a509e9b6e78e6df2b58e5e0a21a2582f912d"
       }
     },
-    "language-japanese=>../../11-language-japanese/prompts/business-config.md": {
-      "topic": "language-japanese",
+    "11-language-japanese=>../../11-language-japanese/prompts/business-config.md": {
+      "topic": "11-language-japanese",
       "target": "../../11-language-japanese/prompts/business-config.md",
       "vocab_version": "v1.3",
       "term_count": 70,
-      "synced_at": "2026-11-18T09:07:29",
+      "synced_at": "2026-11-18T11:10:01",
       "source_hash": "24244e42d54e0e40a3fe8333a624d3a41e87b64c1700ade2799ce4cd900b53a0",
       "term_hashes": {
         "JPN-001": "3cb6b594ad725156bcc71c9a549d0620142ded32f008597ae40b6b440d7f2f3a",
@@ -1062,12 +1062,12 @@
         "JPN-070": "3cda4597119051bb9b2906f06d47a7762445bbbd807838bcb3f6a4a53725d8fe"
       }
     },
-    "culture-life=>../../12-culture-life/prompts/business-config.md": {
-      "topic": "culture-life",
+    "12-culture-life=>../../12-culture-life/prompts/business-config.md": {
+      "topic": "12-culture-life",
       "target": "../../12-culture-life/prompts/business-config.md",
       "vocab_version": "v1.3",
       "term_count": 73,
-      "synced_at": "2026-11-14T21:23:14",
+      "synced_at": "2026-11-18T11:10:01",
       "source_hash": "bd0da77aae659648cc8e94d2e0925518a29f52afbfd9c683d84100512ce06e81",
       "term_hashes": {
         "CUL-001": "191c2399a4177a1bc09f492eca7c82253a0a8306c694063f9c7de316a702ae87",
@@ -1145,12 +1145,12 @@
         "CUL-073": "257f84fd5fd324d4e0f714192bd5c7d0e1b5ba23184ee8b821f64119891384aa"
       }
     },
-    "regional-info=>../../13-regional-info/prompts/business-config.md": {
-      "topic": "regional-info",
+    "13-regional-info=>../../13-regional-info/prompts/business-config.md": {
+      "topic": "13-regional-info",
       "target": "../../13-regional-info/prompts/business-config.md",
       "vocab_version": "v1.2",
       "term_count": 69,
-      "synced_at": "2026-11-18T09:09:08",
+      "synced_at": "2026-11-18T11:10:01",
       "source_hash": "937da48df53729a2d680ac08444a8c187989be51246c7bc86afdf4999bae865e",
       "term_hashes": {
         "REG-001": "b8b811a3990f6ca70663590b73f024238b9f05013ed3c0bf4a0e7e69516aaaff",
@@ -1224,12 +1224,12 @@
         "REG-069": "35eefcfc50ca8d9e48650727b04ba101140ac086c97662f683767ae6658b1d8f"
       }
     },
-    "exit-transition-return=>../../16-exit-transition-return/prompts/business-config.md": {
-      "topic": "exit-transition-return",
+    "16-exit-transition-return=>../../16-exit-transition-return/prompts/business-config.md": {
+      "topic": "16-exit-transition-return",
       "target": "../../16-exit-transition-return/prompts/business-config.md",
       "vocab_version": "v1.3",
       "term_count": 40,
-      "synced_at": "2026-11-18T09:46:11",
+      "synced_at": "2026-11-18T11:10:01",
       "source_hash": "c95465c5ae6664afaf0e78831b9c7e4e4e3cb61b94212c8daf94d5ff1c126f02",
       "term_hashes": {
         "ETR-001": "548ab59dd48a1064a9c0b4ba7831cfc6bbebe3f47477d389f13ec49a01693cc7",
@@ -1274,12 +1274,12 @@
         "ETR-040": "f622b9a83ce2cd3065a2791a0b5d03e5a1d6b827e9b1bec51d8903dac2e4c516"
       }
     },
-    "life-operations=>../../14-life-operations/prompts/business-config.md": {
-      "topic": "life-operations",
+    "14-life-operations=>../../14-life-operations/prompts/business-config.md": {
+      "topic": "14-life-operations",
       "target": "../../14-life-operations/prompts/business-config.md",
       "vocab_version": "v1.4",
       "term_count": 49,
-      "synced_at": "2026-11-15T15:32:07",
+      "synced_at": "2026-11-18T11:10:01",
       "source_hash": "7d330692fec445f2fba889ef4557dbb5d4abe6b707d2f6932d1f31cb24da9150",
       "term_hashes": {
         "LOP-001": "050c9a0528c45d6f81edb07dc7abb3073e1d3ae07ee77b8999384930a79e8ae2",
@@ -1333,12 +1333,12 @@
         "LOP-049": "1954db30812e8510128b4cdba560da5974d66875dbb88b01f8cd052d25b9246c"
       }
     },
-    "health-wellbeing=>../../15-health-wellbeing/prompts/business-config.md": {
-      "topic": "health-wellbeing",
+    "15-health-wellbeing=>../../15-health-wellbeing/prompts/business-config.md": {
+      "topic": "15-health-wellbeing",
       "target": "../../15-health-wellbeing/prompts/business-config.md",
       "vocab_version": "v1.4",
       "term_count": 50,
-      "synced_at": "2026-11-18T09:46:11",
+      "synced_at": "2026-11-18T11:10:01",
       "source_hash": "45ed3b187f9874d0ffe3a9329f028cf3eaf2f7f063afdca6308f911a4a6b89ca",
       "term_hashes": {
         "HLW-001": "8ce07df2c8bbbdc5515f7cde46e4eae005739e5ff5e53d42606c2a6ea1af3eb4",
@@ -1393,12 +1393,12 @@
         "HLW-050": "09680acaa99412074289c9875f416a659be29a88431088b12776b936f997279e"
       }
     },
-    "migration-compliance=>../../17-migration-compliance/prompts/business-config.md": {
-      "topic": "migration-compliance",
+    "17-migration-compliance=>../../17-migration-compliance/prompts/business-config.md": {
+      "topic": "17-migration-compliance",
       "target": "../../17-migration-compliance/prompts/business-config.md",
       "vocab_version": "v1.2",
       "term_count": 29,
-      "synced_at": "2026-11-14T21:23:15",
+      "synced_at": "2026-11-18T11:10:01",
       "source_hash": "907098e092129ddff0f43e35a11a8ac740f92f8581dbc022366899b74cf7b0a3",
       "term_hashes": {
         "MPC-001": "1b42d9e503226a041a34d11474c394734d660c60d6b590e221f5b380b80949d9",
@@ -1432,12 +1432,12 @@
         "MPC-029": "e517fbb5d4c8bf7d0362d8f0a2f5c44f7b40dee2000191409827546a8ff9feeb"
       }
     },
-    "family-parenting=>../../18-family-parenting/prompts/business-config.md": {
-      "topic": "family-parenting",
+    "18-family-parenting=>../../18-family-parenting/prompts/business-config.md": {
+      "topic": "18-family-parenting",
       "target": "../../18-family-parenting/prompts/business-config.md",
       "vocab_version": "v1.4",
       "term_count": 50,
-      "synced_at": "2026-11-18T09:46:12",
+      "synced_at": "2026-11-18T11:10:01",
       "source_hash": "5ebcbd94a3aa65cc8069d5cffdd8c7a9f252f3a028cd4524e7042dff8df7b1fd",
       "term_hashes": {
         "FAM-001": "389862b82f48714c9e9ced0c4454459b3254022223a42dcf186a6c2893b3a871",
@@ -1492,12 +1492,12 @@
         "FAM-050": "eab894b909acd5acb6c60c4cb2284e24fcf3ffb384addb718ecaa4093d994759"
       }
     },
-    "safety-disaster=>../../19-safety-disaster/prompts/business-config.md": {
-      "topic": "safety-disaster",
+    "19-safety-disaster=>../../19-safety-disaster/prompts/business-config.md": {
+      "topic": "19-safety-disaster",
       "target": "../../19-safety-disaster/prompts/business-config.md",
       "vocab_version": "v1.2",
       "term_count": 40,
-      "synced_at": "2026-11-18T09:46:12",
+      "synced_at": "2026-11-18T11:10:01",
       "source_hash": "05bd94cad09109784e4c543eb371e4a02a19599c191979f31de2193c05e7a8a0",
       "term_hashes": {
         "SFD-001": "8f383be1747282dfb61e0aae4a7b194f77c3e1aff59735ea8e98149777e24751",
@@ -1542,12 +1542,12 @@
         "SFD-040": "fe4c3b590c8904963d80c2ab3b9e5cae09cc0894fc94f0a3747fb0b8ed4d31b0"
       }
     },
-    "overseas-china=>../../20-overseas-china/prompts/business-config.md": {
-      "topic": "overseas-china",
+    "20-overseas-china=>../../20-overseas-china/prompts/business-config.md": {
+      "topic": "20-overseas-china",
       "target": "../../20-overseas-china/prompts/business-config.md",
       "vocab_version": "v1.2",
       "term_count": 37,
-      "synced_at": "2026-11-15T14:28:34",
+      "synced_at": "2026-11-18T11:10:01",
       "source_hash": "c9765fb18e9d7813c70ed59839b7ca61524d2b2cfd04fa98015d1e0c5cf62a62",
       "term_hashes": {
         "OVC-001": "3f6e1ec851fb6c6e4416e9ca082c1ce46dfaf437a07930d52400eec65a9b486b",

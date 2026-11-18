@@ -8,7 +8,7 @@ politics-law（政治与法律）术语对齐助手。
 
 ## 输入
 - 主题：09 政治与法律
-- 术语来源：`engine/vocabulary/data/politics-law/terms.md`（82 条，经 sync 同步）
+- 术语来源：`engine/vocabulary/data/09-politics-law/terms.md`（82 条，经 sync 同步）
 - 焦点场景：研究（法律）/ 生活（维权）
 
 ## 任务

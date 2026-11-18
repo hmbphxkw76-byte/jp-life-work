@@ -8,7 +8,7 @@
 ## 输入
 - 主题：01-ssw-driver；场景：工作 / 生活 / 研究 / 学习
 - 问题（五问映射）：去不去 / 能不能去 / 怎么去 / 去哪 / 最坏怎么办
-- 数据源：`01-ssw-driver/reports/`、`data/ssw_driver_indicator_registry.md`、`prompts/business-config.md`、`engine/vocabulary/data/ssw-driver/terms.md`
+- 数据源：`01-ssw-driver/reports/`、`data/ssw_driver_indicator_registry.md`、`prompts/business-config.md`、`engine/vocabulary/data/01-ssw-driver/terms.md`
 
 ## 任务
 1. 建立三态清单：已知（有来源且时效内）/ 未知（缺失或过时）/ 不可知（无公开来源）。

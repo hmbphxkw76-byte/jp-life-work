@@ -7,7 +7,7 @@
 
 ## 输入
 - 主题：01-ssw-driver（特定技能司机）
-- 术语来源：`engine/vocabulary/data/ssw-driver/terms.md`（109 条 / 6 分类，v1.5，经 sync 同步）
+- 术语来源：`engine/vocabulary/data/01-ssw-driver/terms.md`（109 条 / 6 分类，v1.5，经 sync 同步）
 - 焦点场景：研究（制度口径）/ 工作（岗位薪酬）/ 学习（考试）
 
 ## 任务

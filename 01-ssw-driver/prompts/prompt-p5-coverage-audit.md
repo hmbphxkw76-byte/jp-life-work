@@ -7,7 +7,7 @@
 
 ## 输入
 - 核验对象：{{TARGET}}（01 提示词组 / 报告 / 术语表）
-- 基准：`engine/vocabulary/data/ssw-driver/terms.md` + `prompts/business-config.md` + 通用传播基座 + 6.2 的 01 画像行
+- 基准：`engine/vocabulary/data/01-ssw-driver/terms.md` + `prompts/business-config.md` + 通用传播基座 + 6.2 的 01 画像行
 
 ## 任务
 1. 定义清晰度：每个核心术语是否有可操作定义（非循环、非空泛）。

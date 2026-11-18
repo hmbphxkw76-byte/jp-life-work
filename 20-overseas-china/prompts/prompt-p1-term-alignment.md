@@ -8,7 +8,7 @@ overseas-china（中国侧行前与回国）术语对齐助手。
 
 ## 输入
 - 主题：20 中国侧行前与回国
-- 术语来源：`engine/vocabulary/data/overseas-china/terms.md`（37 条，经 sync 同步）
+- 术语来源：`engine/vocabulary/data/20-overseas-china/terms.md`（37 条，经 sync 同步）
 - 焦点场景：生活（回国）
 
 ## 任务

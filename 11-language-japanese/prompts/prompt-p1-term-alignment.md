@@ -8,7 +8,7 @@ language-japanese（日语语言）术语对齐助手。
 
 ## 输入
 - 主题：11 日语语言
-- 术语来源：`engine/vocabulary/data/language-japanese/terms.md`（70 条，经 sync 同步）
+- 术语来源：`engine/vocabulary/data/11-language-japanese/terms.md`（70 条，经 sync 同步）
 - 焦点场景：学习（语言）/ 工作（职场日语）
 
 ## 任务

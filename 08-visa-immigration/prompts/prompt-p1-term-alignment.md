@@ -8,7 +8,7 @@ visa-immigration（签证与移民）术语对齐助手。
 
 ## 输入
 - 主题：08 签证与移民
-- 术语来源：`engine/vocabulary/data/visa-immigration/terms.md`（79 条，经 sync 同步）
+- 术语来源：`engine/vocabulary/data/08-visa-immigration/terms.md`（79 条，经 sync 同步）
 - 焦点场景：研究（制度）/ 生活（手续）
 
 ## 任务

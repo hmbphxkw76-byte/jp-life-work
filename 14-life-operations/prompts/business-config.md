@@ -189,10 +189,10 @@
 
 ---
 
-<!-- VOCAB-SYNC:BEGIN topic=life-operations do-not-edit -->
+<!-- VOCAB-SYNC:BEGIN topic=14-life-operations do-not-edit -->
 ## 词汇速览：在日生活实务（词汇库自动同步）
 
-> 由 `engine/vocabulary/script/sync_vocab.py` 自动维护：词汇库 life-operations v1.4，共 49 条（同步于 2026-11-15T15:32:07）。标记区间内请勿手工编辑；词条变更走词汇库导入流程（engine/vocabulary/README.md 第三节），同步机制见第九节。
+> 由 `engine/vocabulary/script/sync_vocab.py` 自动维护：词汇库 14-life-operations v1.4，共 49 条（同步于 2026-11-18T11:10:01）。标记区间内请勿手工编辑；词条变更走词汇库导入流程（engine/vocabulary/README.md 第三节），同步机制见第九节。
 
 - **在留与住民登记**（3）：在留卡（在留カード、residence card）；住民票（residence certificate）；健康保険加入（健康保险加入、医保加入）
 - **住房与租赁**（15）：番地（门牌号、地番）；敷金（押金、保证金）；礼金（谢礼）；更新料（更新费用、契约更新料）；仲介手数料（中介费、中介手续费）；権利金（权义金、权利金）；保証会社（保证公司、租赁保证公司）；賃貸保証（租赁保证、租房保证）；原状回復（原状恢复、恢复原状）；鍵交換（换锁、锁更换）；家賃保証（房租保证、租金保证）；地震保険（地震保险）；引越し会社（搬家公司）；粗大ゴミ（大件垃圾、大型垃圾）；資源ゴミ（资源垃圾、可回收垃圾）

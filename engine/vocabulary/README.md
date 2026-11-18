@@ -1,6 +1,6 @@
 # 词汇库子系统（vocabulary）· 标准操作流程（SOP）
 
-> **一句话定位**：仓库级、主题无关的标准化动态词汇子系统，位于 `engine/vocabulary/`。当前登记 **20 个主题、1327 条词条**（每主题 6–7 个受控分类），经交叉校验覆盖各业务线核心指标词，并同步至 **20 条业务线**的 `prompts/business-config.md`。新增任意领域词汇仅需执行一条 `topic-add` 命令，**零代码修改**。
+> **一句话定位**：仓库级、主题无关的标准化动态词汇子系统，位于 `engine/vocabulary/`。当前登记 **20 个主题、1389 条词条**（每主题 6–7 个受控分类），经交叉校验覆盖各业务线核心指标词，并同步至 **20 条业务线**的 `prompts/business-config.md`。新增任意领域词汇仅需执行一条 `topic-add` 命令，**零代码修改**。
 
 ---
 
@@ -43,9 +43,9 @@ engine/vocabulary/
 
 | 对象 | 约定 | 示例 |
 |---|---|---|
-| 主题 ID（目录名） | 小写 kebab-case，仅字母/数字/连字符 | `ssw-driver`、`economy-finance` |
+| 主题 ID（目录名） | `NN-slug`，与根目录 `00–20` 主题编号一一对应 | `01-ssw-driver`、`07-economy-finance` |
 | ID 前缀 | 2–4 位大写字母，全局唯一 | `SSW`、`ECON`、`LOG` |
-| 词库文件 | 固定 `terms.md` | `data/ssw-driver/terms.md` |
+| 词库文件 | 固定 `terms.md` | `data/01-ssw-driver/terms.md` |
 | 导入文件 | `YYYY-MM-DD_<说明>.md`（也支持 `.csv` / `.json`） | `2026-11-13_seed-economy.md` |
 | 导出产物 | `{topic}_{YYYY-MM-DD}_export.{json,csv,jsonl}` | `economy_2026-11-13_export.json` |
 | 脚本 | 小写 snake_case + `.py` | `vocab_tool.py` |
@@ -66,8 +66,8 @@ engine/vocabulary/
 
 ```powershell
 python engine/vocabulary/script/vocab_tool.py topics                                          # 查看已注册主题
-python engine/vocabulary/script/vocab_tool.py check --topic ssw-driver                        # 质量校验（当前 109 条，0 错误 0 警告）
-python engine/vocabulary/script/vocab_tool.py export --topic ssw-driver --format all          # 一键导出 json/csv/jsonl
+python engine/vocabulary/script/vocab_tool.py check --topic 01-ssw-driver                        # 质量校验（当前 109 条，0 错误 0 警告）
+python engine/vocabulary/script/vocab_tool.py export --topic 01-ssw-driver --format all          # 一键导出 json/csv/jsonl
 python engine/vocabulary/script/vocab_tool.py index                                           # 重新生成全主题索引
 ```
 
@@ -202,7 +202,7 @@ python engine/vocabulary/script/vocab_tool.py topic-add --topic smart-logistics 
 
 ```json
 {
-  "topic": "ssw-driver",
+  "topic": "01-ssw-driver",
   "name": "特定技能司机",
   "version": "v1.5",
   "generated_at": "2026-11-15T15:32:23",
@@ -290,26 +290,26 @@ python engine/vocabulary/script/vocab_tool.py topic-add --topic smart-logistics 
 
 | 业务线 | 词汇库主题 | 目标提示词 | 区块标题 |
 |---|---|---|---|
-| 01 | ssw-driver | `01-ssw-driver/prompts/business-config.md` | `## 词汇速览：特定技能司机（词汇库自动同步）` |
-| 02 | career-driver | `02-career-driver/prompts/business-config.md` | `## 词汇速览：司机职业发展（词汇库自动同步）` |
-| 03 | career-management | `03-career-management/prompts/business-config.md` | `## 词汇速览：职业管理与晋升（词汇库自动同步）` |
-| 04 | industry-logistics | `04-industry-logistics/prompts/business-config.md` | `## 词汇速览：物流行业（词汇库自动同步）` |
-| 05 | industry-autonomous | `05-industry-autonomous/prompts/business-config.md` | `## 词汇速览：自动驾驶与自动化（词汇库自动同步）` |
-| 06 | industry-technology | `06-industry-technology/prompts/business-config.md` | `## 词汇速览：技术行业（词汇库自动同步）` |
-| 07 | economy-finance | `07-economy-finance/prompts/business-config.md` | `## 词汇速览：经济与财务（词汇库自动同步）` |
-| 08 | visa-immigration | `08-visa-immigration/prompts/business-config.md` | `## 词汇速览：签证与移民（词汇库自动同步）` |
-| 09 | politics-law | `09-politics-law/prompts/business-config.md` | `## 词汇速览：政治与法律（词汇库自动同步）` |
-| 10 | education-qualification | `10-education-qualification/prompts/business-config.md` | `## 词汇速览：教育与资格（词汇库自动同步）` |
-| 11 | language-japanese | `11-language-japanese/prompts/business-config.md` | `## 词汇速览：日语语言（词汇库自动同步）` |
-| 12 | culture-life | `12-culture-life/prompts/business-config.md` | `## 词汇速览：文化与生活（词汇库自动同步）` |
-| 13 | regional-info | `13-regional-info/prompts/business-config.md` | `## 词汇速览：地区信息（词汇库自动同步）` |
-| 14 | life-operations | `14-life-operations/prompts/business-config.md` | `## 词汇速览：在日生活实务（词汇库自动同步）` |
-| 15 | health-wellbeing | `15-health-wellbeing/prompts/business-config.md` | `## 词汇速览：医疗·健康·心理（词汇库自动同步）` |
-| 16 | exit-transition-return | `16-exit-transition-return/prompts/business-config.md` | `## 词汇速览：退出·转型·回国（词汇库自动同步）` |
-| 17 | migration-compliance | `17-migration-compliance/prompts/business-config.md` | `## 词汇速览：劳务输出与中介合规（词汇库自动同步）` |
-| 18 | family-parenting | `18-family-parenting/prompts/business-config.md` | `## 词汇速览：家族·育儿·人生事件（词汇库自动同步）` |
-| 19 | safety-disaster | `19-safety-disaster/prompts/business-config.md` | `## 词汇速览：防灾·安全·治安（词汇库自动同步）` |
-| 20 | overseas-china | `20-overseas-china/prompts/business-config.md` | `## 词汇速览：中国侧行前与回国（词汇库自动同步）` |
+| 01 | 01-ssw-driver | `01-ssw-driver/prompts/business-config.md` | `## 词汇速览：特定技能司机（词汇库自动同步）` |
+| 02 | 02-career-driver | `02-career-driver/prompts/business-config.md` | `## 词汇速览：司机职业发展（词汇库自动同步）` |
+| 03 | 03-career-management | `03-career-management/prompts/business-config.md` | `## 词汇速览：职业管理与晋升（词汇库自动同步）` |
+| 04 | 04-industry-logistics | `04-industry-logistics/prompts/business-config.md` | `## 词汇速览：物流行业（词汇库自动同步）` |
+| 05 | 05-industry-autonomous | `05-industry-autonomous/prompts/business-config.md` | `## 词汇速览：自动驾驶与自动化（词汇库自动同步）` |
+| 06 | 06-industry-technology | `06-industry-technology/prompts/business-config.md` | `## 词汇速览：技术行业（词汇库自动同步）` |
+| 07 | 07-economy-finance | `07-economy-finance/prompts/business-config.md` | `## 词汇速览：经济与财务（词汇库自动同步）` |
+| 08 | 08-visa-immigration | `08-visa-immigration/prompts/business-config.md` | `## 词汇速览：签证与移民（词汇库自动同步）` |
+| 09 | 09-politics-law | `09-politics-law/prompts/business-config.md` | `## 词汇速览：政治与法律（词汇库自动同步）` |
+| 10 | 10-education-qualification | `10-education-qualification/prompts/business-config.md` | `## 词汇速览：教育与资格（词汇库自动同步）` |
+| 11 | 11-language-japanese | `11-language-japanese/prompts/business-config.md` | `## 词汇速览：日语语言（词汇库自动同步）` |
+| 12 | 12-culture-life | `12-culture-life/prompts/business-config.md` | `## 词汇速览：文化与生活（词汇库自动同步）` |
+| 13 | 13-regional-info | `13-regional-info/prompts/business-config.md` | `## 词汇速览：地区信息（词汇库自动同步）` |
+| 14 | 14-life-operations | `14-life-operations/prompts/business-config.md` | `## 词汇速览：在日生活实务（词汇库自动同步）` |
+| 15 | 15-health-wellbeing | `15-health-wellbeing/prompts/business-config.md` | `## 词汇速览：医疗·健康·心理（词汇库自动同步）` |
+| 16 | 16-exit-transition-return | `16-exit-transition-return/prompts/business-config.md` | `## 词汇速览：退出·转型·回国（词汇库自动同步）` |
+| 17 | 17-migration-compliance | `17-migration-compliance/prompts/business-config.md` | `## 词汇速览：劳务输出与中介合规（词汇库自动同步）` |
+| 18 | 18-family-parenting | `18-family-parenting/prompts/business-config.md` | `## 词汇速览：家族·育儿·人生事件（词汇库自动同步）` |
+| 19 | 19-safety-disaster | `19-safety-disaster/prompts/business-config.md` | `## 词汇速览：防灾·安全·治安（词汇库自动同步）` |
+| 20 | 20-overseas-china | `20-overseas-china/prompts/business-config.md` | `## 词汇速览：中国侧行前与回国（词汇库自动同步）` |
 
 > **说明**：同一目标文件绑定多个主题时，须使用不同的 `section_title`，避免区块标题重复。
 
@@ -364,3 +364,4 @@ python engine/vocabulary/script/vocab_tool.py topic-add --topic smart-logistics 
 | v2.0 | 2026-11-13 | 4 主题扩展至 102 条 | ssw-driver、career-driver、industry-logistics、industry-autonomous 各新增 34 条扩展种子（imports/2026-11-13_expansion-*.md），零重复、零跳过；4 主题词库 v1.2（各 102 条），全库 13 主题 1020 条；check 0 错误 0 警告，4 个业务线同步区块增量更新并通过 verify |
 | v2.1 | 2026-11-13 | 全库交叉校验与缺口补录 | 以 13 条业务线指标登记册核心指标词为基准逐词核对，发现 12 个主题共 32 项指标级缺口（如育成就劳 MOC、SPPI、物流白書、家計調査、時間外労働上限、納期遵守率等），经 imports/2026-11-13_gapfill*.md 全部补录入库（32 条，0 重复）；复核 13/13 主题完整覆盖，全库 1052 条；check / topic-check / sync verify 全部通过 |
 | v2.2 | 2026-11-17 | 文档治理更新 | 主题扩展至 20 个（14–20 接入）、全库 1327 条；README 修正主题/词条/绑定计数、补 `verify` 命令、旧路径 `prompts/tools` 与已删除主题示例（ai-security → ssw-driver）、命名约定示例、9.5 绑定表补齐 20 行 |
+| v2.3 | 2026-11-18 | 目录对齐 `NN-slug` | `data/` 20 个子目录重命名为 `NN-slug`（与根目录 00–20 主题编号一一对应）；`topics.json` / `sync.json` / 绑定表 / 示例路径同步；全库 1389 条 |

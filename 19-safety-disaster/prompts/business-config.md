@@ -201,7 +201,7 @@
 
 ## 十一、词汇库导入说明
 
-本主题词库实体 `safety-disaster` 由 `engine/vocabulary/data/safety-disaster/imports/2026-11-14_词条导入.md` 导入，并已在 `engine/vocabulary/config/sync.json` 绑定；下方「词汇速览」区块由 `sync_vocab.py` 自动维护，请勿手工编辑。
+本主题词库实体 `safety-disaster` 由 `engine/vocabulary/data/19-safety-disaster/imports/2026-11-14_词条导入.md` 导入，并已在 `engine/vocabulary/config/sync.json` 绑定；下方「词汇速览」区块由 `sync_vocab.py` 自动维护，请勿手工编辑。
 
 ---
 
@@ -215,10 +215,10 @@
 
 ---
 
-<!-- VOCAB-SYNC:BEGIN topic=safety-disaster do-not-edit -->
+<!-- VOCAB-SYNC:BEGIN topic=19-safety-disaster do-not-edit -->
 ## 词汇速览：防灾·安全·治安（词汇库自动同步）
 
-> 由 `engine/vocabulary/script/sync_vocab.py` 自动维护：词汇库 safety-disaster v1.2，共 40 条（同步于 2026-11-18T09:46:12）。标记区间内请勿手工编辑；词条变更走词汇库导入流程（engine/vocabulary/README.md 第三节），同步机制见第九节。
+> 由 `engine/vocabulary/script/sync_vocab.py` 自动维护：词汇库 19-safety-disaster v1.2，共 40 条（同步于 2026-11-18T11:10:01）。标记区间内请勿手工编辑；词条变更走词汇库导入流程（engine/vocabulary/README.md 第三节），同步机制见第九节。
 
 - **防灾体制**（12）：防災計画（防灾计划）；避難所（避难所、疏散场所）；防災行政无线（防灾行政无线）；防災訓練（防灾训练、避难训练）；警戒レベル（警戒级别）；地震（震災）；台風（台风）；豪雨（暴雨）；土砂災害（泥石流）；洪水（水害）；津波（海啸）；火山（火山噴火）
 - **避难与情报**（9）：避難指示（避难指示）；避難勧告（避难劝告）；防災メール（防灾邮件）；情報難民（情报难民）；多言語防災気象情報（多语言防灾气象情报）；緊急地震速報（紧急地震速报）；警報（警报）；警戒（警戒態勢）；避難（避难）

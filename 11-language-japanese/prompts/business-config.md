@@ -187,10 +187,10 @@
 
 ---
 
-<!-- VOCAB-SYNC:BEGIN topic=language-japanese do-not-edit -->
+<!-- VOCAB-SYNC:BEGIN topic=11-language-japanese do-not-edit -->
 ## 词汇速览：日语语言（词汇库自动同步）
 
-> 由 `engine/vocabulary/script/sync_vocab.py` 自动维护：词汇库 language-japanese v1.3，共 70 条（同步于 2026-11-18T09:07:29）。标记区间内请勿手工编辑；词条变更走词汇库导入流程（engine/vocabulary/README.md 第三节），同步机制见第九节。
+> 由 `engine/vocabulary/script/sync_vocab.py` 自动维护：词汇库 11-language-japanese v1.3，共 70 条（同步于 2026-11-18T11:10:01）。标记区间内请勿手工编辑；词条变更走词汇库导入流程（engine/vocabulary/README.md 第三节），同步机制见第九节。
 
 - **语言能力与考试**（13）：日本語能力試験（JLPT）；N1（一級）；N2（二級）；N3（三級）；N4（四級）；N5（五級）；JFT-Basic（国際交流基金日本語基礎テスト）；BJT（ビジネス日本語能力テスト）；聴解（聴解問題）；読解（読解問題）；言語知識（文字・語彙・文法）；合格基準（合格点）；受験料（検定料）
 - **语法与句型**（12）：助詞（てにをは）；活用（語形変化）；敬体（です・ます体）；常体（だ・である体）；受身（受け身）；使役（使役形）；条件形（条件表現）；意向形（意志形）；可能形（可能表現）；て形（てフォーム）；自動詞；他動詞

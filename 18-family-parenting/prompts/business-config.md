@@ -211,7 +211,7 @@
 
 ## 十一、词汇库导入说明
 
-本主题词库实体 `family-parenting` 由 `engine/vocabulary/data/family-parenting/imports/2026-11-14_词条导入.md` 导入，并已在 `engine/vocabulary/config/sync.json` 绑定；下方「词汇速览」区块由 `sync_vocab.py` 自动维护，请勿手工编辑。
+本主题词库实体 `family-parenting` 由 `engine/vocabulary/data/18-family-parenting/imports/2026-11-14_词条导入.md` 导入，并已在 `engine/vocabulary/config/sync.json` 绑定；下方「词汇速览」区块由 `sync_vocab.py` 自动维护，请勿手工编辑。
 
 ---
 
@@ -225,10 +225,10 @@
 
 ---
 
-<!-- VOCAB-SYNC:BEGIN topic=family-parenting do-not-edit -->
+<!-- VOCAB-SYNC:BEGIN topic=18-family-parenting do-not-edit -->
 ## 词汇速览：家族·育儿·人生事件（词汇库自动同步）
 
-> 由 `engine/vocabulary/script/sync_vocab.py` 自动维护：词汇库 family-parenting v1.4，共 50 条（同步于 2026-11-18T09:46:12）。标记区间内请勿手工编辑；词条变更走词汇库导入流程（engine/vocabulary/README.md 第三节），同步机制见第九节。
+> 由 `engine/vocabulary/script/sync_vocab.py` 自动维护：词汇库 18-family-parenting v1.4，共 50 条（同步于 2026-11-18T11:10:01）。标记区间内请勿手工编辑；词条变更走词汇库导入流程（engine/vocabulary/README.md 第三节），同步机制见第九节。
 
 - **家族滞在**（5）：家族滞在（家族滞在ビザ、家族带同）；扶養（扶養義務、扶養関係）；在職証明書（在职证明）；住民税課税証明書（住民税证明、课税证明）；納税証明書（纳税证明）
 - **婚姻与离婚**（7）：国際結婚（国际结婚、涉外婚姻）；婚姻届（结婚登记、婚姻申报）；離婚（离婚）；親権（亲权、监护权）；面会交流（探视权、会面交往）；同居（同住）；養子（养子）

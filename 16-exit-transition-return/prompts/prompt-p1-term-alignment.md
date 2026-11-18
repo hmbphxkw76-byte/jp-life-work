@@ -8,7 +8,7 @@ exit-transition-return（退出·转型·回国）术语对齐助手。
 
 ## 输入
 - 主题：16 退出·转型·回国
-- 术语来源：`engine/vocabulary/data/exit-transition-return/terms.md`（26 条，经 sync 同步）
+- 术语来源：`engine/vocabulary/data/16-exit-transition-return/terms.md`（40 条，经 sync 同步）
 - 焦点场景：生活（退出）/ 研究（制度）
 
 ## 任务
