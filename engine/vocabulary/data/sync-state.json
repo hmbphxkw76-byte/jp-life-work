@@ -124,8 +124,8 @@
       "target": "../../02-career-driver/prompts/business-config.md",
       "vocab_version": "v1.3",
       "term_count": 104,
-      "synced_at": "2026-11-13T20:08:47",
-      "source_hash": "6f06fe9259f1bc8e0f542ce68f6f0dd1ac12bcdbe2dc01760d88451a04890fd0",
+      "synced_at": "2026-11-18T09:09:08",
+      "source_hash": "1c15c8f0c6b568b6de44f1929e2b1591387c36041dcc7d0704ea35e99bb9cc99",
       "term_hashes": {
         "CDR-001": "27360c88f8ede226cec5f3499ef6729706b94bb35e11b0d1ea50e1c7556bd9b3",
         "CDR-002": "01237a929f551ad991346e2807a4bdaaae1ef408b114b4e8c52b52970a3cee22",
@@ -238,8 +238,8 @@
       "target": "../../03-career-management/prompts/business-config.md",
       "vocab_version": "v1.2",
       "term_count": 72,
-      "synced_at": "2026-11-13T20:08:47",
-      "source_hash": "f4ceccf97a95f4a8ba22cf579cd97153b780419682953213c2505d2dfedefdc5",
+      "synced_at": "2026-11-18T09:09:08",
+      "source_hash": "3052cd658f8e86886f757b087657e83d5e32f0a86969855516e1b0d03f2017ec",
       "term_hashes": {
         "CMG-001": "909866cab4cb76eb89819b737be87c3343097bd2359d6862efce1acb8caeac67",
         "CMG-002": "68dba04aaea54c9d31816363ea2ba4d831b1cd977f2fd8030aad8c435e8145f9",
@@ -318,10 +318,10 @@
     "industry-logistics=>../../04-industry-logistics/prompts/business-config.md": {
       "topic": "industry-logistics",
       "target": "../../04-industry-logistics/prompts/business-config.md",
-      "vocab_version": "v1.3",
-      "term_count": 106,
-      "synced_at": "2026-11-13T20:08:48",
-      "source_hash": "d5ae3a7cecca7cdcb13d7c0938385989e33d0af5c19ea01ea8ff9379d5f0eb07",
+      "vocab_version": "v1.4",
+      "term_count": 109,
+      "synced_at": "2026-11-18T09:07:29",
+      "source_hash": "865f0c960ccfb6ccc2205b07614bf8b8087b8c9b148691e4c61a08a5633b1d98",
       "term_hashes": {
         "LOG-001": "6f46c07253d27c49ec4e13f939a33a8109faa96b8f6e57d759dc70dbbeb77986",
         "LOG-002": "1171b0ed697a0a6a3573a33b4794026d7000683c8b1ee87f880533f61331427a",
@@ -428,16 +428,19 @@
         "LOG-103": "eca6c236a5f9a8b6e8ee81102f819d3754bddea620639dd597a6f6e6653cef71",
         "LOG-104": "c68fdfb41c23ce26660a1b31d2721dfeb39ab17dbbc14957e900a9da81c255d6",
         "LOG-105": "bdda975e963617dea98bb4c9d70edeb1298f2dab8e909fbf764c772953a37293",
-        "LOG-106": "68b91ea87a291265346149dddeaab1978abec25df5ac83393498621696b2e1e2"
+        "LOG-106": "68b91ea87a291265346149dddeaab1978abec25df5ac83393498621696b2e1e2",
+        "LOG-107": "204fc17a50ba007a1baffd93a87da27aab691f1855ab194de2333ca2cc1c3c49",
+        "LOG-108": "ae7e1db65ccad2c0dda9e1e69e9879916f4f2e65658fe8733d19f47da36dc6f1",
+        "LOG-109": "2e511337845d7e6b6e10d2b1ed1507e7b6e5bb8c7c12c6c836901cf5d32e2b49"
       }
     },
     "industry-autonomous=>../../05-industry-autonomous/prompts/business-config.md": {
       "topic": "industry-autonomous",
       "target": "../../05-industry-autonomous/prompts/business-config.md",
-      "vocab_version": "v1.3",
-      "term_count": 104,
-      "synced_at": "2026-11-13T20:08:48",
-      "source_hash": "ad61ec310f6040dbddcad25a9ca3bc4c5f1858c25dec96e0017de6a669e6654a",
+      "vocab_version": "v1.4",
+      "term_count": 106,
+      "synced_at": "2026-11-18T09:07:30",
+      "source_hash": "183f1a27236bea18213ff0c9ead69d9356b4b1192d67f0b5538f8830d0ec6e27",
       "term_hashes": {
         "AUT-001": "cb0ed9d5adb68ba8c2f4e67b864dc9d7aee9af24971374d6f29513e19d7c8139",
         "AUT-002": "3f753554f8afbbcf9bf59ecefa99de34e7889f969e5972425ca83e508e1ab76d",
@@ -542,7 +545,9 @@
         "AUT-101": "d585f8a34b7be6bf5f7bed87cfc3f7bad7758cfcc5d5d8d1f4fd90cf7171cdea",
         "AUT-102": "c1fa238d12932cff594fb448ace07e6f2e3c022589ce2af232eaa82bbe059d8d",
         "AUT-103": "fa154d7d3bf24aa9c7ee235f84579eafda19d5a547fe01d88f5265de847f4356",
-        "AUT-104": "5d4f3090a7b94983298f9c81c5667699ca82a16a942f2875515b281a2318e888"
+        "AUT-104": "5d4f3090a7b94983298f9c81c5667699ca82a16a942f2875515b281a2318e888",
+        "AUT-105": "f88bbee02dd3c02cf33240fd03dc7789ea8f427559a2b9625f80558f81f7f1ca",
+        "AUT-106": "31c32637ae083b50a4069212cb641bceb13a698ab50e6cf10f44b9f472b4008a"
       }
     },
     "industry-technology=>../../06-industry-technology/prompts/business-config.md": {
@@ -550,8 +555,8 @@
       "target": "../../06-industry-technology/prompts/business-config.md",
       "vocab_version": "v1.2",
       "term_count": 74,
-      "synced_at": "2026-11-13T20:08:48",
-      "source_hash": "d58543283f709dccf1e4a26789aedd76b5632ab43410737803b8ec2f4ff60353",
+      "synced_at": "2026-11-18T09:09:08",
+      "source_hash": "2ee0c80248913864e79a9cf78f2f4759efb91aa27ce1cd72fed852407c90aa18",
       "term_hashes": {
         "TEC-001": "74604f1eb06dccfa20a0fbd3ae9efb9f7d262b83928789e893d703d05fd095a0",
         "TEC-002": "ad0b9a4c864633369b0250ee1ae0b3db55bd360b47a3ec2d6e4c168bf8c2d6cb",
@@ -721,8 +726,8 @@
       "target": "../../08-visa-immigration/prompts/business-config.md",
       "vocab_version": "v1.3",
       "term_count": 79,
-      "synced_at": "2026-11-14T20:57:56",
-      "source_hash": "36477f39334d6b398e1c8aba362cf0c884235c1fe54c8fd7e38aa668aeae82ca",
+      "synced_at": "2026-11-18T09:09:08",
+      "source_hash": "b1e857ddea3f6318bec7ac1c416598164922b1e294e6750c5abd651a95da6902",
       "term_hashes": {
         "VIS-001": "fe6379489f6e0df33da0ea3f7453b1f5f1d78fedaafc5dec447cace51887cf1b",
         "VIS-002": "a9c21171d63324be11c7afb2582c016a02d73c7bd56736f483b4379434d2d003",
@@ -980,10 +985,10 @@
     "language-japanese=>../../11-language-japanese/prompts/business-config.md": {
       "topic": "language-japanese",
       "target": "../../11-language-japanese/prompts/business-config.md",
-      "vocab_version": "v1.2",
-      "term_count": 69,
-      "synced_at": "2026-11-13T20:08:49",
-      "source_hash": "aeb1c70b7fef7170a6d8cac44953a709608e876e8de79cd9598d5eec1b7e2282",
+      "vocab_version": "v1.3",
+      "term_count": 70,
+      "synced_at": "2026-11-18T09:07:29",
+      "source_hash": "24244e42d54e0e40a3fe8333a624d3a41e87b64c1700ade2799ce4cd900b53a0",
       "term_hashes": {
         "JPN-001": "3cb6b594ad725156bcc71c9a549d0620142ded32f008597ae40b6b440d7f2f3a",
         "JPN-002": "be74e8b734291ff661afbfa2088041d58e90eeb79f54f64a03cfb0b5085e63e6",
@@ -1053,7 +1058,8 @@
         "JPN-066": "6034286c1325c2114bd70b401438b4a4baa25183b5d41d12ac5761857bc311a3",
         "JPN-067": "f3f9d48d6059b8f682055ac699ffac8111c266a5cd465e748d914bf718bd38e8",
         "JPN-068": "29203bb6d6e9311461c37913b4b615c292560654ce19993015ddad76e1ce4a96",
-        "JPN-069": "a71e166db48f29d8dab811930338b6f05d496c54ef8ac621968e5cc72e765f3e"
+        "JPN-069": "a71e166db48f29d8dab811930338b6f05d496c54ef8ac621968e5cc72e765f3e",
+        "JPN-070": "3cda4597119051bb9b2906f06d47a7762445bbbd807838bcb3f6a4a53725d8fe"
       }
     },
     "culture-life=>../../12-culture-life/prompts/business-config.md": {
@@ -1144,8 +1150,8 @@
       "target": "../../13-regional-info/prompts/business-config.md",
       "vocab_version": "v1.2",
       "term_count": 69,
-      "synced_at": "2026-11-13T20:08:49",
-      "source_hash": "dabe37bdca4ae1d6adb5565fbaad397de6490a27886a7b81ff8bd8f0983a3a31",
+      "synced_at": "2026-11-18T09:09:08",
+      "source_hash": "937da48df53729a2d680ac08444a8c187989be51246c7bc86afdf4999bae865e",
       "term_hashes": {
         "REG-001": "b8b811a3990f6ca70663590b73f024238b9f05013ed3c0bf4a0e7e69516aaaff",
         "REG-002": "c13a7aaa7a34fe8e5af271904e7be28fe14b9ec41a6bafda782f697fe18c6ffa",
@@ -1400,10 +1406,10 @@
     "family-parenting=>../../18-family-parenting/prompts/business-config.md": {
       "topic": "family-parenting",
       "target": "../../18-family-parenting/prompts/business-config.md",
-      "vocab_version": "v1.2",
-      "term_count": 36,
-      "synced_at": "2026-11-15T14:28:34",
-      "source_hash": "b6322bed67b1ab166e2f76cba2be36f4c44bda5edcf32d343db611515d197d8e",
+      "vocab_version": "v1.3",
+      "term_count": 37,
+      "synced_at": "2026-11-18T09:07:30",
+      "source_hash": "deecf6bf75a2debc17efd42f3baab55e1570e19a8665e721897c04c1a0e8509b",
       "term_hashes": {
         "FAM-001": "389862b82f48714c9e9ced0c4454459b3254022223a42dcf186a6c2893b3a871",
         "FAM-002": "6906da35bcfc9ff9de86a39d006190fc7f586bdddf217b4ba680eb357f2dd36a",
@@ -1440,7 +1446,8 @@
         "FAM-033": "7fdbaffb82a4e0291624977298be9ccc814cea630a333a0dbe274679a6d8def2",
         "FAM-034": "0afd30b0966b963e1e809ce6926c1b896994dcea94cf3144975afe3c9e58fdae",
         "FAM-035": "ad38b12cfa80f2299446ad53c62bd8880bf22a82454abe76e2ebb80cffa1d7bb",
-        "FAM-036": "2f411c68f39f4ed245f79e755d8386b76496fdea7500a75a1e525cd796d06f9e"
+        "FAM-036": "2f411c68f39f4ed245f79e755d8386b76496fdea7500a75a1e525cd796d06f9e",
+        "FAM-037": "fcce1faf1bc6c9dfd9cfa440f19ca9bc731eb8e85c7419a2e7781843fa5f4440"
       }
     },
     "safety-disaster=>../../19-safety-disaster/prompts/business-config.md": {
