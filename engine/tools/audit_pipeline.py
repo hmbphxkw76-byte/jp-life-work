@@ -578,9 +578,15 @@ def cmd_sync() -> int:
                      "html_hash": cur_html})
             n += 1
     state = rebuild_status(load_ledger())
+    # 对账：台账可能残留已删除报告的历史事件，状态文件不应保留指向不存在文件的条目
+    ghosts = sorted(r for r in state if not (ROOT / r).is_file())
+    for r in ghosts:
+        state.pop(r, None)
     write_status(state)
     build_registry()
     print(f"同步完成：{n} 份审计失效（stale），需修改后重新走流程")
+    if ghosts:
+        print(f"对账清理：{len(ghosts)} 条幽灵状态（报告文件不存在）：{', '.join(ghosts)}")
     return 0
 
 

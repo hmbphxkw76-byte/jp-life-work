@@ -25,6 +25,9 @@ industry-technology（技术行业）覆盖核验助手。核验定义清晰度�
 ## 常见误解
 把「资格证」当「能力」
 
+## 信息缺口
+动作：补 IT 人材不足数据；验收：数据有来源 + 年份，纳入登记册
+
 ## 落盘后审计（提交前必做）
 
 落盘后依次运行 `python engine/tools/audit_preflight.py --report <报告相对路径>`、`python engine/tools/audit_check.py --report <报告相对路径>`，修正全部 P0/P1 后执行 `python engine/tools/audit_pipeline.py --submit --report <报告相对路径>` 提交审计（未通过初审不得合并）。

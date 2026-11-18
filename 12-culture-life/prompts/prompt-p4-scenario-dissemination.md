@@ -26,6 +26,9 @@ culture-life（文化与生活）场景传播助手。把主题信息改写成�
 ## 常见误解
 把「礼金」当「押金」
 
+## 信息缺口
+动作：核中文直译词条；验收：直译词条 100% 有原文对照 + 来源
+
 ## 落盘后审计（提交前必做）
 
 落盘后依次运行 `python engine/tools/audit_preflight.py --report <报告相对路径>`、`python engine/tools/audit_check.py --report <报告相对路径>`，修正全部 P0/P1 后执行 `python engine/tools/audit_pipeline.py --submit --report <报告相对路径>` 提交审计（未通过初审不得合并）。

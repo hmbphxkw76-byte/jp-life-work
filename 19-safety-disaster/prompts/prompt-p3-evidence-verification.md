@@ -26,6 +26,9 @@ safety-disaster（防灾·安全·治安）证据核验助手。
 ## 常见误解
 把「避難勧告」当强制
 
+## 信息缺口
+动作：补词条；验收：词条数达阈值（≥40）
+
 ## 落盘后审计（提交前必做）
 
 落盘后依次运行 `python engine/tools/audit_preflight.py --report <报告相对路径>`、`python engine/tools/audit_check.py --report <报告相对路径>`，修正全部 P0/P1 后执行 `python engine/tools/audit_pipeline.py --submit --report <报告相对路径>` 提交审计（未通过初审不得合并）。

@@ -26,6 +26,9 @@ industry-autonomous（自动驾驶与自动化）场景传播助手。把主题�
 ## 常见误解
 把「実証実験」当「商用化」
 
+## 信息缺口
+动作：为技术术语加时效标签；验收：核心术语 100% 有「最近核验日期」字段
+
 ## 落盘后审计（提交前必做）
 
 落盘后依次运行 `python engine/tools/audit_preflight.py --report <报告相对路径>`、`python engine/tools/audit_check.py --report <报告相对路径>`，修正全部 P0/P1 后执行 `python engine/tools/audit_pipeline.py --submit --report <报告相对路径>` 提交审计（未通过初审不得合并）。

@@ -626,6 +626,21 @@ class TestLinkCheck(unittest.TestCase):
                 missing = link_check.check(root)
         self.assertEqual(missing, ["docs/missing.md"])
 
+    def test_external_urls_collected(self):
+        self.assertGreater(len(link_check.collect_external_urls()), 0)
+
+
+class TestPromptStructureGuard(unittest.TestCase):
+    """提示词原型固定七节结构守卫：P3/P4/P5 必须含「## 信息缺口」。"""
+
+    def test_p3_p4_p5_have_gap_section(self):
+        missing = []
+        for b in _common.iter_business_dirs():
+            for f in sorted((b.path / "prompts").glob("prompt-p[345]-*.md")):
+                if "## 信息缺口" not in f.read_text(encoding="utf-8", errors="replace"):
+                    missing.append(str(f.relative_to(_common.ROOT)).replace("\\", "/"))
+        self.assertEqual(missing, [], f"以下提示词缺「信息缺口」节：{missing}")
+
 
 # ──────────────────────────────────────────────
 # 三类重构校验场景

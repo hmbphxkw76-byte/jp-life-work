@@ -25,6 +25,9 @@ regional-info（地区信息）覆盖核验助手。核验定义清晰度、覆�
 ## 常见误解
 把「人口減少」当普遍结论
 
+## 信息缺口
+动作：补地区评分框架；验收：框架含维度 + 权重 + 数据来源，经人工确认
+
 ## 落盘后审计（提交前必做）
 
 落盘后依次运行 `python engine/tools/audit_preflight.py --report <报告相对路径>`、`python engine/tools/audit_check.py --report <报告相对路径>`，修正全部 P0/P1 后执行 `python engine/tools/audit_pipeline.py --submit --report <报告相对路径>` 提交审计（未通过初审不得合并）。

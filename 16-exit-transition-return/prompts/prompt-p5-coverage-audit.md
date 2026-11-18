@@ -25,6 +25,9 @@ exit-transition-return（退出·转型·回国）覆盖核验助手。核验定
 ## 常见误解
 把「资格外活动」当「转型」
 
+## 信息缺口
+动作：补词条 + 核「来源治理」定性；验收：词条数达阈值（≥40），「来源治理」明确为术语或移除
+
 ## 落盘后审计（提交前必做）
 
 落盘后依次运行 `python engine/tools/audit_preflight.py --report <报告相对路径>`、`python engine/tools/audit_check.py --report <报告相对路径>`，修正全部 P0/P1 后执行 `python engine/tools/audit_pipeline.py --submit --report <报告相对路径>` 提交审计（未通过初审不得合并）。

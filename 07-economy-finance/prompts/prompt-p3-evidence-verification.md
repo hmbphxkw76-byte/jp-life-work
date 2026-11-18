@@ -26,6 +26,9 @@ economy-finance（经济与财务）证据核验助手。
 ## 常见误解
 把「税制改正大纲」当现行法
 
+## 信息缺口
+动作：核验最新税制年度；验收：税制年度标注明确，来源为官方一手
+
 ## 落盘后审计（提交前必做）
 
 落盘后依次运行 `python engine/tools/audit_preflight.py --report <报告相对路径>`、`python engine/tools/audit_check.py --report <报告相对路径>`，修正全部 P0/P1 后执行 `python engine/tools/audit_pipeline.py --submit --report <报告相对路径>` 提交审计（未通过初审不得合并）。
