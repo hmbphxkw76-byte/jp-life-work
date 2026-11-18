@@ -80,7 +80,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git commit -m "ci: html-sync 同步报告 HTML 与汇总页"
-          git push
+          git push --force-with-lease
 
       # 阶段收尾：无论成败清理缓存、临时产物与 pip 缓存，保证流水线结束后无残留。
       - uses: ./.github/actions/workspace-cleanup

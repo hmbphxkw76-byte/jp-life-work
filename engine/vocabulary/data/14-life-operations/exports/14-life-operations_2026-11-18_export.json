@@ -1,0 +1,1017 @@
+{
+  "topic": "14-life-operations",
+  "name": "在日生活实务",
+  "version": "v1.4",
+  "generated_at": "2026-11-18T20:05:39",
+  "count": 49,
+  "categories": {
+    "在留与住民登记": 3,
+    "住房与租赁": 15,
+    "行政手续": 8,
+    "场景与表达": 11,
+    "通信与网络": 4,
+    "银行与支付": 4,
+    "水电燃气与基础设施": 4
+  },
+  "terms": [
+    {
+      "id": "LOP-001",
+      "term": "在留卡",
+      "aliases": [
+        "在留カード",
+        "residence card"
+      ],
+      "category": "在留与住民登记",
+      "tags": [
+        "身份",
+        "在留"
+      ],
+      "definition": "日本政府发给在留外国人的身份与在留资格证明卡，与在留资格、住民票三者不得混用",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-14",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "LOP-002",
+      "term": "住民票",
+      "aliases": [
+        "residence certificate"
+      ],
+      "category": "在留与住民登记",
+      "tags": [
+        "住所",
+        "登记"
+      ],
+      "definition": "自治体发行的住民登记证明，是开户、入学、行政手续的基础住所凭证",
+      "source": "総務省",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-14",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "LOP-003",
+      "term": "番地",
+      "aliases": [
+        "门牌号",
+        "地番"
+      ],
+      "category": "住房与租赁",
+      "tags": [
+        "住所",
+        "地址"
+      ],
+      "definition": "日本地址中的街区与门牌编号，与「住址」和「建物名」区分",
+      "source": "一般知識",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-14",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "LOP-004",
+      "term": "転出",
+      "aliases": [
+        "转出",
+        "転出届"
+      ],
+      "category": "行政手续",
+      "tags": [
+        "住所",
+        "迁移"
+      ],
+      "definition": "离开现住所时向自治体申报迁出，决定住民票与国保的转移时点",
+      "source": "総務省",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-14",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "LOP-005",
+      "term": "転入",
+      "aliases": [
+        "转入",
+        "転入届"
+      ],
+      "category": "行政手续",
+      "tags": [
+        "住所",
+        "迁移"
+      ],
+      "definition": "迁入新住所后在规定期限内向自治体申报迁入",
+      "source": "総務省",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-14",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "LOP-006",
+      "term": "国民健康保険",
+      "aliases": [
+        "国保",
+        "国民健康保险"
+      ],
+      "category": "行政手续",
+      "tags": [
+        "医疗",
+        "保险"
+      ],
+      "definition": "面向非公司职员与自营业者的公共医疗保险，与用者保险并列的两大制度",
+      "source": "厚生労働省",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-14",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "LOP-007",
+      "term": "被用者健康保険",
+      "aliases": [
+        "被用者保险",
+        "医保",
+        "社会保険"
+      ],
+      "category": "行政手续",
+      "tags": [
+        "医疗",
+        "保险"
+      ],
+      "definition": "公司职员加入的厚生年金健康保险，保险证与国保区分",
+      "source": "厚生労働省",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-14",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "LOP-008",
+      "term": "健康保険証",
+      "aliases": [
+        "保险证",
+        "健康保险证"
+      ],
+      "category": "行政手续",
+      "tags": [
+        "医疗",
+        "凭证"
+      ],
+      "definition": "就医时提示的保险凭证；在留卡不可代替保险证",
+      "source": "厚生労働省",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-14",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "LOP-009",
+      "term": "高額療養費",
+      "aliases": [
+        "高额疗养",
+        "高额疗养费制度"
+      ],
+      "category": "行政手续",
+      "tags": [
+        "医疗",
+        "报销"
+      ],
+      "definition": "医疗费用超过一定额度后按限度额事后报销的制度",
+      "source": "厚生労働省",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-14",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "LOP-010",
+      "term": "人間ドック",
+      "aliases": [
+        "综合体检",
+        "精密体检"
+      ],
+      "category": "场景与表达",
+      "tags": [
+        "体检",
+        "预防"
+      ],
+      "definition": "自费综合检查，与雇主或自治体实施的健康诊断区分",
+      "source": "厚生労働省",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-14",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "LOP-011",
+      "term": "健康診断",
+      "aliases": [
+        "体检",
+        "健康检查"
+      ],
+      "category": "场景与表达",
+      "tags": [
+        "体检",
+        "预防"
+      ],
+      "definition": "雇主或自治体依法实施的定期健康检查",
+      "source": "厚生労働省",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-14",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "LOP-012",
+      "term": "敷金",
+      "aliases": [
+        "押金",
+        "保证金"
+      ],
+      "category": "住房与租赁",
+      "tags": [
+        "租房",
+        "费用"
+      ],
+      "definition": "租赁契约押金，退租时扣除修缮等后结算，与礼金区分",
+      "source": "国土交通省",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-14",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "LOP-013",
+      "term": "礼金",
+      "aliases": [
+        "谢礼"
+      ],
+      "category": "住房与租赁",
+      "tags": [
+        "租房",
+        "费用"
+      ],
+      "definition": "签约时支付给房东的谢礼，通常不退还",
+      "source": "国土交通省",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-14",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "LOP-014",
+      "term": "更新料",
+      "aliases": [
+        "更新费用",
+        "契约更新料"
+      ],
+      "category": "住房与租赁",
+      "tags": [
+        "租房",
+        "费用"
+      ],
+      "definition": "定期租赁契约更新时支付的费用",
+      "source": "国土交通省",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-14",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "LOP-015",
+      "term": "仲介手数料",
+      "aliases": [
+        "中介费",
+        "中介手续费"
+      ],
+      "category": "住房与租赁",
+      "tags": [
+        "租房",
+        "费用"
+      ],
+      "definition": "不动产中介撮合租赁成功时收取的报酬，受上限规制",
+      "source": "国土交通省",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-14",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "LOP-016",
+      "term": "権利金",
+      "aliases": [
+        "权义金",
+        "权利金"
+      ],
+      "category": "住房与租赁",
+      "tags": [
+        "租房",
+        "费用"
+      ],
+      "definition": "租赁契约中支付给房东的对价，性质与礼金、敷金不同",
+      "source": "一般知識",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-14",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "LOP-017",
+      "term": "定期券",
+      "aliases": [
+        "月票",
+        "通勤定期券"
+      ],
+      "category": "场景与表达",
+      "tags": [
+        "交通",
+        "票券"
+      ],
+      "definition": "一定区间与期间内无限次乘车的通勤/通学月票",
+      "source": "一般知識",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-14",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "LOP-018",
+      "term": "ICカード",
+      "aliases": [
+        "IC卡",
+        "交通卡"
+      ],
+      "category": "场景与表达",
+      "tags": [
+        "交通",
+        "支付"
+      ],
+      "definition": "充值式电子票卡，与定期券性质不同",
+      "source": "一般知識",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-14",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "LOP-019",
+      "term": "格安SIM",
+      "aliases": [
+        "廉价SIM",
+        "廉价卡"
+      ],
+      "category": "通信与网络",
+      "tags": [
+        "通信",
+        "资费"
+      ],
+      "definition": "租用回路的低价移动通信服务，与自有回路的大手运营商区分",
+      "source": "総務省",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-14",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "LOP-020",
+      "term": "光回線",
+      "aliases": [
+        "光纤",
+        "光宽带"
+      ],
+      "category": "通信与网络",
+      "tags": [
+        "通信",
+        "宽带"
+      ],
+      "definition": "有线光纤宽带，与移动路由器区分",
+      "source": "総務省",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-14",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "LOP-021",
+      "term": "ポケットWiFi",
+      "aliases": [
+        "口袋WiFi",
+        "移动路由器"
+      ],
+      "category": "通信与网络",
+      "tags": [
+        "通信",
+        "宽带"
+      ],
+      "definition": "便携移动路由器，适合短期或过渡使用",
+      "source": "一般知識",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-14",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "LOP-022",
+      "term": "猫眼快递",
+      "aliases": [
+        "猫眼",
+        "快递柜"
+      ],
+      "category": "场景与表达",
+      "tags": [
+        "生活",
+        "快递"
+      ],
+      "definition": "日本常见自助快递/寄件柜服务",
+      "source": "一般知識",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-14",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "LOP-023",
+      "term": "サンド",
+      "aliases": [
+        "沙箱",
+        "沙盒"
+      ],
+      "category": "场景与表达",
+      "tags": [
+        "生活",
+        "设施"
+      ],
+      "definition": "儿童游玩的沙坑设施",
+      "source": "一般知識",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-14",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "LOP-024",
+      "term": "便利店",
+      "aliases": [
+        "コンビニ"
+      ],
+      "category": "场景与表达",
+      "tags": [
+        "生活",
+        "支付"
+      ],
+      "definition": "24 小时综合便利店，可办理支付、复印、快递等",
+      "source": "一般知識",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-14",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "LOP-025",
+      "term": "免费Wi-Fi",
+      "aliases": [
+        "フリーWi-Fi",
+        "公共无线网"
+      ],
+      "category": "通信与网络",
+      "tags": [
+        "通信",
+        "公共"
+      ],
+      "definition": "公共场所提供的免费无线网，安全性与稳定性低于自有回路",
+      "source": "総務省",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-14",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "LOP-026",
+      "term": "乗換案内",
+      "aliases": [
+        "换乘案内",
+        "换乘查询"
+      ],
+      "category": "场景与表达",
+      "tags": [
+        "公共交通",
+        "换乘",
+        "App"
+      ],
+      "definition": "查询铁路与巴士换乘路线、时刻、费用与所需时间的服务与应用",
+      "source": "需核实原文",
+      "first_added": "2026-11-15",
+      "last_updated": "2026-11-15",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "LOP-027",
+      "term": "電車",
+      "aliases": [
+        "电车",
+        "electric train"
+      ],
+      "category": "场景与表达",
+      "tags": [
+        "公共交通",
+        "电车",
+        "通勤"
+      ],
+      "definition": "日本城市主要公共交通方式之一，由 JR、私铁与地下铁运营，是通勤与通学的主力",
+      "source": "国土交通省",
+      "first_added": "2026-11-15",
+      "last_updated": "2026-11-15",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "LOP-028",
+      "term": "保証会社",
+      "aliases": [
+        "保证公司",
+        "租赁保证公司"
+      ],
+      "category": "住房与租赁",
+      "tags": [
+        "住房",
+        "保证",
+        "费用"
+      ],
+      "definition": "为承租人提供租赁债务保证的专门公司，外国人租房常需加入并支付首次费用",
+      "source": "国土交通省",
+      "first_added": "2026-11-15",
+      "last_updated": "2026-11-15",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "LOP-029",
+      "term": "賃貸保証",
+      "aliases": [
+        "租赁保证",
+        "租房保证"
+      ],
+      "category": "住房与租赁",
+      "tags": [
+        "住房",
+        "保证",
+        "契约"
+      ],
+      "definition": "由保证公司为承租人提供房租与相关费用保证的制度",
+      "source": "国土交通省",
+      "first_added": "2026-11-15",
+      "last_updated": "2026-11-15",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "LOP-030",
+      "term": "原状回復",
+      "aliases": [
+        "原状恢复",
+        "恢复原状"
+      ],
+      "category": "住房与租赁",
+      "tags": [
+        "住房",
+        "契约",
+        "退室"
+      ],
+      "definition": "退租时将房屋恢复到入住时状态的义务，费用承担需在契约中确认",
+      "source": "国土交通省",
+      "first_added": "2026-11-15",
+      "last_updated": "2026-11-15",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "LOP-031",
+      "term": "鍵交換",
+      "aliases": [
+        "换锁",
+        "锁更换"
+      ],
+      "category": "住房与租赁",
+      "tags": [
+        "住房",
+        "安全",
+        "费用"
+      ],
+      "definition": "入住或退租时更换门锁的费用与手续",
+      "source": "需核实原文",
+      "first_added": "2026-11-15",
+      "last_updated": "2026-11-15",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "LOP-032",
+      "term": "家賃保証",
+      "aliases": [
+        "房租保证",
+        "租金保证"
+      ],
+      "category": "住房与租赁",
+      "tags": [
+        "住房",
+        "保证",
+        "费用"
+      ],
+      "definition": "保证公司承担房租支付保证的制度总称",
+      "source": "国土交通省",
+      "first_added": "2026-11-15",
+      "last_updated": "2026-11-15",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "LOP-033",
+      "term": "地震保険",
+      "aliases": [
+        "地震保险"
+      ],
+      "category": "住房与租赁",
+      "tags": [
+        "住房",
+        "保险",
+        "地震"
+      ],
+      "definition": "补偿地震损失的保险，常与火灾保险捆绑，租赁时可能被要求加入",
+      "source": "金融庁",
+      "first_added": "2026-11-15",
+      "last_updated": "2026-11-15",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "LOP-034",
+      "term": "引越し会社",
+      "aliases": [
+        "搬家公司"
+      ],
+      "category": "住房与租赁",
+      "tags": [
+        "搬家",
+        "服务",
+        "费用"
+      ],
+      "definition": "提供搬家与家具运送服务的公司",
+      "source": "総務省",
+      "first_added": "2026-11-15",
+      "last_updated": "2026-11-15",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "LOP-035",
+      "term": "粗大ゴミ",
+      "aliases": [
+        "大件垃圾",
+        "大型垃圾"
+      ],
+      "category": "住房与租赁",
+      "tags": [
+        "垃圾",
+        "粗大",
+        "回收"
+      ],
+      "definition": "自治体规定的大件废弃物，需预约并支付回收费",
+      "source": "環境省",
+      "first_added": "2026-11-15",
+      "last_updated": "2026-11-15",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "LOP-036",
+      "term": "資源ゴミ",
+      "aliases": [
+        "资源垃圾",
+        "可回收垃圾"
+      ],
+      "category": "住房与租赁",
+      "tags": [
+        "垃圾",
+        "资源",
+        "回收"
+      ],
+      "definition": "可回收的资源类垃圾，按自治体分类与收集日投放",
+      "source": "環境省",
+      "first_added": "2026-11-15",
+      "last_updated": "2026-11-15",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "LOP-037",
+      "term": "健康保険加入",
+      "aliases": [
+        "健康保险加入",
+        "医保加入"
+      ],
+      "category": "在留与住民登记",
+      "tags": [
+        "保险",
+        "手续",
+        "加入"
+      ],
+      "definition": "住民登记后办理健康保险加入的手续",
+      "source": "厚生労働省",
+      "first_added": "2026-11-15",
+      "last_updated": "2026-11-15",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "LOP-038",
+      "term": "解約",
+      "aliases": [
+        "解约",
+        "解除契约"
+      ],
+      "category": "场景与表达",
+      "tags": [
+        "解约",
+        "手续",
+        "契约"
+      ],
+      "definition": "解除手机、网络、水电等契约的手续",
+      "source": "需核实原文",
+      "first_added": "2026-11-15",
+      "last_updated": "2026-11-15",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "LOP-039",
+      "term": "印鑑",
+      "aliases": [
+        "印章",
+        "印鉴"
+      ],
+      "category": "银行与支付",
+      "tags": [
+        "银行",
+        "印鉴",
+        "身份"
+      ],
+      "definition": "用于银行开户与契约的印章，日本人常用实印与认印",
+      "source": "金融庁",
+      "first_added": "2026-11-15",
+      "last_updated": "2026-11-15",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "LOP-040",
+      "term": "口座振替",
+      "aliases": [
+        "账户扣款",
+        "自动转账"
+      ],
+      "category": "银行与支付",
+      "tags": [
+        "银行",
+        "支付",
+        "扣款"
+      ],
+      "definition": "从银行账户自动扣缴水电燃气等费用的方式",
+      "source": "各金融機関",
+      "first_added": "2026-11-15",
+      "last_updated": "2026-11-15",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "LOP-041",
+      "term": "デビットカード",
+      "aliases": [
+        "借记卡",
+        "debit card"
+      ],
+      "category": "银行与支付",
+      "tags": [
+        "银行",
+        "支付",
+        "借记卡"
+      ],
+      "definition": "直接从银行账户扣款的支付卡，无需信用审查",
+      "source": "金融庁",
+      "first_added": "2026-11-15",
+      "last_updated": "2026-11-15",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "LOP-042",
+      "term": "電気料金",
+      "aliases": [
+        "电费",
+        "电力费用"
+      ],
+      "category": "水电燃气与基础设施",
+      "tags": [
+        "电力",
+        "费用",
+        "水电"
+      ],
+      "definition": "电力使用费，2016 年全面自由化后可比较选择",
+      "source": "資源エネルギー庁",
+      "first_added": "2026-11-15",
+      "last_updated": "2026-11-15",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "LOP-043",
+      "term": "ガス料金",
+      "aliases": [
+        "燃气费",
+        "煤气费"
+      ],
+      "category": "水电燃气与基础设施",
+      "tags": [
+        "燃气",
+        "费用",
+        "水电"
+      ],
+      "definition": "燃气使用费，2017 年全面自由化后可比较选择",
+      "source": "資源エネルギー庁",
+      "first_added": "2026-11-15",
+      "last_updated": "2026-11-15",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "LOP-044",
+      "term": "水道料金",
+      "aliases": [
+        "水费",
+        "自来水费"
+      ],
+      "category": "水电燃气与基础设施",
+      "tags": [
+        "水道",
+        "费用",
+        "水电"
+      ],
+      "definition": "自来水使用费，由自治体或委托业者征收",
+      "source": "国土交通省",
+      "first_added": "2026-11-15",
+      "last_updated": "2026-11-15",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "LOP-045",
+      "term": "電力自由化",
+      "aliases": [
+        "电力自由化"
+      ],
+      "category": "水电燃气与基础设施",
+      "tags": [
+        "电力",
+        "自由化",
+        "制度"
+      ],
+      "definition": "2016 年起电力零售全面自由化，用户可自由选择电力公司",
+      "source": "資源エネルギー庁",
+      "first_added": "2026-11-15",
+      "last_updated": "2026-11-15",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "LOP-046",
+      "term": "多言語窓口",
+      "aliases": [
+        "多语言窗口",
+        "外语窗口"
+      ],
+      "category": "行政手续",
+      "tags": [
+        "行政",
+        "多语言",
+        "窗口"
+      ],
+      "definition": "自治体提供的外语对应行政服务窗口",
+      "source": "各自治体",
+      "first_added": "2026-11-15",
+      "last_updated": "2026-11-15",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "LOP-047",
+      "term": "年金手帳",
+      "aliases": [
+        "年金手册",
+        "养老金手册"
+      ],
+      "category": "行政手续",
+      "tags": [
+        "年金",
+        "手帐",
+        "行政"
+      ],
+      "definition": "记录年金加入与缴纳情况的蓝色手册，2020 年代起逐步数字化",
+      "source": "日本年金機構",
+      "first_added": "2026-11-15",
+      "last_updated": "2026-11-15",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "LOP-048",
+      "term": "通勤手当",
+      "aliases": [
+        "通勤补贴",
+        "交通补贴"
+      ],
+      "category": "场景与表达",
+      "tags": [
+        "通勤",
+        "补贴",
+        "费用"
+      ],
+      "definition": "雇主对员工通勤费用的补贴，常见于全职雇佣",
+      "source": "厚生労働省",
+      "first_added": "2026-11-15",
+      "last_updated": "2026-11-15",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "LOP-049",
+      "term": "キャッシュレス",
+      "aliases": [
+        "无现金",
+        "电子支付"
+      ],
+      "category": "银行与支付",
+      "tags": [
+        "支付",
+        "无现金",
+        "决済"
+      ],
+      "definition": "不依赖现金的支付方式总称，含信用卡、电子支付与二维码支付",
+      "source": "経済産業省",
+      "first_added": "2026-11-15",
+      "last_updated": "2026-11-15",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    }
+  ]
+}

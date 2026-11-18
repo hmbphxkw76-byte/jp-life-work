@@ -956,6 +956,13 @@ class TestCovReportDiff(unittest.TestCase):
         self.assertEqual(report_diff._similarity("", ""), 1.0)
         self.assertEqual(report_diff._normalize_text("  a   b  "), "a b")
 
+    def test_cross_month_baseline_regression(self):
+        """P2-7：第 2 期起输出上期对比基线（机制验证）。"""
+        stats = {"new": 0, "mod": 1, "del": 0, "equal": 2}
+        s = report_diff.diff_summary(stats, "2026-11", "2026-10")
+        self.assertIn("2026-10", s)
+        self.assertIn("修改 1 处", s)
+
     def test_serialize_escapes(self):
         blocks = report_diff.extract_blocks("<p>a &amp; b</p><p>&lt;x&gt;</p>")
         self.assertEqual(blocks[0].html, "<p>a &amp; b</p>")

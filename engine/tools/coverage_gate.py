@@ -75,6 +75,43 @@ def measure(config: dict) -> tuple[float, str, bool]:
     return float(total), buf.getvalue(), ok
 
 
+def per_tool_coverage() -> dict:
+    """逐工具覆盖率明细（P2-3：薄弱点可定位）。
+
+    读取最近一次 ``.coverage`` 数据，对 ``engine/tools/*.py`` 逐文件计算
+    ``(语句数 - 缺失) / 语句数``，返回 ``{文件名: 百分比}``（升序，薄弱项在前）。
+    无数据时返回空字典。
+    """
+    import coverage
+
+    cov = coverage.Coverage(config_file=str(RC))
+    try:
+        cov.load()
+    except Exception:  # noqa: BLE001
+        return {}
+    data = cov.get_data()
+    out: dict[str, float] = {}
+    for f in data.measured_files():
+        rel = Path(f)
+        try:
+            rel = rel.relative_to(ROOT)
+        except ValueError:
+            continue
+        parts = rel.parts
+        if len(parts) < 2 or parts[0] != "engine" or parts[1] != "tools":
+            continue
+        if rel.suffix != ".py" or rel.name == "_common.py":
+            continue
+        try:
+            _fn, statements, _excluded, missing, _fmt = cov.analysis2(f)[:5]
+        except Exception:  # noqa: BLE001
+            continue
+        n = len(statements or [])
+        if n:
+            out[rel.name] = round((n - len(missing or [])) / n * 100, 1)
+    return dict(sorted(out.items(), key=lambda kv: kv[1]))
+
+
 def evaluate(total: float, threshold: int, enforce: bool) -> int:
     """按阈值与开关判定退出码（0 达标 / 1 阻断 / 2 观察）。"""
     if total >= threshold:
@@ -116,12 +153,17 @@ def main(argv: list[str] | None = None) -> int:
         # 测试全绿是覆盖率的前提；测试失败一律阻断
         code = 1
 
+    per_tool = per_tool_coverage()
+    weakest = dict(list(per_tool.items())[:5])
+
     if args.update_baseline:
         write_baseline(ROOT / config["baseline"], {
             "threshold": config["threshold"],
             "enforce": config["enforce"],
             "total_percent": round(total, 2),
             "tests_green": ok,
+            "per_tool": per_tool,
+            "weakest": weakest,
         })
 
     if args.porcelain:
@@ -130,6 +172,8 @@ def main(argv: list[str] | None = None) -> int:
             "threshold": config["threshold"],
             "enforce": config["enforce"],
             "tests_green": ok,
+            "per_tool": per_tool,
+            "weakest": weakest,
             "exit_code": code,
         }, ensure_ascii=False))
     else:
@@ -137,6 +181,9 @@ def main(argv: list[str] | None = None) -> int:
             print(report.rstrip())
         print(f"覆盖率 {total:.1f}%（阈值 {config['threshold']}%，"
               f"enforce={config['enforce']}）（测试 {'全绿' if ok else '有失败'}）")
+        if weakest:
+            print("薄弱工具 Top5：" + "、".join(
+                f"{k} {v}%" for k, v in weakest.items()))
         if code == 1:
             print("[BLOCK] 覆盖率未达阈值或测试失败，阻断合并")
         elif code == 2:

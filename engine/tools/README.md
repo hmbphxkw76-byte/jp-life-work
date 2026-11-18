@@ -62,6 +62,7 @@ python -m unittest discover -s engine/tests -v   # 单元测试（881 项，以 
 | l5_meta_check.py | 校验 | audit-gate.yml「L5 证据元评估」（P1-4：覆盖率 / 合格率 / basis 缺失 / 依据充分度） |
 | decision_metrics.py | 决策支持 | validate.yml「决策度量校验」（P1-6：五问收敛率 / 判定率 / 缺失 / 决策日志变化） |
 | source_check.py | 校验 | validate.yml「来源条目 schema 校验」（P1-2：来源章节 / URL 条目时点 / 分级，产出 source-index.json） |
+| counterexample_scan.py | 校验 | validate.yml「反例扫描」（P2-1：绝对化 / 以偏概全 / 无来源断言候选） |
 
 ## 校验类
 
@@ -222,6 +223,19 @@ python engine/tools/source_check.py --json
 把各报告来源章节的条目解析为机读四元组（来源文本 / 时点年份 / URL / 分级分组），产出
 `engine/report-audits/audit/source-index.json`。校验：来源章节存在性（阻断）；URL 条目
 时点年份、来源分级声明（告警）。退出码：0=通过；1=缺来源章节（阻断）；2=仅告警。
+
+### counterexample_scan.py — 反例 / 绝对化论断扫描（P2-1）
+
+```bash
+python engine/tools/counterexample_scan.py            # 扫描并写清单
+python engine/tools/counterexample_scan.py --check    # 不写文件
+python engine/tools/counterexample_scan.py --json
+```
+
+复用 `audit_check.absolute_hits`（已排除否定 / 引述语境）扫描**可证伪的反例候选**：
+`ABS`（绝对化措辞）、`GEN`（以偏概全 / 过度推断）、`NOSRC`（断言句无来源标记）。
+产出 `engine/report-audits/audit/counterexample-report.json` 供人工补反例或限定语。
+退出码：0=无命中；1=扫描失败；2=存在候选（需裁定）。
 
 ## 生成类
 
@@ -424,7 +438,7 @@ python engine/tools/automation_status.py activity --threshold 45               #
   `engine/vocabulary/config/report-cycles.json`。
 
 <!-- REGISTRY:BEGIN -->
-> 注册表快照：工具 42 · 类型 12 · 主题 21 · 工作流 8（由 `generate_registry.py` 生成，勿手工编辑）
+> 注册表快照：工具 43 · 类型 12 · 主题 21 · 工作流 8（由 `generate_registry.py` 生成，勿手工编辑）
 <!-- REGISTRY:END -->
 
 

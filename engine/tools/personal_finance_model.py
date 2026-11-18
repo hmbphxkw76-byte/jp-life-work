@@ -208,12 +208,12 @@ def build_model() -> dict:
         return result
 
     living_low, living_high = living  # type: ignore[misc]
-    take_home = income * (1 - SOCIAL_INSURANCE_RATE)  # type: ignore[operator]
+    take_home = income * (1 - SOCIAL_INSURANCE_RATE)
     save_high = take_home - living_low   # 生活成本低 → 储蓄高
     save_low = take_home - living_high   # 生活成本高 → 储蓄低
     initial_low, initial_high = initial  # type: ignore[misc]
-    upfront_low = initial_low + driving + intermediary + exam  # type: ignore[operator]
-    upfront_high = initial_high + driving + intermediary + exam  # type: ignore[operator]
+    upfront_low = initial_low + driving + intermediary + exam
+    upfront_high = initial_high + driving + intermediary + exam
 
     result["metrics"] = {
         "take_home_monthly": round(take_home, 2),

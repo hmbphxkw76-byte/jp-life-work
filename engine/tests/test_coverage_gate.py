@@ -147,5 +147,41 @@ class TestMain(unittest.TestCase):
         self.assertEqual(code, 1)
 
 
+class TestPerToolCoverage(unittest.TestCase):
+    """P2-3：逐工具覆盖率明细。"""
+
+    def _fake_cov(self, files):
+        data = unittest.mock.Mock()
+        data.measured_files.return_value = list(files)
+        cov = unittest.mock.Mock()
+        cov.get_data.return_value = data
+        cov.analysis2.side_effect = lambda f: (f, [1, 2, 3, 4], [], [4], "")
+        return cov
+
+    def test_per_tool_filters_and_sorts(self):
+        root = ROOT
+        files = [
+            str(root / "engine" / "tools" / "bbb.py"),
+            str(root / "engine" / "tools" / "aaa.py"),
+            str(root / "engine" / "scripts" / "ccc.py"),
+            str(root / "engine" / "tools" / "_common.py"),
+        ]
+        with unittest.mock.patch.dict("sys.modules", {"coverage": unittest.mock.Mock()}):
+            import coverage as _cov_mod
+            with unittest.mock.patch.object(_cov_mod, "Coverage",
+                                            return_value=self._fake_cov(files)):
+                out = coverage_gate.per_tool_coverage()
+        self.assertEqual(set(out), {"aaa.py", "bbb.py"})
+        self.assertEqual(list(out), sorted(out, key=lambda k: out[k]))
+
+    def test_per_tool_empty_on_no_data(self):
+        with unittest.mock.patch.dict("sys.modules", {"coverage": unittest.mock.Mock()}):
+            import coverage as _cov_mod
+            cov = unittest.mock.Mock()
+            cov.load.side_effect = Exception("no data")
+            with unittest.mock.patch.object(_cov_mod, "Coverage", return_value=cov):
+                self.assertEqual(coverage_gate.per_tool_coverage(), {})
+
+
 if __name__ == "__main__":
     unittest.main()

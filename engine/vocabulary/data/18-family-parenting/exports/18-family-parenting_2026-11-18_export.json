@@ -1,0 +1,979 @@
+{
+  "topic": "18-family-parenting",
+  "name": "家族·育儿·人生事件",
+  "version": "v1.4",
+  "generated_at": "2026-11-18T20:05:40",
+  "count": 50,
+  "categories": {
+    "家族滞在": 5,
+    "婚姻与离婚": 7,
+    "生育与育儿": 9,
+    "保育与教育": 10,
+    "扶养与支援": 8,
+    "继承与终末": 4,
+    "场景与表达": 7
+  },
+  "terms": [
+    {
+      "id": "FAM-001",
+      "term": "家族滞在",
+      "aliases": [
+        "家族滞在ビザ",
+        "家族带同"
+      ],
+      "category": "家族滞在",
+      "tags": [
+        "在留",
+        "家属"
+      ],
+      "definition": "扶养资格者的配偶或子的在留资格；特定技能1号原则上不可带家属",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-14",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "FAM-002",
+      "term": "扶養",
+      "aliases": [
+        "扶養義務",
+        "扶養関係"
+      ],
+      "category": "家族滞在",
+      "tags": [
+        "家属",
+        "扶养"
+      ],
+      "definition": "扶养人对配偶或子女承担的抚养义务与关系",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-14",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "FAM-003",
+      "term": "在職証明書",
+      "aliases": [
+        "在职证明"
+      ],
+      "category": "家族滞在",
+      "tags": [
+        "家属",
+        "书类"
+      ],
+      "definition": "雇主出具的证明雇佣状态与职业的书类，家族滞在申请必备",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-14",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "FAM-004",
+      "term": "住民税課税証明書",
+      "aliases": [
+        "住民税证明",
+        "课税证明"
+      ],
+      "category": "家族滞在",
+      "tags": [
+        "家属",
+        "书类"
+      ],
+      "definition": "自治体出具的住民税课税或非课税证明，用于扶养能力审查",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-14",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "FAM-005",
+      "term": "納税証明書",
+      "aliases": [
+        "纳税证明"
+      ],
+      "category": "家族滞在",
+      "tags": [
+        "家属",
+        "书类"
+      ],
+      "definition": "证明一年间总所得与纳税状况的书类",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-14",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "FAM-006",
+      "term": "国際結婚",
+      "aliases": [
+        "国际结婚",
+        "涉外婚姻"
+      ],
+      "category": "婚姻与离婚",
+      "tags": [
+        "婚姻",
+        "国际"
+      ],
+      "definition": "一方为外国人、婚姻成立要件依本国法判断的婚姻",
+      "source": "法務省",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-14",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "FAM-007",
+      "term": "婚姻届",
+      "aliases": [
+        "结婚登记",
+        "婚姻申报"
+      ],
+      "category": "婚姻与离婚",
+      "tags": [
+        "婚姻",
+        "书类"
+      ],
+      "definition": "向市区町村提交的结婚成立申报书",
+      "source": "法務省",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-14",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "FAM-008",
+      "term": "離婚",
+      "aliases": [
+        "离婚"
+      ],
+      "category": "婚姻与离婚",
+      "tags": [
+        "离婚"
+      ],
+      "definition": "婚姻关系依協議・調停・裁判等方式消灭",
+      "source": "法務省",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-14",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "FAM-009",
+      "term": "親権",
+      "aliases": [
+        "亲权",
+        "监护权"
+      ],
+      "category": "婚姻与离婚",
+      "tags": [
+        "离婚",
+        "子女"
+      ],
+      "definition": "离婚后对子女的监护与教养权分配",
+      "source": "家庭裁判所",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-14",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "FAM-010",
+      "term": "面会交流",
+      "aliases": [
+        "探视权",
+        "会面交往"
+      ],
+      "category": "婚姻与离婚",
+      "tags": [
+        "离婚",
+        "子女"
+      ],
+      "definition": "离婚后未任親権者一方与子女会面交往的安排",
+      "source": "家庭裁判所",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-14",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "FAM-011",
+      "term": "出産育児一時金",
+      "aliases": [
+        "出产育儿一时金",
+        "生育一时金"
+      ],
+      "category": "生育与育儿",
+      "tags": [
+        "生育",
+        "给付"
+      ],
+      "definition": "加入健康保险者分娩时可申请的一次性给付",
+      "source": "厚生労働省",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-14",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "FAM-012",
+      "term": "母子手帳",
+      "aliases": [
+        "母子健康手帳",
+        "母婴健康手册"
+      ],
+      "category": "生育与育儿",
+      "tags": [
+        "生育",
+        "母子"
+      ],
+      "definition": "自治体交付的孕期与乳幼儿健康管理手册",
+      "source": "厚生労働省",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-14",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "FAM-013",
+      "term": "産科医療給付金",
+      "aliases": [
+        "产科医疗给付"
+      ],
+      "category": "生育与育儿",
+      "tags": [
+        "生育",
+        "给付"
+      ],
+      "definition": "与出産育児一時金并行的产科医疗相关给付口径",
+      "source": "厚生労働省",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-14",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "FAM-014",
+      "term": "育児休業",
+      "aliases": [
+        "育儿休假"
+      ],
+      "category": "生育与育儿",
+      "tags": [
+        "育儿",
+        "劳动"
+      ],
+      "definition": "抚育婴幼儿的休假制度，与雇用保険给付衔接",
+      "source": "厚生労働省",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-14",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "FAM-015",
+      "term": "産後パパ育休",
+      "aliases": [
+        "产后爸爸育婴假",
+        "男性育休"
+      ],
+      "category": "生育与育儿",
+      "tags": [
+        "育儿",
+        "劳动"
+      ],
+      "definition": "男性在产后一定期间内取得的育婴休假",
+      "source": "厚生労働省",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-14",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "FAM-016",
+      "term": "子育て支援",
+      "aliases": [
+        "育儿支援"
+      ],
+      "category": "生育与育儿",
+      "tags": [
+        "育儿",
+        "支援"
+      ],
+      "definition": "自治体与社区提供的育儿支持服务总称",
+      "source": "厚生労働省",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-14",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "FAM-017",
+      "term": "保育所",
+      "aliases": [
+        "保育园",
+        "认可保育所"
+      ],
+      "category": "保育与教育",
+      "tags": [
+        "保育"
+      ],
+      "definition": "以需要保育的儿童为对象的福祉设施",
+      "source": "厚生労働省",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-14",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "FAM-018",
+      "term": "認定こども園",
+      "aliases": [
+        "认定儿童园"
+      ],
+      "category": "保育与教育",
+      "tags": [
+        "保育",
+        "教育"
+      ],
+      "definition": "教育与保育一体的设施，兼具幼稚園与保育所功能",
+      "source": "文部科学省",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-14",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "FAM-019",
+      "term": "幼稚園",
+      "aliases": [
+        "幼儿园"
+      ],
+      "category": "保育与教育",
+      "tags": [
+        "教育"
+      ],
+      "definition": "学校教育法上的学校，3岁以上为对象",
+      "source": "文部科学省",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-14",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "FAM-020",
+      "term": "待機児童",
+      "aliases": [
+        "待机儿童",
+        "等待入园儿童"
+      ],
+      "category": "保育与教育",
+      "tags": [
+        "保育"
+      ],
+      "definition": "希望入保育所但因定员不足未能入所的儿童",
+      "source": "厚生労働省",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-14",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "FAM-021",
+      "term": "日本語指導",
+      "aliases": [
+        "日语指导"
+      ],
+      "category": "保育与教育",
+      "tags": [
+        "教育",
+        "日语"
+      ],
+      "definition": "为需要日语支援的儿童提供的抽离或特别的教育课程",
+      "source": "文部科学省",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-14",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "FAM-022",
+      "term": "就学援助",
+      "aliases": [
+        "就学资助"
+      ],
+      "category": "保育与教育",
+      "tags": [
+        "教育",
+        "支援"
+      ],
+      "definition": "学校教育法第19条上市町村必须援助的就学经济支持",
+      "source": "文部科学省",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-14",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "FAM-023",
+      "term": "児童手当",
+      "aliases": [
+        "儿童手当",
+        "子ども手当"
+      ],
+      "category": "扶养与支援",
+      "tags": [
+        "给付",
+        "儿童"
+      ],
+      "definition": "对监护儿童者按月给付的津贴",
+      "source": "内閣府",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-14",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "FAM-024",
+      "term": "児童扶養手当",
+      "aliases": [
+        "儿童抚养手当"
+      ],
+      "category": "扶养与支援",
+      "tags": [
+        "给付",
+        "单亲"
+      ],
+      "definition": "对单亲家庭监护儿童者给付的津贴",
+      "source": "厚生労働省",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-14",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "FAM-025",
+      "term": "生活保護",
+      "aliases": [
+        "生活保护",
+        "低保"
+      ],
+      "category": "扶养与支援",
+      "tags": [
+        "支援",
+        "生活"
+      ],
+      "definition": "对困难家庭提供最低生活与医疗等扶助的公的扶助制度",
+      "source": "厚生労働省",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-14",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "FAM-026",
+      "term": "母子福祉資金",
+      "aliases": [
+        "母子福利资金"
+      ],
+      "category": "扶养与支援",
+      "tags": [
+        "支援",
+        "单亲"
+      ],
+      "definition": "对母子家庭提供的资金贷付等支援",
+      "source": "厚生労働省",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-14",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "FAM-027",
+      "term": "第3号被保険者",
+      "aliases": [
+        "第三号被保险人",
+        "被抚养配偶"
+      ],
+      "category": "扶养与支援",
+      "tags": [
+        "保险",
+        "扶养"
+      ],
+      "definition": "厚生年金加入者的被抚养配偶，免直接缴纳厚生年金",
+      "source": "日本年金機構",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-14",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "FAM-028",
+      "term": "相続",
+      "aliases": [
+        "继承"
+      ],
+      "category": "继承与终末",
+      "tags": [
+        "继承"
+      ],
+      "definition": "死亡时对其财产的法定承继",
+      "source": "法務省",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-14",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "FAM-029",
+      "term": "遺言",
+      "aliases": [
+        "遗嘱"
+      ],
+      "category": "继承与终末",
+      "tags": [
+        "继承"
+      ],
+      "definition": "对被继承人财产的意定安排",
+      "source": "法務省",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-14",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "FAM-030",
+      "term": "遺産分割",
+      "aliases": [
+        "遗产分割"
+      ],
+      "category": "继承与终末",
+      "tags": [
+        "继承"
+      ],
+      "definition": "多数继承人之间对遗产的分割协议或裁判",
+      "source": "法務省",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-14",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "FAM-031",
+      "term": "埋葬",
+      "aliases": [
+        "火葬"
+      ],
+      "category": "继承与终末",
+      "tags": [
+        "终末"
+      ],
+      "definition": "死亡后的埋葬或火葬及相关许可",
+      "source": "厚生労働省",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-14",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "FAM-032",
+      "term": "家族帯同",
+      "aliases": [
+        "家属带同",
+        "带家属"
+      ],
+      "category": "场景与表达",
+      "tags": [
+        "场景",
+        "家属"
+      ],
+      "definition": "在留期间携配偶或子女共同在留的安排",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-14",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "FAM-033",
+      "term": "定住者",
+      "aliases": [
+        "定住ビザ",
+        "定住资格"
+      ],
+      "category": "场景与表达",
+      "tags": [
+        "在留",
+        "长期"
+      ],
+      "definition": "特定事由（如家族滞在高卒后就业）的在留资格",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-14",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "FAM-034",
+      "term": "世帯年収",
+      "aliases": [
+        "家庭年收入"
+      ],
+      "category": "场景与表达",
+      "tags": [
+        "扶养",
+        "收入"
+      ],
+      "definition": "同一生计家庭的年度收入，永住与扶养审查口径",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-14",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "FAM-035",
+      "term": "家庭イベント",
+      "aliases": [
+        "家庭事件",
+        "人生事件"
+      ],
+      "category": "场景与表达",
+      "tags": [
+        "场景"
+      ],
+      "definition": "结婚、生育、离婚、继承等在留与行政手续的统称",
+      "source": "仓库规范",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-14",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "FAM-036",
+      "term": "出産",
+      "aliases": [
+        "分娩",
+        "生育"
+      ],
+      "category": "生育与育儿",
+      "tags": [
+        "生育",
+        "医疗",
+        "出産"
+      ],
+      "definition": "生育行为；日本设有出産育児一時金等一次性补助，由健康保险支付",
+      "source": "厚生労働省",
+      "first_added": "2026-11-15",
+      "last_updated": "2026-11-15",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "FAM-037",
+      "term": "介護休業",
+      "aliases": [
+        "介护休假",
+        "介护休业"
+      ],
+      "category": "生育与育儿",
+      "tags": [
+        "介护",
+        "休假"
+      ],
+      "definition": "因护理家人而休业的制度；与育児休業对照",
+      "source": "厚生労働省",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "FAM-038",
+      "term": "出生届",
+      "aliases": [
+        "出生申报"
+      ],
+      "category": "生育与育儿",
+      "tags": [
+        "生育",
+        "手续"
+      ],
+      "definition": "出生时向自治体提交的申报",
+      "source": "厚生労働省",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "FAM-039",
+      "term": "教育",
+      "aliases": [
+        "教育制度"
+      ],
+      "category": "保育与教育",
+      "tags": [
+        "教育"
+      ],
+      "definition": "子女的教育制度与过程",
+      "source": "文部科学省",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "FAM-040",
+      "term": "学校",
+      "aliases": [
+        "スクール"
+      ],
+      "category": "保育与教育",
+      "tags": [
+        "教育",
+        "学校"
+      ],
+      "definition": "实施教育的机构",
+      "source": "文部科学省",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "FAM-041",
+      "term": "入園",
+      "aliases": [
+        "入园"
+      ],
+      "category": "保育与教育",
+      "tags": [
+        "保育",
+        "入园"
+      ],
+      "definition": "进入保育所或幼儿园",
+      "source": "厚生労働省",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "FAM-042",
+      "term": "児童",
+      "aliases": [
+        "儿童"
+      ],
+      "category": "保育与教育",
+      "tags": [
+        "儿童",
+        "福祉"
+      ],
+      "definition": "未成年的孩子",
+      "source": "厚生労働省",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "FAM-043",
+      "term": "年金",
+      "aliases": [
+        "养老金"
+      ],
+      "category": "扶养与支援",
+      "tags": [
+        "年金",
+        "制度"
+      ],
+      "definition": "抚养制度中的公共年金",
+      "source": "日本年金機構",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "FAM-044",
+      "term": "医療",
+      "aliases": [
+        "医疗"
+      ],
+      "category": "扶养与支援",
+      "tags": [
+        "医疗",
+        "扶养"
+      ],
+      "definition": "抚养对象享受的医疗保障",
+      "source": "厚生労働省",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "FAM-045",
+      "term": "保険",
+      "aliases": [
+        "保险"
+      ],
+      "category": "扶养与支援",
+      "tags": [
+        "保险",
+        "扶养"
+      ],
+      "definition": "抚养对象加入的保险",
+      "source": "厚生労働省",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "FAM-046",
+      "term": "住宅",
+      "aliases": [
+        "住居"
+      ],
+      "category": "场景与表达",
+      "tags": [
+        "居住",
+        "场景"
+      ],
+      "definition": "家庭居住形态",
+      "source": "国土交通省",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "FAM-047",
+      "term": "生活",
+      "aliases": [
+        "暮らし"
+      ],
+      "category": "场景与表达",
+      "tags": [
+        "生活",
+        "场景"
+      ],
+      "definition": "家庭的日常生活",
+      "source": "厚生労働省",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "FAM-048",
+      "term": "同居",
+      "aliases": [
+        "同住"
+      ],
+      "category": "婚姻与离婚",
+      "tags": [
+        "婚姻",
+        "同居"
+      ],
+      "definition": "家庭成员同住的状态",
+      "source": "厚生労働省",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "FAM-049",
+      "term": "独身",
+      "aliases": [
+        "未婚"
+      ],
+      "category": "场景与表达",
+      "tags": [
+        "婚姻",
+        "场景"
+      ],
+      "definition": "未婚状态",
+      "source": "厚生労働省",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "FAM-050",
+      "term": "養子",
+      "aliases": [
+        "养子"
+      ],
+      "category": "婚姻与离婚",
+      "tags": [
+        "婚姻",
+        "收养"
+      ],
+      "definition": "通过收养建立的亲子关系",
+      "source": "厚生労働省",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    }
+  ]
+}

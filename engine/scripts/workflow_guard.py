@@ -58,7 +58,7 @@ DEFAULT_STALE_TIMEOUT = 1800  # 锁超时（秒）：30 分钟未更新视为失
 DEFAULT_WAIT = 0              # 默认不等待锁，快速失败
 
 TASK_NAME_RE = re.compile(r"^[a-z0-9][a-z0-9-]{0,62}$")
-SCOPES = ("checkout", "merge")
+SCOPES = ("checkout", "merge", "commit", "push")
 
 
 class GuardError(RuntimeError):
