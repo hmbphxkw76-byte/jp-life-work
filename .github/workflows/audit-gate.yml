@@ -68,6 +68,18 @@ jobs:
           fi
           echo "audit_pipeline --gate 退出码 $code"
 
+      # 全库兜底（P1-5）：无论增量与否，对全库报告重跑审计状态校验
+      # （audited + md/HTML 指纹 + 有效 L5 证据），防止存量报告漏检。
+      - name: 全库审计兜底（audit_pipeline --gate --strict）
+        run: |
+          python engine/tools/audit_pipeline.py --gate --strict || code=$?
+          code=${code:-0}
+          if [ "$code" -ne 0 ] && [ "$code" -ne 2 ]; then
+            echo "::error::全库审计兜底阻断：存在未通过审计的存量报告（退出码 $code）"
+            exit 1
+          fi
+          echo "audit_pipeline --gate --strict 退出码 $code"
+
       # 全量多层级校验：当前存量报告 P0/P1=0；新增/变更报告引入 P0/P1 即阻断。
       - name: 多层级校验（audit_check --all）
         run: |

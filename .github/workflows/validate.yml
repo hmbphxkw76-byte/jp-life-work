@@ -133,6 +133,27 @@ jobs:
           fi
           echo "structure_check.py 退出码 ${code:-0}（2=仅告警不阻断）"
 
+      # md ↔ HTML 一致性门禁（P1-3）：HTML 是 md 的确定性派生物，
+      # 「改了 md 未同步 HTML」或「HTML 被手工改动」造成的漂移即阻断。
+      - name: md↔HTML 一致性校验（md_html_parity.py）
+        run: |
+          python engine/tools/md_html_parity.py || code=$?
+          if [ "${code:-0}" -eq 1 ]; then
+            echo "::error::md↔HTML 一致性校验存在漂移/缺失，阻断合并（改了 md 需重跑 md2html.py）"
+            exit 1
+          fi
+          echo "md_html_parity.py 退出码 ${code:-0}（2=仅告警不阻断）"
+
+      # 提示词门禁（P1-11）：命名 / 继承声明 / p3–p5 结构 / business-config 槽位与优先级。
+      - name: 提示词结构门禁（prompt_check.py）
+        run: |
+          python engine/tools/prompt_check.py || code=$?
+          if [ "${code:-0}" -eq 1 ]; then
+            echo "::error::提示词门禁存在违规（命名/继承/结构/槽位），阻断合并"
+            exit 1
+          fi
+          echo "prompt_check.py 退出码 ${code:-0}（2=仅告警不阻断）"
+
       # 新报告阻断级：期间 >= 2026-11 的报告 lint / 模板合规必须无错误项；
       # 历史报告由 --new-only 跳过，遗留项列入 lint-whitelist.json 豁免。
       - name: 报告内容 lint（新报告阻断）
