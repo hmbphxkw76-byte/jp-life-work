@@ -199,7 +199,7 @@ reports/YYYY-MM-<slug>.md  ──md2html.py──►  reports/YYYY-MM-<slug>.htm
 - **辅助开关**：报告页工具条「隐藏更新标记」对照阅读、「展开全部删除」。
 - **呈现**：报告页新标签页独立打开，页脚提供「← 返回主题 / 返回首页」。
 
-## 六、测试体系（`engine/tests/`，969 项）
+## 六、测试体系（`engine/tests/`，971 项）
 
 | 场景 | 测试类 | 覆盖 |
 |---|---|---|
@@ -454,3 +454,4 @@ python engine/scripts/cleanup_workspace.py --dry-run  # 预览将删除项
 | v2.12 | 2026-11-18 | P1 报告结构统一（P1-1） | 局限章节标准名统一为「数据可靠性与局限说明」（7 份报告改名并重走 audit）；`structure_check` 收严为仅认标准名；修复 `audit_pipeline.write_status` 幽灵状态残留（新增守卫用例）；六节测试数 939 → 940 |
 | v2.13 | 2026-11-18 | P1 来源 schema（P1-2） | 新增 `source_check.py`（来源条目四元组字段化 → `source-index.json`，10 项）接入 `validate.yml`；工具 41 → 42；六节测试数 940 → 950 |
 | v2.14 | 2026-11-18 | P2 批次（P2-1…P2-7） | 新增 `counterexample_scan.py`（7 项）、`vocab_near_check.py`（8 项）与 `docs/词库近义合并规范.md`；`coverage_gate` 增逐工具明细（2 项）；`workflow_guard` 锁域扩展 commit/push；mypy 清零并转阻断 + 一次性工具冒烟；`decision_metrics --history` 入维护流水线；P2-7 跨月基线回归；工具 42 → 43；六节测试数 950 → 969 |
+| v2.15 | 2026-11-18 | P1-9 词条 + P1-2 来源时点 | 14–20 词条补全至 ≥70（新增 245 条）；`source_check` 识别和历（令和/平成/昭和）与核对标记；6 份报告来源条目补「（2026-11 核对）」并重走审计；六节测试数 969 → 971 |

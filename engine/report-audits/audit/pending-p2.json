@@ -1,7 +1,7 @@
 {
   "version": "1.0",
   "updated": "2026-11-18",
-  "count": 235,
+  "count": 233,
   "items": [
     {
       "report": "00-decision-hub/reports/2026-11-decision-hub.md",
@@ -2312,26 +2312,6 @@
       "first_seen": "2026-11-15",
       "last_seen": "2026-11-18",
       "review_by": "2026-12-15"
-    },
-    {
-      "report": "19-safety-disaster/reports/2026-11-safety-disaster.md",
-      "code": "E7",
-      "location": "必需要素",
-      "detail": "事实单元来源标注覆盖率 18% < 20%",
-      "spec": "S-06",
-      "first_seen": "2026-11-18",
-      "last_seen": "2026-11-18",
-      "review_by": "2026-12-18"
-    },
-    {
-      "report": "19-safety-disaster/reports/2026-11-safety-disaster.md",
-      "code": "C-07",
-      "location": "事实单元来源覆盖不足",
-      "detail": "含数字事实单元（段落 + 表格行）来源覆盖率 18% < 20%（程序化门槛；语义目标 100%）（信息质量四维度）",
-      "spec": "S-06",
-      "first_seen": "2026-11-18",
-      "last_seen": "2026-11-18",
-      "review_by": "2026-12-18"
     },
     {
       "report": "19-safety-disaster/reports/2026-11-safety-disaster.md",

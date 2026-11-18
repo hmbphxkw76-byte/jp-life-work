@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "key": "b85490a4fc152147ff87db1513f8135990d8d7075f6f7f239fee9e2c103301f7",
+  "key": "cbb3143859f9c59264a78e77a332f39938f4d35f8cbe4b045ad31ffd47b2fde3",
   "findings": {
     "08-visa-immigration/reports/2026-11-visa-immigration.md": [
       {
@@ -116,26 +116,6 @@
         "code": "C-03",
         "severity": "P2",
         "report": "08-visa-immigration/reports/2026-11-visa-immigration.md",
-        "location": "跨文档重复",
-        "detail": "约 225 字的段落与 20-overseas-china/reports/2026-11-overseas-china.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
-        "spec": "S-02"
-      }
-    ],
-    "19-safety-disaster/reports/2026-11-safety-disaster.md": [
-      {
-        "layer": "L3",
-        "code": "C-07",
-        "severity": "P2",
-        "report": "19-safety-disaster/reports/2026-11-safety-disaster.md",
-        "location": "事实单元来源覆盖不足",
-        "detail": "含数字事实单元（段落 + 表格行）来源覆盖率 18% < 20%（程序化门槛；语义目标 100%）（信息质量四维度）",
-        "spec": "S-06"
-      },
-      {
-        "layer": "L4",
-        "code": "C-03",
-        "severity": "P2",
-        "report": "19-safety-disaster/reports/2026-11-safety-disaster.md",
         "location": "跨文档重复",
         "detail": "约 225 字的段落与 20-overseas-china/reports/2026-11-overseas-china.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
         "spec": "S-02"
@@ -1947,6 +1927,17 @@
         "report": "18-family-parenting/reports/2026-11-family-parenting.md",
         "location": "跨文档重复",
         "detail": "约 226 字的段落与 19-safety-disaster/reports/2026-11-safety-disaster.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      }
+    ],
+    "19-safety-disaster/reports/2026-11-safety-disaster.md": [
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "19-safety-disaster/reports/2026-11-safety-disaster.md",
+        "location": "跨文档重复",
+        "detail": "约 225 字的段落与 20-overseas-china/reports/2026-11-overseas-china.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
         "spec": "S-02"
       }
     ]

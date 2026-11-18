@@ -33,7 +33,10 @@ from _common import ROOT, atomic_write, iter_business_dirs  # noqa: E402
 
 SECTION_RE = re.compile(r"^##\s+.*(?:参考来源|来源|引用)", re.M)
 URL_RE = re.compile(r"https?://[^\s)\]]+")
-YEAR_RE = re.compile(r"(19|20)\d{2}")
+# 时点：西历 4 位年，或日本年号（令和/平成/昭和 N 年）
+YEAR_RE = re.compile(r"(?:19|20)\d{2}|(?:令和|平成|昭和)\s*\d{1,2}\s*年?")
+# 明确的核验/改定标记（机构入口页无刊行日的，以此记录核验时点）
+MARKER_RE = re.compile(r"核对|改定|换版|最終更新|最终更新")
 GRADE_RE = re.compile(r"分级|官方一手|权威|媒体|A 级|B 级|C 级")
 GROUP_RE = re.compile(r"^(?:###\s*)?[①②③④⑤]|"  # ① 日本政府官方一手
                       r"^\*\*([ABC])\b")          # **A 官方一手**
@@ -62,16 +65,18 @@ def extract_report(rel: str, text: str) -> dict:
             continue
         url = URL_RE.search(line)
         year = YEAR_RE.search(line)
+        marker = MARKER_RE.search(line)
         entries.append({
             "text": line.strip()[:200],
             "url": url.group(0) if url else "",
             "year": year.group(0) if year else "",
+            "marker": marker.group(0) if marker else "",
             "group": group,
         })
     problems: list[str] = []
     if not entries:
         problems.append("来源章节无 URL 条目")
-    no_year = sum(1 for e in entries if not e["year"])
+    no_year = sum(1 for e in entries if not e["year"] and not e["marker"])
     if no_year:
         problems.append(f"{no_year} 条 URL 条目缺时点年份")
     graded = bool(GRADE_RE.search(body)) or bool(GRADE_RE.search(text))
