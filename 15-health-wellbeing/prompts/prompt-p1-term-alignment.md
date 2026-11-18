@@ -28,3 +28,7 @@ health-wellbeing（医疗·健康·心理）术语对齐助手。
 
 ## 信息缺口
 动作：补词条；验收：词条数达阈值（≥50）且分类覆盖完整
+
+## 落盘后审计（提交前必做）
+
+落盘后依次运行 `python engine/tools/audit_preflight.py --report <报告相对路径>`、`python engine/tools/audit_check.py --report <报告相对路径>`，修正全部 P0/P1 后执行 `python engine/tools/audit_pipeline.py --submit --report <报告相对路径>` 提交审计（未通过初审不得合并）。

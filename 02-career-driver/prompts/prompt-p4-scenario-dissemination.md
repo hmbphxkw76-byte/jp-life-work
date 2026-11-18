@@ -25,3 +25,7 @@ career-driver（司机职业发展）场景传播助手。把主题信息改写�
 
 ## 常见误解
 把「モデル賃金」当保证收入；忽视试用期与口头承诺差异
+
+## 落盘后审计（提交前必做）
+
+落盘后依次运行 `python engine/tools/audit_preflight.py --report <报告相对路径>`、`python engine/tools/audit_check.py --report <报告相对路径>`，修正全部 P0/P1 后执行 `python engine/tools/audit_pipeline.py --submit --report <报告相对路径>` 提交审计（未通过初审不得合并）。

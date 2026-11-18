@@ -32,3 +32,7 @@
 
 ## 信息缺口
 - 动作：来源 URL 补「获取时间」；验收：关键数字 100% 附机构·周期·日期·状态·URL。
+
+## 落盘后审计（提交前必做）
+
+落盘后依次运行 `python engine/tools/audit_preflight.py --report <报告相对路径>`、`python engine/tools/audit_check.py --report <报告相对路径>`，修正全部 P0/P1 后执行 `python engine/tools/audit_pipeline.py --submit --report <报告相对路径>` 提交审计（未通过初审不得合并）。
