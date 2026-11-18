@@ -1,7 +1,189 @@
 {
   "version": "1.1",
-  "key": "a3fad7e3c657e48cb80cfd5c50eac5474e36b40e1c0eae587da53792d39a8591",
+  "key": "2535c469b6f8c7372872024b0184069e16c8911750373c5f621f9ce61d2f20c1",
   "findings": {
+    "00-decision-hub/reports/2026-11-decision-hub.md": [
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "00-decision-hub/reports/2026-11-decision-hub.md",
+        "location": "跨文档重复",
+        "detail": "约 221 字的段落与 01-ssw-driver/reports/2026-11-ssw-driver.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "00-decision-hub/reports/2026-11-decision-hub.md",
+        "location": "跨文档重复",
+        "detail": "约 223 字的段落与 02-career-driver/reports/2026-11-career-driver.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "00-decision-hub/reports/2026-11-decision-hub.md",
+        "location": "跨文档重复",
+        "detail": "约 223 字的段落与 03-career-management/reports/2026-11-career-management.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "00-decision-hub/reports/2026-11-decision-hub.md",
+        "location": "跨文档重复",
+        "detail": "约 223 字的段落与 04-industry-logistics/reports/2026-11-industry-logistics.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "00-decision-hub/reports/2026-11-decision-hub.md",
+        "location": "跨文档重复",
+        "detail": "约 223 字的段落与 05-industry-autonomous/reports/2026-11-industry-autonomous.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "00-decision-hub/reports/2026-11-decision-hub.md",
+        "location": "跨文档重复",
+        "detail": "约 223 字的段落与 06-industry-technology/reports/2026-11-industry-technology.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "00-decision-hub/reports/2026-11-decision-hub.md",
+        "location": "跨文档重复",
+        "detail": "约 223 字的段落与 07-economy-finance/reports/2026-11-economy-finance.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "00-decision-hub/reports/2026-11-decision-hub.md",
+        "location": "跨文档重复",
+        "detail": "约 223 字的段落与 08-visa-immigration/reports/2026-11-visa-immigration.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "00-decision-hub/reports/2026-11-decision-hub.md",
+        "location": "跨文档重复",
+        "detail": "约 223 字的段落与 09-politics-law/reports/2026-11-politics-law.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "00-decision-hub/reports/2026-11-decision-hub.md",
+        "location": "跨文档重复",
+        "detail": "约 223 字的段落与 10-education-qualification/reports/2026-11-education-qualification.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "00-decision-hub/reports/2026-11-decision-hub.md",
+        "location": "跨文档重复",
+        "detail": "约 223 字的段落与 11-language-japanese/reports/2026-11-language-japanese.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "00-decision-hub/reports/2026-11-decision-hub.md",
+        "location": "跨文档重复",
+        "detail": "约 223 字的段落与 12-culture-life/reports/2026-11-culture-life.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "00-decision-hub/reports/2026-11-decision-hub.md",
+        "location": "跨文档重复",
+        "detail": "约 223 字的段落与 13-regional-info/reports/2026-11-regional-info.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "00-decision-hub/reports/2026-11-decision-hub.md",
+        "location": "跨文档重复",
+        "detail": "约 223 字的段落与 14-life-operations/reports/2026-11-life-operations.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "00-decision-hub/reports/2026-11-decision-hub.md",
+        "location": "跨文档重复",
+        "detail": "约 223 字的段落与 15-health-wellbeing/reports/2026-11-health-wellbeing.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "00-decision-hub/reports/2026-11-decision-hub.md",
+        "location": "跨文档重复",
+        "detail": "约 223 字的段落与 16-exit-transition-return/reports/2026-11-exit-transition-return.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "00-decision-hub/reports/2026-11-decision-hub.md",
+        "location": "跨文档重复",
+        "detail": "约 223 字的段落与 17-migration-compliance/reports/2026-11-migration-compliance.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "00-decision-hub/reports/2026-11-decision-hub.md",
+        "location": "跨文档重复",
+        "detail": "约 223 字的段落与 18-family-parenting/reports/2026-11-family-parenting.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "00-decision-hub/reports/2026-11-decision-hub.md",
+        "location": "跨文档重复",
+        "detail": "约 223 字的段落与 19-safety-disaster/reports/2026-11-safety-disaster.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "00-decision-hub/reports/2026-11-decision-hub.md",
+        "location": "跨文档重复",
+        "detail": "约 223 字的段落与 20-overseas-china/reports/2026-11-overseas-china.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      }
+    ],
     "01-ssw-driver/reports/2026-11-ssw-driver.md": [
       {
         "layer": "L4",
@@ -9,7 +191,488 @@
         "severity": "P2",
         "report": "01-ssw-driver/reports/2026-11-ssw-driver.md",
         "location": "跨文档重复",
-        "detail": "约 362 字的段落与 02-career-driver/reports/2026-11-career-driver.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "detail": "约 1122 字的段落与 02-career-driver/reports/2026-11-career-driver.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "01-ssw-driver/reports/2026-11-ssw-driver.md",
+        "location": "跨文档重复",
+        "detail": "约 221 字的段落与 03-career-management/reports/2026-11-career-management.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "01-ssw-driver/reports/2026-11-ssw-driver.md",
+        "location": "跨文档重复",
+        "detail": "约 221 字的段落与 04-industry-logistics/reports/2026-11-industry-logistics.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "01-ssw-driver/reports/2026-11-ssw-driver.md",
+        "location": "跨文档重复",
+        "detail": "约 221 字的段落与 05-industry-autonomous/reports/2026-11-industry-autonomous.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "01-ssw-driver/reports/2026-11-ssw-driver.md",
+        "location": "跨文档重复",
+        "detail": "约 221 字的段落与 06-industry-technology/reports/2026-11-industry-technology.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "01-ssw-driver/reports/2026-11-ssw-driver.md",
+        "location": "跨文档重复",
+        "detail": "约 221 字的段落与 07-economy-finance/reports/2026-11-economy-finance.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "01-ssw-driver/reports/2026-11-ssw-driver.md",
+        "location": "跨文档重复",
+        "detail": "约 221 字的段落与 08-visa-immigration/reports/2026-11-visa-immigration.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "01-ssw-driver/reports/2026-11-ssw-driver.md",
+        "location": "跨文档重复",
+        "detail": "约 221 字的段落与 09-politics-law/reports/2026-11-politics-law.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "01-ssw-driver/reports/2026-11-ssw-driver.md",
+        "location": "跨文档重复",
+        "detail": "约 221 字的段落与 10-education-qualification/reports/2026-11-education-qualification.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "01-ssw-driver/reports/2026-11-ssw-driver.md",
+        "location": "跨文档重复",
+        "detail": "约 221 字的段落与 11-language-japanese/reports/2026-11-language-japanese.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "01-ssw-driver/reports/2026-11-ssw-driver.md",
+        "location": "跨文档重复",
+        "detail": "约 221 字的段落与 12-culture-life/reports/2026-11-culture-life.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "01-ssw-driver/reports/2026-11-ssw-driver.md",
+        "location": "跨文档重复",
+        "detail": "约 221 字的段落与 13-regional-info/reports/2026-11-regional-info.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "01-ssw-driver/reports/2026-11-ssw-driver.md",
+        "location": "跨文档重复",
+        "detail": "约 221 字的段落与 14-life-operations/reports/2026-11-life-operations.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "01-ssw-driver/reports/2026-11-ssw-driver.md",
+        "location": "跨文档重复",
+        "detail": "约 221 字的段落与 15-health-wellbeing/reports/2026-11-health-wellbeing.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "01-ssw-driver/reports/2026-11-ssw-driver.md",
+        "location": "跨文档重复",
+        "detail": "约 221 字的段落与 16-exit-transition-return/reports/2026-11-exit-transition-return.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "01-ssw-driver/reports/2026-11-ssw-driver.md",
+        "location": "跨文档重复",
+        "detail": "约 221 字的段落与 17-migration-compliance/reports/2026-11-migration-compliance.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "01-ssw-driver/reports/2026-11-ssw-driver.md",
+        "location": "跨文档重复",
+        "detail": "约 221 字的段落与 18-family-parenting/reports/2026-11-family-parenting.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "01-ssw-driver/reports/2026-11-ssw-driver.md",
+        "location": "跨文档重复",
+        "detail": "约 221 字的段落与 19-safety-disaster/reports/2026-11-safety-disaster.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "01-ssw-driver/reports/2026-11-ssw-driver.md",
+        "location": "跨文档重复",
+        "detail": "约 221 字的段落与 20-overseas-china/reports/2026-11-overseas-china.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      }
+    ],
+    "02-career-driver/reports/2026-11-career-driver.md": [
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "02-career-driver/reports/2026-11-career-driver.md",
+        "location": "跨文档重复",
+        "detail": "约 224 字的段落与 03-career-management/reports/2026-11-career-management.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "02-career-driver/reports/2026-11-career-driver.md",
+        "location": "跨文档重复",
+        "detail": "约 224 字的段落与 04-industry-logistics/reports/2026-11-industry-logistics.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "02-career-driver/reports/2026-11-career-driver.md",
+        "location": "跨文档重复",
+        "detail": "约 224 字的段落与 05-industry-autonomous/reports/2026-11-industry-autonomous.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "02-career-driver/reports/2026-11-career-driver.md",
+        "location": "跨文档重复",
+        "detail": "约 224 字的段落与 06-industry-technology/reports/2026-11-industry-technology.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "02-career-driver/reports/2026-11-career-driver.md",
+        "location": "跨文档重复",
+        "detail": "约 224 字的段落与 07-economy-finance/reports/2026-11-economy-finance.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "02-career-driver/reports/2026-11-career-driver.md",
+        "location": "跨文档重复",
+        "detail": "约 224 字的段落与 08-visa-immigration/reports/2026-11-visa-immigration.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "02-career-driver/reports/2026-11-career-driver.md",
+        "location": "跨文档重复",
+        "detail": "约 223 字的段落与 09-politics-law/reports/2026-11-politics-law.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "02-career-driver/reports/2026-11-career-driver.md",
+        "location": "跨文档重复",
+        "detail": "约 224 字的段落与 10-education-qualification/reports/2026-11-education-qualification.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "02-career-driver/reports/2026-11-career-driver.md",
+        "location": "跨文档重复",
+        "detail": "约 224 字的段落与 11-language-japanese/reports/2026-11-language-japanese.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "02-career-driver/reports/2026-11-career-driver.md",
+        "location": "跨文档重复",
+        "detail": "约 223 字的段落与 12-culture-life/reports/2026-11-culture-life.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "02-career-driver/reports/2026-11-career-driver.md",
+        "location": "跨文档重复",
+        "detail": "约 224 字的段落与 13-regional-info/reports/2026-11-regional-info.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "02-career-driver/reports/2026-11-career-driver.md",
+        "location": "跨文档重复",
+        "detail": "约 224 字的段落与 14-life-operations/reports/2026-11-life-operations.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "02-career-driver/reports/2026-11-career-driver.md",
+        "location": "跨文档重复",
+        "detail": "约 224 字的段落与 15-health-wellbeing/reports/2026-11-health-wellbeing.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "02-career-driver/reports/2026-11-career-driver.md",
+        "location": "跨文档重复",
+        "detail": "约 224 字的段落与 16-exit-transition-return/reports/2026-11-exit-transition-return.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "02-career-driver/reports/2026-11-career-driver.md",
+        "location": "跨文档重复",
+        "detail": "约 224 字的段落与 17-migration-compliance/reports/2026-11-migration-compliance.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "02-career-driver/reports/2026-11-career-driver.md",
+        "location": "跨文档重复",
+        "detail": "约 224 字的段落与 18-family-parenting/reports/2026-11-family-parenting.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "02-career-driver/reports/2026-11-career-driver.md",
+        "location": "跨文档重复",
+        "detail": "约 224 字的段落与 19-safety-disaster/reports/2026-11-safety-disaster.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "02-career-driver/reports/2026-11-career-driver.md",
+        "location": "跨文档重复",
+        "detail": "约 224 字的段落与 20-overseas-china/reports/2026-11-overseas-china.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      }
+    ],
+    "03-career-management/reports/2026-11-career-management.md": [
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "03-career-management/reports/2026-11-career-management.md",
+        "location": "跨文档重复",
+        "detail": "约 228 字的段落与 04-industry-logistics/reports/2026-11-industry-logistics.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "03-career-management/reports/2026-11-career-management.md",
+        "location": "跨文档重复",
+        "detail": "约 228 字的段落与 05-industry-autonomous/reports/2026-11-industry-autonomous.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "03-career-management/reports/2026-11-career-management.md",
+        "location": "跨文档重复",
+        "detail": "约 228 字的段落与 06-industry-technology/reports/2026-11-industry-technology.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "03-career-management/reports/2026-11-career-management.md",
+        "location": "跨文档重复",
+        "detail": "约 226 字的段落与 07-economy-finance/reports/2026-11-economy-finance.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "03-career-management/reports/2026-11-career-management.md",
+        "location": "跨文档重复",
+        "detail": "约 227 字的段落与 08-visa-immigration/reports/2026-11-visa-immigration.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "03-career-management/reports/2026-11-career-management.md",
+        "location": "跨文档重复",
+        "detail": "约 223 字的段落与 09-politics-law/reports/2026-11-politics-law.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "03-career-management/reports/2026-11-career-management.md",
+        "location": "跨文档重复",
+        "detail": "约 228 字的段落与 10-education-qualification/reports/2026-11-education-qualification.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "03-career-management/reports/2026-11-career-management.md",
+        "location": "跨文档重复",
+        "detail": "约 228 字的段落与 11-language-japanese/reports/2026-11-language-japanese.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "03-career-management/reports/2026-11-career-management.md",
+        "location": "跨文档重复",
+        "detail": "约 223 字的段落与 12-culture-life/reports/2026-11-culture-life.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "03-career-management/reports/2026-11-career-management.md",
+        "location": "跨文档重复",
+        "detail": "约 224 字的段落与 13-regional-info/reports/2026-11-regional-info.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "03-career-management/reports/2026-11-career-management.md",
+        "location": "跨文档重复",
+        "detail": "约 226 字的段落与 14-life-operations/reports/2026-11-life-operations.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "03-career-management/reports/2026-11-career-management.md",
+        "location": "跨文档重复",
+        "detail": "约 227 字的段落与 15-health-wellbeing/reports/2026-11-health-wellbeing.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "03-career-management/reports/2026-11-career-management.md",
+        "location": "跨文档重复",
+        "detail": "约 228 字的段落与 16-exit-transition-return/reports/2026-11-exit-transition-return.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "03-career-management/reports/2026-11-career-management.md",
+        "location": "跨文档重复",
+        "detail": "约 228 字的段落与 17-migration-compliance/reports/2026-11-migration-compliance.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "03-career-management/reports/2026-11-career-management.md",
+        "location": "跨文档重复",
+        "detail": "约 227 字的段落与 18-family-parenting/reports/2026-11-family-parenting.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "03-career-management/reports/2026-11-career-management.md",
+        "location": "跨文档重复",
+        "detail": "约 226 字的段落与 19-safety-disaster/reports/2026-11-safety-disaster.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "03-career-management/reports/2026-11-career-management.md",
+        "location": "跨文档重复",
+        "detail": "约 225 字的段落与 20-overseas-china/reports/2026-11-overseas-china.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
         "spec": "S-02"
       }
     ],
@@ -31,6 +694,132 @@
         "location": "跨文档重复",
         "detail": "约 140 字的段落与 06-industry-technology/reports/2026-11-industry-technology.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
         "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "04-industry-logistics/reports/2026-11-industry-logistics.md",
+        "location": "跨文档重复",
+        "detail": "约 226 字的段落与 07-economy-finance/reports/2026-11-economy-finance.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "04-industry-logistics/reports/2026-11-industry-logistics.md",
+        "location": "跨文档重复",
+        "detail": "约 227 字的段落与 08-visa-immigration/reports/2026-11-visa-immigration.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "04-industry-logistics/reports/2026-11-industry-logistics.md",
+        "location": "跨文档重复",
+        "detail": "约 223 字的段落与 09-politics-law/reports/2026-11-politics-law.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "04-industry-logistics/reports/2026-11-industry-logistics.md",
+        "location": "跨文档重复",
+        "detail": "约 229 字的段落与 10-education-qualification/reports/2026-11-education-qualification.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "04-industry-logistics/reports/2026-11-industry-logistics.md",
+        "location": "跨文档重复",
+        "detail": "约 228 字的段落与 11-language-japanese/reports/2026-11-language-japanese.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "04-industry-logistics/reports/2026-11-industry-logistics.md",
+        "location": "跨文档重复",
+        "detail": "约 223 字的段落与 12-culture-life/reports/2026-11-culture-life.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "04-industry-logistics/reports/2026-11-industry-logistics.md",
+        "location": "跨文档重复",
+        "detail": "约 224 字的段落与 13-regional-info/reports/2026-11-regional-info.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "04-industry-logistics/reports/2026-11-industry-logistics.md",
+        "location": "跨文档重复",
+        "detail": "约 226 字的段落与 14-life-operations/reports/2026-11-life-operations.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "04-industry-logistics/reports/2026-11-industry-logistics.md",
+        "location": "跨文档重复",
+        "detail": "约 227 字的段落与 15-health-wellbeing/reports/2026-11-health-wellbeing.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "04-industry-logistics/reports/2026-11-industry-logistics.md",
+        "location": "跨文档重复",
+        "detail": "约 229 字的段落与 16-exit-transition-return/reports/2026-11-exit-transition-return.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "04-industry-logistics/reports/2026-11-industry-logistics.md",
+        "location": "跨文档重复",
+        "detail": "约 229 字的段落与 17-migration-compliance/reports/2026-11-migration-compliance.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "04-industry-logistics/reports/2026-11-industry-logistics.md",
+        "location": "跨文档重复",
+        "detail": "约 227 字的段落与 18-family-parenting/reports/2026-11-family-parenting.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "04-industry-logistics/reports/2026-11-industry-logistics.md",
+        "location": "跨文档重复",
+        "detail": "约 226 字的段落与 19-safety-disaster/reports/2026-11-safety-disaster.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "04-industry-logistics/reports/2026-11-industry-logistics.md",
+        "location": "跨文档重复",
+        "detail": "约 225 字的段落与 20-overseas-china/reports/2026-11-overseas-china.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
       }
     ],
     "05-industry-autonomous/reports/2026-11-industry-autonomous.md": [
@@ -40,7 +829,261 @@
         "severity": "P2",
         "report": "05-industry-autonomous/reports/2026-11-industry-autonomous.md",
         "location": "跨文档重复",
-        "detail": "约 779 字的段落与 06-industry-technology/reports/2026-11-industry-technology.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "detail": "约 141 字的段落与 06-industry-technology/reports/2026-11-industry-technology.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "05-industry-autonomous/reports/2026-11-industry-autonomous.md",
+        "location": "跨文档重复",
+        "detail": "约 226 字的段落与 07-economy-finance/reports/2026-11-economy-finance.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "05-industry-autonomous/reports/2026-11-industry-autonomous.md",
+        "location": "跨文档重复",
+        "detail": "约 227 字的段落与 08-visa-immigration/reports/2026-11-visa-immigration.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "05-industry-autonomous/reports/2026-11-industry-autonomous.md",
+        "location": "跨文档重复",
+        "detail": "约 223 字的段落与 09-politics-law/reports/2026-11-politics-law.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "05-industry-autonomous/reports/2026-11-industry-autonomous.md",
+        "location": "跨文档重复",
+        "detail": "约 230 字的段落与 10-education-qualification/reports/2026-11-education-qualification.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "05-industry-autonomous/reports/2026-11-industry-autonomous.md",
+        "location": "跨文档重复",
+        "detail": "约 228 字的段落与 11-language-japanese/reports/2026-11-language-japanese.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "05-industry-autonomous/reports/2026-11-industry-autonomous.md",
+        "location": "跨文档重复",
+        "detail": "约 223 字的段落与 12-culture-life/reports/2026-11-culture-life.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "05-industry-autonomous/reports/2026-11-industry-autonomous.md",
+        "location": "跨文档重复",
+        "detail": "约 224 字的段落与 13-regional-info/reports/2026-11-regional-info.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "05-industry-autonomous/reports/2026-11-industry-autonomous.md",
+        "location": "跨文档重复",
+        "detail": "约 226 字的段落与 14-life-operations/reports/2026-11-life-operations.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "05-industry-autonomous/reports/2026-11-industry-autonomous.md",
+        "location": "跨文档重复",
+        "detail": "约 227 字的段落与 15-health-wellbeing/reports/2026-11-health-wellbeing.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "05-industry-autonomous/reports/2026-11-industry-autonomous.md",
+        "location": "跨文档重复",
+        "detail": "约 230 字的段落与 16-exit-transition-return/reports/2026-11-exit-transition-return.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "05-industry-autonomous/reports/2026-11-industry-autonomous.md",
+        "location": "跨文档重复",
+        "detail": "约 230 字的段落与 17-migration-compliance/reports/2026-11-migration-compliance.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "05-industry-autonomous/reports/2026-11-industry-autonomous.md",
+        "location": "跨文档重复",
+        "detail": "约 227 字的段落与 18-family-parenting/reports/2026-11-family-parenting.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "05-industry-autonomous/reports/2026-11-industry-autonomous.md",
+        "location": "跨文档重复",
+        "detail": "约 226 字的段落与 19-safety-disaster/reports/2026-11-safety-disaster.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "05-industry-autonomous/reports/2026-11-industry-autonomous.md",
+        "location": "跨文档重复",
+        "detail": "约 225 字的段落与 20-overseas-china/reports/2026-11-overseas-china.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      }
+    ],
+    "06-industry-technology/reports/2026-11-industry-technology.md": [
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "06-industry-technology/reports/2026-11-industry-technology.md",
+        "location": "跨文档重复",
+        "detail": "约 226 字的段落与 07-economy-finance/reports/2026-11-economy-finance.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "06-industry-technology/reports/2026-11-industry-technology.md",
+        "location": "跨文档重复",
+        "detail": "约 227 字的段落与 08-visa-immigration/reports/2026-11-visa-immigration.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "06-industry-technology/reports/2026-11-industry-technology.md",
+        "location": "跨文档重复",
+        "detail": "约 223 字的段落与 09-politics-law/reports/2026-11-politics-law.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "06-industry-technology/reports/2026-11-industry-technology.md",
+        "location": "跨文档重复",
+        "detail": "约 230 字的段落与 10-education-qualification/reports/2026-11-education-qualification.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "06-industry-technology/reports/2026-11-industry-technology.md",
+        "location": "跨文档重复",
+        "detail": "约 228 字的段落与 11-language-japanese/reports/2026-11-language-japanese.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "06-industry-technology/reports/2026-11-industry-technology.md",
+        "location": "跨文档重复",
+        "detail": "约 223 字的段落与 12-culture-life/reports/2026-11-culture-life.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "06-industry-technology/reports/2026-11-industry-technology.md",
+        "location": "跨文档重复",
+        "detail": "约 224 字的段落与 13-regional-info/reports/2026-11-regional-info.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "06-industry-technology/reports/2026-11-industry-technology.md",
+        "location": "跨文档重复",
+        "detail": "约 226 字的段落与 14-life-operations/reports/2026-11-life-operations.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "06-industry-technology/reports/2026-11-industry-technology.md",
+        "location": "跨文档重复",
+        "detail": "约 227 字的段落与 15-health-wellbeing/reports/2026-11-health-wellbeing.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "06-industry-technology/reports/2026-11-industry-technology.md",
+        "location": "跨文档重复",
+        "detail": "约 230 字的段落与 16-exit-transition-return/reports/2026-11-exit-transition-return.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "06-industry-technology/reports/2026-11-industry-technology.md",
+        "location": "跨文档重复",
+        "detail": "约 230 字的段落与 17-migration-compliance/reports/2026-11-migration-compliance.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "06-industry-technology/reports/2026-11-industry-technology.md",
+        "location": "跨文档重复",
+        "detail": "约 227 字的段落与 18-family-parenting/reports/2026-11-family-parenting.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "06-industry-technology/reports/2026-11-industry-technology.md",
+        "location": "跨文档重复",
+        "detail": "约 226 字的段落与 19-safety-disaster/reports/2026-11-safety-disaster.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "06-industry-technology/reports/2026-11-industry-technology.md",
+        "location": "跨文档重复",
+        "detail": "约 225 字的段落与 20-overseas-china/reports/2026-11-overseas-china.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
         "spec": "S-02"
       }
     ],
@@ -52,6 +1095,417 @@
         "report": "07-economy-finance/reports/2026-11-economy-finance.md",
         "location": "跨文档重复",
         "detail": "约 175 字的段落与 10-education-qualification/reports/2026-11-education-qualification.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "07-economy-finance/reports/2026-11-economy-finance.md",
+        "location": "跨文档重复",
+        "detail": "约 226 字的段落与 08-visa-immigration/reports/2026-11-visa-immigration.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "07-economy-finance/reports/2026-11-economy-finance.md",
+        "location": "跨文档重复",
+        "detail": "约 223 字的段落与 09-politics-law/reports/2026-11-politics-law.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "07-economy-finance/reports/2026-11-economy-finance.md",
+        "location": "跨文档重复",
+        "detail": "约 226 字的段落与 11-language-japanese/reports/2026-11-language-japanese.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "07-economy-finance/reports/2026-11-economy-finance.md",
+        "location": "跨文档重复",
+        "detail": "约 223 字的段落与 12-culture-life/reports/2026-11-culture-life.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "07-economy-finance/reports/2026-11-economy-finance.md",
+        "location": "跨文档重复",
+        "detail": "约 224 字的段落与 13-regional-info/reports/2026-11-regional-info.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "07-economy-finance/reports/2026-11-economy-finance.md",
+        "location": "跨文档重复",
+        "detail": "约 226 字的段落与 14-life-operations/reports/2026-11-life-operations.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "07-economy-finance/reports/2026-11-economy-finance.md",
+        "location": "跨文档重复",
+        "detail": "约 226 字的段落与 15-health-wellbeing/reports/2026-11-health-wellbeing.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "07-economy-finance/reports/2026-11-economy-finance.md",
+        "location": "跨文档重复",
+        "detail": "约 226 字的段落与 16-exit-transition-return/reports/2026-11-exit-transition-return.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "07-economy-finance/reports/2026-11-economy-finance.md",
+        "location": "跨文档重复",
+        "detail": "约 226 字的段落与 17-migration-compliance/reports/2026-11-migration-compliance.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "07-economy-finance/reports/2026-11-economy-finance.md",
+        "location": "跨文档重复",
+        "detail": "约 226 字的段落与 18-family-parenting/reports/2026-11-family-parenting.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "07-economy-finance/reports/2026-11-economy-finance.md",
+        "location": "跨文档重复",
+        "detail": "约 226 字的段落与 19-safety-disaster/reports/2026-11-safety-disaster.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "07-economy-finance/reports/2026-11-economy-finance.md",
+        "location": "跨文档重复",
+        "detail": "约 225 字的段落与 20-overseas-china/reports/2026-11-overseas-china.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      }
+    ],
+    "08-visa-immigration/reports/2026-11-visa-immigration.md": [
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "08-visa-immigration/reports/2026-11-visa-immigration.md",
+        "location": "跨文档重复",
+        "detail": "约 223 字的段落与 09-politics-law/reports/2026-11-politics-law.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "08-visa-immigration/reports/2026-11-visa-immigration.md",
+        "location": "跨文档重复",
+        "detail": "约 227 字的段落与 10-education-qualification/reports/2026-11-education-qualification.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "08-visa-immigration/reports/2026-11-visa-immigration.md",
+        "location": "跨文档重复",
+        "detail": "约 227 字的段落与 11-language-japanese/reports/2026-11-language-japanese.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "08-visa-immigration/reports/2026-11-visa-immigration.md",
+        "location": "跨文档重复",
+        "detail": "约 223 字的段落与 12-culture-life/reports/2026-11-culture-life.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "08-visa-immigration/reports/2026-11-visa-immigration.md",
+        "location": "跨文档重复",
+        "detail": "约 224 字的段落与 13-regional-info/reports/2026-11-regional-info.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "08-visa-immigration/reports/2026-11-visa-immigration.md",
+        "location": "跨文档重复",
+        "detail": "约 226 字的段落与 14-life-operations/reports/2026-11-life-operations.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "08-visa-immigration/reports/2026-11-visa-immigration.md",
+        "location": "跨文档重复",
+        "detail": "约 227 字的段落与 15-health-wellbeing/reports/2026-11-health-wellbeing.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "08-visa-immigration/reports/2026-11-visa-immigration.md",
+        "location": "跨文档重复",
+        "detail": "约 227 字的段落与 16-exit-transition-return/reports/2026-11-exit-transition-return.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "08-visa-immigration/reports/2026-11-visa-immigration.md",
+        "location": "跨文档重复",
+        "detail": "约 227 字的段落与 17-migration-compliance/reports/2026-11-migration-compliance.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "08-visa-immigration/reports/2026-11-visa-immigration.md",
+        "location": "跨文档重复",
+        "detail": "约 227 字的段落与 18-family-parenting/reports/2026-11-family-parenting.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "08-visa-immigration/reports/2026-11-visa-immigration.md",
+        "location": "跨文档重复",
+        "detail": "约 226 字的段落与 19-safety-disaster/reports/2026-11-safety-disaster.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "08-visa-immigration/reports/2026-11-visa-immigration.md",
+        "location": "跨文档重复",
+        "detail": "约 225 字的段落与 20-overseas-china/reports/2026-11-overseas-china.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      }
+    ],
+    "09-politics-law/reports/2026-11-politics-law.md": [
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "09-politics-law/reports/2026-11-politics-law.md",
+        "location": "跨文档重复",
+        "detail": "约 223 字的段落与 10-education-qualification/reports/2026-11-education-qualification.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "09-politics-law/reports/2026-11-politics-law.md",
+        "location": "跨文档重复",
+        "detail": "约 223 字的段落与 11-language-japanese/reports/2026-11-language-japanese.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "09-politics-law/reports/2026-11-politics-law.md",
+        "location": "跨文档重复",
+        "detail": "约 223 字的段落与 12-culture-life/reports/2026-11-culture-life.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "09-politics-law/reports/2026-11-politics-law.md",
+        "location": "跨文档重复",
+        "detail": "约 223 字的段落与 13-regional-info/reports/2026-11-regional-info.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "09-politics-law/reports/2026-11-politics-law.md",
+        "location": "跨文档重复",
+        "detail": "约 223 字的段落与 14-life-operations/reports/2026-11-life-operations.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "09-politics-law/reports/2026-11-politics-law.md",
+        "location": "跨文档重复",
+        "detail": "约 223 字的段落与 15-health-wellbeing/reports/2026-11-health-wellbeing.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "09-politics-law/reports/2026-11-politics-law.md",
+        "location": "跨文档重复",
+        "detail": "约 223 字的段落与 16-exit-transition-return/reports/2026-11-exit-transition-return.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "09-politics-law/reports/2026-11-politics-law.md",
+        "location": "跨文档重复",
+        "detail": "约 223 字的段落与 17-migration-compliance/reports/2026-11-migration-compliance.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "09-politics-law/reports/2026-11-politics-law.md",
+        "location": "跨文档重复",
+        "detail": "约 223 字的段落与 18-family-parenting/reports/2026-11-family-parenting.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "09-politics-law/reports/2026-11-politics-law.md",
+        "location": "跨文档重复",
+        "detail": "约 223 字的段落与 19-safety-disaster/reports/2026-11-safety-disaster.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "09-politics-law/reports/2026-11-politics-law.md",
+        "location": "跨文档重复",
+        "detail": "约 223 字的段落与 20-overseas-china/reports/2026-11-overseas-china.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      }
+    ],
+    "10-education-qualification/reports/2026-11-education-qualification.md": [
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "10-education-qualification/reports/2026-11-education-qualification.md",
+        "location": "跨文档重复",
+        "detail": "约 228 字的段落与 11-language-japanese/reports/2026-11-language-japanese.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "10-education-qualification/reports/2026-11-education-qualification.md",
+        "location": "跨文档重复",
+        "detail": "约 223 字的段落与 12-culture-life/reports/2026-11-culture-life.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "10-education-qualification/reports/2026-11-education-qualification.md",
+        "location": "跨文档重复",
+        "detail": "约 224 字的段落与 13-regional-info/reports/2026-11-regional-info.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "10-education-qualification/reports/2026-11-education-qualification.md",
+        "location": "跨文档重复",
+        "detail": "约 226 字的段落与 14-life-operations/reports/2026-11-life-operations.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "10-education-qualification/reports/2026-11-education-qualification.md",
+        "location": "跨文档重复",
+        "detail": "约 227 字的段落与 15-health-wellbeing/reports/2026-11-health-wellbeing.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "10-education-qualification/reports/2026-11-education-qualification.md",
+        "location": "跨文档重复",
+        "detail": "约 233 字的段落与 16-exit-transition-return/reports/2026-11-exit-transition-return.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "10-education-qualification/reports/2026-11-education-qualification.md",
+        "location": "跨文档重复",
+        "detail": "约 231 字的段落与 17-migration-compliance/reports/2026-11-migration-compliance.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "10-education-qualification/reports/2026-11-education-qualification.md",
+        "location": "跨文档重复",
+        "detail": "约 227 字的段落与 18-family-parenting/reports/2026-11-family-parenting.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "10-education-qualification/reports/2026-11-education-qualification.md",
+        "location": "跨文档重复",
+        "detail": "约 226 字的段落与 19-safety-disaster/reports/2026-11-safety-disaster.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "10-education-qualification/reports/2026-11-education-qualification.md",
+        "location": "跨文档重复",
+        "detail": "约 225 字的段落与 20-overseas-china/reports/2026-11-overseas-china.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
         "spec": "S-02"
       }
     ],
@@ -73,6 +1527,69 @@
         "location": "跨文档重复",
         "detail": "约 186 字的段落与 14-life-operations/reports/2026-11-life-operations.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
         "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "11-language-japanese/reports/2026-11-language-japanese.md",
+        "location": "跨文档重复",
+        "detail": "约 224 字的段落与 13-regional-info/reports/2026-11-regional-info.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "11-language-japanese/reports/2026-11-language-japanese.md",
+        "location": "跨文档重复",
+        "detail": "约 227 字的段落与 15-health-wellbeing/reports/2026-11-health-wellbeing.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "11-language-japanese/reports/2026-11-language-japanese.md",
+        "location": "跨文档重复",
+        "detail": "约 228 字的段落与 16-exit-transition-return/reports/2026-11-exit-transition-return.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "11-language-japanese/reports/2026-11-language-japanese.md",
+        "location": "跨文档重复",
+        "detail": "约 228 字的段落与 17-migration-compliance/reports/2026-11-migration-compliance.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "11-language-japanese/reports/2026-11-language-japanese.md",
+        "location": "跨文档重复",
+        "detail": "约 227 字的段落与 18-family-parenting/reports/2026-11-family-parenting.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "11-language-japanese/reports/2026-11-language-japanese.md",
+        "location": "跨文档重复",
+        "detail": "约 226 字的段落与 19-safety-disaster/reports/2026-11-safety-disaster.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "11-language-japanese/reports/2026-11-language-japanese.md",
+        "location": "跨文档重复",
+        "detail": "约 225 字的段落与 20-overseas-china/reports/2026-11-overseas-china.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
       }
     ],
     "12-culture-life/reports/2026-11-culture-life.md": [
@@ -93,6 +1610,125 @@
         "location": "跨文档重复",
         "detail": "约 165 字的段落与 17-migration-compliance/reports/2026-11-migration-compliance.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
         "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "12-culture-life/reports/2026-11-culture-life.md",
+        "location": "跨文档重复",
+        "detail": "约 223 字的段落与 13-regional-info/reports/2026-11-regional-info.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "12-culture-life/reports/2026-11-culture-life.md",
+        "location": "跨文档重复",
+        "detail": "约 223 字的段落与 15-health-wellbeing/reports/2026-11-health-wellbeing.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "12-culture-life/reports/2026-11-culture-life.md",
+        "location": "跨文档重复",
+        "detail": "约 223 字的段落与 16-exit-transition-return/reports/2026-11-exit-transition-return.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "12-culture-life/reports/2026-11-culture-life.md",
+        "location": "跨文档重复",
+        "detail": "约 223 字的段落与 18-family-parenting/reports/2026-11-family-parenting.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "12-culture-life/reports/2026-11-culture-life.md",
+        "location": "跨文档重复",
+        "detail": "约 223 字的段落与 19-safety-disaster/reports/2026-11-safety-disaster.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "12-culture-life/reports/2026-11-culture-life.md",
+        "location": "跨文档重复",
+        "detail": "约 223 字的段落与 20-overseas-china/reports/2026-11-overseas-china.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      }
+    ],
+    "13-regional-info/reports/2026-11-regional-info.md": [
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "13-regional-info/reports/2026-11-regional-info.md",
+        "location": "跨文档重复",
+        "detail": "约 224 字的段落与 14-life-operations/reports/2026-11-life-operations.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "13-regional-info/reports/2026-11-regional-info.md",
+        "location": "跨文档重复",
+        "detail": "约 224 字的段落与 15-health-wellbeing/reports/2026-11-health-wellbeing.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "13-regional-info/reports/2026-11-regional-info.md",
+        "location": "跨文档重复",
+        "detail": "约 224 字的段落与 16-exit-transition-return/reports/2026-11-exit-transition-return.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "13-regional-info/reports/2026-11-regional-info.md",
+        "location": "跨文档重复",
+        "detail": "约 224 字的段落与 17-migration-compliance/reports/2026-11-migration-compliance.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "13-regional-info/reports/2026-11-regional-info.md",
+        "location": "跨文档重复",
+        "detail": "约 224 字的段落与 18-family-parenting/reports/2026-11-family-parenting.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "13-regional-info/reports/2026-11-regional-info.md",
+        "location": "跨文档重复",
+        "detail": "约 224 字的段落与 19-safety-disaster/reports/2026-11-safety-disaster.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "13-regional-info/reports/2026-11-regional-info.md",
+        "location": "跨文档重复",
+        "detail": "约 224 字的段落与 20-overseas-china/reports/2026-11-overseas-china.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
       }
     ],
     "14-life-operations/reports/2026-11-life-operations.md": [
@@ -103,6 +1739,98 @@
         "report": "14-life-operations/reports/2026-11-life-operations.md",
         "location": "跨文档重复",
         "detail": "约 165 字的段落与 17-migration-compliance/reports/2026-11-migration-compliance.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "14-life-operations/reports/2026-11-life-operations.md",
+        "location": "跨文档重复",
+        "detail": "约 226 字的段落与 15-health-wellbeing/reports/2026-11-health-wellbeing.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "14-life-operations/reports/2026-11-life-operations.md",
+        "location": "跨文档重复",
+        "detail": "约 226 字的段落与 16-exit-transition-return/reports/2026-11-exit-transition-return.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "14-life-operations/reports/2026-11-life-operations.md",
+        "location": "跨文档重复",
+        "detail": "约 226 字的段落与 18-family-parenting/reports/2026-11-family-parenting.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "14-life-operations/reports/2026-11-life-operations.md",
+        "location": "跨文档重复",
+        "detail": "约 226 字的段落与 19-safety-disaster/reports/2026-11-safety-disaster.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "14-life-operations/reports/2026-11-life-operations.md",
+        "location": "跨文档重复",
+        "detail": "约 225 字的段落与 20-overseas-china/reports/2026-11-overseas-china.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      }
+    ],
+    "15-health-wellbeing/reports/2026-11-health-wellbeing.md": [
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "15-health-wellbeing/reports/2026-11-health-wellbeing.md",
+        "location": "跨文档重复",
+        "detail": "约 227 字的段落与 16-exit-transition-return/reports/2026-11-exit-transition-return.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "15-health-wellbeing/reports/2026-11-health-wellbeing.md",
+        "location": "跨文档重复",
+        "detail": "约 227 字的段落与 17-migration-compliance/reports/2026-11-migration-compliance.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "15-health-wellbeing/reports/2026-11-health-wellbeing.md",
+        "location": "跨文档重复",
+        "detail": "约 227 字的段落与 18-family-parenting/reports/2026-11-family-parenting.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "15-health-wellbeing/reports/2026-11-health-wellbeing.md",
+        "location": "跨文档重复",
+        "detail": "约 226 字的段落与 19-safety-disaster/reports/2026-11-safety-disaster.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "15-health-wellbeing/reports/2026-11-health-wellbeing.md",
+        "location": "跨文档重复",
+        "detail": "约 225 字的段落与 20-overseas-china/reports/2026-11-overseas-china.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
         "spec": "S-02"
       }
     ],
@@ -115,6 +1843,62 @@
         "location": "跨文档重复",
         "detail": "约 204 字的段落与 20-overseas-china/reports/2026-11-overseas-china.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
         "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "16-exit-transition-return/reports/2026-11-exit-transition-return.md",
+        "location": "跨文档重复",
+        "detail": "约 231 字的段落与 17-migration-compliance/reports/2026-11-migration-compliance.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "16-exit-transition-return/reports/2026-11-exit-transition-return.md",
+        "location": "跨文档重复",
+        "detail": "约 227 字的段落与 18-family-parenting/reports/2026-11-family-parenting.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "16-exit-transition-return/reports/2026-11-exit-transition-return.md",
+        "location": "跨文档重复",
+        "detail": "约 226 字的段落与 19-safety-disaster/reports/2026-11-safety-disaster.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      }
+    ],
+    "17-migration-compliance/reports/2026-11-migration-compliance.md": [
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "17-migration-compliance/reports/2026-11-migration-compliance.md",
+        "location": "跨文档重复",
+        "detail": "约 227 字的段落与 18-family-parenting/reports/2026-11-family-parenting.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "17-migration-compliance/reports/2026-11-migration-compliance.md",
+        "location": "跨文档重复",
+        "detail": "约 226 字的段落与 19-safety-disaster/reports/2026-11-safety-disaster.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
+      },
+      {
+        "layer": "L4",
+        "code": "C-03",
+        "severity": "P2",
+        "report": "17-migration-compliance/reports/2026-11-migration-compliance.md",
+        "location": "跨文档重复",
+        "detail": "约 225 字的段落与 20-overseas-china/reports/2026-11-overseas-china.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "spec": "S-02"
       }
     ],
     "18-family-parenting/reports/2026-11-family-parenting.md": [
@@ -124,7 +1908,7 @@
         "severity": "P2",
         "report": "18-family-parenting/reports/2026-11-family-parenting.md",
         "location": "跨文档重复",
-        "detail": "约 173 字的段落与 19-safety-disaster/reports/2026-11-safety-disaster.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "detail": "约 204 字的段落与 20-overseas-china/reports/2026-11-overseas-china.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
         "spec": "S-02"
       },
       {
@@ -133,7 +1917,7 @@
         "severity": "P2",
         "report": "18-family-parenting/reports/2026-11-family-parenting.md",
         "location": "跨文档重复",
-        "detail": "约 158 字的段落与 20-overseas-china/reports/2026-11-overseas-china.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "detail": "约 226 字的段落与 19-safety-disaster/reports/2026-11-safety-disaster.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
         "spec": "S-02"
       }
     ],
@@ -144,8 +1928,19 @@
         "severity": "P2",
         "report": "19-safety-disaster/reports/2026-11-safety-disaster.md",
         "location": "跨文档重复",
-        "detail": "约 158 字的段落与 20-overseas-china/reports/2026-11-overseas-china.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
+        "detail": "约 225 字的段落与 20-overseas-china/reports/2026-11-overseas-china.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
         "spec": "S-02"
+      }
+    ],
+    "00-decision-hub/data/decision_hub_registry.md": [
+      {
+        "layer": "L3",
+        "code": "C-09",
+        "severity": "P2",
+        "report": "00-decision-hub/data/decision_hub_registry.md",
+        "location": "交叉引用",
+        "detail": "引用目标不存在：../reports/2026-12-decision-hub.md（信息质量四维度）",
+        "spec": "S-08"
       }
     ]
   }
