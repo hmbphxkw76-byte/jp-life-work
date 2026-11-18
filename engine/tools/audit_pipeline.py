@@ -612,7 +612,8 @@ def _changed_report_paths(base: str, changed_file: str | None) -> list[str]:
     """汇总本次变更的报告 md 相对路径（去重、排序）。
 
     changed_file 给出时按清单（每行一个路径）；否则对 `base...HEAD` 跑 git diff。
-    仅保留 `*/reports/*.md`，HTML / 非报告变更不触发审计门禁。
+    仅保留 `*/reports/*.md`，HTML / 非报告变更不触发审计门禁；
+    已删除（工作树中不存在）的报告跳过——门禁校验交付物，删除不产生待审对象。
     """
     raw: list[str] = []
     if changed_file:
@@ -634,7 +635,10 @@ def _changed_report_paths(base: str, changed_file: str | None) -> list[str]:
     for rel in raw:
         rel = rel.replace("\\", "/")
         if rel.endswith(".md") and "/reports/" in rel:
-            reps.add(rel)
+            # 已删除（工作树中不存在）的报告不参与受检：门禁校验的是「交付物」，
+            # 删除操作本身不产生待审交付物；其台账历史保留为 stale，不再阻断。
+            if (ROOT / rel).is_file():
+                reps.add(rel)
     return sorted(reps)
 
 
