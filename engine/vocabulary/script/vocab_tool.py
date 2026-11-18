@@ -35,7 +35,10 @@ from pathlib import Path
 TOOL_ROOT = Path(__file__).resolve().parent.parent  # vocabulary/
 DEFAULT_CONFIG = TOOL_ROOT / "config" / "topics.json"
 
-STORAGE_HEADER = ["ID", "词条", "别名", "分类", "标签", "定义", "来源", "首次登记", "最近更新"]
+STORAGE_HEADER = ["ID", "词条", "别名", "分类", "标签", "定义", "来源", "首次登记", "最近更新",
+                  "核验状态", "来源URL", "置信度"]
+DEFAULT_VERIFICATION = "待核实"
+DEFAULT_CONFIDENCE = "待评"
 VERSION_HEADER = ["版本", "日期", "变更", "说明"]
 
 IMPORT_KEYS = ("term", "aliases", "category", "tags", "definition", "source")
@@ -46,6 +49,9 @@ HEADER_MAP = {
     "标签": "tags", "tags": "tags",
     "定义": "definition", "释义": "definition", "description": "definition", "definition": "definition",
     "来源": "source", "出处": "source", "source": "source",
+    "核验状态": "verification", "verification": "verification",
+    "来源url": "source_url", "source_url": "source_url", "来源URL": "source_url",
+    "置信度": "confidence", "confidence": "confidence",
 }
 
 SEP_RE = re.compile(r"^:?-{3,}:?$")
@@ -139,6 +145,9 @@ def load_storage(path: Path):
             "category": r[3], "tags": split_list(r[4]),
             "definition": r[5], "source": r[6],
             "first_added": r[7], "last_updated": r[8],
+            "verification": r[9] or DEFAULT_VERIFICATION,
+            "source_url": r[10] or "",
+            "confidence": r[11] or DEFAULT_CONFIDENCE,
         })
     for r in vrows[1:]:
         r = list(r) + [""] * (len(VERSION_HEADER) - len(r))
@@ -159,7 +168,9 @@ def render_terms_md(tmeta: dict, terms: list, versions: list) -> str:
     L.append("| " + " | ".join(["---"] * len(STORAGE_HEADER)) + " |")
     for t in terms:
         row = [t["id"], t["term"], ";".join(t["aliases"]), t["category"], ";".join(t["tags"]),
-               t["definition"], t["source"], t["first_added"], t["last_updated"]]
+               t["definition"], t["source"], t["first_added"], t["last_updated"],
+               t.get("verification", DEFAULT_VERIFICATION), t.get("source_url", ""),
+               t.get("confidence", DEFAULT_CONFIDENCE)]
         L.append("| " + " | ".join(cell(x) for x in row) + " |")
     L += ["", "## 版本记录", ""]
     L.append("| " + " | ".join(VERSION_HEADER) + " |")
@@ -366,6 +377,9 @@ def cmd_import(tmeta: dict, file_arg: str) -> int:
             "term": term, "aliases": aliases, "category": category,
             "tags": tags, "definition": definition, "source": source,
             "first_added": today_s, "last_updated": today_s,
+            "verification": e.get("verification") or DEFAULT_VERIFICATION,
+            "source_url": e.get("source_url", ""),
+            "confidence": e.get("confidence") or DEFAULT_CONFIDENCE,
         }
         terms.append(new_term)
         for k in keys:
@@ -545,7 +559,9 @@ def cmd_export(tmeta: dict, fmt: str, out: str) -> int:
         else:
             rows = [STORAGE_HEADER] + [
                 [t["id"], t["term"], ";".join(t["aliases"]), t["category"], ";".join(t["tags"]),
-                 t["definition"], t["source"], t["first_added"], t["last_updated"]] for t in terms]
+                 t["definition"], t["source"], t["first_added"], t["last_updated"],
+                 t.get("verification", DEFAULT_VERIFICATION), t.get("source_url", ""),
+                 t.get("confidence", DEFAULT_CONFIDENCE)] for t in terms]
             with target.open("w", encoding="utf-8-sig", newline="") as fh:
                 csv.writer(fh).writerows(rows)
         print(f"[export] {rel(target)}（{len(terms)} 条，{version}）")

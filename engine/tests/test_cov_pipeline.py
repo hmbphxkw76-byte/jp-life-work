@@ -1115,7 +1115,7 @@ class TestCovPipelinePendingVerification(unittest.TestCase):
             {"topic": "d", "deadline": "2026-12-31", "status": "临近", "pending": []},
         ]
         with unittest.mock.patch.object(
-                pending_verification, "TOPICS", ("a", "b", "c", "d")), \
+                pending_verification, "_topics", return_value=("a", "b", "c", "d")), \
                 unittest.mock.patch.object(
                     pending_verification, "_parse", side_effect=rows):
             out_rows, summary = pending_verification.run()

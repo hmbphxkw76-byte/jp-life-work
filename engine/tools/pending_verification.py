@@ -1,6 +1,7 @@
-"""待核实项闭环管理：登记 / 追踪 14、15、17、18、19、20 的首轮核验截止期限。
+"""待核实项闭环管理：登记 / 追踪各主题登记册的首轮核验截止期限。
 
-- 扫描六个模块登记册的「核验闭环」段，读取 `首轮核验截止` 与待核实项；
+- 主题范围由 `iter_business_dirs()` 动态派生（凡存在 `data/*_indicator_registry.md` 的主题）；
+- 扫描登记册的「核验闭环」段，读取 `首轮核验截止` 与待核实项（含 ⚠ 的行）；
 - 状态：未登记 / 进行中 / 临近（≤30 天）/ 已逾期；
 - 输出 JSON 到 `engine/report-audits/audit/pending-verification.json`（机器可读），
   并在控制台给出人读汇总。
@@ -24,14 +25,19 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from _common import ROOT, iter_business_dirs  # noqa: E402
 
-TOPICS = (
-    "14-life-operations",
-    "15-health-wellbeing",
-    "17-migration-compliance",
-    "18-family-parenting",
-    "19-safety-disaster",
-    "20-overseas-china",
-)
+def _topics() -> tuple[str, ...]:
+    """纳入有跟踪需求的主题：登记册含「首轮核验截止」或 ⚠ 待核实项。"""
+    out = []
+    for b in iter_business_dirs():
+        hits = sorted((b.path / "data").glob("*_indicator_registry.md"))
+        if not hits:
+            continue
+        text = hits[0].read_text(encoding="utf-8", errors="replace")
+        if "首轮核验截止" in text or "⚠" in text:
+            out.append(b.rel)
+    return tuple(sorted(out))
+
+
 # 文档口径的默认截止日：仅 docs/CI流水线对齐校验报告 引用，程序不消费（实际截止日解析自登记册文本）。
 DEFAULT_DEADLINE = "2026-12-31"
 OUT_PATH = ROOT / "engine" / "report-audits" / "audit" / "pending-verification.json"
@@ -76,7 +82,7 @@ def _parse(topic: str) -> dict:
 
 
 def run() -> tuple[list[dict], dict]:
-    rows = [_parse(t) for t in TOPICS]
+    rows = [_parse(t) for t in _topics()]
     summary = {
         "updated": date.today().isoformat(),
         "topics": len(rows),
