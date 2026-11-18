@@ -634,19 +634,22 @@ class TestCovAuditPipeline(unittest.TestCase):
         with tempfile.TemporaryDirectory() as d:
             root = Path(d)
             with audit_env(root):
+                md = _make_topic(root, "01-demo")
+                rep = _rel(md, root)
                 changed = root / "changed.txt"
                 changed.write_text(
-                    "01-demo/reports/2026-11-demo.md\n01-demo/reports/a.html\n"
-                    "README.md\n", encoding="utf-8")
+                    f"{rep}\n01-demo/reports/a.html\n"
+                    "01-demo/reports/2026-12-gone.md\nREADME.md\n", encoding="utf-8")
                 out = audit_pipeline._changed_report_paths("origin/main", changed)
-                self.assertEqual(out, ["01-demo/reports/2026-11-demo.md"])
+                # 已删除（工作树中不存在）的报告跳过受检；HTML / 非报告不触发
+                self.assertEqual(out, [rep])
 
                 fake = subprocess.CompletedProcess([], 0,
-                                                   stdout="01-demo/reports/b.md\nREADME.md\n",
+                                                   stdout=f"{rep}\n01-demo/reports/b.md\nREADME.md\n",
                                                    stderr="")
                 with mock.patch.object(subprocess, "run", return_value=fake):
                     out = audit_pipeline._changed_report_paths("origin/main", None)
-                self.assertEqual(out, ["01-demo/reports/b.md"])
+                self.assertEqual(out, [rep])
 
     def test_cmd_gate_strict_unregistered(self):
         with tempfile.TemporaryDirectory() as d:

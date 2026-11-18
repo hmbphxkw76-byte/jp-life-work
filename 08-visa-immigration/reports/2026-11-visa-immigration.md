@@ -2,9 +2,9 @@
 
 > **免责声明**：本报告为信息整理与条件化建议，不构成法律意见或税务意见；重大决策请咨询执业法律 / 税务专业人士。
 
-> **已审计** ✅ 审计编号 `AUD-202611-004`｜终审通过：2026-11-16｜内容指纹 `ac0f137c4ce62f5e28a`｜依据《审计报告标准化管理体系》v1.4
+> **已审计** ✅ 审计编号 `AUD-202611-003`｜终审通过：2026-11-18｜内容指纹 `49b6d80a4fc8b4e9918`｜依据《审计报告标准化管理体系》v1.4
 
-> **版本**：v2026.11.16（2026-11 月度核验）　**数据基准日**：2026-11-16
+> **版本**：v2026.11.17（2026-11 月度核验）　**数据基准日**：2026-11-17
 > **主题类型**：政策法规解读型（policy-analysis）
 > **受众定位**：面向拟通过特定技能（SSW）赴日从事货运司机工作、并规划长期在留的读者，兼具制度查询与路径规划视角。
 > **来源规则**：① 出入国在留管理庁（isa.go.jp / moj.go.jp）、ssw.go.jp、e-Gov 法令检索、国土交通省（mlit.go.jp）＞ ② JFT-Basic（国際交流基金 / Prometric）、JLPT（JEES）、外国人技能実習機構（otit.go.jp）＞ ③ 全日本トラック協会、登录支援机关行业信息 ＞ ④ 指定取次 / 中介机构官网（仅流程参考，不作数据源）＞ ⑤ NHK、日本経済新聞、Nikkei Asia、外務省各领馆中文页（费用类可作一手）
@@ -15,35 +15,37 @@
 
 **核心判断**（编号条目，每条含政策、条款与来源）：
 
-1. **受入上限**：自动车运送业特定技能 1 号受入上限为 **22,100 人**（至 2029 年 3 月末＝令和 11 年 3 月末，2026-01-23 阁议）；ssw.go.jp 中文页仍显示 24,500，属未同步线索。2026-08 末该分野 1 号在留 **843 人**、充足率 3.8%。来源：moj.go.jp 分野运用方针；ISA 统计月报 2026-08 末速报原件 [https://www.moj.go.jp/isa/content/001472175.pdf](https://www.moj.go.jp/isa/content/001472175.pdf)。标注：事实。
-2. **升级路径**：特定技能 2 号仅 **11 分野**，**自动车运送业无 2 号**，「1 号→2 号」路径不存在；长期主线为 **1 号→技人国→永住（约 10 年）**。来源：ssw.go.jp 分野清单 [https://www.ssw.go.jp/cn/about/visa/](https://www.ssw.go.jp/cn/about/visa/)；handbook 05。标注：事实。
-3. **育成就劳**：2027-04-01 施行（技能实习法废止），MOC 名单（ISA 页 7 国 / OTIT 一览 16 国）**均不含中国**——育成就劳渠道目前无法从中国招募；**自动车运送业运用要领未公布**。来源：isa.go.jp / otit.go.jp（2026-11-12 核验）。标注：事实。
-4. **永住要件**：永住许可指南于**令和 8-10-01 改定**（2027-04-01 起申请适用），新增**世帯年収、年金受給見込、日本語能力**考量。来源：ISA 永住许可指南 [https://www.moj.go.jp/isa/10_00279.html](https://www.moj.go.jp/isa/10_00279.html)。标注：事实。
-5. **家属带同**：特定技能 1 号期间**原则不能带家属**；家族滞在扶养人限特定就劳资格·留学等持有者的配偶·子，**年收门槛无官方数值（待复核）**；配偶资格外活動許可包括许可为**1 周 28 小时以内**。来源：moj.go.jp「家族滞在」页 [https://www.moj.go.jp/isa/applications/status/dependent](https://www.moj.go.jp/isa/applications/status/dependent)。标注：事实（制度要件）；带同时点为推断。
-6. **时间线判断**：司机路线的现实永住时间线取决于**第 5 年能否成功转换资格**，而非自动延续。标注：推断。
-7. **不许可救济链**：不许可（不交付）须附理由；救济分层为「補正・再申請 → 在留特別許可 → 行政不服審査・取消訴訟」，虚假材料可致在留資格取消（入管法第22条の4，**不以故意为要件**）。来源：ISA 在留資格取消解説页 [https://www.moj.go.jp/isa/applications/procedures/torikeshi_00002.html](https://www.moj.go.jp/isa/applications/procedures/torikeshi_00002.html)、仮放免制度页 [https://www.moj.go.jp/isa/08_00050.html](https://www.moj.go.jp/isa/08_00050.html)、出頭申告页 [https://www.moj.go.jp/isa/deportation/resources/nyukan_nyukan87.html](https://www.moj.go.jp/isa/deportation/resources/nyukan_nyukan87.html)（2026-11-14 核对）。标注：事实（制度）；**再申请时限、审查请求适用与费用无官方统一基准 → ⚠ 待核实**。
+1. **受入上限**：自动车运送业特定技能 1 号受入上限为 **22,100 人**（2026-01-23 阁议，适用至 2029 年 3 月末）；截至 **2026-08 末**该分野 1 号在留 **843 人**、充足率 3.8%，1 号全体 438,128 人、2 号全体 23,348 人。出入国在留管理庁（ISA）2026-11-06 换版「特定技能 1 号の分野ごとの受入れ見込数や在留者数等」表内基准**仍为令和 8 年 8 月末**（换版未换月），9 月末速报尚未发布。来源：ISA 受入れ見込数・在留者数表 [https://www.moj.go.jp/isa/content/001472175.pdf](https://www.moj.go.jp/isa/content/001472175.pdf)；[01-ssw-driver 2026-11 报告]（只读交叉验证锚）。标注：事实。
+2. **升级路径**：特定技能 2 号仅 **11 分野**，**自动车运送业无 2 号**，「1 号→2 号」路径不存在；长期主线为 **1 号→技人国 / 高度专门职→永住（约 10 年）**。来源：ssw.go.jp 分野清单（別紙 1–19）[https://www.ssw.go.jp/cn/about/visa/](https://www.ssw.go.jp/cn/about/visa/)；ISA 分野別運用方針 [https://www.moj.go.jp/isa/applications/ssw/nyuukokukanri01_00132.html](https://www.moj.go.jp/isa/applications/ssw/nyuukokukanri01_00132.html)。标注：事实。
+3. **育成就労**：2027-04-01 施行（技能实习法废止），育成就労 MOC（二国間協力覚書）已签 **7 国**——ウズベキスタン、スリランカ、**タイ**、バングラデシュ、ベトナム、東ティモール、ラオス，**均不含中国**；タイ MOC 于 2026-06-02 作成（**首个育成就労 MOC**）。**自动车运送业运用要領未公布**；2026-11-13 第 16 回有識者会議已就分野別運用方針改正案进行审议（議事要旨・議事録未掲載）。来源：ISA 育成就労 MOC 页 [https://www.moj.go.jp/isa/applications/ssw/nyuukokukanri05_00002.html](https://www.moj.go.jp/isa/applications/ssw/nyuukokukanri05_00002.html)；タイ MOC [https://www.moj.go.jp/isa/01_00642.html](https://www.moj.go.jp/isa/01_00642.html)；第 16 回有識者会議 [https://www.moj.go.jp/isa/03_00207.html](https://www.moj.go.jp/isa/03_00207.html)。标注：事实。
+4. **永住要件**：永住許可ガイドライン于 **令和 8-10-01 改定**（**令和 9-04-01 起申请适用**），新增 / 明确 **世帯年収、年金受給見込、日本語能力（B1 相当以上）、我が国の制度・ルール等への理解、学齢期子の就学**等考虑要素；同批 **永住者取消ガイドライン** 于令和 8 年 10 月策定、**令和 9-04-01 起运用**，取消事由为入管法第 22 条の 4 第 1 項 **第 8 号（入管法上の義務不遵守・故意に公租公課不払）与第 9 号（特定刑罰法令違反で拘禁刑）**，并设 **職権変更（原则「定住者」）** 与 **通報（入管法第 62 条の 2）** 机制。来源：永住許可ガイドライン [https://www.moj.go.jp/isa/10_00279.html](https://www.moj.go.jp/isa/10_00279.html)；永住取消ガイドライン [https://www.moj.go.jp/isa/11_00118.html](https://www.moj.go.jp/isa/11_00118.html)。标注：事实。
+5. **家属带同**：特定技能 1 号期间**原则不能带家属**；家族滞在扶养人限特定就劳资格·留学等持有者的配偶·子，**年收门槛无官方数值（待复核）**；配偶资格外活動許可包括许可为 **1 周 28 小时以内**。来源：moj.go.jp「家族滞在」页 [https://www.moj.go.jp/isa/applications/status/dependent](https://www.moj.go.jp/isa/applications/status/dependent)；資格外活動許可页 [https://www.moj.go.jp/isa/applications/procedures/nyuukokukanri07_00004.html](https://www.moj.go.jp/isa/applications/procedures/nyuukokukanri07_00004.html)。标注：事实（制度要件）；带同时点为推断。
+6. **支援体制要件改正**：1 号特定技能外国人支援体制要件改正 **令和 9-04-01 施行**——支援責任者・支援担当者须自常勤役員 / 職員中选任、支援業務仅限支援責任者等、支援責任者须受養成講習、支援担当者人数须超过「所属機関数 ÷10」与「1 号人数 ÷50」。来源：ISA [https://www.moj.go.jp/isa/10_00263.html](https://www.moj.go.jp/isa/10_00263.html)（2026-07-28 公开）。标注：事实。
+7. **在留許可手数料**：**令和 8-10-01 起**在留資格変更・在留期間更新・永住許可手数料按**在留期間区分**改定；減額对象为 **变更 / 更新 1 万円、永住 2 万円**；オンライン申請改为コンビニ / 銀行決済。来源：ISA [https://www.moj.go.jp/isa/01_00644.html](https://www.moj.go.jp/isa/01_00644.html)、減免页 [https://www.moj.go.jp/isa/10_00273.html](https://www.moj.go.jp/isa/10_00273.html)。标注：事实。
+8. **时间线判断**：司机路线的现实永住时间线取决于**第 5 年能否成功转换资格**，而非自动延续；永住指南改定后**收入 / 年金 / 日语 / 制度理解**四要素叠加，切换窗口期（Y4–Y5）的资格选择更关键。标注：推断。
+9. **不许可救济链**：不许可（不交付）须附理由；救济分层为「補正・再申請 → 在留特別許可 → 行政不服審査・取消訴訟」，虚假材料可致在留資格取消（入管法第 22 条の 4，**不以故意为要件**）。来源：ISA 在留資格取消解説页 [https://www.moj.go.jp/isa/applications/procedures/torikeshi_00002.html](https://www.moj.go.jp/isa/applications/procedures/torikeshi_00002.html)；出頭申告页 [https://www.moj.go.jp/isa/deportation/resources/nyukan_nyukan87.html](https://www.moj.go.jp/isa/deportation/resources/nyukan_nyukan87.html)。标注：事实（制度）；**再申请时限、审查请求适用与费用无官方统一基准 → ⚠ 待核实**。
 
-**监管态势一句话**：制度面「扩大受入（育成就劳 2027 年施行）＋管理强化（永住要件改定、接受机关审查加严）」并行；本分野入场通道（1 号）持续开放，但 **5 年上限后的资格切换**是长期定居的硬约束。
+**监管态势一句话**：制度面「扩大受入（育成就労 2027 年施行、MOC 扩至 7 国）＋管理强化（永住许可与取消双指南改定、1 号支援体制要件改正、在留手数料改定）」并行；本分野入场通道（1 号）持续开放，但 **5 年上限后的资格切换**与**永住四要素**是长期定居的双重硬约束。
 
-**生效时间线要点**：2026-07-01 签证费 715 元；2026-10-01 永住指南改定；2026-11-12 MOC 页更新；**2027-04-01** 育成就劳施行、1 号支援体制要件改正生效、出租车·巴士 B1 要求适用于 COE 申请；**2029-03** 受入上限到期（详见第七节）。
+**生效时间线要点**：2026-06-14 入管法等改正（法律第 59 号，マイナンバーと在留カード一体化）施行；2026-10-01 在留許可手数料改定、永住許可ガイドライン改定、永住取消ガイドライン策定；2026-11-06 ISA 受入れ見込数・在留者数表换版（仍为 8 月末）；2026-11-13 第 16 回有識者会議；2026-11-16 要領別冊（農業分野）改正；**2027-04-01** 育成就労施行、1 号支援体制要件改正生效、永住双指南运用、出租车·巴士 B1 要求适用于 COE 申请；**2029-03 末**受入上限到期（详见第七节）。
 
 **解读说明**：本报告为 2026-11 月度（复用）生成，政策解读以官方原文为准，登记册活值优先；原文有歧义处并列两种以上解读（见第四、八节）。本报告输出政策文本解读与影响评估，不构成法律意见；建议章（第六节）与事实分离。
 
 ### 数据变更摘要
 
-**本版为 2026-11-16 月度核验**：逐项复核登记册与优先来源，未发现 2026-11-14 以后的新发布 / 口径变化 / 触发器命中；无更新项不虚构变化。（确有更新则据实更新。）
+**本版为 2026-11-17 月度核验**：逐项复核登记册与优先来源，2026-11-16 以来新增 / 变化项为：① 2026-11-16 要領別冊（農業分野）改正（不影响本分野，入台账）；② 2026-11-13 第 16 回有識者会議（分野別運用方針改正案审议，結果未発表）；③ ISA 受入れ見込数・在留者数表 2026-11-06 换版（仍为 8 月末，9 月末未发布）。其余各项与 2026-11-16 版一致；无更新项不虚构变化。
 
 | # | 指标 | 最新活值 | 来源 / 时点 | 状态 |
 |---|---|---|---|---|
-| 1 | 特定技能受入上限（自动车运送业） | 22,100（至 2029-03 末；ssw.go.jp 仍显示 24,500） | moj.go.jp 运用方针；2026-01-23 阁议 | 截至 2026-11-16 无更新 |
-| 2 | 分野在留者数 | 843 人（2026-08 末速报；充足率 3.8%） | ISA 统计月报 | 截至 2026-11-16 无更新 |
-| 3 | 技能试験费用与日程 | 6,500 円；月报至 2026-09（实施国 18、中国大陆无考点） | ClassNK portal | 截至 2026-11-16 无更新 |
-| 4 | JFT-Basic 日本国内费用 | 10,000 円 | Prometric | 截至 2026-11-16 无更新 |
-| 5 | 签证费用（中国受理领馆） | 715 元（2026-07-01 起） | 领馆费用专页 | 截至 2026-11-16 无更新 |
-| 6 | 育成就労 運用要領 分野公布 | 漁業 2026-11-06、宿泊 10-16、飲食料品・資源循環 10-09 等；自动车运送业 未公布 | isa.go.jp / otit.go.jp | 截至 2026-11-16 无更新 |
-| 7 | 育成就労 MOC 国家名单 | 16 国（中国不在名单内；ISA MOC 页 7 国） | otit.go.jp | 截至 2026-11-16 无更新 |
-| 8 | 永住要件现行口径 | 令和 8-10-01 改定（2027-04-01 起申请适用）：世帯年収・年金受給見込・日本語 B1・制度理解 | isa.go.jp ガイドライン | 截至 2026-11-16 无更新 |
-| 9 | 2 号适用分野 | 11 分野（自动车运送业无 2 号） | ssw.go.jp | 截至 2026-11-16 无更新 |
+| 1 | 特定技能受入上限（自动车运送业） | 22,100（至 2029-03 末；ssw.go.jp 仍显示 24,500） | moj.go.jp 运用方针；2026-01-23 阁议 | 截至 2026-11-17 无更新（2026-11-06 表再次列示 22,100） |
+| 2 | 分野在留者数 | 843 人（2026-08 末速报；充足率 3.8%；1 号全体 438,128、2 号 23,348） | ISA 统计月报 | 截至 2026-11-17 无更新（2026-11-06 换版未换月；9 月末未发布） |
+| 3 | 技能试験费用与日程 | 6,500 円；证明书 15,000 円；月报至 2026-09（实施国 18、中国大陆无考点）；2026-12 JLPT 全等级满员、官方引导转 JFT-Basic | ClassNK portal / ISA | 沿用 v2026.11.16_1 更新 |
+| 4 | JFT-Basic 日本国内费用 | 10,000 円 | Prometric | 截至 2026-11-17 无更新 |
+| 5 | 签证费用（中国受理领馆） | 715 元（2026-07-01 起）；**在留許可手数料 2026-10-01 起改定（按在留期間区分；減額对象 变更 / 更新 1 万円、永住 2 万円）** | 领馆费用专页 / ISA | 2026-11-17 补充（手数料） |
+| 6 | 育成就労 運用要領 分野公布 | 漁業 2026-11-06、宿泊 10-16、飲食料品・資源循環 10-09、物流倉庫 09-18、農業 11-16（改正）、木材産業 11-05、外食業 10-26；自动车运送业 未公布 | isa.go.jp / otit.go.jp | 2026-11-17 补充（農業 11-16 改正） |
+| 7 | 育成就労 MOC 国家名单 | 7 国（ウズベキスタン、スリランカ、タイ、バングラデシュ、ベトナム、東ティモール、ラオス；OTIT 一览 16 国含暂定）；中国不在名单内 | ISA MOC 页 / otit.go.jp | 2026-11-17 复核（タイ MOC 2026-06-02） |
+| 8 | 永住要件现行口径 | 永住許可ガイドライン 令和 8-10-01 改定（2027-04-01 起申请适用）；永住取消ガイドライン 令和 8-10 策定（2027-04-01 运用） | isa.go.jp ガイドライン | 2026-11-17 补充（取消ガイドライン） |
+| 9 | 2 号适用分野 | 11 分野（自动车运送业无 2 号） | ssw.go.jp | 截至 2026-11-17 无更新 |
 | 10 | 家族滞在 扶养要件与收入证明口径 | 扶养人限定为特定就劳资格·留学等持有者的配偶·子；须附扶养者职业·收入证明；**年收门槛无官方数值** | moj.go.jp | 2026-11-12 维度扩充 |
 | 11 | 資格外活動許可（家族滞在）规则 | 包括许可 1 周 28 小时以内（仅需申请书）；个别许可从事期间不超在留期间过半 | moj.go.jp | 2026-11-12 维度扩充 |
 | 12 | 不许可理由与救济链 | 不许可须附理由；救济＝補正・再申請・在留特別許可・行政不服審査・取消訴訟；**不许可理由官方解读页未取得** | ISA 手続索引 / 取消解説 | 2026-11-14 新增（⚠ 待核实） |
@@ -53,16 +55,17 @@
 | 16 | 材料瑕疵可补救性分级 | 三级：可补救 / 直接拒 / 影响后续申请（基线判断） | ISA / 实务 | 2026-11-14 新增（推断） |
 | 17 | 虚假材料连带风险 | 虚假材料取得上陆许可可致资格取消（无需故意）；**再入境限制年限无官方明文** | ISA 取消解説（入管法第22条の4） | 2026-11-14 新增（⚠ 待核实） |
 
-> 注：本表逐项抄录登记册活值，未改写数值；本期新增 #12–#17 救济类指标（2026-11-14 基准），#10 #11 为 2026-11-12 维度扩充项，其余各项无新增变更。
+> 注：本表逐项抄录登记册活值并补充 2026-11-17 复核结果；#12–#17 为 2026-11-14 基准，#10 #11 为 2026-11-12 维度扩充项。
 
 ### 已修正事实清单
 
-本版继承历史报告（2026-11-13）已修正事实清单，无新增修正。已修正要点：
+本版继承历史报告（2026-11-13 / 11-16）已修正事实清单，并新增 1 条修正。已修正要点：
 
-- **2026-11-11 重大更正**：特定技能 2 号仅 11 分野、**自动车运送业无 2 号**，「1 号→2 号」路径不存在；长期主线改为 1 号→技人国 / 高度专门职→永住。
-- **受入上限**：由 24,500 修正为 **22,100**（至 2029-03 末）；ssw.go.jp 中文页 24,500 仅作未同步线索。
-- **育成就労 MOC 口径区分**：ISA 页 **7 国** ≠ OTIT **16 国**（含暂定），均不含中国。
-- **843 人原始出处**：已取得 ISA 原件（2026-08 末速报：843 人 / 22,100 / 充足率 3.8%）。
+- **2026-11-11 重大更正**：特定技能 2 号仅 11 分野、**自动车运送业无 2 号**，「1 号→2 号」路径不存在；长期主线改为 1 号→技人国 / 高度专门职→永住。[Source: https://www.ssw.go.jp/cn/about/visa/, 2026]
+- **受入上限**：由 24,500 修正为 **22,100**（至 2029-03 末）；ssw.go.jp 中文页 24,500 仅作未同步线索（截至 2026-11-17 仍未同步）。[Source: https://www.moj.go.jp/isa/content/001472175.pdf, 2026]
+- **育成就労 MOC 口径区分**：ISA 页 **7 国** ≠ OTIT **16 国**（含暂定），均不含中国；タイ MOC 为 2026-06-02 作成的首个育成就労 MOC。[Source: https://www.moj.go.jp/isa/applications/ssw/nyuukokukanri05_00002.html, 2026]
+- **843 人原始出处**：已取得 ISA 原件（2026-08 末速报：843 人 / 22,100 / 充足率 3.8%）。[Source: https://www.moj.go.jp/isa/content/001472175.pdf, 2026]
+- **2026-11-17 新增修正**：❌ 不得再称永住取消事由为「无正当理由连续 3 年以上未履行纳税或社会保险缴费义务」——令和 8 年 10 月《永住者の在留資格の取消しに関するガイドライン》明确的取消事由为入管法第 22 条の 4 第 1 項 **第 8 号（入管法上の義務不遵守・故意に公租公課の支払をしない）**与**第 9 号（特定刑罰法令違反で拘禁刑）**，**无「3 年」门槛**；且设職権変更（原则「定住者」）与通報制度。[Source: https://www.moj.go.jp/isa/11_00118.html, 2026]
 
 ## 二、政策台账与监测机制
 
@@ -112,7 +115,11 @@
 7. 外务省 / 领馆签证费、审查期间、申请流程调整 → 四；
 8. [01-ssw-driver](../../01-ssw-driver/reports/2026-11-ssw-driver.md) 监测报告「已修正事实清单」追加 → 对应文档回写。
 
-**观察项与触发器状态**（摘自登记册）：唯一观察项 · 首要触发器 · 触发器结论均为「首期为空」。
+**观察项与触发器状态**（2026-11-17 复核）：
+
+- **观察项 1**：ssw.go.jp 日 / 中文版受入上限仍写 **24,500**、未同步（连续多次核验）；ISA 表 2026-11-06 版再次列示 **22,100**。观察降为月度扫描，不影响结论。[Source: https://www.moj.go.jp/isa/content/001472175.pdf, 2026]
+- **观察项 2**：ISA 9 月末速报**未发布**——2026-11-06 换版仍为 2026-08 末（843 / 438,128 / 23,348）；按更新节奏预计 12 月上旬随 10 月分发布（推断）。[Source: https://www.moj.go.jp/isa/content/001472175.pdf, 2026]
+- **观察项 3**：2026-11-13 第 16 回有識者会議已就分野別運用方針改正案审议，**議事要旨・議事録未掲載**（「追って掲載予定」），改正内容对自动车运送业的影响**待核实**。[Source: https://www.moj.go.jp/isa/03_00207.html, 2026]
 
 ## 三、监管框架总览
 
@@ -126,11 +133,11 @@
 | 在留期间 | 各 1 年 / 6 个月 / 4 个月，更新不超过上限（自动车运送业为 5 年） | 3 年 / 1 年 / 6 个月，可无限更新 |
 | 家族带同 | 原则不可（例外：同等要件相当者等） | 可以（配偶者 + 子） |
 | 日语要求 | 卡车：JFT-Basic（A2.2 相当）或 JLPT N4 以上；出租车·巴士：JLPT N3 以上且须 B1 相当以上（满足受入机关条件时可用 JFT-Basic / N4 替代） | 原则上 B1 相当以上（自 2027-04-01 起 COE 申请适用；变更·更新待公告） |
-| 支援义务 | 接受机关 / 登录支援机关须提供生活支援 | 无强制支援义务（自主自立） |
+| 支援义务 | 接受机关 / 登录支援机关须提供生活支援（令和 9-04-01 起要件改正） | 无强制支援义务（自主自立） |
 
-来源：ssw.go.jp 分野清单（2026）；ISA 自动车运送业分野运用方针（2026）。
+来源：ssw.go.jp 分野清单（2026）；ISA 自动车运送业分野运用方针（2026）；ISA 1 号支援体制要件改正页 [https://www.moj.go.jp/isa/10_00263.html](https://www.moj.go.jp/isa/10_00263.html)。
 
-**分野一览**：1 号 19 分野（介护、ビルクリーニング、工业制品制造业、建设、造船・舶用工业、自动车整备、航空、宿泊、自动车运送业、铁道、农业、渔业、饮食料品制造业、外食业、林业、木材产业、资源循环、リネンサプライ、物流仓库）；2 号 11 分野（ビルクリーニング、建设、工业制品制造业、造船・舶用工业、自动车整备、航空、宿泊、农业、渔业、饮食料品制造业、外食业）。
+**分野一览**：1 号 19 分野（介护、ビルクリーニング、リネンサプライ、工业制品制造业、建设、造船・舶用工业、自动车整备、航空、宿泊、自动车运送业、铁道、物流仓库、农业、渔业、饮食料品制造业、外食业、林业、木材产业、资源循环）；2 号 11 分野（ビルクリーニング、建设、工业制品制造业、造船・舶用工业、自动车整备、航空、宿泊、农业、渔业、饮食料品制造业、外食业）。来源：ISA 分野別運用方針 [https://www.moj.go.jp/isa/applications/ssw/nyuukokukanri01_00132.html](https://www.moj.go.jp/isa/applications/ssw/nyuukokukanri01_00132.html)（別紙 1–19）。
 
 **与其他在留资格的关系**：技能实习将自 2027 年 4 月被育成就劳取代（育成就劳原则上以 3 年内移行特定技能为目标）；技人国是后期转向物流技术 / 数字化岗位的备选资格；永住者为长期定居终点。
 
@@ -145,7 +152,7 @@
 - **条款摘编**：自动车运送业分野特定技能 1 号受入上限 **22,100 人**，适用至 2029 年 3 月末；2026-08 末在留 843 人、充足率 3.8%。
 - **解读**：上限远未用满，短期入场空间充足；但 2029-03 到期后的延续政策未定。
 - **口径并列（不合并）**：**22,100（现行，moj.go.jp）≠ 24,500（ssw.go.jp 中文页未同步）**。本库一律采用 ISA 运用方针 22,100；中文页 24,500 仅作未同步线索。
-- **来源**：moj.go.jp 运用方针（2026）；ISA 统计月报 2026-08 末速报。
+- **来源**：moj.go.jp 运用方针（2026）；ISA 统计月报 / 受入れ見込数・在留者数表 2026-08 末速报（2026-11-06 换版）[https://www.moj.go.jp/isa/content/001472175.pdf](https://www.moj.go.jp/isa/content/001472175.pdf)。
 
 ### 4.2 人才基准与日语要求（卡车 / 出租车 / 巴士）
 
@@ -155,8 +162,8 @@
 | 出租车 | 评价试验（出租车）+ 第二种驾驶执照 + 新任驾驶员研修 | JLPT N3 以上且须 B1 相当以上；受入机关落实第 9、10 项措施时可用 JFT-Basic / N4 替代 |
 | 巴士 | 评价试验（巴士）+ 第二种驾驶执照 + 新任驾驶员研修 | 同出租车（替代情形为第 9、10 或 11 项措施） |
 
-- **过渡期**：自 2027-04-01 起提交的 COE 申请，出租车·巴士区分须「B1 相当以上」；**在留资格变更·期间更新申请的适用时间仍在检讨中（待公告）**。
-- **健康检查**：本分野**无健康检查义务**；唯一健康相关项为出租车 / 巴士新任驾驶员研修内的「適性診断」（旅客自動車運送事業運輸規則第 38 条第 2 項）。
+- **过渡期**：自 **2027-04-01** 起提交的 COE 申请，出租车·巴士区分须「B1 相当以上」；**在留资格变更·期间更新申请的适用时间仍在检讨中（待公告）**。来源：ISA「日本語能力水準『B1 相当以上』の確認開始時期について」[https://www.moj.go.jp/isa/03_00198.html](https://www.moj.go.jp/isa/03_00198.html)（2026-09-30）。
+- **健康检查**：本分野**无健康检查义务**；唯一健康相关项为出租车 / 巴士新任驾驶员研修内的「適性診断」（旅客自動車運送事業運輸規則第 38 条第 2 項）。来源：01-ssw-driver 报告（交叉引用）。
 - **歧义并列**：B1 要求的变更·更新适用时间官方未明确，存在「2027-04-01 起全部适用」与「仅 COE 申请适用、变更·更新另待公告」两种解读，并列保留、不静默择一。
 - **来源**：ISA 自动车运送业分野运用方针；ISA 出租车·巴士日语要求页 [https://www.moj.go.jp/isa/03_00198.html](https://www.moj.go.jp/isa/03_00198.html)。
 
@@ -164,18 +171,19 @@
 
 - **受验资格**：满 17 岁（印尼考场 18 岁）、有效驾照（日本或外国均可）、无日本国籍、国内受验需有在留资格。
 - **考试构成**：知识试 50 题，**45 题以上正确**为合格；技能试为实技评分。
-- **费用**：日本国内 **6,500 円（税抜）**、海外 **45 美元**（部分国家按当地规定为 50 美元）；合格证明书发行手续费另计。
-- **日语考试**：JFT-Basic 日本国内 **10,000 円**；JLPT 中国考区 N3/N4/N5 **450 元**、N1/N2 550 元。
-- **来源**：ClassNK Portal [https://sswt-portal.classnk.or.jp/news/25](https://sswt-portal.classnk.or.jp/news/25)；Prometric [https://www.prometric-jp.com/ssw/exam/fee/](https://www.prometric-jp.com/ssw/exam/fee/)；NEEA [https://jlpt.neea.edu.cn/faq.html](https://jlpt.neea.edu.cn/faq.html)。
+- **费用**：日本国内 **6,500 円（税抜）**、海外 **45 美元**（部分国家按当地规定为 50 美元）；**合格证明书发行手续费 15,000 円**另计。
+- **日语考试**：JFT-Basic 日本国内 **10,000 円**；JLPT 中国考区 N3/N4/N5 **450 元**、N1/N2 550 元；**2026-12 月 JLPT N1–N5 全等级报名截止前满员**，ISA 公告引导转 JFT-Basic（2026-10-05）[Source: https://www.moj.go.jp/isa/content/001471906.pdf, 2026]。
+- **月报**：ClassNK 试验月报最新至 **2026-09**（2026-10-15 发布），实施国 18、**中国大陆无考点**。
+- **来源**：ClassNK Portal [https://sswt-portal.classnk.or.jp/news/25](https://sswt-portal.classnk.or.jp/news/25)；Prometric [https://www.prometric-jp.com/ssw/exam/fee/](https://www.prometric-jp.com/ssw/exam/fee/)；NEEA [https://jlpt.neea.edu.cn/faq.html](https://jlpt.neea.edu.cn/faq.html)；01-ssw-driver 报告（交叉引用）。
 
 ### 4.4 申请流程与材料
 
 - **两条路径**：A 海外直接申请（中国国内 → 日本：考试 + 雇佣契约 → 雇主受入计划书认定 → COE → 领馆签证 → 入境）；B 国内移行（持技能实习 / 育成就劳等资格者，完成同等技能·日语要件后由雇主申请在留资格变更许可）。
 - **材料**：本人 7 项（申请书、护照复印件与证件照、评价试验合格证明、日语能力证明、驾照复印件（外国驾照附翻译）、履历书、返纳保证书等）；雇主 5 项（受入计划书认定证明、雇佣契约书、支援计划书与实绩、公司登记与损益文件、雇用保险·社保加入证明）。
-- **在留管理义务**：在留卡随身携带；地址变更 **14 日内**报备；每次期满前更新；无正当理由**连续 3 个月**不从事原业务 → 资格取消风险。
+- **在留管理义务**：在留卡随身携带；地址变更 **14 日内**报备；每次期满前更新；无正当理由**连续 3 个月**不从事原业务 → 资格取消风险（入管法第 22 条の 4 第 1 項第 6 号）。
 - **常见不许可风险点**：雇主受入计划书认定瑕疵、日语证明与实际能力差距、驾照翻译件不符合要求、支援体制不落实。
-- **签证费**：单次 **715 元**（2026-07-01 起，代办机构另收手续费）。
-- **来源**：领馆费用专页 [https://www.shanghai.cn.emb-japan.go.jp/itpr_ja/11_000001_00633.html](https://www.shanghai.cn.emb-japan.go.jp/itpr_ja/11_000001_00633.html)；handbook 04。
+- **费用**：签证费单次 **715 元**（2026-07-01 起，代办机构另收手续费）；**在留許可手数料 2026-10-01 起改定**（按在留期間区分；減額对象 变更 / 更新 1 万円、永住 2 万円；オンライン申請为コンビニ / 銀行決済）。
+- **来源**：领馆费用专页 [https://www.shanghai.cn.emb-japan.go.jp/itpr_ja/11_000001_00633.html](https://www.shanghai.cn.emb-japan.go.jp/itpr_ja/11_000001_00633.html)；ISA 在留許可手数料改定 [https://www.moj.go.jp/isa/01_00644.html](https://www.moj.go.jp/isa/01_00644.html)；handbook 04。
 
 ### 4.5 特定技能 2 号与升级路径
 
@@ -188,15 +196,17 @@
 ### 4.6 育成就劳制度（2027-04-01 施行）
 
 - **条款摘编**：2024-06-21 公布改正法，技能实习（约 40 年历史）将被育成就劳取代；原则上以 **3 年内移行特定技能**为目标；育成阶段可跨企业、跨地区转职；原则上仅从 MOC 签署国接收。
-- **进展**：2026-04-15 监理支援机关许可申请受理开始；2026-09-01 育成就劳计划认定申请受理开始；运用要领陆续公布——漁業 2026-11-06、宿泊 10-16、飲食料品製造業・資源循環 10-09、物流倉庫 08-28 等；**自动车运送业未公布**。
-- **口径并列（不合并）**：MOC 国家 **ISA 页 7 国（乌兹别克、斯里兰卡、泰国、孟加拉、越南、东帝汶、老挝）≠ OTIT 一览 16 国（含暂定）**；**均不含中国**。
+- **进展**：2026-04-15 监理支援机关许可申请受理开始；2026-09-01 育成就劳计划认定申请受理开始；运用要領陆续公布——漁業 2026-11-06、宿泊 10-16、飲食料品製造業・資源循環 10-09、物流倉庫 09-18、**農業分野要領別冊 11-16 改正**、木材産業 11-05、外食業 10-26、漁業 10-15 改正等；**自动车运送业未公布**。
+- **MOC 口径并列（不合并）**：**ISA 育成就労 MOC 页 7 国**（ウズベキスタン、スリランカ、**タイ**、バングラデシュ、ベトナム、東ティモール、ラオス）**≠ OTIT 認定送出機関一览 16 国（含暂定）**；**均不含中国**。タイ MOC 为 2026-06-02 作成（**首个育成就労 MOC**，2026-06-04 発表）。
+- **最新动向**：**2026-11-13 第 16 回特定技能制度及び育成就労制度の基本方針及び分野別運用方針に関する有識者会議** 召开，审议「分野別運用方針（案）」及専門家会議検討結果；**議事要旨・議事録未掲載**，对本分野影响待核实。[Source: https://www.moj.go.jp/isa/03_00207.html, 2026]
 - **对本案影响**：已有 N4 + 驾照可直接走 1 号更优；日语 / 技能暂不达标可走育成就劳；已持技能实习关注 2027 衔接。
-- **来源**：ISA 育成就劳页 [https://www.moj.go.jp/isa/applications/index_00005.html](https://www.moj.go.jp/isa/applications/index_00005.html)；MOC 页 [https://www.moj.go.jp/isa/applications/ssw/nyuukokukanri05_00002.html](https://www.moj.go.jp/isa/applications/ssw/nyuukokukanri05_00002.html)；OTIT [https://www.otit.go.jp/employment_for_skill_development/05/](https://www.otit.go.jp/employment_for_skill_development/05/)。
+- **来源**：ISA 育成就劳页 [https://www.moj.go.jp/isa/applications/index_00005.html](https://www.moj.go.jp/isa/applications/index_00005.html)；MOC 页 [https://www.moj.go.jp/isa/applications/ssw/nyuukokukanri05_00002.html](https://www.moj.go.jp/isa/applications/ssw/nyuukokukanri05_00002.html)；OTIT [https://www.otit.go.jp/employment_for_skill_development/05/](https://www.otit.go.jp/employment_for_skill_development/05/)；第 16 回有識者会議 [https://www.moj.go.jp/isa/03_00207.html](https://www.moj.go.jp/isa/03_00207.html)。
 
 ### 4.7 永住许可要件与取消
 
-- **原则要件（令和 8-10-01 改定版）**：连续 10 年以上在留（其中 5 年以上就劳或受扶养）；持有现有资格最长在留期间；行为合规（纳税、社保、雇用保险）；独立生计；**世帯年収**持续达到「世帯人数相应的日本人世帯平均收入」以上（家族滞在等非就労资格者收入不计入）；健康保险·年金未履行满 3 年成为不许可 / 取消事由；**年金受給見込額**须达标（不足可用補填資産补足）；**日本語能力**纳入考虑要素。
-- **2024 年改正（永住取消）**：无正当理由**连续 3 年以上未履行纳税或社会保险缴费义务**、或出国未取得再入国许可而长期离境等，可取消永住。
+- **原则要件（令和 8-10-01 改定版）**：连续 10 年以上在留（其中 5 年以上就劳或受扶养）；持有现有资格最长在留期间；行为合规（纳税、社保、雇用保险）；独立生计；**世帯年収**持续达到「世帯人数相应的日本人世帯平均收入」以上（家族滞在等非就労资格者收入不计入；抚养亲属即便居住海外也计入世帯人数；5 人以上加算生活费）；**年金受給見込額**须达标（不足可用**補填資産**补足）；**日本語能力（B1 相当以上）**、**我が国の制度・ルール等への理解**、**学齢期子の就学**纳入考虑要素。
+- **适用时期**：本ガイドライン改定 **令和 9-04-01 以后申请**适用；但「収入」与「公共の負担とならないこと」两项，**改定日 6 个月前（2026-04-01）以后申请且改定日仍审查中**的案件也适用。[Source: https://www.moj.go.jp/isa/10_00279.html, 2026]
+- **永住取消ガイドライン（令和 8 年 10 月策定、令和 9-04-01 运用）**：取消事由为 **第 8 号（入管法上の義務不遵守；故意に公租公課の支払をしない）** 与 **第 9 号（特定刑罰法令違反で拘禁刑）**；取消前原则先 **職権変更**（多为「定住者」）；设 **通報**（入管法第 62 条の 2，国 / 地方公共団体職員任意通报）。[Source: https://www.moj.go.jp/isa/11_00118.html, 2026]
 - **10 年时间线**：Y0 1 号入境 → Y1–5 更新（≤5 年）→ Y5 切换其他在留资格（2 号不可用）→ Y6–10 新资格 + 收入达标 → Y10 永住申请。关键控制点：Y5 前完成资格切换（**推断**：失败则须离境、连续性中断）。
 - **来源**：永住许可指南（令和 8-10-01 改定）[https://www.moj.go.jp/isa/10_00279.html](https://www.moj.go.jp/isa/10_00279.html)；永住者取消指南 [https://www.moj.go.jp/isa/11_00118.html](https://www.moj.go.jp/isa/11_00118.html)。
 
@@ -207,7 +217,7 @@
 - **资格外活動許可**：包括许可 = **1 周 28 小时以内**（仅需申请书）；个别许可 = 涵盖稼働时间不明确活动等，要件之一为**从事期间不超过在留期间过半**；超过 28 小时 / 周或实质全职就业可能被判定为在留目的实质变更（推断）。
 - **歧义并列**：1 号带同例外（同等要件相当者等）适用细则无公开运用基准；年收门槛存在「以提交证明为足」与「实务扶养能力审查」两种解读，并列保留。
 - **子女衔接**：带同最佳时点（推断）与技人国变更（Y4–Y5）同步；高中毕业后可变更为「定住者」直接就业，不符要件者经「特定活动」过渡。
-- **来源**：moj.go.jp「家族滞在」页；資格外活動許可页 [https://www.moj.go.jp/isa/applications/procedures/nyuukokukanri07_00004.html](https://www.moj.go.jp/isa/applications/procedures/nyuukokukanri07_00004.html)；handbook 08。
+- **来源**：moj.go.jp「家族滞在」页 [https://www.moj.go.jp/isa/applications/status/dependent](https://www.moj.go.jp/isa/applications/status/dependent)；資格外活動許可页 [https://www.moj.go.jp/isa/applications/procedures/nyuukokukanri07_00004.html](https://www.moj.go.jp/isa/applications/procedures/nyuukokukanri07_00004.html)；handbook 08。
 
 ### 4.9 不许可理由与救济链
 
@@ -238,16 +248,13 @@
 - **申請取次**：经地方入管局长申报的弁護士・行政書士可作为取次者代理申请（ISA 在留資格変更許可申請页 [https://www.moj.go.jp/isa/applications/procedures/16-2.html](https://www.moj.go.jp/isa/applications/procedures/16-2.html)，2026-11-14 核对）。
 - **行政書士**：书类作成・理由书・申请代理，国家资格；适合 L1 / L2 补正与再申请。
 - **弁護士**：法律意见・不服审查・取消诉讼代理；适合 L4 / L5 与虚假风险案件。
-- **歧义并列**：不许可案件的「行政書士 vs 弁護士」分工无官方强制口径；**具体费用无官方数值 → ⚠ 待核实**，按案件类型与收费择一。
+- **费用**：**无官方数值 → ⚠ 待核实**，按案件类型与收费择一。
 
-**取消诉讼（行政事件诉讼法）路径**：
-
-- 对入管处分（如不许可、退去强制）可经「行政不服審査（审查请求）」后、或依法直接提起「撤销诉讼」（行政事件訴訟法）。来源：e-Gov 法令检索 [https://laws.e-gov.go.jp](https://laws.e-gov.go.jp)；最高裁判所（行政事件诉讼，2026-11-14 核对）。
-- **歧义并列**：不许可处分是否一律适用审查请求前置、起诉期间起算点，**官方解读页未取得 → ⚠ 待核实**，须咨询弁護士。
+**在留許可手数料减免（2026-10-01 起）**：経済的困難・特別の理由のある者（生活保護要保護者に準ずる等）可获減額——**变更 / 更新 1 万円、永住 2 万円**；オンライン申請不对应減額（须窗口申请）。[Source: https://www.moj.go.jp/isa/10_00273.html, 2026]
 
 **虚假材料连带风险**：
 
-- 以虚假或不正手段取得上陆许可 → 构成在留資格取消事由（入管法第22条の4第1項；ISA 取消解説页 [https://www.moj.go.jp/isa/applications/procedures/torikeshi_00002.html](https://www.moj.go.jp/isa/applications/procedures/torikeshi_00002.html)）。其中第3号「提出虚偽書類」**不以故意为要件**。
+- 以虚假或不正手段取得上陆许可 → 构成在留資格取消事由（入管法第 22 条の 4 第 1 項；ISA 取消解説页 [https://www.moj.go.jp/isa/applications/procedures/torikeshi_00002.html](https://www.moj.go.jp/isa/applications/procedures/torikeshi_00002.html)）。其中第 3 号「提出虚偽書類」**不以故意为要件**。
 - 对后续 COE / 签证 / 变更 / 更新的影响：记录留存，可能长期不利；**再入境限制年限无官方明文 → ⚠ 待核实**。
 
 **歧义并列**：不许可理由的官方解读页与「再申请时限」无公开统一基准——存在「随时可再申请」与「须先消除理由再申请」两种解读，并列保留、不静默择一。
@@ -281,13 +288,15 @@
 | 1 号总在留上限 5 年、无 2 号 | 司机个人 | 资格切换硬约束 | Y5 前须切换，否则须离境（推断） | ssw.go.jp |
 | 1 号原则不可带家属 | 司机家庭 | 家庭规划后移 | 例外细则待复核 | moj.go.jp |
 | 出租车·巴士 B1 相当以上（2027-04-01 起 COE） | 出租车 / 巴士求职者 | 门槛提高 | 满足第 9、10（或 11）项措施可用 N4 / JFT 替代 | ISA 03_00198 |
-| 育成就劳 MOC 不含中国 | 中国国内招募渠道 | 渠道受限 | ISA 7 国 / OTIT 16 国，均不含中国 | ISA / OTIT |
-| 育成就劳 2027-04-01 施行 | 技能实习在留者 / 求职者 | 旧制度衔接 | 3 年内移行特定技能为目标 | ISA |
-| 1 号支援体制要件改正（2027-04-01 生效） | 受入机关 | 支援义务变化 | 2026-07-28 公布 | ISA |
-| 永住指南改定（2027-04-01 起申请适用） | 长期在留者 / 家庭 | 要件加严 | 世帯年収・年金受給見込・日本語 | ISA 10_00279 |
-| 永住取消（2024 改正） | 永住者 | 取消风险 | 连续 3 年未履行纳税 / 社保 | ISA 11_00118 |
+| 育成就労 MOC 不含中国 | 中国国内招募渠道 | 渠道受限 | ISA 7 国 / OTIT 16 国，均不含中国 | ISA / OTIT |
+| 育成就労 2027-04-01 施行 | 技能实习在留者 / 求职者 | 旧制度衔接 | 3 年内移行特定技能为目标 | ISA |
+| 1 号支援体制要件改正（2027-04-01 施行） | 受入机关 / 登录支援机关 | 支援义务变化 | 2026-07-28 公布 | ISA 10_00263 |
+| 在留許可手数料改定（2026-10-01） | 申请者 | 费用变化 | 按在留期間区分；減額对象 变更 / 更新 1 万円、永住 2 万円 | ISA 01_00644 / 10_00273 |
+| 永住指南改定（2027-04-01 起申请适用） | 长期在留者 / 家庭 | 要件加严 | 世帯年収・年金受給見込・日本語 B1・制度理解・就学 | ISA 10_00279 |
+| 永住取消ガイドライン（2027-04-01 运用） | 永住者 | 取消风险 | 8 号 / 9 号；职権变更（原则定住者）・通報 | ISA 11_00118 |
 | 资格外活動許可 周 28 小时 | 家族滞在配偶 | 就劳上限 | 个别许可为例外 | moj.go.jp |
 | 在留卡 14 日地址变更、3 个月原业务义务 | 全在留者 | 合规义务 | 违反可致资格取消 | 入管法 / ISA |
+| 第 16 回有識者会議（2026-11-13） | 全分野 / 本分野 | 運用方針改正待定 | 議事要旨未掲載 → ⚠ 待核实 | ISA 03_00207 |
 
 > 注：矩阵逐格附条款依据；「量级」列中口径冲突处并列呈现，不取均值。
 
@@ -297,15 +306,16 @@
 
 ### 6.1 入场前（建议）
 
-1. **考试路径**：中国大陆无 JFT-Basic 考点 → 主攻 **JLPT N4**（2027 年 7 月场）；JFT-Basic 作为赴日后或顺路出境时的备用选项（与 N4 同等有效）。
-2. **驾照**：优先外免切替；无本国驾照者评估在日考照预算（学费约 25–35 万日元、合宿制约 20–30 万日元）。
+1. **考试路径**：中国大陆无 JFT-Basic 考点 → 主攻 **JLPT N4**（注意 2026-12 月期全等级满员，官方引导转 JFT-Basic）；JFT-Basic 作为赴日后或顺路出境时的备用选项（与 N4 同等有效）。
+2. **驾照**：优先外免切替；无本国驾照者评估在日考照预算（普通 AT 限定官方均价约 324,381 円，→ 01-ssw-driver）。
 3. **雇主核验**：确认雇主持国土交通省「特定技能受入计划书」认定、加入「自動车运送业分野特定技能協議会」，卡车受入机关须取得 ClassNK 认证或 G マーク。
-4. **费用预算**：评价试验 6,500 円（国内）/ 45 美元（海外）；JFT-Basic 10,000 円；JLPT 中国 450 / 550 元；签证费 715 元。
+4. **费用预算**：评价试验 6,500 円（国内）/ 45 美元（海外）+ 合格证明书 15,000 円；JFT-Basic 10,000 円；JLPT 中国 450 / 550 元；签证费 715 元；**在留許可手数料按在留期間另计（2026-10-01 改定后）**。
 
 ### 6.2 在留期间（建议）
 
 1. **更新与义务**：每次期满前更新；地址变更 14 日内报备；避免连续 3 个月不从事原业务。
-2. **证据链**：工资明细、考勤、社保记录长期留存，作为资格切换与永住申请的证据链。
+2. **证据链**：工资明细、考勤、社保记录长期留存，作为资格切换与永住申请的证据链（永住指南改定后，**收入・年金・日语・制度理解**为四要素，证据链价值上升）。
+3. **公租公課**：健康保険料・年金・住民税按时缴纳——永住取消第 8 号「故意に公租公課不払」自 2027-04-01 起运用，**避免长期滞納**。
 
 ### 6.3 资格切换与长期（建议）
 
@@ -316,12 +326,13 @@
 ### 6.4 永住与家庭（建议）
 
 1. 每年归档源泉征收票、住民税课税（非课税）证明书、纳税证明书——既是永住证据链，也是家族滞在的扶养能力证明。
-2. 带同时点宜与技人国转岗涨薪联动，在 Y5 后、永住申请前 2–3 年完成，避免临申请时世帯人数骤增。
+2. 带同时点宜与技人国转岗涨薪联动，在 Y5 后、永住申请前 2–3 年完成，避免临申请时世帯人数骤增（永住指南对**世帯人数与年収**联动审查）。
 3. 配偶就业前申请资格外活動許可（包括许可，周 28 小时）。
+4. **永住申请时点注意适用版本**：2027-04-01 起整体适用新指南；2026-04-01 以后申请且 2026-10-01 仍审查中的案件，「収入」与「公共の負担」两项已适用新规。
 
 ### 6.5 育成就劳选择（建议）
 
-已有 N4 + 驾照者直接走 1 号更优；日语 / 技能暂不达标者可评估育成就劳「预备校」路径；已持技能实习者关注 2027 年衔接措施。
+已有 N4 + 驾照者直接走 1 号更优；日语 / 技能暂不达标者可评估育成就劳「预备校」路径；已持技能实习者关注 2027 年衔接措施。**中国未与日方签署育成就労 MOC，目前无法经育成就労渠道赴日**（事实）。
 
 ### 6.6 被拒后的应对（建议）
 
@@ -332,7 +343,7 @@
 3. **A 级**：在指定期限内补正・追加，保留提交凭证；补正后仍不许可再评估。
 4. **B 级**：不要原样再申请；先更换雇主 / 资格或补足核心要件，再重新申请。
 5. **C 级**：立即停止再申请，咨询弁護士；评估在留資格取消、退去与再入境限制风险。
-6. **出境 / 出頭**：若在留期间过期或面临退去，评估「出国命令」（再入境限制 1 年）与「在留特別許可」（ガイドライン）；避免长期不法滞留。来源：ISA 出頭申告页 [https://www.moj.go.jp/isa/deportation/resources/nyukan_nyukan87.html](https://www.moj.go.jp/isa/deportation/resources/nyukan_nyukan87.html)。
+6. **费用减免**：若在留資格变更 / 更新 / 永住时符合経済的困難等要件，可申请減額（变更 / 更新 1 万円、永住 2 万円），须窗口申请（オンライン不对应）。
 7. **委托**：书类代理找行政書士（国家资格）、诉讼 / 不服找弁護士；签署委托前确认费用与范围。**费用无官方数值 → ⚠ 待核实**。
 8. **证据链**：不许可通知、补正记录、提交凭证、沟通记录长期留存，供后续申请或审查使用。
 
@@ -344,19 +355,24 @@
 | 自动车运送业加入 1 号对象 | 本分野新设 | 2024 年度 | ssw.go.jp |
 | 改正法公布（育成就劳） | 技能实习 → 育成就劳 | 2024-06-21 | ISA |
 | 阁议决定 | 受入上限 22,100；2 号日语 B1 | 2026-01-23 | moj.go.jp |
+| 入管法等改正（法律第 59 号）施行 | マイナンバーと在留カード一体化 | 2026-06-14 | ISA 05_00045 |
+| タイ MOC（首个育成就労 MOC） | 育成就労二国間協力 | 2026-06-02 | ISA 01_00642 |
+| 1 号支援体制要件改正公布 | 2027-04-01 施行 | 2026-07-28 | ISA 10_00263 |
 | 监理支援机关许可申请受理开始 | 育成就劳准备 | 2026-04-15 | ISA |
 | 签证费调整 | 单次 715 元 | 2026-07-01 | 领馆费用专页 |
-| 1 号支援体制要件改正公布 | 2027-04-01 生效 | 2026-07-28 | ISA |
 | 育成就劳计划认定申请受理开始 | 育成就劳准备 | 2026-09-01 | ISA |
-| 永住许可指南改定 | 2027-04-01 起申请适用 | 2026-10-01 | ISA |
+| 在留許可手数料改定 | 按在留期間区分；減額对象 1 万 / 2 万円 | 2026-10-01 | ISA 01_00644 / 10_00273 |
+| 永住许可指南改定 | 2027-04-01 起申请适用 | 2026-10-01 | ISA 10_00279 |
+| 永住者取消ガイドライン策定 | 2027-04-01 运用 | 2026-10 | ISA 11_00118 |
 | 育成就劳运用要领新增分野 | 飲食料品・資源循環；改正 鉄道・木材産業 | 2026-10-09 | ISA |
 | 育成就劳运用要领新增 宿泊 | — | 2026-10-16 | ISA |
 | 育成就劳运用要领新增 漁業 | — | 2026-11-06 | ISA |
-| 育成就労 MOC 页面更新 | ISA 7 国 / OTIT 16 国，均不含中国 | 2026-11-12 | ISA |
-| **育成就劳制度施行** | 技能实习法废止；1 号支援体制要件改正生效；出租车·巴士 B1 适用于 COE 申请 | **2027-04-01** | ISA |
+| 要領別冊（農業分野）改正 | — | 2026-11-16 | ISA |
+| 第 16 回有識者会議 | 分野別運用方針改正案审议（結果未発表） | 2026-11-13 | ISA 03_00207 |
+| **育成就劳制度施行** | 技能实习法废止；1 号支援体制要件改正生效；永住双指南运用；出租车·巴士 B1 适用于 COE 申请 | **2027-04-01** | ISA |
 | 受入上限到期 | 22,100 人上限适用届满 | 2029-03 末 | moj.go.jp |
 
-**待生效与待细则清单**：B1 要求的在留资格变更·更新适用时间（待公告）；自动车运送业育成就劳运用要领（未公布）；2026-10-09 要領別冊 新旧对照表（001472544.pdf，未取得）；2029-03 上限到期后的政策延续；中国 MOC 签署情况。
+**待生效与待细则清单**：B1 要求的在留资格变更·更新适用时间（待公告）；自动车运送业育成就劳运用要領（未公布）；第 16 回有識者会議議事要旨・議事録（未掲載）；ISA 9 月末速报（预计 12 月上旬，推断）；2029-03 上限到期后的政策延续；中国 MOC 签署情况。
 
 ## 八、数据治理与局限
 
@@ -371,22 +387,24 @@
 | 指标 | 并列口径 |
 |---|---|
 | 受入上限 | 22,100（现行，moj.go.jp）≠ 24,500（ssw.go.jp 中文页未同步） |
-| MOC 国家 | ISA MOC 页（7 国）≠ OTIT 認定送出機関一览（16 国，含暂定） |
+| MOC 国家 | ISA 育成就労 MOC 页（7 国）≠ OTIT 認定送出機関一览（16 国，含暂定） |
 | 2 号分野 | 11 分野（不含自动车运送业）≠ 16 分野（旧口径） |
 | 家族滞在 | 扶养人资格范围 ≠ 收入证明口径（年收门槛无官方数值） |
+| 永住取消 | 旧表述「连续 3 年未履行」≠ 官方「8 号 / 9 号」法定事由（2026-11-17 修正） |
 
 **待复核清单**（逐项给出复核入口）：
 
 1. 家族滞在扶养人**年收门槛**——复核入口：ISA「家族滞在」页 [https://www.moj.go.jp/isa/applications/status/dependent](https://www.moj.go.jp/isa/applications/status/dependent)，及行政书士实务资料。
 2. 特定技能 **1 号带同例外**（同等要件相当者等）适用细则——复核入口：ISA 公告与审查要领。
 3. 永住指南「**年収水準**」按世帯人数的具体数值运用实例——复核入口：ISA 永住许可指南页 [https://www.moj.go.jp/isa/10_00279.html](https://www.moj.go.jp/isa/10_00279.html)。
-4. **2026-10-09 要領別冊 新旧对照表**（001472544.pdf）未取得——复核入口：ISA 要領別冊改正页 [https://www.moj.go.jp/isa/applications/ssw/nyuukokukanri07_00201.html](https://www.moj.go.jp/isa/applications/ssw/nyuukokukanri07_00201.html)。
-5. **B1 变更·更新适用时间**——复核入口：ISA 日语要求页 [https://www.moj.go.jp/isa/03_00198.html](https://www.moj.go.jp/isa/03_00198.html)。
-6. **自动车运送业育成就劳运用要领**——复核入口：ISA 育成就劳页 [https://www.moj.go.jp/isa/applications/index_00005.html](https://www.moj.go.jp/isa/applications/index_00005.html)。
-7. **ssw.go.jp 中文页 24,500 更正**——复核入口：[https://www.ssw.go.jp/cn/about/visa/automobile_transportation_business_1/](https://www.ssw.go.jp/cn/about/visa/automobile_transportation_business_1/)（月度检查）。
-8. **2029-03 上限到期后延续**、中国 MOC 签署、ISA / OTIT 更新时差——复核入口：moj.go.jp / 国交省公告、ISA MOC 页。
+4. **第 16 回有識者会議** 議事要旨・議事録与分野別運用方針改正内容——复核入口：ISA 有識者会議页 [https://www.moj.go.jp/isa/03_00207.html](https://www.moj.go.jp/isa/03_00207.html)。
+5. **ISA 9 月末速报**（在留者数与充足率更新）——复核入口：ISA 受入れ見込数・在留者数表 [https://www.moj.go.jp/isa/content/001472175.pdf](https://www.moj.go.jp/isa/content/001472175.pdf)。
+6. **B1 变更·更新适用时间**——复核入口：ISA 日语要求页 [https://www.moj.go.jp/isa/03_00198.html](https://www.moj.go.jp/isa/03_00198.html)。
+7. **自动车运送业育成就劳运用要領**——复核入口：ISA 育成就劳页 [https://www.moj.go.jp/isa/applications/index_00005.html](https://www.moj.go.jp/isa/applications/index_00005.html)。
+8. **ssw.go.jp 中文页 24,500 更正**——复核入口：[https://www.ssw.go.jp/cn/about/visa/automobile_transportation_business_1/](https://www.ssw.go.jp/cn/about/visa/automobile_transportation_business_1/)（月度检查）。
+9. **2029-03 上限到期后延续**、中国 MOC 签署、ISA / OTIT 更新时差——复核入口：moj.go.jp / 国交省公告、ISA MOC 页。
 
-**文本时效声明**：本报告以 **2026-11-16** 时点官方页面为准；历史报告信息核对日期为 2026-11-11 / 11-12，日本官方制度更新频繁，执行前务必以 ISA 官网最新公告为准。
+**文本时效声明**：本报告以 **2026-11-17** 时点官方页面为准；历史报告信息核对日期为 2026-11-11 / 11-12 / 11-14 / 11-16，日本官方制度更新频繁，执行前务必以 ISA 官网最新公告为准。
 
 **解读局限**：本主题只写制度要点与流程，法规条文深度解读归 [09-politics-law](../../09-politics-law/reports/2026-11-politics-law.md)；永住年收财务与证据链归 [07-economy-finance](../../07-economy-finance/reports/2026-11-economy-finance.md)；考试学习计划归 [11-language-japanese](../../11-language-japanese/reports/2026-11-language-japanese.md)。
 
@@ -396,33 +414,32 @@
 
 1. ISA 特定技能制度总页 [https://www.moj.go.jp/isa/applications/status/specifiedskilledworker.html](https://www.moj.go.jp/isa/applications/status/specifiedskilledworker.html)
 2. ISA 自动车运送业分野运用方针 [https://www.moj.go.jp/isa/policies/ssw/automobiletransportation](https://www.moj.go.jp/isa/policies/ssw/automobiletransportation)
-3. ISA 特定技能更新情报 [https://www.moj.go.jp/isa/applications/ssw/](https://www.moj.go.jp/isa/applications/ssw/)；要領別冊改正 [https://www.moj.go.jp/isa/applications/ssw/nyuukokukanri07_00201.html](https://www.moj.go.jp/isa/applications/ssw/nyuukokukanri07_00201.html)
-4. ISA 统计月报（2026-08 末速报）[https://www.moj.go.jp/isa/content/001472175.pdf](https://www.moj.go.jp/isa/content/001472175.pdf)
-5. ISA 育成就劳制度 [https://www.moj.go.jp/isa/applications/index_00005.html](https://www.moj.go.jp/isa/applications/index_00005.html)；育成就労 MOC [https://www.moj.go.jp/isa/applications/ssw/nyuukokukanri05_00002.html](https://www.moj.go.jp/isa/applications/ssw/nyuukokukanri05_00002.html)
+3. ISA 特定技能更新情报 [https://www.moj.go.jp/isa/applications/ssw/](https://www.moj.go.jp/isa/applications/ssw/)；要領別冊改正 [https://www.moj.go.jp/isa/applications/ssw/nyuukokukanri07_00201.html](https://www.moj.go.jp/isa/applications/ssw/nyuukokukanri07_00201.html)；分野別運用方針 [https://www.moj.go.jp/isa/applications/ssw/nyuukokukanri01_00132.html](https://www.moj.go.jp/isa/applications/ssw/nyuukokukanri01_00132.html)
+4. ISA 统计月报 / 受入れ見込数・在留者数表（2026-08 末速报，2026-11-06 换版）[https://www.moj.go.jp/isa/content/001472175.pdf](https://www.moj.go.jp/isa/content/001472175.pdf)
+5. ISA 育成就劳制度 [https://www.moj.go.jp/isa/applications/index_00005.html](https://www.moj.go.jp/isa/applications/index_00005.html)；育成就労 MOC [https://www.moj.go.jp/isa/applications/ssw/nyuukokukanri05_00002.html](https://www.moj.go.jp/isa/applications/ssw/nyuukokukanri05_00002.html)；タイ MOC [https://www.moj.go.jp/isa/01_00642.html](https://www.moj.go.jp/isa/01_00642.html)
 6. ISA 永住许可指南（令和 8-10-01 改定）[https://www.moj.go.jp/isa/10_00279.html](https://www.moj.go.jp/isa/10_00279.html)；永住者取消指南 [https://www.moj.go.jp/isa/11_00118.html](https://www.moj.go.jp/isa/11_00118.html)；在留资格取消 [https://www.moj.go.jp/isa/applications/procedures/torikeshi_00002.html](https://www.moj.go.jp/isa/applications/procedures/torikeshi_00002.html)
-7. ISA「家族滞在」[https://www.moj.go.jp/isa/applications/status/dependent](https://www.moj.go.jp/isa/applications/status/dependent)；「家族滞在」資格外活動許可 [https://www.moj.go.jp/isa/applications/procedures/nyuukokukanri07_00004.html](https://www.moj.go.jp/isa/applications/procedures/nyuukokukanri07_00004.html)；資格外活動許可一般原则 [https://www.moj.go.jp/isa/applications/procedures/nyuukokukanri07_00045.html](https://www.moj.go.jp/isa/applications/procedures/nyuukokukanri07_00045.html)
-8. ISA「技術・人文知識・国際業務」[https://www.moj.go.jp/isa/applications/status/gijinkoku.html](https://www.moj.go.jp/isa/applications/status/gijinkoku.html)；出租车·巴士日语要求 [https://www.moj.go.jp/isa/03_00198.html](https://www.moj.go.jp/isa/03_00198.html)；职位说明书 [https://www.moj.go.jp/isa/applications/ssw/10_00179.html](https://www.moj.go.jp/isa/applications/ssw/10_00179.html)
-9. ssw.go.jp 分野清单（中文）[https://www.ssw.go.jp/cn/about/visa/](https://www.ssw.go.jp/cn/about/visa/)；自动车运送业中文页 [https://www.ssw.go.jp/cn/about/visa/automobile_transportation_business_1/](https://www.ssw.go.jp/cn/about/visa/automobile_transportation_business_1/)
-10. 外务省领馆费用专页 [https://www.shanghai.cn.emb-japan.go.jp/itpr_ja/11_000001_00633.html](https://www.shanghai.cn.emb-japan.go.jp/itpr_ja/11_000001_00633.html)
-11. 国土交通省 [https://www.mlit.go.jp](https://www.mlit.go.jp)；e-Gov 法令检索 [https://laws.e-gov.go.jp](https://laws.e-gov.go.jp)
+7. ISA「家族滞在」[https://www.moj.go.jp/isa/applications/status/dependent](https://www.moj.go.jp/isa/applications/status/dependent)；「家族滞在」資格外活動許可 [https://www.moj.go.jp/isa/applications/procedures/nyuukokukanri07_00004.html](https://www.moj.go.jp/isa/applications/procedures/nyuukokukanri07_00004.html)
+8. ISA「技術・人文知識・国際業務」[https://www.moj.go.jp/isa/applications/status/gijinkoku.html](https://www.moj.go.jp/isa/applications/status/gijinkoku.html)；出租车·巴士日语要求 [https://www.moj.go.jp/isa/03_00198.html](https://www.moj.go.jp/isa/03_00198.html)；1 号支援体制要件改正 [https://www.moj.go.jp/isa/10_00263.html](https://www.moj.go.jp/isa/10_00263.html)；在留許可手数料改定 [https://www.moj.go.jp/isa/01_00644.html](https://www.moj.go.jp/isa/01_00644.html)；手数料減免 [https://www.moj.go.jp/isa/10_00273.html](https://www.moj.go.jp/isa/10_00273.html)
+9. ISA 第 16 回有識者会議 [https://www.moj.go.jp/isa/03_00207.html](https://www.moj.go.jp/isa/03_00207.html)；令和 6 年入管法等改正 [https://www.moj.go.jp/isa/05_00045.html](https://www.moj.go.jp/isa/05_00045.html)
+10. ssw.go.jp 分野清单（中文）[https://www.ssw.go.jp/cn/about/visa/](https://www.ssw.go.jp/cn/about/visa/)；自动车运送业中文页 [https://www.ssw.go.jp/cn/about/visa/automobile_transportation_business_1/](https://www.ssw.go.jp/cn/about/visa/automobile_transportation_business_1/)
+11. 外务省领馆费用专页 [https://www.shanghai.cn.emb-japan.go.jp/itpr_ja/11_000001_00633.html](https://www.shanghai.cn.emb-japan.go.jp/itpr_ja/11_000001_00633.html)
+12. 国土交通省 [https://www.mlit.go.jp](https://www.mlit.go.jp)；e-Gov 法令检索 [https://laws.e-gov.go.jp](https://laws.e-gov.go.jp)
 
 **考试与实施机构**：
 
-12. ClassNK 试验 Portal [https://sswt-portal.classnk.or.jp/](https://sswt-portal.classnk.or.jp/)；费用公告 [https://sswt-portal.classnk.or.jp/news/25](https://sswt-portal.classnk.or.jp/news/25)
-13. JFT-Basic [https://jft-basic.jp](https://jft-basic.jp)；Prometric 受験料 [https://www.prometric-jp.com/ssw/exam/fee/](https://www.prometric-jp.com/ssw/exam/fee/)
-14. JLPT [https://www.jlpt.jp](https://www.jlpt.jp)；中国考区（NEEA）[https://jlpt.neea.edu.cn/faq.html](https://jlpt.neea.edu.cn/faq.html)
-15. 外国人技能実習機構（OTIT）[https://www.otit.go.jp/employment_for_skill_development/05/](https://www.otit.go.jp/employment_for_skill_development/05/)
-
-**行业与专业（线索 / 背景）**：
-
-16. 全日本トラック協会、登录支援机关行业信息（行业背景，本主题未直接引用 URL）
-17. 日本国驻越南使馆资料（考试构成）[https://www.vn.emb-japan.go.jp/files/100989367.pdf](https://www.vn.emb-japan.go.jp/files/100989367.pdf)；育成就劳制度概要 [https://www.vn.emb-japan.go.jp/files/100881460.pdf](https://www.vn.emb-japan.go.jp/files/100881460.pdf)
-18. WAM 特集（2024 改正法解说）[https://www.wam.go.jp/hp/wp-content/uploads/wam202511.pdf](https://www.wam.go.jp/hp/wp-content/uploads/wam202511.pdf)；施行日程说明（线索）[https://titp360.jp/words/nurturing-work/](https://titp360.jp/words/nurturing-work/)
-
-**媒体（线索，须回溯）**：
-
-19. TokyoBrief（843 人早期转载，后经 ISA 原件核验）[https://tokyobrief.com/articles/japan-skilled-worker-visa-cap-54-percent-full-august-2026](https://tokyobrief.com/articles/japan-skilled-worker-visa-cap-54-percent-full-august-2026)
+13. ClassNK 试验 Portal [https://sswt-portal.classnk.or.jp/](https://sswt-portal.classnk.or.jp/)；费用公告 [https://sswt-portal.classnk.or.jp/news/25](https://sswt-portal.classnk.or.jp/news/25)
+14. JFT-Basic [https://jft-basic.jp](https://jft-basic.jp)；Prometric 受験料 [https://www.prometric-jp.com/ssw/exam/fee/](https://www.prometric-jp.com/ssw/exam/fee/)
+15. JLPT [https://www.jlpt.jp](https://www.jlpt.jp)；中国考区（NEEA）[https://jlpt.neea.edu.cn/faq.html](https://jlpt.neea.edu.cn/faq.html)
+16. 外国人技能実習機構（OTIT）[https://www.otit.go.jp/employment_for_skill_development/05/](https://www.otit.go.jp/employment_for_skill_development/05/)
 
 **跨主题只读引用**：
 
-20. [01-ssw-driver](../../01-ssw-driver/reports/2026-11-ssw-driver.md) 登记册与最新报告（官方统计活值单一事实源）
+17. [01-ssw-driver](../../01-ssw-driver/reports/2026-11-ssw-driver.md) 登记册与最新报告（官方统计活值单一事实源）
+
+<!-- AUTO-VERIFY:START -->
+## 自动验证结果
+
+> 数据基准日：2026-11-17　|　规则集：auto-verify v1.0　|　结论：通过（P0 0 / P1 0 / P2 0）
+> 规则明细：V1 交付物与文件可访问 pass｜V2 必填字段与要素 pass｜V3 格式合规 pass｜V4 数据准确性与一致性 pass｜V5 关键指标数值范围 pass
+> 验证日志：engine/report-audits/audit/verify/2026-11-visa-immigration.json
+<!-- AUTO-VERIFY:END -->
