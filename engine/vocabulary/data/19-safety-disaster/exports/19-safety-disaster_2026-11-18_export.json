@@ -1,16 +1,16 @@
 {
   "topic": "19-safety-disaster",
   "name": "防灾·安全·治安",
-  "version": "v1.2",
-  "generated_at": "2026-11-18T20:05:40",
-  "count": 40,
+  "version": "v1.3",
+  "generated_at": "2026-11-18T21:03:37",
+  "count": 75,
   "categories": {
-    "防灾体制": 12,
-    "避难与情报": 9,
-    "治安与人身": 4,
-    "领事保护": 4,
-    "应急联络": 5,
-    "场景与表达": 6
+    "防灾体制": 21,
+    "避难与情报": 24,
+    "治安与人身": 5,
+    "领事保护": 8,
+    "应急联络": 8,
+    "场景与表达": 9
   },
   "terms": [
     {
@@ -767,6 +767,683 @@
         "场景"
       ],
       "definition": "社会安全与秩序状态",
+      "source": "警察庁",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "SFD-041",
+      "term": "新たな防災気象情報",
+      "aliases": [
+        "新防灾气象信息"
+      ],
+      "category": "避难与情报",
+      "tags": [
+        "气象",
+        "预警",
+        "改版"
+      ],
+      "definition": "気象庁于令和8年5月29日运用开始的防灾气象信息体系，河川氾濫・大雨・土砂災害・高潮4现象的信息名称直接标注警戒レベル数字（如「レベル4氾濫危険警報」）",
+      "source": "気象庁",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "SFD-042",
+      "term": "危険警報",
+      "aliases": [
+        "危险警报"
+      ],
+      "category": "避难与情报",
+      "tags": [
+        "气象",
+        "警报",
+        "改版"
+      ],
+      "definition": "令和8年「新たな防災気象情報」运用时新设的警报类别",
+      "source": "気象庁",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "SFD-043",
+      "term": "注意報",
+      "aliases": [
+        "注意报"
+      ],
+      "category": "避难与情报",
+      "tags": [
+        "气象",
+        "注意报"
+      ],
+      "definition": "気象庁发布的注意级别预警，信号规则 S01 中与レベル3对应",
+      "source": "気象庁",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "SFD-044",
+      "term": "特別警報",
+      "aliases": [
+        "特别警报"
+      ],
+      "category": "避难与情报",
+      "tags": [
+        "气象",
+        "特别警报"
+      ],
+      "definition": "Safety tips 提供推送的警报类型之一（紧急地震速报・海啸・特别警报）",
+      "source": "観光庁",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "SFD-045",
+      "term": "警戒レベル相当情報",
+      "aliases": [
+        "警戒级别相当信息"
+      ],
+      "category": "避难与情报",
+      "tags": [
+        "气象",
+        "预警",
+        "改版"
+      ],
+      "definition": "防災庁令和8年3月改定「避難情報に関するガイドライン」中整理并变更名称的警戒レベル相当情報体系",
+      "source": "防災庁",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "SFD-046",
+      "term": "大雨警報",
+      "aliases": [
+        "大雨警报"
+      ],
+      "category": "避难与情报",
+      "tags": [
+        "气象",
+        "警报"
+      ],
+      "definition": "キキクル（大雨警報・洪水警報の危険度分布）所对应的警报类型之一",
+      "source": "気象庁",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "SFD-047",
+      "term": "洪水警報",
+      "aliases": [
+        "洪水警报"
+      ],
+      "category": "避难与情报",
+      "tags": [
+        "气象",
+        "警报"
+      ],
+      "definition": "キキクル（大雨警報・洪水警報の危険度分布）所对应的警报类型之一",
+      "source": "気象庁",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "SFD-048",
+      "term": "河川氾濫",
+      "aliases": [
+        "河川泛滥"
+      ],
+      "category": "防灾体制",
+      "tags": [
+        "灾害",
+        "洪水"
+      ],
+      "definition": "令和8年「新たな防災気象情報」加注警戒レベル数字的4现象之一",
+      "source": "気象庁",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "SFD-049",
+      "term": "高潮",
+      "aliases": [
+        "高潮"
+      ],
+      "category": "防灾体制",
+      "tags": [
+        "灾害",
+        "高潮"
+      ],
+      "definition": "令和8年「新たな防災気象情報」加注警戒レベル数字的4现象之一（河川氾濫・大雨・土砂災害・高潮）",
+      "source": "気象庁",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "SFD-050",
+      "term": "避難情報ガイドライン",
+      "aliases": [
+        "避难信息指南"
+      ],
+      "category": "防灾体制",
+      "tags": [
+        "防灾",
+        "避难",
+        "指南"
+      ],
+      "definition": "防災庁令和8年3月改定的避难信息指南，整理警戒レベル相当情報体系与名称",
+      "source": "防災庁",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "SFD-051",
+      "term": "防災庁",
+      "aliases": [
+        "防灾厅"
+      ],
+      "category": "防灾体制",
+      "tags": [
+        "防灾",
+        "中央"
+      ],
+      "definition": "2026-11-02由内閣府防灾改组发足的中央防灾司令塔，接替内閣府防灾",
+      "source": "防災庁",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "SFD-052",
+      "term": "防災の手引き",
+      "aliases": [
+        "防灾手册"
+      ],
+      "category": "防灾体制",
+      "tags": [
+        "防灾",
+        "入门"
+      ],
+      "definition": "内閣府官方防灾入门页，令和8年10月更新，覆盖事前备え・警戒レベル・避难时机与各灾害行动",
+      "source": "内閣府",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "SFD-053",
+      "term": "ハザードマップ",
+      "aliases": [
+        "灾害风险地图",
+        "风险地图"
+      ],
+      "category": "防灾体制",
+      "tags": [
+        "防灾",
+        "风险地图"
+      ],
+      "definition": "国交省・気象庁・自治体提供的洪水・土砂等风险地图，用于确认现住地与通勤圈风险",
+      "source": "国土交通省",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "SFD-054",
+      "term": "全国シェイクアウト",
+      "aliases": [
+        "全国shakeout"
+      ],
+      "category": "防灾体制",
+      "tags": [
+        "防灾",
+        "训练"
+      ],
+      "definition": "気象庁11月紧急地震速报全国训练联动的全国训练",
+      "source": "気象庁",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "SFD-055",
+      "term": "緊急地震速報全国訓練",
+      "aliases": [
+        "紧急地震速报全国训练"
+      ],
+      "category": "防灾体制",
+      "tags": [
+        "防灾",
+        "训练"
+      ],
+      "definition": "気象庁每年6月与11月实施的紧急地震速报全国训练，11月场次面向民间企业等更广对象",
+      "source": "気象庁",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "SFD-056",
+      "term": "Safety tips",
+      "aliases": [
+        "安全提示"
+      ],
+      "category": "避难与情报",
+      "tags": [
+        "情报",
+        "多语言"
+      ],
+      "definition": "観光庁监修的多语种推送应用，提供15语种紧急地震速报・海啸・特别警报推送与行动流程图、沟通卡",
+      "source": "観光庁",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "SFD-057",
+      "term": "キキクル",
+      "aliases": [
+        "危险度分布"
+      ],
+      "category": "避难与情报",
+      "tags": [
+        "气象",
+        "风险地图"
+      ],
+      "definition": "気象庁提供的大雨警報・洪水警報の危険度分布图，用于自行判断避难",
+      "source": "気象庁",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "SFD-058",
+      "term": "川の防災情報",
+      "aliases": [
+        "河川防灾信息"
+      ],
+      "category": "避难与情报",
+      "tags": [
+        "防灾",
+        "河川"
+      ],
+      "definition": "国土交通省提供的河川水位与防灾信息，大雨时与キキクル并用确认河川水位",
+      "source": "国土交通省",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "SFD-059",
+      "term": "情報コーディネーター",
+      "aliases": [
+        "情报协调员"
+      ],
+      "category": "避难与情报",
+      "tags": [
+        "情报",
+        "支援"
+      ],
+      "definition": "総務省「情報難民ゼロ」项目培训的灾害时外国人支援情报协调员",
+      "source": "総務省",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "SFD-060",
+      "term": "情報難民ゼロ",
+      "aliases": [
+        "情报难民零"
+      ],
+      "category": "避难与情报",
+      "tags": [
+        "情报",
+        "支援"
+      ],
+      "definition": "総務省推进的消除灾害时情报难民项目",
+      "source": "総務省",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "SFD-061",
+      "term": "NHK WORLD-JAPAN",
+      "aliases": [
+        "NHK世界日语"
+      ],
+      "category": "避难与情报",
+      "tags": [
+        "情报",
+        "多语言"
+      ],
+      "definition": "提供约20种语言的备用信息源",
+      "source": "NHK",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "SFD-062",
+      "term": "LINE公式账号",
+      "aliases": [
+        "LINE官方账号"
+      ],
+      "category": "避难与情报",
+      "tags": [
+        "情报",
+        "配信"
+      ],
+      "definition": "自治体防灾配信渠道之一，与防災メール、防灾行政无线并列，须在役所住民课登记住址时一并申请",
+      "source": "地方自治体",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "SFD-063",
+      "term": "緊急度判定プロトコル",
+      "aliases": [
+        "紧急度判定协议"
+      ],
+      "category": "应急联络",
+      "tags": [
+        "应急",
+        "急救",
+        "分诊"
+      ],
+      "definition": "消防庁提供的紧急度判定工具（ver.3），可作为 #7119 之外的受诊判断辅助",
+      "source": "消防庁",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "SFD-064",
+      "term": "Q助",
+      "aliases": [
+        "全国版救急受诊应用"
+      ],
+      "category": "应急联络",
+      "tags": [
+        "应急",
+        "急救",
+        "应用"
+      ],
+      "definition": "消防庁提供的全国版救急受诊アプリ，可作为 #7119 之外的受诊判断辅助",
+      "source": "消防庁",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "SFD-065",
+      "term": "#8000",
+      "aliases": [
+        "儿童急救电话"
+      ],
+      "category": "应急联络",
+      "tags": [
+        "应急",
+        "急救",
+        "儿童"
+      ],
+      "definition": "未开设救急安心センター地区的儿童急救电话咨询号码，或拨 119",
+      "source": "消防庁",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "SFD-066",
+      "term": "マイナポータル",
+      "aliases": [
+        "个人编号门户"
+      ],
+      "category": "领事保护",
+      "tags": [
+        "领事",
+        "书类",
+        "在线"
+      ],
+      "definition": "令和8年8月25日起国外転出者可通过マイナポータル在线申请护照的渠道",
+      "source": "外務省",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "SFD-067",
+      "term": "ORRネット",
+      "aliases": [
+        "在线在留届"
+      ],
+      "category": "领事保护",
+      "tags": [
+        "领事",
+        "书类",
+        "在线"
+      ],
+      "definition": "在线在留届渠道，继续可用",
+      "source": "外務省",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "SFD-068",
+      "term": "在留届",
+      "aliases": [
+        "在留申报"
+      ],
+      "category": "领事保护",
+      "tags": [
+        "领事",
+        "书类"
+      ],
+      "definition": "可通过 ORRネット 在线提交的在留届手续",
+      "source": "外務省",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "SFD-069",
+      "term": "マイナンバーカード",
+      "aliases": [
+        "个人编号卡"
+      ],
+      "category": "领事保护",
+      "tags": [
+        "领事",
+        "书类",
+        "凭证"
+      ],
+      "definition": "国外転出者在线申请护照的持有者条件（マイナンバーカード持有者）",
+      "source": "外務省",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "SFD-070",
+      "term": "ローリングストック",
+      "aliases": [
+        "滚动备蓄"
+      ],
+      "category": "场景与表达",
+      "tags": [
+        "场景",
+        "备灾"
+      ],
+      "definition": "内閣府推荐的滚动备蓄方式（备蓄3天起步）",
+      "source": "内閣府",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "SFD-071",
+      "term": "感震断路器",
+      "aliases": [
+        "感震断路器"
+      ],
+      "category": "场景与表达",
+      "tags": [
+        "场景",
+        "住宅"
+      ],
+      "definition": "内閣府住宅防护措施之一（家具固定、玻璃防飞散膜、感震断路器）",
+      "source": "内閣府",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "SFD-072",
+      "term": "ガラス飛散防止膜",
+      "aliases": [
+        "玻璃防飞散膜"
+      ],
+      "category": "场景与表达",
+      "tags": [
+        "场景",
+        "住宅"
+      ],
+      "definition": "内閣府住宅防护措施之一（家具固定、玻璃防飞散膜、感震断路器）",
+      "source": "内閣府",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "SFD-073",
+      "term": "住民課",
+      "aliases": [
+        "役所住民课",
+        "居民课"
+      ],
+      "category": "防灾体制",
+      "tags": [
+        "防灾",
+        "窓口"
+      ],
+      "definition": "自治体窗口，登记住址时一并申请防災メール等配信",
+      "source": "地方自治体",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "SFD-074",
+      "term": "地域国際化協会",
+      "aliases": [
+        "地域国际化协会"
+      ],
+      "category": "避难与情报",
+      "tags": [
+        "情报",
+        "多语言"
+      ],
+      "definition": "报告来源分级中列为 B 级的多语言防灾信息来源机构（与 JNTO、NHK 等并列）",
+      "source": "地域国際化協会",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "SFD-075",
+      "term": "子供の電話詐欺",
+      "aliases": [
+        "孩子的电话诈骗"
+      ],
+      "category": "治安与人身",
+      "tags": [
+        "治安",
+        "诈骗"
+      ],
+      "definition": "跨境「孩子的电话」类诈骗，亦须同步提醒国内家人",
       "source": "警察庁",
       "first_added": "2026-11-18",
       "last_updated": "2026-11-18",

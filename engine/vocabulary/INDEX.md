@@ -1,6 +1,6 @@
 # 词汇库索引（vocabulary）
 
-> 由 `script/vocab_tool.py index` 自动生成，请勿手工编辑。生成时间：2026-11-18T10:46:06
+> 由 `script/vocab_tool.py index` 自动生成，请勿手工编辑。生成时间：2026-11-18T21:03:36
 
 ## 主题总览
 
@@ -19,15 +19,15 @@
 | 11-language-japanese | 日语语言 | JPN | 70 | 语言能力与考试 13 / 语法与句型 12 / 词汇与表达 11 / 学习与教学 9 / 敬语与语体 9 / 场景与表达 8 / 职场日语 8 | v1.3 | data/11-language-japanese/terms.md | 2026-11-18 |
 | 12-culture-life | 文化与生活 | CUL | 73 | 日常生活与居住 15 / 公共服务与设施 13 / 文化习俗与节庆 12 / 饮食与消费 12 / 社交与礼仪 11 / 场景与表达 10 | v1.3 | data/12-culture-life/terms.md | 2026-11-14 |
 | 13-regional-info | 地区信息 | REG | 69 | 人口与城市 12 / 地方政策与自治 12 / 行政区划与地理 12 / 地方经济与产业 11 / 场景与表达 11 / 生活成本与设施 11 | v1.2 | data/13-regional-info/terms.md | 2026-11-13 |
-| 16-exit-transition-return | 退出·转型·回国 | ETR | 40 | 资产与生活清理 10 / 税务与住民 8 / 转型与在留资格 7 / 年金与保险 5 / 离境与再入国 5 / 退出与劳动 5 | v1.3 | data/16-exit-transition-return/terms.md | 2026-11-18 |
-| 14-life-operations | 在日生活实务 | LOP | 49 | 住房与租赁 15 / 场景与表达 11 / 行政手续 8 / 水电燃气与基础设施 4 / 通信与网络 4 / 银行与支付 4 / 在留与住民登记 3 | v1.4 | data/14-life-operations/terms.md | 2026-11-15 |
-| 15-health-wellbeing | 医疗·健康·心理 | HLW | 50 | 就医实务 15 / 医疗制度 10 / 介护与福祉 8 / 体检与预防 6 / 牙科与精神科 6 / 心理健康与适应 5 | v1.4 | data/15-health-wellbeing/terms.md | 2026-11-18 |
-| 17-migration-compliance | 劳务输出与中介合规 | MPC | 29 | 骗术与风险 7 / 中介资质与核验 5 / 合同与费用 5 / 黑名单与名单 5 / 招募与渠道 4 / 场景与表达 2 / 法律后果与救济 1 | v1.2 | data/17-migration-compliance/terms.md | 2026-11-14 |
-| 18-family-parenting | 家族·育儿·人生事件 | FAM | 50 | 保育与教育 10 / 生育与育儿 9 / 扶养与支援 8 / 场景与表达 7 / 婚姻与离婚 7 / 家族滞在 5 / 继承与终末 4 | v1.4 | data/18-family-parenting/terms.md | 2026-11-18 |
-| 19-safety-disaster | 防灾·安全·治安 | SFD | 40 | 防灾体制 12 / 避难与情报 9 / 场景与表达 6 / 应急联络 5 / 治安与人身 4 / 领事保护 4 | v1.2 | data/19-safety-disaster/terms.md | 2026-11-18 |
-| 20-overseas-china | 中国侧行前与回国 | OVC | 37 | 场景与表达 9 / 档案与社保 9 / 护照与户籍 8 / 公证认证 4 / 驾照转回 3 / 学历认证 2 / 无犯罪记录 2 | v1.2 | data/20-overseas-china/terms.md | 2026-11-15 |
+| 16-exit-transition-return | 退出·转型·回国 | ETR | 78 | 转型与在留资格 19 / 退出与劳动 16 / 税务与住民 14 / 资产与生活清理 13 / 年金与保险 9 / 离境与再入国 7 | v1.4 | data/16-exit-transition-return/terms.md | 2026-11-18 |
+| 14-life-operations | 在日生活实务 | LOP | 77 | 住房与租赁 23 / 行政手续 18 / 场景与表达 11 / 水电燃气与基础设施 9 / 在留与住民登记 6 / 银行与支付 6 / 通信与网络 4 | v1.5 | data/14-life-operations/terms.md | 2026-11-18 |
+| 15-health-wellbeing | 医疗·健康·心理 | HLW | 76 | 就医实务 21 / 医疗制度 19 / 介护与福祉 14 / 体检与预防 10 / 心理健康与适应 6 / 牙科与精神科 6 | v1.5 | data/15-health-wellbeing/terms.md | 2026-11-18 |
+| 17-migration-compliance | 劳务输出与中介合规 | MPC | 77 | 中介资质与核验 19 / 招募与渠道 14 / 合同与费用 11 / 法律后果与救济 11 / 骗术与风险 10 / 黑名单与名单 10 / 场景与表达 2 | v1.3 | data/17-migration-compliance/terms.md | 2026-11-18 |
+| 18-family-parenting | 家族·育儿·人生事件 | FAM | 78 | 家族滞在 15 / 生育与育儿 15 / 保育与教育 14 / 扶养与支援 11 / 场景与表达 10 / 婚姻与离婚 9 / 继承与终末 4 | v1.5 | data/18-family-parenting/terms.md | 2026-11-18 |
+| 19-safety-disaster | 防灾·安全·治安 | SFD | 75 | 避难与情报 24 / 防灾体制 21 / 场景与表达 9 / 应急联络 8 / 领事保护 8 / 治安与人身 5 | v1.3 | data/19-safety-disaster/terms.md | 2026-11-18 |
+| 20-overseas-china | 中国侧行前与回国 | OVC | 79 | 档案与社保 19 / 场景与表达 18 / 护照与户籍 17 / 驾照转回 8 / 公证认证 7 / 学历认证 5 / 无犯罪记录 5 | v1.3 | data/20-overseas-china/terms.md | 2026-11-18 |
 
-合计：20 个主题，1389 条词条。
+合计：20 个主题，1634 条词条。
 
 ## 上层对接
 
