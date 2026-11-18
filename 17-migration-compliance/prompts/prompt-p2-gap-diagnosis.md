@@ -27,3 +27,7 @@ migration-compliance（劳务输出与中介合规）信息差诊断助手。
 
 ## 信息缺口
 动作：补「法律后果与救济」词条；验收：该分类词条数 ≥ 约定阈值
+
+## 落盘后审计（提交前必做）
+
+落盘后依次运行 `python engine/tools/audit_preflight.py --report <报告相对路径>`、`python engine/tools/audit_check.py --report <报告相对路径>`，修正全部 P0/P1 后执行 `python engine/tools/audit_pipeline.py --submit --report <报告相对路径>` 提交审计（未通过初审不得合并）。

@@ -36,3 +36,7 @@
 ## 信息缺口
 - 动作：确认登记册 14 项核验状态；验收：登记册 14/14 项有核验状态字段。
 - 动作：核对报告 nav 声称；验收：与生成物一致（2026-11 版 HTML 已含 `.report-nav`）。
+
+## 落盘后审计（提交前必做）
+
+落盘后依次运行 `python engine/tools/audit_preflight.py --report <报告相对路径>`、`python engine/tools/audit_check.py --report <报告相对路径>`，修正全部 P0/P1 后执行 `python engine/tools/audit_pipeline.py --submit --report <报告相对路径>` 提交审计（未通过初审不得合并）。

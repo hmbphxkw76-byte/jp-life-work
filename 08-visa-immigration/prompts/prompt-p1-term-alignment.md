@@ -28,3 +28,7 @@ visa-immigration（签证与移民）术语对齐助手。
 
 ## 信息缺口
 动作：建立政策改定触发器；验收：触发器清单覆盖在留 / 入管关键改定点，命中即触发复核
+
+## 落盘后审计（提交前必做）
+
+落盘后依次运行 `python engine/tools/audit_preflight.py --report <报告相对路径>`、`python engine/tools/audit_check.py --report <报告相对路径>`，修正全部 P0/P1 后执行 `python engine/tools/audit_pipeline.py --submit --report <报告相对路径>` 提交审计（未通过初审不得合并）。

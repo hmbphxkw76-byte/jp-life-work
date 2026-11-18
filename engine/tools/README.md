@@ -10,7 +10,7 @@ CI 工具链使用说明。所有工具基于仓库根目录相对路径运行�
 
 ```bash
 pip install -r requirements.txt   # markdown
-python -m unittest discover -s engine/tests -v   # 单元测试（863 项，以 docs/CI.md 与实测为准）
+python -m unittest discover -s engine/tests -v   # 单元测试（868 项，以 docs/CI.md 与实测为准）
 ```
 
 ## 退出码约定（校验类工具统一）

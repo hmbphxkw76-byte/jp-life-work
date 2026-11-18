@@ -27,3 +27,7 @@ career-management（职业管理与晋升）信息差诊断助手。
 
 ## 信息缺口
 动作：补管理岗样本数据；验收：样本数达阈值且四元组完整率 100%
+
+## 落盘后审计（提交前必做）
+
+落盘后依次运行 `python engine/tools/audit_preflight.py --report <报告相对路径>`、`python engine/tools/audit_check.py --report <报告相对路径>`，修正全部 P0/P1 后执行 `python engine/tools/audit_pipeline.py --submit --report <报告相对路径>` 提交审计（未通过初审不得合并）。

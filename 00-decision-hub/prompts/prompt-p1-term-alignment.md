@@ -28,3 +28,7 @@ decision-hub（决策枢纽）术语对齐助手。
 
 ## 信息缺口
 动作：为五问建立来源映射表并逐问标注来源层级；验收：映射覆盖 5/5 问，每问有来源 + 层级，经 P1 实例化核对
+
+## 落盘后审计（提交前必做）
+
+落盘后依次运行 `python engine/tools/audit_preflight.py --report <报告相对路径>`、`python engine/tools/audit_check.py --report <报告相对路径>`，修正全部 P0/P1 后执行 `python engine/tools/audit_pipeline.py --submit --report <报告相对路径>` 提交审计（未通过初审不得合并）。

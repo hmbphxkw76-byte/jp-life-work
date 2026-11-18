@@ -24,3 +24,7 @@ life-operations（在日生活实务）覆盖核验助手。核验定义清晰�
 
 ## 常见误解
 把「保证公司」当「保证人」
+
+## 落盘后审计（提交前必做）
+
+落盘后依次运行 `python engine/tools/audit_preflight.py --report <报告相对路径>`、`python engine/tools/audit_check.py --report <报告相对路径>`，修正全部 P0/P1 后执行 `python engine/tools/audit_pipeline.py --submit --report <报告相对路径>` 提交审计（未通过初审不得合并）。

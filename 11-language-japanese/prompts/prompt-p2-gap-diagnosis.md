@@ -27,3 +27,7 @@ language-japanese（日语语言）信息差诊断助手。
 
 ## 信息缺口
 动作：逐次核验考试日程；验收：每次运行输出核验时点 + 来源，过期项标红
+
+## 落盘后审计（提交前必做）
+
+落盘后依次运行 `python engine/tools/audit_preflight.py --report <报告相对路径>`、`python engine/tools/audit_check.py --report <报告相对路径>`，修正全部 P0/P1 后执行 `python engine/tools/audit_pipeline.py --submit --report <报告相对路径>` 提交审计（未通过初审不得合并）。
