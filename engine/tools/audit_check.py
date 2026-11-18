@@ -2,7 +2,7 @@
 
 对每份真实报告执行 L1–L5 五层校验（见 docs/审计报告标准化管理体系.md 第四节）：
 - L1 结构层：命名合规、md/html 配对、HTML 骨架（h2 节数 / 编号 / 锚点）、HTML lint；
-- L2 要素层：报告必需要素 E1–E8 齐全；
+- L2 要素层：报告必需要素 E1–E11 齐全；
 - L3 溯源层：来源章节、事实段落来源标注覆盖率、失效引用；
 - L4 一致性层：跨文档重复、登记册口径冲突、绝对化表述扫描；
 - L5 语义层：人工 / LLM 复核清单（结论-依据匹配、表述一致、时效、以偏概全）。
@@ -224,6 +224,18 @@ def check_elements(rel: str, md_path: Path, html_path: Path) -> list[AuditFindin
         add("E6", "P1", "缺少「来源 / 参考来源」章节")
     if not any(k in text for k in ("观察", "触发", "后续", "待办", "下期")):
         add("E8", "P2", "缺少后续动作 / 观察清单")
+
+    # E9–E11 报告结构统一（P0-9）：置信度标注 / 信息差与未核验清单 / 决策建议。
+    # 口径与 structure_check.REQUIRED 一致；分级码定义见
+    # report_templates/confidence-grade-standard.md。
+    joined = "\n".join(heads)
+    if not any(k in joined for k in ("置信度", "置信")):
+        add("E9", "P1", "缺少「置信度标注」章节（分级码口径见 "
+                       "report_templates/confidence-grade-standard.md）")
+    if not any(k in joined for k in ("信息差", "缺失清单", "未核验清单")):
+        add("E10", "P1", "缺少「信息差与未核验清单」章节")
+    if not any(k in joined for k in ("建议", "结论章", "观察清单", "决策框架", "结论")):
+        add("E11", "P1", "缺少「决策建议」章节")
 
     # E7 来源标注覆盖率（事实单元 = 段落 + 表格行）
     paras, rows = fact_units(text)

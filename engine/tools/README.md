@@ -10,7 +10,7 @@ CI 工具链使用说明。所有工具基于仓库根目录相对路径运行�
 
 ```bash
 pip install -r requirements.txt   # markdown
-python -m unittest discover -s engine/tests -v   # 单元测试（868 项，以 docs/CI.md 与实测为准）
+python -m unittest discover -s engine/tests -v   # 单元测试（881 项，以 docs/CI.md 与实测为准）
 ```
 
 ## 退出码约定（校验类工具统一）
@@ -56,6 +56,7 @@ python -m unittest discover -s engine/tests -v   # 单元测试（868 项，以 
 | coverage_gate.py | 校验 | validate.yml「覆盖率门禁」；阈值读 `coverage-config.json` 单一事实源（`--update-baseline` / `--porcelain`） |
 | review_gate.py | 校验 | audit-gate.yml「工具链变更双轴评审软门禁」（`--changed <清单>`） |
 | link_check.py | 校验 | validate.yml「内链存在性校验」（报告 / 手册 / 词条 / 汇总页 / 搜索数据的仓库相对链接 + audit-status 键对账） |
+| structure_check.py | 校验 | validate.yml「报告必需要素结构校验」（数据可靠性与局限 / 置信度标注 / 信息差与未核验清单 / 决策建议） |
 
 ## 校验类
 
@@ -134,6 +135,21 @@ python engine/tools/ensure_region_topics.py           # 创建缺失子目录
 
 为每条业务线补齐 `prompts/`、`reports/`、`data/` 三个子目录；缺
 business-config.md 时告警。重复执行无副作用。
+
+### structure_check.py — 报告必需要素结构校验
+
+```bash
+python engine/tools/structure_check.py            # 全量校验（CI 阻断式关卡）
+python engine/tools/structure_check.py --report <路径>   # 单份校验
+python engine/tools/structure_check.py --json
+python engine/tools/structure_check.py --warn     # 仅告警（退出码 2）
+```
+
+校验每份 `*/reports/*.md` 是否具备四大必需要素（h2 级，匹配范围为报告全部二级标题）：
+数据可靠性与局限说明、置信度标注、信息差与未核验清单、决策建议。分级码口径见
+[report_templates/confidence-grade-standard.md](../report_templates/confidence-grade-standard.md)。
+退出码：0=通过；1=存在缺失（阻断）；2=仅告警。纯函数 `missing_elements(text)` /
+`check_report(path)` 可被测试直接调用。
 
 ## 生成类
 
@@ -336,7 +352,7 @@ python engine/tools/automation_status.py activity --threshold 45               #
   `engine/vocabulary/config/report-cycles.json`。
 
 <!-- REGISTRY:BEGIN -->
-> 注册表快照：工具 36 · 类型 12 · 主题 21 · 工作流 8（由 `generate_registry.py` 生成，勿手工编辑）
+> 注册表快照：工具 37 · 类型 12 · 主题 21 · 工作流 8（由 `generate_registry.py` 生成，勿手工编辑）
 <!-- REGISTRY:END -->
 
 

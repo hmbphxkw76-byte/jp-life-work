@@ -405,6 +405,58 @@ class TestComplianceCheck(unittest.TestCase):
                                      f"{tid}/{cyc} 结构表行数 {len(rows)} != {rule['sections']}")
 
 
+class TestStructureCheck(unittest.TestCase):
+    """P0-9 报告必需要素结构门禁（structure_check.py）。"""
+
+    def test_required_constant(self):
+        import structure_check
+        self.assertEqual(set(structure_check.REQUIRED),
+                         {"reliability", "confidence", "gap", "decision"})
+
+    def test_missing_elements_empty_report(self):
+        import structure_check
+        self.assertEqual(structure_check.missing_elements("# 标题\n\n正文"),
+                         ["reliability", "confidence", "gap", "decision"])
+
+    def test_missing_elements_accepts_variants(self):
+        import structure_check
+        text = ("## 数据治理与局限\n\n## 置信度标注\n\n"
+                "## 缺失清单\n\n## 观察清单\n")
+        self.assertEqual(structure_check.missing_elements(text), [])
+
+    def test_all_real_reports_pass(self):
+        import structure_check
+        bad = []
+        for p in sorted(_common.ROOT.glob("*/reports/2026-11-*.md")):
+            r = structure_check.check_report(p)
+            if r["missing"]:
+                bad.append((r["path"], r["missing"]))
+        self.assertEqual(bad, [])
+
+    def test_main_report_exit_zero(self):
+        import structure_check
+        rep = _common.ROOT / "04-industry-logistics/reports/2026-11-industry-logistics.md"
+        buf = io.StringIO()
+        with contextlib.redirect_stdout(buf):
+            rc = structure_check.main(["--report", str(rep)])
+        self.assertEqual(rc, 0)
+        self.assertIn("0 份缺必需要素", buf.getvalue())
+
+    def test_main_missing_exit_one(self):
+        import structure_check
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            (root / "01-x" / "reports").mkdir(parents=True)
+            (root / "01-x" / "reports" / "2026-11-x.md").write_text(
+                "# 2026-11 x\n\n正文\n", encoding="utf-8")
+            buf = io.StringIO()
+            with unittest.mock.patch.object(structure_check, "ROOT", root), \
+                 contextlib.redirect_stdout(buf):
+                rc = structure_check.main(["--report", "01-x/reports/2026-11-x.md"])
+            self.assertEqual(rc, 1)
+            self.assertIn("缺 数据可靠性与局限说明", buf.getvalue())
+
+
 # ──────────────────────────────────────────────
 # 16-exit-transition-return 业务线
 # ──────────────────────────────────────────────
@@ -2319,6 +2371,26 @@ class TestNewAuditRules(unittest.TestCase):
             self.assertEqual(payload["l5_pending_total"], 1)
             self.assertEqual(payload["unfinished_verification"], 1)
             self.assertNotIn("l5_pending", payload["checks"])
+
+    def test_e9_e11_required_elements(self):
+        """P0-9：E9 置信度标注 / E10 信息差与未核验清单 / E11 决策建议。"""
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            md = root / "2026-11-x.md"
+            html = root / "2026-11-x.html"
+            md.write_text("# 2026-11 测试\n\n## 一、执行摘要\n\n"
+                          "## 九、参考来源清单\n", encoding="utf-8")
+            html.write_text("<html><body><h2>一</h2></body></html>", encoding="utf-8")
+            f = audit_check.check_elements("01-x/reports/2026-11-x.md", md, html)
+            codes = {x.code for x in f}
+            self.assertIn("E9", codes)
+            self.assertIn("E10", codes)
+            self.assertIn("E11", codes)
+            md.write_text("# 2026-11 测试\n\n## 一、执行摘要\n\n"
+                          "## 置信度标注\n\n## 信息差与未核验清单\n\n"
+                          "## 决策建议\n\n## 九、参考来源清单\n", encoding="utf-8")
+            f2 = audit_check.check_elements("01-x/reports/2026-11-x.md", md, html)
+            self.assertFalse({x.code for x in f2} & {"E9", "E10", "E11"})
 
 
 class TestUpdatePlannerAudit(unittest.TestCase):
