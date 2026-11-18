@@ -319,8 +319,9 @@ class TestComplianceCheck(unittest.TestCase):
         cls.monthly_rule, _ = cycle_rule(cls.rules, "market-monitoring", "monthly")
 
     @staticmethod
-    def _html(sections=8, nav=True, ids=True, title="测试报告",
+    def _html(sections=11, nav=True, ids=True, title="测试报告",
               extra_anchor=None, extra_id=None):
+        # 默认 11 = market-monitoring 骨架 8 + 跨主题必选 3（置信度标注 / 信息差与未核验清单 / 自动验证结果）
         parts = [f"<html><head><title>{title}</title></head><body>"]
         if nav:
             anchors = "".join(

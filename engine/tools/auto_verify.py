@@ -224,7 +224,8 @@ def rule_v3_format(rel: str, html: str, type_id: str) -> RuleResult:
             cycle = "monthly"
             if det and det[0].endswith("Q4"):
                 cycle = "quarterly"
-            rule, _ = compliance_check.cycle_rule(rules, type_id, cycle)
+            rule, _ = compliance_check.resolve_rule(
+                rules, type_id, cycle, theme=compliance_check.theme_of(rel))
             if rule is None:
                 findings.append({"code": "V3-SKELETON", "severity": "P2", "layer": "V3",
                                  "location": "类型骨架", "detail": f"类型 {type_id} 未登记", "spec": "S-05"})

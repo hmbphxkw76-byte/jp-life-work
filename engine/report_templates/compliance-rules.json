@@ -1,11 +1,20 @@
 {
-  "version": "v1.6",
+  "version": "v1.7",
   "updated": "2026-11-18",
-  "comment": "报告模板合规校验规则（CI: compliance_check.py），共 12 类。section_titles 为类型模板骨架的模块名参考（业务提示词可细化措辞，不得增删节、调整顺序）；校验口径：h2 节数缺失=错误（阻断）、超额=警告（业务固化锚需人工确认）。周期识别：compliance_check 按命名识别 monthly（YYYY-MM-<slug>）/ event（YYYY-MM-DD-<主题>，经 event_cycle 映射到项目制 / 事件触发骨架）；识别不到周期才回落 baseline。quarterly / annual 骨架供 --scaffold 与业务提示词使用，运行时因命名统一为自然月而按 monthly 校验（超额按警告处理）。quarterly 第 11 节页脚为 footer 元素（可选 h2），故 h2 期望值为 10。v1.3：为全部类型登记 monthly 骨架（nav=true），消除月度报告回落基线（nav=false）的口径漂移。v1.4：新增 event 周期识别与 event_cycle 映射；措辞 12 类→13 类。v1.5：删除 flash-commentary.monthly（该类型为事件触发型，无月度节拍，且与四段式快评模板不符；事件件经 event_cycle 映射到 flash_note）。v1.6：取消周报节拍，移除 trend-weekly 类型与 weekly 周期识别（13 类→12 类）。",
+  "comment": "报告模板合规校验规则（CI: compliance_check.py），共 12 类。section_titles 为类型模板骨架的模块名参考（业务提示词可细化措辞，不得增删节、调整顺序）；校验口径：h2 节数缺失=错误（阻断）、超额=警告（业务固化锚需人工确认）。周期识别：compliance_check 按命名识别 monthly（YYYY-MM-<slug>）/ event（YYYY-MM-DD-<主题>，经 event_cycle 映射到项目制 / 事件触发骨架）；识别不到周期才回落 baseline。quarterly / annual 骨架供 --scaffold 与业务提示词使用，运行时因命名统一为自然月而按 monthly 校验（超额按警告处理）。quarterly 第 11 节页脚为 footer 元素（可选 h2），故 h2 期望值为 10。v1.3：为全部类型登记 monthly 骨架（nav=true），消除月度报告回落基线（nav=false）的口径漂移。v1.4：新增 event 周期识别与 event_cycle 映射；措辞 12 类→13 类。v1.5：删除 flash-commentary.monthly（该类型为事件触发型，无月度节拍，且与四段式快评模板不符；事件件经 event_cycle 映射到 flash_note）。v1.6：取消周报节拍，移除 trend-weekly 类型与 weekly 周期识别（13 类→12 类）。v1.7：新增 common.mandatory_sections（置信度标注 / 信息差与未核验清单 / 自动验证结果 3 个跨主题必选节）与 theme_overrides（00=11、04/05/06=13、19=13）；期望 h2 节数 = 主题覆盖 ＞ 类型骨架 + 必选节。",
   "common": {
     "require_title": true,
     "anchor_check": true,
-    "nav_required_cycles": ["monthly", "quarterly", "annual"]
+    "nav_required_cycles": ["monthly", "quarterly", "annual"],
+    "mandatory_sections": 3,
+    "mandatory_titles": ["置信度标注", "信息差与未核验清单", "自动验证结果"]
+  },
+  "theme_overrides": {
+    "00-decision-hub": 11,
+    "04-industry-logistics": 13,
+    "05-industry-autonomous": 13,
+    "06-industry-technology": 13,
+    "19-safety-disaster": 13
   },
   "types": {
     "market-monitoring": {
