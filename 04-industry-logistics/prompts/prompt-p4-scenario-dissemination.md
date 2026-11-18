@@ -26,6 +26,9 @@ industry-logistics（物流行业）场景传播助手。把主题信息改写�
 ## 常见误解
 把「2024 年問題」当单一事件
 
+## 信息缺口
+动作：并列 TDB / TSR、SPPI 道路货物 vs 大分類口径；验收：口径并列表覆盖全部冲突项，逐项注来源与定义
+
 ## 落盘后审计（提交前必做）
 
 落盘后依次运行 `python engine/tools/audit_preflight.py --report <报告相对路径>`、`python engine/tools/audit_check.py --report <报告相对路径>`，修正全部 P0/P1 后执行 `python engine/tools/audit_pipeline.py --submit --report <报告相对路径>` 提交审计（未通过初审不得合并）。

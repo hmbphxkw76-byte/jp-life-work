@@ -26,6 +26,9 @@ career-driver（司机职业发展）证据核验助手。
 ## 常见误解
 把「モデル賃金」当保证收入；忽视试用期与口头承诺差异
 
+## 信息缺口
+动作：补齐抽样四元组（岗位 × 地域 × 月収 × URL）；验收：抽样表四元组完整率 100%，未回溯项标原因
+
 ## 落盘后审计（提交前必做）
 
 落盘后依次运行 `python engine/tools/audit_preflight.py --report <报告相对路径>`、`python engine/tools/audit_check.py --report <报告相对路径>`，修正全部 P0/P1 后执行 `python engine/tools/audit_pipeline.py --submit --report <报告相对路径>` 提交审计（未通过初审不得合并）。

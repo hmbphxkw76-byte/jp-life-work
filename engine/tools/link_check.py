@@ -18,6 +18,7 @@
 用法：
     python engine/tools/link_check.py            # 校验，缺失则退出码 1
     python engine/tools/link_check.py --json     # 机器可读输出
+    python engine/tools/link_check.py --external # 额外抽检外部 URL（仅告警，不阻断）
 """
 from __future__ import annotations
 
@@ -128,9 +129,47 @@ def check(root: Path = ROOT) -> list[str]:
     return sorted(missing)
 
 
+MD_LINK_GLOBS = ["*/reports/*.md", "engine/search/*.json"]
+_EXTERNAL_URL = re.compile(r"https?://[^\s)\]\u3000-\uffff\"'<>]+")
+
+
+def collect_external_urls(root: Path = ROOT) -> list[str]:
+    """收集报告与搜索数据中的外部 URL（去重、排序）。"""
+    urls: set[str] = set()
+    for pattern in MD_LINK_GLOBS:
+        for f in sorted(root.glob(pattern)):
+            text = f.read_text(encoding="utf-8", errors="replace")
+            for m in _EXTERNAL_URL.finditer(text):
+                urls.add(m.group(0).rstrip(".,;"))
+    return sorted(urls)
+
+
+def check_external(root: Path = ROOT, timeout: int = 10) -> dict:
+    """抽检外部 URL 可达性。返回 {url: status}，status 为 'ok' / 'fail' / 'skip'。"""
+    import urllib.error
+    import urllib.request
+
+    out: dict[str, str] = {}
+    for url in collect_external_urls(root):
+        req = urllib.request.Request(url, method="HEAD",
+                                     headers={"User-Agent": "jp-life-work-link-check/1.0"})
+        try:
+            with urllib.request.urlopen(req, timeout=timeout) as resp:
+                out[url] = "ok" if resp.status < 400 else "fail"
+        except urllib.error.HTTPError as e:
+            # 部分站点拒绝 HEAD，但 4xx/5xx 仍视为不可用
+            out[url] = "ok" if e.code < 400 else "fail"
+        except Exception:
+            out[url] = "fail"
+    return out
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description="仓库内链存在性校验")
     ap.add_argument("--json", action="store_true", help="以 JSON 输出")
+    ap.add_argument("--external", action="store_true",
+                    help="额外抽检外部 URL 可达性（默认仅告警，不阻断）")
+    ap.add_argument("--external-timeout", type=int, default=10)
     args = ap.parse_args()
 
     missing = check()
@@ -144,8 +183,19 @@ def main() -> int:
     else:
         print("内链校验通过：无失效引用")
 
+    ext_fail: list[str] = []
+    if args.external:
+        results = check_external(timeout=args.external_timeout)
+        ext_fail = sorted(u for u, s in results.items() if s == "fail")
+        print(f"外链抽检：{len(results)} 个 URL，失败 {len(ext_fail)} 个")
+        for u in ext_fail:
+            print(f"  [FAIL] {u}")
+
     if missing:
         return 1
+    if ext_fail:
+        print("提示：外链失败多为站点反爬 / 时效变更，请人工确认后更新来源")
+        return 0
     return 0
 
 

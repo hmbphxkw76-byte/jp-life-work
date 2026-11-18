@@ -26,6 +26,9 @@ life-operations（在日生活实务）场景传播助手。把主题信息改�
 ## 常见误解
 把「保证公司」当「保证人」
 
+## 信息缺口
+动作：清理噪声词条（猫眼快递 / サンド / 免费Wi-Fi）；验收：噪声词条移除或标「非术语」，`vocab_tool check` 通过
+
 ## 落盘后审计（提交前必做）
 
 落盘后依次运行 `python engine/tools/audit_preflight.py --report <报告相对路径>`、`python engine/tools/audit_check.py --report <报告相对路径>`，修正全部 P0/P1 后执行 `python engine/tools/audit_pipeline.py --submit --report <报告相对路径>` 提交审计（未通过初审不得合并）。
