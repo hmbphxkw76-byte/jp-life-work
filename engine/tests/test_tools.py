@@ -1850,9 +1850,9 @@ class TestSkeletonBuilder(unittest.TestCase):
 class TestPendingVerification(unittest.TestCase):
     """待核实项闭环。"""
 
-    def test_all_six_registered(self):
+    def test_all_tracked_registered(self):
         rows, summary = pending_verification.run()
-        self.assertEqual(len(rows), 6)
+        self.assertEqual(len(rows), 9)
         self.assertEqual(summary["unregistered"], 0)
         self.assertTrue(all(r["deadline"] == "2026-12-31" for r in rows))
 
