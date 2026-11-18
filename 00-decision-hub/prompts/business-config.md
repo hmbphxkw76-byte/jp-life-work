@@ -2,7 +2,7 @@
 
 > **定位**：本文件是 `00-decision-hub` 的**单一业务事实源**。本业务线**不产出研究内容**，只做三件事：**收敛**（把 01–20 主题的结论收敛成「五问」答案）、**暴露**（标记缺失事实）、**触发**（按缺失清单启动补缺）。所有事实与数据一律引用既有主题报告 / 登记册，不在此复制正文、不独立改值。
 >
-> **继承声明（四层体系）**：周期提示词 = [通用基座](../../engine/report_templates/prompt-generic-base.md) × [监测报告通用规范](../../engine/report_templates/monitoring-common-spec.md) × [职业就业调研型模板](../../engine/report_templates/employment-research/) × 本文件。冲突时以周期提示词 ＞ 本文件 ＞ 类型模板 ＞ 通用基座 ＞ 通用规范。
+> **继承声明（四层体系）**：周期提示词 = [通用基座](../../engine/report_templates/prompt-generic-base.md) × [监测报告通用规范](../../engine/report_templates/monitoring-common-spec.md) × [职业就业调研型模板](../../engine/report_templates/employment-research/) × 本文件。冲突优先级：**周期提示词 ＞ 类型模板 ＞ 通用基座 ＞ 通用规范**（与通用基座第一节一致）。
 >
 > **与其他主题的关系**：本主题是**跨主题综合层**，不是第 14 条研究业务线。01–20 是事实源，本主题是消费层；本主题对 01–20 只做只读引用，不参与其登记册回写。
 

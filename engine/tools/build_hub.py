@@ -347,8 +347,50 @@ def _report_keywords(rel_path: str, topic_name: str, type_label: str,
     return kws[:24]
 
 
+def _clean_keyword(s: str) -> str:
+    """清洗关键词：还原 markdown 链接为纯文本，剔除路径样串（避免内链门禁误报）。"""
+    s = re.sub(r"\[([^\]]+)\]\([^)]+\)", r"\1", s or "")
+    s = s.strip()
+    if not s or "/" in s or s.endswith((".md", ".html")):
+        return ""
+    return s
+
+
+def _load_handbooks(topics: list[dict]) -> list[dict]:
+    """手册条目（handbook/*.md）→ 搜索索引（P1-7：索引覆盖全载体）。
+
+    手册为 md 载体（无 HTML 交付物），``path`` 指向仓库相对 md 路径。
+    """
+    rows: list[dict] = []
+    for t in topics:
+        hdir = ROOT / t["slug"] / "handbook"
+        if not hdir.is_dir():
+            continue
+        for f in sorted(hdir.glob("*.md")):
+            try:
+                text = f.read_text(encoding="utf-8", errors="replace")
+            except OSError:
+                continue
+            title = f.stem
+            for line in text.splitlines():
+                if line.startswith("# "):
+                    title = _clean_keyword(line[2:]) or f.stem
+                    break
+            kws: list[str] = [t["name"]]
+            for h in _md_headings(text)[:8]:
+                h = _clean_keyword(h)
+                if h and h not in kws:
+                    kws.append(h)
+            rows.append({
+                "topic": t["slug"], "topic_name": t["name"],
+                "title": title, "path": f"{t['slug']}/handbook/{f.name}",
+                "keywords": kws[:24],
+            })
+    return rows
+
+
 def collect_search_index(topics: list[dict]) -> dict:
-    """构建标准化搜索索引：报告（标题 / 关键词 / 命中问题）+ 问题清单 + 五问视图。"""
+    """构建标准化搜索索引：报告（标题 / 关键词 / 命中问题）+ 手册 + 问题清单 + 五问视图。"""
     vocab = _load_vocab_terms()
     keywords = load_keywords()
     five = load_five_questions()
@@ -382,8 +424,8 @@ def collect_search_index(topics: list[dict]) -> dict:
                 if rep["path"] == path:
                     rep["questions"].append(q)
                     break
-    return {"version": 2, "reports": reports, "questions": questions,
-            "five_questions": five}
+    return {"version": 2, "reports": reports, "handbooks": _load_handbooks(topics),
+            "questions": questions, "five_questions": five}
 
 
 def search_reference_errors(topics: list[dict]) -> list[str]:
@@ -731,7 +773,7 @@ HUB_JS = """
 
   /* ---------- 报告级命中（关键词 / 问题索引） ---------- */
   var resultsBox = document.getElementById('search-results');
-  var SINDEX = window.SEARCH_INDEX || { reports: [], questions: [] };
+  var SINDEX = window.SEARCH_INDEX || { reports: [], handbooks: [], questions: [] };
   function _esc(s) {
     return String(s).replace(/[&<>"]/g, function (c) {
       return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
@@ -754,18 +796,40 @@ HUB_JS = """
       if (hay.indexOf(q) >= 0) hits.push(r);
       if (hits.length >= 20) break;
     }
-    if (!hits.length) {
+    var hhits = [];
+    var hbs = SINDEX.handbooks || [];
+    for (var k = 0; k < hbs.length; k++) {
+      var b = hbs[k];
+      var bh = (b.topic_name + ' ' + b.title + ' '
+        + (b.keywords || []).join(' ')).toLowerCase();
+      if (bh.indexOf(q) >= 0) hhits.push(b);
+      if (hhits.length >= 20) break;
+    }
+    if (!hits.length && !hhits.length) {
       resultsBox.hidden = true;
       resultsBox.innerHTML = '';
       return;
     }
-    var html = '<div class="sr-head">报告命中 ' + hits.length + ' 份</div>';
-    for (var j = 0; j < hits.length; j++) {
-      var h = hits[j];
-      html += '<a class="sr-item" href="' + _esc(h.path) + '" target="_blank" rel="noopener">'
-        + '<span class="sr-period">' + _esc(h.period) + '</span>'
-        + '<span class="sr-title">' + _esc(h.title) + '</span>'
-        + '<span class="sr-topic">' + _esc(h.topic_name) + '</span></a>';
+    var html = '';
+    if (hits.length) {
+      html += '<div class="sr-head">报告命中 ' + hits.length + ' 份</div>';
+      for (var j = 0; j < hits.length; j++) {
+        var h = hits[j];
+        html += '<a class="sr-item" href="' + _esc(h.path) + '" target="_blank" rel="noopener">'
+          + '<span class="sr-period">' + _esc(h.period) + '</span>'
+          + '<span class="sr-title">' + _esc(h.title) + '</span>'
+          + '<span class="sr-topic">' + _esc(h.topic_name) + '</span></a>';
+      }
+    }
+    if (hhits.length) {
+      html += '<div class="sr-head">手册命中 ' + hhits.length + ' 份</div>';
+      for (var m = 0; m < hhits.length; m++) {
+        var hb = hhits[m];
+        html += '<a class="sr-item" href="' + _esc(hb.path) + '" target="_blank" rel="noopener">'
+          + '<span class="sr-period">手册</span>'
+          + '<span class="sr-title">' + _esc(hb.title) + '</span>'
+          + '<span class="sr-topic">' + _esc(hb.topic_name) + '</span></a>';
+      }
     }
     resultsBox.innerHTML = html;
     resultsBox.hidden = false;

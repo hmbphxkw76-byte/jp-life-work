@@ -807,6 +807,1098 @@
       ]
     }
   ],
+  "handbooks": [
+    {
+      "topic": "01-ssw-driver",
+      "topic_name": "特定技能司机",
+      "title": "特定技能司机与物流行业 · 知识手册导航",
+      "path": "01-ssw-driver/handbook/00-navigation.md",
+      "keywords": [
+        "特定技能司机",
+        "01-ssw-driver 索引",
+        "文件一览",
+        "关联目录",
+        "使用约定",
+        "原基线版本头（原样保留）",
+        "更新日志",
+        "数据变更摘要（首期基线确立，14 项追踪指标首取值）",
+        "核心结论（摘要）"
+      ]
+    },
+    {
+      "topic": "01-ssw-driver",
+      "topic_name": "特定技能司机",
+      "title": "00a 参考来源清单",
+      "path": "01-ssw-driver/handbook/00a-reference-sources.md",
+      "keywords": [
+        "特定技能司机"
+      ]
+    },
+    {
+      "topic": "01-ssw-driver",
+      "topic_name": "特定技能司机",
+      "title": "01 制度与签证路径",
+      "path": "01-ssw-driver/handbook/01-visa-system.md",
+      "keywords": [
+        "特定技能司机",
+        "2.1 制度框架（截至 2026-11-11）",
+        "2.2 「自動車運送業」分野人材基准",
+        "2.3 试验信息（技能試験 + 日本語試験）",
+        "2.4 申请流程与费用",
+        "2.5 登録支援機関",
+        "2.6 制度口径对比（术语不混用提示）",
+        "关联"
+      ]
+    },
+    {
+      "topic": "01-ssw-driver",
+      "topic_name": "特定技能司机",
+      "title": "02 司机供需与薪酬",
+      "path": "01-ssw-driver/handbook/02-driver-supply-salary.md",
+      "keywords": [
+        "特定技能司机",
+        "3.1 供需缺口（口径差异并列呈现）",
+        "3.2 薪资统计（厚労省毎月勤労統計，2026 年 9 月分速报，2026-11-06 公布）",
+        "3.3 求人抽样（岗位 × 地域分层；月给口径含诸手当）",
+        "3.4 运赁（司机工资的行情基础）",
+        "3.5 净收入参考模型（推断）",
+        "关联"
+      ]
+    },
+    {
+      "topic": "01-ssw-driver",
+      "topic_name": "特定技能司机",
+      "title": "03 物流行业态势",
+      "path": "01-ssw-driver/handbook/03-logistics-industry.md",
+      "keywords": [
+        "特定技能司机",
+        "4.1 \"2024年問題\"后续",
+        "4.2 物流倒産（双机构双口径并列）",
+        "4.3 运价与政策",
+        "4.4 行业 M&A 与企业动态",
+        "关联"
+      ]
+    },
+    {
+      "topic": "01-ssw-driver",
+      "topic_name": "特定技能司机",
+      "title": "04 智能驾驶展望",
+      "path": "01-ssw-driver/handbook/04-autonomous-driving.md",
+      "keywords": [
+        "特定技能司机",
+        "5.1 制度框架与实绩",
+        "5.2 官方时间表（《モビリティ・ロードマップ2026》，2026-07-21 数字社会推进会议决定）",
+        "5.4 对司机岗位的影响评估（全部为推断）",
+        "关联"
+      ]
+    },
+    {
+      "topic": "01-ssw-driver",
+      "topic_name": "特定技能司机",
+      "title": "05 就业落地与中介",
+      "path": "01-ssw-driver/handbook/05-employment-landing.md",
+      "keywords": [
+        "特定技能司机",
+        "6.1 考试准备路径",
+        "6.2 招募渠道与中介资质",
+        "6.3 在留落地清单",
+        "6.4 驾照路径（关键瓶颈）",
+        "6.5 风险提示与维权渠道",
+        "关联"
+      ]
+    },
+    {
+      "topic": "02-career-driver",
+      "topic_name": "司机职业发展",
+      "title": "司机职业 · 知识手册导航",
+      "path": "02-career-driver/handbook/00-navigation.md",
+      "keywords": [
+        "司机职业发展",
+        "02-career-driver 索引",
+        "文件一览",
+        "关联目录",
+        "使用约定",
+        "更新日志"
+      ]
+    },
+    {
+      "topic": "02-career-driver",
+      "topic_name": "司机职业发展",
+      "title": "01 司机岗位全景",
+      "path": "02-career-driver/handbook/01-driver-jobs.md",
+      "keywords": [
+        "司机职业发展",
+        "一、岗位类型谱系",
+        "二、车种与驾照对应（2024 年新制度后）",
+        "三、一天的工作流（典型路线配送）",
+        "四、分野内的职业深化方向（对应阶段 3）",
+        "五、关联文件",
+        "关联"
+      ]
+    },
+    {
+      "topic": "02-career-driver",
+      "topic_name": "司机职业发展",
+      "title": "02 薪资结构与工时合规",
+      "path": "02-career-driver/handbook/02-salary-compliance.md",
+      "keywords": [
+        "司机职业发展",
+        "一、薪资水平（2026 年市场数据）",
+        "二、工资构成拆解（看 offer 必看项）",
+        "三、2024 年（令和 6 年）劳动合规新规——\"物流 2024 年问题\"",
+        "四、入职前必问清单（面试验证用）",
+        "五、红牌信号（出现即谨慎）",
+        "六、关联文件",
+        "关联"
+      ]
+    },
+    {
+      "topic": "02-career-driver",
+      "topic_name": "司机职业发展",
+      "title": "03 安全规范与现场制度",
+      "path": "02-career-driver/handbook/03-safety-rules.md",
+      "keywords": [
+        "司机职业发展",
+        "一、法定运行管理制度（货运）",
+        "二、事故与异常处理流程",
+        "三、饮酒与药物（红线）",
+        "四、恶劣天气与季节性风险",
+        "五、入职初期 90 天安全路线图",
+        "六、关联",
+        "关联"
+      ]
+    },
+    {
+      "topic": "02-career-driver",
+      "topic_name": "司机职业发展",
+      "title": "04 现场经验积累清单",
+      "path": "02-career-driver/handbook/04-field-experience.md",
+      "keywords": [
+        "司机职业发展",
+        "一、四大现场能力域",
+        "二、可量化成果记录表（每月更新，写简历直接用）",
+        "三、技能升级路径时间表（阶段 2 → 3）",
+        "四、证据归档（与永住证据链共用）",
+        "五、关联",
+        "关联"
+      ]
+    },
+    {
+      "topic": "02-career-driver",
+      "topic_name": "司机职业发展",
+      "title": "05 求职渠道与简历面试",
+      "path": "02-career-driver/handbook/05-job-hunting.md",
+      "keywords": [
+        "司机职业发展",
+        "一、求职渠道矩阵",
+        "二、地域选择策略（影响收入与生活）",
+        "四、面试高频问题与回答方向",
+        "五、契约审查清单（签约前逐项核对）",
+        "六、面试日语速成包",
+        "关联"
+      ]
+    },
+    {
+      "topic": "02-career-driver",
+      "topic_name": "司机职业发展",
+      "title": "06 实际工作条件记录",
+      "path": "02-career-driver/handbook/06-work-conditions.md",
+      "keywords": [
+        "司机职业发展",
+        "一、公司概况（入职时填写）",
+        "二、月度记录表",
+        "三、半年对比表",
+        "四、工作环境定性记录（每半年 1 次）",
+        "五、凭证归档索引",
+        "关联"
+      ]
+    },
+    {
+      "topic": "03-career-management",
+      "topic_name": "职业管理与晋升",
+      "title": "管理岗过渡 · 知识手册导航",
+      "path": "03-career-management/handbook/00-navigation.md",
+      "keywords": [
+        "职业管理与晋升",
+        "03-career-management 索引",
+        "文件一览",
+        "关联目录",
+        "使用约定",
+        "更新日志"
+      ]
+    },
+    {
+      "topic": "03-career-management",
+      "topic_name": "职业管理与晋升",
+      "title": "01 管理岗地图与路径评估",
+      "path": "03-career-management/handbook/01-management-map.md",
+      "keywords": [
+        "职业管理与晋升",
+        "二、三条过渡路径评估",
+        "三、决策时点表",
+        "四、风险提示",
+        "五、关联",
+        "关联"
+      ]
+    },
+    {
+      "topic": "03-career-management",
+      "topic_name": "职业管理与晋升",
+      "title": "02 业务知识体系",
+      "path": "03-career-management/handbook/02-business-knowledge.md",
+      "keywords": [
+        "职业管理与晋升",
+        "一、仓储运营（Warehouse Operations）",
+        "二、运输管理（Transport Management）",
+        "三、安全管理（Safety Management）",
+        "四、系统与数据基础（通往阶段 4 的桥）",
+        "五、书目参考（中文·日文各一）",
+        "关联"
+      ]
+    },
+    {
+      "topic": "03-career-management",
+      "topic_name": "职业管理与晋升",
+      "title": "03 管理岗日语与沟通",
+      "path": "03-career-management/handbook/03-management-japanese.md",
+      "keywords": [
+        "职业管理与晋升",
+        "一、四大场景武器库",
+        "二、敬语最小必需集（管理岗够用版）",
+        "三、训练节奏（与 N2 备考并行）",
+        "关联"
+      ]
+    },
+    {
+      "topic": "03-career-management",
+      "topic_name": "职业管理与晋升",
+      "title": "04 管理岗过渡学习计划",
+      "path": "03-career-management/handbook/04-transition-plan.md",
+      "keywords": [
+        "职业管理与晋升",
+        "一、总目标",
+        "二、48 个月分年计划",
+        "三、每周节奏模板（兼职于全职司机工作）",
+        "四、失败预案",
+        "五、进度跟踪",
+        "关联"
+      ]
+    },
+    {
+      "topic": "03-career-management",
+      "topic_name": "职业管理与晋升",
+      "title": "05 成果档案与晋升材料",
+      "path": "03-career-management/handbook/05-achievement-archive.md",
+      "keywords": [
+        "职业管理与晋升",
+        "一、管理活动月度记录表",
+        "二、成果故事卡（STAR 格式）",
+        "三、晋升面谈材料包（第 4 年 Q2 组装）",
+        "四、外部评价背书（随时收集）",
+        "五、与其他档案的关系",
+        "关联"
+      ]
+    },
+    {
+      "topic": "04-industry-logistics",
+      "topic_name": "物流行业",
+      "title": "日本物流行业 · 知识手册导航",
+      "path": "04-industry-logistics/handbook/00-navigation.md",
+      "keywords": [
+        "物流行业",
+        "04-industry-logistics 索引",
+        "文件一览",
+        "关联目录",
+        "使用约定",
+        "更新日志"
+      ]
+    },
+    {
+      "topic": "04-industry-logistics",
+      "topic_name": "物流行业",
+      "title": "01 日本物流产业概览",
+      "path": "04-industry-logistics/handbook/01-logistics-overview.md",
+      "keywords": [
+        "物流行业",
+        "一、产业规模",
+        "二、细分赛道",
+        "三、政策大方向（个人判断依据）",
+        "四、对个人路线的含义",
+        "五、信息源（定期看）",
+        "关联"
+      ]
+    },
+    {
+      "topic": "04-industry-logistics",
+      "topic_name": "物流行业",
+      "title": "02 增长赛道：EC、冷链、3PL",
+      "path": "04-industry-logistics/handbook/02-growth-segments.md",
+      "keywords": [
+        "物流行业",
+        "一、EC 物流（电商物流）",
+        "二、冷链（コールドチェーン）",
+        "三、3PL（第三方物流）",
+        "四、绿色物流（グリーンロジスティクス）",
+        "五、赛道优先级（本规划视角）",
+        "六、关联",
+        "关联"
+      ]
+    },
+    {
+      "topic": "04-industry-logistics",
+      "topic_name": "物流行业",
+      "title": "03 自动化与技术趋势",
+      "path": "04-industry-logistics/handbook/03-automation-trends.md",
+      "keywords": [
+        "物流行业",
+        "一、三条行业级结论",
+        "二、岗位结构影响矩阵（个人对策）",
+        "三、阶段 4 的行动映射",
+        "关联"
+      ]
+    },
+    {
+      "topic": "04-industry-logistics",
+      "topic_name": "物流行业",
+      "title": "04 行业数据跟踪",
+      "path": "04-industry-logistics/handbook/04-data-tracking.md",
+      "keywords": [
+        "物流行业",
+        "一、核心指标看板",
+        "二、季度扫描清单（每季度 1 次，勾选后填日期）",
+        "三、数据记录区（倒序追加）",
+        "四、判断更新日志",
+        "关联"
+      ]
+    },
+    {
+      "topic": "05-industry-autonomous",
+      "topic_name": "自动驾驶与自动化",
+      "title": "日本自动驾驶与自动化 · 知识手册导航",
+      "path": "05-industry-autonomous/handbook/00-navigation.md",
+      "keywords": [
+        "自动驾驶与自动化",
+        "05-industry-autonomous 索引",
+        "文件一览",
+        "关联目录",
+        "使用约定",
+        "更新日志"
+      ]
+    },
+    {
+      "topic": "05-industry-autonomous",
+      "topic_name": "自动驾驶与自动化",
+      "title": "01 自动驾驶技术路线与时间表",
+      "path": "05-industry-autonomous/handbook/01-technology-roadmap.md",
+      "keywords": [
+        "自动驾驶与自动化",
+        "一、日本自动驾驶分级与物流应用",
+        "二、已确认的实证与商用节点",
+        "三、\"中継输送\"模式——最关键的岗位概念",
+        "四、主要玩家（观察名单）",
+        "五、对岗位的时间表判断（本规划视角）",
+        "六、跟踪动作",
+        "关联"
+      ]
+    },
+    {
+      "topic": "05-industry-autonomous",
+      "topic_name": "自动驾驶与自动化",
+      "title": "02 法规与许可制度",
+      "path": "05-industry-autonomous/handbook/02-legal-permit.md",
+      "keywords": [
+        "自动驾驶与自动化",
+        "一、两法体系",
+        "二、L4 许可的三大要件（职业机会所在）",
+        "三、责任与保险（常识级）",
+        "四、跟踪要点",
+        "关联"
+      ]
+    },
+    {
+      "topic": "05-industry-autonomous",
+      "topic_name": "自动驾驶与自动化",
+      "title": "03 仓储自动化与无人配送",
+      "path": "05-industry-autonomous/handbook/03-warehouse-automation.md",
+      "keywords": [
+        "自动驾驶与自动化",
+        "一、仓储自动化技术谱系",
+        "二、无人配送（ラストワンマイル）",
+        "四、个人技能对接",
+        "关联"
+      ]
+    },
+    {
+      "topic": "05-industry-autonomous",
+      "topic_name": "自动驾驶与自动化",
+      "title": "04 个人技能对接与机会",
+      "path": "05-industry-autonomous/handbook/04-personal-skills.md",
+      "keywords": [
+        "自动驾驶与自动化",
+        "一、未来岗位画像（10 年视角）",
+        "二、机会雷达（遇到就抓住的信号）",
+        "三、风险对冲",
+        "四、年度自检（加进 1 月复盘）",
+        "关联"
+      ]
+    },
+    {
+      "topic": "06-industry-technology",
+      "topic_name": "技术行业",
+      "title": "日本技术与数字化 · 知识手册导航",
+      "path": "06-industry-technology/handbook/00-navigation.md",
+      "keywords": [
+        "技术行业",
+        "06-industry-technology 索引",
+        "文件一览",
+        "关联目录",
+        "使用约定",
+        "更新日志"
+      ]
+    },
+    {
+      "topic": "06-industry-technology",
+      "topic_name": "技术行业",
+      "title": "01 物流数字化技能地图",
+      "path": "06-industry-technology/handbook/01-logistics-digital-skills.md",
+      "keywords": [
+        "技术行业",
+        "一、技能分层（由近及远）",
+        "二、物流系统知识（概念层）",
+        "三、证明方式（比证书重要）",
+        "四、资源入口",
+        "关联"
+      ]
+    },
+    {
+      "topic": "06-industry-technology",
+      "topic_name": "技术行业",
+      "title": "02 数字化岗位与转型路径",
+      "path": "06-industry-technology/handbook/02-digital-career-paths.md",
+      "keywords": [
+        "技术行业",
+        "一、三条转型路径",
+        "二、岗位 JD 关键词对照（求职检索用）",
+        "三、评估节点",
+        "四、关联",
+        "关联"
+      ]
+    },
+    {
+      "topic": "06-industry-technology",
+      "topic_name": "技术行业",
+      "title": "03 日本数字化劳动市场与岗位行情",
+      "path": "06-industry-technology/handbook/03-digital-labor-market.md",
+      "keywords": [
+        "技术行业",
+        "二、数字化岗位薪资带",
+        "三、外语要求与外国人就业现状",
+        "四、物流业外泛用型岗位与转职市场",
+        "五、与本项目路线的对接要点（推断）",
+        "关联"
+      ]
+    },
+    {
+      "topic": "07-economy-finance",
+      "topic_name": "经济与财务",
+      "title": "日本经济与财务 · 知识手册导航",
+      "path": "07-economy-finance/handbook/00-navigation.md",
+      "keywords": [
+        "经济与财务",
+        "07-economy-finance 索引",
+        "文件一览",
+        "关联目录",
+        "使用约定",
+        "更新日志"
+      ]
+    },
+    {
+      "topic": "07-economy-finance",
+      "topic_name": "经济与财务",
+      "title": "01 收入结构与薪资行情",
+      "path": "07-economy-finance/handbook/01-income-salary.md",
+      "keywords": [
+        "经济与财务",
+        "一、日本薪资基本盘",
+        "二、地域差（选公司时用）",
+        "三、收入增长曲线（本规划 10 年）",
+        "四、额外收入选项（合规前提）",
+        "五、年度核对项",
+        "关联"
+      ]
+    },
+    {
+      "topic": "07-economy-finance",
+      "topic_name": "经济与财务",
+      "title": "02 生活成本与储蓄规划",
+      "path": "07-economy-finance/handbook/02-living-cost-savings.md",
+      "keywords": [
+        "经济与财务",
+        "一、月度生活成本模型（单身·地方都市）",
+        "二、储蓄模型",
+        "三、年度支出（易漏项）",
+        "四、对国内汇款",
+        "五、落地后动作",
+        "关联"
+      ]
+    },
+    {
+      "topic": "07-economy-finance",
+      "topic_name": "经济与财务",
+      "title": "03 税务社保年金",
+      "path": "07-economy-finance/handbook/03-tax-social-insurance.md",
+      "keywords": [
+        "经济与财务",
+        "一、四大公的义务一览",
+        "二、年金：三个关键词",
+        "三、税务实务",
+        "四、归档清单（与永住证据链共用）",
+        "五、关联",
+        "关联"
+      ]
+    },
+    {
+      "topic": "07-economy-finance",
+      "topic_name": "经济与财务",
+      "title": "04 长期财务规划",
+      "path": "07-economy-finance/handbook/04-longterm-finance.md",
+      "keywords": [
+        "经济与财务",
+        "一、10 年财务里程碑",
+        "二、世帯年收达标模拟（永住「年收水准」要件）",
+        "三、大额决策清单与时机",
+        "四、金融习惯（日本居住者）",
+        "五、年度复盘模板",
+        "关联"
+      ]
+    },
+    {
+      "topic": "08-visa-immigration",
+      "topic_name": "签证与移民",
+      "title": "日本签证与在留资格 · 知识手册导航",
+      "path": "08-visa-immigration/handbook/00-navigation.md",
+      "keywords": [
+        "签证与移民",
+        "08-visa-immigration 索引",
+        "文件一览",
+        "关联目录",
+        "使用约定",
+        "阅读顺序",
+        "更新日志"
+      ]
+    },
+    {
+      "topic": "08-visa-immigration",
+      "topic_name": "签证与移民",
+      "title": "01 特定技能制度概览",
+      "path": "08-visa-immigration/handbook/01-ssw-overview.md",
+      "keywords": [
+        "签证与移民",
+        "一、制度定位",
+        "二、1 号与 2 号对比",
+        "四、与其他在留资格的关系",
+        "五、与本项目路线图的对应",
+        "参考",
+        "关联"
+      ]
+    },
+    {
+      "topic": "08-visa-immigration",
+      "topic_name": "签证与移民",
+      "title": "02 特定技能1号-自动车运送业",
+      "path": "08-visa-immigration/handbook/02-ssw1-driver.md",
+      "keywords": [
+        "签证与移民",
+        "一、业务范围",
+        "二、接收上限",
+        "三、人才基准（合格要件）",
+        "四、受验资格（评价试验，ClassNK Portal）",
+        "五、接受机关侧要件（就业前需确认雇主满足）",
+        "六、申请流程概览",
+        "七、在留期间与上限",
+        "参考"
+      ]
+    },
+    {
+      "topic": "08-visa-immigration",
+      "topic_name": "签证与移民",
+      "title": "03 考试与日语要求",
+      "path": "08-visa-immigration/handbook/03-exams-japanese.md",
+      "keywords": [
+        "签证与移民",
+        "一、两条考试线",
+        "二、技能评价试验（卡车）",
+        "三、日语考试",
+        "四、备考顺序建议（与阶段 1 对齐）",
+        "五、驾照规划",
+        "参考",
+        "关联"
+      ]
+    },
+    {
+      "topic": "08-visa-immigration",
+      "topic_name": "签证与移民",
+      "title": "04 申请流程与材料",
+      "path": "08-visa-immigration/handbook/04-application.md",
+      "keywords": [
+        "签证与移民",
+        "一、两条申请路径",
+        "二、申请材料清单（1 号·卡车）",
+        "三、在留管理与更新义务（落地后）",
+        "五、办理机构",
+        "参考",
+        "关联"
+      ]
+    },
+    {
+      "topic": "08-visa-immigration",
+      "topic_name": "签证与移民",
+      "title": "05 特定技能2号与升级路径",
+      "path": "08-visa-immigration/handbook/05-ssw2-upgrade.md",
+      "keywords": [
+        "签证与移民",
+        "一、为什么升级 2 号（通则）",
+        "二、移行要件概要",
+        "三、移行手续要点",
+        "四、与永住规划的时间线（修正版）",
+        "参考",
+        "关联"
+      ]
+    },
+    {
+      "topic": "08-visa-immigration",
+      "topic_name": "签证与移民",
+      "title": "06 育成就劳制度与新动向",
+      "path": "08-visa-immigration/handbook/06-trainee-labor.md",
+      "keywords": [
+        "签证与移民",
+        "一、制度背景",
+        "二、施行时间线（已确认）",
+        "三、核心机制",
+        "四、对本案（司机路径）的影响",
+        "五、跟踪要点（记入 09-政策更新日志）",
+        "参考",
+        "关联"
+      ]
+    },
+    {
+      "topic": "08-visa-immigration",
+      "topic_name": "签证与移民",
+      "title": "07 永住与长期在留规划",
+      "path": "08-visa-immigration/handbook/07-permanent-residence.md",
+      "keywords": [
+        "签证与移民",
+        "一、永住许可原则要件",
+        "二、2024 年改正：永住取消制度（关键风险）",
+        "三、10 年时间线（从 1 号入境算起）",
+        "四、证据链归档清单（每年更新）",
+        "五、备选路径对比",
+        "六、行动清单（对应阶段 5）",
+        "参考",
+        "关联"
+      ]
+    },
+    {
+      "topic": "08-visa-immigration",
+      "topic_name": "签证与移民",
+      "title": "08 家属带同与家庭规划",
+      "path": "08-visa-immigration/handbook/08-family.md",
+      "keywords": [
+        "签证与移民",
+        "一、「家族滞在」在留资格要件",
+        "二、配偶者的资格外活动许可（周 28 小时上限）",
+        "三、子女带同时序与就学衔接（签证侧）",
+        "五、行动清单（对应阶段 5）",
+        "参考",
+        "关联"
+      ]
+    },
+    {
+      "topic": "08-visa-immigration",
+      "topic_name": "签证与移民",
+      "title": "09 政策更新日志",
+      "path": "08-visa-immigration/handbook/09-policy-log.md",
+      "keywords": [
+        "签证与移民",
+        "2026-11-12（验证运行：触发器与追踪表核对）",
+        "2026-11-11（第 2 次：待复核项核查）",
+        "2026-11-11（第 1 次动态更新·试跑）",
+        "2026-11-11（建档首次核对）",
+        "待跟踪清单",
+        "更新方法",
+        "关联"
+      ]
+    },
+    {
+      "topic": "09-politics-law",
+      "topic_name": "政治与法律",
+      "title": "日本政治与法规 · 知识手册导航",
+      "path": "09-politics-law/handbook/00-navigation.md",
+      "keywords": [
+        "政治与法律",
+        "09-politics-law 索引",
+        "文件一览",
+        "关联目录",
+        "使用约定",
+        "更新日志"
+      ]
+    },
+    {
+      "topic": "09-politics-law",
+      "topic_name": "政治与法律",
+      "title": "01 在留法规框架",
+      "path": "09-politics-law/handbook/01-immigration-law.md",
+      "keywords": [
+        "政治与法律",
+        "一、与本项目相关的法律栈",
+        "二、个人必须烂熟的条款（Top 5）",
+        "三、法规检索入口",
+        "关联"
+      ]
+    },
+    {
+      "topic": "09-politics-law",
+      "topic_name": "政治与法律",
+      "title": "02 政治动向与移民政策环境",
+      "path": "09-politics-law/handbook/02-politics-policy.md",
+      "keywords": [
+        "政治与法律",
+        "一、移民·外国人材政策的三条主线",
+        "二、政党与政策光谱（常识级速查）",
+        "三、地方自治体层面（与 12-regional 联动）",
+        "政党移民政策光谱（政策环境信号源）",
+        "外国人权利动向观察点",
+        "四、跟踪清单（每季度）",
+        "关联"
+      ]
+    },
+    {
+      "topic": "09-politics-law",
+      "topic_name": "政治与法律",
+      "title": "03 维权与合规工具箱",
+      "path": "09-politics-law/handbook/03-rights-compliance.md",
+      "keywords": [
+        "政治与法律",
+        "一、劳动纠纷自助阶梯",
+        "二、在留问题咨询",
+        "三、证据留存规则（与永住证据链共用）",
+        "四、紧急情况速查",
+        "关联"
+      ]
+    },
+    {
+      "topic": "10-education-qualification",
+      "topic_name": "教育与资格",
+      "title": "日本资格与教育投资 · 知识手册导航",
+      "path": "10-education-qualification/handbook/00-navigation.md",
+      "keywords": [
+        "教育与资格",
+        "10-education-qualification 索引",
+        "文件一览",
+        "关联目录",
+        "使用约定",
+        "更新日志"
+      ]
+    },
+    {
+      "topic": "10-education-qualification",
+      "topic_name": "教育与资格",
+      "title": "01 资格地图",
+      "path": "10-education-qualification/handbook/01-qualification-map.md",
+      "keywords": [
+        "教育与资格",
+        "一、必备资格（主线）",
+        "二、加分资格（按需）",
+        "三、远期资格（阶段 4–5）",
+        "四、规则",
+        "关联"
+      ]
+    },
+    {
+      "topic": "10-education-qualification",
+      "topic_name": "教育与资格",
+      "title": "02 学习体系与教育投资",
+      "path": "10-education-qualification/handbook/02-learning-investment.md",
+      "keywords": [
+        "教育与资格",
+        "一、语言账户（→ 11-日语学习）",
+        "二、资格账户（→ 01-资格地图）",
+        "三、学历账户（可选，非必需）",
+        "四、学习资源公共包",
+        "五、年度教育预算模板",
+        "关联"
+      ]
+    },
+    {
+      "topic": "10-education-qualification",
+      "topic_name": "教育与资格",
+      "title": "03 日本学校教育体系与子女教育",
+      "path": "10-education-qualification/handbook/03-school-education.md",
+      "keywords": [
+        "教育与资格",
+        "一、学制全景（学校教育法框架）",
+        "三、外国人子女就学手续（自治体联动）",
+        "四、日本語指导体制现状",
+        "五、教育成本结构与就学援助",
+        "六、子女来日时点选择（推断，个案判断）",
+        "关联"
+      ]
+    },
+    {
+      "topic": "10-education-qualification",
+      "topic_name": "教育与资格",
+      "title": "04 高等教育与技人国学历路径",
+      "path": "10-education-qualification/handbook/04-higher-education.md",
+      "keywords": [
+        "教育与资格",
+        "一、高等教育体系定位",
+        "二、社会人入学与大学编入制度",
+        "三、通信制大学：在职取得学历的可行性",
+        "四、核心对比：大学毕业 vs 10 年实务经验（技人国路线）",
+        "五、行动要点",
+        "六、常见误区",
+        "关联"
+      ]
+    },
+    {
+      "topic": "11-language-japanese",
+      "topic_name": "日语语言",
+      "title": "日本日语学习 · 知识手册导航",
+      "path": "11-language-japanese/handbook/00-navigation.md",
+      "keywords": [
+        "日语语言",
+        "11-language-japanese 索引",
+        "文件一览",
+        "关联目录",
+        "使用约定",
+        "更新日志"
+      ]
+    },
+    {
+      "topic": "11-language-japanese",
+      "topic_name": "日语语言",
+      "title": "01 总体学习路线与考试选择",
+      "path": "11-language-japanese/handbook/01-learning-roadmap.md",
+      "keywords": [
+        "日语语言",
+        "一、目标矩阵（与路线图对齐）",
+        "二、关键结论：考试怎么选",
+        "三、JLPT 日程与报名（中国大陆）",
+        "四、各级别考试概要",
+        "五、学习量估算（零基础起）",
+        "六、总时间线",
+        "七、分计划文件",
+        "关联"
+      ]
+    },
+    {
+      "topic": "11-language-japanese",
+      "topic_name": "日语语言",
+      "title": "02 N4备考计划",
+      "path": "11-language-japanese/handbook/02-n4-plan.md",
+      "keywords": [
+        "日语语言",
+        "一、目标拆解",
+        "二、四阶段计划（约 33 周）",
+        "三、每周节奏模板",
+        "四、合格判定自测线",
+        "五、JFT-Basic 备用方案",
+        "六、并行提醒",
+        "关联"
+      ]
+    },
+    {
+      "topic": "11-language-japanese",
+      "topic_name": "日语语言",
+      "title": "03 N3备考计划",
+      "path": "11-language-japanese/handbook/03-n3-plan.md",
+      "keywords": [
+        "日语语言",
+        "一、为什么 N3 是职业关键级",
+        "二、时间方案",
+        "三、内容拆解",
+        "四、五阶段计划（以稳妥 48 周为例）",
+        "五、职场日语同步包（与阶段 2 对齐）",
+        "六、自测线与失败预案",
+        "七、下一关",
+        "关联"
+      ]
+    },
+    {
+      "topic": "11-language-japanese",
+      "topic_name": "日语语言",
+      "title": "04 N2备考计划",
+      "path": "11-language-japanese/handbook/04-n2-plan.md",
+      "keywords": [
+        "日语语言",
+        "一、N2 的职业意义",
+        "二、时间方案",
+        "三、内容拆解",
+        "五、管理岗日语同步包（与阶段 3 对齐）",
+        "六、自测线与风险",
+        "七、N2 之后",
+        "关联"
+      ]
+    },
+    {
+      "topic": "11-language-japanese",
+      "topic_name": "日语语言",
+      "title": "05 资源与工具清单",
+      "path": "11-language-japanese/handbook/05-resources.md",
+      "keywords": [
+        "日语语言",
+        "一、主线教材（三选一体系）",
+        "二、官方免费资源（优先级最高）",
+        "三、应试书（每级一套即可）",
+        "四、App 与工具",
+        "五、应试信息入口",
+        "六、采购建议",
+        "关联"
+      ]
+    },
+    {
+      "topic": "11-language-japanese",
+      "topic_name": "日语语言",
+      "title": "06 学习进度跟踪",
+      "path": "11-language-japanese/handbook/06-progress.md",
+      "keywords": [
+        "日语语言",
+        "一、里程碑看板",
+        "二、周记录表（滚动追加）",
+        "三、模考记录",
+        "四、月度复盘问题（每月最后一个周日回答）",
+        "五、报名与证件提醒",
+        "关联"
+      ]
+    },
+    {
+      "topic": "12-culture-life",
+      "topic_name": "文化与生活",
+      "title": "文化与生活 · 知识手册导航",
+      "path": "12-culture-life/handbook/00-navigation.md",
+      "keywords": [
+        "文化与生活",
+        "12-culture-life 索引",
+        "文件一览",
+        "关联目录",
+        "使用约定",
+        "更新日志"
+      ]
+    },
+    {
+      "topic": "12-culture-life",
+      "topic_name": "文化与生活",
+      "title": "01 职场文化与人际",
+      "path": "12-culture-life/handbook/01-workplace-culture.md",
+      "keywords": [
+        "文化与生活",
+        "一、司机现场的三大文化规则",
+        "二、上下关系与沟通",
+        "三、评价体系（日本人怎么看工作）",
+        "四、跨文化生存策略"
+      ]
+    },
+    {
+      "topic": "12-culture-life",
+      "topic_name": "文化与生活",
+      "title": "02 生活指南与适应",
+      "path": "12-culture-life/handbook/02-living-guide.md",
+      "keywords": [
+        "文化与生活",
+        "一、行政手续（落地 2 周内）",
+        "二、生活基础设施",
+        "三、金钱与安全习惯",
+        "四、心理健康与社群",
+        "五、饮食与自我照顾",
+        "六、防灾与应急"
+      ]
+    },
+    {
+      "topic": "12-culture-life",
+      "topic_name": "文化与生活",
+      "title": "03 医疗与健康",
+      "path": "12-culture-life/handbook/03-medical-health.md",
+      "keywords": [
+        "文化与生活",
+        "一、医疗保险的两条轨道",
+        "二、就医全流程",
+        "三、体检与预防（司机岗位特化）",
+        "四、劳灾保险与工伤（与职业安全直接衔接）",
+        "五、心理健康资源",
+        "六、医疗日语最小集（N4 可用）",
+        "关联"
+      ]
+    },
+    {
+      "topic": "12-culture-life",
+      "topic_name": "文化与生活",
+      "title": "04 住房与安家",
+      "path": "12-culture-life/handbook/04-housing.md",
+      "keywords": [
+        "文化与生活",
+        "一、租房流程与初期费用",
+        "二、保证会社与外国人入住障碍",
+        "三、公营选项：UR 賃貸住宅",
+        "四、签约时序与水电煤网开通",
+        "五、退去与敷金清算"
+      ]
+    },
+    {
+      "topic": "12-culture-life",
+      "topic_name": "文化与生活",
+      "title": "05 社会融入与社群",
+      "path": "12-culture-life/handbook/05-community.md",
+      "keywords": [
+        "文化与生活",
+        "一、外国人支援体系",
+        "二、多文化共生施策",
+        "三、同乡会与志愿组织参与"
+      ]
+    },
+    {
+      "topic": "13-regional-info",
+      "topic_name": "地区信息",
+      "title": "日本地域信息 · 知识手册导航",
+      "path": "13-regional-info/handbook/00-navigation.md",
+      "keywords": [
+        "地区信息",
+        "13-regional-info 索引",
+        "文件一览",
+        "关联目录",
+        "使用约定",
+        "更新日志"
+      ]
+    },
+    {
+      "topic": "13-regional-info",
+      "topic_name": "地区信息",
+      "title": "01 地域选择框架",
+      "path": "13-regional-info/handbook/01-region-choice.md",
+      "keywords": [
+        "地区信息",
+        "一、评分框架（每地打分 1–5）",
+        "二、候选地域速览（待实地补充）",
+        "三、决策流程",
+        "地域间公共服务差异视角",
+        "关联"
+      ]
+    },
+    {
+      "topic": "13-regional-info",
+      "topic_name": "地区信息",
+      "title": "02 地域生活笔记",
+      "path": "13-regional-info/handbook/02-region-notes.md",
+      "keywords": [
+        "地区信息",
+        "一、定居地档案",
+        "二、生活发现（滚动追加）",
+        "三、防灾与安全",
+        "地域防灾情报渠道",
+        "四、季度观察",
+        "关联"
+      ]
+    }
+  ],
   "questions": [
     {
       "q": "去不去？值不值？",

@@ -212,6 +212,27 @@ class TestCovBuildHub(unittest.TestCase):
             self.assertEqual(len(idx["questions"]), 1)
             self.assertEqual(idx["questions"][0]["anchor"], "a")
 
+    def test_collect_search_index_includes_handbooks(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            _write(root / "01-demo" / "handbook" / "01-visa.md",
+                   "# 签证体系\n\n## 在留资格 [09-政策更新日志](09-policy-log.md)\n内容\n")
+            topics = [{"slug": "01-demo", "rs": "demo", "name": "演示",
+                       "type": "policy-analysis", "type_label": "政策法规解读型",
+                       "reports": []}]
+            with mock.patch.object(build_hub, "ROOT", root), \
+                    mock.patch.object(build_hub, "SEARCH_DIR", root / "search"), \
+                    mock.patch.object(build_hub, "KEYWORDS_PATH", root / "search" / "k.json"), \
+                    mock.patch.object(build_hub, "FIVEQ_PATH", root / "search" / "f.json"), \
+                    mock.patch.object(build_hub, "VOCAB_DATA", root / "vocab"):
+                idx = build_hub.collect_search_index(topics)
+            self.assertEqual(len(idx["handbooks"]), 1)
+            hb = idx["handbooks"][0]
+            self.assertEqual(hb["title"], "签证体系")
+            self.assertEqual(hb["path"], "01-demo/handbook/01-visa.md")
+            self.assertIn("在留资格", " ".join(hb["keywords"]))
+            self.assertNotIn("09-policy-log.md", " ".join(hb["keywords"]))
+
     def test_embed_json_escapes(self):
         out = build_hub.embed_json({"x": "</script><script>alert(1)</script>"})
         self.assertIn("\\u003c", out)
