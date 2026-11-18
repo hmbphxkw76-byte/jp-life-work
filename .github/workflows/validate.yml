@@ -122,6 +122,17 @@ jobs:
           fi
           echo "audit_preflight.py 退出码 ${code:-0}（0/2 放行，1 阻断）"
 
+      # 报告结构统一门禁（P0-9）：数据可靠性与局限 / 置信度标注 / 信息差与未核验清单 /
+      # 决策建议四类必需要素齐全，缺失即阻断。
+      - name: 报告必需要素结构校验（structure_check.py）
+        run: |
+          python engine/tools/structure_check.py || code=$?
+          if [ "${code:-0}" -eq 1 ]; then
+            echo "::error::报告必需要素结构校验存在缺失（置信度标注 / 信息差与未核验清单 / 决策建议 / 数据可靠性与局限），阻断合并"
+            exit 1
+          fi
+          echo "structure_check.py 退出码 ${code:-0}（2=仅告警不阻断）"
+
       # 新报告阻断级：期间 >= 2026-11 的报告 lint / 模板合规必须无错误项；
       # 历史报告由 --new-only 跳过，遗留项列入 lint-whitelist.json 豁免。
       - name: 报告内容 lint（新报告阻断）

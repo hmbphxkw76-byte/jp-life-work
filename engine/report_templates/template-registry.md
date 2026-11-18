@@ -17,6 +17,7 @@ report_templates/
 ├── compliance-rules.json         # 合规校验规则（12 类结构骨架 × 周期，CI 阻断式校验关卡依据）
 ├── fact-card-standard.md         # 事实卡片标准（五字段 / [@FC-NNN] 指针 / 跨报告重复率）
 ├── l5-semantic-review.md         # L5 语义复核提示词（审计 L5 六项清单）
+├── confidence-grade-standard.md  # 置信度分级标准（来源 S/A/B/C × 时效 新/中/旧 × 核验 → 两位分级码，P0-9 报告必需要素口径）
 ├── market-monitoring/            # 类型一：市场指标监测型
 │   ├── prompt-baseline-setup-template.md
 │   ├── prompt-monthly-monitor-template.md
@@ -180,3 +181,4 @@ report_templates/
 | v1.28 | 2026-11-17 | 脚手架正文指针化 | 11 份 `business-prompt-scaffold.md` 的提示词正文统一收口到各类型 `prompts/` 泛用版母版（24 份），脚手架只保留实例化步骤 / business-config 清单 / 审计协议，消除「类型模板 / prompts/ / 脚手架」三处同步 |
 | v1.29 | 2026-11-17 | 交叉核查校准 | 校准 v1.5 泛用版计数（23→22）与 v1.27 主题目录数（20→21）；补齐根部活文档版本记录 |
 | v1.30 | 2026-11-18 | 取消周报节拍 | 移除 trend-weekly 类型目录与注册（13 类→12 类）；_common.py 删除 WEEKLY_RE 与 weekly 周期；compliance-rules.json 移除 weekly 骨架；update_planner 移除 prompt-weekly-monitor；report-classification 降为六族十二类 |
+| v1.31 | 2026-11-18 | P0-9 置信度分级通用化 | 新增根部 `confidence-grade-standard.md`（来源 S/A/B/C × 时效 新/中/旧 × 核验 已核验/部分核验/待核实 → 两位分级码）；`prompt-generic-base.md` 增「必需要素齐全」硬性约束与自检项；`engine/tools/structure_check.py` 提供报告必需要素结构门禁（数据可靠性与局限 / 置信度标注 / 信息差与未核验清单 / 决策建议），接入 validate.yml 与 audit_check L2（E9–E11）；21 份 2026-11 报告补齐必需要素章节 |

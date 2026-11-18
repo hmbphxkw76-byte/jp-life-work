@@ -199,7 +199,7 @@ reports/YYYY-MM-<slug>.md  ──md2html.py──►  reports/YYYY-MM-<slug>.htm
 - **辅助开关**：报告页工具条「隐藏更新标记」对照阅读、「展开全部删除」。
 - **呈现**：报告页新标签页独立打开，页脚提供「← 返回主题 / 返回首页」。
 
-## 六、测试体系（`engine/tests/`，874 项）
+## 六、测试体系（`engine/tests/`，881 项）
 
 | 场景 | 测试类 | 覆盖 |
 |---|---|---|
@@ -209,7 +209,7 @@ reports/YYYY-MM-<slug>.md  ──md2html.py──►  reports/YYYY-MM-<slug>.htm
 | 并行协作三层隔离 | `test_workflow_guard.py`（33 项） | 任务分支 / worktree、检出锁（占用 / 释放 / 强取 / 失效）、串行合并（happy / 冲突保留 / 校验阻断）、sync |
 | 推送双通道 failover | `test_git_push.py`（6 项） | ssh 主通道成功、失败切 https、两条都失败时恰好各试一次（不重试） |
 | 工作区标准化清理 | `test_cleanup.py`（19 项） | 残留识别与清理、`--check` / `--dry-run` 契约、日志作用域限定、已跟踪文件 / 目录保护、CI 接线契约（每工作流前置 + 收尾 `always`） |
-| 工具契约 | `test_tools.py`（214 项） | 命名解析（新 + 历史）、周期与任务推导、归档策略、lint / 合规、`build_hub` 归一化比对与死链校验、`link_check` 内链 / 外链采集、提示词七节结构守卫、活跃度天数、全主题契约、流程复用与三体系一致性、模板合规守卫（链接 / 命名 / 节数 / 周期） |
+| 工具契约 | `test_tools.py`（221 项） | 命名解析（新 + 历史）、周期与任务推导、归档策略、lint / 合规、`build_hub` 归一化比对与死链校验、`link_check` 内链 / 外链采集、提示词七节结构守卫、活跃度天数、全主题契约、流程复用与三体系一致性、模板合规守卫（链接 / 命名 / 节数 / 周期） |
 | 架构守卫 | `test_arch_guard.py`（8 项） | 测试数与本文档一致、类型注册三处一致、目录 / 命名规范守卫 |
 | 增量构建 | `test_incremental_build.py`（4 项） | 增量构建判定与缓存一致性 |
 | 流水线端到端 | `test_pipeline_e2e.py`（2 项） | 审计状态机端到端 |
@@ -228,7 +228,7 @@ reports/YYYY-MM-<slug>.md  ──md2html.py──►  reports/YYYY-MM-<slug>.htm
 | 报告生成一致性比对 | `test_verify_report_parity.py`（25 项） | 归一化（单遍路径重写 / 时间戳 / JSON 易变键）、基线写入与覆盖清空、比对（一致 / 仅路径 / MISMATCH / MISSING / NEW）、退出码 0/1/2 |
 | 引擎层迁移守卫 | `test_engine_migration.py`（16 项） | 目录终态（engine 存在 / 旧引擎层与根协作脚本目录不存在）、SKIP_TOP / TYPE_RE、主题数 21、深度推导 ROOT、旧路径与代码常量活引用清零、裸 tools 目录引用与旧模块路径 `src.<包>` 清零 |
 
-> 合计 874 项（`python -m unittest discover -s engine/tests`，当前全绿）。
+> 合计 881 项（`python -m unittest discover -s engine/tests`，当前全绿）。
 
 ## 七、手动命令速查
 
@@ -447,3 +447,4 @@ python engine/scripts/cleanup_workspace.py --dry-run  # 预览将删除项
 | v2.5 | 2026-11-17 | 引擎层迁移缺口收口 | 修复二次确认列出的 7 处旧路径文本残留（`TOOLCHAIN-DEV-SPEC` 适用范围 / 覆盖率范围、`review_gate` 与 `cleanup_workspace` docstring、`test_cov_pipeline` 运行命令、mainline 评估报告、代码冗余清理报告）；迁移守卫扩展「裸 tools 目录引用」与「旧模块路径 `src.<包>`」两项扫描（14 → 16 项）；六节测试数 861 → 863 |
 | v2.6 | 2026-11-17 | 迁移后治理 | 头部版本号与版本记录对齐；补 docs 索引与 toolchain 子目录索引；工具链类型注解补全（mypy 37 → 0）；删除 2 份无入链一次性留痕文档；新增迁移后治理双轴评审 |
 | v2.7 | 2026-11-18 | 测试计数同步 | 测试数与实测对齐（863 → 868）；同步 `docs/README.md`、`docs/cross-domain-expert-roles.md`、`engine/tools/README.md` 当前计数 |
+| v2.8 | 2026-11-18 | P0-9 报告必需要素门禁 | 新增 `structure_check.py`（报告必需要素结构校验）与 `TestStructureCheck`（6 项）、`audit_check` E9–E11 用例（1 项）；`validate.yml` 增结构校验步骤；六节测试数 874 → 881 |
