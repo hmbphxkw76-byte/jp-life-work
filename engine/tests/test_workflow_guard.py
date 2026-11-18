@@ -427,6 +427,10 @@ class TestPureFunctions(unittest.TestCase):
             repo = make_repo(Path(tmp))
             self.assertEqual(wg.default_base(repo.path), "origin/main")
 
+    def test_lock_scopes_cover_commit_and_push(self):
+        # P2-5：并行锁覆盖 checkout / merge / commit / push，共享检出无裸写。
+        self.assertEqual(set(wg.SCOPES), {"checkout", "merge", "commit", "push"})
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -198,7 +198,8 @@ def start_period(months: int, now: str | None = None) -> str:
 def keep_periods(periods: list[str], keep_months: int, now: str | None = None) -> tuple[list[str], list[str]]:
     """按保留窗口切分 -> (保留期列表, 应归档期列表)。periods 需可解析为 YYYY-MM。"""
     start = start_period(keep_months, now)
-    keep, archive = [], []
+    keep: list[str] = []
+    archive: list[str] = []
     for p in periods:
         (keep if p >= start else archive).append(p)
     return keep, archive

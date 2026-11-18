@@ -17,6 +17,8 @@ engine/vocabulary/data/topic-backups/
 
 # 运行日志（工具写入，不入库；由 engine/scripts/cleanup_workspace.py 统一清理）
 engine/vocabulary/data/*.log
+# 近义扫描报告（vocab_near_check.py 生成，可再生，不入库）
+engine/vocabulary/data/near-dup-report.json
 # AutoVerify 运行日志（auto_verify.py 每次验证写入，含运行时刻，不入库）
 engine/report-audits/audit/verify/
 # 落盘前自检报告（audit_preflight.py --all 生成，可再生，不入库）
@@ -29,6 +31,8 @@ engine/report-audits/audit/decision-metrics.json
 engine/report-audits/audit/decision-metrics.md
 # 来源条目 schema 索引（source_check.py 生成，可再生，不入库）
 engine/report-audits/audit/source-index.json
+# 反例扫描清单（counterexample_scan.py 生成，可再生，不入库）
+engine/report-audits/audit/counterexample-report.json
 
 # 测试 / 静态检查缓存（可再生；由 engine/scripts/cleanup_workspace.py 统一清理）
 .pytest_cache/

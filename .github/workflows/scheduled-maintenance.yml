@@ -91,6 +91,16 @@ jobs:
       - name: 刷新事实卡片校验报告（fact_card_check.py --write）
         run: python engine/tools/fact_card_check.py --write
 
+      # 决策度量历史快照（P2-2）：追加一条指标序列，供跨月趋势对比。
+      - name: 追加决策度量快照（decision_metrics.py --history）
+        run: python engine/tools/decision_metrics.py --history
+
+      # 质量报告刷新（不入库，供人工查阅）：L5 证据元评估 / 反例扫描。
+      - name: 刷新 L5 证据元评估（l5_meta_check.py）
+        run: python engine/tools/l5_meta_check.py
+      - name: 刷新反例扫描清单（counterexample_scan.py）
+        run: python engine/tools/counterexample_scan.py
+
       - name: 审计失效同步（audit_pipeline.py --sync）
         run: python engine/tools/audit_pipeline.py --sync
 

@@ -178,6 +178,17 @@ jobs:
           fi
           echo "source_check.py 退出码 $code（2=条目时点/分级缺失，仅告警）"
 
+      # 反例扫描（P2-1）：绝对化 / 以偏概全 / 无来源断言候选，仅供人工裁定。
+      - name: 反例扫描（counterexample_scan.py）
+        run: |
+          python engine/tools/counterexample_scan.py || code=$?
+          code=${code:-0}
+          if [ "$code" -ne 0 ] && [ "$code" -ne 2 ]; then
+            echo "::error::反例扫描失败（退出码 $code）"
+            exit 1
+          fi
+          echo "counterexample_scan.py 退出码 $code（2=存在反例候选，仅告警）"
+
       # 新报告阻断级：期间 >= 2026-11 的报告 lint / 模板合规必须无错误项；
       # 历史报告由 --new-only 跳过，遗留项列入 lint-whitelist.json 豁免。
       - name: 报告内容 lint（新报告阻断）
@@ -258,6 +269,7 @@ jobs:
           python engine/vocabulary/script/vocab_tool.py topic-check; c1=$?
           python engine/vocabulary/script/vocab_tool.py verify; c2=$?
           python engine/vocabulary/script/sync_vocab.py check; c3=$?
+          python engine/vocabulary/script/vocab_near_check.py; c4=$?
           set -e
           # topic-check / verify：0/2 放行，1 阻断；sync check：存在待同步变更（2）也阻断
           for c in "$c1" "$c2"; do
@@ -270,18 +282,41 @@ jobs:
             echo "::error::词汇同步区间待更新（退出码 $c3）：运行 engine/vocabulary/script/sync_vocab.py sync 后提交"
             exit 1
           fi
-          echo "词库校验通过（topic-check=$c1 verify=$c2 sync-check=$c3；2=仅警告不阻断）"
+          # 近义扫描：0=无疑似；2=有疑似（告警，需人工裁定）；1=扫描失败（阻断）
+          if [ "$c4" -ne 0 ] && [ "$c4" -ne 2 ]; then
+            echo "::error::近义扫描失败（退出码 $c4）"
+            exit 1
+          fi
+          echo "词库校验通过（topic-check=$c1 verify=$c2 sync-check=$c3 near=$c4；2=仅警告不阻断）"
 
-      # 静态检查（架构优化方向 E / ARCH-OPT）：warning 起步，不阻断存量
+      # 静态检查（架构优化方向 E / ARCH-OPT）：ruff warning 起步不阻断；
+      # mypy 已清零存量（P2-4 收紧为阻断门禁）。
       - name: 安装开发依赖（ruff / mypy）
         run: pip install -r requirements-dev.txt
-        continue-on-error: true
-      - name: ruff 静态检查（warning 起步）
+      - name: ruff 静态检查（warning 起步，不阻断）
         run: python -m ruff check engine
         continue-on-error: true
-      - name: mypy 静态检查（渐进式）
+      - name: mypy 静态检查（阻断）
         run: python -m mypy engine/tools engine/vocabulary/script
-        continue-on-error: true
+
+      # 一次性工具 CI 冒烟（P2-4）：验证入口可加载、退出码 0，防止静默退化。
+      - name: 一次性工具冒烟
+        run: |
+          set +e
+          fail=0
+          for t in \
+            engine/tools/migrate_monthly_reports.py \
+            engine/tools/skeleton_builder.py \
+            engine/tools/incremental_build.py \
+            engine/scripts/run_tests_parallel.py \
+            engine/scripts/branch_naming.py \
+            engine/scripts/git_push.py \
+            engine/scripts/cleanup_workspace.py \
+            engine/scripts/workflow_guard.py; do
+            python "$t" --help >/dev/null 2>&1 || { echo "::error::$t 冒烟失败（--help 退出码非 0）"; fail=1; }
+          done
+          if [ "$fail" -ne 0 ]; then exit 1; fi
+          echo "一次性工具冒烟通过（8 项）"
 
       # 阶段收尾：无论成败清理缓存、临时产物与 pip 缓存，保证流水线结束后无残留。
       - uses: ./.github/actions/workspace-cleanup
