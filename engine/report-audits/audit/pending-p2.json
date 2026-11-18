@@ -1,18 +1,8 @@
 {
   "version": "1.0",
   "updated": "2026-11-18",
-  "count": 233,
+  "count": 212,
   "items": [
-    {
-      "report": "00-decision-hub/reports/2026-11-decision-hub.md",
-      "code": "L1-SKELETON",
-      "location": "类型骨架",
-      "detail": "[employment-research/monthly] h2 节数 11 超出模板骨架 9 节（如为业务固化锚请人工确认，否则须对齐类型模板 prompt-update-template.md）",
-      "spec": "S-11",
-      "first_seen": "2026-11-18",
-      "last_seen": "2026-11-18",
-      "review_by": "2026-12-18"
-    },
     {
       "report": "00-decision-hub/reports/2026-11-decision-hub.md",
       "code": "C-03",
@@ -215,16 +205,6 @@
     },
     {
       "report": "01-ssw-driver/reports/2026-11-ssw-driver.md",
-      "code": "L1-SKELETON",
-      "location": "类型骨架",
-      "detail": "[employment-research/monthly] h2 节数 12 超出模板骨架 9 节（如为业务固化锚请人工确认，否则须对齐类型模板 prompt-update-template.md）",
-      "spec": "S-11",
-      "first_seen": "2026-11-18",
-      "last_seen": "2026-11-18",
-      "review_by": "2026-12-18"
-    },
-    {
-      "report": "01-ssw-driver/reports/2026-11-ssw-driver.md",
       "code": "C-03",
       "location": "跨文档重复",
       "detail": "约 1122 字的段落与 02-career-driver/reports/2026-11-career-driver.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
@@ -415,16 +395,6 @@
     },
     {
       "report": "02-career-driver/reports/2026-11-career-driver.md",
-      "code": "L1-SKELETON",
-      "location": "类型骨架",
-      "detail": "[employment-research/monthly] h2 节数 12 超出模板骨架 9 节（如为业务固化锚请人工确认，否则须对齐类型模板 prompt-update-template.md）",
-      "spec": "S-11",
-      "first_seen": "2026-11-18",
-      "last_seen": "2026-11-18",
-      "review_by": "2026-12-18"
-    },
-    {
-      "report": "02-career-driver/reports/2026-11-career-driver.md",
       "code": "C-03",
       "location": "跨文档重复",
       "detail": "约 225 字的段落与 03-career-management/reports/2026-11-career-management.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
@@ -605,16 +575,6 @@
     },
     {
       "report": "03-career-management/reports/2026-11-career-management.md",
-      "code": "L1-SKELETON",
-      "location": "类型骨架",
-      "detail": "[employment-research/monthly] h2 节数 12 超出模板骨架 9 节（如为业务固化锚请人工确认，否则须对齐类型模板 prompt-update-template.md）",
-      "spec": "S-11",
-      "first_seen": "2026-11-17",
-      "last_seen": "2026-11-18",
-      "review_by": "2026-12-17"
-    },
-    {
-      "report": "03-career-management/reports/2026-11-career-management.md",
       "code": "C-03",
       "location": "跨文档重复",
       "detail": "约 229 字的段落与 04-industry-logistics/reports/2026-11-industry-logistics.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
@@ -785,16 +745,6 @@
     },
     {
       "report": "04-industry-logistics/reports/2026-11-industry-logistics.md",
-      "code": "L1-SKELETON",
-      "location": "类型骨架",
-      "detail": "[industry-research/monthly] h2 节数 13 超出模板骨架 9 节（如为业务固化锚请人工确认，否则须对齐类型模板 prompt-annual-refresh-template.md）",
-      "spec": "S-11",
-      "first_seen": "2026-11-18",
-      "last_seen": "2026-11-18",
-      "review_by": "2026-12-18"
-    },
-    {
-      "report": "04-industry-logistics/reports/2026-11-industry-logistics.md",
       "code": "C-03",
       "location": "跨文档重复",
       "detail": "约 140 字的段落与 05-industry-autonomous/reports/2026-11-industry-autonomous.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
@@ -955,16 +905,6 @@
     },
     {
       "report": "05-industry-autonomous/reports/2026-11-industry-autonomous.md",
-      "code": "L1-SKELETON",
-      "location": "类型骨架",
-      "detail": "[industry-research/monthly] h2 节数 13 超出模板骨架 9 节（如为业务固化锚请人工确认，否则须对齐类型模板 prompt-annual-refresh-template.md）",
-      "spec": "S-11",
-      "first_seen": "2026-11-18",
-      "last_seen": "2026-11-18",
-      "review_by": "2026-12-18"
-    },
-    {
-      "report": "05-industry-autonomous/reports/2026-11-industry-autonomous.md",
       "code": "C-03",
       "location": "跨文档重复",
       "detail": "约 141 字的段落与 06-industry-technology/reports/2026-11-industry-technology.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
@@ -1115,16 +1055,6 @@
     },
     {
       "report": "06-industry-technology/reports/2026-11-industry-technology.md",
-      "code": "L1-SKELETON",
-      "location": "类型骨架",
-      "detail": "[industry-research/monthly] h2 节数 13 超出模板骨架 9 节（如为业务固化锚请人工确认，否则须对齐类型模板 prompt-annual-refresh-template.md）",
-      "spec": "S-11",
-      "first_seen": "2026-11-18",
-      "last_seen": "2026-11-18",
-      "review_by": "2026-12-18"
-    },
-    {
-      "report": "06-industry-technology/reports/2026-11-industry-technology.md",
       "code": "C-03",
       "location": "跨文档重复",
       "detail": "约 227 字的段落与 07-economy-finance/reports/2026-11-economy-finance.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
@@ -1265,16 +1195,6 @@
     },
     {
       "report": "07-economy-finance/reports/2026-11-economy-finance.md",
-      "code": "L1-SKELETON",
-      "location": "类型骨架",
-      "detail": "[employment-research/monthly] h2 节数 12 超出模板骨架 9 节（如为业务固化锚请人工确认，否则须对齐类型模板 prompt-update-template.md）",
-      "spec": "S-11",
-      "first_seen": "2026-11-18",
-      "last_seen": "2026-11-18",
-      "review_by": "2026-12-18"
-    },
-    {
-      "report": "07-economy-finance/reports/2026-11-economy-finance.md",
       "code": "C-03",
       "location": "跨文档重复",
       "detail": "约 175 字的段落与 10-education-qualification/reports/2026-11-education-qualification.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
@@ -1402,16 +1322,6 @@
       "first_seen": "2026-11-15",
       "last_seen": "2026-11-18",
       "review_by": "2026-12-15"
-    },
-    {
-      "report": "08-visa-immigration/reports/2026-11-visa-immigration.md",
-      "code": "L1-SKELETON",
-      "location": "类型骨架",
-      "detail": "[policy-analysis/monthly] h2 节数 12 超出模板骨架 9 节（如为业务固化锚请人工确认，否则须对齐类型模板 prompt-policy-review-template.md）",
-      "spec": "S-11",
-      "first_seen": "2026-11-18",
-      "last_seen": "2026-11-18",
-      "review_by": "2026-12-18"
     },
     {
       "report": "08-visa-immigration/reports/2026-11-visa-immigration.md",
@@ -1555,16 +1465,6 @@
     },
     {
       "report": "09-politics-law/reports/2026-11-politics-law.md",
-      "code": "L1-SKELETON",
-      "location": "类型骨架",
-      "detail": "[policy-analysis/monthly] h2 节数 12 超出模板骨架 9 节（如为业务固化锚请人工确认，否则须对齐类型模板 prompt-policy-review-template.md）",
-      "spec": "S-11",
-      "first_seen": "2026-11-18",
-      "last_seen": "2026-11-18",
-      "review_by": "2026-12-18"
-    },
-    {
-      "report": "09-politics-law/reports/2026-11-politics-law.md",
       "code": "C-03",
       "location": "跨文档重复",
       "detail": "约 224 字的段落与 10-education-qualification/reports/2026-11-education-qualification.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
@@ -1675,16 +1575,6 @@
     },
     {
       "report": "10-education-qualification/reports/2026-11-education-qualification.md",
-      "code": "L1-SKELETON",
-      "location": "类型骨架",
-      "detail": "[employment-research/monthly] h2 节数 12 超出模板骨架 9 节（如为业务固化锚请人工确认，否则须对齐类型模板 prompt-update-template.md）",
-      "spec": "S-11",
-      "first_seen": "2026-11-18",
-      "last_seen": "2026-11-18",
-      "review_by": "2026-12-18"
-    },
-    {
-      "report": "10-education-qualification/reports/2026-11-education-qualification.md",
       "code": "C-03",
       "location": "跨文档重复",
       "detail": "约 229 字的段落与 11-language-japanese/reports/2026-11-language-japanese.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
@@ -1785,16 +1675,6 @@
     },
     {
       "report": "11-language-japanese/reports/2026-11-language-japanese.md",
-      "code": "L1-SKELETON",
-      "location": "类型骨架",
-      "detail": "[employment-research/monthly] h2 节数 12 超出模板骨架 9 节（如为业务固化锚请人工确认，否则须对齐类型模板 prompt-update-template.md）",
-      "spec": "S-11",
-      "first_seen": "2026-11-18",
-      "last_seen": "2026-11-18",
-      "review_by": "2026-12-18"
-    },
-    {
-      "report": "11-language-japanese/reports/2026-11-language-japanese.md",
       "code": "C-03",
       "location": "跨文档重复",
       "detail": "约 189 字的段落与 12-culture-life/reports/2026-11-culture-life.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
@@ -1885,16 +1765,6 @@
     },
     {
       "report": "12-culture-life/reports/2026-11-culture-life.md",
-      "code": "L1-SKELETON",
-      "location": "类型骨架",
-      "detail": "[employment-research/monthly] h2 节数 12 超出模板骨架 9 节（如为业务固化锚请人工确认，否则须对齐类型模板 prompt-update-template.md）",
-      "spec": "S-11",
-      "first_seen": "2026-11-18",
-      "last_seen": "2026-11-18",
-      "review_by": "2026-12-18"
-    },
-    {
-      "report": "12-culture-life/reports/2026-11-culture-life.md",
       "code": "C-03",
       "location": "跨文档重复",
       "detail": "约 229 字的段落与 14-life-operations/reports/2026-11-life-operations.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
@@ -1975,16 +1845,6 @@
     },
     {
       "report": "13-regional-info/reports/2026-11-regional-info.md",
-      "code": "L1-SKELETON",
-      "location": "类型骨架",
-      "detail": "[market-monitoring/monthly] h2 节数 11 超出模板骨架 8 节（如为业务固化锚请人工确认，否则须对齐类型模板 prompt-monthly-monitor-template.md）",
-      "spec": "S-11",
-      "first_seen": "2026-11-18",
-      "last_seen": "2026-11-18",
-      "review_by": "2026-12-18"
-    },
-    {
-      "report": "13-regional-info/reports/2026-11-regional-info.md",
       "code": "C-03",
       "location": "跨文档重复",
       "detail": "约 224 字的段落与 14-life-operations/reports/2026-11-life-operations.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
@@ -2055,16 +1915,6 @@
     },
     {
       "report": "14-life-operations/reports/2026-11-life-operations.md",
-      "code": "L1-SKELETON",
-      "location": "类型骨架",
-      "detail": "[employment-research/monthly] h2 节数 12 超出模板骨架 9 节（如为业务固化锚请人工确认，否则须对齐类型模板 prompt-update-template.md）",
-      "spec": "S-11",
-      "first_seen": "2026-11-18",
-      "last_seen": "2026-11-18",
-      "review_by": "2026-12-18"
-    },
-    {
-      "report": "14-life-operations/reports/2026-11-life-operations.md",
       "code": "C-03",
       "location": "跨文档重复",
       "detail": "约 165 字的段落与 17-migration-compliance/reports/2026-11-migration-compliance.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
@@ -2125,16 +1975,6 @@
     },
     {
       "report": "15-health-wellbeing/reports/2026-11-health-wellbeing.md",
-      "code": "L1-SKELETON",
-      "location": "类型骨架",
-      "detail": "[employment-research/monthly] h2 节数 12 超出模板骨架 9 节（如为业务固化锚请人工确认，否则须对齐类型模板 prompt-update-template.md）",
-      "spec": "S-11",
-      "first_seen": "2026-11-18",
-      "last_seen": "2026-11-18",
-      "review_by": "2026-12-18"
-    },
-    {
-      "report": "15-health-wellbeing/reports/2026-11-health-wellbeing.md",
       "code": "C-03",
       "location": "跨文档重复",
       "detail": "约 227 字的段落与 16-exit-transition-return/reports/2026-11-exit-transition-return.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
@@ -2185,16 +2025,6 @@
     },
     {
       "report": "16-exit-transition-return/reports/2026-11-exit-transition-return.md",
-      "code": "L1-SKELETON",
-      "location": "类型骨架",
-      "detail": "[policy-analysis/monthly] h2 节数 12 超出模板骨架 9 节（如为业务固化锚请人工确认，否则须对齐类型模板 prompt-policy-review-template.md）",
-      "spec": "S-11",
-      "first_seen": "2026-11-18",
-      "last_seen": "2026-11-18",
-      "review_by": "2026-12-18"
-    },
-    {
-      "report": "16-exit-transition-return/reports/2026-11-exit-transition-return.md",
       "code": "C-03",
       "location": "跨文档重复",
       "detail": "约 204 字的段落与 20-overseas-china/reports/2026-11-overseas-china.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
@@ -2235,16 +2065,6 @@
     },
     {
       "report": "17-migration-compliance/reports/2026-11-migration-compliance.md",
-      "code": "L1-SKELETON",
-      "location": "类型骨架",
-      "detail": "[employment-research/monthly] h2 节数 12 超出模板骨架 9 节（如为业务固化锚请人工确认，否则须对齐类型模板 prompt-update-template.md）",
-      "spec": "S-11",
-      "first_seen": "2026-11-18",
-      "last_seen": "2026-11-18",
-      "review_by": "2026-12-18"
-    },
-    {
-      "report": "17-migration-compliance/reports/2026-11-migration-compliance.md",
       "code": "C-03",
       "location": "跨文档重复",
       "detail": "约 227 字的段落与 18-family-parenting/reports/2026-11-family-parenting.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
@@ -2275,16 +2095,6 @@
     },
     {
       "report": "18-family-parenting/reports/2026-11-family-parenting.md",
-      "code": "L1-SKELETON",
-      "location": "类型骨架",
-      "detail": "[employment-research/monthly] h2 节数 12 超出模板骨架 9 节（如为业务固化锚请人工确认，否则须对齐类型模板 prompt-update-template.md）",
-      "spec": "S-11",
-      "first_seen": "2026-11-18",
-      "last_seen": "2026-11-18",
-      "review_by": "2026-12-18"
-    },
-    {
-      "report": "18-family-parenting/reports/2026-11-family-parenting.md",
       "code": "C-03",
       "location": "跨文档重复",
       "detail": "约 204 字的段落与 20-overseas-china/reports/2026-11-overseas-china.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
@@ -2305,16 +2115,6 @@
     },
     {
       "report": "19-safety-disaster/reports/2026-11-safety-disaster.md",
-      "code": "L1-SKELETON",
-      "location": "类型骨架",
-      "detail": "[market-monitoring/monthly] h2 节数 13 超出模板骨架 8 节（如为业务固化锚请人工确认，否则须对齐类型模板 prompt-monthly-monitor-template.md）",
-      "spec": "S-11",
-      "first_seen": "2026-11-15",
-      "last_seen": "2026-11-18",
-      "review_by": "2026-12-15"
-    },
-    {
-      "report": "19-safety-disaster/reports/2026-11-safety-disaster.md",
       "code": "C-03",
       "location": "跨文档重复",
       "detail": "约 225 字的段落与 20-overseas-china/reports/2026-11-overseas-china.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度）",
@@ -2322,16 +2122,6 @@
       "first_seen": "2026-11-17",
       "last_seen": "2026-11-18",
       "review_by": "2026-12-17"
-    },
-    {
-      "report": "20-overseas-china/reports/2026-11-overseas-china.md",
-      "code": "L1-SKELETON",
-      "location": "类型骨架",
-      "detail": "[policy-analysis/monthly] h2 节数 12 超出模板骨架 9 节（如为业务固化锚请人工确认，否则须对齐类型模板 prompt-policy-review-template.md）",
-      "spec": "S-11",
-      "first_seen": "2026-11-18",
-      "last_seen": "2026-11-18",
-      "review_by": "2026-12-18"
     }
   ]
 }

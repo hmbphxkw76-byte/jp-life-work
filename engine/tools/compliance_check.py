@@ -99,6 +99,28 @@ def cycle_rule(rules: dict, type_id: str, cycle: str):
     return r, r.get("inherited", False)
 
 
+def theme_of(rel: str) -> str | None:
+    """从报告相对路径取主题目录名（如 00-decision-hub/reports/x.md -> 00-decision-hub）。"""
+    parts = rel.split("/")
+    return parts[0] if len(parts) > 1 else None
+
+
+def resolve_rule(rules: dict, type_id: str, cycle: str, theme: str | None = None):
+    """查 (类型, 周期) 规则并应用主题覆盖（theme_overrides）。
+
+    期望 h2 节数口径：主题覆盖 ＞ 类型骨架 + 跨主题必选节（common.mandatory_sections，由 check_report 计算）。
+    返回 (rule_dict, inherited)；类型未注册返回 (None, False)。
+    """
+    rule, inherited = cycle_rule(rules, type_id, cycle)
+    if rule is None:
+        return None, False
+    override = (rules.get("theme_overrides") or {}).get(theme) if theme else None
+    if override is not None:
+        rule = dict(rule)
+        rule["expected"] = int(override)
+    return rule, inherited
+
+
 def strip_tags(s: str) -> str:
     return re.sub(r"<[^>]+>", "", s)
 
@@ -109,7 +131,9 @@ def check_report(text: str, rule: dict, common: dict) -> list[tuple[str, str]]:
     纯函数，供 tests/ 直接调用。rule = cycle_rule() 输出；common = 规则文件 common 节。
     """
     issues: list[tuple[str, str]] = []
-    expected = rule["sections"]
+    expected = rule.get("expected")
+    if expected is None:
+        expected = rule["sections"] + int(common.get("mandatory_sections", 0) or 0)
 
     # 结构完整性：h2 节数
     h2s = H2_RE.findall(text)
@@ -242,7 +266,7 @@ def run_check(only_file: str | None, new_only: bool = False,
                 lines.append(f"[W] {rel}: 报告类型未注册，跳过结构校验")
                 warnings += 1
             continue
-        rule, inherited = cycle_rule(rules, type_id, cycle or "baseline")
+        rule, inherited = resolve_rule(rules, type_id, cycle or "baseline", theme=rel.split("/")[0])
         if rule is None:
             lines.append(f"[W] {rel}: 类型 {type_id} 未在 compliance-rules.json 登记，跳过结构校验")
             warnings += 1
@@ -269,7 +293,7 @@ def run_audit(outdir: Path) -> tuple[int, int, int, Path]:
     for _rel, _text, type_id, cycle, note in targets:
         bad = bool(note) or not type_id
         if type_id and not bad:
-            rule, _ = cycle_rule(rules, type_id, cycle or "baseline")
+            rule, _ = resolve_rule(rules, type_id, cycle or "baseline", theme=_rel.split("/")[0])
             bad = bool(check_report(_text, rule, rules.get("common", {})))
         if bad:
             violated += 1

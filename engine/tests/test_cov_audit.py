@@ -79,7 +79,8 @@ GOOD_TEXT = """# 示例 · 2026-11 月度报告
 """
 
 
-def _good_html(sections: int = 9) -> str:
+def _good_html(sections: int = 12) -> str:
+    # 12 = 类型骨架 9 + 跨主题必选 3（置信度标注 / 信息差与未核验清单 / 自动验证结果）
     body = "".join(f'<h2 id="s{i}">第{i}节</h2>' for i in range(1, sections + 1))
     return (
         '<html><head><title>示例</title></head><body>'

@@ -449,6 +449,36 @@ class TestCovComplianceComplianceCheck(_TempRootCase):
                 "<a href=\"#s1\">一</a></nav><h2 id=\"s1\">一</h2><h2 id=\"s2\">二</h2></html>")
         self.assertEqual(compliance_check.check_report(text, rule, common), [])
 
+    # ── 跨主题必选节 / 主题覆盖（compliance-rules v1.7）──
+    def test_mandatory_sections_offset(self):
+        rule = {"sections": 2, "nav": True}
+        common = {"require_title": True, "anchor_check": False, "mandatory_sections": 3}
+
+        def html(n):
+            body = "".join(f'<h2 id="s{i}">第{i}节</h2>' for i in range(1, n + 1))
+            return f'<html><title>T</title><nav aria-label="报告导航"></nav>{body}</html>'
+
+        # 期望 = 骨架 2 + 必选 3 = 5
+        self.assertEqual(compliance_check.check_report(html(5), rule, common), [])
+        less = compliance_check.check_report(html(4), rule, common)
+        self.assertTrue(any(lvl == "E" and "结构不完整" in m for lvl, m in less))
+
+    def test_resolve_rule_theme_override(self):
+        rules = _rules_doc()
+        rules["theme_overrides"] = {"00-decision-hub": 5}
+        base, _ = compliance_check.resolve_rule(rules, "demo-type", "monthly")
+        self.assertNotIn("expected", base)   # 无覆盖 → 由 check_report 叠加必选节
+        over, _ = compliance_check.resolve_rule(
+            rules, "demo-type", "monthly", theme="00-decision-hub")
+        self.assertEqual(over.get("expected"), 5)
+        body = "".join(f'<h2 id="s{i}">第{i}节</h2>' for i in range(1, 6))
+        text = f'<html><title>T</title><nav aria-label="报告导航"></nav>{body}</html>'
+        self.assertEqual(compliance_check.check_report(text, over, rules["common"]), [])
+
+    def test_theme_of(self):
+        self.assertEqual(compliance_check.theme_of("00-decision-hub/reports/x.md"), "00-decision-hub")
+        self.assertIsNone(compliance_check.theme_of("x.md"))
+
     # ── type_of_business ──
     def test_type_of_business_missing_config(self):
         b = _common.Business("01-demo")

@@ -203,7 +203,8 @@ def check_text(rel: str, text: str, html: str = "", type_id: str = "",
                  "business-config 未引用 report_templates/<类型ID>/，无法校验骨架", "S-05")
         else:
             rules = compliance_check.load_rules()
-            rule, _ = compliance_check.cycle_rule(rules, type_id, "monthly")
+            rule, _ = compliance_check.resolve_rule(
+                rules, type_id, "monthly", theme=compliance_check.theme_of(rel))
             if rule is None:
                 _add(out, "PF-SKELETON", "P2", "类型骨架",
                      f"类型 {type_id} 未在 compliance-rules.json 登记", "S-05")

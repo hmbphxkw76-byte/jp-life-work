@@ -186,7 +186,7 @@ def check_structure(rel: str, md_path: Path, html_path: Path, type_id: str) -> l
                                 "business-config 未引用 report_templates/<类型ID>/，无法校验骨架", "S-05"))
         return out
     rules = compliance_check.load_rules()
-    rule, _ = compliance_check.cycle_rule(rules, type_id, "monthly")
+    rule, _ = compliance_check.resolve_rule(rules, type_id, "monthly", theme=rel.split("/")[0])
     if rule is None:
         out.append(AuditFinding("L1", "L1-TYPE", "P2", rel, "报告类型",
                                 f"类型 {type_id} 未在 compliance-rules.json 登记", "S-05"))
