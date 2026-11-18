@@ -31,6 +31,8 @@ jp-life-work：围绕日本生活与工作（签证 / 就业 / 行业 / 税制 /
   以用户**最后给出**的版本为准。
 - **无例外**：用户说「直接做 / 跳过确认」也不能跳过；说明该门禁为硬性规约后，仍需确认一次。
 - 模板、展示格式与边界情况见工作区 skill `prompt-polish-confirm`。
+- 可移植性（跨 IDE / 跨模型 / 跨机器）：见 `docs/输入门禁可移植性方案.md`；
+  新机器 `git clone` 后运行 `python engine/scripts/bootstrap_gate.py --install` 完成部署与自检。
 
 ## 硬性规约：并行会话三层隔离（必须遵守）
 
