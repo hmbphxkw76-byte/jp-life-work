@@ -2,7 +2,7 @@
 
 > **免责声明**：本报告为信息整理与条件化建议，不构成法律意见或税务意见；重大决策请咨询执业法律 / 税务专业人士。
 
-> **已审计** ✅ 审计编号 `AUD-202611-011`｜终审通过：2026-11-18｜内容指纹 `8238de2e915e5716606`｜依据《审计报告标准化管理体系》v1.4
+> **已审计** ✅ 审计编号 `AUD-202611-022`｜终审通过：2026-11-18｜内容指纹 `bf982e68e7f8800eac4`｜依据《审计报告标准化管理体系》v1.4
 
 > **版本**：v2026.11.17（2026-11 月度核验）　**数据基准日**：2026-11-17
 > **主题类型**：行业深度研究型（industry-research）
@@ -379,8 +379,8 @@
 ### 官方一手
 
 1. 国土交通省（mlit.go.jp）— 自動運転について https://www.mlit.go.jp/jidosha/jidosha_tk7_000042.html ；自動運転車の公道走行に向けて https://www.mlit.go.jp/jidosha/jidosha_tk7_000043.html ；地域公共交通確保維持改善事業費補助金（自動運転事業関係） https://www.mlit.go.jp/jidosha/jidosha_fr7_000066.html ；準特定地域一覧（R8.10） https://www.mlit.go.jp/jidosha/content/002025204.pdf ；自動運転トラック幹線輸送実証事業 https://www.mlit.go.jp/seisakutokatsu/freight/seisakutokatsu_freight_tk1_000271.html ；倉庫事業経営指標 https://www.mlit.go.jp/seisakutokatsu/freight/butsuryu06000.html （2026 核对）
-2. 警察庁（npa.go.jp）— 自動運転 https://www.npa.go.jp/bureau/traffic/selfdriving/index.html （L4 许可；本期访问受限，需核实原文）
-3. 経済産業省（meti.go.jp）— RoAD to the L4 https://www.meti.go.jp/policy/mono_info_service/mono/automobile/Automated-driving/RoADtotheL4.html ；自動運転 https://www.meti.go.jp/policy/mono_info_service/mono/automobile/Automated-driving/automated-driving.html
+2. 警察庁（npa.go.jp）— 自動運転 https://www.npa.go.jp/bureau/traffic/selfdriving/index.html （L4 许可；本期访问受限，需核实原文）（2026-11 核对）
+3. 経済産業省（meti.go.jp）— RoAD to the L4 https://www.meti.go.jp/policy/mono_info_service/mono/automobile/Automated-driving/RoADtotheL4.html ；自動運転 https://www.meti.go.jp/policy/mono_info_service/mono/automobile/Automated-driving/automated-driving.html（2026-11 核对）
 
 ### 行业机构与实证
 

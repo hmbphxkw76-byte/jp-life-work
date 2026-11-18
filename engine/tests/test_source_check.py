@@ -65,6 +65,16 @@ class ExtractCase(unittest.TestCase):
         r = sc.extract_report("01-x/reports/2026-11-x.md", "# t\n无来源\n")
         self.assertIn("缺来源章节", r["problems"])
 
+    def test_era_year_counts_as_timepoint(self):
+        text = "## 参考来源清单\n\n### ① 官方一手（分级）\n\n1. [X](https://x.go.jp/) — 令和 8-07-13 改定\n"
+        r = sc.extract_report("r", text)
+        self.assertEqual(r["problems"], [])
+
+    def test_marker_counts_as_timepoint(self):
+        text = "## 参考来源清单\n\n### ① 官方一手（分级）\n\n1. [X](https://x.go.jp/) — 首页（2026-11 核对）\n"
+        r = sc.extract_report("r", text)
+        self.assertEqual(r["problems"], [])
+
     def test_missing_year_warns(self):
         text = "## 参考来源清单\n\n### ① 官方一手（分级）\n\n1. [X](https://x.go.jp/) — 无年份\n"
         r = sc.extract_report("r", text)

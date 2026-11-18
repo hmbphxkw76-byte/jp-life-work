@@ -2,7 +2,7 @@
 
 > **免责声明**：本报告为信息整理与条件化建议，不构成法律意见或税务意见；重大决策请咨询执业法律 / 税务专业人士。
 
-> **已审计** ✅ 审计编号 `AUD-202611-016`｜终审通过：2026-11-18｜内容指纹 `29ba31302fb8dc01089`｜依据《审计报告标准化管理体系》v1.4
+> **已审计** ✅ 审计编号 `AUD-202611-023`｜终审通过：2026-11-18｜内容指纹 `308334f9b430e88ddbb`｜依据《审计报告标准化管理体系》v1.4
 
 > **版本**：v2026.11.17（2026-11 月度核验）　**数据基准日**：2026-11-17
 > **主题类型**：政策法规解读型（policy-analysis）
@@ -450,25 +450,25 @@
 
 **官方一手（出入国在留管理庁 / 法务省 / ssw.go.jp / 国土交通省 / 领馆）**：
 
-1. ISA 特定技能制度总页 [https://www.moj.go.jp/isa/applications/status/specifiedskilledworker.html](https://www.moj.go.jp/isa/applications/status/specifiedskilledworker.html)
-2. ISA 自动车运送业分野运用方针 [https://www.moj.go.jp/isa/policies/ssw/automobiletransportation](https://www.moj.go.jp/isa/policies/ssw/automobiletransportation)
-3. ISA 特定技能更新情报 [https://www.moj.go.jp/isa/applications/ssw/](https://www.moj.go.jp/isa/applications/ssw/)；要領別冊改正 [https://www.moj.go.jp/isa/applications/ssw/nyuukokukanri07_00201.html](https://www.moj.go.jp/isa/applications/ssw/nyuukokukanri07_00201.html)；分野別運用方針 [https://www.moj.go.jp/isa/applications/ssw/nyuukokukanri01_00132.html](https://www.moj.go.jp/isa/applications/ssw/nyuukokukanri01_00132.html)
+1. ISA 特定技能制度总页 [https://www.moj.go.jp/isa/applications/status/specifiedskilledworker.html](https://www.moj.go.jp/isa/applications/status/specifiedskilledworker.html)（2026-11 核对）
+2. ISA 自动车运送业分野运用方针 [https://www.moj.go.jp/isa/policies/ssw/automobiletransportation](https://www.moj.go.jp/isa/policies/ssw/automobiletransportation)（2026-11 核对）
+3. ISA 特定技能更新情报 [https://www.moj.go.jp/isa/applications/ssw/](https://www.moj.go.jp/isa/applications/ssw/)；要領別冊改正 [https://www.moj.go.jp/isa/applications/ssw/nyuukokukanri07_00201.html](https://www.moj.go.jp/isa/applications/ssw/nyuukokukanri07_00201.html)；分野別運用方針 [https://www.moj.go.jp/isa/applications/ssw/nyuukokukanri01_00132.html](https://www.moj.go.jp/isa/applications/ssw/nyuukokukanri01_00132.html)（2026-11 核对）
 4. ISA 统计月报 / 受入れ見込数・在留者数表（2026-08 末速报，2026-11-06 换版）[https://www.moj.go.jp/isa/content/001472175.pdf](https://www.moj.go.jp/isa/content/001472175.pdf)
-5. ISA 育成就劳制度 [https://www.moj.go.jp/isa/applications/index_00005.html](https://www.moj.go.jp/isa/applications/index_00005.html)；育成就労 MOC [https://www.moj.go.jp/isa/applications/ssw/nyuukokukanri05_00002.html](https://www.moj.go.jp/isa/applications/ssw/nyuukokukanri05_00002.html)；タイ MOC [https://www.moj.go.jp/isa/01_00642.html](https://www.moj.go.jp/isa/01_00642.html)
+5. ISA 育成就劳制度 [https://www.moj.go.jp/isa/applications/index_00005.html](https://www.moj.go.jp/isa/applications/index_00005.html)；育成就労 MOC [https://www.moj.go.jp/isa/applications/ssw/nyuukokukanri05_00002.html](https://www.moj.go.jp/isa/applications/ssw/nyuukokukanri05_00002.html)；タイ MOC [https://www.moj.go.jp/isa/01_00642.html](https://www.moj.go.jp/isa/01_00642.html)（2026-11 核对）
 6. ISA 永住许可指南（令和 8-10-01 改定）[https://www.moj.go.jp/isa/10_00279.html](https://www.moj.go.jp/isa/10_00279.html)；永住者取消指南 [https://www.moj.go.jp/isa/11_00118.html](https://www.moj.go.jp/isa/11_00118.html)；在留资格取消 [https://www.moj.go.jp/isa/applications/procedures/torikeshi_00002.html](https://www.moj.go.jp/isa/applications/procedures/torikeshi_00002.html)
-7. ISA「家族滞在」[https://www.moj.go.jp/isa/applications/status/dependent](https://www.moj.go.jp/isa/applications/status/dependent)；「家族滞在」資格外活動許可 [https://www.moj.go.jp/isa/applications/procedures/nyuukokukanri07_00004.html](https://www.moj.go.jp/isa/applications/procedures/nyuukokukanri07_00004.html)
+7. ISA「家族滞在」[https://www.moj.go.jp/isa/applications/status/dependent](https://www.moj.go.jp/isa/applications/status/dependent)；「家族滞在」資格外活動許可 [https://www.moj.go.jp/isa/applications/procedures/nyuukokukanri07_00004.html](https://www.moj.go.jp/isa/applications/procedures/nyuukokukanri07_00004.html)（2026-11 核对）
 8. ISA「技術・人文知識・国際業務」[https://www.moj.go.jp/isa/applications/status/gijinkoku.html](https://www.moj.go.jp/isa/applications/status/gijinkoku.html)；出租车·巴士日语要求 [https://www.moj.go.jp/isa/03_00198.html](https://www.moj.go.jp/isa/03_00198.html)；1 号支援体制要件改正 [https://www.moj.go.jp/isa/10_00263.html](https://www.moj.go.jp/isa/10_00263.html)；在留許可手数料改定 [https://www.moj.go.jp/isa/01_00644.html](https://www.moj.go.jp/isa/01_00644.html)；手数料減免 [https://www.moj.go.jp/isa/10_00273.html](https://www.moj.go.jp/isa/10_00273.html)
 9. ISA 第 16 回有識者会議 [https://www.moj.go.jp/isa/03_00207.html](https://www.moj.go.jp/isa/03_00207.html)；令和 6 年入管法等改正 [https://www.moj.go.jp/isa/05_00045.html](https://www.moj.go.jp/isa/05_00045.html)
-10. ssw.go.jp 分野清单（中文）[https://www.ssw.go.jp/cn/about/visa/](https://www.ssw.go.jp/cn/about/visa/)；自动车运送业中文页 [https://www.ssw.go.jp/cn/about/visa/automobile_transportation_business_1/](https://www.ssw.go.jp/cn/about/visa/automobile_transportation_business_1/)
-11. 外务省领馆费用专页 [https://www.shanghai.cn.emb-japan.go.jp/itpr_ja/11_000001_00633.html](https://www.shanghai.cn.emb-japan.go.jp/itpr_ja/11_000001_00633.html)
-12. 国土交通省 [https://www.mlit.go.jp](https://www.mlit.go.jp)；e-Gov 法令检索 [https://laws.e-gov.go.jp](https://laws.e-gov.go.jp)
+10. ssw.go.jp 分野清单（中文）[https://www.ssw.go.jp/cn/about/visa/](https://www.ssw.go.jp/cn/about/visa/)；自动车运送业中文页 [https://www.ssw.go.jp/cn/about/visa/automobile_transportation_business_1/](https://www.ssw.go.jp/cn/about/visa/automobile_transportation_business_1/)（2026-11 核对）
+11. 外务省领馆费用专页 [https://www.shanghai.cn.emb-japan.go.jp/itpr_ja/11_000001_00633.html](https://www.shanghai.cn.emb-japan.go.jp/itpr_ja/11_000001_00633.html)（2026-11 核对）
+12. 国土交通省 [https://www.mlit.go.jp](https://www.mlit.go.jp)；e-Gov 法令检索 [https://laws.e-gov.go.jp](https://laws.e-gov.go.jp)（2026-11 核对）
 
 **考试与实施机构**：
 
-13. ClassNK 试验 Portal [https://sswt-portal.classnk.or.jp/](https://sswt-portal.classnk.or.jp/)；费用公告 [https://sswt-portal.classnk.or.jp/news/25](https://sswt-portal.classnk.or.jp/news/25)
-14. JFT-Basic [https://jft-basic.jp](https://jft-basic.jp)；Prometric 受験料 [https://www.prometric-jp.com/ssw/exam/fee/](https://www.prometric-jp.com/ssw/exam/fee/)
-15. JLPT [https://www.jlpt.jp](https://www.jlpt.jp)；中国考区（NEEA）[https://jlpt.neea.edu.cn/faq.html](https://jlpt.neea.edu.cn/faq.html)
-16. 外国人技能実習機構（OTIT）[https://www.otit.go.jp/employment_for_skill_development/05/](https://www.otit.go.jp/employment_for_skill_development/05/)
+13. ClassNK 试验 Portal [https://sswt-portal.classnk.or.jp/](https://sswt-portal.classnk.or.jp/)；费用公告 [https://sswt-portal.classnk.or.jp/news/25](https://sswt-portal.classnk.or.jp/news/25)（2026-11 核对）
+14. JFT-Basic [https://jft-basic.jp](https://jft-basic.jp)；Prometric 受験料 [https://www.prometric-jp.com/ssw/exam/fee/](https://www.prometric-jp.com/ssw/exam/fee/)（2026-11 核对）
+15. JLPT [https://www.jlpt.jp](https://www.jlpt.jp)；中国考区（NEEA）[https://jlpt.neea.edu.cn/faq.html](https://jlpt.neea.edu.cn/faq.html)（2026-11 核对）
+16. 外国人技能実習機構（OTIT）[https://www.otit.go.jp/employment_for_skill_development/05/](https://www.otit.go.jp/employment_for_skill_development/05/)（2026-11 核对）
 
 **跨主题只读引用**：
 

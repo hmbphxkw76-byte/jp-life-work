@@ -7,7 +7,7 @@
     "by_severity": {
       "P0": 0,
       "P1": 0,
-      "P2": 235
+      "P2": 233
     },
     "by_layer": {
       "L1": {
@@ -24,7 +24,7 @@
         "pending": 0,
         "P0": 0,
         "P1": 0,
-        "P2": 2
+        "P2": 1
       },
       "L3": {
         "pass": 21,
@@ -32,7 +32,7 @@
         "pending": 0,
         "P0": 0,
         "P1": 0,
-        "P2": 2
+        "P2": 1
       },
       "L4": {
         "pass": 21,
@@ -2689,7 +2689,7 @@
       "severity": {
         "P0": 0,
         "P1": 0,
-        "P2": 4
+        "P2": 2
       },
       "passed": true,
       "findings": [
@@ -2701,24 +2701,6 @@
           "location": "类型骨架",
           "detail": "[market-monitoring/monthly] h2 节数 13 超出模板骨架 8 节（如为业务固化锚请人工确认，否则须对齐类型模板 prompt-monthly-monitor-template.md）",
           "spec": "S-11"
-        },
-        {
-          "layer": "L2",
-          "code": "E7",
-          "severity": "P2",
-          "report": "19-safety-disaster/reports/2026-11-safety-disaster.md",
-          "location": "必需要素",
-          "detail": "事实单元来源标注覆盖率 18% < 20%",
-          "spec": "S-06"
-        },
-        {
-          "layer": "L3",
-          "code": "C-07",
-          "severity": "P2",
-          "report": "19-safety-disaster/reports/2026-11-safety-disaster.md",
-          "location": "事实单元来源覆盖不足",
-          "detail": "含数字事实单元（段落 + 表格行）来源覆盖率 18% < 20%（程序化门槛；语义目标 100%）（信息质量四维度）",
-          "spec": "S-06"
         },
         {
           "layer": "L4",

@@ -26,7 +26,7 @@
 | [16-exit-transition-return/reports/2026-11-exit-transition-return.md](../../../16-exit-transition-return/reports/2026-11-exit-transition-return.md) | L1✓ L2✓ L3✓ L4✓ L5✓ | 0 | 0 | 5 | 通过 |
 | [17-migration-compliance/reports/2026-11-migration-compliance.md](../../../17-migration-compliance/reports/2026-11-migration-compliance.md) | L1✓ L2✓ L3✓ L4✓ L5✓ | 0 | 0 | 4 | 通过 |
 | [18-family-parenting/reports/2026-11-family-parenting.md](../../../18-family-parenting/reports/2026-11-family-parenting.md) | L1✓ L2✓ L3✓ L4✓ L5✓ | 0 | 0 | 3 | 通过 |
-| [19-safety-disaster/reports/2026-11-safety-disaster.md](../../../19-safety-disaster/reports/2026-11-safety-disaster.md) | L1✓ L2✓ L3✓ L4✓ L5✓ | 0 | 0 | 4 | 通过 |
+| [19-safety-disaster/reports/2026-11-safety-disaster.md](../../../19-safety-disaster/reports/2026-11-safety-disaster.md) | L1✓ L2✓ L3✓ L4✓ L5✓ | 0 | 0 | 2 | 通过 |
 | [20-overseas-china/reports/2026-11-overseas-china.md](../../../20-overseas-china/reports/2026-11-overseas-china.md) | L1✓ L2✓ L3✓ L4✓ L5✓ | 0 | 0 | 1 | 通过 |
 
 ## 分层汇总
@@ -34,8 +34,8 @@
 | 层级 | pass | fail | pending | P0 | P1 | P2 |
 |---|---|---|---|---|---|---|
 | L1 | 21 | 0 | 0 | 0 | 0 | 21 |
-| L2 | 21 | 0 | 0 | 0 | 0 | 2 |
-| L3 | 21 | 0 | 0 | 0 | 0 | 2 |
+| L2 | 21 | 0 | 0 | 0 | 0 | 1 |
+| L3 | 21 | 0 | 0 | 0 | 0 | 1 |
 | L4 | 21 | 0 | 0 | 0 | 0 | 210 |
 | L5 | 21 | 0 | 0 | 0 | 0 | 0 |
 
@@ -274,8 +274,6 @@
 | L4 | C-03 | P2 | 18-family-parenting/reports/2026-11-family-parenting.md | 跨文档重复 | 约 204 字的段落与 20-overseas-china/reports/2026-11-overseas-china.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度） |
 | L4 | C-03 | P2 | 18-family-parenting/reports/2026-11-family-parenting.md | 跨文档重复 | 约 226 字的段落与 19-safety-disaster/reports/2026-11-safety-disaster.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度） |
 | L1 | L1-SKELETON | P2 | 19-safety-disaster/reports/2026-11-safety-disaster.md | 类型骨架 | [market-monitoring/monthly] h2 节数 13 超出模板骨架 8 节（如为业务固化锚请人工确认，否则须对齐类型模板 prompt-monthly-monitor-template.md） |
-| L2 | E7 | P2 | 19-safety-disaster/reports/2026-11-safety-disaster.md | 必需要素 | 事实单元来源标注覆盖率 18% < 20% |
-| L3 | C-07 | P2 | 19-safety-disaster/reports/2026-11-safety-disaster.md | 事实单元来源覆盖不足 | 含数字事实单元（段落 + 表格行）来源覆盖率 18% < 20%（程序化门槛；语义目标 100%）（信息质量四维度） |
 | L4 | C-03 | P2 | 19-safety-disaster/reports/2026-11-safety-disaster.md | 跨文档重复 | 约 225 字的段落与 20-overseas-china/reports/2026-11-overseas-china.md 相似度 ≥ 80%，疑似研究正文交叉重复，建议确认是否需保留（信息质量四维度） |
 | L1 | L1-SKELETON | P2 | 20-overseas-china/reports/2026-11-overseas-china.md | 类型骨架 | [policy-analysis/monthly] h2 节数 12 超出模板骨架 9 节（如为业务固化锚请人工确认，否则须对齐类型模板 prompt-policy-review-template.md） |
 
