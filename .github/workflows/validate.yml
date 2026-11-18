@@ -86,6 +86,42 @@ jobs:
           fi
           echo "build_index.py 退出码 ${code:-0}（2=索引缺失，由定时维护生成）"
 
+      - name: 内链存在性校验（link_check.py）
+        run: |
+          python engine/tools/link_check.py || code=$?
+          if [ "${code:-0}" -eq 1 ]; then
+            echo "::error::存在失效内链（本地修复后提交；历史迁移留痕不参与校验）"
+            exit 1
+          fi
+          echo "link_check.py 退出码 ${code:-0}（0=无失效引用）"
+
+      - name: 工具注册表一致性（generate_registry.py --check）
+        run: |
+          python engine/tools/generate_registry.py --check || code=$?
+          if [ "${code:-0}" -eq 1 ]; then
+            echo "::error::registry.json / README 快照与代码不一致（本地运行 generate_registry.py --write 修复）"
+            exit 1
+          fi
+          echo "generate_registry.py 退出码 ${code:-0}"
+
+      - name: 报告登记册一致性（audit_registry.py --check）
+        run: |
+          python engine/tools/audit_registry.py --check || code=$?
+          if [ "${code:-0}" -eq 1 ]; then
+            echo "::error::报告登记册与实际报告不一致（本地运行 audit_registry.py --init 修复）"
+            exit 1
+          fi
+          echo "audit_registry.py 退出码 ${code:-0}"
+
+      - name: 落盘前自检（audit_preflight.py --all）
+        run: |
+          python engine/tools/audit_preflight.py --all || code=$?
+          if [ "${code:-0}" -eq 1 ]; then
+            echo "::error::落盘前自检存在 P0/P1（见 engine/report-audits/audit/preflight-report.md）"
+            exit 1
+          fi
+          echo "audit_preflight.py 退出码 ${code:-0}（0/2 放行，1 阻断）"
+
       # 新报告阻断级：期间 >= 2026-11 的报告 lint / 模板合规必须无错误项；
       # 历史报告由 --new-only 跳过，遗留项列入 lint-whitelist.json 豁免。
       - name: 报告内容 lint（新报告阻断）

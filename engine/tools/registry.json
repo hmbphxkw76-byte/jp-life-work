@@ -21,6 +21,7 @@
     "generate_registry.py",
     "incremental_build.py",
     "info_quality_check.py",
+    "link_check.py",
     "lint_reports.py",
     "md2html.py",
     "migrate_monthly_reports.py",

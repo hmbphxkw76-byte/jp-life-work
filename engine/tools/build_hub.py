@@ -386,6 +386,38 @@ def collect_search_index(topics: list[dict]) -> dict:
             "five_questions": five}
 
 
+def search_reference_errors(topics: list[dict]) -> list[str]:
+    """校验搜索数据（question-index / five-questions）引用的报告页真实存在。
+
+    返回缺失路径列表（去重、排序）；空列表表示全部可达。
+    仅校验仓库相对报告页路径（*.html），不校验外部 URL。
+    """
+    existing = {r["path"] for t in topics for r in t["reports"]}
+    refs: set[str] = set()
+    qf = SEARCH_DIR / "question-index.json"
+    if qf.exists():
+        try:
+            data = json.loads(qf.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            data = {}
+        for item in data.get("questions", []):
+            p = (item.get("path") or "").strip()
+            if p:
+                refs.add(p)
+    ff = SEARCH_DIR / "five-questions.json"
+    if ff.exists():
+        try:
+            data = json.loads(ff.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            data = {}
+        for item in data.get("questions", []):
+            for link in item.get("links", []) or []:
+                link = (str(link) or "").strip()
+                if link:
+                    refs.add(link)
+    return sorted(r for r in refs if r not in existing)
+
+
 # ──────────────────────────────────────────────
 # index.html 渲染
 # ──────────────────────────────────────────────
@@ -1030,6 +1062,14 @@ def main() -> int:
     ap = argparse.ArgumentParser(description="生成汇总页 index.html")
     ap.add_argument("--check", action="store_true", help="校验现有汇总页是否为最新")
     args = ap.parse_args()
+
+    ref_err = search_reference_errors(collect_topics())
+    if ref_err:
+        print("[ERROR] 搜索数据引用了不存在的报告页：")
+        for p in ref_err:
+            print(f"  - {p}")
+        print("（修正 engine/search/*.json 后重新生成）")
+        return 1
 
     outputs = build_outputs()
     if args.check:
