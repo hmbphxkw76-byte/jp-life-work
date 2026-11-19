@@ -75,6 +75,8 @@ class DriftGuardCase(unittest.TestCase):
                 ["62_500", "62500", "0.15"],
             "engine/tools/pending_verification.py":
                 ['"2026-12-31"', "<= 30"],
+            "engine/tools/consulting_panel.py":
+                ["62,500", "62500", "310,975", "310975", "324,381", "324381", "0.33"],
         }
         for rel, needles in targets.items():
             text = (ROOT / rel).read_text(encoding="utf-8")
