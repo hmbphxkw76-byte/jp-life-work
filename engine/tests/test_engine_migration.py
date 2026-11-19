@@ -27,15 +27,13 @@ sys.path.insert(0, str(ROOT / "engine" / "tools"))
 
 from _common import ROOT as CROOT, SKIP_TOP, TYPE_RE, iter_business_dirs  # noqa: E402
 
-# 旧路径活引用的合法残留白名单（历史规格 / 映射表本身 / 本守卫自身），见方案 §3.5 与附录 B。
+# 旧路径活引用的合法残留白名单（映射表本身 / 比对脚本说明 / 本守卫自身）。
+# 迁移方案与历史评审为一次性文档，已清理；如再出现引用按残留处理。
 SRC_WHITELIST = {
-    "docs/引擎层迁移方案-2026-11-17.md",     # 本迁移唯一事实源（含旧→新映射表）
     "engine/scripts/verify_report_parity.py",  # 归一化比对脚本（含映射表）
     "engine/tests/test_verify_report_parity.py",  # 映射表的单元测试
     "engine/scripts/README.md",               # 比对工具说明（描述旧→新映射）
     "engine/tests/test_engine_migration.py",  # 本守卫自身（含待检字面量）
-    "docs/toolchain/reviews/engine-migration-review.md",  # 评审报告（描述旧→新映射）
-    "docs/toolchain/reviews/post-migration-governance-review.md",  # 迁移后治理评审（描述旧→新映射）
 }
 
 # 裸 `tools/` 扫描的结构性豁免：以下文件中的 `tools/` **不是**「旧根 tools/ 目录」引用，
@@ -43,7 +41,6 @@ SRC_WHITELIST = {
 TOOLS_TOKEN_EXCLUDE = {
     "engine/report_templates/prompt-generic-base.md",  # engine/ 目录树中的 engine/tools 子节点
     "engine/tests/test_cleanup.py",                    # 合成 fixture 路径（自测清理器行为）
-    "docs/toolchain/reviews/post-migration-governance-review.md",  # 评审中的目录终态校验命令字面量
 }
 
 # 旧路径的两种「无斜杠前缀」形态：裸 `tools/` 目录引用、旧模块路径 `src.<包>`。

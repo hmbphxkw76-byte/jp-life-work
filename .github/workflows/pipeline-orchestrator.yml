@@ -1,6 +1,6 @@
 # 端到端流水线编排：每月 1 日 00:35 UTC（= 09:35 JST）跑「触发检测 → 计划 → 人工闸门」。
 #
-# 对应 docs/端到端流水线编排系统设计-2026-11-17.md §5.7：
+# 对应 docs/端到端流水线治理标准.md：
 #   1. trigger_watch.py --apply：派生 watchlist + freshness + 候选线索，写 trigger-watch.json
 #   2. pipeline_runner.py run：S0 检测 → S1 计划 → S2 人工闸门（自动暂停，不产出正文）
 #   3. pipeline_status.py：生成统一监控视图 status.md / status.json

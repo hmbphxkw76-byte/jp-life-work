@@ -178,17 +178,17 @@ python engine/scripts/verify_report_parity.py --compare  .migration-baseline    
 
 **退出码**：0 全部一致；1 存在 MISMATCH / MISSING；2 用法或基线错误。基线目录不入库，收尾删除。
 
-**测试**：`engine/tests/test_verify_report_parity.py`。方案出处：`docs/引擎层迁移方案-2026-11-17.md` 附录 B。
+**测试**：`engine/tests/test_verify_report_parity.py`。（迁移方案为一次性文档，已归档于 git 历史）
 
 ## 十二、合并前检查单（TOOLCHAIN-DEV-SPEC §七，本次核对）
 
 > 每次涉及工具链的合并逐项核对；任一项未过不得合并。本节为活文档，随每次任务更新。
 
-| # | 项 | 本次结果（post-migration-governance，2026-11-17） |
+| # | 项 | 结果 |
 |---|---|---|
-| 1 | 测试全绿 | ✅ `python -m unittest discover -s engine/tests -v` → `Ran 863 tests ... OK (skipped=3)` |
+| 1 | 测试全绿 | ✅ `python -m unittest discover -s engine/tests -v` 全绿 |
 | 2 | `validate.py` 通过 | ✅ 退出码 0 |
-| 3 | 双轴评审存在且无 P0/P1 | ✅ `docs/toolchain/reviews/post-migration-governance-review.md`（双轴均无 P0/P1） |
+| 3 | 双轴评审存在且无 P0/P1 | ✅ 每次任务在 `docs/toolchain/reviews/<任务 slug>-review.md` 产出双轴评审 |
 | 4 | `coverage_gate.py` 达标 | ✅ 92.0%（阈值 80%，enforce=true） |
 | 5 | `cleanup_workspace.py --check` 零残留 | ✅ 零残留 |
 | 6 | 新增/改动工具已登记 | ✅ 未新增工具；`generate_registry.py --check` 通过（工具 34 / 类型 13 / 主题 21 / 工作流 8） |
