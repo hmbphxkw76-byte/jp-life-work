@@ -1,0 +1,521 @@
+{
+  "schema_version": "1.0",
+  "updated": "2026-11-19",
+  "comment": "「部分核验」分类 → 保留口径映射表（B3，100% 覆盖）。clusters 定义保留簇与保留理由；categories 给出全部分类的归属与实测条数；coverage 记录覆盖率；baseline 记录工单口径与实测差异。本文件为机读事实源，不改变「部分核验」状态，不新增校验命令。",
+  "baseline": {
+    "ticket": "docs/toolchain/tickets/b3-vocab-convergence-map.md",
+    "audit_record": "docs/登记册待核实项复核记录-2026-11-19.md §7A.6/§7A.7",
+    "recorded": {
+      "partial_terms": 1423,
+      "categories_total": 110,
+      "categories_covered": 23,
+      "terms_covered": 492,
+      "categories_unmapped": 87
+    },
+    "measured": {
+      "partial_terms": 1391,
+      "categories_total": 110,
+      "terms_total": 1612
+    },
+    "difference_note": "工单/复核记录 1423 条 vs 实测 1391 条，差 32：66bb692 将 01/02 各 11 条「部分核验」改「待核实」（−22），18/19/20 共 10 条升级「已核验」（−10）；60ab42a 删除 01/02 各 11 条「待核实」（全库总数 1634→1612，不影响部分核验计数）。另 §7A.7 分主题表求和 1420，其中 20-overseas-china 记 64，1423 快照实测为 67。"
+  },
+  "clusters": [
+    {
+      "id": "C1",
+      "name": "口语·生活表达",
+      "retention_reason": "口语词 / 生活与文化表达 / 语言学习类无权威单页定义，门户或常识来源即诚实粒度。",
+      "terms": 216
+    },
+    {
+      "id": "C2",
+      "name": "宽泛法律·政策概念",
+      "retention_reason": "多为跨领域宽泛概念或条文体系，无「单页覆盖」定义页。",
+      "terms": 134
+    },
+    {
+      "id": "C3",
+      "name": "机构定义",
+      "retention_reason": "机构官网首页即准确来源。",
+      "terms": 43
+    },
+    {
+      "id": "C4",
+      "name": "自治体·机构依存",
+      "retention_reason": "要件 / 费用 / 窗口因自治体或机构而异，无全国统一口径。",
+      "terms": 241
+    },
+    {
+      "id": "C5",
+      "name": "行业·企业与非官方概念",
+      "retention_reason": "非官方标准 / 行业惯例 / 企业依存概念，无日本官方单页。",
+      "terms": 328
+    },
+    {
+      "id": "C6",
+      "name": "统计·指标",
+      "retention_reason": "宽泛统计指标，保留门户（已有官方统计页者已升级）。",
+      "terms": 61
+    },
+    {
+      "id": "C7",
+      "name": "在留·资格·行业实务",
+      "retention_reason": "在留资格 / 资格考试 / 行业实务类，需按「主题 × 分类」逐条定向核验。",
+      "terms": 278
+    },
+    {
+      "id": "C8",
+      "name": "生活实务·基础设施",
+      "retention_reason": "居住 / 水电 / 通信 / 消费等生活操作，口径因地区 / 事业者 / 个人情况而异。",
+      "terms": 90
+    }
+  ],
+  "categories": {
+    "场景与表达": {
+      "cluster": "C1",
+      "terms": 147
+    },
+    "法规与政策": {
+      "cluster": "C2",
+      "terms": 28
+    },
+    "行政与司法程序": {
+      "cluster": "C4",
+      "terms": 23
+    },
+    "自动驾驶技术": {
+      "cluster": "C5",
+      "terms": 20
+    },
+    "避难与情报": {
+      "cluster": "C4",
+      "terms": 20
+    },
+    "企业与市场": {
+      "cluster": "C5",
+      "terms": 19
+    },
+    "就医实务": {
+      "cluster": "C4",
+      "terms": 19
+    },
+    "求职与雇佣": {
+      "cluster": "C5",
+      "terms": 19
+    },
+    "算法与系统架构": {
+      "cluster": "C5",
+      "terms": 19
+    },
+    "薪资与待遇": {
+      "cluster": "C5",
+      "terms": 19
+    },
+    "防灾体制": {
+      "cluster": "C2",
+      "terms": 19
+    },
+    "医疗制度": {
+      "cluster": "C4",
+      "terms": 18
+    },
+    "岗位与业务场景": {
+      "cluster": "C5",
+      "terms": 18
+    },
+    "法规与标准": {
+      "cluster": "C2",
+      "terms": 18
+    },
+    "薪酬与劳动条件": {
+      "cluster": "C5",
+      "terms": 18
+    },
+    "行业结构与业态": {
+      "cluster": "C6",
+      "terms": 18
+    },
+    "在留资格与制度": {
+      "cluster": "C7",
+      "terms": 17
+    },
+    "驾驶与运输作业": {
+      "cluster": "C7",
+      "terms": 17
+    },
+    "仓储与配送作业": {
+      "cluster": "C7",
+      "terms": 16
+    },
+    "商业化与运营": {
+      "cluster": "C5",
+      "terms": 16
+    },
+    "职业转型": {
+      "cluster": "C7",
+      "terms": 16
+    },
+    "车辆与传感器": {
+      "cluster": "C5",
+      "terms": 16
+    },
+    "运输模式与枢纽": {
+      "cluster": "C7",
+      "terms": 16
+    },
+    "退出与劳动": {
+      "cluster": "C7",
+      "terms": 16
+    },
+    "个人财务与税务": {
+      "cluster": "C4",
+      "terms": 15
+    },
+    "护照与户籍": {
+      "cluster": "C4",
+      "terms": 15
+    },
+    "日常生活与居住": {
+      "cluster": "C8",
+      "terms": 15
+    },
+    "档案与社保": {
+      "cluster": "C4",
+      "terms": 15
+    },
+    "生活适应与表达": {
+      "cluster": "C1",
+      "terms": 15
+    },
+    "申请与审查流程": {
+      "cluster": "C4",
+      "terms": 15
+    },
+    "介护与福祉": {
+      "cluster": "C4",
+      "terms": 14
+    },
+    "家族滞在": {
+      "cluster": "C7",
+      "terms": 14
+    },
+    "教育体系与阶段": {
+      "cluster": "C7",
+      "terms": 14
+    },
+    "法律体系与条文": {
+      "cluster": "C2",
+      "terms": 14
+    },
+    "转型与在留资格": {
+      "cluster": "C7",
+      "terms": 14
+    },
+    "中介资质与核验": {
+      "cluster": "C7",
+      "terms": 13
+    },
+    "劳动与民事法律": {
+      "cluster": "C2",
+      "terms": 13
+    },
+    "生育与育儿": {
+      "cluster": "C8",
+      "terms": 13
+    },
+    "税务与住民": {
+      "cluster": "C4",
+      "terms": 13
+    },
+    "职级与晋升路径": {
+      "cluster": "C5",
+      "terms": 13
+    },
+    "人口与城市": {
+      "cluster": "C6",
+      "terms": 12
+    },
+    "保育与教育": {
+      "cluster": "C7",
+      "terms": 12
+    },
+    "公共服务与设施": {
+      "cluster": "C4",
+      "terms": 12
+    },
+    "地方政策与自治": {
+      "cluster": "C4",
+      "terms": 12
+    },
+    "岗位与协作": {
+      "cluster": "C5",
+      "terms": 12
+    },
+    "技术与数字化": {
+      "cluster": "C5",
+      "terms": 12
+    },
+    "政治制度与机构": {
+      "cluster": "C3",
+      "terms": 12
+    },
+    "语法与句型": {
+      "cluster": "C1",
+      "terms": 12
+    },
+    "语言能力与考试": {
+      "cluster": "C7",
+      "terms": 12
+    },
+    "金融机构与工具": {
+      "cluster": "C3",
+      "terms": 12
+    },
+    "合同与费用": {
+      "cluster": "C5",
+      "terms": 11
+    },
+    "团队与运营管理": {
+      "cluster": "C5",
+      "terms": 11
+    },
+    "宏观与经济指标": {
+      "cluster": "C6",
+      "terms": 11
+    },
+    "技术栈与架构": {
+      "cluster": "C5",
+      "terms": 11
+    },
+    "文化习俗与节庆": {
+      "cluster": "C1",
+      "terms": 11
+    },
+    "永住与归化": {
+      "cluster": "C7",
+      "terms": 11
+    },
+    "生活成本与设施": {
+      "cluster": "C8",
+      "terms": 11
+    },
+    "管理岗位与职责": {
+      "cluster": "C5",
+      "terms": 11
+    },
+    "行政区划与地理": {
+      "cluster": "C6",
+      "terms": 11
+    },
+    "词汇与表达": {
+      "cluster": "C1",
+      "terms": 11
+    },
+    "资产与生活清理": {
+      "cluster": "C8",
+      "terms": 11
+    },
+    "饮食与消费": {
+      "cluster": "C8",
+      "terms": 11
+    },
+    "云与基础设施": {
+      "cluster": "C5",
+      "terms": 10
+    },
+    "人才发展与培训": {
+      "cluster": "C5",
+      "terms": 10
+    },
+    "学费与资助": {
+      "cluster": "C7",
+      "terms": 10
+    },
+    "安全与合规": {
+      "cluster": "C5",
+      "terms": 10
+    },
+    "开发与工程实践": {
+      "cluster": "C5",
+      "terms": 10
+    },
+    "扶养与支援": {
+      "cluster": "C4",
+      "terms": 10
+    },
+    "招募与渠道": {
+      "cluster": "C5",
+      "terms": 10
+    },
+    "政策与选举": {
+      "cluster": "C2",
+      "terms": 10
+    },
+    "法律后果与救济": {
+      "cluster": "C2",
+      "terms": 10
+    },
+    "组织与制度": {
+      "cluster": "C3",
+      "terms": 10
+    },
+    "资格考试与培训": {
+      "cluster": "C7",
+      "terms": 10
+    },
+    "骗术与风险": {
+      "cluster": "C8",
+      "terms": 10
+    },
+    "估值与风险": {
+      "cluster": "C5",
+      "terms": 9
+    },
+    "体检与预防": {
+      "cluster": "C4",
+      "terms": 9
+    },
+    "地方经济与产业": {
+      "cluster": "C6",
+      "terms": 9
+    },
+    "婚姻与离婚": {
+      "cluster": "C2",
+      "terms": 9
+    },
+    "市场机制与交易": {
+      "cluster": "C5",
+      "terms": 9
+    },
+    "年金与保险": {
+      "cluster": "C4",
+      "terms": 9
+    },
+    "敬语与语体": {
+      "cluster": "C1",
+      "terms": 9
+    },
+    "监管与政策": {
+      "cluster": "C2",
+      "terms": 9
+    },
+    "社交与礼仪": {
+      "cluster": "C1",
+      "terms": 9
+    },
+    "资格与认证": {
+      "cluster": "C7",
+      "terms": 9
+    },
+    "院校与专业": {
+      "cluster": "C7",
+      "terms": 9
+    },
+    "黑名单与名单": {
+      "cluster": "C7",
+      "terms": 9
+    },
+    "家属与生活": {
+      "cluster": "C8",
+      "terms": 8
+    },
+    "绩效与评估": {
+      "cluster": "C5",
+      "terms": 8
+    },
+    "技能与证照": {
+      "cluster": "C7",
+      "terms": 7
+    },
+    "数据与人工智能": {
+      "cluster": "C5",
+      "terms": 7
+    },
+    "驾照转回": {
+      "cluster": "C7",
+      "terms": 7
+    },
+    "住房与租赁": {
+      "cluster": "C8",
+      "terms": 6
+    },
+    "应急联络": {
+      "cluster": "C4",
+      "terms": 6
+    },
+    "银行与支付": {
+      "cluster": "C3",
+      "terms": 6
+    },
+    "学习与教学": {
+      "cluster": "C7",
+      "terms": 5
+    },
+    "治安与人身": {
+      "cluster": "C4",
+      "terms": 5
+    },
+    "牙科与精神科": {
+      "cluster": "C4",
+      "terms": 5
+    },
+    "公证认证": {
+      "cluster": "C7",
+      "terms": 4
+    },
+    "在留资格类型": {
+      "cluster": "C7",
+      "terms": 4
+    },
+    "学历认证": {
+      "cluster": "C7",
+      "terms": 4
+    },
+    "心理健康与适应": {
+      "cluster": "C4",
+      "terms": 4
+    },
+    "无犯罪记录": {
+      "cluster": "C7",
+      "terms": 4
+    },
+    "离境与再入国": {
+      "cluster": "C7",
+      "terms": 4
+    },
+    "继承与终末": {
+      "cluster": "C2",
+      "terms": 4
+    },
+    "考试与备考": {
+      "cluster": "C7",
+      "terms": 4
+    },
+    "通信与网络": {
+      "cluster": "C8",
+      "terms": 4
+    },
+    "领事保护": {
+      "cluster": "C3",
+      "terms": 3
+    },
+    "职场日语": {
+      "cluster": "C1",
+      "terms": 2
+    },
+    "行政手续": {
+      "cluster": "C4",
+      "terms": 2
+    },
+    "水电燃气与基础设施": {
+      "cluster": "C8",
+      "terms": 1
+    }
+  },
+  "coverage": {
+    "categories_total": 110,
+    "categories_mapped": 110,
+    "partial_terms": 1391,
+    "mapped_terms": 1391,
+    "unmapped_categories": []
+  }
+}
