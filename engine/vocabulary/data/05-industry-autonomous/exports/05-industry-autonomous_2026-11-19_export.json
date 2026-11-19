@@ -1,8 +1,8 @@
 {
   "topic": "05-industry-autonomous",
   "name": "自动驾驶与自动化",
-  "version": "v1.5",
-  "generated_at": "2026-11-19T09:07:50",
+  "version": "v1.6",
+  "generated_at": "2026-11-19T11:38:28",
   "count": 106,
   "categories": {
     "自动驾驶技术": 20,
@@ -30,7 +30,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.sae.org/",
+      "source_url": "https://saemobilus.sae.org/content/J3016_202104",
       "confidence": "B"
     },
     {
@@ -49,7 +49,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.sae.org/",
+      "source_url": "https://saemobilus.sae.org/content/J3016_202104",
       "confidence": "B"
     },
     {
@@ -68,7 +68,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.sae.org/",
+      "source_url": "https://saemobilus.sae.org/content/J3016_202104",
       "confidence": "B"
     },
     {
@@ -87,7 +87,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.sae.org/",
+      "source_url": "https://saemobilus.sae.org/content/J3016_202104",
       "confidence": "B"
     },
     {
@@ -107,7 +107,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.sae.org/",
+      "source_url": "https://saemobilus.sae.org/content/J3016_202104",
       "confidence": "B"
     },
     {
@@ -127,7 +127,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.sae.org/",
+      "source_url": "https://saemobilus.sae.org/content/J3016_202104",
       "confidence": "B"
     },
     {
@@ -147,7 +147,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.sae.org/",
+      "source_url": "https://saemobilus.sae.org/content/J3016_202104",
       "confidence": "B"
     },
     {
@@ -167,7 +167,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.sae.org/",
+      "source_url": "https://saemobilus.sae.org/content/J3016_202104",
       "confidence": "B"
     },
     {
@@ -186,7 +186,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.sae.org/",
+      "source_url": "https://saemobilus.sae.org/content/J3016_202104",
       "confidence": "B"
     },
     {
@@ -206,7 +206,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.sae.org/",
+      "source_url": "https://saemobilus.sae.org/content/J3016_202104",
       "confidence": "B"
     },
     {
@@ -839,7 +839,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.sae.org/",
+      "source_url": "https://saemobilus.sae.org/content/J3016_202104",
       "confidence": "B"
     },
     {
@@ -1298,7 +1298,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.soumu.go.jp/",
+      "source_url": "https://www.soumu.go.jp/main_sosiki/jichi_gyousei/c-gyousei/2001/kaso/kasomain0.htm",
       "confidence": "B"
     },
     {
@@ -1378,7 +1378,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.sae.org/",
+      "source_url": "https://saemobilus.sae.org/content/J3016_202104",
       "confidence": "B"
     },
     {
@@ -1398,7 +1398,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.sae.org/",
+      "source_url": "https://saemobilus.sae.org/content/J3016_202104",
       "confidence": "B"
     },
     {
