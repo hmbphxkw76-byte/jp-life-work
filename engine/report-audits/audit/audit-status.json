@@ -1,14 +1,14 @@
 {
   "version": "v1.4",
-  "updated": "2026-11-19T13:28:45+00:00",
+  "updated": "2026-11-19T14:42:12+00:00",
   "reports": {
     "00-decision-hub/reports/2026-11-decision-hub.md": {
       "state": "audited",
-      "audit_id": "AUD-202611-010",
-      "finalized_at": "2026-11-19T07:36:08+00:00",
-      "content_hash": "sha256:2552e4c940badf3d5a0bc67e96043311947cea704a231d6d9943ec9e3230763f",
-      "html_hash": "sha256:130070157f6bb3a0236b78dd80e7dfd76a1c5237029bc7558ecc18c0a3ba4df3",
-      "last_seq": 822
+      "audit_id": "AUD-202611-013",
+      "finalized_at": "2026-11-19T14:42:12+00:00",
+      "content_hash": "sha256:579331d18fc45b5de42212d22a95616d372bd830b09375cc39ab1973f8f41ed4",
+      "html_hash": "sha256:29c22b69d404c5e9d3b13fd07e33cc9c23115affca1a7cd2d47391ec5ce124da",
+      "last_seq": 847
     },
     "01-ssw-driver/reports/2026-11-ssw-driver.md": {
       "state": "audited",

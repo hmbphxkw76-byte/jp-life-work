@@ -22,6 +22,8 @@
 - 文件存在且一致 -> 退出码 0
 - 文件存在但过期 -> 退出码 1（阻断合并）
 - 文件不存在    -> 退出码 0 并提示（全新克隆尚未生成，由定时维护首建）
+- 检索层产物校验：engine/search/*.json（检索输入）须存在且可解析；
+  search-index.json（构建产物）随 index.html 一并比对，缺失 / 过期均阻断。
 
 页脚不嵌入生成时间戳（避免 html-sync 每次产生仅时间戳变更的空提交）；
 normalize_for_check 保留一个归一化函数，用于抹平历史版本页脚残留的时间戳行，
@@ -458,6 +460,33 @@ def search_reference_errors(topics: list[dict]) -> list[str]:
                 if link:
                     refs.add(link)
     return sorted(r for r in refs if r not in existing)
+
+
+# ──────────────────────────────────────────────
+# 检索层产物校验（B7：检索层纳入 --check）
+# ──────────────────────────────────────────────
+
+# 检索层输入产物（engine/search/*.json，单一事实源，人工维护）；
+# 构建产物 search-index.json 由 build_outputs() 生成并随 --check 比对。
+SEARCH_INPUT_FILES = ("keywords.json", "question-index.json", "five-questions.json")
+
+
+def search_layer_errors() -> list[str]:
+    """校验检索层产物：输入 JSON 存在且可解析。
+
+    返回错误列表（排序）；空列表表示检索层就绪。
+    """
+    errs: list[str] = []
+    for name in SEARCH_INPUT_FILES:
+        p = SEARCH_DIR / name
+        if not p.exists():
+            errs.append(f"检索层输入缺失：engine/search/{name}")
+            continue
+        try:
+            json.loads(p.read_text(encoding="utf-8"))
+        except (OSError, ValueError) as e:
+            errs.append(f"检索层输入无法解析：engine/search/{name}（{e}）")
+    return sorted(errs)
 
 
 # ──────────────────────────────────────────────
@@ -1133,6 +1162,14 @@ def main() -> int:
         for p in ref_err:
             print(f"  - {p}")
         print("（修正 engine/search/*.json 后重新生成）")
+        return 1
+
+    layer_err = search_layer_errors()
+    if layer_err:
+        print("[ERROR] 检索层产物校验失败：")
+        for p in layer_err:
+            print(f"  - {p}")
+        print("（检索层 = engine/search/*.json 输入 + search-index.json 构建产物）")
         return 1
 
     outputs = build_outputs()

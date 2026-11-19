@@ -708,6 +708,20 @@ class TestBuildHubCheck(unittest.TestCase):
                 )
         self.assertEqual(errs, ["00-decision-hub/reports/2099-01-x.html"])
 
+    def test_search_layer_inputs_present_and_parseable(self):
+        """检索层输入产物存在且可解析（B7：检索层纳入 --check）。"""
+        self.assertEqual(build_hub.search_layer_errors(), [])
+
+    def test_search_layer_errors_detects_missing_and_invalid(self):
+        with tempfile.TemporaryDirectory() as td:
+            p = Path(td)
+            (p / "keywords.json").write_text("{ not json", encoding="utf-8")
+            with unittest.mock.patch.object(build_hub, "SEARCH_DIR", p):
+                errs = build_hub.search_layer_errors()
+        self.assertTrue(any("keywords.json" in e and "无法解析" in e for e in errs))
+        self.assertTrue(any("question-index.json" in e and "缺失" in e for e in errs))
+        self.assertTrue(any("five-questions.json" in e and "缺失" in e for e in errs))
+
 
 class TestLinkCheck(unittest.TestCase):
     """内链存在性校验（link_check.py）用例。"""

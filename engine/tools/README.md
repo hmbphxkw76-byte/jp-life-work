@@ -13,7 +13,7 @@ pip install -r requirements.txt   # markdown
 python -m unittest discover -s engine/tests -q   # 单元测试（以 docs/CI.md 与实测为准）
 ```
 
-> 测试计数：1045 项（`python -m unittest discover -s engine/tests` 实测，与 `docs/CI.md` 六节一致；由 `engine/tests/test_arch_guard.py` 双向锁定）。
+> 测试计数：1047 项（`python -m unittest discover -s engine/tests` 实测，与 `docs/CI.md` 六节一致；由 `engine/tests/test_arch_guard.py` 双向锁定）。
 
 ## 退出码约定（校验类工具统一）
 
@@ -303,6 +303,10 @@ report_diff.py）。列表按报告页 meta 高亮「已更新 / 无更新」。
 文件缺失（全新克隆）退出码 0 并提示，由定时维护首建。比对前对两侧做归一化——
 抹平「最近生成」生成时刻时间戳（分钟级心跳，不参与最新性判定），清单逐字节比对。
 
+**检索层产物校验**：`engine/search/{keywords,question-index,five-questions}.json`
+（检索输入，单一事实源）须存在且为合法 JSON；构建产物 `search-index.json` 随
+`index.html` 一并比对，缺失 / 过期均阻断（退出码 1）。
+
 ## 编排类
 
 ### update_planner.py — 内容更新任务清单
@@ -471,3 +475,4 @@ python engine/tools/automation_status.py activity --threshold 45               #
 | v1.4 | 2026-11-19 | 合并后计数校准 | 测试计数 1008 → 1029（并入 consulting-panel 15 项 + B2 表格语义 6 项后实测） |
 | v1.5 | 2026-11-19 | 工程守卫（W1 / A1 / A5） | 测试计数 1029 → 1040（新增归档保留期边界 6 项 + 文档数字锁定 3 项 + 骨架完备性 2 项）；退出码约定改为指向 `docs/CI.md`；`structure_check` 新增主题骨架完备性校验 |
 | v1.6 | 2026-11-19 | CI/CD 加固（W2） | 测试计数 1040 → 1045（覆盖率单工具阈值 5 项）；工具链代码新增 pre-commit 快速子集（ruff --fix + validate.py）说明 |
+| v1.7 | 2026-11-19 | 内容与词库（W4 / B7） | 测试计数 1045 → 1047（B7 新增 2 项 `build_hub` 检索层校验用例）；补记检索层产物校验说明 |
