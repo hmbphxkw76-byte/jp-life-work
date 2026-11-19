@@ -23,11 +23,14 @@ concurrency:
 
 permissions:
   contents: write
+  pull-requests: write
 
 jobs:
   assess:
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -41,6 +44,15 @@ jobs:
       - uses: ./.github/actions/workspace-cleanup
         with:
           mode: ci
+
+      # 依赖缓存（W2 / R5）：key 随 requirements 变更，命中即跳过 pip 下载。
+      - name: 缓存 pip 依赖
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt', 'requirements-dev.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
 
       - name: 安装依赖
         run: pip install -r requirements.txt
@@ -87,7 +99,12 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git commit -m "chore: 信息质量周期评估（自动修复 + 三清单）"
-          git push
+          BRANCH="auto/info-quality-$(date -u +%Y%m%d-%H%M%S)"
+          git push origin "HEAD:$BRANCH"
+          gh pr create --base main --head "$BRANCH" \
+            --title "[automated] 信息质量周期评估" \
+            --body "由 .github/workflows/info-quality.yml 自动提交（[automated] 标记，保留 github-actions[bot] 提交身份）。请评审后合并。" \
+            || echo "::warning::PR 创建失败（可能已存在），请人工确认"
 
       # 阶段收尾：无论成败清理缓存、临时产物与 pip 缓存，保证流水线结束后无残留。
       - uses: ./.github/actions/workspace-cleanup

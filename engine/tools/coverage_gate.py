@@ -49,6 +49,8 @@ def load_config(path: Path = CONFIG) -> dict:
         raise ValueError("coverage-config.json 缺少 test_discovery")
     if not isinstance(data.get("baseline"), str) or not data["baseline"]:
         raise ValueError("coverage-config.json 缺少 baseline")
+    if not isinstance(data.get("per_tool_min"), int) or isinstance(data.get("per_tool_min"), bool):
+        raise ValueError("coverage-config.json 缺少整型 per_tool_min")
     return data
 
 
@@ -113,11 +115,25 @@ def per_tool_coverage() -> dict:
     return dict(sorted(out.items(), key=lambda kv: kv[1]))
 
 
-def evaluate(total: float, threshold: int, enforce: bool) -> int:
-    """按阈值与开关判定退出码（0 达标 / 1 阻断 / 2 观察）。"""
-    if total >= threshold:
-        return 0
-    return 1 if enforce else 2
+def tools_below(per_tool: dict, per_tool_min: int) -> list[str]:
+    """低于单工具最低阈值的工具名（升序，薄弱项在前）。"""
+    return [k for k, v in per_tool.items() if v < per_tool_min]
+
+
+def evaluate(total: float, threshold: int, enforce: bool,
+             per_tool_min: int | None = None, per_tool: dict | None = None) -> int:
+    """按阈值与开关判定退出码（0 达标 / 1 阻断 / 2 观察）。
+
+    总覆盖率与单工具最低阈值（``per_tool_min``）双重判定：任一不达标即不通过。
+    ``per_tool_min`` 为 None 时退化为仅总覆盖率判定（兼容既有调用）。
+    """
+    code = 0 if total >= threshold else (1 if enforce else 2)
+    if per_tool_min is not None and per_tool and tools_below(per_tool, per_tool_min):
+        if enforce:
+            code = 1
+        elif code == 0:
+            code = 2
+    return code
 
 
 def write_baseline(path: Path, payload: dict) -> None:
@@ -147,17 +163,20 @@ def main(argv: list[str] | None = None) -> int:
         return 1
 
     total, report, ok = measure(config)
-    code = evaluate(total, config["threshold"], config["enforce"])
+
+    per_tool = per_tool_coverage()
+    weakest = dict(list(per_tool.items())[:5])
+    per_tool_min = config["per_tool_min"]
+    below = tools_below(per_tool, per_tool_min)
+    code = evaluate(total, config["threshold"], config["enforce"], per_tool_min, per_tool)
     if not ok:
         # 测试全绿是覆盖率的前提；测试失败一律阻断
         code = 1
 
-    per_tool = per_tool_coverage()
-    weakest = dict(list(per_tool.items())[:5])
-
     if args.update_baseline:
         write_baseline(ROOT / config["baseline"], {
             "threshold": config["threshold"],
+            "per_tool_min": per_tool_min,
             "enforce": config["enforce"],
             "total_percent": round(total, 2),
             "tests_green": ok,
@@ -173,6 +192,8 @@ def main(argv: list[str] | None = None) -> int:
             "tests_green": ok,
             "per_tool": per_tool,
             "weakest": weakest,
+            "per_tool_min": per_tool_min,
+            "below_tools": below,
             "exit_code": code,
         }, ensure_ascii=False))
     else:
@@ -183,6 +204,9 @@ def main(argv: list[str] | None = None) -> int:
         if weakest:
             print("薄弱工具 Top5：" + "、".join(
                 f"{k} {v}%" for k, v in weakest.items()))
+        if below:
+            print("低于单工具阈值（{}%）的工具：{}".format(
+                per_tool_min, "、".join(f"{k} {per_tool[k]}%" for k in below)))
         if code == 1:
             print("[BLOCK] 覆盖率未达阈值或测试失败，阻断合并")
         elif code == 2:
