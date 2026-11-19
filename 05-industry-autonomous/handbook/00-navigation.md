@@ -42,7 +42,7 @@
 | 变更类型 | 位置 | 内容 |
 |---|---|---|
 | 拆分 | handbook/ | 原单份手册按四大维度拆分为 01–04 共 4 个主题文档 + 本导航文件；内容原样搬运，编号与登记册指标、触发器映射不变 |
-| 存档 | reports/archives/ | 原合并版全文存档为 2026-11-industry-autonomous-merged-v1.0.md |
+| 存档 | reports/archives/ | 周期归档目录（超出保留期由 `archive_reports.py` 移入）；原合并版不再单独存档，内容已全量拆分至本 handbook |
 | 更新 | reports/2026-11-industry-autonomous.md | 报告正文（一至十节）不动，附录替换为指向 handbook/ 的链接指针 |
 | 导航 | 本文件 | 文件一览表更新为拆分后路径；手册内部章节锚点改写为跨文件相对链接 |
 
