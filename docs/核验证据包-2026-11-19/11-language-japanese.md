@@ -48,7 +48,7 @@
 
 ## F 提交短码与文件清单
 
-- 提交短码：见本组提交（`feat(vocab): 07/13/11/17 门户 URL 核验深化`）。
+- 提交短码：`a57d702`（`feat(vocab): 07/13/11/17 门户 URL 核验深化`）。
 - 文件清单：
   - `engine/vocabulary/data/11-language-japanese/terms.md`（未变更）
   - `engine/vocabulary/data/11-language-japanese/imports/2026-11-19_核验深化.md`（未变更）

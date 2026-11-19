@@ -94,7 +94,7 @@
 
 ## F 提交短码与文件清单
 
-- 提交短码：见本组提交（`feat(vocab): 07/13/11/17 门户 URL 核验深化`）。
+- 提交短码：`a57d702`（`feat(vocab): 07/13/11/17 门户 URL 核验深化`）。
 - 文件清单：
   - `engine/vocabulary/data/13-regional-info/terms.md`
   - `engine/vocabulary/data/13-regional-info/imports/2026-11-19_核验深化.md`
