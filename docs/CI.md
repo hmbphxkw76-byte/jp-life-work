@@ -235,7 +235,7 @@ reports/YYYY-MM-<slug>.md  ──md2html.py──►  reports/YYYY-MM-<slug>.htm
 - **辅助开关**：报告页工具条「隐藏更新标记」对照阅读、「展开全部删除」。
 - **呈现**：报告页新标签页独立打开，页脚提供「← 返回主题 / 返回首页」。
 
-## 六、测试体系（`engine/tests/`，以实测为准）
+## 六、测试体系（`engine/tests/`，998 项）
 
 | 场景 | 测试类 | 覆盖 |
 |---|---|---|
@@ -266,7 +266,7 @@ reports/YYYY-MM-<slug>.md  ──md2html.py──►  reports/YYYY-MM-<slug>.htm
 | 跨平台差异守卫 | `test_platform_guard.py`（9 项） | 路径分隔（无 Windows 路径字面量 / 工作流正斜杠）、换行（仓库 blob LF / `.gitattributes` / `atomic_write` 保 LF）、命令可用性（无 `shell=True` / 无 PowerShell 专属语法 / 工具路径存在） |
 | 性能趋势快照 | `test_perf_snapshot.py`（6 项） | 规模快照字段与实测口径、耗时采集、基线语义（首条为基线 / 追加不改基线 / `--set-baseline` 覆盖）、CLI `--porcelain` |
 
-> 合计以 `python -m unittest discover -s engine/tests` 集成后实测为准（当前全绿）。
+> 合计 998 项（`python -m unittest discover -s engine/tests` 集成后实测，当前全绿；`incremental_build` 两项「无变更」断言在集成分支领先 main 时按预期失败，合并后通过）。
 
 ## 七、手动命令速查
 
@@ -566,4 +566,4 @@ CI 在 ubuntu runner 上用 **bash** 执行 `run:`，本地维护者用 **PowerS
 | v2.16 | 2026-11-19 | 测试计数同步 | 六节标题与合计行对齐实测：976 → 978、合计 881 → 978（含他会话 `6879c0e` 974→976 与 `e91940e` +2 未同步的累积漂移）；`test_arch_guard` 计数守卫恢复通过 |
 | v2.17 | 2026-11-19 | 文档↔实现对齐 | 二.1 `validate` 步骤表补齐至实测（主 job 28 个命名步骤 + 2 个附加 job：覆盖率 / 工作区卫生）；二.3 `maintenance` 补齐至 19 步（含 `auto_verify --all --dry-run`）；二.6 `audit-gate` 补齐至 5 步；十二.1「六族十三类」→「六族十二类」。实测来源：`.github/workflows/{validate,audit-gate,scheduled-maintenance}.yml`（main @`fb1a38b`） |
 | v2.18 | 2026-11-19 | 工具接线（组 C） | N4 `decision_log.py --check` 接入 `validate.yml`（缺失 / 结构损坏阻断）+ 守卫测试；N5 信息质量三清单留存策略；N6 `auto_verify` 全量日志策略；N8 五问收敛触发条件说明 |
-| v2.19 | 2026-11-19 | 工程硬化（组 D / N11–N14） | ruff 存量 138 → 0（100 自动修复 + 38 人工等价重构，unittest / mypy / validate 等价验证）；新增 `test_platform_guard.py`（9 项）/ `test_perf_snapshot.py`（6 项）；新增 `perf_snapshot.py` 并接入 `scheduled-maintenance.yml`；`.gitattributes` 固化 LF；新增 13.5 / 十四 / 十五节；六节测试数以集成后实测为准 |
+| v2.19 | 2026-11-19 | 工程硬化（组 D / N11–N14） | ruff 存量 138 → 0（100 自动修复 + 38 人工等价重构，unittest / mypy / validate 等价验证）；新增 `test_platform_guard.py`（9 项）/ `test_perf_snapshot.py`（6 项）；新增 `perf_snapshot.py` 并接入 `scheduled-maintenance.yml`；`.gitattributes` 固化 LF；新增 13.5 / 十四 / 十五节；六节测试数 978 → 998（集成后实测） |
