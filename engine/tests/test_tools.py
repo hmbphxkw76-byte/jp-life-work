@@ -2826,8 +2826,9 @@ class TestPipelineFlowSpec(unittest.TestCase):
     def test_cycle_workflows_schedules(self):
         self.assertIn('cron: "15 0 1 * *"', self._wf("scheduled-maintenance.yml"))
         self.assertIn('cron: "20 2 * * 1"', self._wf("info-quality.yml"))
-        self.assertIn('cron: "25 0 1 * *"', self._wf("audit-sampling.yml"))
-        self.assertIn('cron: "20 0 1 * *"', self._wf("scheduled-report-tasks.yml"))
+        self.assertIn('cron: "15 1 1 * *"', self._wf("audit-sampling.yml"))
+        self.assertIn('cron: "45 0 1 * *"', self._wf("scheduled-report-tasks.yml"))
+        self.assertIn('cron: "45 1 1 * *"', self._wf("pipeline-orchestrator.yml"))
 
     def test_html_sync_chain(self):
         h = self._wf("html-sync.yml")
@@ -2852,7 +2853,7 @@ class TestPipelineFlowSpec(unittest.TestCase):
 
     def test_spec_schedule_matches_workflows(self):
         spec = self._read("docs", "信息生产全链路执行规范.md")
-        for ts in ("00:15 UTC", "02:20 UTC", "00:25 UTC"):
+        for ts in ("00:15 UTC", "02:20 UTC", "00:45 UTC", "01:15 UTC", "01:45 UTC"):
             self.assertIn(ts, spec)
 
     def test_validate_pr_targets_main(self):

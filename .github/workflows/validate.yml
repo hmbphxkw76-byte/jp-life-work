@@ -18,6 +18,7 @@ permissions:
 jobs:
   validate:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
       # fetch-depth: 0 拉取完整历史——TestHistoricalMigration 需用 git 历史
       # 取出迁移前的旧报告，逐份复核内容零丢失（浅克隆取不到旧文件）。
@@ -34,11 +35,17 @@ jobs:
         with:
           mode: ci
 
+      # 依赖缓存（W2 / R5）：key 随 requirements 变更，命中即跳过 pip 下载。
+      - name: 缓存 pip 依赖
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt', 'requirements-dev.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
       - name: 安装依赖
         run: pip install -r requirements.txt
-
-      - name: 契约测试（engine/tests）
-        run: python -m unittest discover -s engine/tests -v
 
       # 各校验脚本退出码约定：0=通过；1=错误（阻断）；2=警告（放行）
       - name: 结构与规范校验（validate.py）
@@ -301,16 +308,14 @@ jobs:
           fi
           echo "词库校验通过（topic-check=$c1 verify=$c2 sync-check=$c3 near=$c4；2=仅警告不阻断）"
 
-      # 静态检查（架构优化方向 E / ARCH-OPT）：ruff 存量已于 2026-11-19 清零
-      # （138 → 0，无显式忽略；见 ruff.toml 注释），仍按 warning 不阻断，新增回归由评审兜底；
-      # mypy 已清零存量（P2-4 收紧为阻断门禁）。
+      # 静态检查（架构优化方向 E / ARCH-OPT）：ruff 自 W2 起转阻断（存量已于 2026-11-19 清零，
+      # 138 → 0，无显式忽略；见 ruff.toml 注释）；mypy 覆盖工具链三目录并阻断。
       - name: 安装开发依赖（ruff / mypy）
-        run: pip install -r requirements-dev.txt
-      - name: ruff 静态检查（warning 起步，不阻断）
+        run: pip install -r requirements-dev.lock
+      - name: ruff 静态检查（阻断）
         run: python -m ruff check engine
-        continue-on-error: true
-      - name: mypy 静态检查（阻断）
-        run: python -m mypy engine/tools engine/vocabulary/script
+      - name: mypy 静态检查（阻断，覆盖工具链三目录）
+        run: python -m mypy engine/tools engine/vocabulary/script engine/scripts
 
       # 一次性工具 CI 冒烟（P2-4）：验证入口可加载、退出码 0，防止静默退化。
       - name: 一次性工具冒烟
@@ -337,6 +342,48 @@ jobs:
         with:
           mode: ci
 
+  # 契约测试分片（W2 / R7）：按测试模块分 4 片并行，任一片失败即 job 失败。
+  # 与 validate 主 job 分离，避免单 job 串行成为瓶颈。
+  tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [1, 2, 3, 4]
+    steps:
+      # fetch-depth: 0 拉取完整历史——TestHistoricalMigration 需用 git 历史
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - uses: ./.github/actions/workspace-cleanup
+        with:
+          mode: ci
+
+      - name: 缓存 pip 依赖
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt', 'requirements-dev.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: 安装依赖
+        run: pip install -r requirements.txt
+
+      - name: 契约测试分片（run_tests_parallel.py）
+        run: python engine/scripts/run_tests_parallel.py --shard ${{ matrix.shard }}/4
+
+      - uses: ./.github/actions/workspace-cleanup
+        if: always()
+        with:
+          mode: ci
+
   # 覆盖率门禁（TOOLCHAIN-DEV-SPEC 第六节；mainline 融合 P1 / P3）。
   # 统计范围由 .coveragerc 限定工具链三目录；阈值 / 开关读 coverage-config.json 单一事实源，
   # 不在本脚本硬编码。enforce=true 时未达阈值退出码 1 → 阻断；enforce=false 时退出码 2 → 观察放行。
@@ -356,18 +403,36 @@ jobs:
         with:
           mode: ci
 
+      - name: 缓存 pip 依赖
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt', 'requirements-dev.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
       - name: 安装依赖
         run: pip install -r requirements.txt
 
       - name: 覆盖率门禁（工具链）
         run: |
-          python engine/tools/coverage_gate.py || code=$?
+          python engine/tools/coverage_gate.py --porcelain > coverage-gate.json || code=$?
           code=${code:-0}
+          cat coverage-gate.json
           if [ "$code" -ne 0 ] && [ "$code" -ne 2 ]; then
             echo "::error::工具链覆盖率未达标或测试失败（退出码 $code），阻断合并"
             exit 1
           fi
           echo "coverage_gate 退出码 $code（0=达标，2=观察期未达标不阻断）"
+
+      # 覆盖率报告留痕（W2 / 2.8）：上传机读结果，供跨月对比与人工审查。
+      - name: 上传覆盖率报告
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-gate
+          path: coverage-gate.json
+          if-no-files-found: ignore
 
       - uses: ./.github/actions/workspace-cleanup
         if: always()

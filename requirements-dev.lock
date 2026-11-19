@@ -1,0 +1,17 @@
+# 开发 / 静态检查依赖完整锁定（W2 / R5；由本地环境实测解析生成）。
+# 用法：pip install -r requirements-dev.lock
+# 升级口径：先改 requirements-dev.txt，再重新解析并回归 ruff / mypy 全量。
+ast-serialize==0.13.1
+    # via mypy
+librt==0.16.0
+    # via mypy
+mypy==2.4.1
+    # via requirements-dev.txt
+mypy-extensions==1.2.0
+    # via mypy
+pathspec==1.1.1
+    # via mypy
+ruff==0.17.5
+    # via requirements-dev.txt
+typing-extensions==4.16.0
+    # via mypy

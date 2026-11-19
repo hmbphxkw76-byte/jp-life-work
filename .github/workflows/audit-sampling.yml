@@ -1,5 +1,5 @@
-# 月度审计抽检：每月 1 日 00:25 UTC（= 09:25 JST）执行分层抽检并提交报告。
-# 紧随定时维护（00:15）之后；命中 P0/P1 即告警，不合格报告进入重新审计流程：
+# 月度审计抽检：每月 1 日 01:15 UTC（= 10:15 JST）执行分层抽检并提交报告。
+# 紧随定时维护（00:15）之后，与月度提醒（00:45）、流水线编排（01:45）错峰 ≥ 30 分钟；命中 P0/P1 即告警，不合格报告进入重新审计流程：
 # audit_sampling --apply 内置 G→F 反馈链路（命中 P0/P1 → audit_pipeline 置 stale），
 # 随后 audit_badge --sync 撤销「已审计」标识，报告须重走 submit → 初审 → 复核 → 终审。
 #
@@ -8,8 +8,8 @@ name: audit-sampling
 
 on:
   schedule:
-    # 每月 1 日 00:25 UTC = 09:25 JST，避开整点高负载时段
-    - cron: "25 0 1 * *"
+    # 每月 1 日 01:15 UTC = 10:15 JST，与 00:15 / 00:45 / 01:45 错峰 ≥ 30 分钟
+    - cron: "15 1 1 * *"
   workflow_dispatch:
 
 concurrency:
@@ -18,11 +18,14 @@ concurrency:
 
 permissions:
   contents: write
+  pull-requests: write
 
 jobs:
   sample:
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -36,6 +39,15 @@ jobs:
       - uses: ./.github/actions/workspace-cleanup
         with:
           mode: ci
+
+      # 依赖缓存（W2 / R5）：key 随 requirements 变更，命中即跳过 pip 下载。
+      - name: 缓存 pip 依赖
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt', 'requirements-dev.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
 
       - name: 安装依赖
         run: pip install -r requirements.txt
@@ -76,7 +88,12 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git commit -m "chore(audit): 月度分层抽检报告（含不合格处置）"
-          git push
+          BRANCH="auto/audit-sampling-$(date -u +%Y%m%d-%H%M%S)"
+          git push origin "HEAD:$BRANCH"
+          gh pr create --base main --head "$BRANCH" \
+            --title "[automated] 月度分层抽检报告" \
+            --body "由 .github/workflows/audit-sampling.yml 自动提交（[automated] 标记，保留 github-actions[bot] 提交身份）。请评审后合并。" \
+            || echo "::warning::PR 创建失败（可能已存在），请人工确认"
 
       # 阶段收尾：无论成败清理缓存、临时产物与 pip 缓存，保证流水线结束后无残留。
       - uses: ./.github/actions/workspace-cleanup

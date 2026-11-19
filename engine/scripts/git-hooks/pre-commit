@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
-# jp-life-work 分支命名守卫（pre-commit）。
+# jp-life-work 提交前守卫（pre-commit）。
 # 源文件由 engine/scripts/branch_naming.py install 安装；修改请改 engine/scripts/git-hooks/pre-commit 后重装。
-# 当前分支为不合规 task/* 时阻断提交；main 与 detached HEAD 放行。
+#
+# 两道检查：
+#   1. 分支命名守卫：当前分支为不合规 task/* 时阻断提交；main 与 detached HEAD 放行。
+#   2. 快速校验子集（W2 / R6）：暂存 Python 文件 ruff --fix + 结构规范校验（validate.py）。
+#      ruff 缺失时跳过并告警（不阻断）；validate.py 退出码 1 阻断、2 放行。
 set -euo pipefail
 
 root="$(git rev-parse --show-toplevel)"
@@ -28,4 +32,32 @@ if [ -z "$py" ]; then
   exit 1
 fi
 
-exec "$py" "$script" hook pre-commit
+# 1) 分支命名守卫
+"$py" "$script" hook pre-commit || exit $?
+
+# 2) 快速校验子集
+staged_py="$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.py$' || true)"
+if [ -n "$staged_py" ]; then
+  if "$py" -m ruff --version >/dev/null 2>&1; then
+    if ! printf '%s\n' "$staged_py" | xargs "$py" -m ruff check --fix; then
+      echo "[pre-commit] ruff 存在未修复违规，已禁止提交。" >&2
+      exit 1
+    fi
+    printf '%s\n' "$staged_py" | xargs git add --
+  else
+    echo "[pre-commit] 未找到 ruff，跳过 ruff --fix（可 pip install -r requirements-dev.txt）。" >&2
+  fi
+fi
+
+if [ -f "$root/engine/tools/validate.py" ]; then
+  set +e
+  "$py" "$root/engine/tools/validate.py"
+  code=$?
+  set -e
+  if [ "$code" -eq 1 ]; then
+    echo "[pre-commit] validate.py 存在错误级违规，已禁止提交。" >&2
+    exit 1
+  fi
+fi
+
+exit 0

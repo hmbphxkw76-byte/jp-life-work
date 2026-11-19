@@ -55,7 +55,7 @@ def _run_push(remote: str, refspecs: Sequence[str], force_with_lease: bool,
 
 
 def push_with_failover(remote: str, refspecs: Sequence[str],
-                       fallback: str = DEFAULT_FALLBACK,
+                       fallback: str | None = DEFAULT_FALLBACK,
                        force_with_lease: bool = False,
                        dry_run: bool = False) -> int:
     """先试主通道，失败切备用通道；都失败即停止，不重试。

@@ -20,7 +20,7 @@
 | 决策支持件套（参数 / 一页纸 / 财务模型 / 事实卡片 / 待核实闭环） | `validate.yml`（复用门禁）+ `scheduled-maintenance.yml`（刷新） |
 | 流程复用一致性 | `engine/tests/test_tools.py::TestProcessReuse` |
 | 阶段出口质量（采集 / 筛选 / 分类左移） | `validate.yml`（`stage_gate_check.py`） |
-| 触发检测 / 编排状态（S0→S2） | `pipeline-orchestrator.yml`（每月 1 日 00:35 UTC） |
+| 触发检测 / 编排状态（S0→S2） | `pipeline-orchestrator.yml`（每月 1 日 01:45 UTC） |
 | 工具链覆盖率 / 双轴评审 | `validate.yml`（`coverage_gate.py`）/ `audit-gate.yml`（`review_gate.py`） |
 
 **CI 不产出报告研究内容**——报告由各主题 `prompts/business-config.md` 定义的研究流程人工/Agent 产出；CI 只校验与同步生成物。
@@ -35,7 +35,8 @@
 
 | 步骤 | 命令 | 失败后果 |
 |---|---|---|
-| 契约测试 | `python -m unittest discover -s engine/tests -v` | 阻断（退出码 1） |
+| 缓存 pip 依赖 | `actions/cache@v4`（key 随 requirements 哈希） | 未命中仅降速，不阻断 |
+| 契约测试（分片 job） | `run_tests_parallel.py --shard <i>/4`（4 片并行） | 阻断（任一片失败） |
 | 结构与规范校验 | `validate.py` | 阻断 |
 | 报告自动归位检查 | `classify_reports.py --check --unknown-warn` | 阻断 |
 | 结构补全检查 | `ensure_region_topics.py --check` | 阻断 |
@@ -60,14 +61,16 @@
 | 个人财务模型一致性 | `personal_finance_model.py --check` | 阻断（缺失 / 过期） |
 | 词库校验 | `vocab_tool.py topic-check` / `verify` + `sync_vocab.py check` + `vocab_near_check.py` | 阻断 |
 | 决策日志校验 | `decision_log.py --check` | 阻断（日志缺失 / 结构损坏；暂无记录仅告警） |
-| 安装开发依赖 | `pip install -r requirements-dev.txt` | 失败即阻断 |
-| ruff 静态检查 | `python -m ruff check engine` | 不阻断（warning 起步） |
-| mypy 静态检查 | `python -m mypy engine/tools engine/vocabulary/script` | 阻断 |
+| 安装开发依赖 | `pip install -r requirements-dev.lock` | 失败即阻断 |
+| ruff 静态检查 | `python -m ruff check engine` | 阻断（W2 起） |
+| mypy 静态检查 | `python -m mypy engine/tools engine/vocabulary/script engine/scripts` | 阻断 |
 | 一次性工具冒烟 | 8 个一次性工具 `--help` | 阻断 |
 | 覆盖率门禁（附加 job） | `coverage_gate.py`（阈值读 `coverage-config.json`） | 阻断（enforce=true 未达标 / 测试失败） |
 | 工作区卫生自检（附加 job） | `cleanup_workspace.py --check` | 阻断（存在残留） |
 
-> 实测（2026-11-19，main @`fb1a38b`）：主 job **29 个命名步骤**（不含通用「安装依赖」，含「安装开发依赖」；主 job 实际共 30 个 `- name:` 步骤）+ **2 个附加 job**（覆盖率 / 工作区卫生）；`ruff` 与 `mypy` 为主 job 内静态检查步骤，非独立 job。集成合并后如步骤数变化，以实测为准并更新本表。
+> 实测（2026-11-19，main @`fb1a38b`）：主 job **29 个命名步骤**（不含通用「安装依赖」，含「安装开发依赖」；主 job 实际共 30 个 `- name:` 步骤）+ **3 个附加 job**（契约测试分片 / 覆盖率 / 工作区卫生）；契约测试已拆为独立 4 分片 job，`ruff` 与 `mypy` 为主 job 内静态检查步骤。集成合并后如步骤数变化，以实测为准并更新本表。
+
+> 通用改造（W2 / R5 / R1 / R7，2026-11-19）：8 条工作流均已接入 `actions/cache@v4` pip 缓存（key 随 `requirements*.txt` 哈希）并补齐 `timeout-minutes`；5 条定时工作流（maintenance / audit-sampling / info-quality / scheduled-report-tasks / pipeline-orchestrator）提交改为推自动分支 + 开 PR（`[automated]` 标记，保留 `github-actions[bot]` 提交身份）；月度 cron 错峰至 00:15 / 00:45 / 01:15 / 01:45（间隔 ≥ 30 分钟）；契约测试由 `run_tests_parallel.py` 分 4 片并行。
 
 > 两个关卡对期间 >= 2026-11 的**新报告**阻断；历史报告由 `--new-only` 跳过，
 > 遗留项列入 `engine/report-audits/audit/lint-whitelist.json` 豁免（逾期恢复阻断）。
@@ -111,7 +114,7 @@
 | 提交 | `git commit` + `git push` | 有变更才提交 |
 | 自动化状态失败补记 | `git add -A -- automation-status.json` → `commit` + `push`（`if: always()`） | job 失败时主提交跳过，本步骤仍把本轮状态入库，避免「记录了却因未提交而丢失」 |
 
-> 实测（2026-11-19，main @`fb1a38b`）：共 **20 步**（不含通用「安装依赖」），含 `auto_verify.py --all --dry-run` / `decision_metrics.py --history` / `l5_meta_check.py` / `counterexample_scan.py`。
+> 实测（2026-11-19，main @`fb1a38b`）：共 **21 步**（不含通用「安装依赖」），含 `auto_verify.py --all --dry-run` / `decision_metrics.py --history` / `l5_meta_check.py` / `counterexample_scan.py`；定时任务提交已改为推分支 + 开 PR（W2 / R1）。
 
 - **退出码约定**：`0` 通过；`1` 错误（阻断）；`2` 警告（放行）。
 - **核验日志策略（N6）**：`auto_verify.py --all --dry-run` 逐报告写
@@ -123,7 +126,7 @@
 
 ### 4. `scheduled-report-tasks.yml` — 月度产出提醒
 
-- **触发**：`cron: "20 0 1 * *"`（每月 1 日 00:20 UTC）、手动（可指定 `period`）
+- **触发**：`cron: "45 0 1 * *"`（每月 1 日 00:45 UTC）、手动（可指定 `period`）
 - **步骤**：
   1. `update_planner.py --period <YYYY-MM>` 生成当月任务清单
   2. 用 `gh issue create` 开「【月度报告产出】YYYY-MM 任务清单」Issue
@@ -164,7 +167,7 @@
 | 多层级校验 | `audit_check.py --all` | 存在 P0/P1 阻断；仅 P2 放行 |
 | 工具链双轴评审软门禁 | `review_gate.py --changed .changed-files` | 软门禁（缺评审告警，不阻断） |
 
-> 实测（2026-11-19，main @`fb1a38b`）：共 **5 步**（不含通用「安装依赖」）。
+> 实测（2026-11-19，main @`fb1a38b`）：共 **6 步**（不含通用「安装依赖」，含 pip 缓存准备）。
 
 - **合并门禁覆盖**：`--gate` 一次完成台账哈希链、登记册双向一致、已审计标识一致、受检报告审计状态（`audited` + md/HTML 指纹匹配 + 有效 L5 证据）；PR 默认只查本次变更报告，`--strict` 查全库。
 - **L5 证据门禁**：`audited` 报告必须附有效 L5 语义复核证据（`re_review --evidence` 或一次性 `--backfill-l5`），缺失即 `L5-EVIDENCE`（P1）阻断。
@@ -174,7 +177,7 @@
 
 ### 7. `audit-sampling.yml` — 月度分层抽检
 
-- **触发**：`cron: "25 0 1 * *"`（每月 1 日 00:25 UTC = 09:25 JST）、手动
+- **触发**：`cron: "15 1 1 * *"`（每月 1 日 01:15 UTC = 10:15 JST）、手动
 - **步骤**：
   1. `audit_sampling.py --apply`（分层抽样：每主题至少 1 份、总数 ≥ 20%，逐期轮换；命中 P0/P1 自动置 `stale`）
   2. `audit_badge.py --sync`（撤销不合格报告的「已审计」标识）
@@ -185,7 +188,7 @@
 
 ### 8. `pipeline-orchestrator.yml` — 端到端流水线编排（检测 + 计划）
 
-- **触发**：`cron: "35 0 1 * *"`（每月 1 日 00:35 UTC = 09:35 JST，与 00:15 / 00:20 / 00:25 错开）、手动（可指定 `--period`）
+- **触发**：`cron: "45 1 1 * *"`（每月 1 日 01:45 UTC = 10:45 JST，与 00:15 / 00:45 / 01:15 错开 ≥ 30 分钟）、手动（可指定 `--period`）
 - **步骤**：
   1. `trigger_watch.py --apply`（派生 watchlist + freshness + 候选线索，写 `trigger-watch.json`）
   2. `pipeline_runner.py run`（S0 检测 → S1 计划 → **S2 人工闸门自动暂停**，不产出正文）
@@ -247,7 +250,7 @@ reports/YYYY-MM-<slug>.md  ──md2html.py──►  reports/YYYY-MM-<slug>.htm
 - **辅助开关**：报告页工具条「隐藏更新标记」对照阅读、「展开全部删除」。
 - **呈现**：报告页新标签页独立打开，页脚提供「← 返回主题 / 返回首页」。
 
-## 六、测试体系（`engine/tests/`，1040 项）
+## 六、测试体系（`engine/tests/`，1045 项）
 
 | 场景 | 测试类 | 覆盖 |
 |---|---|---|
@@ -279,7 +282,7 @@ reports/YYYY-MM-<slug>.md  ──md2html.py──►  reports/YYYY-MM-<slug>.htm
 | 跨平台差异守卫 | `test_platform_guard.py`（9 项） | 路径分隔（无 Windows 路径字面量 / 工作流正斜杠）、换行（仓库 blob LF / `.gitattributes` / `atomic_write` 保 LF）、命令可用性（无 `shell=True` / 无 PowerShell 专属语法 / 工具路径存在） |
 | 性能趋势快照 | `test_perf_snapshot.py`（6 项） | 规模快照字段与实测口径、耗时采集、基线语义（首条为基线 / 追加不改基线 / `--set-baseline` 覆盖）、CLI `--porcelain` |
 
-> 合计 1040 项（`python -m unittest discover -s engine/tests` 集成后实测，当前全绿；`incremental_build` 两项「无变更」断言在集成分支领先 main 时按预期失败，合并后通过）。
+> 合计 1045 项（`python -m unittest discover -s engine/tests` 集成后实测，当前全绿；`incremental_build` 两项「无变更」断言在集成分支领先 main 时按预期失败，合并后通过）。
 
 ## 七、手动命令速查
 
@@ -584,3 +587,4 @@ CI 在 ubuntu runner 上用 **bash** 执行 `run:`，本地维护者用 **PowerS
 | v2.20 | 2026-11-19 | 词条删除 + remove 命令 | 新增 `vocab_tool remove`（TDD，3 项测试）；删除 22 条无法核验 `npa.go.jp` 词条（01: 109→98、02: 104→93）；`index.html` 重新生成；测试数 998 → 1001 |
 | v2.21 | 2026-11-19 | 工程硬化收口（T3/T8） | T3 收口 `findings-by-path.json` 忽略（`git check-ignore` 命中，跑测试后工作区无残留）；T8 新增规格 `docs/toolchain/specs/align-2026-11-19.md` 与守卫 `TestReviewCoverage`（2 项，工单 100% 评审覆盖断言）；补 `coverage-gate-review.md` 与 closure-b 工单 slug 留痕；六节测试数 1001 → 1003 |
 | v2.22 | 2026-11-19 | 文档↔实现对齐（T1/T10） | 修正工具 43→44、类型 13→12、测试 978→1008、validate 29/30 步、maintenance 20 步、词库 1634→1612、覆盖率 92.0→90.35%；`docs/README` 一次性文档声明改为「4 份在库、过程留痕保留」；新增 5 项守卫（类型数 / 词条数 / CI 步骤数 / 覆盖率基线 / 一次性文档声明） |
+| v2.23 | 2026-11-19 | CI/CD 加固（W2 / R5 / R1 / R6 / R7） | 8 条工作流接入 pip 缓存 + 补齐 timeout；定时任务改推分支 + 开 PR（不再直推 main）；月度 cron 错峰（00:15 / 00:45 / 01:15 / 01:45）；`requirements-dev` 固定 + 新增 `requirements-dev.lock`；ruff 转阻断、mypy 覆盖 `engine/scripts`；契约测试改 4 分片 job（`run_tests_parallel.py`）；覆盖率新增单工具最低阈值（`per_tool_min`）+ `upload-artifact`；本地 pre-commit 增 `ruff --fix` + `validate.py`；测试数 1040 → 1045 |

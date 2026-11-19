@@ -1,5 +1,6 @@
 {
   "threshold": 80,
+  "per_tool_min": 60,
   "enforce": true,
   "total_percent": 90.46,
   "tests_green": true,

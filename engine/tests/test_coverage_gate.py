@@ -28,6 +28,7 @@ class TestLoadConfig(unittest.TestCase):
         self.assertIsInstance(cfg["enforce"], bool)
         self.assertIsInstance(cfg["test_discovery"], str)
         self.assertTrue(cfg["test_discovery"])
+        self.assertIsInstance(cfg["per_tool_min"], int)
 
     def test_missing_threshold_rejected(self):
         with tempfile.TemporaryDirectory() as d:
@@ -61,6 +62,15 @@ class TestEvaluate(unittest.TestCase):
 
     def test_below_threshold_observe_warns(self):
         self.assertEqual(coverage_gate.evaluate(55.0, 60, False), 2)
+
+    def test_per_tool_below_enforced_blocks(self):
+        self.assertEqual(coverage_gate.evaluate(90.0, 80, True, 60, {"a.py": 50.0}), 1)
+
+    def test_per_tool_below_observe_warns(self):
+        self.assertEqual(coverage_gate.evaluate(90.0, 80, False, 60, {"a.py": 50.0}), 2)
+
+    def test_per_tool_above_passes(self):
+        self.assertEqual(coverage_gate.evaluate(90.0, 80, True, 60, {"a.py": 70.0}), 0)
 
 
 class TestWriteBaseline(unittest.TestCase):
@@ -130,6 +140,24 @@ class TestMain(unittest.TestCase):
             code, _ = self._run()
         self.assertEqual(code, 1)
 
+    def test_per_tool_below_blocks(self):
+        with unittest.mock.patch.object(coverage_gate, "measure",
+                                        return_value=(90.0, "r", True)), \
+                unittest.mock.patch.object(coverage_gate, "per_tool_coverage",
+                                           return_value={"a.py": 40.0}):
+            code, out = self._run()
+        self.assertEqual(code, 1)
+        self.assertIn("低于单工具阈值", out)
+
+    def test_per_tool_above_passes(self):
+        with unittest.mock.patch.object(coverage_gate, "measure",
+                                        return_value=(90.0, "r", True)), \
+                unittest.mock.patch.object(coverage_gate, "per_tool_coverage",
+                                           return_value={"a.py": 70.0}):
+            code, out = self._run()
+        self.assertEqual(code, 0)
+        self.assertNotIn("低于单工具阈值", out)
+
     def test_porcelain_json(self):
         with unittest.mock.patch.object(coverage_gate, "measure",
                                         return_value=(85.0, "r", True)):
@@ -139,6 +167,7 @@ class TestMain(unittest.TestCase):
         self.assertEqual(data["total_percent"], 85.0)
         self.assertEqual(data["threshold"], 80)
         self.assertTrue(data["tests_green"])
+        self.assertEqual(data["per_tool_min"], 60)
 
     def test_invalid_config_exit_1(self):
         with unittest.mock.patch.object(coverage_gate, "load_config",
