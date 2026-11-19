@@ -1,8 +1,8 @@
 {
   "topic": "19-safety-disaster",
   "name": "防灾·安全·治安",
-  "version": "v1.4",
-  "generated_at": "2026-11-19T08:48:46",
+  "version": "v1.5",
+  "generated_at": "2026-11-19T11:38:45",
   "count": 75,
   "categories": {
     "防灾体制": 21,
@@ -330,7 +330,7 @@
       "first_added": "2026-11-14",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mofa.go.jp/",
+      "source_url": "https://www.anzen.mofa.go.jp/",
       "confidence": "B"
     },
     {
@@ -1003,7 +1003,7 @@
       "first_added": "2026-11-18",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.cao.go.jp/",
+      "source_url": "https://www.kantei.go.jp/jp/headline/bousai/index.html",
       "confidence": "B"
     },
     {
@@ -1023,7 +1023,7 @@
       "first_added": "2026-11-18",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mlit.go.jp/",
+      "source_url": "https://disaportal.gsi.go.jp/",
       "confidence": "B"
     },
     {
@@ -1118,7 +1118,7 @@
       "first_added": "2026-11-18",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mlit.go.jp/",
+      "source_url": "https://www.river.go.jp/portal/",
       "confidence": "B"
     },
     {
@@ -1294,7 +1294,7 @@
       "first_added": "2026-11-18",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mofa.go.jp/",
+      "source_url": "https://www.ezairyu.mofa.go.jp/RRnet/index.html",
       "confidence": "B"
     },
     {
@@ -1313,7 +1313,7 @@
       "first_added": "2026-11-18",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mofa.go.jp/",
+      "source_url": "https://www.ezairyu.mofa.go.jp/RRnet/index.html",
       "confidence": "B"
     },
     {

@@ -1,8 +1,8 @@
 {
   "topic": "10-education-qualification",
   "name": "教育与资格",
-  "version": "v1.3",
-  "generated_at": "2026-11-19T09:07:50",
+  "version": "v1.4",
+  "generated_at": "2026-11-19T11:39:02",
   "count": 70,
   "categories": {
     "教育体系与阶段": 14,
@@ -487,7 +487,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.ipa.go.jp/",
+      "source_url": "https://www.ipa.go.jp/shiken/kubun/ip.html",
       "confidence": "B"
     },
     {
@@ -790,7 +790,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.jasso.go.jp/",
+      "source_url": "https://www.jasso.go.jp/shogakukin/index.html",
       "confidence": "B"
     },
     {
@@ -809,7 +809,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.jasso.go.jp/",
+      "source_url": "https://www.jasso.go.jp/shogakukin/about/index.html",
       "confidence": "B"
     },
     {
@@ -828,7 +828,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.jasso.go.jp/",
+      "source_url": "https://www.jasso.go.jp/shogakukin/about/index.html",
       "confidence": "B"
     },
     {
