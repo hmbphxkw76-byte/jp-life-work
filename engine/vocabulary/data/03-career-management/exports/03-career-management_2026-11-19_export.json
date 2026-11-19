@@ -1,8 +1,8 @@
 {
   "topic": "03-career-management",
   "name": "职业管理与晋升",
-  "version": "v1.3",
-  "generated_at": "2026-11-19T09:07:49",
+  "version": "v1.4",
+  "generated_at": "2026-11-19T11:34:48",
   "count": 72,
   "categories": {
     "管理岗位与职责": 13,
@@ -363,7 +363,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/",
+      "source_url": "https://kokoro.mhlw.go.jp/",
       "confidence": "B"
     },
     {
@@ -382,7 +382,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/koyoukintou/seisaku06/index.html",
       "confidence": "B"
     },
     {
@@ -684,7 +684,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000122460.html",
       "confidence": "B"
     },
     {
@@ -703,7 +703,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000122460.html",
       "confidence": "B"
     },
     {
@@ -1005,7 +1005,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.fsa.go.jp/",
+      "source_url": "https://www.fsa.go.jp/policy/kinyusyohin/index.html",
       "confidence": "B"
     },
     {
@@ -1024,7 +1024,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudouseisaku/roudoukumiai/index.html",
       "confidence": "B"
     },
     {

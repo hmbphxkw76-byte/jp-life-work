@@ -1,8 +1,8 @@
 {
   "topic": "06-industry-technology",
   "name": "技术行业",
-  "version": "v1.3",
-  "generated_at": "2026-11-19T09:07:50",
+  "version": "v1.4",
+  "generated_at": "2026-11-19T11:43:45",
   "count": 74,
   "categories": {
     "技术栈与架构": 12,
@@ -95,7 +95,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.cncf.io/",
+      "source_url": "https://glossary.cncf.io/microservices/",
       "confidence": "B"
     },
     {
@@ -137,7 +137,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.cncf.io/",
+      "source_url": "https://glossary.cncf.io/event-driven-architecture/",
       "confidence": "B"
     },
     {
@@ -789,7 +789,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.cncf.io/",
+      "source_url": "https://glossary.cncf.io/container/",
       "confidence": "B"
     },
     {
@@ -829,7 +829,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.cncf.io/",
+      "source_url": "https://glossary.cncf.io/kubernetes/",
       "confidence": "B"
     },
     {
@@ -850,7 +850,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.cncf.io/",
+      "source_url": "https://glossary.cncf.io/serverless/",
       "confidence": "B"
     },
     {
@@ -871,7 +871,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.iso.org/",
+      "source_url": "https://www.iso.org/standard/35733.html",
       "confidence": "B"
     },
     {
@@ -954,7 +954,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.ietf.org/",
+      "source_url": "https://www.rfc-editor.org/rfc/rfc6749.html",
       "confidence": "B"
     },
     {
@@ -1038,7 +1038,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.nist.gov/",
+      "source_url": "https://csrc.nist.gov/publications/detail/sp/800-207/final",
       "confidence": "B"
     },
     {
@@ -1059,7 +1059,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.ppc.go.jp/",
+      "source_url": "https://www.ppc.go.jp/personalinfo/",
       "confidence": "B"
     },
     {
@@ -1080,7 +1080,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.iso.org/",
+      "source_url": "https://www.iso.org/standard/27001",
       "confidence": "B"
     },
     {
@@ -1101,7 +1101,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.nist.gov/",
+      "source_url": "https://csrc.nist.gov/pubs/sp/800/61/r3/final",
       "confidence": "B"
     },
     {

@@ -1,8 +1,8 @@
 {
   "topic": "15-health-wellbeing",
   "name": "医疗·健康·心理",
-  "version": "v1.6",
-  "generated_at": "2026-11-19T08:48:46",
+  "version": "v1.7",
+  "generated_at": "2026-11-19T11:58:56",
   "count": 76,
   "categories": {
     "医疗制度": 19,
@@ -30,7 +30,7 @@
       "first_added": "2026-11-14",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/stf/newpage_22682.html",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/index.html",
       "confidence": "B"
     },
     {
@@ -50,7 +50,7 @@
       "first_added": "2026-11-14",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/juuyou/kougakuiryou/index.html",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/koukikourei/index.html",
       "confidence": "B"
     },
     {
@@ -70,7 +70,7 @@
       "first_added": "2026-11-14",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/juuyou/kougakuiryou/index.html",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/index.html",
       "confidence": "B"
     },
     {
@@ -90,7 +90,7 @@
       "first_added": "2026-11-14",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/juuyou/kougakuiryou/index.html",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/index.html",
       "confidence": "B"
     },
     {
@@ -130,7 +130,7 @@
       "first_added": "2026-11-14",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.nta.go.jp/",
+      "source_url": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1120.htm",
       "confidence": "B"
     },
     {
@@ -149,7 +149,7 @@
       "first_added": "2026-11-14",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/juuyou/kougakuiryou/index.html",
+      "source_url": "https://www.mhlw.go.jp/",
       "confidence": "B"
     },
     {
@@ -169,7 +169,7 @@
       "first_added": "2026-11-14",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/juuyou/kougakuiryou/index.html",
+      "source_url": "https://www.mhlw.go.jp/",
       "confidence": "B"
     },
     {
@@ -189,7 +189,7 @@
       "first_added": "2026-11-14",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/juuyou/kougakuiryou/index.html",
+      "source_url": "https://www.mhlw.go.jp/",
       "confidence": "B"
     },
     {
@@ -208,7 +208,7 @@
       "first_added": "2026-11-14",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/juuyou/kougakuiryou/index.html",
+      "source_url": "https://www.mhlw.go.jp/",
       "confidence": "B"
     },
     {
@@ -228,7 +228,7 @@
       "first_added": "2026-11-14",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/stf/newpage_22682.html",
+      "source_url": "https://www.mhlw.go.jp/",
       "confidence": "B"
     },
     {
@@ -248,7 +248,7 @@
       "first_added": "2026-11-14",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/juuyou/kougakuiryou/index.html",
+      "source_url": "https://www.mhlw.go.jp/",
       "confidence": "B"
     },
     {
@@ -288,7 +288,7 @@
       "first_added": "2026-11-14",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/juuyou/kougakuiryou/index.html",
+      "source_url": "https://www.mhlw.go.jp/",
       "confidence": "B"
     },
     {
@@ -307,7 +307,7 @@
       "first_added": "2026-11-14",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000161103.html",
+      "source_url": "https://www.mhlw.go.jp/",
       "confidence": "B"
     },
     {
@@ -326,7 +326,7 @@
       "first_added": "2026-11-14",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/juuyou/kougakuiryou/index.html",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index.html",
       "confidence": "B"
     },
     {
@@ -346,7 +346,7 @@
       "first_added": "2026-11-14",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/juuyou/kougakuiryou/index.html",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index.html",
       "confidence": "B"
     },
     {
@@ -366,7 +366,7 @@
       "first_added": "2026-11-14",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/juuyou/kougakuiryou/index.html",
+      "source_url": "https://www.mhlw.go.jp/",
       "confidence": "B"
     },
     {
@@ -386,7 +386,7 @@
       "first_added": "2026-11-14",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/juuyou/kougakuiryou/index.html",
+      "source_url": "https://www.mhlw.go.jp/",
       "confidence": "B"
     },
     {
@@ -428,7 +428,7 @@
       "first_added": "2026-11-15",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/stf/newpage_22682.html",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/index.html",
       "confidence": "B"
     },
     {
@@ -449,7 +449,7 @@
       "first_added": "2026-11-15",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/juuyou/kougakuiryou/index.html",
+      "source_url": "https://www.mhlw.go.jp/",
       "confidence": "B"
     },
     {
@@ -470,7 +470,7 @@
       "first_added": "2026-11-15",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/juuyou/kougakuiryou/index.html",
+      "source_url": "https://www.mhlw.go.jp/",
       "confidence": "B"
     },
     {
@@ -491,7 +491,7 @@
       "first_added": "2026-11-15",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/juuyou/kougakuiryou/index.html",
+      "source_url": "https://www.mhlw.go.jp/",
       "confidence": "B"
     },
     {
@@ -512,7 +512,7 @@
       "first_added": "2026-11-15",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/juuyou/kougakuiryou/index.html",
+      "source_url": "https://www.mhlw.go.jp/",
       "confidence": "B"
     },
     {
@@ -616,7 +616,7 @@
       "first_added": "2026-11-15",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index.html",
+      "source_url": "https://www.mhlw.go.jp/",
       "confidence": "B"
     },
     {
@@ -699,7 +699,7 @@
       "first_added": "2026-11-15",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/juuyou/kougakuiryou/index.html",
+      "source_url": "https://www.mhlw.go.jp/",
       "confidence": "B"
     },
     {
@@ -719,7 +719,7 @@
       "first_added": "2026-11-15",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index.html",
+      "source_url": "https://www.mhlw.go.jp/",
       "confidence": "B"
     },
     {
@@ -738,7 +738,7 @@
       "first_added": "2026-11-18",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/juuyou/kougakuiryou/index.html",
+      "source_url": "https://www.mhlw.go.jp/",
       "confidence": "B"
     },
     {
@@ -757,7 +757,7 @@
       "first_added": "2026-11-18",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/juuyou/kougakuiryou/index.html",
+      "source_url": "https://www.mhlw.go.jp/",
       "confidence": "B"
     },
     {
@@ -776,7 +776,7 @@
       "first_added": "2026-11-18",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/juuyou/kougakuiryou/index.html",
+      "source_url": "https://www.mhlw.go.jp/",
       "confidence": "B"
     },
     {
@@ -795,7 +795,7 @@
       "first_added": "2026-11-18",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/juuyou/kougakuiryou/index.html",
+      "source_url": "https://www.mhlw.go.jp/",
       "confidence": "B"
     },
     {
@@ -814,7 +814,7 @@
       "first_added": "2026-11-18",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/juuyou/kougakuiryou/index.html",
+      "source_url": "https://www.mhlw.go.jp/",
       "confidence": "B"
     },
     {
@@ -833,7 +833,7 @@
       "first_added": "2026-11-18",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/koukikourei/index.html",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/index.html",
       "confidence": "B"
     },
     {
@@ -852,7 +852,7 @@
       "first_added": "2026-11-18",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/juuyou/kougakuiryou/index.html",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/index.html",
       "confidence": "B"
     },
     {
@@ -871,7 +871,7 @@
       "first_added": "2026-11-18",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/juuyou/kougakuiryou/index.html",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index.html",
       "confidence": "B"
     },
     {
@@ -890,7 +890,7 @@
       "first_added": "2026-11-18",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/juuyou/kougakuiryou/index.html",
+      "source_url": "https://www.mhlw.go.jp/",
       "confidence": "B"
     },
     {
@@ -909,7 +909,7 @@
       "first_added": "2026-11-18",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/juuyou/kougakuiryou/index.html",
+      "source_url": "https://www.mhlw.go.jp/",
       "confidence": "B"
     },
     {
@@ -928,7 +928,7 @@
       "first_added": "2026-11-18",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/juuyou/kougakuiryou/index.html",
+      "source_url": "https://www.mhlw.go.jp/",
       "confidence": "B"
     },
     {
@@ -947,7 +947,7 @@
       "first_added": "2026-11-18",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000161103.html",
+      "source_url": "https://www.mhlw.go.jp/",
       "confidence": "B"
     },
     {
@@ -966,7 +966,7 @@
       "first_added": "2026-11-18",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000161103.html",
+      "source_url": "https://www.mhlw.go.jp/",
       "confidence": "B"
     },
     {
@@ -985,7 +985,7 @@
       "first_added": "2026-11-18",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/juuyou/kougakuiryou/index.html",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/shussan/index.html",
       "confidence": "B"
     },
     {
@@ -1004,7 +1004,7 @@
       "first_added": "2026-11-18",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/juuyou/kougakuiryou/index.html",
+      "source_url": "https://www.mhlw.go.jp/",
       "confidence": "B"
     },
     {
@@ -1106,7 +1106,7 @@
       "first_added": "2026-11-18",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/juuyou/kougakuiryou/index.html",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/shussan/index.html",
       "confidence": "B"
     },
     {
@@ -1127,7 +1127,7 @@
       "first_added": "2026-11-18",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/stf/newpage_22682.html",
+      "source_url": "https://www.mhlw.go.jp/stf/newpage_21517.html",
       "confidence": "B"
     },
     {
@@ -1167,7 +1167,7 @@
       "first_added": "2026-11-18",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/stf/newpage_22682.html",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/index.html",
       "confidence": "B"
     },
     {
@@ -1188,7 +1188,7 @@
       "first_added": "2026-11-18",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/juuyou/kougakuiryou/index.html",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/index.html",
       "confidence": "B"
     },
     {
@@ -1228,7 +1228,7 @@
       "first_added": "2026-11-18",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/juuyou/kougakuiryou/index.html",
+      "source_url": "https://www.mhlw.go.jp/",
       "confidence": "B"
     },
     {
@@ -1289,7 +1289,7 @@
       "first_added": "2026-11-18",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/koukikourei/index.html",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/index.html",
       "confidence": "B"
     },
     {
@@ -1350,7 +1350,7 @@
       "first_added": "2026-11-18",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000161103.html",
+      "source_url": "https://www.mhlw.go.jp/",
       "confidence": "B"
     },
     {
@@ -1370,7 +1370,7 @@
       "first_added": "2026-11-18",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/stf/newpage_22682.html",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000161103.html",
       "confidence": "B"
     },
     {
@@ -1390,7 +1390,7 @@
       "first_added": "2026-11-18",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/juuyou/kougakuiryou/index.html",
+      "source_url": "https://www.mhlw.go.jp/",
       "confidence": "B"
     },
     {
@@ -1430,7 +1430,7 @@
       "first_added": "2026-11-18",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/juuyou/kougakuiryou/index.html",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index.html",
       "confidence": "B"
     },
     {
@@ -1450,7 +1450,7 @@
       "first_added": "2026-11-18",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/juuyou/kougakuiryou/index.html",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index.html",
       "confidence": "B"
     },
     {
@@ -1470,7 +1470,7 @@
       "first_added": "2026-11-18",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/juuyou/kougakuiryou/index.html",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index.html",
       "confidence": "B"
     },
     {
@@ -1489,7 +1489,7 @@
       "first_added": "2026-11-18",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/juuyou/kougakuiryou/index.html",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index.html",
       "confidence": "B"
     },
     {
