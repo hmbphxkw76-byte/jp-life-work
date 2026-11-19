@@ -27,6 +27,7 @@ from typing import Any
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
+import compliance_check  # noqa: E402
 from _common import (  # noqa: E402
     ROOT,
     detect_month_report,
@@ -34,15 +35,13 @@ from _common import (  # noqa: E402
     link_prefix,
     md_table,
 )
-import compliance_check  # noqa: E402
-import info_quality_check  # noqa: E402
+from audit_check import H2_RE, absolute_hits  # noqa: E402
 from info_quality_check import (  # noqa: E402
     MD_LINK_RE,
     THRESH_SOURCE_COVERAGE,
     fact_units,
     has_source,
 )
-from audit_check import H2_RE, absolute_hits  # noqa: E402
 from lint_reports import lint_html  # noqa: E402
 
 AUDIT_DIR = ROOT / "engine" / "report-audits" / "audit"

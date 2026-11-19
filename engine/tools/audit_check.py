@@ -31,6 +31,10 @@ from typing import Any
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
+import contextlib
+
+import compliance_check  # noqa: E402
+import info_quality_check  # noqa: E402
 from _common import (  # noqa: E402
     ROOT,
     detect_month_report,
@@ -38,8 +42,6 @@ from _common import (  # noqa: E402
     link_prefix,
     md_table,
 )
-import compliance_check  # noqa: E402
-import info_quality_check  # noqa: E402
 from audit_registry import content_fingerprint  # noqa: E402
 from info_quality_check import (  # noqa: E402
     THRESH_SOURCE_COVERAGE,
@@ -328,7 +330,7 @@ def _iq_findings_by_path() -> dict[str, list[AuditFinding]]:
     return {p: [AuditFinding(**d) for d in items] for p, items in mapped.items()}
 
 
-def _hash_bytes(h: "hashlib._Hash", data: bytes) -> None:
+def _hash_bytes(h: hashlib._Hash, data: bytes) -> None:
     """写入哈希前统一换行符：检出配置差异（core.autocrlf）会让同一提交在
     不同工作区呈现 CRLF / LF 两种字节，若按原始字节哈希，缓存键会随检出
     环境漂移（同一份内容算出两个键），既让缓存永不命中、又使生成物反复变脏。"""
@@ -339,10 +341,8 @@ def _iq_cache_key() -> str:
     """全库内容哈希（业务主题下全部 md 的路径 + 内容指纹）+ 判定内核版本。"""
     h = hashlib.sha256()
     _hash_bytes(h, CACHE_VERSION.encode("utf-8"))
-    try:
+    with contextlib.suppress(OSError):
         _hash_bytes(h, Path(info_quality_check.__file__).read_bytes())
-    except OSError:
-        pass
     for b in iter_business_dirs():
         for md in sorted(b.path.rglob("*.md")):
             h.update(md.relative_to(ROOT).as_posix().encode("utf-8"))
@@ -440,10 +440,7 @@ def write_report(results: list[ReportResult], summary: dict, run_date: str) -> l
     layer_rows = [[k, str(v["pass"]), str(v["fail"]), str(v.get("pending", 0)),
                    str(v["P0"]), str(v["P1"]), str(v["P2"])]
                   for k, v in sorted(summary["by_layer"].items())]
-    if summary["failed"] == 0:
-        conclusion = "全部通过"
-    else:
-        conclusion = f"{summary['failed']} 份报告存在 P0/P1，需修复后复评"
+    conclusion = "全部通过" if summary["failed"] == 0 else f"{summary['failed']} 份报告存在 P0/P1，需修复后复评"
 
     md = "\n".join(
         [

@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """vocab_tool.py — 标准化动态词汇库管理工具（主题无关核心）。
 
 设计原则：
@@ -22,6 +21,7 @@
 from __future__ import annotations
 
 import argparse
+import contextlib
 import csv
 import json
 import os
@@ -269,7 +269,7 @@ def read_import_file(path: Path) -> list:
         keys = [HEADER_MAP.get(norm(h), norm(h)) for h in rows[0]]
         for r in rows[1:]:
             r = list(r) + [""] * (len(keys) - len(r))
-            raw_rows.append(dict(zip(keys, r)))
+            raw_rows.append(dict(zip(keys, r, strict=False)))
     else:
         raise ValueError(f"不支持的导入格式：{suffix}（支持 .md / .csv / .json）")
 
@@ -720,10 +720,8 @@ def backup_topics_file(cfg_path: Path) -> Path:
     shutil.copyfile(cfg_path, dst)
     olds = sorted(bdir.glob("topics.*.json"))
     for p in olds[:-5]:
-        try:
+        with contextlib.suppress(OSError):
             p.unlink()
-        except OSError:
-            pass
     return dst
 
 
@@ -736,10 +734,7 @@ def bump_registry_version(cfg: dict):
 
 def derive_prefix(existing: set, tid: str) -> str:
     parts = [p for p in tid.split("-") if p]
-    if len(parts) == 1:
-        cand = parts[0][:4].upper()
-    else:
-        cand = "".join(p[0] for p in parts).upper()[:4]
+    cand = parts[0][:4].upper() if len(parts) == 1 else "".join(p[0] for p in parts).upper()[:4]
     cand = cand or "T"
     if cand not in existing and re.match(r"^[A-Z]{2,4}$", cand):
         return cand

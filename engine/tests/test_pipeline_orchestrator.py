@@ -34,33 +34,30 @@ class TestPipelineStateLayer(unittest.TestCase):
         self.assertEqual(s["updated"], "")
 
     def test_save_and_load_roundtrip(self):
-        with tempfile.TemporaryDirectory() as d:
-            with unittest.mock.patch.object(_common, "PIPELINE_DIR", Path(d)):
-                _common.save_state("2026-11", _common.new_state("2026-11"))
-                self.assertTrue((Path(d) / "state-2026-11.json").is_file())
-                loaded = _common.load_state("2026-11")
-                self.assertEqual(loaded["period"], "2026-11")
-                self.assertEqual(loaded["schema_version"], "1.0")
+        with tempfile.TemporaryDirectory() as d, unittest.mock.patch.object(_common, "PIPELINE_DIR", Path(d)):
+            _common.save_state("2026-11", _common.new_state("2026-11"))
+            self.assertTrue((Path(d) / "state-2026-11.json").is_file())
+            loaded = _common.load_state("2026-11")
+            self.assertEqual(loaded["period"], "2026-11")
+            self.assertEqual(loaded["schema_version"], "1.0")
 
     def test_load_corrupt_raises(self):
-        with tempfile.TemporaryDirectory() as d:
-            with unittest.mock.patch.object(_common, "PIPELINE_DIR", Path(d)):
-                (Path(d) / "state-2026-11.json").write_text("{not json", encoding="utf-8")
-                with self.assertRaises(ValueError):
-                    _common.load_state("2026-11")
+        with tempfile.TemporaryDirectory() as d, unittest.mock.patch.object(_common, "PIPELINE_DIR", Path(d)):
+            (Path(d) / "state-2026-11.json").write_text("{not json", encoding="utf-8")
+            with self.assertRaises(ValueError):
+                _common.load_state("2026-11")
 
     def test_load_version_mismatch_raises(self):
-        with tempfile.TemporaryDirectory() as d:
-            with unittest.mock.patch.object(_common, "PIPELINE_DIR", Path(d)):
-                p = Path(d) / "state-2026-11.json"
-                bad_payloads = [
-                    {"schema_version": "0.9", "period": "2026-11", "stages": {}},
-                    {"period": "2026-11", "stages": {}},
-                ]
-                for bad in bad_payloads:
-                    p.write_text(json.dumps(bad, ensure_ascii=False), encoding="utf-8")
-                    with self.assertRaises(ValueError):
-                        _common.load_state("2026-11")
+        with tempfile.TemporaryDirectory() as d, unittest.mock.patch.object(_common, "PIPELINE_DIR", Path(d)):
+            p = Path(d) / "state-2026-11.json"
+            bad_payloads = [
+                {"schema_version": "0.9", "period": "2026-11", "stages": {}},
+                {"period": "2026-11", "stages": {}},
+            ]
+            for bad in bad_payloads:
+                p.write_text(json.dumps(bad, ensure_ascii=False), encoding="utf-8")
+                with self.assertRaises(ValueError):
+                    _common.load_state("2026-11")
 
 
 class TestTriggerWatch(unittest.TestCase):
@@ -104,11 +101,10 @@ class TestTriggerWatch(unittest.TestCase):
 
     def test_load_non_object_raises(self):
         # T1 评审 N3：schema 非对象（如 []）负例
-        with tempfile.TemporaryDirectory() as d:
-            with unittest.mock.patch.object(_common, "PIPELINE_DIR", Path(d)):
-                (Path(d) / "state-2026-11.json").write_text("[]", encoding="utf-8")
-                with self.assertRaises(ValueError):
-                    _common.load_state("2026-11")
+        with tempfile.TemporaryDirectory() as d, unittest.mock.patch.object(_common, "PIPELINE_DIR", Path(d)):
+            (Path(d) / "state-2026-11.json").write_text("[]", encoding="utf-8")
+            with self.assertRaises(ValueError):
+                _common.load_state("2026-11")
 
 
 class TestPipelineStatus(unittest.TestCase):
@@ -125,25 +121,23 @@ class TestPipelineStatus(unittest.TestCase):
         self.assertIn("阻塞", md)
 
     def test_collect_reports_blocking_stage(self):
-        with tempfile.TemporaryDirectory() as d:
-            with unittest.mock.patch.object(_common, "PIPELINE_DIR", Path(d)):
-                st = _common.new_state("2026-11")
-                st["stages"] = {
-                    "S0_detect": {"status": "completed"},
-                    "S1_plan": {"status": "running"},
-                    "S2_author": {"status": "pending"},
-                }
-                _common.save_state("2026-11", st)
-                p = pipeline_status.collect("2026-11")
-                self.assertEqual(p["blocking"], "S1_plan")
+        with tempfile.TemporaryDirectory() as d, unittest.mock.patch.object(_common, "PIPELINE_DIR", Path(d)):
+            st = _common.new_state("2026-11")
+            st["stages"] = {
+                "S0_detect": {"status": "completed"},
+                "S1_plan": {"status": "running"},
+                "S2_author": {"status": "pending"},
+            }
+            _common.save_state("2026-11", st)
+            p = pipeline_status.collect("2026-11")
+            self.assertEqual(p["blocking"], "S1_plan")
 
     def test_collect_corrupt_state_surfaces_error(self):
-        with tempfile.TemporaryDirectory() as d:
-            with unittest.mock.patch.object(_common, "PIPELINE_DIR", Path(d)):
-                (Path(d) / "state-2026-11.json").write_text("{bad", encoding="utf-8")
-                p = pipeline_status.collect("2026-11")
-                self.assertIn("state_error", p)
-                self.assertTrue(p["state_error"])
+        with tempfile.TemporaryDirectory() as d, unittest.mock.patch.object(_common, "PIPELINE_DIR", Path(d)):
+            (Path(d) / "state-2026-11.json").write_text("{bad", encoding="utf-8")
+            p = pipeline_status.collect("2026-11")
+            self.assertIn("state_error", p)
+            self.assertTrue(p["state_error"])
 
 
 class TestPipelineRunner(unittest.TestCase):
@@ -153,48 +147,43 @@ class TestPipelineRunner(unittest.TestCase):
         self.assertEqual(pipeline_runner.STAGES[:3], ("S0_detect", "S1_plan", "S2_author"))
 
     def test_run_pauses_at_author_gate(self):
-        with tempfile.TemporaryDirectory() as d:
-            with unittest.mock.patch.object(_common, "PIPELINE_DIR", Path(d)):
-                rc = pipeline_runner.run("2026-11", dry_run=True)
-                self.assertEqual(rc, 0)
-                st = _common.load_state("2026-11")
-                self.assertEqual(st["stages"]["S1_plan"]["status"], "completed")
-                self.assertEqual(st["stages"]["S2_author"]["status"], "pending")
+        with tempfile.TemporaryDirectory() as d, unittest.mock.patch.object(_common, "PIPELINE_DIR", Path(d)):
+            rc = pipeline_runner.run("2026-11", dry_run=True)
+            self.assertEqual(rc, 0)
+            st = _common.load_state("2026-11")
+            self.assertEqual(st["stages"]["S1_plan"]["status"], "completed")
+            self.assertEqual(st["stages"]["S2_author"]["status"], "pending")
 
     def test_resume_from_s3_continues(self):
-        with tempfile.TemporaryDirectory() as d:
-            with unittest.mock.patch.object(_common, "PIPELINE_DIR", Path(d)):
-                pipeline_runner.run("2026-11", dry_run=True)
-                rc = pipeline_runner.run("2026-11", from_stage="S3_build", dry_run=True)
-                self.assertEqual(rc, 0)
-                self.assertEqual(
-                    _common.load_state("2026-11")["stages"]["S5_monitor"]["status"],
-                    "completed",
-                )
+        with tempfile.TemporaryDirectory() as d, unittest.mock.patch.object(_common, "PIPELINE_DIR", Path(d)):
+            pipeline_runner.run("2026-11", dry_run=True)
+            rc = pipeline_runner.run("2026-11", from_stage="S3_build", dry_run=True)
+            self.assertEqual(rc, 0)
+            self.assertEqual(
+                _common.load_state("2026-11")["stages"]["S5_monitor"]["status"],
+                "completed",
+            )
 
     def test_corrupt_state_aborts(self):
-        with tempfile.TemporaryDirectory() as d:
-            with unittest.mock.patch.object(_common, "PIPELINE_DIR", Path(d)):
-                (Path(d) / "state-2026-11.json").write_text("{bad", encoding="utf-8")
-                rc = pipeline_runner.run("2026-11")
-                self.assertEqual(rc, 1)
+        with tempfile.TemporaryDirectory() as d, unittest.mock.patch.object(_common, "PIPELINE_DIR", Path(d)):
+            (Path(d) / "state-2026-11.json").write_text("{bad", encoding="utf-8")
+            rc = pipeline_runner.run("2026-11")
+            self.assertEqual(rc, 1)
 
     def test_invalid_period_rejected(self):
-        with tempfile.TemporaryDirectory() as d:
-            with unittest.mock.patch.object(_common, "PIPELINE_DIR", Path(d)):
-                self.assertEqual(pipeline_runner.run("2026-13", dry_run=True), 2)
+        with tempfile.TemporaryDirectory() as d, unittest.mock.patch.object(_common, "PIPELINE_DIR", Path(d)):
+            self.assertEqual(pipeline_runner.run("2026-13", dry_run=True), 2)
 
     def test_run_is_idempotent(self):
-        with tempfile.TemporaryDirectory() as d:
-            with unittest.mock.patch.object(_common, "PIPELINE_DIR", Path(d)):
-                pipeline_runner.run("2026-11", dry_run=True)
-                first = _common.load_state("2026-11")["stages"]
-                pipeline_runner.run("2026-11", dry_run=True)
-                second = _common.load_state("2026-11")["stages"]
-                self.assertEqual(
-                    {k: v["status"] for k, v in first.items()},
-                    {k: v["status"] for k, v in second.items()},
-                )
+        with tempfile.TemporaryDirectory() as d, unittest.mock.patch.object(_common, "PIPELINE_DIR", Path(d)):
+            pipeline_runner.run("2026-11", dry_run=True)
+            first = _common.load_state("2026-11")["stages"]
+            pipeline_runner.run("2026-11", dry_run=True)
+            second = _common.load_state("2026-11")["stages"]
+            self.assertEqual(
+                {k: v["status"] for k, v in first.items()},
+                {k: v["status"] for k, v in second.items()},
+            )
 
 
 class TestPipelineWorkflow(unittest.TestCase):
@@ -219,35 +208,34 @@ class TestPipelineEndToEnd(unittest.TestCase):
     """任务 7：全链路 S0→S5（合成状态 + dry-run），断言 S2 闸门与幂等。"""
 
     def test_full_flow_with_author_gate(self):
-        with tempfile.TemporaryDirectory() as d:
-            with unittest.mock.patch.object(_common, "PIPELINE_DIR", Path(d)):
-                # 第一轮：S0 → S1 → S2 人工闸门（停）
-                self.assertEqual(pipeline_runner.run("2026-11", dry_run=True), 0)
-                st = _common.load_state("2026-11")
-                self.assertEqual(st["stages"]["S0_detect"]["status"], "completed")
-                self.assertEqual(st["stages"]["S1_plan"]["status"], "completed")
-                self.assertEqual(st["stages"]["S2_author"]["status"], "pending")
-                # S2 只产出待撰写清单，不产出正文
-                self.assertEqual(st["stages"]["S2_author"]["summary"]["gate"], "author")
-                self.assertIsInstance(st["stages"]["S2_author"]["summary"]["todo"], list)
+        with tempfile.TemporaryDirectory() as d, unittest.mock.patch.object(_common, "PIPELINE_DIR", Path(d)):
+            # 第一轮：S0 → S1 → S2 人工闸门（停）
+            self.assertEqual(pipeline_runner.run("2026-11", dry_run=True), 0)
+            st = _common.load_state("2026-11")
+            self.assertEqual(st["stages"]["S0_detect"]["status"], "completed")
+            self.assertEqual(st["stages"]["S1_plan"]["status"], "completed")
+            self.assertEqual(st["stages"]["S2_author"]["status"], "pending")
+            # S2 只产出待撰写清单，不产出正文
+            self.assertEqual(st["stages"]["S2_author"]["summary"]["gate"], "author")
+            self.assertIsInstance(st["stages"]["S2_author"]["summary"]["todo"], list)
 
-                # 人工完成 S2 后：S3 → S4 → S5 自动续跑
-                self.assertEqual(
-                    pipeline_runner.run("2026-11", from_stage="S3_build", dry_run=True), 0
-                )
-                st = _common.load_state("2026-11")
-                for name in pipeline_runner.STAGES:
-                    self.assertEqual(st["stages"][name]["status"], "completed", name)
+            # 人工完成 S2 后：S3 → S4 → S5 自动续跑
+            self.assertEqual(
+                pipeline_runner.run("2026-11", from_stage="S3_build", dry_run=True), 0
+            )
+            st = _common.load_state("2026-11")
+            for name in pipeline_runner.STAGES:
+                self.assertEqual(st["stages"][name]["status"], "completed", name)
 
-                # 幂等：再次从 S3 续跑，状态不变
-                self.assertEqual(
-                    pipeline_runner.run("2026-11", from_stage="S3_build", dry_run=True), 0
-                )
-                st2 = _common.load_state("2026-11")
-                self.assertEqual(
-                    {k: v["status"] for k, v in st["stages"].items()},
-                    {k: v["status"] for k, v in st2["stages"].items()},
-                )
+            # 幂等：再次从 S3 续跑，状态不变
+            self.assertEqual(
+                pipeline_runner.run("2026-11", from_stage="S3_build", dry_run=True), 0
+            )
+            st2 = _common.load_state("2026-11")
+            self.assertEqual(
+                {k: v["status"] for k, v in st["stages"].items()},
+                {k: v["status"] for k, v in st2["stages"].items()},
+            )
 
 
 if __name__ == "__main__":

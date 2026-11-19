@@ -25,12 +25,12 @@ import argparse
 import json
 import re
 import sys
-from datetime import date, datetime, timezone
+from datetime import UTC, date, datetime
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from _common import NEW_FROM, detect_month_report, iter_business_dirs, ROOT, ENGINE, TEMPLATE_ROOT  # noqa: E402
+from _common import ENGINE, NEW_FROM, ROOT, TEMPLATE_ROOT, detect_month_report, iter_business_dirs  # noqa: E402
 
 RULES_PATH = TEMPLATE_ROOT / "compliance-rules.json"
 AUDIT_DIR = ENGINE / "report-audits"
@@ -301,7 +301,7 @@ def run_audit(outdir: Path) -> tuple[int, int, int, Path]:
 
     outdir.mkdir(exist_ok=True)
     audit_path = outdir / "compliance-audit.md"
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+    now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M UTC")
     rate = f"{compliant / total * 100:.0f}%" if total else "N/A"
     body = [
         "# 报告合规性审计（历史报告 × 类型模板匹配度）",
@@ -350,7 +350,7 @@ def run_scaffold(type_id: str, cycle: str | None) -> int:
         print(f"| {i} | {title} | id=\"s{i}\" |" if titles and len(titles) == n
               else f"{i}. {title}")
     print("\n## 填充与合规自检要点\n")
-    print("- 节标题可按业务细化措辞，但节数、顺序、编号（id=\"s1\"..\"s%d\"）不得改变" % n)
+    print(f'- 节标题可按业务细化措辞，但节数、顺序、编号（id="s1".."s{n}"）不得改变')
     print("- 顶部导航 <nav class=\"report-nav\" aria-label=\"报告导航\">：锚点标签与节标题逐字一致"
           if rule.get("nav") else "- 基线报告保留简化锚点导航（<nav aria-label=\"报告导航\">）")
     print("- <title> 非空；全部锚点 href=\"#x\" 必须有对应 id")

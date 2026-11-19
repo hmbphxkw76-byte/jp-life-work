@@ -26,6 +26,7 @@
 | `info-quality/verification-report.md` | `info_quality_check.py`（`--apply` 重写） | 三清单之一：验证报告（随提交留存，N5） |
 | `info-quality/rules-notes.md` | 人工 | 判定口径唯一事实源（活文档，随提交留存） |
 | `info-quality/repair-history.md` | `info_quality_check.py`（追加式） | 跨运行累计修复日志（json 只含本轮，不可由 json 派生；随提交留存） |
+| `toolchain/perf-trend.json` | `perf_snapshot.py`（scheduled-maintenance 月度追加） | 性能趋势快照（规模 + 耗时基线 / 历史，保留最近 36 条，供跨月对比） |
 | `report-migration-2026-11.json` / `-paths.json` | `migrate_monthly_reports.py` / 测试夹具 | 迁移清单与路径映射（`test_tools.py::TestHistoricalMigration` 依赖） |
 
 ### 2. 生成物（工具渲染，json 为源，可删除重生成）

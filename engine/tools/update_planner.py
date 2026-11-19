@@ -19,11 +19,12 @@ from __future__ import annotations
 import argparse
 import json
 import sys
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
+import decision_log  # noqa: E402
 from _common import (  # noqa: E402
     ROOT,
     Business,
@@ -33,7 +34,6 @@ from _common import (  # noqa: E402
     quarter_to_month,
     topic_slug,
 )
-import decision_log  # noqa: E402
 
 AUDIT_STATUS_PATH = ROOT / "engine" / "report-audits" / "audit" / "audit-status.json"
 
@@ -166,7 +166,7 @@ def render_md(tasks: list[dict], period: str, decisions: list[dict] | None = Non
     for t in unaudited:
         lines.append(f"- {t['output']}：{t['audit']}")
     lines.append("")
-    lines.append("**决策状态变化（近 {0} 条）**".format(len(decisions or [])))
+    lines.append(f"**决策状态变化（近 {len(decisions or [])} 条）**")
     lines.append("")
     if decisions:
         for d in decisions:
@@ -200,7 +200,7 @@ def main() -> int:
             print(f"[ERROR] 未找到业务线目录: {target}", file=sys.stderr)
             return 2
 
-    period = args.period or default_period(datetime.now(tz=timezone.utc))
+    period = args.period or default_period(datetime.now(tz=UTC))
     try:
         parse_period(period)
     except ValueError as e:

@@ -14,7 +14,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
-from datetime import date, datetime, timezone
+from datetime import UTC, date, datetime
 from pathlib import Path
 from unittest import mock
 
@@ -551,9 +551,9 @@ class TestCovSkeletonBuilder(unittest.TestCase):
                 compact = skeleton_builder.build_skeleton("01-demo", "compact", "2026-11")
                 self.assertIn("## 待补模块（合并）", compact)
                 self.assertIn("- 二、行业与政策发展趋势（待补）", compact)
-            with mock.patch.object(skeleton_builder, "_find_topic", lambda t: None):
-                with self.assertRaises(SystemExit):
-                    skeleton_builder.build_skeleton("nope")
+            with mock.patch.object(skeleton_builder, "_find_topic", lambda t: None), \
+                    self.assertRaises(SystemExit):
+                skeleton_builder.build_skeleton("nope")
 
     def test_build_skeleton_default_period_uses_today(self):
         with tempfile.TemporaryDirectory() as d:
@@ -619,7 +619,7 @@ class TestCovSkeletonBuilder(unittest.TestCase):
 class TestCovBuildIndex(unittest.TestCase):
     def test_render_index_empty_and_grouped(self):
         self.assertIn("暂无已产出报告。", build_index.render_index([], "2026-11-01 00:00 UTC"))
-        m = datetime(2026, 11, 1, 12, 0, tzinfo=timezone.utc)
+        m = datetime(2026, 11, 1, 12, 0, tzinfo=UTC)
         entries = [
             ("01-demo", "2026-11", "01-demo/reports/2026-11-demo.html", "十一月", m, "月度"),
             ("01-demo", "2026-10", "01-demo/reports/2026-10-demo.html", "十月", m, "月度"),

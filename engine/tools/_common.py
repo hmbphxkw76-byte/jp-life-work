@@ -4,6 +4,7 @@
 """
 from __future__ import annotations
 
+import contextlib
 import os
 import re
 from dataclasses import dataclass
@@ -335,10 +336,8 @@ def atomic_write(path, text: str, encoding: str = "utf-8") -> None:
             fh.write(text)
         os.replace(tmp, path)
     except BaseException:
-        try:
+        with contextlib.suppress(OSError):
             tmp.unlink()
-        except OSError:
-            pass
         raise
 
 

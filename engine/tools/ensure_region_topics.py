@@ -13,7 +13,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from _common import iter_business_dirs, ROOT  # noqa: E402
+from _common import ROOT, iter_business_dirs  # noqa: E402
 
 REQUIRED_SUBDIRS = ("prompts", "reports", "data")
 

@@ -1,0 +1,4 @@
+# 换行口径单一事实源（I-11 / N13）：仓库文本一律 LF。
+# CI（ubuntu / bash）检出即为 LF；Windows 本地即便 core.autocrlf=true 也统一为 LF，
+# 避免工作流 run: 块与脚本在平台间发生 CRLF / LF 漂移。
+* text=auto eol=lf

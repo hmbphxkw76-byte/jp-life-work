@@ -25,6 +25,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from _common import ROOT, iter_business_dirs, load_decision_config  # noqa: E402
 
+
 def _topics() -> tuple[str, ...]:
     """纳入有跟踪需求的主题：登记册含「首轮核验截止」或 ⚠ 待核实项。"""
     out = []

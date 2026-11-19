@@ -92,23 +92,20 @@ class LoaderErrorCase(unittest.TestCase):
         return mock.patch.object(_common, "DECISION_CONFIG_PATH", path)
 
     def test_missing(self) -> None:
-        with self._patch(self.root / "nope.json"):
-            with self.assertRaises(ValueError):
-                _common.load_decision_config()
+        with self._patch(self.root / "nope.json"), self.assertRaises(ValueError):
+            _common.load_decision_config()
 
     def test_corrupt(self) -> None:
         p = self.root / "bad.json"
         p.write_text("{not json", encoding="utf-8")
-        with self._patch(p):
-            with self.assertRaises(ValueError):
-                _common.load_decision_config()
+        with self._patch(p), self.assertRaises(ValueError):
+            _common.load_decision_config()
 
     def test_wrong_schema(self) -> None:
         p = self.root / "wrong.json"
         p.write_text(json.dumps({"schema_version": "9.9"}), encoding="utf-8")
-        with self._patch(p):
-            with self.assertRaises(ValueError):
-                _common.load_decision_config()
+        with self._patch(p), self.assertRaises(ValueError):
+            _common.load_decision_config()
 
     def test_ok(self) -> None:
         p = self.root / "ok.json"

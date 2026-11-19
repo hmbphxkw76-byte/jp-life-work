@@ -451,8 +451,8 @@ def render_page(
     esc = html_mod.escape
     meta_lines = _parse_meta(blockquote)
     meta_html = "<br>".join(meta_lines)
-    ver = next((l for l in meta_lines if "版本" in l), "")
-    date = next((l for l in meta_lines if "数据基准日" in l), "")
+    ver = next((ln for ln in meta_lines if "版本" in ln), "")
+    date = next((ln for ln in meta_lines if "数据基准日" in ln), "")
     sub = re.sub(r"<[^>]+>", "", "｜".join(x for x in (ver, date) if x)) or (
         re.sub(r"<[^>]+>", "", meta_lines[0]) if meta_lines else ""
     )
@@ -567,7 +567,7 @@ def convert(md_path: Path) -> str:
         import markdown
     except ImportError:
         print("[ERROR] 缺少 markdown 依赖，请先执行 pip install -r requirements.txt")
-        raise SystemExit(1)
+        raise SystemExit(1) from None
     text = md_path.read_text(encoding="utf-8")
     body = markdown.markdown(text, extensions=["tables", "fenced_code", "toc"])
     title = md_path.stem

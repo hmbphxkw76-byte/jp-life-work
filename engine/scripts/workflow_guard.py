@@ -28,6 +28,7 @@
 from __future__ import annotations
 
 import argparse
+import contextlib
 import getpass
 import json
 import os
@@ -37,9 +38,9 @@ import socket
 import subprocess
 import sys
 import time
-from datetime import datetime, timezone
+from collections.abc import Sequence
+from datetime import UTC, datetime
 from pathlib import Path
-from typing import Optional, Sequence
 
 _TOOL_DIR = Path(__file__).resolve().parent
 if str(_TOOL_DIR) not in sys.path:
@@ -69,10 +70,10 @@ class GuardError(RuntimeError):
 # 基础工具
 # ──────────────────────────────────────────────
 def _now() -> str:
-    return datetime.now(timezone.utc).astimezone().isoformat(timespec="seconds")
+    return datetime.now(UTC).astimezone().isoformat(timespec="seconds")
 
 
-def _run(cmd: Sequence[str] | str, cwd: Optional[Path] = None, check: bool = True,
+def _run(cmd: Sequence[str] | str, cwd: Path | None = None, check: bool = True,
          capture: bool = True, shell: bool = False) -> subprocess.CompletedProcess:
     # shell=True 时允许直接传字符串；否则按序列处理（默认关闭）
     argv = cmd if (shell and isinstance(cmd, str)) else list(cmd)
@@ -86,11 +87,11 @@ def _run(cmd: Sequence[str] | str, cwd: Optional[Path] = None, check: bool = Tru
     return proc
 
 
-def git(args: Sequence[str], cwd: Optional[Path] = None, check: bool = True) -> subprocess.CompletedProcess:
+def git(args: Sequence[str], cwd: Path | None = None, check: bool = True) -> subprocess.CompletedProcess:
     return _run(["git", *args], cwd=cwd, check=check)
 
 
-def _find_push_script(cwd: Optional[Path]) -> Optional[Path]:
+def _find_push_script(cwd: Path | None) -> Path | None:
     """定位 ``engine/scripts/git_push.py``：优先当前工作树（如 ``_merge``），再回退本工具目录。"""
     if cwd:
         local_script = Path(cwd) / "engine" / "scripts" / "git_push.py"
@@ -100,7 +101,7 @@ def _find_push_script(cwd: Optional[Path]) -> Optional[Path]:
     return shared if shared.exists() else None
 
 
-def push_with_failover(cwd: Optional[Path], remote: str, refspecs: Sequence[str],
+def push_with_failover(cwd: Path | None, remote: str, refspecs: Sequence[str],
                        fallback: str = "origin-https",
                        force_with_lease: bool = False) -> subprocess.CompletedProcess:
     """经 ``engine/scripts/git_push.py`` 走 ssh / https 双通道 failover 推送。
@@ -173,7 +174,7 @@ class Lock:
         self.scope = scope
         self.stale_timeout = stale_timeout
 
-    def read(self) -> Optional[dict]:
+    def read(self) -> dict | None:
         try:
             with self.path.open(encoding="utf-8") as f:
                 data = json.load(f)
@@ -181,7 +182,7 @@ class Lock:
         except (OSError, ValueError):
             return None
 
-    def _stale(self, data: Optional[dict]) -> bool:
+    def _stale(self, data: dict | None) -> bool:
         if data is None:
             return True
         try:
@@ -190,7 +191,7 @@ class Lock:
             return True
         return age > self.stale_timeout
 
-    def _busy_msg(self, data: Optional[dict]) -> str:
+    def _busy_msg(self, data: dict | None) -> str:
         if not data:
             return f"{self.scope} 锁存在但内容不可读：{self.path}"
         return (
@@ -208,13 +209,11 @@ class Lock:
             except FileExistsError:
                 data = self.read()
                 if force or self._stale(data):
-                    try:
+                    with contextlib.suppress(FileNotFoundError):
                         self.path.unlink()
-                    except FileNotFoundError:
-                        pass
                     continue
                 if time.time() >= deadline:
-                    raise GuardError(self._busy_msg(data))
+                    raise GuardError(self._busy_msg(data)) from None
                 time.sleep(1.0)
                 continue
             payload = {
@@ -229,7 +228,7 @@ class Lock:
                 json.dump(payload, f, ensure_ascii=False, indent=2)
             return payload
 
-    def release(self, owner: Optional[str] = None, force: bool = False) -> None:
+    def release(self, owner: str | None = None, force: bool = False) -> None:
         data = self.read()
         if data is None:
             return
@@ -237,10 +236,8 @@ class Lock:
             raise GuardError(
                 f"{self.scope} 锁属于 {data.get('owner')}，{owner} 无权释放（--force 可强取）"
             )
-        try:
+        with contextlib.suppress(FileNotFoundError):
             self.path.unlink()
-        except FileNotFoundError:
-            pass
 
 
 def _lock_for(state: Path, scope: str, stale_timeout: int) -> Lock:
@@ -270,7 +267,7 @@ def save_tasks(state: Path, tasks: list[dict]) -> None:
         json.dump(tasks, f, ensure_ascii=False, indent=2)
 
 
-def find_task(tasks: list[dict], name: str) -> Optional[dict]:
+def find_task(tasks: list[dict], name: str) -> dict | None:
     return next((t for t in tasks if t.get("name") == name), None)
 
 
@@ -725,7 +722,7 @@ def build_parser() -> argparse.ArgumentParser:
     return p
 
 
-def main(argv: Optional[Sequence[str]] = None) -> int:
+def main(argv: Sequence[str] | None = None) -> int:
     parser = build_parser()
     args = parser.parse_args(argv)
     if not getattr(args, "func", None):

@@ -41,11 +41,11 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import audit_check  # noqa: E402
 import audit_preflight  # noqa: E402
 import compliance_check  # noqa: E402
-import info_quality_check  # noqa: E402
 import lint_reports  # noqa: E402
 import md2html  # noqa: E402
 from _common import ROOT, atomic_write, detect_month_report, iter_business_dirs, resolve_within  # noqa: E402
-from info_quality_check import live_table, read as iq_read, report_value_rows, significant_numbers  # noqa: E402
+from info_quality_check import live_table, report_value_rows, significant_numbers  # noqa: E402
+from info_quality_check import read as iq_read
 
 BASE_DATE_RE = re.compile(r"数据基准日\**\s*[:：]\s*([0-9]{4}-[0-9]{2}-[0-9]{2})")
 
@@ -187,9 +187,7 @@ def rule_v1_deliverables(rel: str, md_path: Path, html_path: Path) -> tuple[Rule
                          "detail": f"报告 slug「{det[1]}」与目录 slug「{slug_dir}」不一致", "spec": "S-04"})
 
     worst = "pass"
-    if any(f["severity"] == "P0" for f in findings):
-        worst = "fail"
-    elif any(f["severity"] == "P1" for f in findings):
+    if any(f["severity"] == "P0" for f in findings) or any(f["severity"] == "P1" for f in findings):
         worst = "fail"
     elif findings:
         worst = "warn"
@@ -334,10 +332,7 @@ def render_block(result: VerifyResult, log_rel: str) -> str:
 def write_back(md_path: Path, block: str) -> bool:
     """幂等写入「自动验证结果」章节（存在则替换，不存在则追加）。"""
     text = _read(md_path)
-    if BLOCK_RE.search(text):
-        new = BLOCK_RE.sub(lambda _m: block, text)
-    else:
-        new = text.rstrip("\n") + "\n\n" + block + "\n"
+    new = BLOCK_RE.sub(lambda _m: block, text) if BLOCK_RE.search(text) else text.rstrip("\n") + "\n\n" + block + "\n"
     if new != text:
         atomic_write(md_path, new)
         return True

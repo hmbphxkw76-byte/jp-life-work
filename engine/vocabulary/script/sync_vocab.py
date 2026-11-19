@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """sync_vocab.py — 词汇库 → 业务提示词自动同步工具。
 
 职责与机制：
@@ -35,6 +34,8 @@ from datetime import datetime
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+import contextlib
+
 from vocab_tool import load_storage  # noqa: E402  复用词库解析器，保证解析口径一致
 
 SYNC_ROOT = Path(__file__).resolve().parent.parent          # vocabulary/
@@ -58,7 +59,7 @@ def sha(text: str) -> str:
 
 def read_text_raw(path: Path) -> str:
     """保留原始换行符读取（确保区间外内容字节级不变）。"""
-    with open(path, "r", encoding="utf-8", newline="") as f:
+    with open(path, encoding="utf-8", newline="") as f:
         return f.read()
 
 
@@ -228,10 +229,8 @@ def backup_target(topic: str, tpath: Path, backup_dir: Path, keep: int) -> Path:
     prefix = f"{topic}.{tpath.name}."
     olds = sorted(backup_dir.glob(f"{prefix}*.bak"))
     for p in olds[:-keep] if keep > 0 and len(olds) > keep else []:
-        try:
+        with contextlib.suppress(OSError):
             p.unlink()
-        except OSError:
-            pass
     return dst
 
 
@@ -273,10 +272,7 @@ def sync_one(cfg: dict, topics: dict, binding: dict, tcfg: dict, state: dict,
     target_disp = tcfg["path"]
 
     if not pending:
-        if drift:
-            msg = f"结构漂移待修复：{'；'.join(drift[:2])}"
-        else:
-            msg = "无变更（词汇库与提示词区间一致）"
+        msg = f"结构漂移待修复：{'；'.join(drift[:2])}" if drift else "无变更（词汇库与提示词区间一致）"
         return 0, msg, counts
 
     if dry:

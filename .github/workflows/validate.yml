@@ -301,7 +301,8 @@ jobs:
           fi
           echo "词库校验通过（topic-check=$c1 verify=$c2 sync-check=$c3 near=$c4；2=仅警告不阻断）"
 
-      # 静态检查（架构优化方向 E / ARCH-OPT）：ruff warning 起步不阻断；
+      # 静态检查（架构优化方向 E / ARCH-OPT）：ruff 存量已于 2026-11-19 清零
+      # （138 → 0，无显式忽略；见 ruff.toml 注释），仍按 warning 不阻断，新增回归由评审兜底；
       # mypy 已清零存量（P2-4 收紧为阻断门禁）。
       - name: 安装开发依赖（ruff / mypy）
         run: pip install -r requirements-dev.txt
