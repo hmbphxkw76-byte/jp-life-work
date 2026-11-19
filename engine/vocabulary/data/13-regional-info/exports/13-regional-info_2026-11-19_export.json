@@ -1,0 +1,1442 @@
+{
+  "topic": "13-regional-info",
+  "name": "地区信息",
+  "version": "v1.3",
+  "generated_at": "2026-11-19T09:07:50",
+  "count": 69,
+  "categories": {
+    "行政区划与地理": 12,
+    "人口与城市": 12,
+    "地方经济与产业": 11,
+    "生活成本与设施": 11,
+    "地方政策与自治": 12,
+    "场景与表达": 11
+  },
+  "terms": [
+    {
+      "id": "REG-001",
+      "term": "都道府県",
+      "aliases": [
+        "広域自治体"
+      ],
+      "category": "行政区划与地理",
+      "tags": [
+        "広域",
+        "行政区分",
+        "地方公共団体"
+      ],
+      "definition": "日本の広域地方公共団体で、1都1道2府43県の計47からなる行政区画。",
+      "source": "総務省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.soumu.go.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "REG-002",
+      "term": "市町村",
+      "aliases": [
+        "市区町村",
+        "基礎自治体"
+      ],
+      "category": "行政区划与地理",
+      "tags": [
+        "基礎自治体",
+        "住民",
+        "行政"
+      ],
+      "definition": "市・町・村および特別区からなる基礎的な地方公共団体で、住民に最も近い行政を担う。",
+      "source": "総務省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.soumu.go.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "REG-003",
+      "term": "政令指定都市",
+      "aliases": [
+        "政令市",
+        "指定都市"
+      ],
+      "category": "行政区划与地理",
+      "tags": [
+        "大都市",
+        "行政区",
+        "権限"
+      ],
+      "definition": "人口50万人以上などの要件を満たし政令で指定された市で、行政区を置き事務権限が拡大される。",
+      "source": "総務省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.soumu.go.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "REG-004",
+      "term": "中核市",
+      "aliases": [
+        "中核都市"
+      ],
+      "category": "行政区划与地理",
+      "tags": [
+        "都市",
+        "事務移譲",
+        "中規模"
+      ],
+      "definition": "人口20万人以上などの要件で政令指定され、都道府県から多くの事務移譲を受ける市。",
+      "source": "総務省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.soumu.go.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "REG-005",
+      "term": "特別区",
+      "aliases": [
+        "東京23区",
+        "区部"
+      ],
+      "category": "行政区划与地理",
+      "tags": [
+        "東京都",
+        "特別地方公共団体",
+        "大都市"
+      ],
+      "definition": "東京都区部に置かれる特別地方公共団体で、市に準じる権能を持ち都が補完する。",
+      "source": "総務省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.soumu.go.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "REG-006",
+      "term": "地方",
+      "aliases": [
+        "地方ブロック",
+        "地域区分"
+      ],
+      "category": "行政区划与地理",
+      "tags": [
+        "広域",
+        "地理",
+        "区分"
+      ],
+      "definition": "国土を地理的・行政的にまとめた広域単位で、関東や関西など複数の都道府県を含む。",
+      "source": "国土交通省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp/totikensangyo/totikensangyo_fr4_000044.html",
+      "confidence": "B"
+    },
+    {
+      "id": "REG-007",
+      "term": "関東地方",
+      "aliases": [
+        "関東"
+      ],
+      "category": "行政区划与地理",
+      "tags": [
+        "首都圏",
+        "東日本",
+        "広域"
+      ],
+      "definition": "東京都・神奈川県・埼玉県・千葉県・茨城県・栃木県・群馬県からなる地方。",
+      "source": "国土交通省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp/totikensangyo/totikensangyo_fr4_000044.html",
+      "confidence": "B"
+    },
+    {
+      "id": "REG-008",
+      "term": "近畿地方",
+      "aliases": [
+        "関西",
+        "関西地方"
+      ],
+      "category": "行政区划与地理",
+      "tags": [
+        "西日本",
+        "経済圏",
+        "広域"
+      ],
+      "definition": "大阪府・京都府・兵庫県・奈良県・滋賀県・和歌山県からなる地方で、関西とも呼ぶ。",
+      "source": "国土交通省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp/totikensangyo/totikensangyo_fr4_000044.html",
+      "confidence": "B"
+    },
+    {
+      "id": "REG-009",
+      "term": "九州地方",
+      "aliases": [
+        "九州",
+        "九州・沖縄"
+      ],
+      "category": "行政区划与地理",
+      "tags": [
+        "南日本",
+        "広域",
+        "離島"
+      ],
+      "definition": "福岡県など7県と沖縄県からなる南西部の地方で、福岡市や那覇市が中心都市。",
+      "source": "国土交通省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp/totikensangyo/totikensangyo_fr4_000044.html",
+      "confidence": "B"
+    },
+    {
+      "id": "REG-010",
+      "term": "北海道",
+      "aliases": [
+        "北海道地方"
+      ],
+      "category": "行政区划与地理",
+      "tags": [
+        "北日本",
+        "広域",
+        "自然"
+      ],
+      "definition": "日本最北の地方公共団体で、広大な面積と独自の自然環境・産業構造を持つ道。",
+      "source": "北海道",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "REG-011",
+      "term": "地形",
+      "aliases": [
+        "地勢",
+        "地形条件"
+      ],
+      "category": "行政区划与地理",
+      "tags": [
+        "土地",
+        "起伏",
+        "自然"
+      ],
+      "definition": "山地・平野・海岸・河川など土地の起伏や構成を指し、交通や居住の条件を左右する。",
+      "source": "国土地理院",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.gsi.go.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "REG-012",
+      "term": "気候",
+      "aliases": [
+        "気候区分",
+        "气候"
+      ],
+      "category": "行政区划与地理",
+      "tags": [
+        "気温",
+        "降水",
+        "自然"
+      ],
+      "definition": "気温・降水・季節風などの長期的な大気の状態で、日本は北海道から沖縄まで多様である。",
+      "source": "気象庁",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.jma.go.jp/jma/kishou/know/bosai/keiho-update2026/index.html",
+      "confidence": "B"
+    },
+    {
+      "id": "REG-013",
+      "term": "人口",
+      "aliases": [
+        "住民人口",
+        "总人口"
+      ],
+      "category": "人口与城市",
+      "tags": [
+        "統計",
+        "国勢調査",
+        "基礎指標"
+      ],
+      "definition": "一定地域に居住する人の総数で、国勢調査では5年ごとに全数を調査する。",
+      "source": "総務省統計局",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.stat.go.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "REG-014",
+      "term": "高齢化率",
+      "aliases": [
+        "老年人口比率",
+        "老龄化率"
+      ],
+      "category": "人口与城市",
+      "tags": [
+        "高齢化",
+        "統計",
+        "比率"
+      ],
+      "definition": "65歳以上人口が総人口に占める割合で、日本の水準は世界でも高い。",
+      "source": "総務省統計局",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.stat.go.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "REG-015",
+      "term": "出生率",
+      "aliases": [
+        "合計特殊出生率"
+      ],
+      "category": "人口与城市",
+      "tags": [
+        "少子化",
+        "統計",
+        "人口動態"
+      ],
+      "definition": "一定期間の出生数を人口で割った指標で、合計特殊出生率は女性1人あたりの子どもの数。",
+      "source": "厚生労働省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mhlw.go.jp/toukei/list/33-20.html",
+      "confidence": "B"
+    },
+    {
+      "id": "REG-016",
+      "term": "転入",
+      "aliases": [
+        "転入者",
+        "迁入"
+      ],
+      "category": "人口与城市",
+      "tags": [
+        "住民基本台帳",
+        "移動",
+        "届出"
+      ],
+      "definition": "住民基本台帳上、他の市区町村から新たに住所を移して当該自治体の住民となること。",
+      "source": "総務省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.soumu.go.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "REG-017",
+      "term": "転出",
+      "aliases": [
+        "転出者",
+        "迁出"
+      ],
+      "category": "人口与城市",
+      "tags": [
+        "住民基本台帳",
+        "移動",
+        "人口"
+      ],
+      "definition": "住民基本台帳上、当該市区町村から他の自治体へ住所を移して住民でなくなること。",
+      "source": "総務省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.soumu.go.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "REG-018",
+      "term": "人口減少",
+      "aliases": [
+        "人口減少社会",
+        "少子化"
+      ],
+      "category": "人口与城市",
+      "tags": [
+        "自然減",
+        "社会減",
+        "人口動態"
+      ],
+      "definition": "死亡数が出生数を上回る自然減と、転出超過の社会減により総人口が減る現象。",
+      "source": "総務省統計局",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.stat.go.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "REG-019",
+      "term": "地方創生",
+      "aliases": [
+        "地域創生",
+        "まち・ひと・しごと創生"
+      ],
+      "category": "人口与城市",
+      "tags": [
+        "国の政策",
+        "地域",
+        "人口"
+      ],
+      "definition": "東京一極集中を是正し、地域の雇用・人口・活力を維持するための国の政策体系。",
+      "source": "内閣府",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.cao.go.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "REG-020",
+      "term": "東京一極集中",
+      "aliases": [
+        "一極集中",
+        "首都集中"
+      ],
+      "category": "人口与城市",
+      "tags": [
+        "東京圏",
+        "集積",
+        "政策課題"
+      ],
+      "definition": "人口・企業・機能が東京圏に過度に集積する状態で、地方の活力低下の要因とされる。",
+      "source": "内閣府",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.cao.go.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "REG-021",
+      "term": "過疎地域",
+      "aliases": [
+        "過疎",
+        "過疎市町村"
+      ],
+      "category": "人口与城市",
+      "tags": [
+        "人口減少",
+        "指定",
+        "地域"
+      ],
+      "definition": "人口減少と高齢化が著しく、生活基盤の維持が困難として法律に基づき指定される地域。",
+      "source": "総務省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.soumu.go.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "REG-022",
+      "term": "都市計画",
+      "aliases": [
+        "都市計画区域",
+        "城市规划"
+      ],
+      "category": "人口与城市",
+      "tags": [
+        "土地利用",
+        "都市",
+        "制度"
+      ],
+      "definition": "土地利用・道路・公園などを総合的に定め、都市の健全な発展を図る制度。",
+      "source": "国土交通省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp/totikensangyo/totikensangyo_fr4_000044.html",
+      "confidence": "B"
+    },
+    {
+      "id": "REG-023",
+      "term": "昼夜間人口比率",
+      "aliases": [
+        "昼夜間人口比",
+        "昼間人口比率"
+      ],
+      "category": "人口与城市",
+      "tags": [
+        "通勤",
+        "統計",
+        "都市"
+      ],
+      "definition": "昼間人口を夜間人口で割った比率で、100を超えると通勤・通学で流入する都市。",
+      "source": "総務省統計局",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.stat.go.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "REG-024",
+      "term": "地域経済",
+      "aliases": [
+        "ローカル経済",
+        "地方経済"
+      ],
+      "category": "地方经济与产业",
+      "tags": [
+        "域内循環",
+        "雇用",
+        "経済"
+      ],
+      "definition": "特定の地域内で生産・消費・雇用が循環する経済の仕組みで、域内需要と域外輸出で成り立つ。",
+      "source": "内閣府",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.cao.go.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "REG-025",
+      "term": "産業構造",
+      "aliases": [
+        "産業構成",
+        "产业结构"
+      ],
+      "category": "地方经济与产业",
+      "tags": [
+        "就業者",
+        "生産額",
+        "構成比"
+      ],
+      "definition": "地域や国の産業別の就業者数や生産額の構成比で、経済の発展段階を示す。",
+      "source": "経済産業省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.meti.go.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "REG-026",
+      "term": "第一次産業",
+      "aliases": [
+        "一次産業"
+      ],
+      "category": "地方经济与产业",
+      "tags": [
+        "農林水産",
+        "自然資源",
+        "産業分類"
+      ],
+      "definition": "農業・林業・漁業など自然資源を直接利用して生産する産業の総称。",
+      "source": "総務省統計局",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.stat.go.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "REG-027",
+      "term": "第二次産業",
+      "aliases": [
+        "二次産業"
+      ],
+      "category": "地方经济与产业",
+      "tags": [
+        "製造業",
+        "建設業",
+        "産業分類"
+      ],
+      "definition": "製造業・建設業・鉱業など原材料を加工して製品を生み出す産業の総称。",
+      "source": "総務省統計局",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.stat.go.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "REG-028",
+      "term": "第三次産業",
+      "aliases": [
+        "三次産業",
+        "サービス産業"
+      ],
+      "category": "地方经济与产业",
+      "tags": [
+        "商業",
+        "サービス",
+        "産業分類"
+      ],
+      "definition": "商業・運輸・金融・サービスなど第一次・第二次以外の産業の総称。",
+      "source": "総務省統計局",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.stat.go.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "REG-029",
+      "term": "観光業",
+      "aliases": [
+        "観光産業",
+        "旅游业"
+      ],
+      "category": "地方经济与产业",
+      "tags": [
+        "宿泊",
+        "交流人口",
+        "地域"
+      ],
+      "definition": "宿泊・交通・飲食・土産などの関連産業を含み、地域外から人と支出を呼び込む産業。",
+      "source": "観光庁",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "REG-030",
+      "term": "農業",
+      "aliases": [
+        "営農"
+      ],
+      "category": "地方经济与产业",
+      "tags": [
+        "作物",
+        "土地利用",
+        "一次産業"
+      ],
+      "definition": "土地を利用して作物を栽培し家畜を飼養する産業で、地域の土地利用と景観を支える。",
+      "source": "農林水産省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.maff.go.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "REG-031",
+      "term": "漁業",
+      "aliases": [
+        "水産業"
+      ],
+      "category": "地方经济与产业",
+      "tags": [
+        "水産",
+        "沿岸",
+        "一次産業"
+      ],
+      "definition": "海や川で魚介類を捕獲・養殖する産業で、沿岸地域の雇用と食文化を支える。",
+      "source": "水産庁",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "REG-032",
+      "term": "製造業",
+      "aliases": [
+        "ものづくり",
+        "制造业"
+      ],
+      "category": "地方经济与产业",
+      "tags": [
+        "加工",
+        "組立",
+        "雇用"
+      ],
+      "definition": "原材料を加工・組立して製品を生産する産業で、設備投資と雇用の大宗を占める地域も多い。",
+      "source": "経済産業省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.meti.go.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "REG-033",
+      "term": "地場産業",
+      "aliases": [
+        "地元産業",
+        "伝統産業"
+      ],
+      "category": "地方经济与产业",
+      "tags": [
+        "地域資源",
+        "産地",
+        "ブランド"
+      ],
+      "definition": "特定地域で地域資源を活かして発展した産業で、産地ブランドや技術の集積を持つ。",
+      "source": "経済産業省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.meti.go.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "REG-034",
+      "term": "企業誘致",
+      "aliases": [
+        "誘致活動"
+      ],
+      "category": "地方经济与产业",
+      "tags": [
+        "雇用",
+        "税収",
+        "自治体"
+      ],
+      "definition": "自治体が補助金や用地提供などで外部企業の立地を促し、雇用と税収を確保する施策。",
+      "source": "内閣府",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.cao.go.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "REG-035",
+      "term": "家賃相場",
+      "aliases": [
+        "賃料相場",
+        "租金行情"
+      ],
+      "category": "生活成本与设施",
+      "tags": [
+        "住居費",
+        "賃貸",
+        "相場"
+      ],
+      "definition": "地域や間取り別の賃貸住宅の平均的な月額賃料で、住居費の目安となる。",
+      "source": "国土交通省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp/totikensangyo/totikensangyo_fr4_000044.html",
+      "confidence": "B"
+    },
+    {
+      "id": "REG-036",
+      "term": "物価",
+      "aliases": [
+        "消費者物価",
+        "物价"
+      ],
+      "category": "生活成本与设施",
+      "tags": [
+        "価格",
+        "統計",
+        "地域差"
+      ],
+      "definition": "商品やサービスの価格水準で、地域差は消費者物価指数などで把握される。",
+      "source": "総務省統計局",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.stat.go.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "REG-037",
+      "term": "公共交通",
+      "aliases": [
+        "公共交通工具",
+        "公交"
+      ],
+      "category": "生活成本与设施",
+      "tags": [
+        "鉄道",
+        "バス",
+        "移動"
+      ],
+      "definition": "鉄道・バスなど不特定多数が利用する交通機関で、地方では路線維持が課題となる。",
+      "source": "国土交通省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp/totikensangyo/totikensangyo_fr4_000044.html",
+      "confidence": "B"
+    },
+    {
+      "id": "REG-038",
+      "term": "鉄道",
+      "aliases": [
+        "鉄道網"
+      ],
+      "category": "生活成本与设施",
+      "tags": [
+        "通勤",
+        "通学",
+        "交通"
+      ],
+      "definition": "線路上を走る列車で人や物を運ぶ交通機関で、通勤通学の基幹をなす。",
+      "source": "国土交通省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp/totikensangyo/totikensangyo_fr4_000044.html",
+      "confidence": "B"
+    },
+    {
+      "id": "REG-039",
+      "term": "路線バス",
+      "aliases": [
+        "バス"
+      ],
+      "category": "生活成本与设施",
+      "tags": [
+        "路線",
+        "定時",
+        "交通"
+      ],
+      "definition": "定められた路線を定時に運行するバスで、鉄道空白地域の移動手段となる。",
+      "source": "国土交通省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp/totikensangyo/totikensangyo_fr4_000044.html",
+      "confidence": "B"
+    },
+    {
+      "id": "REG-040",
+      "term": "医療機関",
+      "aliases": [
+        "医療施設"
+      ],
+      "category": "生活成本与设施",
+      "tags": [
+        "病院",
+        "診療所",
+        "医療"
+      ],
+      "definition": "病院・診療所・歯科医院など診療を行う施設で、地域の医療提供体制の基礎となる。",
+      "source": "厚生労働省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mhlw.go.jp/toukei/saikin/hw/iryosd/24/index.html",
+      "confidence": "B"
+    },
+    {
+      "id": "REG-041",
+      "term": "学校",
+      "aliases": [
+        "教育施設"
+      ],
+      "category": "生活成本与设施",
+      "tags": [
+        "通学",
+        "教育",
+        "子育て"
+      ],
+      "definition": "小学校・中学校・高校など教育を行う施設で、通学区域が住まい選びの要素となる。",
+      "source": "文部科学省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mext.go.jp/a_menu/shotou/clarinet/genjyou/1295897.htm",
+      "confidence": "B"
+    },
+    {
+      "id": "REG-042",
+      "term": "商業施設",
+      "aliases": [
+        "ショッピングセンター"
+      ],
+      "category": "生活成本与设施",
+      "tags": [
+        "買い物",
+        "小売",
+        "利便性"
+      ],
+      "definition": "小売店や飲食店などが集まる施設で、日常の買い物の利便性を左右する。",
+      "source": "経済産業省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.meti.go.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "REG-043",
+      "term": "公園",
+      "aliases": [
+        "都市公園"
+      ],
+      "category": "生活成本与设施",
+      "tags": [
+        "緑地",
+        "レクリエーション",
+        "都市"
+      ],
+      "definition": "休息や運動、レクリエーションのための緑地施設で、都市計画に基づき整備される。",
+      "source": "国土交通省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp/totikensangyo/totikensangyo_fr4_000044.html",
+      "confidence": "B"
+    },
+    {
+      "id": "REG-044",
+      "term": "上下水道",
+      "aliases": [
+        "上水道・下水道"
+      ],
+      "category": "生活成本与设施",
+      "tags": [
+        "水道",
+        "下水",
+        "生活基盤"
+      ],
+      "definition": "飲料水を供給する上水道と汚水を処理する下水道で、生活基盤の根幹をなす。",
+      "source": "国土交通省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp/totikensangyo/totikensangyo_fr4_000044.html",
+      "confidence": "B"
+    },
+    {
+      "id": "REG-045",
+      "term": "生活インフラ",
+      "aliases": [
+        "インフラ",
+        "生活基盤"
+      ],
+      "category": "生活成本与设施",
+      "tags": [
+        "電気",
+        "ガス",
+        "通信"
+      ],
+      "definition": "電気・ガス・水道・交通・通信など日常生活を支える施設とサービスの総称。",
+      "source": "国土交通省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp/totikensangyo/totikensangyo_fr4_000044.html",
+      "confidence": "B"
+    },
+    {
+      "id": "REG-046",
+      "term": "地方自治",
+      "aliases": [
+        "住民自治"
+      ],
+      "category": "地方政策与自治",
+      "tags": [
+        "憲法",
+        "自治体",
+        "住民"
+      ],
+      "definition": "地域の住民が自らの意思で地域の行政を担う制度で、日本国憲法に保障される。",
+      "source": "総務省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.soumu.go.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "REG-047",
+      "term": "地方税",
+      "aliases": [
+        "地方税制",
+        "地方税收"
+      ],
+      "category": "地方政策与自治",
+      "tags": [
+        "住民税",
+        "固定資産税",
+        "財源"
+      ],
+      "definition": "都道府県や市町村が課す住民税・固定資産税などの税で、自治体の自主財源となる。",
+      "source": "総務省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.soumu.go.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "REG-048",
+      "term": "地方交付税",
+      "aliases": [
+        "交付税",
+        "地方交付税交付金"
+      ],
+      "category": "地方政策与自治",
+      "tags": [
+        "財源調整",
+        "交付金",
+        "財政"
+      ],
+      "definition": "国税の一定割合を財源に、自治体間の財源格差を調整して配分する交付金。",
+      "source": "総務省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.soumu.go.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "REG-049",
+      "term": "ふるさと納税",
+      "aliases": [
+        "故郷納税",
+        "家乡纳税"
+      ],
+      "category": "地方政策与自治",
+      "tags": [
+        "寄付",
+        "税額控除",
+        "自治体"
+      ],
+      "definition": "応援したい自治体に寄付すると、寄付額に応じて税額控除が受けられる制度。",
+      "source": "総務省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.soumu.go.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "REG-050",
+      "term": "地域おこし協力隊",
+      "aliases": [
+        "地域協力隊",
+        "おこし協力隊"
+      ],
+      "category": "地方政策与自治",
+      "tags": [
+        "移住",
+        "人材",
+        "総務省"
+      ],
+      "definition": "都市部の人材が過疎地域などに移住し、地域活動や産業支援に従事する総務省の制度。",
+      "source": "総務省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.soumu.go.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "REG-051",
+      "term": "移住支援金",
+      "aliases": [
+        "移住促進補助"
+      ],
+      "category": "地方政策与自治",
+      "tags": [
+        "移住",
+        "補助",
+        "就業"
+      ],
+      "definition": "地方への移住や就業を条件に、国と自治体が支給する金銭的な支援。",
+      "source": "内閣府",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.cao.go.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "REG-052",
+      "term": "地方分権",
+      "aliases": [
+        "地方分権改革",
+        "分権"
+      ],
+      "category": "地方政策与自治",
+      "tags": [
+        "権限移譲",
+        "財源",
+        "改革"
+      ],
+      "definition": "国から地方公共団体へ権限や財源を移し、地域の主体的な行政を進める改革。",
+      "source": "内閣府",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.cao.go.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "REG-053",
+      "term": "自治体DX",
+      "aliases": [
+        "デジタル・ガバメント",
+        "行政DX"
+      ],
+      "category": "地方政策与自治",
+      "tags": [
+        "オンライン化",
+        "デジタル",
+        "行政"
+      ],
+      "definition": "自治体が行政手続のオンライン化やデータ活用を進め、住民サービスを改善する取組。",
+      "source": "総務省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.soumu.go.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "REG-054",
+      "term": "住民票",
+      "aliases": [
+        "住民票の写し",
+        "居民票"
+      ],
+      "category": "地方政策与自治",
+      "tags": [
+        "証明",
+        "住民登録",
+        "窓口"
+      ],
+      "definition": "住民基本台帳に基づき、氏名・住所・生年月日などを証明する書類。",
+      "source": "総務省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.soumu.go.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "REG-055",
+      "term": "転入届",
+      "aliases": [
+        "転入の届出",
+        "迁入申报"
+      ],
+      "category": "地方政策与自治",
+      "tags": [
+        "届出",
+        "住所",
+        "期限"
+      ],
+      "definition": "転入から14日以内に市町村の窓口へ提出する住所変更の届出。",
+      "source": "総務省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.soumu.go.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "REG-056",
+      "term": "補助金",
+      "aliases": [
+        "助成金",
+        "补助金"
+      ],
+      "category": "地方政策与自治",
+      "tags": [
+        "交付",
+        "政策",
+        "返済不要"
+      ],
+      "definition": "国や自治体が政策目的のために事業者や個人へ交付する返済不要の資金。",
+      "source": "経済産業省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.meti.go.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "REG-057",
+      "term": "条例",
+      "aliases": [
+        "自治体条例",
+        "地方条例"
+      ],
+      "category": "地方政策与自治",
+      "tags": [
+        "議会",
+        "法規",
+        "自治"
+      ],
+      "definition": "地方公共団体が議会の議決を経て制定する、地域独自の法規。",
+      "source": "総務省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.soumu.go.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "REG-058",
+      "term": "移住",
+      "aliases": [
+        "移住生活",
+        "迁居"
+      ],
+      "category": "场景与表达",
+      "tags": [
+        "定住",
+        "生活",
+        "地方"
+      ],
+      "definition": "生活の拠点を他の地域へ移すことで、定住や二拠点生活と区別して語られる。",
+      "source": "内閣府",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.cao.go.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "REG-059",
+      "term": "住みやすさ",
+      "aliases": [
+        "居住性",
+        "宜居度"
+      ],
+      "category": "场景与表达",
+      "tags": [
+        "生活条件",
+        "評価",
+        "地域"
+      ],
+      "definition": "交通・買い物・医療・治安などの生活条件から総合的に評価される暮らしやすさ。",
+      "source": "国土交通省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp/totikensangyo/totikensangyo_fr4_000044.html",
+      "confidence": "B"
+    },
+    {
+      "id": "REG-060",
+      "term": "地域差",
+      "aliases": [
+        "地域間格差",
+        "地区差"
+      ],
+      "category": "场景与表达",
+      "tags": [
+        "格差",
+        "比較",
+        "統計"
+      ],
+      "definition": "賃金・物価・サービスの供給などが地域によって異なること。",
+      "source": "総務省統計局",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.stat.go.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "REG-061",
+      "term": "田舎暮らし",
+      "aliases": [
+        "地方暮らし",
+        "乡村生活"
+      ],
+      "category": "场景与表达",
+      "tags": [
+        "自然",
+        "生活",
+        "地方"
+      ],
+      "definition": "都市部を離れ、自然環境の豊かな地域で生活すること。",
+      "source": "国土交通省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp/totikensangyo/totikensangyo_fr4_000044.html",
+      "confidence": "B"
+    },
+    {
+      "id": "REG-062",
+      "term": "交通不便",
+      "aliases": [
+        "交通の便が悪い"
+      ],
+      "category": "场景与表达",
+      "tags": [
+        "移動",
+        "車社会",
+        "地方"
+      ],
+      "definition": "鉄道やバスの本数が少なく、車がないと移動が難しい地域の状況を表す表現。",
+      "source": "国土交通省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp/totikensangyo/totikensangyo_fr4_000044.html",
+      "confidence": "B"
+    },
+    {
+      "id": "REG-063",
+      "term": "災害リスク",
+      "aliases": [
+        "防災リスク",
+        "灾害风险"
+      ],
+      "category": "场景与表达",
+      "tags": [
+        "地震",
+        "水害",
+        "防災"
+      ],
+      "definition": "地震・洪水・土砂災害など、その地域で想定される災害の危険度。",
+      "source": "国土交通省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp/totikensangyo/totikensangyo_fr4_000044.html",
+      "confidence": "B"
+    },
+    {
+      "id": "REG-064",
+      "term": "地域おこし",
+      "aliases": [
+        "町おこし",
+        "地方振兴"
+      ],
+      "category": "场景与表达",
+      "tags": [
+        "活性化",
+        "住民",
+        "地域資源"
+      ],
+      "definition": "地域資源を活かして住民が主体となり、地域の活性化を図る活動。",
+      "source": "内閣府",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.cao.go.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "REG-065",
+      "term": "二拠点生活",
+      "aliases": [
+        "デュアルライフ",
+        "双据点生活"
+      ],
+      "category": "场景与表达",
+      "tags": [
+        "ライフスタイル",
+        "移住",
+        "地方"
+      ],
+      "definition": "都市と地方など2つの地域に生活拠点を置き、行き来しながら暮らすライフスタイル。",
+      "source": "国土交通省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp/totikensangyo/totikensangyo_fr4_000044.html",
+      "confidence": "B"
+    },
+    {
+      "id": "REG-066",
+      "term": "ご当地",
+      "aliases": [
+        "地元"
+      ],
+      "category": "场景与表达",
+      "tags": [
+        "口語",
+        "地域",
+        "文化"
+      ],
+      "definition": "その土地ならではの産品や文化、習慣を指す口語的な表現。",
+      "source": "需核实原文",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "REG-067",
+      "term": "ド田舎",
+      "aliases": [
+        "超田舎"
+      ],
+      "category": "场景与表达",
+      "tags": [
+        "口語",
+        "地方",
+        "利便性"
+      ],
+      "definition": "都市機能が非常に少なく、最寄りの商業施設まで遠い地域を指す口語表現。",
+      "source": "需核实原文",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "REG-068",
+      "term": "住環境",
+      "aliases": [
+        "居住環境"
+      ],
+      "category": "场景与表达",
+      "tags": [
+        "住まい",
+        "生活",
+        "条件"
+      ],
+      "definition": "住まいの周辺の静かさ・日照・騒音・利便性など、暮らしの質に関わる条件。",
+      "source": "国土交通省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp/totikensangyo/totikensangyo_fr4_000044.html",
+      "confidence": "B"
+    },
+    {
+      "id": "REG-069",
+      "term": "求人件数",
+      "aliases": [
+        "求人数",
+        "地域求人"
+      ],
+      "category": "人口与城市",
+      "tags": [
+        "招聘",
+        "统计"
+      ],
+      "definition": "特定地域发布的招聘件数统计，用于观察地域劳动力需求与就业机会",
+      "source": "厚生労働省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mhlw.go.jp/toukei/list/33-20.html",
+      "confidence": "B"
+    }
+  ]
+}
