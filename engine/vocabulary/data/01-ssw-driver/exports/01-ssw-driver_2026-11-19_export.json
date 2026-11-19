@@ -1,8 +1,8 @@
 {
   "topic": "01-ssw-driver",
   "name": "特定技能司机",
-  "version": "v1.7",
-  "generated_at": "2026-11-19T11:44:55",
+  "version": "v1.9",
+  "generated_at": "2026-11-19T16:05:32",
   "count": 109,
   "categories": {
     "在留资格与制度": 19,
@@ -719,8 +719,8 @@
       "source": "警察庁",
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
-      "verification": "部分核验",
-      "source_url": "https://drivey.jp/blog/gaimen-kirikae-knowledge-test",
+      "verification": "待核实",
+      "source_url": "https://www.npa.go.jp/",
       "confidence": "B"
     },
     {
@@ -738,8 +738,8 @@
       "source": "警察庁",
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
-      "verification": "部分核验",
-      "source_url": "https://drivey.jp/blog/gaimen-kirikae-knowledge-test",
+      "verification": "待核实",
+      "source_url": "https://www.npa.go.jp/",
       "confidence": "B"
     },
     {
@@ -854,8 +854,8 @@
       "source": "警察庁",
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
-      "verification": "部分核验",
-      "source_url": "https://drivey.jp/blog/gaimen-kirikae-knowledge-test",
+      "verification": "待核实",
+      "source_url": "https://www.npa.go.jp/",
       "confidence": "B"
     },
     {
@@ -1066,8 +1066,8 @@
       "source": "警察庁",
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
-      "verification": "部分核验",
-      "source_url": "https://drivey.jp/blog/gaimen-kirikae-knowledge-test",
+      "verification": "待核实",
+      "source_url": "https://www.npa.go.jp/",
       "confidence": "B"
     },
     {
@@ -1123,8 +1123,8 @@
       "source": "警察庁",
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
-      "verification": "部分核验",
-      "source_url": "https://drivey.jp/blog/gaimen-kirikae-knowledge-test",
+      "verification": "待核实",
+      "source_url": "https://www.npa.go.jp/",
       "confidence": "B"
     },
     {
@@ -1335,8 +1335,8 @@
       "source": "警察庁",
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
-      "verification": "部分核验",
-      "source_url": "https://drivey.jp/blog/gaimen-kirikae-knowledge-test",
+      "verification": "待核实",
+      "source_url": "https://www.npa.go.jp/",
       "confidence": "B"
     },
     {
@@ -1705,8 +1705,8 @@
       "source": "警察庁",
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
-      "verification": "部分核验",
-      "source_url": "https://drivey.jp/blog/gaimen-kirikae-knowledge-test",
+      "verification": "待核实",
+      "source_url": "https://www.npa.go.jp/",
       "confidence": "B"
     },
     {
@@ -1828,8 +1828,8 @@
       "source": "警察庁",
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
-      "verification": "部分核验",
-      "source_url": "https://drivey.jp/blog/gaimen-kirikae-knowledge-test",
+      "verification": "待核实",
+      "source_url": "https://www.npa.go.jp/",
       "confidence": "B"
     },
     {
@@ -1849,8 +1849,8 @@
       "source": "警察庁",
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
-      "verification": "部分核验",
-      "source_url": "https://drivey.jp/blog/gaimen-kirikae-knowledge-test",
+      "verification": "待核实",
+      "source_url": "https://www.npa.go.jp/",
       "confidence": "B"
     },
     {
@@ -1869,8 +1869,8 @@
       "source": "警察庁",
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
-      "verification": "部分核验",
-      "source_url": "https://drivey.jp/blog/gaimen-kirikae-knowledge-test",
+      "verification": "待核实",
+      "source_url": "https://www.npa.go.jp/",
       "confidence": "B"
     },
     {
@@ -1890,8 +1890,8 @@
       "source": "警察庁",
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
-      "verification": "部分核验",
-      "source_url": "https://drivey.jp/blog/gaimen-kirikae-knowledge-test",
+      "verification": "待核实",
+      "source_url": "https://www.npa.go.jp/",
       "confidence": "B"
     },
     {

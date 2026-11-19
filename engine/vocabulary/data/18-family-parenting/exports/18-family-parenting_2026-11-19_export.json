@@ -1,8 +1,8 @@
 {
   "topic": "18-family-parenting",
   "name": "家族·育儿·人生事件",
-  "version": "v1.7",
-  "generated_at": "2026-11-19T11:56:52",
+  "version": "v1.11",
+  "generated_at": "2026-11-19T16:05:33",
   "count": 78,
   "categories": {
     "家族滞在": 15,
@@ -361,8 +361,8 @@
       "source": "文部科学省",
       "first_added": "2026-11-14",
       "last_updated": "2026-11-19",
-      "verification": "部分核验",
-      "source_url": "https://www.mext.go.jp/a_menu/shotou/shugaku/detail/1422256.htm",
+      "verification": "已核验",
+      "source_url": "https://www.mext.go.jp/a_menu/01_b.htm",
       "confidence": "B"
     },
     {
@@ -379,8 +379,8 @@
       "source": "文部科学省",
       "first_added": "2026-11-14",
       "last_updated": "2026-11-19",
-      "verification": "部分核验",
-      "source_url": "https://www.mext.go.jp/a_menu/shotou/shugaku/detail/1422256.htm",
+      "verification": "已核验",
+      "source_url": "https://www.mext.go.jp/a_menu/01_b.htm",
       "confidence": "B"
     },
     {
@@ -1400,9 +1400,7 @@
     {
       "id": "FAM-073",
       "term": "父子家庭",
-      "aliases": [
-        "父子家庭"
-      ],
+      "aliases": [],
       "category": "扶养与支援",
       "tags": [
         "单亲",
@@ -1419,9 +1417,7 @@
     {
       "id": "FAM-074",
       "term": "母子家庭",
-      "aliases": [
-        "母子家庭"
-      ],
+      "aliases": [],
       "category": "扶养与支援",
       "tags": [
         "单亲",

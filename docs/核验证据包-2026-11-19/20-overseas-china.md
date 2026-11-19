@@ -42,6 +42,16 @@ OVC-035（外交）、OVC-036（日中関係）、OVC-069（公印确认・ア�
 
 OVC-035 / 036 / 069 外務省门户复核：web_fetch 返回 Access Denied（Akamai），保留门户，标「未核实（CDN 拦截）」。
 
+### D.2 未核实项浏览器核验（2026-11-19，closure-unverified）
+
+浏览器实测外務省具体页（2026-11-19），3 条由「部分核验」改「已核验」：
+
+| ID | 词条 | 新 URL | 实取要点 |
+|---|---|---|---|
+| OVC-035 | 外交 | https://www.mofa.go.jp/mofaj/gaiko/index.html | 外務省「外交政策」页（外交活動・外交青書・分野別政策） |
+| OVC-036 | 日中関係 | https://www.mofa.go.jp/mofaj/area/china/index.html | 外務省「中華人民共和国」页（二国間関係・経済協力・要人往来） |
+| OVC-069 | 公印确认・アポスティーユ | https://www.mofa.go.jp/mofaj/toko/todoke/shomei/index.html | 载「令和8年10月5日以降の外務省（東京）での窓口申請についてはオンライン予約が必要」 |
+
 ## E 自检结论
 
 - `verify-update --topic 20-overseas-china --file engine/vocabulary/data/20-overseas-china/imports/2026-11-19_核验深化.md`：读取 6 行 → 更新 6 / 未匹配 0 / 非法 0；词库 79 条 → v1.5。
