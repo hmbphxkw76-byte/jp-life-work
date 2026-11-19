@@ -87,7 +87,7 @@
 
 ## F 提交短码与文件清单
 
-- 提交短码：见本文件同目录提交后回填（commit `feat(vocab): 05/19/10/16 门户 URL 核验深化`）。
+- 提交短码：`4b1ce78`（`feat(vocab): 05/19/10/16 门户 URL 核验深化`）。
 - 文件清单：
   - `engine/vocabulary/data/05-industry-autonomous/terms.md`
   - `engine/vocabulary/data/05-industry-autonomous/imports/2026-11-19_核验深化.md`
