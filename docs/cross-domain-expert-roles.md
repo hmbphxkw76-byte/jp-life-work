@@ -34,10 +34,10 @@
 #### R1　技术实现专家（Technical Implementation Analyst）
 
 - **专业定位**：项目"信息生产线"的工程师视角——把工具链、CI、生成物、测试当作被审计对象。
-- **核心分析维度**：工具链健康度（43 个工具是否可运行、退出码是否符合 0/1/2 约定）；生成物确定性（`build_hub.py --check` 是否恒过）；命名合规（`validate.py`）；CI 门禁覆盖（8 条工作流）；测试覆盖与失败项（`engine/tests/`，978 项）；幂等性（重复执行无副作用）。
+- **核心分析维度**：工具链健康度（44 个工具是否可运行、退出码是否符合 0/1/2 约定）；生成物确定性（`build_hub.py --check` 是否恒过）；命名合规（`validate.py`）；CI 门禁覆盖（8 条工作流）；测试覆盖与失败项（`engine/tests/`，1003 项）；幂等性（重复执行无副作用）。
 - **独特价值贡献**：在内容问题之前先排除"生产工具本身出问题"——避免把工具缺陷误判为内容缺陷。
 - **能力边界**：只回答"体系如何被构建与自动化"，不回答"内容对不对、设计好不好、读者用得顺不顺"。
-- **本项目专属切入点**：`engine/tools/`（43 个工具脚本，含 validate / lint_reports / compliance_check / classify_reports / ensure_region_topics / md2html / archive_reports / build_index / build_hub / report_diff / update_planner / automation_status / 审计五件套等）、`.github/workflows/`（8 条工作流）、`build_hub.py --check` 的确定性归一化机制、`report_diff.py` 的相似度阈值（0.35）。
+- **本项目专属切入点**：`engine/tools/`（44 个工具脚本，含 validate / lint_reports / compliance_check / classify_reports / ensure_region_topics / md2html / archive_reports / build_index / build_hub / report_diff / update_planner / automation_status / 审计五件套等）、`.github/workflows/`（8 条工作流）、`build_hub.py --check` 的确定性归一化机制、`report_diff.py` 的相似度阈值（0.35）。
 
 #### R2　业务逻辑专家（Research Logic Analyst）
 
@@ -66,7 +66,7 @@
 #### R5　数据治理专家（Data Governance Analyst）
 
 - **专业定位**：项目"数据资产"的治理视角——把指标登记册、词库、来源分级登记当作被审计对象。
-- **核心分析维度**：登记册完整性（指标 / 来源 / 引用位置 / 收敛状态 / 缺失标记是否齐全）；口径登记（同指标多口径是否登记）；状态与新鲜度（「截至 {{CURRENT_DATE}} 无更新」）；词库覆盖（20 主题 1327 条，0 个 0 条主题）；数据血缘（报告 → 登记册 → 来源）。
+- **核心分析维度**：登记册完整性（指标 / 来源 / 引用位置 / 收敛状态 / 缺失标记是否齐全）；口径登记（同指标多口径是否登记）；状态与新鲜度（「截至 {{CURRENT_DATE}} 无更新」）；词库覆盖（20 主题 1634 条，0 个 0 条主题）；数据血缘（报告 → 登记册 → 来源）。
 - **独特价值贡献**：发现"账本本身"的缺口——指标未登记、口径未定义、词库空白、状态过期。
 - **能力边界**：只维护与评估"数据资产本身"，不核验"报告正文是否引用正确"（R7）、不评估"研究设计"（R2）、不审计"规范符合性"（R6）。
 - **本项目专属切入点**：各主题 `data/*_indicator_registry.md`（md-table 格式）、`engine/vocabulary/`（INDEX.md / topics.json / 各主题 terms.md / exports）、`engine/vocabulary/README.md` 的六步 SOP、通用基座第四节来源分级、`sync_vocab.py` 的 VOCAB-SYNC 标记区间。
