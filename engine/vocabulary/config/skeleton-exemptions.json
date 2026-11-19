@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.0",
+  "updated": "2026-11-19",
+  "comment": "主题骨架显式豁免清单（优化方案 W1 / A5）。规则：已配 prompts/business-config.md 的主题须具备 handbook/；确无 handbook 的须在此显式声明豁免（写明理由与证据）。空骨架（无 business-config）不占位、不校验。由 engine/tools/structure_check.py 读取。",
+  "exemptions": [
+    {
+      "topic": "00-decision-hub",
+      "reason": "跨主题决策层，不产出研究内容（只收敛 / 暴露 / 触发），无 handbook",
+      "evidence": "00-decision-hub/prompts/business-config.md 一定位"
+    },
+    {
+      "topic": "14-life-operations",
+      "reason": "新建执行层主题，handbook 待补",
+      "evidence": "docs/优化方案与实施清单-2026-11-19.md A5"
+    },
+    {
+      "topic": "15-health-wellbeing",
+      "reason": "新建保障主题，handbook 待补",
+      "evidence": "docs/优化方案与实施清单-2026-11-19.md A5"
+    },
+    {
+      "topic": "16-exit-transition-return",
+      "reason": "新建退出 / 转型主题，handbook 待补",
+      "evidence": "docs/优化方案与实施清单-2026-11-19.md A5"
+    },
+    {
+      "topic": "17-migration-compliance",
+      "reason": "新建中介合规主题，handbook 待补",
+      "evidence": "docs/优化方案与实施清单-2026-11-19.md A5"
+    },
+    {
+      "topic": "18-family-parenting",
+      "reason": "新建家庭主题，handbook 待补",
+      "evidence": "docs/优化方案与实施清单-2026-11-19.md A5"
+    },
+    {
+      "topic": "19-safety-disaster",
+      "reason": "新建防灾安全主题，handbook 待补",
+      "evidence": "docs/优化方案与实施清单-2026-11-19.md A5"
+    },
+    {
+      "topic": "20-overseas-china",
+      "reason": "新建国内衔接主题，handbook 待补",
+      "evidence": "docs/优化方案与实施清单-2026-11-19.md A5"
+    }
+  ]
+}

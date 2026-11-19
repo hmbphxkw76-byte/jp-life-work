@@ -1,6 +1,6 @@
 # engine/tools 使用文档
 
-> **版本**：v1.4（2026-11-19 测试计数对齐 1029 + 不接线工具登记）
+> **版本**：v1.5（2026-11-19 工程守卫 W1 / A1 / A5）
 
 CI 工具链使用说明。所有工具基于仓库根目录相对路径运行（自动定位仓库根），
 在仓库根目录执行即可；通用层 `engine/report_templates/` + 业务层 `NN-<slug>/` 结构见
@@ -13,15 +13,11 @@ pip install -r requirements.txt   # markdown
 python -m unittest discover -s engine/tests -q   # 单元测试（以 docs/CI.md 与实测为准）
 ```
 
-> 测试计数：1029 项（`python -m unittest discover -s engine/tests` 实测，与 `docs/CI.md` 六节一致；由 `engine/tests/test_arch_guard.py` 双向锁定）。
+> 测试计数：1040 项（`python -m unittest discover -s engine/tests` 实测，与 `docs/CI.md` 六节一致；由 `engine/tests/test_arch_guard.py` 双向锁定）。
 
 ## 退出码约定（校验类工具统一）
 
-| 退出码 | 含义 | CI 行为 |
-|---|---|---|
-| 0 | 通过（含空清单 / 无可处理项） | 继续 |
-| 1 | 存在错误项 | 阻断 |
-| 2 | 仅警告项 / 需人工确认 | 不阻断 |
+统一约定（`0` 通过 / `1` 阻断 / `2` 放行）见 `docs/CI.md` 的「退出码约定」。
 
 ## 工具一览
 
@@ -167,11 +163,16 @@ python engine/tools/structure_check.py --json
 python engine/tools/structure_check.py --warn     # 仅告警（退出码 2）
 ```
 
-校验每份 `*/reports/*.md` 是否具备四大必需要素（h2 级，匹配范围为报告全部二级标题）：
-数据可靠性与局限说明、置信度标注、信息差与未核验清单、决策建议。分级码口径见
-[report_templates/confidence-grade-standard.md](../report_templates/confidence-grade-standard.md)。
+两部分：
+
+1. **报告必需要素**：校验每份 `*/reports/*.md` 是否具备四大必需要素（h2 级，匹配范围为报告全部二级标题）：
+   数据可靠性与局限说明、置信度标注、信息差与未核验清单、决策建议。分级码口径见
+   [report_templates/confidence-grade-standard.md](../report_templates/confidence-grade-standard.md)。
+2. **主题骨架完备性**（W1 / A5）：已配 `prompts/business-config.md` 的主题须有 `handbook/`，
+   或在 `engine/vocabulary/config/skeleton-exemptions.json` 显式豁免；空骨架不占位。
+
 退出码：0=通过；1=存在缺失（阻断）；2=仅告警。纯函数 `missing_elements(text)` /
-`check_report(path)` 可被测试直接调用。
+`check_report(path)` / `check_skeleton()` / `skeleton_exemptions()` 可被测试直接调用。
 
 ### md_html_parity.py — md ↔ HTML 一致性校验（P1-3）
 
@@ -468,3 +469,4 @@ python engine/tools/automation_status.py activity --threshold 45               #
 | v1.2 | 2026-11-19 | 文档↔实现对齐 | 测试计数 881 → 978（与 `docs/CI.md` 六节及实测对齐） |
 | v1.3 | 2026-11-19 | 测试计数对齐 + 不接线工具登记 | 测试计数 978 → 1008（与实测对齐）；`test_arch_guard` 扩展为同时锁定 `docs/CI.md` 六节与本节计数；新增「设计内不接线工具清单」（B6） |
 | v1.4 | 2026-11-19 | 合并后计数校准 | 测试计数 1008 → 1029（并入 consulting-panel 15 项 + B2 表格语义 6 项后实测） |
+| v1.5 | 2026-11-19 | 工程守卫（W1 / A1 / A5） | 测试计数 1029 → 1040（新增归档保留期边界 6 项 + 文档数字锁定 3 项 + 骨架完备性 2 项）；退出码约定改为指向 `docs/CI.md`；`structure_check` 新增主题骨架完备性校验 |

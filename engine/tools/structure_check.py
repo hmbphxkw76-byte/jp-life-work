@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
 """structure_check.py — 报告必需要素结构门禁（信息差 / 质量可靠 / 决策支撑）。
 
-校验每份报告（md 源稿）是否具备四大必需要素（h2 级）：
+两部分：
+1. 报告必需要素：每份报告（md 源稿）是否具备四大必需要素（h2 级）；
+2. 主题骨架完备性：已配 `prompts/business-config.md` 的主题须有 `handbook/`，
+   或在 `engine/vocabulary/config/skeleton-exemptions.json` 显式豁免；空骨架不占位。
 
 1. 数据可靠性与局限说明（允许变体：数据治理与局限 / 数据缺口与未核验 / 风险、局限）
 2. 置信度标注（分级码说明或置信度表）
@@ -37,6 +40,9 @@ REQUIRED: dict[str, tuple[str, tuple[str, ...]]] = {
 
 _H2 = re.compile(r"^##\s+(.+?)\s*$", re.MULTILINE)
 
+# 骨架豁免清单（W1 / A5）：已配 business-config 但无 handbook 的主题须显式声明。
+SKELETON_EXEMPT_CONFIG = ROOT / "engine" / "vocabulary" / "config" / "skeleton-exemptions.json"
+
 
 def _titles(text: str) -> list[str]:
     return [m.group(1).strip() for m in _H2.finditer(text)]
@@ -61,6 +67,40 @@ def check(root: Path = ROOT) -> list[dict]:
     return out
 
 
+def skeleton_exemptions() -> dict[str, str]:
+    """读取骨架豁免清单 -> {topic: reason}；缺失 / 损坏时为空（不抛错）。"""
+    try:
+        data = json.loads(SKELETON_EXEMPT_CONFIG.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return {}
+    return {
+        e.get("topic"): e.get("reason", "")
+        for e in data.get("exemptions", [])
+        if e.get("topic")
+    }
+
+
+def check_skeleton(root: Path = ROOT) -> list[dict]:
+    """主题骨架完备性：已配 business-config 的主题须有 handbook/ 或显式豁免。
+
+    返回违规项 [{"topic", "missing": "handbook/"}]；空骨架（无 business-config）不占位。
+    """
+    from _common import iter_business_dirs
+
+    exempt = skeleton_exemptions()
+    issues = []
+    for b in iter_business_dirs():
+        cfg = b.path / "prompts" / "business-config.md"
+        if not cfg.exists():
+            continue
+        if (b.path / "handbook").is_dir():
+            continue
+        if b.rel in exempt:
+            continue
+        issues.append({"topic": b.rel, "missing": "handbook/"})
+    return issues
+
+
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description="报告必需要素结构校验")
     ap.add_argument("--report", help="单份报告路径（仓库相对或绝对）")
@@ -77,16 +117,21 @@ def main(argv: list[str] | None = None) -> int:
         results = check()
 
     bad = [r for r in results if r["missing"]]
+    skeleton = check_skeleton()
     if args.json:
-        print(json.dumps({"reports": results, "violations": len(bad)},
+        print(json.dumps({"reports": results, "violations": len(bad),
+                          "skeleton": skeleton, "skeleton_violations": len(skeleton)},
                          ensure_ascii=False, indent=2))
     else:
         scope = "单份" if args.report else f"{len(results)} 份"
-        print(f"结构校验：{scope}报告，{len(bad)} 份缺必需要素")
+        print(f"结构校验：{scope}报告，{len(bad)} 份缺必需要素；"
+              f"骨架 {len(skeleton)} 个主题缺 handbook")
         for r in bad:
             labels = [REQUIRED[k][0] for k in r["missing"]]
             print(f"  - {r['path']}: 缺 {', '.join(labels)}")
-    if bad:
+        for r in skeleton:
+            print(f"  - {r['topic']}: 缺 {r['missing']}")
+    if bad or skeleton:
         return 2 if args.warn else 1
     return 0
 
