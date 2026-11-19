@@ -926,6 +926,43 @@ class TestCovAuditPreflight(unittest.TestCase):
                                                  type_id="nope")
                 self.assertTrue(any("未在 compliance-rules.json 登记" in f.detail for f in res))
 
+    def test_regval_gap_is_p1(self):
+        """PF-REGVAL：登记册活值数值未在报告「数据变更摘要」出现 → P1。"""
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            with audit_env(root):
+                md = _make_topic(root, "01-demo", text=GOOD_TEXT, html=_good_html())
+                rep = _rel(md, root)
+                registry = ("| # | 指标 | 口径 | 最新值 |\n"
+                            "|---|---|---|---|\n"
+                            "| 1 | 测试指标 | 口径A | 1,234 元 |\n")
+                report = ("### 数据变更摘要\n\n"
+                          "| # | 指标 | 活值 |\n|---|---|---|\n"
+                          "| 1 | 测试指标 | 999 元 |\n")
+                res = audit_preflight.check_text(rep, report, registry_text=registry)
+                self.assertIn("PF-REGVAL", {f.code for f in res})
+                self.assertTrue(any(f.severity == "P1" and f.code == "PF-REGVAL"
+                                    for f in res))
+
+    def test_regval_consistent_no_finding(self):
+        """PF-REGVAL：两表数值一致（或不可判定）→ 不报。"""
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            with audit_env(root):
+                md = _make_topic(root, "01-demo", text=GOOD_TEXT, html=_good_html())
+                rep = _rel(md, root)
+                registry = ("| # | 指标 | 口径 | 最新值 |\n"
+                            "|---|---|---|---|\n"
+                            "| 1 | 测试指标 | 口径A | 1,234 元 |\n")
+                report = ("### 数据变更摘要\n\n"
+                          "| # | 指标 | 活值 |\n|---|---|---|\n"
+                          "| 1 | 测试指标 | 1,234 元 |\n")
+                res = audit_preflight.check_text(rep, report, registry_text=registry)
+                self.assertNotIn("PF-REGVAL", {f.code for f in res})
+                # 无摘要表（历史遗留）→ 不可判定，不误报
+                res2 = audit_preflight.check_text(rep, GOOD_TEXT, registry_text=registry)
+                self.assertNotIn("PF-REGVAL", {f.code for f in res2})
+
     def test_run_all_and_write_report(self):
         with tempfile.TemporaryDirectory() as d:
             root = Path(d)
@@ -990,6 +1027,42 @@ class TestCovAuditSampling(unittest.TestCase):
                          {f"01-demo/reports/2026-11-d{i}.md" for i in range(5)})
         self.assertEqual(audit_sampling.select_sample(self._entries(3), "2026-11"),
                          self._entries(3))
+
+    def test_semantic_coverage(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            with audit_env(root):
+                md = _make_topic(root, "01-demo")
+                rep = _rel(md, root)
+                guide = root / "01-demo" / "operations-guide.md"
+                guide.write_text(
+                    "## 语义指标人工核验清单\n\n"
+                    "| 指标 | 核验要点 |\n|---|---|\n"
+                    "| S-01 | 核对口径 |\n| C-11 | 检查推断 |\n", encoding="utf-8")
+                n, found = audit_sampling.semantic_coverage(rep)
+                self.assertEqual(n, 2)
+                self.assertEqual(found, ["C-11", "S-01"])
+                self.assertEqual(audit_sampling.semantic_coverage("99-none/reports/x.md"),
+                                 (0, []))
+
+    def test_main_check_exit_code(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            with audit_env(root):
+                argv = sys.argv
+                try:
+                    sys.argv = ["audit_sampling.py", "--check"]
+                    base = self._payload()
+                    with mock.patch.object(audit_sampling, "run_sample",
+                                           return_value=self._payload(
+                                               checks=dict(base["checks"], semantic_min=True))):
+                        self.assertEqual(audit_sampling.main(), 0)
+                    with mock.patch.object(audit_sampling, "run_sample",
+                                           return_value=self._payload(
+                                               checks=dict(base["checks"], semantic_min=False))):
+                        self.assertEqual(audit_sampling.main(), 1)
+                finally:
+                    sys.argv = argv
 
     def test_run_sample_payload(self):
         with tempfile.TemporaryDirectory() as d:

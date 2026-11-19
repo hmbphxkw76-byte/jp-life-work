@@ -70,6 +70,12 @@ MAX_REWORK_ROUNDS = 2               # 修复最大返工轮次（提示词体系
 # 元组 = 限定主题（分期推进期使用）。00 决策层无登记册，自动跳过。
 VALUE_SYNC_TOPICS = None
 
+# 语义类指标（需人工 / LLM 复核，不在自动门槛内）：模块四 S-01/03/04/06/07/09/10/11 + C-11/12。
+# 单一事实源：audit_sampling 月度抽检与主题 operations-guide.md「语义指标人工核验清单」均以此为准。
+SEMANTIC_INDICATORS: tuple[str, ...] = (
+    "S-01", "S-03", "S-04", "S-06", "S-07", "S-09", "S-10", "S-11", "C-11", "C-12",
+)
+
 # ④/⑤ 级来源允许的核验标注（分级字段化）
 GRADE_ANNOTATION_MARKERS = (
     "已核验", "已核实", "已回溯", "需核实原文", "待核实", "单源待证",
@@ -392,6 +398,11 @@ def _report_value_rows(text: str) -> dict[int, str]:
     return {}
 
 
+def has_value_summary(text: str) -> bool:
+    """报告是否含「数据变更摘要」活值表（C-13 / PF-REGVAL 可判定前提）。"""
+    return bool(_report_value_rows(text))
+
+
 def _rel(path: Path) -> str:
     try:
         return str(path.relative_to(ROOT)).replace("\\", "/")
@@ -648,35 +659,47 @@ def check_grade_annotations(u: dict, rel: str, text: str, findings: list[Finding
                 "S-06"))
 
 
-def check_value_sync(u: dict, rp: Path, text: str, findings: list[Finding]) -> None:
-    """C-13：报告 ↔ 登记册数值一致性（全量覆盖 VALUE_SYNC_TOPICS，P1）。
+def value_sync_gaps(registry_text: str, report_text: str) -> list[tuple[int, set[str]]]:
+    """登记册活值 ↔ 报告「数据变更摘要」数值差集（C-13 判定内核，纯函数）。
 
     以登记册活值表「最新值」列为基准，抽取数值型数字；报告「数据变更摘要」对应
-    编号行若缺失该数值则判不一致。仅比数值存在性，不做单位 / 口径换算。
+    编号行若缺失该数值则计入差集。仅比数值存在性，不做单位 / 口径换算。
+    无活值表 / 无摘要表 / 无「最新值」列时返回 []（不可判定，不误报）。
+
+    单一事实源：本函数是 C-13 与 `audit_preflight` 登记册一致性检查（PF-REGVAL）
+    的唯一判定实现，调用方不得另写规则。
     """
-    if u.get("registry") is None:
-        return
-    if VALUE_SYNC_TOPICS is not None and u["topic"] not in VALUE_SYNC_TOPICS:
-        return
-    lt = _live_table(_read(u["registry"]))
+    lt = _live_table(registry_text)
     if not lt:
-        return
+        return []
     hdr, rows = lt
     vi = next((i for i, h in enumerate(hdr) if "最新值" in h), None)
     if vi is None:
-        return
+        return []
     reg_vals = {int(c[0]): c[vi] for c in rows if len(c) > vi and c[0].isdigit()}
-    rep_vals = _report_value_rows(text)
-    rel = _rel(rp)
+    rep_vals = _report_value_rows(report_text)
+    out: list[tuple[int, set[str]]] = []
     for no, reg_v in sorted(reg_vals.items()):
         if no not in rep_vals:
             continue
         missing = _significant_numbers(reg_v) - _significant_numbers(rep_vals[no])
         if missing:
-            findings.append(Finding(
-                "C-13", "P1", u["topic"], rel, "数据变更摘要",
-                f"指标 #{no} 登记册活值中的数值 {', '.join(sorted(missing))} "
-                f"未在报告「数据变更摘要」对应行出现", "S-09"))
+            out.append((no, missing))
+    return out
+
+
+def check_value_sync(u: dict, rp: Path, text: str, findings: list[Finding]) -> None:
+    """C-13：报告 ↔ 登记册数值一致性（全量覆盖 VALUE_SYNC_TOPICS，P1）。"""
+    if u.get("registry") is None:
+        return
+    if VALUE_SYNC_TOPICS is not None and u["topic"] not in VALUE_SYNC_TOPICS:
+        return
+    rel = _rel(rp)
+    for no, missing in value_sync_gaps(_read(u["registry"]), text):
+        findings.append(Finding(
+            "C-13", "P1", u["topic"], rel, "数据变更摘要",
+            f"指标 #{no} 登记册活值中的数值 {', '.join(sorted(missing))} "
+            f"未在报告「数据变更摘要」对应行出现", "S-09"))
 
 
 def check_cross_topic(units: list[dict], findings: list[Finding]) -> dict:

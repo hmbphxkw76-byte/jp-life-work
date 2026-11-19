@@ -10,6 +10,7 @@
 用法：
     python audit_sampling.py --apply [--period YYYY-MM]   # 执行抽检并写报告（命中 P0/P1 自动置 stale）
     python audit_sampling.py --report [--period YYYY-MM]  # 输出到 stdout（只读，不处置）
+    python audit_sampling.py --check [--period YYYY-MM]   # 只读输出语义指标人工核验覆盖统计
 
 退出码：0 = 达到门槛；1 = 未达门槛（P0/P1 或合格率不足）；2 = 仅 P2。
 """
@@ -29,6 +30,7 @@ from _common import ROOT, link_prefix, md_table  # noqa: E402
 from audit_check import check_report, iq_findings_by_path, l5_status  # noqa: E402
 from audit_check import rel as rel_path
 from audit_registry import AUDIT_DIR, audit_state, discover  # noqa: E402
+from info_quality_check import SEMANTIC_INDICATORS  # noqa: E402
 
 SAMPLING_DIR = AUDIT_DIR / "sampling"
 PENDING_P2 = AUDIT_DIR / "pending-p2.json"
@@ -39,6 +41,11 @@ TH_ELEMENT = 0.95      # 要素完整率
 TH_CONSIST = 1.00      # 状态一致率
 TH_PASS = 0.95         # 抽检合格率
 # 说明：四项阈值均为「程序化验收门槛」，直接参与下方 checks 判定，非仅文档口径。
+
+# 语义类指标人工核验：每份抽检报告须覆盖 ≥ SEMANTIC_MIN 项（清单见各主题 operations-guide.md）。
+SEMANTIC_MIN = 2
+SEMANTIC_SECTION_RE = re.compile(
+    r"##\s*语义指标人工核验清单(.*?)(?=\n##\s|\Z)", re.DOTALL)
 
 
 def select_sample(entries: list[dict], period: str) -> list[dict]:
@@ -93,6 +100,23 @@ def overdue_p2() -> list[dict]:
     return out
 
 
+def semantic_coverage(rel: str) -> tuple[int, list[str]]:
+    """读取主题 operations-guide.md「语义指标人工核验清单」，返回 (覆盖项数, 命中指标)。
+
+    指标代码集合以 `info_quality_check.SEMANTIC_INDICATORS` 为单一事实源；无清单或小节
+    未命中时代 0（由调用方计入公示）。
+    """
+    guide = ROOT / Path(rel).parents[1] / "operations-guide.md"
+    if not guide.is_file():
+        return 0, []
+    m = SEMANTIC_SECTION_RE.search(guide.read_text(encoding="utf-8", errors="replace"))
+    if not m:
+        return 0, []
+    body = m.group(1)
+    found = sorted({c for c in SEMANTIC_INDICATORS if re.search(rf"\b{re.escape(c)}\b", body)})
+    return len(found), found
+
+
 def run_sample(period: str) -> dict:
     entries = discover()
     sample = select_sample(entries, period)
@@ -110,11 +134,13 @@ def run_sample(period: str) -> dict:
         state_label = st.get("state") or st.get("audit_state") or "registered"
         has_badge = "**已审计**" in md.read_text(encoding="utf-8", errors="replace")
         status_ok = (state_label == "audited") == has_badge
+        sem_n, sem_found = semantic_coverage(rel)
         results.append({
             "report": rel, "topic": e["topic"], "period": e["period"],
             "passed": res.passed, "layers": res.layers,
             "severity": res.severity_counts, "status_ok": status_ok,
             "findings": [f for f in res.findings if f.severity in ("P0", "P1")],
+            "semantic_count": sem_n, "semantic_found": sem_found,
         })
 
     total = len(results)
@@ -130,12 +156,16 @@ def run_sample(period: str) -> dict:
     l5_pending = sum(1 for r in results if r["layers"].get("L5") == "pending")
     l5_pending_total = sum(1 for e in entries if not l5.get(e["report"], False))
 
+    # 语义类指标人工核验覆盖：每份抽检报告须覆盖 ≥ SEMANTIC_MIN 项
+    sem_ok = sum(1 for r in results if r["semantic_count"] >= SEMANTIC_MIN)
+    sem_found = sorted({c for r in results for c in r["semantic_found"]})
     checks = {
         "struct_100": (struct_ok / total >= TH_STRUCT) if total else True,
         "element_95": (elem_ok / total >= TH_ELEMENT) if total else True,
         "consistent_100": (consist_ok / total >= TH_CONSIST) if total else True,
         "pass_95": rate >= TH_PASS,
         "p0p1_zero": (p0 + p1) == 0,
+        "semantic_min": (sem_ok == total) if total else True,
     }
     return {
         "period": period, "total_reports": len(entries), "sample_size": total,
@@ -144,6 +174,8 @@ def run_sample(period: str) -> dict:
         "l5_pending": l5_pending, "l5_pending_total": l5_pending_total,
         "unfinished_verification": l5_pending,
         "overdue_p2_count": len(overdue_p2()),
+        "semantic": {"covered": sem_ok, "total": total, "min": SEMANTIC_MIN,
+                     "found": sem_found},
         "checks": checks, "ok": all(checks.values()),
         "results": results,
     }
@@ -161,6 +193,21 @@ def write_report(payload: dict) -> list[Path]:
                      "✓" if r["status_ok"] else "✗",
                      "通过" if (r["passed"] and r["status_ok"]) else "不通过"])
     chk_rows = [[k, "通过" if v else "未通过"] for k, v in payload["checks"].items()]
+    sem = payload.get("semantic", {})
+    sem_rows = [["报告", "覆盖项数", "命中指标"]]
+    for r in payload["results"]:
+        sem_rows.append([f"[{r['report']}]({prefix}{r['report']})",
+                         str(r.get("semantic_count", 0)),
+                         "、".join(r.get("semantic_found", [])) or "—"])
+    sem_block = "\n".join([
+        "## 语义指标人工核验覆盖",
+        "",
+        f"> 每份抽检报告须覆盖 ≥{sem.get('min', SEMANTIC_MIN)} 项语义类指标（清单见各主题 operations-guide.md）；"
+        f"本期覆盖 {sem.get('covered', 0)}/{sem.get('total', 0)}。",
+        "",
+        md_table(sem_rows),
+        "",
+    ])
     md = "\n".join(
         [
             f"# 报告合规抽检报告（{payload['period']}）",
@@ -181,6 +228,7 @@ def write_report(payload: dict) -> list[Path]:
             "",
             md_table(rows),
             "",
+            sem_block,
             f"**验收结论：{'达标 ✅' if payload['ok'] else '未达标 ⚠️（见未通过校验项）'}**",
             "",
         ]
@@ -216,6 +264,8 @@ def main() -> int:
     ap = argparse.ArgumentParser(description="报告合规抽检")
     ap.add_argument("--apply", action="store_true", help="执行抽检并写报告")
     ap.add_argument("--report", action="store_true", help="输出到 stdout")
+    ap.add_argument("--check", action="store_true",
+                    help="只读输出语义指标人工核验覆盖统计（不写报告、不处置）")
     ap.add_argument("--period", help="抽检期间（YYYY-MM，缺省当前月）")
     args = ap.parse_args()
 
@@ -226,6 +276,15 @@ def main() -> int:
     payload = run_sample(period)
     if args.report:
         print(json.dumps(payload, ensure_ascii=False, indent=2))
+    elif args.check:
+        sem = payload.get("semantic", {})
+        print(f"语义指标人工核验覆盖：{sem.get('covered', 0)}/{sem.get('total', 0)} "
+              f"份抽检报告达 ≥{sem.get('min', SEMANTIC_MIN)} 项")
+        for r in payload["results"]:
+            flag = "✓" if r.get("semantic_count", 0) >= SEMANTIC_MIN else "×"
+            print(f"  {flag} {r['report']}：{r.get('semantic_count', 0)} 项 "
+                  f"{'、'.join(r.get('semantic_found', [])) or '—'}")
+        return 0 if payload["checks"].get("semantic_min") else 1
     else:
         # G→F 反馈链路：命中 P0/P1 的已审计报告自动置 stale，标识由工作流 badge --sync 撤销。
         mark_sampling_failures(payload)

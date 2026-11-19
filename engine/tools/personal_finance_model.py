@@ -35,7 +35,8 @@ REPRESENTATIVE_RENT = _FINANCE_CFG["representative_rent_jpy"]
 SOCIAL_INSURANCE_RATE = _FINANCE_CFG["social_insurance_rate"]
 
 # 登记册定位：(主题目录, 指标号, 值所在列索引)
-# 01/07/10/14 为 5 列（值在第 4 列，索引 3）；17 为 12 列（值在第 5 列，索引 4）。
+# 01 已于 2026-11-19 迁移 v2 标准表（12 列，值在第 5 列，索引 4）；
+# 07/10/14 为 v1 5 列（值在第 4 列，索引 3）；17 为 12 列（值索引 4）。
 SOURCES = {k: tuple(v) for k, v in _FINANCE_CFG["sources"].items()}
 
 
