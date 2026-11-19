@@ -1,13 +1,13 @@
 {
   "topic": "02-career-driver",
   "name": "司机职业发展",
-  "version": "v1.6",
-  "generated_at": "2026-11-19T12:01:06",
-  "count": 104,
+  "version": "v1.10",
+  "generated_at": "2026-11-19T17:01:49",
+  "count": 93,
   "categories": {
-    "职级与晋升路径": 18,
+    "职级与晋升路径": 17,
     "薪资与待遇": 19,
-    "技能与证照": 19,
+    "技能与证照": 9,
     "求职与雇佣": 19,
     "职业转型": 16,
     "场景与表达": 13
@@ -151,24 +151,6 @@
       "verification": "已核验",
       "source_url": "https://www.mlit.go.jp/jidosha/",
       "confidence": "A"
-    },
-    {
-      "id": "CDR-008",
-      "term": "安全運転管理者",
-      "aliases": [],
-      "category": "职级与晋升路径",
-      "tags": [
-        "法定岗位",
-        "安全教育",
-        "酒驾防止"
-      ],
-      "definition": "依道路交通法选任的管理者，负责司机安全驾驶教育与酒驾防止等事务。",
-      "source": "警察庁",
-      "first_added": "2026-11-13",
-      "last_updated": "2026-11-19",
-      "verification": "部分核验",
-      "source_url": "https://mp.weixin.qq.com/s?__biz=MjM5NTA5NzY3OQ==&mid=2650795907&idx=2&sn=cbc2cf5b919a4ff51aa229b0e6e029a7",
-      "confidence": "B"
     },
     {
       "id": "CDR-009",
@@ -472,106 +454,6 @@
       "confidence": "B"
     },
     {
-      "id": "CDR-024",
-      "term": "大型免許",
-      "aliases": [
-        "大型自動車免許"
-      ],
-      "category": "技能与证照",
-      "tags": [
-        "驾驶证",
-        "大型卡车",
-        "考试"
-      ],
-      "definition": "可驾驶车辆总重量11吨以上大型卡车等的驾驶证，需通过大型一种考试。",
-      "source": "警察庁",
-      "first_added": "2026-11-13",
-      "last_updated": "2026-11-19",
-      "verification": "部分核验",
-      "source_url": "https://mp.weixin.qq.com/s?__biz=MjM5NTA5NzY3OQ==&mid=2650795907&idx=2&sn=cbc2cf5b919a4ff51aa229b0e6e029a7",
-      "confidence": "B"
-    },
-    {
-      "id": "CDR-025",
-      "term": "中型免許",
-      "aliases": [
-        "中型自動車免許"
-      ],
-      "category": "技能与证照",
-      "tags": [
-        "驾驶证",
-        "中型卡车",
-        "载重"
-      ],
-      "definition": "可驾驶总重量8吨以上11吨未满、最大载重5吨以上卡车的驾驶证。",
-      "source": "警察庁",
-      "first_added": "2026-11-13",
-      "last_updated": "2026-11-19",
-      "verification": "部分核验",
-      "source_url": "https://mp.weixin.qq.com/s?__biz=MjM5NTA5NzY3OQ==&mid=2650795907&idx=2&sn=cbc2cf5b919a4ff51aa229b0e6e029a7",
-      "confidence": "B"
-    },
-    {
-      "id": "CDR-026",
-      "term": "準中型免許",
-      "aliases": [
-        "準中型"
-      ],
-      "category": "技能与证照",
-      "tags": [
-        "驾驶证",
-        "准中型",
-        "载重"
-      ],
-      "definition": "可驾驶总重量3.5吨以上8吨未满、最大载重2吨以上卡车的驾驶证。",
-      "source": "警察庁",
-      "first_added": "2026-11-13",
-      "last_updated": "2026-11-19",
-      "verification": "部分核验",
-      "source_url": "https://mp.weixin.qq.com/s?__biz=MjM5NTA5NzY3OQ==&mid=2650795907&idx=2&sn=cbc2cf5b919a4ff51aa229b0e6e029a7",
-      "confidence": "B"
-    },
-    {
-      "id": "CDR-027",
-      "term": "二種免許",
-      "aliases": [
-        "第二種運転免許"
-      ],
-      "category": "技能与证照",
-      "tags": [
-        "驾驶证",
-        "客运",
-        "出租车"
-      ],
-      "definition": "可驾驶出租车、巴士等以运送乘客为目的车辆的驾驶证，分普通二种等。",
-      "source": "警察庁",
-      "first_added": "2026-11-13",
-      "last_updated": "2026-11-19",
-      "verification": "部分核验",
-      "source_url": "https://mp.weixin.qq.com/s?__biz=MjM5NTA5NzY3OQ==&mid=2650795907&idx=2&sn=cbc2cf5b919a4ff51aa229b0e6e029a7",
-      "confidence": "B"
-    },
-    {
-      "id": "CDR-028",
-      "term": "牽引免許",
-      "aliases": [
-        "けん引免許"
-      ],
-      "category": "技能与证照",
-      "tags": [
-        "驾驶证",
-        "拖车",
-        "附加"
-      ],
-      "definition": "驾驶牵引车、重型拖车等牵引式车辆时必须取得的附加驾驶证。",
-      "source": "警察庁",
-      "first_added": "2026-11-13",
-      "last_updated": "2026-11-19",
-      "verification": "部分核验",
-      "source_url": "https://mp.weixin.qq.com/s?__biz=MjM5NTA5NzY3OQ==&mid=2650795907&idx=2&sn=cbc2cf5b919a4ff51aa229b0e6e029a7",
-      "confidence": "B"
-    },
-    {
       "id": "CDR-029",
       "term": "フォークリフト",
       "aliases": [
@@ -650,26 +532,6 @@
       "last_updated": "2026-11-19",
       "verification": "部分核验",
       "source_url": "https://www.mlit.go.jp/jidosha/",
-      "confidence": "B"
-    },
-    {
-      "id": "CDR-033",
-      "term": "安全運転管理者講習",
-      "aliases": [
-        "安全運転管理者研修"
-      ],
-      "category": "技能与证照",
-      "tags": [
-        "法定讲习",
-        "安全教育",
-        "管理者"
-      ],
-      "definition": "被选任为安全驾驶管理者后须参加的法定讲习，学习事故预防与指导方法。",
-      "source": "警察庁",
-      "first_added": "2026-11-13",
-      "last_updated": "2026-11-19",
-      "verification": "部分核验",
-      "source_url": "https://mp.weixin.qq.com/s?__biz=MjM5NTA5NzY3OQ==&mid=2650795907&idx=2&sn=cbc2cf5b919a4ff51aa229b0e6e029a7",
       "confidence": "B"
     },
     {
@@ -1625,82 +1487,6 @@
       "last_updated": "2026-11-19",
       "verification": "部分核验",
       "source_url": "https://www.fdma.go.jp/",
-      "confidence": "B"
-    },
-    {
-      "id": "CDR-082",
-      "term": "運転免許更新",
-      "aliases": [
-        "免許更新"
-      ],
-      "category": "技能与证照",
-      "tags": [
-        "证照",
-        "驾驶证",
-        "周期"
-      ],
-      "definition": "驾驶执照按更新周期办理的换证手续，分优良、一般等区分。",
-      "source": "警察庁",
-      "first_added": "2026-11-13",
-      "last_updated": "2026-11-19",
-      "verification": "部分核验",
-      "source_url": "https://mp.weixin.qq.com/s?__biz=MjM5NTA5NzY3OQ==&mid=2650795907&idx=2&sn=cbc2cf5b919a4ff51aa229b0e6e029a7",
-      "confidence": "B"
-    },
-    {
-      "id": "CDR-083",
-      "term": "違反講習",
-      "aliases": [],
-      "category": "技能与证照",
-      "tags": [
-        "证照",
-        "记点",
-        "讲习"
-      ],
-      "definition": "因违章记点临近吊销执照时，为免除处分必须接受的讲习课程。",
-      "source": "警察庁",
-      "first_added": "2026-11-13",
-      "last_updated": "2026-11-19",
-      "verification": "部分核验",
-      "source_url": "https://mp.weixin.qq.com/s?__biz=MjM5NTA5NzY3OQ==&mid=2650795907&idx=2&sn=cbc2cf5b919a4ff51aa229b0e6e029a7",
-      "confidence": "B"
-    },
-    {
-      "id": "CDR-084",
-      "term": "教習所指導員",
-      "aliases": [
-        "指定自動車教習所指導員"
-      ],
-      "category": "技能与证照",
-      "tags": [
-        "证照",
-        "指导技能",
-        "教习所"
-      ],
-      "definition": "在公安委员会指定驾校教授驾驶技能与学科的专业指导人员。",
-      "source": "公安委員会",
-      "first_added": "2026-11-13",
-      "last_updated": "2026-11-19",
-      "verification": "部分核验",
-      "source_url": "https://www.npa.go.jp/",
-      "confidence": "B"
-    },
-    {
-      "id": "CDR-085",
-      "term": "応急救護処置",
-      "aliases": [],
-      "category": "技能与证照",
-      "tags": [
-        "技能",
-        "应急救护",
-        "事故"
-      ],
-      "definition": "事故现场对伤者实施止血、包扎等应急救护的基本技能要求。",
-      "source": "警察庁",
-      "first_added": "2026-11-13",
-      "last_updated": "2026-11-19",
-      "verification": "部分核验",
-      "source_url": "https://mp.weixin.qq.com/s?__biz=MjM5NTA5NzY3OQ==&mid=2650795907&idx=2&sn=cbc2cf5b919a4ff51aa229b0e6e029a7",
       "confidence": "B"
     },
     {

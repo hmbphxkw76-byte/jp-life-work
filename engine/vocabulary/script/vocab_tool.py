@@ -550,6 +550,39 @@ def cmd_alias(tmeta: dict, term_id: str, add: str, remove: str) -> int:
     return 0
 
 
+def cmd_remove(tmeta: dict, term_ids: str) -> int:
+    """按 ID 删除词条（可复用命令，避免手改词库）。
+
+    term_ids 为逗号分隔的 ID 列表；未找到的 ID 记入版本行但不阻断已删除项。
+    """
+    storage = tmeta["storage"]
+    if not storage.exists():
+        print(f"[error] 词库不存在：{rel(storage)}")
+        return 1
+    ids = [x.strip() for x in str(term_ids).split(",") if x.strip()]
+    if not ids:
+        print("[error] 未指定任何词条 ID")
+        return 1
+    terms, versions = load_storage(storage)
+    before = len(terms)
+    idset = {i.lower() for i in ids}
+    kept = [t for t in terms if t["id"].lower() not in idset]
+    removed = [t for t in terms if t["id"].lower() in idset]
+    found = {t["id"].lower() for t in removed}
+    missing = [i for i in ids if i.lower() not in found]
+    if not removed:
+        print(f"[remove] 未找到任何指定词条：{','.join(ids)}")
+        return 1
+    detail = f"删除 {len(removed)} 条：{','.join(t['id'] for t in removed)}"
+    if missing:
+        detail += f"；未找到 {','.join(missing)}"
+    versions.append([next_version(versions), today(), "词条删除", detail])
+    storage.write_text(render_terms_md(tmeta, kept, versions), encoding="utf-8")
+    print(f"[remove] 删除 {len(removed)} 条（{before}→{len(kept)}）；词库更新至 {versions[-1][0]}")
+    auto_sync_hook(tmeta["id"])
+    return 0
+
+
 def cmd_verify_update(tmeta: dict, file_arg: str) -> int:
     """回填既有词条的核验字段（核验状态 / 来源URL / 置信度）。
 
@@ -931,6 +964,9 @@ def main(argv=None) -> int:
     p.add_argument("--id", required=True)
     p.add_argument("--add", default="", help="追加别名，分号分隔")
     p.add_argument("--remove", default="", help="移除别名，分号分隔")
+    p = sub.add_parser("remove", help="按 ID 删除词条（逗号分隔）")
+    p.add_argument("--topic", required=True)
+    p.add_argument("--id", required=True, help="待删除词条 ID，逗号分隔")
     p = sub.add_parser("verify-update", help="回填既有词条核验字段（核验状态 / 来源URL / 置信度）")
     p.add_argument("--topic", required=True)
     p.add_argument("--file", required=True, help="回填文件（.md 表格 / .csv / .json，含 ID 或词条列）")
@@ -979,6 +1015,8 @@ def main(argv=None) -> int:
             return cmd_tag(tmeta, args.id, args.add, args.remove)
         if args.cmd == "alias":
             return cmd_alias(tmeta, args.id, args.add, args.remove)
+        if args.cmd == "remove":
+            return cmd_remove(tmeta, args.id)
         if args.cmd == "verify-update":
             return cmd_verify_update(tmeta, args.file)
         if args.cmd == "export":
