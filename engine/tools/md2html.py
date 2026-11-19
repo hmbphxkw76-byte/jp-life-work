@@ -3,7 +3,7 @@
 扫描各业务线 reports/*.md，转换为同名自包含 .html。报告页采用 macropulse-reports
 设计范式（统一 navy 设计令牌）：
 
-    skip-link -> header.hero（eyebrow / h1 / sub / meta / tags）
+    skip-link -> header.hero（navy 标题带：eyebrow / h1 / tags；浅色 meta 面板：meta-grid / 审计徽章）
     -> nav.report-nav（sticky：报告路径 + 章节锚点 tabs + 跨月对比工具条）
     -> main.wrap（版本与运行变量卡 + h2.sec 章节）
     -> footer.footer（返回主题 / 返回首页）
@@ -81,16 +81,30 @@ a:hover{text-decoration:underline}
 .audit-badge .audit-seal{font-weight:700;white-space:nowrap}
 .audit-badge .audit-meta{color:var(--ink2)}
 
-/* ── 题头 Hero ── */
-.hero{background:linear-gradient(128deg,#0f2338 0%,#16324f 52%,#2f5597 100%);
-  color:#fff;padding:46px 36px 34px;border-radius:0 0 18px 18px;margin-bottom:24px}
-.hero .eyebrow{font-size:11.5px;letter-spacing:2.4px;color:rgba(255,255,255,.62);text-transform:uppercase}
-.hero h1{font-size:28px;font-weight:700;letter-spacing:.4px;margin:8px 0 6px;line-height:1.35}
-.hero .sub{font-size:13.5px;color:rgba(255,255,255,.82);max-width:900px}
-.hero .meta{font-size:12.3px;color:rgba(255,255,255,.78);margin-top:16px;line-height:2}
-.hero .meta b{color:#fff}
-.hero .tag{display:inline-block;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.2);
-  border-radius:14px;padding:2px 11px;margin:5px 6px 0 0;font-size:11.5px}
+/* ── 题头 Hero（分层：navy 标题带 + 浅色 meta 面板） ── */
+.hero{margin-bottom:20px}
+.hero .wrap{padding-bottom:0}
+.hero-band{background:linear-gradient(128deg,#0f2338 0%,#16324f 52%,#2f5597 100%);color:#fff;
+  padding:14px 0 12px;border-radius:0 0 14px 14px}
+.hero-top{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.hero-band .eyebrow{font-size:10.5px;letter-spacing:2px;color:rgba(255,255,255,.62);text-transform:uppercase}
+.hero-band h1{font-size:21px;font-weight:700;letter-spacing:.3px;margin:5px 0 0;line-height:1.3}
+.hero-band .tags{display:flex;flex-wrap:wrap;gap:6px}
+.hero-band .tag{display:inline-block;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.2);
+  border-radius:14px;padding:1px 10px;font-size:11px}
+.hero-panel{display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px;
+  background:var(--card);border:1px solid var(--line);border-radius:12px;
+  padding:8px 12px;margin-top:8px;box-shadow:var(--shadow)}
+.meta-grid{flex:1 1 0;min-width:0;column-count:2;column-gap:20px;
+  font-size:11.4px;line-height:1.45;color:var(--ink2)}
+.meta-grid .meta-item{break-inside:avoid;margin:0 0 2px;min-width:0;overflow-wrap:anywhere}
+.meta-grid .meta-item b{color:var(--navy)}
+.hero-panel .audit-badge{margin:0;flex:0 0 300px;font-size:12px;padding:6px 12px}
+@media (max-width:900px){
+  .hero-panel{flex-direction:column;align-items:stretch}
+  .hero-panel .audit-badge{flex:1 1 auto}
+  .meta-grid{column-count:1}
+}
 
 /* ── 报告导航（sticky） ── */
 .report-nav{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);
@@ -516,12 +530,7 @@ def render_page(
     """
     esc = html_mod.escape
     meta_lines = _parse_meta(blockquote)
-    meta_html = "<br>".join(meta_lines)
-    ver = next((ln for ln in meta_lines if "版本" in ln), "")
-    date = next((ln for ln in meta_lines if "数据基准日" in ln), "")
-    sub = re.sub(r"<[^>]+>", "", "｜".join(x for x in (ver, date) if x)) or (
-        re.sub(r"<[^>]+>", "", meta_lines[0]) if meta_lines else ""
-    )
+    meta_html = "".join(f'<div class="meta-item">{ln}</div>' for ln in meta_lines)
     tags = f'<span class="tag">{esc(period)}</span>'
     if type_label:
         tags += f'<span class="tag">{esc(type_label)}</span>'
@@ -593,12 +602,21 @@ def render_page(
 <body>
 <a class="skip-link" href="#main-content">跳转到主要内容</a>
 <header class="hero" role="banner" aria-label="报告题头">
-  <div class="eyebrow">{esc(topic_name)} · {esc(type_label)}</div>
-  <h1>{esc(title)}</h1>
-  {f'<div class="sub">{esc(sub)}</div>' if sub else ''}
-  <div class="meta">{meta_html}</div>
-  {audit_html}
-  <div>{tags}</div>
+  <div class="hero-band">
+    <div class="wrap">
+      <div class="hero-top">
+        <div class="eyebrow">{esc(topic_name)} · {esc(type_label)}</div>
+        <div class="tags">{tags}</div>
+      </div>
+      <h1>{esc(title)}</h1>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="hero-panel">
+      <div class="meta-grid">{meta_html}</div>
+      {audit_html}
+    </div>
+  </div>
 </header>
 <nav class="report-nav" aria-label="报告导航">
   <div class="wrap">
