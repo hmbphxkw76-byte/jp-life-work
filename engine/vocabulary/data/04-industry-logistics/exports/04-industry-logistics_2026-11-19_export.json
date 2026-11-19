@@ -1,8 +1,8 @@
 {
   "topic": "04-industry-logistics",
   "name": "物流行业",
-  "version": "v1.5",
-  "generated_at": "2026-11-19T09:07:49",
+  "version": "v1.6",
+  "generated_at": "2026-11-19T11:37:21",
   "count": 109,
   "categories": {
     "行业结构与业态": 20,
@@ -743,7 +743,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/index.html",
       "confidence": "B"
     },
     {
@@ -762,7 +762,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/gyosyu/roudoujouken05/index.html",
       "confidence": "B"
     },
     {
@@ -781,7 +781,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.soumu.go.jp/",
+      "source_url": "https://www.soumu.go.jp/main_sosiki/jichi_zeisei/czaisei/czaisei_seido/150790_12.html",
       "confidence": "B"
     },
     {
@@ -1711,7 +1711,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.meti.go.jp/",
+      "source_url": "http://www.greenpartnership.jp/",
       "confidence": "B"
     },
     {
@@ -1728,7 +1728,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.env.go.jp/",
+      "source_url": "https://ondankataisaku.env.go.jp/carbon_neutral/",
       "confidence": "B"
     },
     {

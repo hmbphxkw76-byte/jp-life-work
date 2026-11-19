@@ -1,8 +1,8 @@
 {
   "topic": "18-family-parenting",
   "name": "家族·育儿·人生事件",
-  "version": "v1.6",
-  "generated_at": "2026-11-19T08:48:46",
+  "version": "v1.7",
+  "generated_at": "2026-11-19T11:56:52",
   "count": 78,
   "categories": {
     "家族滞在": 15,
@@ -129,7 +129,7 @@
       "first_added": "2026-11-14",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.moj.go.jp/",
+      "source_url": "https://www.moj.go.jp/MINJI/minji15.html",
       "confidence": "B"
     },
     {
@@ -149,7 +149,7 @@
       "first_added": "2026-11-14",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.moj.go.jp/",
+      "source_url": "https://www.moj.go.jp/ONLINE/FAMILYREGISTER/5-2.html",
       "confidence": "B"
     },
     {
@@ -167,7 +167,7 @@
       "first_added": "2026-11-14",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.moj.go.jp/",
+      "source_url": "https://www.courts.go.jp/saiban/syurui/syurui_kazi/kazi_08_01/index.html",
       "confidence": "B"
     },
     {
@@ -187,7 +187,7 @@
       "first_added": "2026-11-14",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.courts.go.jp/",
+      "source_url": "https://www.courts.go.jp/saiban/syurui/syurui_kazi/kazi_shinken/index.html",
       "confidence": "B"
     },
     {
@@ -207,7 +207,7 @@
       "first_added": "2026-11-14",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.courts.go.jp/",
+      "source_url": "https://www.courts.go.jp/saiban/syurui/syurui_kazi/kazi_07_08/index.html",
       "confidence": "B"
     },
     {
@@ -457,7 +457,7 @@
       "first_added": "2026-11-14",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.cao.go.jp/",
+      "source_url": "https://www.cfa.go.jp/policies/kokoseido/jidouteate/annai",
       "confidence": "B"
     },
     {
@@ -535,7 +535,7 @@
       "first_added": "2026-11-14",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.nenkin.go.jp/",
+      "source_url": "https://www.nenkin.go.jp/service/seidozenpan/20140710.html",
       "confidence": "B"
     },
     {
@@ -553,7 +553,7 @@
       "first_added": "2026-11-14",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.moj.go.jp/",
+      "source_url": "https://www.gov-online.go.jp/useful/article/201809/1.html",
       "confidence": "B"
     },
     {
@@ -571,7 +571,7 @@
       "first_added": "2026-11-14",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.moj.go.jp/",
+      "source_url": "https://www.moj.go.jp/MINJI/minji03_00051.html",
       "confidence": "B"
     },
     {
@@ -589,7 +589,7 @@
       "first_added": "2026-11-14",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.moj.go.jp/",
+      "source_url": "https://www.courts.go.jp/saiban/syurui/syurui_kazi/kazi_07_12/index.html",
       "confidence": "B"
     },
     {
@@ -839,7 +839,7 @@
       "first_added": "2026-11-18",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.nenkin.go.jp/",
+      "source_url": "https://www.nenkin.go.jp/service/index.html",
       "confidence": "B"
     },
     {
@@ -896,7 +896,7 @@
       "first_added": "2026-11-18",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mlit.go.jp/",
+      "source_url": "https://www.mlit.go.jp/jutakukentiku/house/index.html",
       "confidence": "B"
     },
     {
@@ -1375,7 +1375,7 @@
       "first_added": "2026-11-18",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.moj.go.jp/",
+      "source_url": "https://www.moj.go.jp/MINJI/koseki.html",
       "confidence": "B"
     },
     {
@@ -1394,7 +1394,7 @@
       "first_added": "2026-11-18",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.courts.go.jp/",
+      "source_url": "https://www.courts.go.jp/saiban/syurui/syurui_kazi/youikuhi-tetsuzuki/index.html",
       "confidence": "B"
     },
     {

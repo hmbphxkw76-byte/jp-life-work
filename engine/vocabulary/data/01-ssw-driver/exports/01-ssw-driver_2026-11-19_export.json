@@ -1,8 +1,8 @@
 {
   "topic": "01-ssw-driver",
   "name": "特定技能司机",
-  "version": "v1.6",
-  "generated_at": "2026-11-19T09:07:49",
+  "version": "v1.7",
+  "generated_at": "2026-11-19T11:44:55",
   "count": 109,
   "categories": {
     "在留资格与制度": 19,
@@ -583,7 +583,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/roudouzikan/index.html",
       "confidence": "B"
     },
     {
@@ -640,7 +640,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/",
+      "source_url": "https://saiteichingin.mhlw.go.jp/",
       "confidence": "B"
     },
     {
@@ -660,7 +660,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/roudouzikan/index.html",
       "confidence": "B"
     },
     {
@@ -680,7 +680,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/gyosyu/roudoujouken05/index.html",
       "confidence": "B"
     },
     {
@@ -700,7 +700,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/gyosyu/roudoujouken05/index.html",
       "confidence": "B"
     },
     {
@@ -758,7 +758,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/roudoukijun/anzeneisei10/qualificaton_education.html",
       "confidence": "B"
     },
     {
@@ -777,7 +777,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/roudoukijun/anzeneisei10/qualificaton_education.html",
       "confidence": "B"
     },
     {
@@ -1029,7 +1029,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/anzen/index.html",
       "confidence": "B"
     },
     {
@@ -1086,7 +1086,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/anzen/index.html",
       "confidence": "B"
     },
     {
@@ -1260,7 +1260,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.nta.go.jp/",
+      "source_url": "https://www.nta.go.jp/taxes/shiraberu/shinkoku/kakutei.htm",
       "confidence": "B"
     },
     {
@@ -1279,7 +1279,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/koukikourei/index_00002.html",
       "confidence": "B"
     },
     {
@@ -1604,7 +1604,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/nenkin/nenkin/",
       "confidence": "B"
     },
     {
@@ -1624,7 +1624,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/",
+      "source_url": "https://www.mhlw.go.jp/seisakunitsuite/bunya/koyou_roudou/roudoukijun/hoken/tokusetusaito.html",
       "confidence": "B"
     },
     {
@@ -1645,7 +1645,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/rousai/gaiyou.html",
       "confidence": "B"
     },
     {
@@ -1666,7 +1666,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/roudouzikan/index.html",
       "confidence": "B"
     },
     {
@@ -1912,7 +1912,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/roudoukijun/anzeneisei10/qualificaton_education.html",
       "confidence": "B"
     },
     {
@@ -2035,7 +2035,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.nta.go.jp/",
+      "source_url": "https://www.nta.go.jp/users/gensen/nencho/index/gimusya.htm",
       "confidence": "B"
     },
     {
