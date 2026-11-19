@@ -1,8 +1,8 @@
 {
   "topic": "09-politics-law",
   "name": "政治与法律",
-  "version": "v1.5",
-  "generated_at": "2026-11-19T09:07:50",
+  "version": "v1.6",
+  "generated_at": "2026-11-19T11:43:41",
   "count": 82,
   "categories": {
     "政治制度与机构": 12,
@@ -31,7 +31,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.shugiin.go.jp/",
+      "source_url": "https://www.shugiin.go.jp/internet/itdb_annai.nsf/html/statics/kokkai/kokkai.htm",
       "confidence": "B"
     },
     {
@@ -93,7 +93,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.cas.go.jp/",
+      "source_url": "https://www.kantei.go.jp/jp/seido/index.html",
       "confidence": "B"
     },
     {
@@ -114,7 +114,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.cas.go.jp/",
+      "source_url": "https://www.kantei.go.jp/jp/seido/seido_2_1.html",
       "confidence": "B"
     },
     {
@@ -135,7 +135,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.cas.go.jp/",
+      "source_url": "https://www.kantei.go.jp/jp/seido/seido_2_1.html",
       "confidence": "B"
     },
     {
@@ -218,7 +218,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.soumu.go.jp/main_sosiki/jichi_gyousei/c-gyousei/zairyu/",
+      "source_url": "https://www.soumu.go.jp/main_sosiki/jichi_gyousei/index.html",
       "confidence": "B"
     },
     {
@@ -238,7 +238,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.courts.go.jp/",
+      "source_url": "https://www.shugiin.go.jp/internet/itdb_annai.nsf/html/statics/kokkai/kokkai_sankenbunritsu.htm",
       "confidence": "B"
     },
     {
@@ -259,7 +259,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.soumu.go.jp/main_sosiki/jichi_gyousei/c-gyousei/zairyu/",
+      "source_url": "https://www.soumu.go.jp/main_sosiki/jichi_gyousei/index.html",
       "confidence": "B"
     },
     {
@@ -280,7 +280,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.shugiin.go.jp/",
+      "source_url": "https://www.shugiin.go.jp/internet/itdb_annai.nsf/html/statics/shiryo/dl-constitution.htm",
       "confidence": "B"
     },
     {
@@ -363,7 +363,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.soumu.go.jp/main_sosiki/jichi_gyousei/c-gyousei/zairyu/",
+      "source_url": "https://www.soumu.go.jp/main_sosiki/jichi_gyousei/index.html",
       "confidence": "B"
     },
     {
@@ -384,7 +384,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.courts.go.jp/",
+      "source_url": "https://www.courts.go.jp/hanrei/index.html",
       "confidence": "B"
     },
     {
@@ -464,7 +464,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/roumu/",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/index.html",
       "confidence": "B"
     },
     {
@@ -485,7 +485,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.soumu.go.jp/main_sosiki/jichi_gyousei/c-gyousei/zairyu/",
+      "source_url": "https://www.soumu.go.jp/main_sosiki/jichi_gyousei/index.html",
       "confidence": "B"
     },
     {
@@ -527,7 +527,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.soumu.go.jp/main_sosiki/jichi_gyousei/c-gyousei/zairyu/",
+      "source_url": "https://www.soumu.go.jp/main_sosiki/jichi_gyousei/index.html",
       "confidence": "B"
     },
     {
@@ -548,7 +548,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.soumu.go.jp/main_sosiki/jichi_gyousei/c-gyousei/zairyu/",
+      "source_url": "https://www.soumu.go.jp/main_sosiki/jichi_gyousei/index.html",
       "confidence": "B"
     },
     {
@@ -590,7 +590,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.courts.go.jp/",
+      "source_url": "https://www.courts.go.jp/saiban/syurui/syurui_minzi/minzi_25_20/index.html",
       "confidence": "B"
     },
     {
@@ -611,7 +611,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.courts.go.jp/",
+      "source_url": "https://www.courts.go.jp/saiban/syurui/syurui_keizi/index.html",
       "confidence": "B"
     },
     {
@@ -632,7 +632,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.courts.go.jp/",
+      "source_url": "https://www.courts.go.jp/saiban/syurui/syurui_minzi/minzi_25_01/index.html",
       "confidence": "B"
     },
     {
@@ -713,7 +713,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.courts.go.jp/",
+      "source_url": "https://www.courts.go.jp/about/sosiki/index.html",
       "confidence": "B"
     },
     {
@@ -733,7 +733,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.courts.go.jp/",
+      "source_url": "https://www.courts.go.jp/saiban/syurui/syurui_minzi/minzi_25_02/index.html",
       "confidence": "B"
     },
     {
@@ -754,7 +754,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.courts.go.jp/",
+      "source_url": "https://www.courts.go.jp/saiban/syurui/syurui_minzi/minzi_25_22/index.html",
       "confidence": "B"
     },
     {
@@ -774,7 +774,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/roumu/",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/index.html",
       "confidence": "B"
     },
     {
@@ -794,7 +794,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/roumu/",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/index.html",
       "confidence": "B"
     },
     {
@@ -814,7 +814,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/roumu/",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/index.html",
       "confidence": "B"
     },
     {
@@ -835,7 +835,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/roumu/",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/index.html",
       "confidence": "B"
     },
     {
@@ -855,7 +855,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/roumu/",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/index.html",
       "confidence": "B"
     },
     {
@@ -876,7 +876,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/roumu/",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/index.html",
       "confidence": "B"
     },
     {
@@ -896,7 +896,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/roumu/",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/index.html",
       "confidence": "B"
     },
     {
@@ -917,7 +917,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/roumu/",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/index.html",
       "confidence": "B"
     },
     {
@@ -938,7 +938,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/roumu/",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/index.html",
       "confidence": "B"
     },
     {
@@ -959,7 +959,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/roumu/",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/index.html",
       "confidence": "B"
     },
     {
@@ -979,7 +979,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.courts.go.jp/",
+      "source_url": "https://www.courts.go.jp/saiban/syurui/syurui_minzi/minzi_25_21/index.html",
       "confidence": "B"
     },
     {
@@ -999,7 +999,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/roumu/",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/index.html",
       "confidence": "B"
     },
     {
@@ -1040,7 +1040,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.shugiin.go.jp/",
+      "source_url": "https://www.shugiin.go.jp/internet/itdb_annai.nsf/html/statics/kokkai/kokkai_gian2.htm",
       "confidence": "B"
     },
     {
@@ -1061,7 +1061,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mof.go.jp/",
+      "source_url": "https://www.mof.go.jp/budget/",
       "confidence": "B"
     },
     {
@@ -1082,7 +1082,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mof.go.jp/",
+      "source_url": "https://www.mof.go.jp/tax_policy/index.html",
       "confidence": "B"
     },
     {
@@ -1122,7 +1122,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.cao.go.jp/",
+      "source_url": "https://www.cao.go.jp/bunken-suishin/soukatsutotenbou/soukatsutotenbou-index.html",
       "confidence": "B"
     },
     {
@@ -1142,7 +1142,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.soumu.go.jp/main_sosiki/jichi_gyousei/c-gyousei/zairyu/",
+      "source_url": "https://www.soumu.go.jp/main_sosiki/jichi_gyousei/index.html",
       "confidence": "B"
     },
     {
@@ -1162,7 +1162,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.soumu.go.jp/main_sosiki/jichi_gyousei/c-gyousei/zairyu/",
+      "source_url": "https://www.soumu.go.jp/main_sosiki/jichi_gyousei/index.html",
       "confidence": "B"
     },
     {
@@ -1182,7 +1182,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.soumu.go.jp/main_sosiki/jichi_gyousei/c-gyousei/zairyu/",
+      "source_url": "https://www.soumu.go.jp/main_sosiki/jichi_gyousei/index.html",
       "confidence": "B"
     },
     {
@@ -1203,7 +1203,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.soumu.go.jp/main_sosiki/jichi_gyousei/c-gyousei/zairyu/",
+      "source_url": "https://www.soumu.go.jp/main_sosiki/jichi_gyousei/index.html",
       "confidence": "B"
     },
     {
@@ -1264,7 +1264,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.japanpost.jp/",
+      "source_url": "https://www.post.japanpost.jp/service/fuka_service/syomei/index.html",
       "confidence": "B"
     },
     {
@@ -1284,7 +1284,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/roumu/",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/index.html",
       "confidence": "B"
     },
     {
@@ -1365,7 +1365,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.courts.go.jp/",
+      "source_url": "https://www.courts.go.jp/saiban/syurui/minjisikkou/index.html",
       "confidence": "B"
     },
     {
@@ -1676,7 +1676,7 @@
       "first_added": "2026-11-14",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/roumu/",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/index.html",
       "confidence": "B"
     },
     {

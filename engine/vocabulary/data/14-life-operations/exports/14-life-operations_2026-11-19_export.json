@@ -1,8 +1,8 @@
 {
   "topic": "14-life-operations",
   "name": "在日生活实务",
-  "version": "v1.7",
-  "generated_at": "2026-11-19T09:47:04",
+  "version": "v1.8",
+  "generated_at": "2026-11-19T11:55:38",
   "count": 77,
   "categories": {
     "在留与住民登记": 6,
@@ -715,9 +715,9 @@
       "definition": "自治体规定的大件废弃物，需预约并支付回收费",
       "source": "環境省",
       "first_added": "2026-11-15",
-      "last_updated": "2026-11-18",
+      "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.env.go.jp/",
+      "source_url": "https://www.env.go.jp/recycle/kaden/tv-recycle/qa.html",
       "confidence": "B"
     },
     {
@@ -1008,9 +1008,9 @@
       "definition": "不依赖现金的支付方式总称，含信用卡、电子支付与二维码支付",
       "source": "経済産業省",
       "first_added": "2026-11-15",
-      "last_updated": "2026-11-18",
+      "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.meti.go.jp/",
+      "source_url": "https://www.meti.go.jp/policy/mono_info_service/cashless/index.html",
       "confidence": "B"
     },
     {
@@ -1535,9 +1535,9 @@
       "definition": "对外国人较友好、可作过渡的银行选项（推断）",
       "source": "日本郵便",
       "first_added": "2026-11-18",
-      "last_updated": "2026-11-18",
+      "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.japanpost.jp/",
+      "source_url": "https://jp-bank-kaisetsu.japanpost.jp/account_open",
       "confidence": "C"
     },
     {
@@ -1554,9 +1554,9 @@
       "definition": "Suica/PayPay 等不依赖现金的电子支付方式",
       "source": "経済産業省",
       "first_added": "2026-11-18",
-      "last_updated": "2026-11-18",
+      "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.meti.go.jp/",
+      "source_url": "https://www.meti.go.jp/policy/mono_info_service/cashless/index.html",
       "confidence": "B"
     },
     {

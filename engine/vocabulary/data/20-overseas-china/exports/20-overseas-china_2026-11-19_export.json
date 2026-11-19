@@ -1,8 +1,8 @@
 {
   "topic": "20-overseas-china",
   "name": "中国侧行前与回国",
-  "version": "v1.4",
-  "generated_at": "2026-11-19T08:48:46",
+  "version": "v1.5",
+  "generated_at": "2026-11-19T11:52:26",
   "count": 79,
   "categories": {
     "护照与户籍": 17,
@@ -231,7 +231,7 @@
       "first_added": "2026-11-14",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://zwfw.cscse.edu.cn/",
+      "source_url": "https://zwfw.cscse.edu.cn/cscse/lxfwzxwsfwdt2020/lxcd/index.html",
       "confidence": "B"
     },
     {
@@ -430,7 +430,7 @@
       "first_added": "2026-11-14",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://zwfw.cscse.edu.cn/",
+      "source_url": "https://zwfw.cscse.edu.cn/zwfw/lxfwzxwsfwdt2020/index.html",
       "confidence": "B"
     },
     {
@@ -450,7 +450,7 @@
       "first_added": "2026-11-14",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://zwfw.cscse.edu.cn/",
+      "source_url": "https://zwfw.cscse.edu.cn/zwfw/lxfwzxwsfwdt2020/xlxwrz32/qtxx/2026042823585825550/index.html",
       "confidence": "B"
     },
     {
@@ -509,7 +509,7 @@
       "first_added": "2026-11-14",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "http://www.moj.gov.cn/",
+      "source_url": "https://www.moj.gov.cn/pub/sfbgw/zwfw/zwfwgzbl/",
       "confidence": "B"
     },
     {
@@ -1248,7 +1248,7 @@
       "first_added": "2026-11-18",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://zwfw.cscse.edu.cn/",
+      "source_url": "https://www.cscse.edu.cn/cscse/sy/tzgg/2025102809225023345/index.html",
       "confidence": "B"
     },
     {
@@ -1267,7 +1267,7 @@
       "first_added": "2026-11-18",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://zwfw.cscse.edu.cn/",
+      "source_url": "https://zwfw.cscse.edu.cn/zwfw/lxfwzxwsfwdt2020/xlxwrz32/tzgg61/2026051815272573928/index.html",
       "confidence": "B"
     },
     {

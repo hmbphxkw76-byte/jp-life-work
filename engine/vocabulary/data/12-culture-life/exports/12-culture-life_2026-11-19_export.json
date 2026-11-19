@@ -1,8 +1,8 @@
 {
   "topic": "12-culture-life",
   "name": "文化与生活",
-  "version": "v1.4",
-  "generated_at": "2026-11-19T09:07:50",
+  "version": "v1.5",
+  "generated_at": "2026-11-19T11:48:01",
   "count": 73,
   "categories": {
     "文化习俗与节庆": 12,
@@ -472,7 +472,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.env.go.jp/",
+      "source_url": "https://www.env.go.jp/recycle/",
       "confidence": "B"
     },
     {
@@ -535,7 +535,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.bunka.go.jp/",
+      "source_url": "https://www.bunka.go.jp/seisaku/shokubunka/index.html",
       "confidence": "B"
     },
     {
@@ -618,7 +618,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.meti.go.jp/",
+      "source_url": "https://www.meti.go.jp/statistics/tyo/syoudou/index.html",
       "confidence": "B"
     },
     {
@@ -639,7 +639,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.meti.go.jp/",
+      "source_url": "https://www.meti.go.jp/statistics/tyo/syoudou/index.html",
       "confidence": "B"
     },
     {
@@ -680,7 +680,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.nta.go.jp/",
+      "source_url": "https://www.nta.go.jp/taxes/shiraberu/zeimokubetsu/shohi.htm",
       "confidence": "B"
     },
     {
@@ -1140,7 +1140,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.env.go.jp/",
+      "source_url": "https://www.env.go.jp/recycle/",
       "confidence": "B"
     },
     {
