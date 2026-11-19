@@ -2840,11 +2840,20 @@ class TestPipelineFlowSpec(unittest.TestCase):
         self.assertIn("branches: [main]", pr)
 
     def test_audit_spec_version_matches_standard_doc(self):
-        """登记册 / 已审计标识引用的标准版本须与《审计报告标准化管理体系》现行版本一致。"""
+        """登记册 / 已审计标识引用的标准版本须与《审计报告标准化管理体系》声明的依据版本一致。
+
+        口径：文档头部版本 = 版本记录末版（体系版本）；登记册 / 标识依据版本另行声明，
+        与 `audit_registry.SPEC_VERSION` 一致。两者允许不同，但依据版本必须显式可查。
+        """
         text = self._read("docs", "审计报告标准化管理体系.md")
-        m = re.search(r"> \*\*版本\*\*：(v[\d.]+)", text)
-        self.assertIsNotNone(m, "审计标准文档缺少版本行")
+        m = re.search(r"登记册 / 已审计标识依据版本为\s*\**(v[\d.]+)\**", text)
+        self.assertIsNotNone(m, "审计标准文档缺少「登记册 / 已审计标识依据版本」声明")
         self.assertEqual(audit_registry.SPEC_VERSION, m.group(1))
+        header = re.search(r"> \*\*版本\*\*：(v[\d.]+)", text)
+        self.assertIsNotNone(header, "审计标准文档缺少版本行")
+        record = re.findall(r"^\|\s*(v[\d.]+)\s*\|", text, re.M)
+        self.assertEqual(header.group(1), record[-1],
+                         "审计标准文档头部版本须等于版本记录末版")
 
     def test_supplement_deadline_declared(self):
         """补缺准入「期限」要素须在登记册与总规范中同时显式化（O1/N4 闭环）。"""

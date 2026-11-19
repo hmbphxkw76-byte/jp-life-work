@@ -1,6 +1,6 @@
 # CI 与自动化体系
 
-> **版本**：v2.17（2026-11-19 文档↔实现对齐）
+> **版本**：v2.22（2026-11-19 文档↔实现对齐）
 > 本文档说明 jp-life-work 报告管理体系的持续集成（CI）与定时自动化。
 > 代码位置：`.github/workflows/`（8 条工作流）；工具链：`engine/tools/`；测试：`engine/tests/`。
 
@@ -194,6 +194,18 @@
   5. `automation_status.py record --phase pipeline` + 提交 `engine/report-audits/pipeline/**`
 - **纪律**：**不含任何撰写步骤**；不跑 S3–S5 本地生成（由 `html-sync` / `validate` / `audit-gate` 承担）
 - **退出码**：`pipeline_runner run` 0 = 正常（含 S2 暂停）；1 = 阶段失败 / 状态损坏；2 = 参数错误
+
+### 9. 设计内不接线工具清单（B6）
+
+以下工具**设计内不接入定时流水线**，仅冒烟 / 手动 / 触发依赖；列此清单消除「应接未接」歧义，
+不改变现有接线决策。与 `engine/tools/README.md`「设计内不接线工具清单」同口径。
+
+| 工具 | 现状 | 不接线理由 | 复核日期 |
+|---|---|---|---|
+| `incremental_build.py` | POC / 手动（含 `--bench`）；仅 `validate.yml` 一次性冒烟（`--help`） | N12 决策不切生产默认；切默认触发条件未满足（见第十四节） | 2026-12-19 |
+| `migrate_monthly_reports.py` | 一次性迁移，已完成；仅冒烟 | 存量报告合并重命名已完成，无周期触发需求 | 2026-12-19 |
+| `skeleton_builder.py` | 手动 / 按需（生成期）；仅冒烟 | 按需入口，无周期触发需求 | 2026-12-19 |
+| `report_diff.py` | 触发依赖：`html-sync.yml` 路径过滤器 + `md2html.py` 构建期依赖；无独立校验步骤 | 纯函数依赖，已由 `md2html` / `md_html_parity` 覆盖，不单独设步骤 | 2026-12-19 |
 
 ## 三、报告生命周期
 
@@ -392,6 +404,7 @@ CI 之外的**本地多会话 / 多任务并行**由三层隔离机制约束，�
 
 - **豁免阈值**：≤2 文件且无新增工具的变更免规格 / 工单，但不得豁免双轴评审与合并前检查单。
 - **分阶段阈值**：P1/P2 观察期 60%（`enforce=false`）；P3 起 80%（`enforce=true`，阻断）。
+- **review_gate 转硬评估**：见 [review_gate 转硬评估框架](toolchain/review-gate-hardening-plan.md)；当前保持软门禁，条件未满足不切换。
 
 ---
 

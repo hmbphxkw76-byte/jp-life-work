@@ -1,6 +1,6 @@
 # engine/tools 使用文档
 
-> **版本**：v1.2（2026-11-19 文档↔实现对齐）
+> **版本**：v1.3（2026-11-19 测试计数对齐 + 不接线工具登记）
 
 CI 工具链使用说明。所有工具基于仓库根目录相对路径运行（自动定位仓库根），
 在仓库根目录执行即可；通用层 `engine/report_templates/` + 业务层 `NN-<slug>/` 结构见
@@ -12,6 +12,8 @@ CI 工具链使用说明。所有工具基于仓库根目录相对路径运行�
 pip install -r requirements.txt   # markdown
 python -m unittest discover -s engine/tests -q   # 单元测试（以 docs/CI.md 与实测为准）
 ```
+
+> 测试计数：1008 项（`python -m unittest discover -s engine/tests` 实测，与 `docs/CI.md` 六节一致；由 `engine/tests/test_arch_guard.py` 双向锁定）。
 
 ## 退出码约定（校验类工具统一）
 
@@ -64,6 +66,18 @@ python -m unittest discover -s engine/tests -q   # 单元测试（以 docs/CI.md
 | source_check.py | 校验 | validate.yml「来源条目 schema 校验」（P1-2：来源章节 / URL 条目时点 / 分级，产出 source-index.json） |
 | counterexample_scan.py | 校验 | validate.yml「反例扫描」（P2-1：绝对化 / 以偏概全 / 无来源断言候选） |
 | perf_snapshot.py | 校验 | scheduled-maintenance.yml「性能趋势快照」；规模 + 耗时采集（基线 / 历史，`--with-tests` / `--set-baseline` / `--porcelain`） |
+
+## 设计内不接线工具清单（B6）
+
+以下工具**设计内不接入定时流水线**，仅冒烟 / 手动 / 触发依赖；列此清单消除「应接未接」歧义，
+不改变现有接线决策。与 `docs/CI.md` 二.9 同口径。
+
+| 工具 | 现状 | 不接线理由 | 复核日期 |
+|---|---|---|---|
+| `incremental_build.py` | POC / 手动（含 `--bench`）；仅 `validate.yml` 一次性冒烟（`--help`） | N12 决策不切生产默认；切默认触发条件未满足（见 `docs/CI.md` 第十四节） | 2026-12-19 |
+| `migrate_monthly_reports.py` | 一次性迁移，已完成；仅冒烟 | 存量报告合并重命名已完成，无周期触发需求 | 2026-12-19 |
+| `skeleton_builder.py` | 手动 / 按需（生成期）；仅冒烟 | 按需入口，无周期触发需求 | 2026-12-19 |
+| `report_diff.py` | 触发依赖：`html-sync.yml` 路径过滤器 + `md2html.py` 构建期依赖；无独立校验步骤 | 纯函数依赖，已由 `md2html` / `md_html_parity` 覆盖，不单独设步骤 | 2026-12-19 |
 
 ## 校验类
 
@@ -450,3 +464,4 @@ python engine/tools/automation_status.py activity --threshold 45               #
 | v1.0 | 2026-11-17 | 初始版本 | 工具链使用说明（工具一览 / 工作流 / 测试 / 流水线全貌）；2026-11-17 校准测试数 308、工作流 8、类型 13 与旧路径 |
 | v1.1 | 2026-11-17 | 迁移后治理 | 修复 `../../report_templates/` 断链为 `../report_templates/`；测试数 308 → 863；工作流 6 → 8 |
 | v1.2 | 2026-11-19 | 文档↔实现对齐 | 测试计数 881 → 978（与 `docs/CI.md` 六节及实测对齐） |
+| v1.3 | 2026-11-19 | 测试计数对齐 + 不接线工具登记 | 测试计数 978 → 1008（与实测对齐）；`test_arch_guard` 扩展为同时锁定 `docs/CI.md` 六节与本节计数；新增「设计内不接线工具清单」（B6） |
