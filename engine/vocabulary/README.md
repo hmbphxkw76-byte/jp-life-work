@@ -12,7 +12,9 @@ engine/vocabulary/
 ├── INDEX.md                           # 全主题索引（index 命令自动生成，勿手工编辑）
 ├── config/
 │   ├── topics.json                    # 主题注册表（脚本托管，单一事实源）
-│   └── sync.json                      # 词库 → 业务提示词同步绑定配置
+│   ├── sync.json                      # 词库 → 业务提示词同步绑定配置
+│   ├── verify-exemptions.json         # verify/check 显式豁免清单（B4）
+│   └── verification-retention-map.json # 部分核验「分类 → 保留口径」映射（B3）
 ├── script/                            # 组件目录：主题无关的实现代码
 │   ├── vocab_tool.py                  # 核心脚本（仅依赖 Python 标准库）
 │   └── sync_vocab.py                  # 同步脚本（标记区间保护 + 增量检测 + 回滚）
@@ -195,6 +197,19 @@ python engine/vocabulary/script/vocab_tool.py topic-add --topic smart-logistics 
 | `topic-check` | — | 注册表与目录结构一致性审计 | 0/1/2 |
 
 通用参数：`--config` 指定备用主题注册表（默认 `engine/vocabulary/config/topics.json`）；导入文件路径支持相对仓库根或 `engine/vocabulary/` 根书写。
+
+### 5.1 显式豁免清单（config/verify-exemptions.json）
+
+`check` 与 `verify` 的警告级项可由显式豁免清单跳过，二者口径一致（同读一份清单，由 `check_topic` 统一判定）：
+
+- 清单结构：`exemptions[]`，每项含 `topic`（主题 ID）、`check`（检查项标识）、`reason`（豁免理由）、`evidence`（证据指针）。
+- 当前仅豁免 `id_sequence_gap`（ID 序号不连续）：01-ssw-driver / 02-career-driver 因 2026-11-19 删除 22 条无法核验的 npa.go.jp 词条遗留缺号，重排会波及报告引用与生成物（证据见复核记录 §8A.5）。
+- 纪律：只豁免已留痕的既有警告；新增警告默认不豁免，须先查因；新增豁免须同步更新清单与本节。
+- 清单缺失 / 损坏 / 结构不符时视为无豁免，不阻断校验。
+
+### 5.2 部分核验保留口径映射（config/verification-retention-map.json）
+
+「部分核验」条目的「分类 → 保留口径」100% 映射表（B3）：`clusters` 定义保留簇与保留理由，`categories` 给出全部分类的归属与条数，`coverage` 记录覆盖率，`baseline` 记录工单口径与实测差异。该文件为机读事实源，供定向核验与审计使用；不改变「部分核验」状态，也不新增校验命令。
 
 ## 六、数据契约（上层系统对接）
 

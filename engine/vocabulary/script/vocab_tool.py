@@ -227,6 +227,30 @@ def resolve_import_file(file_arg: str) -> Path:
     return p
 
 
+def load_verify_exemptions() -> list:
+    """读取 config/verify-exemptions.json（显式豁免清单）。
+
+    文件缺失 / 损坏 / 结构不符时视为无豁免（不阻断校验），保证测试与最小部署可用。
+    """
+    path = TOOL_ROOT / "config" / "verify-exemptions.json"
+    if not path.exists():
+        return []
+    try:
+        data = json.loads(path.read_text(encoding="utf-8-sig"))
+    except (OSError, json.JSONDecodeError):
+        return []
+    items = data.get("exemptions") if isinstance(data, dict) else None
+    return items if isinstance(items, list) else []
+
+
+def is_exempt(topic_id: str, check_name: str) -> bool:
+    """该主题的该类检查是否已列入显式豁免清单（check / verify 共用）。"""
+    return any(
+        isinstance(e, dict) and e.get("topic") == topic_id and e.get("check") == check_name
+        for e in load_verify_exemptions()
+    )
+
+
 # ---------- 去重索引 ----------
 
 def build_uniq(terms: list) -> dict:
@@ -450,7 +474,8 @@ def check_topic(tmeta: dict) -> tuple[list, list]:
         if bad:
             errors.append(f"ID 前缀不符 {len(bad)} 条（须为 {prefix}-<数字>，如 {'、'.join(bad[:3])}）")
         nums = sorted(int(m.group(1)) for t in terms for m in [pat.match(t["id"])] if m)
-        if nums and nums != list(range(1, len(nums) + 1)):
+        gap = bool(nums) and nums != list(range(1, len(nums) + 1))
+        if gap and not is_exempt(tmeta.get("id", ""), "id_sequence_gap"):
             warns.append(f"ID 序号不连续（{nums[0]}..{nums[-1]}）；如系人工删除条目所致属正常，建议保留连续性")
     return errors, warns
 

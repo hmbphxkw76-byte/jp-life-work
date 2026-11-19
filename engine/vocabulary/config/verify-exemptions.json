@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0",
+  "updated": "2026-11-19",
+  "comment": "verify/check 显式豁免清单（B4）。由 vocab_tool.py 的 check_topic 读取，check 与 verify 一致豁免；仅豁免已留痕的既有警告，新增警告默认不豁免。豁免须写明理由与证据，新增豁免须同步更新本文件与 README 第九节。",
+  "exemptions": [
+    {
+      "topic": "01-ssw-driver",
+      "check": "id_sequence_gap",
+      "reason": "2026-11-19 删除 11 条无法核验的 npa.go.jp 词条后遗留缺号（1..109，现存 98 条）；ID 语义未变、词条数高于下限，重排会波及报告引用与生成物，故显式豁免。",
+      "evidence": "docs/登记册待核实项复核记录-2026-11-19.md §8A.5；commit 60ab42a"
+    },
+    {
+      "topic": "02-career-driver",
+      "check": "id_sequence_gap",
+      "reason": "2026-11-19 删除 11 条无法核验的 npa.go.jp 词条后遗留缺号（1..104，现存 93 条）；ID 语义未变、词条数高于下限，重排会波及报告引用与生成物，故显式豁免。",
+      "evidence": "docs/登记册待核实项复核记录-2026-11-19.md §8A.5；commit 60ab42a"
+    }
+  ]
+}
