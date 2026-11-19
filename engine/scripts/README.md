@@ -189,9 +189,9 @@ python engine/scripts/verify_report_parity.py --compare  .migration-baseline    
 | 1 | 测试全绿 | ✅ `python -m unittest discover -s engine/tests -v` 全绿 |
 | 2 | `validate.py` 通过 | ✅ 退出码 0 |
 | 3 | 双轴评审存在且无 P0/P1 | ✅ 每次任务在 `docs/toolchain/reviews/<任务 slug>-review.md` 产出双轴评审 |
-| 4 | `coverage_gate.py` 达标 | ✅ 92.0%（阈值 80%，enforce=true） |
+| 4 | `coverage_gate.py` 达标 | ✅ 90.35%（阈值 80%，enforce=true） |
 | 5 | `cleanup_workspace.py --check` 零残留 | ✅ 零残留 |
-| 6 | 新增/改动工具已登记 | ✅ 未新增工具；`generate_registry.py --check` 通过（工具 34 / 类型 13 / 主题 21 / 工作流 8） |
+| 6 | 新增/改动工具已登记 | ✅ 未新增工具；`generate_registry.py --check` 通过（工具 44 / 类型 12 / 主题 21 / 工作流 8） |
 | 7 | 生成物确定性 | ✅ `build_hub.py --check` / `build_index.py --check` 均退出码 0 |
 | 8 | 架构边界 | ✅ `engine/tools/` 无 git 可变操作；`engine/scripts/` 不产出内容；`iter_business_dirs()` = 21 |
 

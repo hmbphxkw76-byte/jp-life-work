@@ -67,7 +67,7 @@
 | 覆盖率门禁（附加 job） | `coverage_gate.py`（阈值读 `coverage-config.json`） | 阻断（enforce=true 未达标 / 测试失败） |
 | 工作区卫生自检（附加 job） | `cleanup_workspace.py --check` | 阻断（存在残留） |
 
-> 实测（2026-11-19，main @`fb1a38b`）：主 job **28 个命名步骤**（不含通用「安装依赖」，含「安装开发依赖」；主 job 实际共 29 个 `- name:` 步骤）+ **2 个附加 job**（覆盖率 / 工作区卫生）；`ruff` 与 `mypy` 为主 job 内静态检查步骤，非独立 job。集成合并后如步骤数变化，以实测为准并更新本表。
+> 实测（2026-11-19，main @`fb1a38b`）：主 job **29 个命名步骤**（不含通用「安装依赖」，含「安装开发依赖」；主 job 实际共 30 个 `- name:` 步骤）+ **2 个附加 job**（覆盖率 / 工作区卫生）；`ruff` 与 `mypy` 为主 job 内静态检查步骤，非独立 job。集成合并后如步骤数变化，以实测为准并更新本表。
 
 > 两个关卡对期间 >= 2026-11 的**新报告**阻断；历史报告由 `--new-only` 跳过，
 > 遗留项列入 `engine/report-audits/audit/lint-whitelist.json` 豁免（逾期恢复阻断）。
@@ -111,7 +111,7 @@
 | 提交 | `git commit` + `git push` | 有变更才提交 |
 | 自动化状态失败补记 | `git add -A -- automation-status.json` → `commit` + `push`（`if: always()`） | job 失败时主提交跳过，本步骤仍把本轮状态入库，避免「记录了却因未提交而丢失」 |
 
-> 实测（2026-11-19，main @`fb1a38b`）：共 **19 步**（不含通用「安装依赖」），含 `auto_verify.py --all --dry-run` / `decision_metrics.py --history` / `l5_meta_check.py` / `counterexample_scan.py`。
+> 实测（2026-11-19，main @`fb1a38b`）：共 **20 步**（不含通用「安装依赖」），含 `auto_verify.py --all --dry-run` / `decision_metrics.py --history` / `l5_meta_check.py` / `counterexample_scan.py`。
 
 - **退出码约定**：`0` 通过；`1` 错误（阻断）；`2` 警告（放行）。
 - **核验日志策略（N6）**：`auto_verify.py --all --dry-run` 逐报告写
@@ -235,7 +235,7 @@ reports/YYYY-MM-<slug>.md  ──md2html.py──►  reports/YYYY-MM-<slug>.htm
 - **辅助开关**：报告页工具条「隐藏更新标记」对照阅读、「展开全部删除」。
 - **呈现**：报告页新标签页独立打开，页脚提供「← 返回主题 / 返回首页」。
 
-## 六、测试体系（`engine/tests/`，998 项）
+## 六、测试体系（`engine/tests/`，1003 项）
 
 | 场景 | 测试类 | 覆盖 |
 |---|---|---|
@@ -266,7 +266,7 @@ reports/YYYY-MM-<slug>.md  ──md2html.py──►  reports/YYYY-MM-<slug>.htm
 | 跨平台差异守卫 | `test_platform_guard.py`（9 项） | 路径分隔（无 Windows 路径字面量 / 工作流正斜杠）、换行（仓库 blob LF / `.gitattributes` / `atomic_write` 保 LF）、命令可用性（无 `shell=True` / 无 PowerShell 专属语法 / 工具路径存在） |
 | 性能趋势快照 | `test_perf_snapshot.py`（6 项） | 规模快照字段与实测口径、耗时采集、基线语义（首条为基线 / 追加不改基线 / `--set-baseline` 覆盖）、CLI `--porcelain` |
 
-> 合计 998 项（`python -m unittest discover -s engine/tests` 集成后实测，当前全绿；`incremental_build` 两项「无变更」断言在集成分支领先 main 时按预期失败，合并后通过）。
+> 合计 1003 项（`python -m unittest discover -s engine/tests` 集成后实测，当前全绿；`incremental_build` 两项「无变更」断言在集成分支领先 main 时按预期失败，合并后通过）。
 
 ## 七、手动命令速查
 
