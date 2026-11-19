@@ -1,8 +1,8 @@
 {
   "topic": "08-visa-immigration",
   "name": "签证与移民",
-  "version": "v1.4",
-  "generated_at": "2026-11-19T09:07:50",
+  "version": "v1.5",
+  "generated_at": "2026-11-19T11:50:10",
   "count": 79,
   "categories": {
     "在留资格类型": 15,
@@ -657,7 +657,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.moj.go.jp/",
+      "source_url": "https://www.moj.go.jp/MINJI/kokuseki.html",
       "confidence": "B"
     },
     {
@@ -762,7 +762,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.nta.go.jp/",
+      "source_url": "https://www.nta.go.jp/taxes/kids/hatten/page14.htm",
       "confidence": "B"
     },
     {
@@ -867,7 +867,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.moj.go.jp/",
+      "source_url": "https://www.moj.go.jp/ONLINE/NATIONALITY/6-2.html",
       "confidence": "B"
     },
     {
@@ -951,7 +951,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.soumu.go.jp/",
+      "source_url": "https://www.soumu.go.jp/main_sosiki/jichi_gyousei/c-gyousei/zairyu/",
       "confidence": "B"
     },
     {
@@ -992,7 +992,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/koukikourei/index_00002.html",
       "confidence": "B"
     },
     {
@@ -1076,7 +1076,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/seikatsuhogo/seikatuhogo/index.html",
       "confidence": "B"
     },
     {
