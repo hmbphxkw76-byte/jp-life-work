@@ -1,6 +1,6 @@
 # CI 与自动化体系
 
-> **版本**：v2.6（2026-11-17 迁移后治理）
+> **版本**：v2.16（2026-11-19 测试计数同步）
 > 本文档说明 jp-life-work 报告管理体系的持续集成（CI）与定时自动化。
 > 代码位置：`.github/workflows/`（8 条工作流）；工具链：`engine/tools/`；测试：`engine/tests/`。
 
@@ -199,7 +199,7 @@ reports/YYYY-MM-<slug>.md  ──md2html.py──►  reports/YYYY-MM-<slug>.htm
 - **辅助开关**：报告页工具条「隐藏更新标记」对照阅读、「展开全部删除」。
 - **呈现**：报告页新标签页独立打开，页脚提供「← 返回主题 / 返回首页」。
 
-## 六、测试体系（`engine/tests/`，976 项）
+## 六、测试体系（`engine/tests/`，978 项）
 
 | 场景 | 测试类 | 覆盖 |
 |---|---|---|
@@ -228,7 +228,7 @@ reports/YYYY-MM-<slug>.md  ──md2html.py──►  reports/YYYY-MM-<slug>.htm
 | 报告生成一致性比对 | `test_verify_report_parity.py`（25 项） | 归一化（单遍路径重写 / 时间戳 / JSON 易变键）、基线写入与覆盖清空、比对（一致 / 仅路径 / MISMATCH / MISSING / NEW）、退出码 0/1/2 |
 | 引擎层迁移守卫 | `test_engine_migration.py`（16 项） | 目录终态（engine 存在 / 旧引擎层与根协作脚本目录不存在）、SKIP_TOP / TYPE_RE、主题数 21、深度推导 ROOT、旧路径与代码常量活引用清零、裸 tools 目录引用与旧模块路径 `src.<包>` 清零 |
 
-> 合计 881 项（`python -m unittest discover -s engine/tests`，当前全绿）。
+> 合计 978 项（`python -m unittest discover -s engine/tests` 实测，当前全绿）。
 
 ## 七、手动命令速查
 
@@ -455,3 +455,4 @@ python engine/scripts/cleanup_workspace.py --dry-run  # 预览将删除项
 | v2.13 | 2026-11-18 | P1 来源 schema（P1-2） | 新增 `source_check.py`（来源条目四元组字段化 → `source-index.json`，10 项）接入 `validate.yml`；工具 41 → 42；六节测试数 940 → 950 |
 | v2.14 | 2026-11-18 | P2 批次（P2-1…P2-7） | 新增 `counterexample_scan.py`（7 项）、`vocab_near_check.py`（8 项）与 `docs/词库近义合并规范.md`；`coverage_gate` 增逐工具明细（2 项）；`workflow_guard` 锁域扩展 commit/push；mypy 清零并转阻断 + 一次性工具冒烟；`decision_metrics --history` 入维护流水线；P2-7 跨月基线回归；工具 42 → 43；六节测试数 950 → 969 |
 | v2.15 | 2026-11-18 | P1-9 词条 + P1-2 来源时点 | 14–20 词条补全至 ≥70（新增 245 条）；`source_check` 识别和历（令和/平成/昭和）与核对标记；6 份报告来源条目补「（2026-11 核对）」并重走审计；六节测试数 969 → 971 |
+| v2.16 | 2026-11-19 | 测试计数同步 | 六节标题与合计行对齐实测：976 → 978、合计 881 → 978（含他会话 `6879c0e` 974→976 与 `e91940e` +2 未同步的累积漂移）；`test_arch_guard` 计数守卫恢复通过 |
