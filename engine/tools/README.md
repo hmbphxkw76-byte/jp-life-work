@@ -51,6 +51,7 @@ python -m unittest discover -s engine/tests -q   # 单元测试（以 docs/CI.md
 | personal_finance_model.py | 决策支持 | validate.yml「财务模型一致性」+ scheduled-maintenance.yml「刷新」 |
 | fact_card_check.py | 决策支持 | validate.yml「事实卡片校验」+ scheduled-maintenance.yml「刷新」 |
 | pending_verification.py | 决策支持 | validate.yml「待核实闭环」+ scheduled-maintenance.yml「刷新」 |
+| consulting_panel.py | 决策支持 | 手动：17 项个人参数（PF-01…PF-17）→ 五问判定 + 条件化行动方案；`--render-panel` / `--check` / `--profile` / `--demo` |
 | skeleton_builder.py | 生成 | 手动：报告骨架 / 空模块合并 |
 | decision_log.py | 编排 | 手动：决策状态变化时间线；validate.yml「决策日志校验」（`--check` 缺失 / 结构损坏检测） |
 | coverage_gate.py | 校验 | validate.yml「覆盖率门禁」；阈值读 `coverage-config.json` 单一事实源（`--update-baseline` / `--porcelain`） |
@@ -378,6 +379,7 @@ python engine/tools/automation_status.py activity --threshold 45               #
 | `personal_finance_model.py` | 读 01/07/14/10/17 登记册活值，算净储蓄率 / 回本周期 | `validate.yml` 一致性 + `scheduled-maintenance.yml` 刷新 |
 | `fact_card_check.py` | 事实卡片五字段 / `[@FC-NNN]` 指针 / 跨报告事实重复率 | 同上 |
 | `pending_verification.py` | 14/15/17/18/19/20 首轮核验截止跟踪 | 同上 |
+| `consulting_panel.py` | 17 项个人参数 → 五问判定 + 条件化方案（时间线 / 预算 / 核验清单） | 手动（`--profile`）；`--check` 校验面板 md |
 | `skeleton_builder.py` | 报告骨架生成 / 空模块合并 / 边界声明集中 | 生成期（按需） |
 | `decision_log.py` | 决策状态变化时间线 | `update_planner.py` 月度清单 + `validate.yml` `--check`（缺失 / 结构损坏检测） |
 | `info_quality_check.py` | 结构化免责声明 / 空模块占比 / 事实重复率 | `info-quality.yml --apply` + `validate.yml --check` |
@@ -439,7 +441,7 @@ python engine/tools/automation_status.py activity --threshold 45               #
   `engine/vocabulary/config/report-cycles.json`。
 
 <!-- REGISTRY:BEGIN -->
-> 注册表快照：工具 44 · 类型 12 · 主题 21 · 工作流 8（由 `generate_registry.py` 生成，勿手工编辑）
+> 注册表快照：工具 45 · 类型 12 · 主题 21 · 工作流 8（由 `generate_registry.py` 生成，勿手工编辑）
 <!-- REGISTRY:END -->
 
 

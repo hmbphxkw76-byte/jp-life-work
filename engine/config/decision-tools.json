@@ -15,5 +15,64 @@
   "pending_verification": {
     "default_deadline": "2026-12-31",
     "near_window_days": 30
+  },
+  "consulting_panel": {
+    "version": "1.0",
+    "profile_fields": [
+      {"id": "PF-01", "key": "startup_fund_jpy", "label": "可用启动资金", "type": "jpy", "required": true},
+      {"id": "PF-02", "key": "monthly_reserve_jpy", "label": "月生活储备", "type": "jpy", "required": true},
+      {"id": "PF-03", "key": "initial_cost_cap_jpy", "label": "初期费用上限", "type": "derived", "required": false},
+      {"id": "PF-04", "key": "objective_value", "label": "客观价值", "type": "fixed", "required": false},
+      {"id": "PF-05", "key": "execution_cost", "label": "执行代价", "type": "fixed", "required": false},
+      {"id": "PF-06", "key": "family_accompany", "label": "家属随行", "type": "bool", "required": true},
+      {"id": "PF-07", "key": "family_members", "label": "家属人数与育儿需求", "type": "str", "required": false},
+      {"id": "PF-08", "key": "target_entry", "label": "目标入境时间", "type": "str", "required": true},
+      {"id": "PF-09", "key": "income_multiple", "label": "收入倍数", "type": "fixed", "required": false},
+      {"id": "PF-10", "key": "gov_cap", "label": "官方限额", "type": "fixed", "required": false},
+      {"id": "PF-11", "key": "japanese_level", "label": "当前日语水平", "type": "enum", "required": true},
+      {"id": "PF-12", "key": "job_holes", "label": "有效求人倍率", "type": "fixed", "required": false},
+      {"id": "PF-13", "key": "license_category", "label": "当前中国驾照类别", "type": "enum", "required": true},
+      {"id": "PF-14", "key": "license_switch_feasible", "label": "外免切替可行性", "type": "derived", "required": false},
+      {"id": "PF-15", "key": "quit_cost", "label": "退出代价", "type": "fixed", "required": false},
+      {"id": "PF-16", "key": "candidate_region", "label": "候选定居地", "type": "str", "required": true},
+      {"id": "PF-17", "key": "rent_budget_jpy", "label": "月房租与通勤预算", "type": "jpy", "required": true}
+    ],
+    "license_map": {
+      "C1": {"japan": "普通（3.5t 未満）", "switch": true, "at_limited": false, "path": "外免切替"},
+      "C2": {"japan": "普通（AT 限定）", "switch": true, "at_limited": true, "path": "外免切替（须解除 AT 限定或改 MT）"},
+      "B2": {"japan": "中型 / 大型（须重考）", "switch": false, "at_limited": false, "path": "教习所（MT / 大型）"},
+      "B1": {"japan": "中型 / 大型・第二种（须重考）", "switch": false, "at_limited": false, "path": "教习所（MT / 大型）"},
+      "A1": {"japan": "大型・第二种（须重考）", "switch": false, "at_limited": false, "path": "教习所（大型）"},
+      "A2": {"japan": "大型＋けん引（须重考）", "switch": false, "at_limited": false, "path": "教习所（大型・けん引）"},
+      "无": {"japan": "—", "switch": false, "at_limited": false, "path": "教习所（普通 MT / 大型）"}
+    },
+    "reference": {
+      "initial_cost_months": [2.5, 7.0],
+      "initial_cost_flat_jpy": [50000, 150000],
+      "living_monthly_jpy": {"single_local": [105000, 170000], "single_tokyo": [150000, 220000]},
+      "reserve_months": [3, 6],
+      "driving_school_jpy": {"at": 324381, "mt": [300000, 400000], "large": [250000, 280000]},
+      "license_switch_fee_jpy": [50000, 80000],
+      "license_switch_months": [3, 6],
+      "rent_budget_ratio": 0.33,
+      "window_threshold": 0.10,
+      "representative_rent_jpy": 62500,
+      "verified": {
+        "living_two_plus_monthly_jpy": 310975,
+        "driving_at_jpy": 324381,
+        "ur_single_thresholds_jpy": [62500, 200000],
+        "ur_single_income_base_jpy": [null, 250000, 400000],
+        "ur_family_thresholds_jpy": [82500, 200000],
+        "ur_family_income_base_jpy": [null, 330000, 400000],
+        "switch_pass_rate": [0.428, 0.131]
+      }
+    },
+    "sources": {
+      "license_map": "10-education-qualification / 01-ssw-driver 登记册；外免切替严格化 千葉県警察・朝日新聞",
+      "initial_cost": "14-life-operations 登记册；国土交通省 仲介手数料；UR 都市機構",
+      "living": "07-economy-finance 登记册；総務省統計局 家計調査",
+      "driving_school": "10-education-qualification 登记册（総務省 e-Stat 2026-09）",
+      "ur_requirement": "UR 都市機構 お申込み資格（単身者 / 世帯口径）"
+    }
   }
 }

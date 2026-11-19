@@ -235,7 +235,7 @@ reports/YYYY-MM-<slug>.md  ──md2html.py──►  reports/YYYY-MM-<slug>.htm
 - **辅助开关**：报告页工具条「隐藏更新标记」对照阅读、「展开全部删除」。
 - **呈现**：报告页新标签页独立打开，页脚提供「← 返回主题 / 返回首页」。
 
-## 六、测试体系（`engine/tests/`，1008 项）
+## 六、测试体系（`engine/tests/`，1023 项）
 
 | 场景 | 测试类 | 覆盖 |
 |---|---|---|
@@ -255,6 +255,7 @@ reports/YYYY-MM-<slug>.md  ──md2html.py──►  reports/YYYY-MM-<slug>.htm
 | 工具链覆盖率门禁 | `test_coverage_gate.py`（15 项） | 配置读取 / 退出码判定 / 基线写入 / 报告测量 |
 | 工具链评审软门禁 | `test_review_gate.py`（9 项） | 范围判定 / 评审存在性 / 清单解析 |
 | 工具链开发规约守卫 | `test_toolchain_dev_spec.py`（11 项） | 规约阶段顺序 / 覆盖率单一事实源 / 合并前检查单 |
+| 咨询面板决策引擎 | `test_consulting_panel.py`（15 项） | 配置 schema / 单一事实源消费 / PF-03·PF-14 派生 / 五问判定（空白·已填·边界）/ 面板确定性与演示标注 |
 | 工具链补测（审计家族） | `test_cov_audit.py`（69 项） | audit_pipeline / check / badge / preflight / sampling / registry / auto_verify |
 | 工具链补测（合规校验） | `test_cov_compliance.py`（122 项） | compliance / info_quality / lint / fact_card / validate / classify / ensure |
 | 工具链补测（生成类） | `test_cov_build.py`（57 项） | build_hub / build_index / md2html / skeleton / archive / incremental / registry / diff |
@@ -266,7 +267,7 @@ reports/YYYY-MM-<slug>.md  ──md2html.py──►  reports/YYYY-MM-<slug>.htm
 | 跨平台差异守卫 | `test_platform_guard.py`（9 项） | 路径分隔（无 Windows 路径字面量 / 工作流正斜杠）、换行（仓库 blob LF / `.gitattributes` / `atomic_write` 保 LF）、命令可用性（无 `shell=True` / 无 PowerShell 专属语法 / 工具路径存在） |
 | 性能趋势快照 | `test_perf_snapshot.py`（6 项） | 规模快照字段与实测口径、耗时采集、基线语义（首条为基线 / 追加不改基线 / `--set-baseline` 覆盖）、CLI `--porcelain` |
 
-> 合计 1008 项（`python -m unittest discover -s engine/tests` 集成后实测，当前全绿；`incremental_build` 两项「无变更」断言在集成分支领先 main 时按预期失败，合并后通过）。
+> 合计 1023 项（`python -m unittest discover -s engine/tests` 集成后实测，当前全绿；`incremental_build` 两项「无变更」断言在集成分支领先 main 时按预期失败，合并后通过）。
 
 ## 七、手动命令速查
 
