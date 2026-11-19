@@ -303,6 +303,10 @@ report_diff.py）。列表按报告页 meta 高亮「已更新 / 无更新」。
 文件缺失（全新克隆）退出码 0 并提示，由定时维护首建。比对前对两侧做归一化——
 抹平「最近生成」生成时刻时间戳（分钟级心跳，不参与最新性判定），清单逐字节比对。
 
+**检索层产物校验**：`engine/search/{keywords,question-index,five-questions}.json`
+（检索输入，单一事实源）须存在且为合法 JSON；构建产物 `search-index.json` 随
+`index.html` 一并比对，缺失 / 过期均阻断（退出码 1）。
+
 ## 编排类
 
 ### update_planner.py — 内容更新任务清单

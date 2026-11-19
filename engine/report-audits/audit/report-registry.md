@@ -5,7 +5,7 @@
 
 | 报告 | 主题 | 期间 | 类型 | 内容指纹 | 审计状态 | 审计编号 |
 |---|---|---|---|---|---|---|
-| [00-decision-hub/reports/2026-11-decision-hub.md](../../../00-decision-hub/reports/2026-11-decision-hub.md) | 00-decision-hub | 2026-11 | employment-research | `sha256:2552e4c940ba` | audited | AUD-202611-010 |
+| [00-decision-hub/reports/2026-11-decision-hub.md](../../../00-decision-hub/reports/2026-11-decision-hub.md) | 00-decision-hub | 2026-11 | employment-research | `sha256:579331d18fc4` | audited | AUD-202611-013 |
 | [01-ssw-driver/reports/2026-11-ssw-driver.md](../../../01-ssw-driver/reports/2026-11-ssw-driver.md) | 01-ssw-driver | 2026-11 | employment-research | `sha256:1598d855da69` | audited | AUD-202611-001 |
 | [02-career-driver/reports/2026-11-career-driver.md](../../../02-career-driver/reports/2026-11-career-driver.md) | 02-career-driver | 2026-11 | employment-research | `sha256:1987411328ad` | audited | AUD-202611-012 |
 | [03-career-management/reports/2026-11-career-management.md](../../../03-career-management/reports/2026-11-career-management.md) | 03-career-management | 2026-11 | employment-research | `sha256:a2dd767ddaa8` | audited | AUD-202611-018 |
