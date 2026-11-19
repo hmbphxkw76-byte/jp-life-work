@@ -67,7 +67,7 @@
 | 覆盖率门禁（附加 job） | `coverage_gate.py`（阈值读 `coverage-config.json`） | 阻断（enforce=true 未达标 / 测试失败） |
 | 工作区卫生自检（附加 job） | `cleanup_workspace.py --check` | 阻断（存在残留） |
 
-> 实测（2026-11-19，main @`fb1a38b`）：主 job **28 个命名步骤**（不含通用「安装依赖」，含「安装开发依赖」；主 job 实际共 29 个 `- name:` 步骤）+ **2 个附加 job**（覆盖率 / 工作区卫生）；`ruff` 与 `mypy` 为主 job 内静态检查步骤，非独立 job。集成合并后如步骤数变化，以实测为准并更新本表。
+> 实测（2026-11-19，main @`fb1a38b`）：主 job **29 个命名步骤**（不含通用「安装依赖」，含「安装开发依赖」；主 job 实际共 30 个 `- name:` 步骤）+ **2 个附加 job**（覆盖率 / 工作区卫生）；`ruff` 与 `mypy` 为主 job 内静态检查步骤，非独立 job。集成合并后如步骤数变化，以实测为准并更新本表。
 
 > 两个关卡对期间 >= 2026-11 的**新报告**阻断；历史报告由 `--new-only` 跳过，
 > 遗留项列入 `engine/report-audits/audit/lint-whitelist.json` 豁免（逾期恢复阻断）。
@@ -111,7 +111,7 @@
 | 提交 | `git commit` + `git push` | 有变更才提交 |
 | 自动化状态失败补记 | `git add -A -- automation-status.json` → `commit` + `push`（`if: always()`） | job 失败时主提交跳过，本步骤仍把本轮状态入库，避免「记录了却因未提交而丢失」 |
 
-> 实测（2026-11-19，main @`fb1a38b`）：共 **19 步**（不含通用「安装依赖」），含 `auto_verify.py --all --dry-run` / `decision_metrics.py --history` / `l5_meta_check.py` / `counterexample_scan.py`。
+> 实测（2026-11-19，main @`fb1a38b`）：共 **20 步**（不含通用「安装依赖」），含 `auto_verify.py --all --dry-run` / `decision_metrics.py --history` / `l5_meta_check.py` / `counterexample_scan.py`。
 
 - **退出码约定**：`0` 通过；`1` 错误（阻断）；`2` 警告（放行）。
 - **核验日志策略（N6）**：`auto_verify.py --all --dry-run` 逐报告写
@@ -235,7 +235,7 @@ reports/YYYY-MM-<slug>.md  ──md2html.py──►  reports/YYYY-MM-<slug>.htm
 - **辅助开关**：报告页工具条「隐藏更新标记」对照阅读、「展开全部删除」。
 - **呈现**：报告页新标签页独立打开，页脚提供「← 返回主题 / 返回首页」。
 
-## 六、测试体系（`engine/tests/`，998 项）
+## 六、测试体系（`engine/tests/`，1008 项）
 
 | 场景 | 测试类 | 覆盖 |
 |---|---|---|
@@ -266,7 +266,7 @@ reports/YYYY-MM-<slug>.md  ──md2html.py──►  reports/YYYY-MM-<slug>.htm
 | 跨平台差异守卫 | `test_platform_guard.py`（9 项） | 路径分隔（无 Windows 路径字面量 / 工作流正斜杠）、换行（仓库 blob LF / `.gitattributes` / `atomic_write` 保 LF）、命令可用性（无 `shell=True` / 无 PowerShell 专属语法 / 工具路径存在） |
 | 性能趋势快照 | `test_perf_snapshot.py`（6 项） | 规模快照字段与实测口径、耗时采集、基线语义（首条为基线 / 追加不改基线 / `--set-baseline` 覆盖）、CLI `--porcelain` |
 
-> 合计 998 项（`python -m unittest discover -s engine/tests` 集成后实测，当前全绿；`incremental_build` 两项「无变更」断言在集成分支领先 main 时按预期失败，合并后通过）。
+> 合计 1008 项（`python -m unittest discover -s engine/tests` 集成后实测，当前全绿；`incremental_build` 两项「无变更」断言在集成分支领先 main 时按预期失败，合并后通过）。
 
 ## 七、手动命令速查
 
@@ -567,3 +567,6 @@ CI 在 ubuntu runner 上用 **bash** 执行 `run:`，本地维护者用 **PowerS
 | v2.17 | 2026-11-19 | 文档↔实现对齐 | 二.1 `validate` 步骤表补齐至实测（主 job 28 个命名步骤 + 2 个附加 job：覆盖率 / 工作区卫生）；二.3 `maintenance` 补齐至 19 步（含 `auto_verify --all --dry-run`）；二.6 `audit-gate` 补齐至 5 步；十二.1「六族十三类」→「六族十二类」。实测来源：`.github/workflows/{validate,audit-gate,scheduled-maintenance}.yml`（main @`fb1a38b`） |
 | v2.18 | 2026-11-19 | 工具接线（组 C） | N4 `decision_log.py --check` 接入 `validate.yml`（缺失 / 结构损坏阻断）+ 守卫测试；N5 信息质量三清单留存策略；N6 `auto_verify` 全量日志策略；N8 五问收敛触发条件说明 |
 | v2.19 | 2026-11-19 | 工程硬化（组 D / N11–N14） | ruff 存量 138 → 0（100 自动修复 + 38 人工等价重构，unittest / mypy / validate 等价验证）；新增 `test_platform_guard.py`（9 项）/ `test_perf_snapshot.py`（6 项）；新增 `perf_snapshot.py` 并接入 `scheduled-maintenance.yml`；`.gitattributes` 固化 LF；新增 13.5 / 十四 / 十五节；六节测试数 978 → 998（集成后实测） |
+| v2.20 | 2026-11-19 | 词条删除 + remove 命令 | 新增 `vocab_tool remove`（TDD，3 项测试）；删除 22 条无法核验 `npa.go.jp` 词条（01: 109→98、02: 104→93）；`index.html` 重新生成；测试数 998 → 1001 |
+| v2.21 | 2026-11-19 | 工程硬化收口（T3/T8） | T3 收口 `findings-by-path.json` 忽略（`git check-ignore` 命中，跑测试后工作区无残留）；T8 新增规格 `docs/toolchain/specs/align-2026-11-19.md` 与守卫 `TestReviewCoverage`（2 项，工单 100% 评审覆盖断言）；补 `coverage-gate-review.md` 与 closure-b 工单 slug 留痕；六节测试数 1001 → 1003 |
+| v2.22 | 2026-11-19 | 文档↔实现对齐（T1/T10） | 修正工具 43→44、类型 13→12、测试 978→1008、validate 29/30 步、maintenance 20 步、词库 1634→1612、覆盖率 92.0→90.35%；`docs/README` 一次性文档声明改为「4 份在库、过程留痕保留」；新增 5 项守卫（类型数 / 词条数 / CI 步骤数 / 覆盖率基线 / 一次性文档声明） |

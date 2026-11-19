@@ -1,16 +1,16 @@
 {
   "topic": "01-ssw-driver",
   "name": "特定技能司机",
-  "version": "v1.7",
-  "generated_at": "2026-11-19T11:44:55",
-  "count": 109,
+  "version": "v1.10",
+  "generated_at": "2026-11-19T17:01:49",
+  "count": 98,
   "categories": {
     "在留资格与制度": 19,
     "岗位与业务场景": 18,
     "薪酬与劳动条件": 18,
-    "驾驶与运输作业": 21,
-    "资格考试与培训": 17,
-    "生活适应与表达": 16
+    "驾驶与运输作业": 17,
+    "资格考试与培训": 11,
+    "生活适应与表达": 15
   },
   "terms": [
     {
@@ -704,45 +704,6 @@
       "confidence": "B"
     },
     {
-      "id": "SSW-036",
-      "term": "大型一種免許",
-      "aliases": [
-        "大型一种驾照",
-        "大型货车驾照"
-      ],
-      "category": "驾驶与运输作业",
-      "tags": [
-        "驾照",
-        "大型"
-      ],
-      "definition": "日本驾照种类，可驾驶总重量11吨以上或载重6.5吨以上的货车，需年满21岁并满足驾龄条件。",
-      "source": "警察庁",
-      "first_added": "2026-11-13",
-      "last_updated": "2026-11-19",
-      "verification": "部分核验",
-      "source_url": "https://drivey.jp/blog/gaimen-kirikae-knowledge-test",
-      "confidence": "B"
-    },
-    {
-      "id": "SSW-037",
-      "term": "牽引免許",
-      "aliases": [
-        "牵引驾照"
-      ],
-      "category": "驾驶与运输作业",
-      "tags": [
-        "驾照",
-        "牵引"
-      ],
-      "definition": "牵引750公斤以上挂车时必需的驾照，须在持有大型或普通驾照基础上加考，含连接与倒车考试。",
-      "source": "警察庁",
-      "first_added": "2026-11-13",
-      "last_updated": "2026-11-19",
-      "verification": "部分核验",
-      "source_url": "https://drivey.jp/blog/gaimen-kirikae-knowledge-test",
-      "confidence": "B"
-    },
-    {
       "id": "SSW-038",
       "term": "フォークリフト",
       "aliases": [
@@ -837,25 +798,6 @@
       "last_updated": "2026-11-19",
       "verification": "部分核验",
       "source_url": "https://www.mlit.go.jp/jidosha/jidosha_tk7_000043.html",
-      "confidence": "B"
-    },
-    {
-      "id": "SSW-043",
-      "term": "過積載",
-      "aliases": [
-        "超载"
-      ],
-      "category": "驾驶与运输作业",
-      "tags": [
-        "违法",
-        "装载"
-      ],
-      "definition": "超过车辆最大载重或法定限度的装载行为，属违法，司机、运行管理者与货主均可能被追责。",
-      "source": "警察庁",
-      "first_added": "2026-11-13",
-      "last_updated": "2026-11-19",
-      "verification": "部分核验",
-      "source_url": "https://drivey.jp/blog/gaimen-kirikae-knowledge-test",
       "confidence": "B"
     },
     {
@@ -1052,25 +994,6 @@
       "confidence": "B"
     },
     {
-      "id": "SSW-054",
-      "term": "道路交通法",
-      "aliases": [
-        "道交法"
-      ],
-      "category": "资格考试与培训",
-      "tags": [
-        "法规",
-        "交通"
-      ],
-      "definition": "规定交通规则、驾照与违章处罚的法律，超速、酒驾与过载等行为的罚则均由此法规定。",
-      "source": "警察庁",
-      "first_added": "2026-11-13",
-      "last_updated": "2026-11-19",
-      "verification": "部分核验",
-      "source_url": "https://drivey.jp/blog/gaimen-kirikae-knowledge-test",
-      "confidence": "B"
-    },
-    {
       "id": "SSW-055",
       "term": "労働安全衛生法",
       "aliases": [
@@ -1106,25 +1029,6 @@
       "last_updated": "2026-11-19",
       "verification": "部分核验",
       "source_url": "https://www.fdma.go.jp/",
-      "confidence": "B"
-    },
-    {
-      "id": "SSW-057",
-      "term": "安全運転管理者",
-      "aliases": [
-        "安全驾驶管理者"
-      ],
-      "category": "资格考试与培训",
-      "tags": [
-        "资格",
-        "安全"
-      ],
-      "definition": "一定规模以上企业须选任的管理者，负责司机安全教育、酒气检测与运行计划审查。",
-      "source": "警察庁",
-      "first_added": "2026-11-13",
-      "last_updated": "2026-11-19",
-      "verification": "部分核验",
-      "source_url": "https://drivey.jp/blog/gaimen-kirikae-knowledge-test",
       "confidence": "B"
     },
     {
@@ -1318,25 +1222,6 @@
       "last_updated": "2026-11-19",
       "verification": "部分核验",
       "source_url": "https://www.mhlw.go.jp/",
-      "confidence": "B"
-    },
-    {
-      "id": "SSW-068",
-      "term": "緊急連絡先",
-      "aliases": [
-        "紧急联系方式"
-      ],
-      "category": "生活适应与表达",
-      "tags": [
-        "生活",
-        "应急"
-      ],
-      "definition": "发生事故、疾病或灾害时第一时间联系的电话，包括公司运行管理者、110、119与支援机构。",
-      "source": "警察庁",
-      "first_added": "2026-11-13",
-      "last_updated": "2026-11-19",
-      "verification": "部分核验",
-      "source_url": "https://drivey.jp/blog/gaimen-kirikae-knowledge-test",
       "confidence": "B"
     },
     {
@@ -1690,26 +1575,6 @@
       "confidence": "B"
     },
     {
-      "id": "SSW-086",
-      "term": "中型一種免許",
-      "aliases": [
-        "中型一种驾照",
-        "中型货车驾照"
-      ],
-      "category": "驾驶与运输作业",
-      "tags": [
-        "驾照",
-        "中型"
-      ],
-      "definition": "可驾驶总重量3.5吨以上5吨以下等中型车辆的第一类驾照，多用于区域配送车型。",
-      "source": "警察庁",
-      "first_added": "2026-11-13",
-      "last_updated": "2026-11-19",
-      "verification": "部分核验",
-      "source_url": "https://drivey.jp/blog/gaimen-kirikae-knowledge-test",
-      "confidence": "B"
-    },
-    {
       "id": "SSW-087",
       "term": "危険物乙種第4類",
       "aliases": [
@@ -1809,89 +1674,6 @@
       "last_updated": "2026-11-19",
       "verification": "部分核验",
       "source_url": "https://www.mlit.go.jp/jidosha/jidosha_tk7_000043.html",
-      "confidence": "B"
-    },
-    {
-      "id": "SSW-092",
-      "term": "学科試験",
-      "aliases": [
-        "笔试",
-        "学科考试"
-      ],
-      "category": "资格考试与培训",
-      "tags": [
-        "考试",
-        "驾照",
-        "笔试"
-      ],
-      "definition": "驾照及各类资格考试中考查交通法规与安全知识的笔试科目。",
-      "source": "警察庁",
-      "first_added": "2026-11-13",
-      "last_updated": "2026-11-19",
-      "verification": "部分核验",
-      "source_url": "https://drivey.jp/blog/gaimen-kirikae-knowledge-test",
-      "confidence": "B"
-    },
-    {
-      "id": "SSW-093",
-      "term": "実技試験",
-      "aliases": [
-        "实技考试",
-        "技能考试"
-      ],
-      "category": "资格考试与培训",
-      "tags": [
-        "考试",
-        "驾照",
-        "技能"
-      ],
-      "definition": "考查实际驾驶操作等现场能力的考试，取得驾照时与学科考试并设。",
-      "source": "警察庁",
-      "first_added": "2026-11-13",
-      "last_updated": "2026-11-19",
-      "verification": "部分核验",
-      "source_url": "https://drivey.jp/blog/gaimen-kirikae-knowledge-test",
-      "confidence": "B"
-    },
-    {
-      "id": "SSW-094",
-      "term": "違反者講習",
-      "aliases": [
-        "违反者讲习"
-      ],
-      "category": "资格考试与培训",
-      "tags": [
-        "讲习",
-        "驾照",
-        "违章"
-      ],
-      "definition": "更新驾照时有违章或事故记录者须在更新前接受的讲习，完成后方可办理更新。",
-      "source": "警察庁",
-      "first_added": "2026-11-13",
-      "last_updated": "2026-11-19",
-      "verification": "部分核验",
-      "source_url": "https://drivey.jp/blog/gaimen-kirikae-knowledge-test",
-      "confidence": "B"
-    },
-    {
-      "id": "SSW-095",
-      "term": "仮免許",
-      "aliases": [
-        "仮免",
-        "临时驾照"
-      ],
-      "category": "资格考试与培训",
-      "tags": [
-        "驾照",
-        "学习",
-        "考试"
-      ],
-      "definition": "正式驾照取得前为路上练习发放的临时驾照，练习时须有符合条件的指导者同行。",
-      "source": "警察庁",
-      "first_added": "2026-11-13",
-      "last_updated": "2026-11-19",
-      "verification": "部分核验",
-      "source_url": "https://drivey.jp/blog/gaimen-kirikae-knowledge-test",
       "confidence": "B"
     },
     {

@@ -80,6 +80,10 @@
 
 原 D 节记录的 11 条 drivey.jp 私人博客来源逐条复核：该域名非官方；本会话 web_fetch 可达，内容仅对外免切替相关表述切題，其余词条不切題。官方同源机构（警察庁）门户 https://www.npa.go.jp/ 经 web_fetch 返回 403（CloudFront 地域拦截），无法实取具体页。处置：纠错回落官方门户并标「未核实（CDN 拦截）」。涉及 SSW-036 / 037 / 043 / 054 / 057 / 068 / 086 / 092 / 093 / 094 / 095（11 条）。
 
+### D.2 未核实项浏览器核验（2026-11-19，closure-unverified）
+
+浏览器（妙手 paw browser）实测 `www.npa.go.jp`：门户与深链 `https://www.npa.go.jp/about/introduction/index.html`、`https://www.npa.go.jp/english/index.html` 均返回 CloudFront 403「The Amazon CloudFront distribution is configured to block access from your country」（2026-11-19）。未尝试绕过。处置（2026-11-19 用户确认，保障信息质量）：11 条**已删除**（无法核验来源的条目不保留）；词库 109 → 98（v1.10），`business-config.md` 区块同步删除，`exports/` 重生成。涉及 SSW-036 / 037 / 043 / 054 / 057 / 068 / 086 / 092 / 093 / 094 / 095；上表为删除前状态留痕。
+
 ## E 自检结论
 
 ```

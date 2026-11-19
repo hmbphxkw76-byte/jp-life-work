@@ -14,7 +14,7 @@
 
 | 目录 | 职责 | 文档形态 | 单一事实源 |
 |---|---|---|---|
-| `engine/report_templates/` | 报告模板通用层（跨类型共享） | 通用基座 / 规范 / 注册表 / 13 个类型目录 | 本目录根部文件 |
+| `engine/report_templates/` | 报告模板通用层（跨类型共享） | 通用基座 / 规范 / 注册表 / 12 个类型目录 | 本目录根部文件 |
 | `engine/tools/` | CI 工具链 | `README.md`（工具说明）+ `registry.json`（快照） | 工具代码本身 |
 | `engine/vocabulary/` | 动态词汇库 | `README.md`（SOP）+ `INDEX.md`（索引）+ `data/*/terms.md` | `config/topics.json` + `terms.md` |
 | `engine/search/` | 五问检索索引 | `*.json`（源） | `question-index.json` 等 |
@@ -65,13 +65,13 @@
 | `engine/README.md` | 活文档 | 本文件（治理总纲） |
 | `engine/report_templates/prompt-generic-base.md` | 活文档 | 通用基座（第一层继承） |
 | `engine/report_templates/monitoring-common-spec.md` | 活文档 | 渲染 / 排版 / 交付规范 |
-| `engine/report_templates/template-registry.md` | 活文档 | 类型注册表（13 类） |
-| `engine/report_templates/report-classification.md` | 活文档 | 六族十三类选型参考 |
+| `engine/report_templates/template-registry.md` | 活文档 | 类型注册表（12 类） |
+| `engine/report_templates/report-classification.md` | 活文档 | 六族十二类选型参考 |
 | `engine/report_templates/registry-schema.md` | 活文档 | 指标登记册 Schema |
 | `engine/report_templates/fact-card-standard.md` | 活文档 | 事实卡片标准 |
 | `engine/report_templates/l5-semantic-review.md` | 活文档 | L5 语义复核提示词 |
 | `engine/report_templates/handbook-split-standard.md` | 活文档 | 知识手册拆分规范 |
-| `engine/report_templates/<类型ID>/*` | 活文档 | 13 类模板 + 泛用版提示词 + 脚手架 |
+| `engine/report_templates/<类型ID>/*` | 活文档 | 12 类模板 + 泛用版提示词 + 脚手架 |
 | `engine/tools/README.md` | 活文档 | 工具链使用说明 |
 | `engine/tools/registry.json` | 生成物 | 工具 / 类型 / 主题 / 工作流快照 |
 | `engine/tools/coverage-config.json` | 配置 | 覆盖率阈值 / 开关单一事实源（TOOLCHAIN-DEV-SPEC 第六节） |

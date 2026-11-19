@@ -2856,5 +2856,62 @@ class TestPipelineFlowSpec(unittest.TestCase):
         self.assertIn("建议类型、**期限**", spec)
 
 
+class TestVocabRemove(unittest.TestCase):
+    """vocab_tool remove：按 ID 删除词条（可复用命令，避免手改词库）。"""
+
+    HEADER = ("| ID | 词条 | 别名 | 分类 | 标签 | 定义 | 来源 | 首次登记 | 最近更新 |\n"
+              "| --- | --- | --- | --- | --- | --- | --- | --- | --- |\n")
+
+    def setUp(self):
+        self._tmp = tempfile.TemporaryDirectory()  # noqa: P201
+        self.root = Path(self._tmp.name)
+
+    def tearDown(self):
+        self._tmp.cleanup()
+
+    def _tmeta(self, prefix="DEM", min_terms=1):
+        return {
+            "id": "demo",
+            "storage": self.root / "data" / "demo" / "terms.md",
+            "id_prefix": prefix,
+            "categories": [],
+            "min_terms": min_terms,
+        }
+
+    def _write(self, tmeta, rows):
+        tmeta["storage"].parent.mkdir(parents=True, exist_ok=True)
+        tmeta["storage"].write_text("# 词库\n\n## 词汇表\n\n" + self.HEADER + rows,
+                                    encoding="utf-8")
+
+    def test_remove_existing(self):
+        tmeta = self._tmeta()
+        self._write(tmeta, "| DEM-001 | 甲 |  | 分类A |  | 定义 | 来源 | 2026-11-14 | 2026-11-14 |\n"
+                            "| DEM-002 | 乙 |  | 分类A |  | 定义 | 来源 | 2026-11-14 | 2026-11-14 |\n")
+        rc = vocab_tool.cmd_remove(tmeta, "DEM-001")
+        self.assertEqual(rc, 0)
+        text = tmeta["storage"].read_text(encoding="utf-8")
+        self.assertNotIn("| DEM-001 |", text)
+        self.assertIn("| DEM-002 |", text)
+        self.assertIn("词条删除", text)
+
+    def test_remove_multiple_with_missing(self):
+        tmeta = self._tmeta()
+        self._write(tmeta, "| DEM-001 | 甲 |  | 分类A |  | 定义 | 来源 | 2026-11-14 | 2026-11-14 |\n"
+                            "| DEM-002 | 乙 |  | 分类A |  | 定义 | 来源 | 2026-11-14 | 2026-11-14 |\n")
+        rc = vocab_tool.cmd_remove(tmeta, "DEM-001,DEM-999")
+        self.assertEqual(rc, 0)
+        text = tmeta["storage"].read_text(encoding="utf-8")
+        self.assertNotIn("| DEM-001 |", text)
+        self.assertIn("| DEM-002 |", text)
+        self.assertIn("DEM-999", text)  # 未找到项记入版本行
+
+    def test_remove_all_missing_returns_1(self):
+        tmeta = self._tmeta()
+        self._write(tmeta, "| DEM-001 | 甲 |  | 分类A |  | 定义 | 来源 | 2026-11-14 | 2026-11-14 |\n")
+        rc = vocab_tool.cmd_remove(tmeta, "DEM-999")
+        self.assertEqual(rc, 1)
+        self.assertIn("DEM-001", tmeta["storage"].read_text(encoding="utf-8"))
+
+
 if __name__ == "__main__":
     unittest.main()
