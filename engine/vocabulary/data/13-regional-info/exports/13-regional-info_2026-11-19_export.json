@@ -1,8 +1,8 @@
 {
   "topic": "13-regional-info",
   "name": "地区信息",
-  "version": "v1.4",
-  "generated_at": "2026-11-19T10:05:36",
+  "version": "v1.5",
+  "generated_at": "2026-11-19T11:42:31",
   "count": 69,
   "categories": {
     "行政区划与地理": 12,
@@ -30,7 +30,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.soumu.go.jp/",
+      "source_url": "https://www.soumu.go.jp/main_sosiki/jichi_gyousei/bunken/chihou-koukyoudantai_kubun.html",
       "confidence": "B"
     },
     {
@@ -51,7 +51,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.soumu.go.jp/",
+      "source_url": "https://www.soumu.go.jp/main_sosiki/jichi_gyousei/bunken/chihou-koukyoudantai_kubun.html",
       "confidence": "B"
     },
     {
@@ -72,7 +72,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.soumu.go.jp/",
+      "source_url": "https://www.soumu.go.jp/main_sosiki/jichi_gyousei/bunken/shitei_toshi-ichiran.html",
       "confidence": "B"
     },
     {
@@ -92,7 +92,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.soumu.go.jp/",
+      "source_url": "https://www.soumu.go.jp/cyukaku/",
       "confidence": "B"
     },
     {
@@ -113,7 +113,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.soumu.go.jp/",
+      "source_url": "https://www.soumu.go.jp/main_sosiki/jichi_gyousei/bunken/chihou-koukyoudantai_kubun.html",
       "confidence": "B"
     },
     {
@@ -279,7 +279,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.stat.go.jp/",
+      "source_url": "https://www.stat.go.jp/data/jinsui/index.html",
       "confidence": "B"
     },
     {
@@ -404,7 +404,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.cao.go.jp/",
+      "source_url": "https://www.chisou.go.jp/sousei/",
       "confidence": "B"
     },
     {
@@ -446,7 +446,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.soumu.go.jp/",
+      "source_url": "https://www.soumu.go.jp/main_sosiki/jichi_gyousei/c-gyousei/2001/kaso/kasomain0.htm",
       "confidence": "B"
     },
     {
@@ -756,7 +756,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.stat.go.jp/",
+      "source_url": "https://www.stat.go.jp/data/cpi/",
       "confidence": "B"
     },
     {
@@ -958,7 +958,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.soumu.go.jp/",
+      "source_url": "https://www.soumu.go.jp/main_sosiki/jichi_gyousei/bunken/gaiyou.html",
       "confidence": "B"
     },
     {
@@ -979,7 +979,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.soumu.go.jp/",
+      "source_url": "https://www.soumu.go.jp/main_sosiki/jichi_zeisei/czaisei/czais.html",
       "confidence": "B"
     },
     {
@@ -1104,7 +1104,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.soumu.go.jp/",
+      "source_url": "https://www.soumu.go.jp/denshijiti/digital_transformation_portal/index.html",
       "confidence": "B"
     },
     {
