@@ -939,6 +939,44 @@ class TestCovPipelineDecisionLog(unittest.TestCase):
             with unittest.mock.patch.object(decision_log, "LOG_PATH", lp):
                 self.assertEqual(decision_log.entries(), [])
 
+    # ── --check：决策日志缺失 / 结构损坏检测（N4）──
+    def test_main_check_missing_file(self):
+        with tempfile.TemporaryDirectory() as d:
+            lp = Path(d) / "decision_log.md"
+            with unittest.mock.patch.object(decision_log, "LOG_PATH", lp):
+                rc, _, err = _capture(["decision_log.py", "--check"], decision_log.main)
+        self.assertEqual(rc, 1)
+        self.assertIn("缺失", err)
+
+    def test_main_check_missing_header(self):
+        with tempfile.TemporaryDirectory() as d:
+            lp = Path(d) / "decision_log.md"
+            lp.write_text("| 2026-01-01 | Q | F | a | b | basis | src |\n",
+                          encoding="utf-8")
+            with unittest.mock.patch.object(decision_log, "LOG_PATH", lp):
+                rc, _, err = _capture(["decision_log.py", "--check"], decision_log.main)
+        self.assertEqual(rc, 1)
+        self.assertIn("结构", err)
+
+    def test_main_check_empty_warns(self):
+        with tempfile.TemporaryDirectory() as d:
+            lp = Path(d) / "decision_log.md"
+            lp.write_text(decision_log._ensure_header(""), encoding="utf-8")
+            with unittest.mock.patch.object(decision_log, "LOG_PATH", lp):
+                rc, out, _ = _capture(["decision_log.py", "--check"], decision_log.main)
+        self.assertEqual(rc, 2)
+        self.assertIn("暂无记录", out)
+
+    def test_main_check_ok(self):
+        with tempfile.TemporaryDirectory() as d:
+            lp = Path(d) / "decision_log.md"
+            with unittest.mock.patch.object(decision_log, "LOG_PATH", lp):
+                _capture(["decision_log.py", "--add", "--question", "Q",
+                          "--field", "F", "--new", "N"], decision_log.main)
+                rc, out, _ = _capture(["decision_log.py", "--check"], decision_log.main)
+        self.assertEqual(rc, 0)
+        self.assertIn("1 条记录", out)
+
 
 # ──────────────────────────────────────────────
 # stage_gate_check：阶段闸

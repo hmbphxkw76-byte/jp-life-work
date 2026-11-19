@@ -166,6 +166,18 @@ jobs:
           fi
           echo "decision_metrics.py 退出码 $code（2=存在待定/缺失，仅告警）"
 
+      # 决策日志缺失 / 结构损坏检测（N4）：decision_log.md 为跟踪交付物，
+      # 缺失或结构损坏即阻断；存在但暂无记录仅告警（新库初始化期）。
+      - name: 决策日志校验（decision_log.py --check）
+        run: |
+          python engine/tools/decision_log.py --check || code=$?
+          code=${code:-0}
+          if [ "$code" -ne 0 ] && [ "$code" -ne 2 ]; then
+            echo "::error::决策日志缺失或结构损坏（退出码 $code），阻断合并"
+            exit 1
+          fi
+          echo "decision_log.py 退出码 $code（2=暂无记录，仅告警）"
+
       # 来源 schema（P1-2）：来源章节存在性阻断；条目时点 / 分级缺失仅告警，
       # 并产出机读 source-index.json（来源条目四元组字段化）。
       - name: 来源条目 schema 校验（source_check.py）

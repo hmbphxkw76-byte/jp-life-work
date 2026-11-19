@@ -10,7 +10,7 @@ CI 工具链使用说明。所有工具基于仓库根目录相对路径运行�
 
 ```bash
 pip install -r requirements.txt   # markdown
-python -m unittest discover -s engine/tests -v   # 单元测试（978 项，以 docs/CI.md 与实测为准）
+python -m unittest discover -s engine/tests -q   # 单元测试（以 docs/CI.md 与实测为准）
 ```
 
 ## 退出码约定（校验类工具统一）
@@ -52,7 +52,7 @@ python -m unittest discover -s engine/tests -v   # 单元测试（978 项，以 
 | fact_card_check.py | 决策支持 | validate.yml「事实卡片校验」+ scheduled-maintenance.yml「刷新」 |
 | pending_verification.py | 决策支持 | validate.yml「待核实闭环」+ scheduled-maintenance.yml「刷新」 |
 | skeleton_builder.py | 生成 | 手动：报告骨架 / 空模块合并 |
-| decision_log.py | 编排 | 手动：决策状态变化时间线 |
+| decision_log.py | 编排 | 手动：决策状态变化时间线；validate.yml「决策日志校验」（`--check` 缺失 / 结构损坏检测） |
 | coverage_gate.py | 校验 | validate.yml「覆盖率门禁」；阈值读 `coverage-config.json` 单一事实源（`--update-baseline` / `--porcelain`） |
 | review_gate.py | 校验 | audit-gate.yml「工具链变更双轴评审软门禁」（`--changed <清单>`） |
 | link_check.py | 校验 | validate.yml「内链存在性校验」（报告 / 手册 / 词条 / 汇总页 / 搜索数据的仓库相对链接 + audit-status 键对账） |
@@ -378,7 +378,7 @@ python engine/tools/automation_status.py activity --threshold 45               #
 | `fact_card_check.py` | 事实卡片五字段 / `[@FC-NNN]` 指针 / 跨报告事实重复率 | 同上 |
 | `pending_verification.py` | 14/15/17/18/19/20 首轮核验截止跟踪 | 同上 |
 | `skeleton_builder.py` | 报告骨架生成 / 空模块合并 / 边界声明集中 | 生成期（按需） |
-| `decision_log.py` | 决策状态变化时间线 | `update_planner.py` 月度清单 |
+| `decision_log.py` | 决策状态变化时间线 | `update_planner.py` 月度清单 + `validate.yml` `--check`（缺失 / 结构损坏检测） |
 | `info_quality_check.py` | 结构化免责声明 / 空模块占比 / 事实重复率 | `info-quality.yml --apply` + `validate.yml --check` |
 
 - **复用一致性测试**：`engine/tests/test_tools.py::TestProcessReuse` 断言各阶段均引用对应工具，漏接即失败。

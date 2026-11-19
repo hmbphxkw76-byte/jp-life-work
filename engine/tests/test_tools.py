@@ -1991,6 +1991,12 @@ class TestProcessReuse(unittest.TestCase):
                     "compliance_check.py --new-only"):
             self.assertIn(cmd, t, f"validate.yml 缺少流程复用：{cmd}")
 
+    def test_validate_gate_checks_decision_log(self):
+        """N4：validate.yml 必须含 decision_log 缺失检测步骤。"""
+        t = self._read(".github/workflows/validate.yml")
+        self.assertIn("decision_log.py --check", t,
+                      "validate.yml 缺少决策日志缺失检测步骤")
+
     def test_maintenance_refreshes_decision_support(self):
         t = self._read(".github/workflows/scheduled-maintenance.yml")
         for cmd in ("personal_finance_model.py", "pending_verification.py",
