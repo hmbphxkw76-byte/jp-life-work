@@ -1,8 +1,8 @@
 {
   "topic": "13-regional-info",
   "name": "地区信息",
-  "version": "v1.3",
-  "generated_at": "2026-11-19T09:07:50",
+  "version": "v1.4",
+  "generated_at": "2026-11-19T10:05:36",
   "count": 69,
   "categories": {
     "行政区划与地理": 12,
@@ -341,7 +341,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.soumu.go.jp/",
+      "source_url": "https://www.soumu.go.jp/main_sosiki/jichi_gyousei/c-gyousei/zairyu/move-in_move-out.html",
       "confidence": "B"
     },
     {
@@ -362,7 +362,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.soumu.go.jp/",
+      "source_url": "https://www.soumu.go.jp/main_sosiki/jichi_gyousei/c-gyousei/zairyu/move-in_move-out.html",
       "confidence": "B"
     },
     {
@@ -1021,7 +1021,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.soumu.go.jp/",
+      "source_url": "https://www.soumu.go.jp/main_sosiki/jichi_zeisei/czaisei/czaisei_seido/080430_2_kojin.html",
       "confidence": "B"
     },
     {
@@ -1042,7 +1042,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.soumu.go.jp/",
+      "source_url": "https://www.soumu.go.jp/main_sosiki/jichi_gyousei/c-gyousei/02gyosei08_03000066.html",
       "confidence": "B"
     },
     {
@@ -1125,7 +1125,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.soumu.go.jp/",
+      "source_url": "https://www.soumu.go.jp/main_sosiki/jichi_gyousei/c-gyousei/zairyu/",
       "confidence": "B"
     },
     {
@@ -1146,7 +1146,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.soumu.go.jp/",
+      "source_url": "https://www.soumu.go.jp/main_sosiki/jichi_gyousei/c-gyousei/zairyu/move-in_move-out.html",
       "confidence": "B"
     },
     {
