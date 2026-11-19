@@ -1,8 +1,8 @@
 {
   "topic": "02-career-driver",
   "name": "司机职业发展",
-  "version": "v1.5",
-  "generated_at": "2026-11-19T09:47:04",
+  "version": "v1.6",
+  "generated_at": "2026-11-19T12:01:06",
   "count": 104,
   "categories": {
     "职级与晋升路径": 18,
@@ -448,7 +448,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.nta.go.jp/",
+      "source_url": "https://www.nta.go.jp/publication/statistics/kokuzeicho/minkan/top.htm",
       "confidence": "B"
     },
     {
@@ -1165,7 +1165,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.nta.go.jp/",
+      "source_url": "https://www.nta.go.jp/taxes/tetsuzuki/shinsei/annai/shinkoku/annai/04.htm",
       "confidence": "B"
     },
     {
