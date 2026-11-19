@@ -1,8 +1,8 @@
 {
   "topic": "02-career-driver",
   "name": "司机职业发展",
-  "version": "v1.6",
-  "generated_at": "2026-11-19T12:01:06",
+  "version": "v1.9",
+  "generated_at": "2026-11-19T16:07:39",
   "count": 104,
   "categories": {
     "职级与晋升路径": 18,
@@ -166,8 +166,8 @@
       "source": "警察庁",
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
-      "verification": "部分核验",
-      "source_url": "https://mp.weixin.qq.com/s?__biz=MjM5NTA5NzY3OQ==&mid=2650795907&idx=2&sn=cbc2cf5b919a4ff51aa229b0e6e029a7",
+      "verification": "待核实",
+      "source_url": "https://www.npa.go.jp/",
       "confidence": "B"
     },
     {
@@ -487,8 +487,8 @@
       "source": "警察庁",
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
-      "verification": "部分核验",
-      "source_url": "https://mp.weixin.qq.com/s?__biz=MjM5NTA5NzY3OQ==&mid=2650795907&idx=2&sn=cbc2cf5b919a4ff51aa229b0e6e029a7",
+      "verification": "待核实",
+      "source_url": "https://www.npa.go.jp/",
       "confidence": "B"
     },
     {
@@ -507,8 +507,8 @@
       "source": "警察庁",
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
-      "verification": "部分核验",
-      "source_url": "https://mp.weixin.qq.com/s?__biz=MjM5NTA5NzY3OQ==&mid=2650795907&idx=2&sn=cbc2cf5b919a4ff51aa229b0e6e029a7",
+      "verification": "待核实",
+      "source_url": "https://www.npa.go.jp/",
       "confidence": "B"
     },
     {
@@ -527,8 +527,8 @@
       "source": "警察庁",
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
-      "verification": "部分核验",
-      "source_url": "https://mp.weixin.qq.com/s?__biz=MjM5NTA5NzY3OQ==&mid=2650795907&idx=2&sn=cbc2cf5b919a4ff51aa229b0e6e029a7",
+      "verification": "待核实",
+      "source_url": "https://www.npa.go.jp/",
       "confidence": "B"
     },
     {
@@ -547,8 +547,8 @@
       "source": "警察庁",
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
-      "verification": "部分核验",
-      "source_url": "https://mp.weixin.qq.com/s?__biz=MjM5NTA5NzY3OQ==&mid=2650795907&idx=2&sn=cbc2cf5b919a4ff51aa229b0e6e029a7",
+      "verification": "待核实",
+      "source_url": "https://www.npa.go.jp/",
       "confidence": "B"
     },
     {
@@ -567,8 +567,8 @@
       "source": "警察庁",
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
-      "verification": "部分核验",
-      "source_url": "https://mp.weixin.qq.com/s?__biz=MjM5NTA5NzY3OQ==&mid=2650795907&idx=2&sn=cbc2cf5b919a4ff51aa229b0e6e029a7",
+      "verification": "待核实",
+      "source_url": "https://www.npa.go.jp/",
       "confidence": "B"
     },
     {
@@ -668,8 +668,8 @@
       "source": "警察庁",
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
-      "verification": "部分核验",
-      "source_url": "https://mp.weixin.qq.com/s?__biz=MjM5NTA5NzY3OQ==&mid=2650795907&idx=2&sn=cbc2cf5b919a4ff51aa229b0e6e029a7",
+      "verification": "待核实",
+      "source_url": "https://www.npa.go.jp/",
       "confidence": "B"
     },
     {
@@ -1643,8 +1643,8 @@
       "source": "警察庁",
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
-      "verification": "部分核验",
-      "source_url": "https://mp.weixin.qq.com/s?__biz=MjM5NTA5NzY3OQ==&mid=2650795907&idx=2&sn=cbc2cf5b919a4ff51aa229b0e6e029a7",
+      "verification": "待核实",
+      "source_url": "https://www.npa.go.jp/",
       "confidence": "B"
     },
     {
@@ -1661,8 +1661,8 @@
       "source": "警察庁",
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
-      "verification": "部分核验",
-      "source_url": "https://mp.weixin.qq.com/s?__biz=MjM5NTA5NzY3OQ==&mid=2650795907&idx=2&sn=cbc2cf5b919a4ff51aa229b0e6e029a7",
+      "verification": "待核实",
+      "source_url": "https://www.npa.go.jp/",
       "confidence": "B"
     },
     {
@@ -1681,7 +1681,7 @@
       "source": "公安委員会",
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
-      "verification": "部分核验",
+      "verification": "待核实",
       "source_url": "https://www.npa.go.jp/",
       "confidence": "B"
     },
@@ -1699,8 +1699,8 @@
       "source": "警察庁",
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
-      "verification": "部分核验",
-      "source_url": "https://mp.weixin.qq.com/s?__biz=MjM5NTA5NzY3OQ==&mid=2650795907&idx=2&sn=cbc2cf5b919a4ff51aa229b0e6e029a7",
+      "verification": "待核实",
+      "source_url": "https://www.npa.go.jp/",
       "confidence": "B"
     },
     {

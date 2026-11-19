@@ -1,8 +1,8 @@
 {
   "topic": "20-overseas-china",
   "name": "中国侧行前与回国",
-  "version": "v1.5",
-  "generated_at": "2026-11-19T11:52:26",
+  "version": "v1.6",
+  "generated_at": "2026-11-19T16:05:33",
   "count": 79,
   "categories": {
     "护照与户籍": 17,
@@ -709,8 +709,8 @@
       "source": "外務省",
       "first_added": "2026-11-15",
       "last_updated": "2026-11-19",
-      "verification": "部分核验",
-      "source_url": "https://www.mofa.go.jp/",
+      "verification": "已核验",
+      "source_url": "https://www.mofa.go.jp/mofaj/gaiko/index.html",
       "confidence": "B"
     },
     {
@@ -730,8 +730,8 @@
       "source": "外務省",
       "first_added": "2026-11-15",
       "last_updated": "2026-11-19",
-      "verification": "部分核验",
-      "source_url": "https://www.mofa.go.jp/",
+      "verification": "已核验",
+      "source_url": "https://www.mofa.go.jp/mofaj/area/china/index.html",
       "confidence": "B"
     },
     {
@@ -1362,8 +1362,8 @@
       "source": "外務省",
       "first_added": "2026-11-18",
       "last_updated": "2026-11-19",
-      "verification": "部分核验",
-      "source_url": "https://www.mofa.go.jp/",
+      "verification": "已核验",
+      "source_url": "https://www.mofa.go.jp/mofaj/toko/todoke/shomei/index.html",
       "confidence": "B"
     },
     {
