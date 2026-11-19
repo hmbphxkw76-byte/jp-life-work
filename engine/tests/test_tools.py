@@ -18,7 +18,7 @@ import sys
 import tempfile
 import unittest
 import unittest.mock
-from datetime import date, datetime, timezone
+from datetime import UTC, date, datetime
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tools"))
@@ -27,24 +27,31 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "vocabulary" / "scr
 import _common  # noqa: E402
 import audit_badge  # noqa: E402
 import audit_check  # noqa: E402
-import auto_verify  # noqa: E402
 import audit_pipeline  # noqa: E402
 import audit_preflight  # noqa: E402
 import audit_registry  # noqa: E402
 import audit_sampling  # noqa: E402
+import auto_verify  # noqa: E402
 import build_hub  # noqa: E402
 import build_index  # noqa: E402
 import compliance_check  # noqa: E402
+import decision_log  # noqa: E402
+import fact_card_check  # noqa: E402
+import info_quality_check  # noqa: E402
 import link_check  # noqa: E402
-import update_planner  # noqa: E402
-import vocab_tool  # noqa: E402
 import lint_reports  # noqa: E402
 import md2html  # noqa: E402
+import pending_verification  # noqa: E402
+import personal_finance_model  # noqa: E402
+import skeleton_builder  # noqa: E402
 import stage_gate_check  # noqa: E402
+import update_planner  # noqa: E402
+import vocab_tool  # noqa: E402
 from archive_reports import select_archives  # noqa: E402
 from automation_status import days_since_latest  # noqa: E402
 from build_hub import build_outputs, collect_topics, normalize_for_check, search_reference_errors  # noqa: E402
 from compliance_check import check_report, cycle_rule, detect_type, load_rules  # noqa: E402
+from info_quality_check import evaluate, repair, scan_topics, verify  # noqa: E402
 from lint_reports import lint_html  # noqa: E402
 from md2html import convert as md2html_convert  # noqa: E402
 from report_diff import (  # noqa: E402
@@ -55,14 +62,6 @@ from report_diff import (  # noqa: E402
     strip_body,
 )
 from update_planner import build_tasks, default_period, pick_prompt, target_month  # noqa: E402
-import info_quality_check  # noqa: E402
-from info_quality_check import evaluate, repair, scan_topics, verify  # noqa: E402
-import personal_finance_model  # noqa: E402
-import fact_card_check  # noqa: E402
-import skeleton_builder  # noqa: E402
-import pending_verification  # noqa: E402
-import decision_log  # noqa: E402
-
 
 # ──────────────────────────────────────────────
 # 命名解析
@@ -166,11 +165,11 @@ class TestTasksForPeriod(unittest.TestCase):
 
 class TestDefaultPeriod(unittest.TestCase):
     def test_plain_month(self):
-        self.assertEqual(default_period(datetime(2026, 11, 13, tzinfo=timezone.utc)), "2026-11")
+        self.assertEqual(default_period(datetime(2026, 11, 13, tzinfo=UTC)), "2026-11")
 
     def test_quarter_start_month(self):
-        self.assertEqual(default_period(datetime(2026, 1, 1, tzinfo=timezone.utc)), "2026-Q1")
-        self.assertEqual(default_period(datetime(2026, 10, 31, tzinfo=timezone.utc)), "2026-Q4")
+        self.assertEqual(default_period(datetime(2026, 1, 1, tzinfo=UTC)), "2026-Q1")
+        self.assertEqual(default_period(datetime(2026, 10, 31, tzinfo=UTC)), "2026-Q4")
 
 
 class TestTargetMonth(unittest.TestCase):
@@ -941,21 +940,21 @@ class TestDiffAccuracy(unittest.TestCase):
 
 class TestDaysSinceLatest(unittest.TestCase):
     def test_none_when_empty(self):
-        now = datetime(2026, 11, 13, tzinfo=timezone.utc)
+        now = datetime(2026, 11, 13, tzinfo=UTC)
         self.assertIsNone(days_since_latest(now, []))
 
     def test_days(self):
-        now = datetime(2026, 11, 13, tzinfo=timezone.utc)
+        now = datetime(2026, 11, 13, tzinfo=UTC)
         records = [{"timestamp": "2026-11-10T00:00:00+00:00"}]
         self.assertEqual(days_since_latest(now, records), 3)
 
     def test_ignores_bad_timestamp(self):
-        now = datetime(2026, 11, 13, tzinfo=timezone.utc)
+        now = datetime(2026, 11, 13, tzinfo=UTC)
         records = [{"timestamp": "not-a-date"}]
         self.assertIsNone(days_since_latest(now, records))
 
     def test_naive_treated_as_utc(self):
-        now = datetime(2026, 11, 13, tzinfo=timezone.utc)
+        now = datetime(2026, 11, 13, tzinfo=UTC)
         records = [{"timestamp": "2026-11-12T00:00:00"}]
         self.assertEqual(days_since_latest(now, records), 1)
 
@@ -1812,10 +1811,10 @@ class TestNewOnlyGate(unittest.TestCase):
             _common.ROOT, compliance_check.ROOT = root, root
             try:
                 _, _, lines = compliance_check.run_check(None, new_only=True)
-                self.assertTrue(all("2026-10" not in l for l in lines))
+                self.assertTrue(all("2026-10" not in ln for ln in lines))
                 _, _, lines2 = compliance_check.run_check(
                     None, new_only=True, whitelist={"01-demo/reports/2026-11-demo.html"})
-                self.assertTrue(any("SKIP" in l for l in lines2))
+                self.assertTrue(any("SKIP" in ln for ln in lines2))
             finally:
                 _common.ROOT, compliance_check.ROOT = orig_common, orig_cc
 

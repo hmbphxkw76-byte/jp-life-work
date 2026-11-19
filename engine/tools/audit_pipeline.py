@@ -36,21 +36,23 @@ import argparse
 import hashlib
 import json
 import sys
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from _common import ROOT  # noqa: E402
+from audit_check import L5_CHECKLIST  # noqa: E402  （audit_check 不反向导入 audit_pipeline，无循环）
 from audit_registry import (  # noqa: E402
     AUDIT_DIR,
     SPEC_VERSION,
-    build as build_registry,
     content_fingerprint,
     content_fingerprints,
     discover,
 )
-from audit_check import L5_CHECKLIST  # noqa: E402  （audit_check 不反向导入 audit_pipeline，无循环）
+from audit_registry import (
+    build as build_registry,
+)
 
 LEDGER = AUDIT_DIR / "audit-ledger.jsonl"
 STATUS = AUDIT_DIR / "audit-status.json"
@@ -83,7 +85,7 @@ STATE_LABEL = {
 
 
 def _now() -> str:
-    return datetime.now(timezone.utc).isoformat(timespec="seconds")
+    return datetime.now(UTC).isoformat(timespec="seconds")
 
 
 # ──────────────────────────────────────────────
@@ -275,7 +277,7 @@ def _last_event(rep: str) -> dict | None:
 
 
 def _next_audit_id(state: dict) -> str:
-    ym = datetime.now(timezone.utc).strftime("%Y%m")
+    ym = datetime.now(UTC).strftime("%Y%m")
     used = [v.get("audit_id", "") for v in state.values()]
     n = 1
     while f"AUD-{ym}-{n:03d}" in used:
@@ -309,7 +311,7 @@ def _report_arg(rel: str | None) -> str:
         resolved = (ROOT / rel).resolve()
         resolved.relative_to(ROOT.resolve())
     except (ValueError, OSError):
-        raise SystemExit(f"[ERROR] 路径越出仓库根：{rel}")
+        raise SystemExit(f"[ERROR] 路径越出仓库根：{rel}") from None
     if not resolved.is_file():
         raise SystemExit(f"[ERROR] 报告不存在：{rel}")
     if resolved.suffix != ".md":
@@ -689,11 +691,10 @@ def _changed_report_paths(base: str, changed_file: str | None) -> list[str]:
     reps = set()
     for rel in raw:
         rel = rel.replace("\\", "/")
-        if rel.endswith(".md") and "/reports/" in rel:
-            # 已删除（工作树中不存在）的报告不参与受检：门禁校验的是「交付物」，
-            # 删除操作本身不产生待审交付物；其台账历史保留为 stale，不再阻断。
-            if (ROOT / rel).is_file():
-                reps.add(rel)
+        # 已删除（工作树中不存在）的报告不参与受检：门禁校验的是「交付物」，
+        # 删除操作本身不产生待审交付物；其台账历史保留为 stale，不再阻断。
+        if rel.endswith(".md") and "/reports/" in rel and (ROOT / rel).is_file():
+            reps.add(rel)
     return sorted(reps)
 
 

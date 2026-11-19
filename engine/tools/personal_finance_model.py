@@ -178,10 +178,7 @@ def build_model() -> dict:
     inter_raw = _cell(rows, SOURCES["intermediary"][1], SOURCES["intermediary"][2])
     login = _yen(inter_raw)
     per_month = _yen_range(inter_raw)
-    if login is not None and per_month:
-        intermediary = login + (per_month[0] + per_month[1]) / 2
-    else:
-        intermediary = None
+    intermediary = login + (per_month[0] + per_month[1]) / 2 if login is not None and per_month else None
     inputs["intermediary"] = {"topic": SOURCES["intermediary"][0], "item": SOURCES["intermediary"][1],
                               "path": str(p.relative_to(ROOT)).replace("\\", "/"),
                               "raw": inter_raw, "value": intermediary}

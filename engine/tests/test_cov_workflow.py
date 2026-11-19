@@ -102,9 +102,9 @@ class TestCovWgRunAndGit(TempCase):
         with mock.patch.object(wg.subprocess, "run", return_value=cp(0)) as run:
             wg._run(["git", "status"], cwd=self.root, check=True)
         self.assertEqual(run.call_args.args[0], ["git", "status"])
-        with mock.patch.object(wg.subprocess, "run", return_value=cp(2, "", "boom")):
-            with self.assertRaises(wg.GuardError):
-                wg._run(["git", "nope"], check=True)
+        with mock.patch.object(wg.subprocess, "run", return_value=cp(2, "", "boom")), \
+                self.assertRaises(wg.GuardError):
+            wg._run(["git", "nope"], check=True)
 
     def test_git_wrapper_prefixes_git(self):
         with mock.patch.object(wg, "_run", return_value=cp(0)) as run:
@@ -327,8 +327,10 @@ class WgCmdCase(TempCase):
         self.state.mkdir(parents=True)
         p1 = mock.patch.object(wg, "repo_root", return_value=self.root)
         p2 = mock.patch.object(wg, "state_dir", return_value=self.state)
-        p1.start(); p2.start()
-        self.addCleanup(p1.stop); self.addCleanup(p2.stop)
+        p1.start()
+        p2.start()
+        self.addCleanup(p1.stop)
+        self.addCleanup(p2.stop)
 
     def _ns(self, **kw):
         base = dict(scope="checkout", op=None, wait=0, force=False, stale_timeout=1800)
@@ -391,9 +393,8 @@ class TestCovWgTaskCmd(WgCmdCase):
             ("rev-parse", "--verify", "--quiet", DEMO_BRANCH): (0, "", ""),
             ("rev-parse", "--verify", "--quiet", "task/demo"): (1, "", ""),
         })
-        with mock.patch.object(wg, "git", git):
-            with self.assertRaises(wg.GuardError) as ctx:
-                wg.cmd_task_start(self._start_args(no_worktree=True))
+        with mock.patch.object(wg, "git", git), self.assertRaises(wg.GuardError) as ctx:
+            wg.cmd_task_start(self._start_args(no_worktree=True))
         self.assertIn("分支已存在", str(ctx.exception))
 
     def test_start_worktree_dir_exists(self):
@@ -402,9 +403,8 @@ class TestCovWgTaskCmd(WgCmdCase):
             ("rev-parse", "--verify", "--quiet", DEMO_BRANCH): (1, "", ""),
             ("rev-parse", "--verify", "--quiet", "task/demo"): (1, "", ""),
         })
-        with mock.patch.object(wg, "git", git):
-            with self.assertRaises(wg.GuardError) as ctx:
-                wg.cmd_task_start(self._start_args())
+        with mock.patch.object(wg, "git", git), self.assertRaises(wg.GuardError) as ctx:
+            wg.cmd_task_start(self._start_args())
         self.assertIn("工作树目录已存在", str(ctx.exception))
 
     def test_stop_not_found(self):
@@ -415,9 +415,8 @@ class TestCovWgTaskCmd(WgCmdCase):
         wg.save_tasks(self.state, [{"name": "demo", "branch": "task/demo",
                                     "worktree": None, "base": "origin/main"}])
         git = FakeGit({("merge-base", "--is-ancestor", "task/demo", "origin/main"): (1, "", "")})
-        with mock.patch.object(wg, "git", git):
-            with self.assertRaises(wg.GuardError) as ctx:
-                wg.cmd_task_stop(argparse.Namespace(name="demo", force=False, remote="origin"))
+        with mock.patch.object(wg, "git", git), self.assertRaises(wg.GuardError) as ctx:
+            wg.cmd_task_stop(argparse.Namespace(name="demo", force=False, remote="origin"))
         self.assertIn("尚未合入", str(ctx.exception))
 
     def test_stop_merged_without_worktree(self):
@@ -479,9 +478,8 @@ class TestCovWgLockCmd(WgCmdCase):
 
     def test_release_foreign_owner(self):
         wg.cmd_lock_acquire(self._ns(op="a"))
-        with mock.patch.object(wg, "current_owner", return_value="intruder"):
-            with self.assertRaises(wg.GuardError):
-                wg.cmd_lock_release(self._ns(force=False))
+        with mock.patch.object(wg, "current_owner", return_value="intruder"), self.assertRaises(wg.GuardError):
+            wg.cmd_lock_release(self._ns(force=False))
         self.assertTrue((self.state / "checkout.lock").exists())
 
     def test_run_requires_command(self):
@@ -651,9 +649,8 @@ class TestCovWgMerge(WgCmdCase):
             ("merge", "--no-ff", "--no-edit", "demo"): (0, "", ""),
             ("merge", "--no-ff", "--no-edit", "origin/main"): (0, "", ""),
         }
-        with mock.patch.object(wg, "push_with_failover", return_value=cp(1)):
-            with self.assertRaises(wg.GuardError):
-                wg.cmd_merge(merge_args())
+        with mock.patch.object(wg, "push_with_failover", return_value=cp(1)), self.assertRaises(wg.GuardError):
+            wg.cmd_merge(merge_args())
 
     def test_merge_lock_busy(self):
         (self.state / "merge.lock").write_text('{"owner": "x"}', encoding="utf-8")
@@ -790,9 +787,8 @@ class TestCovWgSync(WgCmdCase):
             ("merge-base", "--is-ancestor", "origin/main", "main"): (0, "", ""),
             ("rev-list", "--count", "origin/main..main"): (0, "1\n", ""),
         }
-        with mock.patch.object(wg, "push_with_failover", return_value=cp(1)):
-            with self.assertRaises(wg.GuardError):
-                wg.cmd_sync(self._args(push_local=True))
+        with mock.patch.object(wg, "push_with_failover", return_value=cp(1)), self.assertRaises(wg.GuardError):
+            wg.cmd_sync(self._args(push_local=True))
 
     def test_sync_diverged(self):
         self.git.responses = {
@@ -895,9 +891,8 @@ class TestCovGitPush(unittest.TestCase):
         self.assertEqual(push.call_args.kwargs["refspecs"], ["main"])
 
     def test_build_parser_requires_refspec(self):
-        with mock.patch.object(sys, "argv", ["git_push.py"]):
-            with self.assertRaises(SystemExit):
-                gp.build_parser().parse_args([])
+        with mock.patch.object(sys, "argv", ["git_push.py"]), self.assertRaises(SystemExit):
+            gp.build_parser().parse_args([])
 
 
 # ──────────────────────────────────────────────

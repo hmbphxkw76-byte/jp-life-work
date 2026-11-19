@@ -23,7 +23,7 @@ from __future__ import annotations
 import argparse
 import json
 import sys
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -51,7 +51,7 @@ def record(phase: str, result: str, run_url: str) -> int:
             "phase": phase,
             "result": result,
             "run_url": run_url,
-            "timestamp": datetime.now(tz=timezone.utc).isoformat(timespec="seconds"),
+            "timestamp": datetime.now(tz=UTC).isoformat(timespec="seconds"),
         }
     )
     STATUS_FILE.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
@@ -71,7 +71,7 @@ def days_since_latest(now: datetime, records: list[dict]):
         except ValueError:
             continue
         if dt.tzinfo is None:
-            dt = dt.replace(tzinfo=timezone.utc)
+            dt = dt.replace(tzinfo=UTC)
         if latest is None or dt > latest:
             latest = dt
     if latest is None:
@@ -81,7 +81,7 @@ def days_since_latest(now: datetime, records: list[dict]):
 
 def activity(threshold: int, porcelain: bool) -> int:
     records = load_status()["records"]
-    now = datetime.now(tz=timezone.utc)
+    now = datetime.now(tz=UTC)
     days = days_since_latest(now, records)
     if days is None:
         if porcelain:

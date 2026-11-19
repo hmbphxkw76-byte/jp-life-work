@@ -199,7 +199,7 @@ reports/YYYY-MM-<slug>.md  ──md2html.py──►  reports/YYYY-MM-<slug>.htm
 - **辅助开关**：报告页工具条「隐藏更新标记」对照阅读、「展开全部删除」。
 - **呈现**：报告页新标签页独立打开，页脚提供「← 返回主题 / 返回首页」。
 
-## 六、测试体系（`engine/tests/`，978 项）
+## 六、测试体系（`engine/tests/`，993 项）
 
 | 场景 | 测试类 | 覆盖 |
 |---|---|---|
@@ -227,8 +227,10 @@ reports/YYYY-MM-<slug>.md  ──md2html.py──►  reports/YYYY-MM-<slug>.htm
 | 分支命名与会话标识 | `test_branch_naming.py`（19 项） | sid 派生 / 分支名校验 / pre-push / pre-commit / 钩子安装 |
 | 报告生成一致性比对 | `test_verify_report_parity.py`（25 项） | 归一化（单遍路径重写 / 时间戳 / JSON 易变键）、基线写入与覆盖清空、比对（一致 / 仅路径 / MISMATCH / MISSING / NEW）、退出码 0/1/2 |
 | 引擎层迁移守卫 | `test_engine_migration.py`（16 项） | 目录终态（engine 存在 / 旧引擎层与根协作脚本目录不存在）、SKIP_TOP / TYPE_RE、主题数 21、深度推导 ROOT、旧路径与代码常量活引用清零、裸 tools 目录引用与旧模块路径 `src.<包>` 清零 |
+| 跨平台差异守卫 | `test_platform_guard.py`（9 项） | 路径分隔（无 Windows 路径字面量 / 工作流正斜杠）、换行（仓库 blob LF / `.gitattributes` / `atomic_write` 保 LF）、命令可用性（无 `shell=True` / 无 PowerShell 专属语法 / 工具路径存在） |
+| 性能趋势快照 | `test_perf_snapshot.py`（6 项） | 规模快照字段与实测口径、耗时采集、基线语义（首条为基线 / 追加不改基线 / `--set-baseline` 覆盖）、CLI `--porcelain` |
 
-> 合计 978 项（`python -m unittest discover -s engine/tests` 实测，当前全绿）。
+> 合计 993 项（`python -m unittest discover -s engine/tests` 实测，当前全绿）。
 
 ## 七、手动命令速查
 
@@ -424,6 +426,76 @@ python engine/scripts/cleanup_workspace.py --dry-run  # 预览将删除项
 - 运行日志不入库（`.gitignore`：`engine/vocabulary/data/*.log`），本地仍由工具正常写入；
 - `.worktrees/` 由 `engine/scripts/workflow_guard.py` 管理，不在清理脚本作用域内。
 
+### 13.5 跨平台换行与路径口径（I-11 / N13）
+
+CI 在 ubuntu runner 上用 **bash** 执行 `run:`，本地维护者用 **PowerShell**，两端在路径分隔、
+换行、命令可用性上存在实质差异。仓库用「单一事实源 + 守卫测试」固化口径：
+
+| 差异点 | 口径 | 载体 |
+|---|---|---|
+| 路径分隔 | 工具链代码禁止 Windows 路径字面量；工作流 `python engine/...` 一律正斜杠 | `engine/tests/test_platform_guard.py` |
+| 换行 | 仓库文本一律 LF（`.gitattributes`：`* text=auto eol=lf`）；`atomic_write` 以 `newline=""` 原样保留 LF | `.gitattributes` + 守卫测试 |
+| 命令可用性 | 工具禁止 `shell=True`；工作流禁止 PowerShell 专属语法 / `shell: powershell`；工作流引用的工具路径必须存在 | 守卫测试 |
+
+> 守卫测试校验的是**仓库 blob**（`git show HEAD:<path>`）而非工作树：Windows 本地
+> `core.autocrlf=true` 会把 LF 检出为 CRLF，若按工作树断言会误报。
+
+---
+
+## 十四、增量构建切默认决策记录（N12）
+
+> **结论：不切生产默认**（2026-11-19 决策）。`incremental_build.py` 保持 POC / 手动入口，
+> `md2html.py --changed` 可用但未接入默认构建流程；`build_hub` / `build_index` 仍全量。
+
+### 14.1 现状
+
+- `incremental_build.py`：按 `git diff --name-only <base>` 选月度报告 md，仅转换变更项；
+  含 `--bench` 全量 vs 增量耗时对比。
+- `md2html.py --changed`：同一筛选逻辑的 CLI 入口（默认基点 `main...HEAD`）。
+- 既有测试：`test_incremental_build.py`（4 项）覆盖筛选 / 子集 / CLI / bench。
+
+### 14.2 切默认的触发条件（须全部满足）
+
+1. 连续 ≥3 次维护 / html-sync 运行中，增量产物与全量产物逐字节一致
+   （`md_html_parity.py` 全绿 + 人工抽检）。
+2. 变更集合判定覆盖**删除 / 重命名 / 跨月改名**场景，且有回归用例。
+3. `build_hub` / `build_index` 的全量依赖被显式建模（汇总页 / 搜索索引必须全量重建），
+   文档与测试同步。
+4. `--bench` 显示增量耗时不高于全量的 60%，且无额外失败。
+
+### 14.3 回滚判据（任一触发即回滚）
+
+1. 增量产物与全量产物不一致（`md_html_parity` 报 MISMATCH / MISSING / NEW）。
+2. 变更集合漏选（新增报告未生成 HTML）或误选（非报告文件进入转换）。
+3. 增量路径下 `build_hub --check` / `build_index --check` / `validate.py` 任一退出码为 1。
+4. **回滚方式**：恢复 `html-sync.yml` / `scheduled-maintenance.yml` 的 `md2html.py` 全量调用，
+   移除增量开关；POC 工具保留不删。
+
+### 14.4 验证口径
+
+- **正确性**：`md_html_parity.py` 21/21 OK；`validate.py` 退出码 ∈ {0,2}；`unittest` 全绿。
+- **等价性**：同一提交下增量与全量 HTML 逐字节一致（`report_diff` / `md_html_parity`）。
+- **性能**：`incremental_build.py --bench` 输出 `incremental_sec` / `full_sec` / `speedup`，
+  作为趋势快照录入 `engine/report-audits/toolchain/`（见第十五节）。
+- **回归**：`test_incremental_build.py` 4 项 + 新增删除 / 重命名用例。
+
+---
+
+## 十五、性能趋势采集机制（N14）
+
+`engine/tools/perf_snapshot.py` 采集**规模 + 耗时**并追加到
+`engine/report-audits/toolchain/perf-trend.json`（基线 + 历史，保留最近 36 条）：
+
+- **规模**：仓库文件数 / 体积、报告 md / html 数与 html 体积、`index.html` /
+  `search-index.json` 体积、工具数、契约测试数。
+- **耗时**：`validate` / `build_hub --check` / `build_index --check` / `md2html`；
+  `--with-tests` 额外采集 `unittest`（默认关闭，避免维护流程翻倍耗时）。
+- **基线**：首条快照即为基线；`--set-baseline` 覆盖基线；`--porcelain` 输出 JSON。
+- **接线**：`scheduled-maintenance.yml` 每月追加一条快照，供跨月趋势对比。
+
+> 基线数值可复用 `engine/report-audits/toolchain/coverage-baseline.json` 的覆盖率基线口径；
+> 本报告不涉及覆盖率阈值（单一事实源仍为 `engine/tools/coverage-config.json`）。
+
 ---
 
 ## 版本记录
@@ -456,3 +528,4 @@ python engine/scripts/cleanup_workspace.py --dry-run  # 预览将删除项
 | v2.14 | 2026-11-18 | P2 批次（P2-1…P2-7） | 新增 `counterexample_scan.py`（7 项）、`vocab_near_check.py`（8 项）与 `docs/词库近义合并规范.md`；`coverage_gate` 增逐工具明细（2 项）；`workflow_guard` 锁域扩展 commit/push；mypy 清零并转阻断 + 一次性工具冒烟；`decision_metrics --history` 入维护流水线；P2-7 跨月基线回归；工具 42 → 43；六节测试数 950 → 969 |
 | v2.15 | 2026-11-18 | P1-9 词条 + P1-2 来源时点 | 14–20 词条补全至 ≥70（新增 245 条）；`source_check` 识别和历（令和/平成/昭和）与核对标记；6 份报告来源条目补「（2026-11 核对）」并重走审计；六节测试数 969 → 971 |
 | v2.16 | 2026-11-19 | 测试计数同步 | 六节标题与合计行对齐实测：976 → 978、合计 881 → 978（含他会话 `6879c0e` 974→976 与 `e91940e` +2 未同步的累积漂移）；`test_arch_guard` 计数守卫恢复通过 |
+| v2.17 | 2026-11-19 | 工程硬化（组 D / N11–N14） | ruff 存量 138 → 0（100 自动修复 + 38 人工等价重构，unittest / mypy / validate 等价验证）；新增 `test_platform_guard.py`（9 项）/ `test_perf_snapshot.py`（6 项）；新增 `perf_snapshot.py` 并接入 `scheduled-maintenance.yml`；`.gitattributes` 固化 LF；新增 13.5 / 十四 / 十五节；六节测试数 978 → 993 |

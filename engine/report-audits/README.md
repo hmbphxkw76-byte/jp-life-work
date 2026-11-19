@@ -23,6 +23,7 @@
 | `info-quality/info-quality.json` | `info_quality_check.py` | 信息质量三清单数据源 |
 | `info-quality/rules-notes.md` | 人工 | 判定口径唯一事实源（活文档） |
 | `info-quality/repair-history.md` | `info_quality_check.py`（追加式） | 跨运行累计修复日志（json 只含本轮，不可由 json 派生） |
+| `toolchain/perf-trend.json` | `perf_snapshot.py`（scheduled-maintenance 月度追加） | 性能趋势快照（规模 + 耗时基线 / 历史，保留最近 36 条，供跨月对比） |
 | `report-migration-2026-11.json` / `-paths.json` | `migrate_monthly_reports.py` / 测试夹具 | 迁移清单与路径映射（`test_tools.py::TestHistoricalMigration` 依赖） |
 
 ### 2. 生成物（工具渲染，json 为源，可删除重生成）

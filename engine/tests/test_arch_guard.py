@@ -23,6 +23,8 @@ sys.path.insert(0, str(ROOT / "engine" / "tools"))
 
 from _common import (  # noqa: E402
     ROOT as CROOT,
+)
+from _common import (  # noqa: E402
     TEMPLATE_TYPE_DIRS,
     atomic_write,
     resolve_within,
@@ -116,9 +118,9 @@ class TestAtomicWrite(unittest.TestCase):
         with tempfile.TemporaryDirectory() as d:
             p = Path(d) / "a.txt"
             p.write_text("orig", encoding="utf-8")
-            with unittest.mock.patch("builtins.open", side_effect=OSError("boom")):
-                with self.assertRaises(OSError):
-                    atomic_write(p, "new")
+            with unittest.mock.patch("builtins.open", side_effect=OSError("boom")), \
+                    self.assertRaises(OSError):
+                atomic_write(p, "new")
             self.assertEqual(p.read_text(encoding="utf-8"), "orig")
 
 

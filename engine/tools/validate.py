@@ -21,12 +21,12 @@ from _common import (  # noqa: E402
     BUSINESS_KEYWORDS,
     BUSINESS_TOPIC_MARKERS,
     REQUIRED_TEMPLATE_FILES,
+    ROOT,
     TEMPLATE_ROOT,
     TEMPLATE_TYPE_DIRS,
     detect_month_report,
     iter_business_dirs,
     month_report_name,
-    ROOT,
     topic_slug,
 )
 

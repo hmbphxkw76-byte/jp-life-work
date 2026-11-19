@@ -29,7 +29,7 @@ from __future__ import annotations
 import argparse
 import subprocess
 import sys
-from typing import Sequence
+from collections.abc import Sequence
 
 EXIT_OK = 0
 EXIT_ERR = 1

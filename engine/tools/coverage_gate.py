@@ -20,6 +20,7 @@
 from __future__ import annotations
 
 import argparse
+import contextlib
 import io
 import json
 import os
@@ -128,10 +129,8 @@ def write_baseline(path: Path, payload: dict) -> None:
                        encoding="utf-8")
         os.replace(tmp, path)
     except BaseException:
-        try:
+        with contextlib.suppress(OSError):
             tmp.unlink()
-        except OSError:
-            pass
         raise
 
 

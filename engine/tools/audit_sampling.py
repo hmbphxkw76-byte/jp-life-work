@@ -20,13 +20,14 @@ import json
 import math
 import re
 import sys
-from datetime import date, datetime, timezone
+from datetime import UTC, date, datetime
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from _common import ROOT, link_prefix, md_table  # noqa: E402
-from audit_check import check_report, iq_findings_by_path, l5_status, rel as rel_path  # noqa: E402
+from audit_check import check_report, iq_findings_by_path, l5_status  # noqa: E402
+from audit_check import rel as rel_path
 from audit_registry import AUDIT_DIR, audit_state, discover  # noqa: E402
 
 SAMPLING_DIR = AUDIT_DIR / "sampling"
@@ -50,7 +51,7 @@ def select_sample(entries: list[dict], period: str) -> list[dict]:
 
     n = len(entries)
     target = min(n, max(math.ceil(n * 0.20), min(n, 5)))
-    ym = period or datetime.now(timezone.utc).strftime("%Y-%m")
+    ym = period or datetime.now(UTC).strftime("%Y-%m")
     month_num = int(ym.split("-")[1])
 
     picked: list[dict] = []
@@ -170,7 +171,7 @@ def write_report(payload: dict) -> list[Path]:
             f"P0 {payload['p0']} / P1 {payload['p1']} / P2 {payload['p2']}",
             f"> 未完成核验数（L5 pending）：样本 {payload['l5_pending']}/{payload['sample_size']}；"
             f"全库 {payload['l5_pending_total']}/{payload['total_reports']}（公示项，不强制阻断）",
-            f"> 依据《审计报告标准化管理体系》第七节验收门槛",
+            "> 依据《审计报告标准化管理体系》第七节验收门槛",
             "",
             "## 验收门槛判定",
             "",

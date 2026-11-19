@@ -21,7 +21,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from _common import detect_month_report, iter_business_dirs, ROOT, TEMPLATE_ROOT, topic_slug  # noqa: E402
+from _common import ROOT, TEMPLATE_ROOT, detect_month_report, iter_business_dirs, topic_slug  # noqa: E402
 
 
 def strays() -> list[Path]:

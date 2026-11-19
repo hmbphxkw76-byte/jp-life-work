@@ -30,6 +30,7 @@
     "md_html_parity.py",
     "migrate_monthly_reports.py",
     "pending_verification.py",
+    "perf_snapshot.py",
     "personal_finance_model.py",
     "pipeline_runner.py",
     "pipeline_status.py",

@@ -25,7 +25,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "engine" / "tools"))
 
-from _common import ROOT as CROOT, SKIP_TOP, TYPE_RE, iter_business_dirs  # noqa: E402
+from _common import ROOT as CROOT  # noqa: E402
+from _common import SKIP_TOP, TYPE_RE, iter_business_dirs  # noqa: E402
 
 # 旧路径活引用的合法残留白名单（映射表本身 / 比对脚本说明 / 本守卫自身）。
 # 迁移方案与历史评审为一次性文档，已清理；如再出现引用按残留处理。
