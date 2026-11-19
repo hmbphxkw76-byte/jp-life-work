@@ -39,10 +39,14 @@ STORAGE_HEADER = ["ID", "词条", "别名", "分类", "标签", "定义", "来�
                   "核验状态", "来源URL", "置信度"]
 DEFAULT_VERIFICATION = "待核实"
 DEFAULT_CONFIDENCE = "待评"
+VERIFICATION_VALUES = ("已核验", "部分核验", "待核实")
+CONFIDENCE_VALUES = ("S", "A", "B", "C", "待评")
 VERSION_HEADER = ["版本", "日期", "变更", "说明"]
 
-IMPORT_KEYS = ("term", "aliases", "category", "tags", "definition", "source")
+IMPORT_KEYS = ("id", "term", "aliases", "category", "tags", "definition", "source",
+                "verification", "source_url", "confidence")
 HEADER_MAP = {
+    "id": "id", "ID": "id", "编号": "id",
     "词条": "term", "术语": "term", "term": "term",
     "别名": "aliases", "同义词": "aliases", "alias": "aliases", "aliases": "aliases",
     "分类": "category", "类别": "category", "category": "category",
@@ -516,6 +520,63 @@ def cmd_tag(tmeta: dict, term_id: str, add: str, remove: str) -> int:
     return 0
 
 
+def cmd_verify_update(tmeta: dict, file_arg: str) -> int:
+    """回填既有词条的核验字段（核验状态 / 来源URL / 置信度）。
+
+    导入文件须含 ID（或词条）列，以及核验状态 / 来源URL / 置信度 中至少一列；
+    按 ID 优先、词条归一化为辅匹配。仅更新提供且合法的值，未提供列保持不变。
+    """
+    storage = tmeta["storage"]
+    if not storage.exists():
+        print(f"[error] 词库不存在：{rel(storage)}")
+        return 1
+    terms, versions = load_storage(storage)
+    by_id = {t["id"].lower(): t for t in terms}
+    by_term = {norm(t["term"]): t for t in terms}
+    entries = read_import_file(Path(file_arg))
+    updated = missing = invalid = 0
+    for e in entries:
+        key = str(e.get("id", "")).strip()
+        term_key = norm(str(e.get("term", "")))
+        target = by_id.get(key.lower()) if key else by_term.get(term_key)
+        if not target:
+            missing += 1
+            print(f"  [warn] 未匹配词条：id={key or '—'} term={e.get('term', '') or '—'}")
+            continue
+        changed = False
+        ver = str(e.get("verification", "")).strip()
+        if ver:
+            if ver not in VERIFICATION_VALUES:
+                invalid += 1
+                print(f"  [warn] {target['id']} 核验状态非法：{ver!r}")
+            elif ver != target.get("verification"):
+                target["verification"] = ver
+                changed = True
+        conf = str(e.get("confidence", "")).strip().upper()
+        if conf:
+            if conf not in CONFIDENCE_VALUES:
+                invalid += 1
+                print(f"  [warn] {target['id']} 置信度非法：{conf!r}")
+            elif conf != target.get("confidence"):
+                target["confidence"] = conf
+                changed = True
+        url = str(e.get("source_url", "")).strip()
+        if url and url != target.get("source_url"):
+            target["source_url"] = url
+            changed = True
+        if changed:
+            target["last_updated"] = today()
+            updated += 1
+    if updated:
+        versions.append([next_version(versions), today(), "核验回填",
+                         f"更新 {updated} 条核验字段；文件 {Path(file_arg).name}"])
+        storage.write_text(render_terms_md(tmeta, terms, versions), encoding="utf-8")
+        auto_sync_hook(tmeta["id"])
+    print(f"[verify-update] 读取 {len(entries)} 行 → 更新 {updated} / 未匹配 {missing} / 非法 {invalid}；"
+          f"词库共 {len(terms)} 条" + (f"（已更新至 {versions[-1][0]}）" if updated else "（未写盘）"))
+    return 2 if (missing or invalid) else 0
+
+
 def cmd_export(tmeta: dict, fmt: str, out: str) -> int:
     storage = tmeta["storage"]
     if not storage.exists():
@@ -840,6 +901,9 @@ def main(argv=None) -> int:
     p.add_argument("--id", required=True)
     p.add_argument("--add", default="", help="追加标签，分号分隔")
     p.add_argument("--remove", default="", help="移除标签，分号分隔")
+    p = sub.add_parser("verify-update", help="回填既有词条核验字段（核验状态 / 来源URL / 置信度）")
+    p.add_argument("--topic", required=True)
+    p.add_argument("--file", required=True, help="回填文件（.md 表格 / .csv / .json，含 ID 或词条列）")
     p = sub.add_parser("export", help="一键导出结构化数据")
     p.add_argument("--topic", required=True)
     p.add_argument("--format", default="all", choices=["json", "csv", "jsonl", "all"])
@@ -883,6 +947,8 @@ def main(argv=None) -> int:
             return cmd_check(tmeta)
         if args.cmd == "tag":
             return cmd_tag(tmeta, args.id, args.add, args.remove)
+        if args.cmd == "verify-update":
+            return cmd_verify_update(tmeta, args.file)
         if args.cmd == "export":
             return cmd_export(tmeta, args.format, args.out)
     except (KeyError, ValueError, FileNotFoundError, json.JSONDecodeError) as exc:
