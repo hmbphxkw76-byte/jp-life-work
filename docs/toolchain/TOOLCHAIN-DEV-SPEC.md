@@ -2,7 +2,7 @@
 
 > **版本**：v1.1（2026-11-17 迁移后治理）
 > **定位**：jp-life-work **工具链开发域**（代码交付）的开发流程与验收规约，选择性吸收 mainline 11 阶段规范的增量能力。
-> **上位依据**：[AGENTS.md](../../AGENTS.md)、[CI.md](../CI.md)（CI-SYSTEM）、[mainline 融合评估报告](mainline融合评估报告-2026-11-17.md)（MAINLINE-INTEGRATION-ASSESSMENT-2026-11）。
+> **上位依据**：[AGENTS.md](../../AGENTS.md)、[CI.md](../CI.md)（CI-SYSTEM）。
 > **适用对象**：`engine/`、`engine/scripts/`、`.github/workflows/` 及根配置（`requirements*.txt`、`.coveragerc`、`coverage-config.json`）的变更。
 
 ---
@@ -28,7 +28,7 @@
 工具链任务不得以「内容流程」名义跳过本规约的阶段与门禁。
 
 > **与编排层的边界（R4 文档互指）**：报告生产编排（S0–S5）见
-> [端到端流水线编排系统设计](../端到端流水线编排系统设计-2026-11-17.md)；本规约只管工具链代码变更，二者并行、互不替代。
+> [端到端流水线治理标准](../端到端流水线治理标准.md)；本规约只管工具链代码变更，二者并行、互不替代。
 
 ## 三、阶段定义（顺序固定，不跳不并）
 

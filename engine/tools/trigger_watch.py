@@ -1,6 +1,6 @@
 """触发检测：watchlist 派生 + freshness 扫描 + 候选线索（PIPELINE-ORCHESTRATOR）。
 
-对应 `docs/端到端流水线编排系统设计-2026-11-17.md` §5.1：
+对应 `docs/端到端流水线治理标准.md`「触发检测」：
 
 - **W1 窗口到期**：复用 `update_planner.build_tasks` 的待办判定（节拍窗口已到且期望输出缺失）。
 - **W2 核验超期**：登记册核验日期早于 `info_quality_check` 的 freshness 阈值（`STALE_DAYS`）。
