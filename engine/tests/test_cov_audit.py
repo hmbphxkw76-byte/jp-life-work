@@ -703,6 +703,52 @@ class TestAuditStatusGhost(unittest.TestCase):
             self.assertNotIn("01-x/missing.md", written["reports"])
 
 
+class TestPurgeGhostEvents(unittest.TestCase):
+    """cmd_purge_ghosts：剔除指向不存在报告的事件，保留真实报告事件并重算哈希链。"""
+
+    @staticmethod
+    def _ev(seq: int, prev: str, h: str, report: str) -> dict:
+        return {"seq": seq, "prev_hash": prev, "hash": h, "ts": "t",
+                "event": "register", "report": report,
+                "actor": "system", "role": "system", "result": "ok"}
+
+    def test_purge_removes_ghost_and_keeps_real(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            with audit_env(root):
+                md = _make_topic(root, "01-demo", html=_good_html())
+                rep = _rel(md, root)
+                audit_pipeline.LEDGER.parent.mkdir(parents=True, exist_ok=True)
+                audit_pipeline.LEDGER.write_text(
+                    json.dumps(self._ev(1, "0" * 64, "x", rep)) + "\n"
+                    + json.dumps(self._ev(2, "x", "y",
+                                          "00-ghost/reports/2026-12-ghost.md")) + "\n",
+                    encoding="utf-8")
+                rc, out = _capture(audit_pipeline.cmd_purge_ghosts)
+                self.assertEqual(rc, 0)
+                self.assertIn("幽灵", out)
+                ledger = audit_pipeline.load_ledger()
+                self.assertEqual([e["report"] for e in ledger], [rep])
+                self.assertEqual([e["seq"] for e in ledger], [1])
+                self.assertEqual(audit_pipeline._chain_problems(ledger), [])
+
+    def test_purge_noop_when_no_ghost(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            with audit_env(root):
+                md = _make_topic(root, "01-demo", html=_good_html())
+                rep = _rel(md, root)
+                audit_pipeline.LEDGER.parent.mkdir(parents=True, exist_ok=True)
+                audit_pipeline.LEDGER.write_text(
+                    json.dumps(self._ev(1, "0" * 64, "x", rep)) + "\n",
+                    encoding="utf-8")
+                before = audit_pipeline.LEDGER.read_text(encoding="utf-8")
+                rc, out = _capture(audit_pipeline.cmd_purge_ghosts)
+                self.assertEqual(rc, 0)
+                self.assertIn("无幽灵", out)
+                self.assertEqual(audit_pipeline.LEDGER.read_text(encoding="utf-8"), before)
+
+
 class TestCovAuditCheck(unittest.TestCase):
     def test_absolute_hits_filters(self):
         text = "不能包过。\n「包过」是引号。\n100% 包过。\n"
