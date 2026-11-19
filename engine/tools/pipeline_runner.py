@@ -1,7 +1,6 @@
 """端到端流水线编排器（PIPELINE-ORCHESTRATOR 六阶段状态机）。
 
-对应 `docs/端到端流水线编排系统设计-2026-11-17.md` §5.2 与
-`docs/流水线编排实施计划-2026-11-17.md` 任务 3。
+对应 `docs/端到端流水线治理标准.md`（编排层现行事实源；历史设计与计划文档已归档于 git 历史）。
 
 阶段：`S0_detect → S1_plan → S2_author（人工闸门）→ S3_build → S4_audit → S5_monitor`。
 

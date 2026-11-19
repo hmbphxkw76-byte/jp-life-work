@@ -38,7 +38,7 @@ def _topics() -> tuple[str, ...]:
     return tuple(sorted(out))
 
 
-# 文档口径的默认截止日：仅 docs/CI流水线对齐校验报告 引用，程序不消费（实际截止日解析自登记册文本）。
+# 文档口径的默认截止日：历史校验报告已归档（git 历史），程序不消费（实际截止日解析自登记册文本）。
 # 阈值与默认值外置到 engine/config/decision-tools.json（单一事实源）。
 _PENDING_CFG = load_decision_config()["pending_verification"]
 DEFAULT_DEADLINE = _PENDING_CFG["default_deadline"]
