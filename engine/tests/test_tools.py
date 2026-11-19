@@ -2552,6 +2552,37 @@ class TestVocabVerify(unittest.TestCase):
         self.assertEqual(rc, 1)
         self.assertIn("ID 前缀不符", buf.getvalue())
 
+    def test_verify_update_sets_fields(self):
+        tmeta = self._tmeta()
+        self._write(tmeta, "| DEM-001 | 词条甲 |  | 分类A |  | 定义 | 来源 | 2026-11-14 | 2026-11-14 |\n")
+        f = self.root / "upd.md"
+        f.write_text("| ID | 核验状态 | 来源URL | 置信度 |\n|---|---|---|---|\n"
+                     "| DEM-001 | 已核验 | https://example.com/a | A |\n", encoding="utf-8")
+        buf = io.StringIO()
+        with unittest.mock.patch.object(vocab_tool, "TOOL_ROOT", self.root), \
+                unittest.mock.patch.object(vocab_tool, "auto_sync_hook"), \
+                contextlib.redirect_stdout(buf):
+            rc = vocab_tool.cmd_verify_update(tmeta, str(f))
+        self.assertEqual(rc, 0)
+        terms, _ = vocab_tool.load_storage(tmeta["storage"])
+        self.assertEqual((terms[0]["verification"], terms[0]["source_url"],
+                          terms[0]["confidence"]), ("已核验", "https://example.com/a", "A"))
+
+    def test_verify_update_rejects_bad_value(self):
+        tmeta = self._tmeta()
+        self._write(tmeta, "| DEM-001 | 词条甲 |  | 分类A |  | 定义 | 来源 | 2026-11-14 | 2026-11-14 |\n")
+        f = self.root / "upd.md"
+        f.write_text("| ID | 核验状态 | 来源URL | 置信度 |\n|---|---|---|---|\n"
+                     "| DEM-001 | 瞎写 |  |  |\n", encoding="utf-8")
+        buf = io.StringIO()
+        with unittest.mock.patch.object(vocab_tool, "TOOL_ROOT", self.root), \
+                unittest.mock.patch.object(vocab_tool, "auto_sync_hook"), \
+                contextlib.redirect_stdout(buf):
+            rc = vocab_tool.cmd_verify_update(tmeta, str(f))
+        self.assertEqual(rc, 2)
+        terms, _ = vocab_tool.load_storage(tmeta["storage"])
+        self.assertEqual(terms[0]["verification"], "待核实")
+
     def test_ci_runs_vocab_verify(self):
         wf = Path(__file__).resolve().parents[2] / ".github" / "workflows" / "validate.yml"
         t = wf.read_text(encoding="utf-8")
