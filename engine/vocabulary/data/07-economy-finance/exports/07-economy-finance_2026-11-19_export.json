@@ -1,8 +1,8 @@
 {
   "topic": "07-economy-finance",
   "name": "经济与财务",
-  "version": "v1.5",
-  "generated_at": "2026-11-19T10:40:52",
+  "version": "v1.6",
+  "generated_at": "2026-11-19T11:47:04",
   "count": 77,
   "categories": {
     "宏观与经济指标": 12,
@@ -106,7 +106,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.boj.or.jp/",
+      "source_url": "https://www.boj.or.jp/statistics/pi/index.htm",
       "confidence": "B"
     },
     {
@@ -144,7 +144,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.boj.or.jp/",
+      "source_url": "https://www.boj.or.jp/mopo/outline/index.htm",
       "confidence": "B"
     },
     {
@@ -759,7 +759,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.boj.or.jp/",
+      "source_url": "https://www.boj.or.jp/mopo/outline/ref_qqe.htm",
       "confidence": "B"
     },
     {
