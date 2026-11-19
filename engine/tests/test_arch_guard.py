@@ -154,6 +154,11 @@ class TestDocNumberGuard(unittest.TestCase):
         m = re.search(r"`engine/tests/`\s*，\s*(\d+)\s*项", text)
         self.assertIsNotNone(m, "docs/CI.md 未找到测试数表述")
         self.assertEqual(actual, int(m.group(1)), "测试数与 docs/CI.md 不一致")
+        # B1-D4：engine/tools/README.md 的测试计数同样双向锁定（与 docs/CI.md 同口径）。
+        tools_readme = (CROOT / "engine" / "tools" / "README.md").read_text(encoding="utf-8")
+        m2 = re.search(r"测试计数\s*：\s*(\d+)\s*项", tools_readme)
+        self.assertIsNotNone(m2, "engine/tools/README.md 未找到测试计数表述")
+        self.assertEqual(actual, int(m2.group(1)), "测试数与 engine/tools/README.md 不一致")
 
 
 class TestRegistrationConsistency(unittest.TestCase):
