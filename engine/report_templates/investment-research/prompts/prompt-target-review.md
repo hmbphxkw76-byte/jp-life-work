@@ -1,7 +1,7 @@
 # {{REGION}} · {{TOPIC}} · 标的复核提示词（投资分析与尽调型 · 泛用版 · 定期复核 + 事件触发）
 
 > **用途**：定期复核（财报 / 定期数据窗口）与事件触发复核（重大事项披露后）统一入口。泛用版业务提示词：建新业务线时复制本文件至 `{TOPIC_DIR}/prompts/`，替换变量与 TODO 后即可运行。
-> **产出**：更新版报告 `reports/{{YYYY-MM}}-<slug>.md`（+ 同名 html，由业务配置规定）或事件专项修订件 `reports/{{YYYY-MM}}-<slug>.md`（命名不在标准正则内，validate 仅 WARN 不阻断，属预期）。
+> **产出**：更新版报告 `reports/{{YYYY-MM}}-<slug>.md`（+ 同名 html，由业务配置规定）或事件专项修订件 `reports/{{YYYY-MM-DD}}-<主题>.md`（由 `compliance_check.py` 按事件件（event）识别，validate 对非月度正则仅 WARN 不阻断，属预期）。
 >
 > **继承声明（四层体系）**：本文件 = [通用基座](../../engine/report_templates/prompt-generic-base.md) × [监测报告通用规范](../../engine/report_templates/monitoring-common-spec.md) × [事件触发更新类型模板（投资分析与尽调型）](../../engine/report_templates/investment-research/prompt-target-update-template.md) × 业务专属配置（实例化后为 `./business-config.md`；泛用版暂缺，业务项以 TODO 标注）。冲突时以业务提示词（即本文件实例化版）为准。
 

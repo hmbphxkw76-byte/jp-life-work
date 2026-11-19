@@ -39,11 +39,11 @@
 
 | 节拍 | 文件名（业务目录相对路径） | 版本号 |
 |---|---|---|
-| 新选题白皮书 | `reports/{{YYYY-MM}}-<slug>.md`（+ 同名 html） | 写入报告内（vYYYY.MM.DD） |
+| 新选题白皮书 | `reports/{{YYYY-MM-DD}}-<主题>.md`（+ 同名 html） | 写入报告内（vYYYY.MM.DD） |
 | 年度系列篇 | `reports/{{YYYY-MM}}-<slug>.md`（+ 同名 html） | 同上 |
 | 框架修订篇 | `reports/{{YYYY-MM-DD}}-主题-修订.md`（+ 同名 html） | 同上 |
 
-- 新选题与修订篇命名不在 `engine/tools` 标准正则内，`validate.py` 仅提示 WARN 不阻断，属预期行为；年度系列篇命名与标准正则兼容。
+- 新选题与修订篇用 `YYYY-MM-DD-` 日期前缀命名，`compliance_check.py` 按事件件（event）识别；`validate.py` 对非月度正则仅提示 WARN 不阻断，属预期行为；年度系列篇命名与标准正则兼容。
 - 交付格式：md 源稿 + 同目录自包含 HTML（`engine/tools/md2html.py` 同步生成）；HTML 必须通过 `engine/tools/lint_reports.py`。
 - 已发布白皮书常驻 `reports/` 顶层，不进入归档；勘误以勘误件形式发布，不改原稿。
 

@@ -1,7 +1,7 @@
 # {{REGION}} · {{TOPIC}} · 专题调研提示词（消费者·用户调研型 · 泛用版 · 项目制）
 
 > **用途**：项目制专题调研统一入口——概念测试、满意度 / NPS 年度复测、画像刷新、决策路径研究（当次项目主题由 {{STUDY_TYPE}} 指定）。泛用版业务提示词：建新业务线时复制本文件至 `{TOPIC_DIR}/prompts/`，替换变量与 TODO 后即可运行。
-> **产出**：单份专题报告（md 源稿 + 同目录自包含 HTML），落盘 `{{OUTPUT_PATH}}`。专题命名不在工具链标准正则内，validate 仅 WARN 不阻断，属预期；年度复测命名与标准正则兼容。
+> **产出**：单份专题报告（md 源稿 + 同目录自包含 HTML），落盘 `{{OUTPUT_PATH}}`。专题件用 `reports/{{YYYY-MM-DD}}-<主题>.md` 命名，`compliance_check.py` 按事件件（event）识别，validate 对非月度正则仅 WARN 不阻断，属预期；年度复测命名与标准正则兼容。
 >
 > **继承声明（四层体系）**：本文件 = [通用基座](../../engine/report_templates/prompt-generic-base.md) × [监测报告通用规范](../../engine/report_templates/monitoring-common-spec.md) × [专题调研类型模板（消费者·用户调研型）](../../engine/report_templates/consumer-research/prompt-study-template.md) × 业务专属配置（实例化后为 `./business-config.md`；泛用版暂缺，业务项以 TODO 标注）。冲突时以业务提示词（即本文件实例化版）为准。
 
@@ -15,7 +15,7 @@
 {{STUDY_TYPE}}            = 本次专题类型（概念测试 / 满意度复测 / 画像刷新 / 决策路径，TODO：按业务配置枚举）
 {{BASELINE_REPORT_PATH}}  = reports/{{YYYY-MM}}-<slug>.md
 {{REGISTRY_PATH}}         = data/（TODO）
-{{OUTPUT_PATH}}           = 专题件 reports/{{YYYY-MM-DD}}-（TODO：主题）.md；年度复测 reports/{{YYYY-MM}}-<slug>.md
+{{OUTPUT_PATH}}           = 专题件 reports/{{YYYY-MM-DD}}-<主题>.md；年度复测 reports/{{YYYY-MM}}-<slug>.md
 {{REPORT_VERSION}}        = 本次版本号，格式 vYYYY.MM.DD
 ```
 

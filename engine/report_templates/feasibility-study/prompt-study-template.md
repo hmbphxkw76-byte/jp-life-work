@@ -38,10 +38,10 @@
 
 | 节拍 | 文件名（业务目录相对路径） | 版本号 |
 |---|---|---|
-| 项目论证 | `reports/{{YYYY-MM}}-<slug>.md`（+ 同名 html） | 写入报告内（vYYYY.MM.DD） |
+| 项目论证 | `reports/{{YYYY-MM-DD}}-<主题>.md`（+ 同名 html） | 写入报告内（vYYYY.MM.DD） |
 | 项目复盘 | `reports/{{YYYY-MM-DD}}-主题-复盘.md`（+ 同名 html） | 同上 |
 
-- 项目制命名不在 `engine/tools` 标准正则内，`validate.py` 仅提示 WARN 不阻断，属预期行为。
+- 项目论证件用 `reports/{{YYYY-MM-DD}}-<主题>.md` 命名，`compliance_check.py` 按事件件（event）识别；`validate.py` 对非月度正则仅提示 WARN 不阻断，属预期行为。
 - 交付格式：md 源稿 + 同目录自包含 HTML（`engine/tools/md2html.py` 同步生成）；HTML 必须通过 `engine/tools/lint_reports.py`。
 - 基线报告常驻 `reports/` 顶层，不进入归档。
 
