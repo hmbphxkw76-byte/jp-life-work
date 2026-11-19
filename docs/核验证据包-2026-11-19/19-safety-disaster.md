@@ -64,6 +64,18 @@
 
 外務省 CDN 拦截复核：SFD-015 / 016 / 018 / 066 / 069 来源均为 https://www.mofa.go.jp/；本会话 web_fetch 返回 Access Denied（Akamai），与证据包 C 节记录一致。结论：保留门户并标「未核实（CDN 拦截）」，不补值。
 
+### D.2 未核实项浏览器核验（2026-11-19，closure-unverified）
+
+浏览器实测外務省具体页（2026-11-19），5 条由「部分核验」改「已核验」：
+
+| ID | 词条 | 新 URL | 实取要点 |
+|---|---|---|---|
+| SFD-015 | 领事保护 | https://www.mofa.go.jp/mofaj/annai/zaigai/shigoto.html | 「在外公館の仕事」载「邦人援護活動」（急病・事故・盗難・テロ/紛爭/災害时保护日本人） |
+| SFD-016 | 在外公館 | https://www.mofa.go.jp/mofaj/annai/zaigai/index.html | 定义「大使館・総領事館・政府代表部を総称して在外公館」 |
+| SFD-018 | パスポート | https://www.mofa.go.jp/mofaj/toko/passport/index.html | 外務省「パスポート（旅券）」页 |
+| SFD-066 | マイナポータル | https://www.mofa.go.jp/mofaj/toko/passport/page22_004039.html | 「国外からオンライン申請」页载「令和8年8月25日から、国外転出者向けマイナンバーカードをお持ちの方はマイナポータルからのオンライン申請が可能」 |
+| SFD-069 | マイナンバーカード | https://www.mofa.go.jp/mofaj/toko/passport/page22_004039.html | 同页载「マイナンバーカード（署名用電子証明書用パスワード）」为申请条件 |
+
 ## E 自检结论
 
 ```

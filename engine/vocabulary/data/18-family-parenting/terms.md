@@ -25,8 +25,8 @@
 | FAM-015 | 産後パパ育休 | 产后爸爸育婴假;男性育休 | 生育与育儿 | 育儿;劳动 | 男性在产后一定期间内取得的育婴休假 | 厚生労働省 | 2026-11-14 | 2026-11-19 | 部分核验 | https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/shussan/index.html | B |
 | FAM-016 | 子育て支援 | 育儿支援 | 生育与育儿 | 育儿;支援 | 自治体与社区提供的育儿支持服务总称 | 厚生労働省 | 2026-11-14 | 2026-11-19 | 部分核验 | https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/shussan/index.html | B |
 | FAM-017 | 保育所 | 保育园;认可保育所 | 保育与教育 | 保育 | 以需要保育的儿童为对象的福祉设施 | 厚生労働省 | 2026-11-14 | 2026-11-19 | 部分核验 | https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/shussan/index.html | B |
-| FAM-018 | 認定こども園 | 认定儿童园 | 保育与教育 | 保育;教育 | 教育与保育一体的设施，兼具幼稚園与保育所功能 | 文部科学省 | 2026-11-14 | 2026-11-19 | 部分核验 | https://www.mext.go.jp/a_menu/01_b.htm | B |
-| FAM-019 | 幼稚園 | 幼儿园 | 保育与教育 | 教育 | 学校教育法上的学校，3岁以上为对象 | 文部科学省 | 2026-11-14 | 2026-11-19 | 部分核验 | https://www.mext.go.jp/a_menu/01_b.htm | B |
+| FAM-018 | 認定こども園 | 认定儿童园 | 保育与教育 | 保育;教育 | 教育与保育一体的设施，兼具幼稚園与保育所功能 | 文部科学省 | 2026-11-14 | 2026-11-19 | 已核验 | https://www.mext.go.jp/a_menu/01_b.htm | B |
+| FAM-019 | 幼稚園 | 幼儿园 | 保育与教育 | 教育 | 学校教育法上的学校，3岁以上为对象 | 文部科学省 | 2026-11-14 | 2026-11-19 | 已核验 | https://www.mext.go.jp/a_menu/01_b.htm | B |
 | FAM-020 | 待機児童 | 待机儿童;等待入园儿童 | 保育与教育 | 保育 | 希望入保育所但因定员不足未能入所的儿童 | 厚生労働省 | 2026-11-14 | 2026-11-19 | 部分核验 | https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/shussan/index.html | B |
 | FAM-021 | 日本語指導 | 日语指导 | 保育与教育 | 教育;日语 | 为需要日语支援的儿童提供的抽离或特别的教育课程 | 文部科学省 | 2026-11-14 | 2026-11-19 | 部分核验 | https://www.mext.go.jp/content/20260525-mxt_kokoku-000007294_00.pdf | B |
 | FAM-022 | 就学援助 | 就学资助 | 保育与教育 | 教育;支援 | 学校教育法第19条上市町村必须援助的就学经济支持 | 文部科学省 | 2026-11-14 | 2026-11-19 | 部分核验 | https://www.mext.go.jp/a_menu/shotou/clarinet/004/1323374.htm | B |
@@ -102,3 +102,4 @@
 | v1.8 | 2026-11-19 | 别名调整 | FAM-073：增 — / 删 父子家庭 |
 | v1.9 | 2026-11-19 | 别名调整 | FAM-074：增 — / 删 母子家庭 |
 | v1.10 | 2026-11-19 | 核验回填 | 更新 2 条核验字段；文件 2026-11-19_门户错配复核.md |
+| v1.11 | 2026-11-19 | 核验回填 | 更新 2 条核验字段；文件 2026-11-19_未核实项浏览器核验.md |

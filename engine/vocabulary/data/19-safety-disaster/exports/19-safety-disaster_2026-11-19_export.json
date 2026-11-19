@@ -1,8 +1,8 @@
 {
   "topic": "19-safety-disaster",
   "name": "防灾·安全·治安",
-  "version": "v1.5",
-  "generated_at": "2026-11-19T11:38:45",
+  "version": "v1.8",
+  "generated_at": "2026-11-19T16:05:33",
   "count": 75,
   "categories": {
     "防灾体制": 21,
@@ -291,8 +291,8 @@
       "source": "外務省",
       "first_added": "2026-11-14",
       "last_updated": "2026-11-19",
-      "verification": "部分核验",
-      "source_url": "https://www.mofa.go.jp/",
+      "verification": "已核验",
+      "source_url": "https://www.mofa.go.jp/mofaj/annai/zaigai/shigoto.html",
       "confidence": "B"
     },
     {
@@ -310,8 +310,8 @@
       "source": "外務省",
       "first_added": "2026-11-14",
       "last_updated": "2026-11-19",
-      "verification": "部分核验",
-      "source_url": "https://www.mofa.go.jp/",
+      "verification": "已核验",
+      "source_url": "https://www.mofa.go.jp/mofaj/annai/zaigai/index.html",
       "confidence": "B"
     },
     {
@@ -348,8 +348,8 @@
       "source": "外務省",
       "first_added": "2026-11-14",
       "last_updated": "2026-11-19",
-      "verification": "部分核验",
-      "source_url": "https://www.mofa.go.jp/",
+      "verification": "已核验",
+      "source_url": "https://www.mofa.go.jp/mofaj/toko/passport/index.html",
       "confidence": "B"
     },
     {
@@ -932,9 +932,7 @@
     {
       "id": "SFD-049",
       "term": "高潮",
-      "aliases": [
-        "高潮"
-      ],
+      "aliases": [],
       "category": "防灾体制",
       "tags": [
         "灾害",
@@ -1273,8 +1271,8 @@
       "source": "外務省",
       "first_added": "2026-11-18",
       "last_updated": "2026-11-19",
-      "verification": "部分核验",
-      "source_url": "https://www.mofa.go.jp/",
+      "verification": "已核验",
+      "source_url": "https://www.mofa.go.jp/mofaj/toko/passport/page22_004039.html",
       "confidence": "B"
     },
     {
@@ -1332,8 +1330,8 @@
       "source": "外務省",
       "first_added": "2026-11-18",
       "last_updated": "2026-11-19",
-      "verification": "部分核验",
-      "source_url": "https://www.mofa.go.jp/",
+      "verification": "已核验",
+      "source_url": "https://www.mofa.go.jp/mofaj/toko/passport/page22_004039.html",
       "confidence": "B"
     },
     {
@@ -1358,9 +1356,7 @@
     {
       "id": "SFD-071",
       "term": "感震断路器",
-      "aliases": [
-        "感震断路器"
-      ],
+      "aliases": [],
       "category": "场景与表达",
       "tags": [
         "场景",
