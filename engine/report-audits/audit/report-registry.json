@@ -12,11 +12,11 @@
       "type_id": "employment-research",
       "md": "00-decision-hub/reports/2026-11-decision-hub.md",
       "html": "00-decision-hub/reports/2026-11-decision-hub.html",
-      "content_hash": "sha256:2552e4c940badf3d5a0bc67e96043311947cea704a231d6d9943ec9e3230763f",
-      "html_hash": "sha256:130070157f6bb3a0236b78dd80e7dfd76a1c5237029bc7558ecc18c0a3ba4df3",
-      "audit_id": "AUD-202611-010",
+      "content_hash": "sha256:35ea6ec5eef9fc26ae6b49550376d5b9f879922a2ef87bb727b96e6ea1187de6",
+      "html_hash": "sha256:abef002005bb93fe431fdc436099fe853b89ece8ae99e3ea54d874731e6d57bc",
+      "audit_id": "AUD-202611-013",
       "audit_state": "audited",
-      "finalized_at": "2026-11-19T07:36:08+00:00"
+      "finalized_at": "2026-11-19T15:44:39+00:00"
     },
     {
       "report": "01-ssw-driver/reports/2026-11-ssw-driver.md",
