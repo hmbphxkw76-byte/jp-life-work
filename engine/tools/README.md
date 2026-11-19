@@ -1,6 +1,6 @@
 # engine/tools 使用文档
 
-> **版本**：v1.3（2026-11-19 测试计数对齐 + 不接线工具登记）
+> **版本**：v1.4（2026-11-19 测试计数对齐 1029 + 不接线工具登记）
 
 CI 工具链使用说明。所有工具基于仓库根目录相对路径运行（自动定位仓库根），
 在仓库根目录执行即可；通用层 `engine/report_templates/` + 业务层 `NN-<slug>/` 结构见
@@ -13,7 +13,7 @@ pip install -r requirements.txt   # markdown
 python -m unittest discover -s engine/tests -q   # 单元测试（以 docs/CI.md 与实测为准）
 ```
 
-> 测试计数：1008 项（`python -m unittest discover -s engine/tests` 实测，与 `docs/CI.md` 六节一致；由 `engine/tests/test_arch_guard.py` 双向锁定）。
+> 测试计数：1029 项（`python -m unittest discover -s engine/tests` 实测，与 `docs/CI.md` 六节一致；由 `engine/tests/test_arch_guard.py` 双向锁定）。
 
 ## 退出码约定（校验类工具统一）
 
@@ -467,3 +467,4 @@ python engine/tools/automation_status.py activity --threshold 45               #
 | v1.1 | 2026-11-17 | 迁移后治理 | 修复 `../../report_templates/` 断链为 `../report_templates/`；测试数 308 → 863；工作流 6 → 8 |
 | v1.2 | 2026-11-19 | 文档↔实现对齐 | 测试计数 881 → 978（与 `docs/CI.md` 六节及实测对齐） |
 | v1.3 | 2026-11-19 | 测试计数对齐 + 不接线工具登记 | 测试计数 978 → 1008（与实测对齐）；`test_arch_guard` 扩展为同时锁定 `docs/CI.md` 六节与本节计数；新增「设计内不接线工具清单」（B6） |
+| v1.4 | 2026-11-19 | 合并后计数校准 | 测试计数 1008 → 1029（并入 consulting-panel 15 项 + B2 表格语义 6 项后实测） |

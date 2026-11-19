@@ -276,13 +276,44 @@ class TestLintHtml(unittest.TestCase):
             "<html><body>"
             '<nav class="report-nav" aria-label="报告导航"></nav>'
             "<table class=\"fixed\"><thead><tr>"
-            '<th style="width:20%">A</th><th style="width:20%">B</th><th style="width:20%">C</th>'
-            '<th style="width:20%">D</th><th style="width:20%">E</th>'
+            '<th scope="col" style="width:20%">A</th><th scope="col" style="width:20%">B</th>'
+            '<th scope="col" style="width:20%">C</th>'
+            '<th scope="col" style="width:20%">D</th><th scope="col" style="width:20%">E</th>'
             "</tr></thead><tbody><tr><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr></tbody></table>"
             "</body></html>"
         )
         errors = [i for i in lint_html(text) if i[0] == "E"]
         self.assertEqual(errors, [])
+
+    def test_missing_scope_is_error(self):
+        text = (
+            "<table><thead><tr><th>A</th><th>B</th></tr></thead>"
+            "<tbody><tr><td>1</td><td>2</td></tr></tbody></table>"
+        )
+        issues = lint_html(text)
+        self.assertTrue(any(i[0] == "E" and "缺少 scope" in i[1] for i in issues))
+
+    def test_complex_table_missing_caption_is_error(self):
+        # 表头行数 >1 → 复杂表，缺 <caption> 阻断
+        text = (
+            "<table><thead><tr><th scope=\"col\">A</th></tr>"
+            "<tr><th scope=\"col\">B</th></tr></thead>"
+            "<tbody><tr><td>1</td></tr></tbody></table>"
+        )
+        issues = lint_html(text)
+        self.assertTrue(any(i[0] == "E" and "缺少 <caption>" in i[1] for i in issues))
+        # 补上 <caption> 后不再因语义阻断
+        ok = text.replace("<thead>", '<caption>表 1：A</caption><thead>', 1)
+        self.assertEqual([i for i in lint_html(ok) if i[0] == "E"], [])
+
+    def test_row_header_table_needs_caption(self):
+        # 首列为行标题 → 复杂表
+        text = (
+            "<table><thead><tr><th scope=\"col\">名称</th><th scope=\"col\">值</th></tr></thead>"
+            "<tbody><tr><th scope=\"row\">甲</th><td>1</td></tr></tbody></table>"
+        )
+        issues = lint_html(text)
+        self.assertTrue(any(i[0] == "E" and "缺少 <caption>" in i[1] for i in issues))
 
     def test_duplicate_tbody_close(self):
         text = (

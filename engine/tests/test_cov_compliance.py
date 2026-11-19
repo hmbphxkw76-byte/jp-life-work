@@ -748,6 +748,36 @@ class TestCovComplianceLintReports(_TempRootCase):
         self.assertTrue(any("缺少 alt" in m for _lvl, m in issues))
         self.assertEqual(lint_reports.lint_html('<img src="x.png" alt="x">'), [])
 
+    def test_lint_html_scope_and_caption(self):
+        simple = ('<table><thead><tr><th scope="col">A</th></tr></thead>'
+                  '<tbody><tr><td>1</td></tr></tbody></table>')
+        self.assertEqual([i for i in lint_reports.lint_html(simple) if i[0] == "E"], [])
+        no_scope = simple.replace(' scope="col"', "")
+        self.assertTrue(any(lvl == "E" and "缺少 scope" in m
+                            for lvl, m in lint_reports.lint_html(no_scope)))
+        complex_no_cap = ('<table><thead><tr><th scope="col">A</th></tr>'
+                          '<tr><th scope="col">B</th></tr></thead>'
+                          '<tbody><tr><td>1</td></tr></tbody></table>')
+        self.assertTrue(any(lvl == "E" and "缺少 <caption>" in m
+                            for lvl, m in lint_reports.lint_html(complex_no_cap)))
+        with_cap = complex_no_cap.replace("<thead>", '<caption>表 1：A</caption><thead>', 1)
+        self.assertEqual([i for i in lint_reports.lint_html(with_cap) if i[0] == "E"], [])
+
+    def test_is_complex_html_table(self):
+        from _common import is_complex_html_table
+        simple = ('<table><thead><tr><th scope="col">A</th></tr></thead>'
+                  '<tbody><tr><td>1</td></tr></tbody></table>')
+        self.assertFalse(is_complex_html_table(simple))
+        self.assertTrue(is_complex_html_table(
+            "<table><thead><tr><th>A</th></tr><tr><th>B</th></tr></thead>"
+            "<tbody><tr><td>1</td></tr></tbody></table>"))
+        self.assertTrue(is_complex_html_table(
+            '<table><thead><tr><th colspan="2">A</th></tr></thead>'
+            "<tbody><tr><td>1</td><td>2</td></tr></tbody></table>"))
+        self.assertTrue(is_complex_html_table(
+            '<table><thead><tr><th scope="col">名称</th><th scope="col">值</th></tr></thead>'
+            '<tbody><tr><th scope="row">甲</th><td>1</td></tr></tbody></table>'))
+
     def test_collect_report_htmls_skips_missing_reports(self):
         self._business("01-demo")
         self.assertEqual(lint_reports.collect_report_htmls(), [])

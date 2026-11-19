@@ -370,6 +370,39 @@ def link_prefix(out_file: Path) -> str:
 
 
 # ──────────────────────────────────────────────
+# HTML 表格语义（WCAG 2.1 AA）：复杂 / 多层表判定
+# 单一事实源：md2html 渲染与 lint_reports 校验共用，避免两处口径漂移。
+# ──────────────────────────────────────────────
+HTML_TABLE_RE = re.compile(r"<table\b.*?</table>", re.DOTALL)
+HTML_THEAD_RE = re.compile(r"<thead\b.*?</thead>", re.DOTALL)
+HTML_TBODY_RE = re.compile(r"<tbody\b.*?</tbody>", re.DOTALL)
+HTML_TR_RE = re.compile(r"<tr\b.*?</tr>", re.DOTALL)
+_HTML_ROW_HEADER_RE = re.compile(r"<tr\b[^>]*>\s*<th\b")
+
+
+def is_complex_html_table(tbl: str) -> bool:
+    """复杂 / 多层表判定（满足任一即复杂）：
+
+    - 表头行数 > 1（`<thead>` 内多个 `<tr>`）；
+    - 列结构分层（`<thead>` 内含 `colspan` / `rowspan`）；
+    - 首列为行标题（`<tbody>` 行首格为 `<th>`）。
+
+    简单表（单表头行、无分层、无行标题）仅需 `scope="col"`。
+    """
+    thead = HTML_THEAD_RE.search(tbl)
+    if thead:
+        head = thead.group(0)
+        if len(HTML_TR_RE.findall(head)) > 1:
+            return True
+        if "colspan=" in head or "rowspan=" in head:
+            return True
+    tbody = HTML_TBODY_RE.search(tbl)
+    if tbody:
+        return any(_HTML_ROW_HEADER_RE.search(row) for row in HTML_TR_RE.findall(tbody.group(0)))
+    return False
+
+
+# ──────────────────────────────────────────────
 # 端到端流水线编排：状态层（2026-11-17 任务 1）
 # ──────────────────────────────────────────────
 # 状态文件只存路径 / 状态 / 时间戳 / 摘要，不存正文、不存凭据。

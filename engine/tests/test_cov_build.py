@@ -330,13 +330,39 @@ class TestCovMd2Html(unittest.TestCase):
         self.assertEqual(md2html._with_width('<th style="width:10%">x</th>', 30),
                          '<th style="width:10%">x</th>')
         self.assertIn("width:30%", md2html._with_width('<th style="color:red">x</th>', 30))
-        fixed = md2html._fix_tables("<table><tr><th>A</th><th>B</th></tr></table>")
+        simple = ("<table><thead><tr><th>A</th><th>B</th></tr></thead>"
+                  "<tbody><tr><td>1</td><td>2</td></tr></tbody></table>")
+        fixed = md2html._fix_tables(simple)
         self.assertIn('class="fixed"', fixed)
         self.assertEqual(fixed.count("width:50%"), 2)
-        once = md2html._fix_tables('<table class="fixed"><tr><th>A</th></tr></table>')
+        self.assertEqual(fixed.count('scope="col"'), 2)
+        self.assertNotIn("<caption", fixed)  # 简单表（单表头行）仅需 scope="col"
+        once = md2html._fix_tables(
+            '<table class="fixed"><thead><tr><th>A</th></tr></thead>'
+            "<tbody><tr><td>1</td></tr></tbody></table>"
+        )
         self.assertEqual(once.count('class="fixed"'), 1)
-        no_th = md2html._fix_tables("<table><tr><td>A</td></tr></table>")
+        self.assertEqual(once.count('scope="col"'), 1)
+        no_th = md2html._fix_tables(
+            "<table><thead><tr><td>A</td></tr></thead>"
+            "<tbody><tr><td>1</td></tr></tbody></table>"
+        )
         self.assertNotIn("width:", no_th)
+
+    def test_fix_tables_complex_caption_and_row_scope(self):
+        # 表头行数 >1 → 复杂表：补 <caption>，表头仍 scope="col"
+        multi = ("<table><thead><tr><th>A</th></tr><tr><th>B</th></tr></thead>"
+                 "<tbody><tr><td>1</td></tr></tbody></table>")
+        out = md2html._fix_tables(multi)
+        self.assertIn("<caption>表 1：A</caption>", out)
+        self.assertEqual(out.count('scope="col"'), 2)
+        self.assertEqual(md2html._fix_tables(out), out)  # 幂等
+        # 首列为行标题 → 复杂表：行首 th 补 scope="row"；caption 取表前最近标题
+        rowh = ("<table><thead><tr><th>名称</th><th>值</th></tr></thead>"
+                "<tbody><tr><th>甲</th><td>1</td></tr></tbody></table>")
+        out2 = md2html._fix_tables("<h2>数据</h2>" + rowh)
+        self.assertIn('scope="row"', out2)
+        self.assertIn("<caption>表 1：数据</caption>", out2)
 
     def test_fix_headings_and_anchors(self):
         html = "<h1>T</h1><h2>甲</h2><p>x</p><h2>乙</h2>"
