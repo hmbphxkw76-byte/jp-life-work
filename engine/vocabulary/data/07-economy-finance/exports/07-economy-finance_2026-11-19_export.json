@@ -1,8 +1,8 @@
 {
   "topic": "07-economy-finance",
   "name": "经济与财务",
-  "version": "v1.4",
-  "generated_at": "2026-11-19T09:07:50",
+  "version": "v1.5",
+  "generated_at": "2026-11-19T10:40:52",
   "count": 77,
   "categories": {
     "宏观与经济指标": 12,
@@ -30,7 +30,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.cao.go.jp/",
+      "source_url": "https://www.esri.cao.go.jp/jp/sna/menu.html",
       "confidence": "B"
     },
     {
@@ -49,7 +49,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.cao.go.jp/",
+      "source_url": "https://www.esri.cao.go.jp/jp/sna/menu.html",
       "confidence": "B"
     },
     {
@@ -125,7 +125,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.stat.go.jp/data/cpi/sokuhou/tsuki/index-z.htm",
+      "source_url": "https://www.stat.go.jp/data/roudou/",
       "confidence": "B"
     },
     {
@@ -163,7 +163,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mof.go.jp/",
+      "source_url": "https://www.mof.go.jp/jgbs/reference/interest_rate/index.htm",
       "confidence": "B"
     },
     {
@@ -357,7 +357,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mof.go.jp/",
+      "source_url": "https://www.mof.go.jp/jgbs/",
       "confidence": "B"
     },
     {
@@ -608,7 +608,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mof.go.jp/",
+      "source_url": "https://www.mof.go.jp/jgbs/reference/interest_rate/index.htm",
       "confidence": "B"
     },
     {
@@ -739,7 +739,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.bis.org/",
+      "source_url": "https://www.bis.org/bcbs/basel3.htm",
       "confidence": "B"
     },
     {
@@ -815,7 +815,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.nta.go.jp/",
+      "source_url": "https://www.nta.go.jp/taxes/shiraberu/zeimokubetsu/shotoku.htm",
       "confidence": "B"
     },
     {
@@ -834,7 +834,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.stat.go.jp/data/cpi/sokuhou/tsuki/index-z.htm",
+      "source_url": "https://www.soumu.go.jp/main_sosiki/jichi_zeisei/czaisei/czaisei_seido/individual-inhabitant-tax.html",
       "confidence": "B"
     },
     {
@@ -853,7 +853,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.nta.go.jp/",
+      "source_url": "https://www.nta.go.jp/taxes/shiraberu/zeimokubetsu/shohi.htm",
       "confidence": "B"
     },
     {
@@ -891,7 +891,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.nta.go.jp/",
+      "source_url": "https://www.nta.go.jp/taxes/shiraberu/shinkoku/kakutei.htm",
       "confidence": "B"
     },
     {
@@ -910,7 +910,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.nta.go.jp/",
+      "source_url": "https://www.nta.go.jp/users/gensen/nencho/index/gimusya.htm",
       "confidence": "B"
     },
     {
@@ -929,7 +929,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.fsa.go.jp/",
+      "source_url": "https://www.fsa.go.jp/policy/nisa2/about/index.html",
       "confidence": "B"
     },
     {
@@ -948,7 +948,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/",
+      "source_url": "https://www.mhlw.go.jp/topics/bukyoku/nenkin/nenkin/kyoshutsu/gaiyou.html",
       "confidence": "B"
     },
     {
@@ -967,7 +967,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.stat.go.jp/data/cpi/sokuhou/tsuki/index-z.htm",
+      "source_url": "https://www.soumu.go.jp/main_sosiki/jichi_zeisei/czaisei/czaisei_seido/080430_2_kojin.html",
       "confidence": "B"
     },
     {
@@ -1328,7 +1328,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/",
+      "source_url": "https://saiteichingin.mhlw.go.jp/",
       "confidence": "B"
     },
     {
@@ -1348,7 +1348,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.stat.go.jp/data/cpi/sokuhou/tsuki/index-z.htm",
+      "source_url": "https://www.stat.go.jp/data/kakei/",
       "confidence": "B"
     },
     {
@@ -1368,7 +1368,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/",
+      "source_url": "https://www.mhlw.go.jp/toukei/itiran/roudou/monthly/r08/2609p/2609p.html",
       "confidence": "B"
     },
     {
@@ -1408,7 +1408,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.stat.go.jp/data/cpi/sokuhou/tsuki/index-z.htm",
+      "source_url": "https://www.esri.cao.go.jp/jp/sna/sonota/kakei/kakei_top.html",
       "confidence": "B"
     },
     {
@@ -1428,7 +1428,7 @@
       "first_added": "2026-11-14",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.nta.go.jp/",
+      "source_url": "https://www.nta.go.jp/users/gensen/index.htm",
       "confidence": "B"
     },
     {
@@ -1448,7 +1448,7 @@
       "first_added": "2026-11-14",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.nta.go.jp/",
+      "source_url": "https://www.nta.go.jp/publication/pamph/koho/kurashi/html/02_2.htm",
       "confidence": "B"
     },
     {
@@ -1468,7 +1468,7 @@
       "first_added": "2026-11-14",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.nta.go.jp/",
+      "source_url": "https://www.nta.go.jp/publication/pamph/koho/kurashi/html/01_2.htm",
       "confidence": "B"
     },
     {
@@ -1488,7 +1488,7 @@
       "first_added": "2026-11-14",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.nta.go.jp/",
+      "source_url": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1463.htm",
       "confidence": "B"
     }
   ]

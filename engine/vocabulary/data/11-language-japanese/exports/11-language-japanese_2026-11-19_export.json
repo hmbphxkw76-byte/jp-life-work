@@ -1,8 +1,8 @@
 {
   "topic": "11-language-japanese",
   "name": "日语语言",
-  "version": "v1.4",
-  "generated_at": "2026-11-19T09:07:50",
+  "version": "v1.5",
+  "generated_at": "2026-11-19T10:40:52",
   "count": 70,
   "categories": {
     "语言能力与考试": 13,
@@ -49,7 +49,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.irodori.jpf.go.jp",
+      "source_url": "https://www.jlpt.jp/about/levelsummary.html",
       "confidence": "B"
     },
     {
@@ -68,7 +68,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.irodori.jpf.go.jp",
+      "source_url": "https://www.jlpt.jp/about/levelsummary.html",
       "confidence": "B"
     },
     {
@@ -87,7 +87,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.irodori.jpf.go.jp",
+      "source_url": "https://www.jlpt.jp/about/levelsummary.html",
       "confidence": "B"
     },
     {
@@ -106,7 +106,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.irodori.jpf.go.jp",
+      "source_url": "https://www.jlpt.jp/about/levelsummary.html",
       "confidence": "B"
     },
     {
@@ -125,7 +125,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.irodori.jpf.go.jp",
+      "source_url": "https://www.jlpt.jp/about/levelsummary.html",
       "confidence": "B"
     },
     {
@@ -144,7 +144,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.irodori.jpf.go.jp",
+      "source_url": "https://www.jft-basic.jp/",
       "confidence": "B"
     },
     {
@@ -163,7 +163,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.kanken.or.jp/",
+      "source_url": "https://www.kanken.or.jp/bjt/",
       "confidence": "B"
     },
     {
@@ -182,7 +182,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.irodori.jpf.go.jp",
+      "source_url": "https://www.jlpt.jp/guideline/testsections.html",
       "confidence": "B"
     },
     {
@@ -201,7 +201,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.irodori.jpf.go.jp",
+      "source_url": "https://www.jlpt.jp/guideline/testsections.html",
       "confidence": "B"
     },
     {
@@ -221,7 +221,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.irodori.jpf.go.jp",
+      "source_url": "https://www.jlpt.jp/guideline/testsections.html",
       "confidence": "B"
     },
     {
@@ -240,7 +240,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.irodori.jpf.go.jp",
+      "source_url": "https://www.jlpt.jp/guideline/results.html",
       "confidence": "B"
     },
     {
@@ -259,7 +259,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.jees.or.jp/",
+      "source_url": "https://www.jlpt.jp/application/domestic_index.html",
       "confidence": "B"
     },
     {
@@ -278,7 +278,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.bunka.go.jp/",
+      "source_url": "https://www.bunka.go.jp/seisaku/kokugo_nihongo/index.html",
       "confidence": "B"
     },
     {
@@ -297,7 +297,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.bunka.go.jp/",
+      "source_url": "https://www.bunka.go.jp/seisaku/kokugo_nihongo/index.html",
       "confidence": "B"
     },
     {
@@ -316,7 +316,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.bunka.go.jp/",
+      "source_url": "https://www.bunka.go.jp/seisaku/kokugo_nihongo/index.html",
       "confidence": "B"
     },
     {
@@ -335,7 +335,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.bunka.go.jp/",
+      "source_url": "https://www.bunka.go.jp/seisaku/kokugo_nihongo/index.html",
       "confidence": "B"
     },
     {
@@ -354,7 +354,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.bunka.go.jp/",
+      "source_url": "https://www.bunka.go.jp/seisaku/kokugo_nihongo/index.html",
       "confidence": "B"
     },
     {
@@ -373,7 +373,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.bunka.go.jp/",
+      "source_url": "https://www.bunka.go.jp/seisaku/kokugo_nihongo/index.html",
       "confidence": "B"
     },
     {
@@ -392,7 +392,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.bunka.go.jp/",
+      "source_url": "https://www.bunka.go.jp/seisaku/kokugo_nihongo/index.html",
       "confidence": "B"
     },
     {
@@ -411,7 +411,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.bunka.go.jp/",
+      "source_url": "https://www.bunka.go.jp/seisaku/kokugo_nihongo/index.html",
       "confidence": "B"
     },
     {
@@ -430,7 +430,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.bunka.go.jp/",
+      "source_url": "https://www.bunka.go.jp/seisaku/kokugo_nihongo/index.html",
       "confidence": "B"
     },
     {
@@ -449,7 +449,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.bunka.go.jp/",
+      "source_url": "https://www.bunka.go.jp/seisaku/kokugo_nihongo/index.html",
       "confidence": "B"
     },
     {
@@ -466,7 +466,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.bunka.go.jp/",
+      "source_url": "https://www.bunka.go.jp/seisaku/kokugo_nihongo/index.html",
       "confidence": "B"
     },
     {
@@ -483,7 +483,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.bunka.go.jp/",
+      "source_url": "https://www.bunka.go.jp/seisaku/kokugo_nihongo/index.html",
       "confidence": "B"
     },
     {
@@ -521,7 +521,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.bunka.go.jp/",
+      "source_url": "https://www.bunka.go.jp/seisaku/kokugo_nihongo/index.html",
       "confidence": "B"
     },
     {
@@ -540,7 +540,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.bunka.go.jp/",
+      "source_url": "https://www.bunka.go.jp/seisaku/kokugo_nihongo/index.html",
       "confidence": "B"
     },
     {
@@ -559,7 +559,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.bunka.go.jp/",
+      "source_url": "https://www.bunka.go.jp/seisaku/kokugo_nihongo/index.html",
       "confidence": "B"
     },
     {
@@ -578,7 +578,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.bunka.go.jp/",
+      "source_url": "https://www.bunka.go.jp/seisaku/kokugo_nihongo/index.html",
       "confidence": "B"
     },
     {
@@ -597,7 +597,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.bunka.go.jp/",
+      "source_url": "https://www.bunka.go.jp/seisaku/kokugo_nihongo/index.html",
       "confidence": "B"
     },
     {
@@ -616,7 +616,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.bunka.go.jp/",
+      "source_url": "https://www.bunka.go.jp/seisaku/kokugo_nihongo/index.html",
       "confidence": "B"
     },
     {
@@ -636,7 +636,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.bunka.go.jp/",
+      "source_url": "https://www.bunka.go.jp/seisaku/kokugo_nihongo/index.html",
       "confidence": "B"
     },
     {
@@ -655,7 +655,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.bunka.go.jp/",
+      "source_url": "https://www.bunka.go.jp/seisaku/kokugo_nihongo/index.html",
       "confidence": "B"
     },
     {
@@ -674,7 +674,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.bunka.go.jp/",
+      "source_url": "https://www.bunka.go.jp/seisaku/kokugo_nihongo/index.html",
       "confidence": "B"
     },
     {
@@ -693,7 +693,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.bunka.go.jp/",
+      "source_url": "https://www.bunka.go.jp/seisaku/kokugo_nihongo/index.html",
       "confidence": "B"
     },
     {
@@ -712,7 +712,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.bunka.go.jp/",
+      "source_url": "https://www.bunka.go.jp/seisaku/kokugo_nihongo/index.html",
       "confidence": "B"
     },
     {
@@ -731,7 +731,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.bunka.go.jp/",
+      "source_url": "https://www.bunka.go.jp/seisaku/kokugo_nihongo/index.html",
       "confidence": "B"
     },
     {
@@ -750,7 +750,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.bunka.go.jp/",
+      "source_url": "https://www.bunka.go.jp/seisaku/kokugo_nihongo/index.html",
       "confidence": "B"
     },
     {
@@ -769,7 +769,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.bunka.go.jp/",
+      "source_url": "https://www.bunka.go.jp/seisaku/kokugo_nihongo/index.html",
       "confidence": "B"
     },
     {
@@ -786,7 +786,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.bunka.go.jp/",
+      "source_url": "https://www.bunka.go.jp/seisaku/kokugo_nihongo/index.html",
       "confidence": "B"
     },
     {
@@ -803,7 +803,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.bunka.go.jp/",
+      "source_url": "https://www.bunka.go.jp/seisaku/kokugo_nihongo/index.html",
       "confidence": "B"
     },
     {
@@ -822,7 +822,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.bunka.go.jp/",
+      "source_url": "https://www.bunka.go.jp/seisaku/kokugo_nihongo/index.html",
       "confidence": "B"
     },
     {
@@ -841,7 +841,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.bunka.go.jp/",
+      "source_url": "https://www.bunka.go.jp/seisaku/kokugo_nihongo/index.html",
       "confidence": "B"
     },
     {
@@ -1307,7 +1307,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.bunka.go.jp/",
+      "source_url": "https://www.bunka.go.jp/seisaku/kokugo_nihongo/index.html",
       "confidence": "B"
     },
     {
@@ -1327,7 +1327,7 @@
       "first_added": "2026-11-18",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.bunka.go.jp/",
+      "source_url": "https://www.bunka.go.jp/seisaku/kokugo_nihongo/index.html",
       "confidence": "B"
     }
   ]
