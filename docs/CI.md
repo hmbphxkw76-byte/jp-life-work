@@ -1,6 +1,6 @@
 # CI 与自动化体系
 
-> **版本**：v2.16（2026-11-19 测试计数同步）
+> **版本**：v2.17（2026-11-19 文档↔实现对齐）
 > 本文档说明 jp-life-work 报告管理体系的持续集成（CI）与定时自动化。
 > 代码位置：`.github/workflows/`（8 条工作流）；工具链：`engine/tools/`；测试：`engine/tests/`。
 
@@ -35,12 +35,22 @@
 
 | 步骤 | 命令 | 失败后果 |
 |---|---|---|
-| 契约测试 | `python -m unittest discover -s engine/tests` | 阻断（退出码 1） |
+| 契约测试 | `python -m unittest discover -s engine/tests -v` | 阻断（退出码 1） |
 | 结构与规范校验 | `validate.py` | 阻断 |
-| 报告归位检查 | `classify_reports.py --check --unknown-warn` | 阻断 |
+| 报告自动归位检查 | `classify_reports.py --check --unknown-warn` | 阻断 |
 | 结构补全检查 | `ensure_region_topics.py --check` | 阻断 |
-| 汇总页一致性 | `build_hub.py --check` | 阻断 |
-| 全局索引一致性 | `build_index.py --check` | 阻断 |
+| 汇总页一致性校验 | `build_hub.py --check` | 阻断 |
+| 全局索引一致性校验 | `build_index.py --check` | 阻断 |
+| 内链存在性校验 | `link_check.py` | 阻断 |
+| 工具注册表一致性 | `generate_registry.py --check` | 阻断 |
+| 报告登记册一致性 | `audit_registry.py --check` | 阻断 |
+| 落盘前自检 | `audit_preflight.py --all` | 阻断（P0/P1） |
+| 报告必需要素结构校验 | `structure_check.py` | 阻断（要素缺失） |
+| md↔HTML 一致性校验 | `md_html_parity.py` | 阻断（漂移 / 缺失） |
+| 提示词结构门禁 | `prompt_check.py` | 阻断（命名 / 继承 / 结构 / 槽位） |
+| 决策度量校验 | `decision_metrics.py --check` | 阻断（解析失败） |
+| 来源条目 schema 校验 | `source_check.py` | 阻断（来源章节缺失） |
+| 反例扫描 | `counterexample_scan.py` | 阻断（扫描失败；候选放行） |
 | 报告内容 lint | `lint_reports.py --new-only` | 阻断（新报告；退出码 1） |
 | 模板合规校验 | `compliance_check.py --new-only` | 阻断（新报告；退出码 1） |
 | 阶段闸检查 | `stage_gate_check.py`（采集 / 筛选 / 分类） | 阻断（P0/P1） |
@@ -48,8 +58,15 @@
 | 事实卡片校验 | `fact_card_check.py` | 阻断（P0/P1） |
 | 待核实闭环检查 | `pending_verification.py --check` | 阻断（未登记 / 逾期） |
 | 个人财务模型一致性 | `personal_finance_model.py --check` | 阻断（缺失 / 过期） |
-| 词库校验 | `vocab_tool.py topic-check` / `verify` + `sync_vocab.py check` | 阻断 |
-| 覆盖率门禁 | `coverage_gate.py`（阈值读 `coverage-config.json`） | 阻断（enforce=true 未达标 / 测试失败） |
+| 词库校验 | `vocab_tool.py topic-check` / `verify` + `sync_vocab.py check` + `vocab_near_check.py` | 阻断 |
+| 安装开发依赖 | `pip install -r requirements-dev.txt` | 失败即阻断 |
+| ruff 静态检查 | `python -m ruff check engine` | 不阻断（warning 起步） |
+| mypy 静态检查 | `python -m mypy engine/tools engine/vocabulary/script` | 阻断 |
+| 一次性工具冒烟 | 8 个一次性工具 `--help` | 阻断 |
+| 覆盖率门禁（附加 job） | `coverage_gate.py`（阈值读 `coverage-config.json`） | 阻断（enforce=true 未达标 / 测试失败） |
+| 工作区卫生自检（附加 job） | `cleanup_workspace.py --check` | 阻断（存在残留） |
+
+> 实测（2026-11-19，main @`fb1a38b`）：主 job **28 个命名步骤**（不含通用「安装依赖」，含「安装开发依赖」；主 job 实际共 29 个 `- name:` 步骤）+ **2 个附加 job**（覆盖率 / 工作区卫生）；`ruff` 与 `mypy` 为主 job 内静态检查步骤，非独立 job。
 
 > 两个关卡对期间 >= 2026-11 的**新报告**阻断；历史报告由 `--new-only` 跳过，
 > 遗留项列入 `engine/report-audits/audit/lint-whitelist.json` 豁免（逾期恢复阻断）。
@@ -82,12 +99,18 @@
 | 财务模型 | `personal_finance_model.py` | 刷新个人财务模型 |
 | 待核实闭环 | `pending_verification.py` | 刷新待核实闭环 |
 | 事实卡片 | `fact_card_check.py --write` | 刷新事实卡片校验报告 |
+| 决策度量快照 | `decision_metrics.py --history` | 追加一条指标序列，供跨月趋势对比 |
+| L5 证据元评估 | `l5_meta_check.py` | 刷新 L5 证据元评估（不入库，供人工查阅） |
+| 反例扫描 | `counterexample_scan.py` | 刷新反例扫描清单（不入库，供人工查阅） |
 | 审计失效 | `audit_pipeline.py --sync` | 指纹失配 → `stale` |
 | 标识同步 | `audit_badge.py --sync` | 有效注入 / 失效撤销 |
+| 全量自动验证 | `auto_verify.py --all --dry-run` | V1–V5 逐报告校验；P0/P1 即失败（只写 gitignored 运行日志） |
 | 回归 | `unittest` | 确认维护未破坏契约 |
-| 自动化状态 | `automation_status.py record` | 记录维护执行状态 |
+| 自动化状态 | `automation_status.py record` | 记录维护执行状态（`if: always()`） |
 | 提交 | `git commit` + `git push` | 有变更才提交 |
 | 自动化状态失败补记 | `git add -A -- automation-status.json` → `commit` + `push`（`if: always()`） | job 失败时主提交跳过，本步骤仍把本轮状态入库，避免「记录了却因未提交而丢失」 |
+
+> 实测（2026-11-19，main @`fb1a38b`）：共 **19 步**（不含通用「安装依赖」），含 `auto_verify.py --all --dry-run` / `decision_metrics.py --history` / `l5_meta_check.py` / `counterexample_scan.py`。
 
 - **退出码约定**：`0` 通过；`1` 错误（阻断）；`2` 警告（放行）。
 - **活跃度预警**：`automation_status.py activity --threshold 45` 为**手动 / 按需入口**（见第七节），
@@ -127,8 +150,12 @@
 | 步骤 | 命令 | 失败后果 |
 |---|---|---|
 | 合并门禁（统一入口） | `audit_pipeline.py --gate`（`--changed` 增量 / `--strict` 全库） | 阻断（退出码 1） |
+| 全库审计兜底 | `audit_pipeline.py --gate --strict` | 阻断（存量报告未通过审计） |
+| L5 证据元评估 | `l5_meta_check.py --check` | 阻断（覆盖缺口 / 无效证据 / basis 缺失） |
 | 多层级校验 | `audit_check.py --all` | 存在 P0/P1 阻断；仅 P2 放行 |
 | 工具链双轴评审软门禁 | `review_gate.py --changed .changed-files` | 软门禁（缺评审告警，不阻断） |
+
+> 实测（2026-11-19，main @`fb1a38b`）：共 **5 步**（不含通用「安装依赖」）。
 
 - **合并门禁覆盖**：`--gate` 一次完成台账哈希链、登记册双向一致、已审计标识一致、受检报告审计状态（`audited` + md/HTML 指纹匹配 + 有效 L5 证据）；PR 默认只查本次变更报告，`--strict` 查全库。
 - **L5 证据门禁**：`audited` 报告必须附有效 L5 语义复核证据（`re_review --evidence` 或一次性 `--backfill-l5`），缺失即 `L5-EVIDENCE`（P1）阻断。
@@ -364,7 +391,7 @@ CI 之外的**本地多会话 / 多任务并行**由三层隔离机制约束，�
 ### 12.1 程序化边界（形态 vs 语义）
 
 - **形态 / 结构类**（可程序化、秒级、无网络）→ 进 CI 硬门禁：命名、配对、继承声明、登记册 Schema、类型注册、时效字段（闸1 / 2 / 3，`stage_gate_check.py`）；
-- **语义类**（来源语言规则、六族十三类选型判别、口径冲突裁决、以偏概全）→ 不进 CI 硬门禁，由提示词自检 + L5 语义复核 + 季度跨领域角色（R2 / R4 / R5）承载。
+- **语义类**（来源语言规则、六族十二类选型判别、口径冲突裁决、以偏概全）→ 不进 CI 硬门禁，由提示词自检 + L5 语义复核 + 季度跨领域角色（R2 / R4 / R5）承载。
 - **判定内核单一事实源**：闸复用 `info_quality_check.evaluate()` / `compliance_check` / `audit_registry` 的解析，不新写判定。
 
 阶段闸定义、闭环判据与全链路图见总规范第三节与 1.2。
@@ -456,3 +483,4 @@ python engine/scripts/cleanup_workspace.py --dry-run  # 预览将删除项
 | v2.14 | 2026-11-18 | P2 批次（P2-1…P2-7） | 新增 `counterexample_scan.py`（7 项）、`vocab_near_check.py`（8 项）与 `docs/词库近义合并规范.md`；`coverage_gate` 增逐工具明细（2 项）；`workflow_guard` 锁域扩展 commit/push；mypy 清零并转阻断 + 一次性工具冒烟；`decision_metrics --history` 入维护流水线；P2-7 跨月基线回归；工具 42 → 43；六节测试数 950 → 969 |
 | v2.15 | 2026-11-18 | P1-9 词条 + P1-2 来源时点 | 14–20 词条补全至 ≥70（新增 245 条）；`source_check` 识别和历（令和/平成/昭和）与核对标记；6 份报告来源条目补「（2026-11 核对）」并重走审计；六节测试数 969 → 971 |
 | v2.16 | 2026-11-19 | 测试计数同步 | 六节标题与合计行对齐实测：976 → 978、合计 881 → 978（含他会话 `6879c0e` 974→976 与 `e91940e` +2 未同步的累积漂移）；`test_arch_guard` 计数守卫恢复通过 |
+| v2.17 | 2026-11-19 | 文档↔实现对齐 | 二.1 `validate` 步骤表补齐至实测（主 job 28 个命名步骤 + 2 个附加 job：覆盖率 / 工作区卫生）；二.3 `maintenance` 补齐至 19 步（含 `auto_verify --all --dry-run`）；二.6 `audit-gate` 补齐至 5 步；十二.1「六族十三类」→「六族十二类」。实测来源：`.github/workflows/{validate,audit-gate,scheduled-maintenance}.yml`（main @`fb1a38b`） |

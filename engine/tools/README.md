@@ -1,6 +1,6 @@
 # engine/tools 使用文档
 
-> **版本**：v1.1（2026-11-17 迁移后治理）
+> **版本**：v1.2（2026-11-19 文档↔实现对齐）
 
 CI 工具链使用说明。所有工具基于仓库根目录相对路径运行（自动定位仓库根），
 在仓库根目录执行即可；通用层 `engine/report_templates/` + 业务层 `NN-<slug>/` 结构见
@@ -10,7 +10,7 @@ CI 工具链使用说明。所有工具基于仓库根目录相对路径运行�
 
 ```bash
 pip install -r requirements.txt   # markdown
-python -m unittest discover -s engine/tests -v   # 单元测试（881 项，以 docs/CI.md 与实测为准）
+python -m unittest discover -s engine/tests -v   # 单元测试（978 项，以 docs/CI.md 与实测为准）
 ```
 
 ## 退出码约定（校验类工具统一）
@@ -448,3 +448,4 @@ python engine/tools/automation_status.py activity --threshold 45               #
 |---|---|---|---|
 | v1.0 | 2026-11-17 | 初始版本 | 工具链使用说明（工具一览 / 工作流 / 测试 / 流水线全貌）；2026-11-17 校准测试数 308、工作流 8、类型 13 与旧路径 |
 | v1.1 | 2026-11-17 | 迁移后治理 | 修复 `../../report_templates/` 断链为 `../report_templates/`；测试数 308 → 863；工作流 6 → 8 |
+| v1.2 | 2026-11-19 | 文档↔实现对齐 | 测试计数 881 → 978（与 `docs/CI.md` 六节及实测对齐） |
