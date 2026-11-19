@@ -1,8 +1,8 @@
 {
   "topic": "02-career-driver",
   "name": "司机职业发展",
-  "version": "v1.4",
-  "generated_at": "2026-11-19T09:07:49",
+  "version": "v1.5",
+  "generated_at": "2026-11-19T09:47:04",
   "count": 104,
   "categories": {
     "职级与晋升路径": 18,
@@ -31,7 +31,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/",
+      "source_url": "https://www.mhlw.go.jp/toukei/itiran/roudou/monthly/r08/2609p/2609p.html",
       "confidence": "B"
     },
     {
@@ -228,7 +228,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/",
+      "source_url": "https://www.mhlw.go.jp/toukei/itiran/roudou/monthly/r08/2609p/2609p.html",
       "confidence": "B"
     },
     {
@@ -249,7 +249,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/",
+      "source_url": "https://www.mhlw.go.jp/toukei/itiran/roudou/monthly/r08/2609p/2609p.html",
       "confidence": "B"
     },
     {
@@ -270,7 +270,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/",
+      "source_url": "https://www.mhlw.go.jp/toukei/itiran/roudou/monthly/r08/2609p/2609p.html",
       "confidence": "B"
     },
     {
@@ -290,7 +290,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/",
+      "source_url": "https://www.mhlw.go.jp/toukei/itiran/roudou/monthly/r08/2609p/2609p.html",
       "confidence": "B"
     },
     {
@@ -310,7 +310,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/",
+      "source_url": "https://www.mhlw.go.jp/toukei/itiran/roudou/monthly/r08/2609p/2609p.html",
       "confidence": "B"
     },
     {
@@ -328,7 +328,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/",
+      "source_url": "https://www.mhlw.go.jp/toukei/itiran/roudou/monthly/r08/2609p/2609p.html",
       "confidence": "B"
     },
     {
@@ -368,7 +368,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/",
+      "source_url": "https://www.mhlw.go.jp/toukei/itiran/roudou/monthly/r08/2609p/2609p.html",
       "confidence": "B"
     },
     {
@@ -388,7 +388,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/",
+      "source_url": "https://www.mhlw.go.jp/toukei/itiran/roudou/monthly/r08/2609p/2609p.html",
       "confidence": "B"
     },
     {
@@ -408,7 +408,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/",
+      "source_url": "https://www.mhlw.go.jp/toukei/itiran/roudou/monthly/r08/2609p/2609p.html",
       "confidence": "B"
     },
     {
@@ -428,7 +428,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/",
+      "source_url": "https://www.mhlw.go.jp/toukei/itiran/roudou/monthly/r08/2609p/2609p.html",
       "confidence": "B"
     },
     {
@@ -468,7 +468,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/",
+      "source_url": "https://www.mhlw.go.jp/toukei/itiran/roudou/monthly/r08/2609p/2609p.html",
       "confidence": "B"
     },
     {
@@ -588,7 +588,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/",
+      "source_url": "https://www.mhlw.go.jp/toukei/itiran/roudou/monthly/r08/2609p/2609p.html",
       "confidence": "B"
     },
     {
@@ -608,7 +608,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/",
+      "source_url": "https://www.mhlw.go.jp/toukei/itiran/roudou/monthly/r08/2609p/2609p.html",
       "confidence": "B"
     },
     {
@@ -689,7 +689,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/",
+      "source_url": "https://www.mhlw.go.jp/toukei/itiran/roudou/monthly/r08/2609p/2609p.html",
       "confidence": "B"
     },
     {
@@ -845,7 +845,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/",
+      "source_url": "https://www.mhlw.go.jp/toukei/itiran/roudou/monthly/r08/2609p/2609p.html",
       "confidence": "B"
     },
     {
@@ -865,7 +865,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/",
+      "source_url": "https://www.mhlw.go.jp/toukei/itiran/roudou/monthly/r08/2609p/2609p.html",
       "confidence": "B"
     },
     {
@@ -885,7 +885,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/",
+      "source_url": "https://www.mhlw.go.jp/toukei/itiran/roudou/monthly/r08/2609p/2609p.html",
       "confidence": "B"
     },
     {
@@ -906,7 +906,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/",
+      "source_url": "https://www.mhlw.go.jp/toukei/itiran/roudou/monthly/r08/2609p/2609p.html",
       "confidence": "B"
     },
     {
@@ -926,7 +926,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/",
+      "source_url": "https://www.mhlw.go.jp/toukei/itiran/roudou/monthly/r08/2609p/2609p.html",
       "confidence": "B"
     },
     {
@@ -944,7 +944,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/",
+      "source_url": "https://www.mhlw.go.jp/toukei/itiran/roudou/monthly/r08/2609p/2609p.html",
       "confidence": "B"
     },
     {
@@ -964,7 +964,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/",
+      "source_url": "https://www.mhlw.go.jp/toukei/itiran/roudou/monthly/r08/2609p/2609p.html",
       "confidence": "B"
     },
     {
@@ -1004,7 +1004,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/",
+      "source_url": "https://www.mhlw.go.jp/toukei/itiran/roudou/monthly/r08/2609p/2609p.html",
       "confidence": "B"
     },
     {
@@ -1044,7 +1044,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/",
+      "source_url": "https://www.mhlw.go.jp/toukei/itiran/roudou/monthly/r08/2609p/2609p.html",
       "confidence": "B"
     },
     {
@@ -1064,7 +1064,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/",
+      "source_url": "https://www.mhlw.go.jp/toukei/itiran/roudou/monthly/r08/2609p/2609p.html",
       "confidence": "B"
     },
     {
@@ -1084,7 +1084,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/",
+      "source_url": "https://www.mhlw.go.jp/toukei/itiran/roudou/monthly/r08/2609p/2609p.html",
       "confidence": "B"
     },
     {
@@ -1105,7 +1105,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/",
+      "source_url": "https://www.mhlw.go.jp/toukei/itiran/roudou/monthly/r08/2609p/2609p.html",
       "confidence": "B"
     },
     {
@@ -1125,7 +1125,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/",
+      "source_url": "https://www.mhlw.go.jp/toukei/itiran/roudou/monthly/r08/2609p/2609p.html",
       "confidence": "B"
     },
     {
@@ -1205,7 +1205,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/",
+      "source_url": "https://www.mhlw.go.jp/toukei/itiran/roudou/monthly/r08/2609p/2609p.html",
       "confidence": "B"
     },
     {
@@ -1305,7 +1305,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/",
+      "source_url": "https://driver-roudou-jikan.mhlw.go.jp/truck/notice",
       "confidence": "B"
     },
     {
@@ -1325,7 +1325,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/",
+      "source_url": "https://www.mhlw.go.jp/toukei/itiran/roudou/monthly/r08/2609p/2609p.html",
       "confidence": "B"
     },
     {
@@ -1385,7 +1385,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/",
+      "source_url": "https://www.mhlw.go.jp/toukei/itiran/roudou/monthly/r08/2609p/2609p.html",
       "confidence": "B"
     },
     {
@@ -1425,7 +1425,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/",
+      "source_url": "https://www.mhlw.go.jp/toukei/itiran/roudou/monthly/r08/2609p/2609p.html",
       "confidence": "B"
     },
     {
@@ -1463,7 +1463,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/",
+      "source_url": "https://www.mhlw.go.jp/toukei/itiran/roudou/monthly/r08/2609p/2609p.html",
       "confidence": "B"
     },
     {
@@ -1503,7 +1503,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/",
+      "source_url": "https://www.mhlw.go.jp/toukei/itiran/roudou/monthly/r08/2609p/2609p.html",
       "confidence": "B"
     },
     {
@@ -1523,7 +1523,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/",
+      "source_url": "https://www.mhlw.go.jp/toukei/itiran/roudou/monthly/r08/2609p/2609p.html",
       "confidence": "B"
     },
     {
@@ -1563,7 +1563,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/",
+      "source_url": "https://www.mhlw.go.jp/toukei/itiran/roudou/monthly/r08/2609p/2609p.html",
       "confidence": "B"
     },
     {
@@ -1583,7 +1583,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/",
+      "source_url": "https://www.mhlw.go.jp/toukei/itiran/roudou/monthly/r08/2609p/2609p.html",
       "confidence": "B"
     },
     {
@@ -1603,7 +1603,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/",
+      "source_url": "https://www.mhlw.go.jp/toukei/itiran/roudou/monthly/r08/2609p/2609p.html",
       "confidence": "B"
     },
     {
@@ -1758,7 +1758,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/",
+      "source_url": "https://www.mhlw.go.jp/toukei/itiran/roudou/monthly/r08/2609p/2609p.html",
       "confidence": "B"
     },
     {
@@ -1778,7 +1778,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/",
+      "source_url": "https://www.mhlw.go.jp/toukei/itiran/roudou/monthly/r08/2609p/2609p.html",
       "confidence": "B"
     },
     {
@@ -1816,7 +1816,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/",
+      "source_url": "https://www.mhlw.go.jp/toukei/itiran/roudou/monthly/r08/2609p/2609p.html",
       "confidence": "B"
     },
     {
@@ -1836,7 +1836,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/",
+      "source_url": "https://www.mhlw.go.jp/toukei/itiran/roudou/monthly/r08/2609p/2609p.html",
       "confidence": "B"
     },
     {
@@ -1856,7 +1856,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/",
+      "source_url": "https://www.mhlw.go.jp/toukei/itiran/roudou/monthly/r08/2609p/2609p.html",
       "confidence": "B"
     },
     {
@@ -1876,7 +1876,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/",
+      "source_url": "https://www.mhlw.go.jp/toukei/itiran/roudou/monthly/r08/2609p/2609p.html",
       "confidence": "B"
     },
     {
@@ -1952,7 +1952,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/",
+      "source_url": "https://www.mhlw.go.jp/toukei/itiran/roudou/monthly/r08/2609p/2609p.html",
       "confidence": "B"
     },
     {
@@ -1972,7 +1972,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/",
+      "source_url": "https://www.mhlw.go.jp/toukei/itiran/roudou/monthly/r08/2609p/2609p.html",
       "confidence": "B"
     },
     {
@@ -2069,7 +2069,7 @@
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/",
+      "source_url": "https://driver-roudou-jikan.mhlw.go.jp/truck/notice",
       "confidence": "B"
     }
   ]

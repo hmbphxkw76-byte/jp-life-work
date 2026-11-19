@@ -1,8 +1,8 @@
 {
   "topic": "14-life-operations",
   "name": "在日生活实务",
-  "version": "v1.6",
-  "generated_at": "2026-11-19T08:48:46",
+  "version": "v1.7",
+  "generated_at": "2026-11-19T09:47:04",
   "count": 77,
   "categories": {
     "在留与住民登记": 6,
@@ -694,9 +694,9 @@
       "definition": "提供搬家与家具运送服务的公司",
       "source": "総務省",
       "first_added": "2026-11-15",
-      "last_updated": "2026-11-18",
+      "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.soumu.go.jp/",
+      "source_url": "https://www.soumu.go.jp/main_sosiki/jichi_gyousei/c-gyousei/zairyu/",
       "confidence": "C"
     },
     {
@@ -904,9 +904,9 @@
       "definition": "自来水使用费，由自治体或委托业者征收",
       "source": "国土交通省",
       "first_added": "2026-11-15",
-      "last_updated": "2026-11-18",
+      "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mlit.go.jp/",
+      "source_url": "https://www.mlit.go.jp/jutakukentiku/house/index.html",
       "confidence": "B"
     },
     {
@@ -987,9 +987,9 @@
       "definition": "雇主对员工通勤费用的补贴，常见于全职雇佣",
       "source": "厚生労働省",
       "first_added": "2026-11-15",
-      "last_updated": "2026-11-18",
+      "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mhlw.go.jp/",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/index.html",
       "confidence": "B"
     },
     {
@@ -1493,9 +1493,9 @@
       "definition": "自治体或委托业者管理自来水供给的机构",
       "source": "国土交通省",
       "first_added": "2026-11-18",
-      "last_updated": "2026-11-18",
+      "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.mlit.go.jp/",
+      "source_url": "https://www.mlit.go.jp/jutakukentiku/house/index.html",
       "confidence": "B"
     },
     {
@@ -1574,9 +1574,9 @@
       "definition": "総務省令和8-04-01至令和9-03-31开设的12语种窗口通译支援（050-1720-0849）",
       "source": "総務省",
       "first_added": "2026-11-18",
-      "last_updated": "2026-11-18",
+      "last_updated": "2026-11-19",
       "verification": "部分核验",
-      "source_url": "https://www.soumu.go.jp/",
+      "source_url": "https://www.soumu.go.jp/main_sosiki/jichi_gyousei/c-gyousei/zairyu/",
       "confidence": "B"
     }
   ]
