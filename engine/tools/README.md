@@ -13,7 +13,7 @@ pip install -r requirements.txt   # markdown
 python -m unittest discover -s engine/tests -q   # 单元测试（以 docs/CI.md 与实测为准）
 ```
 
-> 测试计数：1040 项（`python -m unittest discover -s engine/tests` 实测，与 `docs/CI.md` 六节一致；由 `engine/tests/test_arch_guard.py` 双向锁定）。
+> 测试计数：1042 项（`python -m unittest discover -s engine/tests` 实测，与 `docs/CI.md` 六节一致；由 `engine/tests/test_arch_guard.py` 双向锁定）。
 
 ## 退出码约定（校验类工具统一）
 
@@ -474,3 +474,4 @@ python engine/tools/automation_status.py activity --threshold 45               #
 | v1.3 | 2026-11-19 | 测试计数对齐 + 不接线工具登记 | 测试计数 978 → 1008（与实测对齐）；`test_arch_guard` 扩展为同时锁定 `docs/CI.md` 六节与本节计数；新增「设计内不接线工具清单」（B6） |
 | v1.4 | 2026-11-19 | 合并后计数校准 | 测试计数 1008 → 1029（并入 consulting-panel 15 项 + B2 表格语义 6 项后实测） |
 | v1.5 | 2026-11-19 | 工程守卫（W1 / A1 / A5） | 测试计数 1029 → 1040（新增归档保留期边界 6 项 + 文档数字锁定 3 项 + 骨架完备性 2 项）；退出码约定改为指向 `docs/CI.md`；`structure_check` 新增主题骨架完备性校验 |
+| v1.6 | 2026-11-19 | 内容与词库（W4 / B7） | 测试计数 1040 → 1042（B7 新增 2 项 `build_hub` 检索层校验用例）；补记检索层产物校验说明 |

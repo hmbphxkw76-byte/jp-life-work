@@ -1,8 +1,8 @@
 {
   "topic": "08-visa-immigration",
   "name": "签证与移民",
-  "version": "v1.5",
-  "generated_at": "2026-11-19T11:50:10",
+  "version": "v1.7",
+  "generated_at": "2026-11-19T22:55:04",
   "count": 79,
   "categories": {
     "在留资格类型": 15,
@@ -29,8 +29,8 @@
       "source": "出入国在留管理庁「在留資格一覧」",
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
-      "verification": "部分核验",
-      "source_url": "https://www.moj.go.jp/isa/",
+      "verification": "已核验",
+      "source_url": "https://www.moj.go.jp/isa/applications/status/index.html",
       "confidence": "B"
     },
     {
@@ -50,8 +50,8 @@
       "source": "出入国在留管理庁「特定技能制度」",
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
-      "verification": "部分核验",
-      "source_url": "https://www.moj.go.jp/isa/",
+      "verification": "已核验",
+      "source_url": "https://www.moj.go.jp/isa/applications/ssw/index.html",
       "confidence": "B"
     },
     {
@@ -71,8 +71,8 @@
       "source": "出入国在留管理庁「特定技能制度」",
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
-      "verification": "部分核验",
-      "source_url": "https://www.moj.go.jp/isa/",
+      "verification": "已核验",
+      "source_url": "https://www.moj.go.jp/isa/applications/ssw/index.html",
       "confidence": "B"
     },
     {
@@ -92,8 +92,8 @@
       "source": "出入国在留管理庁",
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
-      "verification": "部分核验",
-      "source_url": "https://www.moj.go.jp/isa/",
+      "verification": "已核验",
+      "source_url": "https://www.moj.go.jp/isa/applications/status/gijinkoku.html",
       "confidence": "B"
     },
     {
@@ -113,8 +113,8 @@
       "source": "出入国在留管理庁「技能実習制度」",
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
-      "verification": "部分核验",
-      "source_url": "https://www.moj.go.jp/isa/",
+      "verification": "已核验",
+      "source_url": "https://www.moj.go.jp/isa/applications/status/technicalinterntraining.html",
       "confidence": "B"
     },
     {
@@ -134,8 +134,8 @@
       "source": "出入国在留管理庁",
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
-      "verification": "部分核验",
-      "source_url": "https://www.moj.go.jp/isa/",
+      "verification": "已核验",
+      "source_url": "https://www.moj.go.jp/isa/applications/procedures/16-4.html",
       "confidence": "B"
     },
     {
@@ -155,8 +155,8 @@
       "source": "出入国在留管理庁",
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
-      "verification": "部分核验",
-      "source_url": "https://www.moj.go.jp/isa/",
+      "verification": "已核验",
+      "source_url": "https://www.moj.go.jp/isa/applications/status/spouseorchildofjapanese.html",
       "confidence": "B"
     },
     {
@@ -176,8 +176,8 @@
       "source": "出入国在留管理庁",
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
-      "verification": "部分核验",
-      "source_url": "https://www.moj.go.jp/isa/",
+      "verification": "已核验",
+      "source_url": "https://www.moj.go.jp/isa/applications/status/longtermresident.html",
       "confidence": "B"
     },
     {
@@ -197,8 +197,8 @@
       "source": "出入国在留管理庁",
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
-      "verification": "部分核验",
-      "source_url": "https://www.moj.go.jp/isa/",
+      "verification": "已核验",
+      "source_url": "https://www.moj.go.jp/isa/applications/status/student.html",
       "confidence": "B"
     },
     {
@@ -218,8 +218,8 @@
       "source": "出入国在留管理庁",
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
-      "verification": "部分核验",
-      "source_url": "https://www.moj.go.jp/isa/",
+      "verification": "已核验",
+      "source_url": "https://www.moj.go.jp/isa/applications/status/dependent.html",
       "confidence": "B"
     },
     {
@@ -260,8 +260,8 @@
       "source": "出入国在留管理庁「高度専門職」",
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
-      "verification": "部分核验",
-      "source_url": "https://www.moj.go.jp/isa/",
+      "verification": "已核验",
+      "source_url": "https://www.moj.go.jp/isa/applications/status/designatedactivities02_00004.html",
       "confidence": "B"
     },
     {
@@ -281,8 +281,8 @@
       "source": "出入国在留管理庁",
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
-      "verification": "部分核验",
-      "source_url": "https://www.moj.go.jp/isa/",
+      "verification": "已核验",
+      "source_url": "https://www.moj.go.jp/isa/applications/status/businessmanager.html",
       "confidence": "B"
     },
     {
@@ -302,8 +302,8 @@
       "source": "出入国在留管理庁",
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
-      "verification": "部分核验",
-      "source_url": "https://www.moj.go.jp/isa/",
+      "verification": "已核验",
+      "source_url": "https://www.moj.go.jp/isa/applications/status/designatedactivities.html",
       "confidence": "B"
     },
     {
@@ -323,8 +323,8 @@
       "source": "出入国在留管理庁",
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
-      "verification": "部分核验",
-      "source_url": "https://www.moj.go.jp/isa/",
+      "verification": "已核验",
+      "source_url": "https://www.moj.go.jp/isa/applications/status/spouseorchildofpermanentresident.html",
       "confidence": "B"
     },
     {
@@ -344,8 +344,8 @@
       "source": "出入国在留管理庁",
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
-      "verification": "部分核验",
-      "source_url": "https://www.moj.go.jp/isa/",
+      "verification": "已核验",
+      "source_url": "https://www.moj.go.jp/isa/applications/procedures/16-1.html",
       "confidence": "B"
     },
     {
@@ -362,8 +362,8 @@
       "source": "出入国在留管理庁",
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
-      "verification": "部分核验",
-      "source_url": "https://www.moj.go.jp/isa/",
+      "verification": "已核验",
+      "source_url": "https://www.moj.go.jp/isa/applications/procedures/whatzairyu_00001.html",
       "confidence": "B"
     },
     {
@@ -383,8 +383,8 @@
       "source": "出入国在留管理庁",
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
-      "verification": "部分核验",
-      "source_url": "https://www.moj.go.jp/isa/",
+      "verification": "已核验",
+      "source_url": "https://www.moj.go.jp/isa/applications/procedures/16-3.html",
       "confidence": "B"
     },
     {
@@ -404,8 +404,8 @@
       "source": "出入国在留管理庁",
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
-      "verification": "部分核验",
-      "source_url": "https://www.moj.go.jp/isa/",
+      "verification": "已核验",
+      "source_url": "https://www.moj.go.jp/isa/applications/procedures/16-2.html",
       "confidence": "B"
     },
     {
@@ -635,8 +635,8 @@
       "source": "出入国在留管理庁「永住許可」",
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
-      "verification": "部分核验",
-      "source_url": "https://www.moj.go.jp/isa/",
+      "verification": "已核验",
+      "source_url": "https://www.moj.go.jp/isa/applications/procedures/16-4.html",
       "confidence": "B"
     },
     {
@@ -656,7 +656,7 @@
       "source": "法務省「国籍Ｑ＆Ａ」",
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
-      "verification": "部分核验",
+      "verification": "已核验",
       "source_url": "https://www.moj.go.jp/MINJI/kokuseki.html",
       "confidence": "B"
     },
@@ -677,8 +677,8 @@
       "source": "出入国在留管理庁",
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
-      "verification": "部分核验",
-      "source_url": "https://www.moj.go.jp/isa/",
+      "verification": "已核验",
+      "source_url": "https://www.moj.go.jp/isa/10_00279.html",
       "confidence": "B"
     },
     {
@@ -698,8 +698,8 @@
       "source": "出入国在留管理庁",
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
-      "verification": "部分核验",
-      "source_url": "https://www.moj.go.jp/isa/",
+      "verification": "已核验",
+      "source_url": "https://www.moj.go.jp/isa/10_00279.html",
       "confidence": "B"
     },
     {
@@ -719,8 +719,8 @@
       "source": "法務省",
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
-      "verification": "部分核验",
-      "source_url": "https://www.moj.go.jp/",
+      "verification": "已核验",
+      "source_url": "https://www.moj.go.jp/isa/10_00279.html",
       "confidence": "B"
     },
     {
@@ -740,8 +740,8 @@
       "source": "出入国在留管理庁",
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
-      "verification": "部分核验",
-      "source_url": "https://www.moj.go.jp/isa/",
+      "verification": "已核验",
+      "source_url": "https://www.moj.go.jp/isa/10_00279.html",
       "confidence": "B"
     },
     {
@@ -824,8 +824,8 @@
       "source": "出入国在留管理庁",
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
-      "verification": "部分核验",
-      "source_url": "https://www.moj.go.jp/isa/",
+      "verification": "已核验",
+      "source_url": "https://www.moj.go.jp/isa/applications/procedures/16-4.html",
       "confidence": "B"
     },
     {
@@ -845,8 +845,8 @@
       "source": "出入国在留管理庁",
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
-      "verification": "部分核验",
-      "source_url": "https://www.moj.go.jp/isa/",
+      "verification": "已核验",
+      "source_url": "https://www.moj.go.jp/isa/applications/procedures/16-4.html",
       "confidence": "B"
     },
     {
@@ -866,7 +866,7 @@
       "source": "法務省",
       "first_added": "2026-11-13",
       "last_updated": "2026-11-19",
-      "verification": "部分核验",
+      "verification": "已核验",
       "source_url": "https://www.moj.go.jp/ONLINE/NATIONALITY/6-2.html",
       "confidence": "B"
     },
