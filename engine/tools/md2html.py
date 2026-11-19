@@ -27,7 +27,16 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from _common import ROOT, TYPE_LABEL_FALLBACK, TYPE_RE, iter_business_dirs  # noqa: E402
+from _common import (  # noqa: E402
+    HTML_TBODY_RE,
+    HTML_THEAD_RE,
+    HTML_TR_RE,
+    ROOT,
+    TYPE_LABEL_FALLBACK,
+    TYPE_RE,
+    is_complex_html_table,
+    iter_business_dirs,
+)
 from report_cycles import cycle_profile_path  # noqa: E402
 from report_diff import diff_summary, render_diffed_body  # noqa: E402
 
@@ -243,22 +252,79 @@ def _with_width(th: str, width: int) -> str:
     return th.replace("<th", f'<th style="width:{width}%"', 1)
 
 
+def _with_scope(th: str, scope: str) -> str:
+    """给单个 <th> 补 scope（已含 scope= 时跳过，保证幂等）。"""
+    if "scope=" in th:
+        return th
+    return th.replace("<th", f'<th scope="{scope}"', 1)
+
+
+def _caption_html(prefix: str, tbl: str, idx: int) -> str:
+    """复杂表 <caption>：优先取表前最近标题（h1–h6）纯文本，缺则取表头首行文本。"""
+    text = ""
+    heads = [mm.group(0) for mm in HEAD_RE.finditer(prefix)]
+    if heads:
+        text = _strip_tags(heads[-1])
+    if not text:
+        thead = HTML_THEAD_RE.search(tbl)
+        if thead:
+            first = HTML_TR_RE.search(thead.group(0))
+            if first:
+                cells = re.findall(r"<th\b[^>]*>(.*?)</th>", first.group(0), re.DOTALL)
+                vals = [t for t in (_strip_tags(c) for c in cells) if t]
+                text = " / ".join(vals)
+    label = f"表 {idx}"
+    return f"<caption>{label}：{text}</caption>" if text else f"<caption>{label}</caption>"
+
+
 def _fix_tables(html: str) -> str:
-    """表格加 class="fixed"；表头逐列声明百分比列宽（同表之和 100%）。"""
+    """表格加 class="fixed"；表头补 scope="col" 与百分比列宽；复杂表补 <caption>。
+
+    复杂 / 多层表判定（表头行数 >1、列结构分层、首列为行标题）见
+    `_common.is_complex_html_table`，与 lint_reports 共用同一口径。
+    """
+    idx = 0
 
     def fix(m: re.Match) -> str:
+        nonlocal idx
+        idx += 1
         tbl = m.group(0)
         if 'class="fixed"' not in tbl:
             tbl = tbl.replace("<table", '<table class="fixed"', 1)
-        ths = TH_RE.findall(tbl)
-        if not ths:
-            return tbl
-        n = len(ths)
-        base, rem = divmod(100, n)
-        widths = [base] * n
-        widths[-1] += rem
-        it = iter(widths)
-        return TH_RE.sub(lambda mm: _with_width(mm.group(0), next(it)), tbl)
+        # 表头：逐列补百分比列宽 + scope="col"
+        thead = HTML_THEAD_RE.search(tbl)
+        if thead:
+            head = thead.group(0)
+            ths = TH_RE.findall(head)
+            if ths:
+                n = len(ths)
+                base, rem = divmod(100, n)
+                widths = [base] * n
+                widths[-1] += rem
+                it = iter(widths)
+                new_head = TH_RE.sub(
+                    lambda mm: _with_scope(_with_width(mm.group(0), next(it)), "col"), head
+                )
+                tbl = tbl.replace(head, new_head, 1)
+        # 行标题：tbody 行首 <th> 补 scope="row"
+        tbody = HTML_TBODY_RE.search(tbl)
+        if tbody:
+            body = tbody.group(0)
+
+            def fix_row(rm: re.Match) -> str:
+                row = rm.group(0)
+                if not re.search(r"<tr\b[^>]*>\s*<th\b", row):
+                    return row
+                return re.sub(r"<th\b[^>]*>", lambda mm: _with_scope(mm.group(0), "row"), row, count=1)
+
+            tbl = tbl.replace(body, HTML_TR_RE.sub(fix_row, body), 1)
+        # 复杂表：补 <caption>（幂等）
+        if "<caption" not in tbl and is_complex_html_table(m.group(0)):
+            open_m = re.match(r"<table\b[^>]*>", tbl)
+            if open_m:
+                cap = _caption_html(html[: m.start()], m.group(0), idx)
+                tbl = tbl[: open_m.end()] + cap + tbl[open_m.end():]
+        return tbl
 
     return TABLE_RE.sub(fix, html)
 

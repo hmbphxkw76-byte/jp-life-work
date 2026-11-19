@@ -6,6 +6,8 @@
 错误项（阻断）：
 - thead / tbody / table 标签不配对、重复 </tbody>
 - 畸形 <th scope="col"ead> 写法
+- <th> 缺少 scope 属性（WCAG 2.1 AA 表格语义）
+- 复杂 / 多层表缺少 <caption>（判定口径见 _common.is_complex_html_table）
 
 警告项（不阻断）：
 - 多列表（≥6 列）<th> 未声明百分比列宽
@@ -23,7 +25,13 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from _common import NEW_FROM, ROOT, detect_month_report, iter_business_dirs  # noqa: E402
+from _common import (  # noqa: E402
+    NEW_FROM,
+    ROOT,
+    detect_month_report,
+    is_complex_html_table,
+    iter_business_dirs,
+)
 
 DEFAULT_WHITELIST = ROOT / "engine" / "report-audits" / "audit" / "lint-whitelist.json"
 
@@ -59,6 +67,16 @@ def lint_html(text: str) -> list[tuple[str, str]]:
                 issues.append(
                     ("W", f"第 {i} 张表格（{len(ths)} 列）有 {len(no_width)} 个 <th> 未声明百分比列宽")
                 )
+        # 表格语义（WCAG 2.1 AA）：th 必须声明 scope；复杂表必须有 caption
+        no_scope = [t for t in ths if "scope=" not in t]
+        if no_scope:
+            issues.append(
+                ("E", f"第 {i} 张表格有 {len(no_scope)} 个 <th> 缺少 scope 属性（可访问性）")
+            )
+        if is_complex_html_table(tbl) and "<caption" not in tbl:
+            issues.append(
+                ("E", f"第 {i} 张表格为复杂 / 多层表但缺少 <caption>（可访问性）")
+            )
 
     # 图片可访问性
     for m in re.finditer(r"<img\b[^>]*>", text):
