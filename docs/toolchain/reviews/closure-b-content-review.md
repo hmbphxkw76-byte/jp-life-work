@@ -1,6 +1,7 @@
 # 组 B 内容核验 · 收尾评审（closure-b，2026-11-19）
 
 > **范围**：`task/closure-b-93955b6d` worktree（`D:\文档\GitHub\jp-life-work\.worktrees\closure-b`）内「组 B：内容核验」收尾的独立评审。
+> **工单**：`n2-portal-url-mismatch` / `n7-vocab-verification-deepen` / `n9-fact-card-references` / `n10-finance-model-refresh` / `n15-vocab-alias-cleanup` / `n17-report-second-issue`（组 B，2026-11-19 补全 slug 留痕，见 `docs/toolchain/specs/align-2026-11-19.md`）
 > **基线**：前序子代理留下的 31 处未提交改动 + 本轮收尾新增（14 词库 2 条、复核记录 / 证据包 / 14 证据包）。
 > **口径**：只审本任务范围；来源分级、事实 / 推断分离、无法核实须说明，不编造。
 > **结论**：**P0 = 0 / P1 = 0**；残留为 P2 与环境限制项，见 §六。

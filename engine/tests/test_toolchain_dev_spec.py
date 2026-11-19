@@ -6,6 +6,7 @@
 from __future__ import annotations
 
 import json
+import re
 import sys
 import unittest
 from pathlib import Path
@@ -88,6 +89,54 @@ class TestReviewScopeMatchesSpec(unittest.TestCase):
                   "engine/scripts/workflow_guard.py"):
             self.assertTrue(review_gate.is_toolchain_path(p), p)
         self.assertFalse(review_gate.is_toolchain_path("01-ssw-driver/reports/2026-11-x.md"))
+
+
+class TestReviewCoverage(unittest.TestCase):
+    """T8-b：每个工单 slug 必须有对应评审，或工单内显式标「免评审」。
+
+    规格：docs/toolchain/specs/align-2026-11-19.md。
+    判定：slug 出现在 docs/toolchain/reviews/*.md 任一正文，或工单正文含「免评审」。
+    """
+
+    TICKETS = ROOT / "docs" / "toolchain" / "tickets"
+    REVIEWS = ROOT / "docs" / "toolchain" / "reviews"
+
+    def test_reviews_dir_not_empty(self):
+        self.assertTrue(self.REVIEWS.is_dir(), "缺少 docs/toolchain/reviews/")
+        self.assertTrue(
+            any(p.suffix.lower() == ".md" for p in self.REVIEWS.iterdir()),
+            "docs/toolchain/reviews/ 无 .md 评审报告",
+        )
+
+    def _review_headers(self) -> str:
+        """汇总各评审的标题行与「工单」声明行（覆盖来源）。"""
+        parts = []
+        for p in sorted(self.REVIEWS.glob("*.md")):
+            lines = p.read_text(encoding="utf-8").splitlines()
+            keep = [ln for ln in lines
+                    if ln.startswith("#")
+                    or ln.startswith("> **工单**")
+                    or ln.startswith("> 工单")]
+            parts.append("\n".join(keep))
+        return "\n".join(parts)
+
+    def test_every_ticket_has_review_or_exemption(self):
+        headers = self._review_headers()
+        missing = []
+        for ticket in sorted(self.TICKETS.glob("*.md")):
+            slug = ticket.stem
+            # 精确匹配：slug 前后不得是 kebab-case 字符，避免 coverage-gate
+            # 误命中 n3-close-coverage-gate-t10 之类的子串。
+            pattern = re.compile(r"(?<![a-z0-9-])" + re.escape(slug) + r"(?![a-z0-9-])")
+            if pattern.search(headers):
+                continue
+            if "免评审" in ticket.read_text(encoding="utf-8"):
+                continue
+            missing.append(slug)
+        self.assertEqual(
+            missing, [],
+            f"工单缺少对应评审（或在工单内显式标「免评审」）：{missing}",
+        )
 
 
 if __name__ == "__main__":
