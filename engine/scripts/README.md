@@ -161,7 +161,8 @@ python engine/scripts/cleanup_workspace.py --root <dir>
 - `task start` 自动追加 sid，无需手工输入；任务登记表 `session` 字段记录完整会话 ID。
 - 手工校验：`python engine/scripts/branch_naming.py check <branch...>`（退出码 1 不合规）。
 - 钩子：`python engine/scripts/workflow_guard.py hooks` 安装 pre-push / pre-commit（`--check` / `--uninstall`）；
-  新克隆 / 换机后必装。规范与异常处理见 `docs/branch-management.md`。
+  新克隆 / 换机后必装。pre-commit 现含两道检查：① 分支命名守卫；② 快速校验子集（暂存 Python 文件 `ruff check --fix` + `engine/tools/validate.py`，退出码 1 阻断、2 放行；ruff 缺失仅告警）。
+  规范与异常处理见 `docs/branch-management.md`。
 
 ## 十一、报告生成一致性比对（`engine/scripts/verify_report_parity.py`）
 
@@ -186,12 +187,12 @@ python engine/scripts/verify_report_parity.py --compare  .migration-baseline    
 
 | # | 项 | 结果 |
 |---|---|---|
-| 1 | 测试全绿 | ✅ `python -m unittest discover -s engine/tests -v` 全绿 |
+| 1 | 测试全绿 | ✅ `python -m unittest discover -s engine/tests -v` 全绿（1045 项） |
 | 2 | `validate.py` 通过 | ✅ 退出码 0 |
-| 3 | 双轴评审存在且无 P0/P1 | ✅ 每次任务在 `docs/toolchain/reviews/<任务 slug>-review.md` 产出双轴评审 |
-| 4 | `coverage_gate.py` 达标 | ✅ 90.2%（阈值 80%，enforce=true） |
+| 3 | 双轴评审存在且无 P0/P1 | ✅ `docs/toolchain/reviews/w2-ci-cd-hardening-review.md`（W2 / 项 2.1–2.8） |
+| 4 | `coverage_gate.py` 达标 | ✅ 90.46%（阈值 80%，enforce=true）；单工具最低阈值 60% |
 | 5 | `cleanup_workspace.py --check` 零残留 | ✅ 零残留 |
-| 6 | 新增/改动工具已登记 | ✅ 新增 `consulting_panel.py`；`generate_registry.py --check` 通过（工具 45 / 类型 12 / 主题 21 / 工作流 8） |
+| 6 | 新增/改动工具已登记 | ✅ 本任务无新增工具；`generate_registry.py --check` 通过（工具 45 / 类型 12 / 主题 21 / 工作流 8） |
 | 6b | 决策面板产物一致性 | ✅ `consulting_panel.py --check` 退出码 0（面板 md 与重算一致） |
 | 7 | 生成物确定性 | ✅ `build_hub.py --check` / `build_index.py --check` 均退出码 0 |
 | 8 | 架构边界 | ✅ `engine/tools/` 无 git 可变操作；`engine/scripts/` 不产出内容；`iter_business_dirs()` = 21 |

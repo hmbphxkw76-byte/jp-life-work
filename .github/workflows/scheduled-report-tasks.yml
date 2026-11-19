@@ -6,7 +6,7 @@
 # 流程：
 #   1. 按当前 UTC 月份（或手动指定 --period）运行 update_planner.py 生成任务清单
 #   2. 以 Issue 形式发布（标题含月份，正文含待办清单与命名规范提醒）
-#   3. 记录自动化状态（automation_status.py record）并提交状态文件
+#   3. 记录自动化状态（automation_status.py record）并提交状态文件（推分支 + PR）
 #
 # 产出后：提交 reports/YYYY-MM-<slug>.md 并 push，html-sync 自动生成报告页 HTML
 # （含跨月对比高亮）与汇总页；下期报告自动与本期比对并高亮「已更新」。
@@ -18,8 +18,8 @@ name: scheduled-report-tasks
 
 on:
   schedule:
-    # 每月 1 日 00:20 UTC = 09:20 JST，紧随定时维护（00:15）之后
-    - cron: "20 0 1 * *"
+    # 每月 1 日 00:45 UTC = 09:45 JST，与定时维护（00:15）/ 抽检（01:15）/ 编排（01:45）错峰 ≥ 30 分钟
+    - cron: "45 0 1 * *"
   workflow_dispatch:
     inputs:
       period:
@@ -34,6 +34,7 @@ concurrency:
 permissions:
   contents: write
   issues: write
+  pull-requests: write
 
 jobs:
   dispatch:
@@ -52,6 +53,15 @@ jobs:
       - uses: ./.github/actions/workspace-cleanup
         with:
           mode: ci
+
+      # 依赖缓存（W2 / R5）：key 随 requirements 变更，命中即跳过 pip 下载。
+      - name: 缓存 pip 依赖
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt', 'requirements-dev.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
 
       - name: 安装依赖
         run: pip install -r requirements.txt
@@ -123,7 +133,12 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git commit -m "chore: 记录月度提醒自动化状态"
-          git push
+          BRANCH="auto/report-tasks-$(date -u +%Y%m%d-%H%M%S)"
+          git push origin "HEAD:$BRANCH"
+          gh pr create --base main --head "$BRANCH" \
+            --title "[automated] 月度提醒自动化状态" \
+            --body "由 .github/workflows/scheduled-report-tasks.yml 自动提交（[automated] 标记，保留 github-actions[bot] 提交身份）。请评审后合并。" \
+            || echo "::warning::PR 创建失败（可能已存在），请人工确认"
 
       # 阶段收尾：无论成败清理缓存、临时产物与 pip 缓存，保证流水线结束后无残留。
       - uses: ./.github/actions/workspace-cleanup

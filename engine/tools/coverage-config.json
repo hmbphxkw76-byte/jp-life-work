@@ -1,6 +1,7 @@
 {
   "version": 1,
   "threshold": 80,
+  "per_tool_min": 60,
   "enforce": true,
   "test_discovery": "engine/tests",
   "baseline": "engine/report-audits/toolchain/coverage-baseline.json",

@@ -29,11 +29,14 @@ concurrency:
 
 permissions:
   contents: write
+  pull-requests: write
 
 jobs:
   maintain:
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -47,6 +50,15 @@ jobs:
       - uses: ./.github/actions/workspace-cleanup
         with:
           mode: ci
+
+      # 依赖缓存（W2 / R5）：key 随 requirements 变更，命中即跳过 pip 下载。
+      - name: 缓存 pip 依赖
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt', 'requirements-dev.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
 
       - name: 安装依赖
         run: pip install -r requirements.txt
@@ -136,6 +148,7 @@ jobs:
             --phase maintenance --result "$RESULT" \
             --run-url "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
 
+      # 定时任务不再直推 main（W2 / R1）：提交后推自动分支并开 PR，保留 [automated] 标记。
       - name: 提交维护产物
         run: |
           git add -A
@@ -146,7 +159,12 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git commit -m "chore: 定时维护（归位 / 归档 / 索引 / 汇总页同步）"
-          git push
+          BRANCH="auto/maintenance-$(date -u +%Y%m%d-%H%M%S)"
+          git push origin "HEAD:$BRANCH"
+          gh pr create --base main --head "$BRANCH" \
+            --title "[automated] 定时维护产物同步" \
+            --body "由 .github/workflows/scheduled-maintenance.yml 自动提交（[automated] 标记，保留 github-actions[bot] 提交身份）。请评审后合并。" \
+            || echo "::warning::PR 创建失败（可能已存在），请人工确认"
 
       # 失败补记：主提交步骤随 job 成功路径执行；job 失败时仍把本轮自动化状态入库，
       # 避免「记录了却因未提交而丢失」（与其余 4 条工作流的 always 提交口径一致）。
@@ -165,7 +183,12 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git commit -m "chore: 补记定时维护自动化状态"
-          git push
+          BRANCH="auto/maintenance-status-$(date -u +%Y%m%d-%H%M%S)"
+          git push origin "HEAD:$BRANCH"
+          gh pr create --base main --head "$BRANCH" \
+            --title "[automated] 补记定时维护自动化状态" \
+            --body "由 scheduled-maintenance.yml 失败补记步骤自动提交（[automated] 标记）。请评审后合并。" \
+            || echo "::warning::PR 创建失败（可能已存在），请人工确认"
 
       # 阶段收尾：无论成败清理缓存、临时产物与 pip 缓存，保证流水线结束后无残留。
       - uses: ./.github/actions/workspace-cleanup

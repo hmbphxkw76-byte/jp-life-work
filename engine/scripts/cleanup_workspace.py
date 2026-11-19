@@ -115,9 +115,9 @@ def collect_residue(root: Path = ROOT) -> list[Residue]:
 
     # 1) 固定生成的备份目录
     for rel in GENERATED_DIRS:
-        d = root / rel
-        if d.is_dir():
-            found.append(Residue(d, "generated-dir"))
+        gen_dir = root / rel
+        if gen_dir.is_dir():
+            found.append(Residue(gen_dir, "generated-dir"))
 
     # 2) 目录树遍历：缓存目录整体回收，文件按规则匹配
     for dirpath, dirnames, filenames in os.walk(root, topdown=True, followlinks=False):
@@ -127,13 +127,13 @@ def collect_residue(root: Path = ROOT) -> list[Residue]:
         # 永不进入 .git
         dirnames[:] = [d for d in dirnames if d not in PRUNE_DIRS]
 
-        for d in list(dirnames):
-            if d in CACHE_DIRS:
-                p = cur / d
+        for name in list(dirnames):
+            if name in CACHE_DIRS:
+                p = cur / name
                 rel = p.relative_to(root).as_posix()
                 if not _is_tracked(rel, tracked):
                     found.append(Residue(p, "cache-dir"))
-                    dirnames.remove(d)          # 整体回收，不再下钻
+                    dirnames.remove(name)        # 整体回收，不再下钻
 
         if rel_dir == LOG_DIR or rel_dir.startswith(LOG_DIR + "/"):
             for f in filenames:

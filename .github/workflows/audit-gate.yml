@@ -41,6 +41,15 @@ jobs:
         with:
           mode: ci
 
+      # 依赖缓存（W2 / R5）：key 随 requirements 变更，命中即跳过 pip 下载。
+      - name: 缓存 pip 依赖
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt', 'requirements-dev.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
       - name: 安装依赖
         run: pip install -r requirements.txt
 
