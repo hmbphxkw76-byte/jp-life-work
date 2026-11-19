@@ -25,8 +25,8 @@ import shutil
 import socket
 import subprocess
 import sys
+from collections.abc import Iterable, Sequence
 from pathlib import Path
-from typing import Iterable, Optional, Sequence
 
 EXIT_OK = 0
 EXIT_ERR = 1
@@ -76,7 +76,7 @@ def session_id() -> str:
     return fallback
 
 
-def session_sid(session: Optional[str] = None) -> str:
+def session_sid(session: str | None = None) -> str:
     """会话短码：UUID 取前 8 位十六进制；否则 SHA-1 前 8 位。"""
     s = session if session is not None else session_id()
     if UUID_RE.match(s):
@@ -84,12 +84,12 @@ def session_sid(session: Optional[str] = None) -> str:
     return hashlib.sha1(s.encode("utf-8")).hexdigest()[:8]
 
 
-def task_branch(name: str, session: Optional[str] = None) -> str:
+def task_branch(name: str, session: str | None = None) -> str:
     """按规范生成任务分支名：``task/<name>-<sid>``。"""
     return f"{TASK_PREFIX}{name}-{session_sid(session)}"
 
 
-def sid_of(branch: str) -> Optional[str]:
+def sid_of(branch: str) -> str | None:
     m = BRANCH_RE.match(branch)
     return m.group("sid") if m else None
 
@@ -113,7 +113,7 @@ def validate_branch(name: str) -> tuple[bool, str]:
     return True, "ok"
 
 
-def session_mismatch(branch: str, session: Optional[str] = None) -> bool:
+def session_mismatch(branch: str, session: str | None = None) -> bool:
     """分支 ``sid`` 是否与当前会话不一致（仅提示，不阻断推送）。"""
     sid = sid_of(branch)
     return sid is not None and sid != session_sid(session)
@@ -159,7 +159,7 @@ def hook_pre_push(lines: Iterable[str]) -> int:
     return EXIT_OK
 
 
-def _git(args: Sequence[str], cwd: Optional[Path] = None, check: bool = True) -> subprocess.CompletedProcess:
+def _git(args: Sequence[str], cwd: Path | None = None, check: bool = True) -> subprocess.CompletedProcess:
     proc = subprocess.run(
         ["git", *args], cwd=str(cwd) if cwd else None, capture_output=True, text=True,
         encoding="utf-8", errors="replace",
@@ -190,7 +190,7 @@ def hook_pre_commit() -> int:
 # ──────────────────────────────────────────────
 # 钩子安装
 # ──────────────────────────────────────────────
-def hooks_dir(cwd: Optional[Path] = None) -> Path:
+def hooks_dir(cwd: Path | None = None) -> Path:
     """共享 git hooks 目录（跨 worktree 生效）。``cwd`` 指定待操作的仓库。"""
     proc = _git(
         ["rev-parse", "--path-format=absolute", "--git-path", "hooks"],
@@ -208,7 +208,7 @@ def hooks_dir(cwd: Optional[Path] = None) -> Path:
 
 
 def install_hooks(check: bool = False, uninstall: bool = False,
-                  force: bool = False, cwd: Optional[Path] = None) -> bool:
+                  force: bool = False, cwd: Path | None = None) -> bool:
     """把 ``engine/scripts/git-hooks/{pre-push,pre-commit}`` 安装到共享 hooks 目录。
 
     ``check`` 只比对（无差异返回 True）；``uninstall`` 删除（内容被改过需 ``force``）。
@@ -322,7 +322,7 @@ def cmd_install(args: argparse.Namespace) -> int:
     return EXIT_OK if ok else EXIT_ERR
 
 
-def main(argv: Optional[Sequence[str]] = None) -> int:
+def main(argv: Sequence[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     try:
         return args.func(args) or EXIT_OK

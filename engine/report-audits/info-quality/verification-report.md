@@ -1,6 +1,6 @@
 # 信息质量验证报告
 
-> 运行日期：2026-11-18
+> 运行日期：2026-11-19
 
 ## 修复后指标（复评）
 
@@ -18,8 +18,15 @@
 
 | 校验项 | 结果 |
 |---|---|
+| required_coverage_ok | 通过 |
+| dup_ratio_ok | 通过 |
+| cite_valid_not_regressed | 通过 |
+| p0p1_contradictions_zero | 通过 |
+| no_new_open_findings | 通过 |
+| no_regression | 通过 |
+| repairs_verified | 通过 |
 
 ## 遗留项（需人工/外部介入）
 
 
-**验证结论：存在未通过校验项，见上表**
+**验证结论：全部通过**

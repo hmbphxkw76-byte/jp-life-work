@@ -8,8 +8,10 @@
         --old 待定 --new 是 --basis "个人参数补齐" --source 00
     python engine/tools/decision_log.py --list
     python engine/tools/decision_log.py --timeline
+    python engine/tools/decision_log.py --check
 
-退出码：0 = 成功；1 = 参数错误 / 写入失败。
+退出码：0 = 成功；1 = 参数错误 / 写入失败 / 日志缺失或结构损坏；
+2 = 日志存在但暂无记录（仅告警）。
 """
 from __future__ import annotations
 
@@ -67,6 +69,33 @@ def entries(limit: int = 0) -> list[dict]:
     return out[:limit] if limit else out
 
 
+def check() -> int:
+    """校验决策日志可检测缺失 / 结构损坏（供 CI 门禁复用）。
+
+    0 = 存在且至少 1 条记录；1 = 文件缺失或结构损坏（阻断）；
+    2 = 文件存在但暂无记录（仅告警）。
+    """
+    if not LOG_PATH.is_file():
+        try:
+            rel = LOG_PATH.relative_to(ROOT)
+        except ValueError:
+            rel = LOG_PATH
+        print(f"[ERROR] 决策日志缺失：{rel}", file=sys.stderr)
+        return 1
+    text = _read()
+    if "# 决策日志" not in text:
+        print(f"[ERROR] 决策日志结构损坏（缺表头）：{LOG_PATH}", file=sys.stderr)
+        return 1
+    rows = entries()
+    if not rows:
+        print(f"[WARN] 决策日志暂无记录：{LOG_PATH}")
+        return 2
+    latest = rows[0]
+    print(f"决策日志：{len(rows)} 条记录，最新 {latest['日期']}｜"
+          f"{latest['决策问题']}·{latest['字段']} → {latest['变化后']}")
+    return 0
+
+
 def render_timeline(limit: int = 0) -> str:
     rows = entries(limit)
     lines = ["## 决策时间线", ""]
@@ -84,6 +113,7 @@ def main() -> int:
     ap.add_argument("--add", action="store_true")
     ap.add_argument("--list", action="store_true")
     ap.add_argument("--timeline", action="store_true")
+    ap.add_argument("--check", action="store_true", help="校验日志缺失 / 结构损坏（不写文件）")
     ap.add_argument("--question", default="")
     ap.add_argument("--field", default="")
     ap.add_argument("--old", default="")
@@ -106,6 +136,9 @@ def main() -> int:
     if args.timeline:
         print(render_timeline(args.limit))
         return 0
+
+    if args.check:
+        return check()
 
     for r in entries(args.limit):
         print(f"{r['日期']}｜{r['决策问题']}·{r['字段']}：{r['变化前']} → {r['变化后']}")

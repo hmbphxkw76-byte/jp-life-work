@@ -10,7 +10,7 @@ from __future__ import annotations
 import argparse
 import re
 import sys
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -43,7 +43,7 @@ def collect_entries():
                 continue
             period = det[0]
             text = f.read_text(encoding="utf-8", errors="replace")
-            mtime = datetime.fromtimestamp(f.stat().st_mtime, tz=timezone.utc)
+            mtime = datetime.fromtimestamp(f.stat().st_mtime, tz=UTC)
             entries.append(
                 (b.rel, period, f"{b.rel}/reports/{f.name}", report_title(text), mtime,
                  profile["label"])
@@ -81,7 +81,7 @@ def main(argv=None) -> int:
                     help="校验 INDEX.md 是否与当前生成结果一致（忽略时间戳 / mtime）")
     args = ap.parse_args(argv)
     entries = collect_entries()
-    now_iso = datetime.now(tz=timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+    now_iso = datetime.now(tz=UTC).strftime("%Y-%m-%d %H:%M UTC")
     text = render_index(entries, now_iso)
     if args.check:
         p = ROOT / "INDEX.md"

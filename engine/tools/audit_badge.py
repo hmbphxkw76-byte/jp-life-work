@@ -126,7 +126,7 @@ def _targets(all_: bool, rel: str | None) -> list[str]:
     try:
         resolved = resolve_within(ROOT, rel)
     except (ValueError, OSError):
-        raise SystemExit(f"[ERROR] 路径越出仓库根：{rel}")
+        raise SystemExit(f"[ERROR] 路径越出仓库根：{rel}") from None
     if not resolved.is_file():
         raise SystemExit(f"[ERROR] 报告不存在：{rel}")
     return [resolved.relative_to(ROOT.resolve()).as_posix()]

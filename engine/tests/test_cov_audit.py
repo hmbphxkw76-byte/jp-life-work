@@ -34,7 +34,6 @@ import compliance_check  # noqa: E402
 import info_quality_check  # noqa: E402
 import md2html  # noqa: E402
 
-
 # ---------------------------------------------------------------- 公共夹具
 
 GOOD_TEXT = """# 示例 · 2026-11 月度报告

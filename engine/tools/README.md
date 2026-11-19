@@ -1,6 +1,6 @@
 # engine/tools 使用文档
 
-> **版本**：v1.1（2026-11-17 迁移后治理）
+> **版本**：v1.2（2026-11-19 文档↔实现对齐）
 
 CI 工具链使用说明。所有工具基于仓库根目录相对路径运行（自动定位仓库根），
 在仓库根目录执行即可；通用层 `engine/report_templates/` + 业务层 `NN-<slug>/` 结构见
@@ -10,7 +10,7 @@ CI 工具链使用说明。所有工具基于仓库根目录相对路径运行�
 
 ```bash
 pip install -r requirements.txt   # markdown
-python -m unittest discover -s engine/tests -v   # 单元测试（881 项，以 docs/CI.md 与实测为准）
+python -m unittest discover -s engine/tests -q   # 单元测试（以 docs/CI.md 与实测为准）
 ```
 
 ## 退出码约定（校验类工具统一）
@@ -52,7 +52,7 @@ python -m unittest discover -s engine/tests -v   # 单元测试（881 项，以 
 | fact_card_check.py | 决策支持 | validate.yml「事实卡片校验」+ scheduled-maintenance.yml「刷新」 |
 | pending_verification.py | 决策支持 | validate.yml「待核实闭环」+ scheduled-maintenance.yml「刷新」 |
 | skeleton_builder.py | 生成 | 手动：报告骨架 / 空模块合并 |
-| decision_log.py | 编排 | 手动：决策状态变化时间线 |
+| decision_log.py | 编排 | 手动：决策状态变化时间线；validate.yml「决策日志校验」（`--check` 缺失 / 结构损坏检测） |
 | coverage_gate.py | 校验 | validate.yml「覆盖率门禁」；阈值读 `coverage-config.json` 单一事实源（`--update-baseline` / `--porcelain`） |
 | review_gate.py | 校验 | audit-gate.yml「工具链变更双轴评审软门禁」（`--changed <清单>`） |
 | link_check.py | 校验 | validate.yml「内链存在性校验」（报告 / 手册 / 词条 / 汇总页 / 搜索数据的仓库相对链接 + audit-status 键对账） |
@@ -63,6 +63,7 @@ python -m unittest discover -s engine/tests -v   # 单元测试（881 项，以 
 | decision_metrics.py | 决策支持 | validate.yml「决策度量校验」（P1-6：五问收敛率 / 判定率 / 缺失 / 决策日志变化） |
 | source_check.py | 校验 | validate.yml「来源条目 schema 校验」（P1-2：来源章节 / URL 条目时点 / 分级，产出 source-index.json） |
 | counterexample_scan.py | 校验 | validate.yml「反例扫描」（P2-1：绝对化 / 以偏概全 / 无来源断言候选） |
+| perf_snapshot.py | 校验 | scheduled-maintenance.yml「性能趋势快照」；规模 + 耗时采集（基线 / 历史，`--with-tests` / `--set-baseline` / `--porcelain`） |
 
 ## 校验类
 
@@ -378,7 +379,7 @@ python engine/tools/automation_status.py activity --threshold 45               #
 | `fact_card_check.py` | 事实卡片五字段 / `[@FC-NNN]` 指针 / 跨报告事实重复率 | 同上 |
 | `pending_verification.py` | 14/15/17/18/19/20 首轮核验截止跟踪 | 同上 |
 | `skeleton_builder.py` | 报告骨架生成 / 空模块合并 / 边界声明集中 | 生成期（按需） |
-| `decision_log.py` | 决策状态变化时间线 | `update_planner.py` 月度清单 |
+| `decision_log.py` | 决策状态变化时间线 | `update_planner.py` 月度清单 + `validate.yml` `--check`（缺失 / 结构损坏检测） |
 | `info_quality_check.py` | 结构化免责声明 / 空模块占比 / 事实重复率 | `info-quality.yml --apply` + `validate.yml --check` |
 
 - **复用一致性测试**：`engine/tests/test_tools.py::TestProcessReuse` 断言各阶段均引用对应工具，漏接即失败。
@@ -438,7 +439,7 @@ python engine/tools/automation_status.py activity --threshold 45               #
   `engine/vocabulary/config/report-cycles.json`。
 
 <!-- REGISTRY:BEGIN -->
-> 注册表快照：工具 43 · 类型 12 · 主题 21 · 工作流 8（由 `generate_registry.py` 生成，勿手工编辑）
+> 注册表快照：工具 44 · 类型 12 · 主题 21 · 工作流 8（由 `generate_registry.py` 生成，勿手工编辑）
 <!-- REGISTRY:END -->
 
 
@@ -448,3 +449,4 @@ python engine/tools/automation_status.py activity --threshold 45               #
 |---|---|---|---|
 | v1.0 | 2026-11-17 | 初始版本 | 工具链使用说明（工具一览 / 工作流 / 测试 / 流水线全貌）；2026-11-17 校准测试数 308、工作流 8、类型 13 与旧路径 |
 | v1.1 | 2026-11-17 | 迁移后治理 | 修复 `../../report_templates/` 断链为 `../report_templates/`；测试数 308 → 863；工作流 6 → 8 |
+| v1.2 | 2026-11-19 | 文档↔实现对齐 | 测试计数 881 → 978（与 `docs/CI.md` 六节及实测对齐） |

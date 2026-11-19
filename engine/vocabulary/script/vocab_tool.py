@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """vocab_tool.py — 标准化动态词汇库管理工具（主题无关核心）。
 
 设计原则：
@@ -22,6 +21,7 @@
 from __future__ import annotations
 
 import argparse
+import contextlib
 import csv
 import json
 import os
@@ -269,7 +269,7 @@ def read_import_file(path: Path) -> list:
         keys = [HEADER_MAP.get(norm(h), norm(h)) for h in rows[0]]
         for r in rows[1:]:
             r = list(r) + [""] * (len(keys) - len(r))
-            raw_rows.append(dict(zip(keys, r)))
+            raw_rows.append(dict(zip(keys, r, strict=False)))
     else:
         raise ValueError(f"不支持的导入格式：{suffix}（支持 .md / .csv / .json）")
 
@@ -520,6 +520,36 @@ def cmd_tag(tmeta: dict, term_id: str, add: str, remove: str) -> int:
     return 0
 
 
+def cmd_alias(tmeta: dict, term_id: str, add: str, remove: str) -> int:
+    """调整既有词条别名（增 / 删），保持词库由工具统一读写。"""
+    storage = tmeta["storage"]
+    if not storage.exists():
+        print(f"[error] 词库不存在：{rel(storage)}")
+        return 1
+    terms, versions = load_storage(storage)
+    target = next((t for t in terms if t["id"].lower() == term_id.lower()), None)
+    if not target:
+        print(f"[error] 未找到词条 ID：{term_id}")
+        return 1
+    add_list, remove_list = split_list(add), split_list(remove)
+    before = list(target["aliases"])
+    aliases = [x for x in before if x not in remove_list]
+    for a in add_list:
+        if a not in aliases:
+            aliases.append(a)
+    if aliases == before:
+        print(f"[alias] {target['id']}「{target['term']}」别名无变化，未写盘")
+        return 0
+    target["aliases"] = aliases
+    target["last_updated"] = today()
+    detail = f"{target['id']}：增 {','.join(add_list) or '—'} / 删 {','.join(remove_list) or '—'}"
+    versions.append([next_version(versions), today(), "别名调整", detail])
+    storage.write_text(render_terms_md(tmeta, terms, versions), encoding="utf-8")
+    print(f"[alias] {target['id']}「{target['term']}」别名 → {';'.join(aliases) or '（空）'}；词库更新至 {versions[-1][0]}")
+    auto_sync_hook(tmeta["id"])
+    return 0
+
+
 def cmd_verify_update(tmeta: dict, file_arg: str) -> int:
     """回填既有词条的核验字段（核验状态 / 来源URL / 置信度）。
 
@@ -690,10 +720,8 @@ def backup_topics_file(cfg_path: Path) -> Path:
     shutil.copyfile(cfg_path, dst)
     olds = sorted(bdir.glob("topics.*.json"))
     for p in olds[:-5]:
-        try:
+        with contextlib.suppress(OSError):
             p.unlink()
-        except OSError:
-            pass
     return dst
 
 
@@ -706,10 +734,7 @@ def bump_registry_version(cfg: dict):
 
 def derive_prefix(existing: set, tid: str) -> str:
     parts = [p for p in tid.split("-") if p]
-    if len(parts) == 1:
-        cand = parts[0][:4].upper()
-    else:
-        cand = "".join(p[0] for p in parts).upper()[:4]
+    cand = parts[0][:4].upper() if len(parts) == 1 else "".join(p[0] for p in parts).upper()[:4]
     cand = cand or "T"
     if cand not in existing and re.match(r"^[A-Z]{2,4}$", cand):
         return cand
@@ -901,6 +926,11 @@ def main(argv=None) -> int:
     p.add_argument("--id", required=True)
     p.add_argument("--add", default="", help="追加标签，分号分隔")
     p.add_argument("--remove", default="", help="移除标签，分号分隔")
+    p = sub.add_parser("alias", help="调整既有词条别名")
+    p.add_argument("--topic", required=True)
+    p.add_argument("--id", required=True)
+    p.add_argument("--add", default="", help="追加别名，分号分隔")
+    p.add_argument("--remove", default="", help="移除别名，分号分隔")
     p = sub.add_parser("verify-update", help="回填既有词条核验字段（核验状态 / 来源URL / 置信度）")
     p.add_argument("--topic", required=True)
     p.add_argument("--file", required=True, help="回填文件（.md 表格 / .csv / .json，含 ID 或词条列）")
@@ -947,6 +977,8 @@ def main(argv=None) -> int:
             return cmd_check(tmeta)
         if args.cmd == "tag":
             return cmd_tag(tmeta, args.id, args.add, args.remove)
+        if args.cmd == "alias":
+            return cmd_alias(tmeta, args.id, args.add, args.remove)
         if args.cmd == "verify-update":
             return cmd_verify_update(tmeta, args.file)
         if args.cmd == "export":

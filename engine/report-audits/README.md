@@ -20,9 +20,13 @@
 | `audit/pending-p2.json` | `audit_check` / `audit_sampling` | P2 问题闭环台账 |
 | `audit/pending-verification.json` | `pending_verification.py` | 待核实闭环（CI 月度刷新） |
 | `audit/lint-whitelist.json` | `lint_reports` / `compliance_check` | lint 豁免清单 |
-| `info-quality/info-quality.json` | `info_quality_check.py` | 信息质量三清单数据源 |
-| `info-quality/rules-notes.md` | 人工 | 判定口径唯一事实源（活文档） |
-| `info-quality/repair-history.md` | `info_quality_check.py`（追加式） | 跨运行累计修复日志（json 只含本轮，不可由 json 派生） |
+| `info-quality/info-quality.json` | `info_quality_check.py` | 信息质量三清单数据源（随提交留存） |
+| `info-quality/assessment-ledger.md` | `info_quality_check.py`（`--apply` 重写） | 三清单之一：评估台账（随提交留存，N5） |
+| `info-quality/repair-ledger.md` | `info_quality_check.py`（`--apply` 重写） | 三清单之一：修复台账（本轮；无修复轮次也写入，随提交留存，N5） |
+| `info-quality/verification-report.md` | `info_quality_check.py`（`--apply` 重写） | 三清单之一：验证报告（随提交留存，N5） |
+| `info-quality/rules-notes.md` | 人工 | 判定口径唯一事实源（活文档，随提交留存） |
+| `info-quality/repair-history.md` | `info_quality_check.py`（追加式） | 跨运行累计修复日志（json 只含本轮，不可由 json 派生；随提交留存） |
+| `toolchain/perf-trend.json` | `perf_snapshot.py`（scheduled-maintenance 月度追加） | 性能趋势快照（规模 + 耗时基线 / 历史，保留最近 36 条，供跨月对比） |
 | `report-migration-2026-11.json` / `-paths.json` | `migrate_monthly_reports.py` / 测试夹具 | 迁移清单与路径映射（`test_tools.py::TestHistoricalMigration` 依赖） |
 
 ### 2. 生成物（工具渲染，json 为源，可删除重生成）
@@ -32,16 +36,17 @@
 | `audit/audit-check-report.md` | `audit_check.py` | `audit-check-report.json` |
 | `audit/report-registry.md` | `audit_registry.py` | `report-registry.json` |
 | `audit/fact-card-report.md` | `fact_card_check.py`（scheduled-maintenance 月度刷新） | 无 json 对应，md 即产物 |
-| `info-quality/assessment-ledger.md` | `info_quality_check.py` | `info-quality.json` |
-| `info-quality/verification-report.md` | `info_quality_check.py` | `info-quality.json` |
-| `info-quality/findings-by-path.json` | `audit_check.py`（内容哈希缓存） | 运行缓存（建议 `.gitignore`） |
+| `info-quality/findings-by-path.json` | `audit_check.py`（内容哈希缓存） | 运行缓存，随内容变更刷新 |
 
 > 生成物**不做手工编辑**；正文漂移时删除后由工具重生成。
+> 例外：信息质量三清单（`assessment-ledger.md` / `repair-ledger.md` /
+> `verification-report.md`）虽由工具渲染，但按 N5 留存策略**随提交留存**，
+> 不适用「删除后重生成」——漂移时由 `info_quality_check.py --apply` 重写并提交。
 
 ### 3. 历史归档 / 已清理（无引用即删）
 
 - **一次性留痕**（已完成方案 / 结项验证 / 一次性清理记录）：`cleanup-2026-11-13.md`、`cleanup-2026-11-14.md`、`gap-analysis-2026-11.md`、`execution-plan-2026-11.md`、`audit/verification-report-2026-11.md`、`audit/implementation-status.json`——完成即清理。
-- **已清理的生成物**（工具可重生成，**非**历史归档）：`compliance-audit.md`、`audit/preflight-report.md/.json`、`audit/sampling/sampling-2026-11.md/.json`、`info-quality/repair-ledger.md`、`report-migration-2026-11.md`——删除仅因快照过期，再次运行对应工具即重建。
+- **已清理的生成物**（工具可重生成，**非**历史归档）：`compliance-audit.md`、`audit/preflight-report.md/.json`、`audit/sampling/sampling-2026-11.md/.json`、`report-migration-2026-11.md`——删除仅因快照过期，再次运行对应工具即重建。
 
 ---
 

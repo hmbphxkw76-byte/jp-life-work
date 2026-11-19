@@ -609,7 +609,7 @@ def check_report(u: dict, rp: Path, findings: list[Finding]) -> dict:
             nums.append(m.group(1))
     order = ["一", "二", "三", "四", "五", "六", "七", "八", "九", "十"]
     seq = [order.index(n) for n in nums if n in order]
-    for a, b in zip(seq, seq[1:]):
+    for a, b in zip(seq, seq[1:], strict=False):
         if b - a > 1:
             findings.append(Finding("C-04", "P2", u["topic"], rel, "章节序号",
                                     f"h2 中文序号由「{order[a]}」跳至「{order[b]}」，存在逻辑断层嫌疑", "S-03"))
@@ -639,17 +639,13 @@ def check_grade_annotations(u: dict, rel: str, text: str, findings: list[Finding
         h = re.match(r"^(#{2,4})\s*(.*)$", line.strip())
         if h:
             m = re.match(r"^([①②③④⑤])\s*(.*)$", h.group(2).strip())
-            if m and m.group(1) in ("④", "⑤") and "只读引用" not in m.group(2):
-                current = m.group(1)
-            else:
-                current = None
+            current = m.group(1) if m and m.group(1) in ("④", "⑤") and "只读引用" not in m.group(2) else None
             continue
-        if current and re.match(r"^\s*\d+\.\s+", line):
-            if not any(k in line for k in GRADE_ANNOTATION_MARKERS):
-                findings.append(Finding(
-                    "C-14", "P1", u["topic"], rel, "来源分级",
-                    f"{current} 级来源条目缺少核验标注（{'、'.join(GRADE_ANNOTATION_MARKERS)} 任一）",
-                    "S-06"))
+        if current and re.match(r"^\s*\d+\.\s+", line) and not any(k in line for k in GRADE_ANNOTATION_MARKERS):
+            findings.append(Finding(
+                "C-14", "P1", u["topic"], rel, "来源分级",
+                f"{current} 级来源条目缺少核验标注（{'、'.join(GRADE_ANNOTATION_MARKERS)} 任一）",
+                "S-06"))
 
 
 def check_value_sync(u: dict, rp: Path, text: str, findings: list[Finding]) -> None:
@@ -1139,7 +1135,7 @@ def write_reports(findings: list[Finding], repairs: list[Repair],
         "# 信息质量评估台账",
         "",
         f"> 运行日期：{run_date}　|　评估范围：全项目 {before.topics_total} 个主题",
-        f"> 数据来源：info_quality_check.py 程序化判定（《信息质量评估提示词体系》可执行子集）",
+        "> 数据来源：info_quality_check.py 程序化判定（《信息质量评估提示词体系》可执行子集）",
         "",
         "## 四维度量化指标（修复前）",
         "",

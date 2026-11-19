@@ -16,7 +16,7 @@ import sys
 import tempfile
 import unittest
 import unittest.mock
-from datetime import date, datetime, timedelta, timezone
+from datetime import UTC, date, datetime, timedelta
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -33,7 +33,7 @@ import stage_gate_check  # noqa: E402
 import trigger_watch  # noqa: E402
 import update_planner  # noqa: E402
 
-UTC = timezone.utc
+UTC = UTC
 
 
 def _capture(argv, func, *args, **kwargs):
@@ -108,9 +108,8 @@ class TestCovPipelineCommon(unittest.TestCase):
         self.assertNotIn(".git", rels)
 
     def test_iter_business_dirs_missing_root(self):
-        with tempfile.TemporaryDirectory() as d:
-            with unittest.mock.patch.object(_common, "ROOT", Path(d) / "nope"):
-                self.assertEqual(_common.iter_business_dirs(), [])
+        with tempfile.TemporaryDirectory() as d, unittest.mock.patch.object(_common, "ROOT", Path(d) / "nope"):
+            self.assertEqual(_common.iter_business_dirs(), [])
 
     def test_detect_legacy_special(self):
         self.assertEqual(
@@ -151,9 +150,8 @@ class TestCovPipelineStatus(unittest.TestCase):
                 self.assertEqual(pipeline_status._latest_period(), "2026-11")
 
     def test_latest_period_empty(self):
-        with tempfile.TemporaryDirectory() as d:
-            with unittest.mock.patch.object(_common, "PIPELINE_DIR", Path(d)):
-                self.assertEqual(pipeline_status._latest_period(), "")
+        with tempfile.TemporaryDirectory() as d, unittest.mock.patch.object(_common, "PIPELINE_DIR", Path(d)):
+            self.assertEqual(pipeline_status._latest_period(), "")
 
     def test_audit_distribution(self):
         with tempfile.TemporaryDirectory() as d:
@@ -432,10 +430,9 @@ class TestCovPipelineRunner(unittest.TestCase):
         self.assertEqual(summary["audit_total"], 7)
 
     def test_run_invalid_from_stage(self):
-        with tempfile.TemporaryDirectory() as d:
-            with unittest.mock.patch.object(_common, "PIPELINE_DIR", Path(d)):
-                self.assertEqual(
-                    pipeline_runner.run("2026-11", from_stage="S9_nope"), 2)
+        with tempfile.TemporaryDirectory() as d, unittest.mock.patch.object(_common, "PIPELINE_DIR", Path(d)):
+            self.assertEqual(
+                pipeline_runner.run("2026-11", from_stage="S9_nope"), 2)
 
     def test_run_stage_failure_returns_1(self):
         with tempfile.TemporaryDirectory() as d:
@@ -450,9 +447,8 @@ class TestCovPipelineRunner(unittest.TestCase):
                     "failed")
 
     def test_status_cold_start(self):
-        with tempfile.TemporaryDirectory() as d:
-            with unittest.mock.patch.object(_common, "PIPELINE_DIR", Path(d)):
-                st = pipeline_runner.status("2099-01")
+        with tempfile.TemporaryDirectory() as d, unittest.mock.patch.object(_common, "PIPELINE_DIR", Path(d)):
+            st = pipeline_runner.status("2099-01")
         self.assertEqual(st["period"], "2099-01")
         self.assertEqual(st["stages"], {})
 
@@ -770,10 +766,9 @@ class TestCovPipelineUpdatePlanner(unittest.TestCase):
 # ──────────────────────────────────────────────
 class TestCovPipelineAutomationStatus(unittest.TestCase):
     def test_load_status_missing(self):
-        with tempfile.TemporaryDirectory() as d:
-            with unittest.mock.patch.object(
-                    automation_status, "STATUS_FILE", Path(d) / "none.json"):
-                self.assertEqual(automation_status.load_status(), {"records": []})
+        with tempfile.TemporaryDirectory() as d, unittest.mock.patch.object(
+                automation_status, "STATUS_FILE", Path(d) / "none.json"):
+            self.assertEqual(automation_status.load_status(), {"records": []})
 
     def test_load_status_valid(self):
         with tempfile.TemporaryDirectory() as d:
@@ -871,11 +866,10 @@ class TestCovPipelineAutomationStatus(unittest.TestCase):
 # ──────────────────────────────────────────────
 class TestCovPipelineDecisionLog(unittest.TestCase):
     def test_main_add_missing_args(self):
-        with tempfile.TemporaryDirectory() as d:
-            with unittest.mock.patch.object(
-                    decision_log, "LOG_PATH", Path(d) / "decision_log.md"):
-                rc, _, _ = _capture(
-                    ["decision_log.py", "--add", "--question", "q"], decision_log.main)
+        with tempfile.TemporaryDirectory() as d, unittest.mock.patch.object(
+                decision_log, "LOG_PATH", Path(d) / "decision_log.md"):
+            rc, _, _ = _capture(
+                ["decision_log.py", "--add", "--question", "q"], decision_log.main)
         self.assertEqual(rc, 1)
 
     def test_main_add_and_list(self):
@@ -939,6 +933,44 @@ class TestCovPipelineDecisionLog(unittest.TestCase):
             with unittest.mock.patch.object(decision_log, "LOG_PATH", lp):
                 self.assertEqual(decision_log.entries(), [])
 
+    # ── --check：决策日志缺失 / 结构损坏检测（N4）──
+    def test_main_check_missing_file(self):
+        with tempfile.TemporaryDirectory() as d:
+            lp = Path(d) / "decision_log.md"
+            with unittest.mock.patch.object(decision_log, "LOG_PATH", lp):
+                rc, _, err = _capture(["decision_log.py", "--check"], decision_log.main)
+        self.assertEqual(rc, 1)
+        self.assertIn("缺失", err)
+
+    def test_main_check_missing_header(self):
+        with tempfile.TemporaryDirectory() as d:
+            lp = Path(d) / "decision_log.md"
+            lp.write_text("| 2026-01-01 | Q | F | a | b | basis | src |\n",
+                          encoding="utf-8")
+            with unittest.mock.patch.object(decision_log, "LOG_PATH", lp):
+                rc, _, err = _capture(["decision_log.py", "--check"], decision_log.main)
+        self.assertEqual(rc, 1)
+        self.assertIn("结构", err)
+
+    def test_main_check_empty_warns(self):
+        with tempfile.TemporaryDirectory() as d:
+            lp = Path(d) / "decision_log.md"
+            lp.write_text(decision_log._ensure_header(""), encoding="utf-8")
+            with unittest.mock.patch.object(decision_log, "LOG_PATH", lp):
+                rc, out, _ = _capture(["decision_log.py", "--check"], decision_log.main)
+        self.assertEqual(rc, 2)
+        self.assertIn("暂无记录", out)
+
+    def test_main_check_ok(self):
+        with tempfile.TemporaryDirectory() as d:
+            lp = Path(d) / "decision_log.md"
+            with unittest.mock.patch.object(decision_log, "LOG_PATH", lp):
+                _capture(["decision_log.py", "--add", "--question", "Q",
+                          "--field", "F", "--new", "N"], decision_log.main)
+                rc, out, _ = _capture(["decision_log.py", "--check"], decision_log.main)
+        self.assertEqual(rc, 0)
+        self.assertIn("1 条记录", out)
+
 
 # ──────────────────────────────────────────────
 # stage_gate_check：阶段闸
@@ -959,7 +991,7 @@ class TestCovPipelineStageGate(unittest.TestCase):
                  "{{REGION}} = 日本\n{{TOPIC}} = T\n"
                  "{{REGISTRY_PATH}} = data/x_indicator_registry.md\n")
     _GOOD_REG = ("| # | 指标 | 口径 | 核验日期 |\n|---|---|---|---|\n"
-                 "| 1 | A | B | {} |\n".format(date.today().isoformat()))
+                 f"| 1 | A | B | {date.today().isoformat()} |\n")
 
     def test_main_topic_not_found(self):
         with unittest.mock.patch.object(stage_gate_check, "iter_business_dirs", return_value=[]):

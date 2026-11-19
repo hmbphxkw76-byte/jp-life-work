@@ -346,16 +346,15 @@ class TestCovComplianceComplianceCheck(_TempRootCase):
 
     # ── load_rules ──
     def test_load_rules_missing_exits(self):
-        with mock.patch.object(compliance_check, "RULES_PATH", self.root / "missing.json"):
-            with self.assertRaises(SystemExit) as cm:
-                compliance_check.load_rules()
+        with mock.patch.object(compliance_check, "RULES_PATH", self.root / "missing.json"), \
+                self.assertRaises(SystemExit) as cm:
+            compliance_check.load_rules()
         self.assertEqual(cm.exception.code, 1)
 
     def test_load_rules_invalid_json_exits(self):
         bad = _write(self.root / "bad.json", "{not json")
-        with mock.patch.object(compliance_check, "RULES_PATH", bad):
-            with self.assertRaises(SystemExit) as cm:
-                compliance_check.load_rules()
+        with mock.patch.object(compliance_check, "RULES_PATH", bad), self.assertRaises(SystemExit) as cm:
+            compliance_check.load_rules()
         self.assertEqual(cm.exception.code, 1)
 
     # ── detect_type / detect_types / cycle_rule ──
@@ -558,32 +557,32 @@ class TestCovComplianceComplianceCheck(_TempRootCase):
         errors, warnings, lines = compliance_check.run_check(
             None, whitelist={"01-demo/reports/2026-11-demo.html"})
         self.assertEqual((errors, warnings), (0, 0))
-        self.assertTrue(any("[SKIP]" in l for l in lines))
+        self.assertTrue(any("[SKIP]" in ln for ln in lines))
 
     def test_run_check_new_only_skips_old(self):
         self._one_target(name="2026-10-demo.html")
         errors, warnings, lines = compliance_check.run_check(None, new_only=True)
         self.assertEqual((errors, warnings), (0, 0))
-        self.assertFalse(any("2026-10" in l for l in lines))
+        self.assertFalse(any("2026-10" in ln for ln in lines))
 
     def test_run_check_note_warning(self):
         # 业务配置无继承声明 → note 警告
         self._one_target(config="# 无继承\n")
         errors, warnings, lines = compliance_check.run_check(None)
         self.assertEqual(warnings, 1)
-        self.assertTrue(any("[W]" in l for l in lines))
+        self.assertTrue(any("[W]" in ln for ln in lines))
 
     def test_run_check_unregistered_type_warning(self):
         self._one_target(config="x ../../engine/report_templates/unknown-type/\n")
         errors, warnings, lines = compliance_check.run_check(None)
         self.assertEqual(warnings, 1)
-        self.assertTrue(any("未在 compliance-rules.json 登记" in l for l in lines))
+        self.assertTrue(any("未在 compliance-rules.json 登记" in ln for ln in lines))
 
     def test_run_check_inherited_info(self):
         # event 周期未单独登记 → 回落基线（INFO）
         self._one_target(name="2026-11-15-事件.html")
         errors, warnings, lines = compliance_check.run_check(None)
-        self.assertTrue(any("[INFO]" in l and "按基线骨架" in l for l in lines))
+        self.assertTrue(any("[INFO]" in ln and "按基线骨架" in ln for ln in lines))
 
     def test_run_check_error_and_warning_counts(self):
         # 节数超出 → W；缺 title → E
