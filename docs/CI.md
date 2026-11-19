@@ -49,6 +49,7 @@
 | 待核实闭环检查 | `pending_verification.py --check` | 阻断（未登记 / 逾期） |
 | 个人财务模型一致性 | `personal_finance_model.py --check` | 阻断（缺失 / 过期） |
 | 词库校验 | `vocab_tool.py topic-check` / `verify` + `sync_vocab.py check` | 阻断 |
+| 决策日志校验 | `decision_log.py --check` | 阻断（日志缺失 / 结构损坏；暂无记录仅告警） |
 | 覆盖率门禁 | `coverage_gate.py`（阈值读 `coverage-config.json`） | 阻断（enforce=true 未达标 / 测试失败） |
 
 > 两个关卡对期间 >= 2026-11 的**新报告**阻断；历史报告由 `--new-only` 跳过，
@@ -90,6 +91,10 @@
 | 自动化状态失败补记 | `git add -A -- automation-status.json` → `commit` + `push`（`if: always()`） | job 失败时主提交跳过，本步骤仍把本轮状态入库，避免「记录了却因未提交而丢失」 |
 
 - **退出码约定**：`0` 通过；`1` 错误（阻断）；`2` 警告（放行）。
+- **核验日志策略（N6）**：`auto_verify.py --all --dry-run` 逐报告写
+  `engine/report-audits/audit/verify/<slug>.json`（21 份；维护流水线另写 `auto-verify-all.json` 汇总）。
+  该目录由 `.gitignore` 第 23 行排除，属**运行期产物、不入库**；CI 只保证可重跑生成，
+  排查时取日志，不做提交。策略变更需同步 `engine/report-audits/README.md` 与本文。
 - **活跃度预警**：`automation_status.py activity --threshold 45` 为**手动 / 按需入口**（见第七节），
   不纳入自动门禁；自动侧只保证各工作流 `record` 入库，供人工判断节拍是否断档。
 
@@ -118,6 +123,10 @@
   5. `automation_status.py record` — 记录执行状态
   6. 提交三清单（无变更则跳过）
 - **产物**：`engine/report-audits/info-quality/`（评估台账 / 修复台账 / 验证报告 / 累计修复历史 / JSON）
+- **留存策略（N5）**：该目录**不纳入 `.gitignore`**，三清单（`assessment-ledger.md` /
+  `repair-ledger.md` / `verification-report.md`）与人工维护的 `rules-notes.md` 随提交留存；
+  `info-quality.yml` 每次运行 `--apply` 重写，`git status` 出现漂移即提交，不做运行期清理。
+  `findings-by-path.json` 为 `audit_check` 的内容哈希缓存（键含全部 md 指纹），随内容变更刷新。
 
 ### 6. `audit-gate.yml` — 审计门禁（阻断式）
 
@@ -199,7 +208,7 @@ reports/YYYY-MM-<slug>.md  ──md2html.py──►  reports/YYYY-MM-<slug>.htm
 - **辅助开关**：报告页工具条「隐藏更新标记」对照阅读、「展开全部删除」。
 - **呈现**：报告页新标签页独立打开，页脚提供「← 返回主题 / 返回首页」。
 
-## 六、测试体系（`engine/tests/`，978 项）
+## 六、测试体系（`engine/tests/`，983 项）
 
 | 场景 | 测试类 | 覆盖 |
 |---|---|---|
@@ -228,7 +237,7 @@ reports/YYYY-MM-<slug>.md  ──md2html.py──►  reports/YYYY-MM-<slug>.htm
 | 报告生成一致性比对 | `test_verify_report_parity.py`（25 项） | 归一化（单遍路径重写 / 时间戳 / JSON 易变键）、基线写入与覆盖清空、比对（一致 / 仅路径 / MISMATCH / MISSING / NEW）、退出码 0/1/2 |
 | 引擎层迁移守卫 | `test_engine_migration.py`（16 项） | 目录终态（engine 存在 / 旧引擎层与根协作脚本目录不存在）、SKIP_TOP / TYPE_RE、主题数 21、深度推导 ROOT、旧路径与代码常量活引用清零、裸 tools 目录引用与旧模块路径 `src.<包>` 清零 |
 
-> 合计 978 项（`python -m unittest discover -s engine/tests` 实测，当前全绿）。
+> 合计 983 项（`python -m unittest discover -s engine/tests` 实测，当前全绿）。
 
 ## 七、手动命令速查
 
@@ -456,3 +465,4 @@ python engine/scripts/cleanup_workspace.py --dry-run  # 预览将删除项
 | v2.14 | 2026-11-18 | P2 批次（P2-1…P2-7） | 新增 `counterexample_scan.py`（7 项）、`vocab_near_check.py`（8 项）与 `docs/词库近义合并规范.md`；`coverage_gate` 增逐工具明细（2 项）；`workflow_guard` 锁域扩展 commit/push；mypy 清零并转阻断 + 一次性工具冒烟；`decision_metrics --history` 入维护流水线；P2-7 跨月基线回归；工具 42 → 43；六节测试数 950 → 969 |
 | v2.15 | 2026-11-18 | P1-9 词条 + P1-2 来源时点 | 14–20 词条补全至 ≥70（新增 245 条）；`source_check` 识别和历（令和/平成/昭和）与核对标记；6 份报告来源条目补「（2026-11 核对）」并重走审计；六节测试数 969 → 971 |
 | v2.16 | 2026-11-19 | 测试计数同步 | 六节标题与合计行对齐实测：976 → 978、合计 881 → 978（含他会话 `6879c0e` 974→976 与 `e91940e` +2 未同步的累积漂移）；`test_arch_guard` 计数守卫恢复通过 |
+| v2.17 | 2026-11-19 | 工具接线（组 C） | N4 `decision_log.py --check` 接入 `validate.yml`（缺失 / 结构损坏阻断）+ 守卫测试；N5 信息质量三清单留存策略；N6 `auto_verify` 全量日志策略；N8 五问收敛触发条件说明 |
