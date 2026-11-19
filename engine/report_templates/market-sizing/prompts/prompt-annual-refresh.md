@@ -1,7 +1,7 @@
 # {{REGION}} · {{TOPIC}} · 年度假设刷新提示词（市场规模测算与预测型 · 泛用版）
 
 > **用途**：每年固定窗口对模型假设做刷新与回测；关键假设失效信号触发器命中时专项插刷。泛用版业务提示词：建新业务线时复制本文件至 `{TOPIC_DIR}/prompts/`，替换变量与 TODO 后即可运行。
-> **产出**：刷新版报告落盘 `{{OUTPUT_PATH}}`（`reports/{{YYYY-MM}}-<slug>.md`）+ 模型档案年度新版（`{{OUTPUT_REGISTRY}}`，另存不覆盖历史）；插刷件 `reports/{{YYYY-MM}}-<slug>.md`（命名不在标准正则内，validate 仅 WARN 不阻断，属预期）。
+> **产出**：刷新版报告落盘 `{{OUTPUT_PATH}}`（`reports/{{YYYY-MM}}-<slug>.md`）+ 模型档案年度新版（`{{OUTPUT_REGISTRY}}`，另存不覆盖历史）；插刷件 `reports/{{YYYY-MM-DD}}-<主题>.md`（由 `compliance_check.py` 按事件件（event）识别，validate 对非月度正则仅 WARN 不阻断，属预期）。
 >
 > **继承声明（四层体系）**：本文件 = [通用基座](../../engine/report_templates/prompt-generic-base.md) × [监测报告通用规范](../../engine/report_templates/monitoring-common-spec.md) × [年度刷新类型模板（市场规模测算与预测型）](../../engine/report_templates/market-sizing/prompt-annual-refresh-template.md) × 业务专属配置（实例化后为 `./business-config.md`；泛用版暂缺，业务项以 TODO 标注）。冲突时以业务提示词（即本文件实例化版）为准。
 

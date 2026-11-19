@@ -38,9 +38,9 @@
 | 节拍 | 文件名（业务目录相对路径） | 版本号 |
 |---|---|---|
 | 月度 | `reports/{{YYYY-MM}}-<slug>.md`（+ 同名 html） | 写入报告内（vYYYY.MM.DD） |
-| 事件触发 | 月度报告内专项章节或 `reports/{{YYYY-MM}}-<slug>.md` 追加件 | 同上 |
+| 事件触发 | 月度报告内专项章节或 `reports/{{YYYY-MM-DD}}-<主题>.md` 追加件 | 同上 |
 
-- 文件命名遵循仓库统一约定（`engine/tools` 按此识别）；事件触发的追加件命名不在标准正则内，`validate.py` 仅提示 WARN 不阻断，属预期行为。
+- 文件命名遵循仓库统一约定（`engine/tools` 按此识别）；事件触发追加件用 `reports/{{YYYY-MM-DD}}-<主题>.md` 命名，`compliance_check.py` 按事件件（event）识别；`validate.py` 对非月度正则仅提示 WARN 不阻断，属预期行为。
 - 交付格式：md 源稿 + 同目录自包含 HTML（`engine/tools/md2html.py` 同步生成）；HTML 必须通过 `engine/tools/lint_reports.py`。
 - 基线报告常驻 `reports/` 顶层，不进入归档；周期报告按归档保留策略执行。
 

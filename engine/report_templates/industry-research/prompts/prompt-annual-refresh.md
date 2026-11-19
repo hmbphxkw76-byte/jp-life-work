@@ -1,7 +1,7 @@
 # {{REGION}} · {{TOPIC}} · 年度刷新提示词（行业深度研究型 · 泛用版）
 
 > **用途**：每年固定窗口对行业全景做全量刷新；重大结构性事件触发器命中时提前插刷对应模块。泛用版业务提示词：建新业务线时复制本文件至 `{TOPIC_DIR}/prompts/`，替换变量与 TODO 后即可运行。
-> **产出**：刷新版报告落盘 `{{OUTPUT_PATH}}`（`reports/{{YYYY-MM}}-<slug>.md`）；插刷件 `reports/{{YYYY-MM}}-<slug>.md`（命名不在标准正则内，validate 仅 WARN 不阻断，属预期）。
+> **产出**：刷新版报告落盘 `{{OUTPUT_PATH}}`（`reports/{{YYYY-MM}}-<slug>.md`）；插刷件 `reports/{{YYYY-MM-DD}}-<主题>.md`（由 `compliance_check.py` 按事件件（event）识别，validate 对非月度正则仅 WARN 不阻断，属预期）。
 >
 > **继承声明（四层体系）**：本文件 = [通用基座](../../engine/report_templates/prompt-generic-base.md) × [监测报告通用规范](../../engine/report_templates/monitoring-common-spec.md) × [年度刷新类型模板（行业深度研究型）](../../engine/report_templates/industry-research/prompt-annual-refresh-template.md) × 业务专属配置（实例化后为 `./business-config.md`；泛用版暂缺，业务项以 TODO 标注）。冲突时以业务提示词（即本文件实例化版）为准。
 

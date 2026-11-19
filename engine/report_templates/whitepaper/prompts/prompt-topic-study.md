@@ -1,7 +1,7 @@
 # {{REGION}} · {{TOPIC}} · 专题续作提示词（白皮书·专题深度型 · 泛用版 · 选题制）
 
 > **用途**：专题续作统一入口——新选题白皮书、年度系列篇、框架修订篇（当次类型由 {{STUDY_TYPE}} 指定）。泛用版业务提示词：建新业务线时复制本文件至 `{TOPIC_DIR}/prompts/`，替换变量与 TODO 后即可运行。
-> **产出**：新选题件 `reports/{{YYYY-MM}}-<slug>.md` 或框架修订件 `reports/{{YYYY-MM-DD}}-主题-修订.md`、年度系列篇 `reports/{{YYYY-MM}}-<slug>.md`（+ 同名 html）。新选题与修订篇命名不在工具链标准正则内，validate 仅 WARN 不阻断，属预期。
+> **产出**：新选题件 `reports/{{YYYY-MM-DD}}-<主题>.md` 或框架修订件 `reports/{{YYYY-MM-DD}}-主题-修订.md`、年度系列篇 `reports/{{YYYY-MM}}-<slug>.md`（+ 同名 html）。新选题与修订篇由 `compliance_check.py` 按事件件（event）识别，validate 对非月度正则仅 WARN 不阻断，属预期。
 >
 > **继承声明（四层体系）**：本文件 = [通用基座](../../engine/report_templates/prompt-generic-base.md) × [监测报告通用规范](../../engine/report_templates/monitoring-common-spec.md) × [专题续作类型模板（白皮书·专题深度型）](../../engine/report_templates/whitepaper/prompt-topic-study-template.md) × 业务专属配置（实例化后为 `./business-config.md`；泛用版暂缺，业务项以 TODO 标注）。冲突时以业务提示词（即本文件实例化版）为准。
 

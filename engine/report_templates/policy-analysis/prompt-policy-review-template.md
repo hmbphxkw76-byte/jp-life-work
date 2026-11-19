@@ -37,10 +37,10 @@
 
 | 节拍 | 文件名（业务目录相对路径） | 版本号 |
 |---|---|---|
-| 事件触发解读 | `reports/{{YYYY-MM}}-<slug>.md`（+ 同名 html） | 写入报告内（vYYYY.MM.DD） |
+| 事件触发解读 | `reports/{{YYYY-MM-DD}}-<主题>.md`（+ 同名 html） | 写入报告内（vYYYY.MM.DD） |
 | 年度台账复盘 | `reports/{{YYYY-MM}}-<slug>.md`（+ 同名 html）+ 台账年度新版 | 同上 |
 
-- 事件触发解读命名不在 `engine/tools` 标准正则内，`validate.py` 仅提示 WARN 不阻断，属预期行为；年度复盘命名与标准正则兼容。
+- 事件触发解读用 `reports/{{YYYY-MM-DD}}-<主题>.md` 命名，`compliance_check.py` 按事件件（event）识别；`validate.py` 对非月度正则仅提示 WARN 不阻断，属预期行为；年度复盘命名与标准正则兼容。
 - 交付格式：md 源稿 + 同目录自包含 HTML（`engine/tools/md2html.py` 同步生成）；HTML 必须通过 `engine/tools/lint_reports.py`。
 - 基线报告常驻 `reports/` 顶层，不进入归档；解读件按归档保留策略执行。
 
