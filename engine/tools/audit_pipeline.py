@@ -25,6 +25,7 @@
     python audit_pipeline.py --status               # 打印状态表
     python audit_pipeline.py --verify               # 校验台账哈希链 + 指纹绑定
     python audit_pipeline.py --sync                 # 对指纹失配的已审计报告写 revoke（→ stale）
+    python audit_pipeline.py --purge-ghosts         # 移除台账中 report 指向不存在报告的幽灵事件（重算哈希链）
     python audit_pipeline.py --rebind               # 内容未变、仅 HTML 渲染漂移的失效报告重新绑定（→ audited）
     python audit_pipeline.py --sampling-fail <清单>  # 抽检命中 P0/P1 的已审计报告置 stale（G→F 反馈链路）
     python audit_pipeline.py --gate                 # 合并门禁：完整性 + 变更报告审计状态（--strict 全库）
@@ -600,6 +601,44 @@ def cmd_sync() -> int:
     return 0
 
 
+def cmd_purge_ghosts() -> int:
+    """移除台账中的「幽灵事件」——report 指向工作树中不存在的报告文件。
+
+    台账是 append-only 事件流，但已删除报告的历史事件会长期残留，使对账
+    口径里持续出现指向不存在文件的幽灵路径。本命令仅剔除这类事件，完整
+    保留真实报告（工作树中存在）的事件，并重算 seq / prev_hash / hash
+    使哈希链重新闭合。幂等：无幽灵事件后台账不变。
+    """
+    ledger = load_ledger()
+    if not ledger:
+        print("审计台账为空，无需清理")
+        return 0
+    ghosts = sorted({ev["report"] for ev in ledger
+                     if ev.get("report") and not (ROOT / ev["report"]).is_file()})
+    if not ghosts:
+        print("无幽灵事件（全部事件均指向存在的报告），台账未改动")
+        return 0
+    kept = [ev for ev in ledger
+            if not ev.get("report") or (ROOT / ev["report"]).is_file()]
+    prev = "0" * 64
+    out: list[dict] = []
+    for i, ev in enumerate(kept, start=1):
+        body = {k: v for k, v in ev.items() if k not in ("seq", "prev_hash", "hash")}
+        h = _hash(prev, body)
+        out.append({"seq": i, "prev_hash": prev, "hash": h, **body})
+        prev = h
+    tmp = LEDGER.parent / (LEDGER.name + ".tmp")
+    tmp.write_text("".join(json.dumps(r, ensure_ascii=False) + "\n" for r in out),
+                   encoding="utf-8")
+    tmp.replace(LEDGER)
+    state = rebuild_status(load_ledger())
+    write_status(state)
+    build_registry()
+    print(f"幽灵事件清理：移除 {len(ledger) - len(kept)} 条，保留 {len(kept)} 条；"
+          f"涉及幽灵报告 {len(ghosts)} 份：{', '.join(ghosts)}")
+    return 0
+
+
 def mark_sampling_failures(reports: list[str]) -> int:
     """抽检命中 P0/P1：把对应已审计报告置 stale（G→F 反馈链路，规范七）。
 
@@ -755,6 +794,8 @@ def main() -> int:
     ap.add_argument("--status", action="store_true", help="打印状态表")
     ap.add_argument("--verify", action="store_true", help="校验台账哈希链与指纹绑定")
     ap.add_argument("--sync", action="store_true", help="同步指纹失配的审计失效报告")
+    ap.add_argument("--purge-ghosts", action="store_true",
+                    help="移除台账中 report 指向不存在报告的幽灵事件（重算哈希链）")
     ap.add_argument("--rebind", action="store_true",
                     help="内容未变、仅 HTML 渲染漂移的失效报告重新绑定（stale → audited）")
     ap.add_argument("--backfill-l5", action="store_true",
@@ -787,6 +828,8 @@ def main() -> int:
         return cmd_verify()
     if args.sync:
         return cmd_sync()
+    if args.purge_ghosts:
+        return cmd_purge_ghosts()
     if args.rebind:
         return cmd_rebind()
     if args.backfill_l5:
