@@ -77,6 +77,26 @@ def _section(text: str, heading_prefix: str) -> str:
     return ""
 
 
+def _latest_number_row(text: str) -> str:
+    """docs/README.md 版本记录区中「最新一条含工具数」的数据行（表按时间升序）。
+
+    只取含 `工具 N` 的最后一行：后续版本行若未复述数字（如仅记新增节），
+    仍锁定最近一次记录的数字，避免历史行的旧数字干扰。
+    """
+    m = re.search(r"##\s*五、版本记录(.*)\Z", text, re.DOTALL)
+    if not m:
+        return ""
+    rows = []
+    for ln in m.group(1).splitlines():
+        s = ln.strip()
+        if s.startswith("|") and not re.match(r"^\|[\s\-:|]+\|$", s) and "版本" not in s.split("|")[1]:
+            rows.append(s)
+    for s in reversed(rows):
+        if re.search(r"工具\s*\d+", s):
+            return s
+    return ""
+
+
 _CN_DIGITS = {"一": 1, "二": 2, "三": 3, "四": 4, "五": 5,
              "六": 6, "七": 7, "八": 8, "九": 9}
 
@@ -295,6 +315,59 @@ class TestDocImplAlignmentGuard(unittest.TestCase):
         rows = re.findall(r"^\|\s*\[", sec.group(0), re.M)
         self.assertEqual(len(rows), 14,
                          f"docs/README.md 规范清单实际 {len(rows)} 行，应 14")
+
+
+class TestDocNumberLockW1(unittest.TestCase):
+    """W1 / A1：规范类文档中的易变数字与代码实测双向锁定。
+
+    锁定对象：docs/README.md 版本记录最新行、总规范头部「程序化实现」行、
+    cross-domain-expert-roles.md 的工具数 / 测试数。数字变更须同步改文档，否则测试红。
+    """
+
+    def test_docs_readme_version_numbers_match_actual(self):
+        text = (DOCS_DIR / "README.md").read_text(encoding="utf-8")
+        row = _latest_number_row(text)
+        self.assertTrue(row, "docs/README.md 版本记录区未找到含工具数的数据行")
+        actual = {
+            "工具": len(_tool_files()),
+            "类型": len(TEMPLATE_TYPE_DIRS),
+            "测试": unittest.defaultTestLoader.discover(
+                str(ROOT / "engine" / "tests")
+            ).countTestCases(),
+        }
+        for label, n in actual.items():
+            m = re.search(rf"{label}\s*(\d+)", row)
+            self.assertIsNotNone(m, f"docs/README.md 版本记录最新行未找到「{label} N」")
+            self.assertEqual(int(m.group(1)), n,
+                             f"docs/README.md 版本记录 {label}数漂移：文档 {m.group(1)} vs 实测 {n}")
+
+    def test_pipeline_spec_header_numbers_match_actual(self):
+        text = (DOCS_DIR / "信息生产全链路执行规范.md").read_text(encoding="utf-8")
+        header = next((ln for ln in text.splitlines() if "程序化实现" in ln), "")
+        self.assertTrue(header, "总规范未找到「程序化实现」行")
+        m1 = re.search(r"(\d+)\s*个工具脚本", header)
+        m2 = re.search(r"(\d+)\s*条工作流", header)
+        self.assertIsNotNone(m1, "总规范头部未找到「N 个工具脚本」")
+        self.assertIsNotNone(m2, "总规范头部未找到「N 条工作流」")
+        self.assertEqual(int(m1.group(1)), len(_tool_files()),
+                         "总规范头部工具数与实测不符")
+        self.assertEqual(int(m2.group(1)),
+                         len(list(WORKFLOWS_DIR.glob("*.yml"))),
+                         "总规范头部工作流数与实测不符")
+
+    def test_expert_roles_numbers_match_actual(self):
+        text = (DOCS_DIR / "cross-domain-expert-roles.md").read_text(encoding="utf-8")
+        m1 = re.search(r"(\d+)\s*个工具", text)
+        m2 = re.search(r"engine/tests/`[^）]*?(\d+)\s*项", text)
+        self.assertIsNotNone(m1, "cross-domain-expert-roles.md 未找到「N 个工具」")
+        self.assertIsNotNone(m2, "cross-domain-expert-roles.md 未找到测试数表述")
+        self.assertEqual(int(m1.group(1)), len(_tool_files()),
+                         "cross-domain-expert-roles.md 工具数与实测不符")
+        self.assertEqual(
+            int(m2.group(1)),
+            unittest.defaultTestLoader.discover(str(ROOT / "engine" / "tests")).countTestCases(),
+            "cross-domain-expert-roles.md 测试数与实测不符",
+        )
 
 
 class TestAtomicWrite(unittest.TestCase):

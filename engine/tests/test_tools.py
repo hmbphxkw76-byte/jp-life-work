@@ -477,6 +477,21 @@ class TestStructureCheck(unittest.TestCase):
         self.assertEqual(rc, 0)
         self.assertIn("0 份缺必需要素", buf.getvalue())
 
+    def test_skeleton_all_configured_topics_covered(self):
+        """W1 / A5：已配 business-config 的主题须有 handbook 或显式豁免。"""
+        import structure_check
+        self.assertEqual(structure_check.check_skeleton(), [])
+
+    def test_skeleton_exemptions_cover_gap_topics(self):
+        """W1 / A5：00 与 14–20 缺 handbook，须在豁免清单中显式声明。"""
+        import structure_check
+        exempt = structure_check.skeleton_exemptions()
+        for topic in ("00-decision-hub", "14-life-operations", "15-health-wellbeing",
+                      "16-exit-transition-return", "17-migration-compliance",
+                      "18-family-parenting", "19-safety-disaster", "20-overseas-china"):
+            self.assertIn(topic, exempt, f"{topic} 缺 handbook 但未声明豁免")
+            self.assertTrue(exempt[topic], f"{topic} 豁免未写明理由")
+
     def test_main_missing_exit_one(self):
         import structure_check
         with tempfile.TemporaryDirectory() as d:

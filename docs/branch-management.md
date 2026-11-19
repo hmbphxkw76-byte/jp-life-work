@@ -64,7 +64,7 @@ python engine/scripts/branch_naming.py install --uninstall [--force]
 | `pre-push` | `git push` | 逐条校验 `refs/heads/*`；不合规 `task/*` 阻断（退出码 1）；`main`、删除、非 heads 引用放行 |
 | `pre-commit` | `git commit` | 当前分支为不合规 `task/*` 时阻断；`main` 与 detached HEAD（merge / rebase 中）放行 |
 
-- 退出码：`0` 放行；`1` 阻断；`130` 中断。
+- 退出码：通用约定见 [CI](CI.md)；本钩子 `130` 表示中断。
 - Python 解释器：依次尝试 `BRANCH_NAMING_PY` → `python` → `python3`；
   都没有则阻断并提示。
 - CI 侧（GitHub Actions）在远端 runner 直接推 `main`，不经过本地钩子，不受影响。
