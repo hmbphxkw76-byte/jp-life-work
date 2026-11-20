@@ -41,6 +41,8 @@ from info_quality_check import (  # noqa: E402
     THRESH_SOURCE_COVERAGE,
     fact_units,
     has_source,
+    has_value_summary,
+    value_sync_gaps,
 )
 from lint_reports import lint_html  # noqa: E402
 
@@ -49,6 +51,10 @@ REPORT_MD = AUDIT_DIR / "preflight-report.md"
 REPORT_JSON = AUDIT_DIR / "preflight-report.json"
 
 P_LEVELS = {"P0": 0, "P1": 1, "P2": 2}
+
+# 登记册一致性（PF-REGVAL）历史遗留豁免：未建「数据变更摘要」活值表的主题暂不判定，
+# 豁免清单在 run_all 汇总中公示（带截止日期）；截止后须补表并纳入判定。
+REGVAL_ROLLOUT_DEADLINE = "2026-12-31"
 MD_HEAD_RE = re.compile(r"^#{1,6}\s+(.*)$", re.MULTILINE)
 MD_H2_RE = re.compile(r"^##\s+", re.MULTILINE)
 REG_ROW_RE = re.compile(r"^\|\s*(\d+)\s*\|", re.MULTILINE)
@@ -195,6 +201,14 @@ def check_text(rel: str, text: str, html: str = "", type_id: str = "",
                 _add(out, "PF-REG", "P2", "登记册指针",
                      f"引用登记册 {', '.join('#' + str(n) for n in missing)} 在登记册中不存在", "S-08")
 
+    # ── 登记册一致性（PF-REGVAL，P1；判定复用 info_quality_check.value_sync_gaps） ──
+    # 报告核验完成 → 登记册回写：登记册活值数值须在两表对应行一致，缺失即 P1。
+    if registry_text:
+        for no, missing in value_sync_gaps(registry_text, text):
+            _add(out, "PF-REGVAL", "P1", "登记册一致性",
+                 f"指标 #{no} 登记册活值中的数值 {', '.join(sorted(missing))} "
+                 f"未在报告「数据变更摘要」对应行出现（报告核验后须回写登记册）", "S-09")
+
     # ── 结构：类型骨架与 HTML lint（仅有 HTML 时） ──
     if html:
         if not type_id:
@@ -252,18 +266,30 @@ def run_all() -> tuple[list[dict], dict]:
         for md in sorted(reports.glob("*.md")):
             rel = _rel(md)
             findings = check_report(rel)
+            # 登记册一致性豁免：登记册存在但报告未建「数据变更摘要」活值表（历史遗留）。
+            regval_exempt = False
+            data_dir = md.parents[1] / "data"
+            if data_dir.is_dir():
+                for f in sorted(data_dir.glob("*.md")):
+                    if "registry" in f.name:
+                        if _read(f) and not has_value_summary(_read(md)):
+                            regval_exempt = True
+                        break
             results.append({
                 "report": rel,
                 "topic": b.rel,
                 "findings": findings,
                 "severity": severity_counts(findings),
                 "passed": not any(f.severity in ("P0", "P1") for f in findings),
+                "regval_exempt": regval_exempt,
             })
     results.sort(key=lambda r: r["report"])
     summary: dict[str, Any] = {
         "reports": len(results),
         "passed": sum(1 for r in results if r["passed"]),
         "failed": sum(1 for r in results if not r["passed"]),
+        "regval_exempt": [r["report"] for r in results if r["regval_exempt"]],
+        "regval_rollout_deadline": REGVAL_ROLLOUT_DEADLINE,
         "by_severity": {"P0": 0, "P1": 0, "P2": 0},
     }
     for r in results:
@@ -287,6 +313,14 @@ def write_report(results: list[dict], summary: dict, run_date: str) -> list[Path
             detail.append([f.code, f.severity, r["report"], f.location, f.detail])
     conclusion = "全部通过" if summary["failed"] == 0 else f"{summary['failed']} 份报告存在 P0/P1，需修正后复检"
 
+    exempt = summary.get("regval_exempt", [])
+    deadline = summary.get("regval_rollout_deadline", REGVAL_ROLLOUT_DEADLINE)
+    exempt_rows = [["报告", "豁免截止日"]]
+    for r in exempt:
+        exempt_rows.append([f"[{r}]({prefix}{r})", deadline])
+    exempt_block = (md_table(exempt_rows) if exempt
+                    else "（无：全部报告均已建「数据变更摘要」活值表）")
+
     md = "\n".join([
         "# 落盘前自检报告（AuditGuard Preflight）",
         "",
@@ -297,6 +331,13 @@ def write_report(results: list[dict], summary: dict, run_date: str) -> list[Path
         "## 逐报告结论",
         "",
         md_table(rows),
+        "",
+        "## 登记册一致性豁免清单（历史遗留）",
+        "",
+        f"> PF-REGVAL 仅比对同时具备登记册活值表与报告「数据变更摘要」活值表的行；"
+        f"下表报告未建该表，豁免至 {deadline}，逾期须补表并纳入判定。",
+        "",
+        exempt_block,
         "",
         "## 发现明细",
         "",

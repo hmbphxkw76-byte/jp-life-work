@@ -1,4 +1,15 @@
-# 置信度分级标准（00 决策枢纽）
+# 00-decision-hub 置信度标注口径
 
-> **通用基准**：[../../engine/report_templates/confidence-grade-standard.md](../../engine/report_templates/confidence-grade-standard.md)（全库统一，冲突时以通用层为准）。
-> 本文件仅保留 00 特有口径：五问结论、关键数字、判读句后附两位分级码；00 在 `data/decision_hub_registry.md` 与报告中统一汇总展示。
+**单一事实源**：分级码定义与引用格式以 `engine/report_templates/confidence-grade-standard.md` 为准，本文件只声明本主题的差异口径，不复制规则。
+
+## 主题差异声明（显式）
+
+00 是跨主题决策层，**不新增一手来源**，全部结论引用 01–20 主题报告 / 登记册。因此：
+
+- 凡引用官方一手事实但**经由来源主题报告转引**者，本主题按 **A 级（官方一手·转引）** 定级（A1 / A2），引用写作 `（来源：主题 NN · 报告期 YYYY-MM）`。
+- 同一对象在来源主题（直读原文）为 **S 级**、在本主题为 **A 级** 并存——差异**仅源于来源路径**（直读 vs 转引），**值一致**，不构成口径冲突。
+- 若本主题后续直接取得官方一手来源（URL + 发布机构 + 获取时间），应升级为 S 级并改用 `[Source: URL, 年份]` 格式，同时删除对应的 A 级标注。
+
+## 待裁定差异
+
+出现时登记于 `docs/decision-info-gap-registry.md`，不得静默择一。
