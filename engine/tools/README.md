@@ -476,7 +476,7 @@ python engine/tools/automation_status.py activity --threshold 45               #
   `engine/vocabulary/config/report-cycles.json`。
 
 <!-- REGISTRY:BEGIN -->
-> 注册表快照：工具 45 · 类型 12 · 主题 21 · 工作流 8（由 `generate_registry.py` 生成，勿手工编辑）
+> 注册表快照：工具 46 · 类型 12 · 主题 21 · 工作流 8（由 `generate_registry.py` 生成，勿手工编辑）
 <!-- REGISTRY:END -->
 
 
