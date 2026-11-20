@@ -26,6 +26,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from _common import ROOT  # noqa: E402
 
 LOG_PATH = ROOT / "00-decision-hub" / "data" / "decision_log.md"
+REGISTRY_PATH = ROOT / "00-decision-hub" / "data" / "decision_hub_registry.md"
 ROW_RE = re.compile(r"^\|\s*(\d{4}-\d{2}-\d{2})\s*\|(.+)\|\s*$", re.M)
 
 HEADER = ["日期", "决策问题", "字段", "变化前", "变化后", "依据", "来源"]
@@ -69,6 +70,26 @@ def entries(limit: int = 0) -> list[dict]:
     return out[:limit] if limit else out
 
 
+def _known_questions() -> set[str]:
+    """登记册第一节的「决策问题」取值集合（含聚合值「全部」），用于关联校验（n20）。"""
+    out = {"全部"}
+    try:
+        text = REGISTRY_PATH.read_text(encoding="utf-8", errors="replace")
+    except OSError:
+        return out
+    m = re.search(r"##\s*一、五问指标状态表(.*?)(?=\n##\s*|\Z)", text, re.DOTALL)
+    if not m:
+        return out
+    for line in m.group(1).splitlines():
+        line = line.strip()
+        if not line.startswith("|") or re.match(r"^\|[\s\-|]+\|$", line):
+            continue
+        cells = [c.strip() for c in line.strip("|").split("|")]
+        if len(cells) >= 2 and cells[0].isdigit():
+            out.add(cells[1])
+    return out
+
+
 def check() -> int:
     """校验决策日志可检测缺失 / 结构损坏（供 CI 门禁复用）。
 
@@ -89,6 +110,13 @@ def check() -> int:
     rows = entries()
     if not rows:
         print(f"[WARN] 决策日志暂无记录：{LOG_PATH}")
+        return 2
+    # n20：反馈事件须能关联需求（决策问题须存在于登记册第一节）
+    known = _known_questions()
+    unknown = [r for r in rows if r["决策问题"] not in known]
+    if unknown:
+        print(f"[WARN] {len(unknown)} 条决策记录的「决策问题」未关联需求编号"
+              f"（未知：{', '.join(sorted({r['决策问题'] for r in unknown}))}）")
         return 2
     latest = rows[0]
     print(f"决策日志：{len(rows)} 条记录，最新 {latest['日期']}｜"

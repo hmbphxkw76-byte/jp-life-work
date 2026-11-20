@@ -25,6 +25,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 import decision_log  # noqa: E402
+import decision_metrics  # noqa: E402
 from _common import (  # noqa: E402
     ROOT,
     Business,
@@ -178,6 +179,24 @@ def render_md(tasks: list[dict], period: str, decisions: list[dict] | None = Non
     return "\n".join(lines)
 
 
+def render_requirements(matrix: dict) -> str:
+    """需求覆盖矩阵（PIR）人读表格（n19）。"""
+    lines = ["## 需求覆盖矩阵（PIR，n19）", "",
+             "| 需求编号 | 决策问题 | 责任主题 | 覆盖状态 | 期限 | 关联缺失 |",
+             "|---|---|---|---|---|---|"]
+    for r in matrix["requirements"]:
+        lines.append(f"| {r['需求编号']} | {r['决策问题']} | {r['责任主题']} | "
+                     f"{r['覆盖状态']} | {r['期限'] or '—'} | {r['关联缺失编号'] or '—'} |")
+    lines += ["", f"缺失清单：{len(matrix['gaps'])} 条", "",
+              "| 缺失编号 | 缺失主题 | 覆盖的决策问题 | 优先级 | 期限 |",
+              "|---|---|---|---|---|"]
+    for g in matrix["gaps"]:
+        lines.append(f"| {g['编号']} | {g['缺口']} | {g['覆盖的决策问题']} | "
+                     f"{g['优先级']} | {g['期限'] or '—'} |")
+    lines.append("")
+    return "\n".join(lines)
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description="内容更新任务清单生成")
     ap.add_argument("--project", default="", help="限定业务线（如 01-ssw-driver），缺省全部")
@@ -185,7 +204,16 @@ def main() -> int:
     ap.add_argument("--pending-only", action="store_true", help="仅输出未完成任务")
     ap.add_argument("--porcelain", action="store_true", help="输出 JSON 数组")
     ap.add_argument("--decisions", action="store_true", help="仅输出决策状态变化")
+    ap.add_argument("--requirements", action="store_true", help="输出需求覆盖矩阵（PIR，n19）")
     args = ap.parse_args()
+
+    if args.requirements:
+        matrix = decision_metrics.requirements_matrix()
+        if args.porcelain:
+            print(json.dumps(matrix, ensure_ascii=False, indent=2))
+        else:
+            print(render_requirements(matrix), end="")
+        return 0
 
     if args.decisions:
         for d in decision_changes():

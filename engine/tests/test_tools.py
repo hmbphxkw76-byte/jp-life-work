@@ -36,6 +36,7 @@ import build_hub  # noqa: E402
 import build_index  # noqa: E402
 import compliance_check  # noqa: E402
 import decision_log  # noqa: E402
+import decision_metrics  # noqa: E402
 import fact_card_check  # noqa: E402
 import info_quality_check  # noqa: E402
 import link_check  # noqa: E402
@@ -1989,6 +1990,25 @@ class TestDecisionLog(unittest.TestCase):
             finally:
                 decision_log.LOG_PATH = orig
 
+    def test_check_flags_unknown_question(self):
+        """n20：决策记录的「决策问题」须能关联登记册需求，否则告警（rc=2）。"""
+        with tempfile.TemporaryDirectory() as d:
+            orig_log, orig_reg = decision_log.LOG_PATH, decision_log.REGISTRY_PATH
+            decision_log.LOG_PATH = Path(d) / "decision_log.md"
+            decision_log.REGISTRY_PATH = Path(d) / "registry.md"
+            try:
+                (Path(d) / "registry.md").write_text(
+                    "## 一、五问指标状态表\n\n"
+                    "| # | 决策问题 | 指标 | 来源主题 | 引用位置 | 收敛状态 | 缺失标记 |\n"
+                    "|---|---|---|---|---|---|---|\n"
+                    "| 1 | 去不去 | x | 01 | y | 已收敛 | — |\n", encoding="utf-8")
+                self.assertIn("去不去", decision_log._known_questions())
+                self.assertIn("全部", decision_log._known_questions())
+                decision_log.add("未知问题", "判定", "待定", "是", "x", "00")
+                self.assertEqual(decision_log.check(), 2)
+            finally:
+                decision_log.LOG_PATH, decision_log.REGISTRY_PATH = orig_log, orig_reg
+
 
 class TestInfoQualityUpgrades(unittest.TestCase):
     """结构化免责声明 / 空模块占比 / 跨报告事实重复率。"""
@@ -2512,6 +2532,29 @@ class TestUpdatePlannerAudit(unittest.TestCase):
         md = update_planner.render_md(tasks, "2026-11", [])
         self.assertIn("审计提醒", md)
         self.assertIn("未审计", md)
+
+    def test_render_requirements(self):
+        """n19：需求覆盖矩阵（PIR）人读表格。"""
+        matrix = {"requirements": [{"需求编号": "REQ-01", "决策问题": "去不去",
+                                    "责任主题": "01", "覆盖状态": "已覆盖",
+                                    "期限": "", "关联缺失编号": "GAP-01"}],
+                  "gaps": [{"编号": "GAP-01", "缺口": "对比", "覆盖的决策问题": "去不去",
+                            "优先级": "P1", "期限": "2026-11-01"}]}
+        md = update_planner.render_requirements(matrix)
+        self.assertIn("REQ-01", md)
+        self.assertIn("GAP-01", md)
+
+    def test_requirements_main_porcelain(self):
+        """n19：--requirements --porcelain 输出 JSON。"""
+        matrix = {"requirements": [], "gaps": []}
+        with unittest.mock.patch.object(decision_metrics, "requirements_matrix",
+                                       return_value=matrix), \
+                unittest.mock.patch.object(sys, "argv",
+                                          ["update_planner.py", "--requirements", "--porcelain"]):
+            buf = io.StringIO()
+            with contextlib.redirect_stdout(buf):
+                self.assertEqual(update_planner.main(), 0)
+        self.assertEqual(json.loads(buf.getvalue()), matrix)
 
 
 class TestIndexGate(unittest.TestCase):
