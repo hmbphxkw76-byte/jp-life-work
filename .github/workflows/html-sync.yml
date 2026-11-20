@@ -23,6 +23,7 @@ concurrency:
 
 permissions:
   contents: write
+  pull-requests: write
 
 jobs:
   sync:
@@ -78,8 +79,10 @@ jobs:
             --phase html-sync --result "$RESULT" \
             --run-url "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
 
-      - name: 提交 HTML 与汇总页更新
+      - name: 提交 HTML 与汇总页更新（推分支 + 开 PR）
         if: always()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git add -A -- ':(glob)**/reports/*.html' index.html search-index.json \
             engine/report-audits/audit/ automation-status.json
@@ -90,7 +93,12 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git commit -m "ci: html-sync 同步报告 HTML 与汇总页"
-          git push --force-with-lease
+          BRANCH="auto/html-sync-$(date -u +%Y%m%d-%H%M%S)"
+          git push origin "HEAD:$BRANCH"
+          gh pr create --base main --head "$BRANCH" \
+            --title "[automated] html-sync 同步报告 HTML 与汇总页" \
+            --body "由 .github/workflows/html-sync.yml 自动提交（[automated] 标记，保留 github-actions[bot] 提交身份）。HTML 为 md 的确定性派生物，请评审后合并。" \
+            || echo "::warning::PR 创建失败（可能已存在），请人工确认"
 
       # 阶段收尾：无论成败清理缓存、临时产物与 pip 缓存，保证流水线结束后无残留。
       - uses: ./.github/actions/workspace-cleanup
