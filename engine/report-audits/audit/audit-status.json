@@ -1,14 +1,14 @@
 {
   "version": "v1.4",
-  "updated": "2026-11-20T05:49:33+00:00",
+  "updated": "2026-11-20T07:23:31+00:00",
   "reports": {
     "00-decision-hub/reports/2026-11-decision-hub.md": {
-      "state": "stale",
-      "audit_id": "AUD-202611-013",
-      "finalized_at": "2026-11-19T14:42:12+00:00",
+      "state": "audited",
+      "audit_id": "AUD-202611-010",
+      "finalized_at": "2026-11-20T07:20:01+00:00",
       "content_hash": "sha256:a3e14c6421f4ae6ea3c29b147f0ec11dd40614ff945b038a331a704a29d8a809",
       "html_hash": "sha256:7aa6f4c2af85bf928a5a93e360750cef65f40781653702c2ed97fc4e9e794be8",
-      "last_seq": 869
+      "last_seq": 923
     },
     "01-ssw-driver/reports/2026-11-ssw-driver.md": {
       "state": "audited",
@@ -139,36 +139,36 @@
       "last_seq": 919
     },
     "17-migration-compliance/reports/2026-11-migration-compliance.md": {
-      "state": "stale",
-      "audit_id": "AUD-202611-020",
-      "finalized_at": "2026-11-18T09:02:54+00:00",
+      "state": "audited",
+      "audit_id": "AUD-202611-013",
+      "finalized_at": "2026-11-20T07:22:05+00:00",
       "content_hash": "sha256:3d34b94a934b84313a6836f74cb9088f066f4168774f0d5981a385f163fcbfec",
       "html_hash": "sha256:5cee19b4e6465e1fdd65b7800e9f735c02531a24787fdfcdb8a8391b10fa9368",
-      "last_seq": 870
+      "last_seq": 927
     },
     "18-family-parenting/reports/2026-11-family-parenting.md": {
-      "state": "stale",
-      "audit_id": "AUD-202611-008",
-      "finalized_at": "2026-11-18T09:02:55+00:00",
+      "state": "audited",
+      "audit_id": "AUD-202611-020",
+      "finalized_at": "2026-11-20T07:22:38+00:00",
       "content_hash": "sha256:6bbd9e5947c1085de7181fd41acbe201967548cd0a4375a25b58c7d17ab3c0ea",
       "html_hash": "sha256:066d2dfc2c16e7bf776a3c321d615c22382f8181594ff7589f09e11d2a0d2fab",
-      "last_seq": 871
+      "last_seq": 931
     },
     "19-safety-disaster/reports/2026-11-safety-disaster.md": {
-      "state": "stale",
-      "audit_id": "AUD-202611-004",
-      "finalized_at": "2026-11-18T13:17:54+00:00",
+      "state": "audited",
+      "audit_id": "AUD-202611-008",
+      "finalized_at": "2026-11-20T07:23:05+00:00",
       "content_hash": "sha256:0ca864643a93c6bfe38e10a5e7012a35d9879cd816ab0d720ab2445ddcdb8f77",
       "html_hash": "sha256:59fa2ee68b6d4c227206dff17ac6c71f5769e11d6489a8817144585e78916c8d",
-      "last_seq": 872
+      "last_seq": 935
     },
     "20-overseas-china/reports/2026-11-overseas-china.md": {
-      "state": "stale",
-      "audit_id": "AUD-202611-021",
-      "finalized_at": "2026-11-18T09:02:56+00:00",
+      "state": "audited",
+      "audit_id": "AUD-202611-004",
+      "finalized_at": "2026-11-20T07:23:31+00:00",
       "content_hash": "sha256:32e21f7e02aa7a4407703a6384c79ae0126c8c1af9022a1e9170c9be5b4373e0",
       "html_hash": "sha256:ba3836834d3e4a569d7369de483ff221f1aafb0051355687a08706a2ac10a77b",
-      "last_seq": 873
+      "last_seq": 939
     }
   }
 }
