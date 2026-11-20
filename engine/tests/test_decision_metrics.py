@@ -40,7 +40,12 @@ REGISTRY_TEXT = """# 登记册
 | 2 | 去不去 | 缺口 | 01 | y | 部分 | 缺对比 |
 | 3 | 能不能去 | 在留 | 08 | z | 已收敛 | — |
 
-## 二、缺失清单
+## 二、暴露的缺失清单（补缺触发器）
+
+| 优先级 | 缺失主题 | 覆盖的决策问题 | 缺口证据 | 建议类型 | 期限 |
+|---|---|---|---|---|---|
+| P1 | 中国同岗到手对比 | 去不去 | 待补 | employment-research | 2026-11-01 |
+| 已接入 | 在留救济 | 能不能去 | 已建 | policy-analysis | 已完成（2026-11-14） |
 
 ## 三、观察项
 
@@ -98,6 +103,25 @@ class CollectCase(unittest.TestCase):
         self.assertEqual(snap["kit_total"], 2)
         self.assertEqual(snap["kit_ready"], 1)
         self.assertEqual(snap["decision_log_entries"], 2)
+        # n19 需求维度
+        self.assertEqual(snap["requirement_total"], 3)
+        self.assertEqual(snap["requirement_covered"], 2)
+        self.assertEqual(snap["requirement_partial"], 1)
+        self.assertEqual(snap["requirement_uncovered"], 0)
+        self.assertEqual(snap["requirement_overdue"], 1)
+
+    def test_requirements_matrix(self) -> None:
+        with mock.patch.object(m, "REGISTRY", self.reg):
+            mx = m.requirements_matrix()
+        self.assertEqual(len(mx["requirements"]), 3)
+        self.assertEqual(len(mx["gaps"]), 2)
+        req1 = mx["requirements"][0]
+        self.assertEqual(req1["需求编号"], "REQ-01")
+        self.assertEqual(req1["责任主题"], "01")
+        self.assertEqual(req1["覆盖状态"], "已覆盖")
+        self.assertEqual(req1["关联缺失编号"], "GAP-01")
+        # 「能不能去」关联 GAP-02
+        self.assertEqual(mx["requirements"][2]["关联缺失编号"], "GAP-02")
 
     def test_collect_missing_registry(self) -> None:
         with mock.patch.object(m, "REGISTRY", self.root / "nope.md"), \
@@ -144,10 +168,14 @@ class RenderMainCase(unittest.TestCase):
                 "indicator_total": 2, "question_decision_rate": 0.0,
                 "question_decided": 0, "question_total": 2, "gap_entries": 1,
                 "kit_readiness_rate": 1.0, "kit_ready": 1, "kit_total": 1,
-                "decision_log_entries": 2}
+                "decision_log_entries": 2,
+                "requirement_coverage_rate": 0.5, "requirement_covered": 1,
+                "requirement_total": 2, "requirement_partial": 1,
+                "requirement_uncovered": 0, "requirement_overdue": 0}
         md = m.render_md(snap)
         self.assertIn("五问 / 缺失决策度量", md)
         self.assertIn("决策变化次数", md)
+        self.assertIn("需求覆盖率", md)
 
     def test_main_exit_1_on_empty(self) -> None:
         with mock.patch.object(m, "collect",
