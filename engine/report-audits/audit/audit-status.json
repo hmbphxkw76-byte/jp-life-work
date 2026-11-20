@@ -1,6 +1,6 @@
 {
   "version": "v1.4",
-  "updated": "2026-11-20T04:22:26+00:00",
+  "updated": "2026-11-20T04:36:27+00:00",
   "reports": {
     "00-decision-hub/reports/2026-11-decision-hub.md": {
       "state": "stale",
@@ -16,7 +16,7 @@
       "finalized_at": "2026-11-18T09:02:45+00:00",
       "content_hash": "sha256:1598d855da693946fd57519be8711c7b4c9c92418da8dc2bad61a9a74717bae2",
       "html_hash": "sha256:de73c15624803ef3b1522cc17d7f63656677e888c85ff8677cafc14b1dbe5147",
-      "last_seq": 849
+      "last_seq": 874
     },
     "02-career-driver/reports/2026-11-career-driver.md": {
       "state": "audited",
@@ -24,7 +24,7 @@
       "finalized_at": "2026-11-18T09:02:46+00:00",
       "content_hash": "sha256:1987411328ad741be94429bf42f7bdc24bc26736fff76d4911e444c988227fc7",
       "html_hash": "sha256:250ab979f791bf7e4ca887482524989fd05120fa10003acaad9ee28890458635",
-      "last_seq": 850
+      "last_seq": 875
     },
     "03-career-management/reports/2026-11-career-management.md": {
       "state": "audited",
@@ -32,7 +32,7 @@
       "finalized_at": "2026-11-18T13:17:51+00:00",
       "content_hash": "sha256:a2dd767ddaa85ea7808694f205267f274534ecc17c544716edccf403c7742e56",
       "html_hash": "sha256:cbc8391ce93f7530a62246605bc5087709b632dcc0ec08f53a670f3cd3db07df",
-      "last_seq": 851
+      "last_seq": 876
     },
     "04-industry-logistics/reports/2026-11-industry-logistics.md": {
       "state": "audited",
@@ -40,7 +40,7 @@
       "finalized_at": "2026-11-18T11:10:18+00:00",
       "content_hash": "sha256:a88d0614701b6637e30d53ab6f6e055da97106b456c8e820dcf33a309b0d0b81",
       "html_hash": "sha256:2448d2b4457e49851d482afbfa39c74fcb007cdeb533130b297ca36f77f14e09",
-      "last_seq": 852
+      "last_seq": 877
     },
     "05-industry-autonomous/reports/2026-11-industry-autonomous.md": {
       "state": "audited",
@@ -48,7 +48,7 @@
       "finalized_at": "2026-11-18T13:17:51+00:00",
       "content_hash": "sha256:bf982e68e7f8800eac40f721d20c00a05d6b7de18d768beec071bdc9d2c28569",
       "html_hash": "sha256:aa623393ca82128f248fc80249845ae5300a6a5ff7365949dc2c79069c08cfb3",
-      "last_seq": 853
+      "last_seq": 878
     },
     "06-industry-technology/reports/2026-11-industry-technology.md": {
       "state": "audited",
@@ -56,7 +56,7 @@
       "finalized_at": "2026-11-18T13:17:52+00:00",
       "content_hash": "sha256:dd4bc54be6e3034cc2c5353bcadc03d0b906684fea7f29a207a48c7bc3ea42c5",
       "html_hash": "sha256:4022c4ed18ccb406e7be763a763a2ef50ce19c06d53c3df43b46ef57859d62ad",
-      "last_seq": 854
+      "last_seq": 879
     },
     "07-economy-finance/reports/2026-11-economy-finance.md": {
       "state": "audited",
@@ -64,7 +64,7 @@
       "finalized_at": "2026-11-18T09:02:48+00:00",
       "content_hash": "sha256:108772fe64c83fe3af2564bdf2c99fd774082a6605ce0db8af7238a4ca8718bf",
       "html_hash": "sha256:c9f02858d47aa7783a22c80b74e349fbc6ac8f482b0b142054635af0d9f014d2",
-      "last_seq": 855
+      "last_seq": 880
     },
     "08-visa-immigration/reports/2026-11-visa-immigration.md": {
       "state": "audited",
@@ -72,7 +72,7 @@
       "finalized_at": "2026-11-18T14:58:02+00:00",
       "content_hash": "sha256:fae71f97343a459592dcac90d61b48e9df7ba14ee03d114adbfb006318d24195",
       "html_hash": "sha256:1fee4cea881444e4f2c281d6ed44b4666c914e31d3787a88a338b413841f2615",
-      "last_seq": 856
+      "last_seq": 881
     },
     "09-politics-law/reports/2026-11-politics-law.md": {
       "state": "audited",
@@ -80,7 +80,7 @@
       "finalized_at": "2026-11-18T11:10:20+00:00",
       "content_hash": "sha256:f456039b3659b3acf3b24a9772b0ab598302dbae9789cf0da70436a7d7f37ffc",
       "html_hash": "sha256:dc5c9a5015b4ccaefc65fbb14b16c687992c2fd2c884ec7cc486fd1a2384aa62",
-      "last_seq": 857
+      "last_seq": 882
     },
     "10-education-qualification/reports/2026-11-education-qualification.md": {
       "state": "audited",
@@ -88,7 +88,7 @@
       "finalized_at": "2026-11-18T13:17:53+00:00",
       "content_hash": "sha256:33fee2a8911b3c69e1cb640ed2c7eb50860d68bc7b444496a3e1de05a9e2bab1",
       "html_hash": "sha256:8d0f41dcbc14b8a91f640d06d78156b6ed554f7278c93d95e576e8a19772f32d",
-      "last_seq": 858
+      "last_seq": 883
     },
     "11-language-japanese/reports/2026-11-language-japanese.md": {
       "state": "audited",
@@ -96,7 +96,7 @@
       "finalized_at": "2026-11-18T09:02:51+00:00",
       "content_hash": "sha256:2d8c1f1254b70fc2f80f3c863bd5fce75b70b99304cb918b110519719f312baa",
       "html_hash": "sha256:5efb97c342ded16ab85e59647512c7d7434c03d39bda9e329f5a3390ec044db5",
-      "last_seq": 859
+      "last_seq": 884
     },
     "12-culture-life/reports/2026-11-culture-life.md": {
       "state": "audited",
@@ -104,7 +104,7 @@
       "finalized_at": "2026-11-18T09:02:51+00:00",
       "content_hash": "sha256:3efdb84df9a322b80829b6cebe85fcb7b08886d820da710bdff652617089bfd7",
       "html_hash": "sha256:cffd64183765598b40cf12e90ba237f32edc53ad1649018bf5ec3b853fc41eef",
-      "last_seq": 860
+      "last_seq": 885
     },
     "13-regional-info/reports/2026-11-regional-info.md": {
       "state": "audited",
@@ -112,7 +112,7 @@
       "finalized_at": "2026-11-18T11:10:21+00:00",
       "content_hash": "sha256:3ec2622cf17b50e9b7509a035e0cab12491f44c21991a6a3634fdaba16afd785",
       "html_hash": "sha256:d6f144a623dd710279b8b3f196418c6b3894eb2a8fac5350df470669b58f3df3",
-      "last_seq": 861
+      "last_seq": 886
     },
     "14-life-operations/reports/2026-11-life-operations.md": {
       "state": "audited",
@@ -120,7 +120,7 @@
       "finalized_at": "2026-11-18T09:02:53+00:00",
       "content_hash": "sha256:1b8172b2ac08a04012606935bb4418cac8492a7c0428ffeb01b558959086587b",
       "html_hash": "sha256:e2ba61207a50a83d40e03de1be414d50f3ff7463bafe625dff27879ff9fdd8be",
-      "last_seq": 862
+      "last_seq": 887
     },
     "15-health-wellbeing/reports/2026-11-health-wellbeing.md": {
       "state": "audited",
@@ -128,7 +128,7 @@
       "finalized_at": "2026-11-18T09:02:53+00:00",
       "content_hash": "sha256:019b0e804964ad269134d8245c4a8fefa32721005ffba9056c66e428e0fa9568",
       "html_hash": "sha256:75e7be4474d93aec98a743ae8414edd1bdfa4ab77d6f30e4f953494822e136c4",
-      "last_seq": 863
+      "last_seq": 888
     },
     "16-exit-transition-return/reports/2026-11-exit-transition-return.md": {
       "state": "audited",
@@ -136,7 +136,7 @@
       "finalized_at": "2026-11-18T09:02:54+00:00",
       "content_hash": "sha256:7303ce47f48b53928ec60a9c8c04822b86025175707dbf6463269ee8d4ae26a1",
       "html_hash": "sha256:bc898400a7538730388db7e3539c4654deef2bf379dc886958d8013719aabf03",
-      "last_seq": 864
+      "last_seq": 889
     },
     "17-migration-compliance/reports/2026-11-migration-compliance.md": {
       "state": "stale",
