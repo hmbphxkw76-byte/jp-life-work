@@ -41,6 +41,7 @@
     "review_gate.py",
     "skeleton_builder.py",
     "source_check.py",
+    "source_language_gate.py",
     "source_normalize.py",
     "stage_gate_check.py",
     "structure_check.py",

@@ -16,7 +16,7 @@
 {{REGISTRY_FORMAT}}      = md-table
 {{BASELINE_REPORT_PATH}} = reports/{{YYYY-MM}}-<slug>.md
 {{FRESHNESS_PRIORITY}}   = 最新官方页 > 上期值 > 预测值；给付金额与要件以官方最新年度口径为准
-{{SOURCE_LANGUAGE_RULE}} = 日文官方一手 + 英文权威优先；中文来源仅作线索，引用须回溯日 / 英原文
+{{SOURCE_LANGUAGE_RULE}} = 仅英文 / 日文来源：① 官方权威（日本政府省厅・e-Gov・统计、国际机构、其他国家政府官方）；② 主流投资平台 / 顾问机构；③ 主流新闻媒体（英文 / 日文）。杜绝中文来源（含中文媒体及其中英文版、中国机构中英文版），不得引用、不得作线索、不得设例外。
 {{REPO_RAW_URL_BASE}}    = https://github.com/hmbphxkw76-byte/jp-life-work/blob/main/18-family-parenting
 ```
 
@@ -121,7 +121,7 @@
 ＞ ④ 家庭裁判所、自治体多语言窗口、地域国際化協会（仅执行流程）
 ＞ ⑤ 媒体（仅线索，引用须回溯官方原文）
 
-每条数据必须附官方原文 URL 与版本日期；中文来源仅作线索。
+每条数据必须附官方原文 URL 与版本日期。
 
 ---
 

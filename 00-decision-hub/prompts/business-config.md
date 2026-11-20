@@ -18,7 +18,7 @@
 {{REGISTRY_FORMAT}}      = md-table
 {{BASELINE_REPORT_PATH}} = reports/2026-11-decision-hub.md
 {{FRESHNESS_PRIORITY}}   = 以各来源主题最新一期报告 / 登记册为准；主题未更新时沿用其最近值并注明
-{{SOURCE_LANGUAGE_RULE}} = 沿用各来源主题的来源规则；本主题不新增一手来源，只做引用与缺失标注
+{{SOURCE_LANGUAGE_RULE}} = 仅英文 / 日文来源：① 官方权威（日本政府省厅・e-Gov・统计、国际机构、其他国家政府官方）；② 主流投资平台 / 顾问机构；③ 主流新闻媒体（英文 / 日文）。杜绝中文来源（含中文媒体及其中英文版、中国机构中英文版），不得引用、不得作线索、不得设例外。
 {{REPO_RAW_URL_BASE}}    = https://github.com/hmbphxkw76-byte/jp-life-work/blob/main/00-decision-hub
 {{PERSONAL_PROFILE_PATH}} = data/personal_profile.md
 {{FINANCE_MODEL_PATH}}     = data/personal_finance_model.md

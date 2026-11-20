@@ -1,6 +1,6 @@
 # engine/tools 使用文档
 
-> **版本**：v1.5（2026-11-19 工程守卫 W1 / A1 / A5）
+> **版本**：v1.13（2026-11-20 来源语言门禁 W5）
 
 CI 工具链使用说明。所有工具基于仓库根目录相对路径运行（自动定位仓库根），
 在仓库根目录执行即可；通用层 `engine/report_templates/` + 业务层 `NN-<slug>/` 结构见
@@ -13,7 +13,7 @@ pip install -r requirements.txt   # markdown
 python -m unittest discover -s engine/tests -q   # 单元测试（以 docs/CI.md 与实测为准）
 ```
 
-> 测试计数：1081 项（`python -m unittest discover -s engine/tests` 实测，与 `docs/CI.md` 六节一致；由 `engine/tests/test_arch_guard.py` 双向锁定）。
+> 测试计数：1095 项（`python -m unittest discover -s engine/tests` 实测，与 `docs/CI.md` 六节一致；由 `engine/tests/test_arch_guard.py` 双向锁定）。
 
 ## 退出码约定（校验类工具统一）
 
@@ -58,6 +58,7 @@ python -m unittest discover -s engine/tests -q   # 单元测试（以 docs/CI.md
 | structure_check.py | 校验 | validate.yml「报告必需要素结构校验」（数据可靠性与局限 / 置信度标注 / 信息差与未核验清单 / 决策建议） |
 | md_html_parity.py | 校验 | validate.yml「md↔HTML 一致性校验」（P1-3：渲染漂移 / 缺 HTML 阻断） |
 | prompt_check.py | 校验 | validate.yml「提示词结构门禁」（P1-11：命名 / 继承声明 / p3–p5 结构 / business-config 槽位与优先级） |
+| source_language_gate.py | 校验 | validate.yml「来源语言门禁」（W5：`{{SOURCE_LANGUAGE_RULE}}` 逐字一致 + 中文来源许可扫描 + 变更报告中文域名黑名单） |
 | l5_meta_check.py | 校验 | audit-gate.yml「L5 证据元评估」（P1-4：覆盖率 / 合格率 / basis 缺失 / 依据充分度） |
 | decision_metrics.py | 决策支持 | validate.yml「决策度量校验」（P1-6：五问收敛率 / 判定率 / 缺失 / 决策日志变化） |
 | source_check.py | 校验 | validate.yml「来源条目 schema 校验」（P1-2：来源章节 / URL 条目时点 / 分级 / 字段完整率 E5，产出 source-index.json，n25 起入库受控） |
@@ -477,7 +478,7 @@ python engine/tools/automation_status.py activity --threshold 45               #
   `engine/vocabulary/config/report-cycles.json`。
 
 <!-- REGISTRY:BEGIN -->
-> 注册表快照：工具 46 · 类型 12 · 主题 21 · 工作流 8（由 `generate_registry.py` 生成，勿手工编辑）
+> 注册表快照：工具 47 · 类型 12 · 主题 21 · 工作流 8（由 `generate_registry.py` 生成，勿手工编辑）
 <!-- REGISTRY:END -->
 
 
@@ -498,3 +499,4 @@ python engine/tools/automation_status.py activity --threshold 45               #
 | v1.10 | 2026-11-20 | 需求登记（n19） | `decision_metrics.requirements_matrix()` 需求覆盖矩阵（PIR）+ 需求维度指标；`update_planner --requirements`；00 / 01 / 08 提示词增「需求命中检查」 |
 | v1.11 | 2026-11-20 | 反馈回路（n20） | `decision_metrics` 增缺失闭环率（反馈维度）；`decision_log --check` 增「决策问题」关联登记册校验（未关联 rc=2）；`scheduled-maintenance.yml` 增反馈汇总步骤；00 提示词增「反馈回流」 |
 | v1.12 | 2026-11-20 | DIKW 血缘（n24） | `fact_card_check --lineage`（FC → 报告 / 登记册）；`decision_metrics --lineage`（决策问题 → 结论 ← 引用位置 ← 责任主题）；00 登记册增「DIKW 血缘」节 |
+| v1.13 | 2026-11-20 | 来源语言门禁（W5） | 新增 `source_language_gate.py`（提示词规则逐字一致 + 中文来源许可扫描 + 变更报告中文域名黑名单）与 `engine/config/source-policy.json` 单一事实源；测试计数 1081 → 1095；头部版本对齐 |

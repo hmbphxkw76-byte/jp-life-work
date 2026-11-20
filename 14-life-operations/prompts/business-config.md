@@ -16,7 +16,7 @@
 {{REGISTRY_FORMAT}}      = md-table
 {{BASELINE_REPORT_PATH}} = reports/{{YYYY-MM}}-<slug>.md
 {{FRESHNESS_PRIORITY}}   = 官方一手最新；费用 / 要件以官方页与运营商官网为准
-{{SOURCE_LANGUAGE_RULE}} = 日文官方一手优先；运营商 / 金融機関官网次之；中文来源仅作线索
+{{SOURCE_LANGUAGE_RULE}} = 仅英文 / 日文来源：① 官方权威（日本政府省厅・e-Gov・统计、国际机构、其他国家政府官方）；② 主流投资平台 / 顾问机构；③ 主流新闻媒体（英文 / 日文）。杜绝中文来源（含中文媒体及其中英文版、中国机构中英文版），不得引用、不得作线索、不得设例外。
 {{REPO_RAW_URL_BASE}}    = https://github.com/hmbphxkw76-byte/jp-life-work/blob/main/14-life-operations
 ```
 

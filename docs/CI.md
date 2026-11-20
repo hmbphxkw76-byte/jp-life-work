@@ -49,6 +49,7 @@
 | 报告必需要素结构校验 | `structure_check.py` | 阻断（要素缺失） |
 | md↔HTML 一致性校验 | `md_html_parity.py` | 阻断（漂移 / 缺失） |
 | 提示词结构门禁 | `prompt_check.py` | 阻断（命名 / 继承 / 结构 / 槽位） |
+| 来源语言门禁 | `source_language_gate.py --changed` | 阻断（规则不一致 / 中文来源许可 / 变更报告中文域名） |
 | 决策度量校验 | `decision_metrics.py --check` | 阻断（解析失败） |
 | 来源条目 schema 校验 | `source_check.py` | 阻断（来源章节缺失） |
 | 反例扫描 | `counterexample_scan.py` | 阻断（扫描失败；候选放行） |
@@ -68,7 +69,7 @@
 | 覆盖率门禁（附加 job） | `coverage_gate.py`（阈值读 `coverage-config.json`） | 阻断（enforce=true 未达标 / 测试失败） |
 | 工作区卫生自检（附加 job） | `cleanup_workspace.py --check` | 阻断（存在残留） |
 
-> 实测（2026-11-19，main @`fb1a38b`）：主 job **29 个命名步骤**（不含通用「安装依赖」，含「安装开发依赖」；主 job 实际共 30 个 `- name:` 步骤）+ **3 个附加 job**（契约测试分片 / 覆盖率 / 工作区卫生）；契约测试已拆为独立 4 分片 job，`ruff` 与 `mypy` 为主 job 内静态检查步骤。集成合并后如步骤数变化，以实测为准并更新本表。
+> 实测（2026-11-20，origin/main @`b570873` + 来源语言门禁任务）：主 job **30 个命名步骤**（不含通用「安装依赖」，含「安装开发依赖」；主 job 实际共 31 个 `- name:` 步骤）+ **3 个附加 job**（契约测试分片 / 覆盖率 / 工作区卫生）；契约测试已拆为独立 4 分片 job，`ruff` 与 `mypy` 为主 job 内静态检查步骤。集成合并后如步骤数变化，以实测为准并更新本表。
 
 > 通用改造（W2 / R5 / R1 / R7，2026-11-19）：8 条工作流均已接入 `actions/cache@v4` pip 缓存（key 随 `requirements*.txt` 哈希）并补齐 `timeout-minutes`；5 条定时工作流（maintenance / audit-sampling / info-quality / scheduled-report-tasks / pipeline-orchestrator）提交改为推自动分支 + 开 PR（`[automated]` 标记，保留 `github-actions[bot]` 提交身份）；月度 cron 错峰至 00:15 / 00:45 / 01:15 / 01:45（间隔 ≥ 30 分钟）；契约测试由 `run_tests_parallel.py` 分 4 片并行。
 
@@ -250,7 +251,7 @@ reports/YYYY-MM-<slug>.md  ──md2html.py──►  reports/YYYY-MM-<slug>.htm
 - **辅助开关**：报告页工具条「隐藏更新标记」对照阅读、「展开全部删除」。
 - **呈现**：报告页新标签页独立打开，页脚提供「← 返回主题 / 返回首页」。
 
-## 六、测试体系（`engine/tests/`，1081 项）
+## 六、测试体系（`engine/tests/`，1095 项）
 
 | 场景 | 测试类 | 覆盖 |
 |---|---|---|
@@ -419,7 +420,7 @@ CI 之外的**本地多会话 / 多任务并行**由三层隔离机制约束，�
 ### 12.1 程序化边界（形态 vs 语义）
 
 - **形态 / 结构类**（可程序化、秒级、无网络）→ 进 CI 硬门禁：命名、配对、继承声明、登记册 Schema、类型注册、时效字段（闸1 / 2 / 3，`stage_gate_check.py`）；
-- **语义类**（来源语言规则、六族十二类选型判别、口径冲突裁决、以偏概全）→ 不进 CI 硬门禁，由提示词自检 + L5 语义复核 + 季度跨领域角色（R2 / R4 / R5）承载。
+- **语义类**（六族十二类选型判别、口径冲突裁决、以偏概全）→ 不进 CI 硬门禁，由提示词自检 + L5 语义复核 + 季度跨领域角色（R2 / R4 / R5）承载；**来源语言规则**已程序化（`source_language_gate.py`，见二.1），属形态 / 结构类硬门禁。
 - **判定内核单一事实源**：闸复用 `info_quality_check.evaluate()` / `compliance_check` / `audit_registry` 的解析，不新写判定。
 
 阶段闸定义、闭环判据与全链路图见总规范第三节与 1.2。
@@ -589,3 +590,4 @@ CI 在 ubuntu runner 上用 **bash** 执行 `run:`，本地维护者用 **PowerS
 | v2.22 | 2026-11-19 | 文档↔实现对齐（T1/T10） | 修正工具 43→44、类型 13→12、测试 978→1008、validate 29/30 步、maintenance 20 步、词库 1634→1612、覆盖率 92.0→90.35%；`docs/README` 一次性文档声明改为「4 份在库、过程留痕保留」；新增 5 项守卫（类型数 / 词条数 / CI 步骤数 / 覆盖率基线 / 一次性文档声明） |
 | v2.23 | 2026-11-19 | CI/CD 加固（W2 / R5 / R1 / R6 / R7） | 8 条工作流接入 pip 缓存 + 补齐 timeout；定时任务改推分支 + 开 PR（不再直推 main）；月度 cron 错峰（00:15 / 00:45 / 01:15 / 01:45）；`requirements-dev` 固定 + 新增 `requirements-dev.lock`；ruff 转阻断、mypy 覆盖 `engine/scripts`；契约测试改 4 分片 job（`run_tests_parallel.py`）；覆盖率新增单工具最低阈值（`per_tool_min`）+ `upload-artifact`；本地 pre-commit 增 `ruff --fix` + `validate.py`；测试数 1040 → 1045 |
 | v2.24 | 2026-11-20 | 主健康修复 | 工具 45 → 46（`source_normalize.py` 登记入工具一览）、测试 1056 → 1081、`scheduled-maintenance` 步骤 21 → 22、`audit-gate` 步骤 6 → 7；`decision_log --check` 测试适配 n20「需求编号关联」契约（改用登记册真实问题）；`update_planner --requirements` 测试 patch 目标修正为 `update_planner.decision_metrics`（修复测试隔离）；n19–n26 工单双轴评审覆盖补齐（另由评审任务合入） |
+| v2.25 | 2026-11-20 | 来源语言门禁（W5） | 新增 `engine/config/source-policy.json`（来源语言单一事实源）与 `source_language_gate.py`（提示词规则逐字一致 + 中文来源许可扫描 + 变更报告中文域名黑名单，14 项测试）；`validate.yml` 增「来源语言门禁」步骤（主 job 29 → 30 个命名步骤）；全库 21 主题 business-config 与 10 份泛用版提示词的 `{{SOURCE_LANGUAGE_RULE}}` 统一为「仅英文 / 日文来源，杜绝中文来源」；工具 46 → 47、测试 1081 → 1095 |

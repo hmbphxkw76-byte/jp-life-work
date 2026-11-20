@@ -16,7 +16,7 @@
 {{OUTPUT_PATH}}           = reports/{{YYYY-MM}}-<slug>.md
 {{REGISTRY_PATH}}         = data/（TODO：标的档案文件名）
 {{REGISTRY_FORMAT}}       = md-table（TODO：按业务配置）
-{{SOURCE_LANGUAGE_RULE}}  = （TODO：来源语言规则）
+{{SOURCE_LANGUAGE_RULE}}  = 仅英文 / 日文来源：① 官方权威（日本政府省厅・e-Gov・统计、国际机构、其他国家政府官方）；② 主流投资平台 / 顾问机构；③ 主流新闻媒体（英文 / 日文）。杜绝中文来源（含中文媒体及其中英文版、中国机构中英文版），不得引用、不得作线索、不得设例外。
 {{REPORT_VERSION}}        = v1.0（首期基线固定）
 ```
 
