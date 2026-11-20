@@ -40,16 +40,16 @@ flowchart LR
 
 | 工单 | 标题 | 级别 | 分支 | worktree | 状态 |
 |---|---|---|---|---|---|
-| [n19](n19-pir-requirements.md) | 规划层情报需求登记 | P1 | `task/n19-pir-requirements-b5958a4c` | `.worktrees/n19-pir-requirements` | 已实施（未提交） |
-| [n20](n20-feedback-loop.md) | 反馈层「使用 → 规划」回路 | P1 | `task/n20-feedback-loop-b5958a4c` | `.worktrees/n20-feedback-loop` | 已实施（未提交） |
-| [n21](n21-source-criticism.md) | 信源批评升级（来源质量四维） | P1 | `task/n21-source-criticism-b5958a4c` | `.worktrees/n21-source-criticism` | 已实施（未提交） |
-| [n22](n22-evidence-strength.md) | 证据强度标定与合成规则 | P1 | `task/n22-evidence-strength-b5958a4c` | `.worktrees/n22-evidence-strength` | 已实施（未提交） |
-| [n23](n23-vocab-cross-topic.md) | 受控词表跨主题同概念对齐 | P2 | `task/n23-vocab-cross-topic-b5958a4c` | `.worktrees/n23-vocab-cross-topic` | 已实施（未提交） |
-| [n24](n24-dikw-lineage.md) | DIKW 端到端血缘视图 | P2 | `task/n24-dikw-lineage-b5958a4c` | `.worktrees/n24-dikw-lineage` | 已实施（未提交） |
-| [n25](n25-processing-controlled.md) | 加工层受控中间产物（source-index 入册） | P2 | `task/n25-processing-controlled-b5958a4c` | `.worktrees/n25-processing-controlled` | 已实施（未提交） |
-| [n26](n26-vocab-fingerprint.md) | 词表变更审计指纹 | P2 | `task/n26-vocab-fingerprint-b5958a4c` | `.worktrees/n26-vocab-fingerprint` | 已实施（未提交） |
+| [n19](n19-pir-requirements.md) | 规划层情报需求登记 | P1 | `task/n19-pir-requirements-b5958a4c` | `.worktrees/n19-pir-requirements` | 已入库 |
+| [n20](n20-feedback-loop.md) | 反馈层「使用 → 规划」回路 | P1 | `task/n20-feedback-loop-b5958a4c` | `.worktrees/n20-feedback-loop` | 已入库 |
+| [n21](n21-source-criticism.md) | 信源批评升级（来源质量四维） | P1 | `task/n21-source-criticism-b5958a4c` | `.worktrees/n21-source-criticism` | 已入库 |
+| [n22](n22-evidence-strength.md) | 证据强度标定与合成规则 | P1 | `task/n22-evidence-strength-b5958a4c` | `.worktrees/n22-evidence-strength` | 已入库 |
+| [n23](n23-vocab-cross-topic.md) | 受控词表跨主题同概念对齐 | P2 | `task/n23-vocab-cross-topic-b5958a4c` | `.worktrees/n23-vocab-cross-topic` | 已入库 |
+| [n24](n24-dikw-lineage.md) | DIKW 端到端血缘视图 | P2 | `task/n24-dikw-lineage-b5958a4c` | `.worktrees/n24-dikw-lineage` | 已入库 |
+| [n25](n25-processing-controlled.md) | 加工层受控中间产物（source-index 入册） | P2 | `task/n25-processing-controlled-b5958a4c` | `.worktrees/n25-processing-controlled` | 已入库 |
+| [n26](n26-vocab-fingerprint.md) | 词表变更审计指纹 | P2 | `task/n26-vocab-fingerprint-b5958a4c` | `.worktrees/n26-vocab-fingerprint` | 已入库 |
 
-> **进度（2026-11-20）**：8 张工单全部**已实施（未提交）**；各自 worktree 内 `validate.py` rc=0，相关 unittest（test_tools / test_source_check / test_cov_audit / test_counterexample_scan / test_decision_metrics / test_l5_meta_check）全绿。
+> **进度（2026-11-20）**：8 张工单全部**已入库**（合并推送至 `origin/main`）；遗留清理（fact_card corroboration / concept_map 补登 / L5「独」项复核 / 单源候选清单）一并入库。
 
 ## 四、验收判据摘要
 
@@ -79,4 +79,5 @@ flowchart LR
 | 版本 | 日期 | 变更 |
 |---|---|---|
 | v1.0 | 2026-11-20 | 初始版本：n19–n26 依赖图、优先级批次、状态表、验收摘要 |
-| v1.1 | 2026-11-20 | 8 张工单全部实施完成（未提交），状态表同步为「已实施（未提交）」 |
+| v1.1 | 2026-11-20 | 8 张工单全部实施完成，状态表同步为「已实施（未提交）」 |
+| v1.2 | 2026-11-20 | 8 张工单 + 遗留清理全部合并推送至 origin/main，状态表同步为「已入库」 |
