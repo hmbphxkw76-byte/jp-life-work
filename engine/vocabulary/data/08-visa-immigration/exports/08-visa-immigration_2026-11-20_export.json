@@ -1,0 +1,1669 @@
+{
+  "topic": "08-visa-immigration",
+  "name": "签证与移民",
+  "version": "v1.8",
+  "generated_at": "2026-11-20T12:23:13",
+  "count": 79,
+  "categories": {
+    "在留资格类型": 15,
+    "申请与审查流程": 19,
+    "永住与归化": 12,
+    "家属与生活": 10,
+    "法规与政策": 14,
+    "场景与表达": 9
+  },
+  "terms": [
+    {
+      "id": "VIS-001",
+      "term": "在留資格",
+      "aliases": [
+        "ビザ"
+      ],
+      "category": "在留资格类型",
+      "tags": [
+        "法律地位",
+        "入管法",
+        "在留カード"
+      ],
+      "definition": "外国人在日本合法滞留并从事指定活动的法律资格，分为工作、居住、学习等类别。",
+      "source": "出入国在留管理庁「在留資格一覧」",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "已核验",
+      "source_url": "https://www.moj.go.jp/isa/applications/status/index.html",
+      "confidence": "B"
+    },
+    {
+      "id": "VIS-002",
+      "term": "特定技能1号",
+      "aliases": [
+        "特定技能一号",
+        "SSW1号"
+      ],
+      "category": "在留资格类型",
+      "tags": [
+        "人手不足",
+        "技能",
+        "五年"
+      ],
+      "definition": "面向人手不足领域、要求一定技能与日语能力、原则上最长在留五年的工作资格。",
+      "source": "出入国在留管理庁「特定技能制度」",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "已核验",
+      "source_url": "https://www.moj.go.jp/isa/applications/ssw/index.html",
+      "confidence": "B"
+    },
+    {
+      "id": "VIS-003",
+      "term": "特定技能2号",
+      "aliases": [
+        "特定技能二号",
+        "SSW2号"
+      ],
+      "category": "在留资格类型",
+      "tags": [
+        "熟练技能",
+        "更新",
+        "家属"
+      ],
+      "definition": "面向熟练技能者的工作资格，可更新在留期间并允许携带配偶与子女。",
+      "source": "出入国在留管理庁「特定技能制度」",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "已核验",
+      "source_url": "https://www.moj.go.jp/isa/applications/ssw/index.html",
+      "confidence": "B"
+    },
+    {
+      "id": "VIS-004",
+      "term": "技術・人文知識・国際業務",
+      "aliases": [
+        "技人国",
+        "技術人文知識国際業務"
+      ],
+      "category": "在留资格类型",
+      "tags": [
+        "白领",
+        "专业职",
+        "学历"
+      ],
+      "definition": "从事理工技术、人文知识与国际业务的白领工作资格，要求学历或实务经验。",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "已核验",
+      "source_url": "https://www.moj.go.jp/isa/applications/status/gijinkoku.html",
+      "confidence": "B"
+    },
+    {
+      "id": "VIS-005",
+      "term": "技能実習",
+      "aliases": [
+        "実習",
+        "技能実習制度"
+      ],
+      "category": "在留资格类型",
+      "tags": [
+        "研修",
+        "技能转移",
+        "国际贡献"
+      ],
+      "definition": "以技能转移与国际贡献为目的、在日企业学习技能的研修型在留资格。",
+      "source": "出入国在留管理庁「技能実習制度」",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "已核验",
+      "source_url": "https://www.moj.go.jp/isa/applications/status/technicalinterntraining.html",
+      "confidence": "B"
+    },
+    {
+      "id": "VIS-006",
+      "term": "永住者",
+      "aliases": [
+        "永住資格",
+        "永住ビザ"
+      ],
+      "category": "在留资格类型",
+      "tags": [
+        "无期限",
+        "永住",
+        "稳定居住"
+      ],
+      "definition": "获得永住许可后无在留期限、活动不受限制的居住资格。",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "已核验",
+      "source_url": "https://www.moj.go.jp/isa/applications/procedures/16-4.html",
+      "confidence": "B"
+    },
+    {
+      "id": "VIS-007",
+      "term": "日本人の配偶者等",
+      "aliases": [
+        "日本人配偶者",
+        "日配"
+      ],
+      "category": "在留资格类型",
+      "tags": [
+        "婚姻",
+        "日本人配偶",
+        "家庭"
+      ],
+      "definition": "与日本人结婚或为日本人子女等身份者的居住资格，活动范围较宽。",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "已核验",
+      "source_url": "https://www.moj.go.jp/isa/applications/status/spouseorchildofjapanese.html",
+      "confidence": "B"
+    },
+    {
+      "id": "VIS-008",
+      "term": "定住者",
+      "aliases": [
+        "定住ビザ",
+        "定住資格"
+      ],
+      "category": "在留资格类型",
+      "tags": [
+        "身份",
+        "告示",
+        "长期居住"
+      ],
+      "definition": "法务大臣告示指定的、以特定身份或经历为基础的长期居住资格。",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "已核验",
+      "source_url": "https://www.moj.go.jp/isa/applications/status/longtermresident.html",
+      "confidence": "B"
+    },
+    {
+      "id": "VIS-009",
+      "term": "留学",
+      "aliases": [
+        "留学ビザ",
+        "学生ビザ"
+      ],
+      "category": "在留资格类型",
+      "tags": [
+        "就学",
+        "学校",
+        "学生"
+      ],
+      "definition": "在日本的大学、专门学校或日语学校接受教育的在留资格，打工受限。",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "已核验",
+      "source_url": "https://www.moj.go.jp/isa/applications/status/student.html",
+      "confidence": "B"
+    },
+    {
+      "id": "VIS-010",
+      "term": "家族滞在",
+      "aliases": [
+        "家族滞在ビザ",
+        "家族帯同"
+      ],
+      "category": "在留资格类型",
+      "tags": [
+        "家属",
+        "扶养",
+        "同居"
+      ],
+      "definition": "在日工作的配偶或子女随同生活的在留资格，原则上不得就劳。",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "已核验",
+      "source_url": "https://www.moj.go.jp/isa/applications/status/dependent.html",
+      "confidence": "B"
+    },
+    {
+      "id": "VIS-011",
+      "term": "短期滞在",
+      "aliases": [
+        "短期ビザ",
+        "観光ビザ"
+      ],
+      "category": "在留资格类型",
+      "tags": [
+        "观光",
+        "探亲",
+        "九十日"
+      ],
+      "definition": "以观光、探亲、商务考察等为目的、最长停留九十天的在留资格。",
+      "source": "外務省「査証」",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "VIS-012",
+      "term": "高度専門職",
+      "aliases": [
+        "高度人材",
+        "高度専門職ビザ"
+      ],
+      "category": "在留资格类型",
+      "tags": [
+        "积分制",
+        "优待",
+        "高端人才"
+      ],
+      "definition": "按学历、年收入、职历等积分认定的高端人才资格，享永住与家属优待。",
+      "source": "出入国在留管理庁「高度専門職」",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "已核验",
+      "source_url": "https://www.moj.go.jp/isa/applications/status/designatedactivities02_00004.html",
+      "confidence": "B"
+    },
+    {
+      "id": "VIS-013",
+      "term": "経営・管理",
+      "aliases": [
+        "経営管理",
+        "投資経営"
+      ],
+      "category": "在留资格类型",
+      "tags": [
+        "创业",
+        "经营",
+        "管理"
+      ],
+      "definition": "在日本经营事业或担任管理职务的在留资格，要求事业所与资本金等。",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "已核验",
+      "source_url": "https://www.moj.go.jp/isa/applications/status/businessmanager.html",
+      "confidence": "B"
+    },
+    {
+      "id": "VIS-014",
+      "term": "特定活動",
+      "aliases": [
+        "特定活動ビザ",
+        "告示活動"
+      ],
+      "category": "在留资格类型",
+      "tags": [
+        "告示",
+        "个别指定",
+        "例外"
+      ],
+      "definition": "法务大臣个别指定的活动资格，用于实习、医疗、家务支援等例外情形。",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "已核验",
+      "source_url": "https://www.moj.go.jp/isa/applications/status/designatedactivities.html",
+      "confidence": "B"
+    },
+    {
+      "id": "VIS-015",
+      "term": "永住者の配偶者等",
+      "aliases": [
+        "永住者配偶者",
+        "永配"
+      ],
+      "category": "在留资格类型",
+      "tags": [
+        "婚姻",
+        "永住者配偶",
+        "家庭"
+      ],
+      "definition": "与永住者结婚或为永住者子女者的居住资格，满足条件可申请永住。",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "已核验",
+      "source_url": "https://www.moj.go.jp/isa/applications/status/spouseorchildofpermanentresident.html",
+      "confidence": "B"
+    },
+    {
+      "id": "VIS-016",
+      "term": "在留資格認定証明書",
+      "aliases": [
+        "COE",
+        "認定証明書"
+      ],
+      "category": "申请与审查流程",
+      "tags": [
+        "事前审查",
+        "交付",
+        "入境"
+      ],
+      "definition": "外国人入境前由入管预先审查并交付的证明书，用于在使领馆申请签证。",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "已核验",
+      "source_url": "https://www.moj.go.jp/isa/applications/procedures/16-1.html",
+      "confidence": "B"
+    },
+    {
+      "id": "VIS-017",
+      "term": "在留カード",
+      "aliases": [],
+      "category": "申请与审查流程",
+      "tags": [
+        "身份证明",
+        "IC卡",
+        "随身携带"
+      ],
+      "definition": "发给中长期在留者的IC身份卡，记载在留资格、期间与就劳限制。",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "已核验",
+      "source_url": "https://www.moj.go.jp/isa/applications/procedures/whatzairyu_00001.html",
+      "confidence": "B"
+    },
+    {
+      "id": "VIS-018",
+      "term": "在留期間更新",
+      "aliases": [
+        "在留更新",
+        "更新許可申請"
+      ],
+      "category": "申请与审查流程",
+      "tags": [
+        "期限",
+        "续签",
+        "申请"
+      ],
+      "definition": "在留期限届满前申请延长同一资格的在留期间，需提交理由与证明资料。",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "已核验",
+      "source_url": "https://www.moj.go.jp/isa/applications/procedures/16-3.html",
+      "confidence": "B"
+    },
+    {
+      "id": "VIS-019",
+      "term": "在留資格変更",
+      "aliases": [
+        "資格変更",
+        "変更許可申請"
+      ],
+      "category": "申请与审查流程",
+      "tags": [
+        "转资格",
+        "工作变更",
+        "申请"
+      ],
+      "definition": "将在留资格变更为其他类型的手续，如留学转为就劳资格。",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "已核验",
+      "source_url": "https://www.moj.go.jp/isa/applications/procedures/16-2.html",
+      "confidence": "B"
+    },
+    {
+      "id": "VIS-020",
+      "term": "再入国許可",
+      "aliases": [
+        "再入国許可証",
+        "再入国"
+      ],
+      "category": "申请与审查流程",
+      "tags": [
+        "出境",
+        "返回",
+        "一年"
+      ],
+      "definition": "出境后一年内返回日本所需的许可，可事先在入管申请贴纸或印章。",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.moj.go.jp/isa/",
+      "confidence": "B"
+    },
+    {
+      "id": "VIS-021",
+      "term": "みなし再入国許可",
+      "aliases": [
+        "みなし再入国",
+        "視同再入国"
+      ],
+      "category": "申请与审查流程",
+      "tags": [
+        "一年内",
+        "免申请",
+        "出境"
+      ],
+      "definition": "持有效在留卡者出境一年内返回时，无需申请即视为获得再入国许可。",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.moj.go.jp/isa/",
+      "confidence": "B"
+    },
+    {
+      "id": "VIS-022",
+      "term": "在留資格認定証明書交付申請",
+      "aliases": [
+        "COE交付申請",
+        "認定証明書申請"
+      ],
+      "category": "申请与审查流程",
+      "tags": [
+        "申请",
+        "雇主",
+        "代理"
+      ],
+      "definition": "由接收单位或代理人向入管申请交付COE的手续，是入境前审查的第一步。",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.moj.go.jp/isa/",
+      "confidence": "B"
+    },
+    {
+      "id": "VIS-023",
+      "term": "申請書",
+      "aliases": [
+        "申請書式",
+        "様式"
+      ],
+      "category": "申请与审查流程",
+      "tags": [
+        "表格",
+        "记载",
+        "提交"
+      ],
+      "definition": "记载申请人信息、在留资格与申请事由的法定格式文件，须如实填写。",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.moj.go.jp/isa/",
+      "confidence": "B"
+    },
+    {
+      "id": "VIS-024",
+      "term": "理由書",
+      "aliases": [
+        "申請理由書",
+        "理由書面"
+      ],
+      "category": "申请与审查流程",
+      "tags": [
+        "说明",
+        "必要性",
+        "书面"
+      ],
+      "definition": "说明申请在留资格或更新必要性的书面材料，需与事实和证明文件一致。",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.moj.go.jp/isa/",
+      "confidence": "B"
+    },
+    {
+      "id": "VIS-025",
+      "term": "証明書",
+      "aliases": [
+        "証明書類",
+        "疎明資料"
+      ],
+      "category": "申请与审查流程",
+      "tags": [
+        "证据",
+        "材料",
+        "审查"
+      ],
+      "definition": "证明申请人符合在留资格条件的官方文件，如在职、纳税与住民票。",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.moj.go.jp/isa/",
+      "confidence": "B"
+    },
+    {
+      "id": "VIS-026",
+      "term": "審査",
+      "aliases": [
+        "入管審査",
+        "審査手続"
+      ],
+      "category": "申请与审查流程",
+      "tags": [
+        "审查",
+        "标准",
+        "期间"
+      ],
+      "definition": "入管依据法令对申请内容与证明资料进行的实质审查，通常需数周至数月。",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.moj.go.jp/isa/",
+      "confidence": "B"
+    },
+    {
+      "id": "VIS-027",
+      "term": "不許可",
+      "aliases": [
+        "不交付",
+        "不許可処分"
+      ],
+      "category": "申请与审查流程",
+      "tags": [
+        "驳回",
+        "理由",
+        "救济"
+      ],
+      "definition": "入管认定申请不符合法定条件而作出的否定处分，会书面说明理由。",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.moj.go.jp/isa/",
+      "confidence": "B"
+    },
+    {
+      "id": "VIS-028",
+      "term": "補正",
+      "aliases": [
+        "追加資料",
+        "補正通知"
+      ],
+      "category": "申请与审查流程",
+      "tags": [
+        "补交",
+        "期限",
+        "审查"
+      ],
+      "definition": "审查中因资料不足被要求追加或修正材料，须在指定期限内提交。",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.moj.go.jp/isa/",
+      "confidence": "B"
+    },
+    {
+      "id": "VIS-029",
+      "term": "上陸許可",
+      "aliases": [
+        "上陸審査",
+        "入国審査"
+      ],
+      "category": "申请与审查流程",
+      "tags": [
+        "入境",
+        "口岸",
+        "条件"
+      ],
+      "definition": "外国人在口岸接受审查后被允许入境日本的处分，附有在留资格与期间。",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.moj.go.jp/isa/",
+      "confidence": "B"
+    },
+    {
+      "id": "VIS-030",
+      "term": "永住許可",
+      "aliases": [
+        "永住許可申請",
+        "永住権"
+      ],
+      "category": "永住与归化",
+      "tags": [
+        "无限期",
+        "审查",
+        "条件"
+      ],
+      "definition": "允许外国人在日本无限期居住且活动不受限制的许可，审查较为严格。",
+      "source": "出入国在留管理庁「永住許可」",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "已核验",
+      "source_url": "https://www.moj.go.jp/isa/applications/procedures/16-4.html",
+      "confidence": "B"
+    },
+    {
+      "id": "VIS-031",
+      "term": "帰化",
+      "aliases": [
+        "国籍取得",
+        "日本国籍取得"
+      ],
+      "category": "永住与归化",
+      "tags": [
+        "国籍",
+        "法务局",
+        "条件"
+      ],
+      "definition": "外国人取得日本国籍的法律行为，由法务局审查并须满足居住与素行等条件。",
+      "source": "法務省「国籍Ｑ＆Ａ」",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "已核验",
+      "source_url": "https://www.moj.go.jp/MINJI/kokuseki.html",
+      "confidence": "B"
+    },
+    {
+      "id": "VIS-032",
+      "term": "在留10年",
+      "aliases": [
+        "10年在留",
+        "在留十年"
+      ],
+      "category": "永住与归化",
+      "tags": [
+        "居住年限",
+        "永住",
+        "要件"
+      ],
+      "definition": "申请永住原则上需连续在日本居住十年，其中就劳资格者需工作满五年。",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "已核验",
+      "source_url": "https://www.moj.go.jp/isa/10_00279.html",
+      "confidence": "B"
+    },
+    {
+      "id": "VIS-033",
+      "term": "就労5年",
+      "aliases": [
+        "就労年数",
+        "5年就労"
+      ],
+      "category": "永住与归化",
+      "tags": [
+        "工作年限",
+        "永住",
+        "要件"
+      ],
+      "definition": "永住许可的居住要件之一，要求以就劳资格在日本工作满五年。",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "已核验",
+      "source_url": "https://www.moj.go.jp/isa/10_00279.html",
+      "confidence": "B"
+    },
+    {
+      "id": "VIS-034",
+      "term": "素行善良",
+      "aliases": [
+        "素行要件",
+        "素行善良要件"
+      ],
+      "category": "永住与归化",
+      "tags": [
+        "品行",
+        "犯罪",
+        "守法"
+      ],
+      "definition": "永住与归化的要件之一，要求无犯罪记录并日常遵守法令、履行公共义务。",
+      "source": "法務省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "已核验",
+      "source_url": "https://www.moj.go.jp/isa/10_00279.html",
+      "confidence": "B"
+    },
+    {
+      "id": "VIS-035",
+      "term": "独立生計",
+      "aliases": [
+        "生計要件",
+        "独立の生計"
+      ],
+      "category": "永住与归化",
+      "tags": [
+        "收入",
+        "稳定",
+        "扶养"
+      ],
+      "definition": "永住要件之一，要求本人或配偶有稳定收入足以维持家庭生活。",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "已核验",
+      "source_url": "https://www.moj.go.jp/isa/10_00279.html",
+      "confidence": "B"
+    },
+    {
+      "id": "VIS-036",
+      "term": "納税義務",
+      "aliases": [
+        "納税",
+        "納付義務"
+      ],
+      "category": "永住与归化",
+      "tags": [
+        "税务",
+        "履行",
+        "永住"
+      ],
+      "definition": "按法令申报并缴纳所得税、住民税等税款的义务，是永住审查的重点。",
+      "source": "国税庁",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-20",
+      "verification": "已核验",
+      "source_url": "https://www.nta.go.jp/taxes/kids/hatten/page14.htm",
+      "confidence": "B"
+    },
+    {
+      "id": "VIS-037",
+      "term": "年金保険料",
+      "aliases": [
+        "公的年金",
+        "年金納付"
+      ],
+      "category": "永住与归化",
+      "tags": [
+        "社保",
+        "缴纳",
+        "永住"
+      ],
+      "definition": "国民年金或厚生年金保险费的缴纳记录，未缴会影响永住与更新审查。",
+      "source": "日本年金機構",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-20",
+      "verification": "已核验",
+      "source_url": "https://www.nenkin.go.jp/service/kokunen/hokenryo/index.html",
+      "confidence": "B"
+    },
+    {
+      "id": "VIS-038",
+      "term": "健康保険料",
+      "aliases": [
+        "社会保険料",
+        "医療保険料"
+      ],
+      "category": "永住与归化",
+      "tags": [
+        "医保",
+        "缴纳",
+        "在留"
+      ],
+      "definition": "国民健康保险或健康保险的保险费，滞纳会被视为未履行公共义务。",
+      "source": "厚生労働省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mhlw.go.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "VIS-039",
+      "term": "身元保証人",
+      "aliases": [
+        "保証人",
+        "身元引受人"
+      ],
+      "category": "永住与归化",
+      "tags": [
+        "担保",
+        "永住",
+        "归化"
+      ],
+      "definition": "为申请人身份与行为提供担保的人，永住与归化申请通常需要日本人或永住者。",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "已核验",
+      "source_url": "https://www.moj.go.jp/isa/applications/procedures/16-4.html",
+      "confidence": "B"
+    },
+    {
+      "id": "VIS-040",
+      "term": "永住申請",
+      "aliases": [
+        "永住ビザ申請",
+        "永住許可申請書"
+      ],
+      "category": "永住与归化",
+      "tags": [
+        "申请",
+        "材料",
+        "审查"
+      ],
+      "definition": "向入管提交永住许可申请的手续，需附住民票、纳税与年金缴纳证明。",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "已核验",
+      "source_url": "https://www.moj.go.jp/isa/applications/procedures/16-4.html",
+      "confidence": "B"
+    },
+    {
+      "id": "VIS-041",
+      "term": "帰化許可申請",
+      "aliases": [
+        "帰化申請",
+        "国籍取得申請"
+      ],
+      "category": "永住与归化",
+      "tags": [
+        "法务局",
+        "面接",
+        "材料"
+      ],
+      "definition": "向住所地法务局提出的取得日本国籍申请，需提交动机书与身份、纳税材料。",
+      "source": "法務省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "已核验",
+      "source_url": "https://www.moj.go.jp/ONLINE/NATIONALITY/6-2.html",
+      "confidence": "B"
+    },
+    {
+      "id": "VIS-042",
+      "term": "配偶者",
+      "aliases": [
+        "夫",
+        "妻"
+      ],
+      "category": "家属与生活",
+      "tags": [
+        "婚姻",
+        "家属",
+        "身份"
+      ],
+      "definition": "与在留者具有合法婚姻关系的另一方，可依身份申请配偶者类在留资格。",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.moj.go.jp/isa/",
+      "confidence": "B"
+    },
+    {
+      "id": "VIS-043",
+      "term": "扶養",
+      "aliases": [
+        "扶養義務",
+        "扶養関係"
+      ],
+      "category": "家属与生活",
+      "tags": [
+        "经济支持",
+        "家属",
+        "义务"
+      ],
+      "definition": "以收入维持配偶、子女等家属生活的法律与经济关系，是家族滞在的核心。",
+      "source": "厚生労働省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mhlw.go.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "VIS-044",
+      "term": "子",
+      "aliases": [
+        "子ども",
+        "子女"
+      ],
+      "category": "家属与生活",
+      "tags": [
+        "未成年",
+        "家属",
+        "教育"
+      ],
+      "definition": "在留者的亲生或收养子女，可随父母以家族滞在等资格在日本生活。",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.moj.go.jp/isa/",
+      "confidence": "B"
+    },
+    {
+      "id": "VIS-045",
+      "term": "住民登録",
+      "aliases": [
+        "住民票",
+        "転入届"
+      ],
+      "category": "家属与生活",
+      "tags": [
+        "市区町村",
+        "住所",
+        "登记"
+      ],
+      "definition": "在市区町村登记住所与家庭成员的手续，是享受行政服务的前提。",
+      "source": "総務省「住民基本台帳制度」",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.soumu.go.jp/main_sosiki/jichi_gyousei/c-gyousei/zairyu/",
+      "confidence": "B"
+    },
+    {
+      "id": "VIS-046",
+      "term": "マイナンバー",
+      "aliases": [
+        "個人番号"
+      ],
+      "category": "家属与生活",
+      "tags": [
+        "行政",
+        "编号",
+        "身份"
+      ],
+      "definition": "日本为每位居民编定的十二位个人编号，用于税务、社保与行政手续。",
+      "source": "デジタル庁「マイナンバー制度」",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "VIS-047",
+      "term": "国民健康保険",
+      "aliases": [
+        "国保",
+        "国民健康保険制度"
+      ],
+      "category": "家属与生活",
+      "tags": [
+        "医疗",
+        "保险",
+        "市区町村"
+      ],
+      "definition": "面向非公司职员等居民的公共医疗保险，加入后自付比例通常为三成。",
+      "source": "厚生労働省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/koukikourei/index_00002.html",
+      "confidence": "B"
+    },
+    {
+      "id": "VIS-048",
+      "term": "児童手当",
+      "aliases": [
+        "子ども手当",
+        "児童手当制度"
+      ],
+      "category": "家属与生活",
+      "tags": [
+        "育儿",
+        "补贴",
+        "子女"
+      ],
+      "definition": "向养育至高中阶段子女者发放的现金补贴，金额按子女年龄与人数计算。",
+      "source": "こども家庭庁",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "VIS-049",
+      "term": "学校",
+      "aliases": [
+        "公立学校",
+        "就学"
+      ],
+      "category": "家属与生活",
+      "tags": [
+        "教育",
+        "子女",
+        "入学"
+      ],
+      "definition": "子女在日本的幼儿园、小学、中学或高中就读，义务教育阶段免学费。",
+      "source": "文部科学省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mext.go.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "VIS-050",
+      "term": "住宅",
+      "aliases": [
+        "住居",
+        "賃貸住宅"
+      ],
+      "category": "家属与生活",
+      "tags": [
+        "居住",
+        "租房",
+        "保证人"
+      ],
+      "definition": "在日居住的房屋，外国人租房常需保证会社或在日保证人。",
+      "source": "国土交通省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp",
+      "confidence": "B"
+    },
+    {
+      "id": "VIS-051",
+      "term": "生活保護",
+      "aliases": [
+        "生活保護制度",
+        "公的扶助"
+      ],
+      "category": "家属与生活",
+      "tags": [
+        "最低生活",
+        "补助",
+        "申请"
+      ],
+      "definition": "对生活困难者提供最低生活保障的公的扶助制度，需经福祉事务所审查。",
+      "source": "厚生労働省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/seikatsuhogo/seikatuhogo/index.html",
+      "confidence": "B"
+    },
+    {
+      "id": "VIS-052",
+      "term": "出入国管理及び難民認定法",
+      "aliases": [
+        "入管法",
+        "入難法"
+      ],
+      "category": "法规与政策",
+      "tags": [
+        "法律",
+        "在留",
+        "难民"
+      ],
+      "definition": "规定外国人入境、在留、退去与难民认定的基本法律，是入管行政的依据。",
+      "source": "法務省「出入国管理及び難民認定法」",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.moj.go.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "VIS-053",
+      "term": "入管法改正",
+      "aliases": [
+        "法改正",
+        "入管法改定"
+      ],
+      "category": "法规与政策",
+      "tags": [
+        "修法",
+        "政策",
+        "在留"
+      ],
+      "definition": "对入管法条文进行修订的立法过程，近年涉及特定技能与育成就労等制度。",
+      "source": "法務省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.moj.go.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "VIS-054",
+      "term": "特定技能制度",
+      "aliases": [
+        "特定技能",
+        "特定技能在留"
+      ],
+      "category": "法规与政策",
+      "tags": [
+        "人手不足",
+        "就劳",
+        "制度"
+      ],
+      "definition": "为填补人手不足领域而设立的就劳制度，分为特定技能1号与2号。",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.moj.go.jp/isa/",
+      "confidence": "B"
+    },
+    {
+      "id": "VIS-055",
+      "term": "育成就労制度",
+      "aliases": [
+        "育成就労"
+      ],
+      "category": "法规与政策",
+      "tags": [
+        "人才培养",
+        "技能",
+        "新制度"
+      ],
+      "definition": "取代技能実習的新制度，以培养可长期工作的特定技能人才为目标。",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.moj.go.jp/isa/",
+      "confidence": "B"
+    },
+    {
+      "id": "VIS-056",
+      "term": "不法滞在",
+      "aliases": [
+        "オーバーステイ",
+        "不法残留"
+      ],
+      "category": "法规与政策",
+      "tags": [
+        "逾期",
+        "违法",
+        "退去"
+      ],
+      "definition": "超过在留期限仍滞留或未经许可入境的状态，属违法并成为退去强制对象。",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.moj.go.jp/isa/",
+      "confidence": "B"
+    },
+    {
+      "id": "VIS-057",
+      "term": "退去強制",
+      "aliases": [
+        "強制退去",
+        "退去強制令書"
+      ],
+      "category": "法规与政策",
+      "tags": [
+        "遣返",
+        "违法",
+        "强制"
+      ],
+      "definition": "对不法滞在者等由入管作出的强制遣返程序，须经审查与口头审理。",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.moj.go.jp/isa/",
+      "confidence": "B"
+    },
+    {
+      "id": "VIS-058",
+      "term": "出国命令",
+      "aliases": [
+        "出国命令制度",
+        "自主出国"
+      ],
+      "category": "法规与政策",
+      "tags": [
+        "离境",
+        "简化",
+        "违法"
+      ],
+      "definition": "对轻微不法滞在者允许限期自主离境的制度，可避免被强制遣返。",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.moj.go.jp/isa/",
+      "confidence": "B"
+    },
+    {
+      "id": "VIS-059",
+      "term": "在留資格取消",
+      "aliases": [
+        "在留取消",
+        "資格取消"
+      ],
+      "category": "法规与政策",
+      "tags": [
+        "取消",
+        "违法",
+        "事后"
+      ],
+      "definition": "因虚假申报或不再符合条件等，由入管取消已取得的在留资格的处分。",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.moj.go.jp/isa/",
+      "confidence": "B"
+    },
+    {
+      "id": "VIS-060",
+      "term": "難民認定",
+      "aliases": [
+        "難民認定制度",
+        "難民申請"
+      ],
+      "category": "法规与政策",
+      "tags": [
+        "难民",
+        "保护",
+        "审查"
+      ],
+      "definition": "对因迫害等理由需要保护者进行的认定程序，通过后可获得定居资格。",
+      "source": "法務省「難民認定制度」",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.moj.go.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "VIS-061",
+      "term": "入管窓口",
+      "aliases": [
+        "入管局窓口",
+        "在留窓口"
+      ],
+      "category": "场景与表达",
+      "tags": [
+        "窗口",
+        "办理",
+        "咨询"
+      ],
+      "definition": "地方出入国在留管理局受理在留申请、更新与咨询的对外窗口。",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.moj.go.jp/isa/",
+      "confidence": "B"
+    },
+    {
+      "id": "VIS-062",
+      "term": "申請相談",
+      "aliases": [
+        "入管相談",
+        "相談窓口"
+      ],
+      "category": "场景与表达",
+      "tags": [
+        "咨询",
+        "事前",
+        "准备"
+      ],
+      "definition": "在正式申请前向入管或专家咨询资格条件与材料准备的行为。",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.moj.go.jp/isa/",
+      "confidence": "B"
+    },
+    {
+      "id": "VIS-063",
+      "term": "許可通知",
+      "aliases": [
+        "許可通知書",
+        "交付通知"
+      ],
+      "category": "场景与表达",
+      "tags": [
+        "结果",
+        "通知",
+        "领取"
+      ],
+      "definition": "入管以书面形式告知申请已获许可并说明领取在留卡等后续手续。",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.moj.go.jp/isa/",
+      "confidence": "B"
+    },
+    {
+      "id": "VIS-064",
+      "term": "不許可通知",
+      "aliases": [
+        "不許可通知書",
+        "不交付通知"
+      ],
+      "category": "场景与表达",
+      "tags": [
+        "结果",
+        "理由",
+        "再申请"
+      ],
+      "definition": "入管书面告知申请未获许可并载明理由，申请人可研究再申请或申诉。",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.moj.go.jp/isa/",
+      "confidence": "B"
+    },
+    {
+      "id": "VIS-065",
+      "term": "行政書士",
+      "aliases": [
+        "申請取次行政書士",
+        "書士"
+      ],
+      "category": "场景与表达",
+      "tags": [
+        "代理",
+        "申请",
+        "专家"
+      ],
+      "definition": "受委托代办在留申请材料的国家资格者，可取次向入管提交申请。",
+      "source": "日本行政書士会連合会",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "VIS-066",
+      "term": "弁護士",
+      "aliases": [
+        "入管弁護士",
+        "法律事務所"
+      ],
+      "category": "场景与表达",
+      "tags": [
+        "法律",
+        "救济",
+        "代理"
+      ],
+      "definition": "就可否处分、退去强制等提供法律代理与救济的律师，可代理诉讼与申诉。",
+      "source": "日本弁護士連合会",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.nichibenren.or.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "VIS-067",
+      "term": "更新時期",
+      "aliases": [
+        "更新時期の目安",
+        "在留期限"
+      ],
+      "category": "场景与表达",
+      "tags": [
+        "期限",
+        "提前",
+        "计划"
+      ],
+      "definition": "在留期限届满前约三个月开始准备更新申请的时间节点，避免逾期。",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.moj.go.jp/isa/",
+      "confidence": "B"
+    },
+    {
+      "id": "VIS-068",
+      "term": "理由書の書き方",
+      "aliases": [
+        "理由書作成",
+        "理由書の構成"
+      ],
+      "category": "场景与表达",
+      "tags": [
+        "写作",
+        "说明",
+        "技巧"
+      ],
+      "definition": "撰写理由书时应说明申请必要性、经过与在日生活计划，并与证明资料一致。",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.moj.go.jp/isa/",
+      "confidence": "B"
+    },
+    {
+      "id": "VIS-069",
+      "term": "二国間協定",
+      "aliases": [
+        "MOC",
+        "労働者受け入れ協力覚書",
+        "备忘录"
+      ],
+      "category": "法规与政策",
+      "tags": [
+        "制度",
+        "国际"
+      ],
+      "definition": "育成就劳框架下日本与送出国签署的合作备忘录，签署国名单决定送出资格",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.moj.go.jp/isa/",
+      "confidence": "B"
+    },
+    {
+      "id": "VIS-070",
+      "term": "再申請",
+      "aliases": [
+        "再申请",
+        "重新申请"
+      ],
+      "category": "申请与审查流程",
+      "tags": [
+        "救济",
+        "重新",
+        "申请"
+      ],
+      "definition": "在不许可等处分后，就同一或修正后的申请事项再次向入管提出的申请。",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.moj.go.jp/isa/",
+      "confidence": "B"
+    },
+    {
+      "id": "VIS-071",
+      "term": "不許可理由",
+      "aliases": [
+        "不许可理由",
+        "不交付理由"
+      ],
+      "category": "申请与审查流程",
+      "tags": [
+        "理由",
+        "救济",
+        "解读"
+      ],
+      "definition": "入管在不许可处分中书面告知的不许可事由，是选择补正、再申请或救济的起点。",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.moj.go.jp/isa/",
+      "confidence": "B"
+    },
+    {
+      "id": "VIS-072",
+      "term": "不許可理由書",
+      "aliases": [
+        "不许可理由书",
+        "处分通知书"
+      ],
+      "category": "场景与表达",
+      "tags": [
+        "通知",
+        "理由",
+        "救济"
+      ],
+      "definition": "载明不许可理由的书面通知，申请人据此研究补正、再申请或申诉。",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.moj.go.jp/isa/",
+      "confidence": "B"
+    },
+    {
+      "id": "VIS-073",
+      "term": "申請取次",
+      "aliases": [
+        "申请取次",
+        "申请代理"
+      ],
+      "category": "申请与审查流程",
+      "tags": [
+        "代理",
+        "行政书士",
+        "弁護士"
+      ],
+      "definition": "经地方入管局长承认或申报的律师、行政书士等代理申请人向入管提交申请的制度。",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.moj.go.jp/isa/",
+      "confidence": "B"
+    },
+    {
+      "id": "VIS-074",
+      "term": "虚偽材料",
+      "aliases": [
+        "虚假材料",
+        "虚伪书类"
+      ],
+      "category": "法规与政策",
+      "tags": [
+        "虚假",
+        "风险",
+        "取消"
+      ],
+      "definition": "以伪造或不实内容提交的书类，可能成为在留资格取消与上陆拒否的事由。",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.moj.go.jp/isa/",
+      "confidence": "B"
+    },
+    {
+      "id": "VIS-075",
+      "term": "取消訴訟",
+      "aliases": [
+        "取消诉讼",
+        "撤销诉讼"
+      ],
+      "category": "法规与政策",
+      "tags": [
+        "诉讼",
+        "救济",
+        "行政事件诉讼法"
+      ],
+      "definition": "依行政事件诉讼法请求法院撤销入管处分的诉讼，是拒签救济的司法路径。",
+      "source": "最高裁判所",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.courts.go.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "VIS-076",
+      "term": "行政不服審査",
+      "aliases": [
+        "审查请求",
+        "不服申立"
+      ],
+      "category": "法规与政策",
+      "tags": [
+        "救济",
+        "行政",
+        "期限"
+      ],
+      "definition": "对行政处分不服时向行政机关请求复查的程序，原则上须在知悉之日起三个月内提出。",
+      "source": "総務省",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.soumu.go.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "VIS-077",
+      "term": "在留特別許可",
+      "aliases": [
+        "在留特别许可",
+        "特别许可"
+      ],
+      "category": "申请与审查流程",
+      "tags": [
+        "许可",
+        "指南",
+        "救济"
+      ],
+      "definition": "法务大臣对不法滞留等者个别给予的在留许可，依「在留特別許可に係るガイドライン」判断。",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.moj.go.jp/isa/",
+      "confidence": "B"
+    },
+    {
+      "id": "VIS-078",
+      "term": "材料瑕疵",
+      "aliases": [
+        "资料瑕疵",
+        "材料不备"
+      ],
+      "category": "申请与审查流程",
+      "tags": [
+        "分级",
+        "补正",
+        "风险"
+      ],
+      "definition": "申请资料在形式或实质上的欠缺，按可补救、直接拒、影响后续申请三级评估。",
+      "source": "基线判断（非官方）",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "",
+      "confidence": "C"
+    },
+    {
+      "id": "VIS-079",
+      "term": "救済",
+      "aliases": [
+        "救济",
+        "法律救济"
+      ],
+      "category": "法规与政策",
+      "tags": [
+        "救济",
+        "路径"
+      ],
+      "definition": "对不许可、取消等行政处分，依法通过补正、再申请、不服审查或诉讼寻求救济的路径总称。",
+      "source": "基线判断（非官方）",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "",
+      "confidence": "C"
+    }
+  ]
+}
