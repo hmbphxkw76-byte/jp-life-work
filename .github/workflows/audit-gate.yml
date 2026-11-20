@@ -101,6 +101,20 @@ jobs:
           fi
           echo "l5_meta_check 退出码 $code（2=仅告警）"
 
+      # 词表变更审计指纹（n26）：词库内容哈希与基线失配 → 提示 sync_vocab + 刷新基线。
+      - name: 词表指纹校验（vocab-hash --check）
+        run: |
+          python engine/vocabulary/script/vocab_tool.py vocab-hash --check || code=$?
+          code=${code:-0}
+          if [ "$code" -ne 0 ] && [ "$code" -ne 2 ]; then
+            echo "::error::词表指纹基线缺失或校验失败（退出码 $code）"
+            exit 1
+          fi
+          if [ "$code" -eq 2 ]; then
+            echo "::warning::词库内容已变更（指纹失配）：请 sync_vocab 同步提示词并刷新 config/vocab-fingerprint.json"
+          fi
+          echo "vocab-hash 退出码 $code（2=失配告警）"
+
       # 全量多层级校验：当前存量报告 P0/P1=0；新增/变更报告引入 P0/P1 即阻断。
       - name: 多层级校验（audit_check --all）
         run: |

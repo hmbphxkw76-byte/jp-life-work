@@ -43,6 +43,17 @@ ROW_RE = re.compile(r"^\|\s*(\d{4}-\d{2}-\d{2})\s*\|(.+)\|\s*$", re.M)
 CONVERGED = "已收敛"
 
 
+def vocab_fingerprint() -> str:
+    """词表内容指纹（n26）：读 `vocab_tool.vocab_hash()`；失败返回空串。"""
+    try:
+        sys.path.insert(0, str(ROOT / "engine" / "vocabulary" / "script"))
+        import vocab_tool  # type: ignore
+        cfg = vocab_tool.load_config(vocab_tool.DEFAULT_CONFIG)
+        return vocab_tool.vocab_hash(cfg)[0]
+    except Exception:
+        return ""
+
+
 def _rows(text: str, section_re: re.Pattern, numeric_first: bool = True) -> list[list[str]]:
     """提取指定章节内的 markdown 表格行（单元格列表）。
 
@@ -104,6 +115,7 @@ def collect() -> dict:
         "kit_ready": kit_ready,
         "kit_readiness_rate": round(kit_ready / kit_total, 4) if kit_total else 0.0,
         "decision_log_entries": log_n,
+        "vocab_hash": vocab_fingerprint(),
     }
 
 

@@ -139,6 +139,17 @@ python engine/vocabulary/script/vocab_tool.py index                             
 
 **校验标准**：任意词条可回溯「首次登记日期 + 引入它的导入文件 + 版本记录行」三要素。
 
+### S7 词表变更审计指纹（n26）
+
+| 项 | 规范 |
+|---|---|
+| 内容指纹 | `vocab_tool.py vocab-hash` → 全库「词汇表」小节 SHA-256（按主题排序，确定性，不含 mtime） |
+| 基线 | `vocab-hash --write` 写 `config/vocab-fingerprint.json`；`--check` 与基线比对（失配 rc=2） |
+| 门禁 | `audit-gate.yml` 增 `vocab-hash --check`：失配告警，提示 `sync_vocab` 同步提示词并刷新基线 |
+| 跨层一致性 | `decision_metrics` 快照含 `vocab_hash` 字段，纳入跨层校验 |
+
+**校验标准**：词库内容变更后指纹失配可被门禁发现；基线随词库变更一并提交。
+
 ## 四、新增主题扩展指南（一条命令，自动目录关联）
 
 新增主题**无需手工编辑注册表**（topics.json 已降级为脚本托管文件），一条命令完成全部目录关联：

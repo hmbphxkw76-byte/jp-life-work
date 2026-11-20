@@ -98,6 +98,7 @@ class CollectCase(unittest.TestCase):
         self.assertEqual(snap["kit_total"], 2)
         self.assertEqual(snap["kit_ready"], 1)
         self.assertEqual(snap["decision_log_entries"], 2)
+        self.assertEqual(len(snap["vocab_hash"]), 64)  # n26 词表指纹
 
     def test_collect_missing_registry(self) -> None:
         with mock.patch.object(m, "REGISTRY", self.root / "nope.md"), \
