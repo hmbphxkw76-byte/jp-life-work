@@ -2711,6 +2711,33 @@ class TestVocabVerify(unittest.TestCase):
         errors, _warns = vocab_tool.check_topic(tmeta)
         self.assertTrue(any("低于下限 3" in e for e in errors))
 
+    def test_vocab_hash_and_check(self):
+        """n26：词表内容指纹确定性 + 基线校验。"""
+        tmeta = self._tmeta()
+        self._write(tmeta, "| DEM-001 | 词条甲 |  | 分类A |  | 定义 | 来源 | 2026-11-14 | 2026-11-14 |\n")
+        cfg = {"topics": {"demo": {"storage": "data/demo/terms.md",
+                                    "imports_dir": "data/demo/imports",
+                                    "exports_dir": "data/demo/exports",
+                                    "id_prefix": "DEM", "categories": []}}}
+        ns_write = type("NS", (), {"write": True, "check": False})()
+        ns_check = type("NS", (), {"write": False, "check": True})()
+        with unittest.mock.patch.object(vocab_tool, "TOOL_ROOT", self.root):
+            h1, topics, terms = vocab_tool.vocab_hash(cfg)
+            h2, _, _ = vocab_tool.vocab_hash(cfg)
+            self.assertEqual(h1, h2)
+            self.assertEqual((topics, terms), (1, 1))
+            buf = io.StringIO()
+            with contextlib.redirect_stdout(buf):
+                self.assertEqual(vocab_tool.cmd_vocab_hash(cfg, ns_write), 0)
+            self.assertTrue((self.root / "config" / "vocab-fingerprint.json").is_file())
+            with contextlib.redirect_stdout(io.StringIO()):
+                self.assertEqual(vocab_tool.cmd_vocab_hash(cfg, ns_check), 0)
+            # 变更后失配 → 2
+            self._write(tmeta, "| DEM-001 | 词条甲 |  | 分类A |  | 定义 | 来源 | 2026-11-14 | 2026-11-14 |\n"
+                                "| DEM-002 | 词条乙 |  | 分类A |  | 定义 | 来源 | 2026-11-14 | 2026-11-14 |\n")
+            with contextlib.redirect_stdout(io.StringIO()):
+                self.assertEqual(vocab_tool.cmd_vocab_hash(cfg, ns_check), 2)
+
     def test_cmd_verify_loops_topics(self):
         tmeta = self._tmeta()
         self._write(tmeta, "| XXX-001 | 词条甲 |  | 分类A |  | 定义 | 来源 | 2026-11-14 | 2026-11-14 |\n")

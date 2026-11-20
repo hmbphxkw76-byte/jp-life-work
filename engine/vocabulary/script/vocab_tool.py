@@ -1048,6 +1048,59 @@ def cmd_cross_check(cfg: dict, args) -> int:
     return 1 if errors else (2 if warns else 0)
 
 
+# ---------- 词表变更审计指纹（n26） ----------
+
+def vocab_hash(cfg: dict) -> tuple[str, int, int]:
+    """全库词表内容指纹（n26）：词汇表小节按主题排序拼接后 SHA-256。
+
+    仅取「词汇表」小节（版本记录为变更留痕，不计入内容指纹）；不含 mtime，确定性。
+    返回 ``(hash_hex, topics, terms)``。
+    """
+    import hashlib
+    h = hashlib.sha256()
+    n = 0
+    topics = 0
+    for tid in sorted(cfg["topics"]):
+        tmeta = resolve_topic(cfg, tid)
+        try:
+            text = tmeta["storage"].read_text(encoding="utf-8")
+        except (FileNotFoundError, ValueError):
+            continue
+        topics += 1
+        rows = parse_table(get_section(text, "词汇表"))[1:]
+        h.update(f"{tid}\n".encode())
+        for r in rows:
+            h.update(("|".join(r) + "\n").encode())
+        n += len(rows)
+    return h.hexdigest(), topics, n
+
+
+def cmd_vocab_hash(cfg: dict, args) -> int:
+    """词表指纹命令（n26）：打印 / ``--check`` 对基线 / ``--write`` 刷新基线。"""
+    digest, topics, terms = vocab_hash(cfg)
+    base_path = TOOL_ROOT / "config" / "vocab-fingerprint.json"
+    if getattr(args, "write", False):
+        base_path.parent.mkdir(parents=True, exist_ok=True)
+        base_path.write_text(json.dumps(
+            {"vocab_hash": digest, "topics": topics, "terms": terms, "updated": today()},
+            ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        print(f"[vocab-hash] 基线已写入：{rel(base_path)}（{digest[:12]}…，{topics} 主题 / {terms} 词条）")
+        return 0
+    if getattr(args, "check", False):
+        if not base_path.exists():
+            print(f"[vocab-hash] 基线缺失：{rel(base_path)}（运行 vocab-hash --write）")
+            return 1
+        base = json.loads(base_path.read_text(encoding="utf-8-sig")).get("vocab_hash")
+        if base == digest:
+            print(f"[vocab-hash] 匹配（{digest[:12]}…，{topics} 主题 / {terms} 词条）")
+            return 0
+        print(f"[vocab-hash] 失配：当前 {digest[:12]}… ≠ 基线 {str(base)[:12]}…"
+              "（词库已变更：请 sync_vocab 同步提示词并刷新基线）")
+        return 2
+    print(json.dumps({"vocab_hash": digest, "topics": topics, "terms": terms}, ensure_ascii=False))
+    return 0
+
+
 # ---------- 入口 ----------
 
 def main(argv=None) -> int:
@@ -1096,6 +1149,9 @@ def main(argv=None) -> int:
     sub.add_parser("topic-check", help="主题注册表与目录结构一致性审计")
     p = sub.add_parser("cross-check", help="跨主题同概念对齐校验（n23）")
     p.add_argument("--json", action="store_true")
+    p = sub.add_parser("vocab-hash", help="词表内容指纹（n26）：打印 / --check / --write")
+    p.add_argument("--check", action="store_true", help="与基线 config/vocab-fingerprint.json 比对")
+    p.add_argument("--write", action="store_true", help="刷新基线")
     sub.add_parser("verify", help="全主题词库校验（重复 / 空值 / 分类 / ID 前缀 / 条目数下限）")
 
     args = ap.parse_args(argv)
@@ -1114,6 +1170,8 @@ def main(argv=None) -> int:
             return cmd_topic_check(cfg, args)
         if args.cmd == "cross-check":
             return cmd_cross_check(cfg, args)
+        if args.cmd == "vocab-hash":
+            return cmd_vocab_hash(cfg, args)
         if args.cmd == "verify":
             return cmd_verify(cfg, args)
         tmeta = resolve_topic(cfg, args.topic)

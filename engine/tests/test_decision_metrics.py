@@ -113,6 +113,7 @@ class CollectCase(unittest.TestCase):
         self.assertEqual(snap["gap_total"], 2)
         self.assertEqual(snap["gap_closed"], 1)
         self.assertEqual(snap["gap_close_rate"], 0.5)
+        self.assertEqual(len(snap["vocab_hash"]), 64)  # n26 词表指纹
 
     def test_requirements_matrix(self) -> None:
         with mock.patch.object(m, "REGISTRY", self.reg):
