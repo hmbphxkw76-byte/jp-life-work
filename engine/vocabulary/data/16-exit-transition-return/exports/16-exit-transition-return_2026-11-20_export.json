@@ -1,0 +1,1557 @@
+{
+  "topic": "16-exit-transition-return",
+  "name": "退出·转型·回国",
+  "version": "v1.6",
+  "generated_at": "2026-11-20T20:33:40",
+  "count": 78,
+  "categories": {
+    "退出与劳动": 16,
+    "年金与保险": 9,
+    "转型与在留资格": 19,
+    "税务与住民": 14,
+    "离境与再入国": 7,
+    "资产与生活清理": 13
+  },
+  "terms": [
+    {
+      "id": "ETR-001",
+      "term": "退職",
+      "aliases": [
+        "辞职",
+        "退职"
+      ],
+      "category": "退出与劳动",
+      "tags": [
+        "退出",
+        "劳动"
+      ],
+      "definition": "劳动者与雇主之间劳动关系依合意、解雇或定年而终止的程序与状态",
+      "source": "厚生労働省",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-20",
+      "verification": "已核验",
+      "source_url": "https://jsite.mhlw.go.jp/tokyo-foreigner/tenshokusha/nihon_hataraku_gaikokujin/spec_1d.html",
+      "confidence": "B"
+    },
+    {
+      "id": "ETR-002",
+      "term": "雇用保険",
+      "aliases": [
+        "失业保险",
+        "失业给付"
+      ],
+      "category": "退出与劳动",
+      "tags": [
+        "退出",
+        "保险"
+      ],
+      "definition": "劳动者失业后，为稳定生活与再就职而给付的保险制度",
+      "source": "ハローワーク",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-20",
+      "verification": "已核验",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/koyou/koyouhoken/index_00003.html",
+      "confidence": "B"
+    },
+    {
+      "id": "ETR-003",
+      "term": "健康保険任意継続",
+      "aliases": [
+        "任意继续",
+        "任意継続"
+      ],
+      "category": "退出与劳动",
+      "tags": [
+        "退出",
+        "保险"
+      ],
+      "definition": "被用者保险退职后，满足条件者可继续加入被用者保险的制度",
+      "source": "日本年金機構",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-20",
+      "verification": "已核验",
+      "source_url": "https://www.kyoukaikenpo.or.jp/benefit/voluntary_continuation/",
+      "confidence": "B"
+    },
+    {
+      "id": "ETR-004",
+      "term": "厚生年金脱退一时金",
+      "aliases": [
+        "脱退一时金",
+        "年金脱退"
+      ],
+      "category": "年金与保险",
+      "tags": [
+        "回国",
+        "年金"
+      ],
+      "definition": "外国人离开日本时，满足条件者可申请的一次性年金脱退给付；本主题只研究申请执行",
+      "source": "日本年金機構",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.nenkin.go.jp/international/japanese-system/withdrawalpayment/index.html",
+      "confidence": "B"
+    },
+    {
+      "id": "ETR-005",
+      "term": "国民健康保険",
+      "aliases": [
+        "国保",
+        "住民保险"
+      ],
+      "category": "年金与保险",
+      "tags": [
+        "退出",
+        "保险"
+      ],
+      "definition": "以住民为对象的健康保险制度，退职后通常转入此制度",
+      "source": "厚生労働省",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/index.html",
+      "confidence": "B"
+    },
+    {
+      "id": "ETR-006",
+      "term": "被用者保険",
+      "aliases": [
+        "健保",
+        "社会保险"
+      ],
+      "category": "年金与保险",
+      "tags": [
+        "退出",
+        "保险"
+      ],
+      "definition": "受雇者加入的健康保险与厚生年金制度",
+      "source": "厚生労働省",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/index.html",
+      "confidence": "B"
+    },
+    {
+      "id": "ETR-007",
+      "term": "在留資格変更",
+      "aliases": [
+        "资格变更",
+        "变更许可"
+      ],
+      "category": "转型与在留资格",
+      "tags": [
+        "转型",
+        "在留"
+      ],
+      "definition": "在留资格从一种类型切换为另一种类型的许可程序",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-19",
+      "verification": "已核验",
+      "source_url": "https://www.moj.go.jp/isa/applications/procedures/16-2.html",
+      "confidence": "A"
+    },
+    {
+      "id": "ETR-008",
+      "term": "在留資格取消",
+      "aliases": [
+        "资格取消",
+        "取消处分"
+      ],
+      "category": "转型与在留资格",
+      "tags": [
+        "退出",
+        "在留"
+      ],
+      "definition": "因资格要件丧失或法定事由，入管机关取消在留资格的处分",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-19",
+      "verification": "已核验",
+      "source_url": "https://www.moj.go.jp/isa/applications/procedures/torikeshi_00002.html",
+      "confidence": "A"
+    },
+    {
+      "id": "ETR-009",
+      "term": "特定活動",
+      "aliases": [
+        "特定活动",
+        "告示活动"
+      ],
+      "category": "转型与在留资格",
+      "tags": [
+        "转型",
+        "在留"
+      ],
+      "definition": "入管法告示指定的个别活动在留资格，可用于特定目的的过渡",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.moj.go.jp/isa/applications/status/designatedactivities14.html",
+      "confidence": "B"
+    },
+    {
+      "id": "ETR-010",
+      "term": "技能実習",
+      "aliases": [
+        "技能实习",
+        "实習"
+      ],
+      "category": "转型与在留资格",
+      "tags": [
+        "转型",
+        "在留"
+      ],
+      "definition": "以技能学习为目的的在留资格，与特定活動不同",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.moj.go.jp/isa/applications/ssw/03_00067.html",
+      "confidence": "B"
+    },
+    {
+      "id": "ETR-011",
+      "term": "転職",
+      "aliases": [
+        "转职",
+        "跳槽"
+      ],
+      "category": "转型与在留资格",
+      "tags": [
+        "转型",
+        "劳动"
+      ],
+      "definition": "在留期间转换雇主或岗位；须在资格允许范围内办理",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.moj.go.jp/isa/applications/procedures/torikeshi_00002.html",
+      "confidence": "B"
+    },
+    {
+      "id": "ETR-012",
+      "term": "资格外活动",
+      "aliases": [
+        "资格外许可",
+        "アルバイト许可"
+      ],
+      "category": "转型与在留资格",
+      "tags": [
+        "转型",
+        "在留"
+      ],
+      "definition": "在留资格许可范围外从事活动的许可，通常有时间上限",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.moj.go.jp/isa/applications/guide/nyuukokukanri07_00045.html",
+      "confidence": "B"
+    },
+    {
+      "id": "ETR-013",
+      "term": "特定技能2号",
+      "aliases": [
+        "特定技能二号",
+        "SSW2号"
+      ],
+      "category": "转型与在留资格",
+      "tags": [
+        "转型",
+        "在留"
+      ],
+      "definition": "特定技能在留资格的可更新类型；该类型适用分野有限，自动车运送业不在其中",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-19",
+      "verification": "已核验",
+      "source_url": "https://www.moj.go.jp/isa/applications/ssw/03_00067.html",
+      "confidence": "A"
+    },
+    {
+      "id": "ETR-014",
+      "term": "帰国前確定申告",
+      "aliases": [
+        "归国前申报",
+        "确定申告"
+      ],
+      "category": "税务与住民",
+      "tags": [
+        "回国",
+        "税务"
+      ],
+      "definition": "离开日本前办理的所得税确定申报程序",
+      "source": "国税庁",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1420.htm",
+      "confidence": "B"
+    },
+    {
+      "id": "ETR-015",
+      "term": "住民税",
+      "aliases": [
+        "居民税",
+        "県民税",
+        "市民税"
+      ],
+      "category": "税务与住民",
+      "tags": [
+        "住民",
+        "税务"
+      ],
+      "definition": "对住民征收的地方税；退职、转出或回国时需确认纳付义务",
+      "source": "総務省",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.soumu.go.jp/main_sosiki/jichi_gyousei/c-gyousei/zairyu/",
+      "confidence": "B"
+    },
+    {
+      "id": "ETR-016",
+      "term": "所得税",
+      "aliases": [
+        "个税",
+        "所得课税"
+      ],
+      "category": "税务与住民",
+      "tags": [
+        "回国",
+        "税务"
+      ],
+      "definition": "对所得征收的直接税；归国前后须确认申报与结算时点",
+      "source": "国税庁",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1420.htm",
+      "confidence": "B"
+    },
+    {
+      "id": "ETR-017",
+      "term": "転出届",
+      "aliases": [
+        "转出申报",
+        "转出届"
+      ],
+      "category": "税务与住民",
+      "tags": [
+        "住民",
+        "住所"
+      ],
+      "definition": "迁出原住所地时向自治体提交的转出申报",
+      "source": "総務省",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.soumu.go.jp/main_sosiki/jichi_gyousei/c-gyousei/zairyu/",
+      "confidence": "B"
+    },
+    {
+      "id": "ETR-018",
+      "term": "住民票",
+      "aliases": [
+        "居民票",
+        "住民票誊本"
+      ],
+      "category": "税务与住民",
+      "tags": [
+        "住民",
+        "住所"
+      ],
+      "definition": "自治体制作并管理的住民登记证明",
+      "source": "総務省",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.soumu.go.jp/main_sosiki/jichi_gyousei/c-gyousei/zairyu/",
+      "confidence": "B"
+    },
+    {
+      "id": "ETR-019",
+      "term": "在留カード",
+      "aliases": [
+        "在留卡",
+        "residence card"
+      ],
+      "category": "离境与再入国",
+      "tags": [
+        "在留",
+        "身份"
+      ],
+      "definition": "交付给中长期在留外国人的身份证明卡",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-19",
+      "verification": "已核验",
+      "source_url": "https://www.moj.go.jp/isa/applications/procedures/nyuukokukanri10_00020.html",
+      "confidence": "A"
+    },
+    {
+      "id": "ETR-020",
+      "term": "再入国許可",
+      "aliases": [
+        "再入国许可",
+        "re-entry permit"
+      ],
+      "category": "离境与再入国",
+      "tags": [
+        "离境",
+        "再入国"
+      ],
+      "definition": "离开日本后再返回日本所需的许可，须在离境前或离境时办理",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-19",
+      "verification": "已核验",
+      "source_url": "https://www.moj.go.jp/isa/immigration/procedures/16-5.html",
+      "confidence": "A"
+    },
+    {
+      "id": "ETR-021",
+      "term": "みなし再入国",
+      "aliases": [
+        "视同再入国",
+        "临时再入国"
+      ],
+      "category": "离境与再入国",
+      "tags": [
+        "离境",
+        "再入国"
+      ],
+      "definition": "满足法定条件者离境时视为已获再入国许可的特别制度",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.moj.go.jp/isa/immigration/procedures/16-5.html",
+      "confidence": "B"
+    },
+    {
+      "id": "ETR-022",
+      "term": "退室",
+      "aliases": [
+        "退房",
+        "退租"
+      ],
+      "category": "资产与生活清理",
+      "tags": [
+        "回国",
+        "住房"
+      ],
+      "definition": "租赁契约终止时迁出并交还房屋的手续",
+      "source": "国土交通省",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp/jidosha/jidosha_tk6_000001.html",
+      "confidence": "B"
+    },
+    {
+      "id": "ETR-023",
+      "term": "解約",
+      "aliases": [
+        "解约",
+        "终止契约"
+      ],
+      "category": "资产与生活清理",
+      "tags": [
+        "回国",
+        "生活"
+      ],
+      "definition": "通信、银行、水电燃气等契约终止的手续",
+      "source": "各机构官网",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "",
+      "confidence": "C"
+    },
+    {
+      "id": "ETR-024",
+      "term": "车辆处置",
+      "aliases": [
+        "车辆转让",
+        "廃車",
+        "卖车"
+      ],
+      "category": "资产与生活清理",
+      "tags": [
+        "回国",
+        "车辆"
+      ],
+      "definition": "离境前对自用车辆进行转让、注销或废弃处理",
+      "source": "国土交通省",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp/jidosha/jidosha_tk6_000001.html",
+      "confidence": "B"
+    },
+    {
+      "id": "ETR-025",
+      "term": "来源治理",
+      "aliases": [
+        "来源核验",
+        "版本核验"
+      ],
+      "category": "资产与生活清理",
+      "tags": [
+        "来源",
+        "治理"
+      ],
+      "definition": "对官方来源、版本日期、核验状态与口径冲突进行登记和维护",
+      "source": "仓库规范",
+      "first_added": "2026-11-14",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "",
+      "confidence": "C"
+    },
+    {
+      "id": "ETR-026",
+      "term": "離脱手続き",
+      "aliases": [
+        "离境手续",
+        "出境手续"
+      ],
+      "category": "离境与再入国",
+      "tags": [
+        "归国",
+        "手续",
+        "在留"
+      ],
+      "definition": "离开日本前的行政手续总称，含在留卡返还、再入国与税务",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-15",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.moj.go.jp/isa/applications/procedures/torikeshi_00002.html",
+      "confidence": "B"
+    },
+    {
+      "id": "ETR-027",
+      "term": "帰国",
+      "aliases": [
+        "回国"
+      ],
+      "category": "离境与再入国",
+      "tags": [
+        "回国",
+        "退出"
+      ],
+      "definition": "离开日本返回原籍国的行为",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.moj.go.jp/isa/applications/procedures/torikeshi_00002.html",
+      "confidence": "B"
+    },
+    {
+      "id": "ETR-028",
+      "term": "住所",
+      "aliases": [
+        "住址"
+      ],
+      "category": "税务与住民",
+      "tags": [
+        "住民",
+        "住所"
+      ],
+      "definition": "个人或家庭的居住地址",
+      "source": "総務省",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.soumu.go.jp/main_sosiki/jichi_gyousei/c-gyousei/zairyu/",
+      "confidence": "B"
+    },
+    {
+      "id": "ETR-029",
+      "term": "年金",
+      "aliases": [
+        "养老金"
+      ],
+      "category": "年金与保险",
+      "tags": [
+        "年金",
+        "制度"
+      ],
+      "definition": "老后或伤残时给付的公共年金制度",
+      "source": "日本年金機構",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.nenkin.go.jp/international/japanese-system/withdrawalpayment/index.html",
+      "confidence": "B"
+    },
+    {
+      "id": "ETR-030",
+      "term": "扶養",
+      "aliases": [
+        "抚养"
+      ],
+      "category": "税务与住民",
+      "tags": [
+        "税务",
+        "抚养"
+      ],
+      "definition": "在税制与社保中扶养亲属的概念",
+      "source": "国税庁",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1420.htm",
+      "confidence": "B"
+    },
+    {
+      "id": "ETR-031",
+      "term": "手当",
+      "aliases": [
+        "津贴"
+      ],
+      "category": "年金与保险",
+      "tags": [
+        "给付",
+        "津贴"
+      ],
+      "definition": "按制度支付的各类津贴",
+      "source": "厚生労働省",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000139508.html",
+      "confidence": "B"
+    },
+    {
+      "id": "ETR-032",
+      "term": "再就職",
+      "aliases": [
+        "再就业"
+      ],
+      "category": "退出与劳动",
+      "tags": [
+        "劳动",
+        "再就职"
+      ],
+      "definition": "退职后重新就业",
+      "source": "ハローワーク",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/koyou/hellowork.html",
+      "confidence": "B"
+    },
+    {
+      "id": "ETR-033",
+      "term": "雇用",
+      "aliases": [
+        "雇佣"
+      ],
+      "category": "退出与劳动",
+      "tags": [
+        "劳动",
+        "雇用"
+      ],
+      "definition": "劳动者与雇主之间的雇佣关系",
+      "source": "厚生労働省",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://jsite.mhlw.go.jp/tokyo-foreigner/tenshokusha/nihon_hataraku_gaikokujin/spec_1c.html",
+      "confidence": "B"
+    },
+    {
+      "id": "ETR-034",
+      "term": "住基",
+      "aliases": [
+        "住民基本台帳"
+      ],
+      "category": "税务与住民",
+      "tags": [
+        "住民",
+        "台账"
+      ],
+      "definition": "自治体管理的住民基本台账",
+      "source": "総務省",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.soumu.go.jp/main_sosiki/jichi_gyousei/c-gyousei/zairyu/",
+      "confidence": "B"
+    },
+    {
+      "id": "ETR-035",
+      "term": "解約金",
+      "aliases": [
+        "解约金"
+      ],
+      "category": "资产与生活清理",
+      "tags": [
+        "契约",
+        "费用"
+      ],
+      "definition": "提前解除契约时的费用",
+      "source": "各机构官网",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "",
+      "confidence": "C"
+    },
+    {
+      "id": "ETR-036",
+      "term": "火災保険",
+      "aliases": [
+        "火灾保险"
+      ],
+      "category": "资产与生活清理",
+      "tags": [
+        "保险",
+        "住房"
+      ],
+      "definition": "针对火灾等损害的保险",
+      "source": "各机构官网",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "",
+      "confidence": "C"
+    },
+    {
+      "id": "ETR-037",
+      "term": "携帯",
+      "aliases": [
+        "手机"
+      ],
+      "category": "资产与生活清理",
+      "tags": [
+        "通信",
+        "契约"
+      ],
+      "definition": "移动通信终端与契约",
+      "source": "各机构官网",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "",
+      "confidence": "C"
+    },
+    {
+      "id": "ETR-038",
+      "term": "倉庫",
+      "aliases": [
+        "仓库"
+      ],
+      "category": "资产与生活清理",
+      "tags": [
+        "资产",
+        "保管"
+      ],
+      "definition": "离境前保管物品的设施",
+      "source": "各机构官网",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "",
+      "confidence": "C"
+    },
+    {
+      "id": "ETR-039",
+      "term": "行李",
+      "aliases": [
+        "荷物"
+      ],
+      "category": "资产与生活清理",
+      "tags": [
+        "资产",
+        "搬运"
+      ],
+      "definition": "回国时携带或托运的物品",
+      "source": "各机构官网",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "",
+      "confidence": "C"
+    },
+    {
+      "id": "ETR-040",
+      "term": "送金",
+      "aliases": [
+        "汇款"
+      ],
+      "category": "资产与生活清理",
+      "tags": [
+        "资金",
+        "汇款"
+      ],
+      "definition": "向原籍国汇款的手续",
+      "source": "各机构官网",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "",
+      "confidence": "C"
+    },
+    {
+      "id": "ETR-041",
+      "term": "解雇予告",
+      "aliases": [
+        "解雇预告"
+      ],
+      "category": "退出与劳动",
+      "tags": [
+        "退出",
+        "劳动",
+        "解雇"
+      ],
+      "definition": "雇主解雇劳动者时原则上须提前30日以上预告；未达30日时按平均工资的日数分支付解雇予告手当（労働基準法20条・21条）",
+      "source": "厚生労働省",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://jsite.mhlw.go.jp/tokyo-foreigner/tenshokusha/nihon_hataraku_gaikokujin/spec_1c.html",
+      "confidence": "B"
+    },
+    {
+      "id": "ETR-042",
+      "term": "解雇予告手当",
+      "aliases": [
+        "解雇预告手当"
+      ],
+      "category": "退出与劳动",
+      "tags": [
+        "退出",
+        "劳动",
+        "解雇"
+      ],
+      "definition": "解雇预告不足30日时，按平均工资的日数分支付的工资（労働基準法20条）",
+      "source": "厚生労働省",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000139508.html",
+      "confidence": "B"
+    },
+    {
+      "id": "ETR-043",
+      "term": "労働基準法第15条",
+      "aliases": [
+        "劳动基准法第15条"
+      ],
+      "category": "退出与劳动",
+      "tags": [
+        "退出",
+        "劳动",
+        "书面"
+      ],
+      "definition": "要求工资等劳动条件明示、工资事项书面明示的规定",
+      "source": "厚生労働省",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/index.html",
+      "confidence": "B"
+    },
+    {
+      "id": "ETR-044",
+      "term": "労働基準法第16条",
+      "aliases": [
+        "劳动基准法第16条"
+      ],
+      "category": "退出与劳动",
+      "tags": [
+        "退出",
+        "劳动",
+        "违约金"
+      ],
+      "definition": "禁止就劳动者不履行预定違約金或损害赔偿额的规定",
+      "source": "厚生労働省",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/index.html",
+      "confidence": "B"
+    },
+    {
+      "id": "ETR-045",
+      "term": "労働基準法第19条",
+      "aliases": [
+        "劳动基准法第19条"
+      ],
+      "category": "退出与劳动",
+      "tags": [
+        "退出",
+        "劳动",
+        "解雇"
+      ],
+      "definition": "对疗养中及其后30日内的劳动者限制解雇的规定",
+      "source": "厚生労働省",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/index.html",
+      "confidence": "B"
+    },
+    {
+      "id": "ETR-046",
+      "term": "労働基準法第24条",
+      "aliases": [
+        "劳动基准法第24条"
+      ],
+      "category": "退出与劳动",
+      "tags": [
+        "退出",
+        "劳动",
+        "工资"
+      ],
+      "definition": "工资支付原则（通货・直接・全额・每月1回以上・一定期日）；退职时未付工资解释上为退职日7日以内支付",
+      "source": "厚生労働省",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/index.html",
+      "confidence": "B"
+    },
+    {
+      "id": "ETR-047",
+      "term": "未払賃金",
+      "aliases": [
+        "未付工资"
+      ],
+      "category": "退出与劳动",
+      "tags": [
+        "退出",
+        "劳动",
+        "工资"
+      ],
+      "definition": "退职时未支付的工资；其支付期限解释上为退职日7日以内",
+      "source": "厚生労働省",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://jsite.mhlw.go.jp/tokyo-foreigner/tenshokusha/nihon_hataraku_gaikokujin/spec_1c.html",
+      "confidence": "B"
+    },
+    {
+      "id": "ETR-048",
+      "term": "基本手当",
+      "aliases": [
+        "失业基本手当"
+      ],
+      "category": "退出与劳动",
+      "tags": [
+        "退出",
+        "保险",
+        "给付"
+      ],
+      "definition": "雇用保険失业给付的核心给付种类，退职后符合受给资格者可申请",
+      "source": "ハローワーク",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/koyou/hellowork.html",
+      "confidence": "B"
+    },
+    {
+      "id": "ETR-049",
+      "term": "受給資格決定",
+      "aliases": [
+        "受给资格决定"
+      ],
+      "category": "退出与劳动",
+      "tags": [
+        "退出",
+        "保险",
+        "手续"
+      ],
+      "definition": "ハローワーク对失业给付受给资格的决定程序；受给资格决定窓口为平日8:30–16:00",
+      "source": "ハローワーク",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/koyou/hellowork.html",
+      "confidence": "B"
+    },
+    {
+      "id": "ETR-050",
+      "term": "離職票",
+      "aliases": [
+        "离职票"
+      ],
+      "category": "退出与劳动",
+      "tags": [
+        "退出",
+        "书类"
+      ],
+      "definition": "退职时雇主交付的离职证明，为雇用保険受给申请必要书类之一",
+      "source": "厚生労働省",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://jsite.mhlw.go.jp/tokyo-foreigner/tenshokusha/nihon_hataraku_gaikokujin/spec_1c.html",
+      "confidence": "B"
+    },
+    {
+      "id": "ETR-051",
+      "term": "雇用保険被保険者証",
+      "aliases": [
+        "雇用保险被保险者证"
+      ],
+      "category": "退出与劳动",
+      "tags": [
+        "退出",
+        "书类",
+        "保险"
+      ],
+      "definition": "雇用保険被保险者的凭证，受给申请必要书类之一",
+      "source": "厚生労働省",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/index.html",
+      "confidence": "B"
+    },
+    {
+      "id": "ETR-052",
+      "term": "協会けんぽ",
+      "aliases": [
+        "协会健保",
+        "全国健康保险协会"
+      ],
+      "category": "年金与保险",
+      "tags": [
+        "保险",
+        "被用者",
+        "机构"
+      ],
+      "definition": "全国健康保険協会的通称，被用者健康保険的运营主体之一",
+      "source": "全国健康保険協会",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.kyoukaikenpo.or.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "ETR-053",
+      "term": "健保組合",
+      "aliases": [
+        "健康保险组合"
+      ],
+      "category": "年金与保险",
+      "tags": [
+        "保险",
+        "被用者",
+        "机构"
+      ],
+      "definition": "被用者健康保険的运营主体之一，由公司与个人分担保费",
+      "source": "厚生労働省",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://jsite.mhlw.go.jp/tokyo-foreigner/tenshokusha/nihon_hataraku_gaikokujin/spec_1c.html",
+      "confidence": "B"
+    },
+    {
+      "id": "ETR-054",
+      "term": "被用者保険資格喪失",
+      "aliases": [
+        "被用者保险资格丧失"
+      ],
+      "category": "年金与保险",
+      "tags": [
+        "退出",
+        "保险"
+      ],
+      "definition": "被用者保険资格于退职日翌日丧失，退职后须向市区町村办理住民异动与国民健康保険加入",
+      "source": "厚生労働省",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/index.html",
+      "confidence": "B"
+    },
+    {
+      "id": "ETR-055",
+      "term": "国保加入義務",
+      "aliases": [
+        "国保加入义务"
+      ],
+      "category": "年金与保险",
+      "tags": [
+        "退出",
+        "保险",
+        "国保"
+      ],
+      "definition": "3个月以上在留且未加入勤务先公共健康保険者，负有国民健康保険加入义务",
+      "source": "厚生労働省",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://jsite.mhlw.go.jp/tokyo-foreigner/tenshokusha/nihon_hataraku_gaikokujin/spec_1c.html",
+      "confidence": "B"
+    },
+    {
+      "id": "ETR-056",
+      "term": "退去強制",
+      "aliases": [
+        "退去强制"
+      ],
+      "category": "转型与在留资格",
+      "tags": [
+        "退出",
+        "在留",
+        "强制"
+      ],
+      "definition": "入管法上的强制离境制度，与退職（劳动关系终止）不得混用",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.moj.go.jp/isa/applications/procedures/torikeshi_00002.html",
+      "confidence": "B"
+    },
+    {
+      "id": "ETR-057",
+      "term": "継続就職活動",
+      "aliases": [
+        "继续求职活动"
+      ],
+      "category": "转型与在留资格",
+      "tags": [
+        "转型",
+        "在留",
+        "活动"
+      ],
+      "definition": "特定活動告示规定的个别活动之一，允许毕业生继续求职",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-19",
+      "verification": "已核验",
+      "source_url": "https://www.moj.go.jp/isa/applications/status/designatedactivities14.html",
+      "confidence": "A"
+    },
+    {
+      "id": "ETR-058",
+      "term": "入管法22条の4",
+      "aliases": [
+        "入管法第22条之4"
+      ],
+      "category": "转型与在留资格",
+      "tags": [
+        "在留",
+        "取消",
+        "法规"
+      ],
+      "definition": "规定在留資格取消事由的法条：原活动继续3个月以上不履行（正当理由除外）",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.moj.go.jp/isa/applications/procedures/torikeshi_00002.html",
+      "confidence": "B"
+    },
+    {
+      "id": "ETR-059",
+      "term": "特定技能1号",
+      "aliases": [
+        "特定技能一号",
+        "技能1号"
+      ],
+      "category": "转型与在留资格",
+      "tags": [
+        "转型",
+        "在留"
+      ],
+      "definition": "特定技能在留资格的非更新类型，有业务限制与在留上限；自动车运送业无2号",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.moj.go.jp/isa/applications/ssw/03_00067.html",
+      "confidence": "B"
+    },
+    {
+      "id": "ETR-060",
+      "term": "自動車運送業",
+      "aliases": [
+        "自动车运送业"
+      ],
+      "category": "转型与在留资格",
+      "tags": [
+        "转型",
+        "行业"
+      ],
+      "definition": "特定技能2号对象外分野；受入上限22,100人（2026-01-23閣議、至2029-03末）",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.moj.go.jp/isa/applications/procedures/torikeshi_00002.html",
+      "confidence": "B"
+    },
+    {
+      "id": "ETR-061",
+      "term": "受入上限",
+      "aliases": [
+        "受入见込数"
+      ],
+      "category": "转型与在留资格",
+      "tags": [
+        "转型",
+        "统计"
+      ],
+      "definition": "特定技能1号分野别受入见込数上限；自动车运送业22,100人（至2029-03末）",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.moj.go.jp/isa/content/001472175.pdf",
+      "confidence": "B"
+    },
+    {
+      "id": "ETR-062",
+      "term": "包括許可",
+      "aliases": [
+        "包括许可"
+      ],
+      "category": "转型与在留资格",
+      "tags": [
+        "转型",
+        "在留",
+        "资格外"
+      ],
+      "definition": "资格外活動的许可类型之一，1周28小时以内的报偿活动",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.moj.go.jp/isa/immigration/procedures/16-5.html",
+      "confidence": "B"
+    },
+    {
+      "id": "ETR-063",
+      "term": "個別許可",
+      "aliases": [
+        "个别许可"
+      ],
+      "category": "转型与在留资格",
+      "tags": [
+        "转型",
+        "在留",
+        "资格外"
+      ],
+      "definition": "资格外活動的许可类型之一，按活动逐个审查",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.moj.go.jp/isa/immigration/procedures/16-5.html",
+      "confidence": "B"
+    },
+    {
+      "id": "ETR-064",
+      "term": "永住許可ガイドライン",
+      "aliases": [
+        "永住许可指南"
+      ],
+      "category": "转型与在留资格",
+      "tags": [
+        "在留",
+        "永住",
+        "指南"
+      ],
+      "definition": "出入国在留管理庁令和8-10-01改定的永住许可指南，令和9-04-01起申请适用",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-19",
+      "verification": "已核验",
+      "source_url": "https://www.moj.go.jp/isa/10_00279.html",
+      "confidence": "A"
+    },
+    {
+      "id": "ETR-065",
+      "term": "永住取消ガイドライン",
+      "aliases": [
+        "永住取消指南"
+      ],
+      "category": "转型与在留资格",
+      "tags": [
+        "在留",
+        "永住",
+        "取消"
+      ],
+      "definition": "令和8年10月策定的永住取消指南，取消事由为入管法22条の4第1項第8号/第9号",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.moj.go.jp/isa/10_00279.html",
+      "confidence": "B"
+    },
+    {
+      "id": "ETR-066",
+      "term": "公租公課",
+      "aliases": [
+        "公租公课"
+      ],
+      "category": "转型与在留资格",
+      "tags": [
+        "在留",
+        "永住",
+        "税务"
+      ],
+      "definition": "公共租税与课役的合称；永住审查中作为消极评价要素，过去滞纳亦审查",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.moj.go.jp/isa/applications/procedures/torikeshi_00002.html",
+      "confidence": "B"
+    },
+    {
+      "id": "ETR-067",
+      "term": "職権変更",
+      "aliases": [
+        "职权变更"
+      ],
+      "category": "转型与在留资格",
+      "tags": [
+        "在留",
+        "永住",
+        "处分"
+      ],
+      "definition": "永住取消前原则先实施的资格变更（多为「定住者」）",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.moj.go.jp/isa/applications/procedures/16-2.html",
+      "confidence": "B"
+    },
+    {
+      "id": "ETR-068",
+      "term": "源泉徴収",
+      "aliases": [
+        "源泉征收"
+      ],
+      "category": "税务与住民",
+      "tags": [
+        "回国",
+        "税务"
+      ],
+      "definition": "脱退一时金等给付时按20.42%扣缴的所得税（媒体汇总口径，需核实原文）",
+      "source": "日本年金機構",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.nenkin.go.jp/international/japanese-system/withdrawalpayment/index.html",
+      "confidence": "B"
+    },
+    {
+      "id": "ETR-069",
+      "term": "退職所得",
+      "aliases": [
+        "退职所得"
+      ],
+      "category": "税务与住民",
+      "tags": [
+        "回国",
+        "税务"
+      ],
+      "definition": "退职金对应的所得，适用分離課税（(収入金額－退職所得控除額)×1/2）",
+      "source": "国税庁",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-19",
+      "verification": "已核验",
+      "source_url": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1420.htm",
+      "confidence": "A"
+    },
+    {
+      "id": "ETR-070",
+      "term": "分離課税",
+      "aliases": [
+        "分离课税"
+      ],
+      "category": "税务与住民",
+      "tags": [
+        "回国",
+        "税务"
+      ],
+      "definition": "退職所得适用的课税方式，按(収入金額－退職所得控除額)×1/2计算",
+      "source": "国税庁",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1420.htm",
+      "confidence": "B"
+    },
+    {
+      "id": "ETR-071",
+      "term": "国外転出時課税制度",
+      "aliases": [
+        "国外转出时课税制度"
+      ],
+      "category": "税务与住民",
+      "tags": [
+        "回国",
+        "税务"
+      ],
+      "definition": "国外転出时对対象资产课税的系列，含確定申告書・第三表・対象資産明細書等様式",
+      "source": "国税庁",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1420.htm",
+      "confidence": "B"
+    },
+    {
+      "id": "ETR-072",
+      "term": "納税管理人",
+      "aliases": [
+        "纳税管理人"
+      ],
+      "category": "税务与住民",
+      "tags": [
+        "回国",
+        "税务",
+        "住民"
+      ],
+      "definition": "归国前为住民税等申报与缴纳而选任的纳税管理人",
+      "source": "国税庁",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1420.htm",
+      "confidence": "B"
+    },
+    {
+      "id": "ETR-073",
+      "term": "準確定申告",
+      "aliases": [
+        "准确定申告"
+      ],
+      "category": "税务与住民",
+      "tags": [
+        "回国",
+        "税务"
+      ],
+      "definition": "退职等导致年内收入减少时，可就已纳预定税额申请退还的申报；帰国前确定申告的期限依据",
+      "source": "国税庁",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1420.htm",
+      "confidence": "B"
+    },
+    {
+      "id": "ETR-074",
+      "term": "在留カード返納",
+      "aliases": [
+        "在留卡返还"
+      ],
+      "category": "离境与再入国",
+      "tags": [
+        "离境",
+        "在留",
+        "手续"
+      ],
+      "definition": "在留カード失効日起14日以内（出国时于出入国港立即）返还的手续",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-19",
+      "verification": "已核验",
+      "source_url": "https://www.moj.go.jp/isa/applications/procedures/nyuukokukanri10_00020.html",
+      "confidence": "A"
+    },
+    {
+      "id": "ETR-075",
+      "term": "特別永住者",
+      "aliases": [
+        "特别永住者"
+      ],
+      "category": "离境与再入国",
+      "tags": [
+        "在留",
+        "再入国"
+      ],
+      "definition": "再入国許可有効期間最長6年的在留资格类型（一般最长5年）",
+      "source": "出入国在留管理庁",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.moj.go.jp/isa/10_00279.html",
+      "confidence": "B"
+    },
+    {
+      "id": "ETR-076",
+      "term": "ワンストップサービス",
+      "aliases": [
+        "一站式服务",
+        "OSS"
+      ],
+      "category": "资产与生活清理",
+      "tags": [
+        "回国",
+        "车辆",
+        "手续"
+      ],
+      "definition": "国土交通省提供的自動車保有関係手続一括办理服务，可完成変更登録・抹消登録・税・手数料",
+      "source": "国土交通省",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-19",
+      "verification": "已核验",
+      "source_url": "https://www.mlit.go.jp/jidosha/jidosha_tk6_000001.html",
+      "confidence": "A"
+    },
+    {
+      "id": "ETR-077",
+      "term": "自動車保有関係手続",
+      "aliases": [
+        "自动车保有相关手续"
+      ],
+      "category": "资产与生活清理",
+      "tags": [
+        "回国",
+        "车辆"
+      ],
+      "definition": "车辆转让、注销或废弃时的登记与税手续费手续，经国土交通省OSS一括办理",
+      "source": "国土交通省",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-19",
+      "verification": "已核验",
+      "source_url": "https://www.mlit.go.jp/jidosha/jidosha_tk6_000001.html",
+      "confidence": "A"
+    },
+    {
+      "id": "ETR-078",
+      "term": "解約予告期間",
+      "aliases": [
+        "解约预告期间"
+      ],
+      "category": "资产与生活清理",
+      "tags": [
+        "回国",
+        "住房",
+        "契约"
+      ],
+      "definition": "退室解约前须预告的期间：期间未定的赁贷借为申入后1个月、定期建物赁贷借原则6个月",
+      "source": "国土交通省",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp/jidosha/jidosha_tk6_000001.html",
+      "confidence": "B"
+    }
+  ]
+}

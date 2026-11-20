@@ -8,9 +8,9 @@
 
 | ID | 词条 | 别名 | 分类 | 标签 | 定义 | 来源 | 首次登记 | 最近更新 | 核验状态 | 来源URL | 置信度 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| ETR-001 | 退職 | 辞职;退职 | 退出与劳动 | 退出;劳动 | 劳动者与雇主之间劳动关系依合意、解雇或定年而终止的程序与状态 | 厚生労働省 | 2026-11-14 | 2026-11-19 | 部分核验 | https://jsite.mhlw.go.jp/tokyo-foreigner/tenshokusha/nihon_hataraku_gaikokujin/spec_1c.html | B |
-| ETR-002 | 雇用保険 | 失业保险;失业给付 | 退出与劳动 | 退出;保险 | 劳动者失业后，为稳定生活与再就职而给付的保险制度 | ハローワーク | 2026-11-14 | 2026-11-19 | 部分核验 | https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/koyou/hellowork.html | B |
-| ETR-003 | 健康保険任意継続 | 任意继续;任意継続 | 退出与劳动 | 退出;保险 | 被用者保险退职后，满足条件者可继续加入被用者保险的制度 | 日本年金機構 | 2026-11-14 | 2026-11-19 | 部分核验 | https://www.nenkin.go.jp/service/kounen/hokenryo/menjo/20140122-01.html | B |
+| ETR-001 | 退職 | 辞职;退职 | 退出与劳动 | 退出;劳动 | 劳动者与雇主之间劳动关系依合意、解雇或定年而终止的程序与状态 | 厚生労働省 | 2026-11-14 | 2026-11-20 | 已核验 | https://jsite.mhlw.go.jp/tokyo-foreigner/tenshokusha/nihon_hataraku_gaikokujin/spec_1d.html | B |
+| ETR-002 | 雇用保険 | 失业保险;失业给付 | 退出与劳动 | 退出;保险 | 劳动者失业后，为稳定生活与再就职而给付的保险制度 | ハローワーク | 2026-11-14 | 2026-11-20 | 已核验 | https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/koyou/koyouhoken/index_00003.html | B |
+| ETR-003 | 健康保険任意継続 | 任意继续;任意継続 | 退出与劳动 | 退出;保险 | 被用者保险退职后，满足条件者可继续加入被用者保险的制度 | 日本年金機構 | 2026-11-14 | 2026-11-20 | 已核验 | https://www.kyoukaikenpo.or.jp/benefit/voluntary_continuation/ | B |
 | ETR-004 | 厚生年金脱退一时金 | 脱退一时金;年金脱退 | 年金与保险 | 回国;年金 | 外国人离开日本时，满足条件者可申请的一次性年金脱退给付；本主题只研究申请执行 | 日本年金機構 | 2026-11-14 | 2026-11-19 | 部分核验 | https://www.nenkin.go.jp/international/japanese-system/withdrawalpayment/index.html | B |
 | ETR-005 | 国民健康保険 | 国保;住民保险 | 年金与保险 | 退出;保险 | 以住民为对象的健康保险制度，退职后通常转入此制度 | 厚生労働省 | 2026-11-14 | 2026-11-19 | 部分核验 | https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/index.html | B |
 | ETR-006 | 被用者保険 | 健保;社会保险 | 年金与保险 | 退出;保险 | 受雇者加入的健康保险与厚生年金制度 | 厚生労働省 | 2026-11-14 | 2026-11-19 | 部分核验 | https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/index.html | B |
@@ -97,3 +97,4 @@
 | v1.3 | 2026-11-18 | 批量导入 | 新增 14 条 / 跳过重复 0 条 / 无效 0 条；文件 2026-11-18_补至阈值.md |
 | v1.4 | 2026-11-18 | 批量导入 | 新增 38 条 / 跳过重复 0 条 / 无效 0 条；文件 16-exit-transition-return.md |
 | v1.5 | 2026-11-19 | 核验回填 | 更新 78 条核验字段；文件 2026-11-18_核验回填.md |
+| v1.6 | 2026-11-20 | 核验回填 | 更新 3 条核验字段；文件 2026-11-20_C7批次3核验.md |

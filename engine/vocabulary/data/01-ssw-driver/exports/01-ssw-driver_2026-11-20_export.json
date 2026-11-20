@@ -1,8 +1,8 @@
 {
   "topic": "01-ssw-driver",
   "name": "特定技能司机",
-  "version": "v1.11",
-  "generated_at": "2026-11-20T12:23:13",
+  "version": "v1.12",
+  "generated_at": "2026-11-20T20:33:40",
   "count": 98,
   "categories": {
     "在留资格与制度": 19,
@@ -1692,8 +1692,8 @@
       "definition": "用人单位须在员工入职时立即实施的法定教育，内容含作业方法与安全卫生常识。",
       "source": "厚生労働省",
       "first_added": "2026-11-13",
-      "last_updated": "2026-11-19",
-      "verification": "部分核验",
+      "last_updated": "2026-11-20",
+      "verification": "已核验",
       "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/roudoukijun/anzeneisei10/qualificaton_education.html",
       "confidence": "B"
     },
