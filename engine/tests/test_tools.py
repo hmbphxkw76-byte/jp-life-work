@@ -1989,6 +1989,16 @@ class TestFactCardCheck(unittest.TestCase):
         self.assertEqual(len(issues), 2)
         self.assertTrue(all(i["level"] == "P2" for i in issues))
 
+    def test_lineage(self):
+        """n24：FC → 引用报告 / 登记册 血缘索引。"""
+        cards = {"FC-001": {"值": "22,100"}}
+        pointers = {"FC-001": ["01-x/reports/2026-11-x.md",
+                               "00-decision-hub/data/fact_cards.md"]}
+        lin = fact_card_check.lineage(cards, pointers)
+        self.assertEqual(lin[0]["card"], "FC-001")
+        self.assertEqual(lin[0]["reports"], ["01-x/reports/2026-11-x.md"])
+        self.assertEqual(lin[0]["registries"], [])
+
 
 class TestSkeletonBuilder(unittest.TestCase):
     """报告骨架与空模块合并。"""

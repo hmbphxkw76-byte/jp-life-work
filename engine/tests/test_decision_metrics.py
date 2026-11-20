@@ -127,6 +127,17 @@ class CollectCase(unittest.TestCase):
         # 「能不能去」关联 GAP-02
         self.assertEqual(mx["requirements"][2]["关联缺失编号"], "GAP-02")
 
+    def test_lineage(self) -> None:
+        """n24：五问结论血缘。"""
+        with mock.patch.object(m, "REGISTRY", self.reg):
+            lin = m.lineage()
+        self.assertEqual(len(lin), 3)
+        self.assertEqual(lin[0]["决策问题"], "去不去")
+        self.assertEqual(lin[0]["结论"], "是")
+        self.assertEqual(lin[0]["责任主题"], "01")
+        self.assertEqual(lin[0]["引用位置"], "x")
+        self.assertEqual(lin[2]["结论"], "待定")
+
     def test_collect_missing_registry(self) -> None:
         with mock.patch.object(m, "REGISTRY", self.root / "nope.md"), \
                 mock.patch.object(m, "LOG", self.log), \

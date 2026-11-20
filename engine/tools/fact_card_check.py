@@ -99,6 +99,21 @@ def check_corroboration(cards: dict[str, dict]) -> list[dict]:
     return issues
 
 
+def lineage(cards: dict[str, dict], pointers: dict[str, list[str]]) -> list[dict]:
+    """DIKW 血缘（n24）：FC → 引用报告 / 登记册（知识 ← 信息）。
+
+    只列真实存在的引用位置；无引用者留空，不虚构。
+    """
+    out: list[dict] = []
+    for cid in sorted(cards):
+        locs = pointers.get(cid, [])
+        reports = sorted({loc for loc in locs if "/reports/" in loc})
+        registries = sorted({loc for loc in locs if "/data/" in loc and "registry" in loc})
+        out.append({"card": cid, "value": cards[cid].get("值", ""),
+                    "reports": reports, "registries": registries})
+    return out
+
+
 def check_pointers(cards: dict[str, dict], pointers: dict[str, list[str]]) -> list[dict]:
     """指针可解析性检查。"""
     issues = []
@@ -160,7 +175,13 @@ def main() -> int:
     ap = argparse.ArgumentParser(description="事实卡片校验")
     ap.add_argument("--json", action="store_true")
     ap.add_argument("--write", action="store_true")
+    ap.add_argument("--lineage", action="store_true", help="输出 DIKW 血缘索引（FC → 报告 / 登记册，n24）")
     args = ap.parse_args()
+
+    if args.lineage:
+        print(json.dumps(lineage(parse_cards(), collect_pointers()),
+                         ensure_ascii=False, indent=2))
+        return 0
 
     issues, summary = run()
     p0p1 = [i for i in issues if i["level"] in ("P0", "P1")]

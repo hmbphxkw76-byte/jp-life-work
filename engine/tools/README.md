@@ -412,7 +412,7 @@ python engine/tools/automation_status.py activity --threshold 45               #
 | 工具 | 作用 | 复用阶段 |
 |---|---|---|
 | `personal_finance_model.py` | 读 01/07/14/10/17 登记册活值，算净储蓄率 / 回本周期 | `validate.yml` 一致性 + `scheduled-maintenance.yml` 刷新 |
-| `fact_card_check.py` | 事实卡片五字段 / `[@FC-NNN]` 指针 / 跨报告事实重复率 / corroboration 来源数（n22） | 同上 |
+| `fact_card_check.py` | 事实卡片五字段 / `[@FC-NNN]` 指针 / 跨报告事实重复率 / corroboration 来源数（n22）/ DIKW 血缘（n24） | 同上 |
 | `pending_verification.py` | 14/15/17/18/19/20 首轮核验截止跟踪 | 同上 |
 | `consulting_panel.py` | 17 项个人参数 → 五问判定 + 条件化方案（时间线 / 预算 / 核验清单） | 手动（`--profile`）；`--check` 校验面板 md |
 | `skeleton_builder.py` | 报告骨架生成 / 空模块合并 / 边界声明集中 | 生成期（按需） |
@@ -496,3 +496,4 @@ python engine/tools/automation_status.py activity --threshold 45               #
 | v1.9 | 2026-11-20 | 证据强度标定（n22） | `counterexample_scan` 增「单源」扫描；`fact_card_check` 增 corroboration 来源数（P2）；`audit_check` L4 增 `EVI-01`（绝对化措辞配 3 级证据码）；置信度分级标准增证据类型 / 强度码 / 合成规则 |
 | v1.10 | 2026-11-20 | 需求登记（n19） | `decision_metrics.requirements_matrix()` 需求覆盖矩阵（PIR）+ 需求维度指标；`update_planner --requirements`；00 / 01 / 08 提示词增「需求命中检查」 |
 | v1.11 | 2026-11-20 | 反馈回路（n20） | `decision_metrics` 增缺失闭环率（反馈维度）；`decision_log --check` 增「决策问题」关联登记册校验（未关联 rc=2）；`scheduled-maintenance.yml` 增反馈汇总步骤；00 提示词增「反馈回流」 |
+| v1.12 | 2026-11-20 | DIKW 血缘（n24） | `fact_card_check --lineage`（FC → 报告 / 登记册）；`decision_metrics --lineage`（决策问题 → 结论 ← 引用位置 ← 责任主题）；00 登记册增「DIKW 血缘」节 |
