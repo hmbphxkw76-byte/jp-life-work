@@ -228,7 +228,9 @@ python engine/tools/decision_metrics.py --check    # 仅校验可解析，不写
 从 `00-decision-hub` 的结构化登记册与决策日志计算：指标收敛率、五问判定率、缺失条目数、
 件套齐备度、决策变化次数，以及**需求维度（n19）**：需求覆盖率（已覆盖 / 部分 / 未覆盖）
 与超期未闭环缺失数（由 `requirements_matrix()` 从登记册第一节 + 第二节生成）。
-历史序列写入 `decision-metrics-history.jsonl`，供跨月趋势（P2-2 复用）。退出码：0=正常；1=结构解析失败（阻断）；2=存在待定 / 缺失（告警）。
+历史序列写入 `decision-metrics-history.jsonl`，供跨月趋势（P2-2 复用）。
+**反馈维度（n20）**：缺失闭环率（已接入 / 已完成视为闭环）与超期未闭环缺失数；
+决策记录引用次数以 `decision_log_entries` 为代理。退出码：0=正常；1=结构解析失败（阻断）；2=存在待定 / 缺失（告警）。
 
 ### source_check.py — 来源条目 schema 化（P1-2）
 
@@ -493,3 +495,4 @@ python engine/tools/automation_status.py activity --threshold 45               #
 | v1.8 | 2026-11-20 | 加工层受控（n25） | `source-index.json` 由生成物提升为入库活台账（含报告内容指纹）；新增 `source_normalize.py` 归一化单一事实源；`source_check` 增 E5 字段完整率并扩展分组头识别 |
 | v1.9 | 2026-11-20 | 证据强度标定（n22） | `counterexample_scan` 增「单源」扫描；`fact_card_check` 增 corroboration 来源数（P2）；`audit_check` L4 增 `EVI-01`（绝对化措辞配 3 级证据码）；置信度分级标准增证据类型 / 强度码 / 合成规则 |
 | v1.10 | 2026-11-20 | 需求登记（n19） | `decision_metrics.requirements_matrix()` 需求覆盖矩阵（PIR）+ 需求维度指标；`update_planner --requirements`；00 / 01 / 08 提示词增「需求命中检查」 |
+| v1.11 | 2026-11-20 | 反馈回路（n20） | `decision_metrics` 增缺失闭环率（反馈维度）；`decision_log --check` 增「决策问题」关联登记册校验（未关联 rc=2）；`scheduled-maintenance.yml` 增反馈汇总步骤；00 提示词增「反馈回流」 |

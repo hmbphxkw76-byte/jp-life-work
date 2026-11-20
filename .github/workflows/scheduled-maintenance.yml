@@ -108,6 +108,13 @@ jobs:
       - name: 追加决策度量快照（decision_metrics.py --history）
         run: python engine/tools/decision_metrics.py --history
 
+      # 反馈汇总（n20）：需求覆盖矩阵 + 缺失闭环率 + 决策引用，供人工复盘。
+      - name: 反馈汇总（需求覆盖矩阵 + 决策度量趋势）
+        run: |
+          mkdir -p engine/report-audits/toolchain
+          python engine/tools/update_planner.py --requirements > engine/report-audits/toolchain/requirements-matrix.md
+          python engine/tools/decision_metrics.py --trend || true
+
       # 质量报告刷新（不入库，供人工查阅）：L5 证据元评估 / 反例扫描。
       - name: 刷新 L5 证据元评估（l5_meta_check.py）
         run: python engine/tools/l5_meta_check.py

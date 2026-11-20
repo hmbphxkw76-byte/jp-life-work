@@ -154,6 +154,11 @@ def collect() -> dict:
         if m and m.group(1) < today:
             req_overdue += 1
 
+    # 反馈维度（n20）：缺失闭环率（已接入 / 已完成视为闭环）
+    gap_total = len(req["gaps"])
+    gap_closed = sum(1 for g in req["gaps"] if g["优先级"] in ("已接入", "已完成"))
+    gap_close_rate = round(gap_closed / gap_total, 4) if gap_total else 0.0
+
     return {
         "updated": datetime.now(UTC).isoformat(timespec="seconds"),
         "period": date.today().isoformat()[:7],
@@ -174,6 +179,10 @@ def collect() -> dict:
         "requirement_uncovered": req_uncovered,
         "requirement_overdue": req_overdue,
         "requirement_coverage_rate": round(req_covered / req_total, 4) if req_total else 0.0,
+        "gap_total": gap_total,
+        "gap_closed": gap_closed,
+        "gap_close_rate": gap_close_rate,
+        "gap_close_avg_days": None,
     }
 
 
@@ -230,6 +239,8 @@ def render_md(snap: dict, tr: dict | None = None) -> str:
         f"（{snap['requirement_covered']}/{snap['requirement_total']}，"
         f"部分 {snap['requirement_partial']} / 未覆盖 {snap['requirement_uncovered']}） |",
         f"| 超期未闭环缺失（n19） | {snap['requirement_overdue']} |",
+        f"| 缺失闭环率（n20） | {snap['gap_close_rate']:.0%}"
+        f"（{snap['gap_closed']}/{snap['gap_total']}） |",
         "",
     ]
     if tr and tr.get("available"):

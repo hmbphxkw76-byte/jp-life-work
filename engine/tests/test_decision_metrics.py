@@ -109,6 +109,10 @@ class CollectCase(unittest.TestCase):
         self.assertEqual(snap["requirement_partial"], 1)
         self.assertEqual(snap["requirement_uncovered"], 0)
         self.assertEqual(snap["requirement_overdue"], 1)
+        # n20 反馈维度
+        self.assertEqual(snap["gap_total"], 2)
+        self.assertEqual(snap["gap_closed"], 1)
+        self.assertEqual(snap["gap_close_rate"], 0.5)
 
     def test_requirements_matrix(self) -> None:
         with mock.patch.object(m, "REGISTRY", self.reg):
@@ -171,11 +175,14 @@ class RenderMainCase(unittest.TestCase):
                 "decision_log_entries": 2,
                 "requirement_coverage_rate": 0.5, "requirement_covered": 1,
                 "requirement_total": 2, "requirement_partial": 1,
-                "requirement_uncovered": 0, "requirement_overdue": 0}
+                "requirement_uncovered": 0, "requirement_overdue": 0,
+                "gap_total": 2, "gap_closed": 1, "gap_close_rate": 0.5,
+                "gap_close_avg_days": None}
         md = m.render_md(snap)
         self.assertIn("五问 / 缺失决策度量", md)
         self.assertIn("决策变化次数", md)
         self.assertIn("需求覆盖率", md)
+        self.assertIn("缺失闭环率", md)
 
     def test_main_exit_1_on_empty(self) -> None:
         with mock.patch.object(m, "collect",

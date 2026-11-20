@@ -2035,6 +2035,25 @@ class TestDecisionLog(unittest.TestCase):
             finally:
                 decision_log.LOG_PATH = orig
 
+    def test_check_flags_unknown_question(self):
+        """n20：决策记录的「决策问题」须能关联登记册需求，否则告警（rc=2）。"""
+        with tempfile.TemporaryDirectory() as d:
+            orig_log, orig_reg = decision_log.LOG_PATH, decision_log.REGISTRY_PATH
+            decision_log.LOG_PATH = Path(d) / "decision_log.md"
+            decision_log.REGISTRY_PATH = Path(d) / "registry.md"
+            try:
+                (Path(d) / "registry.md").write_text(
+                    "## 一、五问指标状态表\n\n"
+                    "| # | 决策问题 | 指标 | 来源主题 | 引用位置 | 收敛状态 | 缺失标记 |\n"
+                    "|---|---|---|---|---|---|---|\n"
+                    "| 1 | 去不去 | x | 01 | y | 已收敛 | — |\n", encoding="utf-8")
+                self.assertIn("去不去", decision_log._known_questions())
+                self.assertIn("全部", decision_log._known_questions())
+                decision_log.add("未知问题", "判定", "待定", "是", "x", "00")
+                self.assertEqual(decision_log.check(), 2)
+            finally:
+                decision_log.LOG_PATH, decision_log.REGISTRY_PATH = orig_log, orig_reg
+
 
 class TestInfoQualityUpgrades(unittest.TestCase):
     """结构化免责声明 / 空模块占比 / 跨报告事实重复率。"""
