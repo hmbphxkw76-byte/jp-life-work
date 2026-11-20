@@ -192,6 +192,71 @@ class TestTrackedProtection(TempCase):
         self.assertNotIn(".pytest_cache", rels)
 
 
+class TestEolNormalization(TempCase):
+    """行尾规范化：仅已跟踪 UTF-8 文本文件的 CRLF → LF（行尾假 dirty 治理）。"""
+
+    def _git(self, *args: str) -> None:
+        subprocess.run(
+            ["git", *args],
+            cwd=self.root,
+            check=True,
+            capture_output=True,
+            env={
+                "PATH": __import__("os").environ.get("PATH", ""),
+                "GIT_CONFIG_NOSYSTEM": "1",
+                "HOME": str(self.root),
+            },
+        )
+
+    def _init_repo(self, rel: str, content: bytes) -> Path:
+        self._git("init", "-q")
+        p = self._mk(rel, content)
+        self._git("add", "-A")
+        self._git("-c", "user.name=t", "-c", "user.email=t@t", "commit", "-q", "-m", "x")
+        return p
+
+    def test_normalizes_tracked_crlf(self):
+        p = self._init_repo("docs/a.md", b"line1\nline2\n")
+        p.write_bytes(b"line1\r\nline2\r\n")
+        code, out, _ = self._run()
+        self.assertEqual(code, 0)
+        self.assertIn("行尾规范化 1 项", out)
+        self.assertEqual(p.read_bytes(), b"line1\nline2\n")
+
+    def test_skips_untracked_crlf(self):
+        self._git("init", "-q")
+        p = self._mk("docs/b.md", b"x\r\n")
+        code, out, _ = self._run()
+        self.assertEqual(code, 0)
+        self.assertNotIn("行尾规范化", out)
+        self.assertEqual(p.read_bytes(), b"x\r\n")
+
+    def test_skips_binary_with_nul(self):
+        self._init_repo("assets/blob.bin", b"a\n\x00\n")
+        p = self.root / "assets" / "blob.bin"
+        p.write_bytes(b"a\r\n\x00\r\n")
+        code, out, _ = self._run()
+        self.assertEqual(code, 0)
+        self.assertNotIn("行尾规范化", out)
+        self.assertEqual(p.read_bytes(), b"a\r\n\x00\r\n")
+
+    def test_check_flags_eol_without_writing(self):
+        p = self._init_repo("docs/c.md", b"x\n")
+        p.write_bytes(b"x\r\n")
+        code, out, _ = self._run("--check")
+        self.assertEqual(code, 1)
+        self.assertIn("行尾待规范化 1 项", out)
+        self.assertEqual(p.read_bytes(), b"x\r\n")
+
+    def test_no_normalize_eol_flag(self):
+        p = self._init_repo("docs/d.md", b"x\n")
+        p.write_bytes(b"x\r\n")
+        code, out, _ = self._run("--no-normalize-eol")
+        self.assertEqual(code, 0)
+        self.assertNotIn("行尾规范化", out)
+        self.assertEqual(p.read_bytes(), b"x\r\n")
+
+
 class TestCliContract(TempCase):
     def test_missing_root_errors(self):
         out, err = io.StringIO(), io.StringIO()
