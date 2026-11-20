@@ -139,13 +139,19 @@ GitHub Actions 在远端 runner 上跑，不经过本地锁；它们直接向 `m
 - 运行日志：`engine/vocabulary/data/*.log`（作用域限定，其他目录同名文件不动）；
 - 覆盖率产物：`.coverage*`（coverage 数据文件）、`htmlcov/`（HTML 报告目录）。
 
-**安全约束**：只清仓库根内路径；已被 `git ls-files` 覆盖的文件 / 目录跳过；不进入 `.git`；不跟随符号链接。
+**行尾规范化**（P2-2）：已跟踪的 UTF-8 文本文件若被运行副作用写成 CRLF，写回 LF，
+消除 `git status` 的「行尾假 dirty」。仅作用于「已跟踪 + 无 NUL + 可 UTF-8 解码」文件，
+只做 CRLF → LF，不改内容语义；`--no-normalize-eol` 可关闭。
+
+**安全约束**：残留清理只清仓库根内路径；已被 `git ls-files` 覆盖的文件 / 目录跳过；
+不进入 `.git`；不跟随符号链接。行尾规范化仅改写已跟踪文本文件的行尾，不动其他文件。
 
 ```bash
 python engine/scripts/cleanup_workspace.py            # 清理
 python engine/scripts/cleanup_workspace.py --check    # 只检查，发现残留退出码 1（门禁用）
 python engine/scripts/cleanup_workspace.py --dry-run  # 预览
 python engine/scripts/cleanup_workspace.py --root <dir>
+python engine/scripts/cleanup_workspace.py --no-normalize-eol  # 跳过行尾规范化
 ```
 
 **CI 接入**：复合动作 `.github/actions/workspace-cleanup/action.yml`；每条工作流在
@@ -187,7 +193,7 @@ python engine/scripts/verify_report_parity.py --compare  .migration-baseline    
 
 | # | 项 | 结果 |
 |---|---|---|
-| 1 | 测试全绿 | ✅ `python -m unittest discover -s engine/tests -v` 全绿（1045 项） |
+| 1 | 测试全绿 | ✅ `python -m unittest discover -s engine/tests -v` 全绿（1056 项） |
 | 2 | `validate.py` 通过 | ✅ 退出码 0 |
 | 3 | 双轴评审存在且无 P0/P1 | ✅ `docs/toolchain/reviews/w2-ci-cd-hardening-review.md`（W2 / 项 2.1–2.8） |
 | 4 | `coverage_gate.py` 达标 | ✅ 90.46%（阈值 80%，enforce=true）；单工具最低阈值 60% |

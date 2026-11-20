@@ -9,14 +9,21 @@
   python engine/scripts/cleanup_workspace.py --check      # 只检查不删除（发现残留 → 退出码 1）
   python engine/scripts/cleanup_workspace.py --dry-run    # 列出将删除项，不执行
   python engine/scripts/cleanup_workspace.py --root <dir> # 指定根（默认脚本所在仓库）
+  python engine/scripts/cleanup_workspace.py --no-normalize-eol  # 跳过行尾规范化
 
 退出码：0 = 干净或已清理；1 = --check 发现残留 / 参数错误 / 清理异常。
+
+两类整理：
+  1) 残留清理：缓存 / 临时文件 / 构建副产物 / 过期日志（只针对未入库产物）；
+  2) 行尾规范化：已跟踪的 UTF-8 文本文件若被运行副作用写成 CRLF，写回 LF。
 
 安全约束（不可关闭）：
   - 只清理仓库根内的路径，绝不跟随符号链接外出；
   - 已被 git 跟踪的文件 / 目录一律跳过（清理对象是「未入库的产物」）；
-  - 不触碰 .git、engine/、reports/、docs/ 等源码与交付物；
-  - 删除目录时仅删空或纯缓存目录（缓存目录整体删除）。
+  - 残留清理不触碰 .git、engine/、reports/、docs/ 等源码与交付物；
+  - 删除目录时仅删空或纯缓存目录（缓存目录整体删除）；
+  - 行尾规范化仅作用于「已跟踪 + 无 NUL + 可 UTF-8 解码」的文件，且只做 CRLF → LF，
+    不改内容语义；可用 --no-normalize-eol 关闭。
 """
 
 from __future__ import annotations
@@ -105,6 +112,59 @@ def _is_tracked(rel: str, tracked: set[str] | None) -> bool:
     if tracked is None:
         return False
     return rel in tracked or any(t.startswith(rel + "/") for t in tracked)
+
+
+def _is_utf8_text(data: bytes) -> bool:
+    """可视为 UTF-8 文本（无 NUL 且可解码），否则跳过，避免改写二进制。"""
+    if b"\x00" in data:
+        return False
+    try:
+        data.decode("utf-8")
+    except UnicodeDecodeError:
+        return False
+    return True
+
+
+def eol_dirty(root: Path = ROOT) -> list[Path]:
+    """已跟踪文本文件中被写成 CRLF 的（行尾假 dirty 来源），不修改。
+
+    仅读扫描；返回相对 root 的路径列表（按路径排序）。无 git 时返回空列表。
+    """
+    root = root.resolve()
+    tracked = _tracked_paths(root)
+    if tracked is None:
+        return []
+    dirty: list[Path] = []
+    for rel in sorted(tracked):
+        p = root / rel
+        if p.is_symlink() or not p.is_file():
+            continue
+        try:
+            data = p.read_bytes()
+        except OSError:
+            continue
+        if b"\r\n" not in data:
+            continue
+        if not _is_utf8_text(data):
+            continue
+        dirty.append(p)
+    return dirty
+
+
+def normalize_eol(root: Path = ROOT) -> list[Path]:
+    """把 eol_dirty 列出的文件写回 LF，返回实际改写的文件（按路径排序）。"""
+    changed: list[Path] = []
+    for p in eol_dirty(root):
+        try:
+            data = p.read_bytes()
+            fixed = data.replace(b"\r\n", b"\n")
+            if fixed == data:
+                continue
+            p.write_bytes(fixed)
+        except OSError:
+            continue
+        changed.append(p)
+    return changed
 
 
 def collect_residue(root: Path = ROOT) -> list[Residue]:
@@ -200,11 +260,12 @@ def _human(n: int) -> str:
 
 
 def main(argv: list[str] | None = None) -> int:
-    ap = argparse.ArgumentParser(description="工作区标准化清理（缓存 / 临时文件 / 过期日志）")
+    ap = argparse.ArgumentParser(description="工作区标准化清理（缓存 / 临时文件 / 过期日志 / 行尾规范化）")
     ap.add_argument("--root", default=str(ROOT), help="仓库根目录（默认脚本所在仓库）")
     ap.add_argument("--check", action="store_true", help="只检查不删除；发现残留退出码 1")
     ap.add_argument("--dry-run", action="store_true", help="列出将删除项，不执行")
     ap.add_argument("--quiet", action="store_true", help="仅输出汇总一行")
+    ap.add_argument("--no-normalize-eol", action="store_true", help="跳过已跟踪文本文件的 CRLF→LF 规范化")
     args = ap.parse_args(argv)
 
     root = Path(args.root).resolve()
@@ -219,34 +280,46 @@ def main(argv: list[str] | None = None) -> int:
     total = sum(it.size for it in items)
     detail = "、".join(f"{k} {v}" for k, v in kinds.items() if v)
 
+    eol = [] if args.no_normalize_eol else eol_dirty(root)
+
     if args.check:
-        if items:
-            print(f"[cleanup] 发现残留 {len(items)} 项（{detail}），共 {_human(total)}：")
+        if items or eol:
+            print(f"[cleanup] 发现残留 {len(items)} 项（{detail or '无'}），共 {_human(total)}：")
             for it in items:
                 print(f"  - [{it.kind}] {it.path.relative_to(root).as_posix()}")
+            if eol:
+                print(f"[cleanup] 行尾待规范化 {len(eol)} 项（已跟踪文本 CRLF→LF）：")
+                for p in eol:
+                    print(f"  - [eol] {p.relative_to(root).as_posix()}")
             return 1
         if not args.quiet:
             print("[cleanup] 工作区干净，无残留。")
         return 0
 
     if args.dry_run:
-        if not items:
+        if not items and not eol:
             print("[cleanup] 工作区干净，无待清理项。")
             return 0
-        print(f"[cleanup][dry-run] 将清理 {len(items)} 项（{detail}），共 {_human(total)}：")
+        print(f"[cleanup][dry-run] 将清理 {len(items)} 项（{detail or '无'}），共 {_human(total)}：")
         for it in items:
             print(f"  - [{it.kind}] {it.path.relative_to(root).as_posix()}")
+        if eol:
+            print(f"[cleanup][dry-run] 将规范化行尾 {len(eol)} 项：")
+            for p in eol:
+                print(f"  - [eol] {p.relative_to(root).as_posix()}")
         return 0
 
     n, freed, errors = clean(items)
+    fixed = [] if args.no_normalize_eol else normalize_eol(root)
+    eol_part = f"；行尾规范化 {len(fixed)} 项" if fixed else ""
     if args.quiet:
         print(
-            f"[cleanup] 已清理 {n} 项（释放 {_human(freed)}）。"
-            if items
+            f"[cleanup] 已清理 {n} 项（释放 {_human(freed)}）{eol_part}。"
+            if items or fixed
             else "[cleanup] 工作区干净，无残留。"
         )
-    elif items:
-        print(f"[cleanup] 已清理 {n}/{len(items)} 项（{detail or '无'}），释放 {_human(freed)}。")
+    elif items or fixed:
+        print(f"[cleanup] 已清理 {n}/{len(items)} 项（{detail or '无'}），释放 {_human(freed)}{eol_part}。")
     else:
         print("[cleanup] 工作区干净，无残留。")
     for e in errors:
