@@ -16,7 +16,7 @@
 {{REGISTRY_FORMAT}}      = md-table
 {{BASELINE_REPORT_PATH}} = reports/{{YYYY-MM}}-<slug>.md
 {{FRESHNESS_PRIORITY}}   = 厚生労働省 / 日本年金機構官方一手最新；医疗机构行情按官网
-{{SOURCE_LANGUAGE_RULE}} = 日文官方一手优先；医疗机构 / 学会官网次之；中文来源仅作线索
+{{SOURCE_LANGUAGE_RULE}} = 仅英文 / 日文来源：① 官方权威（日本政府省厅・e-Gov・统计、国际机构、其他国家政府官方）；② 主流投资平台 / 顾问机构；③ 主流新闻媒体（英文 / 日文）。杜绝中文来源（含中文媒体及其中英文版、中国机构中英文版），不得引用、不得作线索、不得设例外。
 {{REPO_RAW_URL_BASE}}    = https://github.com/hmbphxkw76-byte/jp-life-work/blob/main/15-health-wellbeing
 ```
 

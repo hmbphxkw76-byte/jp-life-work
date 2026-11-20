@@ -161,6 +161,19 @@ jobs:
           fi
           echo "prompt_check.py 退出码 ${code:-0}（2=仅告警不阻断）"
 
+      # 来源语言与机构白名单门禁（W5）：提示词规则逐字一致 + 无中文来源许可表述；
+      # 报告层只阻断相对基址的变更报告（存量报告为后续清理对象，--all 仅诊断）。
+      - name: 来源语言门禁（source_language_gate）
+        run: |
+          base="${{ github.base_ref && format('origin/{0}', github.base_ref) || github.event.before }}"
+          python engine/tools/source_language_gate.py --changed --base "$base" || code=$?
+          code=${code:-0}
+          if [ "$code" -ne 0 ] && [ "$code" -ne 2 ]; then
+            echo "::error::来源语言门禁存在违规（规则不一致 / 中文来源许可 / 变更报告中文域名），阻断合并（退出码 $code）"
+            exit 1
+          fi
+          echo "source_language_gate.py 退出码 $code（2=仅告警不阻断）"
+
       # 决策度量（P1-6）：五问收敛率 / 判定率 / 缺失 / 决策日志变化；
       # 登记册结构解析失败即阻断，存在待定 / 缺失仅告警。
       - name: 决策度量校验（decision_metrics.py）

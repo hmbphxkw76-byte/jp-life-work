@@ -16,7 +16,7 @@
 {{REGISTRY_FORMAT}}      = md-table
 {{BASELINE_REPORT_PATH}} = reports/{{YYYY-MM}}-<slug>.md
 {{FRESHNESS_PRIORITY}}   = 法规类近 12 个月内优先；政治动向标注事件日期
-{{SOURCE_LANGUAGE_RULE}} = 法规类须日文官方原文；政治动向类日英媒体可引但须回溯
+{{SOURCE_LANGUAGE_RULE}} = 仅英文 / 日文来源：① 官方权威（日本政府省厅・e-Gov・统计、国际机构、其他国家政府官方）；② 主流投资平台 / 顾问机构；③ 主流新闻媒体（英文 / 日文）。杜绝中文来源（含中文媒体及其中英文版、中国机构中英文版），不得引用、不得作线索、不得设例外。
 {{REPO_RAW_URL_BASE}}    = https://github.com/hmbphxkw76-byte/jp-life-work/blob/main/09-politics-law
 ```
 
