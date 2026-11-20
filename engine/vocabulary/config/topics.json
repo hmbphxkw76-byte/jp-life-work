@@ -1,7 +1,7 @@
 {
   "version": "v1.32",
   "updated": "2026-11-18",
-  "comment": "主题注册表（vocabulary 子系统单一事实源）。本文件由 vocab_tool.py 自动维护，请勿手工编辑：新增主题用 topic-add（自动登记注册表 + 创建 data/<topic>/ 目录 + 重建索引 + 备份回滚 + 操作日志），移除用 topic-remove，一致性审计用 topic-check。storage/imports_dir/exports_dir 为相对 vocabulary/ 根目录的路径。 2026-11-18 目录对齐：data/ 子目录重命名为 NN-slug（与根目录 00-20 主题编号一一对应）。",
+  "comment": "主题注册表（vocabulary 子系统单一事实源）。本文件由 vocab_tool.py 自动维护，请勿手工编辑：新增主题用 topic-add（自动登记注册表 + 创建 data/<topic>/ 目录 + 重建索引 + 备份回滚 + 操作日志），移除用 topic-remove，一致性审计用 topic-check。storage/imports_dir/exports_dir 为相对 vocabulary/ 根目录的路径。 2026-11-18 目录对齐：data/ 子目录重命名为 NN-slug（与根目录 00-20 主题编号一一对应）。 concept_map：跨主题同概念映射（n23，人工策划，vocab_tool 保留该顶层键）。",
   "topics": {
     "01-ssw-driver": {
       "name": "特定技能司机",
@@ -329,6 +329,378 @@
         "无犯罪记录",
         "公证认证",
         "场景与表达"
+      ]
+    }
+  },
+  "concept_map": {
+    "CONCEPT-001": {
+      "name": "特定技能1号在留资格",
+      "terms": [
+        {
+          "topic": "01-ssw-driver",
+          "id": "SSW-001",
+          "term": "特定技能1号"
+        },
+        {
+          "topic": "08-visa-immigration",
+          "id": "VIS-002",
+          "term": "特定技能1号"
+        },
+        {
+          "topic": "16-exit-transition-return",
+          "id": "ETR-059",
+          "term": "特定技能1号"
+        },
+        {
+          "topic": "18-family-parenting",
+          "id": "FAM-051",
+          "term": "特定技能1号"
+        }
+      ]
+    },
+    "CONCEPT-002": {
+      "name": "特定技能2号在留资格",
+      "terms": [
+        {
+          "topic": "01-ssw-driver",
+          "id": "SSW-002",
+          "term": "特定技能2号"
+        },
+        {
+          "topic": "08-visa-immigration",
+          "id": "VIS-003",
+          "term": "特定技能2号"
+        },
+        {
+          "topic": "16-exit-transition-return",
+          "id": "ETR-013",
+          "term": "特定技能2号"
+        },
+        {
+          "topic": "18-family-parenting",
+          "id": "FAM-052",
+          "term": "特定技能2号"
+        }
+      ]
+    },
+    "CONCEPT-003": {
+      "name": "在留卡",
+      "terms": [
+        {
+          "topic": "01-ssw-driver",
+          "id": "SSW-003",
+          "term": "在留カード"
+        },
+        {
+          "topic": "08-visa-immigration",
+          "id": "VIS-017",
+          "term": "在留カード"
+        },
+        {
+          "topic": "16-exit-transition-return",
+          "id": "ETR-019",
+          "term": "在留カード"
+        }
+      ]
+    },
+    "CONCEPT-004": {
+      "name": "在留资格变更",
+      "terms": [
+        {
+          "topic": "01-ssw-driver",
+          "id": "SSW-005",
+          "term": "在留資格変更"
+        },
+        {
+          "topic": "08-visa-immigration",
+          "id": "VIS-019",
+          "term": "在留資格変更"
+        },
+        {
+          "topic": "16-exit-transition-return",
+          "id": "ETR-007",
+          "term": "在留資格変更"
+        }
+      ]
+    },
+    "CONCEPT-005": {
+      "name": "在留期间更新",
+      "terms": [
+        {
+          "topic": "01-ssw-driver",
+          "id": "SSW-006",
+          "term": "在留期間更新"
+        },
+        {
+          "topic": "08-visa-immigration",
+          "id": "VIS-018",
+          "term": "在留期間更新"
+        }
+      ]
+    },
+    "CONCEPT-006": {
+      "name": "注册支援机关",
+      "terms": [
+        {
+          "topic": "01-ssw-driver",
+          "id": "SSW-009",
+          "term": "登録支援機関"
+        },
+        {
+          "topic": "17-migration-compliance",
+          "id": "MPC-017",
+          "term": "登録支援機関"
+        }
+      ]
+    },
+    "CONCEPT-007": {
+      "name": "送出机关",
+      "terms": [
+        {
+          "topic": "01-ssw-driver",
+          "id": "SSW-012",
+          "term": "送出機関"
+        },
+        {
+          "topic": "17-migration-compliance",
+          "id": "MPC-001",
+          "term": "送出機関"
+        }
+      ]
+    },
+    "CONCEPT-008": {
+      "name": "干线运输",
+      "terms": [
+        {
+          "topic": "01-ssw-driver",
+          "id": "SSW-016",
+          "term": "幹線輸送"
+        },
+        {
+          "topic": "04-industry-logistics",
+          "id": "LOG-013",
+          "term": "幹線輸送"
+        }
+      ]
+    },
+    "CONCEPT-009": {
+      "name": "包车",
+      "terms": [
+        {
+          "topic": "01-ssw-driver",
+          "id": "SSW-019",
+          "term": "傭車"
+        },
+        {
+          "topic": "04-industry-logistics",
+          "id": "LOG-050",
+          "term": "傭車"
+        }
+      ]
+    },
+    "CONCEPT-010": {
+      "name": "货主",
+      "terms": [
+        {
+          "topic": "01-ssw-driver",
+          "id": "SSW-020",
+          "term": "荷主"
+        },
+        {
+          "topic": "04-industry-logistics",
+          "id": "LOG-043",
+          "term": "荷主"
+        }
+      ]
+    },
+    "CONCEPT-011": {
+      "name": "运行管理者",
+      "terms": [
+        {
+          "topic": "01-ssw-driver",
+          "id": "SSW-023",
+          "term": "運行管理者"
+        },
+        {
+          "topic": "02-career-driver",
+          "id": "CDR-007",
+          "term": "運行管理者"
+        },
+        {
+          "topic": "03-career-management",
+          "id": "CMG-001",
+          "term": "運行管理者"
+        },
+        {
+          "topic": "10-education-qualification",
+          "id": "EDU-022",
+          "term": "運行管理者"
+        }
+      ]
+    },
+    "CONCEPT-012": {
+      "name": "到手收入",
+      "terms": [
+        {
+          "topic": "01-ssw-driver",
+          "id": "SSW-026",
+          "term": "手取り"
+        },
+        {
+          "topic": "07-economy-finance",
+          "id": "ECF-072",
+          "term": "手取り"
+        }
+      ]
+    },
+    "CONCEPT-013": {
+      "name": "最低工资",
+      "terms": [
+        {
+          "topic": "01-ssw-driver",
+          "id": "SSW-032",
+          "term": "最低賃金"
+        },
+        {
+          "topic": "07-economy-finance",
+          "id": "ECF-069",
+          "term": "最低賃金"
+        }
+      ]
+    },
+    "CONCEPT-014": {
+      "name": "货物汽车运输事业法",
+      "terms": [
+        {
+          "topic": "01-ssw-driver",
+          "id": "SSW-053",
+          "term": "貨物自動車運送事業法"
+        },
+        {
+          "topic": "04-industry-logistics",
+          "id": "LOG-033",
+          "term": "貨物自動車運送事業法"
+        }
+      ]
+    },
+    "CONCEPT-015": {
+      "name": "汇款",
+      "terms": [
+        {
+          "topic": "01-ssw-driver",
+          "id": "SSW-060",
+          "term": "送金"
+        },
+        {
+          "topic": "07-economy-finance",
+          "id": "ECF-067",
+          "term": "送金"
+        },
+        {
+          "topic": "16-exit-transition-return",
+          "id": "ETR-040",
+          "term": "送金"
+        }
+      ]
+    },
+    "CONCEPT-016": {
+      "name": "住民票",
+      "terms": [
+        {
+          "topic": "01-ssw-driver",
+          "id": "SSW-063",
+          "term": "住民票"
+        },
+        {
+          "topic": "12-culture-life",
+          "id": "CUL-067",
+          "term": "住民票"
+        },
+        {
+          "topic": "13-regional-info",
+          "id": "REG-054",
+          "term": "住民票"
+        },
+        {
+          "topic": "16-exit-transition-return",
+          "id": "ETR-018",
+          "term": "住民票"
+        },
+        {
+          "topic": "14-life-operations",
+          "id": "LOP-002",
+          "term": "住民票"
+        }
+      ]
+    },
+    "CONCEPT-017": {
+      "name": "国民健康保险",
+      "terms": [
+        {
+          "topic": "01-ssw-driver",
+          "id": "SSW-065",
+          "term": "国民健康保険"
+        },
+        {
+          "topic": "08-visa-immigration",
+          "id": "VIS-047",
+          "term": "国民健康保険"
+        },
+        {
+          "topic": "16-exit-transition-return",
+          "id": "ETR-005",
+          "term": "国民健康保険"
+        },
+        {
+          "topic": "14-life-operations",
+          "id": "LOP-006",
+          "term": "国民健康保険"
+        }
+      ]
+    },
+    "CONCEPT-018": {
+      "name": "厚生年金",
+      "terms": [
+        {
+          "topic": "01-ssw-driver",
+          "id": "SSW-081",
+          "term": "厚生年金"
+        },
+        {
+          "topic": "14-life-operations",
+          "id": "LOP-061",
+          "term": "厚生年金"
+        }
+      ]
+    },
+    "CONCEPT-019": {
+      "name": "雇用保险",
+      "terms": [
+        {
+          "topic": "01-ssw-driver",
+          "id": "SSW-082",
+          "term": "雇用保険"
+        },
+        {
+          "topic": "16-exit-transition-return",
+          "id": "ETR-002",
+          "term": "雇用保険"
+        }
+      ]
+    },
+    "CONCEPT-020": {
+      "name": "健康保险组合（同定义异名）",
+      "terms": [
+        {
+          "topic": "15-health-wellbeing",
+          "id": "HLW-058",
+          "term": "健康保険組合"
+        },
+        {
+          "topic": "16-exit-transition-return",
+          "id": "ETR-053",
+          "term": "健保組合"
+        }
       ]
     }
   }

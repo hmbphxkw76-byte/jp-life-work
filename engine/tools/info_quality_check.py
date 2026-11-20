@@ -403,6 +403,20 @@ def registry_ext_gaps(text: str) -> list[str]:
     return problems
 
 
+def vocab_cross_gaps() -> tuple[list[str], list[str], dict]:
+    """C-15：跨主题同概念对齐（复用 ``vocab_tool.cross_check_gaps``，单一事实源）。
+
+    返回 (errors, warnings, summary)；导入失败时返回空（不阻断）。
+    """
+    try:
+        sys.path.insert(0, str(ROOT / "engine" / "vocabulary" / "script"))
+        import vocab_tool  # type: ignore
+        cfg = vocab_tool.load_config(vocab_tool.DEFAULT_CONFIG)
+        return vocab_tool.cross_check_gaps(cfg)
+    except Exception:
+        return [], [], {}
+
+
 def _significant_numbers(s: str) -> set[str]:
     """抽取「数值型」数字（排除年份、1–2 位小数前零、YYYY.M 版本串与括号内文献号）。"""
     s = re.sub(r"\[[^\]]*\]", " ", s)
@@ -863,6 +877,16 @@ def check_cross_topic(units: list[dict], findings: list[Finding]) -> dict:
             findings.append(Finding(
                 "C-10", "P2", "|".join(sorted(per_topic)), "data/（登记册）", "口径不一致",
                 f"指标「{name}」在 {len(per_topic)} 个主题登记册中口径表述不一致", "S-09"))
+
+    # ── 跨主题同概念对齐（C-15，n23，P2）──
+    cerrs, cwarns, csummary = vocab_cross_gaps()
+    if cerrs or cwarns:
+        detail = (f"概念 {csummary.get('concepts', 0)} 条；同名词条组 "
+                  f"{csummary.get('same_term_groups', 0)}，未登记 "
+                  f"{csummary.get('unregistered_same_term_groups', 0)}；"
+                  f"引用错误 {len(cerrs)}；未登记候选 {len(cwarns)}")
+        findings.append(Finding("C-15", "P2", "全库", "engine/vocabulary/（词库）",
+                                "跨主题同概念", detail, "S-09"))
 
     dup_ratio = (dup_extra_chars / total_chars) if total_chars else 0.0
 
