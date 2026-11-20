@@ -2612,7 +2612,8 @@ class TestUpdatePlannerAudit(unittest.TestCase):
     def test_requirements_main_porcelain(self):
         """n19：--requirements --porcelain 输出 JSON。"""
         matrix = {"requirements": [], "gaps": []}
-        with unittest.mock.patch.object(decision_metrics, "requirements_matrix",
+        # n19：patch update_planner 实际引用的模块对象（避免测试间模块分裂导致 mock 失效）
+        with unittest.mock.patch.object(update_planner.decision_metrics, "requirements_matrix",
                                        return_value=matrix), \
                 unittest.mock.patch.object(sys, "argv",
                                           ["update_planner.py", "--requirements", "--porcelain"]):

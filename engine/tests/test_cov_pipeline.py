@@ -965,7 +965,9 @@ class TestCovPipelineDecisionLog(unittest.TestCase):
         with tempfile.TemporaryDirectory() as d:
             lp = Path(d) / "decision_log.md"
             with unittest.mock.patch.object(decision_log, "LOG_PATH", lp):
-                _capture(["decision_log.py", "--add", "--question", "Q",
+                # n20 起 --check 要求「决策问题」关联需求编号（存在于登记册第一节）；
+                # 用登记册中的真实问题「怎么去」以验证正常路径 rc=0。
+                _capture(["decision_log.py", "--add", "--question", "怎么去",
                           "--field", "F", "--new", "N"], decision_log.main)
                 rc, out, _ = _capture(["decision_log.py", "--check"], decision_log.main)
         self.assertEqual(rc, 0)

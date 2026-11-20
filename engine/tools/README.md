@@ -13,7 +13,7 @@ pip install -r requirements.txt   # markdown
 python -m unittest discover -s engine/tests -q   # 单元测试（以 docs/CI.md 与实测为准）
 ```
 
-> 测试计数：1056 项（`python -m unittest discover -s engine/tests` 实测，与 `docs/CI.md` 六节一致；由 `engine/tests/test_arch_guard.py` 双向锁定）。
+> 测试计数：1081 项（`python -m unittest discover -s engine/tests` 实测，与 `docs/CI.md` 六节一致；由 `engine/tests/test_arch_guard.py` 双向锁定）。
 
 ## 退出码约定（校验类工具统一）
 
@@ -61,6 +61,7 @@ python -m unittest discover -s engine/tests -q   # 单元测试（以 docs/CI.md
 | l5_meta_check.py | 校验 | audit-gate.yml「L5 证据元评估」（P1-4：覆盖率 / 合格率 / basis 缺失 / 依据充分度） |
 | decision_metrics.py | 决策支持 | validate.yml「决策度量校验」（P1-6：五问收敛率 / 判定率 / 缺失 / 决策日志变化） |
 | source_check.py | 校验 | validate.yml「来源条目 schema 校验」（P1-2：来源章节 / URL 条目时点 / 分级 / 字段完整率 E5，产出 source-index.json，n25 起入库受控） |
+| source_normalize.py | 生成 | n25 来源字段归一化单一事实源（URL / 机构名 / 年份 / NFKC；供 source_check 与 n21 / n22 复用，纯函数） |
 | counterexample_scan.py | 校验 | validate.yml「反例扫描」（P2-1：绝对化 / 以偏概全 / 无来源断言 / 单源候选） |
 | perf_snapshot.py | 校验 | scheduled-maintenance.yml「性能趋势快照」；规模 + 耗时采集（基线 / 历史，`--with-tests` / `--set-baseline` / `--porcelain`） |
 
