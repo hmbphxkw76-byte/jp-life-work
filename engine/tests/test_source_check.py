@@ -131,5 +131,64 @@ class CollectAndMainCase(unittest.TestCase):
             self.assertEqual(sc.main(), 0)
 
 
+class NormalizeCase(unittest.TestCase):
+    """n25：来源归一化单一事实源（source_normalize）。"""
+
+    def test_url_strips_trailing_punctuation(self):
+        from source_normalize import normalize_url
+        self.assertEqual(normalize_url("https://x.go.jp/a).，"), "https://x.go.jp/a")
+        self.assertEqual(normalize_url(""), "")
+
+    def test_org_strips_modifier(self):
+        from source_normalize import normalize_org
+        self.assertEqual(normalize_org("**出入国在留管理庁** · 2026"), "出入国在留管理庁 2026")
+        self.assertEqual(normalize_org(""), "")
+
+    def test_year_normalized(self):
+        from source_normalize import extract_year, normalize_year
+        self.assertEqual(normalize_year("令和 8-07-13 改定"), "令和8年")
+        self.assertEqual(normalize_year("最终更新 2026-10-15"), "2026")
+        self.assertEqual(extract_year("令和 8-07-13 改定"), "令和8")
+        self.assertEqual(normalize_year("无年份"), "")
+
+
+class CompletenessCase(unittest.TestCase):
+    """n25：E5 来源条目字段完整率。"""
+
+    def setUp(self) -> None:
+        self._tmp = tempfile.TemporaryDirectory()
+        self.root = Path(self._tmp.name)
+        self.addCleanup(self._tmp.cleanup)
+
+    def _biz(self, rel: str, text: str):
+        d = self.root / rel / "reports"
+        d.mkdir(parents=True)
+        (d / "2026-11-x.md").write_text(text, encoding="utf-8")
+
+    def test_incomplete_group_warns(self):
+        # 有条目但无分级分组 → 完整率 < 100%
+        text = ("## 参考来源清单\n\n### 官方一手（分级）\n\n"
+                "1. [X](https://x.go.jp/) — 2026\n")
+        # 移除分组标记，模拟无 group 行
+        text = text.replace("### 官方一手（分级）\n\n", "")
+        r = sc.extract_report("r", text)
+        self.assertTrue(any("字段完整率" in p for p in r["problems"]))
+        self.assertLess(r["field_completeness"], 1.0)
+
+    def test_complete_entries_no_e5(self):
+        r = sc.extract_report("r", "# t\n" + SECTION)
+        self.assertEqual(r["field_completeness"], 1.0)
+        self.assertFalse(any("字段完整率" in p for p in r["problems"]))
+
+    def test_collect_adds_fingerprint(self):
+        self._biz("01-x", "# t\n" + SECTION)
+        with mock.patch.object(_common, "ROOT", self.root), \
+                mock.patch.object(sc, "ROOT", self.root), \
+                mock.patch.object(sc, "iter_business_dirs",
+                                  return_value=[_common.Business("01-x")]):
+            out = sc.collect()
+        self.assertTrue(out[0]["fingerprint"].startswith("sha256:"))
+
+
 if __name__ == "__main__":
     unittest.main()
