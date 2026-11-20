@@ -99,6 +99,17 @@ class CollectCase(unittest.TestCase):
         self.assertEqual(snap["kit_ready"], 1)
         self.assertEqual(snap["decision_log_entries"], 2)
 
+    def test_lineage(self) -> None:
+        """n24：五问结论血缘。"""
+        with mock.patch.object(m, "REGISTRY", self.reg):
+            lin = m.lineage()
+        self.assertEqual(len(lin), 3)
+        self.assertEqual(lin[0]["决策问题"], "去不去")
+        self.assertEqual(lin[0]["结论"], "是")
+        self.assertEqual(lin[0]["责任主题"], "01")
+        self.assertEqual(lin[0]["引用位置"], "x")
+        self.assertEqual(lin[2]["结论"], "待定")
+
     def test_collect_missing_registry(self) -> None:
         with mock.patch.object(m, "REGISTRY", self.root / "nope.md"), \
                 mock.patch.object(m, "LOG", self.log), \

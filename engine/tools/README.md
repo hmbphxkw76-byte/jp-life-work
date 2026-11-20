@@ -396,7 +396,7 @@ python engine/tools/automation_status.py activity --threshold 45               #
 | 工具 | 作用 | 复用阶段 |
 |---|---|---|
 | `personal_finance_model.py` | 读 01/07/14/10/17 登记册活值，算净储蓄率 / 回本周期 | `validate.yml` 一致性 + `scheduled-maintenance.yml` 刷新 |
-| `fact_card_check.py` | 事实卡片五字段 / `[@FC-NNN]` 指针 / 跨报告事实重复率 | 同上 |
+| `fact_card_check.py` | 事实卡片五字段 / `[@FC-NNN]` 指针 / 跨报告事实重复率 / DIKW 血缘（n24） | 同上 |
 | `pending_verification.py` | 14/15/17/18/19/20 首轮核验截止跟踪 | 同上 |
 | `consulting_panel.py` | 17 项个人参数 → 五问判定 + 条件化方案（时间线 / 预算 / 核验清单） | 手动（`--profile`）；`--check` 校验面板 md |
 | `skeleton_builder.py` | 报告骨架生成 / 空模块合并 / 边界声明集中 | 生成期（按需） |
@@ -476,3 +476,4 @@ python engine/tools/automation_status.py activity --threshold 45               #
 | v1.5 | 2026-11-19 | 工程守卫（W1 / A1 / A5） | 测试计数 1029 → 1040（新增归档保留期边界 6 项 + 文档数字锁定 3 项 + 骨架完备性 2 项）；退出码约定改为指向 `docs/CI.md`；`structure_check` 新增主题骨架完备性校验 |
 | v1.6 | 2026-11-19 | CI/CD 加固（W2） | 测试计数 1040 → 1045（覆盖率单工具阈值 5 项）；工具链代码新增 pre-commit 快速子集（ruff --fix + validate.py）说明 |
 | v1.7 | 2026-11-19 | 内容与词库（W4 / B7） | 测试计数 1045 → 1047（B7 新增 2 项 `build_hub` 检索层校验用例）；补记检索层产物校验说明 |
+| v1.8 | 2026-11-20 | DIKW 血缘（n24） | `fact_card_check --lineage`（FC → 报告 / 登记册）；`decision_metrics --lineage`（决策问题 → 结论 ← 引用位置 ← 责任主题）；00 登记册增「DIKW 血缘」节 |

@@ -43,6 +43,33 @@ ROW_RE = re.compile(r"^\|\s*(\d{4}-\d{2}-\d{2})\s*\|(.+)\|\s*$", re.M)
 CONVERGED = "已收敛"
 
 
+def lineage() -> list[dict]:
+    """DIKW 血缘（n24）：决策问题 → 结论 ← 引用位置（报告 / 登记册）← 责任主题。
+
+    数据源：登记册第一节（五问指标状态表）+ 4.1（五问判定）。
+    缺失项显式留空，不虚构。
+    """
+    text = REGISTRY.read_text(encoding="utf-8", errors="replace")
+    ind_rows = _rows(text, re.compile(r"##\s*一、五问指标状态表(.*?)(?=\n##\s*|\Z)", re.DOTALL))
+    judge_rows = _rows(text, re.compile(r"###\s*4\.1[^\n]*\n(.*?)(?=\n#{2,3}\s*|\Z)", re.DOTALL))
+    judge = {}
+    for r in judge_rows:
+        if len(r) >= 3:
+            base = re.split(r"[（(]", r[1])[0].strip()
+            judge[base] = r[2]
+    out: list[dict] = []
+    for r in ind_rows:
+        q = r[1] if len(r) > 1 else ""
+        out.append({
+            "决策问题": q,
+            "指标": r[2] if len(r) > 2 else "",
+            "结论": judge.get(q, ""),
+            "责任主题": r[3] if len(r) > 3 else "",
+            "引用位置": r[4] if len(r) > 4 else "",
+        })
+    return out
+
+
 def _rows(text: str, section_re: re.Pattern, numeric_first: bool = True) -> list[list[str]]:
     """提取指定章节内的 markdown 表格行（单元格列表）。
 
@@ -170,7 +197,12 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--trend", action="store_true", help="与上一快照对比")
     ap.add_argument("--check", action="store_true", help="仅校验可解析，不写文件")
     ap.add_argument("--json", action="store_true")
+    ap.add_argument("--lineage", action="store_true", help="输出五问结论血缘（DIKW，n24）")
     args = ap.parse_args(argv)
+
+    if args.lineage:
+        print(json.dumps(lineage(), ensure_ascii=False, indent=2))
+        return 0
 
     try:
         snap = collect()
