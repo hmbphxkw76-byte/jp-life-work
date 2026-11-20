@@ -1573,6 +1573,13 @@ class TestAuditGuard(unittest.TestCase):
             {self.REPORT_REL: True})
         self.assertEqual(res2.layers["L5"], "pass")
 
+    def test_evidence_strength_mismatch(self):
+        """n22：绝对化措辞配 3 级证据码 → EVI-01 命中。"""
+        hits = audit_check.check_evidence_strength("该制度必然成功，覆盖率达 100%（C3）。")
+        self.assertEqual(len(hits), 1)
+        self.assertFalse(audit_check.check_evidence_strength("该制度必然成功（C1）。"))
+        self.assertFalse(audit_check.check_evidence_strength("该制度必然成功。"))
+
     def test_pending_p2_ledger_and_overdue(self):
         res = audit_check.ReportResult(report=self.REPORT_REL, topic="01-demo",
                                        period="2026-11", type_id="")
@@ -1971,6 +1978,15 @@ class TestFactCardCheck(unittest.TestCase):
         pointers = fact_card_check.collect_pointers()
         self.assertEqual(fact_card_check.check_pointers(cards, pointers), [])
         self.assertTrue(pointers)
+
+    def test_corroboration_check(self):
+        """n22：corroboration 未标注 / < 2 → P2。"""
+        cards = {"FC-001": {"corroboration": ""},
+                 "FC-002": {"corroboration": "1"},
+                 "FC-003": {"corroboration": "3"}}
+        issues = fact_card_check.check_corroboration(cards)
+        self.assertEqual(len(issues), 2)
+        self.assertTrue(all(i["level"] == "P2" for i in issues))
 
 
 class TestSkeletonBuilder(unittest.TestCase):

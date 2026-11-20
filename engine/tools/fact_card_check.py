@@ -30,6 +30,8 @@ REPORT_PATH = ROOT / "engine" / "report-audits" / "audit" / "fact-card-report.md
 FIELDS = ("值", "统计口径", "数据时点", "来源 URL", "版本号")
 CARD_RE = re.compile(r"^\|\s*(FC-\d{3})\s*\|", re.M)
 POINTER_RE = re.compile(r"\[@(FC-\d{3})\]")
+# corroboration 来源数（n22）：可选第 7 列，或行内「corroboration: N」/「互证 N」
+CORROB_RE = re.compile(r"corroboration\s*[:：]?\s*(\d+)|互证\s*[:：]?\s*(\d+)")
 
 
 def parse_cards() -> dict[str, dict]:
@@ -47,6 +49,12 @@ def parse_cards() -> dict[str, dict]:
             continue
         cards[m.group(1)] = {"值": cells[1], "统计口径": cells[2], "数据时点": cells[3],
                              "来源 URL": cells[4], "版本号": cells[5], "raw": ln.strip()}
+        # n22：corroboration 来源数（可选第 7 列或行内标注）
+        corrob = cells[6].strip() if len(cells) > 6 else ""
+        if not corrob:
+            cm = CORROB_RE.search(ln)
+            corrob = (cm.group(1) or cm.group(2)) if cm else ""
+        cards[m.group(1)]["corroboration"] = corrob
     return cards
 
 
@@ -77,6 +85,20 @@ def check_fields(cards: dict[str, dict]) -> list[dict]:
     return issues
 
 
+def check_corroboration(cards: dict[str, dict]) -> list[dict]:
+    """n22：corroboration 来源数登记与多源互证提示（P2）。"""
+    issues = []
+    for cid, c in sorted(cards.items()):
+        v = (c.get("corroboration") or "").strip()
+        if not v:
+            issues.append({"id": cid, "level": "P2", "issue": "corroboration 未标注",
+                           "detail": "事实卡片未登记 corroboration 来源数（n22）"})
+        elif v.isdigit() and int(v) < 2:
+            issues.append({"id": cid, "level": "P2", "issue": "corroboration 来源数 < 2",
+                           "detail": f"当前 {v}，建议多源互证"})
+    return issues
+
+
 def check_pointers(cards: dict[str, dict], pointers: dict[str, list[str]]) -> list[dict]:
     """指针可解析性检查。"""
     issues = []
@@ -96,7 +118,8 @@ def check_orphans(cards: dict[str, dict], pointers: dict[str, list[str]]) -> lis
 def run() -> tuple[list[dict], dict]:
     cards = parse_cards()
     pointers = collect_pointers()
-    issues = check_fields(cards) + check_pointers(cards, pointers) + check_orphans(cards, pointers)
+    issues = (check_fields(cards) + check_corroboration(cards)
+              + check_pointers(cards, pointers) + check_orphans(cards, pointers))
 
     units = iqc.scan_topics()
     fact_rate, fact_details = iqc.fact_duplication(units)

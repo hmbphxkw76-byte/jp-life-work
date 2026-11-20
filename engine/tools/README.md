@@ -47,7 +47,7 @@ python -m unittest discover -s engine/tests -q   # 单元测试（以 docs/CI.md
 | auto_verify.py | 校验 | 手动：生成后自动验证（V1–V5）→ 写回「自动验证结果」→ 提交审计；scheduled-maintenance.yml「全量自动验证（dry-run）」 |
 | audit_registry.py / audit_pipeline.py / audit_badge.py / audit_check.py / audit_sampling.py / audit_preflight.py | 审计 | audit-gate.yml / audit-sampling.yml / html-sync.yml |
 | personal_finance_model.py | 决策支持 | validate.yml「财务模型一致性」+ scheduled-maintenance.yml「刷新」 |
-| fact_card_check.py | 决策支持 | validate.yml「事实卡片校验」+ scheduled-maintenance.yml「刷新」 |
+| fact_card_check.py | 决策支持 | validate.yml「事实卡片校验」+ scheduled-maintenance.yml「刷新」；五字段 / 指针 / 重复率 / corroboration（n22） |
 | pending_verification.py | 决策支持 | validate.yml「待核实闭环」+ scheduled-maintenance.yml「刷新」 |
 | consulting_panel.py | 决策支持 | 手动：17 项个人参数（PF-01…PF-17）→ 五问判定 + 条件化行动方案；`--render-panel` / `--check` / `--profile` / `--demo` |
 | skeleton_builder.py | 生成 | 手动：报告骨架 / 空模块合并 |
@@ -61,7 +61,7 @@ python -m unittest discover -s engine/tests -q   # 单元测试（以 docs/CI.md
 | l5_meta_check.py | 校验 | audit-gate.yml「L5 证据元评估」（P1-4：覆盖率 / 合格率 / basis 缺失 / 依据充分度） |
 | decision_metrics.py | 决策支持 | validate.yml「决策度量校验」（P1-6：五问收敛率 / 判定率 / 缺失 / 决策日志变化） |
 | source_check.py | 校验 | validate.yml「来源条目 schema 校验」（P1-2：来源章节 / URL 条目时点 / 分级 / 字段完整率 E5，产出 source-index.json，n25 起入库受控） |
-| counterexample_scan.py | 校验 | validate.yml「反例扫描」（P2-1：绝对化 / 以偏概全 / 无来源断言候选） |
+| counterexample_scan.py | 校验 | validate.yml「反例扫描」（P2-1：绝对化 / 以偏概全 / 无来源断言 / 单源候选） |
 | perf_snapshot.py | 校验 | scheduled-maintenance.yml「性能趋势快照」；规模 + 耗时采集（基线 / 历史，`--with-tests` / `--set-baseline` / `--porcelain`） |
 
 ## 设计内不接线工具清单（B6）
@@ -257,7 +257,8 @@ python engine/tools/counterexample_scan.py --json
 ```
 
 复用 `audit_check.absolute_hits`（已排除否定 / 引述语境）扫描**可证伪的反例候选**：
-`ABS`（绝对化措辞）、`GEN`（以偏概全 / 过度推断）、`NOSRC`（断言句无来源标记）。
+`ABS`（绝对化措辞）、`GEN`（以偏概全 / 过度推断）、`NOSRC`（断言句无来源标记）、
+`单源`（含数字的结论句、所在段落仅一个来源标记且无 corroboration 标注，n22）。
 产出 `engine/report-audits/audit/counterexample-report.json` 供人工补反例或限定语。
 退出码：0=无命中；1=扫描失败；2=存在候选（需裁定）。
 
@@ -403,7 +404,7 @@ python engine/tools/automation_status.py activity --threshold 45               #
 | 工具 | 作用 | 复用阶段 |
 |---|---|---|
 | `personal_finance_model.py` | 读 01/07/14/10/17 登记册活值，算净储蓄率 / 回本周期 | `validate.yml` 一致性 + `scheduled-maintenance.yml` 刷新 |
-| `fact_card_check.py` | 事实卡片五字段 / `[@FC-NNN]` 指针 / 跨报告事实重复率 | 同上 |
+| `fact_card_check.py` | 事实卡片五字段 / `[@FC-NNN]` 指针 / 跨报告事实重复率 / corroboration 来源数（n22） | 同上 |
 | `pending_verification.py` | 14/15/17/18/19/20 首轮核验截止跟踪 | 同上 |
 | `consulting_panel.py` | 17 项个人参数 → 五问判定 + 条件化方案（时间线 / 预算 / 核验清单） | 手动（`--profile`）；`--check` 校验面板 md |
 | `skeleton_builder.py` | 报告骨架生成 / 空模块合并 / 边界声明集中 | 生成期（按需） |
@@ -484,3 +485,4 @@ python engine/tools/automation_status.py activity --threshold 45               #
 | v1.6 | 2026-11-19 | CI/CD 加固（W2） | 测试计数 1040 → 1045（覆盖率单工具阈值 5 项）；工具链代码新增 pre-commit 快速子集（ruff --fix + validate.py）说明 |
 | v1.7 | 2026-11-19 | 内容与词库（W4 / B7） | 测试计数 1045 → 1047（B7 新增 2 项 `build_hub` 检索层校验用例）；补记检索层产物校验说明 |
 | v1.8 | 2026-11-20 | 加工层受控（n25） | `source-index.json` 由生成物提升为入库活台账（含报告内容指纹）；新增 `source_normalize.py` 归一化单一事实源；`source_check` 增 E5 字段完整率并扩展分组头识别 |
+| v1.9 | 2026-11-20 | 证据强度标定（n22） | `counterexample_scan` 增「单源」扫描；`fact_card_check` 增 corroboration 来源数（P2）；`audit_check` L4 增 `EVI-01`（绝对化措辞配 3 级证据码）；置信度分级标准增证据类型 / 强度码 / 合成规则 |
