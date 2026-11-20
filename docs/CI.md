@@ -1,6 +1,6 @@
 # CI 与自动化体系
 
-> **版本**：v2.22（2026-11-19 文档↔实现对齐）
+> **版本**：v2.24（2026-11-20 主健康修复）
 > 本文档说明 jp-life-work 报告管理体系的持续集成（CI）与定时自动化。
 > 代码位置：`.github/workflows/`（8 条工作流）；工具链：`engine/tools/`；测试：`engine/tests/`。
 
@@ -114,7 +114,7 @@
 | 提交 | `git commit` + `git push` | 有变更才提交 |
 | 自动化状态失败补记 | `git add -A -- automation-status.json` → `commit` + `push`（`if: always()`） | job 失败时主提交跳过，本步骤仍把本轮状态入库，避免「记录了却因未提交而丢失」 |
 
-> 实测（2026-11-19，main @`fb1a38b`）：共 **21 步**（不含通用「安装依赖」），含 `auto_verify.py --all --dry-run` / `decision_metrics.py --history` / `l5_meta_check.py` / `counterexample_scan.py`；定时任务提交已改为推分支 + 开 PR（W2 / R1）。
+> 实测（2026-11-20，main @`ff19ac8`）：共 **22 步**（不含通用「安装依赖」），含 `auto_verify.py --all --dry-run` / `decision_metrics.py --history` / `l5_meta_check.py` / `counterexample_scan.py`；定时任务提交已改为推分支 + 开 PR（W2 / R1）。
 
 - **退出码约定**：`0` 通过；`1` 错误（阻断）；`2` 警告（放行）。
 - **核验日志策略（N6）**：`auto_verify.py --all --dry-run` 逐报告写
@@ -167,7 +167,7 @@
 | 多层级校验 | `audit_check.py --all` | 存在 P0/P1 阻断；仅 P2 放行 |
 | 工具链双轴评审软门禁 | `review_gate.py --changed .changed-files` | 软门禁（缺评审告警，不阻断） |
 
-> 实测（2026-11-19，main @`fb1a38b`）：共 **6 步**（不含通用「安装依赖」，含 pip 缓存准备）。
+> 实测（2026-11-20，main @`ff19ac8`）：共 **7 步**（不含通用「安装依赖」，含 pip 缓存准备）。
 
 - **合并门禁覆盖**：`--gate` 一次完成台账哈希链、登记册双向一致、已审计标识一致、受检报告审计状态（`audited` + md/HTML 指纹匹配 + 有效 L5 证据）；PR 默认只查本次变更报告，`--strict` 查全库。
 - **L5 证据门禁**：`audited` 报告必须附有效 L5 语义复核证据（`re_review --evidence` 或一次性 `--backfill-l5`），缺失即 `L5-EVIDENCE`（P1）阻断。
@@ -250,7 +250,7 @@ reports/YYYY-MM-<slug>.md  ──md2html.py──►  reports/YYYY-MM-<slug>.htm
 - **辅助开关**：报告页工具条「隐藏更新标记」对照阅读、「展开全部删除」。
 - **呈现**：报告页新标签页独立打开，页脚提供「← 返回主题 / 返回首页」。
 
-## 六、测试体系（`engine/tests/`，1056 项）
+## 六、测试体系（`engine/tests/`，1081 项）
 
 | 场景 | 测试类 | 覆盖 |
 |---|---|---|
@@ -282,7 +282,7 @@ reports/YYYY-MM-<slug>.md  ──md2html.py──►  reports/YYYY-MM-<slug>.htm
 | 跨平台差异守卫 | `test_platform_guard.py`（9 项） | 路径分隔（无 Windows 路径字面量 / 工作流正斜杠）、换行（仓库 blob LF / `.gitattributes` / `atomic_write` 保 LF）、命令可用性（无 `shell=True` / 无 PowerShell 专属语法 / 工具路径存在） |
 | 性能趋势快照 | `test_perf_snapshot.py`（6 项） | 规模快照字段与实测口径、耗时采集、基线语义（首条为基线 / 追加不改基线 / `--set-baseline` 覆盖）、CLI `--porcelain` |
 
-> 合计 1056 项（`python -m unittest discover -s engine/tests` 集成后实测，当前全绿；`incremental_build` 两项「无变更」断言在集成分支领先 main 时按预期失败，合并后通过）。
+> 合计 1081 项（`python -m unittest discover -s engine/tests` 集成后实测，当前全绿；`incremental_build` 两项「无变更」断言在集成分支领先 main 时按预期失败，合并后通过）。
 
 ## 七、手动命令速查
 
@@ -588,3 +588,4 @@ CI 在 ubuntu runner 上用 **bash** 执行 `run:`，本地维护者用 **PowerS
 | v2.21 | 2026-11-19 | 工程硬化收口（T3/T8） | T3 收口 `findings-by-path.json` 忽略（`git check-ignore` 命中，跑测试后工作区无残留）；T8 新增规格 `docs/toolchain/specs/align-2026-11-19.md` 与守卫 `TestReviewCoverage`（2 项，工单 100% 评审覆盖断言）；补 `coverage-gate-review.md` 与 closure-b 工单 slug 留痕；六节测试数 1001 → 1003 |
 | v2.22 | 2026-11-19 | 文档↔实现对齐（T1/T10） | 修正工具 43→44、类型 13→12、测试 978→1008、validate 29/30 步、maintenance 20 步、词库 1634→1612、覆盖率 92.0→90.35%；`docs/README` 一次性文档声明改为「4 份在库、过程留痕保留」；新增 5 项守卫（类型数 / 词条数 / CI 步骤数 / 覆盖率基线 / 一次性文档声明） |
 | v2.23 | 2026-11-19 | CI/CD 加固（W2 / R5 / R1 / R6 / R7） | 8 条工作流接入 pip 缓存 + 补齐 timeout；定时任务改推分支 + 开 PR（不再直推 main）；月度 cron 错峰（00:15 / 00:45 / 01:15 / 01:45）；`requirements-dev` 固定 + 新增 `requirements-dev.lock`；ruff 转阻断、mypy 覆盖 `engine/scripts`；契约测试改 4 分片 job（`run_tests_parallel.py`）；覆盖率新增单工具最低阈值（`per_tool_min`）+ `upload-artifact`；本地 pre-commit 增 `ruff --fix` + `validate.py`；测试数 1040 → 1045 |
+| v2.24 | 2026-11-20 | 主健康修复 | 工具 45 → 46（`source_normalize.py` 登记入工具一览）、测试 1056 → 1081、`scheduled-maintenance` 步骤 21 → 22、`audit-gate` 步骤 6 → 7；`decision_log --check` 测试适配 n20「需求编号关联」契约（改用登记册真实问题）；`update_planner --requirements` 测试 patch 目标修正为 `update_planner.decision_metrics`（修复测试隔离）；n19–n26 工单双轴评审覆盖补齐（另由评审任务合入） |
