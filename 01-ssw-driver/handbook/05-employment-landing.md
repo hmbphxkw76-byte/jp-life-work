@@ -8,14 +8,14 @@
 ## 6.1 考试准备路径
 
 1. 技能試験：官方免费样本题（ClassNK Portal）＋全ト协学習用テキスト为唯一官方教材。[Source: https://sswt-portal.classnk.or.jp/area?tab=3-1, 2026; https://jta.or.jp/member/driver/ssw_text.html, 2026]
-2. 日语：中国大陆考生主路径为 **JLPT N4**（每年 7/12 两次，450 元）；JFT-Basic 中国无考点（赴第三国时可选）。[Source: https://jlpt.neea.cn/faq.html, 2026; https://www.prometric-jp.com/zh-CHS/ssw/, 2026]
+2. 日语：中国大陆考生主路径为 **JLPT N4**（每年 7/12 两次）；JFT-Basic 中国无考点（赴第三国时可选）。[Source: https://www.jlpt.jp/, 2026; https://www.prometric-jp.com/zh-CHS/ssw/, 2026]
 3. 考试地点策略（推断）：无考场于中国大陆 → 最现实路径为持有效中国驾照先赴日本以"特定活动"入境后国内受验（国内受验费 6,500 円），或赴越南/泰国等已有 CBT 考场的第三国。
 
 ## 6.2 招募渠道与中介资质
 
-- 中国路径官方明示：**商务部批准资质的对外劳务合作企业**＋日方公共职业安定所（ハローワーク）。[Source: https://www.ssw.go.jp/cn/about/step/, 2026]
-- 资质查询入口：商务部对外劳务合作企业名单 http://femhzs.mofcom.gov.cn/fecpmvc_zj/pages/fem/CorpLWList.html ；商务部提醒原文：无资质出国务工属违法。[Source: https://ao.mofcom.gov.cn/aqtz/art/2024/art_f0ce83f61c9240d39e775a23fcff8827.html, 2024]
-- 非法中介特征（推断汇总）：无法提供商务部资质编号、要求前置大额"保证金"、承诺"免考包过"（技能試験为 ClassNK 统一实施，无免考通道）。
+- 中国路径官方明示：须经中国主管部门批准资质的对外劳务合作企业＋日方公共职业安定所（ハローワーク）。[Source: https://www.ssw.go.jp/cn/about/step/, 2026]
+- 资质查询入口：中国侧资质查询入口为中文来源，按来源规则不列 → 待核实；无资质出国务工属违法（法理判断）。
+- 非法中介特征（推断汇总）：无法提供中国主管部门资质编号、要求前置大额“保证金”、承诺“免考包过”（技能試験为 ClassNK 统一实施，无免考通道）。
 
 ## 6.3 在留落地清单
 
