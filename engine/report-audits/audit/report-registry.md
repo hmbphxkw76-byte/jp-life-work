@@ -5,7 +5,7 @@
 
 | 报告 | 主题 | 期间 | 类型 | 内容指纹 | 审计状态 | 审计编号 |
 |---|---|---|---|---|---|---|
-| [00-decision-hub/reports/2026-11-decision-hub.md](../../../00-decision-hub/reports/2026-11-decision-hub.md) | 00-decision-hub | 2026-11 | employment-research | `sha256:a3e14c6421f4` | audited | AUD-202611-010 |
+| [00-decision-hub/reports/2026-11-decision-hub.md](../../../00-decision-hub/reports/2026-11-decision-hub.md) | 00-decision-hub | 2026-11 | employment-research | `sha256:a3e14c6421f4` | stale | AUD-202611-013 |
 | [01-ssw-driver/reports/2026-11-ssw-driver.md](../../../01-ssw-driver/reports/2026-11-ssw-driver.md) | 01-ssw-driver | 2026-11 | employment-research | `sha256:1598d855da69` | audited | AUD-202611-001 |
 | [02-career-driver/reports/2026-11-career-driver.md](../../../02-career-driver/reports/2026-11-career-driver.md) | 02-career-driver | 2026-11 | employment-research | `sha256:1987411328ad` | audited | AUD-202611-012 |
 | [03-career-management/reports/2026-11-career-management.md](../../../03-career-management/reports/2026-11-career-management.md) | 03-career-management | 2026-11 | employment-research | `sha256:a2dd767ddaa8` | audited | AUD-202611-018 |
@@ -22,7 +22,7 @@
 | [14-life-operations/reports/2026-11-life-operations.md](../../../14-life-operations/reports/2026-11-life-operations.md) | 14-life-operations | 2026-11 | employment-research | `sha256:1b8172b2ac08` | audited | AUD-202611-007 |
 | [15-health-wellbeing/reports/2026-11-health-wellbeing.md](../../../15-health-wellbeing/reports/2026-11-health-wellbeing.md) | 15-health-wellbeing | 2026-11 | employment-research | `sha256:019b0e804964` | audited | AUD-202611-014 |
 | [16-exit-transition-return/reports/2026-11-exit-transition-return.md](../../../16-exit-transition-return/reports/2026-11-exit-transition-return.md) | 16-exit-transition-return | 2026-11 | policy-analysis | `sha256:7303ce47f48b` | audited | AUD-202611-019 |
-| [17-migration-compliance/reports/2026-11-migration-compliance.md](../../../17-migration-compliance/reports/2026-11-migration-compliance.md) | 17-migration-compliance | 2026-11 | employment-research | `sha256:3d34b94a934b` | audited | AUD-202611-004 |
-| [18-family-parenting/reports/2026-11-family-parenting.md](../../../18-family-parenting/reports/2026-11-family-parenting.md) | 18-family-parenting | 2026-11 | employment-research | `sha256:6bbd9e5947c1` | audited | AUD-202611-020 |
-| [19-safety-disaster/reports/2026-11-safety-disaster.md](../../../19-safety-disaster/reports/2026-11-safety-disaster.md) | 19-safety-disaster | 2026-11 | market-monitoring | `sha256:0ca864643a93` | audited | AUD-202611-013 |
-| [20-overseas-china/reports/2026-11-overseas-china.md](../../../20-overseas-china/reports/2026-11-overseas-china.md) | 20-overseas-china | 2026-11 | policy-analysis | `sha256:32e21f7e02aa` | audited | AUD-202611-008 |
+| [17-migration-compliance/reports/2026-11-migration-compliance.md](../../../17-migration-compliance/reports/2026-11-migration-compliance.md) | 17-migration-compliance | 2026-11 | employment-research | `sha256:3d34b94a934b` | stale | AUD-202611-020 |
+| [18-family-parenting/reports/2026-11-family-parenting.md](../../../18-family-parenting/reports/2026-11-family-parenting.md) | 18-family-parenting | 2026-11 | employment-research | `sha256:6bbd9e5947c1` | stale | AUD-202611-008 |
+| [19-safety-disaster/reports/2026-11-safety-disaster.md](../../../19-safety-disaster/reports/2026-11-safety-disaster.md) | 19-safety-disaster | 2026-11 | market-monitoring | `sha256:0ca864643a93` | stale | AUD-202611-004 |
+| [20-overseas-china/reports/2026-11-overseas-china.md](../../../20-overseas-china/reports/2026-11-overseas-china.md) | 20-overseas-china | 2026-11 | policy-analysis | `sha256:32e21f7e02aa` | stale | AUD-202611-021 |
