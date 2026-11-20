@@ -70,6 +70,8 @@
 
 按[业务配置第八节](./business-config.md)的 11 项追踪指标逐项核对并填写「是否更新」；运行前从 `{{REGISTRY_PATH}}` 读台账 → 增量登记 / 状态变更 → 运行后回写。政策变更摘要覆盖本期新增 / 修订 / 生效 / 废止清单及影响方向；未核实项单列「待复核清单」。prompt 模板内不填活值。
 
+**需求命中检查（PIR，n19）**：运行前读取 `00-decision-hub/data/decision_hub_registry.md`（或 `python engine/tools/update_planner.py --requirements`），声明本期覆盖的 `REQ-NN` 需求编号；未覆盖项写入「信息差与未核验清单」。
+
 ## 六、执行方式（建议）
 
 1. 原文回溯先行：完成官方原文登记（URL、版本日期、文本完整性）后再启动逐条解读子代理。

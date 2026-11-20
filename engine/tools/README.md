@@ -226,8 +226,9 @@ python engine/tools/decision_metrics.py --check    # 仅校验可解析，不写
 ```
 
 从 `00-decision-hub` 的结构化登记册与决策日志计算：指标收敛率、五问判定率、缺失条目数、
-件套齐备度、决策变化次数。历史序列写入 `decision-metrics-history.jsonl`，供跨月趋势
-（P2-2 复用）。退出码：0=正常；1=结构解析失败（阻断）；2=存在待定 / 缺失（告警）。
+件套齐备度、决策变化次数，以及**需求维度（n19）**：需求覆盖率（已覆盖 / 部分 / 未覆盖）
+与超期未闭环缺失数（由 `requirements_matrix()` 从登记册第一节 + 第二节生成）。
+历史序列写入 `decision-metrics-history.jsonl`，供跨月趋势（P2-2 复用）。退出码：0=正常；1=结构解析失败（阻断）；2=存在待定 / 缺失（告警）。
 
 ### source_check.py — 来源条目 schema 化（P1-2）
 
@@ -318,6 +319,9 @@ python engine/tools/update_planner.py --porcelain --pending-only > tasks.json
 python engine/tools/update_planner.py --pending-only > tasks.md
 # 限定项目 / 周期
 python engine/tools/update_planner.py --project 01-ssw-driver --period 2026-12
+# 需求覆盖矩阵（PIR，n19）
+python engine/tools/update_planner.py --requirements           # 人读表格
+python engine/tools/update_planner.py --requirements --porcelain  # JSON
 ```
 
 - `--period` 接受 `YYYY-MM` / `YYYY-Qn` / `YYYY`；缺省按当前 UTC 日期推导
@@ -326,6 +330,8 @@ python engine/tools/update_planner.py --project 01-ssw-driver --period 2026-12
   季度节拍按季度末月归档（2026-Q4 → 2026-12），年度取 12 月。
 - 任务状态：期望输出已存在 → done，否则 pending；`--pending-only` 只留 pending。
   参数错误退出码 2。
+- `--requirements`（n19）输出需求覆盖矩阵（PIR）：`REQ-NN`（决策问题）× 责任主题 /
+  覆盖状态 / 期限 / 关联缺失编号 + 缺失清单 `GAP-NN`；数据源 `decision_metrics.requirements_matrix()`。
 
 ### trigger_watch.py — 触发检测（watchlist / freshness / 候选线索）
 
@@ -476,3 +482,4 @@ python engine/tools/automation_status.py activity --threshold 45               #
 | v1.5 | 2026-11-19 | 工程守卫（W1 / A1 / A5） | 测试计数 1029 → 1040（新增归档保留期边界 6 项 + 文档数字锁定 3 项 + 骨架完备性 2 项）；退出码约定改为指向 `docs/CI.md`；`structure_check` 新增主题骨架完备性校验 |
 | v1.6 | 2026-11-19 | CI/CD 加固（W2） | 测试计数 1040 → 1045（覆盖率单工具阈值 5 项）；工具链代码新增 pre-commit 快速子集（ruff --fix + validate.py）说明 |
 | v1.7 | 2026-11-19 | 内容与词库（W4 / B7） | 测试计数 1045 → 1047（B7 新增 2 项 `build_hub` 检索层校验用例）；补记检索层产物校验说明 |
+| v1.8 | 2026-11-20 | 需求登记（n19） | `decision_metrics.requirements_matrix()` 需求覆盖矩阵（PIR）+ 需求维度指标；`update_planner --requirements`；00 / 01 / 08 提示词增「需求命中检查」 |

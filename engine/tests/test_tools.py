@@ -36,6 +36,7 @@ import build_hub  # noqa: E402
 import build_index  # noqa: E402
 import compliance_check  # noqa: E402
 import decision_log  # noqa: E402
+import decision_metrics  # noqa: E402
 import fact_card_check  # noqa: E402
 import info_quality_check  # noqa: E402
 import link_check  # noqa: E402
@@ -2512,6 +2513,29 @@ class TestUpdatePlannerAudit(unittest.TestCase):
         md = update_planner.render_md(tasks, "2026-11", [])
         self.assertIn("审计提醒", md)
         self.assertIn("未审计", md)
+
+    def test_render_requirements(self):
+        """n19：需求覆盖矩阵（PIR）人读表格。"""
+        matrix = {"requirements": [{"需求编号": "REQ-01", "决策问题": "去不去",
+                                    "责任主题": "01", "覆盖状态": "已覆盖",
+                                    "期限": "", "关联缺失编号": "GAP-01"}],
+                  "gaps": [{"编号": "GAP-01", "缺口": "对比", "覆盖的决策问题": "去不去",
+                            "优先级": "P1", "期限": "2026-11-01"}]}
+        md = update_planner.render_requirements(matrix)
+        self.assertIn("REQ-01", md)
+        self.assertIn("GAP-01", md)
+
+    def test_requirements_main_porcelain(self):
+        """n19：--requirements --porcelain 输出 JSON。"""
+        matrix = {"requirements": [], "gaps": []}
+        with unittest.mock.patch.object(decision_metrics, "requirements_matrix",
+                                       return_value=matrix), \
+                unittest.mock.patch.object(sys, "argv",
+                                          ["update_planner.py", "--requirements", "--porcelain"]):
+            buf = io.StringIO()
+            with contextlib.redirect_stdout(buf):
+                self.assertEqual(update_planner.main(), 0)
+        self.assertEqual(json.loads(buf.getvalue()), matrix)
 
 
 class TestIndexGate(unittest.TestCase):
