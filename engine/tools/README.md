@@ -60,7 +60,7 @@ python -m unittest discover -s engine/tests -q   # 单元测试（以 docs/CI.md
 | prompt_check.py | 校验 | validate.yml「提示词结构门禁」（P1-11：命名 / 继承声明 / p3–p5 结构 / business-config 槽位与优先级） |
 | l5_meta_check.py | 校验 | audit-gate.yml「L5 证据元评估」（P1-4：覆盖率 / 合格率 / basis 缺失 / 依据充分度） |
 | decision_metrics.py | 决策支持 | validate.yml「决策度量校验」（P1-6：五问收敛率 / 判定率 / 缺失 / 决策日志变化） |
-| source_check.py | 校验 | validate.yml「来源条目 schema 校验」（P1-2：来源章节 / URL 条目时点 / 分级，产出 source-index.json） |
+| source_check.py | 校验 | validate.yml「来源条目 schema 校验」（P1-2：来源章节 / URL 条目时点 / 分级 / 字段完整率 E5，产出 source-index.json，n25 起入库受控） |
 | counterexample_scan.py | 校验 | validate.yml「反例扫描」（P2-1：绝对化 / 以偏概全 / 无来源断言候选） |
 | perf_snapshot.py | 校验 | scheduled-maintenance.yml「性能趋势快照」；规模 + 耗时采集（基线 / 历史，`--with-tests` / `--set-baseline` / `--porcelain`） |
 
@@ -238,8 +238,15 @@ python engine/tools/source_check.py --json
 ```
 
 把各报告来源章节的条目解析为机读四元组（来源文本 / 时点年份 / URL / 分级分组），产出
-`engine/report-audits/audit/source-index.json`。校验：来源章节存在性（阻断）；URL 条目
-时点年份、来源分级声明（告警）。退出码：0=通过；1=缺来源章节（阻断）；2=仅告警。
+`engine/report-audits/audit/source-index.json`（n25 起为**入库受控产物**，含每份报告内容指纹）。
+校验：来源章节存在性（E1，阻断）；URL 条目时点年份（E3）、来源分级声明（E4）、
+来源条目字段完整率（E5）（告警）。归一化规则集中在 `source_normalize.py`（单一事实源），
+供本工具与后续信源批评（n21）/ 证据强度（n22）复用。退出码：0=通过；1=缺来源章节（阻断）；2=仅告警。
+
+### source_normalize.py — 来源字段归一化（n25）
+
+纯函数模块（无副作用）：`normalize_url` / `normalize_org` / `normalize_year` / `extract_year`。
+所有来源字段归一化必须经此模块，其他工具不得再各写一套。
 
 ### counterexample_scan.py — 反例 / 绝对化论断扫描（P2-1）
 
@@ -476,3 +483,4 @@ python engine/tools/automation_status.py activity --threshold 45               #
 | v1.5 | 2026-11-19 | 工程守卫（W1 / A1 / A5） | 测试计数 1029 → 1040（新增归档保留期边界 6 项 + 文档数字锁定 3 项 + 骨架完备性 2 项）；退出码约定改为指向 `docs/CI.md`；`structure_check` 新增主题骨架完备性校验 |
 | v1.6 | 2026-11-19 | CI/CD 加固（W2） | 测试计数 1040 → 1045（覆盖率单工具阈值 5 项）；工具链代码新增 pre-commit 快速子集（ruff --fix + validate.py）说明 |
 | v1.7 | 2026-11-19 | 内容与词库（W4 / B7） | 测试计数 1045 → 1047（B7 新增 2 项 `build_hub` 检索层校验用例）；补记检索层产物校验说明 |
+| v1.8 | 2026-11-20 | 加工层受控（n25） | `source-index.json` 由生成物提升为入库活台账（含报告内容指纹）；新增 `source_normalize.py` 归一化单一事实源；`source_check` 增 E5 字段完整率并扩展分组头识别 |

@@ -1204,6 +1204,35 @@ class TestInfoQualityCheck(unittest.TestCase):
         self.assertEqual(info_quality_check.THRESH_SOURCE_COVERAGE, 0.20)
         self.assertIn("20%", text.split("事实段落来源标注覆盖率门槛")[1].split("\n")[0])
 
+    def test_registry_ext_gaps(self):
+        """C-16：登记册来源质量扩展列校验（n21）。"""
+        from info_quality_check import registry_ext_gaps
+
+        def table(cols, row):
+            return ("## 核心指标\n\n| " + " | ".join(cols) + " |\n|"
+                    + "---|" * len(cols) + "\n| " + " | ".join(row) + " |\n")
+
+        base_cols = ["#", "指标", "口径", "研究阶段", "最新值 / 规则", "来源机构",
+                     "来源 URL", "版本日期", "核验日期", "核验状态", "关联章节", "更新时间"]
+        base_row = ["1", "测试", "口径", "周期", "1", "机构", "https://x",
+                    "2026-11-01", "2026-11-01", "已核验", "数据变更摘要", "2026-11-01"]
+        # 存量 v2 旧表（核验日期 < 门槛）→ 豁免
+        self.assertEqual(registry_ext_gaps(table(base_cols, base_row)), [])
+        # 新表（核验日期 ≥ 门槛）→ 提示缺列
+        new_row = [c if c != "2026-11-01" else "2026-12-05" for c in base_row]
+        self.assertTrue(any("缺来源质量扩展列" in g
+                            for g in registry_ext_gaps(table(base_cols, new_row))))
+        # 含扩展列但值域不合规 → 提示
+        ext_cols = base_cols[:10] + ["来源类型", "独立性", "转述层级"] + base_cols[10:]
+        ext_row = base_row[:10] + ["二手", "独立", "1"] + base_row[10:]
+        ext_row = [c if c != "2026-11-01" else "2026-12-05" for c in ext_row]
+        self.assertTrue(any("值域不合规" in g
+                            for g in registry_ext_gaps(table(ext_cols, ext_row))))
+        # 值域合规 → 无提示
+        ok_row = base_row[:10] + ["一手", "独立", "1"] + base_row[10:]
+        ok_row = [c if c != "2026-11-01" else "2026-12-05" for c in ok_row]
+        self.assertEqual(registry_ext_gaps(table(ext_cols, ok_row)), [])
+
 
 class TestAuditPreflight(unittest.TestCase):
     """落盘前快速自检（audit_preflight.py，左移预防层）。"""

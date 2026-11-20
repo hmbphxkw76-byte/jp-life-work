@@ -1,6 +1,6 @@
 # report-audits/ 审计留痕治理说明
 
-> **版本**：v1.1（2026-11-17 迁移后治理）
+> **版本**：v1.2（2026-11-20 n25 加工层受控）
 > **定位**：`engine/report-audits/` 存放审计台账与生成报告。本文件规定其**分层规则**与
 > **生成器对照**，避免把生成物当活文档手工维护，也避免误删门禁依赖的台账。
 >
@@ -19,6 +19,7 @@
 | `audit/report-registry.json` | `audit_registry` / `audit_pipeline` | 报告登记册（`--gate` 受检报告须 audited + 指纹匹配） |
 | `audit/pending-p2.json` | `audit_check` / `audit_sampling` | P2 问题闭环台账 |
 | `audit/pending-verification.json` | `pending_verification.py` | 待核实闭环（CI 月度刷新） |
+| `audit/source-index.json` | `source_check.py` | 来源条目 schema 索引 + 每份报告内容指纹（n25 起入库受控，可回溯来源对应的报告版本） |
 | `audit/lint-whitelist.json` | `lint_reports` / `compliance_check` | lint 豁免清单 |
 | `info-quality/info-quality.json` | `info_quality_check.py` | 信息质量三清单数据源（随提交留存） |
 | `info-quality/assessment-ledger.md` | `info_quality_check.py`（`--apply` 重写） | 三清单之一：评估台账（随提交留存，N5） |
@@ -72,3 +73,4 @@
 |---|---|---|---|
 | v1.0 | 2026-11-17 | 初始版本 | 建立审计留痕分层（活台账 / 生成物 / 历史归档）、生成器对照与新增/删除规则 |
 | v1.1 | 2026-11-17 | 迁移后治理 | 第三节改为「CI 接线对照」，移除已失效的「范围外接线问题」描述 |
+| v1.2 | 2026-11-20 | n25 加工层受控 | `audit/source-index.json` 由生成物提升为活台账（含报告内容指纹），移出 `.gitignore` |
