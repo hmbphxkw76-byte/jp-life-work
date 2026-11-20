@@ -1,6 +1,6 @@
 {
   "version": "v1.4",
-  "updated": "2026-11-20T02:05:14+00:00",
+  "updated": "2026-11-20T04:32:42+00:00",
   "reports": {
     "00-decision-hub/reports/2026-11-decision-hub.md": {
       "state": "audited",
@@ -20,11 +20,11 @@
     },
     "02-career-driver/reports/2026-11-career-driver.md": {
       "state": "audited",
-      "audit_id": "AUD-202611-012",
-      "finalized_at": "2026-11-18T09:02:46+00:00",
-      "content_hash": "sha256:1987411328ad741be94429bf42f7bdc24bc26736fff76d4911e444c988227fc7",
-      "html_hash": "sha256:250ab979f791bf7e4ca887482524989fd05120fa10003acaad9ee28890458635",
-      "last_seq": 824
+      "audit_id": "AUD-202611-003",
+      "finalized_at": "2026-11-20T04:32:41+00:00",
+      "content_hash": "sha256:333ab3e34020c8c565c4d07505a206da38faec983a4d69336861a93b1e33dff0",
+      "html_hash": "sha256:921087f97ec88eecf10126abd12a6bef54c7c9b360f6173dab29470579c4b03e",
+      "last_seq": 895
     },
     "03-career-management/reports/2026-11-career-management.md": {
       "state": "audited",
@@ -68,19 +68,19 @@
     },
     "08-visa-immigration/reports/2026-11-visa-immigration.md": {
       "state": "audited",
-      "audit_id": "AUD-202611-003",
-      "finalized_at": "2026-11-18T14:58:02+00:00",
-      "content_hash": "sha256:fae71f97343a459592dcac90d61b48e9df7ba14ee03d114adbfb006318d24195",
-      "html_hash": "sha256:1fee4cea881444e4f2c281d6ed44b4666c914e31d3787a88a338b413841f2615",
-      "last_seq": 830
+      "audit_id": "AUD-202611-019",
+      "finalized_at": "2026-11-20T04:32:41+00:00",
+      "content_hash": "sha256:e8a677ba41ccc8b5a87323a9b76f6d60090fba5987c2bc592f912d8b55f5b5f7",
+      "html_hash": "sha256:5ddae09e17ceb728f6554eabcc4fdd349ee986fbfbc707924aca5959557463fa",
+      "last_seq": 893
     },
     "09-politics-law/reports/2026-11-politics-law.md": {
       "state": "audited",
-      "audit_id": "AUD-202611-017",
-      "finalized_at": "2026-11-18T11:10:20+00:00",
-      "content_hash": "sha256:f456039b3659b3acf3b24a9772b0ab598302dbae9789cf0da70436a7d7f37ffc",
-      "html_hash": "sha256:dc5c9a5015b4ccaefc65fbb14b16c687992c2fd2c884ec7cc486fd1a2384aa62",
-      "last_seq": 831
+      "audit_id": "AUD-202611-021",
+      "finalized_at": "2026-11-20T04:32:40+00:00",
+      "content_hash": "sha256:256b00fb10405fd4e64ce5cd0cec82939fd903b3cffd3a2a10d0282568b9f697",
+      "html_hash": "sha256:741c774151ded2281ed926be3bc99b168b36435814d84f125635e2a3adbc82b1",
+      "last_seq": 889
     },
     "10-education-qualification/reports/2026-11-education-qualification.md": {
       "state": "audited",
@@ -108,11 +108,11 @@
     },
     "13-regional-info/reports/2026-11-regional-info.md": {
       "state": "audited",
-      "audit_id": "AUD-202611-009",
-      "finalized_at": "2026-11-18T11:10:21+00:00",
-      "content_hash": "sha256:3ec2622cf17b50e9b7509a035e0cab12491f44c21991a6a3634fdaba16afd785",
-      "html_hash": "sha256:d6f144a623dd710279b8b3f196418c6b3894eb2a8fac5350df470669b58f3df3",
-      "last_seq": 835
+      "audit_id": "AUD-202611-012",
+      "finalized_at": "2026-11-20T04:32:42+00:00",
+      "content_hash": "sha256:741b8645b4e48b4f8d0216737602f5ce093088814dd6941ee48ec80deab457e6",
+      "html_hash": "sha256:c251bb24d74759c4ed8a6b144386aa463488e517a2734223bf4be31c99b6d480",
+      "last_seq": 897
     },
     "14-life-operations/reports/2026-11-life-operations.md": {
       "state": "audited",
@@ -132,11 +132,11 @@
     },
     "16-exit-transition-return/reports/2026-11-exit-transition-return.md": {
       "state": "audited",
-      "audit_id": "AUD-202611-019",
-      "finalized_at": "2026-11-18T09:02:54+00:00",
-      "content_hash": "sha256:7303ce47f48b53928ec60a9c8c04822b86025175707dbf6463269ee8d4ae26a1",
-      "html_hash": "sha256:bc898400a7538730388db7e3539c4654deef2bf379dc886958d8013719aabf03",
-      "last_seq": 838
+      "audit_id": "AUD-202611-017",
+      "finalized_at": "2026-11-20T04:32:41+00:00",
+      "content_hash": "sha256:866ee9abf4ab64b528571e9c839798a8321de7b29677f45c6d31ad74ab6f3f42",
+      "html_hash": "sha256:ea53c7e1e3a4b580abd32c02f3b0bde5119d89733e4d7e06fbb44a2459851ff6",
+      "last_seq": 891
     },
     "17-migration-compliance/reports/2026-11-migration-compliance.md": {
       "state": "audited",
