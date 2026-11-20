@@ -46,6 +46,22 @@ class ScanTextCase(unittest.TestCase):
         text = "所有结论均成立。" * 3
         self.assertEqual(len(cs.scan_text(text)), 1)
 
+    def test_single_source_hit(self):
+        # 含数字的结论句 + 段落仅一个来源 → 单源候选
+        text = "结论：2026 年缺口为 14%（来源：官方统计）。"
+        items = cs.scan_text(text)
+        self.assertTrue(any("单源" in i["kinds"] for i in items))
+
+    def test_single_source_labeled_not_hit(self):
+        text = "结论：2026 年缺口为 14%（单源，来源：官方统计）。"
+        items = cs.scan_text(text)
+        self.assertFalse(any("单源" in i["kinds"] for i in items))
+
+    def test_single_source_plain_sentence_not_hit(self):
+        # 普通来源句（无结论性措辞）不误报
+        self.assertFalse(any("单源" in i["kinds"] for i in cs.scan_text(
+            "该指标 2026-11 为 3.8%（来源：ISA）。")))
+
 
 class ScanAndMainCase(unittest.TestCase):
     def setUp(self) -> None:

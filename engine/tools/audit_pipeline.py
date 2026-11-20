@@ -541,11 +541,13 @@ def cmd_rebind(all_: bool = True, rel: str | None = None) -> int:
     return 0
 
 
-def cmd_backfill_l5(rel: str | None, all_: bool, evidence: str | None, actor: str) -> int:
+def cmd_backfill_l5(rel: str | None, all_: bool, evidence: str | None, actor: str,
+                   force: bool = False) -> int:
     """存量报告 L5 补核专项：为已审计但缺有效 L5 证据的报告补录证据。
 
-    幂等：已有有效证据者跳过；证据须经 validate_l5_evidence 校验；以独立事件
-    l5_backfill（role=reviewer_l2）追加，保持哈希链与审计状态不变。
+    幂等：已有有效证据者跳过（``force=True`` 时允许更新已有证据，用于复核结论落地）；
+    证据须经 validate_l5_evidence 校验；以独立事件 l5_backfill（role=reviewer_l2）
+    追加，保持哈希链与审计状态不变。
     """
     if not evidence:
         raise SystemExit("[ERROR] 需要 --evidence <JSON>")
@@ -564,7 +566,7 @@ def cmd_backfill_l5(rel: str | None, all_: bool, evidence: str | None, actor: st
         if cur.get("state") != "audited":
             print(f"[SKIP] {rep}：状态 {cur.get('state') or '未登记'}，非 audited")
             continue
-        if l5.get(rep, False):
+        if l5.get(rep, False) and not force:
             print(f"[SKIP] {rep}：已有有效 L5 证据")
             continue
         md_h, html_h = _current_hashes(rep)
@@ -801,6 +803,8 @@ def main() -> int:
                     help="内容未变、仅 HTML 渲染漂移的失效报告重新绑定（stale → audited）")
     ap.add_argument("--backfill-l5", action="store_true",
                     help="存量报告 L5 补核专项：为已审计但缺证据的报告追加 evidence（新格式）")
+    ap.add_argument("--backfill-force", action="store_true",
+                    help="允许更新已有有效 L5 证据（用于复核结论落地）")
     ap.add_argument("--sampling-fail", metavar="清单",
                     help="抽检不合格报告清单（每行一个路径）；命中 P0/P1 的已审计报告置 stale")
     ap.add_argument("--gate", action="store_true",
@@ -836,7 +840,8 @@ def main() -> int:
     if args.backfill_l5:
         if not args.report and not args.all:
             ap.error("--backfill-l5 需要 --report <路径> 或 --all")
-        return cmd_backfill_l5(args.report, args.all, args.evidence, args.actor or "")
+        return cmd_backfill_l5(args.report, args.all, args.evidence, args.actor or "",
+                               args.backfill_force)
     if args.sampling_fail:
         p = Path(args.sampling_fail)
         if not p.is_file():

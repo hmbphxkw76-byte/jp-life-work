@@ -1,16 +1,22 @@
 #!/usr/bin/env python3
-"""source_check.py — 来源条目 schema 化与格式校验（P1-2）。
+"""source_check.py — 来源条目 schema 化与格式校验（P1-2，n25 升级）。
 
-把各报告「参考来源清单 / 来源」章节的条目解析为**机读四元组**
-（来源文本 / 时点年份 / URL / 分级分组），产出 `source-index.json`，
+把各报告「参考来源清单 / 来源」章节的条目解析为**机读六元组**
+（来源文本 / 时点年份 / URL / 分级分组 / 转述层级 / 独立性），产出 `source-index.json`，
 并校验来源格式约定：
 
 - E1：报告存在来源章节（P1，阻断）；
 - E2：来源章节含 URL 条目（P2，告警；00 决策枢纽等引用型报告可空）；
 - E3：URL 条目附 4 位年份（时点）（P2，告警）；
-- E4：报告声明来源分级（分级 / 官方一手 / 权威 / 媒体）（P2，告警）。
+- E4：报告声明来源分级（分级 / 官方一手 / 权威 / 媒体）（P2，告警）；
+- E5：来源条目字段完整率（url + 时点 + 分级分组三项齐全）（P2，告警）；
+- E6：来源质量字段（转述层级 / 独立性）缺失或判为「不明」（P2，告警，n21）。
 
-输出：``engine/report-audits/audit/source-index.json``（schema 化索引）。
+归一化规则集中在本模块引用的 ``source_normalize``（单一事实源），
+其他工具复用该模块，不再各写一套。
+
+输出：``engine/report-audits/audit/source-index.json``（schema 化索引；
+n25 起为**入库受控产物**，含每份报告内容指纹，可回溯来源条目对应的报告版本）。
 
 用法：
     python engine/tools/source_check.py            # 全量校验并写索引
@@ -30,16 +36,40 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from _common import ROOT, atomic_write, iter_business_dirs  # noqa: E402
+from audit_registry import content_fingerprint  # noqa: E402
+from source_normalize import extract_year, normalize_url  # noqa: E402
 
 SECTION_RE = re.compile(r"^##\s+.*(?:参考来源|来源|引用)", re.M)
 URL_RE = re.compile(r"https?://[^\s)\]]+")
-# 时点：西历 4 位年，或日本年号（令和/平成/昭和 N 年）
-YEAR_RE = re.compile(r"(?:19|20)\d{2}|(?:令和|平成|昭和)\s*\d{1,2}\s*年?")
+# 时点：西历 4 位年，或日本年号（令和/平成/昭和 N 年）——抽取交归一化模块
 # 明确的核验/改定标记（机构入口页无刊行日的，以此记录核验时点）
 MARKER_RE = re.compile(r"核对|改定|换版|最終更新|最终更新")
 GRADE_RE = re.compile(r"分级|官方一手|权威|媒体|A 级|B 级|C 级")
-GROUP_RE = re.compile(r"^(?:###\s*)?[①②③④⑤]|"  # ① 日本政府官方一手
-                      r"^\*\*([ABC])\b")          # **A 官方一手**
+GROUP_RE = re.compile(r"^(?:###\s*)?[①②③④⑤]|"   # ① 日本政府官方一手
+                      r"^\*\*([ABC])\b|"           # **A 官方一手**
+                      r"^\*\*[^*]{2,120}\*\*[：:]?|"  # **官方一手（…）**（冒号可选）
+                      r"^###\s+\S")                 # ### 官方一手
+# 来源质量初判（n21，信源批评四问的机读化；仅为初判，人工可覆盖）
+RELAY_RE = re.compile(r"转引|转载|转述|引自|译自")
+NONIND_RE = re.compile(r"门户|挂牌|中介|媒体|转载|转引|转述|聚合")
+IND_RE = re.compile(r"官方|政府|省厅|委员会|行业|协会|学会|研究|机构|团体")
+
+
+def infer_relay_level(text: str) -> str:
+    """转述层级初判：含转引 / 转载等标记 → 2，否则 1（一手）。"""
+    return "2" if RELAY_RE.search(text or "") else "1"
+
+
+def infer_independence(text: str) -> str:
+    """独立性初判：门户 / 媒体 / 聚合 → 非独立；官方 / 行业机构 → 独立；其余不明。"""
+    s = text or ""
+    if NONIND_RE.search(s):
+        return "非独立"
+    if IND_RE.search(s):
+        return "独立"
+    return "不明"
+
+INDEX_PATH = ROOT / "engine" / "report-audits" / "audit" / "source-index.json"
 
 
 def _section_body(text: str, match: re.Match) -> str:
@@ -48,11 +78,11 @@ def _section_body(text: str, match: re.Match) -> str:
 
 
 def extract_report(rel: str, text: str) -> dict:
-    """解析单份报告的来源章节 → {heading, entries[], graded}。"""
+    """解析单份报告的来源章节 → {heading, entries[], graded, field_completeness}。"""
     ms = list(SECTION_RE.finditer(text))
     if not ms:
         return {"report": rel, "heading": "", "entries": [], "graded": False,
-                "problems": ["缺来源章节"]}
+                "field_completeness": 0.0, "problems": ["缺来源章节"]}
     sec = ms[-1]
     body = _section_body(text, sec)
     entries: list[dict] = []
@@ -64,14 +94,16 @@ def extract_report(rel: str, text: str) -> dict:
         if "http" not in line:
             continue
         url = URL_RE.search(line)
-        year = YEAR_RE.search(line)
+        year = extract_year(line)
         marker = MARKER_RE.search(line)
         entries.append({
             "text": line.strip()[:200],
-            "url": url.group(0) if url else "",
-            "year": year.group(0) if year else "",
+            "url": normalize_url(url.group(0)) if url else "",
+            "year": year,
             "marker": marker.group(0) if marker else "",
             "group": group,
+            "relay_level": infer_relay_level(group + " " + line),
+            "independence": infer_independence(group + " " + line),
         })
     problems: list[str] = []
     if not entries:
@@ -79,11 +111,20 @@ def extract_report(rel: str, text: str) -> dict:
     no_year = sum(1 for e in entries if not e["year"] and not e["marker"])
     if no_year:
         problems.append(f"{no_year} 条 URL 条目缺时点年份")
+    complete = sum(1 for e in entries
+                   if e["url"] and (e["year"] or e["marker"]) and e["group"])
+    rate = (complete / len(entries)) if entries else 1.0
+    if entries and complete < len(entries):
+        problems.append(f"来源条目字段完整率 {rate:.0%}（{complete}/{len(entries)}）")
+    unknown_ind = sum(1 for e in entries if e["independence"] == "不明")
+    if unknown_ind:
+        problems.append(f"{unknown_ind} 条来源条目独立性判为「不明」（待人工确认）")
     graded = bool(GRADE_RE.search(body)) or bool(GRADE_RE.search(text))
     if not graded:
         problems.append("未声明来源分级")
     return {"report": rel, "heading": sec.group(0).strip(), "entries": entries,
-            "graded": graded, "problems": problems}
+            "graded": graded, "field_completeness": round(rate, 4),
+            "problems": problems}
 
 
 def collect() -> list[dict]:
@@ -94,7 +135,13 @@ def collect() -> list[dict]:
             continue
         for md in sorted(reports.glob("*.md")):
             rel = md.relative_to(ROOT).as_posix()
-            out.append(extract_report(rel, md.read_text(encoding="utf-8", errors="replace")))
+            rec = extract_report(rel, md.read_text(encoding="utf-8", errors="replace"))
+            # 与报告内容指纹关联：来源条目可回溯到生成它的报告版本（n25）
+            try:
+                rec["fingerprint"] = content_fingerprint(md)
+            except Exception:
+                rec["fingerprint"] = ""
+            out.append(rec)
     return out
 
 
@@ -110,7 +157,7 @@ def main(argv: list[str] | None = None) -> int:
     total_entries = sum(len(r.get("entries", [])) for r in reports)
 
     if args.json:
-        print(json.dumps({"reports": reports, "total_entries": total_entries},
+        print(json.dumps({"version": 2, "reports": reports, "total_entries": total_entries},
                          ensure_ascii=False, indent=2))
     else:
         print(f"来源 schema：{len(reports)} 份报告，{total_entries} 条 URL 条目；"
@@ -120,11 +167,10 @@ def main(argv: list[str] | None = None) -> int:
         for r in warnings:
             print(f"  [告警] {r['report']}：{'; '.join(r['problems'])}")
         if not args.check and not args.json:
-            out = ROOT / "engine" / "report-audits" / "audit" / "source-index.json"
-            atomic_write(out, json.dumps(
-                {"version": 1, "total_entries": total_entries, "reports": reports},
+            atomic_write(INDEX_PATH, json.dumps(
+                {"version": 2, "total_entries": total_entries, "reports": reports},
                 ensure_ascii=False, indent=2))
-            print(f"已写入：{out.relative_to(ROOT)}")
+            print(f"已写入：{INDEX_PATH.relative_to(ROOT)}")
 
     if blocking:
         return 1

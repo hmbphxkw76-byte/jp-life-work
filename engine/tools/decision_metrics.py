@@ -43,6 +43,93 @@ ROW_RE = re.compile(r"^\|\s*(\d{4}-\d{2}-\d{2})\s*\|(.+)\|\s*$", re.M)
 CONVERGED = "已收敛"
 
 
+def requirements_matrix() -> dict:
+    """需求覆盖矩阵（PIR，n19）：决策问题 → 责任主题 / 覆盖状态 / 期限 / 关联缺失。
+
+    数据源：`decision_hub_registry.md` 第一节「五问指标状态表」（需求）与
+    第二节「暴露的缺失清单」（数据缺口）。需求编号 `REQ-NN`，缺失编号 `GAP-NN`。
+    关联规则：缺失的「覆盖的决策问题」包含需求的「决策问题」即关联。
+    """
+    text = REGISTRY.read_text(encoding="utf-8", errors="replace")
+    ind_rows = _rows(text, re.compile(r"##\s*一、五问指标状态表(.*?)(?=\n##\s*|\Z)", re.DOTALL))
+    gap_rows = _rows(text, re.compile(r"##\s*二、暴露的缺失清单(.*?)(?=\n##\s*|\Z)", re.DOTALL),
+                     numeric_first=False)
+
+    # 缺失清单列：优先级 | 缺失主题 | 覆盖的决策问题 | 缺口证据 | 建议类型 | 期限
+    gaps = []
+    for i, r in enumerate(gap_rows, start=1):
+        gaps.append({
+            "编号": f"GAP-{i:02d}",
+            "缺口": r[1] if len(r) > 1 else "",
+            "覆盖的决策问题": r[2] if len(r) > 2 else "",
+            "优先级": r[0] if r else "",
+            "期限": r[5] if len(r) > 5 else "",
+        })
+
+    # 五问指标状态表列：# | 决策问题 | 指标 | 来源主题 | 引用位置 | 收敛状态 | 缺失标记
+    reqs = []
+    for i, r in enumerate(ind_rows, start=1):
+        question = r[1] if len(r) > 1 else ""
+        resp = r[3] if len(r) > 3 else ""
+        judge = r[5] if len(r) > 5 else ""
+        missing = r[6] if len(r) > 6 else ""
+        linked = [g for g in gaps
+                  if question and question != "—" and question in g["覆盖的决策问题"]]
+        if judge == CONVERGED:
+            coverage = "已覆盖"
+        elif missing and missing not in ("—", "-", ""):
+            coverage = "部分覆盖"
+        else:
+            coverage = "未覆盖"
+        reqs.append({
+            "需求编号": f"REQ-{i:02d}",
+            "决策问题": question,
+            "责任主题": resp,
+            "覆盖状态": coverage,
+            "期限": linked[0]["期限"] if linked else "",
+            "关联缺失编号": ",".join(g["编号"] for g in linked),
+        })
+    return {"requirements": reqs, "gaps": gaps}
+
+
+def lineage() -> list[dict]:
+    """DIKW 血缘（n24）：决策问题 → 结论 ← 引用位置（报告 / 登记册）← 责任主题。
+
+    数据源：登记册第一节（五问指标状态表）+ 4.1（五问判定）。
+    缺失项显式留空，不虚构。
+    """
+    text = REGISTRY.read_text(encoding="utf-8", errors="replace")
+    ind_rows = _rows(text, re.compile(r"##\s*一、五问指标状态表(.*?)(?=\n##\s*|\Z)", re.DOTALL))
+    judge_rows = _rows(text, re.compile(r"###\s*4\.1[^\n]*\n(.*?)(?=\n#{2,3}\s*|\Z)", re.DOTALL))
+    judge = {}
+    for r in judge_rows:
+        if len(r) >= 3:
+            base = re.split(r"[（(]", r[1])[0].strip()
+            judge[base] = r[2]
+    out: list[dict] = []
+    for r in ind_rows:
+        q = r[1] if len(r) > 1 else ""
+        out.append({
+            "决策问题": q,
+            "指标": r[2] if len(r) > 2 else "",
+            "结论": judge.get(q, ""),
+            "责任主题": r[3] if len(r) > 3 else "",
+            "引用位置": r[4] if len(r) > 4 else "",
+        })
+    return out
+
+
+def vocab_fingerprint() -> str:
+    """词表内容指纹（n26）：读 `vocab_tool.vocab_hash()`；失败返回空串。"""
+    try:
+        sys.path.insert(0, str(ROOT / "engine" / "vocabulary" / "script"))
+        import vocab_tool  # type: ignore
+        cfg = vocab_tool.load_config(vocab_tool.DEFAULT_CONFIG)
+        return vocab_tool.vocab_hash(cfg)[0]
+    except Exception:
+        return ""
+
+
 def _rows(text: str, section_re: re.Pattern, numeric_first: bool = True) -> list[list[str]]:
     """提取指定章节内的 markdown 表格行（单元格列表）。
 
@@ -90,6 +177,26 @@ def collect() -> dict:
 
     log_n = len(ROW_RE.findall(LOG.read_text(encoding="utf-8"))) if LOG.is_file() else 0
 
+    req = requirements_matrix()
+    reqs = req["requirements"]
+    req_total = len(reqs)
+    req_covered = sum(1 for r in reqs if r["覆盖状态"] == "已覆盖")
+    req_partial = sum(1 for r in reqs if r["覆盖状态"] == "部分覆盖")
+    req_uncovered = sum(1 for r in reqs if r["覆盖状态"] == "未覆盖")
+    today = date.today().isoformat()
+    req_overdue = 0
+    for g in req["gaps"]:
+        if g["优先级"] in ("已接入", "已完成"):
+            continue
+        m = re.search(r"(\d{4}-\d{2}-\d{2})", g["期限"])
+        if m and m.group(1) < today:
+            req_overdue += 1
+
+    # 反馈维度（n20）：缺失闭环率（已接入 / 已完成视为闭环）
+    gap_total = len(req["gaps"])
+    gap_closed = sum(1 for g in req["gaps"] if g["优先级"] in ("已接入", "已完成"))
+    gap_close_rate = round(gap_closed / gap_total, 4) if gap_total else 0.0
+
     return {
         "updated": datetime.now(UTC).isoformat(timespec="seconds"),
         "period": date.today().isoformat()[:7],
@@ -104,6 +211,17 @@ def collect() -> dict:
         "kit_ready": kit_ready,
         "kit_readiness_rate": round(kit_ready / kit_total, 4) if kit_total else 0.0,
         "decision_log_entries": log_n,
+        "requirement_total": req_total,
+        "requirement_covered": req_covered,
+        "requirement_partial": req_partial,
+        "requirement_uncovered": req_uncovered,
+        "requirement_overdue": req_overdue,
+        "requirement_coverage_rate": round(req_covered / req_total, 4) if req_total else 0.0,
+        "gap_total": gap_total,
+        "gap_closed": gap_closed,
+        "gap_close_rate": gap_close_rate,
+        "gap_close_avg_days": None,
+        "vocab_hash": vocab_fingerprint(),
     }
 
 
@@ -134,7 +252,8 @@ def trend(snap: dict) -> dict:
         return {"available": False, "reason": "无历史快照"}
     prev = hist[-1]
     keys = ("indicator_converged", "gap_entries", "question_decided",
-            "kit_ready", "decision_log_entries")
+            "kit_ready", "decision_log_entries",
+            "requirement_covered", "requirement_overdue")
     return {"available": True, "prev_period": prev.get("period"),
             "delta": {k: snap.get(k, 0) - prev.get(k, 0) for k in keys}}
 
@@ -155,6 +274,12 @@ def render_md(snap: dict, tr: dict | None = None) -> str:
         f"| 件套齐备度 | {snap['kit_readiness_rate']:.0%}"
         f"（{snap['kit_ready']}/{snap['kit_total']}） |",
         f"| 决策变化次数 | {snap['decision_log_entries']} |",
+        f"| 需求覆盖率（n19） | {snap['requirement_coverage_rate']:.0%}"
+        f"（{snap['requirement_covered']}/{snap['requirement_total']}，"
+        f"部分 {snap['requirement_partial']} / 未覆盖 {snap['requirement_uncovered']}） |",
+        f"| 超期未闭环缺失（n19） | {snap['requirement_overdue']} |",
+        f"| 缺失闭环率（n20） | {snap['gap_close_rate']:.0%}"
+        f"（{snap['gap_closed']}/{snap['gap_total']}） |",
         "",
     ]
     if tr and tr.get("available"):
@@ -170,7 +295,12 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--trend", action="store_true", help="与上一快照对比")
     ap.add_argument("--check", action="store_true", help="仅校验可解析，不写文件")
     ap.add_argument("--json", action="store_true")
+    ap.add_argument("--lineage", action="store_true", help="输出五问结论血缘（DIKW，n24）")
     args = ap.parse_args(argv)
+
+    if args.lineage:
+        print(json.dumps(lineage(), ensure_ascii=False, indent=2))
+        return 0
 
     try:
         snap = collect()

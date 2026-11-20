@@ -83,7 +83,7 @@ C_TO_LAYER = {
     "C-01": "L5", "C-02": "L4", "C-03": "L4", "C-04": "L5",
     "C-05": "L2", "C-06": "L2", "C-07": "L3", "C-08": "L3",
     "C-09": "L3", "C-10": "L4", "C-11": "L5", "C-12": "L5",
-    "C-13": "L4", "C-14": "L3",
+    "C-13": "L4", "C-14": "L3", "C-15": "L4", "C-16": "L3",
 }
 
 L5_CHECKLIST = (
@@ -93,7 +93,11 @@ L5_CHECKLIST = (
     "是否存在以偏概全 / 过度推断 / 绝对化表述",
     "口径并列是否清晰、未合并未取均值",
     "跨主题引用是否准确、无归属错误",
+    "独立性与三角验证：关键结论是否多源互证、单源是否已标注",
 )
+
+# n22：3 级证据码（如「（C3）」），用于结论强度 ↔ 证据强度匹配扫描
+EVIDENCE_CODE_RE = re.compile(r"[（(][SABC]3[)）]")
 
 
 @dataclass
@@ -253,6 +257,16 @@ def check_elements(rel: str, md_path: Path, html_path: Path) -> list[AuditFindin
 # L4 一致性层（本地部分）
 # ──────────────────────────────────────────────
 
+def check_evidence_strength(text: str) -> list[str]:
+    """n22：绝对化措辞配 3 级证据码 → 结论强度可能超出证据强度（EVI-01）。"""
+    out: list[str] = []
+    for sent in re.split(r"[。！？\n]", text):
+        if any(w in sent for w in ("绝对", "必然", "一定", "所有", "全部", "100%")) \
+                and EVIDENCE_CODE_RE.search(sent):
+            out.append(sent.strip()[:80])
+    return out
+
+
 def check_local_consistency(rel: str, md_path: Path) -> list[AuditFinding]:
     out: list[AuditFinding] = []
     text = _read(md_path)
@@ -261,6 +275,11 @@ def check_local_consistency(rel: str, md_path: Path) -> list[AuditFinding]:
         out.append(AuditFinding("L4", "ABS-01", "P2", rel, "绝对化表述",
                                 f"命中绝对化措辞 {len(hits)} 处（{', '.join(sorted(set(hits))[:5])}），"
                                 "语义确认后定级", "S-10"))
+    weak = check_evidence_strength(text)
+    if weak:
+        out.append(AuditFinding("L4", "EVI-01", "P2", rel, "证据强度不足",
+                                f"{len(weak)} 处绝对化措辞配 3 级证据码（结论强度可能超出证据强度）："
+                                f"{weak[0]}", "S-10"))
     return out
 
 

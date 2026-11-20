@@ -47,7 +47,7 @@ python -m unittest discover -s engine/tests -q   # 单元测试（以 docs/CI.md
 | auto_verify.py | 校验 | 手动：生成后自动验证（V1–V5）→ 写回「自动验证结果」→ 提交审计；scheduled-maintenance.yml「全量自动验证（dry-run）」 |
 | audit_registry.py / audit_pipeline.py / audit_badge.py / audit_check.py / audit_sampling.py / audit_preflight.py | 审计 | audit-gate.yml / audit-sampling.yml / html-sync.yml |
 | personal_finance_model.py | 决策支持 | validate.yml「财务模型一致性」+ scheduled-maintenance.yml「刷新」 |
-| fact_card_check.py | 决策支持 | validate.yml「事实卡片校验」+ scheduled-maintenance.yml「刷新」 |
+| fact_card_check.py | 决策支持 | validate.yml「事实卡片校验」+ scheduled-maintenance.yml「刷新」；五字段 / 指针 / 重复率 / corroboration（n22） |
 | pending_verification.py | 决策支持 | validate.yml「待核实闭环」+ scheduled-maintenance.yml「刷新」 |
 | consulting_panel.py | 决策支持 | 手动：17 项个人参数（PF-01…PF-17）→ 五问判定 + 条件化行动方案；`--render-panel` / `--check` / `--profile` / `--demo` |
 | skeleton_builder.py | 生成 | 手动：报告骨架 / 空模块合并 |
@@ -60,8 +60,8 @@ python -m unittest discover -s engine/tests -q   # 单元测试（以 docs/CI.md
 | prompt_check.py | 校验 | validate.yml「提示词结构门禁」（P1-11：命名 / 继承声明 / p3–p5 结构 / business-config 槽位与优先级） |
 | l5_meta_check.py | 校验 | audit-gate.yml「L5 证据元评估」（P1-4：覆盖率 / 合格率 / basis 缺失 / 依据充分度） |
 | decision_metrics.py | 决策支持 | validate.yml「决策度量校验」（P1-6：五问收敛率 / 判定率 / 缺失 / 决策日志变化） |
-| source_check.py | 校验 | validate.yml「来源条目 schema 校验」（P1-2：来源章节 / URL 条目时点 / 分级，产出 source-index.json） |
-| counterexample_scan.py | 校验 | validate.yml「反例扫描」（P2-1：绝对化 / 以偏概全 / 无来源断言候选） |
+| source_check.py | 校验 | validate.yml「来源条目 schema 校验」（P1-2：来源章节 / URL 条目时点 / 分级 / 字段完整率 E5，产出 source-index.json，n25 起入库受控） |
+| counterexample_scan.py | 校验 | validate.yml「反例扫描」（P2-1：绝对化 / 以偏概全 / 无来源断言 / 单源候选） |
 | perf_snapshot.py | 校验 | scheduled-maintenance.yml「性能趋势快照」；规模 + 耗时采集（基线 / 历史，`--with-tests` / `--set-baseline` / `--porcelain`） |
 
 ## 设计内不接线工具清单（B6）
@@ -226,8 +226,11 @@ python engine/tools/decision_metrics.py --check    # 仅校验可解析，不写
 ```
 
 从 `00-decision-hub` 的结构化登记册与决策日志计算：指标收敛率、五问判定率、缺失条目数、
-件套齐备度、决策变化次数。历史序列写入 `decision-metrics-history.jsonl`，供跨月趋势
-（P2-2 复用）。退出码：0=正常；1=结构解析失败（阻断）；2=存在待定 / 缺失（告警）。
+件套齐备度、决策变化次数，以及**需求维度（n19）**：需求覆盖率（已覆盖 / 部分 / 未覆盖）
+与超期未闭环缺失数（由 `requirements_matrix()` 从登记册第一节 + 第二节生成）。
+历史序列写入 `decision-metrics-history.jsonl`，供跨月趋势（P2-2 复用）。
+**反馈维度（n20）**：缺失闭环率（已接入 / 已完成视为闭环）与超期未闭环缺失数；
+决策记录引用次数以 `decision_log_entries` 为代理。退出码：0=正常；1=结构解析失败（阻断）；2=存在待定 / 缺失（告警）。
 
 ### source_check.py — 来源条目 schema 化（P1-2）
 
@@ -238,8 +241,15 @@ python engine/tools/source_check.py --json
 ```
 
 把各报告来源章节的条目解析为机读四元组（来源文本 / 时点年份 / URL / 分级分组），产出
-`engine/report-audits/audit/source-index.json`。校验：来源章节存在性（阻断）；URL 条目
-时点年份、来源分级声明（告警）。退出码：0=通过；1=缺来源章节（阻断）；2=仅告警。
+`engine/report-audits/audit/source-index.json`（n25 起为**入库受控产物**，含每份报告内容指纹）。
+校验：来源章节存在性（E1，阻断）；URL 条目时点年份（E3）、来源分级声明（E4）、
+来源条目字段完整率（E5）（告警）。归一化规则集中在 `source_normalize.py`（单一事实源），
+供本工具与后续信源批评（n21）/ 证据强度（n22）复用。退出码：0=通过；1=缺来源章节（阻断）；2=仅告警。
+
+### source_normalize.py — 来源字段归一化（n25）
+
+纯函数模块（无副作用）：`normalize_url` / `normalize_org` / `normalize_year` / `extract_year`。
+所有来源字段归一化必须经此模块，其他工具不得再各写一套。
 
 ### counterexample_scan.py — 反例 / 绝对化论断扫描（P2-1）
 
@@ -250,7 +260,8 @@ python engine/tools/counterexample_scan.py --json
 ```
 
 复用 `audit_check.absolute_hits`（已排除否定 / 引述语境）扫描**可证伪的反例候选**：
-`ABS`（绝对化措辞）、`GEN`（以偏概全 / 过度推断）、`NOSRC`（断言句无来源标记）。
+`ABS`（绝对化措辞）、`GEN`（以偏概全 / 过度推断）、`NOSRC`（断言句无来源标记）、
+`单源`（含数字的结论句、所在段落仅一个来源标记且无 corroboration 标注，n22）。
 产出 `engine/report-audits/audit/counterexample-report.json` 供人工补反例或限定语。
 退出码：0=无命中；1=扫描失败；2=存在候选（需裁定）。
 
@@ -318,6 +329,9 @@ python engine/tools/update_planner.py --porcelain --pending-only > tasks.json
 python engine/tools/update_planner.py --pending-only > tasks.md
 # 限定项目 / 周期
 python engine/tools/update_planner.py --project 01-ssw-driver --period 2026-12
+# 需求覆盖矩阵（PIR，n19）
+python engine/tools/update_planner.py --requirements           # 人读表格
+python engine/tools/update_planner.py --requirements --porcelain  # JSON
 ```
 
 - `--period` 接受 `YYYY-MM` / `YYYY-Qn` / `YYYY`；缺省按当前 UTC 日期推导
@@ -326,6 +340,8 @@ python engine/tools/update_planner.py --project 01-ssw-driver --period 2026-12
   季度节拍按季度末月归档（2026-Q4 → 2026-12），年度取 12 月。
 - 任务状态：期望输出已存在 → done，否则 pending；`--pending-only` 只留 pending。
   参数错误退出码 2。
+- `--requirements`（n19）输出需求覆盖矩阵（PIR）：`REQ-NN`（决策问题）× 责任主题 /
+  覆盖状态 / 期限 / 关联缺失编号 + 缺失清单 `GAP-NN`；数据源 `decision_metrics.requirements_matrix()`。
 
 ### trigger_watch.py — 触发检测（watchlist / freshness / 候选线索）
 
@@ -396,7 +412,7 @@ python engine/tools/automation_status.py activity --threshold 45               #
 | 工具 | 作用 | 复用阶段 |
 |---|---|---|
 | `personal_finance_model.py` | 读 01/07/14/10/17 登记册活值，算净储蓄率 / 回本周期 | `validate.yml` 一致性 + `scheduled-maintenance.yml` 刷新 |
-| `fact_card_check.py` | 事实卡片五字段 / `[@FC-NNN]` 指针 / 跨报告事实重复率 | 同上 |
+| `fact_card_check.py` | 事实卡片五字段 / `[@FC-NNN]` 指针 / 跨报告事实重复率 / corroboration 来源数（n22）/ DIKW 血缘（n24） | 同上 |
 | `pending_verification.py` | 14/15/17/18/19/20 首轮核验截止跟踪 | 同上 |
 | `consulting_panel.py` | 17 项个人参数 → 五问判定 + 条件化方案（时间线 / 预算 / 核验清单） | 手动（`--profile`）；`--check` 校验面板 md |
 | `skeleton_builder.py` | 报告骨架生成 / 空模块合并 / 边界声明集中 | 生成期（按需） |
@@ -460,7 +476,7 @@ python engine/tools/automation_status.py activity --threshold 45               #
   `engine/vocabulary/config/report-cycles.json`。
 
 <!-- REGISTRY:BEGIN -->
-> 注册表快照：工具 45 · 类型 12 · 主题 21 · 工作流 8（由 `generate_registry.py` 生成，勿手工编辑）
+> 注册表快照：工具 46 · 类型 12 · 主题 21 · 工作流 8（由 `generate_registry.py` 生成，勿手工编辑）
 <!-- REGISTRY:END -->
 
 
@@ -476,3 +492,8 @@ python engine/tools/automation_status.py activity --threshold 45               #
 | v1.5 | 2026-11-19 | 工程守卫（W1 / A1 / A5） | 测试计数 1029 → 1040（新增归档保留期边界 6 项 + 文档数字锁定 3 项 + 骨架完备性 2 项）；退出码约定改为指向 `docs/CI.md`；`structure_check` 新增主题骨架完备性校验 |
 | v1.6 | 2026-11-19 | CI/CD 加固（W2） | 测试计数 1040 → 1045（覆盖率单工具阈值 5 项）；工具链代码新增 pre-commit 快速子集（ruff --fix + validate.py）说明 |
 | v1.7 | 2026-11-19 | 内容与词库（W4 / B7） | 测试计数 1045 → 1047（B7 新增 2 项 `build_hub` 检索层校验用例）；补记检索层产物校验说明 |
+| v1.8 | 2026-11-20 | 加工层受控（n25） | `source-index.json` 由生成物提升为入库活台账（含报告内容指纹）；新增 `source_normalize.py` 归一化单一事实源；`source_check` 增 E5 字段完整率并扩展分组头识别 |
+| v1.9 | 2026-11-20 | 证据强度标定（n22） | `counterexample_scan` 增「单源」扫描；`fact_card_check` 增 corroboration 来源数（P2）；`audit_check` L4 增 `EVI-01`（绝对化措辞配 3 级证据码）；置信度分级标准增证据类型 / 强度码 / 合成规则 |
+| v1.10 | 2026-11-20 | 需求登记（n19） | `decision_metrics.requirements_matrix()` 需求覆盖矩阵（PIR）+ 需求维度指标；`update_planner --requirements`；00 / 01 / 08 提示词增「需求命中检查」 |
+| v1.11 | 2026-11-20 | 反馈回路（n20） | `decision_metrics` 增缺失闭环率（反馈维度）；`decision_log --check` 增「决策问题」关联登记册校验（未关联 rc=2）；`scheduled-maintenance.yml` 增反馈汇总步骤；00 提示词增「反馈回流」 |
+| v1.12 | 2026-11-20 | DIKW 血缘（n24） | `fact_card_check --lineage`（FC → 报告 / 登记册）；`decision_metrics --lineage`（决策问题 → 结论 ← 引用位置 ← 责任主题）；00 登记册增「DIKW 血缘」节 |

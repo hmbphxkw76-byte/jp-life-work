@@ -76,6 +76,8 @@
 
 按[业务配置第八节](./business-config.md)的 14 项追踪指标逐项核对并填写「是否更新」；运行前从 `{{REGISTRY_PATH}}` 读取活值与研究边界档案 → 复核有效性 → 运行后回写。数据变更摘要至少覆盖全部 14 项；未核实项单列「待复核清单」。prompt 模板内不填活值。
 
+**需求命中检查（PIR，n19）**：运行前读取 `00-decision-hub/data/decision_hub_registry.md`（或 `python engine/tools/update_planner.py --requirements`），声明本期覆盖的 `REQ-NN` 需求编号；未覆盖项写入「信息差与未核验清单」。
+
 ## 六、执行方式（建议）
 
 1. 按调研维度并行启动研究子代理（制度签证 / 薪酬供需 / 行业态势 / 智能驾驶 / 落地路径），全部限定日 / 英来源、逐点引用，每条数据附可直接访问的 URL。

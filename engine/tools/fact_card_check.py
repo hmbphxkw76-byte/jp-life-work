@@ -30,6 +30,8 @@ REPORT_PATH = ROOT / "engine" / "report-audits" / "audit" / "fact-card-report.md
 FIELDS = ("值", "统计口径", "数据时点", "来源 URL", "版本号")
 CARD_RE = re.compile(r"^\|\s*(FC-\d{3})\s*\|", re.M)
 POINTER_RE = re.compile(r"\[@(FC-\d{3})\]")
+# corroboration 来源数（n22）：可选第 7 列，或行内「corroboration: N」/「互证 N」
+CORROB_RE = re.compile(r"corroboration\s*[:：]?\s*(\d+)|互证\s*[:：]?\s*(\d+)")
 
 
 def parse_cards() -> dict[str, dict]:
@@ -47,6 +49,12 @@ def parse_cards() -> dict[str, dict]:
             continue
         cards[m.group(1)] = {"值": cells[1], "统计口径": cells[2], "数据时点": cells[3],
                              "来源 URL": cells[4], "版本号": cells[5], "raw": ln.strip()}
+        # n22：corroboration 来源数（可选第 7 列或行内标注）
+        corrob = cells[6].strip() if len(cells) > 6 else ""
+        if not corrob:
+            cm = CORROB_RE.search(ln)
+            corrob = (cm.group(1) or cm.group(2)) if cm else ""
+        cards[m.group(1)]["corroboration"] = corrob
     return cards
 
 
@@ -77,6 +85,35 @@ def check_fields(cards: dict[str, dict]) -> list[dict]:
     return issues
 
 
+def check_corroboration(cards: dict[str, dict]) -> list[dict]:
+    """n22：corroboration 来源数登记与多源互证提示（P2）。"""
+    issues = []
+    for cid, c in sorted(cards.items()):
+        v = (c.get("corroboration") or "").strip()
+        if not v:
+            issues.append({"id": cid, "level": "P2", "issue": "corroboration 未标注",
+                           "detail": "事实卡片未登记 corroboration 来源数（n22）"})
+        elif v.isdigit() and int(v) < 2:
+            issues.append({"id": cid, "level": "P2", "issue": "corroboration 来源数 < 2",
+                           "detail": f"当前 {v}，建议多源互证"})
+    return issues
+
+
+def lineage(cards: dict[str, dict], pointers: dict[str, list[str]]) -> list[dict]:
+    """DIKW 血缘（n24）：FC → 引用报告 / 登记册（知识 ← 信息）。
+
+    只列真实存在的引用位置；无引用者留空，不虚构。
+    """
+    out: list[dict] = []
+    for cid in sorted(cards):
+        locs = pointers.get(cid, [])
+        reports = sorted({loc for loc in locs if "/reports/" in loc})
+        registries = sorted({loc for loc in locs if "/data/" in loc and "registry" in loc})
+        out.append({"card": cid, "value": cards[cid].get("值", ""),
+                    "reports": reports, "registries": registries})
+    return out
+
+
 def check_pointers(cards: dict[str, dict], pointers: dict[str, list[str]]) -> list[dict]:
     """指针可解析性检查。"""
     issues = []
@@ -96,7 +133,8 @@ def check_orphans(cards: dict[str, dict], pointers: dict[str, list[str]]) -> lis
 def run() -> tuple[list[dict], dict]:
     cards = parse_cards()
     pointers = collect_pointers()
-    issues = check_fields(cards) + check_pointers(cards, pointers) + check_orphans(cards, pointers)
+    issues = (check_fields(cards) + check_corroboration(cards)
+              + check_pointers(cards, pointers) + check_orphans(cards, pointers))
 
     units = iqc.scan_topics()
     fact_rate, fact_details = iqc.fact_duplication(units)
@@ -137,7 +175,13 @@ def main() -> int:
     ap = argparse.ArgumentParser(description="事实卡片校验")
     ap.add_argument("--json", action="store_true")
     ap.add_argument("--write", action="store_true")
+    ap.add_argument("--lineage", action="store_true", help="输出 DIKW 血缘索引（FC → 报告 / 登记册，n24）")
     args = ap.parse_args()
+
+    if args.lineage:
+        print(json.dumps(lineage(parse_cards(), collect_pointers()),
+                         ensure_ascii=False, indent=2))
+        return 0
 
     issues, summary = run()
     p0p1 = [i for i in issues if i["level"] in ("P0", "P1")]

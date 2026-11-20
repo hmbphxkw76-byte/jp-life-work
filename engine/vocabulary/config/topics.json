@@ -1,7 +1,7 @@
 {
   "version": "v1.32",
   "updated": "2026-11-18",
-  "comment": "主题注册表（vocabulary 子系统单一事实源）。本文件由 vocab_tool.py 自动维护，请勿手工编辑：新增主题用 topic-add（自动登记注册表 + 创建 data/<topic>/ 目录 + 重建索引 + 备份回滚 + 操作日志），移除用 topic-remove，一致性审计用 topic-check。storage/imports_dir/exports_dir 为相对 vocabulary/ 根目录的路径。 2026-11-18 目录对齐：data/ 子目录重命名为 NN-slug（与根目录 00-20 主题编号一一对应）。",
+  "comment": "主题注册表（vocabulary 子系统单一事实源）。本文件由 vocab_tool.py 自动维护，请勿手工编辑：新增主题用 topic-add（自动登记注册表 + 创建 data/<topic>/ 目录 + 重建索引 + 备份回滚 + 操作日志），移除用 topic-remove，一致性审计用 topic-check。storage/imports_dir/exports_dir 为相对 vocabulary/ 根目录的路径。 2026-11-18 目录对齐：data/ 子目录重命名为 NN-slug（与根目录 00-20 主题编号一一对应）。 concept_map：跨主题同概念映射（n23，人工策划，vocab_tool 保留该顶层键）。",
   "topics": {
     "01-ssw-driver": {
       "name": "特定技能司机",
@@ -329,6 +329,813 @@
         "无犯罪记录",
         "公证认证",
         "场景与表达"
+      ]
+    }
+  },
+  "concept_map": {
+    "CONCEPT-001": {
+      "name": "特定技能1号在留资格",
+      "terms": [
+        {
+          "topic": "01-ssw-driver",
+          "id": "SSW-001",
+          "term": "特定技能1号"
+        },
+        {
+          "topic": "08-visa-immigration",
+          "id": "VIS-002",
+          "term": "特定技能1号"
+        },
+        {
+          "topic": "16-exit-transition-return",
+          "id": "ETR-059",
+          "term": "特定技能1号"
+        },
+        {
+          "topic": "18-family-parenting",
+          "id": "FAM-051",
+          "term": "特定技能1号"
+        }
+      ]
+    },
+    "CONCEPT-002": {
+      "name": "特定技能2号在留资格",
+      "terms": [
+        {
+          "topic": "01-ssw-driver",
+          "id": "SSW-002",
+          "term": "特定技能2号"
+        },
+        {
+          "topic": "08-visa-immigration",
+          "id": "VIS-003",
+          "term": "特定技能2号"
+        },
+        {
+          "topic": "16-exit-transition-return",
+          "id": "ETR-013",
+          "term": "特定技能2号"
+        },
+        {
+          "topic": "18-family-parenting",
+          "id": "FAM-052",
+          "term": "特定技能2号"
+        }
+      ]
+    },
+    "CONCEPT-003": {
+      "name": "在留卡",
+      "terms": [
+        {
+          "topic": "01-ssw-driver",
+          "id": "SSW-003",
+          "term": "在留カード"
+        },
+        {
+          "topic": "08-visa-immigration",
+          "id": "VIS-017",
+          "term": "在留カード"
+        },
+        {
+          "topic": "16-exit-transition-return",
+          "id": "ETR-019",
+          "term": "在留カード"
+        }
+      ]
+    },
+    "CONCEPT-004": {
+      "name": "在留资格变更",
+      "terms": [
+        {
+          "topic": "01-ssw-driver",
+          "id": "SSW-005",
+          "term": "在留資格変更"
+        },
+        {
+          "topic": "08-visa-immigration",
+          "id": "VIS-019",
+          "term": "在留資格変更"
+        },
+        {
+          "topic": "16-exit-transition-return",
+          "id": "ETR-007",
+          "term": "在留資格変更"
+        }
+      ]
+    },
+    "CONCEPT-005": {
+      "name": "在留期间更新",
+      "terms": [
+        {
+          "topic": "01-ssw-driver",
+          "id": "SSW-006",
+          "term": "在留期間更新"
+        },
+        {
+          "topic": "08-visa-immigration",
+          "id": "VIS-018",
+          "term": "在留期間更新"
+        }
+      ]
+    },
+    "CONCEPT-006": {
+      "name": "注册支援机关",
+      "terms": [
+        {
+          "topic": "01-ssw-driver",
+          "id": "SSW-009",
+          "term": "登録支援機関"
+        },
+        {
+          "topic": "17-migration-compliance",
+          "id": "MPC-017",
+          "term": "登録支援機関"
+        }
+      ]
+    },
+    "CONCEPT-007": {
+      "name": "送出机关",
+      "terms": [
+        {
+          "topic": "01-ssw-driver",
+          "id": "SSW-012",
+          "term": "送出機関"
+        },
+        {
+          "topic": "17-migration-compliance",
+          "id": "MPC-001",
+          "term": "送出機関"
+        }
+      ]
+    },
+    "CONCEPT-008": {
+      "name": "干线运输",
+      "terms": [
+        {
+          "topic": "01-ssw-driver",
+          "id": "SSW-016",
+          "term": "幹線輸送"
+        },
+        {
+          "topic": "04-industry-logistics",
+          "id": "LOG-013",
+          "term": "幹線輸送"
+        }
+      ]
+    },
+    "CONCEPT-009": {
+      "name": "包车",
+      "terms": [
+        {
+          "topic": "01-ssw-driver",
+          "id": "SSW-019",
+          "term": "傭車"
+        },
+        {
+          "topic": "04-industry-logistics",
+          "id": "LOG-050",
+          "term": "傭車"
+        }
+      ]
+    },
+    "CONCEPT-010": {
+      "name": "货主",
+      "terms": [
+        {
+          "topic": "01-ssw-driver",
+          "id": "SSW-020",
+          "term": "荷主"
+        },
+        {
+          "topic": "04-industry-logistics",
+          "id": "LOG-043",
+          "term": "荷主"
+        }
+      ]
+    },
+    "CONCEPT-011": {
+      "name": "运行管理者",
+      "terms": [
+        {
+          "topic": "01-ssw-driver",
+          "id": "SSW-023",
+          "term": "運行管理者"
+        },
+        {
+          "topic": "02-career-driver",
+          "id": "CDR-007",
+          "term": "運行管理者"
+        },
+        {
+          "topic": "03-career-management",
+          "id": "CMG-001",
+          "term": "運行管理者"
+        },
+        {
+          "topic": "10-education-qualification",
+          "id": "EDU-022",
+          "term": "運行管理者"
+        }
+      ]
+    },
+    "CONCEPT-012": {
+      "name": "到手收入",
+      "terms": [
+        {
+          "topic": "01-ssw-driver",
+          "id": "SSW-026",
+          "term": "手取り"
+        },
+        {
+          "topic": "07-economy-finance",
+          "id": "ECF-072",
+          "term": "手取り"
+        }
+      ]
+    },
+    "CONCEPT-013": {
+      "name": "最低工资",
+      "terms": [
+        {
+          "topic": "01-ssw-driver",
+          "id": "SSW-032",
+          "term": "最低賃金"
+        },
+        {
+          "topic": "07-economy-finance",
+          "id": "ECF-069",
+          "term": "最低賃金"
+        }
+      ]
+    },
+    "CONCEPT-014": {
+      "name": "货物汽车运输事业法",
+      "terms": [
+        {
+          "topic": "01-ssw-driver",
+          "id": "SSW-053",
+          "term": "貨物自動車運送事業法"
+        },
+        {
+          "topic": "04-industry-logistics",
+          "id": "LOG-033",
+          "term": "貨物自動車運送事業法"
+        }
+      ]
+    },
+    "CONCEPT-015": {
+      "name": "汇款",
+      "terms": [
+        {
+          "topic": "01-ssw-driver",
+          "id": "SSW-060",
+          "term": "送金"
+        },
+        {
+          "topic": "07-economy-finance",
+          "id": "ECF-067",
+          "term": "送金"
+        },
+        {
+          "topic": "16-exit-transition-return",
+          "id": "ETR-040",
+          "term": "送金"
+        }
+      ]
+    },
+    "CONCEPT-016": {
+      "name": "住民票",
+      "terms": [
+        {
+          "topic": "01-ssw-driver",
+          "id": "SSW-063",
+          "term": "住民票"
+        },
+        {
+          "topic": "12-culture-life",
+          "id": "CUL-067",
+          "term": "住民票"
+        },
+        {
+          "topic": "13-regional-info",
+          "id": "REG-054",
+          "term": "住民票"
+        },
+        {
+          "topic": "16-exit-transition-return",
+          "id": "ETR-018",
+          "term": "住民票"
+        },
+        {
+          "topic": "14-life-operations",
+          "id": "LOP-002",
+          "term": "住民票"
+        }
+      ]
+    },
+    "CONCEPT-017": {
+      "name": "国民健康保险",
+      "terms": [
+        {
+          "topic": "01-ssw-driver",
+          "id": "SSW-065",
+          "term": "国民健康保険"
+        },
+        {
+          "topic": "08-visa-immigration",
+          "id": "VIS-047",
+          "term": "国民健康保険"
+        },
+        {
+          "topic": "16-exit-transition-return",
+          "id": "ETR-005",
+          "term": "国民健康保険"
+        },
+        {
+          "topic": "14-life-operations",
+          "id": "LOP-006",
+          "term": "国民健康保険"
+        }
+      ]
+    },
+    "CONCEPT-018": {
+      "name": "厚生年金",
+      "terms": [
+        {
+          "topic": "01-ssw-driver",
+          "id": "SSW-081",
+          "term": "厚生年金"
+        },
+        {
+          "topic": "14-life-operations",
+          "id": "LOP-061",
+          "term": "厚生年金"
+        }
+      ]
+    },
+    "CONCEPT-019": {
+      "name": "雇用保险",
+      "terms": [
+        {
+          "topic": "01-ssw-driver",
+          "id": "SSW-082",
+          "term": "雇用保険"
+        },
+        {
+          "topic": "16-exit-transition-return",
+          "id": "ETR-002",
+          "term": "雇用保険"
+        }
+      ]
+    },
+    "CONCEPT-020": {
+      "name": "健康保险组合（同定义异名）",
+      "terms": [
+        {
+          "topic": "15-health-wellbeing",
+          "id": "HLW-058",
+          "term": "健康保険組合"
+        },
+        {
+          "topic": "16-exit-transition-return",
+          "id": "ETR-053",
+          "term": "健保組合"
+        }
+      ]
+    },
+    "CONCEPT-021": {
+      "name": "フォークリフト",
+      "terms": [
+        {
+          "topic": "01-ssw-driver",
+          "id": "SSW-038",
+          "term": "フォークリフト"
+        },
+        {
+          "topic": "02-career-driver",
+          "id": "CDR-029",
+          "term": "フォークリフト"
+        },
+        {
+          "topic": "10-education-qualification",
+          "id": "EDU-020",
+          "term": "フォークリフト"
+        }
+      ]
+    },
+    "CONCEPT-022": {
+      "name": "マイナンバーカード",
+      "terms": [
+        {
+          "topic": "12-culture-life",
+          "id": "CUL-068",
+          "term": "マイナンバーカード"
+        },
+        {
+          "topic": "14-life-operations",
+          "id": "LOP-058",
+          "term": "マイナンバーカード"
+        },
+        {
+          "topic": "19-safety-disaster",
+          "id": "SFD-069",
+          "term": "マイナンバーカード"
+        }
+      ]
+    },
+    "CONCEPT-023": {
+      "name": "労働基準法",
+      "terms": [
+        {
+          "topic": "04-industry-logistics",
+          "id": "LOG-038",
+          "term": "労働基準法"
+        },
+        {
+          "topic": "09-politics-law",
+          "id": "LAW-037",
+          "term": "労働基準法"
+        },
+        {
+          "topic": "17-migration-compliance",
+          "id": "MPC-061",
+          "term": "労働基準法"
+        }
+      ]
+    },
+    "CONCEPT-024": {
+      "name": "労働条件通知書",
+      "terms": [
+        {
+          "topic": "02-career-driver",
+          "id": "CDR-065",
+          "term": "労働条件通知書"
+        },
+        {
+          "topic": "03-career-management",
+          "id": "CMG-057",
+          "term": "労働条件通知書"
+        },
+        {
+          "topic": "17-migration-compliance",
+          "id": "MPC-021",
+          "term": "労働条件通知書"
+        }
+      ]
+    },
+    "CONCEPT-025": {
+      "name": "危険物取扱者",
+      "terms": [
+        {
+          "topic": "01-ssw-driver",
+          "id": "SSW-056",
+          "term": "危険物取扱者"
+        },
+        {
+          "topic": "02-career-driver",
+          "id": "CDR-031",
+          "term": "危険物取扱者"
+        },
+        {
+          "topic": "10-education-qualification",
+          "id": "EDU-021",
+          "term": "危険物取扱者"
+        }
+      ]
+    },
+    "CONCEPT-026": {
+      "name": "在留資格取消",
+      "terms": [
+        {
+          "topic": "08-visa-immigration",
+          "id": "VIS-059",
+          "term": "在留資格取消"
+        },
+        {
+          "topic": "09-politics-law",
+          "id": "LAW-070",
+          "term": "在留資格取消"
+        },
+        {
+          "topic": "16-exit-transition-return",
+          "id": "ETR-008",
+          "term": "在留資格取消"
+        }
+      ]
+    },
+    "CONCEPT-027": {
+      "name": "学校",
+      "terms": [
+        {
+          "topic": "08-visa-immigration",
+          "id": "VIS-049",
+          "term": "学校"
+        },
+        {
+          "topic": "13-regional-info",
+          "id": "REG-041",
+          "term": "学校"
+        },
+        {
+          "topic": "18-family-parenting",
+          "id": "FAM-040",
+          "term": "学校"
+        }
+      ]
+    },
+    "CONCEPT-028": {
+      "name": "扶養",
+      "terms": [
+        {
+          "topic": "08-visa-immigration",
+          "id": "VIS-043",
+          "term": "扶養"
+        },
+        {
+          "topic": "16-exit-transition-return",
+          "id": "ETR-030",
+          "term": "扶養"
+        },
+        {
+          "topic": "18-family-parenting",
+          "id": "FAM-002",
+          "term": "扶養"
+        }
+      ]
+    },
+    "CONCEPT-029": {
+      "name": "技能実習",
+      "terms": [
+        {
+          "topic": "08-visa-immigration",
+          "id": "VIS-005",
+          "term": "技能実習"
+        },
+        {
+          "topic": "16-exit-transition-return",
+          "id": "ETR-010",
+          "term": "技能実習"
+        },
+        {
+          "topic": "17-migration-compliance",
+          "id": "MPC-034",
+          "term": "技能実習"
+        }
+      ]
+    },
+    "CONCEPT-030": {
+      "name": "特定活動",
+      "terms": [
+        {
+          "topic": "08-visa-immigration",
+          "id": "VIS-014",
+          "term": "特定活動"
+        },
+        {
+          "topic": "16-exit-transition-return",
+          "id": "ETR-009",
+          "term": "特定活動"
+        },
+        {
+          "topic": "18-family-parenting",
+          "id": "FAM-076",
+          "term": "特定活動"
+        }
+      ]
+    },
+    "CONCEPT-031": {
+      "name": "留学",
+      "terms": [
+        {
+          "topic": "08-visa-immigration",
+          "id": "VIS-009",
+          "term": "留学"
+        },
+        {
+          "topic": "10-education-qualification",
+          "id": "EDU-057",
+          "term": "留学"
+        },
+        {
+          "topic": "18-family-parenting",
+          "id": "FAM-053",
+          "term": "留学"
+        }
+      ]
+    },
+    "CONCEPT-032": {
+      "name": "退去強制",
+      "terms": [
+        {
+          "topic": "08-visa-immigration",
+          "id": "VIS-057",
+          "term": "退去強制"
+        },
+        {
+          "topic": "09-politics-law",
+          "id": "LAW-071",
+          "term": "退去強制"
+        },
+        {
+          "topic": "16-exit-transition-return",
+          "id": "ETR-056",
+          "term": "退去強制"
+        }
+      ]
+    },
+    "CONCEPT-033": {
+      "name": "DX",
+      "terms": [
+        {
+          "topic": "04-industry-logistics",
+          "id": "LOG-052",
+          "term": "DX"
+        },
+        {
+          "topic": "06-industry-technology",
+          "id": "TEC-069",
+          "term": "DX"
+        }
+      ]
+    },
+    "CONCEPT-034": {
+      "name": "JFT-Basic",
+      "terms": [
+        {
+          "topic": "01-ssw-driver",
+          "id": "SSW-048",
+          "term": "JFT-Basic"
+        },
+        {
+          "topic": "11-language-japanese",
+          "id": "JPN-007",
+          "term": "JFT-Basic"
+        }
+      ]
+    },
+    "CONCEPT-035": {
+      "name": "ふるさと納税",
+      "terms": [
+        {
+          "topic": "07-economy-finance",
+          "id": "ECF-050",
+          "term": "ふるさと納税"
+        },
+        {
+          "topic": "13-regional-info",
+          "id": "REG-049",
+          "term": "ふるさと納税"
+        }
+      ]
+    },
+    "CONCEPT-036": {
+      "name": "ハラスメント",
+      "terms": [
+        {
+          "topic": "03-career-management",
+          "id": "CMG-020",
+          "term": "ハラスメント"
+        },
+        {
+          "topic": "09-politics-law",
+          "id": "LAW-046",
+          "term": "ハラスメント"
+        }
+      ]
+    },
+    "CONCEPT-037": {
+      "name": "ハローワーク",
+      "terms": [
+        {
+          "topic": "02-career-driver",
+          "id": "CDR-048",
+          "term": "ハローワーク"
+        },
+        {
+          "topic": "17-migration-compliance",
+          "id": "MPC-026",
+          "term": "ハローワーク"
+        }
+      ]
+    },
+    "CONCEPT-038": {
+      "name": "マイナンバー",
+      "terms": [
+        {
+          "topic": "01-ssw-driver",
+          "id": "SSW-062",
+          "term": "マイナンバー"
+        },
+        {
+          "topic": "08-visa-immigration",
+          "id": "VIS-046",
+          "term": "マイナンバー"
+        }
+      ]
+    },
+    "CONCEPT-039": {
+      "name": "上下水道",
+      "terms": [
+        {
+          "topic": "12-culture-life",
+          "id": "CUL-055",
+          "term": "上下水道"
+        },
+        {
+          "topic": "13-regional-info",
+          "id": "REG-044",
+          "term": "上下水道"
+        }
+      ]
+    },
+    "CONCEPT-040": {
+      "name": "下請",
+      "terms": [
+        {
+          "topic": "01-ssw-driver",
+          "id": "SSW-022",
+          "term": "下請"
+        },
+        {
+          "topic": "04-industry-logistics",
+          "id": "LOG-045",
+          "term": "下請"
+        }
+      ]
+    },
+    "CONCEPT-041": {
+      "name": "主任",
+      "terms": [
+        {
+          "topic": "02-career-driver",
+          "id": "CDR-002",
+          "term": "主任"
+        },
+        {
+          "topic": "03-career-management",
+          "id": "CMG-009",
+          "term": "主任"
+        }
+      ]
+    },
+    "CONCEPT-042": {
+      "name": "会議",
+      "terms": [
+        {
+          "topic": "03-career-management",
+          "id": "CMG-064",
+          "term": "会議"
+        },
+        {
+          "topic": "11-language-japanese",
+          "id": "JPN-057",
+          "term": "会議"
+        }
+      ]
+    },
+    "CONCEPT-043": {
+      "name": "住宅",
+      "terms": [
+        {
+          "topic": "08-visa-immigration",
+          "id": "VIS-050",
+          "term": "住宅"
+        },
+        {
+          "topic": "18-family-parenting",
+          "id": "FAM-046",
+          "term": "住宅"
+        }
+      ]
+    },
+    "CONCEPT-044": {
+      "name": "住民税",
+      "terms": [
+        {
+          "topic": "07-economy-finance",
+          "id": "ECF-043",
+          "term": "住民税"
+        },
+        {
+          "topic": "16-exit-transition-return",
+          "id": "ETR-015",
+          "term": "住民税"
+        }
+      ]
+    },
+    "CONCEPT-045": {
+      "name": "係長",
+      "terms": [
+        {
+          "topic": "02-career-driver",
+          "id": "CDR-003",
+          "term": "係長"
+        },
+        {
+          "topic": "03-career-management",
+          "id": "CMG-008",
+          "term": "係長"
+        }
       ]
     }
   }

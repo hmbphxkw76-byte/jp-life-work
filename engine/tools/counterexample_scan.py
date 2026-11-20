@@ -9,7 +9,8 @@
 
 - ``ABS``：绝对化措辞命中（绝对 / 必然 / 一定 / 所有 / 全部 / 100% 等）；
 - ``GEN``：以偏概全 / 过度推断标记（以偏概全 / 过度推断 / 一概而论 / 都 / 全部）；
-- ``NOSRC``：结论式断言句但所在段落无来源标记（``[Source:`` / ``http``）。
+- ``NOSRC``：结论式断言句但所在段落无来源标记（``[Source:`` / ``http``）；
+- ``单源``：含关键数字的段落仅一个来源标记且无 corroboration / 单源标注（n22）。
 
 输出：``engine/report-audits/audit/counterexample-report.json``（不入库）。
 
@@ -38,6 +39,27 @@ OUT = ROOT / "engine" / "report-audits" / "audit" / "counterexample-report.json"
 GEN_RE = re.compile(r"以偏概全|过度推断|一概而论|全部|所有|无一例外")
 SENTENCE_RE = re.compile(r"[^。！？\n]{4,80}[。！？]")
 SRC_RE = re.compile(r"\[Source:|https?://|来源[：:]")
+SINGLE_LABEL_RE = re.compile(r"单源|corroboration|互证|多源")
+NUM_RE = re.compile(r"\d")
+# 结论性措辞：仅对「关键结论」类句子判定单源，避免普通来源句误报
+CLAIM_RE = re.compile(r"结论|判断|表明|意味着|说明|证实|显示|缺口|不足|超过|达到|风险|预计")
+
+
+def _single_source_sentences(text: str) -> list[str]:
+    """段落级单源候选：含数字的结论句，所在段落仅一个来源标记且无 corroboration 标注。"""
+    out: list[str] = []
+    for para in re.split(r"\n\s*\n", text):
+        if not NUM_RE.search(para):
+            continue
+        if len(SRC_RE.findall(para)) != 1:
+            continue
+        if SINGLE_LABEL_RE.search(para):
+            continue
+        for sent in SENTENCE_RE.findall(para):
+            if NUM_RE.search(sent) and CLAIM_RE.search(sent):
+                out.append(sent.strip()[:160])
+                break
+    return out
 
 
 def scan_text(text: str) -> list[dict]:
@@ -63,6 +85,13 @@ def scan_text(text: str) -> list[dict]:
             continue
         seen.add(key)
         out.append({"sentence": s[:160], "kinds": kinds, "hits": sorted(set(hits))[:5]})
+    # n22：单源候选（段落级）
+    for s in _single_source_sentences(text):
+        key = ("单源", s[:40])
+        if key in seen:
+            continue
+        seen.add(key)
+        out.append({"sentence": s, "kinds": ["单源"], "hits": []})
     return out
 
 

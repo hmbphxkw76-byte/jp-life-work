@@ -356,6 +356,67 @@ def registry_latest_date(text: str):
     return max(dates) if dates else None
 
 
+# ──────────────────────────────────────────────
+# C-16 登记册来源质量扩展列（n21，信源批评）
+# ──────────────────────────────────────────────
+# 新表必填「来源类型 / 独立性 / 转述层级」；存量 v2 旧表在
+# REGISTRY_EXT_REQUIRED_FROM 前豁免（过渡期）。
+REGISTRY_EXT_REQUIRED_FROM = date(2026, 12, 1)
+REGISTRY_EXT_COLS = ("来源类型", "独立性", "转述层级")
+REGISTRY_EXT_DOMAINS = {
+    "来源类型": {"一手", "转引", "转载"},
+    "独立性": {"独立", "非独立", "不明"},
+    "转述层级": {"1", "2", "3"},
+}
+
+
+def registry_ext_gaps(text: str) -> list[str]:
+    """C-16：登记册 v2 新表来源质量扩展列校验（P2 告警，n21）。
+
+    - 仅适用于 v2 新表（含「口径」列）；v1 旧表不判定。
+    - 缺任一扩展列：登记册最新字段化日期 ≥ REGISTRY_EXT_REQUIRED_FROM 时提示。
+    - 值域不合规：逐行提示。
+    """
+    lt = _live_table(text)
+    if not lt:
+        return []
+    hdr, rows = lt
+    if "口径" not in hdr:
+        return []
+    if not any(c in hdr for c in REGISTRY_EXT_COLS):
+        latest = registry_latest_date(text)
+        if latest is not None and latest < REGISTRY_EXT_REQUIRED_FROM:
+            return []
+        return [f"v2 活值表缺来源质量扩展列：{'/'.join(REGISTRY_EXT_COLS)}"]
+    problems: list[str] = []
+    for col, domain in REGISTRY_EXT_DOMAINS.items():
+        if col not in hdr:
+            problems.append(f"缺列：{col}")
+            continue
+        idx = hdr.index(col)
+        for cells in rows:
+            if idx >= len(cells):
+                continue
+            v = cells[idx].strip()
+            if v and v not in domain:
+                problems.append(f"{col} 值域不合规：{v!r}")
+    return problems
+
+
+def vocab_cross_gaps() -> tuple[list[str], list[str], dict]:
+    """C-15：跨主题同概念对齐（复用 ``vocab_tool.cross_check_gaps``，单一事实源）。
+
+    返回 (errors, warnings, summary)；导入失败时返回空（不阻断）。
+    """
+    try:
+        sys.path.insert(0, str(ROOT / "engine" / "vocabulary" / "script"))
+        import vocab_tool  # type: ignore
+        cfg = vocab_tool.load_config(vocab_tool.DEFAULT_CONFIG)
+        return vocab_tool.cross_check_gaps(cfg)
+    except Exception:
+        return [], [], {}
+
+
 def _significant_numbers(s: str) -> set[str]:
     """抽取「数值型」数字（排除年份、1–2 位小数前零、YYYY.M 版本串与括号内文献号）。"""
     s = re.sub(r"\[[^\]]*\]", " ", s)
@@ -607,6 +668,11 @@ def check_report(u: dict, rp: Path, findings: list[Finding]) -> dict:
             findings.append(Finding("C-08", "P2", u["topic"], rel, "时效",
                                     f"登记册最新核验日期 {reg_date.isoformat()} 已超出 "
                                     f"{STALE_MONTHS} 个月窗口（{age_days} 天）", "S-07"))
+    # C-16 来源质量扩展列（n21）：新表必填「来源类型 / 独立性 / 转述层级」
+    if u.get("registry"):
+        for gap in registry_ext_gaps(_read(u["registry"])):
+            findings.append(Finding("C-16", "P2", u["topic"], _rel(u["registry"]),
+                                    "来源质量扩展列", gap, "S-06"))
 
     # C-14 分级字段化：④/⑤ 级来源条目必须带显式核验标注
     check_grade_annotations(u, rel, text, findings)
@@ -811,6 +877,16 @@ def check_cross_topic(units: list[dict], findings: list[Finding]) -> dict:
             findings.append(Finding(
                 "C-10", "P2", "|".join(sorted(per_topic)), "data/（登记册）", "口径不一致",
                 f"指标「{name}」在 {len(per_topic)} 个主题登记册中口径表述不一致", "S-09"))
+
+    # ── 跨主题同概念对齐（C-15，n23，P2）──
+    cerrs, cwarns, csummary = vocab_cross_gaps()
+    if cerrs or cwarns:
+        detail = (f"概念 {csummary.get('concepts', 0)} 条；同名词条组 "
+                  f"{csummary.get('same_term_groups', 0)}，未登记 "
+                  f"{csummary.get('unregistered_same_term_groups', 0)}；"
+                  f"引用错误 {len(cerrs)}；未登记候选 {len(cwarns)}")
+        findings.append(Finding("C-15", "P2", "全库", "engine/vocabulary/（词库）",
+                                "跨主题同概念", detail, "S-09"))
 
     dup_ratio = (dup_extra_chars / total_chars) if total_chars else 0.0
 

@@ -36,6 +36,7 @@ import build_hub  # noqa: E402
 import build_index  # noqa: E402
 import compliance_check  # noqa: E402
 import decision_log  # noqa: E402
+import decision_metrics  # noqa: E402
 import fact_card_check  # noqa: E402
 import info_quality_check  # noqa: E402
 import link_check  # noqa: E402
@@ -1204,6 +1205,45 @@ class TestInfoQualityCheck(unittest.TestCase):
         self.assertEqual(info_quality_check.THRESH_SOURCE_COVERAGE, 0.20)
         self.assertIn("20%", text.split("事实段落来源标注覆盖率门槛")[1].split("\n")[0])
 
+    def test_registry_ext_gaps(self):
+        """C-16：登记册来源质量扩展列校验（n21）。"""
+        from info_quality_check import registry_ext_gaps
+
+        def table(cols, row):
+            return ("## 核心指标\n\n| " + " | ".join(cols) + " |\n|"
+                    + "---|" * len(cols) + "\n| " + " | ".join(row) + " |\n")
+
+        base_cols = ["#", "指标", "口径", "研究阶段", "最新值 / 规则", "来源机构",
+                     "来源 URL", "版本日期", "核验日期", "核验状态", "关联章节", "更新时间"]
+        base_row = ["1", "测试", "口径", "周期", "1", "机构", "https://x",
+                    "2026-11-01", "2026-11-01", "已核验", "数据变更摘要", "2026-11-01"]
+        # 存量 v2 旧表（核验日期 < 门槛）→ 豁免
+        self.assertEqual(registry_ext_gaps(table(base_cols, base_row)), [])
+        # 新表（核验日期 ≥ 门槛）→ 提示缺列
+        new_row = [c if c != "2026-11-01" else "2026-12-05" for c in base_row]
+        self.assertTrue(any("缺来源质量扩展列" in g
+                            for g in registry_ext_gaps(table(base_cols, new_row))))
+        # 含扩展列但值域不合规 → 提示
+        ext_cols = base_cols[:10] + ["来源类型", "独立性", "转述层级"] + base_cols[10:]
+        ext_row = base_row[:10] + ["二手", "独立", "1"] + base_row[10:]
+        ext_row = [c if c != "2026-11-01" else "2026-12-05" for c in ext_row]
+        self.assertTrue(any("值域不合规" in g
+                            for g in registry_ext_gaps(table(ext_cols, ext_row))))
+        # 值域合规 → 无提示
+        ok_row = base_row[:10] + ["一手", "独立", "1"] + base_row[10:]
+        ok_row = [c if c != "2026-11-01" else "2026-12-05" for c in ok_row]
+        self.assertEqual(registry_ext_gaps(table(ext_cols, ok_row)), [])
+
+    def test_vocab_cross_gaps_shape(self):
+        """n23：C-15 数据来源（vocab_tool.cross_check_gaps）可调用且结构正确。"""
+        result = info_quality_check.vocab_cross_gaps()
+        self.assertIsInstance(result, tuple)
+        self.assertEqual(len(result), 3)
+        errors, warns, summary = result
+        self.assertIsInstance(errors, list)
+        self.assertIsInstance(warns, list)
+        self.assertIsInstance(summary, dict)
+
 
 class TestAuditPreflight(unittest.TestCase):
     """落盘前快速自检（audit_preflight.py，左移预防层）。"""
@@ -1543,6 +1583,13 @@ class TestAuditGuard(unittest.TestCase):
             self.REPORT_REL, self.md, self.md.with_suffix(".html"), "", {},
             {self.REPORT_REL: True})
         self.assertEqual(res2.layers["L5"], "pass")
+
+    def test_evidence_strength_mismatch(self):
+        """n22：绝对化措辞配 3 级证据码 → EVI-01 命中。"""
+        hits = audit_check.check_evidence_strength("该制度必然成功，覆盖率达 100%（C3）。")
+        self.assertEqual(len(hits), 1)
+        self.assertFalse(audit_check.check_evidence_strength("该制度必然成功（C1）。"))
+        self.assertFalse(audit_check.check_evidence_strength("该制度必然成功。"))
 
     def test_pending_p2_ledger_and_overdue(self):
         res = audit_check.ReportResult(report=self.REPORT_REL, topic="01-demo",
@@ -1943,6 +1990,25 @@ class TestFactCardCheck(unittest.TestCase):
         self.assertEqual(fact_card_check.check_pointers(cards, pointers), [])
         self.assertTrue(pointers)
 
+    def test_corroboration_check(self):
+        """n22：corroboration 未标注 / < 2 → P2。"""
+        cards = {"FC-001": {"corroboration": ""},
+                 "FC-002": {"corroboration": "1"},
+                 "FC-003": {"corroboration": "3"}}
+        issues = fact_card_check.check_corroboration(cards)
+        self.assertEqual(len(issues), 2)
+        self.assertTrue(all(i["level"] == "P2" for i in issues))
+
+    def test_lineage(self):
+        """n24：FC → 引用报告 / 登记册 血缘索引。"""
+        cards = {"FC-001": {"值": "22,100"}}
+        pointers = {"FC-001": ["01-x/reports/2026-11-x.md",
+                               "00-decision-hub/data/fact_cards.md"]}
+        lin = fact_card_check.lineage(cards, pointers)
+        self.assertEqual(lin[0]["card"], "FC-001")
+        self.assertEqual(lin[0]["reports"], ["01-x/reports/2026-11-x.md"])
+        self.assertEqual(lin[0]["registries"], [])
+
 
 class TestSkeletonBuilder(unittest.TestCase):
     """报告骨架与空模块合并。"""
@@ -1988,6 +2054,25 @@ class TestDecisionLog(unittest.TestCase):
                 self.assertIn("待定 → 是", decision_log.render_timeline())
             finally:
                 decision_log.LOG_PATH = orig
+
+    def test_check_flags_unknown_question(self):
+        """n20：决策记录的「决策问题」须能关联登记册需求，否则告警（rc=2）。"""
+        with tempfile.TemporaryDirectory() as d:
+            orig_log, orig_reg = decision_log.LOG_PATH, decision_log.REGISTRY_PATH
+            decision_log.LOG_PATH = Path(d) / "decision_log.md"
+            decision_log.REGISTRY_PATH = Path(d) / "registry.md"
+            try:
+                (Path(d) / "registry.md").write_text(
+                    "## 一、五问指标状态表\n\n"
+                    "| # | 决策问题 | 指标 | 来源主题 | 引用位置 | 收敛状态 | 缺失标记 |\n"
+                    "|---|---|---|---|---|---|---|\n"
+                    "| 1 | 去不去 | x | 01 | y | 已收敛 | — |\n", encoding="utf-8")
+                self.assertIn("去不去", decision_log._known_questions())
+                self.assertIn("全部", decision_log._known_questions())
+                decision_log.add("未知问题", "判定", "待定", "是", "x", "00")
+                self.assertEqual(decision_log.check(), 2)
+            finally:
+                decision_log.LOG_PATH, decision_log.REGISTRY_PATH = orig_log, orig_reg
 
 
 class TestInfoQualityUpgrades(unittest.TestCase):
@@ -2513,6 +2598,29 @@ class TestUpdatePlannerAudit(unittest.TestCase):
         self.assertIn("审计提醒", md)
         self.assertIn("未审计", md)
 
+    def test_render_requirements(self):
+        """n19：需求覆盖矩阵（PIR）人读表格。"""
+        matrix = {"requirements": [{"需求编号": "REQ-01", "决策问题": "去不去",
+                                    "责任主题": "01", "覆盖状态": "已覆盖",
+                                    "期限": "", "关联缺失编号": "GAP-01"}],
+                  "gaps": [{"编号": "GAP-01", "缺口": "对比", "覆盖的决策问题": "去不去",
+                            "优先级": "P1", "期限": "2026-11-01"}]}
+        md = update_planner.render_requirements(matrix)
+        self.assertIn("REQ-01", md)
+        self.assertIn("GAP-01", md)
+
+    def test_requirements_main_porcelain(self):
+        """n19：--requirements --porcelain 输出 JSON。"""
+        matrix = {"requirements": [], "gaps": []}
+        with unittest.mock.patch.object(decision_metrics, "requirements_matrix",
+                                       return_value=matrix), \
+                unittest.mock.patch.object(sys, "argv",
+                                          ["update_planner.py", "--requirements", "--porcelain"]):
+            buf = io.StringIO()
+            with contextlib.redirect_stdout(buf):
+                self.assertEqual(update_planner.main(), 0)
+        self.assertEqual(json.loads(buf.getvalue()), matrix)
+
 
 class TestIndexGate(unittest.TestCase):
     """INDEX.md 合并门禁（build_index.py --check）。"""
@@ -2603,6 +2711,33 @@ class TestVocabVerify(unittest.TestCase):
         errors, _warns = vocab_tool.check_topic(tmeta)
         self.assertTrue(any("低于下限 3" in e for e in errors))
 
+    def test_vocab_hash_and_check(self):
+        """n26：词表内容指纹确定性 + 基线校验。"""
+        tmeta = self._tmeta()
+        self._write(tmeta, "| DEM-001 | 词条甲 |  | 分类A |  | 定义 | 来源 | 2026-11-14 | 2026-11-14 |\n")
+        cfg = {"topics": {"demo": {"storage": "data/demo/terms.md",
+                                    "imports_dir": "data/demo/imports",
+                                    "exports_dir": "data/demo/exports",
+                                    "id_prefix": "DEM", "categories": []}}}
+        ns_write = type("NS", (), {"write": True, "check": False})()
+        ns_check = type("NS", (), {"write": False, "check": True})()
+        with unittest.mock.patch.object(vocab_tool, "TOOL_ROOT", self.root):
+            h1, topics, terms = vocab_tool.vocab_hash(cfg)
+            h2, _, _ = vocab_tool.vocab_hash(cfg)
+            self.assertEqual(h1, h2)
+            self.assertEqual((topics, terms), (1, 1))
+            buf = io.StringIO()
+            with contextlib.redirect_stdout(buf):
+                self.assertEqual(vocab_tool.cmd_vocab_hash(cfg, ns_write), 0)
+            self.assertTrue((self.root / "config" / "vocab-fingerprint.json").is_file())
+            with contextlib.redirect_stdout(io.StringIO()):
+                self.assertEqual(vocab_tool.cmd_vocab_hash(cfg, ns_check), 0)
+            # 变更后失配 → 2
+            self._write(tmeta, "| DEM-001 | 词条甲 |  | 分类A |  | 定义 | 来源 | 2026-11-14 | 2026-11-14 |\n"
+                                "| DEM-002 | 词条乙 |  | 分类A |  | 定义 | 来源 | 2026-11-14 | 2026-11-14 |\n")
+            with contextlib.redirect_stdout(io.StringIO()):
+                self.assertEqual(vocab_tool.cmd_vocab_hash(cfg, ns_check), 2)
+
     def test_cmd_verify_loops_topics(self):
         tmeta = self._tmeta()
         self._write(tmeta, "| XXX-001 | 词条甲 |  | 分类A |  | 定义 | 来源 | 2026-11-14 | 2026-11-14 |\n")
@@ -2616,6 +2751,48 @@ class TestVocabVerify(unittest.TestCase):
             rc = vocab_tool.cmd_verify(cfg, None)
         self.assertEqual(rc, 1)
         self.assertIn("ID 前缀不符", buf.getvalue())
+
+    def _cross_cfg(self):
+        t1 = {"storage": "data/t1/terms.md", "imports_dir": "x", "exports_dir": "y",
+              "id_prefix": "AA", "categories": []}
+        t2 = {"storage": "data/t2/terms.md", "imports_dir": "x", "exports_dir": "y",
+              "id_prefix": "BB", "categories": []}
+        for tid, prefix, term in (("t1", "AA", "共有词条"), ("t2", "BB", "共有词条")):
+            p = self.root / "data" / tid / "terms.md"
+            p.parent.mkdir(parents=True, exist_ok=True)
+            p.write_text("# 词库\n\n## 词汇表\n\n" + self.HEADER
+                         + f"| {prefix}-001 | {term} |  | 分类 |  | 同定义 | 来源 | 2026-11-14 | 2026-11-14 |\n",
+                         encoding="utf-8")
+        return {"topics": {"t1": t1, "t2": t2}, "concept_map": {}}
+
+    def test_cross_check_same_term(self):
+        """n23：同名词条未登记 → 警告。"""
+        cfg = self._cross_cfg()
+        with unittest.mock.patch.object(vocab_tool, "TOOL_ROOT", self.root):
+            errors, warns, summary = vocab_tool.cross_check_gaps(cfg)
+        self.assertEqual(errors, [])
+        self.assertTrue(any("同名词条未登记" in w for w in warns))
+        self.assertEqual(summary["same_term_groups"], 1)
+
+    def test_cross_check_registered_no_warn(self):
+        """n23：已登记概念 → 不再告警。"""
+        cfg = self._cross_cfg()
+        cfg["concept_map"] = {"CONCEPT-001": {"name": "共有",
+                                              "terms": [{"topic": "t1", "id": "AA-001"},
+                                                        {"topic": "t2", "id": "BB-001"}]}}
+        with unittest.mock.patch.object(vocab_tool, "TOOL_ROOT", self.root):
+            errors, warns, summary = vocab_tool.cross_check_gaps(cfg)
+        self.assertEqual(errors, [])
+        self.assertFalse(any("同名词条未登记" in w for w in warns))
+
+    def test_cross_check_bad_reference(self):
+        """n23：概念映射引用不存在的词条 → 错误。"""
+        cfg = self._cross_cfg()
+        cfg["concept_map"] = {"CONCEPT-001": {"name": "坏引用",
+                                              "terms": [{"topic": "t1", "id": "AA-999"}]}}
+        with unittest.mock.patch.object(vocab_tool, "TOOL_ROOT", self.root):
+            errors, warns, summary = vocab_tool.cross_check_gaps(cfg)
+        self.assertTrue(any("引用不存在" in e for e in errors))
 
     def test_verify_update_sets_fields(self):
         tmeta = self._tmeta()
