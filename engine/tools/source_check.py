@@ -1,15 +1,16 @@
 #!/usr/bin/env python3
 """source_check.py — 来源条目 schema 化与格式校验（P1-2，n25 升级）。
 
-把各报告「参考来源清单 / 来源」章节的条目解析为**机读四元组**
-（来源文本 / 时点年份 / URL / 分级分组），产出 `source-index.json`，
+把各报告「参考来源清单 / 来源」章节的条目解析为**机读六元组**
+（来源文本 / 时点年份 / URL / 分级分组 / 转述层级 / 独立性），产出 `source-index.json`，
 并校验来源格式约定：
 
 - E1：报告存在来源章节（P1，阻断）；
 - E2：来源章节含 URL 条目（P2，告警；00 决策枢纽等引用型报告可空）；
 - E3：URL 条目附 4 位年份（时点）（P2，告警）；
 - E4：报告声明来源分级（分级 / 官方一手 / 权威 / 媒体）（P2，告警）；
-- E5：来源条目字段完整率（url + 时点 + 分级分组三项齐全）（P2，告警）。
+- E5：来源条目字段完整率（url + 时点 + 分级分组三项齐全）（P2，告警）；
+- E6：来源质量字段（转述层级 / 独立性）缺失或判为「不明」（P2，告警，n21）。
 
 归一化规则集中在本模块引用的 ``source_normalize``（单一事实源），
 其他工具复用该模块，不再各写一套。
@@ -48,6 +49,25 @@ GROUP_RE = re.compile(r"^(?:###\s*)?[①②③④⑤]|"   # ① 日本政府官�
                       r"^\*\*([ABC])\b|"           # **A 官方一手**
                       r"^\*\*[^*]{2,120}\*\*[：:]?|"  # **官方一手（…）**（冒号可选）
                       r"^###\s+\S")                 # ### 官方一手
+# 来源质量初判（n21，信源批评四问的机读化；仅为初判，人工可覆盖）
+RELAY_RE = re.compile(r"转引|转载|转述|引自|译自")
+NONIND_RE = re.compile(r"门户|挂牌|中介|媒体|转载|转引|转述|聚合")
+IND_RE = re.compile(r"官方|政府|省厅|委员会|行业|协会|学会|研究|机构|团体")
+
+
+def infer_relay_level(text: str) -> str:
+    """转述层级初判：含转引 / 转载等标记 → 2，否则 1（一手）。"""
+    return "2" if RELAY_RE.search(text or "") else "1"
+
+
+def infer_independence(text: str) -> str:
+    """独立性初判：门户 / 媒体 / 聚合 → 非独立；官方 / 行业机构 → 独立；其余不明。"""
+    s = text or ""
+    if NONIND_RE.search(s):
+        return "非独立"
+    if IND_RE.search(s):
+        return "独立"
+    return "不明"
 
 INDEX_PATH = ROOT / "engine" / "report-audits" / "audit" / "source-index.json"
 
@@ -82,6 +102,8 @@ def extract_report(rel: str, text: str) -> dict:
             "year": year,
             "marker": marker.group(0) if marker else "",
             "group": group,
+            "relay_level": infer_relay_level(group + " " + line),
+            "independence": infer_independence(group + " " + line),
         })
     problems: list[str] = []
     if not entries:
@@ -94,6 +116,9 @@ def extract_report(rel: str, text: str) -> dict:
     rate = (complete / len(entries)) if entries else 1.0
     if entries and complete < len(entries):
         problems.append(f"来源条目字段完整率 {rate:.0%}（{complete}/{len(entries)}）")
+    unknown_ind = sum(1 for e in entries if e["independence"] == "不明")
+    if unknown_ind:
+        problems.append(f"{unknown_ind} 条来源条目独立性判为「不明」（待人工确认）")
     graded = bool(GRADE_RE.search(body)) or bool(GRADE_RE.search(text))
     if not graded:
         problems.append("未声明来源分级")

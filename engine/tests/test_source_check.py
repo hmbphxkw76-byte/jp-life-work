@@ -35,12 +35,12 @@ SECTION = """## 九、参考来源清单
 
 ### ① 日本政府官方一手
 
-1. [ISA](https://www.moj.go.jp/isa/) — 出入国在留管理庁, 2026
-2. [MLIT](https://www.mlit.go.jp/) — 2025
+1. [ISA](https://www.moj.go.jp/isa/) — 出入国在留管理庁（官方一手）, 2026
+2. [MLIT](https://www.mlit.go.jp/) — 国土交通省（官方一手）, 2025
 
 ### ② 行业机构
 
-3. [ClassNK](https://www.classnk.or.jp/) — 最终更新 2026-10-15
+3. [ClassNK](https://www.classnk.or.jp/) — 行业机构, 最终更新 2026-10-15
 """
 
 
@@ -60,6 +60,8 @@ class ExtractCase(unittest.TestCase):
         self.assertEqual(len(r["entries"]), 3)
         self.assertTrue(all(e["year"] for e in r["entries"]))
         self.assertTrue(r["graded"])
+        # n21 六元组：转述层级 / 独立性字段存在
+        self.assertTrue(all("relay_level" in e and "independence" in e for e in r["entries"]))
 
     def test_missing_section(self):
         r = sc.extract_report("01-x/reports/2026-11-x.md", "# t\n无来源\n")
@@ -88,6 +90,18 @@ class ExtractCase(unittest.TestCase):
     def test_group_captured(self):
         r = sc.extract_report("r", SECTION)
         self.assertTrue(r["entries"][0]["group"])
+
+    def test_unknown_independence_warns(self):
+        text = ("## 参考来源清单\n\n### 来源（分级）\n\n"
+                "1. [X](https://x.go.jp/) — 2026\n")
+        r = sc.extract_report("r", text)
+        self.assertTrue(any("独立性判为「不明」" in p for p in r["problems"]))
+
+    def test_relay_level_inferred(self):
+        text = ("## 参考来源清单\n\n### 官方一手（分级）\n\n"
+                "1. [X](https://x.go.jp/) — 转引自官方, 2026\n")
+        r = sc.extract_report("r", text)
+        self.assertEqual(r["entries"][0]["relay_level"], "2")
 
 
 class CollectAndMainCase(unittest.TestCase):

@@ -460,7 +460,7 @@ class TestCovAuditPipeline(unittest.TestCase):
         bad = json.loads(_l5())
         bad["items"] = bad["items"][:-1]
         ok, probs = audit_pipeline.validate_l5_evidence(json.dumps(bad))
-        self.assertIn("须为 6 项", probs[0])
+        self.assertIn("须为 7 项", probs[0])
 
         bad = json.loads(_l5())
         bad["items"][0]["item"] = "错"
