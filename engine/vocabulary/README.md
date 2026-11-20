@@ -139,6 +139,16 @@ python engine/vocabulary/script/vocab_tool.py index                             
 
 **校验标准**：任意词条可回溯「首次登记日期 + 引入它的导入文件 + 版本记录行」三要素。
 
+### S7 跨主题概念对齐（n23）
+
+| 项 | 规范 |
+|---|---|
+| 概念映射 | `config/topics.json` 的 `concept_map`：`CONCEPT-NNN → {name, terms:[{topic,id,term}]}`，登记跨主题同概念（同名词条 / 同定义异名）；人工策划，`vocab_tool` 保留该顶层键 |
+| 校验命令 | `vocab_tool.py cross-check`（`--json` 机读）：引用完整性（缺失 → 错误 rc=1）+ 同定义异名 / 同名词条未登记（rc=2，供人工登记） |
+| 上层校验 | `info_quality_check` C-15（P2，复用 `cross_check_gaps()` 单一事实源）；`validate.yml` 词库校验步骤接入 |
+
+**校验标准**：`concept_map` 引用全部可解析；新增跨主题共享概念后登记，避免同概念异名口径漂移。
+
 ## 四、新增主题扩展指南（一条命令，自动目录关联）
 
 新增主题**无需手工编辑注册表**（topics.json 已降级为脚本托管文件），一条命令完成全部目录关联：

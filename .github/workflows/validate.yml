@@ -281,19 +281,21 @@ jobs:
           echo "personal_finance_model.py 退出码 ${code:-0}"
 
       # 词库校验：注册/目录结构（topic-check）+ 全主题结构（verify：重复 / 空值 / 分类 /
-      # ID 前缀 / 条目数下限）+ 同步区间一致性（sync check：提示词区块与词库同步）。
-      - name: 词库校验（topic-check / verify / sync check）
+      # ID 前缀 / 条目数下限）+ 同步区间一致性（sync check：提示词区块与词库同步）+
+      # 跨主题同概念对齐（cross-check，n23）。
+      - name: 词库校验（topic-check / verify / sync check / cross-check）
         run: |
           set +e
           python engine/vocabulary/script/vocab_tool.py topic-check; c1=$?
           python engine/vocabulary/script/vocab_tool.py verify; c2=$?
           python engine/vocabulary/script/sync_vocab.py check; c3=$?
           python engine/vocabulary/script/vocab_near_check.py; c4=$?
+          python engine/vocabulary/script/vocab_tool.py cross-check; c5=$?
           set -e
-          # topic-check / verify：0/2 放行，1 阻断；sync check：存在待同步变更（2）也阻断
-          for c in "$c1" "$c2"; do
+          # topic-check / verify / cross-check：0/2 放行，1 阻断；sync check：存在待同步变更（2）也阻断
+          for c in "$c1" "$c2" "$c5"; do
             if [ "$c" -ne 0 ] && [ "$c" -ne 2 ]; then
-              echo "::error::词库校验失败（退出码 $c）：topic-check / verify 存在错误级项"
+              echo "::error::词库校验失败（退出码 $c）：topic-check / verify / cross-check 存在错误级项"
               exit 1
             fi
           done
@@ -306,7 +308,7 @@ jobs:
             echo "::error::近义扫描失败（退出码 $c4）"
             exit 1
           fi
-          echo "词库校验通过（topic-check=$c1 verify=$c2 sync-check=$c3 near=$c4；2=仅警告不阻断）"
+          echo "词库校验通过（topic-check=$c1 verify=$c2 sync-check=$c3 near=$c4 cross-check=$c5；2=仅警告不阻断）"
 
       # 静态检查（架构优化方向 E / ARCH-OPT）：ruff 自 W2 起转阻断（存量已于 2026-11-19 清零，
       # 138 → 0，无显式忽略；见 ruff.toml 注释）；mypy 覆盖工具链三目录并阻断。

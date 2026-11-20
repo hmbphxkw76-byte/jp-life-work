@@ -1204,6 +1204,16 @@ class TestInfoQualityCheck(unittest.TestCase):
         self.assertEqual(info_quality_check.THRESH_SOURCE_COVERAGE, 0.20)
         self.assertIn("20%", text.split("事实段落来源标注覆盖率门槛")[1].split("\n")[0])
 
+    def test_vocab_cross_gaps_shape(self):
+        """n23：C-15 数据来源（vocab_tool.cross_check_gaps）可调用且结构正确。"""
+        result = info_quality_check.vocab_cross_gaps()
+        self.assertIsInstance(result, tuple)
+        self.assertEqual(len(result), 3)
+        errors, warns, summary = result
+        self.assertIsInstance(errors, list)
+        self.assertIsInstance(warns, list)
+        self.assertIsInstance(summary, dict)
+
 
 class TestAuditPreflight(unittest.TestCase):
     """落盘前快速自检（audit_preflight.py，左移预防层）。"""
@@ -2616,6 +2626,48 @@ class TestVocabVerify(unittest.TestCase):
             rc = vocab_tool.cmd_verify(cfg, None)
         self.assertEqual(rc, 1)
         self.assertIn("ID 前缀不符", buf.getvalue())
+
+    def _cross_cfg(self):
+        t1 = {"storage": "data/t1/terms.md", "imports_dir": "x", "exports_dir": "y",
+              "id_prefix": "AA", "categories": []}
+        t2 = {"storage": "data/t2/terms.md", "imports_dir": "x", "exports_dir": "y",
+              "id_prefix": "BB", "categories": []}
+        for tid, prefix, term in (("t1", "AA", "共有词条"), ("t2", "BB", "共有词条")):
+            p = self.root / "data" / tid / "terms.md"
+            p.parent.mkdir(parents=True, exist_ok=True)
+            p.write_text("# 词库\n\n## 词汇表\n\n" + self.HEADER
+                         + f"| {prefix}-001 | {term} |  | 分类 |  | 同定义 | 来源 | 2026-11-14 | 2026-11-14 |\n",
+                         encoding="utf-8")
+        return {"topics": {"t1": t1, "t2": t2}, "concept_map": {}}
+
+    def test_cross_check_same_term(self):
+        """n23：同名词条未登记 → 警告。"""
+        cfg = self._cross_cfg()
+        with unittest.mock.patch.object(vocab_tool, "TOOL_ROOT", self.root):
+            errors, warns, summary = vocab_tool.cross_check_gaps(cfg)
+        self.assertEqual(errors, [])
+        self.assertTrue(any("同名词条未登记" in w for w in warns))
+        self.assertEqual(summary["same_term_groups"], 1)
+
+    def test_cross_check_registered_no_warn(self):
+        """n23：已登记概念 → 不再告警。"""
+        cfg = self._cross_cfg()
+        cfg["concept_map"] = {"CONCEPT-001": {"name": "共有",
+                                              "terms": [{"topic": "t1", "id": "AA-001"},
+                                                        {"topic": "t2", "id": "BB-001"}]}}
+        with unittest.mock.patch.object(vocab_tool, "TOOL_ROOT", self.root):
+            errors, warns, summary = vocab_tool.cross_check_gaps(cfg)
+        self.assertEqual(errors, [])
+        self.assertFalse(any("同名词条未登记" in w for w in warns))
+
+    def test_cross_check_bad_reference(self):
+        """n23：概念映射引用不存在的词条 → 错误。"""
+        cfg = self._cross_cfg()
+        cfg["concept_map"] = {"CONCEPT-001": {"name": "坏引用",
+                                              "terms": [{"topic": "t1", "id": "AA-999"}]}}
+        with unittest.mock.patch.object(vocab_tool, "TOOL_ROOT", self.root):
+            errors, warns, summary = vocab_tool.cross_check_gaps(cfg)
+        self.assertTrue(any("引用不存在" in e for e in errors))
 
     def test_verify_update_sets_fields(self):
         tmeta = self._tmeta()

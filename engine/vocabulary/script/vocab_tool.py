@@ -965,6 +965,89 @@ def cmd_topic_check(cfg: dict, args) -> int:
     return 1 if errors else (2 if warns else 0)
 
 
+# ---------- 跨主题概念对齐（n23） ----------
+
+def cross_check_gaps(cfg: dict) -> tuple[list, list, dict]:
+    """跨主题同概念对齐检测（纯函数，n23）。
+
+    返回 (errors, warnings, summary)：
+    - errors：`concept_map` 引用不存在的词条；
+    - warnings：同定义异名未登记 / 同名词条未登记（供人工登记）。
+    """
+    terms_by_topic: dict[str, list] = {}
+    for tid in cfg["topics"]:
+        tmeta = resolve_topic(cfg, tid)
+        try:
+            terms, _ = load_storage(tmeta["storage"])
+        except (FileNotFoundError, ValueError):
+            terms = []
+        terms_by_topic[tid] = terms
+
+    index: dict[str, list] = {}
+    by_def: dict[str, list] = {}
+    for tid, terms in terms_by_topic.items():
+        for t in terms:
+            index.setdefault(norm(t["term"]), []).append((tid, t["id"], t["term"]))
+            d = norm(t["definition"])
+            if d:
+                by_def.setdefault(d, []).append((tid, t["id"], t["term"]))
+
+    concept_map = cfg.get("concept_map") or {}
+    registered = {(it.get("topic"), it.get("id"))
+                  for entry in concept_map.values() for it in entry.get("terms", [])}
+
+    errors = []
+    for cid in sorted(concept_map):
+        for it in concept_map[cid].get("terms", []):
+            tid, tid_id = it.get("topic"), it.get("id")
+            if tid not in terms_by_topic or not any(t["id"] == tid_id for t in terms_by_topic[tid]):
+                errors.append(f"{cid} 引用不存在的词条：{tid}:{tid_id}")
+
+    warns = []
+    for _d, items in by_def.items():
+        if len({x[0] for x in items}) < 2 or len({norm(x[2]) for x in items}) <= 1:
+            continue
+        if all((x[0], x[1]) in registered for x in items):
+            continue
+        warns.append("同定义异名未登记：" + " / ".join(f"{x[0]}:{x[1]}({x[2]})" for x in items))
+
+    unregistered_same = 0
+    for _k, items in index.items():
+        if len({x[0] for x in items}) < 2:
+            continue
+        if all((x[0], x[1]) in registered for x in items):
+            continue
+        unregistered_same += 1
+        if len(warns) < 20:
+            warns.append("同名词条未登记：" + " / ".join(f"{x[0]}:{x[1]}" for x in items))
+
+    summary = {
+        "concepts": len(concept_map),
+        "registered_terms": len(registered),
+        "same_term_groups": sum(1 for v in index.values() if len({x[0] for x in v}) >= 2),
+        "unregistered_same_term_groups": unregistered_same,
+    }
+    return errors, warns, summary
+
+
+def cmd_cross_check(cfg: dict, args) -> int:
+    """跨主题同概念对齐校验（n23，命令入口）。"""
+    errors, warns, summary = cross_check_gaps(cfg)
+    if getattr(args, "json", False):
+        print(json.dumps({"errors": errors, "warnings": warns, **summary},
+                         ensure_ascii=False, indent=2))
+    else:
+        print(f"[cross-check] 概念 {summary['concepts']} 条（登记词条 {summary['registered_terms']}）；"
+              f"同名词条组 {summary['same_term_groups']}，未登记 {summary['unregistered_same_term_groups']}；"
+              f"错误 {len(errors)} / 警告 {len(warns)}")
+        for e in errors:
+            print(f"  [error] {e}")
+        for w in warns[:20]:
+            print(f"  [warn] {w}")
+    plog_ops(f"[cross-check] concepts={summary['concepts']} errors={len(errors)} warnings={len(warns)}")
+    return 1 if errors else (2 if warns else 0)
+
+
 # ---------- 入口 ----------
 
 def main(argv=None) -> int:
@@ -1011,6 +1094,8 @@ def main(argv=None) -> int:
     p.add_argument("--force", action="store_true", help="词库非空时确认移除注册")
     p.add_argument("--delete-data", action="store_true", help="同时删除 data/<topic>/ 数据目录")
     sub.add_parser("topic-check", help="主题注册表与目录结构一致性审计")
+    p = sub.add_parser("cross-check", help="跨主题同概念对齐校验（n23）")
+    p.add_argument("--json", action="store_true")
     sub.add_parser("verify", help="全主题词库校验（重复 / 空值 / 分类 / ID 前缀 / 条目数下限）")
 
     args = ap.parse_args(argv)
@@ -1027,6 +1112,8 @@ def main(argv=None) -> int:
             return cmd_topic_remove(cfg, args)
         if args.cmd == "topic-check":
             return cmd_topic_check(cfg, args)
+        if args.cmd == "cross-check":
+            return cmd_cross_check(cfg, args)
         if args.cmd == "verify":
             return cmd_verify(cfg, args)
         tmeta = resolve_topic(cfg, args.topic)
