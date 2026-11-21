@@ -1,13 +1,13 @@
 # 报告多层级校验报告（AuditGuard）
 
-> 校验日期：2026-11-20　|　报告总数：21　|　通过 16 / 不通过 5
+> 校验日期：2026-11-21　|　报告总数：21　|　通过 21 / 不通过 0
 > 层级：L1 结构 / L2 要素 / L3 溯源 / L4 一致性 / L5 语义（清单）；判定内核内嵌信息质量四维度。
 
 ## 逐报告结论
 
 | 报告 | 层级结论 | P0 | P1 | P2 | 结论 |
 |---|---|---|---|---|---|
-| [00-decision-hub/reports/2026-11-decision-hub.md](../../../00-decision-hub/reports/2026-11-decision-hub.md) | L1✓ L2✓ L3✓ L4✓ L5? | 0 | 1 | 0 | 不通过 |
+| [00-decision-hub/reports/2026-11-decision-hub.md](../../../00-decision-hub/reports/2026-11-decision-hub.md) | L1✓ L2✓ L3✓ L4✓ L5✓ | 0 | 0 | 0 | 通过 |
 | [01-ssw-driver/reports/2026-11-ssw-driver.md](../../../01-ssw-driver/reports/2026-11-ssw-driver.md) | L1✓ L2✓ L3✓ L4✓ L5✓ | 0 | 0 | 0 | 通过 |
 | [02-career-driver/reports/2026-11-career-driver.md](../../../02-career-driver/reports/2026-11-career-driver.md) | L1✓ L2✓ L3✓ L4✓ L5✓ | 0 | 0 | 0 | 通过 |
 | [03-career-management/reports/2026-11-career-management.md](../../../03-career-management/reports/2026-11-career-management.md) | L1✓ L2✓ L3✓ L4✓ L5✓ | 0 | 0 | 0 | 通过 |
@@ -24,10 +24,10 @@
 | [14-life-operations/reports/2026-11-life-operations.md](../../../14-life-operations/reports/2026-11-life-operations.md) | L1✓ L2✓ L3✓ L4✓ L5✓ | 0 | 0 | 0 | 通过 |
 | [15-health-wellbeing/reports/2026-11-health-wellbeing.md](../../../15-health-wellbeing/reports/2026-11-health-wellbeing.md) | L1✓ L2✓ L3✓ L4✓ L5✓ | 0 | 0 | 0 | 通过 |
 | [16-exit-transition-return/reports/2026-11-exit-transition-return.md](../../../16-exit-transition-return/reports/2026-11-exit-transition-return.md) | L1✓ L2✓ L3✓ L4✓ L5✓ | 0 | 0 | 0 | 通过 |
-| [17-migration-compliance/reports/2026-11-migration-compliance.md](../../../17-migration-compliance/reports/2026-11-migration-compliance.md) | L1✓ L2✓ L3✓ L4✓ L5? | 0 | 1 | 0 | 不通过 |
-| [18-family-parenting/reports/2026-11-family-parenting.md](../../../18-family-parenting/reports/2026-11-family-parenting.md) | L1✓ L2✓ L3✓ L4✓ L5? | 0 | 1 | 0 | 不通过 |
-| [19-safety-disaster/reports/2026-11-safety-disaster.md](../../../19-safety-disaster/reports/2026-11-safety-disaster.md) | L1✓ L2✓ L3✓ L4✓ L5? | 0 | 1 | 0 | 不通过 |
-| [20-overseas-china/reports/2026-11-overseas-china.md](../../../20-overseas-china/reports/2026-11-overseas-china.md) | L1✓ L2✓ L3✓ L4✓ L5? | 0 | 1 | 0 | 不通过 |
+| [17-migration-compliance/reports/2026-11-migration-compliance.md](../../../17-migration-compliance/reports/2026-11-migration-compliance.md) | L1✓ L2✓ L3✓ L4✓ L5✓ | 0 | 0 | 0 | 通过 |
+| [18-family-parenting/reports/2026-11-family-parenting.md](../../../18-family-parenting/reports/2026-11-family-parenting.md) | L1✓ L2✓ L3✓ L4✓ L5✓ | 0 | 0 | 0 | 通过 |
+| [19-safety-disaster/reports/2026-11-safety-disaster.md](../../../19-safety-disaster/reports/2026-11-safety-disaster.md) | L1✓ L2✓ L3✓ L4✓ L5✓ | 0 | 0 | 0 | 通过 |
+| [20-overseas-china/reports/2026-11-overseas-china.md](../../../20-overseas-china/reports/2026-11-overseas-china.md) | L1✓ L2✓ L3✓ L4✓ L5✓ | 0 | 0 | 0 | 通过 |
 
 ## 分层汇总
 
@@ -37,17 +37,11 @@
 | L2 | 21 | 0 | 0 | 0 | 0 | 0 |
 | L3 | 21 | 0 | 0 | 0 | 0 | 0 |
 | L4 | 21 | 0 | 0 | 0 | 0 | 0 |
-| L5 | 16 | 0 | 5 | 0 | 5 | 0 |
+| L5 | 21 | 0 | 0 | 0 | 0 | 0 |
 
 ## 发现明细
 
-| 层级 | 编号 | 级别 | 报告 | 位置 | 判定依据 |
-|---|---|---|---|---|---|
-| L5 | L5-EVIDENCE | P1 | 00-decision-hub/reports/2026-11-decision-hub.md | 语义复核 | 缺少有效 L5 语义复核证据（re_review --evidence / --backfill-l5，见 l5-semantic-review.md） |
-| L5 | L5-EVIDENCE | P1 | 17-migration-compliance/reports/2026-11-migration-compliance.md | 语义复核 | 缺少有效 L5 语义复核证据（re_review --evidence / --backfill-l5，见 l5-semantic-review.md） |
-| L5 | L5-EVIDENCE | P1 | 18-family-parenting/reports/2026-11-family-parenting.md | 语义复核 | 缺少有效 L5 语义复核证据（re_review --evidence / --backfill-l5，见 l5-semantic-review.md） |
-| L5 | L5-EVIDENCE | P1 | 19-safety-disaster/reports/2026-11-safety-disaster.md | 语义复核 | 缺少有效 L5 语义复核证据（re_review --evidence / --backfill-l5，见 l5-semantic-review.md） |
-| L5 | L5-EVIDENCE | P1 | 20-overseas-china/reports/2026-11-overseas-china.md | 语义复核 | 缺少有效 L5 语义复核证据（re_review --evidence / --backfill-l5，见 l5-semantic-review.md） |
+（无发现项）
 
 ## L5 语义复核清单（人工 / LLM 逐项确认）
 
@@ -59,4 +53,4 @@
 - [ ] 跨主题引用是否准确、无归属错误
 - [ ] 独立性与三角验证：关键结论是否多源互证、单源是否已标注
 
-**总体结论：5 份报告存在 P0/P1，需修复后复评**
+**总体结论：全部通过**

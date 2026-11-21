@@ -18,7 +18,6 @@
 | TEC-008 | キャッシュ | キャッシュ層;缓存 | 技术栈与架构 | 性能;存储;命中 | 将高频访问的数据临时保存在高速介质中，以减少后端查询和响应时间。 | IPA | 2026-11-13 | 2026-11-19 | 部分核验 | https://www.ipa.go.jp/digital/chousa/discussion-paper/dx2025_digital_talent_ai_era.html | B |
 | TEC-009 | リレーショナルデータベース | RDB;関係データベース | 技术栈与架构 | 数据库;SQL;事务 | 以行和列的表结构管理数据，支持 SQL 查询与事务处理的数据库。 | IPA | 2026-11-13 | 2026-11-19 | 部分核验 | https://www.ipa.go.jp/digital/chousa/discussion-paper/dx2025_digital_talent_ai_era.html | B |
 | TEC-010 | NoSQL | 非関係データベース;非关系型数据库 | 技术栈与架构 | 数据库;键值;横向扩展 | 不依赖固定表结构，采用键值、文档、列族或图模型存储数据的数据库总称。 | IPA | 2026-11-13 | 2026-11-19 | 部分核验 | https://www.ipa.go.jp/digital/chousa/discussion-paper/dx2025_digital_talent_ai_era.html | B |
-| TEC-011 | ドメイン駆動設計 | DDD;領域駆動設計 | 技术栈与架构 | 设计;领域模型;边界 | 以业务领域模型为中心划分限界上下文，并用统一语言建模的设计方法。 | 需核实原文 | 2026-11-13 | 2026-11-13 | 待核实 |  | 待评 |
 | TEC-012 | CI/CD | 継続的インテグレーション/継続的デリバリー;シーアイシーディー | 开发与工程实践 | 自动化;流水线;交付 | 自动执行构建、测试与部署的流水线实践，缩短从代码提交到发布的周期。 | IPA | 2026-11-13 | 2026-11-19 | 部分核验 | https://www.ipa.go.jp/digital/chousa/discussion-paper/dx2025_digital_talent_ai_era.html | B |
 | TEC-013 | Git | ギット;分散型バージョン管理 | 开发与工程实践 | 版本管理;分支;协作 | 分布式版本控制系统，记录代码变更历史并支持分支创建、合并与回溯。 | Git 官方文档 | 2026-11-13 | 2026-11-19 | 部分核验 | https://git-scm.com/doc | B |
 | TEC-014 | コードレビュー | レビュー;ピアレビュー | 开发与工程实践 | 质量;评审;协作 | 开发者相互检查代码的正确性、可读性与规范符合度，并提出修改意见的活动。 | IPA | 2026-11-13 | 2026-11-19 | 部分核验 | https://www.ipa.go.jp/digital/chousa/discussion-paper/dx2025_digital_talent_ai_era.html | B |
@@ -31,13 +30,9 @@
 | TEC-021 | 技術的負債 | 技術負債;テックデット | 开发与工程实践 | 债务;维护;权衡 | 为短期交付而采取的妥协设计或省略的维护，未来需以额外成本偿还。 | IPA「DXレポート」 | 2026-11-13 | 2026-11-19 | 部分核验 | https://www.ipa.go.jp/digital/chousa/discussion-paper/dx2025_digital_talent_ai_era.html | B |
 | TEC-022 | データパイプライン | データ処理基盤;数据管道 | 数据与人工智能 | 数据流;自动化;处理 | 按顺序自动完成数据抽取、转换、加载与分发的一系列处理流程。 | IPA | 2026-11-13 | 2026-11-19 | 部分核验 | https://www.ipa.go.jp/digital/chousa/discussion-paper/dx2025_digital_talent_ai_era.html | B |
 | TEC-023 | ETL | 抽出変換格納;抽出・変換・投入 | 数据与人工智能 | 数据集成;转换;批处理 | 从数据源抽取数据、按规则转换后加载到目标数据库的集成处理。 | IPA | 2026-11-13 | 2026-11-19 | 部分核验 | https://www.ipa.go.jp/digital/chousa/discussion-paper/dx2025_digital_talent_ai_era.html | B |
-| TEC-024 | データレイク | データレーク;数据湖 | 数据与人工智能 | 存储;原始数据;分析 | 以原始格式集中存储结构化与非结构化数据，供后续分析使用的大型存储库。 | 需核实原文 | 2026-11-13 | 2026-11-13 | 待核实 |  | 待评 |
 | TEC-025 | データウェアハウス | DWH;数据仓库 | 数据与人工智能 | 分析;主题域;报表 | 面向分析用途、按主题整合历史数据并支持查询与报表的数据存储系统。 | IPA | 2026-11-13 | 2026-11-19 | 部分核验 | https://www.ipa.go.jp/digital/chousa/discussion-paper/dx2025_digital_talent_ai_era.html | B |
 | TEC-026 | 機械学習 | ML;マシンラーニング | 数据与人工智能 | 模型;训练;预测 | 让计算机从数据中学习规律，并对新数据做出预测或判断的技术领域。 | IPA | 2026-11-13 | 2026-11-19 | 部分核验 | https://www.ipa.go.jp/digital/chousa/discussion-paper/dx2025_digital_talent_ai_era.html | B |
 | TEC-027 | 深層学習 | ディープラーニング;DL | 数据与人工智能 | 神经网络;多层;特征 | 使用多层神经网络自动提取特征并进行学习与识别的机器学习方法。 | IPA | 2026-11-13 | 2026-11-19 | 部分核验 | https://www.ipa.go.jp/digital/chousa/discussion-paper/dx2025_digital_talent_ai_era.html | B |
-| TEC-028 | 大規模言語モデル | LLM;大语言模型 | 数据与人工智能 | 生成式AI;语言;预训练 | 基于大量文本预训练、能生成与理解自然语言的参数规模巨大的语言模型。 | 需核实原文 | 2026-11-13 | 2026-11-13 | 待核实 |  | 待评 |
-| TEC-029 | RAG | 検索拡張生成;Retrieval-Augmented Generation | 数据与人工智能 | 检索;生成;知识 | 先从外部知识库检索相关文档，再让语言模型据其生成答案的架构。 | 需核实原文 | 2026-11-13 | 2026-11-13 | 待核实 |  | 待评 |
-| TEC-030 | プロンプトエンジニアリング | プロンプト設計;提示工程 | 数据与人工智能 | 提示词;生成AI;调优 | 设计输入提示词以稳定获得语言模型预期输出的方法与实践。 | 需核实原文 | 2026-11-13 | 2026-11-13 | 待核实 |  | 待评 |
 | TEC-031 | 推論 | インファレンス;Inference | 数据与人工智能 | 推理;模型;预测 | 将新数据输入已训练完成的模型，计算并输出预测结果的处理过程。 | IPA | 2026-11-13 | 2026-11-19 | 部分核验 | https://www.ipa.go.jp/digital/chousa/discussion-paper/dx2025_digital_talent_ai_era.html | B |
 | TEC-032 | モデル評価 | モデルアセスメント;模型评估 | 数据与人工智能 | 指标;验证;泛化 | 用测试数据与准确率、召回率等指标衡量模型性能与泛化能力的工作。 | IPA | 2026-11-13 | 2026-11-19 | 部分核验 | https://www.ipa.go.jp/digital/chousa/discussion-paper/dx2025_digital_talent_ai_era.html | B |
 | TEC-033 | クラウド | クラウドコンピューティング;パブリッククラウド;云计算 | 云与基础设施 | 云;按需;资源 | 通过互联网按需提供服务器、存储与软件等计算资源的服务模式，代表厂商为 AWS、Azure 与 GCP。 | 総務省 | 2026-11-13 | 2026-11-19 | 部分核验 | https://www.soumu.go.jp/ | B |
@@ -63,7 +58,6 @@
 | TEC-053 | エンジニア | 技術者;工程师 | 岗位与协作 | 职业;开发;技术 | 运用技术知识设计、开发与维护软件或系统的从业人员总称。 | IPA | 2026-11-13 | 2026-11-19 | 部分核验 | https://www.ipa.go.jp/digital/chousa/discussion-paper/dx2025_digital_talent_ai_era.html | B |
 | TEC-054 | フロントエンドエンジニア | FEエンジニア;前端工程师 | 岗位与协作 | 岗位;界面;Web | 负责网页或应用界面实现、交互逻辑与前端性能优化的工程师。 | IPA | 2026-11-13 | 2026-11-19 | 部分核验 | https://www.ipa.go.jp/digital/chousa/discussion-paper/dx2025_digital_talent_ai_era.html | B |
 | TEC-055 | バックエンドエンジニア | BEエンジニア;サーバーサイドエンジニア;后端工程师 | 岗位与协作 | 岗位;服务端;API | 负责服务端业务逻辑、数据库设计与 API 实现的工程师。 | IPA | 2026-11-13 | 2026-11-19 | 部分核验 | https://www.ipa.go.jp/digital/chousa/discussion-paper/dx2025_digital_talent_ai_era.html | B |
-| TEC-056 | SRE | サイトリライアビリティエンジニア;站点可靠性工程师 | 岗位与协作 | 岗位;可靠性;运维 | 以工程手段保障系统可靠性、可用性与性能，并平衡变更速度与风险的岗位。 | 需核实原文 | 2026-11-13 | 2026-11-13 | 待核实 |  | 待评 |
 | TEC-057 | DevOps | デブオプス;开发运维 | 岗位与协作 | 文化;自动化;协作 | 打破开发与运维壁垒，通过自动化与文化协作缩短交付周期的实践与岗位。 | IPA「DXレポート」 | 2026-11-13 | 2026-11-19 | 部分核验 | https://www.ipa.go.jp/digital/chousa/discussion-paper/dx2025_digital_talent_ai_era.html | B |
 | TEC-058 | データサイエンティスト | DS;数据科学家 | 岗位与协作 | 岗位;分析;建模 | 运用统计与机器学习从数据中提取洞察并构建预测模型的专业人员。 | IPA | 2026-11-13 | 2026-11-19 | 部分核验 | https://www.ipa.go.jp/digital/chousa/discussion-paper/dx2025_digital_talent_ai_era.html | B |
 | TEC-059 | プロダクトマネージャー | PdM;产品经理 | 岗位与协作 | 岗位;产品;需求 | 定义产品价值与需求优先级，协调开发、设计与业务以推进产品目标的角色。 | IPA | 2026-11-13 | 2026-11-19 | 部分核验 | https://www.ipa.go.jp/digital/chousa/discussion-paper/dx2025_digital_talent_ai_era.html | B |
@@ -80,7 +74,6 @@
 | TEC-070 | IT人材不足 | IT人才缺口;IT人材需給ギャップ | 岗位与协作 | 人才;供需 | IT人才供给相对需求的缺口，官方定期发布需给调查量化缺口规模 | 経済産業省 | 2026-11-13 | 2026-11-19 | 部分核验 | https://www.meti.go.jp/policy/it_policy/jinzai/gaiyou.pdf | B |
 | TEC-071 | 給与帯 | 薪资带;年収レンジ;賃金帯 | 岗位与协作 | 薪酬;区间 | 特定岗位招聘公告中列出的薪资区间，用于薪资行情与个人交涉比较 | 厚生労働省 | 2026-11-13 | 2026-11-19 | 部分核验 | https://www.mhlw.go.jp/stf/newpage_75722.html | B |
 | TEC-072 | 求人 | 招聘;採用情報;职位招聘 | 岗位与协作 | 招聘;市场 | 企业发布的岗位招聘信息总称，抽样统计构成数字化岗位供需观察基础 | 厚生労働省 | 2026-11-13 | 2026-11-19 | 部分核验 | https://www.mhlw.go.jp/stf/newpage_75722.html | B |
-| TEC-073 | 外国人IT就業 | 外国籍エンジニア;外国人才IT就业 | 岗位与协作 | 人才;国际 | 外国人在日本IT行业就业的形态与趋势，含技能与日语能力要求的匹配议题 | 需核实原文 | 2026-11-13 | 2026-11-13 | 待核实 |  | 待评 |
 | TEC-074 | IT資格 | 技术认证;IT認定資格 | 岗位与协作 | 资格;认证 | 证明IT技能水平的认证考试与证书体系，是技能简历与晋升评估依据 | 情報処理推進機構 | 2026-11-13 | 2026-11-19 | 部分核验 | https://www.ipa.go.jp/ | B |
 
 ## 版本记录
@@ -92,3 +85,4 @@
 | v1.2 | 2026-11-13 | 批量导入 | 新增 6 条 / 跳过重复 0 条 / 无效 0 条；文件 2026-11-13_gapfill-industry-technology.md |
 | v1.3 | 2026-11-19 | 核验回填 | 更新 67 条核验字段；文件 2026-11-19_核验回填.md |
 | v1.4 | 2026-11-19 | 核验回填 | 更新 11 条核验字段；文件 2026-11-19_核验深化.md |
+| v1.5 | 2026-11-21 | 词条删除 | 删除 7 条：TEC-011,TEC-024,TEC-028,TEC-029,TEC-030,TEC-056,TEC-073 |
