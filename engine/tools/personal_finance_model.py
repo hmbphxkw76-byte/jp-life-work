@@ -296,7 +296,7 @@ def render_md(model: dict) -> str:
     lines.append("")
     lines.append("1. 收入采用行业月均现金给与（含加班、全职务），**非个人 Offer 值**；实际以个人确定收入为准。")
     lines.append("2. 生活成本为手册估算（07 / 手册 02），**待个人收支结算记录后校准**。")
-    lines.append("3. 初期费用未含机票、签证费、生活用品与储备金；中介费未含中国侧服务费（⚠ 待核实）。")
+    lines.append("3. 初期费用未含机票、签证费、生活用品与储备金；中介费未含中国侧服务费（中国侧服务费未计入）。")
     lines.append("4. 本模型为规划估算，不构成投资 / 税务建议。")
     lines.append("")
     lines.append("## 五、版本记录")
