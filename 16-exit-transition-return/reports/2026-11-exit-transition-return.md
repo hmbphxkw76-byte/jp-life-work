@@ -8,7 +8,7 @@
 > **来源规则**：① [出入国在留管理庁](https://www.moj.go.jp/isa/)（isa.go.jp / moj.go.jp）、法務省、e-Gov 法令检索 ＞ ② 厚生労働省、日本年金機構、ハローワーク ＞ ③ 国税庁、総務省、地方自治体 ＞ ④ 银行 / 运营商 / 运输 / 车辆相关机构官网（仅执行流程）＞ ⑤ 媒体（仅线索，引用须回溯官方原文）
 > **结论边界**：本报告为信息整理与条件化建议，**不构成法律意见或税务意见**；重大决策须咨询执业法律 / 税务专业人士。
 
-> **已审计** ✅ 审计编号 `AUD-202611-012`｜终审通过：2026-11-21｜内容指纹 `9fce36489214336818c`｜依据《审计报告标准化管理体系》v1.4
+> **已审计** ✅ 审计编号 `AUD-202611-019`｜终审通过：2026-11-21｜内容指纹 `af06b08a745705ed781`｜依据《审计报告标准化管理体系》v1.4
 
 ---
 
@@ -37,7 +37,7 @@
 | 2 | 雇用保険 / 失業給付衔接 | 退出 | 受給要件・手続・窓口（厚生労働省 Q&A / ハローワーク）；受給資格決定 平日8:30–16:00 | ハローワーク / 厚生労働省 | 已核验（来源：ハローワーク / 厚生労働省） |
 | 3 | 健康保険任意継続要件与期限 | 退出 | — | 日本年金機構 / 協会けんぽ | ⚠ 部分核验（来源：日本年金機構 / 協会けんぽ） |
 | 4 | 国民健康保険 / 被用者保険退出 | 退出 | 退職日翌日資格喪失→市区町村届出14日以内、国保加入 | 厚生労働省 / 総務省 | 已核验（来源：厚生労働省 / 総務省） |
-| 5 | 厚生年金脱退一时金申请资格、书类、时限与复核入口 | 回国 | 日本年金機構公式案内あり | 日本年金機構 | ⚠ 部分核验（来源：日本年金機構） |
+| 5 | 厚生年金脱退一时金申请资格、书类、时限与复核入口 | 回国 | 请求期限「出国後 2 年以内」已核验（日本年金機構英文页）；书类・提交窓口・金额计算待补 | 日本年金機構 | 已核验（请求期限）／部分核验（书类）（来源：日本年金機構） |
 | 6 | 年金・社保后续纳付与永住 / 归化影响 | 退出 / 回国 | 永住指南（令和8-10-01）「公租公课」消極評価、過去滞納も審査；取消事由 8 号 / 9 号（无 3 年门槛）；入管法22条の2 2027-04-01 | 出入国在留管理庁 / 07 / 08 | 已核验（来源：出入国在留管理庁 / 07 / 08） |
 | 7 | 在留資格取消・変更・特定活動衔接 | 退出 / 转型 | 取消＝3か月以上原活動不履行（22条の4）；変更＝20条、満了日以前；特定活動＝告示 | 出入国在留管理庁 | 已核验（来源：出入国在留管理庁） |
 | 8 | 特定技能 1 号业务限制与 2 号路径 | 转型 | 2号11分野、自动车运送业无2号；受入上限22,100（閣議） | 出入国在留管理庁 / ssw.go.jp | 已核验（来源：出入国在留管理庁 / ssw.go.jp） |
@@ -183,6 +183,7 @@
 ### 4.9 厚生年金脱退一时金（执行）
 
 - 日本年金機構は「Withdrawal Payment（脱退一時金）」を公式案内（事实）。
+- **请求期限已核验**：日本年金機構（英文）明载 “you file the application for the Payments **within two years since you leave Japan**”（[来源：日本年金機構 Withdrawal Payment（英文）](https://www.nenkin.go.jp/international/english/japanese-system/benefit/payment.html)，2026）。
 - 残留下放し：请求书类・提出窓口・金额计算——公式深链未取得；厚生労働省が受给条件・算定の見直しを検討中（⚠ 部分核验）。
 - 金额计算口径只读引用 [07-economy-finance](../../07-economy-finance/reports/2026-11-economy-finance.md)。
 - 来源：[日本年金機構 Withdrawal Payment](https://www.nenkin.go.jp/international/japanese-system/withdrawalpayment/index.html)；[日本年金機構 年金の制度・手続き](https://www.nenkin.go.jp/service/index.html)。
@@ -191,7 +192,8 @@
 
 - 所得税の確定申告は翌年 **2/16–3/15**。退職所得は**分離課税**（(収入金額－退職所得控除額)×1/2）。国外転出時課税制度の様式（確定申告書・第三表・対象資産明細書）が国税庁にある（事实）[国税庁]。
 - 住民税は退職後も年度途中で課税される場合があり、帰国前は納税管理人の届出が実務上重要（推断）。
-- 残留下放し：帰国前申告の具体的期限・納税管理人届出書の公式深链未取得（⚠ 部分核验）。
+- **納税管理人届出已核验**：国外転出等时须向税務署長届出納税管理人；納税猶予は「担保を提供した場合に限り」适用（[国税庁 国外転出等をした場合の納税管理人の届出等](https://www.nta.go.jp/taxes/shiraberu/shinkoku/kokugai/01.htm)，2026）。
+- 残留下放し：帰国前申告の具体的期限は公式深链未取得（⚠ 部分核验）。
 - 来源：[国税庁 No.1420 退職所得](https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1420.htm)；[No.2240 申告分離課税制度](https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/2240.htm)；[国外転出時課税制度関係の各種様式](https://www.nta.go.jp/taxes/shiraberu/shinkoku/kokugai/yoshiki/index.htm)；[No.2022 準確定申告（申告期限の根拠）](https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/2022.htm)。
 
 ### 4.11 在留卡返还 / 再入国許可 / みなし再入国
@@ -280,7 +282,7 @@
 
 1. **执行层研究**：本主题不展开税制、年金计算与资格取消制度正文，相关结论引用 [07](../../07-economy-finance/reports/2026-11-economy-finance.md) / [08](../../08-visa-immigration/reports/2026-11-visa-immigration.md)。
 2. **个案差异大**：资格、收入、家属、资产、离境时点不同，建议必须条件化。
-3. **媒体线索边界**：健康保険任意継続与脱退一时金的具体数值来自媒体报道，仅作线索，未採択为公式活值；引用须回溯官方原文。
+3. **媒体线索边界**：健康保険任意継続的具体数值来自媒体报道，仅作线索，未採択为公式活值；厚生年金脱退一时金「出国後 2 年以内」已回溯至日本年金機構官方页（見 4.9）。
 
 ### 8.3 待复核清单（收敛后，逐项附复核入口）
 
@@ -316,7 +318,7 @@
 | 帰国前確定申告 2/16–3/15、退職所得分離課税 | 国税庁（官方一手） | 新 | 已核验 | S1（来源：国税庁（官方一手）） |
 | 在留卡返納 14 日以内、再入国最長 5 年、みなし再入国 1 年以内 | 出入国在留管理庁（官方一手） | 新 | 已核验 | S1（来源：出入国在留管理庁（官方一手）） |
 | 健康保険任意継続：退職日まで 2 か月以上・退職翌日 20 日以内・本人全額・2 年間 | 媒体转引（朝日 2025-01） | 旧 | 部分核验（公式深链未取得） | C3（来源：媒体转引（朝日 2025-01）） |
-| 厚生年金脱退一时金请求期限「出国後 2 年以内」 | 媒体转引（朝日 2026-11） | 新 | 部分核验（公式深链未取得） | C2（来源：媒体转引（朝日 2026-11）） |
+| 厚生年金脱退一时金请求期限「出国後 2 年以内」 | 日本年金機構（官方一手） | 新 | 已核验 | S1（来源：日本年金機構（官方一手）） |
 | 退職时未払賃金支払期限「退職日から 7 日以内」 | e-Gov 労働基準法 24 条（官方一手） | 新 | 部分核验（具体深链待补） | S2（来源：e-Gov 労働基準法 24 条（官方一手）） |
 
 注：本期未逐条取得官方原文的条目按 C3 处理。
@@ -342,15 +344,15 @@
 11. [e-Gov 労働基準法](https://elaws.e-gov.go.jp/document?lawid=322AC0000000049) — 法令全文（令和8-07-17 施行）；核验日期：2026-11-17；核验状态：已核验
 12. [厚生労働省 Q&A（基本手当）](https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000139508.html)；[ハローワーク](https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/koyou/hellowork.html) — 入口页无版本日期；核验日期：2026-11-17；核验状态：已核验
 13. [厚生労働省 医療保険](https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/index.html)；[総務省 外国人住民に係る住民基本台帳制度](https://www.soumu.go.jp/main_sosiki/jichi_gyousei/c-gyousei/zairyu/) — 入口页无版本日期；核验日期：2026-11-17；核验状态：已核验
-14. [日本年金機構 Withdrawal Payment（脱退一時金）](https://www.nenkin.go.jp/international/japanese-system/withdrawalpayment/index.html)；[年金の制度・手続き](https://www.nenkin.go.jp/service/index.html)；[健康保険・厚生年金保険事務手続きガイド](https://www.nenkin.go.jp/service/doga/doga_kounen/shintekidouga.html) — 入口页无版本日期；核验日期：2026-11-17；核验状态：部分核验
+14. [日本年金機構 Withdrawal Payment（脱退一時金）](https://www.nenkin.go.jp/international/japanese-system/withdrawalpayment/index.html)；[日本年金機構 Withdrawal Payment（英文・请求期限 2 年）](https://www.nenkin.go.jp/international/english/japanese-system/benefit/payment.html)；[年金の制度・手続き](https://www.nenkin.go.jp/service/index.html)；[健康保険・厚生年金保険事務手続きガイド](https://www.nenkin.go.jp/service/doga/doga_kounen/shintekidouga.html) — 入口页无版本日期；核验日期：2026-11-21；核验状态：已核验（请求期限）／部分核验（书类）
 15. [日本年金機構 厚生年金保険料等の免除（産前産後休業・育児休業等期間）](https://www.nenkin.go.jp/service/kounen/hokenryo/menjo/20140122-01.html) — 入口页无版本日期；核验日期：2026-11-17；核验状态：已核验
-16. [国税庁 No.1420 退職金を受け取ったとき（退職所得）](https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1420.htm)；[No.2240 申告分離課税制度](https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/2240.htm)；[国外転出時課税制度関係の各種様式](https://www.nta.go.jp/taxes/shiraberu/shinkoku/kokugai/yoshiki/index.htm)；[No.2022 準確定申告](https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/2022.htm) — 令和8-04-01 現在法令等；核验日期：2026-11-17；核验状态：已核验
+16. [国税庁 No.1420 退職金を受け取ったとき（退職所得）](https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1420.htm)；[No.2240 申告分離課税制度](https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/2240.htm)；[国外転出時課税制度関係の各種様式](https://www.nta.go.jp/taxes/shiraberu/shinkoku/kokugai/yoshiki/index.htm)；[No.2022 準確定申告](https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/2022.htm)；[国外転出等をした場合の納税管理人の届出等](https://www.nta.go.jp/taxes/shiraberu/shinkoku/kokugai/01.htm) — 令和8-04-01 現在法令等；核验日期：2026-11-21；核验状态：已核验
 17. [国土交通省 自動車保有関係手続きはワンストップサービス](https://www.mlit.go.jp/jidosha/jidosha_tk6_000001.html)；[国土交通省 住宅](https://www.mlit.go.jp/jutakukentiku/house/index.html) — 入口页无版本日期；核验日期：2026-11-17；核验状态：部分核验（车辆已核验 / 退室解約待核）
 
 **媒体线索（仅线索，引用须回溯官方原文）**：
 
 18. [朝日新聞 2025-01 健康保険任意継続改正報道](https://www.asahi.com/articles/ASQ165Q3GPDWUTFL00Q.html) — 未採択为活值；待回溯厚生労働省 / 協会けんぽ
-19. [朝日新聞 2026-11 厚生年金脱退一時金条件見直し検討](https://www.asahi.com/articles/ASSCC3Q67SCCUTFL019M.html) — 「出国後2年以内」の口径来源；待回溯日本年金機構
+19. [朝日新聞 2026-11 厚生年金脱退一時金条件見直し検討](https://www.asahi.com/articles/ASSCC3Q67SCCUTFL019M.html) — 「出国後2年以内」口径已回溯日本年金機構官方页（見来源清单 14）；見直し検討部分仍为线索
 
 **跨主题只读引用**：
 
