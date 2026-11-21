@@ -1,6 +1,6 @@
 {
   "version": "v1.4",
-  "generated": "2026-11-20",
+  "generated": "2026-11-21",
   "count": 21,
   "reports": [
     {
@@ -29,9 +29,9 @@
       "html": "01-ssw-driver/reports/2026-11-ssw-driver.html",
       "content_hash": "sha256:85987a239c93033c4640e7476b874988253ec516605c68584ca97a766c4760ad",
       "html_hash": "sha256:effcbda72a6083a0633cff8b207d15d254266f08b0f14b628220a6252d27e09b",
-      "audit_id": "AUD-202611-021",
+      "audit_id": "AUD-202611-007",
       "audit_state": "audited",
-      "finalized_at": "2026-11-20T12:56:07+00:00"
+      "finalized_at": "2026-11-21T01:35:24+00:00"
     },
     {
       "report": "02-career-driver/reports/2026-11-career-driver.md",
@@ -46,7 +46,7 @@
       "html_hash": "sha256:d4a02190bc1a2600a11188329121b57b4e1d1013621a4e82ae43ad598017b929",
       "audit_id": "AUD-202611-001",
       "audit_state": "audited",
-      "finalized_at": "2026-11-20T12:56:08+00:00"
+      "finalized_at": "2026-11-21T01:35:26+00:00"
     },
     {
       "report": "03-career-management/reports/2026-11-career-management.md",
@@ -61,7 +61,7 @@
       "html_hash": "sha256:b16a67b9d58f6c474401c43794d96cd235e71edd6ae7245092ef12a1c0c74d6e",
       "audit_id": "AUD-202611-003",
       "audit_state": "audited",
-      "finalized_at": "2026-11-20T12:56:08+00:00"
+      "finalized_at": "2026-11-21T01:35:28+00:00"
     },
     {
       "report": "04-industry-logistics/reports/2026-11-industry-logistics.md",
@@ -121,7 +121,7 @@
       "html_hash": "sha256:6c29549a1c4a63d07982e0cd329e76af880a814d50d83bb937de0989110f4422",
       "audit_id": "AUD-202611-018",
       "audit_state": "audited",
-      "finalized_at": "2026-11-20T12:56:09+00:00"
+      "finalized_at": "2026-11-21T01:35:30+00:00"
     },
     {
       "report": "08-visa-immigration/reports/2026-11-visa-immigration.md",
@@ -136,7 +136,7 @@
       "html_hash": "sha256:b5fc7754208ae6b0200bd5a0367e855a7160dbb64b0faa38774c3d10670a0fb0",
       "audit_id": "AUD-202611-002",
       "audit_state": "audited",
-      "finalized_at": "2026-11-20T12:56:09+00:00"
+      "finalized_at": "2026-11-21T01:35:32+00:00"
     },
     {
       "report": "09-politics-law/reports/2026-11-politics-law.md",
@@ -181,7 +181,7 @@
       "html_hash": "sha256:4b0f94daccb7c0100877b9d6e400ea3d151ac767c1fb33844d9fda0b3d2bef2f",
       "audit_id": "AUD-202611-019",
       "audit_state": "audited",
-      "finalized_at": "2026-11-20T12:56:10+00:00"
+      "finalized_at": "2026-11-21T01:35:33+00:00"
     },
     {
       "report": "12-culture-life/reports/2026-11-culture-life.md",
@@ -241,7 +241,7 @@
       "html_hash": "sha256:ec1c807b4b83c326f5d8902795a1d0fa319fd7b4ebc899ea41098ca1be4a80a1",
       "audit_id": "AUD-202611-006",
       "audit_state": "audited",
-      "finalized_at": "2026-11-20T12:56:11+00:00"
+      "finalized_at": "2026-11-21T01:35:35+00:00"
     },
     {
       "report": "16-exit-transition-return/reports/2026-11-exit-transition-return.md",
@@ -271,7 +271,7 @@
       "html_hash": "sha256:1e5692a0a9f3a4c3cc718d4959c59da3e0478b071829adc0d45bf926e5cef893",
       "audit_id": "AUD-202611-014",
       "audit_state": "audited",
-      "finalized_at": "2026-11-20T12:56:11+00:00"
+      "finalized_at": "2026-11-21T01:35:37+00:00"
     },
     {
       "report": "18-family-parenting/reports/2026-11-family-parenting.md",
@@ -312,11 +312,11 @@
       "type_id": "policy-analysis",
       "md": "20-overseas-china/reports/2026-11-overseas-china.md",
       "html": "20-overseas-china/reports/2026-11-overseas-china.html",
-      "content_hash": "sha256:a99c7dea2e5ae28d32c40322a2f63e2b6ee8092b4131ea6181b16e62770193f3",
-      "html_hash": "sha256:a4fb39a5178a567d8ece376825f1160fd10704d5d136ca1f305b67f207d3caba",
+      "content_hash": "sha256:257b1de1e81df18f0ca0706f2c479924265dd538b324b0b3b74b78a24604ee20",
+      "html_hash": "sha256:bce0af8164545410bdc972852c8d26682e75a5656a6ab55a697048e2a7235e0f",
       "audit_id": "AUD-202611-013",
       "audit_state": "audited",
-      "finalized_at": "2026-11-20T12:56:12+00:00"
+      "finalized_at": "2026-11-21T01:35:39+00:00"
     }
   ]
 }
