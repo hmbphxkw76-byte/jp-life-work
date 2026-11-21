@@ -57,10 +57,10 @@
       "type_id": "employment-research",
       "md": "03-career-management/reports/2026-11-career-management.md",
       "html": "03-career-management/reports/2026-11-career-management.html",
-      "content_hash": "sha256:b488a8d8e783ee898ffc379f0f42d7bb39f708117ac917e1fa9a5996e642cf41",
-      "html_hash": "sha256:0399114a47053524ae9f4d68c77ae9ecc04fba86dfcdee60190453face0e7975",
+      "content_hash": "sha256:de33331b1652c8e4cfa0c04aaf53966e76c404562c7e1b8c2130169bf64791e1",
+      "html_hash": "sha256:f0910f5fed455820e67abcbbe8cf5bc6b891bd4674c3d0e37e017f72a71ca8e2",
       "audit_id": "AUD-202611-003",
-      "audit_state": "audited",
+      "audit_state": "stale",
       "finalized_at": "2026-11-21T02:04:36+00:00"
     },
     {
@@ -117,10 +117,10 @@
       "type_id": "employment-research",
       "md": "07-economy-finance/reports/2026-11-economy-finance.md",
       "html": "07-economy-finance/reports/2026-11-economy-finance.html",
-      "content_hash": "sha256:4f7ee73a9a272cf8efb9c462f22797f3fc13169f65d5cca52ef9931506cbdade",
-      "html_hash": "sha256:a12ecf40da36b996a8edcde6ac0760798d8df342030e2f1122c426ec4576602f",
+      "content_hash": "sha256:d07839b69a427fb5855b35130e8dac4fc363c78ca7c5447ba5d38f1918c42ddc",
+      "html_hash": "sha256:19fb6e80595b9cdda55097b713a19a5bf73a0a2d3d3f5c1b5a31c8040df29b74",
       "audit_id": "AUD-202611-018",
-      "audit_state": "audited",
+      "audit_state": "stale",
       "finalized_at": "2026-11-21T02:07:19+00:00"
     },
     {
