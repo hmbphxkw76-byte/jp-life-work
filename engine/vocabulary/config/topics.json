@@ -545,11 +545,6 @@
           "topic": "01-ssw-driver",
           "id": "SSW-026",
           "term": "手取り"
-        },
-        {
-          "topic": "07-economy-finance",
-          "id": "ECF-072",
-          "term": "手取り"
         }
       ]
     },
@@ -795,11 +790,6 @@
           "topic": "02-career-driver",
           "id": "CDR-031",
           "term": "危険物取扱者"
-        },
-        {
-          "topic": "10-education-qualification",
-          "id": "EDU-021",
-          "term": "危険物取扱者"
         }
       ]
     },
@@ -1025,11 +1015,6 @@
           "topic": "01-ssw-driver",
           "id": "SSW-062",
           "term": "マイナンバー"
-        },
-        {
-          "topic": "08-visa-immigration",
-          "id": "VIS-046",
-          "term": "マイナンバー"
         }
       ]
     },
@@ -1070,11 +1055,6 @@
           "topic": "02-career-driver",
           "id": "CDR-002",
           "term": "主任"
-        },
-        {
-          "topic": "03-career-management",
-          "id": "CMG-009",
-          "term": "主任"
         }
       ]
     },
@@ -1084,11 +1064,6 @@
         {
           "topic": "03-career-management",
           "id": "CMG-064",
-          "term": "会議"
-        },
-        {
-          "topic": "11-language-japanese",
-          "id": "JPN-057",
           "term": "会議"
         }
       ]
