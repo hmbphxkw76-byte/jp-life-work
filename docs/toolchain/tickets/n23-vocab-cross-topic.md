@@ -1,7 +1,7 @@
 # 工单 N23：· 受控词表跨主题同概念对齐（P2，组 B）
 
 > **来源**：情报科学五框架分析（会话，2026-11-20）· 差距 G5（受控词表）
-> **状态**：待实施
+> **状态**：已入库
 > **验收判据**：见下方「验收判据」节；完成后回填状态与证据。
 
 ---
@@ -25,4 +25,4 @@
   - 提示词：21 个主题 `prompts/prompt-p1-term-alignment.md` 增「跨主题同概念对齐（n23）」段。
   - 测试：`test_tools.py` 238 项 OK（新增 cross-check 4 项 + C-15 来源 1 项）；`validate.py` / `prompt_check.py` / ruff 全绿。
   - 文档：`docs/信息质量评估提示词体系.md` v1.6（C-15）、`docs/审计报告标准化管理体系.md` v1.8（C-15 映射 L4）、`engine/vocabulary/README.md` S7。
-- **状态**：已实施（未提交，位于 worktree `n23-vocab-cross-topic`）。
+- **状态**：已入库（实施完成并合并推送至 `origin/main`；证据见上）。

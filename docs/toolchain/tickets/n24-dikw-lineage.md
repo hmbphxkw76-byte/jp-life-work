@@ -1,7 +1,7 @@
 # 工单 N24：· DIKW 端到端血缘视图（P2，组 C）
 
 > **来源**：情报科学五框架分析（会话，2026-11-20）· 差距 G6（DIKW）
-> **状态**：待实施
+> **状态**：已入库
 > **验收判据**：见下方「验收判据」节；完成后回填状态与证据。
 
 ---
@@ -23,4 +23,4 @@
   - 实测：`decision_metrics --lineage` 输出 19 条（结论已关联 4.1 判定，如「去不去 → 待定」）；`fact_card_check --lineage` 输出 16 张卡片血缘（FC-001 引用位于 00 data 层，reports 为空显式留空）。
   - 测试：`test_decision_metrics.py` 11 项 OK（新增 `lineage`）；`test_tools.py` 235 项 OK（新增 `fact_card_check.lineage`）；`validate.py` / ruff 全绿。
   - 文档：`engine/tools/README.md` v1.8。
-- **状态**：已实施（未提交，位于 worktree `n24-dikw-lineage`；`decision_metrics.py` 为增量新增函数，与 n19/n20 改动区域不同，建议合并顺序 n19 → n20 → n24）。
+- **状态**：已入库（实施完成并合并推送至 `origin/main`；证据见上）。

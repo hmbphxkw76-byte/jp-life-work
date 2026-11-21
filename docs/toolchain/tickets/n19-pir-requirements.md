@@ -1,7 +1,7 @@
 # 工单 N19：· 规划层情报需求登记（P1，组 A）
 
 > **来源**：情报科学五框架分析（会话，2026-11-20）· 差距 G1（情报周期·规划）
-> **状态**：待实施
+> **状态**：已入库
 > **验收判据**：见下方「验收判据」节；完成后回填状态与证据。
 
 ---
@@ -25,4 +25,4 @@
   - 实测：`update_planner --requirements --porcelain` 输出 19 条需求 / 11 条缺失（rc=0）；`decision_metrics` 需求覆盖率 4/19、超期 0（rc=2，因既有缺失）。
   - 测试：`test_decision_metrics.py` 11 项 OK（新增需求矩阵 / render / collect 需求字段）；`test_tools.py` 236 项 OK（新增 `render_requirements` / `--requirements --porcelain`）；`validate.py` / `prompt_check.py` / ruff 全绿。
   - 文档：`engine/tools/README.md` v1.8。
-- **状态**：已实施（未提交，位于 worktree `n19-pir-requirements`）。
+- **状态**：已入库（实施完成并合并推送至 `origin/main`；证据见上）。
