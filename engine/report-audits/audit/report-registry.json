@@ -57,10 +57,10 @@
       "type_id": "employment-research",
       "md": "03-career-management/reports/2026-11-career-management.md",
       "html": "03-career-management/reports/2026-11-career-management.html",
-      "content_hash": "sha256:2178747f010fb4c6fa2ef6dc3f5f53a04b72746548157cd56f30577c5632bc7e",
-      "html_hash": "sha256:e1a647ff38d8930e2ef7a57c86ceb9aa17fd55f482c0a869381d57dc0e41f39a",
+      "content_hash": "sha256:b488a8d8e783ee898ffc379f0f42d7bb39f708117ac917e1fa9a5996e642cf41",
+      "html_hash": "sha256:0399114a47053524ae9f4d68c77ae9ecc04fba86dfcdee60190453face0e7975",
       "audit_id": "AUD-202611-003",
-      "audit_state": "stale",
+      "audit_state": "audited",
       "finalized_at": "2026-11-21T02:04:36+00:00"
     },
     {
@@ -117,10 +117,10 @@
       "type_id": "employment-research",
       "md": "07-economy-finance/reports/2026-11-economy-finance.md",
       "html": "07-economy-finance/reports/2026-11-economy-finance.html",
-      "content_hash": "sha256:2a97e18a49cd05512f7724f8ac0744a8c0e9fa544721f78dc3e6d00bc05f1159",
-      "html_hash": "sha256:75cef0a1ab2d1351167df5530cc6e2277fe1d353f4a2f4867530645da9ed6aa3",
+      "content_hash": "sha256:4f7ee73a9a272cf8efb9c462f22797f3fc13169f65d5cca52ef9931506cbdade",
+      "html_hash": "sha256:a12ecf40da36b996a8edcde6ac0760798d8df342030e2f1122c426ec4576602f",
       "audit_id": "AUD-202611-018",
-      "audit_state": "stale",
+      "audit_state": "audited",
       "finalized_at": "2026-11-21T02:07:19+00:00"
     },
     {
@@ -162,10 +162,10 @@
       "type_id": "employment-research",
       "md": "10-education-qualification/reports/2026-11-education-qualification.md",
       "html": "10-education-qualification/reports/2026-11-education-qualification.html",
-      "content_hash": "sha256:ce0fff9c65d9db06cc499352b40c20890b40e9d926bd5a50db343d7da0d23815",
-      "html_hash": "sha256:59e7066a12a3b4c7940e7e38598ad5369f95e717bc2d8b3901513cca15fcc876",
+      "content_hash": "sha256:2de930bf68e53dae6825ba0c140a78ffaa453612a67f44f14a48b2e71816d07a",
+      "html_hash": "sha256:0c09f6f2f679f40e04d4feff1b76cb684a8b645ab7268e7df5cf102b68b4de8b",
       "audit_id": "AUD-202611-016",
-      "audit_state": "pending_initial",
+      "audit_state": "audited",
       "finalized_at": "2026-11-21T02:08:55+00:00"
     },
     {
