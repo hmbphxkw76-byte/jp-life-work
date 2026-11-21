@@ -1,174 +1,174 @@
 {
   "version": "v1.4",
-  "updated": "2026-11-21T12:15:38+00:00",
+  "updated": "2026-11-21T13:59:37+00:00",
   "reports": {
     "00-decision-hub/reports/2026-11-decision-hub.md": {
       "state": "audited",
-      "audit_id": "AUD-202611-013",
-      "finalized_at": "2026-11-21T12:15:38+00:00",
-      "content_hash": "sha256:22a5ad8a2882f2397063be939b798fe0be00d59f5341176307fe1c7be8a3b117",
-      "html_hash": "sha256:1eecbcb32e6d7bb79d36ac2d78eb082728b2ab078a170f4bbd396dc9454d4e7d",
-      "last_seq": 1287
+      "audit_id": "AUD-202611-001",
+      "finalized_at": "2026-11-21T13:59:22+00:00",
+      "content_hash": "sha256:55a1da9a6eb876864b453efeccb2c28d988d206c88a140aacb47be0bc40945b2",
+      "html_hash": "sha256:1f5e85993de5f7e578409308212cc9ff7b3bc4a0c6be1407d9b4a81925ed8f6f",
+      "last_seq": 1352
     },
     "01-ssw-driver/reports/2026-11-ssw-driver.md": {
       "state": "audited",
-      "audit_id": "AUD-202611-008",
-      "finalized_at": "2026-11-21T12:15:38+00:00",
-      "content_hash": "sha256:81ee16a7d3ec87a977f68dc5c069f9d5008be2606a42e9f2e8c203d2fc12676e",
-      "html_hash": "sha256:4914dfcb6b2f5afd47fa944a4a0311e1b900f318d551710ab3765f9c4a769ffa",
-      "last_seq": 1288
+      "audit_id": "AUD-202611-013",
+      "finalized_at": "2026-11-21T13:59:23+00:00",
+      "content_hash": "sha256:31d954bbe2adb37e4918be3015a762f2dbf977eeb112cc43ed003431c28ee2f7",
+      "html_hash": "sha256:67389f8fa2a45d4bf29a5663eb84af2fd73594ae36f1b6ad9d125bea0fc643aa",
+      "last_seq": 1355
     },
     "02-career-driver/reports/2026-11-career-driver.md": {
       "state": "audited",
-      "audit_id": "AUD-202611-004",
-      "finalized_at": "2026-11-21T12:15:38+00:00",
-      "content_hash": "sha256:461eac58bccd3644a3bcb956bc1cefd450f2e3de197d097c3766b180545cf737",
-      "html_hash": "sha256:c3d362e34faf886f7b3fde2e3284fb5f8d5f0f09254faf87efc4c9e14339142f",
-      "last_seq": 1289
+      "audit_id": "AUD-202611-008",
+      "finalized_at": "2026-11-21T13:59:24+00:00",
+      "content_hash": "sha256:fa853dcadf4179b4f36b508bc19178a28b700667ca4f41a7c2364c47d23682f9",
+      "html_hash": "sha256:c4453324cf6939c4fc5958ff9f4ec0f8a60eb5f174051689125c1c0e5defb264",
+      "last_seq": 1358
     },
     "03-career-management/reports/2026-11-career-management.md": {
       "state": "audited",
-      "audit_id": "AUD-202611-010",
-      "finalized_at": "2026-11-21T12:15:38+00:00",
-      "content_hash": "sha256:15e78674f0e2dda782e9bdd17fd7e6e6206112579905f85671b589359242c17e",
-      "html_hash": "sha256:b753655c0d755322df2883a0a25aa6bdec62442b780ad208ea9f03bce40e4d4c",
-      "last_seq": 1290
+      "audit_id": "AUD-202611-004",
+      "finalized_at": "2026-11-21T13:59:24+00:00",
+      "content_hash": "sha256:3277ea469b8c25b9e549e8cf1fb1d997e47c4f5f3feeb3ebbe79819be1967097",
+      "html_hash": "sha256:d4eceab0715c158efe9afe91d19dfb5184e17151f2e314b63b2f9b2c20903db9",
+      "last_seq": 1361
     },
     "04-industry-logistics/reports/2026-11-industry-logistics.md": {
       "state": "audited",
-      "audit_id": "AUD-202611-001",
-      "finalized_at": "2026-11-21T12:15:38+00:00",
-      "content_hash": "sha256:893e9d232ce19e36636cd1b6e6f0966d6b2db8eaed53701d152d3bcf33195878",
-      "html_hash": "sha256:e1c7d042fc937ea40c2eb5c311233cfa2f5a3c42721ca2dabf79f58dd166230c",
-      "last_seq": 1291
+      "audit_id": "AUD-202611-020",
+      "finalized_at": "2026-11-21T13:59:13+00:00",
+      "content_hash": "sha256:a0716aa5ac85a76e2789dc51be3878b6a51a9e93432ac930d4c01f7c251e72c4",
+      "html_hash": "sha256:05a834a48e1acade589dedc986d2e7619978a7e8817930bc3f4db2610305c53b",
+      "last_seq": 1349
     },
     "05-industry-autonomous/reports/2026-11-industry-autonomous.md": {
       "state": "audited",
-      "audit_id": "AUD-202611-007",
-      "finalized_at": "2026-11-21T12:15:38+00:00",
-      "content_hash": "sha256:00670dbb18d4a4e40328bc54a69bbeae6c47fdaad0d9d847f1205f72e9936cf8",
-      "html_hash": "sha256:41697bb5d9020bd34e8f35676ec3921abba74d475c8f4b01891ce124b445b847",
-      "last_seq": 1292
+      "audit_id": "AUD-202611-010",
+      "finalized_at": "2026-11-21T13:59:26+00:00",
+      "content_hash": "sha256:40e72b0718d24467ffbe6f632566ce0f176a120a42ce7869de187594b6dcb4ad",
+      "html_hash": "sha256:55f6f5cc0e36204cdb4ff04ec8bbacd174377a1ceda633171bf67b40e3118497",
+      "last_seq": 1364
     },
     "06-industry-technology/reports/2026-11-industry-technology.md": {
       "state": "audited",
-      "audit_id": "AUD-202611-003",
-      "finalized_at": "2026-11-21T12:15:38+00:00",
-      "content_hash": "sha256:75401bde8640d4cc9cf7719abf303950fde6b38529aee041d56c21dca0cebcca",
-      "html_hash": "sha256:754919a384bfe86d2b373f32b47c71d342d53f5d3a36aaf9720b5a9f603dd0e8",
-      "last_seq": 1293
+      "audit_id": "AUD-202611-007",
+      "finalized_at": "2026-11-21T13:59:26+00:00",
+      "content_hash": "sha256:718e79632714c0e90371fe0668bba743b686f230f2d615aa70d9ea9cc9ebbaa9",
+      "html_hash": "sha256:5d72c3e23f4464f771d76c17fa1d1c6ff763149b26ae6de9b112db88d9939466",
+      "last_seq": 1367
     },
     "07-economy-finance/reports/2026-11-economy-finance.md": {
       "state": "audited",
-      "audit_id": "AUD-202611-021",
-      "finalized_at": "2026-11-21T12:15:38+00:00",
-      "content_hash": "sha256:e371dc0736c467a737399419c36b556e0e633732f1d745ce943f69909347e344",
-      "html_hash": "sha256:d4f92ae984eda8cd92ab496a85dfa9051811110148fc9c70e1b08708f36a4a3d",
-      "last_seq": 1294
+      "audit_id": "AUD-202611-003",
+      "finalized_at": "2026-11-21T13:59:27+00:00",
+      "content_hash": "sha256:203d94860d62ff169022c28f9b0bc19c6d74d080548a66ba95c16d65d8b3e4b8",
+      "html_hash": "sha256:690d9695ce5b113f07355b232fae11582b406827566f4c19fe65da1356779dde",
+      "last_seq": 1370
     },
     "08-visa-immigration/reports/2026-11-visa-immigration.md": {
       "state": "audited",
-      "audit_id": "AUD-202611-015",
-      "finalized_at": "2026-11-21T12:15:38+00:00",
-      "content_hash": "sha256:8d37f7a255fdc63ea457eb32b45356ccb1257a6ff096a1936406db9b519f924d",
-      "html_hash": "sha256:7a7a9dba257b6affb072d71921d0dea3b1ccc19eac7bc4cfbfb520042b73d8c9",
-      "last_seq": 1295
+      "audit_id": "AUD-202611-021",
+      "finalized_at": "2026-11-21T13:59:28+00:00",
+      "content_hash": "sha256:aeb15e0f343db11e9d867c02a6b33d3a31dfc1d353fff506dcdfb4809574bf41",
+      "html_hash": "sha256:d610c53fe51c78f596dc4c3d477dc465d047993390ec6f4a4b5ad5d26ba9380f",
+      "last_seq": 1373
     },
     "09-politics-law/reports/2026-11-politics-law.md": {
       "state": "audited",
-      "audit_id": "AUD-202611-002",
-      "finalized_at": "2026-11-21T10:26:49+00:00",
-      "content_hash": "sha256:dc9c25a9a9e4ca5572047c340f9d764baf41d73def263f5534603da769ad1a4d",
-      "html_hash": "sha256:df658ae5f91cc3151664ab756013677a4af2479b470f99dda03fd8faa68ae8d3",
-      "last_seq": 1204
+      "audit_id": "AUD-202611-015",
+      "finalized_at": "2026-11-21T13:59:29+00:00",
+      "content_hash": "sha256:54550f0f54a0e99c64a9188715825e7d970d3d3608b4ce8eaa3f6e0516738b81",
+      "html_hash": "sha256:fe39701439815477311dce63dcaed960045a4a49dc4a97bd609ef58dff26bd56",
+      "last_seq": 1376
     },
     "10-education-qualification/reports/2026-11-education-qualification.md": {
       "state": "audited",
-      "audit_id": "AUD-202611-011",
-      "finalized_at": "2026-11-21T12:15:38+00:00",
-      "content_hash": "sha256:9b95a72885caef60ed85d257af553a19ed5142c02cbcef84ada3f2d79c5dccbe",
-      "html_hash": "sha256:2b7cc2db1d008a4d8e273a1d5020ff9d9c26c70d1ecf1ff1b2f5f80103e90463",
-      "last_seq": 1296
+      "audit_id": "AUD-202611-002",
+      "finalized_at": "2026-11-21T13:59:29+00:00",
+      "content_hash": "sha256:c5c2c950f7cad25159c0431a1f880dbe5e8a5fc035baf4cd837048ea1f0a967a",
+      "html_hash": "sha256:00d51a9310d833fc989f1eb7f010675024258d1ed463699afb787f8d2fa26aea",
+      "last_seq": 1379
     },
     "11-language-japanese/reports/2026-11-language-japanese.md": {
       "state": "audited",
-      "audit_id": "AUD-202611-009",
-      "finalized_at": "2026-11-21T10:26:49+00:00",
-      "content_hash": "sha256:0006dc53c56a9a331487c645caf8aec9caf5eaa3fe1115b1ab9d7f1583faee70",
-      "html_hash": "sha256:c49035e3841251678c1b0f9501958a75e35c7d03e723a9eba3790f6000de823f",
-      "last_seq": 1205
+      "audit_id": "AUD-202611-011",
+      "finalized_at": "2026-11-21T13:59:30+00:00",
+      "content_hash": "sha256:b010cd239b41006e2d833aa1348778e6c9429e702fd951aba2aab9c78853d54d",
+      "html_hash": "sha256:5e3c8bbc7ff70d79d72321b745f42ad4f76caa84e1ecd0da9e2f286e35a7ed17",
+      "last_seq": 1382
     },
     "12-culture-life/reports/2026-11-culture-life.md": {
       "state": "audited",
-      "audit_id": "AUD-202611-018",
-      "finalized_at": "2026-11-21T12:15:38+00:00",
-      "content_hash": "sha256:c57a56fa22de1236a33bc4040ffbef8161c4ea3b9354bad456d7588ed10609bc",
-      "html_hash": "sha256:10136fad4fcaad28782ab77122a3536a2c8a9892a19df9613ab1268ed8e7bc63",
-      "last_seq": 1297
+      "audit_id": "AUD-202611-009",
+      "finalized_at": "2026-11-21T13:59:31+00:00",
+      "content_hash": "sha256:5fb74197e75f8107e2899d455847cf53b84ab87b72a28efe4bc9be0845b6062f",
+      "html_hash": "sha256:a439165e8051c874d6a80e60f5664424fb3ead0b8da4559d8438636417759e22",
+      "last_seq": 1385
     },
     "13-regional-info/reports/2026-11-regional-info.md": {
       "state": "audited",
-      "audit_id": "AUD-202611-016",
-      "finalized_at": "2026-11-21T12:15:38+00:00",
-      "content_hash": "sha256:67698b888a9e003b6412c9efa038fe54fd4e054a7b8b696bbe9b5d57a8cb5fd2",
-      "html_hash": "sha256:8c8b7015fee64415d74693de1d9e393b23b292aa242753f7df427bf2d62de309",
-      "last_seq": 1298
+      "audit_id": "AUD-202611-018",
+      "finalized_at": "2026-11-21T13:59:32+00:00",
+      "content_hash": "sha256:bbf4d056b06566ed0f4641abe8e8e75763c99838f8c74abf226143c0f9235f97",
+      "html_hash": "sha256:85cf1d092751dca298161d5d5d1c2152a571ef546d30fe28a74c074d64787f41",
+      "last_seq": 1388
     },
     "14-life-operations/reports/2026-11-life-operations.md": {
       "state": "audited",
-      "audit_id": "AUD-202611-019",
-      "finalized_at": "2026-11-21T12:15:38+00:00",
-      "content_hash": "sha256:c10153aedd06d5cc4856ebf07ef0de9ea59f5efd0d8d8535dc2be729490569fb",
-      "html_hash": "sha256:86b0a83a42cf5facab46446d640d490ff7e0560e97232c06484ad05afab16b51",
-      "last_seq": 1299
+      "audit_id": "AUD-202611-016",
+      "finalized_at": "2026-11-21T13:59:32+00:00",
+      "content_hash": "sha256:9d59c92cc3cc3a531c95c12f9574bd4bc4c1f9ba7779506c4d259850f441934e",
+      "html_hash": "sha256:47aa4f12d3e7dc90eeb0edfe78d7698c68104ccf63320a35fe4f2803948525c1",
+      "last_seq": 1391
     },
     "15-health-wellbeing/reports/2026-11-health-wellbeing.md": {
       "state": "audited",
-      "audit_id": "AUD-202611-012",
-      "finalized_at": "2026-11-21T12:15:38+00:00",
-      "content_hash": "sha256:44e5713ead41fe65bb063630eb40c8e8378b65d20a70fc22440c6d38460a8b49",
-      "html_hash": "sha256:0c250bac0b0b0fd209978704183bc3ab32c97371fd64be70b9c5a40cca67ffbf",
-      "last_seq": 1300
+      "audit_id": "AUD-202611-019",
+      "finalized_at": "2026-11-21T13:59:33+00:00",
+      "content_hash": "sha256:7ca8c441fe34cd90713d536903bc5ae59876013a6357363565f4875037bd150d",
+      "html_hash": "sha256:21c5b177de000b1bbe942209e196c8f0d1161d255ec06b8733c01c6b98d43391",
+      "last_seq": 1394
     },
     "16-exit-transition-return/reports/2026-11-exit-transition-return.md": {
       "state": "audited",
-      "audit_id": "AUD-202611-022",
-      "finalized_at": "2026-11-21T10:26:49+00:00",
-      "content_hash": "sha256:c25c711e20b4488c6467d08ca4785bef3b2eb9cd50ad19cbfec089a909722ac6",
-      "html_hash": "sha256:d8d63ccc6948cffb00088d29c5f3426b6939a25374506c3a0bc23292f588b494",
-      "last_seq": 1210
+      "audit_id": "AUD-202611-012",
+      "finalized_at": "2026-11-21T13:59:34+00:00",
+      "content_hash": "sha256:9fce36489214336818cd1233c149b05ac4e844782c8209ad52730f8b663c2335",
+      "html_hash": "sha256:b3761c7b750954f43bc21ae2f95e7be51894a8a7a2d592fc8b260faedf0e758f",
+      "last_seq": 1397
     },
     "17-migration-compliance/reports/2026-11-migration-compliance.md": {
       "state": "audited",
-      "audit_id": "AUD-202611-005",
-      "finalized_at": "2026-11-21T12:15:38+00:00",
-      "content_hash": "sha256:1223dd4e85424159bb7ad2776e92c028894682ce9fc6bf12333a61cfec2d2cf4",
-      "html_hash": "sha256:068884303c04495129ae615037ab2679622fc6b2bb4bba721cf54c83b2352bb4",
-      "last_seq": 1301
+      "audit_id": "AUD-202611-022",
+      "finalized_at": "2026-11-21T13:59:34+00:00",
+      "content_hash": "sha256:41ea2933904f4bc607405564486e3b4730be7d6ea15e40fd97385c6ead71e9ec",
+      "html_hash": "sha256:e073802e8943ff43035f54523368fc206b7a4ef5da603b7905221d17c0f80d50",
+      "last_seq": 1400
     },
     "18-family-parenting/reports/2026-11-family-parenting.md": {
       "state": "audited",
-      "audit_id": "AUD-202611-017",
-      "finalized_at": "2026-11-21T12:15:38+00:00",
-      "content_hash": "sha256:660d42b917ec044c284004d00f0d4c8c96f97da4806903dc375844b60e710436",
-      "html_hash": "sha256:504ac6dc397679d6c2a85162c389305df21ec1134afe457632042d091444c99c",
-      "last_seq": 1302
+      "audit_id": "AUD-202611-005",
+      "finalized_at": "2026-11-21T13:59:35+00:00",
+      "content_hash": "sha256:8313c0a77e05e14a794cabe40d0cc75d8decfe77d2c0a5655446bbee1e6fa4ec",
+      "html_hash": "sha256:7685df9e442c0486553a894335ae339d9a8e02e8d0c1fb46ab043d5a5cc4ab1d",
+      "last_seq": 1403
     },
     "19-safety-disaster/reports/2026-11-safety-disaster.md": {
       "state": "audited",
-      "audit_id": "AUD-202611-006",
-      "finalized_at": "2026-11-21T12:15:38+00:00",
-      "content_hash": "sha256:77cb6f7c7c08801db0ddb516d09325b91f76e23742326ed3e57bf22df8b7c8d3",
-      "html_hash": "sha256:0ffaed3b56e4f86e8a2e60a2e3e803eda35d91ce1657195c70a24db9be4e30ee",
-      "last_seq": 1303
+      "audit_id": "AUD-202611-017",
+      "finalized_at": "2026-11-21T13:59:36+00:00",
+      "content_hash": "sha256:0d9cd38154cdb3afa60ca68060940e9318084d856a612e60355946168547c0d2",
+      "html_hash": "sha256:d3e7000b5ac7277ce9ecfd1f7f5062258fee506ca89298d375aba75a4c747664",
+      "last_seq": 1406
     },
     "20-overseas-china/reports/2026-11-overseas-china.md": {
       "state": "audited",
-      "audit_id": "AUD-202611-014",
-      "finalized_at": "2026-11-21T12:15:38+00:00",
-      "content_hash": "sha256:a8c59af2d8e957291934051d2787dbaa14365fa945c7ceb718312b3dedd2f17e",
-      "html_hash": "sha256:317415dc11bb2d98d0b59a029fa9839a7a6d61d01cb874c6fe379b6ef5042c03",
-      "last_seq": 1304
+      "audit_id": "AUD-202611-006",
+      "finalized_at": "2026-11-21T13:59:37+00:00",
+      "content_hash": "sha256:9b8db76b7fbe77e5836a025debbd27791d8fceead04fd9ea3a72ece8e3aa5b1a",
+      "html_hash": "sha256:5066ddc5e7c7ae40f32fa8e7766a6e4b2c8a58a07f15d83b25c9b98c4da0baab",
+      "last_seq": 1409
     }
   }
 }
