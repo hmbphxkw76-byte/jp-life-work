@@ -1,7 +1,7 @@
 # 工单 N22：· 证据强度标定与合成规则（P1，组 B）
 
 > **来源**：情报科学五框架分析（会话，2026-11-20）· 差距 G4（证据学）
-> **状态**：待实施
+> **状态**：已入库
 > **验收判据**：见下方「验收判据」节；完成后回填状态与证据。
 
 ---
@@ -24,4 +24,4 @@
   - 文档：`fact-card-standard.md` v1.1（corroboration 字段）；`engine/tools/README.md` v1.9。
   - 实测：`counterexample_scan` 15 份 / 28 条候选（rc=2，含新增单源）；`fact_card_check` 16 张卡片 / 16 条 P2（corroboration 未标注，已知缺口）；`audit_pipeline --gate` 通过；`l5_meta_check` 覆盖率 100% rc=0；`validate.py` rc=0。
   - 测试：`test_counterexample_scan.py` 10 项 OK（新增单源 3 项）；`test_cov_audit.py` 76 项 OK；`test_tools.py` 237 项 OK（新增 EVI-01 / corroboration）；ruff 全绿。
-- **状态**：已实施（未提交，位于 worktree `n22-evidence-strength`；已复制 n21 产物，合并须按 n25 → n21 → n22 顺序）。
+- **状态**：已入库（实施完成并合并推送至 `origin/main`；证据见上）。

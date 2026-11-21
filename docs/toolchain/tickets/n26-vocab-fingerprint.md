@@ -1,7 +1,7 @@
 # 工单 N26：· 词表变更审计指纹（P2，组 D）
 
 > **来源**：情报科学五框架分析（会话，2026-11-20）· 差距 G8（受控词表 / 证据学）
-> **状态**：待实施
+> **状态**：已入库
 > **验收判据**：见下方「验收判据」节；完成后回填状态与证据。
 
 ---
@@ -23,4 +23,4 @@
   - 实测：`vocab-hash --check` 匹配 rc=0；变更词条后失配 rc=2（测试覆盖）。
   - 测试：`test_tools.py` 235 项 OK（新增 `test_vocab_hash_and_check`）；`test_decision_metrics.py` 10 项 OK（新增 vocab_hash 字段）；`validate.py` / ruff 全绿。
   - 文档：`engine/vocabulary/README.md` S7。
-- **状态**：已实施（未提交，位于 worktree `n26-vocab-fingerprint`）。
+- **状态**：已入库（实施完成并合并推送至 `origin/main`；证据见上）。

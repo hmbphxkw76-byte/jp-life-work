@@ -1,7 +1,7 @@
 # 工单 N25：· 加工层受控中间产物（source-index 入册）（P2，组 C）
 
 > **来源**：情报科学五框架分析（会话，2026-11-20）· 差距 G7（情报周期·加工）
-> **状态**：待实施
+> **状态**：已入库
 > **验收判据**：见下方「验收判据」节；完成后回填状态与证据。
 
 ---
@@ -25,4 +25,4 @@
   - 测试：`test_source_check.py` 18 项 OK（新增归一化 3 项 + E5/指纹 3 项）；`source_check.py` 全量 21 份报告 / 458 条，阻断 0、告警 1（00 决策枢纽无 URL 条目，预期）；`validate.py` rc=0；ruff 通过。
   - 说明：`counterexample_scan.py` / `info_quality_check.py` 当前无独立机构名 / URL / 日期归一化逻辑，故仅提供共享模块供 n21 / n22 复用，未为改而改。
   - 路径校正：实际受控产物为 `engine/report-audits/audit/source-index.json`（工具既有输出路径），非工单初稿的 `engine/report-audits/source-index.json`。
-- **状态**：已实施（未提交，位于 worktree `n25-processing-controlled`）。
+- **状态**：已入库（实施完成并合并推送至 `origin/main`；证据见上）。

@@ -1,7 +1,7 @@
 # 工单 N21：· 信源批评升级（来源质量四维）（P1，组 B）
 
 > **来源**：情报科学五框架分析（会话，2026-11-20）· 差距 G3（信源批评）
-> **状态**：待实施
+> **状态**：已入库
 > **验收判据**：见下方「验收判据」节；完成后回填状态与证据。
 
 ---
@@ -27,4 +27,4 @@
   - Backfill：新增第 7 项后 L5 覆盖率 0% → 以临时脚本为 21 份已审计报告追加「独」项（`result=uncertain`，basis 标注「程序化补录，非人工结论」），经 `--backfill-l5` 写入台账；补录后 `l5_meta_check` 覆盖率 100%、rc=0；`audit_pipeline --gate` 通过（台账 868 条，链完整）。
   - 测试：`test_source_check.py` 20 项 OK（新增六元组 / E6）；`test_cov_audit.py` 76 项 OK；`test_tools.py` 235 项 OK（新增 C-16）；`test_l5_meta_check.py` 12 项 OK；`validate.py` / `prompt_check.py` / ruff 全绿。
   - 文档：`docs/信息质量评估提示词体系.md` v1.6（C-16）、`docs/审计报告标准化管理体系.md` v1.8（L5 七项 / C-16）。
-- **状态**：已实施（未提交，位于 worktree `n21-source-criticism`；因分支独立，已把 n25 产物复制入本 worktree，合并须按 n25 → n21 顺序）。
+- **状态**：已入库（实施完成并合并推送至 `origin/main`；证据见上）。
