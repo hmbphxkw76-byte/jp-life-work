@@ -192,10 +192,10 @@
       "type_id": "employment-research",
       "md": "12-culture-life/reports/2026-11-culture-life.md",
       "html": "12-culture-life/reports/2026-11-culture-life.html",
-      "content_hash": "sha256:613bed73a2b5d2a11ed29f63f50e7f56988e76f76569c319ff21cf951e6ad5e0",
-      "html_hash": "sha256:d2c6111c8938a0d2e8d5d862c771671ad49ab21dcd5abaebc2b278cb01f54d2c",
+      "content_hash": "sha256:45380bf6de3b58e63021d217114f0cabd5b1f946f9e509fe7793afa9c0d7e8a3",
+      "html_hash": "sha256:17de45e24a167075f5c365f2f4c13722c8e3b182fd7b52d2275031ad6277cb95",
       "audit_id": "AUD-202611-005",
-      "audit_state": "pending_initial",
+      "audit_state": "audited",
       "finalized_at": "2026-11-21T02:11:30+00:00"
     },
     {
@@ -237,10 +237,10 @@
       "type_id": "employment-research",
       "md": "15-health-wellbeing/reports/2026-11-health-wellbeing.md",
       "html": "15-health-wellbeing/reports/2026-11-health-wellbeing.html",
-      "content_hash": "sha256:375ee3d054474a531bf3521697dfa48eb21796ec7ae8c766628484c74b20927a",
-      "html_hash": "sha256:fac84ed2093da082b492a82a2d75d474d1750ce5c452f79ab0e3caea06042b88",
+      "content_hash": "sha256:07398a3ff7712253927b5fe0b40d26d503d0699f13cb04dd0b949863e4e148e2",
+      "html_hash": "sha256:433d43f1d29f7cf16c51148bcd25419b9ee41c74c35f9b50d73e3ae492ad754f",
       "audit_id": "AUD-202611-006",
-      "audit_state": "pending_initial",
+      "audit_state": "audited",
       "finalized_at": "2026-11-21T02:11:34+00:00"
     },
     {
