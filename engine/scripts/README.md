@@ -193,7 +193,7 @@ python engine/scripts/verify_report_parity.py --compare  .migration-baseline    
 
 | # | 项 | 结果 |
 |---|---|---|
-| 1 | 测试全绿 | ✅ `python -m unittest discover -s engine/tests -v` 全绿（1081 项） |
+| 1 | 测试全绿 | ✅ `python -m unittest discover -s engine/tests -v` 全绿（1095 项） |
 | 2 | `validate.py` 通过 | ✅ 退出码 0 |
 | 3 | 双轴评审存在且无 P0/P1 | ✅ `docs/toolchain/reviews/w2-ci-cd-hardening-review.md`（W2 / 项 2.1–2.8） |
 | 4 | `coverage_gate.py` 达标 | ✅ 90.46%（阈值 80%，enforce=true）；单工具最低阈值 60% |
