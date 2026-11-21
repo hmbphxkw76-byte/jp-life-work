@@ -2,7 +2,7 @@
 
 > **免责声明**：本报告为信息整理与条件化建议，不构成法律意见或税务意见；重大决策请咨询执业法律 / 税务专业人士。
 
-> **已审计** ✅ 审计编号 `AUD-202611-019`｜终审通过：2026-11-20｜内容指纹 `e8a677ba41ccc8b5a87`｜依据《审计报告标准化管理体系》v1.4
+> **已审计** ✅ 审计编号 `AUD-202611-002`｜终审通过：2026-11-20｜内容指纹 `2ba414ebf4c01bef729`｜依据《审计报告标准化管理体系》v1.4
 
 > **版本**：v2026.11.17（2026-11 月度核验）　**数据基准日**：2026-11-17
 > **主题类型**：政策法规解读型（policy-analysis）
@@ -172,9 +172,9 @@
 - **受验资格**：满 17 岁（印尼考场 18 岁）、有效驾照（日本或外国均可）、无日本国籍、国内受验需有在留资格。
 - **考试构成**：知识试 50 题，**45 题以上正确**为合格；技能试为实技评分。
 - **费用**：日本国内 **6,500 円（税抜）**、海外 **45 美元**（部分国家按当地规定为 50 美元）；**合格证明书发行手续费 15,000 円**另计。
-- **日语考试**：JFT-Basic 日本国内 **10,000 円**；JLPT 中国考区 N3/N4/N5 **450 元**、N1/N2 550 元；**2026-12 月 JLPT N1–N5 全等级报名截止前满员**，ISA 公告引导转 JFT-Basic（2026-10-05）[Source: https://www.moj.go.jp/isa/content/001471906.pdf, 2026]。
+- **日语考试**：JFT-Basic 日本国内 **10,000 円**；JLPT 中国考区费用（人民币口径）原引 NEEA，按来源规则停用 → 待核实；**2026-12 月 JLPT N1–N5 全等级报名截止前满员**，ISA 公告引导转 JFT-Basic（2026-10-05）[Source: https://www.moj.go.jp/isa/content/001471906.pdf, 2026]。
 - **月报**：ClassNK 试验月报最新至 **2026-09**（2026-10-15 发布），实施国 18、**中国大陆无考点**。
-- **来源**：ClassNK Portal [https://sswt-portal.classnk.or.jp/news/25](https://sswt-portal.classnk.or.jp/news/25)；Prometric [https://www.prometric-jp.com/ssw/exam/fee/](https://www.prometric-jp.com/ssw/exam/fee/)；NEEA [https://jlpt.neea.edu.cn/faq.html](https://jlpt.neea.edu.cn/faq.html)；01-ssw-driver 报告（交叉引用）。
+- **来源**：ClassNK Portal [https://sswt-portal.classnk.or.jp/news/25](https://sswt-portal.classnk.or.jp/news/25)；Prometric [https://www.prometric-jp.com/ssw/exam/fee/](https://www.prometric-jp.com/ssw/exam/fee/)；01-ssw-driver 报告（交叉引用）。（原 NEEA 中文来源已按来源规则停用）
 
 ### 4.4 申请流程与材料
 
@@ -467,7 +467,7 @@
 
 13. ClassNK 试验 Portal [https://sswt-portal.classnk.or.jp/](https://sswt-portal.classnk.or.jp/)；费用公告 [https://sswt-portal.classnk.or.jp/news/25](https://sswt-portal.classnk.or.jp/news/25)（2026-11 核对）
 14. JFT-Basic [https://jft-basic.jp](https://jft-basic.jp)；Prometric 受験料 [https://www.prometric-jp.com/ssw/exam/fee/](https://www.prometric-jp.com/ssw/exam/fee/)（2026-11 核对）
-15. JLPT [https://www.jlpt.jp](https://www.jlpt.jp)；中国考区（NEEA）[https://jlpt.neea.edu.cn/faq.html](https://jlpt.neea.edu.cn/faq.html)（2026-11 核对）
+15. JLPT [https://www.jlpt.jp](https://www.jlpt.jp)（2026-11 核对）；中国考区报名站为中文来源，按来源规则停用
 16. 外国人技能実習機構（OTIT）[https://www.otit.go.jp/employment_for_skill_development/05/](https://www.otit.go.jp/employment_for_skill_development/05/)（2026-11 核对）
 
 **跨主题只读引用**：

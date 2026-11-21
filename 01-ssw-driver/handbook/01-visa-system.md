@@ -39,7 +39,7 @@
 
 **日本語試験**
 - JFT-Basic：随時 CBT，海外 14 国（Prometric 中文页）／27 都市＋日本国内 10 都道府县——**中国大陆不在实施地**；2026-08 起增判 A1/A2.1（育成就劳对应）。[Source: https://www.prometric-jp.com/zh-CHS/ssw/, 2026; https://www.jpf.go.jp/jft-basic/report/pdf/2025-12-202601.pdf, 2026]
-- JLPT：中国大陆每年 2 回（2026 年：7 月 5 日、12 月 6 日），**N4 报名费 450 元人民币**（N1/N2 550 元）——中国考生实际主路径。[Source: https://jlpt.neea.cn/faq.html, 2026]
+- JLPT：中国大陆每年 2 回（2026 年：7 月 5 日、12 月 6 日）——中国考生实际主路径。⚠ 中国考场报名费（人民币口径）仅见于中文来源，按来源规则不列 → 待核实。[Source: https://www.jlpt.jp/, 2026]
 
 ## 2.4 申请流程与费用
 

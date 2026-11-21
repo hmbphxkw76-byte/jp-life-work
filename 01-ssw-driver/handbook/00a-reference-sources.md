@@ -20,7 +20,7 @@
 13. [ISA 登録支援機関](https://www.moj.go.jp/isa/policies/ssw/supportssw.html) — 2026
 14. [JFT-Basic 实施报告 PDF](https://www.jpf.go.jp/jft-basic/report/pdf/2025-12-202601.pdf) — 2026
 15. [Prometric JFT-Basic 中文页](https://www.prometric-jp.com/zh-CHS/ssw/) — 2026
-16. [JLPT 中国报名 FAQ](https://jlpt.neea.cn/faq.html) — 2026
+16. [JLPT 官方站](https://www.jlpt.jp/) — 2026（原 neea.cn 中文页按来源规则停用）
 17. [駐日ベトナム大使館技能試験页](https://www.vn.emb-japan.go.jp/itpr_ja/11_000001_02534_TokuteiginouShiken_Jidoushaunsou.html) — 2026
 18. [MLIT 白書2025 需给 gap](https://www.mlit.go.jp/hakusyo/mlit/r06/hakusho/r07/html/n1112000.html) — 2025
 19. [MLIT 白書2025 直面课题](https://www.mlit.go.jp/hakusyo/mlit/r06/hakusho/r07/html/n1111000.html) — 2025
@@ -71,7 +71,7 @@
 64. [厚労省 劳动条件咨询 Hotline](https://www.check-roudou.mhlw.go.jp/lp/hotline/) — 2026
 65. [东京劳动局 FRESC 中文页](https://jsite.mhlw.go.jp/tokyo-roudoukyoku/fresc_cn.html) — 2026
 66. [ISA 外国人生活支援 Portal](https://www.moj.go.jp/isa/support/portal/) — 2026
-67. [商务部对外劳务合作企业名单提醒](https://ao.mofcom.gov.cn/aqtz/art/2024/art_f0ce83f61c9240d39e775a23fcff8827.html) — 2024
+67. ~~商务部对外劳务合作企业名单提醒（mofcom.gov.cn）~~ — 中文来源，已按来源规则停用（改以 ssw.go.jp 日英页为准）
 68. [MOFA 登録支援機関说明](https://www.mofa.go.jp/mofaj/ca/fna/ssw/jp/registration/) — 2026
 69. [ISA 在留卡 FAQ](https://www.moj.go.jp/isa/publications/faq/newimmiact_4_q-and-a_page3.html) — 2026
 70. [デジタル庁 引越しワンストップ](https://www.digital.go.jp/policies/moving_onestop_service) — 2025-2026
