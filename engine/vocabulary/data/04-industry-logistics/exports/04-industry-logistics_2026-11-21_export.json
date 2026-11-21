@@ -1,0 +1,2119 @@
+{
+  "topic": "04-industry-logistics",
+  "name": "物流行业",
+  "version": "v1.7",
+  "generated_at": "2026-11-21T12:07:22",
+  "count": 109,
+  "categories": {
+    "行业结构与业态": 20,
+    "运输模式与枢纽": 16,
+    "仓储与配送作业": 16,
+    "法规与政策": 14,
+    "企业与市场": 20,
+    "技术与数字化": 12,
+    "场景与表达": 11
+  },
+  "terms": [
+    {
+      "id": "LOG-001",
+      "term": "物流",
+      "aliases": [
+        "物的流通"
+      ],
+      "category": "行业结构与业态",
+      "tags": [
+        "基础概念",
+        "行业"
+      ],
+      "definition": "生産地から消費地へ商品を届ける輸送・保管・荷役・包装などの諸活動の総称。",
+      "source": "日本物流団体連合会",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.logitexts.gr.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-002",
+      "term": "ロジスティクス",
+      "aliases": [
+        "物流管理"
+      ],
+      "category": "行业结构与业态",
+      "tags": [
+        "基础概念",
+        "经营"
+      ],
+      "definition": "調達から生産・販売・廃棄までの物流全体を戦略的に最適化する経営手法。",
+      "source": "日本物流団体連合会",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.logitexts.gr.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-003",
+      "term": "3PL",
+      "aliases": [
+        "サードパーティロジスティクス"
+      ],
+      "category": "行业结构与业态",
+      "tags": [
+        "业态",
+        "外包"
+      ],
+      "definition": "荷主企業が物流業務の設計から運用までを外部の物流事業者へ包括委託する業態。",
+      "source": "国土交通省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp/seisakutokatsu/freight/index.html",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-004",
+      "term": "4PL",
+      "aliases": [
+        "フォースパーティロジスティクス"
+      ],
+      "category": "行业结构与业态",
+      "tags": [
+        "业态",
+        "供应链"
+      ],
+      "definition": "荷主の物流全体を設計・統括し、複数の物流事業者を管理する事業形態。",
+      "source": "国土交通省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp/seisakutokatsu/freight/index.html",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-005",
+      "term": "宅配便",
+      "aliases": [
+        "宅配",
+        "宅急便"
+      ],
+      "category": "行业结构与业态",
+      "tags": [
+        "业态",
+        "小口配送"
+      ],
+      "definition": "個人や小口の荷物を戸口から戸口まで集配する小口貨物輸送サービス。",
+      "source": "国土交通省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp/report/press/jidosha04_hh_000371.html",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-006",
+      "term": "クール便",
+      "aliases": [
+        "冷蔵便",
+        "冷凍便"
+      ],
+      "category": "行业结构与业态",
+      "tags": [
+        "业态",
+        "温度管理"
+      ],
+      "definition": "冷蔵・冷凍の温度帯を保ったまま荷物を届ける温度管理型の宅配サービス。",
+      "source": "国土交通省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp/report/press/jidosha04_hh_000371.html",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-007",
+      "term": "ラストワンマイル",
+      "aliases": [
+        "最終区間配送"
+      ],
+      "category": "行业结构与业态",
+      "tags": [
+        "配送",
+        "网络"
+      ],
+      "definition": "物流拠点から消費者や店舗までの最終区間を担う配送工程。",
+      "source": "国土交通省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp/seisakutokatsu/freight/index.html",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-008",
+      "term": "共同配送",
+      "aliases": [
+        "協同配送"
+      ],
+      "category": "行业结构与业态",
+      "tags": [
+        "配送",
+        "效率化"
+      ],
+      "definition": "複数の荷主や事業者が配送を統合し、車両台数やコストを削減する方式。",
+      "source": "国土交通省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp/seisakutokatsu/freight/index.html",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-009",
+      "term": "モーダルシフト",
+      "aliases": [
+        "モーダルコンビネーション"
+      ],
+      "category": "行业结构与业态",
+      "tags": [
+        "政策",
+        "环保"
+      ],
+      "definition": "トラックから鉄道や船舶へ貨物輸送の手段を転換し、CO2削減を図る取り組み。",
+      "source": "国土交通省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp/seisakutokatsu/freight/index.html",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-010",
+      "term": "2024年問題",
+      "aliases": [
+        "物流2024年問題"
+      ],
+      "category": "行业结构与业态",
+      "tags": [
+        "政策",
+        "人力"
+      ],
+      "definition": "トラック運転者の時間外労働上限規制により輸送力不足が懸念される問題。",
+      "source": "国土交通省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp/seisakutokatsu/freight/index.html",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-011",
+      "term": "物流危機",
+      "aliases": [
+        "物流クライシス"
+      ],
+      "category": "行业结构与业态",
+      "tags": [
+        "行业",
+        "人力"
+      ],
+      "definition": "人手不足や燃料費高騰で物流サービスが維持できなくなる懸念を指す言葉。",
+      "source": "日本物流団体連合会",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.logitexts.gr.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-012",
+      "term": "トラック輸送",
+      "aliases": [
+        "自動車輸送",
+        "陸運"
+      ],
+      "category": "运输模式与枢纽",
+      "tags": [
+        "运输",
+        "公路"
+      ],
+      "definition": "トラックで貨物を戸口から戸口へ運ぶ、日本の物流で最も主流な輸送手段。",
+      "source": "国土交通省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp/seisakutokatsu/freight/index.html",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-013",
+      "term": "幹線輸送",
+      "aliases": [
+        "幹線"
+      ],
+      "category": "运输模式与枢纽",
+      "tags": [
+        "运输",
+        "干线"
+      ],
+      "definition": "都市間の長距離区間を大型車や鉄道・船舶でまとめて輸送する工程。",
+      "source": "国土交通省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp/seisakutokatsu/freight/index.html",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-014",
+      "term": "鉄道貨物",
+      "aliases": [
+        "貨物鉄道",
+        "鉄道輸送"
+      ],
+      "category": "运输模式与枢纽",
+      "tags": [
+        "运输",
+        "铁路"
+      ],
+      "definition": "貨物列車でコンテナなどを大量に長距離輸送する鉄道による物流手段。",
+      "source": "国土交通省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp/seisakutokatsu/freight/index.html",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-015",
+      "term": "内航海運",
+      "aliases": [
+        "内航",
+        "沿海海運"
+      ],
+      "category": "运输模式与枢纽",
+      "tags": [
+        "运输",
+        "海运"
+      ],
+      "definition": "国内の港と港を船舶で結び、バルク貨物やコンテナを運ぶ輸送モード。",
+      "source": "国土交通省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp/seisakutokatsu/freight/index.html",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-016",
+      "term": "航空貨物",
+      "aliases": [
+        "エアカーゴ"
+      ],
+      "category": "运输模式与枢纽",
+      "tags": [
+        "运输",
+        "航空"
+      ],
+      "definition": "航空機で速達性の高い貨物を運ぶ方式で、生鮮品や電子部品の輸送に使われる。",
+      "source": "国土交通省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp/seisakutokatsu/freight/index.html",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-017",
+      "term": "港湾",
+      "aliases": [
+        "港"
+      ],
+      "category": "运输模式与枢纽",
+      "tags": [
+        "枢纽",
+        "设施"
+      ],
+      "definition": "船舶の停泊や荷役を行う施設群で、国際物流の結節点となる場所。",
+      "source": "国土交通省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp/seisakutokatsu/freight/index.html",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-018",
+      "term": "空港",
+      "aliases": [
+        "エアポート"
+      ],
+      "category": "运输模式与枢纽",
+      "tags": [
+        "枢纽",
+        "设施"
+      ],
+      "definition": "航空機の発着と航空貨物の荷捌きを行う、旅客と物流の拠点施設。",
+      "source": "国土交通省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp/seisakutokatsu/freight/index.html",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-019",
+      "term": "物流センター",
+      "aliases": [
+        "配送センター",
+        "物流拠点",
+        "DC"
+      ],
+      "category": "运输模式与枢纽",
+      "tags": [
+        "设施",
+        "仓储"
+      ],
+      "definition": "在庫を保管し、入出庫や仕分け・配送を行う物流ネットワークの中核施設。",
+      "source": "国土交通省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp/seisakutokatsu/freight/index.html",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-020",
+      "term": "クロスドック",
+      "aliases": [
+        "クロスドッキング"
+      ],
+      "category": "运输模式与枢纽",
+      "tags": [
+        "作业",
+        "设施"
+      ],
+      "definition": "在庫を持たずに荷物を積み替えて即日出荷する通過型の物流方式。",
+      "source": "国土交通省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp/seisakutokatsu/freight/index.html",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-021",
+      "term": "中継輸送",
+      "aliases": [
+        "リレー輸送",
+        "トレーラー中継"
+      ],
+      "category": "运输模式与枢纽",
+      "tags": [
+        "运输",
+        "人力"
+      ],
+      "definition": "長距離輸送を複数の運転者が区間ごとに交代してリレーする輸送方式。",
+      "source": "国土交通省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp/seisakutokatsu/freight/index.html",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-022",
+      "term": "入庫",
+      "aliases": [
+        "受け入れ"
+      ],
+      "category": "仓储与配送作业",
+      "tags": [
+        "仓储",
+        "作业"
+      ],
+      "definition": "仕入先や工場から届いた商品を倉庫内に受け入れて記録する作業。",
+      "source": "日本物流団体連合会",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.logitexts.gr.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-023",
+      "term": "出庫",
+      "aliases": [
+        "払出し"
+      ],
+      "category": "仓储与配送作业",
+      "tags": [
+        "仓储",
+        "作业"
+      ],
+      "definition": "出荷指示に基づいて倉庫内の商品を取り出し、出荷場へ運ぶ作業。",
+      "source": "日本物流団体連合会",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.logitexts.gr.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-024",
+      "term": "棚入れ",
+      "aliases": [
+        "格納"
+      ],
+      "category": "仓储与配送作业",
+      "tags": [
+        "仓储",
+        "作业"
+      ],
+      "definition": "入庫した商品を棚の所定のロケーションに収納する倉庫内作業。",
+      "source": "日本物流団体連合会",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.logitexts.gr.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-025",
+      "term": "ピッキング",
+      "aliases": [
+        "摘み取り"
+      ],
+      "category": "仓储与配送作业",
+      "tags": [
+        "仓储",
+        "作业"
+      ],
+      "definition": "出荷伝票に従って棚から商品を集める、倉庫作業の中心となる工程。",
+      "source": "日本物流団体連合会",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.logitexts.gr.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-026",
+      "term": "仕分け",
+      "aliases": [
+        "ソーティング",
+        "選別"
+      ],
+      "category": "仓储与配送作业",
+      "tags": [
+        "配送",
+        "作业"
+      ],
+      "definition": "行き先や配送便ごとに荷物を振り分ける、配送拠点の主要作業。",
+      "source": "日本物流団体連合会",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.logitexts.gr.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-027",
+      "term": "検品",
+      "aliases": [
+        "品検",
+        "検収"
+      ],
+      "category": "仓储与配送作业",
+      "tags": [
+        "质量",
+        "作业"
+      ],
+      "definition": "数量や品種、外観が発注内容と一致しているかを確認する作業。",
+      "source": "日本物流団体連合会",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.logitexts.gr.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-028",
+      "term": "梱包",
+      "aliases": [
+        "パッキング"
+      ],
+      "category": "仓储与配送作业",
+      "tags": [
+        "作业",
+        "包装"
+      ],
+      "definition": "商品を保護し輸送できる状態にするため、箱や緩衝材で包む作業。",
+      "source": "日本物流団体連合会",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.logitexts.gr.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-029",
+      "term": "出荷",
+      "aliases": [
+        "発送"
+      ],
+      "category": "仓储与配送作业",
+      "tags": [
+        "作业",
+        "配送"
+      ],
+      "definition": "検品と梱包を終えた商品をトラックなどへ引き渡す最終工程。",
+      "source": "日本物流団体連合会",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.logitexts.gr.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-030",
+      "term": "在庫管理",
+      "aliases": [
+        "在庫コントロール"
+      ],
+      "category": "仓储与配送作业",
+      "tags": [
+        "仓储",
+        "管理"
+      ],
+      "definition": "商品の数量と保管場所を把握し、適正な在庫水準に保つ管理業務。",
+      "source": "日本物流団体連合会",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.logitexts.gr.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-031",
+      "term": "棚卸",
+      "aliases": [
+        "棚卸し",
+        "実地棚卸"
+      ],
+      "category": "仓储与配送作业",
+      "tags": [
+        "仓储",
+        "盘点"
+      ],
+      "definition": "実際に在庫を数えて帳簿上の数量と照合し、差異を確認する作業。",
+      "source": "日本物流団体連合会",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.logitexts.gr.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-032",
+      "term": "WMS",
+      "aliases": [
+        "倉庫管理システム"
+      ],
+      "category": "仓储与配送作业",
+      "tags": [
+        "系统",
+        "仓储"
+      ],
+      "definition": "入出庫や在庫、作業指示を一元的に管理する倉庫管理システム。",
+      "source": "日本物流団体連合会",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.logitexts.gr.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-033",
+      "term": "貨物自動車運送事業法",
+      "aliases": [
+        "貨物運送事業法",
+        "貨運法"
+      ],
+      "category": "法规与政策",
+      "tags": [
+        "法律",
+        "运输"
+      ],
+      "definition": "トラック運送事業の許可や運賃、安全基準などを定める法律。",
+      "source": "国土交通省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp/seisakutokatsu/freight/index.html",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-034",
+      "term": "物流効率化法",
+      "aliases": [
+        "流通業務総合効率化法"
+      ],
+      "category": "法规与政策",
+      "tags": [
+        "法律",
+        "政策"
+      ],
+      "definition": "流通業務の総合化と物流の効率化を促進するために制定された法律。",
+      "source": "国土交通省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp/seisakutokatsu/freight/index.html",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-035",
+      "term": "物流二法",
+      "aliases": [],
+      "category": "法规与政策",
+      "tags": [
+        "法律",
+        "政策"
+      ],
+      "definition": "物流効率化法と貨物自動車運送事業法を合わせた物流政策の法体系。",
+      "source": "国土交通省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp/seisakutokatsu/freight/index.html",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-036",
+      "term": "下請法",
+      "aliases": [
+        "下請代金支払遅延等防止法"
+      ],
+      "category": "法规与政策",
+      "tags": [
+        "法律",
+        "交易"
+      ],
+      "definition": "親事業者による下請事業者への代金減額や支払遅延を規制する法律。",
+      "source": "公正取引委員会",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.jftc.go.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-037",
+      "term": "独占禁止法",
+      "aliases": [
+        "独禁法"
+      ],
+      "category": "法规与政策",
+      "tags": [
+        "法律",
+        "交易"
+      ],
+      "definition": "競争を制限する行為を禁じ、公正で自由な取引秩序を守る法律。",
+      "source": "公正取引委員会",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.jftc.go.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-038",
+      "term": "労働基準法",
+      "aliases": [
+        "労基法"
+      ],
+      "category": "法规与政策",
+      "tags": [
+        "法律",
+        "劳动"
+      ],
+      "definition": "労働時間や賃金、休憩など労働条件の最低基準を定める法律。",
+      "source": "厚生労働省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/index.html",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-039",
+      "term": "改善基準告示",
+      "aliases": [
+        "自動車運転者の労働時間等の改善のための基準"
+      ],
+      "category": "法规与政策",
+      "tags": [
+        "法规",
+        "劳动"
+      ],
+      "definition": "トラック運転者の拘束時間や休息期間の上限を定めた厚生労働省の告示。",
+      "source": "厚生労働省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/gyosyu/roudoujouken05/index.html",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-040",
+      "term": "軽油引取税",
+      "aliases": [
+        "軽油税"
+      ],
+      "category": "法规与政策",
+      "tags": [
+        "税制",
+        "成本"
+      ],
+      "definition": "軽油の引取りに課される地方税で、トラック運送のコストに影響する。",
+      "source": "総務省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.soumu.go.jp/main_sosiki/jichi_zeisei/czaisei/czaisei_seido/150790_12.html",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-041",
+      "term": "ナンバープレート規制",
+      "aliases": [
+        "ナンバー規制"
+      ],
+      "category": "法规与政策",
+      "tags": [
+        "法规",
+        "车辆"
+      ],
+      "definition": "営業用車両の登録番号の色分けなど、車両の使用区分を管理する制度。",
+      "source": "国土交通省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp/seisakutokatsu/freight/index.html",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-042",
+      "term": "運送会社",
+      "aliases": [
+        "運送事業者",
+        "トラック会社"
+      ],
+      "category": "企业与市场",
+      "tags": [
+        "企业",
+        "运输"
+      ],
+      "definition": "荷物の輸送を業として請け負い、荷主と運送契約を結ぶ事業者。",
+      "source": "国土交通省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp/seisakutokatsu/freight/index.html",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-043",
+      "term": "荷主",
+      "aliases": [
+        "荷主企業",
+        "発荷主"
+      ],
+      "category": "企业与市场",
+      "tags": [
+        "企业",
+        "交易"
+      ],
+      "definition": "物流事業者に輸送や保管を依頼する荷物の所有者や企業のこと。",
+      "source": "国土交通省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp/seisakutokatsu/freight/index.html",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-044",
+      "term": "元請",
+      "aliases": [
+        "元請け",
+        "一次請負"
+      ],
+      "category": "企业与市场",
+      "tags": [
+        "交易",
+        "承包"
+      ],
+      "definition": "荷主から直接業務を受注し、その一部を下請へ委託する事業者。",
+      "source": "国土交通省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp/seisakutokatsu/freight/index.html",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-045",
+      "term": "下請",
+      "aliases": [
+        "下請け",
+        "協力会社"
+      ],
+      "category": "企业与市场",
+      "tags": [
+        "交易",
+        "承包"
+      ],
+      "definition": "元請から業務の一部を請け負う事業者で、傭車を出す会社も含む。",
+      "source": "国土交通省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp/seisakutokatsu/freight/index.html",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-046",
+      "term": "商社",
+      "aliases": [
+        "総合商社",
+        "専門商社"
+      ],
+      "category": "企业与市场",
+      "tags": [
+        "企业",
+        "流通"
+      ],
+      "definition": "商品の売買や物流機能を担い、生産と消費の間をつなぐ企業。",
+      "source": "経済産業省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.meti.go.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-047",
+      "term": "物流子会社",
+      "aliases": [
+        "物流関連子会社"
+      ],
+      "category": "企业与市场",
+      "tags": [
+        "企业",
+        "集团"
+      ],
+      "definition": "製造業や小売業が自社の物流を担うために設立する関連会社。",
+      "source": "経済産業省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.meti.go.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-048",
+      "term": "運賃",
+      "aliases": [
+        "輸送料金"
+      ],
+      "category": "企业与市场",
+      "tags": [
+        "价格",
+        "交易"
+      ],
+      "definition": "荷物を運ぶ対価として荷主が運送事業者に支払う料金。",
+      "source": "国土交通省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp/seisakutokatsu/freight/index.html",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-049",
+      "term": "燃料費",
+      "aliases": [
+        "燃料コスト",
+        "軽油代"
+      ],
+      "category": "企业与市场",
+      "tags": [
+        "成本",
+        "运输"
+      ],
+      "definition": "車両の運行に必要な軽油などの購入費用で、運送原価の主要部分。",
+      "source": "国土交通省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp/seisakutokatsu/freight/index.html",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-050",
+      "term": "傭車",
+      "aliases": [
+        "傭車料",
+        "チャーター車"
+      ],
+      "category": "企业与市场",
+      "tags": [
+        "交易",
+        "运力"
+      ],
+      "definition": "元請が輸送力の不足を補うために外部へ手配するトラックのこと。",
+      "source": "国土交通省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp/seisakutokatsu/freight/index.html",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-051",
+      "term": "物流コスト",
+      "aliases": [
+        "物流費"
+      ],
+      "category": "企业与市场",
+      "tags": [
+        "成本",
+        "管理"
+      ],
+      "definition": "輸送・保管・荷役・包装など物流活動全体にかかる費用の総称。",
+      "source": "日本物流団体連合会",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.logitexts.gr.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-052",
+      "term": "DX",
+      "aliases": [
+        "デジタルトランスフォーメーション"
+      ],
+      "category": "技术与数字化",
+      "tags": [
+        "技术",
+        "转型"
+      ],
+      "definition": "デジタル技術を活用して業務やビジネスモデルを根本から変革すること。",
+      "source": "経済産業省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.meti.go.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-053",
+      "term": "IoT",
+      "aliases": [
+        "モノのインターネット"
+      ],
+      "category": "技术与数字化",
+      "tags": [
+        "技术",
+        "数据"
+      ],
+      "definition": "車両や荷物にセンサーを付け、位置や状態を遠隔で把握する技術。",
+      "source": "総務省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.soumu.go.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-054",
+      "term": "AI配車",
+      "aliases": [
+        "配車最適化",
+        "自動配車"
+      ],
+      "category": "技术与数字化",
+      "tags": [
+        "技术",
+        "配车"
+      ],
+      "definition": "人工知能が配送ルートや車両の割り当てを最適化する配車システム。",
+      "source": "国土交通省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp/seisakutokatsu/freight/index.html",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-055",
+      "term": "自動化倉庫",
+      "aliases": [
+        "自動倉庫",
+        "自動ラック倉庫"
+      ],
+      "category": "技术与数字化",
+      "tags": [
+        "技术",
+        "设施"
+      ],
+      "definition": "入出庫や保管を機械が自動で行い、省人化を実現する倉庫設備。",
+      "source": "日本物流団体連合会",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.logitexts.gr.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-056",
+      "term": "AGV",
+      "aliases": [
+        "無人搬送車",
+        "自動搬送車"
+      ],
+      "category": "技术与数字化",
+      "tags": [
+        "技术",
+        "自动化"
+      ],
+      "definition": "倉庫内で荷物を自動で搬送し、人手不足対策として導入が進む車両。",
+      "source": "日本物流団体連合会",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.logitexts.gr.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-057",
+      "term": "ドローン配送",
+      "aliases": [
+        "ドローン宅配",
+        "無人航空機配送"
+      ],
+      "category": "技术与数字化",
+      "tags": [
+        "技术",
+        "配送"
+      ],
+      "definition": "無人航空機で荷物を空輸する配送方式で、過疎地や離島で実証が進む。",
+      "source": "国土交通省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp/seisakutokatsu/freight/index.html",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-058",
+      "term": "デジタルフォワーダー",
+      "aliases": [
+        "デジタル貨物代理店"
+      ],
+      "category": "技术与数字化",
+      "tags": [
+        "技术",
+        "国际物流"
+      ],
+      "definition": "予約や書類、追跡をデジタル化した国際物流の貨物利用運送事業者。",
+      "source": "国土交通省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp/seisakutokatsu/freight/index.html",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-059",
+      "term": "可視化",
+      "aliases": [
+        "見える化",
+        "輸送可視化"
+      ],
+      "category": "技术与数字化",
+      "tags": [
+        "技术",
+        "数据"
+      ],
+      "definition": "荷物の位置や在庫、輸送状況をリアルタイムで把握できる状態にすること。",
+      "source": "国土交通省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp/seisakutokatsu/freight/index.html",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-060",
+      "term": "共同物流平台",
+      "aliases": [
+        "共同物流プラットフォーム",
+        "物流マッチング"
+      ],
+      "category": "技术与数字化",
+      "tags": [
+        "技术",
+        "共同配送"
+      ],
+      "definition": "複数の荷主の貨物を束ね、共同輸送を成立させるデジタル基盤。",
+      "source": "国土交通省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp/seisakutokatsu/freight/index.html",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-061",
+      "term": "納期",
+      "aliases": [
+        "納入期限",
+        "納品日"
+      ],
+      "category": "场景与表达",
+      "tags": [
+        "场景",
+        "服务"
+      ],
+      "definition": "荷主が指定する荷物の到着期限で、遅延かどうかを判断する基準。",
+      "source": "日本物流団体連合会",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.logitexts.gr.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-062",
+      "term": "遅延",
+      "aliases": [
+        "延着",
+        "遅れ"
+      ],
+      "category": "场景与表达",
+      "tags": [
+        "场景",
+        "异常"
+      ],
+      "definition": "納期や予定時刻を過ぎて荷物の到着が遅れること。",
+      "source": "日本物流団体連合会",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.logitexts.gr.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-063",
+      "term": "欠品",
+      "aliases": [
+        "品切れ",
+        "在庫切れ"
+      ],
+      "category": "场景与表达",
+      "tags": [
+        "场景",
+        "库存"
+      ],
+      "definition": "在庫不足で出荷できず、注文された商品が届けられない状態。",
+      "source": "日本物流団体連合会",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.logitexts.gr.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-064",
+      "term": "誤配送",
+      "aliases": [
+        "誤配",
+        "配達ミス"
+      ],
+      "category": "场景与表达",
+      "tags": [
+        "场景",
+        "异常"
+      ],
+      "definition": "別の宛先や別の荷物を届けてしまう配送トラブル。",
+      "source": "日本物流団体連合会",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.logitexts.gr.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-065",
+      "term": "再配達",
+      "aliases": [
+        "再配",
+        "不在再配達"
+      ],
+      "category": "场景与表达",
+      "tags": [
+        "场景",
+        "配送"
+      ],
+      "definition": "受取人不在などで届けられず、同じ荷物を再度届けること。",
+      "source": "国土交通省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp/seisakutokatsu/freight/index.html",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-066",
+      "term": "置き配",
+      "aliases": [
+        "置き配達"
+      ],
+      "category": "场景与表达",
+      "tags": [
+        "场景",
+        "配送"
+      ],
+      "definition": "受取人不在のとき、玄関前など指定された場所へ荷物を置いて届ける方法。",
+      "source": "国土交通省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp/seisakutokatsu/freight/index.html",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-067",
+      "term": "集荷依頼",
+      "aliases": [
+        "集荷",
+        "引き取り依頼"
+      ],
+      "category": "场景与表达",
+      "tags": [
+        "场景",
+        "服务"
+      ],
+      "definition": "荷主が運送事業者に荷物の引き取りを依頼すること。",
+      "source": "日本物流団体連合会",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.logitexts.gr.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-068",
+      "term": "苦情対応",
+      "aliases": [
+        "クレーム対応"
+      ],
+      "category": "场景与表达",
+      "tags": [
+        "场景",
+        "客服"
+      ],
+      "definition": "遅延や破損などについて、荷主や受取人からの不満に対応する業務。",
+      "source": "日本物流団体連合会",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.logitexts.gr.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-069",
+      "term": "混載便",
+      "aliases": [
+        "混載輸送",
+        "LTL"
+      ],
+      "category": "行业结构与业态",
+      "tags": [
+        "运输方式",
+        "成本"
+      ],
+      "definition": "将多个货主的零担货物拼装在同一车辆上运输，分摊运费、提高装载效率。",
+      "source": "国土交通省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp/seisakutokatsu/freight/index.html",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-070",
+      "term": "貸切便",
+      "aliases": [
+        "貸切輸送",
+        "チャーター便"
+      ],
+      "category": "行业结构与业态",
+      "tags": [
+        "运输方式"
+      ],
+      "definition": "整车租给单一货主、不与其他货物混装，从装货点直达卸货点的运输形态。",
+      "source": "国土交通省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp/seisakutokatsu/freight/index.html",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-071",
+      "term": "時刻表便",
+      "aliases": [
+        "定期便"
+      ],
+      "category": "行业结构与业态",
+      "tags": [
+        "运输方式",
+        "时效"
+      ],
+      "definition": "按固定线路与时刻表运行的定期班次运输，多用于干线与区域间的稳定衔接。",
+      "source": "日本物流団体連合会",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.logitexts.gr.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-072",
+      "term": "翌日便",
+      "aliases": [
+        "翌日配達"
+      ],
+      "category": "行业结构与业态",
+      "tags": [
+        "时效",
+        "服务"
+      ],
+      "definition": "当日揽收、次日送达的时限型配送服务，是宅配运输最基础的时间承诺产品。",
+      "source": "国土交通省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp/seisakutokatsu/freight/index.html",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-073",
+      "term": "区域輸送",
+      "aliases": [],
+      "category": "行业结构与业态",
+      "tags": [
+        "运输方式",
+        "配送"
+      ],
+      "definition": "在特定地区内完成集货与配送的短途运输，衔接干线运输的末端环节。",
+      "source": "国土交通省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp/seisakutokatsu/freight/index.html",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-074",
+      "term": "貨物軽自動車輸送",
+      "aliases": [
+        "軽貨物輸送"
+      ],
+      "category": "行业结构与业态",
+      "tags": [
+        "运输方式",
+        "配送"
+      ],
+      "definition": "使用轻型汽车承运小宗零散货物的运输形态，多承担都市内近距离揽配。",
+      "source": "国土交通省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp/seisakutokatsu/freight/index.html",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-075",
+      "term": "トラックターミナル",
+      "aliases": [
+        "トラックヤード"
+      ],
+      "category": "运输模式与枢纽",
+      "tags": [
+        "枢纽",
+        "设施"
+      ],
+      "definition": "供卡车集中进行中转分拣、停靠换装的专用货运枢纽，多设于城市外围。",
+      "source": "国土交通省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp/seisakutokatsu/freight/index.html",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-076",
+      "term": "ドライポート",
+      "aliases": [
+        "内陸港"
+      ],
+      "category": "运输模式与枢纽",
+      "tags": [
+        "枢纽",
+        "设施"
+      ],
+      "definition": "设在内陆、具备集装箱堆存与通关功能的港口后方据点，衔接海港与货主。",
+      "source": "国土交通省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp/seisakutokatsu/freight/index.html",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-077",
+      "term": "流通センター",
+      "aliases": [],
+      "category": "运输模式与枢纽",
+      "tags": [
+        "枢纽",
+        "设施"
+      ],
+      "definition": "集仓储、流通加工、分拨配送于一体的商品流通综合设施，兼具批发交易功能。",
+      "source": "国土交通省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp/seisakutokatsu/freight/index.html",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-078",
+      "term": "鉄道コンテナ輸送",
+      "aliases": [
+        "JR貨物"
+      ],
+      "category": "运输模式与枢纽",
+      "tags": [
+        "运输方式",
+        "铁路"
+      ],
+      "definition": "以铁路集装箱列车承运干线货物的运输方式，主要由JR货物运营。",
+      "source": "国土交通省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp/seisakutokatsu/freight/index.html",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-079",
+      "term": "フェリー輸送",
+      "aliases": [
+        "内航フェリー",
+        "RORO船"
+      ],
+      "category": "运输模式与枢纽",
+      "tags": [
+        "运输方式",
+        "海运"
+      ],
+      "definition": "让卡车搭载渡轮跨越海域衔接陆上干线的运输方式，弥补桥梁与航线空白。",
+      "source": "国土交通省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp/seisakutokatsu/freight/index.html",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-080",
+      "term": "保税地域",
+      "aliases": [
+        "保税蔵置場"
+      ],
+      "category": "运输模式与枢纽",
+      "tags": [
+        "枢纽",
+        "通关"
+      ],
+      "definition": "经海关许可、外国货物可暂缓缴纳关税存放或加工展示的指定区域总称。",
+      "source": "財務省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mof.go.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-081",
+      "term": "ハンディターミナル",
+      "aliases": [
+        "携帯端末",
+        "HT"
+      ],
+      "category": "仓储与配送作业",
+      "tags": [
+        "设备",
+        "作业"
+      ],
+      "definition": "仓库现场手持式扫描终端，用于拣选指示、验货核对与库存数据实时采集。",
+      "source": "日本物流団体連合会",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.logitexts.gr.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-082",
+      "term": "納品書",
+      "aliases": [
+        "伝票",
+        "納品伝票"
+      ],
+      "category": "仓储与配送作业",
+      "tags": [
+        "单证",
+        "交易"
+      ],
+      "definition": "随货交付收货方、载明品名与数量以供核对签收的送货单据。",
+      "source": "日本物流団体連合会",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.logitexts.gr.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-083",
+      "term": "冷蔵倉庫",
+      "aliases": [
+        "冷凍倉庫",
+        "低温倉庫"
+      ],
+      "category": "仓储与配送作业",
+      "tags": [
+        "设施",
+        "温控"
+      ],
+      "definition": "在低温环境下保存生鲜与冷冻食品的仓库，按冷冻、冷藏温度带分级管理。",
+      "source": "国土交通省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp/seisakutokatsu/freight/index.html",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-084",
+      "term": "先入先出",
+      "aliases": [
+        "FIFO"
+      ],
+      "category": "仓储与配送作业",
+      "tags": [
+        "库存",
+        "作业"
+      ],
+      "definition": "先入库货物先出库的库存管理原则，用于防止积压、劣化与保质期风险。",
+      "source": "日本物流団体連合会",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.logitexts.gr.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-085",
+      "term": "安全在庫",
+      "aliases": [],
+      "category": "仓储与配送作业",
+      "tags": [
+        "库存",
+        "管理"
+      ],
+      "definition": "为应对需求波动与补货延迟而常备的缓冲库存，是设定发注点计算的基础。",
+      "source": "日本物流団体連合会",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.logitexts.gr.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-086",
+      "term": "標準貨物自動車運送約款",
+      "aliases": [
+        "標準約款"
+      ],
+      "category": "法规与政策",
+      "tags": [
+        "法规",
+        "运输"
+      ],
+      "definition": "规定运送人与货主间权利义务的标准条款，合同无特别约定时自动适用。",
+      "source": "国土交通省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp/seisakutokatsu/freight/index.html",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-087",
+      "term": "荷主の責任",
+      "aliases": [
+        "荷主責任"
+      ],
+      "category": "法规与政策",
+      "tags": [
+        "法规",
+        "政策"
+      ],
+      "definition": "物流二法要求货主自主改善运输条件、合理选择承运方的责任规定。",
+      "source": "国土交通省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp/seisakutokatsu/freight/index.html",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-088",
+      "term": "グリーン物流パートナーシップ",
+      "aliases": [
+        "グリーン物流"
+      ],
+      "category": "法规与政策",
+      "tags": [
+        "政策",
+        "环保"
+      ],
+      "definition": "产官学协作机制，推动货主与运输方联手推进削减二氧化碳的物流改革。",
+      "source": "経済産業省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "http://www.greenpartnership.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-089",
+      "term": "カーボンニュートラル",
+      "aliases": [],
+      "category": "法规与政策",
+      "tags": [
+        "政策",
+        "环保"
+      ],
+      "definition": "通过减排与抵消使温室气体净排放归零的目标，是日本物流减碳的政策指针。",
+      "source": "環境省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://ondankataisaku.env.go.jp/carbon_neutral/",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-090",
+      "term": "道路運送車両法",
+      "aliases": [],
+      "category": "法规与政策",
+      "tags": [
+        "法律",
+        "车辆"
+      ],
+      "definition": "规范机动车登记、车检、结构与保养的法律，是营运车辆合规的基础。",
+      "source": "国土交通省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp/seisakutokatsu/freight/index.html",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-091",
+      "term": "物流市場規模",
+      "aliases": [
+        "物流市場"
+      ],
+      "category": "企业与市场",
+      "tags": [
+        "市场",
+        "数据"
+      ],
+      "definition": "以各领域营业收入衡量的国内物流市场总量指标，用于趋势分析与预测。",
+      "source": "経済産業省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.meti.go.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-092",
+      "term": "大手運送会社",
+      "aliases": [
+        "大手運送"
+      ],
+      "category": "企业与市场",
+      "tags": [
+        "企业",
+        "市场"
+      ],
+      "definition": "拥有全国性网络与大规模车队的头部承运企业，与中坚、地域运送分层并存。",
+      "source": "国土交通省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp/seisakutokatsu/freight/index.html",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-093",
+      "term": "運賃改定",
+      "aliases": [
+        "運賃交渉",
+        "運賃値上げ"
+      ],
+      "category": "企业与市场",
+      "tags": [
+        "市场",
+        "价格"
+      ],
+      "definition": "运输方与货主协商调整运价水平的市场行为，近年因人手不足而持续提价。",
+      "source": "国土交通省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp/seisakutokatsu/freight/index.html",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-094",
+      "term": "燃油サーチャージ",
+      "aliases": [
+        "燃料サーチャージ",
+        "FS"
+      ],
+      "category": "企业与市场",
+      "tags": [
+        "价格",
+        "成本"
+      ],
+      "definition": "与柴油价格联动、向货主加收的燃料附加费，用于转嫁油价上涨的运输成本。",
+      "source": "国土交通省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp/seisakutokatsu/freight/index.html",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-095",
+      "term": "輸送単価",
+      "aliases": [
+        "運賃単価"
+      ],
+      "category": "企业与市场",
+      "tags": [
+        "指标",
+        "成本"
+      ],
+      "definition": "按吨公里或件均计算的运输费用水平，是衡量运输成本效率的核心指标。",
+      "source": "国土交通省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp/seisakutokatsu/freight/index.html",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-096",
+      "term": "実車率",
+      "aliases": [],
+      "category": "企业与市场",
+      "tags": [
+        "指标",
+        "效率"
+      ],
+      "definition": "载货行驶里程占总行驶里程的比例，反映车辆利用效率与空驶损失状况。",
+      "source": "国土交通省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp/seisakutokatsu/freight/index.html",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-097",
+      "term": "TMS",
+      "aliases": [
+        "輸送管理システム"
+      ],
+      "category": "技术与数字化",
+      "tags": [
+        "系统",
+        "数字化"
+      ],
+      "definition": "运输管理系统，统一管理配车计划、运行状态与运费结算等运输业务信息。",
+      "source": "日本物流団体連合会",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.logitexts.gr.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-098",
+      "term": "GPS車両追跡",
+      "aliases": [
+        "GPS追跡",
+        "車両位置管理"
+      ],
+      "category": "技术与数字化",
+      "tags": [
+        "数字化",
+        "车辆"
+      ],
+      "definition": "利用卫星定位实时掌握车辆位置与行驶状态的监控管理手段，支撑调度可视化。",
+      "source": "国土交通省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp/seisakutokatsu/freight/index.html",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-099",
+      "term": "配送マッチングプラットフォーム",
+      "aliases": [
+        "配送マッチング",
+        "マッチングプラットフォーム"
+      ],
+      "category": "技术与数字化",
+      "tags": [
+        "平台",
+        "数字化"
+      ],
+      "definition": "在线撮合货主与回程运力的平台，旨在提高满载率并减少空驶与资源浪费。",
+      "source": "国土交通省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp/seisakutokatsu/freight/index.html",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-100",
+      "term": "荷待ち時間",
+      "aliases": [
+        "荷待ち"
+      ],
+      "category": "场景与表达",
+      "tags": [
+        "现场",
+        "问题"
+      ],
+      "definition": "车辆抵达装卸现场后等待作业的时间损耗，是工作时间长的结构性原因之一。",
+      "source": "国土交通省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp/seisakutokatsu/freight/index.html",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-101",
+      "term": "立寄り便",
+      "aliases": [
+        "立寄り輸送"
+      ],
+      "category": "场景与表达",
+      "tags": [
+        "运输方式",
+        "效率"
+      ],
+      "definition": "车辆在干线或返程途中顺路停靠完成他点集配的运行方式，可提升满载率。",
+      "source": "日本物流団体連合会",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.logitexts.gr.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-102",
+      "term": "事故報告",
+      "aliases": [
+        "遅延連絡"
+      ],
+      "category": "场景与表达",
+      "tags": [
+        "现场",
+        "安全"
+      ],
+      "definition": "运输事故发生后向公司与货主通报经过、原因与损害情况的报告流程。",
+      "source": "国土交通省",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.mlit.go.jp/seisakutokatsu/freight/index.html",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-103",
+      "term": "SPPI",
+      "aliases": [
+        "サービスプロデューサー価格指数",
+        "道路貨物サービス価格指数"
+      ],
+      "category": "企业与市场",
+      "tags": [
+        "价格",
+        "指数"
+      ],
+      "definition": "服务生产者价格指数，其中道路货物运输价格用于追踪运价走势",
+      "source": "需核实原文",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "LOG-104",
+      "term": "物流倒産",
+      "aliases": [
+        "倒産件数",
+        "物流企業倒産"
+      ],
+      "category": "企业与市场",
+      "tags": [
+        "风险",
+        "统计"
+      ],
+      "definition": "货运物流相关企业的破产件数统计，是行业景气与经营压力的先行指标",
+      "source": "東京商工リサーチ",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.tsr-net.co.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-105",
+      "term": "物流白書",
+      "aliases": [
+        "業界白書",
+        "物流レポート"
+      ],
+      "category": "行业结构与业态",
+      "tags": [
+        "报告",
+        "行业"
+      ],
+      "definition": "汇总物流业规模、课题与动向的年度白皮书，用于行业结构分析的政策参考",
+      "source": "需核实原文",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13",
+      "verification": "待核实",
+      "source_url": "",
+      "confidence": "待评"
+    },
+    {
+      "id": "LOG-106",
+      "term": "トラック白書",
+      "aliases": [
+        "全ト協白書"
+      ],
+      "category": "行业结构与业态",
+      "tags": [
+        "报告",
+        "行业"
+      ],
+      "definition": "全日本トラック協会发布的卡车运输业年度统计资料，覆盖运量与经营指标",
+      "source": "全日本トラック協会",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-19",
+      "verification": "已核验",
+      "source_url": "https://www.jta.or.jp/",
+      "confidence": "A"
+    },
+    {
+      "id": "LOG-107",
+      "term": "TDB",
+      "aliases": [
+        "帝国データバンク"
+      ],
+      "category": "企业与市场",
+      "tags": [
+        "机构",
+        "倒産"
+      ],
+      "definition": "帝国データバンク：日本主要信用调查机构，发布企业倒産统计",
+      "source": "帝国データバンク",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.tdb.co.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-108",
+      "term": "TSR",
+      "aliases": [
+        "東京商工リサーチ"
+      ],
+      "category": "企业与市场",
+      "tags": [
+        "机构",
+        "倒産"
+      ],
+      "definition": "東京商工リサーチ：日本主要信用调查机构，发布企业倒産统计",
+      "source": "東京商工リサーチ",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.tsr-net.co.jp/",
+      "confidence": "B"
+    },
+    {
+      "id": "LOG-109",
+      "term": "運輸・郵便",
+      "aliases": [
+        "运输",
+        "邮政"
+      ],
+      "category": "行业结构与业态",
+      "tags": [
+        "SPPI",
+        "大分类"
+      ],
+      "definition": "日本銀行 SPPI（服务业生产性统计）的大分类之一，与「道路貨物輸送」等中分类区分",
+      "source": "日本銀行",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-19",
+      "verification": "部分核验",
+      "source_url": "https://www.boj.or.jp/statistics/pi/sppi_2020/index.htm",
+      "confidence": "B"
+    }
+  ]
+}
