@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-"""verified_content_gate.py — 无法核实内容硬门禁（内容层零容忍）。
+"""verified_content_gate.py — 无法核实内容硬门禁（默认全层零容忍）。
 
-把「无法核实的内容一律删除」的做法固化为可机读门禁：**内容层**出现
-无法核实标记即阻断，**记录层**（置信度表 / 信息差与未核验清单 / 待复核清单 /
-核验状态列 / 来源规则声明等）放行。
+把「无法核实的内容一律删除」的做法固化为可机读门禁：**任何层级**出现
+无法核实标记即阻断——正文、置信度表、信息差与未核验清单、待复核清单、
+登记册核验状态列、`source-backlog.md`、词库版本记录等一并覆盖。
+`--content-only` 可回退到「仅内容层」（豁免记录层章节 / 状态列 / 清单 / 行级豁免）。
 
 单一事实源：``engine/config/verified-content-policy.json``
 （markers / record_sections / status_columns / excluded_files / excluded_lines）。
@@ -197,6 +198,8 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--report", help="单份报告（仓库相对路径）")
     ap.add_argument("--json", action="store_true", help="结果输出为 JSON")
     ap.add_argument("--warn", action="store_true", help="命中仅告警（退出码 2）")
+    ap.add_argument("--content-only", action="store_true",
+                    help="仅内容层：豁免记录层章节 / 状态列 / 清单 / 行级豁免（默认全层零容忍）")
     args = ap.parse_args(argv)
 
     try:
@@ -204,6 +207,17 @@ def main(argv: list[str] | None = None) -> int:
     except PolicyError as exc:
         print(f"[ERROR] {exc}", file=sys.stderr)
         return 1
+
+    if not args.content_only:
+        # 默认全层零容忍：记录层（置信度表 / 信息差与未核验清单 / 核验状态列 /
+        # source-backlog / 版本记录等）亦不得出现未核实标记。
+        policy = {
+            **policy,
+            "record_sections": {k: [] for k in policy["record_sections"]},
+            "status_columns": [],
+            "excluded_files": [],
+            "excluded_lines": [],
+        }
 
     targets = collect_targets(args, policy)
     results: list[dict] = []
@@ -220,7 +234,8 @@ def main(argv: list[str] | None = None) -> int:
     if args.json:
         print(json.dumps({"total": total, "files": results}, ensure_ascii=False, indent=2))
     else:
-        print(f"无法核实内容门禁：受检 {len(targets)} 份，命中 {total} 处（内容层零容忍）")
+        mode = "内容层零容忍" if args.content_only else "全层零容忍"
+        print(f"无法核实内容门禁：受检 {len(targets)} 份，命中 {total} 处（{mode}）")
         for r in results:
             print(f"  [{r['kind']}] {r['report']}：{len(r['hits'])} 处")
             for h in r["hits"]:

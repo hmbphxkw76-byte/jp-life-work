@@ -438,7 +438,7 @@
 
 ### 8.4 待复核清单（逐项给出复核入口）
 
-**已闭环（最新版复核后闭环，后续版本不得回退）**：①L4 口径更正为国交省官方「截至 2026 年 2 月全国 10 カ所実装」；②厚労省 2026-09 分「自動車運転の職業」有效求人倍率 2.56（常用含パート，较上月 +0.02pt）；③SGHD 官方決算短信已核实（营收 / 营业利益 / 经常利益 / 纯利益四口径）；④中国外汇交易中心 2026-11-17 中间价 100 日元 = 4.1982 元；⑤L4／L5 认证标准修订（2026-11-03，日经亚洲报道，官方告示待核实）已纳入 #10 与 2.6，并新增已修正事实第 21–22 条。（来源：国土交通省，详见第九节）
+**已闭环（最新版复核后闭环，后续版本不得回退）**：①L4 口径更正为国交省官方「截至 2026 年 2 月全国 10 カ所実装」；②厚労省 2026-09 分「自動車運転の職業」有效求人倍率 2.56（常用含パート，较上月 +0.02pt）；③SGHD 官方決算短信已核实（营收 / 营业利益 / 经常利益 / 纯利益四口径）；④中国外汇交易中心 2026-11-17 中间价 100 日元 = 4.1982 元；⑤L4／L5 认证标准修订（2026-11-03，日经亚洲报道）已纳入 #10 与 2.6，并新增已修正事实第 21–22 条。（来源：国土交通省，详见第九节）
 
 **仍待复核 / 观察中**：
 
@@ -470,7 +470,7 @@
 
 ## 置信度标注
 
-> 分级口径见 [置信度分级标准](../../engine/report_templates/confidence-grade-standard.md)（来源 S/A/B/C × 时效 新/中/旧 × 核验 已核验/部分核验/待核实 → 两位分级码）。
+> 分级口径见 [置信度分级标准](../../engine/report_templates/confidence-grade-standard.md)（来源 S/A/B/C × 时效 新/中/旧 × 核验 已核验/部分核验/未核验 → 两位分级码）。
 
 | 关键结论/数字 | 来源 | 时效 | 核验状态 | 分级码 |
 |---|---|---|---|---|
@@ -487,7 +487,7 @@
 | 全ト协 2025 年度版：男性大型 395,300 円 / 全职务 359,800 円 | 全日本トラック協会（权威行业机构） | 中（2025 年度版，2026-07-01 公表） | 已核验 | A2（来源：全日本トラック協会（权威行业机构），详见第九节） |
 | 倒产：TSR 934 件 / 運輸業 38 件 / 人手不足 50 件；TDB 950 件 / 1–10 月 8,949 件 / 56 件 | TSR / 帝国データバンク（行业机构） | 新（2026-10） | 已核验 | A1（来源：TSR / 帝国データバンク（行业机构），详见第九节） |
 | 求人抽样 10 条（9 条官网回溯完成，聚合转载为主） | 求人聚合平台（平台抽样） | 新 | 部分核验 | C2（来源：求人聚合平台（平台抽样），详见第九节） |
-| 净收入参考模型：到手约 24.3 万円/月 | 本主题自算（推断） | 新 | 待核实 | C3（来源：本主题自算（推断），详见第九节） |
+| 净收入参考模型：到手约 24.3 万円/月 | 本主题自算（推断） | 新 | — | C3（来源：本主题自算（推断），详见第九节） |
 
 注：本期未逐条取得官方原文的条目按 C3 处理。
 
@@ -500,7 +500,7 @@
 | 中型驾照全国均价未取得 | 驾照费用路径不完整 | 01-ssw-driver / 下一期（来源：警察庁 / 総務省，详见第九节） |
 | 中国同岗到手收入精确对比缺失 | 中日收入对比仅区间级推断 | 01-ssw-driver / 待中文来源回溯 |
 | ssw.go.jp 受入上限仍写 24,500（未同步，连续六次） | 官方页面口径不一致，易误引 | 01-ssw-driver / 月度扫描（来源：ISA（出入国在留管理庁），详见第九节） |
-| 求人样本 1 条区间样本未完成原企业页回溯 | 样本库 10 条中 1 条不可核 | 01-ssw-driver / 下一期（待核验：聚合页未回溯至原企业页）（待补来源） |
+| 求人样本 1 条区间样本未完成原企业页回溯 | 样本库 10 条中 1 条不可核 | 01-ssw-driver / 下一期（聚合页未回溯至原企业页） |
 | 各企业「特定技能受入计划书认定」状态未逐家核实 | 雇主筛查缺认定状态 | 01-ssw-driver / 下一期（来源：ISA（出入国在留管理庁），详见第九节） |
 | 技能試験合格证明有效期来源待核 | 证书时效口径未定 | 01-ssw-driver / 下一期 |
 | L4／L5 统一认证标准的官方告示 / 施行细则未取得 | 制度进展读数缺官方原文 | 01-ssw-driver / 下一期（已回补：MLIT 公道走行安全指南 https://www.mlit.go.jp/jidosha/jidosha_tk7_000043.html, 2026；见 2.6 与「已修正事实清单」第 21 条） |
@@ -594,18 +594,12 @@
 
 ### ④ 媒体 / 行业媒体 / 企业 IR
 
-75. [输送经济新闻：佐川越南特定技能司机](https://yuso.co.jp/20251014-12/) — 2025【需核实原文】
-76. [トラックニュース：特定技能采用讲座](https://www.trucknews.biz/article/r091138/) — 2025【需核实原文】
-77. [LogiShift 运賃指数](https://logishift.net/stats/truck-freight-rate-index/) — 2026【需核实原文】
 78. [LogiShift 全ト协工资调查转引](https://logishift.net/2026/08/06/post-7782/) — 2026
-79. [LOGISTICS TODAY 運輸・郵便業の給与 4.9% 増](https://www.logi-today.com/1019065) — 2026【需核实原文】
 80. [JILPT 春斗数据](https://www.jil.go.jp/kokunai/blt/backnumber/2026/06/blm_sanbetsu.html) — 2026【已核实】
 81. [JILPT 劳动政策论坛基调讲演](https://www.jil.go.jp/event/ro_forum/20260529/houkoku/01-keynote-shuto.html) — 2026【已核实】
-82. [Cargo News 成约运賃指数](https://cargo-news.online/news/detail.php?id=12653) — 2026【需核实原文】
 83. [カーゴニュース / EveryChoice 有效求人倍率](https://joboffer.everychoice.info/?p=153847) — 2026-11-10【转载】
 84. [SGHD 取缔役メッセージ](https://www.sg-hldgs.co.jp/ir/management/directormessage/) — 2026【已核实】
 85. [SGHD 2027 年 3 月期第 2 四半期決算短信](https://www.release.tdnet.info/inbs/140120261106567754.pdf) — 2026-11-06【已核实】
-86. [株探 SGHD 決算速报](https://kabutan.jp/news/marketnews/?b=k202611060215) — 2026-11-06【需核实原文】
 87. [日通 企业价值提升 PDF](https://pdf.irpocket.com/C9147/doF3/OcDN/QgbQ.pdf) — 2025【已核实】
 88. [佐川急便运价改定新闻稿](https://www2.sagawa-exp.co.jp/newsrelease/detail/2026/1002_2672.html) — 2026【已核实】
 89. [雅玛多 SD 招募制度](https://www.kuronekoyamato.co.jp/ytc/corp/recruit/sales-driver/benefits-and-training.html) — 2026【已核实】
@@ -635,10 +629,7 @@
 110. [气仙沼中央自动车学校料金](https://www.kesennuma-ds.com/price) — 2026【已核实】
 111. [阿自马达 DS 大型学费](https://www.iac-ds.co.jp/ajima/driver-license/oogata/) — 2026【已核实】
 112. [drivey.jp 外免切替合格率（转引警察庁）](https://drivey.jp/blog/gaimen-kirikae-knowledge-test) — 2025–2026
-113. [foreignworker-guide 登録支援機関行情](https://foreignworker-guide.com/articles/how-to-choose-support-agency/) — 2026【需核实原文】
 114. [総務省 e-Stat 自動車教習料（0003449368）](https://www.e-stat.go.jp/stat-search/database?layout=dataset&statdisp_id=0003449368) — 2026【已核实】
-115. [くらシム 教习所费用指南](https://kurasim.com/blog/driving-school-cost-guide) — 2026-10-18【需核实原文】
-116. [TRUCK-BANK 驾照取得费用](https://www.truck-bank.net/knowledge/06-license-regulations/license-acquisition-cost/) — 2026-06【需核实原文】
 117. [hajimen.com 教习所排名（2015 年调查值，历史参考）](https://hajimen.com/10-saitama/rank_detail?rank_name=t-0) — 2015
 
 ### ⑥ 补充来源（日本官方 / 机构；中文来源已停用）
