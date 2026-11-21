@@ -126,6 +126,18 @@ jobs:
           fi
           echo "audit_check 退出码 $code（2=仅 P2 放行）"
 
+      # 无法核实内容硬门禁（内容层零容忍，全库兜底）：与 validate.yml 同口径，
+      # 在合并门禁处再拦一道，确保存量与变更报告的内容层均无「无法核实」标记。
+      - name: 无法核实内容门禁（verified_content_gate --all）
+        run: |
+          python engine/tools/verified_content_gate.py --all || code=$?
+          code=${code:-0}
+          if [ "$code" -ne 0 ]; then
+            echo "::error::内容层存在无法核实内容（待核实 / 未核实 / 需核实原文 / 待核验 / 待补来源），禁止合并（退出码 $code）"
+            exit 1
+          fi
+          echo "verified_content_gate 退出码 $code（内容层零命中）"
+
       # 工具链变更双轴评审软门禁（TOOLCHAIN-DEV-SPEC 第七节；mainline 融合 P3，P2 软门禁）。
       # 变更涉及工具链代码（engine/tools/、engine/vocabulary/script/、engine/scripts/）时，
       # 要求 docs/toolchain/reviews/ 存在双轴评审报告；缺失仅告警不阻断（软门禁），

@@ -17,7 +17,6 @@
 | FC-004 | 341,158 円 | 厚労省毎月勤労統計・運輸業・郵便業现金给与总额（含加班、未含赏与） | 2026-09（2026-11-06 公布） | https://www.mhlw.go.jp/toukei/itiran/roudou/monthly/r08/2609p/xls/2609c01p.xlsx | v1 | 1 |
 | FC-005 | 324,381 円 | 総務省「小売物価統計調査」・普通教习所 AT 限定全国月次均价 | 2026-09 | https://www.e-stat.go.jp/stat-search/database?layout=dataset&statdisp_id=0003449368 | v1 | 1 |
 | FC-006 | 28,400 円；2–4 万円/人·月 | ISA 登録支援機関・新登录费与行情 | 2026 | https://www.moj.go.jp/isa/policies/ssw/supportssw.html | v1 | 1 |
-| FC-007 | 10.5–17.0 万円/月 | 手册 02 生活成本模型・单身地方都市（手册估算，**待核验**） | 2026（手册） | 无在线来源（见 07 报告 3.1） | v1 | 0 |
 | FC-008 | 10,000 円 | JFT-Basic 受验费（日本国内，含消费税相当额） | 2026 | https://www.prometric-jp.com/ssw/exam/fee/ | v1 | 1 |
 | FC-009 | 6,500 円；15,000 円 | ClassNK 技能试験费 / 证明书费 | 2026 | https://sswt-portal.classnk.or.jp/area?tab=3 | v1 | 1 |
 | FC-010 | 715 元 / 1,430 元 | 驻日领馆签证费・单次 / 二次・数次（上海 / 青岛 / 重庆一致） | 2026-07-01 起 | https://www.shanghai.cn.emb-japan.go.jp/itpr_ja/11_000001_00633.html | v1 | 1 |

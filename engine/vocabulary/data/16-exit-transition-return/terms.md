@@ -75,7 +75,7 @@
 | ETR-065 | 永住取消ガイドライン | 永住取消指南 | 转型与在留资格 | 在留;永住;取消 | 令和8年10月策定的永住取消指南，取消事由为入管法22条の4第1項第8号/第9号 | 出入国在留管理庁 | 2026-11-18 | 2026-11-19 | 部分核验 | https://www.moj.go.jp/isa/10_00279.html | B |
 | ETR-066 | 公租公課 | 公租公课 | 转型与在留资格 | 在留;永住;税务 | 公共租税与课役的合称；永住审查中作为消极评价要素，过去滞纳亦审查 | 出入国在留管理庁 | 2026-11-18 | 2026-11-19 | 部分核验 | https://www.moj.go.jp/isa/applications/procedures/torikeshi_00002.html | B |
 | ETR-067 | 職権変更 | 职权变更 | 转型与在留资格 | 在留;永住;处分 | 永住取消前原则先实施的资格变更（多为「定住者」） | 出入国在留管理庁 | 2026-11-18 | 2026-11-19 | 部分核验 | https://www.moj.go.jp/isa/applications/procedures/16-2.html | B |
-| ETR-068 | 源泉徴収 | 源泉征收 | 税务与住民 | 回国;税务 | 脱退一时金等给付时按20.42%扣缴的所得税（媒体汇总口径，需核实原文） | 日本年金機構 | 2026-11-18 | 2026-11-19 | 部分核验 | https://www.nenkin.go.jp/international/japanese-system/withdrawalpayment/index.html | B |
+| ETR-068 | 源泉徴収 | 源泉征收 | 税务与住民 | 回国;税务 | 脱退一时金等给付时按20.42%扣缴的所得税 | 日本年金機構 | 2026-11-18 | 2026-11-19 | 部分核验 | https://www.nenkin.go.jp/international/japanese-system/withdrawalpayment/index.html | B |
 | ETR-069 | 退職所得 | 退职所得 | 税务与住民 | 回国;税务 | 退职金对应的所得，适用分離課税（(収入金額－退職所得控除額)×1/2） | 国税庁 | 2026-11-18 | 2026-11-19 | 已核验 | https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1420.htm | A |
 | ETR-070 | 分離課税 | 分离课税 | 税务与住民 | 回国;税务 | 退職所得适用的课税方式，按(収入金額－退職所得控除額)×1/2计算 | 国税庁 | 2026-11-18 | 2026-11-19 | 部分核验 | https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1420.htm | B |
 | ETR-071 | 国外転出時課税制度 | 国外转出时课税制度 | 税务与住民 | 回国;税务 | 国外転出时对対象资产课税的系列，含確定申告書・第三表・対象資産明細書等様式 | 国税庁 | 2026-11-18 | 2026-11-19 | 部分核验 | https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1420.htm | B |

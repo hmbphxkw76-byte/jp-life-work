@@ -204,9 +204,9 @@ def check_text(rel: str, text: str, html: str = "", type_id: str = "",
     # ── 登记册一致性（PF-REGVAL，P1；判定复用 info_quality_check.value_sync_gaps） ──
     # 报告核验完成 → 登记册回写：登记册活值数值须在两表对应行一致，缺失即 P1。
     if registry_text:
-        for no, missing in value_sync_gaps(registry_text, text):
+        for no, vals in value_sync_gaps(registry_text, text):
             _add(out, "PF-REGVAL", "P1", "登记册一致性",
-                 f"指标 #{no} 登记册活值中的数值 {', '.join(sorted(missing))} "
+                 f"指标 #{no} 登记册活值中的数值 {', '.join(sorted(vals))} "
                  f"未在报告「数据变更摘要」对应行出现（报告核验后须回写登记册）", "S-09")
 
     # ── 结构：类型骨架与 HTML lint（仅有 HTML 时） ──

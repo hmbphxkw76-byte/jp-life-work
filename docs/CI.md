@@ -1,6 +1,6 @@
 # CI 与自动化体系
 
-> **版本**：v2.24（2026-11-20 主健康修复）
+> **版本**：v2.25（2026-11-21 无法核实内容门禁）
 > 本文档说明 jp-life-work 报告管理体系的持续集成（CI）与定时自动化。
 > 代码位置：`.github/workflows/`（8 条工作流）；工具链：`engine/tools/`；测试：`engine/tests/`。
 
@@ -50,6 +50,7 @@
 | md↔HTML 一致性校验 | `md_html_parity.py` | 阻断（漂移 / 缺失） |
 | 提示词结构门禁 | `prompt_check.py` | 阻断（命名 / 继承 / 结构 / 槽位） |
 | 来源语言门禁 | `source_language_gate.py --changed` | 阻断（规则不一致 / 中文来源许可 / 变更报告中文域名） |
+| 无法核实内容门禁 | `verified_content_gate.py --all` | 阻断（内容层含待核实 / 未核实 / 需核实原文 / 待核验 / 待补来源） |
 | 决策度量校验 | `decision_metrics.py --check` | 阻断（解析失败） |
 | 来源条目 schema 校验 | `source_check.py` | 阻断（来源章节缺失） |
 | 反例扫描 | `counterexample_scan.py` | 阻断（扫描失败；候选放行） |
@@ -69,7 +70,7 @@
 | 覆盖率门禁（附加 job） | `coverage_gate.py`（阈值读 `coverage-config.json`） | 阻断（enforce=true 未达标 / 测试失败） |
 | 工作区卫生自检（附加 job） | `cleanup_workspace.py --check` | 阻断（存在残留） |
 
-> 实测（2026-11-20，origin/main @`b570873` + 来源语言门禁任务）：主 job **30 个命名步骤**（不含通用「安装依赖」，含「安装开发依赖」；主 job 实际共 31 个 `- name:` 步骤）+ **3 个附加 job**（契约测试分片 / 覆盖率 / 工作区卫生）；契约测试已拆为独立 4 分片 job，`ruff` 与 `mypy` 为主 job 内静态检查步骤。集成合并后如步骤数变化，以实测为准并更新本表。
+> 实测（2026-11-21，无法核实内容门禁任务）：主 job **31 个命名步骤**（不含通用「安装依赖」，含「安装开发依赖」；主 job 实际共 32 个 `- name:` 步骤）+ **3 个附加 job**（契约测试分片 / 覆盖率 / 工作区卫生）；契约测试已拆为独立 4 分片 job，`ruff` 与 `mypy` 为主 job 内静态检查步骤。集成合并后如步骤数变化，以实测为准并更新本表。
 
 > 通用改造（W2 / R5 / R1 / R7，2026-11-19）：8 条工作流均已接入 `actions/cache@v4` pip 缓存（key 随 `requirements*.txt` 哈希）并补齐 `timeout-minutes`；5 条定时工作流（maintenance / audit-sampling / info-quality / scheduled-report-tasks / pipeline-orchestrator）提交改为推自动分支 + 开 PR（`[automated]` 标记，保留 `github-actions[bot]` 提交身份）；月度 cron 错峰至 00:15 / 00:45 / 01:15 / 01:45（间隔 ≥ 30 分钟）；契约测试由 `run_tests_parallel.py` 分 4 片并行。
 
@@ -166,9 +167,10 @@
 | 全库审计兜底 | `audit_pipeline.py --gate --strict` | 阻断（存量报告未通过审计） |
 | L5 证据元评估 | `l5_meta_check.py --check` | 阻断（覆盖缺口 / 无效证据 / basis 缺失） |
 | 多层级校验 | `audit_check.py --all` | 存在 P0/P1 阻断；仅 P2 放行 |
+| 无法核实内容门禁 | `verified_content_gate.py --all` | 阻断（内容层无法核实内容） |
 | 工具链双轴评审软门禁 | `review_gate.py --changed .changed-files` | 软门禁（缺评审告警，不阻断） |
 
-> 实测（2026-11-20，main @`ff19ac8`）：共 **7 步**（不含通用「安装依赖」，含 pip 缓存准备）。
+> 实测（2026-11-21，无法核实内容门禁任务）：共 **8 步**（不含通用「安装依赖」，含 pip 缓存准备）。
 
 - **合并门禁覆盖**：`--gate` 一次完成台账哈希链、登记册双向一致、已审计标识一致、受检报告审计状态（`audited` + md/HTML 指纹匹配 + 有效 L5 证据）；PR 默认只查本次变更报告，`--strict` 查全库。
 - **L5 证据门禁**：`audited` 报告必须附有效 L5 语义复核证据（`re_review --evidence` 或一次性 `--backfill-l5`），缺失即 `L5-EVIDENCE`（P1）阻断。
@@ -251,7 +253,7 @@ reports/YYYY-MM-<slug>.md  ──md2html.py──►  reports/YYYY-MM-<slug>.htm
 - **辅助开关**：报告页工具条「隐藏更新标记」对照阅读、「展开全部删除」。
 - **呈现**：报告页新标签页独立打开，页脚提供「← 返回主题 / 返回首页」。
 
-## 六、测试体系（`engine/tests/`，1095 项）
+## 六、测试体系（`engine/tests/`，1110 项）
 
 | 场景 | 测试类 | 覆盖 |
 |---|---|---|
@@ -283,7 +285,7 @@ reports/YYYY-MM-<slug>.md  ──md2html.py──►  reports/YYYY-MM-<slug>.htm
 | 跨平台差异守卫 | `test_platform_guard.py`（9 项） | 路径分隔（无 Windows 路径字面量 / 工作流正斜杠）、换行（仓库 blob LF / `.gitattributes` / `atomic_write` 保 LF）、命令可用性（无 `shell=True` / 无 PowerShell 专属语法 / 工具路径存在） |
 | 性能趋势快照 | `test_perf_snapshot.py`（6 项） | 规模快照字段与实测口径、耗时采集、基线语义（首条为基线 / 追加不改基线 / `--set-baseline` 覆盖）、CLI `--porcelain` |
 
-> 合计 1095 项（`python -m unittest discover -s engine/tests` 集成后实测，当前全绿；`incremental_build` 两项「无变更」断言在集成分支领先 main 时按预期失败，合并后通过）。
+> 合计 1110 项（`python -m unittest discover -s engine/tests` 集成后实测，当前全绿；`incremental_build` 两项「无变更」断言在集成分支领先 main 时按预期失败，合并后通过）。
 
 ## 七、手动命令速查
 
@@ -321,6 +323,9 @@ python engine/tools/audit_pipeline.py --gate
 
 # 阶段闸（采集 / 筛选 / 分类左移）
 python engine/tools/stage_gate_check.py
+
+# 无法核实内容硬门禁（内容层零容忍）
+python engine/tools/verified_content_gate.py --all
 
 # 工具链开发域（TOOLCHAIN-DEV-SPEC）
 python engine/tools/coverage_gate.py            # 覆盖率门禁（--update-baseline / --porcelain）
@@ -591,3 +596,4 @@ CI 在 ubuntu runner 上用 **bash** 执行 `run:`，本地维护者用 **PowerS
 | v2.23 | 2026-11-19 | CI/CD 加固（W2 / R5 / R1 / R6 / R7） | 8 条工作流接入 pip 缓存 + 补齐 timeout；定时任务改推分支 + 开 PR（不再直推 main）；月度 cron 错峰（00:15 / 00:45 / 01:15 / 01:45）；`requirements-dev` 固定 + 新增 `requirements-dev.lock`；ruff 转阻断、mypy 覆盖 `engine/scripts`；契约测试改 4 分片 job（`run_tests_parallel.py`）；覆盖率新增单工具最低阈值（`per_tool_min`）+ `upload-artifact`；本地 pre-commit 增 `ruff --fix` + `validate.py`；测试数 1040 → 1045 |
 | v2.24 | 2026-11-20 | 主健康修复 | 工具 45 → 46（`source_normalize.py` 登记入工具一览）、测试 1056 → 1081、`scheduled-maintenance` 步骤 21 → 22、`audit-gate` 步骤 6 → 7；`decision_log --check` 测试适配 n20「需求编号关联」契约（改用登记册真实问题）；`update_planner --requirements` 测试 patch 目标修正为 `update_planner.decision_metrics`（修复测试隔离）；n19–n26 工单双轴评审覆盖补齐（另由评审任务合入） |
 | v2.25 | 2026-11-20 | 来源语言门禁（W5） | 新增 `engine/config/source-policy.json`（来源语言单一事实源）与 `source_language_gate.py`（提示词规则逐字一致 + 中文来源许可扫描 + 变更报告中文域名黑名单，14 项测试）；`validate.yml` 增「来源语言门禁」步骤（主 job 29 → 30 个命名步骤）；全库 21 主题 business-config 与 10 份泛用版提示词的 `{{SOURCE_LANGUAGE_RULE}}` 统一为「仅英文 / 日文来源，杜绝中文来源」；工具 46 → 47、测试 1081 → 1095 |
+| v2.26 | 2026-11-21 | 无法核实内容门禁 | 新增 `engine/config/verified-content-policy.json`（内容层 / 记录层机读边界、标记词、状态列、豁免清单单一事实源）与 `verified_content_gate.py`（内容层零容忍硬门禁，15 项测试）；`validate.yml` 增「无法核实内容门禁」步骤（主 job 30 → 31 个命名步骤）、`audit-gate.yml` 增全库兜底（7 → 8 步）；全库清除内容层无法核实内容（报告 / 手册 / 登记册 / 词库）；工具 47 → 48、测试 1095 → 1110 |
