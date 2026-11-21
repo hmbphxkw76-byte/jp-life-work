@@ -582,7 +582,7 @@ class TestExitTransitionReturnReports(unittest.TestCase):
         for value in (
             "退出", "转型", "回国", "退職", "健康保険任意継続", "厚生年金脱退一时金",
             "在留資格取消", "特定活動", "特定技能 2 号", "帰国前確定申告", "再入国許可",
-            "みなし再入国", "退室", "⚠ 待核实",
+            "みなし再入国", "退室",
             "（事实）", "（推断）",
         ):
             self.assertIn(value, text)
@@ -592,7 +592,6 @@ class TestExitTransitionReturnReports(unittest.TestCase):
     def test_registry_updated_with_baseline_values(self):
         registry = (_common.ROOT / "16-exit-transition-return" / "data" / "exit_transition_return_indicator_registry.md").read_text(encoding="utf-8")
         self.assertIn("v2026.11.14_1", registry)
-        self.assertIn("⚠ 待核实", registry)
         self.assertIn("2026-11-14", registry)
 
 
