@@ -36,7 +36,6 @@ import build_hub  # noqa: E402
 import build_index  # noqa: E402
 import compliance_check  # noqa: E402
 import decision_log  # noqa: E402
-import decision_metrics  # noqa: E402
 import fact_card_check  # noqa: E402
 import info_quality_check  # noqa: E402
 import link_check  # noqa: E402
@@ -1981,7 +1980,9 @@ class TestFactCardCheck(unittest.TestCase):
 
     def test_cards_five_fields(self):
         cards = fact_card_check.parse_cards()
-        self.assertGreaterEqual(len(cards), 16)
+        # 下限 15：FC-007（生活成本「手册估算」）于 2026-11-21 无法核实内容清理中删除，
+        # 卡片数由 16 → 15（有意减项，非丢失）。
+        self.assertGreaterEqual(len(cards), 15)
         self.assertEqual(fact_card_check.check_fields(cards), [])
 
     def test_pointers_resolvable(self):

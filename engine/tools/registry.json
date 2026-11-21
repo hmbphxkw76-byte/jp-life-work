@@ -47,7 +47,8 @@
     "structure_check.py",
     "trigger_watch.py",
     "update_planner.py",
-    "validate.py"
+    "validate.py",
+    "verified_content_gate.py"
   ],
   "types": [
     "competitive-intelligence",

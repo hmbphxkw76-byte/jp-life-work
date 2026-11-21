@@ -410,7 +410,7 @@ def vocab_cross_gaps() -> tuple[list[str], list[str], dict]:
     """
     try:
         sys.path.insert(0, str(ROOT / "engine" / "vocabulary" / "script"))
-        import vocab_tool  # type: ignore
+        import vocab_tool
         cfg = vocab_tool.load_config(vocab_tool.DEFAULT_CONFIG)
         return vocab_tool.cross_check_gaps(cfg)
     except Exception:
