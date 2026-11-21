@@ -1,12 +1,12 @@
 {
-  "run_date": "2026-11-20",
+  "run_date": "2026-11-21",
   "summary": {
     "reports": 21,
-    "passed": 16,
-    "failed": 5,
+    "passed": 21,
+    "failed": 0,
     "by_severity": {
       "P0": 0,
-      "P1": 5,
+      "P1": 0,
       "P2": 0
     },
     "by_layer": {
@@ -43,11 +43,11 @@
         "P2": 0
       },
       "L5": {
-        "pass": 16,
+        "pass": 21,
         "fail": 0,
-        "pending": 5,
+        "pending": 0,
         "P0": 0,
-        "P1": 5,
+        "P1": 0,
         "P2": 0
       }
     }
@@ -63,25 +63,15 @@
         "L2": "pass",
         "L3": "pass",
         "L4": "pass",
-        "L5": "pending"
+        "L5": "pass"
       },
       "severity": {
         "P0": 0,
-        "P1": 1,
+        "P1": 0,
         "P2": 0
       },
-      "passed": false,
-      "findings": [
-        {
-          "layer": "L5",
-          "code": "L5-EVIDENCE",
-          "severity": "P1",
-          "report": "00-decision-hub/reports/2026-11-decision-hub.md",
-          "location": "语义复核",
-          "detail": "缺少有效 L5 语义复核证据（re_review --evidence / --backfill-l5，见 l5-semantic-review.md）",
-          "spec": ""
-        }
-      ],
+      "passed": true,
+      "findings": [],
       "l5_checklist": [
         "结论与依据是否匹配（关键结论有「事实→推理→结论」链）",
         "表述是否与来源原文含义一致（无夸大 / 曲解）",
@@ -566,25 +556,15 @@
         "L2": "pass",
         "L3": "pass",
         "L4": "pass",
-        "L5": "pending"
+        "L5": "pass"
       },
       "severity": {
         "P0": 0,
-        "P1": 1,
+        "P1": 0,
         "P2": 0
       },
-      "passed": false,
-      "findings": [
-        {
-          "layer": "L5",
-          "code": "L5-EVIDENCE",
-          "severity": "P1",
-          "report": "17-migration-compliance/reports/2026-11-migration-compliance.md",
-          "location": "语义复核",
-          "detail": "缺少有效 L5 语义复核证据（re_review --evidence / --backfill-l5，见 l5-semantic-review.md）",
-          "spec": ""
-        }
-      ],
+      "passed": true,
+      "findings": [],
       "l5_checklist": [
         "结论与依据是否匹配（关键结论有「事实→推理→结论」链）",
         "表述是否与来源原文含义一致（无夸大 / 曲解）",
@@ -605,25 +585,15 @@
         "L2": "pass",
         "L3": "pass",
         "L4": "pass",
-        "L5": "pending"
+        "L5": "pass"
       },
       "severity": {
         "P0": 0,
-        "P1": 1,
+        "P1": 0,
         "P2": 0
       },
-      "passed": false,
-      "findings": [
-        {
-          "layer": "L5",
-          "code": "L5-EVIDENCE",
-          "severity": "P1",
-          "report": "18-family-parenting/reports/2026-11-family-parenting.md",
-          "location": "语义复核",
-          "detail": "缺少有效 L5 语义复核证据（re_review --evidence / --backfill-l5，见 l5-semantic-review.md）",
-          "spec": ""
-        }
-      ],
+      "passed": true,
+      "findings": [],
       "l5_checklist": [
         "结论与依据是否匹配（关键结论有「事实→推理→结论」链）",
         "表述是否与来源原文含义一致（无夸大 / 曲解）",
@@ -644,25 +614,15 @@
         "L2": "pass",
         "L3": "pass",
         "L4": "pass",
-        "L5": "pending"
+        "L5": "pass"
       },
       "severity": {
         "P0": 0,
-        "P1": 1,
+        "P1": 0,
         "P2": 0
       },
-      "passed": false,
-      "findings": [
-        {
-          "layer": "L5",
-          "code": "L5-EVIDENCE",
-          "severity": "P1",
-          "report": "19-safety-disaster/reports/2026-11-safety-disaster.md",
-          "location": "语义复核",
-          "detail": "缺少有效 L5 语义复核证据（re_review --evidence / --backfill-l5，见 l5-semantic-review.md）",
-          "spec": ""
-        }
-      ],
+      "passed": true,
+      "findings": [],
       "l5_checklist": [
         "结论与依据是否匹配（关键结论有「事实→推理→结论」链）",
         "表述是否与来源原文含义一致（无夸大 / 曲解）",
@@ -683,25 +643,15 @@
         "L2": "pass",
         "L3": "pass",
         "L4": "pass",
-        "L5": "pending"
+        "L5": "pass"
       },
       "severity": {
         "P0": 0,
-        "P1": 1,
+        "P1": 0,
         "P2": 0
       },
-      "passed": false,
-      "findings": [
-        {
-          "layer": "L5",
-          "code": "L5-EVIDENCE",
-          "severity": "P1",
-          "report": "20-overseas-china/reports/2026-11-overseas-china.md",
-          "location": "语义复核",
-          "detail": "缺少有效 L5 语义复核证据（re_review --evidence / --backfill-l5，见 l5-semantic-review.md）",
-          "spec": ""
-        }
-      ],
+      "passed": true,
+      "findings": [],
       "l5_checklist": [
         "结论与依据是否匹配（关键结论有「事实→推理→结论」链）",
         "表述是否与来源原文含义一致（无夸大 / 曲解）",

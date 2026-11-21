@@ -14,7 +14,7 @@
 ## 6.2 招募渠道与中介资质
 
 - 中国路径官方明示：须经中国主管部门批准资质的对外劳务合作企业＋日方公共职业安定所（ハローワーク）。[Source: https://www.ssw.go.jp/cn/about/step/, 2026]
-- 资质查询入口：中国侧资质查询入口为中文来源，按来源规则不列 → 待核实；无资质出国务工属违法（法理判断）。
+- 无资质出国务工属违法（法理判断）。
 - 非法中介特征（推断汇总）：无法提供中国主管部门资质编号、要求前置大额“保证金”、承诺“免考包过”（技能試験为 ClassNK 统一实施，无免考通道）。
 
 ## 6.3 在留落地清单
@@ -28,9 +28,9 @@
 
 | 路径 | 要点 | 费用/合格率 |
 |---|---|---|
-| [外免切替（持中国驾照）](https://www.police.pref.chiba.jp/menkyoka/licence_info-11.html "来源：https://www.police.pref.chiba.jp/menkyoka/licence_info-11.html, 2025；https://drivey.jp/blog/gaimen-kirikae-knowledge-test（转引警察庁）, 2025-2026") | 中国不在 29 国免除对象；知识确认 50 题正确率 90%＋技能确认（2025-10 严格化：新增横断步道课题、审查基准 70%） | 知识确认合格率 **42.8%**、技能确认 **13.1%**（2025 年 10–12 月，警察庁） |
+| [外免切替（持中国驾照）](https://www.police.pref.chiba.jp/menkyoka/licence_info-11.html "来源：https://www.police.pref.chiba.jp/menkyoka/licence_info-11.html, 2025；https://drivey.jp/blog/gaimen-kirikae-knowledge-test（转引警察庁）, 2025-2026") | 中国不在 29 国免除对象；知识确认 50 题正确率 90%＋技能确认（2025-10 严格化：新增横断步道课题、审查基准 70%） | — |
 | [在日新考取（普通 MT）](https://www.kesennuma-ds.com/price "来源：https://www.kesennuma-ds.com/price, 2026") | 18 岁～ | 约 **400,550 円**（税込示例，气仙沼中央自动车学校） |
-| 中型 | 20 岁＋持其他驾照满 2 年 | 全国均价待核实 |
+| 中型 | 20 岁＋持其他驾照满 2 年 | — |
 | [大型](https://www.iac-ds.co.jp/ajima/driver-license/oogata/ "来源：https://www.iac-ds.co.jp/ajima/driver-license/oogata/, 2026") | 21 岁＋满 3 年 | 约 **213,550 円**（持中型起，阿自马达 DS 示例） |
 
 ⚠️ 特定活动入境后未取得日本驾照则不能转特定技能 1 号——驾照是全流程的关键路径依赖。[Source: https://www.moj.go.jp/isa/applications/procedures/16-1, 2026]

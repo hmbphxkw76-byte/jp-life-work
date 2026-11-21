@@ -15,7 +15,7 @@
 |---|---|---|
 | 00 | [00-navigation.md](00-navigation.md) | 导航与使用约定（本文件） |
 | 01 | [01-driver-jobs.md](01-driver-jobs.md) | 岗位谱系、车种驾照对应（2024 新制）、一天工作流、深化方向 |
-| 02 | [02-salary-compliance.md](02-salary-compliance.md) | 平均年收约 430 万、工资构成、2024 时间外劳动新规、入职必问清单 |
+| 02 | [02-salary-compliance.md](02-salary-compliance.md) | 含赏与年收口径、工资构成、2024 时间外劳动新规、入职必问清单 |
 | 03 | [03-safety-rules.md](03-safety-rules.md) | 点呼/点检/运行记录、事故处理、酒精红线、90 天路线图 |
 | 04 | [04-field-experience.md](04-field-experience.md) | 四大能力域、可量化成果表、2 年技能升级路径 |
 | 05 | [05-job-hunting.md](05-job-hunting.md) | 渠道矩阵、地域策略、面试问答、契约审查清单 |
