@@ -2,7 +2,7 @@
 
 > **免责声明**：本报告为信息整理与条件化建议，不构成法律意见或税务意见；重大决策请咨询执业法律 / 税务专业人士。
 
-> **已审计** ✅ 审计编号 `AUD-202611-011`｜终审通过：2026-11-21｜内容指纹 `b010cd239b41006e2d8`｜依据《审计报告标准化管理体系》v1.4
+> **已审计** ✅ 审计编号 `AUD-202611-003`｜终审通过：2026-11-21｜内容指纹 `3f7225deaac570567ef`｜依据《审计报告标准化管理体系》v1.4
 
 > **版本**：v2026.11.17（2026-11 月度核验）　**数据基准日**：2026-11-17
 > **主题类型**：职业就业调研型（employment-research）
@@ -331,7 +331,7 @@ M1 完成后即满足特定技能卡车路径的日语要件，可与技能试�
 5. [JLPT 得点区分・合否判定・结果通知](https://www.jlpt.jp/guideline/results.html) — N4 180/90、N3 95、N2 90 与分项底线，2026。
 6. [JLPT CEFR レベル参考表示 公告](https://www.jlpt.jp/cefrlevel/cefrnews.html) — 2025-12 考试起附加，2026。
 7. [JLPT 认定の目安（N1–N5）](https://www.jlpt.jp/about/levelsummary.html)，2026。
-8. [JFT-Basic 官方样题](https://www.jft-basic.jp/sample/)，2026。
+8. [JFT-Basic 官方样题](https://www.jft-basic.jp/sample/)，2026；[JFT-Basic 受験料金（Prometric 国別受験料金：日本 JPY 10,000）](https://www.prometric-jp.com/ssw/exam/fee/)，2026。
 9. [特定技能官方中文站](https://www.ssw.go.jp/cn/)，2026。
 10. [法务省 ISA · 特定技能制度](https://www.moj.go.jp/isa/applications/ssw/index.html) — 日本語能力水準 B1 確認開始時期（2026-09-30）、JFT-Basic 活用推荐（2026-10-05），2026。
 11. [法务省 ISA · 日本語能力水準「B1 相当以上」の確認開始時期](https://www.moj.go.jp/isa/03_00198.html)，2026。
