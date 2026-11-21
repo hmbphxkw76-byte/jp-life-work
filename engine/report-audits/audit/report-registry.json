@@ -177,11 +177,11 @@
       "type_id": "employment-research",
       "md": "11-language-japanese/reports/2026-11-language-japanese.md",
       "html": "11-language-japanese/reports/2026-11-language-japanese.html",
-      "content_hash": "sha256:b010cd239b41006e2d833aa1348778e6c9429e702fd951aba2aab9c78853d54d",
-      "html_hash": "sha256:5e3c8bbc7ff70d79d72321b745f42ad4f76caa84e1ecd0da9e2f286e35a7ed17",
-      "audit_id": "AUD-202611-011",
+      "content_hash": "sha256:3f7225deaac570567ef737616285ad3c17acbc607c04250410bac50a73fa8867",
+      "html_hash": "sha256:9ac2be086eaa805b93b2c29226b54639dd698826605871d2287b8bd21fee980c",
+      "audit_id": "AUD-202611-003",
       "audit_state": "audited",
-      "finalized_at": "2026-11-21T13:59:30+00:00"
+      "finalized_at": "2026-11-21T16:59:41+00:00"
     },
     {
       "report": "12-culture-life/reports/2026-11-culture-life.md",
@@ -207,11 +207,11 @@
       "type_id": "market-monitoring",
       "md": "13-regional-info/reports/2026-11-regional-info.md",
       "html": "13-regional-info/reports/2026-11-regional-info.html",
-      "content_hash": "sha256:bbf4d056b06566ed0f4641abe8e8e75763c99838f8c74abf226143c0f9235f97",
-      "html_hash": "sha256:85cf1d092751dca298161d5d5d1c2152a571ef546d30fe28a74c074d64787f41",
-      "audit_id": "AUD-202611-018",
+      "content_hash": "sha256:50198487b52f72375cc4b671f8afd9391bdd723f517cf0a38bce27ba2bf8bc14",
+      "html_hash": "sha256:822d0f6d71b3dce1f8a409c060bccc8b6cd3898b494c7ccc4860bac2d3651c2b",
+      "audit_id": "AUD-202611-011",
       "audit_state": "audited",
-      "finalized_at": "2026-11-21T13:59:32+00:00"
+      "finalized_at": "2026-11-21T16:59:42+00:00"
     },
     {
       "report": "14-life-operations/reports/2026-11-life-operations.md",

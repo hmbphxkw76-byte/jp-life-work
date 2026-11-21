@@ -2,7 +2,7 @@
 
 > **免责声明**：本报告为信息整理与条件化建议，不构成法律意见或税务意见；重大决策请咨询执业法律 / 税务专业人士。
 
-> **已审计** ✅ 审计编号 `AUD-202611-018`｜终审通过：2026-11-21｜内容指纹 `bbf4d056b06566ed0f4`｜依据《审计报告标准化管理体系》v1.4
+> **已审计** ✅ 审计编号 `AUD-202611-011`｜终审通过：2026-11-21｜内容指纹 `50198487b52f72375cc`｜依据《审计报告标准化管理体系》v1.4
 
 > **版本**：v2026.11.17（2026-11 月度核验）　**数据基准日**：2026-11-17
 > **主题类型**：市场指标监测型（market-monitoring）
@@ -331,7 +331,7 @@
 **A 官方一手**（已核验，附完整 URL）：
 
 1. 厚生労働省 医師・歯科医師・薬剤師統計 — https://www.mhlw.go.jp/toukei/list/33-20.html （2026 核对）
-2. 厚生労働省 令和6年医療施設調査 — https://www.mhlw.go.jp/toukei/saikin/hw/iryosd/24/index.html （2025-09-26 公表）
+2. 厚生労働省 令和6年医療施設調査 — https://www.mhlw.go.jp/toukei/saikin/hw/iryosd/24/index.html （2025-09-26 公表）；[e-Stat 令和6年医療施設(動態)調査 全国編 第2表 病床数](https://www.e-stat.go.jp/dbview?sid=0004048364)（病院・一般病床 879,728）
 3. 文部科学省 帰国・外国人児童生徒等の現状 — https://www.mext.go.jp/a_menu/shotou/clarinet/genjyou/1295897.htm （2026 核对，令和7年度调查）
 4. 国土交通省 令和8年都道府県地価調査 — https://www.mlit.go.jp/totikensangyo/totikensangyo_fr4_000044.html （2026-09-15 公表）
 5. 国土交通省 不動産情報ライブラリ — https://www.reinfolib.mlit.go.jp/ （2026-07-29 更新，令和8年1～3月分成約価格）
