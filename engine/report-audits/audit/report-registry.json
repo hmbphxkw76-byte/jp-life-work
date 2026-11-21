@@ -1,6 +1,6 @@
 {
   "version": "v1.4",
-  "generated": "2026-11-21",
+  "generated": "2026-11-22",
   "count": 21,
   "reports": [
     {
@@ -117,11 +117,11 @@
       "type_id": "employment-research",
       "md": "07-economy-finance/reports/2026-11-economy-finance.md",
       "html": "07-economy-finance/reports/2026-11-economy-finance.html",
-      "content_hash": "sha256:203d94860d62ff169022c28f9b0bc19c6d74d080548a66ba95c16d65d8b3e4b8",
-      "html_hash": "sha256:690d9695ce5b113f07355b232fae11582b406827566f4c19fe65da1356779dde",
-      "audit_id": "AUD-202611-003",
+      "content_hash": "sha256:73f45ed41670ef2cd630c7948e6733af26319a99317026fdab47f3d886199075",
+      "html_hash": "sha256:8712d7d4639d6fed71c234f163efb456b3fbdafa87bb9d5a85688793aa91560b",
+      "audit_id": "AUD-202611-017",
       "audit_state": "audited",
-      "finalized_at": "2026-11-21T13:59:27+00:00"
+      "finalized_at": "2026-11-21T16:03:45+00:00"
     },
     {
       "report": "08-visa-immigration/reports/2026-11-visa-immigration.md",

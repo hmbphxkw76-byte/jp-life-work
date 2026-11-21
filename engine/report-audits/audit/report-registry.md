@@ -1,6 +1,6 @@
 # 审计报告登记册（AuditGuard）
 
-> 生成日期：2026-11-21　|　报告总数：21　|　依据《审计报告标准化管理体系》v1.4
+> 生成日期：2026-11-22　|　报告总数：21　|　依据《审计报告标准化管理体系》v1.4
 > 本文件由 `audit_registry.py --init` 自动生成，请勿手工编辑。
 
 | 报告 | 主题 | 期间 | 类型 | 内容指纹 | 审计状态 | 审计编号 |
@@ -12,7 +12,7 @@
 | [04-industry-logistics/reports/2026-11-industry-logistics.md](../../../04-industry-logistics/reports/2026-11-industry-logistics.md) | 04-industry-logistics | 2026-11 | industry-research | `sha256:a0716aa5ac85` | audited | AUD-202611-020 |
 | [05-industry-autonomous/reports/2026-11-industry-autonomous.md](../../../05-industry-autonomous/reports/2026-11-industry-autonomous.md) | 05-industry-autonomous | 2026-11 | industry-research | `sha256:40e72b0718d2` | audited | AUD-202611-010 |
 | [06-industry-technology/reports/2026-11-industry-technology.md](../../../06-industry-technology/reports/2026-11-industry-technology.md) | 06-industry-technology | 2026-11 | industry-research | `sha256:718e79632714` | audited | AUD-202611-007 |
-| [07-economy-finance/reports/2026-11-economy-finance.md](../../../07-economy-finance/reports/2026-11-economy-finance.md) | 07-economy-finance | 2026-11 | employment-research | `sha256:203d94860d62` | audited | AUD-202611-003 |
+| [07-economy-finance/reports/2026-11-economy-finance.md](../../../07-economy-finance/reports/2026-11-economy-finance.md) | 07-economy-finance | 2026-11 | employment-research | `sha256:73f45ed41670` | audited | AUD-202611-017 |
 | [08-visa-immigration/reports/2026-11-visa-immigration.md](../../../08-visa-immigration/reports/2026-11-visa-immigration.md) | 08-visa-immigration | 2026-11 | policy-analysis | `sha256:786fde68c77e` | audited | AUD-202611-008 |
 | [09-politics-law/reports/2026-11-politics-law.md](../../../09-politics-law/reports/2026-11-politics-law.md) | 09-politics-law | 2026-11 | policy-analysis | `sha256:54550f0f54a0` | audited | AUD-202611-015 |
 | [10-education-qualification/reports/2026-11-education-qualification.md](../../../10-education-qualification/reports/2026-11-education-qualification.md) | 10-education-qualification | 2026-11 | employment-research | `sha256:d68b8c04b74f` | audited | AUD-202611-021 |
