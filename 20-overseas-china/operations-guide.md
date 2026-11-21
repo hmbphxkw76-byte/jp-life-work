@@ -15,6 +15,7 @@
 | 周期提示词（启动入口） | `20-overseas-china/prompts/prompt-{baseline-setup\|policy-review}.md` |
 | 业务参数（变量 / 边界 / 来源 / 触发器） | `20-overseas-china/prompts/business-config.md` |
 | 政策台账与指标登记册 | `20-overseas-china/data/overseas_china_indicator_registry.md` |
+| 来源待回溯清单 | `20-overseas-china/data/source-backlog.md` |
 | 报告产物 | `20-overseas-china/reports/` |
 | 报告归档 | `20-overseas-china/reports/archives/` |
 | 工具链 | `engine/tools/`（退出码：0 过 / 1 错 / 2 警告） |

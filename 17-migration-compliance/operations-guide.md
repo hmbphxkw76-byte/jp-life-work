@@ -15,6 +15,7 @@
 | 周期提示词（启动入口） | `17-migration-compliance/prompts/prompt-{baseline-setup|policy-review}.md` |
 | 业务参数（变量 / 边界 / 来源 / 触发器） | `17-migration-compliance/prompts/business-config.md` |
 | 政策台账与指标登记册 | `17-migration-compliance/data/migration_compliance_indicator_registry.md` |
+| 来源待回溯清单 | `17-migration-compliance/data/source-backlog.md` |
 | 报告产物 | `17-migration-compliance/reports/` |
 | 报告归档 | `17-migration-compliance/reports/archives/` |
 | 工具链 | `engine/tools/`（退出码：0 过 / 1 错 / 2 警告） |
