@@ -7,8 +7,6 @@
 > **结论边界**：本报告为信息整理与条件化建议，**不构成法律意见或税务意见**；重大决策须咨询执业弁護士 / 行政書士 / 税理士。
 > **免责声明**：本报告为信息整理与条件化建议，不构成法律意见或税务意见；重大决策请咨询执业法律 / 税务专业人士。
 
-> **已审计** ✅ 审计编号 `AUD-202611-020`｜终审通过：2026-11-20｜内容指纹 `6bbd9e5947c1085de71`｜依据《审计报告标准化管理体系》v1.4
-
 ---
 
 ## 一、核心结论（摘要）
@@ -27,7 +25,9 @@
 
 **条件化建议**：见第七节（建议章），与事实分离；本主题不预设个人 Go / No-Go。
 
-**关键待核验项**：児童手当与児童扶養手当最新年度口径（官方页深链）；保育所 / 認定こども園 / 幼稚園利用料与入所要件；国際結婚・離婚・相続具体书类与窗口；第 3 号被保険者口径。 （未标注 / 待补来源）
+**关键待核验项（B-3 处理）**：
+- ✅ **已回补（官方一手深链）**：児童手当（[Source: https://www.cfa.go.jp/policies/kokoseido/jidouteate/annai, 2026]）、児童扶養手当（[Source: https://www.cfa.go.jp/policies/hitori-oya/fuyou-teate/, 2026]）、保育所・認定こども園・幼稚園利用料与入所要件（[Source: https://www.cfa.go.jp/policies/hoiku, 2026]；无偿化 [Source: https://www.cfa.go.jp/policies/kokoseido/mushouka/, 2026]；幼稚園 [Source: https://www.mext.go.jp/a_menu/shotou/youchien/, 2026]）、第 3 号被保険者口径（[Source: https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/nenkin/nenkin/, 2026]）。
+- ⚠ **待核验**：国際結婚・離婚・相続的具体书类与窗口（未检索到统一官方深链；离婚后亲权 / 养育费新规则仅部分覆盖，见 [Source: https://www.cfa.go.jp/policies/hitori-oya, 2026]）。逐条理由与检索口径见 `data/source-backlog.md`。
 
 ### 数据变更摘要
 
