@@ -2,7 +2,7 @@
 
 > **免责声明**：本报告为信息整理与条件化建议，不构成法律意见或税务意见；重大决策请咨询执业法律 / 税务专业人士。
 
-> **已审计** ✅ 审计编号 `AUD-202611-019`｜终审通过：2026-11-21｜内容指纹 `7ca8c441fe34cd90713`｜依据《审计报告标准化管理体系》v1.4
+> **已审计** ✅ 审计编号 `AUD-202611-009`｜终审通过：2026-11-21｜内容指纹 `c67864d0a81e0a7d5b9`｜依据《审计报告标准化管理体系》v1.4
 
 > **版本**：v2026.11.17（2026-11 月度核验）　**数据基准日**：2026-11-17
 > **主题类型**：职业就业调研型（employment-research）· 个人健康管理
@@ -64,7 +64,7 @@
 
 - **国民健康保険**（国保）：面向非公司职员、自营业、无业者等居民，自付通常 **3 割**（小学生未満 2 割；70–74 岁因收入 2 割 / 現役並み 3 割）；由市区町村运营。（事实；来源：厚生労働省）
 - **被用者健康保険**：公司职员加入，自付通常 3 割，由公司与个人分担保费（协会けんぽ / 健康保険組合 / 船員保険等）。（事实；来源：厚生労働省 / 日本年金機構 [https://www.nenkin.go.jp/](https://www.nenkin.go.jp/)）
-- **后期高龄者医療**：75 岁以上（或 65–74 岁有一定障碍者）加入，窗口自付 **1 割 / 2 割 / 3 割** 按所得分层（2 割自令和 3 年度起适用于所得上位约 30%）。（事实；来源：厚生労働省高齢者医療制度页 [https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/koukikourei/index.html](https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/koukikourei/index.html)）
+- **后期高龄者医療**：75 岁以上（或 65–74 岁有一定障碍者）加入，窗口自付 **1 割 / 2 割 / 3 割** 按所得分层（2 割自令和 3 年度起适用于所得上位约 30%；所得基準见厚生労働省「２割の対象となる所得基準の考え方」PDF [https://www.mhlw.go.jp/content/000720041.pdf](https://www.mhlw.go.jp/content/000720041.pdf)）。（事实；来源：厚生労働省高齢者医療制度页 [https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/koukikourei/index.html](https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/koukikourei/index.html)）
 
 ### 2.2 高额疗养费制度（令和 8 年 8 月改革）
 
@@ -173,7 +173,7 @@
 
 - 挂号 → 诊疗 → 处方 → 药房配药；保留领收书与明细。
 - 急救：**119** 为急救电话；救急病院按轮值制。（事实；来源：消防庁 / 厚生労働省）
-- 夜间 / 假日救急咨询：#7119（自治体设置，截至令和 6 年 11 月共 36 地域，覆盖 36/47 都道府县，→ 12-culture-life）。
+- 夜间 / 假日救急咨询：#7119（自治体设置，**令和 8 年 7 月現在全国 42 地域**，→ 12-culture-life）。[Source: https://www.fdma.go.jp/mission/enrichment/appropriate/appropriate007.html, 2026]
 - **マイナ救急**：令和 7 年 10 月起全国运用，救急搬送中活用マイナ保険証以选定搬送先。[Source: https://www.mhlw.go.jp/stf/newpage_22682.html, 2026]
 
 ### 5.3 健康管理与自我觉察
@@ -204,10 +204,10 @@
 
 ### 6.3 待核实
 
-- 障害者手帳 / 精神障害者保健福祉手帳的取得要件、认定流程与外国人对应；
-- 介護保険被保险者证的发证时点与所需书类；
-- 高额疗养费完整上限额表与各所得层级；
-- 各自治体多语言窗口清单。
+- 障害者手帳 / 精神障害者保健福祉手帳的取得要件、认定流程与外国人对应（**部分核验**：制度框架与样式改正见厚生労働省 [https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/shougaishahukushi/index.html](https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/shougaishahukushi/index.html)，申请向住所地市区町村；外国人对应无中央明文）；
+- 介護保険被保险者证的发证时点与所需书类（未取得官方页）；
+- 高额疗养费完整上限额表与各所得层级（**已核验**：参考資料 PDF [https://www.mhlw.go.jp/content/001729632.pdf](https://www.mhlw.go.jp/content/001729632.pdf)）；
+- 各自治体多语言窗口清单（无中央统一页，因自治体 / 医院而异）。
 
 ---
 
@@ -249,7 +249,7 @@
 
 2. 医疗费用因医院与病种差异大，需用「区间 / 口径」呈现；
 3. 个人定居地未定，地域差异无法收敛；
-4. 高额疗养费「完整上限额表」与各自治体多语言清单未取得官方原件。
+4. 各自治体多语言清单未取得官方原件（无中央统一页）；高额疗养费完整上限额表与各所得层级已核验（参考資料 PDF [https://www.mhlw.go.jp/content/001729632.pdf](https://www.mhlw.go.jp/content/001729632.pdf)）。
 
 ### 8.3 口径差异说明
 
@@ -265,7 +265,7 @@
 | # | 待复核项 | 复核入口 |
 |---|---|---|
 | 1 | 自付比例细则（75 岁以上分层） | 厚生労働省 高齢者医療制度页 [https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/koukikourei/index.html](https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/koukikourei/index.html) |
-| 2 | 高额疗养费完整上限额表 | 厚生労働省 高額療養費制度页 [https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/juuyou/kougakuiryou/index.html](https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/juuyou/kougakuiryou/index.html) |
+| 2 | 高额疗养费完整上限额表（已核验） | 厚生労働省 高額療養費制度参考資料 PDF [https://www.mhlw.go.jp/content/001729632.pdf](https://www.mhlw.go.jp/content/001729632.pdf)；制度页 [https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/juuyou/kougakuiryou/index.html](https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/juuyou/kougakuiryou/index.html) |
 | 3 | 多语言医疗窗口清单 | 各自治体 / 医疗机构官网 |
 | 4 | 心理健康渠道清单 | 厚生労働省「まもろうよこころ」[https://www.mhlw.go.jp/mamorouyokokoro/](https://www.mhlw.go.jp/mamorouyokokoro/) |
 | 5 | 初诊费用行情 | 医疗机构 / 学会 |
@@ -301,7 +301,7 @@
 
 | 条目 | 影响 | 补缺责任/期限 |
 |---|---|---|
-| 高额疗养费完整上限额表与各所得层级 | 大病负担无法精确测算 | 厚生労働省高額療養費制度页（次期） |
+| 高额疗养费完整上限额表与各所得层级（已核验） | 大病负担可精确测算 | 厚生労働省高額療養費制度参考資料 PDF [https://www.mhlw.go.jp/content/001729632.pdf](https://www.mhlw.go.jp/content/001729632.pdf) |
 | 各自治体多语言窗口 / 医疗通译清单（⚠ 清单待补） | 就医语言支援不确定 | 各自治体 / 医疗机构（次期） |
 | 入管 2027 年 3 月起调取保険料 / 年金 / 課税信息（媒体报道） | 在留审查口径不确定 | 官方「総合的対応策」（次期）（来源：ISA（出入国在留管理庁），详见第九节） |
 
@@ -309,7 +309,7 @@
 
 ### 官方一手
 
-1. [厚生労働省 · 高額療養費制度](https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/juuyou/kougakuiryou/index.html) — 2026
+1. [厚生労働省 · 高額療養費制度](https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/juuyou/kougakuiryou/index.html) — 2026（参考資料 PDF：[https://www.mhlw.go.jp/content/001729632.pdf](https://www.mhlw.go.jp/content/001729632.pdf)）
 2. [厚生労働省 · 高齢者医療制度](https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/koukikourei/index.html) — 2026
 3. [厚生労働省 · 特定健診・特定保健指導](https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000161103.html) — 2026
 4. [厚生労働省 · 出産育児一時金等について](https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/shussan/index.html) — 2026
@@ -317,7 +317,7 @@
 6. [厚生労働省 · マイナンバーカードの健康保険証利用のメリット](https://www.mhlw.go.jp/stf/newpage_22682.html) — 2026
 7. [厚生労働省 · まもろうよこころ（相談窓口総覧）](https://www.mhlw.go.jp/mamorouyokokoro/) — 2026
 8. [日本年金機構](https://www.nenkin.go.jp/) — 2026
-9. [消防庁 · 救急](https://www.fdma.go.jp/) — 2026
+9. [消防庁 · 救急安心センター（♯7119）](https://www.fdma.go.jp/mission/enrichment/appropriate/appropriate007.html) — 令和 8 年 7 月現在 42 地域，2026
 10. [厚生労働省 · 厚生労働統計一覧](https://www.mhlw.go.jp/toukei/itiran/index.html) — 2026
 
 ### 学会 / 医疗机构
