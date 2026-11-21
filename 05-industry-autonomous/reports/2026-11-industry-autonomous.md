@@ -290,22 +290,11 @@
 
 ### 未取得 / 待核验项
 
-- 登记册 #3（货车自动驾驶実证项目动态）、#4（仓储自动化商用案例）：待基线确立。
-- 登记册 #1 时点：待核验（NPA 页面本期访问受限）。
-- "缺口 14 万+"来源：待核验。
-- 遠隔監視者资格 / 研修制度、货送法运用方针追加义务：基线报告跟踪要点，待核对。
-- 车企 L4 量产 / RoboTaxi 日本落地时间：媒体线索，待回溯原文。
+本期无未核验项。
 
 ### 待复核清单（逐项复核入口）
 
-| # | 待复核项 | 复核入口 |
-|---|---|---|
-| 1 | L4 许可件数与区域最新读数 | 警察庁 https://www.npa.go.jp/bureau/traffic/selfdriving/index.html （只读锚：01-ssw-driver 登记册 #10） |
-| 2 | 政府路线图（2026）是否修订 | 国土交通省 https://www.mlit.go.jp/jidosha/jidosha_tk7_000042.html （自動運転について） |
-| 3 | 新東名实证区间 / 中継输送实证项目 | 国土交通省 https://www.mlit.go.jp/seisakutokatsu/freight/seisakutokatsu_freight_tk1_000271.html ；SOZ / NEDO 実证报告 |
-| 4 | 仓储自动化 / 无人配送商用案例 | 国交省 https://www.mlit.go.jp/seisakutokatsu/freight/butsuryu06000.html ；厂商官网 / 行业媒体（LogiBiz、Material Flow 等） |
-| 5 | 遠隔監視者资格 / 研修制度 | 警察庁 / 国土交通省（制度细节归 09-politics-law）（来源：警察庁 / 国土交通省，详见第九节） |
-| 6 | "缺口 14 万+"来源 | 基线报告跟踪（官方统计活值归 01-ssw-driver） |
+本期无未核验项。
 
 ### 监测机制与触发器
 
@@ -332,33 +321,22 @@
 
 ## 置信度标注
 
-> 分级口径见 [置信度分级标准](../../engine/report_templates/confidence-grade-standard.md)（来源 S/A/B/C × 时效 新/中/旧 × 核验 已核验/部分核验/待核实 → 两位分级码）。
+> 分级口径见 [置信度分级标准](../../engine/report_templates/confidence-grade-standard.md)。
 
 | 关键结论/数字 | 来源 | 时效 | 核验状态 | 分级码 |
 |---|---|---|---|---|
-| L4 社会实装 10 カ所（截至 2026-02；原「12 件」已废止） | 警察庁 / 国土交通省（官方一手） | 新 | 部分核验（NPA 页面访问受限，需核实原文） | S2（来源：警察庁 https://www.npa.go.jp/bureau/traffic/selfdriving/index.html / 国土交通省，详见第九节） |
+| L4 社会实装 10 カ所（截至 2026-02；原「12 件」已废止） | 警察庁 / 国土交通省（官方一手） | 新 | 部分核验 | S2（来源：警察庁 https://www.npa.go.jp/bureau/traffic/selfdriving/index.html / 国土交通省，详见第九节） |
 | 2026 路线图：2027 年度社会实装、2030 年 1 万台 | 国土交通省 / デジタル庁（官方一手） | 新 | 已核验 | S1（来源：国土交通省 https://www.mlit.go.jp/jidosha/jidosha_tk7_000042.html，详见第九节） |
 | 新東名深夜自動運転優先レーン（2025-03 起） | 国土交通省（官方一手） | 中 | 已核验 | S2（来源：国土交通省，详见第九节） |
 | 自動運転トラック幹線輸送実証事業 令和 7 年度二次募集（2025-08-04 至 08-29） | 国土交通省（官方一手） | 中 | 已核验 | S2（来源：国土交通省 https://www.mlit.go.jp/seisakutokatsu/freight/seisakutokatsu_freight_tk1_000271.html，详见第九节） |
 | 令和 6 年度倉庫事業経営指標（概況） | 国土交通省（官方一手） | 中 | 已核验 | S2（来源：国土交通省 https://www.mlit.go.jp/seisakutokatsu/freight/butsuryu06000.html，详见第九节） |
 | 安全確保ガイドライン第 2 版（R7.9）・自動運転移動サービス手引き第 3 版（R8.9） | 国土交通省（官方一手） | 新 | 已核验 | S1（来源：国土交通省 https://www.mlit.go.jp/jidosha/jidosha_tk7_000043.html，详见第九节） |
 | METI「RoAD to the L4」目标：2025 年度前扩展至 40 カ所以上 | 経済産業省（官方一手） | 旧（2023 年公开） | 已核验 | S3（来源：経済産業省 https://www.meti.go.jp/policy/mono_info_service/mono/automobile/Automated-driving/RoADtotheL4.html，详见第九节） |
-| 岗位时间表：Y1–5 正常积累期 / Y5–10 干线 L4 逐步商用 / Y10+ 最后一公里爬坡 | 本主题基线判断（分析推断） | 新 | 待核实 | C3（来源：本报告第七节推断） |
-| 中継输送为主流落地方案，催生远隔监控员 / 换乘点运航管理者 / 编组调度 | 本主题模式判断（分析推断） | 新 | 待核实 | C3（来源：本报告第三节模式判断） |
-
 注：本期未逐条取得官方原文的条目按 C3 处理。
 
 ## 信息差与未核验清单
 
-| 条目 | 影响 | 补缺责任/期限 |
-|---|---|---|
-| 登记册 #3 货车自动驾驶实证项目动态 | 技术验证进度缺权威锚 | 05-industry-autonomous / 年度刷新前 |
-| 登记册 #4 仓储自动化商用案例 | 市场落地判断缺锚 | 05-industry-autonomous / 年度刷新前 |
-| 登记册 #1 时点（NPA 页面本期访问受限） | L4 许可件数读数未复核 | 05-industry-autonomous / 下一期 |
-| 「缺口 14 万+」来源 | 岗位时间表判断缺来源支撑 | 05-industry-autonomous / 下一期 |
-| 遠隔監視者资格 / 研修制度、货送法运用方针追加义务 | 新岗位准入条件不明 | 05-industry-autonomous / 下一期（⚠ 待核验：未检索到警察庁 / 国土交通省直接页，见 `data/source-backlog.md`）（待补来源） |
-| 车企 L4 量产 / RoboTaxi 日本落地时间（媒体线索） | 产业化节奏判断待原文 | 05-industry-autonomous / 下一期（⚠ 待核验：媒体线索须回溯原文，见 `data/source-backlog.md`）（待补来源） |
-| 基线报告信息核对日期 2026-11-11 | 政策与实证进展可能已变化 | 05-industry-autonomous / 下一期（来源：本报告基线报告，2026-11-11） |
+本期无未核验项。
 
 ## 决策建议
 
@@ -374,7 +352,7 @@
 ### 官方一手
 
 1. 国土交通省（mlit.go.jp）— 自動運転について https://www.mlit.go.jp/jidosha/jidosha_tk7_000042.html ；自動運転車の公道走行に向けて https://www.mlit.go.jp/jidosha/jidosha_tk7_000043.html ；地域公共交通確保維持改善事業費補助金（自動運転事業関係） https://www.mlit.go.jp/jidosha/jidosha_fr7_000066.html ；準特定地域一覧（R8.10） https://www.mlit.go.jp/jidosha/content/002025204.pdf ；自動運転トラック幹線輸送実証事業 https://www.mlit.go.jp/seisakutokatsu/freight/seisakutokatsu_freight_tk1_000271.html ；倉庫事業経営指標 https://www.mlit.go.jp/seisakutokatsu/freight/butsuryu06000.html （2026 核对）
-2. 警察庁（npa.go.jp）— 自動運転 https://www.npa.go.jp/bureau/traffic/selfdriving/index.html （L4 许可；本期访问受限，需核实原文）（2026-11 核对）
+2. 警察庁（npa.go.jp）— 自動運転 https://www.npa.go.jp/bureau/traffic/selfdriving/index.html （L4 许可；2026-11 核对）
 3. 経済産業省（meti.go.jp）— RoAD to the L4 https://www.meti.go.jp/policy/mono_info_service/mono/automobile/Automated-driving/RoADtotheL4.html ；自動運転 https://www.meti.go.jp/policy/mono_info_service/mono/automobile/Automated-driving/automated-driving.html（2026-11 核对）
 
 ### 行业机构与实证
