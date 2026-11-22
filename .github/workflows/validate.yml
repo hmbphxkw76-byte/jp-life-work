@@ -22,7 +22,7 @@ jobs:
     steps:
       # fetch-depth: 0 拉取完整历史——TestHistoricalMigration 需用 git 历史
       # 取出迁移前的旧报告，逐份复核内容零丢失（浅克隆取不到旧文件）。
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
 
@@ -395,7 +395,7 @@ jobs:
         shard: [1, 2, 3, 4]
     steps:
       # fetch-depth: 0 拉取完整历史——TestHistoricalMigration 需用 git 历史
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
 
@@ -433,7 +433,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
 
@@ -488,7 +488,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
 
