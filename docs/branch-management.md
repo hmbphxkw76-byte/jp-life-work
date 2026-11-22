@@ -1,4 +1,4 @@
-# 分支管理规范与操作手册（BRANCH-NAMING v1.0）
+# 分支管理规范与操作手册（BRANCH-NAMING v1.1）
 
 > 适用范围：`jp-life-work` 仓库全部本地开发分支与推送操作。
 > 上位依据：`AGENTS.md` 硬性规约、`engine/scripts/README.md`（workflow_guard）、`docs/CI.md` 第十节。
@@ -75,9 +75,16 @@ python engine/scripts/branch_naming.py install --uninstall [--force]
 |---|---|
 | 开发（Agent / 人） | 一律 `python engine/scripts/workflow_guard.py task start <name>` 建分支（自动带 sid）；在 `.worktrees/<name>/` 内工作；不在共享检出目录改文件 |
 | 评审 | 只读任务分支 / worktree；不改名、不合并 |
-| 合并 | 只走 `python engine/scripts/workflow_guard.py merge <name>`（串行锁 + 隔离合并 + 校验 + `--force-with-lease`）；禁止直接 push `main` |
+| 合并 | 只走 `python engine/scripts/workflow_guard.py merge <name>`（串行锁 + 校验 + PR 传输：推分支 → 建 PR → 等检查 → 合并）；禁止直接 push `main`（服务端分支保护已启用） |
 | 收尾 | `python engine/scripts/workflow_guard.py task stop <name>`（已合并后清理分支与工作树） |
 | 仓库维护 | 新克隆 / 换机后安装钩子（§2.1）；每季度核对台账与存量分支命名 |
+
+### 3.1 服务端分支保护（main）
+
+`main` 已启用分支保护：**Require pull request before merging** + **Require status checks**
+（`validate` / `audit`）+ **Do not bypass for administrators**（enforce_admins）+ 禁 force-push / 禁删除。
+因此 `merge` 默认走 PR 传输（`--transport auto`）：直推 `main` 会被服务端拒绝；
+`--transport direct` 仅用于非 GitHub 远端或本地测试。
 
 ## 四、存量分支梳理与映射台账
 
@@ -130,3 +137,4 @@ python engine/scripts/branch_naming.py install --uninstall [--force]
 | 版本 | 日期 | 变更 |
 |---|---|---|
 | v1.0 | 2026-11-17 | 建立 `task/<slug>-<sid>` 规范、`branch_naming.py`、pre-push / pre-commit 钩子、存量补全与台账 |
+| v1.1 | 2026-11-22 | 合并流程 PR 化（`merge --transport pr`：推分支 → 建 PR → 等检查 → 合并）+ `main` 服务端分支保护；新增 §3.1 |

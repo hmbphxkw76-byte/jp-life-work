@@ -1,6 +1,6 @@
 # CI 与自动化体系
 
-> **版本**：v2.32（2026-11-22 自动化 PR 权限修复 + 分支治理）
+> **版本**：v2.33（2026-11-22 合并 PR 化 + main 分支保护）
 > 本文档说明 jp-life-work 报告管理体系的持续集成（CI）与定时自动化。
 > 代码位置：`.github/workflows/`（8 条工作流）；工具链：`engine/tools/`；测试：`engine/tests/`。
 
@@ -257,7 +257,7 @@ reports/YYYY-MM-<slug>.md  ──md2html.py──►  reports/YYYY-MM-<slug>.htm
 - **辅助开关**：报告页工具条「隐藏更新标记」对照阅读、「展开全部删除」。
 - **呈现**：报告页新标签页独立打开，页脚提供「← 返回主题 / 返回首页」。
 
-## 六、测试体系（`engine/tests/`，1167 项）
+## 六、测试体系（`engine/tests/`，1171 项）
 
 | 场景 | 测试类 | 覆盖 |
 |---|---|---|
@@ -289,7 +289,7 @@ reports/YYYY-MM-<slug>.md  ──md2html.py──►  reports/YYYY-MM-<slug>.htm
 | 跨平台差异守卫 | `test_platform_guard.py`（9 项） | 路径分隔（无 Windows 路径字面量 / 工作流正斜杠）、换行（仓库 blob LF / `.gitattributes` / `atomic_write` 保 LF）、命令可用性（无 `shell=True` / 无 PowerShell 专属语法 / 工具路径存在） |
 | 性能趋势快照 | `test_perf_snapshot.py`（6 项） | 规模快照字段与实测口径、耗时采集、基线语义（首条为基线 / 追加不改基线 / `--set-baseline` 覆盖）、CLI `--porcelain` |
 
-> 合计 1167 项（`python -m unittest discover -s engine/tests` 集成后实测，当前全绿；`incremental_build` 两项「无变更」断言在集成分支领先 main 时按预期失败，合并后通过）。
+> 合计 1171 项（`python -m unittest discover -s engine/tests` 集成后实测，当前全绿；`incremental_build` 两项「无变更」断言在集成分支领先 main 时按预期失败，合并后通过）。
 
 ## 七、手动命令速查
 
@@ -388,7 +388,7 @@ CI 之外的**本地多会话 / 多任务并行**由三层隔离机制约束，�
 | 层 | 载体 | 命令 |
 |---|---|---|
 | 分支隔离（任务间） | `task/<name>-<sid>` 分支（`sid`=会话标识前 8 位）+ `.worktrees/<name>` 独立工作树 | `task start / list / stop` |
-| 串行合并（main 级） | 全局 merge 锁 + 隔离合并工作树 `.worktrees/_merge` + 校验 + `--force-with-lease` | `merge` |
+| 串行合并（main 级） | 全局 merge 锁 + 校验 + PR 传输（推分支 → 建 PR → 等 `validate` / `audit` → 合并）；服务端分支保护 | `merge` |
 | 共享检出锁（工作目录级） | `.git/workflow-guard/*.lock`（owner / 超时失效） | `lock acquire / release / run / status` |
 
 - **典型流程**：`task start <name>` → 在 `.worktrees/<name>/` 工作 → `merge <name>`
@@ -577,7 +577,7 @@ CI 在 ubuntu runner 上用 **bash** 执行 `run:`，本地维护者用 **PowerS
 | 工作流最小权限 | ✅ | 8 条工作流均显式 `permissions`；定时任务推分支 + 开 PR，无 `pull_request_target` |
 | Actions 可创建 PR | ✅ enabled | 仓库设置 `can_approve_pull_request_reviews`（修复前自动化 `gh pr create` 被静默拒绝，积压 26 个 `auto/html-sync-*` 僵尸分支） |
 | 远端分支治理 | ✅ | `delete_branch_on_merge=true`；已清理 26 个僵尸分支，当前远端仅 `main` |
-| 服务端分支保护 | ⚠ 未启用 | GitHub Free 公共仓库**支持**分支保护；但 `workflow_guard merge` 直推 `origin/main`，启用 required status checks / PR 门禁需先改造合并流程。当前靠本地 `workflow_guard` + pre-commit 纪律 + CI 门禁 |
+| 服务端分支保护 | ✅ 已启用 | `main`：Require PR + Require status checks（`validate` / `audit`）+ enforce_admins + 禁 force-push / 删除；`merge` 默认走 PR 传输 |
 | GitHub Pages | ✅ public | legacy Pages（main 根），与 PUBLIC 仓库一致 |
 
 ---
@@ -628,3 +628,4 @@ CI 在 ubuntu runner 上用 **bash** 执行 `run:`，本地维护者用 **PowerS
 | v2.30 | 2026-11-22 | 本地等价 CI 入口 | 新增 `engine/tools/local_ci.py`（只读编排层：validate / audit-gate 的 33 项本地检查，确定性 JSON，退出码 0/1/2；`--with-tests` / `--with-coverage` 可选）与 `engine/tests/test_local_ci.py`（21 项）；结果目录 `engine/report-audits/local-ci/` 入 `.gitignore`；工具 49 → 50、测试 1146 → 1167 |
 | v2.31 | 2026-11-22 | 生成前核验接入 + public 安全姿态 | 新增复合动作 `.github/actions/content-verify`（闸0 + 无法核实内容硬门禁），接入 `pipeline-orchestrator.yml`（计划前）与 `html-sync.yml`（发布前）；新增 `.github/dependabot.yml`；仓库设置启用 secret scanning / push protection / Dependabot 安全更新；新增第十六节 |
 | v2.32 | 2026-11-22 | 自动化 PR 权限修复 + 分支治理 | 仓库设置 `can_approve_pull_request_reviews=true`（修复自动化 PR 创建被静默拒绝）+ `delete_branch_on_merge=true`；合并 4 个 Dependabot actions 升级（checkout v7 / setup-python v7 / cache v6 / upload-artifact v7）；清理 26 个 `auto/html-sync-*` 僵尸分支；第十六节补两行 |
+| v2.33 | 2026-11-22 | 合并 PR 化 + main 分支保护 | `workflow_guard merge` 新增 `--transport auto\|direct\|pr` + `--wait-timeout`（PR 传输：推分支 → 建 PR → 等检查 → 合并）；`main` 启用分支保护（Require PR + `validate`/`audit` + enforce_admins + 禁 force-push/删除）；`AGENTS.md` / `branch-management.md` v1.1 / `engine/scripts/README.md` 同步 |

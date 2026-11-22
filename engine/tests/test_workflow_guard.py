@@ -71,8 +71,8 @@ class Repo:
     def git(self, *args, check=True):
         return git_run(list(args), cwd=self.path, check=check)
 
-    def tool(self, *args, check=True):
-        return tool_run(list(args), cwd=self.path, check=check)
+    def tool(self, *args, check=True, env=None):
+        return tool_run(list(args), cwd=self.path, check=check, env=env)
 
     def write(self, name: str, text: str) -> Path:
         p = self.path / name
@@ -430,6 +430,92 @@ class TestPureFunctions(unittest.TestCase):
     def test_lock_scopes_cover_commit_and_push(self):
         # P2-5：并行锁覆盖 checkout / merge / commit / push，共享检出无裸写。
         self.assertEqual(set(wg.SCOPES), {"checkout", "merge", "commit", "push"})
+
+
+# ──────────────────────────────────────────────
+# PR 传输（merge --transport pr）
+# ──────────────────────────────────────────────
+FAKE_GH = r'''
+import json, os, sys
+args = sys.argv[1:]
+calls_file = os.environ["FAKE_GH_CALLS"]
+calls = []
+if os.path.exists(calls_file):
+    calls = json.loads(open(calls_file, encoding="utf-8").read())
+calls.append(args)
+open(calls_file, "w", encoding="utf-8").write(json.dumps(calls))
+mode = os.environ.get("FAKE_GH_MODE", "ok")
+if args[:2] == ["pr", "create"]:
+    print("https://github.com/hmbphxkw76-byte/jp-life-work/pull/7")
+elif args[:2] == ["pr", "view"]:
+    rollup = [{"conclusion": "FAILURE"}] if mode == "fail" else [{"conclusion": "SUCCESS"}]
+    print(json.dumps({"state": "OPEN", "mergeable": "MERGEABLE",
+                      "mergeStateStatus": "CLEAN", "statusCheckRollup": rollup,
+                      "mergeCommit": {"oid": "a" * 40}}))
+elif args[:2] == ["pr", "merge"]:
+    if mode == "fail":
+        sys.stderr.write("merge failed")
+        sys.exit(1)
+elif args[:2] == ["pr", "list"]:
+    if mode == "existing":
+        print("7")
+'''
+
+
+class TestPRTransport(TempRepoCase):
+    def _setup_task(self):
+        self.repo.tool("task", "start", "demo")
+        wt = self.repo.path / ".worktrees" / "demo"
+        (wt / "foo.txt").write_text("x\n", encoding="utf-8")
+        git_run(["add", "."], cwd=wt)
+        git_run(["commit", "-m", "change"], cwd=wt)
+        return wt
+
+    def _env(self, tmp, mode="ok"):
+        fake = Path(tmp) / "fake_gh.py"
+        fake.write_text(FAKE_GH, encoding="utf-8")
+        calls = Path(tmp) / "calls.json"
+        return {**GIT_ENV,
+                "WORKFLOW_GUARD_GH": f"{sys.executable} {fake}",
+                "FAKE_GH_CALLS": str(calls),
+                "FAKE_GH_MODE": mode}, calls
+
+    def test_merge_via_pr_happy(self):
+        self._setup_task()
+        env, calls = self._env(self._tmp)
+        self.repo.tool("merge", "demo", "--transport", "pr", "--no-verify", env=env)
+        task = self.repo.tasks()[0]
+        self.assertEqual(task["status"], "merged")
+        self.assertEqual(task["merged_sha"], "a" * 40)
+        kinds = [c[:2] for c in json.loads(calls.read_text(encoding="utf-8"))]
+        self.assertIn(["pr", "create"], kinds)
+        self.assertIn(["pr", "view"], kinds)
+        self.assertIn(["pr", "merge"], kinds)
+
+    def test_merge_via_pr_reuses_existing(self):
+        self._setup_task()
+        env, calls = self._env(self._tmp, mode="existing")
+        self.repo.tool("merge", "demo", "--transport", "pr", "--no-verify", env=env)
+        kinds = [c[:2] for c in json.loads(calls.read_text(encoding="utf-8"))]
+        self.assertNotIn(["pr", "create"], kinds)
+        self.assertIn(["pr", "merge"], kinds)
+        self.assertEqual(self.repo.tasks()[0]["status"], "merged")
+
+    def test_merge_via_pr_check_failure_blocks(self):
+        self._setup_task()
+        env, _ = self._env(self._tmp, mode="fail")
+        proc = self.repo.tool("merge", "demo", "--transport", "pr", "--no-verify",
+                              env=env, check=False)
+        self.assertNotEqual(proc.returncode, 0)
+        self.assertIn("校验失败", proc.stdout + proc.stderr)
+        self.assertNotEqual(self.repo.tasks()[0]["status"], "merged")
+
+    def test_transport_auto_local_origin_is_direct(self):
+        self._setup_task()
+        env, calls = self._env(self._tmp)
+        self.repo.tool("merge", "demo", "--no-verify", env=env)  # 默认 auto
+        self.assertEqual(self.repo.tasks()[0]["status"], "merged")
+        self.assertFalse(calls.exists())  # 未触碰 gh
 
 
 if __name__ == "__main__":

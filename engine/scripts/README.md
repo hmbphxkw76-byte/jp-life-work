@@ -31,7 +31,7 @@
 python engine/scripts/workflow_guard.py task start exit-transition-return
 cd .worktrees/exit-transition-return        # 在任务工作树里干活
 
-# 2) 干完活：串行合并回 main（自动 fetch → 隔离工作树合并 → 校验 → 推送）
+# 2) 干完活：串行合并回 main（PR 传输：推任务分支 → 建 PR → 等必需检查 → 合并）
 python engine/scripts/workflow_guard.py merge exit-transition-return
 
 # 3) 收尾：删工作树与分支
@@ -64,7 +64,7 @@ python engine/scripts/workflow_guard.py lock release checkout
 | `lock release <checkout\|merge> [--force]` | 放锁（非本人持有需 `--force`） |
 | `lock status` | 查看两把锁 |
 | `lock run <checkout\|merge> -- <命令...>` | 持锁执行命令，结束自动释放 |
-| `merge <name> [--no-verify] [--verify-cmd S] [--ff-only] [--wait N] [--cleanup] [--push-fallback S]` | 串行合并入 main |
+| `merge <name> [--no-verify] [--verify-cmd S] [--ff-only] [--wait N] [--cleanup] [--push-fallback S] [--transport auto\|direct\|pr] [--wait-timeout N]` | 串行合并入 main（auto：GitHub + gh 走 PR；direct：直推） |
 | `sync [--push-local] [--push-fallback S]` | 持检出锁对齐本地 main 与远端 |
 | `status` | 总览：锁 / 任务 / worktree |
 | `hooks [--check] [--uninstall] [--force]` | 安装 / 校验 / 卸载分支命名钩子（pre-push / pre-commit） |
@@ -87,6 +87,10 @@ python engine/scripts/workflow_guard.py lock release checkout
    处理完重试 `merge <name>`；放弃用 `merge --cleanup`。
 6. **不改写任务分支**：默认 `--no-ff`，任务分支历史原样保留。
 7. **只合并已提交内容**：未提交的改动不会被带入合并，也不会被推上 main。
+8. **PR 传输（默认）**：`--transport auto` 在 GitHub 远端 + `gh` 可用时走 PR 合并：
+   推任务分支 → `gh pr create` → 轮询必需检查（`--wait-timeout`，默认 1800s）→ `gh pr merge --merge`。
+   服务端分支保护已启用（Require PR + status checks + enforce_admins），直推 `main` 会被拒绝，
+   因此 PR 是默认路径；`--transport direct` 仅用于非 GitHub 远端 / 本地测试。
 
 ## 五、锁语义（第 3 层细节）
 
@@ -100,10 +104,9 @@ python engine/scripts/workflow_guard.py lock release checkout
 
 ## 六、与 CI 的关系
 
-GitHub Actions 在远端 runner 上跑，不经过本地锁；它们直接向 `main` 推送。
-因此第 2 层的 `--force-with-lease` 是防覆盖的最后一道：CI 推进了远端，本地合并就失败重试，
-不会把 CI 的提交冲掉。**不要**用 `sync --push-local` 强行推main，除非你确认那些提交
-已经过校验。
+GitHub Actions 在远端 runner 上跑，不经过本地锁；定时任务推 `auto/*` 分支并开 PR，由人评审合并。
+第 2 层的 PR 传输在服务端分支保护下等待 `validate` / `audit` 通过后再合并；**不要**用
+`sync --push-local` 直推 main（服务端分支保护会拒绝）。
 
 ## 七、状态与清理
 
