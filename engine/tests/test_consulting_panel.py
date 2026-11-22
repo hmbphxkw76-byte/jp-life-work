@@ -12,8 +12,10 @@ from __future__ import annotations
 import importlib.util
 import json
 import sys
+import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "engine" / "tools"))
@@ -102,8 +104,18 @@ class RenderCase(unittest.TestCase):
         self.assertEqual(cp.render_panel_md(), cp.render_panel_md())
 
     def test_panel_roundtrip(self) -> None:
-        cp.OUT_PATH.write_text(cp.render_panel_md(), encoding="utf-8")
-        self.assertEqual(cp.render_panel_md(), cp.OUT_PATH.read_text(encoding="utf-8"))
+        # 密闭：写临时目录，不得污染真实 00-decision-hub/data/consulting_panel.md
+        with tempfile.TemporaryDirectory() as d:
+            tmp = Path(d) / "consulting_panel.md"
+            with mock.patch.object(cp, "OUT_PATH", tmp):
+                cp.OUT_PATH.write_text(cp.render_panel_md(), encoding="utf-8")
+                self.assertEqual(cp.render_panel_md(), cp.OUT_PATH.read_text(encoding="utf-8"))
+
+    def test_panel_no_unverified_markers(self) -> None:
+        # 面板不得输出无法核实标记（与 verified_content_gate 全层零容忍一致）
+        text = cp.render_panel_md()
+        for marker in ("待核实", "未核实", "需核实原文", "待核验", "待补来源"):
+            self.assertNotIn(marker, text)
 
     def test_demo_labeled(self) -> None:
         prof = dict(cp.DEMO_PROFILE)

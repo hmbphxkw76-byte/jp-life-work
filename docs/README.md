@@ -66,3 +66,4 @@
 | v2.9 | 2026-11-21 | 旧数字口径澄清（P2-3） | §三追加口径说明：过程留痕与历史版本记录中的旧数字为当时快照，不作为现行口径；现行数字以规范正文 / 头部与守卫为准 |
 | v2.10 | 2026-11-21 | 无法核实内容门禁 | 新增 `engine/config/verified-content-policy.json` 与 `verified_content_gate.py`（内容层零容忍硬门禁，记录层豁免）；接入 `validate.yml`（主 job 30 → 31 步）与 `audit-gate.yml`（7 → 8 步）；全库清除内容层无法核实内容；工具 48 / 类型 12 / 测试 1110 / 工作流 8 |
 | v2.11 | 2026-11-22 | 来源质量 P0-P2 修复 | `source_normalize` 增受控分组词表 / 独立性 / 权威等级 / 语言判定；`extract_year` 修复 URL 数字误判；`source_check` 增 E7/E8/E9；`verified_content_gate` 默认语义与 CI 对齐；台账 append-only 回归；工具 48 / 类型 12 / 测试 1127 / 工作流 8 |
+| v2.12 | 2026-11-22 | 咨询面板门禁一致性 | `consulting_panel` 核验清单不再输出无法核实标记（未完成项转 source-backlog 第三节）；面板测试改密闭；工具 48 / 类型 12 / 测试 1128 / 工作流 8 |

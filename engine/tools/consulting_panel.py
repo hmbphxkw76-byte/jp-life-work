@@ -255,13 +255,10 @@ def build_plan(prof: dict, derived: dict, verdicts: list[dict]) -> dict:
         ("驾照 · 教习所 AT", at_fee),
         ("生活费储备", f"{REF['reserve_months'][0]}–{REF['reserve_months'][1]} 个月 × 定居地月生活费"),
     ]
+    # 仅列已核验 / 部分核验项；未完成核验项转入记录层 source-backlog（本面板不得输出
+    # 无法核实标记，否则与 verified_content_gate 全层零容忍冲突）。
     checklist = [
-        ("PF-13 ↔ 日本类别官方 1:1 对照表", "待核实", "10 / 01"),
         ("外免切替 知识/技能确认合格率原文（警察庁）", "部分核验", "01 / 10"),
-        ("外免切替 手数料官方页", "待核实", "10"),
-        ("中型教习所全国均价", "待核实", "10"),
-        ("候选地域岗位倍率 / 自治体多语窗口", "待核实", "13"),
-        ("単身世帯・都市階級生活成本", "待核实", "07"),
         ("UR 世帯口径收入基准", "已核验", "12"),
     ]
     intermediary = [
@@ -359,6 +356,8 @@ def render_panel_md() -> str:
     L.append("")
     for item, st, owner in build_plan({}, derive({}), [])["checklist"]:
         L.append(f"- [{st}] {item}（{owner}）")
+    L.append("")
+    L.append("> 未完成核验项见 `00-decision-hub/data/source-backlog.md` 第三节（记录层）。")
     L.append("")
 
     L.append("## 五、已核验参考值（2026-11 核验）")
