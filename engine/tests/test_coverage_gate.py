@@ -122,21 +122,27 @@ class TestMain(unittest.TestCase):
 
     def test_pass_exit_0(self):
         with unittest.mock.patch.object(coverage_gate, "measure",
-                                        return_value=(85.0, "r", True)):
+                                        return_value=(85.0, "r", True)), \
+                unittest.mock.patch.object(coverage_gate, "per_tool_coverage",
+                                           return_value={}):
             code, out = self._run()
         self.assertEqual(code, 0)
         self.assertIn("达标", out)
 
     def test_below_enforced_exit_1(self):
         with unittest.mock.patch.object(coverage_gate, "measure",
-                                        return_value=(70.0, "r", True)):
+                                        return_value=(70.0, "r", True)), \
+                unittest.mock.patch.object(coverage_gate, "per_tool_coverage",
+                                           return_value={}):
             code, out = self._run()
         self.assertEqual(code, 1)
         self.assertIn("阻断", out)
 
     def test_tests_not_green_forces_block(self):
         with unittest.mock.patch.object(coverage_gate, "measure",
-                                        return_value=(99.0, "r", False)):
+                                        return_value=(99.0, "r", False)), \
+                unittest.mock.patch.object(coverage_gate, "per_tool_coverage",
+                                           return_value={}):
             code, _ = self._run()
         self.assertEqual(code, 1)
 
@@ -160,7 +166,9 @@ class TestMain(unittest.TestCase):
 
     def test_porcelain_json(self):
         with unittest.mock.patch.object(coverage_gate, "measure",
-                                        return_value=(85.0, "r", True)):
+                                        return_value=(85.0, "r", True)), \
+                unittest.mock.patch.object(coverage_gate, "per_tool_coverage",
+                                           return_value={}):
             code, out = self._run("--porcelain")
         self.assertEqual(code, 0)
         data = json.loads(out)
