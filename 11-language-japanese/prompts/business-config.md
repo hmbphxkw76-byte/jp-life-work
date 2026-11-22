@@ -96,7 +96,7 @@
 
 ## 五、来源优先级（通用基座第四节的实例化，冲突时报双份并标注）
 
-① JLPT 官方（jees.or.jp/jlpt / jlpt.jp / jlpt.neea.edu.cn）、JFT-Basic（prometric-jp.com / jpf.go.jp）
+① JLPT 官方（jees.or.jp/jlpt / jlpt.jp）、JFT-Basic（prometric-jp.com / jpf.go.jp）
 ＞ ② 国際交流基金、日本語能力試験公式資料
 ＞ ③ 出版社 / 教材官网（参考书版本信息）
 ＞ ④ 学习门户与社区经验（标注为经验，不作事实）
@@ -146,7 +146,7 @@
 
 | # | 监测指标 | 优先数据源 | 对应章节 | 回写登记册项 |
 |---|---|---|---|---|
-| 1 | JLPT 下一次考试报名窗口 | jees.or.jp / jlpt.neea.edu.cn | 01 / 05 | 核心指标 #1 |
+| 1 | JLPT 下一次考试报名窗口 | jees.or.jp / jlpt.jp | 01 / 05 | 核心指标 #1 |
 | 2 | JFT-Basic 考场次与考位 | prometric-jp.com/ssw | 01 / 05 | 核心指标 #2 |
 | 3 | 当前学习进度（N4/N3/N2） | 自记录（06 学习进度跟踪） | 02 / 03 / 04 / 06 | 核心指标 #3 |
 | 4 | 主用教材版本 | 出版社页面 | 05 | 核心指标 #4 |

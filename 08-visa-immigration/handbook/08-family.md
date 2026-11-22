@@ -12,7 +12,7 @@
 **扶养人资格（谁能带家属）**：
 
 - [「家族滞在」的扶养人资格范围](https://www.moj.go.jp/isa/applications/status/dependent "来源：https://www.moj.go.jp/isa/applications/status/dependent, 2026")：教授、芸術、宗教、報道、高度専門職、経営・管理、法律・会計業務、医療、研究、教育、**技術・人文知識・国際業務**、企業内転勤、介護、興行、技能、**特定技能 2 号**、文化活動、**留学** 等在留资格者扶养的**配偶者或子** [Source: https://www.moj.go.jp/isa/applications/status/dependent, 2026]
-- **特定技能 1 号原则上不可带家属**（官方中文站表述「无法申请家人陪同」）[Source: https://www.ssw.go.jp/cn/about/visa/, 2026]；永住指南亦把「技能実習」「育成就労」「特定技能 1 号」列为家族带同受限的资格 [Source: https://www.moj.go.jp/isa/10_00279.html, 2026]
+- **特定技能 1 号原则上不可带家属**（官方中文站表述「无法申请家人陪同」）[Source: https://www.ssw.go.jp/about/visa/, 2026]；永住指南亦把「技能実習」「育成就労」「特定技能 1 号」列为家族带同受限的资格 [Source: https://www.moj.go.jp/isa/10_00279.html, 2026]
 - 对本案：司机 1 号期间（Y0–Y5）**不能带家属**——家庭规划须安排在 Y4/Y5 技人国变更完成之后（→ [05-特定技能2号与升级路径](05-ssw2-upgrade.md) 第五节）。1 号带同例外（同等要件相当者等）的适用细则无公开运用基准，**待复核**。
 - 年收门槛常识：ISA **无公开数值基准**，仅要求提交扶养者的职业·收入证明（在職証明書等＋住民税课税〔或非课税〕证明书＋纳税证明书）[Source: https://www.moj.go.jp/isa/applications/status/dependent, 2026]；实务上须证明可持续扶养全家的经济能力（**推断**），精确年收数值**待复核**。
 
@@ -72,7 +72,7 @@
 - 資格外活動許可について（一般原则）：https://www.moj.go.jp/isa/applications/procedures/nyuukokukanri07_00045.html
 - 家族滞在高卒后就业（定住者/特定活动）：https://www.moj.go.jp/isa/applications/resources/nyuukokukanri07_00122.html
 - 永住许可指南（世帯年収·家族滞在收入不计入）：https://www.moj.go.jp/isa/10_00279.html
-- 特定技能 1 号/2 号家族带同对比（官方中文）：https://www.ssw.go.jp/cn/about/visa/
+- 特定技能 1 号/2 号家族带同对比（官方中文）：https://www.ssw.go.jp/about/visa/
 
 ## 关联
 

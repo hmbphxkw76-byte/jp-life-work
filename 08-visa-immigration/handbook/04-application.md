@@ -68,7 +68,7 @@
 ## 参考
 
 - ISA 特定技能申请页：https://www.moj.go.jp/isa/applications/ssw/
-- 特定技能综合支援站点（中文）：https://www.ssw.go.jp/cn/
+- 特定技能综合支援站点（中文）：https://www.ssw.go.jp/
 
 ## 关联
 

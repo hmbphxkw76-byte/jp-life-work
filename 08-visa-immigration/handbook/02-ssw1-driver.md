@@ -20,7 +20,7 @@
 ## 二、接收上限
 
 - 自动车运送业分野接收上限：**22,100 人**（至 2029 年 3 月末＝令和 11 年 3 月末）[Source: https://www.moj.go.jp/isa/policies/ssw/automobiletransportation, 2026]
-- **中文站未同步（以 22,100 为准）**：特定技能综合支援站日/中文页仍显示 24,500 人（2024-04～2029-03），未随 2026-01-23 閣議決定后的分野别运用方针同步 [Source: https://www.ssw.go.jp/about/visa/automobile_transportation_business_1/, 2026；https://www.ssw.go.jp/cn/about/visa/automobile_transportation_business_1/, 2026]。**本库一律采用 ISA 运用方针 22,100 人**；中文页 24,500 仅作未同步线索，不作为并列口径。
+- **中文站未同步（以 22,100 为准）**：特定技能综合支援站日/中文页仍显示 24,500 人（2024-04～2029-03），未随 2026-01-23 閣議決定后的分野别运用方针同步 [Source: https://www.ssw.go.jp/about/visa/automobile_transportation_business_1/, 2026；https://www.ssw.go.jp/about/visa/automobile_transportation_business_1/, 2026]。**本库一律采用 ISA 运用方针 22,100 人**；中文页 24,500 仅作未同步线索，不作为并列口径。
 - 后续是否延长需跟踪国交省/ISA 公告 → 记入 [09-政策更新日志](09-policy-log.md)
 
 ## 三、人才基准（合格要件）
@@ -94,7 +94,7 @@
 ## 参考
 
 - ISA 自動車運送業分野：https://www.moj.go.jp/isa/policies/ssw/automobiletransportation
-- 中文官方说明：https://www.ssw.go.jp/cn/about/visa/automobile_transportation_business_1/
+- 中文官方说明：https://www.ssw.go.jp/about/visa/automobile_transportation_business_1/
 - ClassNK 试验 Portal：https://sswt-portal.classnk.or.jp/area?tab=3
 - 日本大使馆资料（考试构成）：https://www.vn.emb-japan.go.jp/files/100989367.pdf
 
