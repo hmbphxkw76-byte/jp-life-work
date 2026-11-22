@@ -1,6 +1,6 @@
 # 文档索引（docs/）
 
-> **版本**：v2.13（2026-11-22 生成前信息核验）
+> **版本**：v2.15（2026-11-22 合并 PR 化 + main 分支保护）
 > **用途**：jp-life-work 规范与审计标准的**单一入口**。只收「长期有效规范」，不收一次性过程记录。
 > **维护纪律**：规范类文档修订须同步 `engine/tests/test_tools.py` 对应守卫测试，并经合并门禁校验。
 
@@ -69,3 +69,4 @@
 | v2.12 | 2026-11-22 | 咨询面板门禁一致性 | `consulting_panel` 核验清单不再输出无法核实标记（未完成项转 source-backlog 第三节）；面板测试改密闭；工具 48 / 类型 12 / 测试 1128 / 工作流 8 |
 | v2.13 | 2026-11-22 | 生成前信息核验（闸0） | 新增 `engine/tools/generation_gate.py` 与 `engine/scripts/precommit_content_gate.py`（提交前内容硬门禁）；`validate.yml` 增闸0 步骤（31 → 32）；pre-commit 钩子接入；提示词基座增阶段4 前置步骤；工具 49 / 类型 12 / 测试 1146 / 工作流 8 |
 | v2.14 | 2026-11-22 | 本地等价 CI 入口 | 新增 `engine/tools/local_ci.py`（只读编排层：33 项本地检查 + 确定性 JSON，退出码 0/1/2）与 `engine/tests/test_local_ci.py`（21 项）；结果目录入 `.gitignore`；工具 50 / 类型 12 / 测试 1167 / 工作流 8 |
+| v2.15 | 2026-11-22 | 合并 PR 化 + main 分支保护 | `workflow_guard merge` 新增 `--transport auto\|direct\|pr` + `--wait-timeout`（PR 传输：推分支 → 建 PR → 等检查 → 合并）与 4 项 PR 传输测试；`main` 启用分支保护；工具 50 / 类型 12 / 测试 1171 / 工作流 8 |

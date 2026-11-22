@@ -2,8 +2,8 @@
 """jp-life-work 并行会话三层隔离机制（workflow_guard）。
 
 背景：``main`` 是唯一共享可变引用，而写入者互不知情——多个 Agent 会话直接改写同一
-工作目录与同一分支，GitHub Actions 也在向 ``main`` 直接推送，导致推送被拒、互相
-覆盖、把别人未提交的改动裹进提交等「合并错误」。
+工作目录与同一分支，GitHub Actions 定时任务也写同一仓库，导致推送被拒、互相覆盖、
+把别人未提交的改动裹进提交等「合并错误」。
 
 三层隔离：
 
@@ -12,9 +12,9 @@
      规范见 ``docs/branch-management.md``），默认再配一个独立 worktree
      （``.worktrees/<name>``）。任务只碰自己的分支 / 工作树，互不越界。
   2. 串行合并（main 级）——``merge``
-     全局 merge 锁保证同一时刻只有一个合并；合并动作在隔离的合并工作树
-     （``.worktrees/_merge``，detached）里完成，不动共享检出目录；合并前跑校验，
-     推送用 ``--force-with-lease``，远端被 CI 推进就失败而不是覆盖。
+     全局 merge 锁保证同一时刻只有一个合并；默认走 PR 传输（推任务分支 → 建 PR →
+     等必需检查 → 合并），不动共享检出目录；合并前跑校验。``--transport direct``
+     为旧行为（隔离合并工作树 ``.worktrees/_merge`` + 直推 main），仅非 GitHub / 测试用。
   3. 共享检出锁（工作目录级）——``lock``
      在共享检出目录里做 checkout / commit / stash / reset 等可变操作前先拿锁；
      锁带 owner / pid / 时间戳，超时或进程已死自动失效。推荐用 ``lock run`` 短借
@@ -34,6 +34,7 @@ import json
 import os
 import re
 import shlex
+import shutil
 import socket
 import subprocess
 import sys
@@ -57,6 +58,8 @@ MERGE_WORKTREE_NAME = "_merge"
 
 DEFAULT_STALE_TIMEOUT = 1800  # 锁超时（秒）：30 分钟未更新视为失效
 DEFAULT_WAIT = 0              # 默认不等待锁，快速失败
+DEFAULT_PR_WAIT_TIMEOUT = 1800  # PR 传输等待必需检查的超时（秒）
+PR_POLL_INTERVAL = 15           # PR 检查轮询间隔（秒）
 
 TASK_NAME_RE = re.compile(r"^[a-z0-9][a-z0-9-]{0,62}$")
 SCOPES = ("checkout", "merge", "commit", "push")
@@ -126,6 +129,157 @@ def push_with_failover(cwd: Path | None, remote: str, refspecs: Sequence[str],
     if proc.stderr:
         print(proc.stderr, end="", file=sys.stderr)
     return proc
+
+
+# ──────────────────────────────────────────────
+# PR 传输（合并走 GitHub PR：推分支 → 建 PR → 等检查 → 合并）
+# ──────────────────────────────────────────────
+def _remote_url(remote: str, cwd: Path | None = None) -> str:
+    p = git(["remote", "get-url", remote], cwd=cwd, check=False)
+    return (p.stdout or "").strip()
+
+
+def _is_github_remote(remote: str, cwd: Path | None = None) -> bool:
+    return "github.com" in _remote_url(remote, cwd).lower()
+
+
+def _gh_available() -> bool:
+    return shutil.which("gh") is not None
+
+
+def _resolve_transport(args: argparse.Namespace, root: Path) -> str:
+    """选择合并传输：auto / direct / pr。"""
+    choice = (getattr(args, "transport", "auto") or "auto").lower()
+    if choice not in ("auto", "direct", "pr"):
+        raise GuardError(f"未知传输方式：{choice}（可选 auto / direct / pr）")
+    if choice == "auto":
+        return "pr" if (_is_github_remote(args.remote, root) and _gh_available()) else "direct"
+    if choice == "pr" and not _gh_available():
+        raise GuardError("未找到 gh，无法使用 pr 传输")
+    return choice
+
+
+def _gh(args: Sequence[str], cwd: Path | None = None,
+        check: bool = False) -> subprocess.CompletedProcess:
+    # WORKFLOW_GUARD_GH 可覆盖 gh 命令（测试注入 fake gh；默认 "gh"）
+    raw = os.environ.get("WORKFLOW_GUARD_GH", "") or "gh"
+    base = shlex.split(raw, posix=(os.name != "nt"))  # Windows 路径含反斜杠，需保留
+    return _run([*base, *args], cwd=cwd, check=check)
+
+
+def _gh_pr_find(branch: str, cwd: Path | None = None) -> str | None:
+    p = _gh(["pr", "list", "--base", "main", "--head", branch, "--state", "open",
+             "--json", "number", "--jq", ".[0].number"], cwd=cwd)
+    if p.returncode == 0:
+        num = (p.stdout or "").strip()
+        if num.isdigit():
+            return num
+    return None
+
+
+def _gh_pr_create(branch: str, title: str, body: str, cwd: Path | None = None) -> str:
+    existing = _gh_pr_find(branch, cwd)
+    if existing:
+        print(f"[workflow-guard] PR 已存在：#{existing}")
+        return existing
+    p = _gh(["pr", "create", "--base", "main", "--head", branch,
+             "--title", title, "--body", body], cwd=cwd)
+    if p.returncode != 0:
+        existing = _gh_pr_find(branch, cwd)
+        if existing:
+            print(f"[workflow-guard] PR 已存在：#{existing}")
+            return existing
+        raise GuardError(f"创建 PR 失败：{(p.stderr or p.stdout).strip()}")
+    url = (p.stdout or "").strip().splitlines()[-1].strip() if p.stdout.strip() else ""
+    num = url.rstrip("/").rsplit("/", 1)[-1] if url else ""
+    if not num.isdigit():
+        num = _gh_pr_find(branch, cwd) or ""
+    if not num.isdigit():
+        raise GuardError(f"PR 已创建但无法解析编号：{url}")
+    print(f"[workflow-guard] 已创建 PR #{num}：{url}")
+    return num
+
+
+def _gh_pr_view(num: str, cwd: Path | None = None) -> dict:
+    p = _gh(["pr", "view", num, "--json",
+             "state,mergeable,mergeStateStatus,statusCheckRollup,mergeCommit"], cwd=cwd)
+    if p.returncode != 0:
+        raise GuardError(f"查询 PR #{num} 失败：{(p.stderr or p.stdout).strip()}")
+    try:
+        return json.loads(p.stdout)
+    except json.JSONDecodeError as exc:
+        raise GuardError(f"解析 PR #{num} 状态失败：{exc}") from exc
+
+
+def _gh_pr_wait_checks(num: str, timeout: int, cwd: Path | None = None,
+                       interval: int = PR_POLL_INTERVAL) -> None:
+    deadline = time.time() + max(0, timeout)
+    last = ""
+    while True:
+        v = _gh_pr_view(num, cwd)
+        if v.get("state") != "OPEN":
+            return
+        ms = v.get("mergeStateStatus") or "UNKNOWN"
+        conclusions = [c.get("conclusion") or c.get("state") or "UNKNOWN"
+                       for c in (v.get("statusCheckRollup") or [])]
+        line = f"mergeState={ms} checks={conclusions}"
+        if line != last:
+            print(f"[workflow-guard] PR #{num}：{line}")
+            last = line
+        failed = [c for c in conclusions
+                  if c in ("FAILURE", "ERROR", "CANCELLED", "TIMED_OUT",
+                           "ACTION_REQUIRED", "STALE")]
+        if failed:
+            raise GuardError(f"PR #{num} 校验失败：{conclusions}")
+        pending = [c for c in conclusions
+                   if c not in ("SUCCESS", "NEUTRAL", "SKIPPED", "COMPLETED")]
+        if ms in ("CLEAN", "HAS_HOOKS") and not pending:
+            return
+        if ms == "BLOCKED" and not pending:
+            raise GuardError(f"PR #{num} 被分支保护阻断（必需检查 / 审查未完成）：{conclusions}")
+        if time.time() >= deadline:
+            raise GuardError(f"等待 PR #{num} 校验超时（{timeout}s）：{line}")
+        time.sleep(interval)
+
+
+def _gh_pr_merge(num: str, cwd: Path | None = None) -> str:
+    p = _gh(["pr", "merge", num, "--merge"], cwd=cwd)
+    if p.returncode != 0:
+        raise GuardError(f"合并 PR #{num} 失败：{(p.stderr or p.stdout).strip()}")
+    v = _gh_pr_view(num, cwd)
+    sha = (v.get("mergeCommit") or {}).get("oid") or ""
+    if not sha:
+        raise GuardError(f"PR #{num} 已合并但无法解析合并提交 SHA")
+    return sha
+
+
+def _merge_via_pr(root: Path, state: Path, tasks: list[dict], t: dict | None,
+                  branch: str, remote: str, args: argparse.Namespace) -> int:
+    """PR 传输合并：推任务分支 → 建 PR → 等必需检查 → 合并 PR。"""
+    if not args.no_verify and t:
+        task_wt = Path(t.get("worktree") or "")
+        if task_wt.exists():
+            rc = _run_verify(task_wt, args)
+            if rc == 1:
+                raise GuardError("合并前校验未通过（退出码 1），已阻断合并。")
+            if rc == 2:
+                print("[workflow-guard] 校验有警告（退出码 2），按约定放行。")
+    p = push_with_failover(root, remote, [f"{branch}:{branch}"], fallback=args.push_fallback)
+    if p.returncode != 0:
+        raise GuardError(f"推送任务分支失败：{(p.stderr or p.stdout).strip()}")
+    print(f"[workflow-guard] 已推送任务分支 {branch} → {remote}")
+    num = _gh_pr_create(branch, f"Merge {branch}",
+                        "由 workflow_guard merge 自动创建（PR 传输）。", cwd=root)
+    _gh_pr_wait_checks(num, args.wait_timeout, cwd=root)
+    sha = _gh_pr_merge(num, cwd=root)
+    print(f"[workflow-guard] 已合并 PR #{num}（{sha[:10]}）")
+    if t:
+        t["status"] = "merged"
+        t["merged"] = _now()
+        t["merged_sha"] = sha
+        save_tasks(state, tasks)
+    print("  本地 main 如需对齐：python engine/scripts/workflow_guard.py sync")
+    return EXIT_OK
 
 
 def repo_root() -> Path:
@@ -488,16 +642,18 @@ def cmd_merge(args: argparse.Namespace) -> int:
         raise GuardError(f"分支不存在：{branch}（任务未登记且分支不存在）")
 
     owner = current_owner()
+    remote = args.remote
     lock = _lock_for(state, "merge", args.stale_timeout)
     lock.acquire(owner, f"merge {branch}", wait=args.wait, force=args.force)
-    wt = _worktree_path(root, MERGE_WORKTREE_NAME)
     try:
+        if _resolve_transport(args, root) == "pr":
+            return _merge_via_pr(root, state, tasks, t, branch, remote, args)
+        wt = _worktree_path(root, MERGE_WORKTREE_NAME)
         if wt.exists():
             raise GuardError(
                 f"合并工作树已存在：{wt}\n"
                 f"  上次合并可能未收尾。处理完用 `merge --cleanup` 清理后重试。"
             )
-        remote = args.remote
         git(["fetch", remote, "main"], cwd=root)
         remote_main = f"{remote}/main"
         wt.parent.mkdir(parents=True, exist_ok=True)
@@ -694,6 +850,10 @@ def build_parser() -> argparse.ArgumentParser:
     mp.add_argument("--remote", default="origin")
     mp.add_argument("--push-fallback", default="origin-https",
                     help="推送备用通道 remote（默认 origin-https；传空字符串则不 failover）")
+    mp.add_argument("--transport", choices=["auto", "direct", "pr"], default="auto",
+                    help="合并传输：auto（GitHub + gh 用 PR）/ direct（直推 main）/ pr（建 PR 合并）")
+    mp.add_argument("--wait-timeout", type=int, default=DEFAULT_PR_WAIT_TIMEOUT,
+                    help="PR 传输等待必需检查的超时秒数（默认 1800）")
     mp.set_defaults(func=cmd_merge)
 
     # sync

@@ -33,7 +33,7 @@ jp-life-work：围绕日本生活与工作（签证 / 就业 / 行业 / 税制 /
 
 1. **分支隔离**：任务一律 `python engine/scripts/workflow_guard.py task start <name>` 建分支 + 独立 worktree，
    在 `.worktrees/<name>/` 工作。
-2. **串行合并**：只走 `python engine/scripts/workflow_guard.py merge <name>`，禁止直接 push main。
+2. **串行合并**：只走 `python engine/scripts/workflow_guard.py merge <name>`（默认 PR 传输：推分支 → 建 PR → 等 `validate` / `audit` → 合并），禁止直接 push main（服务端分支保护已启用）。
 3. **共享检出锁**：在仓库根做可变 git 操作用 `lock run`；对齐本地 main 用 `sync`，不要 `git pull` 硬拉。
 4. **不碰别人的改动**：只提交本任务范围内文件。
 5. 规范与异常：`docs/branch-management.md`。
