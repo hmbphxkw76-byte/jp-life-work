@@ -277,6 +277,7 @@ def _merge_via_pr(root: Path, state: Path, tasks: list[dict], t: dict | None,
         t["status"] = "merged"
         t["merged"] = _now()
         t["merged_sha"] = sha
+        t["pr"] = num
         save_tasks(state, tasks)
     print("  本地 main 如需对齐：python engine/scripts/workflow_guard.py sync")
     return EXIT_OK
