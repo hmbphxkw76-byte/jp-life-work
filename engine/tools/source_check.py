@@ -10,7 +10,13 @@
 - E3：URL 条目附 4 位年份（时点）（P2，告警）；
 - E4：报告声明来源分级（分级 / 官方一手 / 权威 / 媒体）（P2，告警）；
 - E5：来源条目字段完整率（url + 时点 + 分级分组三项齐全）（P2，告警）；
-- E6：来源质量字段（转述层级 / 独立性）缺失或判为「不明」（P2，告警，n21）。
+- E6：来源质量字段（转述层级 / 独立性）缺失或判为「不明」（P2，告警，n21）；
+- E7：时点年份合理性（西历须落在 1990–2030，P2，告警，P0-1 修复后新增）；
+- E8：来源页面语言（中文页建议回溯日文原文，P2，告警，P1-5）；
+- E9：来源分组纳入受控词表（P2，告警，P1-4）。
+
+来源分组 / 独立性 / 权威等级 / 语言判定统一复用 ``source_normalize``
+（受控词表 ``GROUP_VOCAB`` 单一事实源），不再各报告自由文本直出。
 
 归一化规则集中在本模块引用的 ``source_normalize``（单一事实源），
 其他工具复用该模块，不再各写一套。
@@ -37,7 +43,17 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from _common import ROOT, atomic_write, iter_business_dirs  # noqa: E402
 from audit_registry import content_fingerprint  # noqa: E402
-from source_normalize import extract_year, normalize_url  # noqa: E402
+from source_normalize import (  # noqa: E402
+    YEAR_MAX,
+    YEAR_MIN,
+    authority_grade,
+    classify_independence,
+    detect_language,
+    extract_year,
+    normalize_group,
+    normalize_url,
+    year_is_plausible,
+)
 
 SECTION_RE = re.compile(r"^##\s+.*(?:参考来源|来源|引用)", re.M)
 URL_RE = re.compile(r"https?://[^\s)\]]+")
@@ -90,20 +106,25 @@ def extract_report(rel: str, text: str) -> dict:
     for line in body.splitlines():
         g = GROUP_RE.match(line.strip())
         if g:
-            group = line.strip()[:24]
+            group = line.strip()
         if "http" not in line:
             continue
         url = URL_RE.search(line)
+        url_s = normalize_url(url.group(0)) if url else ""
         year = extract_year(line)
         marker = MARKER_RE.search(line)
+        canon = normalize_group(group)
         entries.append({
             "text": line.strip()[:200],
-            "url": normalize_url(url.group(0)) if url else "",
+            "url": url_s,
             "year": year,
             "marker": marker.group(0) if marker else "",
             "group": group,
+            "group_canonical": canon,
+            "authority_grade": authority_grade(canon),
+            "language": detect_language(url_s),
             "relay_level": infer_relay_level(group + " " + line),
-            "independence": infer_independence(group + " " + line),
+            "independence": classify_independence(line, url_s, group),
         })
     problems: list[str] = []
     if not entries:
@@ -119,6 +140,15 @@ def extract_report(rel: str, text: str) -> dict:
     unknown_ind = sum(1 for e in entries if e["independence"] == "不明")
     if unknown_ind:
         problems.append(f"{unknown_ind} 条来源条目独立性判为「不明」（待人工确认）")
+    bad_year = sum(1 for e in entries if e["year"] and not year_is_plausible(e["year"]))
+    if bad_year:
+        problems.append(f"{bad_year} 条来源条目时点年份异常（超出 {YEAR_MIN}-{YEAR_MAX}，疑似 URL 数字误判）")
+    zh = sum(1 for e in entries if e["language"] == "zh")
+    if zh:
+        problems.append(f"{zh} 条来源为中文页面（建议回溯日文原文）")
+    no_group = sum(1 for e in entries if not e["group_canonical"])
+    if no_group:
+        problems.append(f"{no_group} 条来源分组未纳入受控词表（待归一）")
     graded = bool(GRADE_RE.search(body)) or bool(GRADE_RE.search(text))
     if not graded:
         problems.append("未声明来源分级")

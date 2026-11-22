@@ -157,6 +157,14 @@ class ExitCodeCase(unittest.TestCase):
     def test_exit_2_warn(self) -> None:
         self.assertEqual(self._run("- 某数值 ⚠ 待核实。\n", "--warn"), 2)
 
+    def test_default_ignores_record_exemption(self) -> None:
+        # P0-2：默认 --all 为全层零容忍，记录层豁免键不生效
+        self.assertEqual(self._run("## 置信度标注\n\n| a | 待核实 |\n"), 1)
+
+    def test_content_only_honors_record_exemption(self) -> None:
+        # P0-2：--content-only 才启用策略的记录层豁免
+        self.assertEqual(self._run("## 置信度标注\n\n| a | 待核实 |\n", "--content-only"), 0)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -1410,5 +1410,50 @@ class TestCovAutoVerify(unittest.TestCase):
                     sys.argv = argv
 
 
+class TestAuditImmutability(unittest.TestCase):
+    """P2-8：台账 append-only 与哈希链不可变回归（dcb23f6 事件丢失事故）。"""
+
+    def test_append_is_append_only(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            with audit_env(root):
+                audit_pipeline._append({"report": "r", "event": "register", "ts": "t1"})
+                first = audit_pipeline.LEDGER.read_text(encoding="utf-8")
+                audit_pipeline._append({"report": "r", "event": "submit", "ts": "t2"})
+                after = audit_pipeline.LEDGER.read_text(encoding="utf-8")
+                # 既有行逐字节保留（append-only，不得重写 seq / prev_hash / hash）
+                self.assertTrue(after.startswith(first))
+                ledger = audit_pipeline.load_ledger()
+                self.assertEqual([e["seq"] for e in ledger], [1, 2])
+                self.assertEqual(audit_pipeline._chain_problems(ledger), [])
+
+    def test_rewrite_of_existing_event_breaks_chain(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            with audit_env(root):
+                audit_pipeline._append({"report": "r", "event": "register", "ts": "t1"})
+                ledger = audit_pipeline.load_ledger()
+                ledger[0]["hash"] = "0" * 64  # 模拟重写既有事件
+                self.assertTrue(audit_pipeline._chain_problems(ledger))
+
+    def test_append_after_remote_prefix_closes_chain(self):
+        # 合并场景：本地新增事件追加在远端前缀之后，链保持闭合
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            with audit_env(root):
+                audit_pipeline.LEDGER.parent.mkdir(parents=True, exist_ok=True)
+                h0 = audit_pipeline._hash("0" * 64,
+                                          {"report": "remote", "event": "register", "ts": "t0"})
+                audit_pipeline.LEDGER.write_text(
+                    json.dumps({"seq": 1, "prev_hash": "0" * 64, "hash": h0,
+                                "report": "remote", "event": "register", "ts": "t0"}) + "\n",
+                    encoding="utf-8")
+                audit_pipeline._append({"report": "local", "event": "submit", "ts": "t1"})
+                ledger = audit_pipeline.load_ledger()
+                self.assertEqual(len(ledger), 2)
+                self.assertEqual(ledger[1]["prev_hash"], h0)
+                self.assertEqual(audit_pipeline._chain_problems(ledger), [])
+
+
 if __name__ == "__main__":
     unittest.main()

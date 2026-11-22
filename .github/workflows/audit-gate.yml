@@ -126,14 +126,15 @@ jobs:
           fi
           echo "audit_check 退出码 $code（2=仅 P2 放行）"
 
-      # 无法核实内容硬门禁（内容层零容忍，全库兜底）：与 validate.yml 同口径，
-      # 在合并门禁处再拦一道，确保存量与变更报告的内容层均无「无法核实」标记。
+      # 无法核实内容硬门禁（默认全层零容忍，全库兜底）：与 validate.yml 同口径，
+      # 在合并门禁处再拦一道，确保存量与变更报告的任何层级均无「无法核实」标记。
+      # 策略文件的记录层豁免键仅在 --content-only 下生效；本处用 --all，故不豁免。
       - name: 无法核实内容门禁（verified_content_gate --all）
         run: |
           python engine/tools/verified_content_gate.py --all || code=$?
           code=${code:-0}
           if [ "$code" -ne 0 ]; then
-            echo "::error::内容层存在无法核实内容（待核实 / 未核实 / 需核实原文 / 待核验 / 待补来源），禁止合并（退出码 $code）"
+            echo "::error::存在无法核实内容（待核实 / 未核实 / 需核实原文 / 待核验 / 待补来源），禁止合并（退出码 $code）"
             exit 1
           fi
           echo "verified_content_gate 退出码 $code（内容层零命中）"

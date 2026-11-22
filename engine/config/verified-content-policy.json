@@ -1,5 +1,6 @@
 {
   "schema": "1.0",
+  "mode_note": "默认（--all）为全层零容忍：record_sections / status_columns / excluded_files / excluded_lines 仅在下述 --content-only 时生效；CI（validate.yml / audit-gate.yml）使用 --all，故不启用任何记录层豁免。",
   "markers": [
     "待核实",
     "未核实",

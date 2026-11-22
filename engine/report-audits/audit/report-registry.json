@@ -27,11 +27,11 @@
       "type_id": "employment-research",
       "md": "01-ssw-driver/reports/2026-11-ssw-driver.md",
       "html": "01-ssw-driver/reports/2026-11-ssw-driver.html",
-      "content_hash": "sha256:055df8b942b6504b40c985acfe2b4b1dbef019408eb41b756fe4595f152ea008",
-      "html_hash": "sha256:c263dd35df8ce030997eb09f390d09fbd36c501eb2a7cc8bc17590acca6f2666",
-      "audit_id": "AUD-202611-001",
+      "content_hash": "sha256:87c0f4c5258142d8b705026281154a433080699025beeeb8d42914b1694dec96",
+      "html_hash": "sha256:9e4f4fccc56d21be72eb8fded40073e26956d2cf5b392b2ee522843ddda2eb58",
+      "audit_id": "AUD-202611-018",
       "audit_state": "audited",
-      "finalized_at": "2026-11-21T15:37:59+00:00"
+      "finalized_at": "2026-11-22T00:08:51+00:00"
     },
     {
       "report": "02-career-driver/reports/2026-11-career-driver.md",
@@ -132,11 +132,11 @@
       "type_id": "policy-analysis",
       "md": "08-visa-immigration/reports/2026-11-visa-immigration.md",
       "html": "08-visa-immigration/reports/2026-11-visa-immigration.html",
-      "content_hash": "sha256:786fde68c77ee20db067373c8737636fac298e454f96d5c1765a9b8a898659f7",
-      "html_hash": "sha256:b952d12500edacb2c2460f4e887f8168b584ac32d53d407d86f1ab5732e95985",
-      "audit_id": "AUD-202611-008",
+      "content_hash": "sha256:86b81e7f4f3a0fe2f018bad3ab68acaef36ce5e6a86cb215197d84973f8baede",
+      "html_hash": "sha256:845297dc95b00b96be4ccb16b725cab282b6ec5d1203d6568aca10c5c55cae66",
+      "audit_id": "AUD-202611-001",
       "audit_state": "audited",
-      "finalized_at": "2026-11-21T15:38:01+00:00"
+      "finalized_at": "2026-11-22T00:08:51+00:00"
     },
     {
       "report": "09-politics-law/reports/2026-11-politics-law.md",
@@ -177,11 +177,11 @@
       "type_id": "employment-research",
       "md": "11-language-japanese/reports/2026-11-language-japanese.md",
       "html": "11-language-japanese/reports/2026-11-language-japanese.html",
-      "content_hash": "sha256:3f7225deaac570567ef737616285ad3c17acbc607c04250410bac50a73fa8867",
-      "html_hash": "sha256:9ac2be086eaa805b93b2c29226b54639dd698826605871d2287b8bd21fee980c",
-      "audit_id": "AUD-202611-003",
+      "content_hash": "sha256:f4c9c498e7b97db62519e6ed0848c1d089b58c7a5433be8112a9f91e970770c6",
+      "html_hash": "sha256:eef191359e0ca969096c2c53c952685731e475e0e67874375bfe2a6e8292c33e",
+      "audit_id": "AUD-202611-008",
       "audit_state": "audited",
-      "finalized_at": "2026-11-21T16:59:41+00:00"
+      "finalized_at": "2026-11-22T00:08:52+00:00"
     },
     {
       "report": "12-culture-life/reports/2026-11-culture-life.md",
@@ -282,11 +282,11 @@
       "type_id": "employment-research",
       "md": "18-family-parenting/reports/2026-11-family-parenting.md",
       "html": "18-family-parenting/reports/2026-11-family-parenting.html",
-      "content_hash": "sha256:6fa1ae946529414eb8cf4c0e6a66c85456a272a67bcace3cef3ff58db083f4af",
-      "html_hash": "sha256:33f1ca647c9fb6cb7fadfe0113c0a6fbd149b468fbad0569f14283194b65a5fa",
-      "audit_id": "AUD-202611-012",
+      "content_hash": "sha256:be1cd1be44993b4554045759cdc7ba21e3fcbd9b12c439122ac81157594abfc8",
+      "html_hash": "sha256:18bbe4840547a8cda46f892a67223aea5352b71b6176d5e8a61f924e01181704",
+      "audit_id": "AUD-202611-003",
       "audit_state": "audited",
-      "finalized_at": "2026-11-21T15:38:05+00:00"
+      "finalized_at": "2026-11-22T00:08:52+00:00"
     },
     {
       "report": "19-safety-disaster/reports/2026-11-safety-disaster.md",

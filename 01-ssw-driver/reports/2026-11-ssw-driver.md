@@ -2,7 +2,7 @@
 
 > **免责声明**：本报告为信息整理与条件化建议，不构成法律意见或税务意见；重大决策请咨询执业法律 / 税务专业人士。
 
-> **已审计** ✅ 审计编号 `AUD-202611-001`｜终审通过：2026-11-21｜内容指纹 `055df8b942b6504b40c`｜依据《审计报告标准化管理体系》v1.4
+> **已审计** ✅ 审计编号 `AUD-202611-018`｜终审通过：2026-11-22｜内容指纹 `87c0f4c5258142d8b70`｜依据《审计报告标准化管理体系》v1.4
 
 > **版本**：v2026.11.17（2026-11 月度核验）　**数据基准日**：2026-11-17
 > **主题类型**：职业就业调研型（employment-research）
@@ -632,18 +632,18 @@
 114. [総務省 e-Stat 自動車教習料（0003449368）](https://www.e-stat.go.jp/stat-search/database?layout=dataset&statdisp_id=0003449368) — 2026【已核实】
 117. [hajimen.com 教习所排名（2015 年调查值，历史参考）](https://hajimen.com/10-saitama/rank_detail?rank_name=t-0) — 2015
 
-### ⑥ 补充来源（日本官方 / 机构；中文来源已停用）
+### ⑥ 补充来源（日本官方 / 机构；中文页建议回溯日文原文）
 
 118. [在上海日本国総領事館 签证费用（2026 年 7 月 1 日修改）](https://www.shanghai.cn.emb-japan.go.jp/itpr_ja/11_000001_00633.html) — 2026
 119. [在青岛日本国総領事館 査証手数料等の変更について](https://www.qingdao.cn.emb-japan.go.jp/itpr_ja/11_000001_02405.html) — 2026
-120. [在重慶日本国総領事館 签证手续费](https://www.chongqing.cn.emb-japan.go.jp/itpr_zh/qianzhengshouye.html) — 2026
+120. [在重慶日本国総領事館 签证手续费](https://www.chongqing.cn.emb-japan.go.jp/itpr_zh/qianzhengshouye.html) — 2026（中文页，建议回溯日文原文）
 121. ~~商务部对外劳务合作企业名单提醒（mofcom.gov.cn）~~ — 中文来源，已按来源规则停用
 122. ~~商务部对外投资合作信息（资质查询入口）~~ — 中文来源，已按来源规则停用
 123. ~~中国货币网 人民币汇率中间价~~ — 中文来源，已按来源规则停用
 124. ~~国家统计局 2025 年城镇单位就业人员平均工资~~ — 中文来源，已按来源规则停用
-125. [特定技能总合支援站（中文）· 在留资格](https://www.ssw.go.jp/cn/about/visa/) — 2026
-126. [特定技能总合支援站（中文）· 步骤](https://www.ssw.go.jp/cn/about/step/) — 2026
-127. [特定技能总合支援站（中文）· 自動車運送業分野](https://www.ssw.go.jp/cn/about/visa/automobile_transportation_business_1/) — 2026
+125. [特定技能总合支援站（中文）· 在留资格](https://www.ssw.go.jp/cn/about/visa/) — 2026（中文页，建议回溯日文原文）
+126. [特定技能总合支援站（中文）· 步骤](https://www.ssw.go.jp/cn/about/step/) — 2026（中文页，建议回溯日文原文）
+127. [特定技能总合支援站（中文）· 自動車運送業分野](https://www.ssw.go.jp/cn/about/visa/automobile_transportation_business_1/) — 2026（中文页，建议回溯日文原文）
 
 ### 本版新增来源（2026-11-17 核验）
 

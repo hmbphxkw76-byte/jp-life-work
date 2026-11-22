@@ -253,7 +253,7 @@ reports/YYYY-MM-<slug>.md  ──md2html.py──►  reports/YYYY-MM-<slug>.htm
 - **辅助开关**：报告页工具条「隐藏更新标记」对照阅读、「展开全部删除」。
 - **呈现**：报告页新标签页独立打开，页脚提供「← 返回主题 / 返回首页」。
 
-## 六、测试体系（`engine/tests/`，1110 项）
+## 六、测试体系（`engine/tests/`，1127 项）
 
 | 场景 | 测试类 | 覆盖 |
 |---|---|---|
@@ -285,7 +285,7 @@ reports/YYYY-MM-<slug>.md  ──md2html.py──►  reports/YYYY-MM-<slug>.htm
 | 跨平台差异守卫 | `test_platform_guard.py`（9 项） | 路径分隔（无 Windows 路径字面量 / 工作流正斜杠）、换行（仓库 blob LF / `.gitattributes` / `atomic_write` 保 LF）、命令可用性（无 `shell=True` / 无 PowerShell 专属语法 / 工具路径存在） |
 | 性能趋势快照 | `test_perf_snapshot.py`（6 项） | 规模快照字段与实测口径、耗时采集、基线语义（首条为基线 / 追加不改基线 / `--set-baseline` 覆盖）、CLI `--porcelain` |
 
-> 合计 1110 项（`python -m unittest discover -s engine/tests` 集成后实测，当前全绿；`incremental_build` 两项「无变更」断言在集成分支领先 main 时按预期失败，合并后通过）。
+> 合计 1127 项（`python -m unittest discover -s engine/tests` 集成后实测，当前全绿；`incremental_build` 两项「无变更」断言在集成分支领先 main 时按预期失败，合并后通过）。
 
 ## 七、手动命令速查
 
@@ -597,3 +597,4 @@ CI 在 ubuntu runner 上用 **bash** 执行 `run:`，本地维护者用 **PowerS
 | v2.24 | 2026-11-20 | 主健康修复 | 工具 45 → 46（`source_normalize.py` 登记入工具一览）、测试 1056 → 1081、`scheduled-maintenance` 步骤 21 → 22、`audit-gate` 步骤 6 → 7；`decision_log --check` 测试适配 n20「需求编号关联」契约（改用登记册真实问题）；`update_planner --requirements` 测试 patch 目标修正为 `update_planner.decision_metrics`（修复测试隔离）；n19–n26 工单双轴评审覆盖补齐（另由评审任务合入） |
 | v2.25 | 2026-11-20 | 来源语言门禁（W5） | 新增 `engine/config/source-policy.json`（来源语言单一事实源）与 `source_language_gate.py`（提示词规则逐字一致 + 中文来源许可扫描 + 变更报告中文域名黑名单，14 项测试）；`validate.yml` 增「来源语言门禁」步骤（主 job 29 → 30 个命名步骤）；全库 21 主题 business-config 与 10 份泛用版提示词的 `{{SOURCE_LANGUAGE_RULE}}` 统一为「仅英文 / 日文来源，杜绝中文来源」；工具 46 → 47、测试 1081 → 1095 |
 | v2.26 | 2026-11-21 | 无法核实内容门禁 | 新增 `engine/config/verified-content-policy.json`（内容层 / 记录层机读边界、标记词、状态列、豁免清单单一事实源）与 `verified_content_gate.py`（内容层零容忍硬门禁，15 项测试）；`validate.yml` 增「无法核实内容门禁」步骤（主 job 30 → 31 个命名步骤）、`audit-gate.yml` 增全库兜底（7 → 8 步）；全库清除内容层无法核实内容（报告 / 手册 / 登记册 / 词库）；工具 47 → 48、测试 1095 → 1110 |
+| v2.27 | 2026-11-22 | 来源质量 P0-P2 修复 | `source_normalize` 新增受控分组词表 / 独立性 / 权威等级 / 语言判定；`extract_year` 先剥离 URL 再取年（修复 URL 数字 ID 误判）+ 行尾年 / URL 日期路径回退；`source_check` 增 E7 年份合理性 / E8 中文页 / E9 分组词表；`verified_content_gate` 默认语义与 CI 注释对齐；台账 append-only 回归；测试 1110 → 1127 |

@@ -174,16 +174,17 @@ jobs:
           fi
           echo "source_language_gate.py 退出码 $code（2=仅告警不阻断）"
 
-      # 无法核实内容硬门禁（内容层零容忍）：报告 / 手册 / 登记册 / 词库内容层
-      # 出现「待核实 / 未核实 / 需核实原文 / 待核验 / 待补来源」即阻断；
-      # 记录层（置信度表 / 信息差与未核验清单 / 待复核清单 / 核验状态列 / 来源清单）
-      # 按 engine/config/verified-content-policy.json 豁免。全量扫描，退出码 1 阻断。
+      # 无法核实内容硬门禁（默认全层零容忍）：报告 / 手册 / 登记册 / 词库的任何层级
+      # 出现「待核实 / 未核实 / 需核实原文 / 待核验 / 待补来源」即阻断。
+      # 注意：策略文件中的记录层豁免键（record_sections / status_columns /
+      # excluded_files / excluded_lines）仅在 --content-only 下生效；本处用 --all，故不豁免。
+      # 全量扫描，退出码 1 阻断。
       - name: 无法核实内容门禁（verified_content_gate）
         run: |
           python engine/tools/verified_content_gate.py --all || code=$?
           code=${code:-0}
           if [ "$code" -ne 0 ]; then
-            echo "::error::内容层存在无法核实内容（待核实 / 未核实 / 需核实原文 / 待核验 / 待补来源），阻断合并；须删除或改为已核实（退出码 $code）"
+            echo "::error::存在无法核实内容（待核实 / 未核实 / 需核实原文 / 待核验 / 待补来源），阻断合并；须删除或改为已核实（退出码 $code）"
             exit 1
           fi
           echo "verified_content_gate.py 退出码 $code（内容层零命中）"

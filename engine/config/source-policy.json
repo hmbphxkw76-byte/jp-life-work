@@ -3,6 +3,7 @@
   "rule_id": "en-ja-official-only",
   "source_language_rule": "仅英文 / 日文来源：① 官方权威（日本政府省厅・e-Gov・统计、国际机构、其他国家政府官方）；② 主流投资平台 / 顾问机构；③ 主流新闻媒体（英文 / 日文）。杜绝中文来源（含中文媒体及其中英文版、中国机构中英文版），不得引用、不得作线索、不得设例外。",
   "allowed_languages": ["en", "ja"],
+  "official_chinese_page_policy": "日本官方机构中文页（域名属日本政府 / 机构，如 ssw.go.jp/cn、使领馆 itpr_zh）可作为「官方一手（中文页）」保留，但须标注「建议回溯日文原文」，且不得作为关键结论的唯一来源；source_check 对 language=zh 条目告警。一般中文来源（中文媒体、中国机构中英文版）仍一律杜绝。",
   "allowed_source_classes": ["官方权威", "主流投资平台", "顾问机构", "主流新闻媒体"],
   "forbidden_permission_patterns": [
     "中文来源仅作线索",

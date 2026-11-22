@@ -93,9 +93,46 @@ class ExtractCase(unittest.TestCase):
 
     def test_unknown_independence_warns(self):
         text = ("## 参考来源清单\n\n### 来源（分级）\n\n"
-                "1. [X](https://x.go.jp/) — 2026\n")
+                "1. [X](https://unknown.example.com/) — 2026\n")
         r = sc.extract_report("r", text)
         self.assertTrue(any("独立性判为「不明」" in p for p in r["problems"]))
+
+    def test_url_digits_not_treated_as_year(self):
+        # P0-1：URL 中的数字 ID 不得被误判为年份
+        text = ("## 参考来源清单\n\n### ① 官方一手（分级）\n\n"
+                "1. [X](https://www.moj.go.jp/isa/content/001471906.pdf) — 2026-10-05\n")
+        r = sc.extract_report("r", text)
+        self.assertEqual(r["entries"][0]["year"], "2026")
+        self.assertEqual(r["problems"], [])
+
+    def test_tail_year_after_bare_url(self):
+        # 裸 URL 后紧跟 `,2026` / `，2026。` 记年
+        text = ("## 参考来源清单\n\n### ① 官方一手（分级）\n\n"
+                "1. [X](https://x.go.jp/)，https://x.go.jp/a.html，2026。\n")
+        r = sc.extract_report("r", text)
+        self.assertEqual(r["entries"][0]["year"], "2026")
+
+    def test_year_sanity_warns(self):
+        # P2-6：超出区间的年份告警
+        text = ("## 参考来源清单\n\n### ① 官方一手（分级）\n\n"
+                "1. [X](https://x.go.jp/) — 1906\n")
+        r = sc.extract_report("r", text)
+        self.assertTrue(any("时点年份异常" in p for p in r["problems"]))
+
+    def test_group_canonical_and_grade(self):
+        # P1-4 / P2-7：分组归一到受控词表并映射权威等级
+        r = sc.extract_report("r", "# t\n" + SECTION)
+        e = r["entries"][0]
+        self.assertEqual(e["group_canonical"], "官方一手")
+        self.assertEqual(e["authority_grade"], "A")
+
+    def test_zh_page_warns(self):
+        # P1-5：中文页告警
+        text = ("## 参考来源清单\n\n### ① 官方一手（分级）\n\n"
+                "1. [X](https://www.ssw.go.jp/cn/about/visa/) — 2026\n")
+        r = sc.extract_report("r", text)
+        self.assertEqual(r["entries"][0]["language"], "zh")
+        self.assertTrue(any("中文页面" in p for p in r["problems"]))
 
     def test_relay_level_inferred(self):
         text = ("## 参考来源清单\n\n### 官方一手（分级）\n\n"
@@ -164,6 +201,69 @@ class NormalizeCase(unittest.TestCase):
         self.assertEqual(normalize_year("最终更新 2026-10-15"), "2026")
         self.assertEqual(extract_year("令和 8-07-13 改定"), "令和8")
         self.assertEqual(normalize_year("无年份"), "")
+
+    def test_url_digits_not_year(self):
+        # P0-1 回归：URL 数字 ID 不再是年份来源
+        from source_normalize import extract_year
+        line = "6. [ISA](https://www.moj.go.jp/isa/content/001471906.pdf) — 2026-10-05"
+        self.assertEqual(extract_year(line), "2026")
+        self.assertEqual(extract_year("[X](https://www.moj.go.jp/isa/content/001471906.pdf)"), "")
+
+    def test_tail_year_and_url_date_path(self):
+        from source_normalize import extract_year
+        self.assertEqual(extract_year("https://www.mhlw.go.jp/stf/newpage_08277.html,2026"), "2026")
+        self.assertEqual(extract_year("https://www.jil.go.jp/kokunai/blt/backnumber/2026/10/x.html"), "2026")
+        self.assertEqual(extract_year("https://www.moj.go.jp/isa/03_00207.html"), "")
+
+    def test_year_is_plausible(self):
+        from source_normalize import year_is_plausible
+        self.assertTrue(year_is_plausible("2026"))
+        self.assertTrue(year_is_plausible("令和8"))
+        self.assertTrue(year_is_plausible(""))
+        self.assertFalse(year_is_plausible("1906"))
+        self.assertFalse(year_is_plausible("2086"))
+
+    def test_normalize_group_vocab(self):
+        from source_normalize import normalize_group
+        cases = {
+            "### ① 日本政府官方一手": "官方一手",
+            "**官方一手（出入国在留管理庁 / 法務省 / ": "官方一手",
+            "**官方一手（e-Gov / ISA / 厚生労": "官方一手",
+            "### ④ 媒体 / 行业媒体 / 企业 IR": "媒体",
+            "### ⑤ 平台抽样 / 行情": "平台抽样",
+            "### 求人门户与薪资调查（预期指标）": "平台抽样",
+            "**内部知识库（本主题）**：": "内部知识库",
+            "### ⑥ 补充来源（日本官方 / 机构；中文页": "补充来源",
+            "### ② 权威组织 / 考试实施机构": "权威机构",
+            "### 学会 / 医疗机构": "权威机构",
+            "**政策环境信号（政党官网 / 专业机构 / 媒体）**": "媒体",
+        }
+        for raw, canon in cases.items():
+            self.assertEqual(normalize_group(raw), canon, raw)
+
+    def test_classify_independence(self):
+        from source_normalize import classify_independence
+        self.assertEqual(classify_independence("求人Box 运送业求人", "https://xn--pckua2a7gp15o89zb.com/"), "非独立")
+        self.assertEqual(classify_independence("ISA", "https://www.moj.go.jp/isa/"), "独立")
+        self.assertEqual(classify_independence("本主题登记册", "https://github.com/hmbphxkw76-byte/jp-life-work", "内部知识库"), "非独立")
+        self.assertEqual(classify_independence("某页", "https://unknown.example.com/"), "不明")
+
+    def test_authority_grade(self):
+        from source_normalize import authority_grade
+        self.assertEqual(authority_grade("官方一手"), "A")
+        self.assertEqual(authority_grade("权威机构"), "B")
+        self.assertEqual(authority_grade("媒体"), "C")
+        self.assertEqual(authority_grade("平台抽样"), "D")
+        self.assertEqual(authority_grade("内部知识库"), "X")
+        self.assertEqual(authority_grade("未登记"), "")
+
+    def test_detect_language(self):
+        from source_normalize import detect_language
+        self.assertEqual(detect_language("https://www.ssw.go.jp/cn/about/visa/"), "zh")
+        self.assertEqual(detect_language("https://www.chongqing.cn.emb-japan.go.jp/itpr_zh/x.html"), "zh")
+        self.assertEqual(detect_language("https://www.shanghai.cn.emb-japan.go.jp/itpr_ja/x.html"), "ja")
+        self.assertEqual(detect_language("https://www.moj.go.jp/isa/"), "ja")
+        self.assertEqual(detect_language("https://www.yamato-hd.co.jp/english/news/"), "en")
 
 
 class CompletenessCase(unittest.TestCase):
