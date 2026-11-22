@@ -192,6 +192,21 @@ class TestTaskIsolation(TempRepoCase):
         self.repo.tool("task", "stop", "demo")
         self.assertEqual(self.repo.tasks(), [])
 
+    def test_stop_recorded_merged_task_without_ancestor(self):
+        self.repo.tool("task", "start", "demo")
+        wt = Repo(self.repo.path / ".worktrees" / "demo")
+        wt.write("feat.txt", "x = 1\n")
+        wt.commit_all("feat")
+        tasks = self.repo.tasks()
+        tasks[0]["status"] = "merged"
+        tasks[0]["merged_sha"] = "b" * 40
+        tasks[0]["merged"] = "2026-11-22T00:00:00+08:00"
+        (self.repo.state() / "tasks.json").write_text(
+            json.dumps(tasks, ensure_ascii=False, indent=2), encoding="utf-8")
+        # 已登记 merged（含 merged_sha）：即使分支不是 base 祖先（模拟远端已删 / 本地滞后）也可 stop
+        self.repo.tool("task", "stop", "demo")
+        self.assertEqual(self.repo.tasks(), [])
+
 
 # ──────────────────────────────────────────────
 # 第 3 层：共享检出锁

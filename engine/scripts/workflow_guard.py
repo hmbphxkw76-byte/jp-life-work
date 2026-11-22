@@ -521,7 +521,13 @@ def cmd_task_stop(args: argparse.Namespace) -> int:
     branch = t["branch"]
     base = t.get("base") or default_base(root, args.remote)
 
-    merged = git(["merge-base", "--is-ancestor", branch, base], check=False).returncode == 0
+    # 已登记为 merged（含 merged_sha）的任务直接信任记录：PR 合并时远端分支可能已被
+    # delete_branch_on_merge 删除，且本地 base 引用可能滞后，祖先检查会误报「未合入」。
+    recorded_merged = (t.get("status") == "merged" and bool(t.get("merged_sha")))
+    if recorded_merged:
+        merged = True
+    else:
+        merged = git(["merge-base", "--is-ancestor", branch, base], check=False).returncode == 0
     if not merged and not args.force:
         raise GuardError(f"分支 {branch} 尚未合入 {base}；确认可丢弃用 --force")
 
