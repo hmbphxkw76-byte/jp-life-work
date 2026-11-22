@@ -174,6 +174,7 @@ L5 语义复核新增「独」项（见 [l5-semantic-review.md](./l5-semantic-re
 - 所有计划值、预测值不得与实绩混算；所有媒体转述必须标「需核实原文」。
 - 所有口径冲突必须并列，不得静默择一。
 - 报告完成后必须执行该报告类型模板的质量自检清单。
+- **生成前信息核验（闸0）**：生成正文前先跑 `python engine/tools/generation_gate.py --topic <主题目录名>`，确认「可生成」；阻断时先修信息资产（登记册 / 来源 / 提示词），不得带病生成。提交前另由 pre-commit 内容硬门禁（`engine/scripts/precommit_content_gate.py`）拦截未核验内容。
 - **交付与审计协议（唯一口径，提示词 / AGENTS / CI 三体系一致）**：报告交付物 = `reports/YYYY-MM-<slug>.md` 源稿 + 同名自包含 `.html`。落盘后、提交前必须按序完成（缺一不得提交）：
   1. **HTML 生成**：`python engine/tools/md2html.py`（仓库根目录执行；任务工作树内运行，共享检出目录禁止），随后 `python engine/tools/lint_reports.py --new-only` 校验交付物；
   2. **生成后自动验证（无人值守入口）**：`python engine/tools/auto_verify.py --report <报告相对路径>`——依次执行 V1–V5 规则集，通过则幂等写回报告「## 自动验证结果」章节、重新生成 HTML 并自动 `audit_pipeline --submit`；失败退出码 1 并打印逐条定位，不写回、不提交（可用 `--dry-run` 只验证 / `--no-submit`）；
@@ -195,6 +196,7 @@ L5 语义复核新增「独」项（见 [l5-semantic-review.md](./l5-semantic-re
 - [ ] 必需要素齐全：数据可靠性与局限说明 / 置信度标注 / 信息差与未核验清单 / 决策建议
 - [ ] 关键结论 / 数字已按置信度分级标准标注两位分级码（结构校验 `structure_check.py` 0 缺失）
 - [ ] 已运行 `md2html.py` 生成同名 HTML 并通过 `lint_reports.py --new-only`
+- [ ] 已运行 `generation_gate.py --topic <主题>` 且可生成（闸0 通过）
 - [ ] 已运行 `auto_verify.py --report`（V1–V5 通过，报告含「## 自动验证结果」）
 - [ ] 已运行 `audit_preflight.py --report` 且无 P0/P1
 - [ ] 已运行 `audit_check.py --report` 并修正全部 P0/P1

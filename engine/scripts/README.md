@@ -167,8 +167,16 @@ python engine/scripts/cleanup_workspace.py --no-normalize-eol  # 跳过行尾规
 - `task start` 自动追加 sid，无需手工输入；任务登记表 `session` 字段记录完整会话 ID。
 - 手工校验：`python engine/scripts/branch_naming.py check <branch...>`（退出码 1 不合规）。
 - 钩子：`python engine/scripts/workflow_guard.py hooks` 安装 pre-push / pre-commit（`--check` / `--uninstall`）；
-  新克隆 / 换机后必装。pre-commit 现含两道检查：① 分支命名守卫；② 快速校验子集（暂存 Python 文件 `ruff check --fix` + `engine/tools/validate.py`，退出码 1 阻断、2 放行；ruff 缺失仅告警）。
+  新克隆 / 换机后必装。pre-commit 现含三道检查：① 分支命名守卫；② 快速校验子集（暂存 Python 文件 `ruff check --fix` + `engine/tools/validate.py`，退出码 1 阻断、2 放行；ruff 缺失仅告警）；③ 提交前内容硬门禁（见下）。
   规范与异常处理见 `docs/branch-management.md`。
+
+### 提交前内容硬门禁（`engine/scripts/precommit_content_gate.py`）
+
+- **定位**：`git commit` 前对**暂存区**内的报告 / 资产执行内容核验，未核验信息不得进入仓库；与 `engine/tools/generation_gate.py`（闸0，生成前）和 CI 交付门禁（推送后）构成三道卡点。
+- **检查项**（复用既有内核）：报告层——`verified_content_gate`（全层零容忍）+ 来源 URL 中文域名黑名单 + `source_check`（缺来源章节）；手册 / 登记册 / 词库——`verified_content_gate`；提示词——中文来源许可表述扫描。
+- **入口**：由 pre-commit 钩子调用；无暂存报告 / 资产时快速退出 0。
+- **退出码**：0 通过；1 命中（阻断提交）。
+- **测试**：`engine/tests/test_precommit_content_gate.py`。
 
 ## 十一、报告生成一致性比对（`engine/scripts/verify_report_parity.py`）
 

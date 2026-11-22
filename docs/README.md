@@ -1,6 +1,6 @@
 # 文档索引（docs/）
 
-> **版本**：v2.10（2026-11-21 无法核实内容门禁）
+> **版本**：v2.13（2026-11-22 生成前信息核验）
 > **用途**：jp-life-work 规范与审计标准的**单一入口**。只收「长期有效规范」，不收一次性过程记录。
 > **维护纪律**：规范类文档修订须同步 `engine/tests/test_tools.py` 对应守卫测试，并经合并门禁校验。
 
@@ -67,3 +67,4 @@
 | v2.10 | 2026-11-21 | 无法核实内容门禁 | 新增 `engine/config/verified-content-policy.json` 与 `verified_content_gate.py`（内容层零容忍硬门禁，记录层豁免）；接入 `validate.yml`（主 job 30 → 31 步）与 `audit-gate.yml`（7 → 8 步）；全库清除内容层无法核实内容；工具 48 / 类型 12 / 测试 1110 / 工作流 8 |
 | v2.11 | 2026-11-22 | 来源质量 P0-P2 修复 | `source_normalize` 增受控分组词表 / 独立性 / 权威等级 / 语言判定；`extract_year` 修复 URL 数字误判；`source_check` 增 E7/E8/E9；`verified_content_gate` 默认语义与 CI 对齐；台账 append-only 回归；工具 48 / 类型 12 / 测试 1127 / 工作流 8 |
 | v2.12 | 2026-11-22 | 咨询面板门禁一致性 | `consulting_panel` 核验清单不再输出无法核实标记（未完成项转 source-backlog 第三节）；面板测试改密闭；工具 48 / 类型 12 / 测试 1128 / 工作流 8 |
+| v2.13 | 2026-11-22 | 生成前信息核验（闸0） | 新增 `engine/tools/generation_gate.py` 与 `engine/scripts/precommit_content_gate.py`（提交前内容硬门禁）；`validate.yml` 增闸0 步骤（31 → 32）；pre-commit 钩子接入；提示词基座增阶段4 前置步骤；工具 49 / 类型 12 / 测试 1146 / 工作流 8 |

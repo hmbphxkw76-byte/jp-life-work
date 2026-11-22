@@ -22,6 +22,7 @@
     "ensure_region_topics.py",
     "fact_card_check.py",
     "generate_registry.py",
+    "generation_gate.py",
     "incremental_build.py",
     "info_quality_check.py",
     "l5_meta_check.py",

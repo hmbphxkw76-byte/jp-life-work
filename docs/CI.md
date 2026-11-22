@@ -57,6 +57,7 @@
 | 报告内容 lint | `lint_reports.py --new-only` | 阻断（新报告；退出码 1） |
 | 模板合规校验 | `compliance_check.py --new-only` | 阻断（新报告；退出码 1） |
 | 阶段闸检查 | `stage_gate_check.py`（采集 / 筛选 / 分类） | 阻断（P0/P1） |
+| 生成前信息核验 | `generation_gate.py --all` | 阻断（P0/P1；闸0） |
 | 信息质量全量检查 | `info_quality_check.py --check` | 阻断（P0/P1） |
 | 事实卡片校验 | `fact_card_check.py` | 阻断（P0/P1） |
 | 待核实闭环检查 | `pending_verification.py --check` | 阻断（未登记 / 逾期） |
@@ -70,7 +71,7 @@
 | 覆盖率门禁（附加 job） | `coverage_gate.py`（阈值读 `coverage-config.json`） | 阻断（enforce=true 未达标 / 测试失败） |
 | 工作区卫生自检（附加 job） | `cleanup_workspace.py --check` | 阻断（存在残留） |
 
-> 实测（2026-11-21，无法核实内容门禁任务）：主 job **31 个命名步骤**（不含通用「安装依赖」，含「安装开发依赖」；主 job 实际共 32 个 `- name:` 步骤）+ **3 个附加 job**（契约测试分片 / 覆盖率 / 工作区卫生）；契约测试已拆为独立 4 分片 job，`ruff` 与 `mypy` 为主 job 内静态检查步骤。集成合并后如步骤数变化，以实测为准并更新本表。
+> 实测（2026-11-22，生成前信息核验任务）：主 job **32 个命名步骤**（不含通用「安装依赖」，含「安装开发依赖」；主 job 实际共 33 个 `- name:` 步骤）+ **3 个附加 job**（契约测试分片 / 覆盖率 / 工作区卫生）；契约测试已拆为独立 4 分片 job，`ruff` 与 `mypy` 为主 job 内静态检查步骤。集成合并后如步骤数变化，以实测为准并更新本表。
 
 > 通用改造（W2 / R5 / R1 / R7，2026-11-19）：8 条工作流均已接入 `actions/cache@v4` pip 缓存（key 随 `requirements*.txt` 哈希）并补齐 `timeout-minutes`；5 条定时工作流（maintenance / audit-sampling / info-quality / scheduled-report-tasks / pipeline-orchestrator）提交改为推自动分支 + 开 PR（`[automated]` 标记，保留 `github-actions[bot]` 提交身份）；月度 cron 错峰至 00:15 / 00:45 / 01:15 / 01:45（间隔 ≥ 30 分钟）；契约测试由 `run_tests_parallel.py` 分 4 片并行。
 
@@ -253,7 +254,7 @@ reports/YYYY-MM-<slug>.md  ──md2html.py──►  reports/YYYY-MM-<slug>.htm
 - **辅助开关**：报告页工具条「隐藏更新标记」对照阅读、「展开全部删除」。
 - **呈现**：报告页新标签页独立打开，页脚提供「← 返回主题 / 返回首页」。
 
-## 六、测试体系（`engine/tests/`，1128 项）
+## 六、测试体系（`engine/tests/`，1146 项）
 
 | 场景 | 测试类 | 覆盖 |
 |---|---|---|
@@ -599,3 +600,4 @@ CI 在 ubuntu runner 上用 **bash** 执行 `run:`，本地维护者用 **PowerS
 | v2.26 | 2026-11-21 | 无法核实内容门禁 | 新增 `engine/config/verified-content-policy.json`（内容层 / 记录层机读边界、标记词、状态列、豁免清单单一事实源）与 `verified_content_gate.py`（内容层零容忍硬门禁，15 项测试）；`validate.yml` 增「无法核实内容门禁」步骤（主 job 30 → 31 个命名步骤）、`audit-gate.yml` 增全库兜底（7 → 8 步）；全库清除内容层无法核实内容（报告 / 手册 / 登记册 / 词库）；工具 47 → 48、测试 1095 → 1110 |
 | v2.27 | 2026-11-22 | 来源质量 P0-P2 修复 | `source_normalize` 新增受控分组词表 / 独立性 / 权威等级 / 语言判定；`extract_year` 先剥离 URL 再取年（修复 URL 数字 ID 误判）+ 行尾年 / URL 日期路径回退；`source_check` 增 E7 年份合理性 / E8 中文页 / E9 分组词表；`verified_content_gate` 默认语义与 CI 注释对齐；台账 append-only 回归；测试 1110 → 1127 |
 | v2.28 | 2026-11-22 | 咨询面板门禁一致性 | `consulting_panel` 核验清单不再输出无法核实标记（未完成项转 `00-decision-hub/data/source-backlog.md` 第三节）；`test_panel_roundtrip` 改密闭临时目录 + 新增标记回归；测试 1127 → 1128 |
+| v2.29 | 2026-11-22 | 生成前信息核验（闸0） | 新增 `engine/tools/generation_gate.py`（复用闸1-3 / 来源语言 / 无法核实内容 / 来源 schema 内核，18 项测试）与 `engine/scripts/precommit_content_gate.py`（提交前内容硬门禁）；`validate.yml` 增「生成前信息核验（闸0）」步骤（主 job 31 → 32 个命名步骤）；pre-commit 钩子接入内容硬门禁；提示词基座增「阶段4 前置：生成前信息核验」；工具 48 → 49、测试 1128 → 1146 |

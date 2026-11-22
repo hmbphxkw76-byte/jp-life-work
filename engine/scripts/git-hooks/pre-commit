@@ -60,4 +60,15 @@ if [ -f "$root/engine/tools/validate.py" ]; then
   fi
 fi
 
+# 3) 提交前内容硬门禁（未核验信息不得进入仓库）
+gate="$root/engine/scripts/precommit_content_gate.py"
+if [ ! -f "$gate" ]; then
+  echo "[pre-commit] 未找到 engine/scripts/precommit_content_gate.py，已禁止提交。" >&2
+  exit 1
+fi
+if ! "$py" "$gate"; then
+  echo "[pre-commit] 提交前内容硬门禁未通过，已禁止提交。" >&2
+  exit 1
+fi
+
 exit 0
