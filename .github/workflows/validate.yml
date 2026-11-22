@@ -470,7 +470,7 @@ jobs:
       # 覆盖率报告留痕（W2 / 2.8）：上传机读结果，供跨月对比与人工审查。
       - name: 上传覆盖率报告
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: coverage-gate
           path: coverage-gate.json
