@@ -3,7 +3,7 @@
 > **范围**：`task/backfill-ja-sources-6b916f70` worktree（`D:\文档\GitHub\jp-life-work\.worktrees\backfill-ja-sources`）。
 > **基线**：`origin/main = 6d4b7b3`。
 > **触发**：P0-P2 核验残留 ②——7 条日本官方中文页（含新发现 2 条）回溯日文原文。
-> **结论**：**Standards 无 P0/P1；Spec 项闭环**。中文页 7 → 1（余 1 条站点拦截无法核验）。
+> **结论**：**Standards 无 P0/P1；Spec 项闭环**。中文页 7 → 1（余 1 条站点拦截无法核验）；L5 依据充分度告警清除。
 
 ---
 
@@ -44,8 +44,9 @@
 | 不编造 | 重庆领馆页 `itpr_ja` 返回 Not found / 站点拦截 | 保留原中文页 + 标注，标「未能核验」 |
 | 检测无遗漏 | `detect_language` 覆盖 `/zh-CHS/`、`_cn.html` | 新断言通过；新发现 2 条被正确识别 |
 | 报告重新审计 | 4 份报告重走全流程 | `audit_pipeline --status` 21/21；`--gate` 通过 |
+| L5 依据充分度（残留 ④） | 4 份近期复核报告经 `--backfill-l5 --backfill-force` 补录实质 basis | `l5_meta_check --check` 退出码 2 → **0**（无告警） |
 
-**Spec 结论：残留 ② 闭环。**
+**Spec 结论：残留 ② 与 ④ 闭环。**
 
 ---
 
