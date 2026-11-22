@@ -410,6 +410,30 @@ python engine/tools/automation_status.py activity --threshold 45               #
 `--phase` 可选 `content-update` / `maintenance` / `html-sync` / `info-quality` /
 `audit-sampling` / `scheduled-report-tasks` / `pipeline`（端到端流水线编排心跳）。
 
+### local_ci.py — 本地等价 CI 入口（本地优先 · 远程兜底）
+
+只读编排层：把 `.github/workflows/` 中本地可跑的检查类步骤收敛为一条命令，
+作为 GitHub Actions 不可用（额度 / 网络 / runner）时的本地兜底。**不新增门禁项**，
+判定口径仍归各工具。
+
+```bash
+python engine/tools/local_ci.py run                    # 默认 33 项只读检查（人读汇总）
+python engine/tools/local_ci.py run --json             # 结果 JSON 到 stdout
+python engine/tools/local_ci.py run --markdown         # Markdown 摘要
+python engine/tools/local_ci.py run --only validate,registry,gen-gate
+python engine/tools/local_ci.py run --skip vocab-near,fact-card
+python engine/tools/local_ci.py run --with-tests --with-coverage   # 追加单元测试 / 覆盖率
+python engine/tools/local_ci.py run --emit engine/report-audits/local-ci/local-ci-status.json
+python engine/tools/local_ci.py list                   # 列检查项 / 排除项 / 仅远程
+```
+
+- **退出码**：`0` 全过 / `1` 有失败 / `2` 仅警告（含参数错误）。
+- **确定性**：结果 JSON 无时间戳 / 耗时，同分支同工作区两次运行逐字节一致。
+- **只读边界**：不含 `--apply/--write/--submit/--sync/--rebind/--external` 等回写开关；
+  `audit_check --all`、`auto_verify`、`cleanup --check` 因非只读或自伤被排除（`list` 可见）。
+- **仅远程**：链接可达率探测、自动开 PR / webhook、GitHub runner 环境与服务端保护。
+- 规格 / 工单 / 评审：`docs/toolchain/{specs,tickets,reviews}/local-ci-entry*.md`。
+
 ## 决策支持流程（DecisionSupport-Guard）
 
 00 模块的决策支持件套与 `info_quality_check` 升级构成「刚优化的流程」，各阶段复用同一套工具：
