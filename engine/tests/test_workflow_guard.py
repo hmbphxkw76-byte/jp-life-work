@@ -487,6 +487,7 @@ class TestPRTransport(TempRepoCase):
         task = self.repo.tasks()[0]
         self.assertEqual(task["status"], "merged")
         self.assertEqual(task["merged_sha"], "a" * 40)
+        self.assertEqual(task["pr"], "7")
         kinds = [c[:2] for c in json.loads(calls.read_text(encoding="utf-8"))]
         self.assertIn(["pr", "create"], kinds)
         self.assertIn(["pr", "view"], kinds)
