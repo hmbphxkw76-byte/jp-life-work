@@ -1,4 +1,5 @@
 # HTML 同步：报告 md 源变更时自动重新生成同名自包含 HTML（含跨月对比高亮）、重建汇总页并提交。
+# 发布前先过「生成前信息核验（闸0）+ 无法核实内容硬门禁」，未通过不得生成 / 发布。
 name: html-sync
 
 on:
@@ -52,6 +53,10 @@ jobs:
 
       - name: 安装依赖
         run: pip install -r requirements.txt
+
+      # 发布前信息核验（闸0 + 无法核实内容硬门禁）：未通过（P0/P1 或无法核实内容）
+      # 即失败，不再生成 / 发布 HTML，确保未核验信息不得呈现在报告中。
+      - uses: ./.github/actions/content-verify
 
       # md2html 在构建期预渲染跨月对比高亮并写入报告页，报告变更后必须同步重建。
       - name: 重新生成报告 HTML（md2html.py）

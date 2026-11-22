@@ -1,0 +1,40 @@
+name: content-verify
+description: >
+  生成 / 发布前信息核验（闸0 生成前信息核验 + 无法核实内容硬门禁）。
+  在报告生成、HTML 生成物发布之前调用；存在 P0/P1 或无法核实内容即失败，
+  阻断生成与发布，确保未核验信息不得进入报告。
+  → 详见 docs/信息生产全链路执行规范.md 闸0 与 docs/CI.md。
+runs:
+  using: composite
+  steps:
+    - name: 生成前信息核验（闸0）
+      shell: bash
+      run: |
+        set -euo pipefail
+        PY=python
+        command -v "$PY" >/dev/null 2>&1 || PY=python3
+        set +e
+        "$PY" engine/tools/generation_gate.py --all
+        code=$?
+        set -e
+        if [ "$code" -ne 0 ] && [ "$code" -ne 2 ]; then
+          echo "::error::生成前信息核验（闸0）存在 P0/P1，阻断报告生成 / 发布（退出码 $code）"
+          exit "$code"
+        fi
+        echo "生成前信息核验（闸0）通过（退出码 $code；2=仅 P2 提示，不阻断）"
+
+    - name: 无法核实内容硬门禁
+      shell: bash
+      run: |
+        set -euo pipefail
+        PY=python
+        command -v "$PY" >/dev/null 2>&1 || PY=python3
+        set +e
+        "$PY" engine/tools/verified_content_gate.py --all
+        code=$?
+        set -e
+        if [ "$code" -ne 0 ]; then
+          echo "::error::存在无法核实内容（待核实 / 未核实 / 需核实原文 / 待核验 / 待补来源），阻断生成 / 发布（退出码 $code）"
+          exit "$code"
+        fi
+        echo "无法核实内容硬门禁通过（内容层零命中）"

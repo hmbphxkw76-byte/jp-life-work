@@ -1,0 +1,16 @@
+# Dependabot 版本更新（public 仓库免费）：
+#   - github-actions：actions/checkout / setup-python / cache / upload-artifact 等
+#   - pip：requirements.txt / requirements-dev.txt
+# 安全更新由仓库设置 dependabot_security_updates 承载（自动、无需本文件）。
+version: 2
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
+  - package-ecosystem: "pip"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
