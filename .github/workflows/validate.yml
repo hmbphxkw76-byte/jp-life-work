@@ -269,6 +269,18 @@ jobs:
           fi
           echo "stage_gate_check.py 退出码 ${code:-0}（2=仅 P2 提示，不阻断）"
 
+      # 生成前信息核验（闸0）：复用闸1-3 / 来源语言 / 无法核实内容 / 来源 schema 内核，
+      # 对全部主题判定「可生成 / 阻断」；与 pre-commit 内容硬门禁、推送后内容门禁构成三道卡点。
+      - name: 生成前信息核验（闸0）
+        run: |
+          python engine/tools/generation_gate.py --all || code=$?
+          code=${code:-0}
+          if [ "$code" -ne 0 ] && [ "$code" -ne 2 ]; then
+            echo "::error::生成前信息核验存在 P0/P1（信息输入不满足可生成条件），阻断合并（退出码 $code）"
+            exit 1
+          fi
+          echo "generation_gate.py 退出码 $code（2=仅 P2 提示，不阻断）"
+
       # ── 决策支持 / 信息质量流程复用（DecisionSupport-Guard + InfoQuality-Guard）──
       # 以下为「刚优化的流程」在 PR 门禁阶段的复用：结构化免责声明、空模块占比、
       # 跨报告事实重复率、事实卡片五字段与指针、待核实闭环、个人财务模型一致性。
