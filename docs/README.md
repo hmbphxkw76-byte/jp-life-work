@@ -68,3 +68,4 @@
 | v2.11 | 2026-11-22 | 来源质量 P0-P2 修复 | `source_normalize` 增受控分组词表 / 独立性 / 权威等级 / 语言判定；`extract_year` 修复 URL 数字误判；`source_check` 增 E7/E8/E9；`verified_content_gate` 默认语义与 CI 对齐；台账 append-only 回归；工具 48 / 类型 12 / 测试 1127 / 工作流 8 |
 | v2.12 | 2026-11-22 | 咨询面板门禁一致性 | `consulting_panel` 核验清单不再输出无法核实标记（未完成项转 source-backlog 第三节）；面板测试改密闭；工具 48 / 类型 12 / 测试 1128 / 工作流 8 |
 | v2.13 | 2026-11-22 | 生成前信息核验（闸0） | 新增 `engine/tools/generation_gate.py` 与 `engine/scripts/precommit_content_gate.py`（提交前内容硬门禁）；`validate.yml` 增闸0 步骤（31 → 32）；pre-commit 钩子接入；提示词基座增阶段4 前置步骤；工具 49 / 类型 12 / 测试 1146 / 工作流 8 |
+| v2.14 | 2026-11-22 | 本地等价 CI 入口 | 新增 `engine/tools/local_ci.py`（只读编排层：33 项本地检查 + 确定性 JSON，退出码 0/1/2）与 `engine/tests/test_local_ci.py`（21 项）；结果目录入 `.gitignore`；工具 50 / 类型 12 / 测试 1167 / 工作流 8 |

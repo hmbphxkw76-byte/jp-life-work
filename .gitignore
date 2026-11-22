@@ -46,6 +46,9 @@ coverage-gate.json
 # 信息质量缓存（audit_check.py IQ_CACHE 运行期写回，可再生；不入库）
 engine/report-audits/info-quality/findings-by-path.json
 
+# 本地等价 CI 结果（local_ci.py 生成，可再生；不入库）
+engine/report-audits/local-ci/
+
 # 本地 worktree 与执行计划工作区（不入库）
 .worktrees/
 .superpowers/
