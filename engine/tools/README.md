@@ -13,7 +13,7 @@ pip install -r requirements.txt   # markdown
 python -m unittest discover -s engine/tests -q   # 单元测试（以 docs/CI.md 与实测为准）
 ```
 
-> 测试计数：1171 项（`python -m unittest discover -s engine/tests` 实测，与 `docs/CI.md` 六节一致；由 `engine/tests/test_arch_guard.py` 双向锁定）。
+> 测试计数：1172 项（`python -m unittest discover -s engine/tests` 实测，与 `docs/CI.md` 六节一致；由 `engine/tests/test_arch_guard.py` 双向锁定）。
 
 ## 退出码约定（校验类工具统一）
 
@@ -531,3 +531,4 @@ python engine/tools/local_ci.py list                   # 列检查项 / 排除�
 | v1.15 | 2026-11-22 | 生成前信息核验（闸0） | 新增 `generation_gate.py`（复用闸1-3 / 来源语言 / 无法核实内容 / 来源 schema 内核）；接入 `validate.yml` 闸0 步骤与提示词基座阶段4 前置；工具 48 → 49、测试计数 1128 → 1146 |
 | v1.16 | 2026-11-22 | 本地等价 CI 入口 | 新增 `local_ci.py`（只读编排层：33 项本地检查 + 确定性 JSON，退出码 0/1/2）；结果目录 `engine/report-audits/local-ci/` 入 `.gitignore`；工具 49 → 50、测试计数 1146 → 1167 |
 | v1.17 | 2026-11-22 | 合并 PR 化 | `workflow_guard merge` 新增 `--transport auto\|direct\|pr` + `--wait-timeout`（PR 传输：推分支 → 建 PR → 等检查 → 合并）与 4 项 PR 传输测试；测试计数 1167 → 1171 |
+| v1.18 | 2026-11-22 | task stop 信任 merged 登记 | `task stop` 对已登记 `merged`（含 `merged_sha`）的任务跳过祖先检查（PR 合并远端分支已删 / 本地 base 滞后时不误报）；测试计数 1171 → 1172 |

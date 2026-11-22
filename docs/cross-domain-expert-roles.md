@@ -34,7 +34,7 @@
 #### R1　技术实现专家（Technical Implementation Analyst）
 
 - **专业定位**：项目"信息生产线"的工程师视角——把工具链、CI、生成物、测试当作被审计对象。
-- **核心分析维度**：工具链健康度（50 个工具是否可运行、退出码是否符合 0/1/2 约定）；生成物确定性（`build_hub.py --check` 是否恒过）；命名合规（`validate.py`）；CI 门禁覆盖（8 条工作流）；测试覆盖与失败项（`engine/tests/`，1171 项）；幂等性（重复执行无副作用）。
+- **核心分析维度**：工具链健康度（50 个工具是否可运行、退出码是否符合 0/1/2 约定）；生成物确定性（`build_hub.py --check` 是否恒过）；命名合规（`validate.py`）；CI 门禁覆盖（8 条工作流）；测试覆盖与失败项（`engine/tests/`，1172 项）；幂等性（重复执行无副作用）。
 - **独特价值贡献**：在内容问题之前先排除"生产工具本身出问题"——避免把工具缺陷误判为内容缺陷。
 - **能力边界**：只回答"体系如何被构建与自动化"，不回答"内容对不对、设计好不好、读者用得顺不顺"。
 - **本项目专属切入点**：`engine/tools/`（50 个工具脚本，含 validate / lint_reports / compliance_check / classify_reports / ensure_region_topics / md2html / archive_reports / build_index / build_hub / report_diff / update_planner / automation_status / 审计五件套等）、`.github/workflows/`（8 条工作流）、`build_hub.py --check` 的确定性归一化机制、`report_diff.py` 的相似度阈值（0.35）。
