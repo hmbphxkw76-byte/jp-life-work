@@ -2,7 +2,7 @@
 
 > **免责声明**：本报告为信息整理与条件化建议，不构成法律意见或税务意见；重大决策请咨询执业法律 / 税务专业人士。
 
-> **已审计** ✅ 审计编号 `AUD-202611-008`｜终审通过：2026-11-21｜内容指纹 `786fde68c77ee20db06`｜依据《审计报告标准化管理体系》v1.4
+> **已审计** ✅ 审计编号 `AUD-202611-001`｜终审通过：2026-11-22｜内容指纹 `86b81e7f4f3a0fe2f01`｜依据《审计报告标准化管理体系》v1.4
 
 > **版本**：v2026.11.17（2026-11 月度核验）　**数据基准日**：2026-11-17
 > **主题类型**：政策法规解读型（policy-analysis）
@@ -434,7 +434,7 @@
 7. ISA「家族滞在」[https://www.moj.go.jp/isa/applications/status/dependent](https://www.moj.go.jp/isa/applications/status/dependent)；「家族滞在」資格外活動許可 [https://www.moj.go.jp/isa/applications/procedures/nyuukokukanri07_00004.html](https://www.moj.go.jp/isa/applications/procedures/nyuukokukanri07_00004.html)（2026-11 核对）
 8. ISA「技術・人文知識・国際業務」[https://www.moj.go.jp/isa/applications/status/gijinkoku.html](https://www.moj.go.jp/isa/applications/status/gijinkoku.html)；出租车·巴士日语要求 [https://www.moj.go.jp/isa/03_00198.html](https://www.moj.go.jp/isa/03_00198.html)；1 号支援体制要件改正 [https://www.moj.go.jp/isa/10_00263.html](https://www.moj.go.jp/isa/10_00263.html)；在留許可手数料改定 [https://www.moj.go.jp/isa/01_00644.html](https://www.moj.go.jp/isa/01_00644.html)；手数料減免 [https://www.moj.go.jp/isa/10_00273.html](https://www.moj.go.jp/isa/10_00273.html)
 9. ISA 第 16 回有識者会議 [https://www.moj.go.jp/isa/03_00207.html](https://www.moj.go.jp/isa/03_00207.html)；令和 6 年入管法等改正 [https://www.moj.go.jp/isa/05_00045.html](https://www.moj.go.jp/isa/05_00045.html)
-10. ssw.go.jp 分野清单（中文）[https://www.ssw.go.jp/cn/about/visa/](https://www.ssw.go.jp/cn/about/visa/)；自动车运送业中文页 [https://www.ssw.go.jp/cn/about/visa/automobile_transportation_business_1/](https://www.ssw.go.jp/cn/about/visa/automobile_transportation_business_1/)（2026-11 核对）
+10. ssw.go.jp 分野清单（中文）[https://www.ssw.go.jp/cn/about/visa/](https://www.ssw.go.jp/cn/about/visa/)；自动车运送业中文页 [https://www.ssw.go.jp/cn/about/visa/automobile_transportation_business_1/](https://www.ssw.go.jp/cn/about/visa/automobile_transportation_business_1/)（2026-11 核对；中文页，建议回溯日文原文）
 11. 外务省领馆费用专页 [https://www.shanghai.cn.emb-japan.go.jp/itpr_ja/11_000001_00633.html](https://www.shanghai.cn.emb-japan.go.jp/itpr_ja/11_000001_00633.html)（2026-11 核对）
 12. 国土交通省 [https://www.mlit.go.jp](https://www.mlit.go.jp)；e-Gov 法令检索 [https://laws.e-gov.go.jp](https://laws.e-gov.go.jp)（2026-11 核对）
 

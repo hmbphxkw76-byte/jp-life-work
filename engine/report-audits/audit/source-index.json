@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "total_entries": 383,
+  "total_entries": 384,
   "reports": [
     {
       "report": "00-decision-hub/reports/2026-11-decision-hub.md",
@@ -23,6 +23,9 @@
           "year": "2026",
           "marker": "",
           "group": "### ① 日本政府官方一手",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -32,6 +35,9 @@
           "year": "2024",
           "marker": "",
           "group": "### ① 日本政府官方一手",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -41,6 +47,9 @@
           "year": "2026",
           "marker": "",
           "group": "### ① 日本政府官方一手",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -50,6 +59,9 @@
           "year": "2026",
           "marker": "",
           "group": "### ① 日本政府官方一手",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -59,15 +71,21 @@
           "year": "2026",
           "marker": "",
           "group": "### ① 日本政府官方一手",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
         {
           "text": "6. [ISA JLPT 受験検討者向け JFT-Basic 活用のお知らせ](https://www.moj.go.jp/isa/content/001471906.pdf) — 2026-10-05",
           "url": "https://www.moj.go.jp/isa/content/001471906.pdf",
-          "year": "1906",
+          "year": "2026",
           "marker": "",
           "group": "### ① 日本政府官方一手",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -77,6 +95,9 @@
           "year": "2026",
           "marker": "",
           "group": "### ① 日本政府官方一手",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -86,6 +107,9 @@
           "year": "2026",
           "marker": "",
           "group": "### ① 日本政府官方一手",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -95,6 +119,9 @@
           "year": "2026",
           "marker": "",
           "group": "### ① 日本政府官方一手",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -104,6 +131,9 @@
           "year": "2026",
           "marker": "",
           "group": "### ① 日本政府官方一手",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -113,6 +143,9 @@
           "year": "2026",
           "marker": "",
           "group": "### ① 日本政府官方一手",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -122,6 +155,9 @@
           "year": "2026",
           "marker": "",
           "group": "### ① 日本政府官方一手",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -131,6 +167,9 @@
           "year": "2026",
           "marker": "",
           "group": "### ① 日本政府官方一手",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -140,6 +179,9 @@
           "year": "2026",
           "marker": "",
           "group": "### ① 日本政府官方一手",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -149,6 +191,9 @@
           "year": "2026",
           "marker": "",
           "group": "### ① 日本政府官方一手",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -158,15 +203,21 @@
           "year": "2024",
           "marker": "",
           "group": "### ① 日本政府官方一手",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
         {
           "text": "17. [MLIT Q&A PDF](https://www.mlit.go.jp/jidosha/content/002004573.pdf) — 2026-06",
           "url": "https://www.mlit.go.jp/jidosha/content/002004573.pdf",
-          "year": "2004",
+          "year": "2026",
           "marker": "",
           "group": "### ① 日本政府官方一手",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -176,6 +227,9 @@
           "year": "2025",
           "marker": "",
           "group": "### ① 日本政府官方一手",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -185,6 +239,9 @@
           "year": "2026",
           "marker": "",
           "group": "### ① 日本政府官方一手",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -194,6 +251,9 @@
           "year": "2026",
           "marker": "",
           "group": "### ① 日本政府官方一手",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -203,6 +263,9 @@
           "year": "2025",
           "marker": "",
           "group": "### ① 日本政府官方一手",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -212,6 +275,9 @@
           "year": "2025",
           "marker": "",
           "group": "### ① 日本政府官方一手",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -221,6 +287,9 @@
           "year": "2030",
           "marker": "",
           "group": "### ① 日本政府官方一手",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -230,6 +299,9 @@
           "year": "2022",
           "marker": "",
           "group": "### ① 日本政府官方一手",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -239,8 +311,11 @@
           "year": "2026",
           "marker": "",
           "group": "### ① 日本政府官方一手",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
-          "independence": "独立"
+          "independence": "非独立"
         },
         {
           "text": "26. [MLIT 标准运賃实态调查](https://www.mlit.go.jp/report/press/jidosha04_hh_000361.html) — 2026",
@@ -248,8 +323,11 @@
           "year": "2026",
           "marker": "",
           "group": "### ① 日本政府官方一手",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
-          "independence": "独立"
+          "independence": "非独立"
         },
         {
           "text": "27. [MLIT 再配送率调查](https://www.mlit.go.jp/report/press/tokatsu01_hh_001025.html) — 2026",
@@ -257,8 +335,11 @@
           "year": "2026",
           "marker": "",
           "group": "### ① 日本政府官方一手",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
-          "independence": "独立"
+          "independence": "非独立"
         },
         {
           "text": "28. [MLIT 大臣要请（2025-04-08）](https://www.mlit.go.jp/page/kanbo01_hy_010172.html) — 2025",
@@ -266,6 +347,9 @@
           "year": "2025",
           "marker": "",
           "group": "### ① 日本政府官方一手",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -275,6 +359,9 @@
           "year": "2026",
           "marker": "",
           "group": "### ① 日本政府官方一手",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -284,8 +371,11 @@
           "year": "2023",
           "marker": "",
           "group": "### ① 日本政府官方一手",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
-          "independence": "独立"
+          "independence": "非独立"
         },
         {
           "text": "31. [MLIT 道运法施行规则改正](https://www.mlit.go.jp/report/press/jidosha02_hh_000561.html) — 2023",
@@ -293,8 +383,11 @@
           "year": "2023",
           "marker": "",
           "group": "### ① 日本政府官方一手",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
-          "independence": "独立"
+          "independence": "非独立"
         },
         {
           "text": "32. [MLIT 公道走行安全指南](https://www.mlit.go.jp/jidosha/jidosha_tk7_000043.html) — 2025",
@@ -302,6 +395,9 @@
           "year": "2025",
           "marker": "",
           "group": "### ① 日本政府官方一手",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -311,6 +407,9 @@
           "year": "2026",
           "marker": "",
           "group": "### ① 日本政府官方一手",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -320,6 +419,9 @@
           "year": "2024",
           "marker": "",
           "group": "### ① 日本政府官方一手",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -329,6 +431,9 @@
           "year": "2026",
           "marker": "",
           "group": "### ① 日本政府官方一手",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -338,6 +443,9 @@
           "year": "2026",
           "marker": "",
           "group": "### ① 日本政府官方一手",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -347,6 +455,9 @@
           "year": "2026",
           "marker": "",
           "group": "### ① 日本政府官方一手",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -356,6 +467,9 @@
           "year": "2026",
           "marker": "",
           "group": "### ① 日本政府官方一手",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -365,6 +479,9 @@
           "year": "2026",
           "marker": "",
           "group": "### ① 日本政府官方一手",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -374,6 +491,9 @@
           "year": "2026",
           "marker": "",
           "group": "### ① 日本政府官方一手",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -383,15 +503,21 @@
           "year": "2026",
           "marker": "",
           "group": "### ① 日本政府官方一手",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
         {
           "text": "42. [年金机构 厚生年金料率](https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20150515-01.html) — 2026",
           "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20150515-01.html",
-          "year": "2015",
+          "year": "2026",
           "marker": "",
           "group": "### ① 日本政府官方一手",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -401,6 +527,9 @@
           "year": "2026",
           "marker": "",
           "group": "### ① 日本政府官方一手",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -410,6 +539,9 @@
           "year": "2026",
           "marker": "",
           "group": "### ① 日本政府官方一手",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -419,6 +551,9 @@
           "year": "2025",
           "marker": "",
           "group": "### ① 日本政府官方一手",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -428,6 +563,9 @@
           "year": "2026",
           "marker": "",
           "group": "### ① 日本政府官方一手",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -437,6 +575,9 @@
           "year": "2026",
           "marker": "",
           "group": "### ① 日本政府官方一手",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -446,6 +587,9 @@
           "year": "2026",
           "marker": "",
           "group": "### ① 日本政府官方一手",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -455,6 +599,9 @@
           "year": "2025",
           "marker": "",
           "group": "### ① 日本政府官方一手",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -464,6 +611,9 @@
           "year": "2026",
           "marker": "",
           "group": "### ① 日本政府官方一手",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -473,6 +623,9 @@
           "year": "2023",
           "marker": "",
           "group": "### ① 日本政府官方一手",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -482,6 +635,9 @@
           "year": "2023",
           "marker": "",
           "group": "### ① 日本政府官方一手",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -491,6 +647,9 @@
           "year": "2023",
           "marker": "",
           "group": "### ① 日本政府官方一手",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -500,8 +659,11 @@
           "year": "2025",
           "marker": "",
           "group": "### ① 日本政府官方一手",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
-          "independence": "独立"
+          "independence": "非独立"
         },
         {
           "text": "55. [ClassNK 考试门户（考场 / 样本题）](https://sswt-portal.classnk.or.jp/area?tab=3) — 2026",
@@ -509,6 +671,9 @@
           "year": "2026",
           "marker": "",
           "group": "### ② 权威组织 / 考试实施机构",
+          "group_canonical": "权威机构",
+          "authority_grade": "B",
+          "language": "ja",
           "relay_level": "1",
           "independence": "非独立"
         },
@@ -518,8 +683,11 @@
           "year": "2026",
           "marker": "改定",
           "group": "### ② 权威组织 / 考试实施机构",
+          "group_canonical": "权威机构",
+          "authority_grade": "B",
+          "language": "ja",
           "relay_level": "1",
-          "independence": "独立"
+          "independence": "非独立"
         },
         {
           "text": "57. [ClassNK Web Portal ニュース一覧](https://sswt-portal.classnk.or.jp/news/) — 最终更新 2026-10-15",
@@ -527,8 +695,11 @@
           "year": "2026",
           "marker": "最终更新",
           "group": "### ② 权威组织 / 考试实施机构",
+          "group_canonical": "权威机构",
+          "authority_grade": "B",
+          "language": "ja",
           "relay_level": "1",
-          "independence": "独立"
+          "independence": "非独立"
         },
         {
           "text": "58. [ClassNK 月报 2026 年 9 月分（news/29）](https://sswt-portal.classnk.or.jp/news/29) — 2026-10-15",
@@ -536,15 +707,21 @@
           "year": "2026",
           "marker": "",
           "group": "### ② 权威组织 / 考试实施机构",
+          "group_canonical": "权威机构",
+          "authority_grade": "B",
+          "language": "ja",
           "relay_level": "1",
-          "independence": "独立"
+          "independence": "非独立"
         },
         {
           "text": "59. [JFT-Basic 实施报告 PDF](https://www.jpf.go.jp/jft-basic/report/pdf/2025-12-202601.pdf) — 2026",
           "url": "https://www.jpf.go.jp/jft-basic/report/pdf/2025-12-202601.pdf",
-          "year": "2025",
+          "year": "2026",
           "marker": "",
           "group": "### ② 权威组织 / 考试实施机构",
+          "group_canonical": "权威机构",
+          "authority_grade": "B",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -554,6 +731,9 @@
           "year": "2026",
           "marker": "",
           "group": "### ② 权威组织 / 考试实施机构",
+          "group_canonical": "权威机构",
+          "authority_grade": "B",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -563,6 +743,9 @@
           "year": "2026",
           "marker": "",
           "group": "### ② 权威组织 / 考试实施机构",
+          "group_canonical": "权威机构",
+          "authority_grade": "B",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -572,6 +755,9 @@
           "year": "2026",
           "marker": "",
           "group": "### ② 权威组织 / 考试实施机构",
+          "group_canonical": "权威机构",
+          "authority_grade": "B",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -581,6 +767,9 @@
           "year": "2026",
           "marker": "",
           "group": "### ② 权威组织 / 考试实施机构",
+          "group_canonical": "权威机构",
+          "authority_grade": "B",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -590,6 +779,9 @@
           "year": "2024",
           "marker": "",
           "group": "### ③ 行业专业机构",
+          "group_canonical": "权威机构",
+          "authority_grade": "B",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -599,6 +791,9 @@
           "year": "2026",
           "marker": "",
           "group": "### ③ 行业专业机构",
+          "group_canonical": "权威机构",
+          "authority_grade": "B",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -608,6 +803,9 @@
           "year": "2025",
           "marker": "",
           "group": "### ③ 行业专业机构",
+          "group_canonical": "权威机构",
+          "authority_grade": "B",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -617,6 +815,9 @@
           "year": "2025",
           "marker": "",
           "group": "### ③ 行业专业机构",
+          "group_canonical": "权威机构",
+          "authority_grade": "B",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -626,15 +827,21 @@
           "year": "2026",
           "marker": "",
           "group": "### ③ 行业专业机构",
+          "group_canonical": "权威机构",
+          "authority_grade": "B",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
         {
           "text": "69. [東京商工リサーチ 道路货运倒产](https://www.tsr-net.co.jp/data/detail/1202864_1527.html) — 2026",
           "url": "https://www.tsr-net.co.jp/data/detail/1202864_1527.html",
-          "year": "2028",
+          "year": "2026",
           "marker": "",
           "group": "### ③ 行业专业机构",
+          "group_canonical": "权威机构",
+          "authority_grade": "B",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -644,8 +851,11 @@
           "year": "2026",
           "marker": "",
           "group": "### ③ 行业专业机构",
+          "group_canonical": "权威机构",
+          "authority_grade": "B",
+          "language": "ja",
           "relay_level": "1",
-          "independence": "独立"
+          "independence": "非独立"
         },
         {
           "text": "71. [大和总研 SPPI 报告（引日银）](https://www.dlri.co.jp/files/macro/666907.pdf) — 2026",
@@ -653,6 +863,9 @@
           "year": "2026",
           "marker": "",
           "group": "### ③ 行业专业机构",
+          "group_canonical": "权威机构",
+          "authority_grade": "B",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -662,6 +875,9 @@
           "year": "2026",
           "marker": "",
           "group": "### ③ 行业专业机构",
+          "group_canonical": "权威机构",
+          "authority_grade": "B",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -671,6 +887,9 @@
           "year": "2020",
           "marker": "",
           "group": "### ③ 行业专业机构",
+          "group_canonical": "权威机构",
+          "authority_grade": "B",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -680,6 +899,9 @@
           "year": "2020",
           "marker": "",
           "group": "### ③ 行业专业机构",
+          "group_canonical": "权威机构",
+          "authority_grade": "B",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -689,6 +911,9 @@
           "year": "2026",
           "marker": "",
           "group": "### ④ 媒体 / 行业媒体 / 企业 IR",
+          "group_canonical": "媒体",
+          "authority_grade": "C",
+          "language": "ja",
           "relay_level": "2",
           "independence": "非独立"
         },
@@ -698,6 +923,9 @@
           "year": "2026",
           "marker": "",
           "group": "### ④ 媒体 / 行业媒体 / 企业 IR",
+          "group_canonical": "媒体",
+          "authority_grade": "C",
+          "language": "ja",
           "relay_level": "1",
           "independence": "非独立"
         },
@@ -707,6 +935,9 @@
           "year": "2026",
           "marker": "",
           "group": "### ④ 媒体 / 行业媒体 / 企业 IR",
+          "group_canonical": "媒体",
+          "authority_grade": "C",
+          "language": "ja",
           "relay_level": "1",
           "independence": "非独立"
         },
@@ -716,6 +947,9 @@
           "year": "2026",
           "marker": "",
           "group": "### ④ 媒体 / 行业媒体 / 企业 IR",
+          "group_canonical": "媒体",
+          "authority_grade": "C",
+          "language": "ja",
           "relay_level": "2",
           "independence": "非独立"
         },
@@ -725,6 +959,9 @@
           "year": "2026",
           "marker": "",
           "group": "### ④ 媒体 / 行业媒体 / 企业 IR",
+          "group_canonical": "媒体",
+          "authority_grade": "C",
+          "language": "ja",
           "relay_level": "1",
           "independence": "非独立"
         },
@@ -734,6 +971,9 @@
           "year": "2027",
           "marker": "",
           "group": "### ④ 媒体 / 行业媒体 / 企业 IR",
+          "group_canonical": "媒体",
+          "authority_grade": "C",
+          "language": "ja",
           "relay_level": "1",
           "independence": "非独立"
         },
@@ -743,6 +983,9 @@
           "year": "2025",
           "marker": "",
           "group": "### ④ 媒体 / 行业媒体 / 企业 IR",
+          "group_canonical": "媒体",
+          "authority_grade": "C",
+          "language": "ja",
           "relay_level": "1",
           "independence": "非独立"
         },
@@ -752,6 +995,9 @@
           "year": "2026",
           "marker": "改定",
           "group": "### ④ 媒体 / 行业媒体 / 企业 IR",
+          "group_canonical": "媒体",
+          "authority_grade": "C",
+          "language": "ja",
           "relay_level": "1",
           "independence": "非独立"
         },
@@ -761,6 +1007,9 @@
           "year": "2026",
           "marker": "",
           "group": "### ④ 媒体 / 行业媒体 / 企业 IR",
+          "group_canonical": "媒体",
+          "authority_grade": "C",
+          "language": "ja",
           "relay_level": "1",
           "independence": "非独立"
         },
@@ -770,6 +1019,9 @@
           "year": "2024",
           "marker": "改定",
           "group": "### ④ 媒体 / 行业媒体 / 企业 IR",
+          "group_canonical": "媒体",
+          "authority_grade": "C",
+          "language": "en",
           "relay_level": "1",
           "independence": "非独立"
         },
@@ -779,6 +1031,9 @@
           "year": "2026",
           "marker": "",
           "group": "### ④ 媒体 / 行业媒体 / 企业 IR",
+          "group_canonical": "媒体",
+          "authority_grade": "C",
+          "language": "ja",
           "relay_level": "1",
           "independence": "非独立"
         },
@@ -788,6 +1043,9 @@
           "year": "2026",
           "marker": "",
           "group": "### ④ 媒体 / 行业媒体 / 企业 IR",
+          "group_canonical": "媒体",
+          "authority_grade": "C",
+          "language": "ja",
           "relay_level": "1",
           "independence": "非独立"
         },
@@ -797,6 +1055,9 @@
           "year": "2026",
           "marker": "",
           "group": "### ④ 媒体 / 行业媒体 / 企业 IR",
+          "group_canonical": "媒体",
+          "authority_grade": "C",
+          "language": "ja",
           "relay_level": "1",
           "independence": "非独立"
         },
@@ -806,6 +1067,9 @@
           "year": "2026",
           "marker": "",
           "group": "### ④ 媒体 / 行业媒体 / 企业 IR",
+          "group_canonical": "媒体",
+          "authority_grade": "C",
+          "language": "ja",
           "relay_level": "1",
           "independence": "非独立"
         },
@@ -815,6 +1079,9 @@
           "year": "2026",
           "marker": "",
           "group": "### ④ 媒体 / 行业媒体 / 企业 IR",
+          "group_canonical": "媒体",
+          "authority_grade": "C",
+          "language": "ja",
           "relay_level": "1",
           "independence": "非独立"
         },
@@ -824,6 +1091,9 @@
           "year": "2026",
           "marker": "",
           "group": "### ④ 媒体 / 行业媒体 / 企业 IR",
+          "group_canonical": "媒体",
+          "authority_grade": "C",
+          "language": "ja",
           "relay_level": "1",
           "independence": "非独立"
         },
@@ -833,6 +1103,9 @@
           "year": "2026",
           "marker": "",
           "group": "### ④ 媒体 / 行业媒体 / 企业 IR",
+          "group_canonical": "媒体",
+          "authority_grade": "C",
+          "language": "ja",
           "relay_level": "1",
           "independence": "非独立"
         },
@@ -842,6 +1115,9 @@
           "year": "2026",
           "marker": "",
           "group": "### ④ 媒体 / 行业媒体 / 企业 IR",
+          "group_canonical": "媒体",
+          "authority_grade": "C",
+          "language": "ja",
           "relay_level": "1",
           "independence": "非独立"
         },
@@ -851,6 +1127,9 @@
           "year": "2026",
           "marker": "",
           "group": "### ④ 媒体 / 行业媒体 / 企业 IR",
+          "group_canonical": "媒体",
+          "authority_grade": "C",
+          "language": "ja",
           "relay_level": "1",
           "independence": "非独立"
         },
@@ -860,6 +1139,9 @@
           "year": "2025",
           "marker": "",
           "group": "### ④ 媒体 / 行业媒体 / 企业 IR",
+          "group_canonical": "媒体",
+          "authority_grade": "C",
+          "language": "ja",
           "relay_level": "1",
           "independence": "非独立"
         },
@@ -869,8 +1151,11 @@
           "year": "2026",
           "marker": "",
           "group": "### ⑤ 平台抽样 / 行情",
+          "group_canonical": "平台抽样",
+          "authority_grade": "D",
+          "language": "ja",
           "relay_level": "1",
-          "independence": "不明"
+          "independence": "非独立"
         },
         {
           "text": "102. [Mintoku Work 特定技能求人](https://mintoku.work/?specific_skills_industry=15) — 2026【样本】",
@@ -878,8 +1163,11 @@
           "year": "2026",
           "marker": "",
           "group": "### ⑤ 平台抽样 / 行情",
+          "group_canonical": "平台抽样",
+          "authority_grade": "D",
+          "language": "ja",
           "relay_level": "1",
-          "independence": "不明"
+          "independence": "非独立"
         },
         {
           "text": "103. [Mintoku Work JOB B00888](https://mintoku.work/work/B00888) — 2026【已回溯】",
@@ -887,8 +1175,11 @@
           "year": "2026",
           "marker": "",
           "group": "### ⑤ 平台抽样 / 行情",
+          "group_canonical": "平台抽样",
+          "authority_grade": "D",
+          "language": "ja",
           "relay_level": "1",
-          "independence": "不明"
+          "independence": "非独立"
         },
         {
           "text": "104. [genbars 关东求人详情（JOB 10151701）](https://en.genbars.jp/kanto/jobdetail/?id=10151701) — 2026【已回溯】",
@@ -896,8 +1187,11 @@
           "year": "2026",
           "marker": "",
           "group": "### ⑤ 平台抽样 / 行情",
+          "group_canonical": "平台抽样",
+          "authority_grade": "D",
+          "language": "ja",
           "relay_level": "1",
-          "independence": "不明"
+          "independence": "非独立"
         },
         {
           "text": "105. [genbars 中型司机东京求人](https://en.genbars.jp/kw/all/中型ドライバー%20東京%20求人/) — 2026【样本】",
@@ -905,8 +1199,11 @@
           "year": "2026",
           "marker": "",
           "group": "### ⑤ 平台抽样 / 行情",
+          "group_canonical": "平台抽样",
+          "authority_grade": "D",
+          "language": "ja",
           "relay_level": "1",
-          "independence": "不明"
+          "independence": "非独立"
         },
         {
           "text": "106. [engage 西本急送](https://en-gage.net/nishikyu_career/) — 2026【样本】",
@@ -914,8 +1211,11 @@
           "year": "2026",
           "marker": "",
           "group": "### ⑤ 平台抽样 / 行情",
+          "group_canonical": "平台抽样",
+          "authority_grade": "D",
+          "language": "ja",
           "relay_level": "1",
-          "independence": "不明"
+          "independence": "非独立"
         },
         {
           "text": "107. [gojob 大富求人](https://gojob.go.goinc.jp/jobs/Z9S78ZH0) — 2026【样本】",
@@ -923,8 +1223,11 @@
           "year": "2026",
           "marker": "",
           "group": "### ⑤ 平台抽样 / 行情",
+          "group_canonical": "平台抽样",
+          "authority_grade": "D",
+          "language": "ja",
           "relay_level": "1",
-          "independence": "不明"
+          "independence": "非独立"
         },
         {
           "text": "108. [works.aqsh 中越运送](https://works.aqsh.co.jp/jobs/midcareer/15030-04340661) — 2026【已回溯】",
@@ -932,17 +1235,23 @@
           "year": "2026",
           "marker": "",
           "group": "### ⑤ 平台抽样 / 行情",
+          "group_canonical": "平台抽样",
+          "authority_grade": "D",
+          "language": "ja",
           "relay_level": "1",
-          "independence": "不明"
+          "independence": "非独立"
         },
         {
           "text": "109. [ten.1049.cc 中越グループ](https://ten.1049.cc/tp/chuetsu-group/job/21993171/) — 2026【样本】",
           "url": "https://ten.1049.cc/tp/chuetsu-group/job/21993171/",
-          "year": "1993",
+          "year": "2026",
           "marker": "",
           "group": "### ⑤ 平台抽样 / 行情",
+          "group_canonical": "平台抽样",
+          "authority_grade": "D",
+          "language": "ja",
           "relay_level": "1",
-          "independence": "不明"
+          "independence": "非独立"
         },
         {
           "text": "110. [气仙沼中央自动车学校料金](https://www.kesennuma-ds.com/price) — 2026【已核实】",
@@ -950,8 +1259,11 @@
           "year": "2026",
           "marker": "",
           "group": "### ⑤ 平台抽样 / 行情",
+          "group_canonical": "平台抽样",
+          "authority_grade": "D",
+          "language": "ja",
           "relay_level": "1",
-          "independence": "不明"
+          "independence": "独立"
         },
         {
           "text": "111. [阿自马达 DS 大型学费](https://www.iac-ds.co.jp/ajima/driver-license/oogata/) — 2026【已核实】",
@@ -959,8 +1271,11 @@
           "year": "2026",
           "marker": "",
           "group": "### ⑤ 平台抽样 / 行情",
+          "group_canonical": "平台抽样",
+          "authority_grade": "D",
+          "language": "ja",
           "relay_level": "1",
-          "independence": "不明"
+          "independence": "独立"
         },
         {
           "text": "112. [drivey.jp 外免切替合格率（转引警察庁）](https://drivey.jp/blog/gaimen-kirikae-knowledge-test) — 2025–2026",
@@ -968,6 +1283,9 @@
           "year": "2025",
           "marker": "",
           "group": "### ⑤ 平台抽样 / 行情",
+          "group_canonical": "平台抽样",
+          "authority_grade": "D",
+          "language": "ja",
           "relay_level": "2",
           "independence": "非独立"
         },
@@ -977,8 +1295,11 @@
           "year": "2026",
           "marker": "",
           "group": "### ⑤ 平台抽样 / 行情",
+          "group_canonical": "平台抽样",
+          "authority_grade": "D",
+          "language": "ja",
           "relay_level": "1",
-          "independence": "不明"
+          "independence": "独立"
         },
         {
           "text": "117. [hajimen.com 教习所排名（2015 年调查值，历史参考）](https://hajimen.com/10-saitama/rank_detail?rank_name=t-0) — 2015",
@@ -986,15 +1307,21 @@
           "year": "2015",
           "marker": "",
           "group": "### ⑤ 平台抽样 / 行情",
+          "group_canonical": "平台抽样",
+          "authority_grade": "D",
+          "language": "ja",
           "relay_level": "1",
-          "independence": "不明"
+          "independence": "非独立"
         },
         {
           "text": "118. [在上海日本国総領事館 签证费用（2026 年 7 月 1 日修改）](https://www.shanghai.cn.emb-japan.go.jp/itpr_ja/11_000001_00633.html) — 2026",
           "url": "https://www.shanghai.cn.emb-japan.go.jp/itpr_ja/11_000001_00633.html",
           "year": "2026",
           "marker": "",
-          "group": "### ⑥ 补充来源（日本官方 / 机构；中文来",
+          "group": "### ⑥ 补充来源（日本官方 / 机构；中文页建议回溯日文原文）",
+          "group_canonical": "补充来源",
+          "authority_grade": "B",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -1003,43 +1330,58 @@
           "url": "https://www.qingdao.cn.emb-japan.go.jp/itpr_ja/11_000001_02405.html",
           "year": "2026",
           "marker": "",
-          "group": "### ⑥ 补充来源（日本官方 / 机构；中文来",
+          "group": "### ⑥ 补充来源（日本官方 / 机构；中文页建议回溯日文原文）",
+          "group_canonical": "补充来源",
+          "authority_grade": "B",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
         {
-          "text": "120. [在重慶日本国総領事館 签证手续费](https://www.chongqing.cn.emb-japan.go.jp/itpr_zh/qianzhengshouye.html) — 2026",
+          "text": "120. [在重慶日本国総領事館 签证手续费](https://www.chongqing.cn.emb-japan.go.jp/itpr_zh/qianzhengshouye.html) — 2026（中文页，建议回溯日文原文）",
           "url": "https://www.chongqing.cn.emb-japan.go.jp/itpr_zh/qianzhengshouye.html",
           "year": "2026",
           "marker": "",
-          "group": "### ⑥ 补充来源（日本官方 / 机构；中文来",
+          "group": "### ⑥ 补充来源（日本官方 / 机构；中文页建议回溯日文原文）",
+          "group_canonical": "补充来源",
+          "authority_grade": "B",
+          "language": "zh",
           "relay_level": "1",
           "independence": "独立"
         },
         {
-          "text": "125. [特定技能总合支援站（中文）· 在留资格](https://www.ssw.go.jp/cn/about/visa/) — 2026",
+          "text": "125. [特定技能总合支援站（中文）· 在留资格](https://www.ssw.go.jp/cn/about/visa/) — 2026（中文页，建议回溯日文原文）",
           "url": "https://www.ssw.go.jp/cn/about/visa/",
           "year": "2026",
           "marker": "",
-          "group": "### ⑥ 补充来源（日本官方 / 机构；中文来",
+          "group": "### ⑥ 补充来源（日本官方 / 机构；中文页建议回溯日文原文）",
+          "group_canonical": "补充来源",
+          "authority_grade": "B",
+          "language": "zh",
           "relay_level": "1",
           "independence": "独立"
         },
         {
-          "text": "126. [特定技能总合支援站（中文）· 步骤](https://www.ssw.go.jp/cn/about/step/) — 2026",
+          "text": "126. [特定技能总合支援站（中文）· 步骤](https://www.ssw.go.jp/cn/about/step/) — 2026（中文页，建议回溯日文原文）",
           "url": "https://www.ssw.go.jp/cn/about/step/",
           "year": "2026",
           "marker": "",
-          "group": "### ⑥ 补充来源（日本官方 / 机构；中文来",
+          "group": "### ⑥ 补充来源（日本官方 / 机构；中文页建议回溯日文原文）",
+          "group_canonical": "补充来源",
+          "authority_grade": "B",
+          "language": "zh",
           "relay_level": "1",
           "independence": "独立"
         },
         {
-          "text": "127. [特定技能总合支援站（中文）· 自動車運送業分野](https://www.ssw.go.jp/cn/about/visa/automobile_transportation_business_1/) — 2026",
+          "text": "127. [特定技能总合支援站（中文）· 自動車運送業分野](https://www.ssw.go.jp/cn/about/visa/automobile_transportation_business_1/) — 2026（中文页，建议回溯日文原文）",
           "url": "https://www.ssw.go.jp/cn/about/visa/automobile_transportation_business_1/",
           "year": "2026",
           "marker": "",
-          "group": "### ⑥ 补充来源（日本官方 / 机构；中文来",
+          "group": "### ⑥ 补充来源（日本官方 / 机构；中文页建议回溯日文原文）",
+          "group_canonical": "补充来源",
+          "authority_grade": "B",
+          "language": "zh",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -1048,35 +1390,44 @@
           "url": "https://www.mlit.go.jp/jidosha/jidosha_tk7_000043.html",
           "year": "2026",
           "marker": "",
-          "group": "### 本版新增来源（2026-11-17 核验",
+          "group": "### 本版新增来源（2026-11-17 核验）",
+          "group_canonical": "补充来源",
+          "authority_grade": "B",
+          "language": "ja",
           "relay_level": "1",
-          "independence": "不明"
+          "independence": "独立"
         },
         {
           "text": "129. [@Press 甲子園エリア自動運転 EV バス一般運行](https://pc.watch.impress.co.jp/docs/release/atpress/2157042.html) — 2026-11-17【已核实】",
           "url": "https://pc.watch.impress.co.jp/docs/release/atpress/2157042.html",
           "year": "2026",
           "marker": "",
-          "group": "### 本版新增来源（2026-11-17 核验",
+          "group": "### 本版新增来源（2026-11-17 核验）",
+          "group_canonical": "补充来源",
+          "authority_grade": "B",
+          "language": "ja",
           "relay_level": "1",
-          "independence": "不明"
+          "independence": "非独立"
         },
         {
           "text": "130. [GO・Waymo・日本交通 自動運転タクシー商用化の実現に向けて合意](http://japantaxi.co.jp/news/pr/2026/09/15/6pzjypdxzuza8kawb2ocfg) — 2026-09-15【已核实】",
           "url": "http://japantaxi.co.jp/news/pr/2026/09/15/6pzjypdxzuza8kawb2ocfg",
           "year": "2026",
           "marker": "",
-          "group": "### 本版新增来源（2026-11-17 核验",
+          "group": "### 本版新增来源（2026-11-17 核验）",
+          "group_canonical": "补充来源",
+          "authority_grade": "B",
+          "language": "ja",
           "relay_level": "1",
-          "independence": "不明"
+          "independence": "非独立"
         }
       ],
       "graded": true,
       "field_completeness": 1.0,
       "problems": [
-        "16 条来源条目独立性判为「不明」（待人工确认）"
+        "4 条来源为中文页面（建议回溯日文原文）"
       ],
-      "fingerprint": "sha256:055df8b942b6504b40c985acfe2b4b1dbef019408eb41b756fe4595f152ea008"
+      "fingerprint": "sha256:87c0f4c5258142d8b705026281154a433080699025beeeb8d42914b1694dec96"
     },
     {
       "report": "02-career-driver/reports/2026-11-career-driver.md",
@@ -1088,6 +1439,9 @@
           "year": "2026",
           "marker": "",
           "group": "### ① 日本政府官方一手",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -1097,6 +1451,9 @@
           "year": "2026",
           "marker": "",
           "group": "### ① 日本政府官方一手",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -1106,6 +1463,9 @@
           "year": "2026",
           "marker": "",
           "group": "### ① 日本政府官方一手",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -1115,6 +1475,9 @@
           "year": "2026",
           "marker": "",
           "group": "### ① 日本政府官方一手",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -1124,6 +1487,9 @@
           "year": "2026",
           "marker": "",
           "group": "### ① 日本政府官方一手",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -1133,6 +1499,9 @@
           "year": "2026",
           "marker": "",
           "group": "### ① 日本政府官方一手",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -1142,6 +1511,9 @@
           "year": "2025",
           "marker": "",
           "group": "### ② 行业团体 / 专业机构",
+          "group_canonical": "权威机构",
+          "authority_grade": "B",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -1151,6 +1523,9 @@
           "year": "2026",
           "marker": "",
           "group": "### ② 行业团体 / 专业机构",
+          "group_canonical": "权威机构",
+          "authority_grade": "B",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -1160,6 +1535,9 @@
           "year": "2026",
           "marker": "",
           "group": "### ② 行业团体 / 专业机构",
+          "group_canonical": "权威机构",
+          "authority_grade": "B",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -1169,6 +1547,9 @@
           "year": "2026",
           "marker": "",
           "group": "### ② 行业团体 / 专业机构",
+          "group_canonical": "权威机构",
+          "authority_grade": "B",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -1178,8 +1559,11 @@
           "year": "2025",
           "marker": "",
           "group": "### ② 行业团体 / 专业机构",
+          "group_canonical": "权威机构",
+          "authority_grade": "B",
+          "language": "ja",
           "relay_level": "1",
-          "independence": "独立"
+          "independence": "非独立"
         },
         {
           "text": "12. [求人Box 运送业求人](https://xn--pckua2a7gp15o89zb.com/運送業-トラックの仕事) — 2026",
@@ -1187,6 +1571,9 @@
           "year": "2026",
           "marker": "",
           "group": "### ③ 平台抽样 / 行情 / 媒体转引",
+          "group_canonical": "媒体",
+          "authority_grade": "C",
+          "language": "ja",
           "relay_level": "2",
           "independence": "非独立"
         },
@@ -1196,6 +1583,9 @@
           "year": "2026",
           "marker": "",
           "group": "### ③ 平台抽样 / 行情 / 媒体转引",
+          "group_canonical": "媒体",
+          "authority_grade": "C",
+          "language": "ja",
           "relay_level": "2",
           "independence": "非独立"
         },
@@ -1205,6 +1595,9 @@
           "year": "2025",
           "marker": "",
           "group": "### ③ 平台抽样 / 行情 / 媒体转引",
+          "group_canonical": "媒体",
+          "authority_grade": "C",
+          "language": "ja",
           "relay_level": "2",
           "independence": "非独立"
         },
@@ -1214,8 +1607,11 @@
           "year": "2026",
           "marker": "",
           "group": "### ④ 只读引用（主责主题）",
+          "group_canonical": "内部知识库",
+          "authority_grade": "X",
+          "language": "ja",
           "relay_level": "1",
-          "independence": "独立"
+          "independence": "非独立"
         },
         {
           "text": "18. [01-ssw-driver 月度报告](https://github.com/hmbphxkw76-byte/jp-life-work/blob/main/01-ssw-driver/reports/2026-11-ssw-driver.md) — 2026-11",
@@ -1223,15 +1619,16 @@
           "year": "2026",
           "marker": "",
           "group": "### ④ 只读引用（主责主题）",
+          "group_canonical": "内部知识库",
+          "authority_grade": "X",
+          "language": "ja",
           "relay_level": "1",
-          "independence": "不明"
+          "independence": "非独立"
         }
       ],
       "graded": true,
       "field_completeness": 1.0,
-      "problems": [
-        "1 条来源条目独立性判为「不明」（待人工确认）"
-      ],
+      "problems": [],
       "fingerprint": "sha256:6e2e6de8947888c599a2b465edd00e7fa9bdadb096410e942a1903fb4eac94ff"
     },
     {
@@ -1244,6 +1641,9 @@
           "year": "2026",
           "marker": "",
           "group": "**官方一手**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -1253,6 +1653,9 @@
           "year": "2026",
           "marker": "",
           "group": "**官方一手**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -1262,6 +1665,9 @@
           "year": "2026",
           "marker": "",
           "group": "**官方一手**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -1271,6 +1677,9 @@
           "year": "2026",
           "marker": "核对",
           "group": "**权威机构**：",
+          "group_canonical": "权威机构",
+          "authority_grade": "B",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -1280,8 +1689,11 @@
           "year": "2026",
           "marker": "",
           "group": "**权威机构**：",
+          "group_canonical": "权威机构",
+          "authority_grade": "B",
+          "language": "ja",
           "relay_level": "1",
-          "independence": "独立"
+          "independence": "非独立"
         },
         {
           "text": "9. [03-career-management 指标登记册](https://github.com/hmbphxkw76-byte/jp-life-work/blob/main/03-career-management/data/career_logistics_indicator_registry.md) — 活值与边界档案，2026-11-12（2026-11-14 结构拆分后维护）。",
@@ -1289,15 +1701,16 @@
           "year": "2026",
           "marker": "",
           "group": "**内部知识库（本主题）**：",
+          "group_canonical": "内部知识库",
+          "authority_grade": "X",
+          "language": "ja",
           "relay_level": "1",
-          "independence": "不明"
+          "independence": "非独立"
         }
       ],
       "graded": true,
       "field_completeness": 1.0,
-      "problems": [
-        "1 条来源条目独立性判为「不明」（待人工确认）"
-      ],
+      "problems": [],
       "fingerprint": "sha256:3277ea469b8c25b9e549e8cf1fb1d997e47c4f5f3feeb3ebbe79819be1967097"
     },
     {
@@ -1310,6 +1723,9 @@
           "year": "2026",
           "marker": "核对",
           "group": "### 官方一手",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -1319,8 +1735,11 @@
           "year": "2026",
           "marker": "",
           "group": "### 官方一手",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
-          "independence": "独立"
+          "independence": "非独立"
         },
         {
           "text": "3. 国土交通省 自動運転トラック幹線輸送実証事業 https://www.mlit.go.jp/seisakutokatsu/freight/seisakutokatsu_freight_tk1_000271.html （2026 核对）",
@@ -1328,6 +1747,9 @@
           "year": "2026",
           "marker": "核对",
           "group": "### 官方一手",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -1337,6 +1759,9 @@
           "year": "2020",
           "marker": "",
           "group": "### 官方一手",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -1346,6 +1771,9 @@
           "year": "令和2",
           "marker": "",
           "group": "### 行业机构",
+          "group_canonical": "权威机构",
+          "authority_grade": "B",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -1355,6 +1783,9 @@
           "year": "2026",
           "marker": "核对",
           "group": "### 行业机构",
+          "group_canonical": "权威机构",
+          "authority_grade": "B",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -1364,6 +1795,9 @@
           "year": "2025",
           "marker": "",
           "group": "### 行业机构",
+          "group_canonical": "权威机构",
+          "authority_grade": "B",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         }
@@ -1380,9 +1814,12 @@
         {
           "text": "1. 国土交通省（mlit.go.jp）— 自動運転について https://www.mlit.go.jp/jidosha/jidosha_tk7_000042.html ；自動運転車の公道走行に向けて https://www.mlit.go.jp/jidosha/jidosha_tk7_000043.html ；地域公共交通確保維持改善事業費補助金（自動運転事業関係） https://www.m",
           "url": "https://www.mlit.go.jp/jidosha/jidosha_tk7_000042.html",
-          "year": "2025",
+          "year": "2026",
           "marker": "核对",
           "group": "### 官方一手",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -1392,15 +1829,21 @@
           "year": "2026",
           "marker": "核对",
           "group": "### 官方一手",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
         {
           "text": "3. 経済産業省（meti.go.jp）— RoAD to the L4 https://www.meti.go.jp/policy/mono_info_service/mono/automobile/Automated-driving/RoADtotheL4.html ；自動運転 https://www.meti.go.jp/policy/mono_info_service/mono/autom",
           "url": "https://www.meti.go.jp/policy/mono_info_service/mono/automobile/Automated-driving/RoADtotheL4.html",
-          "year": "2026",
+          "year": "",
           "marker": "核对",
           "group": "### 官方一手",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         }
@@ -1420,6 +1863,9 @@
           "year": "2019",
           "marker": "核对",
           "group": "### 官方一手",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -1429,6 +1875,9 @@
           "year": "2026",
           "marker": "",
           "group": "### 官方一手",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -1438,6 +1887,9 @@
           "year": "2025",
           "marker": "",
           "group": "### 研究机构与行业团体",
+          "group_canonical": "权威机构",
+          "authority_grade": "B",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -1447,6 +1899,9 @@
           "year": "2026",
           "marker": "",
           "group": "### 研究机构与行业团体",
+          "group_canonical": "权威机构",
+          "authority_grade": "B",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -1456,6 +1911,9 @@
           "year": "2026",
           "marker": "",
           "group": "### 研究机构与行业团体",
+          "group_canonical": "权威机构",
+          "authority_grade": "B",
+          "language": "ja",
           "relay_level": "2",
           "independence": "非独立"
         },
@@ -1465,6 +1923,9 @@
           "year": "2026",
           "marker": "",
           "group": "### 求人门户与薪资调查（预期指标）",
+          "group_canonical": "平台抽样",
+          "authority_grade": "D",
+          "language": "ja",
           "relay_level": "1",
           "independence": "非独立"
         },
@@ -1474,6 +1935,9 @@
           "year": "2025",
           "marker": "",
           "group": "### 求人门户与薪资调查（预期指标）",
+          "group_canonical": "平台抽样",
+          "authority_grade": "D",
+          "language": "ja",
           "relay_level": "1",
           "independence": "非独立"
         },
@@ -1483,6 +1947,9 @@
           "year": "2025",
           "marker": "",
           "group": "### 求人门户与薪资调查（预期指标）",
+          "group_canonical": "平台抽样",
+          "authority_grade": "D",
+          "language": "ja",
           "relay_level": "1",
           "independence": "非独立"
         },
@@ -1492,6 +1959,9 @@
           "year": "2026",
           "marker": "核对",
           "group": "### 技术学习平台",
+          "group_canonical": "权威机构",
+          "authority_grade": "B",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         }
@@ -1511,6 +1981,9 @@
           "year": "2025",
           "marker": "",
           "group": "**官方一手**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -1520,6 +1993,9 @@
           "year": "2026",
           "marker": "",
           "group": "**官方一手**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -1529,6 +2005,9 @@
           "year": "2025",
           "marker": "",
           "group": "**官方一手**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -1538,15 +2017,21 @@
           "year": "2026",
           "marker": "",
           "group": "**官方一手**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
         {
-          "text": "6. [内閣官房 最低賃金の引上げに係る支援策（2025 年度全国加重平均 1,121 円）](https://www.cas.go.jp/jp/seisaku/atarashii_sihonsyugi/saiteichingin/index.html) — 2025-09-05。",
+          "text": "6. [内閣官房 最低賃金の引上げに係る支援策（2025 年度全国加重平均 1,121 円）](https://www.cas.go.jp/jp/seisaku/atarashii_sihonsyugi/saiteichingin/index.html) — 2025-09-05；[JILPT 令和 8 年度（2026 年度）地域別最低賃金改定（全国加重平均 1,177 円）](https://w",
           "url": "https://www.cas.go.jp/jp/seisaku/atarashii_sihonsyugi/saiteichingin/index.html",
           "year": "2025",
-          "marker": "",
+          "marker": "改定",
           "group": "**官方一手**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -1556,15 +2041,33 @@
           "year": "令和8",
           "marker": "",
           "group": "**官方一手**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
         {
+          "text": "9. [JILPT 全国加重平均で56円引き上げの1,177円に（2026年度の地域別最低賃金改定）](https://www.jil.go.jp/kokunai/blt/backnumber/2026/10/special_03.html) — 2026-10；独立行政法人労働政策研究・研修機構（原资料为厚労省 / 地方最賃審公表）。",
+          "url": "https://www.jil.go.jp/kokunai/blt/backnumber/2026/10/special_03.html",
+          "year": "2026",
+          "marker": "改定",
+          "group": "**媒体转引 / 汇总**：",
+          "group_canonical": "媒体",
+          "authority_grade": "C",
+          "language": "ja",
+          "relay_level": "2",
+          "independence": "非独立"
+        },
+        {
           "text": "10. [日本厚生年金费率 18.3%（年金機構）](https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20150515-01.html) — 2026。",
           "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20150515-01.html",
-          "year": "2015",
+          "year": "2026",
           "marker": "",
           "group": "**媒体转引 / 汇总**：",
+          "group_canonical": "媒体",
+          "authority_grade": "C",
+          "language": "ja",
           "relay_level": "2",
           "independence": "非独立"
         },
@@ -1574,16 +2077,17 @@
           "year": "2026",
           "marker": "",
           "group": "**内部知识库（本主题）**：",
+          "group_canonical": "内部知识库",
+          "authority_grade": "X",
+          "language": "ja",
           "relay_level": "1",
-          "independence": "不明"
+          "independence": "非独立"
         }
       ],
       "graded": true,
       "field_completeness": 1.0,
-      "problems": [
-        "1 条来源条目独立性判为「不明」（待人工确认）"
-      ],
-      "fingerprint": "sha256:203d94860d62ff169022c28f9b0bc19c6d74d080548a66ba95c16d65d8b3e4b8"
+      "problems": [],
+      "fingerprint": "sha256:73f45ed41670ef2cd630c7948e6733af26319a99317026fdab47f3d886199075"
     },
     {
       "report": "08-visa-immigration/reports/2026-11-visa-immigration.md",
@@ -1594,7 +2098,10 @@
           "url": "https://www.moj.go.jp/isa/applications/status/specifiedskilledworker.html",
           "year": "2026",
           "marker": "核对",
-          "group": "**官方一手（出入国在留管理庁 / 法务省 / ",
+          "group": "**官方一手（出入国在留管理庁 / 法务省 / ssw.go.jp / 国土交通省 / 领馆）**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -1603,7 +2110,10 @@
           "url": "https://www.moj.go.jp/isa/policies/ssw/automobiletransportation",
           "year": "2026",
           "marker": "核对",
-          "group": "**官方一手（出入国在留管理庁 / 法务省 / ",
+          "group": "**官方一手（出入国在留管理庁 / 法务省 / ssw.go.jp / 国土交通省 / 领馆）**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -1612,7 +2122,10 @@
           "url": "https://www.moj.go.jp/isa/applications/ssw/",
           "year": "2026",
           "marker": "核对",
-          "group": "**官方一手（出入国在留管理庁 / 法务省 / ",
+          "group": "**官方一手（出入国在留管理庁 / 法务省 / ssw.go.jp / 国土交通省 / 领馆）**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -1621,7 +2134,10 @@
           "url": "https://www.moj.go.jp/isa/content/001472175.pdf",
           "year": "2026",
           "marker": "换版",
-          "group": "**官方一手（出入国在留管理庁 / 法务省 / ",
+          "group": "**官方一手（出入国在留管理庁 / 法务省 / ssw.go.jp / 国土交通省 / 领馆）**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -1630,7 +2146,10 @@
           "url": "https://www.moj.go.jp/isa/applications/index_00005.html",
           "year": "2026",
           "marker": "核对",
-          "group": "**官方一手（出入国在留管理庁 / 法务省 / ",
+          "group": "**官方一手（出入国在留管理庁 / 法务省 / ssw.go.jp / 国土交通省 / 领馆）**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -1639,7 +2158,10 @@
           "url": "https://www.moj.go.jp/isa/10_00279.html",
           "year": "令和8",
           "marker": "改定",
-          "group": "**官方一手（出入国在留管理庁 / 法务省 / ",
+          "group": "**官方一手（出入国在留管理庁 / 法务省 / ssw.go.jp / 国土交通省 / 领馆）**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -1648,7 +2170,10 @@
           "url": "https://www.moj.go.jp/isa/applications/status/dependent",
           "year": "2026",
           "marker": "核对",
-          "group": "**官方一手（出入国在留管理庁 / 法务省 / ",
+          "group": "**官方一手（出入国在留管理庁 / 法务省 / ssw.go.jp / 国土交通省 / 领馆）**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -1657,7 +2182,10 @@
           "url": "https://www.moj.go.jp/isa/applications/status/gijinkoku.html",
           "year": "",
           "marker": "改定",
-          "group": "**官方一手（出入国在留管理庁 / 法务省 / ",
+          "group": "**官方一手（出入国在留管理庁 / 法务省 / ssw.go.jp / 国土交通省 / 领馆）**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -1666,7 +2194,10 @@
           "url": "https://www.moj.go.jp/isa/03_00207.html",
           "year": "令和6",
           "marker": "",
-          "group": "**官方一手（出入国在留管理庁 / 法务省 / ",
+          "group": "**官方一手（出入国在留管理庁 / 法务省 / ssw.go.jp / 国土交通省 / 领馆）**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -1675,7 +2206,10 @@
           "url": "https://www.ssw.go.jp/cn/about/visa/",
           "year": "2026",
           "marker": "核对",
-          "group": "**官方一手（出入国在留管理庁 / 法务省 / ",
+          "group": "**官方一手（出入国在留管理庁 / 法务省 / ssw.go.jp / 国土交通省 / 领馆）**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "zh",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -1684,7 +2218,10 @@
           "url": "https://www.shanghai.cn.emb-japan.go.jp/itpr_ja/11_000001_00633.html",
           "year": "2026",
           "marker": "核对",
-          "group": "**官方一手（出入国在留管理庁 / 法务省 / ",
+          "group": "**官方一手（出入国在留管理庁 / 法务省 / ssw.go.jp / 国土交通省 / 领馆）**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -1693,7 +2230,10 @@
           "url": "https://www.mlit.go.jp",
           "year": "2026",
           "marker": "核对",
-          "group": "**官方一手（出入国在留管理庁 / 法务省 / ",
+          "group": "**官方一手（出入国在留管理庁 / 法务省 / ssw.go.jp / 国土交通省 / 领馆）**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -1703,8 +2243,11 @@
           "year": "2026",
           "marker": "核对",
           "group": "**考试与实施机构**：",
+          "group_canonical": "权威机构",
+          "authority_grade": "B",
+          "language": "ja",
           "relay_level": "1",
-          "independence": "独立"
+          "independence": "非独立"
         },
         {
           "text": "14. JFT-Basic [https://jft-basic.jp](https://jft-basic.jp)；Prometric 受験料 [https://www.prometric-jp.com/ssw/exam/fee/](https://www.prometric-jp.com/ssw/exam/fee/)（2026-11 核对）",
@@ -1712,6 +2255,9 @@
           "year": "2026",
           "marker": "核对",
           "group": "**考试与实施机构**：",
+          "group_canonical": "权威机构",
+          "authority_grade": "B",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -1721,6 +2267,9 @@
           "year": "2026",
           "marker": "核对",
           "group": "**考试与实施机构**：",
+          "group_canonical": "权威机构",
+          "authority_grade": "B",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -1730,14 +2279,19 @@
           "year": "2026",
           "marker": "核对",
           "group": "**考试与实施机构**：",
+          "group_canonical": "权威机构",
+          "authority_grade": "B",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         }
       ],
       "graded": true,
       "field_completeness": 1.0,
-      "problems": [],
-      "fingerprint": "sha256:786fde68c77ee20db067373c8737636fac298e454f96d5c1765a9b8a898659f7"
+      "problems": [
+        "1 条来源为中文页面（建议回溯日文原文）"
+      ],
+      "fingerprint": "sha256:86b81e7f4f3a0fe2f018bad3ab68acaef36ce5e6a86cb215197d84973f8baede"
     },
     {
       "report": "09-politics-law/reports/2026-11-politics-law.md",
@@ -1748,7 +2302,10 @@
           "url": "https://laws.e-gov.go.jp",
           "year": "2026",
           "marker": "核对",
-          "group": "**官方一手（e-Gov / ISA / 厚生労",
+          "group": "**官方一手（e-Gov / ISA / 厚生労働省 / 総務省 / 労働局）**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -1757,7 +2314,10 @@
           "url": "https://www.moj.go.jp/isa",
           "year": "2026",
           "marker": "核对",
-          "group": "**官方一手（e-Gov / ISA / 厚生労",
+          "group": "**官方一手（e-Gov / ISA / 厚生労働省 / 総務省 / 労働局）**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -1766,7 +2326,10 @@
           "url": "https://www.moj.go.jp/isa/01_00643.html",
           "year": "2026",
           "marker": "",
-          "group": "**官方一手（e-Gov / ISA / 厚生労",
+          "group": "**官方一手（e-Gov / ISA / 厚生労働省 / 総務省 / 労働局）**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -1775,7 +2338,10 @@
           "url": "https://www.moj.go.jp/isa/01_00644.html",
           "year": "2026",
           "marker": "改定",
-          "group": "**官方一手（e-Gov / ISA / 厚生労",
+          "group": "**官方一手（e-Gov / ISA / 厚生労働省 / 総務省 / 労働局）**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -1784,7 +2350,10 @@
           "url": "https://www.moj.go.jp/isa/applications/procedures/torikeshi_00002.html",
           "year": "2026",
           "marker": "",
-          "group": "**官方一手（e-Gov / ISA / 厚生労",
+          "group": "**官方一手（e-Gov / ISA / 厚生労働省 / 総務省 / 労働局）**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -1793,7 +2362,10 @@
           "url": "https://www.moj.go.jp/isa/deportation/resources/nyukan_nyukan85_00002.html",
           "year": "2026",
           "marker": "",
-          "group": "**官方一手（e-Gov / ISA / 厚生労",
+          "group": "**官方一手（e-Gov / ISA / 厚生労働省 / 総務省 / 労働局）**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -1802,7 +2374,10 @@
           "url": "https://www.moj.go.jp/isa/08_00050.html",
           "year": "2026",
           "marker": "",
-          "group": "**官方一手（e-Gov / ISA / 厚生労",
+          "group": "**官方一手（e-Gov / ISA / 厚生労働省 / 総務省 / 労働局）**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -1811,7 +2386,10 @@
           "url": "https://www.moj.go.jp/isa/08_00045.html",
           "year": "2026",
           "marker": "",
-          "group": "**官方一手（e-Gov / ISA / 厚生労",
+          "group": "**官方一手（e-Gov / ISA / 厚生労働省 / 総務省 / 労働局）**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -1820,7 +2398,10 @@
           "url": "https://www.moj.go.jp/isa/deportation/resources/seido01.html",
           "year": "2026",
           "marker": "",
-          "group": "**官方一手（e-Gov / ISA / 厚生労",
+          "group": "**官方一手（e-Gov / ISA / 厚生労働省 / 総務省 / 労働局）**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -1829,7 +2410,10 @@
           "url": "https://www.moj.go.jp/isa/deportation/procedures/tetuduki_taikyo_hikiwatashi_00001.html",
           "year": "2026",
           "marker": "",
-          "group": "**官方一手（e-Gov / ISA / 厚生労",
+          "group": "**官方一手（e-Gov / ISA / 厚生労働省 / 総務省 / 労働局）**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -1838,7 +2422,10 @@
           "url": "https://www.moj.go.jp/isa/refugee/procedures/16-6.html",
           "year": "2026",
           "marker": "",
-          "group": "**官方一手（e-Gov / ISA / 厚生労",
+          "group": "**官方一手（e-Gov / ISA / 厚生労働省 / 総務省 / 労働局）**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -1847,7 +2434,10 @@
           "url": "https://www.moj.go.jp/isa/refugee/procedures/higo_00001.html",
           "year": "2026",
           "marker": "",
-          "group": "**官方一手（e-Gov / ISA / 厚生労",
+          "group": "**官方一手（e-Gov / ISA / 厚生労働省 / 総務省 / 労働局）**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -1856,7 +2446,10 @@
           "url": "https://www.moj.go.jp/isa/applications/index_00005.html",
           "year": "2026",
           "marker": "",
-          "group": "**官方一手（e-Gov / ISA / 厚生労",
+          "group": "**官方一手（e-Gov / ISA / 厚生労働省 / 総務省 / 労働局）**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -1865,7 +2458,10 @@
           "url": "https://www.moj.go.jp/isa/applications/ssw/index.html",
           "year": "2026",
           "marker": "",
-          "group": "**官方一手（e-Gov / ISA / 厚生労",
+          "group": "**官方一手（e-Gov / ISA / 厚生労働省 / 総務省 / 労働局）**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -1874,7 +2470,10 @@
           "url": "https://www.moj.go.jp/isa/support/guidance/index.html",
           "year": "2026",
           "marker": "",
-          "group": "**官方一手（e-Gov / ISA / 厚生労",
+          "group": "**官方一手（e-Gov / ISA / 厚生労働省 / 総務省 / 労働局）**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -1883,25 +2482,34 @@
           "url": "https://www.moj.go.jp/isa/support/consultation/index.html",
           "year": "2026",
           "marker": "",
-          "group": "**官方一手（e-Gov / ISA / 厚生労",
+          "group": "**官方一手（e-Gov / ISA / 厚生労働省 / 総務省 / 労働局）**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
         {
           "text": "17. ISA — 報道・公表資料（令和 6 年统计）[https://www.moj.go.jp/isa/publications/press/press2025.html](https://www.moj.go.jp/isa/publications/press/press2025.html)（2026）",
           "url": "https://www.moj.go.jp/isa/publications/press/press2025.html",
-          "year": "2025",
+          "year": "2026",
           "marker": "",
-          "group": "**官方一手（e-Gov / ISA / 厚生労",
+          "group": "**官方一手（e-Gov / ISA / 厚生労働省 / 総務省 / 労働局）**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
-          "independence": "独立"
+          "independence": "非独立"
         },
         {
           "text": "18. 厚生労働省 — 劳动基准监督署 [https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/roumu/](https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/roumu/)（2026）",
           "url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/roumu/",
           "year": "2026",
           "marker": "",
-          "group": "**官方一手（e-Gov / ISA / 厚生労",
+          "group": "**官方一手（e-Gov / ISA / 厚生労働省 / 総務省 / 労働局）**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -1910,7 +2518,10 @@
           "url": "https://www.soumu.go.jp/main_sosiki/jichi_gyousei/c-gyousei/zairyu/",
           "year": "2026",
           "marker": "",
-          "group": "**官方一手（e-Gov / ISA / 厚生労",
+          "group": "**官方一手（e-Gov / ISA / 厚生労働省 / 総務省 / 労働局）**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -1919,7 +2530,10 @@
           "url": "https://www.soumu.go.jp/menu_seisaku/chiho/02gyosei05_03000060.html",
           "year": "令和2",
           "marker": "",
-          "group": "**官方一手（e-Gov / ISA / 厚生労",
+          "group": "**官方一手（e-Gov / ISA / 厚生労働省 / 総務省 / 労働局）**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -1928,25 +2542,34 @@
           "url": "https://www.jimin.jp",
           "year": "2026",
           "marker": "",
-          "group": "**政策环境信号（政党官网 / 专业机构 / 媒",
+          "group": "**政策环境信号（政党官网 / 专业机构 / 媒体线索）**：",
+          "group_canonical": "媒体",
+          "authority_grade": "C",
+          "language": "ja",
           "relay_level": "1",
-          "independence": "独立"
+          "independence": "非独立"
         },
         {
           "text": "24. JILPT 研究报告与更新履歴 [https://www.jil.go.jp/information/rireki.html](https://www.jil.go.jp/information/rireki.html)（2026）",
           "url": "https://www.jil.go.jp/information/rireki.html",
           "year": "2026",
           "marker": "",
-          "group": "**政策环境信号（政党官网 / 专业机构 / 媒",
+          "group": "**政策环境信号（政党官网 / 专业机构 / 媒体线索）**：",
+          "group_canonical": "媒体",
+          "authority_grade": "C",
+          "language": "ja",
           "relay_level": "1",
-          "independence": "独立"
+          "independence": "非独立"
         },
         {
           "text": "25. 新华社东京 2026-11-06 电（转引日本媒体）[https://world.huanqiu.com/article/4Tuu3gMCNlp](https://world.huanqiu.com/article/4Tuu3gMCNlp)（2026，⚠ 中文媒体线索，须回溯日媒原文）",
           "url": "https://world.huanqiu.com/article/4Tuu3gMCNlp",
           "year": "2026",
           "marker": "",
-          "group": "**政策环境信号（政党官网 / 专业机构 / 媒",
+          "group": "**政策环境信号（政党官网 / 专业机构 / 媒体线索）**：",
+          "group_canonical": "媒体",
+          "authority_grade": "C",
+          "language": "ja",
           "relay_level": "2",
           "independence": "非独立"
         },
@@ -1955,7 +2578,10 @@
           "url": "https://epaper.qlwb.com.cn/qlwb/content/20261116/ArticelA14002SA.htm",
           "year": "2026",
           "marker": "",
-          "group": "**政策环境信号（政党官网 / 专业机构 / 媒",
+          "group": "**政策环境信号（政党官网 / 专业机构 / 媒体线索）**：",
+          "group_canonical": "媒体",
+          "authority_grade": "C",
+          "language": "ja",
           "relay_level": "1",
           "independence": "非独立"
         },
@@ -1965,15 +2591,16 @@
           "year": "2026",
           "marker": "核对",
           "group": "**法律援助**：",
+          "group_canonical": "权威机构",
+          "authority_grade": "B",
+          "language": "ja",
           "relay_level": "1",
-          "independence": "不明"
+          "independence": "独立"
         }
       ],
       "graded": true,
       "field_completeness": 1.0,
-      "problems": [
-        "1 条来源条目独立性判为「不明」（待人工确认）"
-      ],
+      "problems": [],
       "fingerprint": "sha256:54550f0f54a0e99c64a9188715825e7d970d3d3608b4ce8eaa3f6e0516738b81"
     },
     {
@@ -1986,6 +2613,9 @@
           "year": "2026",
           "marker": "",
           "group": "**官方一手**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "en",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -1995,6 +2625,9 @@
           "year": "2026",
           "marker": "",
           "group": "**官方一手**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2004,6 +2637,9 @@
           "year": "2026",
           "marker": "",
           "group": "**官方一手**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2013,6 +2649,9 @@
           "year": "2026",
           "marker": "",
           "group": "**官方一手**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2022,15 +2661,21 @@
           "year": "2026",
           "marker": "",
           "group": "**官方一手**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "非独立"
         },
         {
           "text": "6. [文部科学省 · 日本語教育支援総合パッケージ](https://www.mext.go.jp/a_menu/shotou/clarinet/003/1320860_00001.html) — 令和 8-09-10，2026。",
           "url": "https://www.mext.go.jp/a_menu/shotou/clarinet/003/1320860_00001.html",
-          "year": "2086",
+          "year": "2026",
           "marker": "",
           "group": "**官方一手**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2040,6 +2685,9 @@
           "year": "2026",
           "marker": "",
           "group": "**官方一手**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2049,6 +2697,9 @@
           "year": "2026",
           "marker": "",
           "group": "**官方一手**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2058,15 +2709,21 @@
           "year": "2026",
           "marker": "",
           "group": "**官方一手**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
         {
           "text": "10. [文部科学省 · 学校給食実施状況调查](https://www.mext.go.jp/content/20260730-mxt-kenshoku-000051287_03.pdf) — 令和 7 年度公立小学月额 5,196 円，2025。",
           "url": "https://www.mext.go.jp/content/20260730-mxt-kenshoku-000051287_03.pdf",
-          "year": "2026",
+          "year": "2025",
           "marker": "",
           "group": "**官方一手**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2076,6 +2733,9 @@
           "year": "2026",
           "marker": "",
           "group": "**官方一手**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2085,6 +2745,9 @@
           "year": "2026",
           "marker": "",
           "group": "**官方一手**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "en",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2094,8 +2757,11 @@
           "year": "2026",
           "marker": "",
           "group": "**官方一手**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
-          "independence": "独立"
+          "independence": "非独立"
         },
         {
           "text": "14. [文部科学省 · 高等教育制度说明](https://www.mext.go.jp/en/policy/education/highered/title02/detail02/1373913.html) — 编入资格要件国家统一、选考方式各校自设，2025。",
@@ -2103,6 +2769,9 @@
           "year": "2025",
           "marker": "",
           "group": "**官方一手**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "en",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2112,6 +2781,9 @@
           "year": "令和8",
           "marker": "",
           "group": "**官方一手**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2121,6 +2793,9 @@
           "year": "2026",
           "marker": "",
           "group": "**官方一手**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2130,6 +2805,9 @@
           "year": "2026",
           "marker": "",
           "group": "**官方一手**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2139,6 +2817,9 @@
           "year": "2026",
           "marker": "",
           "group": "**官方一手**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2148,6 +2829,9 @@
           "year": "2026",
           "marker": "",
           "group": "**官方一手**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2157,8 +2841,11 @@
           "year": "2026",
           "marker": "",
           "group": "**学校官网（学费）**：",
+          "group_canonical": "权威机构",
+          "authority_grade": "B",
+          "language": "ja",
           "relay_level": "1",
-          "independence": "不明"
+          "independence": "独立"
         },
         {
           "text": "21. [近畿大学通信教育部](https://www.kindai.ac.jp/tsushin/course/regular/architecture/expense/) — 授课料 306,000 円 / 年，2026。",
@@ -2166,8 +2853,11 @@
           "year": "2026",
           "marker": "",
           "group": "**学校官网（学费）**：",
+          "group_canonical": "权威机构",
+          "authority_grade": "B",
+          "language": "ja",
           "relay_level": "1",
-          "independence": "不明"
+          "independence": "独立"
         },
         {
           "text": "22. [东京通信大学 · 编入 / 学费](https://www.internet.ac.jp/for/transfer/) / [英语页](https://www.internet.ac.jp/english/) — 初年度 271,000 円～（4 年总 834,000 円～），2026。",
@@ -2175,8 +2865,11 @@
           "year": "2026",
           "marker": "",
           "group": "**学校官网（学费）**：",
+          "group_canonical": "权威机构",
+          "authority_grade": "B",
+          "language": "ja",
           "relay_level": "1",
-          "independence": "不明"
+          "independence": "独立"
         },
         {
           "text": "23. [高等专门学校](https://www.mext.go.jp/a_menu/koutou/kousen/) / [专门学校（专修学校专门课程）](https://shirusen.mext.go.jp/senmon/) — 体系定位，2026。",
@@ -2184,8 +2877,11 @@
           "year": "2026",
           "marker": "",
           "group": "**学校官网（学费）**：",
+          "group_canonical": "权威机构",
+          "authority_grade": "B",
+          "language": "ja",
           "relay_level": "1",
-          "independence": "不明"
+          "independence": "独立"
         },
         {
           "text": "24. [JASSO](https://www.jasso.go.jp/) — 编入试验选考细节复核入口。（2026-11 核对）",
@@ -2193,6 +2889,9 @@
           "year": "2026",
           "marker": "核对",
           "group": "**权威机构（复核入口）**：",
+          "group_canonical": "权威机构",
+          "authority_grade": "B",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2202,8 +2901,11 @@
           "year": "2026",
           "marker": "",
           "group": "**内部知识库（本主题）**：",
+          "group_canonical": "内部知识库",
+          "authority_grade": "X",
+          "language": "ja",
           "relay_level": "1",
-          "independence": "不明"
+          "independence": "非独立"
         },
         {
           "text": "31. [法务省 ISA · ポイント評価の仕組み](https://www.moj.go.jp/isa/applications/resources/newimmiact_3_evaluate_index.html) — 高度人材ポイント制 学歴・職歴・年収等項目別配点（配点表 PDF 另附），2026。",
@@ -2211,15 +2913,16 @@
           "year": "2026",
           "marker": "",
           "group": "**交叉引用主题**：",
+          "group_canonical": "内部知识库",
+          "authority_grade": "X",
+          "language": "ja",
           "relay_level": "1",
-          "independence": "不明"
+          "independence": "独立"
         }
       ],
       "graded": true,
       "field_completeness": 1.0,
-      "problems": [
-        "6 条来源条目独立性判为「不明」（待人工确认）"
-      ],
+      "problems": [],
       "fingerprint": "sha256:d68b8c04b74f0ce9a2a17c42068f7b984f78712b5d72cba151a1dcce4e46d1e6"
     },
     {
@@ -2232,6 +2935,9 @@
           "year": "2026",
           "marker": "",
           "group": "**官方一手**",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2241,6 +2947,9 @@
           "year": "2026",
           "marker": "",
           "group": "**官方一手**",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2250,6 +2959,9 @@
           "year": "2026",
           "marker": "",
           "group": "**官方一手**",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2259,6 +2971,9 @@
           "year": "2026",
           "marker": "",
           "group": "**官方一手**",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2268,6 +2983,9 @@
           "year": "2025",
           "marker": "",
           "group": "**官方一手**",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2277,24 +2995,33 @@
           "year": "2026",
           "marker": "",
           "group": "**官方一手**",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
         {
-          "text": "8. [JFT-Basic 官方样题](https://www.jft-basic.jp/sample/)，2026。",
+          "text": "8. [JFT-Basic 官方样题](https://www.jft-basic.jp/sample/)，2026；[JFT-Basic 受験料金（Prometric 国別受験料金：日本 JPY 10,000）](https://www.prometric-jp.com/ssw/exam/fee/)，2026。",
           "url": "https://www.jft-basic.jp/sample/",
           "year": "2026",
           "marker": "",
           "group": "**官方一手**",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
         {
-          "text": "9. [特定技能官方中文站](https://www.ssw.go.jp/cn/)，2026。",
+          "text": "9. [特定技能官方中文站](https://www.ssw.go.jp/cn/)，2026（中文页，建议回溯日文原文）。",
           "url": "https://www.ssw.go.jp/cn/",
           "year": "2026",
           "marker": "",
           "group": "**官方一手**",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "zh",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2304,6 +3031,9 @@
           "year": "2026",
           "marker": "",
           "group": "**官方一手**",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2313,15 +3043,21 @@
           "year": "2026",
           "marker": "",
           "group": "**官方一手**",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
         {
           "text": "12. [法务省 ISA · JLPT（N4・N5）受験申込みを検討中の方へ JFT-Basic の活用をお勧めします](https://www.moj.go.jp/isa/content/001471906.pdf)，2026。",
           "url": "https://www.moj.go.jp/isa/content/001471906.pdf",
-          "year": "1906",
+          "year": "2026",
           "marker": "",
           "group": "**官方一手**",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2331,8 +3067,11 @@
           "year": "2026",
           "marker": "",
           "group": "**权威组织 / 教学资源**",
+          "group_canonical": "权威机构",
+          "authority_grade": "B",
+          "language": "ja",
           "relay_level": "1",
-          "independence": "不明"
+          "independence": "独立"
         },
         {
           "text": "14. [JF 日本语教育标准](https://jfstandard.jpf.go.jp)，2026。",
@@ -2340,8 +3079,11 @@
           "year": "2026",
           "marker": "",
           "group": "**权威组织 / 教学资源**",
+          "group_canonical": "权威机构",
+          "authority_grade": "B",
+          "language": "ja",
           "relay_level": "1",
-          "independence": "不明"
+          "independence": "独立"
         },
         {
           "text": "15. [日本語能力試験公式資料（JLPT 官方发布资料）](https://www.jlpt.jp)，经官方站点回溯，2026。",
@@ -2349,6 +3091,9 @@
           "year": "2026",
           "marker": "",
           "group": "**权威组织 / 教学资源**",
+          "group_canonical": "权威机构",
+          "authority_grade": "B",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2358,16 +3103,19 @@
           "year": "2026",
           "marker": "",
           "group": "**权威组织 / 教学资源**",
+          "group_canonical": "权威机构",
+          "authority_grade": "B",
+          "language": "ja",
           "relay_level": "1",
-          "independence": "不明"
+          "independence": "独立"
         }
       ],
       "graded": true,
       "field_completeness": 1.0,
       "problems": [
-        "3 条来源条目独立性判为「不明」（待人工确认）"
+        "1 条来源为中文页面（建议回溯日文原文）"
       ],
-      "fingerprint": "sha256:b010cd239b41006e2d833aa1348778e6c9429e702fd951aba2aab9c78853d54d"
+      "fingerprint": "sha256:f4c9c498e7b97db62519e6ed0848c1d089b58c7a5433be8112a9f91e970770c6"
     },
     {
       "report": "12-culture-life/reports/2026-11-culture-life.md",
@@ -2379,6 +3127,9 @@
           "year": "2026",
           "marker": "",
           "group": "**官方一手（省厅 / 机构）**",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2388,6 +3139,9 @@
           "year": "2026",
           "marker": "",
           "group": "**官方一手（省厅 / 机构）**",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2397,6 +3151,9 @@
           "year": "2026",
           "marker": "",
           "group": "**官方一手（省厅 / 机构）**",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2406,6 +3163,9 @@
           "year": "2026",
           "marker": "",
           "group": "**官方一手（省厅 / 机构）**",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2415,6 +3175,9 @@
           "year": "2026",
           "marker": "",
           "group": "**官方一手（省厅 / 机构）**",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2424,15 +3187,21 @@
           "year": "2026",
           "marker": "",
           "group": "**官方一手（省厅 / 机构）**",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
         {
           "text": "7. 厚生労働省（处方笺規則），https://www.mhlw.go.jp/stf/newpage_32041.html，2025。",
           "url": "https://www.mhlw.go.jp/stf/newpage_32041.html,2025",
-          "year": "2041",
+          "year": "2025",
           "marker": "",
           "group": "**官方一手（省厅 / 机构）**",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2442,6 +3211,9 @@
           "year": "2026",
           "marker": "",
           "group": "**官方一手（省厅 / 机构）**",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2451,6 +3223,9 @@
           "year": "2026",
           "marker": "",
           "group": "**官方一手（省厅 / 机构）**",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2460,6 +3235,9 @@
           "year": "2026",
           "marker": "",
           "group": "**官方一手（省厅 / 机构）**",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2469,6 +3247,9 @@
           "year": "2026",
           "marker": "",
           "group": "**官方一手（省厅 / 机构）**",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2478,15 +3259,21 @@
           "year": "2024",
           "marker": "",
           "group": "**官方一手（省厅 / 机构）**",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
         {
           "text": "13. 内閣府防災庁（避難情報に関するガイドラインの改定 令和 8 年 3 月），https://www.bousai.go.jp/oukyu/hinanjouhou/r3_hinanjouhou_guideline/，2026。",
           "url": "https://www.bousai.go.jp/oukyu/hinanjouhou/r3_hinanjouhou_guideline/,2026",
-          "year": "2026",
+          "year": "令和8",
           "marker": "改定",
           "group": "**官方一手（省厅 / 机构）**",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2496,6 +3283,9 @@
           "year": "2026",
           "marker": "",
           "group": "**官方一手（省厅 / 机构）**",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2505,6 +3295,9 @@
           "year": "2026",
           "marker": "",
           "group": "**官方一手（省厅 / 机构）**",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2514,6 +3307,9 @@
           "year": "2026",
           "marker": "",
           "group": "**官方一手（省厅 / 机构）**",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2523,6 +3319,9 @@
           "year": "2026",
           "marker": "",
           "group": "**官方一手（省厅 / 机构）**",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2532,6 +3331,9 @@
           "year": "2026",
           "marker": "",
           "group": "**官方一手（省厅 / 机构）**",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2541,6 +3343,9 @@
           "year": "2026",
           "marker": "",
           "group": "**官方一手（省厅 / 机构）**",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2550,6 +3355,9 @@
           "year": "2026",
           "marker": "",
           "group": "**官方一手（省厅 / 机构）**",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2559,6 +3367,9 @@
           "year": "2026",
           "marker": "",
           "group": "**官方一手（省厅 / 机构）**",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2568,6 +3379,9 @@
           "year": "2026",
           "marker": "",
           "group": "**官方一手（省厅 / 机构）**",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2577,6 +3391,9 @@
           "year": "2026",
           "marker": "",
           "group": "**官方一手（省厅 / 机构）**",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2586,15 +3403,21 @@
           "year": "2026",
           "marker": "",
           "group": "**官方一手（省厅 / 机构）**",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
         {
           "text": "25. 総務省（多文化共生事例集 令和 3 年度版），https://www.soumu.go.jp/menu_seisaku/chiho/tabunkakyousei_suishin_r03.html，2021。",
           "url": "https://www.soumu.go.jp/menu_seisaku/chiho/tabunkakyousei_suishin_r03.html,2021",
-          "year": "2021",
+          "year": "令和3",
           "marker": "",
           "group": "**官方一手（省厅 / 机构）**",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2604,6 +3427,9 @@
           "year": "2026",
           "marker": "",
           "group": "**官方一手（省厅 / 机构）**",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         }
@@ -2620,11 +3446,14 @@
         {
           "text": "| NEW-01 | 新防災気象情報口径（令和8年5月29日運用開始） | 新增口径记录 | 已登记 | 気象庁 [新たな防災気象情報](https://www.jma.go.jp/jma/kishou/know/bosai/keiho-update2026/index.html) |",
           "url": "https://www.jma.go.jp/jma/kishou/know/bosai/keiho-update2026/index.html",
-          "year": "2026",
+          "year": "令和8",
           "marker": "",
           "group": "### 登记册更新台账",
+          "group_canonical": "补充来源",
+          "authority_grade": "B",
+          "language": "ja",
           "relay_level": "1",
-          "independence": "不明"
+          "independence": "独立"
         },
         {
           "text": "| NEW-02 | 避難情報ガイドライン改定（令和8年3月） | 新增口径记录 | 已登记 | 防災庁 [避難情報ガイドライン](https://www.bousai.go.jp/oukyu/hinanjouhou/r3_hinanjouhou_guideline/) |",
@@ -2632,8 +3461,11 @@
           "year": "令和8",
           "marker": "改定",
           "group": "### 登记册更新台账",
+          "group_canonical": "补充来源",
+          "authority_grade": "B",
+          "language": "ja",
           "relay_level": "1",
-          "independence": "不明"
+          "independence": "独立"
         },
         {
           "text": "1. 厚生労働省 医師・歯科医師・薬剤師統計 — https://www.mhlw.go.jp/toukei/list/33-20.html （2026 核对）",
@@ -2641,15 +3473,21 @@
           "year": "2026",
           "marker": "核对",
           "group": "**A 官方一手**（已核验，附完整 URL）：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
         {
-          "text": "2. 厚生労働省 令和6年医療施設調査 — https://www.mhlw.go.jp/toukei/saikin/hw/iryosd/24/index.html （2025-09-26 公表）",
+          "text": "2. 厚生労働省 令和6年医療施設調査 — https://www.mhlw.go.jp/toukei/saikin/hw/iryosd/24/index.html （2025-09-26 公表）；[e-Stat 令和6年医療施設(動態)調査 全国編 第2表 病床数](https://www.e-stat.go.jp/dbview?sid=0004048364)（病院・一般病床 879,728）",
           "url": "https://www.mhlw.go.jp/toukei/saikin/hw/iryosd/24/index.html",
           "year": "2025",
           "marker": "",
           "group": "**A 官方一手**（已核验，附完整 URL）：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2659,6 +3497,9 @@
           "year": "2026",
           "marker": "核对",
           "group": "**A 官方一手**（已核验，附完整 URL）：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2668,6 +3509,9 @@
           "year": "2026",
           "marker": "",
           "group": "**A 官方一手**（已核验，附完整 URL）：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2677,6 +3521,9 @@
           "year": "2026",
           "marker": "",
           "group": "**A 官方一手**（已核验，附完整 URL）：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2686,6 +3533,9 @@
           "year": "2026",
           "marker": "核对",
           "group": "**A 官方一手**（已核验，附完整 URL）：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2695,6 +3545,9 @@
           "year": "2026",
           "marker": "",
           "group": "**A 官方一手**（已核验，附完整 URL）：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2704,6 +3557,9 @@
           "year": "2026",
           "marker": "核对",
           "group": "**A 官方一手**（已核验，附完整 URL）：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2713,6 +3569,9 @@
           "year": "令和8",
           "marker": "改定",
           "group": "**A 官方一手**（已核验，附完整 URL）：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2722,6 +3581,9 @@
           "year": "2026",
           "marker": "核对",
           "group": "**A 官方一手**（已核验，附完整 URL）：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2731,6 +3593,9 @@
           "year": "2026",
           "marker": "核对",
           "group": "**A 官方一手**（已核验，附完整 URL）：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "en",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2740,16 +3605,17 @@
           "year": "2026",
           "marker": "核对",
           "group": "**A 官方一手**（已核验，附完整 URL）：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         }
       ],
       "graded": true,
       "field_completeness": 1.0,
-      "problems": [
-        "2 条来源条目独立性判为「不明」（待人工确认）"
-      ],
-      "fingerprint": "sha256:bbf4d056b06566ed0f4641abe8e8e75763c99838f8c74abf226143c0f9235f97"
+      "problems": [],
+      "fingerprint": "sha256:50198487b52f72375cc4b671f8afd9391bdd723f517cf0a38bce27ba2bf8bc14"
     },
     {
       "report": "14-life-operations/reports/2026-11-life-operations.md",
@@ -2761,6 +3627,9 @@
           "year": "2026",
           "marker": "",
           "group": "**官方一手（省厅 / 机构）**",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2770,6 +3639,9 @@
           "year": "2026",
           "marker": "",
           "group": "**官方一手（省厅 / 机构）**",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2779,6 +3651,9 @@
           "year": "2026",
           "marker": "",
           "group": "**官方一手（省厅 / 机构）**",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2788,6 +3663,9 @@
           "year": "2026",
           "marker": "",
           "group": "**官方一手（省厅 / 机构）**",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2797,6 +3675,9 @@
           "year": "2026",
           "marker": "",
           "group": "**官方一手（省厅 / 机构）**",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2806,6 +3687,9 @@
           "year": "2026",
           "marker": "",
           "group": "**官方一手（省厅 / 机构）**",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2815,6 +3699,9 @@
           "year": "2026",
           "marker": "",
           "group": "**官方一手（省厅 / 机构）**",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2824,6 +3711,9 @@
           "year": "2026",
           "marker": "",
           "group": "**官方一手（省厅 / 机构）**",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2833,6 +3723,9 @@
           "year": "2026",
           "marker": "",
           "group": "**官方一手（省厅 / 机构）**",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2842,6 +3735,9 @@
           "year": "2026",
           "marker": "",
           "group": "**官方一手（省厅 / 机构）**",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2851,6 +3747,9 @@
           "year": "2026",
           "marker": "",
           "group": "**官方一手（省厅 / 机构）**",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2860,6 +3759,9 @@
           "year": "2026",
           "marker": "",
           "group": "**官方一手（省厅 / 机构）**",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2869,6 +3771,9 @@
           "year": "2026",
           "marker": "",
           "group": "**官方一手（省厅 / 机构）**",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2878,6 +3783,9 @@
           "year": "2026",
           "marker": "",
           "group": "**官方一手（省厅 / 机构）**",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2887,6 +3795,9 @@
           "year": "2026",
           "marker": "",
           "group": "**官方一手（省厅 / 机构）**",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2896,6 +3807,9 @@
           "year": "2026",
           "marker": "",
           "group": "**官方一手（省厅 / 机构）**",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2905,6 +3819,9 @@
           "year": "2026",
           "marker": "",
           "group": "**官方一手（省厅 / 机构）**",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2914,6 +3831,9 @@
           "year": "2026",
           "marker": "",
           "group": "**官方一手（省厅 / 机构）**",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2923,6 +3843,9 @@
           "year": "2026",
           "marker": "",
           "group": "**官方一手（省厅 / 机构）**",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2932,6 +3855,9 @@
           "year": "2026",
           "marker": "",
           "group": "**官方一手（省厅 / 机构）**",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2941,6 +3867,9 @@
           "year": "2026",
           "marker": "",
           "group": "**官方一手（省厅 / 机构）**",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2950,6 +3879,9 @@
           "year": "2026",
           "marker": "",
           "group": "**官方一手（省厅 / 机构）**",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2959,6 +3891,9 @@
           "year": "2026",
           "marker": "",
           "group": "**官方一手（省厅 / 机构）**",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         }
@@ -2978,6 +3913,9 @@
           "year": "2026",
           "marker": "",
           "group": "### 官方一手",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2987,6 +3925,9 @@
           "year": "2026",
           "marker": "",
           "group": "### 官方一手",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2996,6 +3937,9 @@
           "year": "2026",
           "marker": "",
           "group": "### 官方一手",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -3005,6 +3949,9 @@
           "year": "2026",
           "marker": "",
           "group": "### 官方一手",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -3014,6 +3961,9 @@
           "year": "2026",
           "marker": "",
           "group": "### 官方一手",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -3023,6 +3973,9 @@
           "year": "2026",
           "marker": "",
           "group": "### 官方一手",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -3032,6 +3985,9 @@
           "year": "2026",
           "marker": "",
           "group": "### 官方一手",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -3041,6 +3997,9 @@
           "year": "2026",
           "marker": "",
           "group": "### 官方一手",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -3050,6 +4009,9 @@
           "year": "2026",
           "marker": "",
           "group": "### 官方一手",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -3059,6 +4021,9 @@
           "year": "2026",
           "marker": "",
           "group": "### 官方一手",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -3068,6 +4033,9 @@
           "year": "2026",
           "marker": "",
           "group": "### 学会 / 医疗机构",
+          "group_canonical": "权威机构",
+          "authority_grade": "B",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -3077,6 +4045,9 @@
           "year": "2026",
           "marker": "",
           "group": "### 学会 / 医疗机构",
+          "group_canonical": "权威机构",
+          "authority_grade": "B",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -3086,6 +4057,9 @@
           "year": "2026",
           "marker": "",
           "group": "### 学会 / 医疗机构",
+          "group_canonical": "权威机构",
+          "authority_grade": "B",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         }
@@ -3104,7 +4078,10 @@
           "url": "https://www.moj.go.jp/isa/applications/procedures/torikeshi_00002.html",
           "year": "2026",
           "marker": "",
-          "group": "**官方一手（出入国在留管理庁 / 法務省 / ",
+          "group": "**官方一手（出入国在留管理庁 / 法務省 / e-Gov / 厚生労働省 / 日本年金機構 / ハローワーク / 国税庁 / 総務省 / 国土交通省）**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -3113,7 +4090,10 @@
           "url": "https://www.moj.go.jp/isa/applications/procedures/16-2.html",
           "year": "2026",
           "marker": "",
-          "group": "**官方一手（出入国在留管理庁 / 法務省 / ",
+          "group": "**官方一手（出入国在留管理庁 / 法務省 / e-Gov / 厚生労働省 / 日本年金機構 / ハローワーク / 国税庁 / 総務省 / 国土交通省）**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -3122,7 +4102,10 @@
           "url": "https://www.moj.go.jp/isa/applications/procedures/nyuukokukanri10_00020.html",
           "year": "2026",
           "marker": "",
-          "group": "**官方一手（出入国在留管理庁 / 法務省 / ",
+          "group": "**官方一手（出入国在留管理庁 / 法務省 / e-Gov / 厚生労働省 / 日本年金機構 / ハローワーク / 国税庁 / 総務省 / 国土交通省）**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -3131,7 +4114,10 @@
           "url": "https://www.moj.go.jp/isa/immigration/procedures/16-5.html",
           "year": "2026",
           "marker": "",
-          "group": "**官方一手（出入国在留管理庁 / 法務省 / ",
+          "group": "**官方一手（出入国在留管理庁 / 法務省 / e-Gov / 厚生労働省 / 日本年金機構 / ハローワーク / 国税庁 / 総務省 / 国土交通省）**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -3140,7 +4126,10 @@
           "url": "https://www.moj.go.jp/isa/applications/guide/nyuukokukanri07_00045.html",
           "year": "2026",
           "marker": "",
-          "group": "**官方一手（出入国在留管理庁 / 法務省 / ",
+          "group": "**官方一手（出入国在留管理庁 / 法務省 / e-Gov / 厚生労働省 / 日本年金機構 / ハローワーク / 国税庁 / 総務省 / 国土交通省）**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -3149,7 +4138,10 @@
           "url": "https://www.moj.go.jp/isa/applications/ssw/03_00067.html",
           "year": "2026",
           "marker": "",
-          "group": "**官方一手（出入国在留管理庁 / 法務省 / ",
+          "group": "**官方一手（出入国在留管理庁 / 法務省 / e-Gov / 厚生労働省 / 日本年金機構 / ハローワーク / 国税庁 / 総務省 / 国土交通省）**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -3158,7 +4150,10 @@
           "url": "https://www.moj.go.jp/isa/10_00279.html",
           "year": "2026",
           "marker": "改定",
-          "group": "**官方一手（出入国在留管理庁 / 法務省 / ",
+          "group": "**官方一手（出入国在留管理庁 / 法務省 / e-Gov / 厚生労働省 / 日本年金機構 / ハローワーク / 国税庁 / 総務省 / 国土交通省）**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -3167,7 +4162,10 @@
           "url": "https://www.moj.go.jp/isa/applications/status/designatedactivities14.html",
           "year": "2026",
           "marker": "",
-          "group": "**官方一手（出入国在留管理庁 / 法務省 / ",
+          "group": "**官方一手（出入国在留管理庁 / 法務省 / e-Gov / 厚生労働省 / 日本年金機構 / ハローワーク / 国税庁 / 総務省 / 国土交通省）**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -3176,7 +4174,10 @@
           "url": "https://www.moj.go.jp/isa/content/001472175.pdf",
           "year": "2026",
           "marker": "换版",
-          "group": "**官方一手（出入国在留管理庁 / 法務省 / ",
+          "group": "**官方一手（出入国在留管理庁 / 法務省 / e-Gov / 厚生労働省 / 日本年金機構 / ハローワーク / 国税庁 / 総務省 / 国土交通省）**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -3185,7 +4186,10 @@
           "url": "https://jsite.mhlw.go.jp/tokyo-foreigner/tenshokusha/nihon_hataraku_gaikokujin/spec_1c.html",
           "year": "2026",
           "marker": "",
-          "group": "**官方一手（出入国在留管理庁 / 法務省 / ",
+          "group": "**官方一手（出入国在留管理庁 / 法務省 / e-Gov / 厚生労働省 / 日本年金機構 / ハローワーク / 国税庁 / 総務省 / 国土交通省）**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -3194,7 +4198,10 @@
           "url": "https://elaws.e-gov.go.jp/document?lawid=322AC0000000049",
           "year": "2026",
           "marker": "",
-          "group": "**官方一手（出入国在留管理庁 / 法務省 / ",
+          "group": "**官方一手（出入国在留管理庁 / 法務省 / e-Gov / 厚生労働省 / 日本年金機構 / ハローワーク / 国税庁 / 総務省 / 国土交通省）**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -3203,7 +4210,10 @@
           "url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000139508.html",
           "year": "2026",
           "marker": "",
-          "group": "**官方一手（出入国在留管理庁 / 法務省 / ",
+          "group": "**官方一手（出入国在留管理庁 / 法務省 / e-Gov / 厚生労働省 / 日本年金機構 / ハローワーク / 国税庁 / 総務省 / 国土交通省）**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -3212,7 +4222,10 @@
           "url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/index.html",
           "year": "2026",
           "marker": "",
-          "group": "**官方一手（出入国在留管理庁 / 法務省 / ",
+          "group": "**官方一手（出入国在留管理庁 / 法務省 / e-Gov / 厚生労働省 / 日本年金機構 / ハローワーク / 国税庁 / 総務省 / 国土交通省）**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -3221,16 +4234,22 @@
           "url": "https://www.nenkin.go.jp/international/japanese-system/withdrawalpayment/index.html",
           "year": "2026",
           "marker": "",
-          "group": "**官方一手（出入国在留管理庁 / 法務省 / ",
+          "group": "**官方一手（出入国在留管理庁 / 法務省 / e-Gov / 厚生労働省 / 日本年金機構 / ハローワーク / 国税庁 / 総務省 / 国土交通省）**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
         {
           "text": "15. [日本年金機構 厚生年金保険料等の免除（産前産後休業・育児休業等期間）](https://www.nenkin.go.jp/service/kounen/hokenryo/menjo/20140122-01.html) — 入口页无版本日期；核验日期：2026-11-17；核验状态：已核验",
           "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/menjo/20140122-01.html",
-          "year": "2014",
+          "year": "2026",
           "marker": "",
-          "group": "**官方一手（出入国在留管理庁 / 法務省 / ",
+          "group": "**官方一手（出入国在留管理庁 / 法務省 / e-Gov / 厚生労働省 / 日本年金機構 / ハローワーク / 国税庁 / 総務省 / 国土交通省）**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -3239,7 +4258,10 @@
           "url": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1420.htm",
           "year": "2022",
           "marker": "",
-          "group": "**官方一手（出入国在留管理庁 / 法務省 / ",
+          "group": "**官方一手（出入国在留管理庁 / 法務省 / e-Gov / 厚生労働省 / 日本年金機構 / ハローワーク / 国税庁 / 総務省 / 国土交通省）**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -3248,7 +4270,10 @@
           "url": "https://www.mlit.go.jp/jidosha/jidosha_tk6_000001.html",
           "year": "2026",
           "marker": "",
-          "group": "**官方一手（出入国在留管理庁 / 法務省 / ",
+          "group": "**官方一手（出入国在留管理庁 / 法務省 / e-Gov / 厚生労働省 / 日本年金機構 / ハローワーク / 国税庁 / 総務省 / 国土交通省）**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -3258,6 +4283,9 @@
           "year": "2025",
           "marker": "",
           "group": "**媒体线索（仅线索，引用须回溯官方原文）**：",
+          "group_canonical": "媒体",
+          "authority_grade": "C",
+          "language": "ja",
           "relay_level": "1",
           "independence": "非独立"
         },
@@ -3267,6 +4295,9 @@
           "year": "2026",
           "marker": "",
           "group": "**媒体线索（仅线索，引用须回溯官方原文）**：",
+          "group_canonical": "媒体",
+          "authority_grade": "C",
+          "language": "ja",
           "relay_level": "1",
           "independence": "非独立"
         }
@@ -3286,6 +4317,9 @@
           "year": "2026",
           "marker": "",
           "group": "**日本官方一手**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -3295,6 +4329,9 @@
           "year": "2026",
           "marker": "",
           "group": "**日本官方一手**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -3304,6 +4341,9 @@
           "year": "2026",
           "marker": "",
           "group": "**日本官方一手**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -3313,6 +4353,9 @@
           "year": "2026",
           "marker": "",
           "group": "**日本官方一手**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -3322,6 +4365,9 @@
           "year": "2026",
           "marker": "",
           "group": "**日本官方一手**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -3331,6 +4377,9 @@
           "year": "2026",
           "marker": "",
           "group": "**日本官方一手**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -3340,6 +4389,9 @@
           "year": "2026",
           "marker": "",
           "group": "**日本官方一手**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -3349,6 +4401,9 @@
           "year": "2026",
           "marker": "",
           "group": "**日本官方一手**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -3358,6 +4413,9 @@
           "year": "2026",
           "marker": "",
           "group": "**日本官方一手**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -3367,6 +4425,9 @@
           "year": "2026",
           "marker": "",
           "group": "**日本官方一手**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -3376,6 +4437,9 @@
           "year": "2026",
           "marker": "",
           "group": "**日本官方一手**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -3385,6 +4449,9 @@
           "year": "2026",
           "marker": "核对",
           "group": "**日本官方一手**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         }
@@ -3403,7 +4470,10 @@
           "url": "https://www.moj.go.jp/isa/applications/status/dependent",
           "year": "2026",
           "marker": "",
-          "group": "**官方一手（出入国在留管理庁 / 法務省 / ",
+          "group": "**官方一手（出入国在留管理庁 / 法務省 / e-Gov / 厚生労働省 / 内閣府 / こども家庭庁 / 文部科学省 / 日本年金機構 / 総務省 / 地方自治体）**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -3412,7 +4482,10 @@
           "url": "https://www.moj.go.jp/isa/applications/procedures/nyuukokukanri07_00004.html",
           "year": "2026",
           "marker": "",
-          "group": "**官方一手（出入国在留管理庁 / 法務省 / ",
+          "group": "**官方一手（出入国在留管理庁 / 法務省 / e-Gov / 厚生労働省 / 内閣府 / こども家庭庁 / 文部科学省 / 日本年金機構 / 総務省 / 地方自治体）**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -3421,7 +4494,10 @@
           "url": "https://www.moj.go.jp/isa/applications/guide/nyuukokukanri07_00045.html",
           "year": "2026",
           "marker": "",
-          "group": "**官方一手（出入国在留管理庁 / 法務省 / ",
+          "group": "**官方一手（出入国在留管理庁 / 法務省 / e-Gov / 厚生労働省 / 内閣府 / こども家庭庁 / 文部科学省 / 日本年金機構 / 総務省 / 地方自治体）**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -3430,7 +4506,10 @@
           "url": "https://www.moj.go.jp/isa/applications/ssw/nyuukokukanri06_00103.html",
           "year": "2026",
           "marker": "",
-          "group": "**官方一手（出入国在留管理庁 / 法務省 / ",
+          "group": "**官方一手（出入国在留管理庁 / 法務省 / e-Gov / 厚生労働省 / 内閣府 / こども家庭庁 / 文部科学省 / 日本年金機構 / 総務省 / 地方自治体）**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -3439,7 +4518,10 @@
           "url": "https://www.moj.go.jp/isa/applications/ssw/index.html",
           "year": "2026",
           "marker": "",
-          "group": "**官方一手（出入国在留管理庁 / 法務省 / ",
+          "group": "**官方一手（出入国在留管理庁 / 法務省 / e-Gov / 厚生労働省 / 内閣府 / こども家庭庁 / 文部科学省 / 日本年金機構 / 総務省 / 地方自治体）**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -3448,7 +4530,10 @@
           "url": "https://www.moj.go.jp/isa/applications/resources/nyuukokukanri07_00122.html",
           "year": "2026",
           "marker": "",
-          "group": "**官方一手（出入国在留管理庁 / 法務省 / ",
+          "group": "**官方一手（出入国在留管理庁 / 法務省 / e-Gov / 厚生労働省 / 内閣府 / こども家庭庁 / 文部科学省 / 日本年金機構 / 総務省 / 地方自治体）**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -3457,7 +4542,10 @@
           "url": "https://www.moj.go.jp/isa/",
           "year": "2026",
           "marker": "",
-          "group": "**官方一手（出入国在留管理庁 / 法務省 / ",
+          "group": "**官方一手（出入国在留管理庁 / 法務省 / e-Gov / 厚生労働省 / 内閣府 / こども家庭庁 / 文部科学省 / 日本年金機構 / 総務省 / 地方自治体）**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -3466,7 +4554,10 @@
           "url": "https://www.moj.go.jp/",
           "year": "2026",
           "marker": "",
-          "group": "**官方一手（出入国在留管理庁 / 法務省 / ",
+          "group": "**官方一手（出入国在留管理庁 / 法務省 / e-Gov / 厚生労働省 / 内閣府 / こども家庭庁 / 文部科学省 / 日本年金機構 / 総務省 / 地方自治体）**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -3475,7 +4566,10 @@
           "url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/shussan/index.html",
           "year": "2026",
           "marker": "",
-          "group": "**官方一手（出入国在留管理庁 / 法務省 / ",
+          "group": "**官方一手（出入国在留管理庁 / 法務省 / e-Gov / 厚生労働省 / 内閣府 / こども家庭庁 / 文部科学省 / 日本年金機構 / 総務省 / 地方自治体）**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -3484,7 +4578,10 @@
           "url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000130583.html",
           "year": "2026",
           "marker": "",
-          "group": "**官方一手（出入国在留管理庁 / 法務省 / ",
+          "group": "**官方一手（出入国在留管理庁 / 法務省 / e-Gov / 厚生労働省 / 内閣府 / こども家庭庁 / 文部科学省 / 日本年金機構 / 総務省 / 地方自治体）**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -3493,7 +4590,10 @@
           "url": "https://www.mhlw.go.jp/",
           "year": "2026",
           "marker": "",
-          "group": "**官方一手（出入国在留管理庁 / 法務省 / ",
+          "group": "**官方一手（出入国在留管理庁 / 法務省 / e-Gov / 厚生労働省 / 内閣府 / こども家庭庁 / 文部科学省 / 日本年金機構 / 総務省 / 地方自治体）**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -3502,7 +4602,10 @@
           "url": "https://www.cfa.go.jp/policies/kokoseido/jidouteate/annai",
           "year": "2026",
           "marker": "",
-          "group": "**官方一手（出入国在留管理庁 / 法務省 / ",
+          "group": "**官方一手（出入国在留管理庁 / 法務省 / e-Gov / 厚生労働省 / 内閣府 / こども家庭庁 / 文部科学省 / 日本年金機構 / 総務省 / 地方自治体）**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -3511,7 +4614,10 @@
           "url": "https://www.cfa.go.jp/policies/hitori-oya/fuyou-teate/",
           "year": "2026",
           "marker": "",
-          "group": "**官方一手（出入国在留管理庁 / 法務省 / ",
+          "group": "**官方一手（出入国在留管理庁 / 法務省 / e-Gov / 厚生労働省 / 内閣府 / こども家庭庁 / 文部科学省 / 日本年金機構 / 総務省 / 地方自治体）**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -3520,7 +4626,10 @@
           "url": "https://www.mext.go.jp/a_menu/shotou/shugaku/detail/1422256.htm",
           "year": "2026",
           "marker": "",
-          "group": "**官方一手（出入国在留管理庁 / 法務省 / ",
+          "group": "**官方一手（出入国在留管理庁 / 法務省 / e-Gov / 厚生労働省 / 内閣府 / こども家庭庁 / 文部科学省 / 日本年金機構 / 総務省 / 地方自治体）**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -3529,7 +4638,10 @@
           "url": "https://www.mext.go.jp/a_menu/shotou/clarinet/004/1323374.htm",
           "year": "2026",
           "marker": "",
-          "group": "**官方一手（出入国在留管理庁 / 法務省 / ",
+          "group": "**官方一手（出入国在留管理庁 / 法務省 / e-Gov / 厚生労働省 / 内閣府 / こども家庭庁 / 文部科学省 / 日本年金機構 / 総務省 / 地方自治体）**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -3538,7 +4650,10 @@
           "url": "https://www.mext.go.jp/a_menu/shotou/clarinet/004/1415154_00018.html",
           "year": "2026",
           "marker": "",
-          "group": "**官方一手（出入国在留管理庁 / 法務省 / ",
+          "group": "**官方一手（出入国在留管理庁 / 法務省 / e-Gov / 厚生労働省 / 内閣府 / こども家庭庁 / 文部科学省 / 日本年金機構 / 総務省 / 地方自治体）**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -3547,7 +4662,10 @@
           "url": "https://www.mext.go.jp/content/20260525-mxt_kokoku-000007294_00.pdf",
           "year": "2026",
           "marker": "",
-          "group": "**官方一手（出入国在留管理庁 / 法務省 / ",
+          "group": "**官方一手（出入国在留管理庁 / 法務省 / e-Gov / 厚生労働省 / 内閣府 / こども家庭庁 / 文部科学省 / 日本年金機構 / 総務省 / 地方自治体）**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -3556,16 +4674,22 @@
           "url": "https://www.mext.go.jp/content/20260525-mxt_kokoku-000049969_02.pdf",
           "year": "2026",
           "marker": "",
-          "group": "**官方一手（出入国在留管理庁 / 法務省 / ",
+          "group": "**官方一手（出入国在留管理庁 / 法務省 / e-Gov / 厚生労働省 / 内閣府 / こども家庭庁 / 文部科学省 / 日本年金機構 / 総務省 / 地方自治体）**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
         {
-          "text": "19. [特定技能中文站 · 在留资格与家族带同](https://www.ssw.go.jp/cn/about/visa/) — 2026；1 号原则上不可带家属",
+          "text": "19. [特定技能中文站 · 在留资格与家族带同](https://www.ssw.go.jp/cn/about/visa/) — 2026（中文页，建议回溯日文原文）；1 号原则上不可带家属",
           "url": "https://www.ssw.go.jp/cn/about/visa/",
           "year": "2026",
           "marker": "",
-          "group": "**官方一手（出入国在留管理庁 / 法務省 / ",
+          "group": "**官方一手（出入国在留管理庁 / 法務省 / e-Gov / 厚生労働省 / 内閣府 / こども家庭庁 / 文部科学省 / 日本年金機構 / 総務省 / 地方自治体）**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "zh",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -3575,6 +4699,9 @@
           "year": "2026",
           "marker": "",
           "group": "**补充官方来源（本期核验）**：",
+          "group_canonical": "补充来源",
+          "authority_grade": "B",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -3584,14 +4711,19 @@
           "year": "2026",
           "marker": "",
           "group": "**补充官方来源（本期核验）**：",
+          "group_canonical": "补充来源",
+          "authority_grade": "B",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         }
       ],
       "graded": true,
       "field_completeness": 1.0,
-      "problems": [],
-      "fingerprint": "sha256:6fa1ae946529414eb8cf4c0e6a66c85456a272a67bcace3cef3ff58db083f4af"
+      "problems": [
+        "1 条来源为中文页面（建议回溯日文原文）"
+      ],
+      "fingerprint": "sha256:be1cd1be44993b4554045759cdc7ba21e3fcbd9b12c439122ac81157594abfc8"
     },
     {
       "report": "19-safety-disaster/reports/2026-11-safety-disaster.md",
@@ -3603,6 +4735,9 @@
           "year": "2026",
           "marker": "核对",
           "group": "**官方权威来源与发布节奏**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -3612,6 +4747,9 @@
           "year": "2026",
           "marker": "核对",
           "group": "**官方权威来源与发布节奏**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -3621,6 +4759,9 @@
           "year": "2026",
           "marker": "核对",
           "group": "**官方权威来源与发布节奏**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -3630,6 +4771,9 @@
           "year": "2026",
           "marker": "核对",
           "group": "**官方权威来源与发布节奏**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -3639,6 +4783,9 @@
           "year": "2026",
           "marker": "核对",
           "group": "**官方权威来源与发布节奏**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         }
@@ -3657,7 +4804,10 @@
           "url": "https://www.mofa.go.jp/mofaj/toko/todoke/shomei/index.html",
           "year": "2026",
           "marker": "核对",
-          "group": "**官方一手（外交部 / 驻外使领馆、国家移民管",
+          "group": "**官方一手（外交部 / 驻外使领馆、国家移民管理局、公安部、商务部、教育部留学服务中心、人社部、国家卫健委、司法部、国务院、日本外务省）**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -3666,7 +4816,10 @@
           "url": "https://www.mofa.go.jp/mofaj/toko/page22_000549.html",
           "year": "2026",
           "marker": "核对",
-          "group": "**官方一手（外交部 / 驻外使领馆、国家移民管",
+          "group": "**官方一手（外交部 / 驻外使领馆、国家移民管理局、公安部、商务部、教育部留学服务中心、人社部、国家卫健委、司法部、国务院、日本外务省）**：",
+          "group_canonical": "官方一手",
+          "authority_grade": "A",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         }
