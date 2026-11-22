@@ -1,6 +1,6 @@
 # CI 与自动化体系
 
-> **版本**：v2.25（2026-11-21 无法核实内容门禁）
+> **版本**：v2.31（2026-11-22 生成前核验接入 + public 安全姿态）
 > 本文档说明 jp-life-work 报告管理体系的持续集成（CI）与定时自动化。
 > 代码位置：`.github/workflows/`（8 条工作流）；工具链：`engine/tools/`；测试：`engine/tests/`。
 
@@ -21,6 +21,7 @@
 | 流程复用一致性 | `engine/tests/test_tools.py::TestProcessReuse` |
 | 阶段出口质量（采集 / 筛选 / 分类左移） | `validate.yml`（`stage_gate_check.py`） |
 | 触发检测 / 编排状态（S0→S2） | `pipeline-orchestrator.yml`（每月 1 日 01:45 UTC） |
+| 生成 / 发布前信息核验（闸0 + 无法核实内容） | `.github/actions/content-verify`（接入 `pipeline-orchestrator.yml` / `html-sync.yml`） |
 | 工具链覆盖率 / 双轴评审 | `validate.yml`（`coverage_gate.py`）/ `audit-gate.yml`（`review_gate.py`） |
 
 **CI 不产出报告研究内容**——报告由各主题 `prompts/business-config.md` 定义的研究流程人工/Agent 产出；CI 只校验与同步生成物。
@@ -82,13 +83,14 @@
 
 - **触发**：push（`**/reports/*.md`、`build_hub.py`、`md2html.py`、`report_diff.py`、`topics.json`、`template-registry.md`、词库 `terms.md`、`engine/search/**` 变更）、手动
 - **步骤**：
-  1. `md2html.py` — 重新生成同名自包含 HTML（含构建期跨月对比高亮）
-  2. `build_hub.py` — 重建 `index.html` 与 `search-index.json`
-  3. `audit_pipeline.py --sync` — 指纹失配 → `stale`
-  4. `audit_pipeline.py --rebind` — 渲染漂移重绑
-  5. `audit_badge.py --sync` — 标识同步
-  6. `automation_status.py record` — 记录执行状态
-  7. 提交并推送（无变更则跳过）
+  1. 生成 / 发布前信息核验（`.github/actions/content-verify`：闸0 + 无法核实内容硬门禁）
+  2. `md2html.py` — 重新生成同名自包含 HTML（含构建期跨月对比高亮）
+  3. `build_hub.py` — 重建 `index.html` 与 `search-index.json`
+  4. `audit_pipeline.py --sync` — 指纹失配 → `stale`
+  5. `audit_pipeline.py --rebind` — 渲染漂移重绑
+  6. `audit_badge.py --sync` — 标识同步
+  7. `automation_status.py record` — 记录执行状态
+  8. 提交并推送（无变更则跳过）
 
 ### 3. `scheduled-maintenance.yml` — 每月定时维护
 
@@ -194,11 +196,12 @@
 
 - **触发**：`cron: "45 1 1 * *"`（每月 1 日 01:45 UTC = 10:45 JST，与 00:15 / 00:45 / 01:15 错开 ≥ 30 分钟）、手动（可指定 `--period`）
 - **步骤**：
-  1. `trigger_watch.py --apply`（派生 watchlist + freshness + 候选线索，写 `trigger-watch.json`）
-  2. `pipeline_runner.py run`（S0 检测 → S1 计划 → **S2 人工闸门自动暂停**，不产出正文）
-  3. `pipeline_status.py`（生成统一监控视图 `status.md` / `status.json`）
-  4. 候选命中时开提醒 Issue（去重：当期已存在则更新正文）
-  5. `automation_status.py record --phase pipeline` + 提交 `engine/report-audits/pipeline/**`
+  1. 生成前信息核验（`.github/actions/content-verify`：闸0 + 无法核实内容硬门禁）
+  2. `trigger_watch.py --apply`（派生 watchlist + freshness + 候选线索，写 `trigger-watch.json`）
+  3. `pipeline_runner.py run`（S0 检测 → S1 计划 → **S2 人工闸门自动暂停**，不产出正文）
+  4. `pipeline_status.py`（生成统一监控视图 `status.md` / `status.json`）
+  5. 候选命中时开提醒 Issue（去重：当期已存在则更新正文）
+  6. `automation_status.py record --phase pipeline` + 提交 `engine/report-audits/pipeline/**`
 - **纪律**：**不含任何撰写步骤**；不跑 S3–S5 本地生成（由 `html-sync` / `validate` / `audit-gate` 承担）
 - **退出码**：`pipeline_runner run` 0 = 正常（含 S2 暂停）；1 = 阶段失败 / 状态损坏；2 = 参数错误
 
@@ -558,6 +561,25 @@ CI 在 ubuntu runner 上用 **bash** 执行 `run:`，本地维护者用 **PowerS
 
 ---
 
+## 十六、public 仓库安全姿态与生成前核验
+
+仓库为 **PUBLIC**（GitHub Free）。已对齐的最佳实践与边界：
+
+| 关注点 | 状态 | 载体 |
+|---|---|---|
+| 生成前信息核验（计划 / 发布前） | ✅ | `.github/actions/content-verify`（闸0 + 无法核实内容硬门禁）接入 `pipeline-orchestrator.yml` 与 `html-sync.yml` |
+| 提交前内容硬门禁 | ✅ | `engine/scripts/precommit_content_gate.py`（pre-commit 钩子） |
+| 合并门禁 | ✅ | `validate.yml` / `audit-gate.yml`（push + PR） |
+| 密钥扫描 | ✅ enabled | 仓库设置 `secret_scanning` |
+| 推送保护 | ✅ enabled | 仓库设置 `secret_scanning_push_protection` |
+| 依赖安全更新 | ✅ enabled | 仓库设置 `dependabot_security_updates` |
+| 依赖版本更新 | ✅ | `.github/dependabot.yml`（github-actions / pip 周更） |
+| 工作流最小权限 | ✅ | 8 条工作流均显式 `permissions`；定时任务推分支 + 开 PR，无 `pull_request_target` |
+| 服务端分支保护 | ⚠ 未启用 | GitHub Free 公共仓库**支持**分支保护；但 `workflow_guard merge` 直推 `origin/main`，启用 required status checks / PR 门禁需先改造合并流程。当前靠本地 `workflow_guard` + pre-commit 纪律 + CI 门禁 |
+| GitHub Pages | ✅ public | legacy Pages（main 根），与 PUBLIC 仓库一致 |
+
+---
+
 ## 版本记录
 
 | 版本 | 日期 | 变更 | 说明 |
@@ -602,3 +624,4 @@ CI 在 ubuntu runner 上用 **bash** 执行 `run:`，本地维护者用 **PowerS
 | v2.28 | 2026-11-22 | 咨询面板门禁一致性 | `consulting_panel` 核验清单不再输出无法核实标记（未完成项转 `00-decision-hub/data/source-backlog.md` 第三节）；`test_panel_roundtrip` 改密闭临时目录 + 新增标记回归；测试 1127 → 1128 |
 | v2.29 | 2026-11-22 | 生成前信息核验（闸0） | 新增 `engine/tools/generation_gate.py`（复用闸1-3 / 来源语言 / 无法核实内容 / 来源 schema 内核，18 项测试）与 `engine/scripts/precommit_content_gate.py`（提交前内容硬门禁）；`validate.yml` 增「生成前信息核验（闸0）」步骤（主 job 31 → 32 个命名步骤）；pre-commit 钩子接入内容硬门禁；提示词基座增「阶段4 前置：生成前信息核验」；工具 48 → 49、测试 1128 → 1146 |
 | v2.30 | 2026-11-22 | 本地等价 CI 入口 | 新增 `engine/tools/local_ci.py`（只读编排层：validate / audit-gate 的 33 项本地检查，确定性 JSON，退出码 0/1/2；`--with-tests` / `--with-coverage` 可选）与 `engine/tests/test_local_ci.py`（21 项）；结果目录 `engine/report-audits/local-ci/` 入 `.gitignore`；工具 49 → 50、测试 1146 → 1167 |
+| v2.31 | 2026-11-22 | 生成前核验接入 + public 安全姿态 | 新增复合动作 `.github/actions/content-verify`（闸0 + 无法核实内容硬门禁），接入 `pipeline-orchestrator.yml`（计划前）与 `html-sync.yml`（发布前）；新增 `.github/dependabot.yml`；仓库设置启用 secret scanning / push protection / Dependabot 安全更新；新增第十六节 |

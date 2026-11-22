@@ -2,6 +2,7 @@
 # 与定时维护（00:15）/ 月度提醒（00:45）/ 抽检（01:15）错峰 ≥ 30 分钟。
 #
 # 对应 docs/端到端流水线治理标准.md：
+#   0. 生成前信息核验（闸0 + 无法核实内容硬门禁）：未通过（P0/P1）即失败，不得进入计划与生成
 #   1. trigger_watch.py --apply：派生 watchlist + freshness + 候选线索，写 trigger-watch.json
 #   2. pipeline_runner.py run：S0 检测 → S1 计划 → S2 人工闸门（自动暂停，不产出正文）
 #   3. pipeline_status.py：生成统一监控视图 status.md / status.json
@@ -63,6 +64,10 @@ jobs:
 
       - name: 安装依赖
         run: pip install -r requirements.txt
+
+      # 生成前信息核验（闸0 + 无法核实内容硬门禁）：在计划 / 生成之前卡点，
+      # 未通过（P0/P1 或无法核实内容）即失败，确保未核验信息不得进入报告。
+      - uses: ./.github/actions/content-verify
 
       - name: 触发检测（trigger_watch.py --apply）
         id: watch
