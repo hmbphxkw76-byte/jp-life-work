@@ -1,6 +1,6 @@
 {
   "version": "v1.4",
-  "updated": "2026-11-22T01:03:09+00:00",
+  "updated": "2026-11-22T01:09:01+00:00",
   "reports": {
     "00-decision-hub/reports/2026-11-decision-hub.md": {
       "state": "audited",
@@ -16,7 +16,7 @@
       "finalized_at": "2026-11-22T01:03:07+00:00",
       "content_hash": "sha256:cd609489f99a19b558751b1e7cce762febd9cc835ded456d3423fac93ff39c83",
       "html_hash": "sha256:6d819f0c46f7db8cb9ad7d7b1876d8a01270b0173aa2f7248b62d27e0c08e2a9",
-      "last_seq": 1505
+      "last_seq": 1515
     },
     "02-career-driver/reports/2026-11-career-driver.md": {
       "state": "audited",
@@ -72,7 +72,7 @@
       "finalized_at": "2026-11-22T01:03:08+00:00",
       "content_hash": "sha256:86a37ccadbc03eaad16a7f13945a29c0fa8c1191c4b35769546492040dde8988",
       "html_hash": "sha256:48ec7432c4f3ab4fc9e0412573bedfd3e88cd5b5467a8bc45a3e92baff37e4de",
-      "last_seq": 1508
+      "last_seq": 1516
     },
     "09-politics-law/reports/2026-11-politics-law.md": {
       "state": "audited",
@@ -96,7 +96,7 @@
       "finalized_at": "2026-11-22T01:03:09+00:00",
       "content_hash": "sha256:df97d004476a6b9b7d72bfc65ece0f75d532636f0194f6ad4f9e517e14cebabc",
       "html_hash": "sha256:af75c2cc62fc6e456833f589291d3e7316c32fc24e0d101b52edc7d509b0e0b7",
-      "last_seq": 1511
+      "last_seq": 1517
     },
     "12-culture-life/reports/2026-11-culture-life.md": {
       "state": "audited",
@@ -152,7 +152,7 @@
       "finalized_at": "2026-11-22T01:03:09+00:00",
       "content_hash": "sha256:832c19f11ae4e059c83abfab3f19587a85fec732f4a76119e334edd9f29b8b95",
       "html_hash": "sha256:005496f4b094522a0b56a3911bd95627ea45014a6bbf7bf615b7f735fff2fb00",
-      "last_seq": 1514
+      "last_seq": 1518
     },
     "19-safety-disaster/reports/2026-11-safety-disaster.md": {
       "state": "audited",
