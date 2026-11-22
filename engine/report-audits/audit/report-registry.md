@@ -6,7 +6,7 @@
 | 报告 | 主题 | 期间 | 类型 | 内容指纹 | 审计状态 | 审计编号 |
 |---|---|---|---|---|---|---|
 | [00-decision-hub/reports/2026-11-decision-hub.md](../../../00-decision-hub/reports/2026-11-decision-hub.md) | 00-decision-hub | 2026-11 | employment-research | `sha256:72951e74ef68` | audited | AUD-202611-014 |
-| [01-ssw-driver/reports/2026-11-ssw-driver.md](../../../01-ssw-driver/reports/2026-11-ssw-driver.md) | 01-ssw-driver | 2026-11 | employment-research | `sha256:cd609489f99a` | audited | AUD-202611-012 |
+| [01-ssw-driver/reports/2026-11-ssw-driver.md](../../../01-ssw-driver/reports/2026-11-ssw-driver.md) | 01-ssw-driver | 2026-11 | employment-research | `sha256:5148eb9e5a55` | audited | AUD-202611-003 |
 | [02-career-driver/reports/2026-11-career-driver.md](../../../02-career-driver/reports/2026-11-career-driver.md) | 02-career-driver | 2026-11 | employment-research | `sha256:6e2e6de89478` | audited | AUD-202611-013 |
 | [03-career-management/reports/2026-11-career-management.md](../../../03-career-management/reports/2026-11-career-management.md) | 03-career-management | 2026-11 | employment-research | `sha256:3277ea469b8c` | audited | AUD-202611-004 |
 | [04-industry-logistics/reports/2026-11-industry-logistics.md](../../../04-industry-logistics/reports/2026-11-industry-logistics.md) | 04-industry-logistics | 2026-11 | industry-research | `sha256:a0716aa5ac85` | audited | AUD-202611-020 |
@@ -16,7 +16,7 @@
 | [08-visa-immigration/reports/2026-11-visa-immigration.md](../../../08-visa-immigration/reports/2026-11-visa-immigration.md) | 08-visa-immigration | 2026-11 | policy-analysis | `sha256:86a37ccadbc0` | audited | AUD-202611-018 |
 | [09-politics-law/reports/2026-11-politics-law.md](../../../09-politics-law/reports/2026-11-politics-law.md) | 09-politics-law | 2026-11 | policy-analysis | `sha256:54550f0f54a0` | audited | AUD-202611-015 |
 | [10-education-qualification/reports/2026-11-education-qualification.md](../../../10-education-qualification/reports/2026-11-education-qualification.md) | 10-education-qualification | 2026-11 | employment-research | `sha256:d68b8c04b74f` | audited | AUD-202611-021 |
-| [11-language-japanese/reports/2026-11-language-japanese.md](../../../11-language-japanese/reports/2026-11-language-japanese.md) | 11-language-japanese | 2026-11 | employment-research | `sha256:df97d004476a` | audited | AUD-202611-001 |
+| [11-language-japanese/reports/2026-11-language-japanese.md](../../../11-language-japanese/reports/2026-11-language-japanese.md) | 11-language-japanese | 2026-11 | employment-research | `sha256:663e697460aa` | audited | AUD-202611-012 |
 | [12-culture-life/reports/2026-11-culture-life.md](../../../12-culture-life/reports/2026-11-culture-life.md) | 12-culture-life | 2026-11 | employment-research | `sha256:1a346d79e89e` | audited | AUD-202611-002 |
 | [13-regional-info/reports/2026-11-regional-info.md](../../../13-regional-info/reports/2026-11-regional-info.md) | 13-regional-info | 2026-11 | market-monitoring | `sha256:50198487b52f` | audited | AUD-202611-011 |
 | [14-life-operations/reports/2026-11-life-operations.md](../../../14-life-operations/reports/2026-11-life-operations.md) | 14-life-operations | 2026-11 | employment-research | `sha256:9d59c92cc3cc` | audited | AUD-202611-016 |

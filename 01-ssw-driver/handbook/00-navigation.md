@@ -100,8 +100,8 @@
 
 ## 核心结论（摘要）
 
-1. **窗口已开但名额有限**：「自動車運送業」分野 2024-12-19 起正式接收特定技能 1 号外国人，五年受入上限 **22,100 人**（2026-01-23 阁议，现行；旧 24,500 已废止、ssw.go.jp 中文页未同步），相对 84 万现役司机的行业规模属于"高确定性、但窄口径"的进入窗口。[Source: https://www.moj.go.jp/isa/policies/ssw/automobiletransportation, 2026; https://www.ssw.go.jp/cn/about/visa/automobile_transportation_business_1/, 2026]
-2. **中国大陆考生面临“无考场”现实**：ClassNK 技能試験 CBT 与 JFT-Basic 的实施地均**不含中国大陆**，中国考生实际路径为赴第三国考试或在日本国内受验，日语考试只能走 JLPT（每年 7 月、12 月两次）。[Source: https://sswt-portal.classnk.or.jp/area?tab=3, 2026; https://www.prometric-jp.com/zh-CHS/ssw/, 2026; https://www.jlpt.jp/, 2026]
+1. **窗口已开但名额有限**：「自動車運送業」分野 2024-12-19 起正式接收特定技能 1 号外国人，五年受入上限 **22,100 人**（2026-01-23 阁议，现行；旧 24,500 已废止、ssw.go.jp 中文页未同步），相对 84 万现役司机的行业规模属于"高确定性、但窄口径"的进入窗口。[Source: https://www.moj.go.jp/isa/policies/ssw/automobiletransportation, 2026; https://www.ssw.go.jp/about/visa/automobile_transportation_business_1/, 2026]
+2. **中国大陆考生面临“无考场”现实**：ClassNK 技能試験 CBT 与 JFT-Basic 的实施地均**不含中国大陆**，中国考生实际路径为赴第三国考试或在日本国内受验，日语考试只能走 JLPT（每年 7 月、12 月两次）。[Source: https://sswt-portal.classnk.or.jp/area?tab=3, 2026; https://www.prometric-jp.com/ja/ssw/, 2026; https://www.jlpt.jp/, 2026]
 3. **供需缺口决定雇主付费意愿**：国交省再检证将 2030 年度卡车运力缺口从旧估 34% 修正为"对策下平均约 7%／最大约 25%"，2026 年 8 月司机有效求人倍率高达 **2.54**（全产业 1.06）。薪资端运输业月均现金给与 34.1 万円（同比+4.9%），但司机绝对收入仍低于全产业均值。[Source: https://www.mlit.go.jp/seisakutokatsu/freight/content/001984794.pdf, 2025; https://www.mhlw.go.jp/content/11602000/001753011.pdf, 2026; https://www.mhlw.go.jp/toukei/itiran/roudou/monthly/r08/2609p/2609p.html, 2026]
 4. **运价→工资传导已启动但不完全**（推断）：2026 春斗卡车业加薪率 3.85% 低于全产业 5.02%，但全ト协调查显示大型司机月薪已达 39.5 万円（+4%）；头部企业（佐川、雅玛多）待遇公告显著高于行业均值。**此传导判断为推断，非官方结论。**[Source: https://logishift.net/2026/08/06/post-7782/, 2026; https://www.jil.go.jp/kokunai/blt/backnumber/2026/06/blm_sanbetsu.html, 2026]
 5. **自动驾驶暂不构成就业威胁**（推断）：L4 现阶段限定"深夜·限定区间·路车协调"的新东名约 100km 实证，商用化目标在 2027–2028 年度以后，且首波聚焦幹線运送；市内配送司机的替代节奏预计显著更慢。**全部为推断。**[Source: https://www.digital.go.jp/assets/contents/node/basic_page/field_ref_resources/2415ad00-6a79-4ebc-8fb1-51a47b1b0552/11045673/20260721_meeting_mobility_01.pdf, 2026]

@@ -43,10 +43,10 @@
 
 | 事项 | 入口 |
 |---|---|
-| JLPT 国内报名 | https://jlpt.neea.edu.cn / https://jlpt.neea.cn |
+| JLPT 官方信息 | https://jlpt.jp / jees.or.jp/jlpt |
 | JLPT 全球官网 | https://www.jlpt.jp |
 | JFT-Basic（赴日后） | https://www.jft-basic.jp（报名经 Prometric） |
-| 特定技能官方中文站 | https://www.ssw.go.jp/cn/ |
+| 特定技能官方中文站 | https://www.ssw.go.jp/ |
 
 ## 六、采购建议
 

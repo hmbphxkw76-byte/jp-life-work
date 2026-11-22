@@ -53,5 +53,5 @@
 ## 四、残留
 
 1. **重庆领馆中文页**（`itpr_zh`）：站点 Akamai 拦截 + `itpr_ja` 路径 Not found，日文原文未能核实，保留中文页并标注。
-2. **新发现（未处理）**：`01` 报告来源 62 `jlpt.neea.cn`（中国教育考试网）为中文域名，不在 `source-policy.json` `blocked_domains` 内，故未被来源语言门禁拦截；属政策清单缺口，建议后续裁定（中国专属报名信息，可能需例外口径）。
+2. **新发现（已于 `purge-cn-sources` 处理）**：`01` 报告来源 62 `jlpt.neea.cn`（中国教育考试网）为中文域名，原不在 `source-policy.json` `blocked_domains` 内；经裁定按现政策严格清零，已加入黑名单并清除报告 / 手册 / 提示词 / 登记册中的 NEEA 引用（详见 `purge-cn-sources-review.md`）。
 3. 报告内对「ssw.go.jp 中文页 24,500 未同步」的文字表述为**口径观察**（非引用），保留。

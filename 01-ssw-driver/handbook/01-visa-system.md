@@ -7,8 +7,8 @@
 
 ## 2.1 制度框架（截至 2026-11-11）
 
-- **特定技能 1 号**：在留期间合计上限 5 年、不可携家属；**2 号**：无上限、可携配偶子女。[Source: https://www.ssw.go.jp/cn/about/visa/, 2026]
-- **分野规模**：1 号可从事 19 个分野、2 号 11 个（出入国在留管理庁中文版）。[Source: https://www.ssw.go.jp/cn/about/visa/, 2026]
+- **特定技能 1 号**：在留期间合计上限 5 年、不可携家属；**2 号**：无上限、可携配偶子女。[Source: https://www.ssw.go.jp/about/visa/, 2026]
+- **分野规模**：1 号可从事 19 个分野、2 号 11 个（出入国在留管理庁中文版）。[Source: https://www.ssw.go.jp/about/visa/, 2026]
 - **「自動車運送業」分野**：2024-03-29 阁议决定新增（同批：铁道、林业、木材产业），监管省厅为**国土交通省**；2024-12-19 上乗せ基准告示施行后正式开始接收；分野运用方针已于 2026-01-23 重新阁议决定。[Source: https://www.moj.go.jp/isa/applications/ssw/2024.03.29.kakugikettei.html, 2024–2026; https://www.moj.go.jp/isa/policies/ssw/automobiletransportation, 2026]
 - **受入上限（冲突并列）**：
   - 22,100 人（2024 年 4 月–2029 年 3 月末，ISA 自動車運送業分野页）[Source: https://www.moj.go.jp/isa/policies/ssw/automobiletransportation, 2026-10-09 现在]
@@ -38,7 +38,7 @@
 - 全日本トラック协会发布面向外国人的学習用テキスト。[Source: https://jta.or.jp/member/driver/ssw_text.html, 2026]
 
 **日本語試験**
-- JFT-Basic：随時 CBT，海外 14 国（Prometric 中文页）／27 都市＋日本国内 10 都道府县——**中国大陆不在实施地**；2026-08 起增判 A1/A2.1（育成就劳对应）。[Source: https://www.prometric-jp.com/zh-CHS/ssw/, 2026; https://www.jpf.go.jp/jft-basic/report/pdf/2025-12-202601.pdf, 2026]
+- JFT-Basic：随時 CBT，海外 14 国（Prometric 中文页）／27 都市＋日本国内 10 都道府县——**中国大陆不在实施地**；2026-08 起增判 A1/A2.1（育成就劳对应）。[Source: https://www.prometric-jp.com/ja/ssw/, 2026; https://www.jpf.go.jp/jft-basic/report/pdf/2025-12-202601.pdf, 2026]
 - JLPT：中国大陆每年 2 回（2026 年：7 月 5 日、12 月 6 日）——中国考生实际主路径。[Source: https://www.jlpt.jp/, 2026]
 
 ## 2.4 申请流程与费用
@@ -62,7 +62,7 @@
 | 家属 | 不可 | 可（配偶子女） | 不可 | 不可 |
 | 定位 | 即战力劳力 | 更高熟练度 | 人材育成/技能转让目的 | 驾照·研修过渡 |
 
-- SSW 数据行：[Source: https://www.ssw.go.jp/cn/about/visa/, 2026]；特定活动行：[Source: https://www.moj.go.jp/isa/applications/procedures/16-1, 2026]
+- SSW 数据行：[Source: https://www.ssw.go.jp/about/visa/, 2026]；特定活动行：[Source: https://www.moj.go.jp/isa/applications/procedures/16-1, 2026]
 - ⚠️ 技能实习、特定技能 2 号分野适用性的完整官方口径本次未逐项核实（推断列），完整对比表待次期补全 → 待复核。引用数据时严禁将技能实习统计与特定技能混算。
 
 ## 关联

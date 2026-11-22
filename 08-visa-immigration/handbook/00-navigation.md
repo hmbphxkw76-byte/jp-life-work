@@ -73,7 +73,7 @@
 | 文档 | 变更点 | 旧值/旧说法 | 新值（来源/年份） | 性质 |
 |---|---|---|---|---|
 | 08 | [新建「家属带同与家庭规划」章节](https://www.moj.go.jp/isa/applications/status/dependent "来源：https://www.moj.go.jp/isa/applications/status/dependent, 2026") | 无专章（全库仅散见 8 处提及） | 「家族滞在」要件、資格外活動許可（周 28 小时）、子女就学衔接（签证侧）、永住世帯年収财务影响 | 新增 |
-| 08 | [扶养人资格范围确认](https://www.ssw.go.jp/cn/about/visa/ "来源：https://www.ssw.go.jp/cn/about/visa/, 2026") | — | 特定技能 1 号原则上不可带家属；技人国、特定技能 2 号等可带 | 新增 |
+| 08 | [扶养人资格范围确认](https://www.ssw.go.jp/about/visa/ "来源：https://www.ssw.go.jp/about/visa/, 2026") | — | 特定技能 1 号原则上不可带家属；技人国、特定技能 2 号等可带 | 新增 |
 | 全手册 | 章节编号顺延 | 08-政策更新日志 | **09-政策更新日志**（索引表、使用约定、更新日志引用、正文锚点同步改写） | 修订 |
 
 待复核（本轮新增）：
@@ -88,7 +88,7 @@
 
 | 文档 | 变更点 | 旧值/旧说法 | 新值（来源/年份） | 性质 |
 |---|---|---|---|---|
-| 02 | [2 号移行表述](https://www.ssw.go.jp/cn/about/visa/ "来源：https://www.ssw.go.jp/cn/about/visa/, 2026") | "满 5 年前需规划 2 号移行" | **本分野无 2 号**，满 5 年前须切换其他在留资格（01/05 已修正，02 遗漏回写） | 修订 |
+| 02 | [2 号移行表述](https://www.ssw.go.jp/about/visa/ "来源：https://www.ssw.go.jp/about/visa/, 2026") | "满 5 年前需规划 2 号移行" | **本分野无 2 号**，满 5 年前须切换其他在留资格（01/05 已修正，02 遗漏回写） | 修订 |
 | 02 | [受入上限口径标注](https://www.moj.go.jp/isa/policies/ssw/automobiletransportation "来源：https://www.moj.go.jp/isa/policies/ssw/automobiletransportation, 2026") | "口径冲突（并列双报）" | **中文站未同步（以 22,100 为准）**；中文页 24,500 仅作线索 | 修订 |
 | 02 | 健康检查 | 未载 | **本分野无健康检查义务**；唯一健康相关项为出租车/巴士新任研修内適性診断 | 新增 |
 | 06 | [育成就労 MOC](https://www.moj.go.jp/isa/applications/ssw/nyuukokukanri05_00002.html "来源：https://www.moj.go.jp/isa/applications/ssw/nyuukokukanri05_00002.html, 2026") | "OTIT 列出 16 国"（未区分签署/暂定） | ISA MOC 页（2026-11-12 更新）列 **7 国**；OTIT 一览列 **16 国**（含暂定）；**均不含中国** | 修订 |
@@ -112,13 +112,13 @@
 | 01/02/03 | [出租车·巴士日语要求](https://www.moj.go.jp/isa/03_00198.html "来源：https://www.moj.go.jp/isa/03_00198.html, 2026") | JLPT N3 以上 | N3 以上**且 B1 相当以上**；满足第 9、10（或 11）项措施可用 JFT-Basic/N4 替代；2027-04-01 起 COE 申请适用 | 修订 |
 | 05 | [2 号日语要件](https://www.moj.go.jp/isa/03_00198.html "来源：https://www.moj.go.jp/isa/03_00198.html, 2026") | 通常 N3 以上 | **B1 相当以上**（2027-04-01 起 COE 申请；变更·更新时间待公告） | 修订 |
 | 03 | [技能评价试验费用/日程](https://sswt-portal.classnk.or.jp/news/25 "来源：https://sswt-portal.classnk.or.jp/news/25, 2026") | 以 Portal 为准（无具体数值） | 日本国内 6,500 円（税抜）、海外 45 美元；CBT 无固定考日 | 新增 |
-| 03 | [JFT-Basic / JLPT 费用](https://www.prometric-jp.com/ssw/exam/fee/ "来源：https://www.prometric-jp.com/ssw/exam/fee/；https://jlpt.neea.edu.cn/faq.html, 2026") | 无具体数值 | JFT-Basic 日本国内 10,000 円；JLPT 中国 N4 450 元 | 新增 |
+| 03 | [JFT-Basic / JLPT 费用](https://www.prometric-jp.com/ssw/exam/fee/ "来源：https://www.prometric-jp.com/ssw/exam/fee/") | 无具体数值 | JFT-Basic 日本国内 10,000 円 | 新增 |
 | 04 | [中国领馆签证费](https://www.shanghai.cn.emb-japan.go.jp/itpr_ja/11_000001_00633.html "来源：https://www.shanghai.cn.emb-japan.go.jp/itpr_ja/11_000001_00633.html, 2026") | 未载 | 单次 715 元（2026-07-01 起） | 新增 |
 | 06 | [育成就労运用要领进展](https://www.moj.go.jp/isa/applications/index_00005.html "来源：https://www.moj.go.jp/isa/applications/index_00005.html, 2026") | 以漁業（2026-11-06）为例 | 新增 宿泊（10-16）、飲食料品製造業・資源循環（10-09）、MOC 页面更新（10-13/10-20）；**自動車運送業 未公布** | 新增 |
 | 06 | [接收国限定](https://www.otit.go.jp/employment_for_skill_development/05/ "来源：https://www.otit.go.jp/employment_for_skill_development/05/, 2026") | 未载 | 育成就労原则上仅从 MOC 签署国接收 | 新增 |
 | 07 | [永住要件](https://www.moj.go.jp/isa/10_00279.html "来源：https://www.moj.go.jp/isa/10_00279.html, 2026-10-01 改定") | 世帯年收 + 社保义务 | 追加：世帯定义与「家族滞在」收入不计入、**年金受給見込額/補填資産**、**日本語能力** | 新增 |
 | 09 | 政策日志 | — | 本轮全部核验条目已记入 09-政策更新日志 | 新增 |
-| 01/05/07 | [**2 号适用分野**](https://www.ssw.go.jp/cn/about/visa/ "来源：https://www.ssw.go.jp/cn/about/visa/, 2026") | 2 号已扩大至全部 16 分野；主线为 1 号→2 号→永住 | **2 号仅 11 分野，自动车运送业无 2 号**；主线改为 1 号→技人国/高度专门职→永住 | 修订（重大） |
+| 01/05/07 | [**2 号适用分野**](https://www.ssw.go.jp/about/visa/ "来源：https://www.ssw.go.jp/about/visa/, 2026") | 2 号已扩大至全部 16 分野；主线为 1 号→2 号→永住 | **2 号仅 11 分野，自动车运送业无 2 号**；主线改为 1 号→技人国/高度专门职→永住 | 修订（重大） |
 | 06 | [育成就労 MOC 国家](https://www.otit.go.jp/employment_for_skill_development/05/ "来源：https://www.otit.go.jp/employment_for_skill_development/05/, 2026") | 待复核 | **中国不在 16 国名单内**（育成就労原则上仅从 MOC 国接收） | 修订 |
 
 ### 2026-11-11（待复核项核查结果）
@@ -126,8 +126,8 @@
 | # | 原待复核项 | 结论 | 证据 |
 |---|---|---|---|
 | 1 | 育成就労 MOC 是否覆盖中国 | **已确认：不含中国**。OTIT 名单共 16 国（泰、老挝、乌兹别克、斯里兰卡、东帝汶等），中国未列入 | https://www.otit.go.jp/employment_for_skill_development/05/ |
-| 2 | ssw.go.jp 中文页 24,500 | **仍未更正**（本次抓取页面仍写 24,500）；与 ISA 22,100 双报保留 | https://www.ssw.go.jp/cn/about/visa/automobile_transportation_business_1/ |
-| 3 | 2 号 自動車運送業 试验 | **已确认：该分野无 2 号**（2 号仅 11 分野），非"未开考"；1 号→2 号路径不存在 | https://www.ssw.go.jp/cn/about/visa/ |
+| 2 | ssw.go.jp 中文页 24,500 | **仍未更正**（本次抓取页面仍写 24,500）；与 ISA 22,100 双报保留 | https://www.ssw.go.jp/about/visa/automobile_transportation_business_1/ |
+| 3 | 2 号 自動車運送業 试验 | **已确认：该分野无 2 号**（2 号仅 11 分野），非"未开考"；1 号→2 号路径不存在 | https://www.ssw.go.jp/about/visa/ |
 | 4 | B1 要求变更·更新的适用时间 | **仍在检讨中**（页面无更新） | https://www.moj.go.jp/isa/03_00198.html |
 | 5 | 843 人原始出处 | **已取得 ISA 原件**：843 人 / 上限 22,100 / 充足率 3.8%（2026-08 末速报） | https://www.moj.go.jp/isa/content/001472175.pdf |
 

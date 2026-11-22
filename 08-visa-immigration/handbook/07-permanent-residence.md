@@ -58,7 +58,7 @@ Y0          Y1–5                     Y5                      Y6–10          
 
 | 路径 | 永住所需时间 | 特点 |
 |---|---|---|
-| [~~1号→2号→永住~~（**不可行**）](https://www.ssw.go.jp/cn/about/visa/ "来源：https://www.ssw.go.jp/cn/about/visa/, 2026") | — | 自动车运送业无 2 号，路径不存在 |
+| [~~1号→2号→永住~~（**不可行**）](https://www.ssw.go.jp/about/visa/ "来源：https://www.ssw.go.jp/about/visa/, 2026") | — | 自动车运送业无 2 号，路径不存在 |
 | [1号→技人国→永住（**已确认主线**）](https://www.moj.go.jp/isa/applications/status/gijinkoku.html "来源：https://www.moj.go.jp/isa/applications/status/gijinkoku.html, 2026") | 约 10 年（1号 5 年 + 技人国 5 年） | 学历要件已满足（本科相关专业）；须在第 5 年前转入管理/企划岗 |
 | 1号→补学历→技人国→永住（兜底，**不启用**） | 10 年+学制时间 | 通信制/海外大学商科·物流，可与 1 号并行（**推断**） |
 | 高度专门职（积分 70/80） | 3 年/1 年 | 需学位与高年收；无学位时基本不可达（详见 [05](05-ssw2-upgrade.md) 5.3） |

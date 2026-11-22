@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "total_entries": 384,
+  "total_entries": 383,
   "reports": [
     {
       "report": "00-decision-hub/reports/2026-11-decision-hub.md",
@@ -750,18 +750,6 @@
           "independence": "独立"
         },
         {
-          "text": "62. [JLPT 中国报名 FAQ](https://jlpt.neea.cn/faq.html) — 2026",
-          "url": "https://jlpt.neea.cn/faq.html",
-          "year": "2026",
-          "marker": "",
-          "group": "### ② 权威组织 / 考试实施机构",
-          "group_canonical": "权威机构",
-          "authority_grade": "B",
-          "language": "ja",
-          "relay_level": "1",
-          "independence": "独立"
-        },
-        {
           "text": "63. [駐日ベトナム大使館技能試験页](https://www.vn.emb-japan.go.jp/itpr_ja/11_000001_02534_TokuteiginouShiken_Jidoushaunsou.html) — 2026",
           "url": "https://www.vn.emb-japan.go.jp/itpr_ja/11_000001_02534_TokuteiginouShiken_Jidoushaunsou.html",
           "year": "2026",
@@ -1427,7 +1415,7 @@
       "problems": [
         "1 条来源为中文页面（建议回溯日文原文）"
       ],
-      "fingerprint": "sha256:cd609489f99a19b558751b1e7cce762febd9cc835ded456d3423fac93ff39c83"
+      "fingerprint": "sha256:5148eb9e5a55e52c9c22a46bf753c4460c28cf1c0c84797887599400067cd67e"
     },
     {
       "report": "02-career-driver/reports/2026-11-career-driver.md",
@@ -3111,7 +3099,7 @@
       "graded": true,
       "field_completeness": 1.0,
       "problems": [],
-      "fingerprint": "sha256:df97d004476a6b9b7d72bfc65ece0f75d532636f0194f6ad4f9e517e14cebabc"
+      "fingerprint": "sha256:663e697460aab04ab63281a5d3d6fc13086130aa757c03eca9236a17648f5880"
     },
     {
       "report": "12-culture-life/reports/2026-11-culture-life.md",

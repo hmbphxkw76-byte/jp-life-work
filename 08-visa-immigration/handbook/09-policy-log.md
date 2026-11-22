@@ -13,7 +13,7 @@
 | 自動車運送業分野 要領別冊 改正（2026-10-09） | 已补记录；**新旧対照表（001472544.pdf）未能取得，課加条件・様式追加的影响待复核**（监测报告已按现行要領确认全 11 项、无健康检查义务） | https://www.moj.go.jp/isa/applications/ssw/nyuukokukanri07_00201.html |
 | 育成就労 MOC 页面（触发器 3） | **2026-11-12 更新**；ISA 列 7 国、OTIT 列 16 国（含暂定），**均不含中国** | https://www.moj.go.jp/isa/applications/ssw/nyuukokukanri05_00002.html |
 | ssw.go.jp 日/中文页受入上限 | 仍为 **24,500**（未同步）；本库采用 ISA 22,100 | https://www.ssw.go.jp/about/visa/automobile_transportation_business_1/ |
-| 2 号适用分野（追踪表 #9） | 无变化（11 分野、无自动车运送业） | https://www.ssw.go.jp/cn/about/visa/ |
+| 2 号适用分野（追踪表 #9） | 无变化（11 分野、无自动车运送业） | https://www.ssw.go.jp/about/visa/ |
 | ClassNK 试验 portal（触发器 2） | 最新 news/30（2026-10-26 物流倉庫出張試験）；自動車運送業 月报最新为 2026-09（news/29），无新日程 | https://sswt-portal.classnk.or.jp/ |
 | 永住ガイドライン（触发器 4） | 令和 8-10-01 改定、适用 2027-04-01 起申请；无新改定 | https://www.moj.go.jp/isa/10_00279.html |
 | 中国领馆签证费（触发器 5） | 领馆页抓取被拒（Access Denied）；715 元以监测报告已核实值为准，无变化证据 | https://www.shanghai.cn.emb-japan.go.jp/ |
@@ -25,8 +25,8 @@
 | 事项 | 结论 | 来源 |
 |---|---|---|
 | 育成就労 MOC 国别名单 | 16 国，**中国不在其中** | https://www.otit.go.jp/employment_for_skill_development/05/ |
-| ssw.go.jp 中文页受入上限 | 仍为 24,500，**未更正** | https://www.ssw.go.jp/cn/about/visa/automobile_transportation_business_1/ |
-| **2 号适用分野** | **仅 11 分野，自动车运送业无 2 号**；1 号→2 号路径不存在（重大更正） | https://www.ssw.go.jp/cn/about/visa/ |
+| ssw.go.jp 中文页受入上限 | 仍为 24,500，**未更正** | https://www.ssw.go.jp/about/visa/automobile_transportation_business_1/ |
+| **2 号适用分野** | **仅 11 分野，自动车运送业无 2 号**；1 号→2 号路径不存在（重大更正） | https://www.ssw.go.jp/about/visa/ |
 | 2 号在留者数（2026-08 末） | 合计 23,348；自動車運送業为空 | https://www.moj.go.jp/isa/content/001472175.pdf |
 | B1 要求对变更·更新的适用时间 | 仍为「現在検討中」 | https://www.moj.go.jp/isa/03_00198.html |
 | 843 人原始出处 | 已取得 ISA 原件（843 人 / 22,100 / 3.8%） | https://www.moj.go.jp/isa/content/001472175.pdf |
@@ -47,20 +47,20 @@
 | ClassNK 受験料：日本国内 6,500 円（税抜）、海外 45 美元 | 确认 | https://sswt-portal.classnk.or.jp/news/25 |
 | JFT-Basic 日本国内受験料 10,000 円 | 确认 | https://www.prometric-jp.com/ssw/exam/fee/ |
 | 中国受理领馆单次签证费 715 元（2026-07-01 起） | 确认 | https://www.shanghai.cn.emb-japan.go.jp/itpr_ja/11_000001_00633.html |
-| JLPT 中国考区 N4 450 元 | 确认 | https://jlpt.neea.edu.cn/faq.html |
+| JLPT 中国考区费用 | 仅中文来源，按政策未纳入 | — |
 
 ## 2026-11-11（建档首次核对）
 
 | 事项 | 状态 | 来源 |
 |---|---|---|
 | 特定技能 1 号自动车运送业分野正常运作 | 确认（ISA 分野页 2026-10-09 现在时点） | https://www.moj.go.jp/isa/policies/ssw/automobiletransportation |
-| 卡车路径要求：评价试验 + 第一种驾照 + JFT-Basic/N4 | 确认 | https://www.ssw.go.jp/cn/about/visa/automobile_transportation_business_1/ |
+| 卡车路径要求：评价试验 + 第一种驾照 + JFT-Basic/N4 | 确认 | https://www.ssw.go.jp/about/visa/automobile_transportation_business_1/ |
 | 出租车/巴士路径：第二种驾照 + N3 + 新任驾驶员研修 | 确认 | 同上 |
 | 评价试验受验资格：满 17 岁（印尼 18）、有效驾照、非日籍 | 确认 | https://sswt-portal.classnk.or.jp/area?tab=3 |
 | 永住许可指南最新版：令和 8 年（2026）10 月 1 日改定，新增世帯年收水准考量 | 确认 | https://www.moj.go.jp/isa/10_00279.html |
 | 育成就劳：2026-04-15 监理支援机关申请受理、2026-09-01 计划认定受理、**2027-04-01 施行** | 确认 | https://www.moj.go.jp/isa/applications/index_00005.html |
 | 特定技能 1 号支援体制要件改正，2027-04-01 生效（2026-07-28 公布） | 确认 | https://www.moj.go.jp/isa/applications/ssw/ |
-| 自动车运送业 5 年接收上限 24,500 人（2024-04～2029-03） | 建档时记录；**已于 2026-11-11 更正为 22,100 人**（见上条） | https://www.ssw.go.jp/cn/ |
+| 自动车运送业 5 年接收上限 24,500 人（2024-04～2029-03） | 建档时记录；**已于 2026-11-11 更正为 22,100 人**（见上条） | https://www.ssw.go.jp/ |
 | 育成就劳分野別运用要领陆续公布（渔业 2026-11-06） | 进行中 | 同上 |
 
 ## 待跟踪清单

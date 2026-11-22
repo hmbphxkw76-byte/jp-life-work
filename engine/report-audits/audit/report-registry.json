@@ -27,11 +27,11 @@
       "type_id": "employment-research",
       "md": "01-ssw-driver/reports/2026-11-ssw-driver.md",
       "html": "01-ssw-driver/reports/2026-11-ssw-driver.html",
-      "content_hash": "sha256:cd609489f99a19b558751b1e7cce762febd9cc835ded456d3423fac93ff39c83",
-      "html_hash": "sha256:6d819f0c46f7db8cb9ad7d7b1876d8a01270b0173aa2f7248b62d27e0c08e2a9",
-      "audit_id": "AUD-202611-012",
+      "content_hash": "sha256:5148eb9e5a55e52c9c22a46bf753c4460c28cf1c0c84797887599400067cd67e",
+      "html_hash": "sha256:50ce94f4a535428d4ae43bc4bff830a958637adba8027e540fb0d6c763d52eb4",
+      "audit_id": "AUD-202611-003",
       "audit_state": "audited",
-      "finalized_at": "2026-11-22T01:03:07+00:00"
+      "finalized_at": "2026-11-22T01:39:45+00:00"
     },
     {
       "report": "02-career-driver/reports/2026-11-career-driver.md",
@@ -177,11 +177,11 @@
       "type_id": "employment-research",
       "md": "11-language-japanese/reports/2026-11-language-japanese.md",
       "html": "11-language-japanese/reports/2026-11-language-japanese.html",
-      "content_hash": "sha256:df97d004476a6b9b7d72bfc65ece0f75d532636f0194f6ad4f9e517e14cebabc",
-      "html_hash": "sha256:af75c2cc62fc6e456833f589291d3e7316c32fc24e0d101b52edc7d509b0e0b7",
-      "audit_id": "AUD-202611-001",
+      "content_hash": "sha256:663e697460aab04ab63281a5d3d6fc13086130aa757c03eca9236a17648f5880",
+      "html_hash": "sha256:3a750f4b61b0b12acbceeba454507eb1346a6b0cb9d0b5c10b4cb9d4bb7ba4ea",
+      "audit_id": "AUD-202611-012",
       "audit_state": "audited",
-      "finalized_at": "2026-11-22T01:03:09+00:00"
+      "finalized_at": "2026-11-22T01:39:46+00:00"
     },
     {
       "report": "12-culture-life/reports/2026-11-culture-life.md",

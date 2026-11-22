@@ -9,7 +9,7 @@
 
 | # | 指标 | 优先数据源 | 最新值（来源/年份） | 基准版本 |
 |---|---|---|---|---|
-| 1 | JLPT 下一次考试报名窗口 | jees.or.jp / jlpt.neea.edu.cn | 2026-12-06 考试（报名 9/1–9/8 已截止）；下一窗口为 2027 年上半年（推断） | baseline |
+| 1 | JLPT 下一次考试报名窗口 | jees.or.jp / jlpt.jp | 2026-12-06 考试（报名 9/1–9/8 已截止）；下一窗口为 2027 年上半年（推断） | baseline |
 | 2 | JFT-Basic 考场次与考位 | prometric-jp.com/ssw | 日本国内 10,000 円；中国大陆无考点 | baseline |
 | 3 | 当前学习进度（N4/N3/N2） | 自记录（06 文档） | 待基线确立 | baseline |
 | 4 | 主用教材版本 | 出版社页面 | 待基线确立 | baseline |
@@ -28,7 +28,7 @@
 
 ### 主体清单与入选标准
 
-- **官方机构**：JLPT 官方（jees.or.jp/jlpt / jlpt.jp / jlpt.neea.edu.cn）、JFT-Basic（prometric-jp.com / jpf.go.jp）。
+- **官方机构**：JLPT 官方（jees.or.jp/jlpt / jlpt.jp）、JFT-Basic（prometric-jp.com / jpf.go.jp）。
 - **教学资源**：国際交流基金、日本語能力試験公式資料、出版社 / 教材官网。
 - **入选标准**：官方发布页可回溯；学习门户与社区经验标注为经验，不作事实引用。
 

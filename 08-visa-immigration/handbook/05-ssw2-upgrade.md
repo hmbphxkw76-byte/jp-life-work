@@ -3,7 +3,7 @@
 
 > 信息核对日期：2026-11-11（复核修正）。依据 ISA「在留资格『特定技能』」总页、特定技能综合支援站分野清单及 2026-08 末统计。
 
-> **重要更正（2026-11-11）**：特定技能 2 号仅覆盖 **11 个分野**，**自动车运送业不在其中**（铁道、林业、木材产业同样没有 2 号）[Source: https://www.ssw.go.jp/cn/about/visa/, 2026]。ISA 统计中该分野 2 号在留者数为空 [Source: https://www.moj.go.jp/isa/content/001472175.pdf, 2026]；国交省只公布「自动车运送业分野特定技能**1 号**评价试验实施要领」，无 2 号试验。结论：**「1 号司机 → 2 号」路径目前不存在**。以下第二～四节为 2 号制度通则，仅供"转入可适用 2 号的分野"时参考；司机主线的长期方案见第五节。
+> **重要更正（2026-11-11）**：特定技能 2 号仅覆盖 **11 个分野**，**自动车运送业不在其中**（铁道、林业、木材产业同样没有 2 号）[Source: https://www.ssw.go.jp/about/visa/, 2026]。ISA 统计中该分野 2 号在留者数为空 [Source: https://www.moj.go.jp/isa/content/001472175.pdf, 2026]；国交省只公布「自动车运送业分野特定技能**1 号**评价试验实施要领」，无 2 号试验。结论：**「1 号司机 → 2 号」路径目前不存在**。以下第二～四节为 2 号制度通则，仅供"转入可适用 2 号的分野"时参考；司机主线的长期方案见第五节。
 >
 > **边界**：活值查 [data/visa_immigration_indicator_registry.md](../data/visa_immigration_indicator_registry.md)；跨主题边界与归属见文末「关联」。
 
@@ -24,7 +24,7 @@
 
 依据 ISA（https://www.moj.go.jp/isa/applications/ssw/10_00001.html）：
 
-0. **前提**：所属分野须为 2 号 11 分野之一（ビルクリーニング、建设、工业制品制造业、造船・舶用工业、自动车整备、航空、宿泊、农业、渔业、饮食料品制造业、外食业）。**自动车运送业不符合** [Source: https://www.ssw.go.jp/cn/about/visa/, 2026]
+0. **前提**：所属分野须为 2 号 11 分野之一（ビルクリーニング、建设、工业制品制造业、造船・舶用工业、自动车整备、航空、宿泊、农业、渔业、饮食料品制造业、外食业）。**自动车运送业不符合** [Source: https://www.ssw.go.jp/about/visa/, 2026]
 1. **技能要件**：2 号技能评价试验合格（各分野试验由行业团体实施）
 2. **实务要件**：分野规定的实务经验（一般要求在 1 号业务上有一定年数的从事实绩，具体以该分野运用要领为准）
 3. **日语要件**：**B1 相当以上**（2026-01-23 閣議決定后确定；自 2027-04-01 起提交的 COE 申请适用，在留资格变更·更新的适用时间待公告）[Source: https://www.moj.go.jp/isa/03_00198.html, 2026]
@@ -120,7 +120,7 @@ Y6–Y10：新资格持续 5 年 + 收入/纳税/年金达标 → 永住申请
 
 ## 参考
 
-- 特定技能 1 号/2 号分野清单（CN）：https://www.ssw.go.jp/cn/about/visa/
+- 特定技能 1 号/2 号分野清单（CN）：https://www.ssw.go.jp/about/visa/
 - ISA 统计（2026-08 末速报）：https://www.moj.go.jp/isa/content/001472175.pdf
 - 在留资格「特定技能」总页：https://www.moj.go.jp/isa/applications/status/specifiedskilledworker.html
 - ISA 试验关系（仅有 1 号实施要领）：https://www.moj.go.jp/isa/applications/ssw/nyuukokukanri01_00135.html
