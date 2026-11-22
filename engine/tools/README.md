@@ -13,7 +13,7 @@ pip install -r requirements.txt   # markdown
 python -m unittest discover -s engine/tests -q   # 单元测试（以 docs/CI.md 与实测为准）
 ```
 
-> 测试计数：1146 项（`python -m unittest discover -s engine/tests` 实测，与 `docs/CI.md` 六节一致；由 `engine/tests/test_arch_guard.py` 双向锁定）。
+> 测试计数：1167 项（`python -m unittest discover -s engine/tests` 实测，与 `docs/CI.md` 六节一致；由 `engine/tests/test_arch_guard.py` 双向锁定）。
 
 ## 退出码约定（校验类工具统一）
 
@@ -28,6 +28,7 @@ python -m unittest discover -s engine/tests -q   # 单元测试（以 docs/CI.md
 | compliance_check.py | 校验+引导+审计 | validate.yml「报告模板合规校验」（新报告阻断） |
 | stage_gate_check.py | 校验 | validate.yml「阶段闸检查」（采集 / 筛选 / 分类左移） |
 | generation_gate.py | 校验 | 手动 / 提示词阶段4 前置：生成前信息核验（闸0）；validate.yml「生成前信息核验（闸0）」 |
+| local_ci.py | 编排 | 手动：本地等价 CI（只读检查集，validate / audit-gate 的本地兜底，额度受限时替代远端）；结果落盘 `engine/report-audits/local-ci/` |
 | classify_reports.py | 校验+修复 | scheduled-maintenance.yml「报告自动归位」 |
 | ensure_region_topics.py | 校验+修复 | validate.yml「结构补全」 |
 | md2html.py | 生成 | html-sync.yml「HTML 同步」 |
@@ -480,7 +481,7 @@ python engine/tools/automation_status.py activity --threshold 45               #
   `engine/vocabulary/config/report-cycles.json`。
 
 <!-- REGISTRY:BEGIN -->
-> 注册表快照：工具 49 · 类型 12 · 主题 21 · 工作流 8（由 `generate_registry.py` 生成，勿手工编辑）
+> 注册表快照：工具 50 · 类型 12 · 主题 21 · 工作流 8（由 `generate_registry.py` 生成，勿手工编辑）
 <!-- REGISTRY:END -->
 
 
@@ -504,3 +505,4 @@ python engine/tools/automation_status.py activity --threshold 45               #
 | v1.13 | 2026-11-20 | 来源语言门禁（W5） | 新增 `source_language_gate.py`（提示词规则逐字一致 + 中文来源许可扫描 + 变更报告中文域名黑名单）与 `engine/config/source-policy.json` 单一事实源；测试计数 1081 → 1095；头部版本对齐 |
 | v1.14 | 2026-11-21 | 无法核实内容门禁 | 新增 `verified_content_gate.py`（内容层零容忍硬门禁）与 `engine/config/verified-content-policy.json`（内容层 / 记录层机读边界、标记词、状态列、豁免清单）；接入 `validate.yml` 与 `audit-gate.yml`；测试计数 1095 → 1110 |
 | v1.15 | 2026-11-22 | 生成前信息核验（闸0） | 新增 `generation_gate.py`（复用闸1-3 / 来源语言 / 无法核实内容 / 来源 schema 内核）；接入 `validate.yml` 闸0 步骤与提示词基座阶段4 前置；工具 48 → 49、测试计数 1128 → 1146 |
+| v1.16 | 2026-11-22 | 本地等价 CI 入口 | 新增 `local_ci.py`（只读编排层：33 项本地检查 + 确定性 JSON，退出码 0/1/2）；结果目录 `engine/report-audits/local-ci/` 入 `.gitignore`；工具 49 → 50、测试计数 1146 → 1167 |

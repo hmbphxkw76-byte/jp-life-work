@@ -254,7 +254,7 @@ reports/YYYY-MM-<slug>.md  ──md2html.py──►  reports/YYYY-MM-<slug>.htm
 - **辅助开关**：报告页工具条「隐藏更新标记」对照阅读、「展开全部删除」。
 - **呈现**：报告页新标签页独立打开，页脚提供「← 返回主题 / 返回首页」。
 
-## 六、测试体系（`engine/tests/`，1146 项）
+## 六、测试体系（`engine/tests/`，1167 项）
 
 | 场景 | 测试类 | 覆盖 |
 |---|---|---|
@@ -286,7 +286,7 @@ reports/YYYY-MM-<slug>.md  ──md2html.py──►  reports/YYYY-MM-<slug>.htm
 | 跨平台差异守卫 | `test_platform_guard.py`（9 项） | 路径分隔（无 Windows 路径字面量 / 工作流正斜杠）、换行（仓库 blob LF / `.gitattributes` / `atomic_write` 保 LF）、命令可用性（无 `shell=True` / 无 PowerShell 专属语法 / 工具路径存在） |
 | 性能趋势快照 | `test_perf_snapshot.py`（6 项） | 规模快照字段与实测口径、耗时采集、基线语义（首条为基线 / 追加不改基线 / `--set-baseline` 覆盖）、CLI `--porcelain` |
 
-> 合计 1146 项（`python -m unittest discover -s engine/tests` 集成后实测，当前全绿；`incremental_build` 两项「无变更」断言在集成分支领先 main 时按预期失败，合并后通过）。
+> 合计 1167 项（`python -m unittest discover -s engine/tests` 集成后实测，当前全绿；`incremental_build` 两项「无变更」断言在集成分支领先 main 时按预期失败，合并后通过）。
 
 ## 七、手动命令速查
 
@@ -601,3 +601,4 @@ CI 在 ubuntu runner 上用 **bash** 执行 `run:`，本地维护者用 **PowerS
 | v2.27 | 2026-11-22 | 来源质量 P0-P2 修复 | `source_normalize` 新增受控分组词表 / 独立性 / 权威等级 / 语言判定；`extract_year` 先剥离 URL 再取年（修复 URL 数字 ID 误判）+ 行尾年 / URL 日期路径回退；`source_check` 增 E7 年份合理性 / E8 中文页 / E9 分组词表；`verified_content_gate` 默认语义与 CI 注释对齐；台账 append-only 回归；测试 1110 → 1127 |
 | v2.28 | 2026-11-22 | 咨询面板门禁一致性 | `consulting_panel` 核验清单不再输出无法核实标记（未完成项转 `00-decision-hub/data/source-backlog.md` 第三节）；`test_panel_roundtrip` 改密闭临时目录 + 新增标记回归；测试 1127 → 1128 |
 | v2.29 | 2026-11-22 | 生成前信息核验（闸0） | 新增 `engine/tools/generation_gate.py`（复用闸1-3 / 来源语言 / 无法核实内容 / 来源 schema 内核，18 项测试）与 `engine/scripts/precommit_content_gate.py`（提交前内容硬门禁）；`validate.yml` 增「生成前信息核验（闸0）」步骤（主 job 31 → 32 个命名步骤）；pre-commit 钩子接入内容硬门禁；提示词基座增「阶段4 前置：生成前信息核验」；工具 48 → 49、测试 1128 → 1146 |
+| v2.30 | 2026-11-22 | 本地等价 CI 入口 | 新增 `engine/tools/local_ci.py`（只读编排层：validate / audit-gate 的 33 项本地检查，确定性 JSON，退出码 0/1/2；`--with-tests` / `--with-coverage` 可选）与 `engine/tests/test_local_ci.py`（21 项）；结果目录 `engine/report-audits/local-ci/` 入 `.gitignore`；工具 49 → 50、测试 1146 → 1167 |

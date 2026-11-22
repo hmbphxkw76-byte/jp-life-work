@@ -28,6 +28,7 @@
     "l5_meta_check.py",
     "link_check.py",
     "lint_reports.py",
+    "local_ci.py",
     "md2html.py",
     "md_html_parity.py",
     "migrate_monthly_reports.py",
