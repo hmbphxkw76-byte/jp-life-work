@@ -27,7 +27,7 @@
 | 2. auto 在 GitHub 选 pr、本地裸 origin 选 direct | 覆盖 | `_resolve_transport`；`test_transport_auto_local_origin_is_direct`（未触碰 gh） |
 | 3. 现有测试全绿 + 新增 PR 传输测试 | 覆盖 | 34 项旧测试 + 4 项新测试全绿；含 PR 已存在复用、检查失败阻断 |
 | 4. 全量回归 | 覆盖 | `unittest` 1171 项全绿；`validate.py` 0；`audit_pipeline --gate` 通过；`ruff` / `mypy` 0 |
-| 5. 分支保护启用后直推被拒、PR 合并成功 | 待端到端 | 由 T6 在真实仓库执行（见工单） |
+| 5. 分支保护启用后直推被拒、PR 合并成功 | 已验证 | 直推 `main` 被拒（`GH006: Protected branch update failed`）；PR #7 在 `BLOCKED → CLEAN` 后由 `merge` 合并（`831d7ef`） |
 
 ## 三、实现要点
 
@@ -43,4 +43,4 @@
 1. **PR 传输耗时**：需等待 `validate` + `audit`（约 2–4 分钟）；`--wait-timeout` 超时即失败，不直推。
 2. **检查名称耦合**：分支保护要求 `validate` / `audit` 两个 job 名；若改名需同步仓库保护与本工具。
 3. **`direct` 仍为旧行为**：仅非 GitHub / 测试使用；生产默认 `auto` → `pr`。
-4. **端到端**：需在真实仓库启用保护后验证「直推被拒 + PR 合并成功」（T6）。
+4. **端到端**：已在真实仓库启用保护后验证「直推被拒 + PR 合并成功」（T6 完成）。
