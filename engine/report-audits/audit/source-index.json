@@ -486,8 +486,8 @@
           "independence": "独立"
         },
         {
-          "text": "40. [东京劳动局 FRESC 中文页](https://jsite.mhlw.go.jp/tokyo-roudoukyoku/fresc_cn.html) — 2026",
-          "url": "https://jsite.mhlw.go.jp/tokyo-roudoukyoku/fresc_cn.html",
+          "text": "40. [东京劳动局 FRESC（外国人特别相谈·支援室）](https://jsite.mhlw.go.jp/tokyo-roudoukyoku/fresc.html) — 2026",
+          "url": "https://jsite.mhlw.go.jp/tokyo-roudoukyoku/fresc.html",
           "year": "2026",
           "marker": "",
           "group": "### ① 日本政府官方一手",
@@ -726,8 +726,8 @@
           "independence": "独立"
         },
         {
-          "text": "60. [Prometric JFT-Basic 中文页](https://www.prometric-jp.com/zh-CHS/ssw/) — 2026",
-          "url": "https://www.prometric-jp.com/zh-CHS/ssw/",
+          "text": "60. [Prometric 特定技能試験](https://www.prometric-jp.com/ja/ssw/) — 2026",
+          "url": "https://www.prometric-jp.com/ja/ssw/",
           "year": "2026",
           "marker": "",
           "group": "### ② 权威组织 / 考试实施机构",
@@ -1318,7 +1318,7 @@
           "url": "https://www.shanghai.cn.emb-japan.go.jp/itpr_ja/11_000001_00633.html",
           "year": "2026",
           "marker": "",
-          "group": "### ⑥ 补充来源（日本官方 / 机构；中文页建议回溯日文原文）",
+          "group": "### ⑥ 补充来源（日本官方 / 机构）",
           "group_canonical": "补充来源",
           "authority_grade": "B",
           "language": "ja",
@@ -1330,7 +1330,7 @@
           "url": "https://www.qingdao.cn.emb-japan.go.jp/itpr_ja/11_000001_02405.html",
           "year": "2026",
           "marker": "",
-          "group": "### ⑥ 补充来源（日本官方 / 机构；中文页建议回溯日文原文）",
+          "group": "### ⑥ 补充来源（日本官方 / 机构）",
           "group_canonical": "补充来源",
           "authority_grade": "B",
           "language": "ja",
@@ -1342,7 +1342,7 @@
           "url": "https://www.chongqing.cn.emb-japan.go.jp/itpr_zh/qianzhengshouye.html",
           "year": "2026",
           "marker": "",
-          "group": "### ⑥ 补充来源（日本官方 / 机构；中文页建议回溯日文原文）",
+          "group": "### ⑥ 补充来源（日本官方 / 机构）",
           "group_canonical": "补充来源",
           "authority_grade": "B",
           "language": "zh",
@@ -1350,38 +1350,38 @@
           "independence": "独立"
         },
         {
-          "text": "125. [特定技能总合支援站（中文）· 在留资格](https://www.ssw.go.jp/cn/about/visa/) — 2026（中文页，建议回溯日文原文）",
-          "url": "https://www.ssw.go.jp/cn/about/visa/",
+          "text": "125. [特定技能総合支援サイト · 在留資格「特定技能」とは](https://www.ssw.go.jp/about/visa/) — 2026",
+          "url": "https://www.ssw.go.jp/about/visa/",
           "year": "2026",
           "marker": "",
-          "group": "### ⑥ 补充来源（日本官方 / 机构；中文页建议回溯日文原文）",
+          "group": "### ⑥ 补充来源（日本官方 / 机构）",
           "group_canonical": "补充来源",
           "authority_grade": "B",
-          "language": "zh",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
         {
-          "text": "126. [特定技能总合支援站（中文）· 步骤](https://www.ssw.go.jp/cn/about/step/) — 2026（中文页，建议回溯日文原文）",
-          "url": "https://www.ssw.go.jp/cn/about/step/",
+          "text": "126. [特定技能総合支援サイト · 日本で働くまでの流れ](https://www.ssw.go.jp/about/step/) — 2026",
+          "url": "https://www.ssw.go.jp/about/step/",
           "year": "2026",
           "marker": "",
-          "group": "### ⑥ 补充来源（日本官方 / 机构；中文页建议回溯日文原文）",
+          "group": "### ⑥ 补充来源（日本官方 / 机构）",
           "group_canonical": "补充来源",
           "authority_grade": "B",
-          "language": "zh",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
         {
-          "text": "127. [特定技能总合支援站（中文）· 自動車運送業分野](https://www.ssw.go.jp/cn/about/visa/automobile_transportation_business_1/) — 2026（中文页，建议回溯日文原文）",
-          "url": "https://www.ssw.go.jp/cn/about/visa/automobile_transportation_business_1/",
+          "text": "127. [特定技能総合支援サイト · 自動車運送業分野](https://www.ssw.go.jp/about/visa/automobile_transportation_business_1/) — 2026",
+          "url": "https://www.ssw.go.jp/about/visa/automobile_transportation_business_1/",
           "year": "2026",
           "marker": "",
-          "group": "### ⑥ 补充来源（日本官方 / 机构；中文页建议回溯日文原文）",
+          "group": "### ⑥ 补充来源（日本官方 / 机构）",
           "group_canonical": "补充来源",
           "authority_grade": "B",
-          "language": "zh",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -1425,9 +1425,9 @@
       "graded": true,
       "field_completeness": 1.0,
       "problems": [
-        "4 条来源为中文页面（建议回溯日文原文）"
+        "1 条来源为中文页面（建议回溯日文原文）"
       ],
-      "fingerprint": "sha256:87c0f4c5258142d8b705026281154a433080699025beeeb8d42914b1694dec96"
+      "fingerprint": "sha256:cd609489f99a19b558751b1e7cce762febd9cc835ded456d3423fac93ff39c83"
     },
     {
       "report": "02-career-driver/reports/2026-11-career-driver.md",
@@ -2202,14 +2202,14 @@
           "independence": "独立"
         },
         {
-          "text": "10. ssw.go.jp 分野清单（中文）[https://www.ssw.go.jp/cn/about/visa/](https://www.ssw.go.jp/cn/about/visa/)；自动车运送业中文页 [https://www.ssw.go.jp/cn/about/visa/automobile_transportation_business_1/](https://www.ssw",
-          "url": "https://www.ssw.go.jp/cn/about/visa/",
+          "text": "10. 特定技能総合支援サイト 分野清单 [https://www.ssw.go.jp/about/visa/](https://www.ssw.go.jp/about/visa/)；自動車運送業分野 [https://www.ssw.go.jp/about/visa/automobile_transportation_business_1/](https://www.ssw.go.jp/abou",
+          "url": "https://www.ssw.go.jp/about/visa/",
           "year": "2026",
           "marker": "核对",
           "group": "**官方一手（出入国在留管理庁 / 法务省 / ssw.go.jp / 国土交通省 / 领馆）**：",
           "group_canonical": "官方一手",
           "authority_grade": "A",
-          "language": "zh",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -2288,10 +2288,8 @@
       ],
       "graded": true,
       "field_completeness": 1.0,
-      "problems": [
-        "1 条来源为中文页面（建议回溯日文原文）"
-      ],
-      "fingerprint": "sha256:86b81e7f4f3a0fe2f018bad3ab68acaef36ce5e6a86cb215197d84973f8baede"
+      "problems": [],
+      "fingerprint": "sha256:86a37ccadbc03eaad16a7f13945a29c0fa8c1191c4b35769546492040dde8988"
     },
     {
       "report": "09-politics-law/reports/2026-11-politics-law.md",
@@ -3014,14 +3012,14 @@
           "independence": "独立"
         },
         {
-          "text": "9. [特定技能官方中文站](https://www.ssw.go.jp/cn/)，2026（中文页，建议回溯日文原文）。",
-          "url": "https://www.ssw.go.jp/cn/",
+          "text": "9. [特定技能総合支援サイト](https://www.ssw.go.jp/)，2026。",
+          "url": "https://www.ssw.go.jp/",
           "year": "2026",
           "marker": "",
           "group": "**官方一手**",
           "group_canonical": "官方一手",
           "authority_grade": "A",
-          "language": "zh",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -3112,10 +3110,8 @@
       ],
       "graded": true,
       "field_completeness": 1.0,
-      "problems": [
-        "1 条来源为中文页面（建议回溯日文原文）"
-      ],
-      "fingerprint": "sha256:f4c9c498e7b97db62519e6ed0848c1d089b58c7a5433be8112a9f91e970770c6"
+      "problems": [],
+      "fingerprint": "sha256:df97d004476a6b9b7d72bfc65ece0f75d532636f0194f6ad4f9e517e14cebabc"
     },
     {
       "report": "12-culture-life/reports/2026-11-culture-life.md",
@@ -4682,14 +4678,14 @@
           "independence": "独立"
         },
         {
-          "text": "19. [特定技能中文站 · 在留资格与家族带同](https://www.ssw.go.jp/cn/about/visa/) — 2026（中文页，建议回溯日文原文）；1 号原则上不可带家属",
-          "url": "https://www.ssw.go.jp/cn/about/visa/",
+          "text": "19. [特定技能総合支援サイト · 在留資格](https://www.ssw.go.jp/about/visa/) — 2026；1 号原则上不可带家属",
+          "url": "https://www.ssw.go.jp/about/visa/",
           "year": "2026",
           "marker": "",
           "group": "**官方一手（出入国在留管理庁 / 法務省 / e-Gov / 厚生労働省 / 内閣府 / こども家庭庁 / 文部科学省 / 日本年金機構 / 総務省 / 地方自治体）**：",
           "group_canonical": "官方一手",
           "authority_grade": "A",
-          "language": "zh",
+          "language": "ja",
           "relay_level": "1",
           "independence": "独立"
         },
@@ -4720,10 +4716,8 @@
       ],
       "graded": true,
       "field_completeness": 1.0,
-      "problems": [
-        "1 条来源为中文页面（建议回溯日文原文）"
-      ],
-      "fingerprint": "sha256:be1cd1be44993b4554045759cdc7ba21e3fcbd9b12c439122ac81157594abfc8"
+      "problems": [],
+      "fingerprint": "sha256:832c19f11ae4e059c83abfab3f19587a85fec732f4a76119e334edd9f29b8b95"
     },
     {
       "report": "19-safety-disaster/reports/2026-11-safety-disaster.md",

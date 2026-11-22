@@ -2,7 +2,7 @@
 
 > **免责声明**：本报告为信息整理与条件化建议，不构成法律意见或税务意见；重大决策请咨询执业法律 / 税务专业人士。
 
-> **已审计** ✅ 审计编号 `AUD-202611-018`｜终审通过：2026-11-22｜内容指纹 `87c0f4c5258142d8b70`｜依据《审计报告标准化管理体系》v1.4
+> **已审计** ✅ 审计编号 `AUD-202611-012`｜终审通过：2026-11-22｜内容指纹 `cd609489f99a19b5587`｜依据《审计报告标准化管理体系》v1.4
 
 > **版本**：v2026.11.17（2026-11 月度核验）　**数据基准日**：2026-11-17
 > **主题类型**：职业就业调研型（employment-research）
@@ -123,7 +123,7 @@
 - **受入上限（现行口径）**：**22,100 人**（2024 年 4 月–2029 年 3 月末，2026-01-23 阁议决定的新运用方针）；旧方针 24,500 人**已废止**。ISA 受入见込数·在留者数表（2026-11-06 更新版）「自動車運送業」列示值即为 **22,100**；ssw.go.jp 日 / 中文版仍显示 24,500，属**未同步观察项**（连续六次），不作现行值使用；本分野页面（ISA）标注「2026 年 10 月 9 日現在」、受入見込数 22,100 人（令和 11 年 3 月末までの受入れ上限）。[Source: https://www.moj.go.jp/isa/content/001472175.pdf, 2026; https://www.moj.go.jp/isa/policies/ssw/automobiletransportation, 2026]
 - **最新更新（2026-11-16）**：ISA 更新情報显示 2026-11-16 改正「農業分野」要領別冊、2026-11-10 更新外食業审査状況——均与本分野无关；本分野最近一次改正仍为 2026-10-09（自動車運送業分野要領別冊）。[Source: https://www.moj.go.jp/isa/applications/ssw/index.html, 2026]
 - **在留者规模**：自動車運送業 1 号 **843 人**（充足率 3.8%、年間増加 803）；SSW 1 号全体 **438,128 人**、2 号全体 **23,348 人**（2026-08 末速报）。本分野**在 2 号栏为空白**，即不得接收 2 号。[Source: https://www.moj.go.jp/isa/content/001472175.pdf, 2026]
-- **制度定位**：特定技能 1 号在留期间合计上限 5 年、原则不可携家属；2 号无上限、可携配偶子女——但本分野不适用 2 号，永住路径须经其他在留资格转接，不得按已废止的升级路径表述。[Source: https://www.ssw.go.jp/cn/about/visa/, 2026]
+- **制度定位**：特定技能 1 号在留期间合计上限 5 年、原则不可携家属；2 号无上限、可携配偶子女——但本分野不适用 2 号，永住路径须经其他在留资格转接，不得按已废止的升级路径表述。[Source: https://www.ssw.go.jp/about/visa/, 2026]
 - **运用口径对比**：
 
 | 维度 | SSW 1 号 | SSW 2 号 | 技能实习 | 特定活动（本分野准备用）（来源：本报告来源清单，详见第九节） |
@@ -387,7 +387,7 @@
 
 ### 7.2 招募渠道与中介资质（建议）
 
-- **中国路径官方明示**：须经中国主管部门批准资质的对外劳务合作企业＋日方公共职业安定所（ハローワーク）。无资质出国务工属违法（法理判断）。[Source: https://www.ssw.go.jp/cn/about/step/, 2026]
+- **中国路径官方明示**：须经中国主管部门批准资质的对外劳务合作企业＋日方公共职业安定所（ハローワーク）。无资质出国务工属违法（法理判断）。[Source: https://www.ssw.go.jp/about/step/, 2026]
 - **非法中介特征（推断汇总）**：无法提供中国主管部门资质编号、要求前置大额「保证金」、承诺「免考包过」（技能試験为 ClassNK 统一实施，除技能实习 2 号良好修了者等法定免试外无免考通道）。
 - **渠道建议**：特定技能专门中介 / 登录支援机关为风险最低主渠道（与接受企业绑定、包支援义务）；签约前核对「对外劳务合作经营资格证书」与日本侧受入机关名（可与 ISA 登录支援機関名单交叉核对）。
 - 渠道矩阵、地域选择、简历面试与契约审查的完整清单见 [02-career-driver](../../02-career-driver/reports/2026-11-career-driver.md) 第 7 节。
@@ -401,7 +401,7 @@
 ### 7.4 风险提示与维权渠道（建议）
 
 - **工资拖欠 / 不当解雇**：劳动基准监督署受理；劳动条件咨询 Hotline **0120-811-610**（免费、匿名、多语言）。[Source: https://www.check-roudou.mhlw.go.jp/lp/hotline/, 2026]
-- **外国人专门窗口**：各都道府県労働局「外国人労働者相談コーナー」与「外国人特別相談·支援室」（东京 FRESC 有中文页面）。[Source: https://www.check-roudou.mhlw.go.jp/soudan/foreigner.html, 2026; https://jsite.mhlw.go.jp/tokyo-roudoukyoku/fresc_cn.html, 2026]
+- **外国人专门窗口**：各都道府県労働局「外国人労働者相談コーナー」与「外国人特別相談·支援室」（东京 FRESC 有中文页面）。[Source: https://www.check-roudou.mhlw.go.jp/soudan/foreigner.html, 2026; https://jsite.mhlw.go.jp/tokyo-roudoukyoku/fresc.html, 2026]
 - **合规提示（推断）**：登録支援機関侧 2027-04-01 起实施支援体制要件改正，若签约时对方以「人数上限」为由缩减支援频次，属于可核查的合规问题，应要求书面说明并向労働局咨询。
 - **安全红线**：酒测出车前后各一次，检出即当日停驾；特定技能者因酒精 / 药物事故原则上将丧失在留资格（以入管厅个案认定为准，法务口径推断）——安全规范与红线详见 [02-career-driver](../../02-career-driver/reports/2026-11-career-driver.md) 第 2 节。
 
@@ -550,7 +550,7 @@
 37. [厚労省一般職業紹介状況（令和 8 年 9 月分）](https://www.mhlw.go.jp/stf/newpage_76960.html) — 2026-10-30
 38. [厚労省労働条件咨询 Hotline](https://www.check-roudou.mhlw.go.jp/lp/hotline/) — 2026
 39. [厚労省 外国人劳动咨询](https://www.check-roudou.mhlw.go.jp/soudan/foreigner.html) — 2026
-40. [东京劳动局 FRESC 中文页](https://jsite.mhlw.go.jp/tokyo-roudoukyoku/fresc_cn.html) — 2026
+40. [东京劳动局 FRESC（外国人特别相谈·支援室）](https://jsite.mhlw.go.jp/tokyo-roudoukyoku/fresc.html) — 2026
 41. [国税厅 令和 8 年分源泉税额表](https://www.nta.go.jp/publication/pamph/gensen/zeigakuhyo2026/01.htm) — 2026
 42. [年金机构 厚生年金料率](https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20150515-01.html) — 2026
 43. [协会けんぽ 令和 8 年度料率](https://www.kyoukaikenpo.or.jp/about/business/insurance_rate/rate_prefectures/r08/) — 2026
@@ -573,7 +573,7 @@
 57. [ClassNK Web Portal ニュース一覧](https://sswt-portal.classnk.or.jp/news/) — 最终更新 2026-10-15
 58. [ClassNK 月报 2026 年 9 月分（news/29）](https://sswt-portal.classnk.or.jp/news/29) — 2026-10-15
 59. [JFT-Basic 实施报告 PDF](https://www.jpf.go.jp/jft-basic/report/pdf/2025-12-202601.pdf) — 2026
-60. [Prometric JFT-Basic 中文页](https://www.prometric-jp.com/zh-CHS/ssw/) — 2026
+60. [Prometric 特定技能試験](https://www.prometric-jp.com/ja/ssw/) — 2026
 61. [Prometric JFT-Basic 受验费](https://www.prometric-jp.com/ssw/exam/fee/) — 2026
 62. [JLPT 中国报名 FAQ](https://jlpt.neea.cn/faq.html) — 2026
 63. [駐日ベトナム大使館技能試験页](https://www.vn.emb-japan.go.jp/itpr_ja/11_000001_02534_TokuteiginouShiken_Jidoushaunsou.html) — 2026
@@ -632,7 +632,7 @@
 114. [総務省 e-Stat 自動車教習料（0003449368）](https://www.e-stat.go.jp/stat-search/database?layout=dataset&statdisp_id=0003449368) — 2026【已核实】
 117. [hajimen.com 教习所排名（2015 年调查值，历史参考）](https://hajimen.com/10-saitama/rank_detail?rank_name=t-0) — 2015
 
-### ⑥ 补充来源（日本官方 / 机构；中文页建议回溯日文原文）
+### ⑥ 补充来源（日本官方 / 机构）
 
 118. [在上海日本国総領事館 签证费用（2026 年 7 月 1 日修改）](https://www.shanghai.cn.emb-japan.go.jp/itpr_ja/11_000001_00633.html) — 2026
 119. [在青岛日本国総領事館 査証手数料等の変更について](https://www.qingdao.cn.emb-japan.go.jp/itpr_ja/11_000001_02405.html) — 2026
@@ -641,9 +641,9 @@
 122. ~~商务部对外投资合作信息（资质查询入口）~~ — 中文来源，已按来源规则停用
 123. ~~中国货币网 人民币汇率中间价~~ — 中文来源，已按来源规则停用
 124. ~~国家统计局 2025 年城镇单位就业人员平均工资~~ — 中文来源，已按来源规则停用
-125. [特定技能总合支援站（中文）· 在留资格](https://www.ssw.go.jp/cn/about/visa/) — 2026（中文页，建议回溯日文原文）
-126. [特定技能总合支援站（中文）· 步骤](https://www.ssw.go.jp/cn/about/step/) — 2026（中文页，建议回溯日文原文）
-127. [特定技能总合支援站（中文）· 自動車運送業分野](https://www.ssw.go.jp/cn/about/visa/automobile_transportation_business_1/) — 2026（中文页，建议回溯日文原文）
+125. [特定技能総合支援サイト · 在留資格「特定技能」とは](https://www.ssw.go.jp/about/visa/) — 2026
+126. [特定技能総合支援サイト · 日本で働くまでの流れ](https://www.ssw.go.jp/about/step/) — 2026
+127. [特定技能総合支援サイト · 自動車運送業分野](https://www.ssw.go.jp/about/visa/automobile_transportation_business_1/) — 2026
 
 ### 本版新增来源（2026-11-17 核验）
 

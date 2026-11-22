@@ -194,7 +194,8 @@ def detect_language(url: str) -> str:
     不把地区子域（如 ``shanghai.cn.emb-japan.go.jp``）误判为中文页。
     """
     u = unicodedata.normalize("NFKC", str(url or "")).lower()
-    if re.search(r"/(cn|zh)(/|$)|itpr_zh|/zh/", u):
+    # 中文页：``/cn/`` / ``/zh/`` / ``/zh-CHS/`` / ``itpr_zh`` / ``xxx_cn.html``
+    if re.search(r"/(cn|zh)(/|$)|/zh[-_]|itpr_zh|_cn\.", u):
         return "zh"
     if re.search(r"/(en|english)(/|$)|itpr_en|/en/", u):
         return "en"

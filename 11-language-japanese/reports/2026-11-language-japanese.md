@@ -2,7 +2,7 @@
 
 > **免责声明**：本报告为信息整理与条件化建议，不构成法律意见或税务意见；重大决策请咨询执业法律 / 税务专业人士。
 
-> **已审计** ✅ 审计编号 `AUD-202611-008`｜终审通过：2026-11-22｜内容指纹 `f4c9c498e7b97db6251`｜依据《审计报告标准化管理体系》v1.4
+> **已审计** ✅ 审计编号 `AUD-202611-001`｜终审通过：2026-11-22｜内容指纹 `df97d004476a6b9b7d7`｜依据《审计报告标准化管理体系》v1.4
 
 > **版本**：v2026.11.17（2026-11 月度核验）　**数据基准日**：2026-11-17
 > **主题类型**：职业就业调研型（employment-research）
@@ -238,7 +238,7 @@ JLPT 官方公告：自 **2025 年 12 月考试**起，JLPT 成绩（综合得�
 |---|---|
 | JLPT 全球官网 | https://www.jlpt.jp |
 | JFT-Basic（赴日后） | https://www.jft-basic.jp（报名经 Prometric） |
-| 特定技能官方中文站 | https://www.ssw.go.jp/cn/ |
+| 特定技能総合支援サイト | https://www.ssw.go.jp/ |
 
 **本地考试可用性**：中国大陆可报 JLPT（N4 下午场，N3/N4/N5 下午、N1/N2 上午）；不可报 JFT-Basic。报名先注册个人信息，抢考位（大城市考位紧张，放报当天即报）。**2026 年考试日程（事实）**：第 1 回 2026-07-05（日）、第 2 回 2026-12-06（日）；2026-12-06 考试报名已截止，下一窗口为 2027 年上半年（推断）。[Source: https://www.jlpt.jp/, 2026]
 
@@ -332,7 +332,7 @@ M1 完成后即满足特定技能卡车路径的日语要件，可与技能试�
 6. [JLPT CEFR レベル参考表示 公告](https://www.jlpt.jp/cefrlevel/cefrnews.html) — 2025-12 考试起附加，2026。
 7. [JLPT 认定の目安（N1–N5）](https://www.jlpt.jp/about/levelsummary.html)，2026。
 8. [JFT-Basic 官方样题](https://www.jft-basic.jp/sample/)，2026；[JFT-Basic 受験料金（Prometric 国別受験料金：日本 JPY 10,000）](https://www.prometric-jp.com/ssw/exam/fee/)，2026。
-9. [特定技能官方中文站](https://www.ssw.go.jp/cn/)，2026（中文页，建议回溯日文原文）。
+9. [特定技能総合支援サイト](https://www.ssw.go.jp/)，2026。
 10. [法务省 ISA · 特定技能制度](https://www.moj.go.jp/isa/applications/ssw/index.html) — 日本語能力水準 B1 確認開始時期（2026-09-30）、JFT-Basic 活用推荐（2026-10-05），2026。
 11. [法务省 ISA · 日本語能力水準「B1 相当以上」の確認開始時期](https://www.moj.go.jp/isa/03_00198.html)，2026。
 12. [法务省 ISA · JLPT（N4・N5）受験申込みを検討中の方へ JFT-Basic の活用をお勧めします](https://www.moj.go.jp/isa/content/001471906.pdf)，2026。

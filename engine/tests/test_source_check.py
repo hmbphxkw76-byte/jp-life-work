@@ -261,6 +261,8 @@ class NormalizeCase(unittest.TestCase):
         from source_normalize import detect_language
         self.assertEqual(detect_language("https://www.ssw.go.jp/cn/about/visa/"), "zh")
         self.assertEqual(detect_language("https://www.chongqing.cn.emb-japan.go.jp/itpr_zh/x.html"), "zh")
+        self.assertEqual(detect_language("https://www.prometric-jp.com/zh-CHS/ssw/"), "zh")
+        self.assertEqual(detect_language("https://jsite.mhlw.go.jp/tokyo-roudoukyoku/fresc_cn.html"), "zh")
         self.assertEqual(detect_language("https://www.shanghai.cn.emb-japan.go.jp/itpr_ja/x.html"), "ja")
         self.assertEqual(detect_language("https://www.moj.go.jp/isa/"), "ja")
         self.assertEqual(detect_language("https://www.yamato-hd.co.jp/english/news/"), "en")
