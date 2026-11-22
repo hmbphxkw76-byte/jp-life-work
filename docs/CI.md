@@ -1,6 +1,6 @@
 # CI 与自动化体系
 
-> **版本**：v2.31（2026-11-22 生成前核验接入 + public 安全姿态）
+> **版本**：v2.32（2026-11-22 自动化 PR 权限修复 + 分支治理）
 > 本文档说明 jp-life-work 报告管理体系的持续集成（CI）与定时自动化。
 > 代码位置：`.github/workflows/`（8 条工作流）；工具链：`engine/tools/`；测试：`engine/tests/`。
 
@@ -575,6 +575,8 @@ CI 在 ubuntu runner 上用 **bash** 执行 `run:`，本地维护者用 **PowerS
 | 依赖安全更新 | ✅ enabled | 仓库设置 `dependabot_security_updates` |
 | 依赖版本更新 | ✅ | `.github/dependabot.yml`（github-actions / pip 周更） |
 | 工作流最小权限 | ✅ | 8 条工作流均显式 `permissions`；定时任务推分支 + 开 PR，无 `pull_request_target` |
+| Actions 可创建 PR | ✅ enabled | 仓库设置 `can_approve_pull_request_reviews`（修复前自动化 `gh pr create` 被静默拒绝，积压 26 个 `auto/html-sync-*` 僵尸分支） |
+| 远端分支治理 | ✅ | `delete_branch_on_merge=true`；已清理 26 个僵尸分支，当前远端仅 `main` |
 | 服务端分支保护 | ⚠ 未启用 | GitHub Free 公共仓库**支持**分支保护；但 `workflow_guard merge` 直推 `origin/main`，启用 required status checks / PR 门禁需先改造合并流程。当前靠本地 `workflow_guard` + pre-commit 纪律 + CI 门禁 |
 | GitHub Pages | ✅ public | legacy Pages（main 根），与 PUBLIC 仓库一致 |
 
@@ -625,3 +627,4 @@ CI 在 ubuntu runner 上用 **bash** 执行 `run:`，本地维护者用 **PowerS
 | v2.29 | 2026-11-22 | 生成前信息核验（闸0） | 新增 `engine/tools/generation_gate.py`（复用闸1-3 / 来源语言 / 无法核实内容 / 来源 schema 内核，18 项测试）与 `engine/scripts/precommit_content_gate.py`（提交前内容硬门禁）；`validate.yml` 增「生成前信息核验（闸0）」步骤（主 job 31 → 32 个命名步骤）；pre-commit 钩子接入内容硬门禁；提示词基座增「阶段4 前置：生成前信息核验」；工具 48 → 49、测试 1128 → 1146 |
 | v2.30 | 2026-11-22 | 本地等价 CI 入口 | 新增 `engine/tools/local_ci.py`（只读编排层：validate / audit-gate 的 33 项本地检查，确定性 JSON，退出码 0/1/2；`--with-tests` / `--with-coverage` 可选）与 `engine/tests/test_local_ci.py`（21 项）；结果目录 `engine/report-audits/local-ci/` 入 `.gitignore`；工具 49 → 50、测试 1146 → 1167 |
 | v2.31 | 2026-11-22 | 生成前核验接入 + public 安全姿态 | 新增复合动作 `.github/actions/content-verify`（闸0 + 无法核实内容硬门禁），接入 `pipeline-orchestrator.yml`（计划前）与 `html-sync.yml`（发布前）；新增 `.github/dependabot.yml`；仓库设置启用 secret scanning / push protection / Dependabot 安全更新；新增第十六节 |
+| v2.32 | 2026-11-22 | 自动化 PR 权限修复 + 分支治理 | 仓库设置 `can_approve_pull_request_reviews=true`（修复自动化 PR 创建被静默拒绝）+ `delete_branch_on_merge=true`；合并 4 个 Dependabot actions 升级（checkout v7 / setup-python v7 / cache v6 / upload-artifact v7）；清理 26 个 `auto/html-sync-*` 僵尸分支；第十六节补两行 |
