@@ -31,7 +31,7 @@
 python engine/scripts/workflow_guard.py task start exit-transition-return
 cd .worktrees/exit-transition-return        # 在任务工作树里干活
 
-# 2) 干完活：串行合并回 main（PR 传输：推任务分支 → 建 PR → 等必需检查 → 合并）
+# 2) 干完活：串行合并回 main（PR 传输：推任务分支 → 建 PR → 等检查 → 合并）
 python engine/scripts/workflow_guard.py merge exit-transition-return
 
 # 3) 收尾：删工作树与分支
@@ -88,8 +88,8 @@ python engine/scripts/workflow_guard.py lock release checkout
 6. **不改写任务分支**：默认 `--no-ff`，任务分支历史原样保留。
 7. **只合并已提交内容**：未提交的改动不会被带入合并，也不会被推上 main。
 8. **PR 传输（默认）**：`--transport auto` 在 GitHub 远端 + `gh` 可用时走 PR 合并：
-   推任务分支 → `gh pr create` → 轮询必需检查（`--wait-timeout`，默认 1800s）→ `gh pr merge --merge`。
-   服务端分支保护已启用（Require PR + status checks + enforce_admins），直推 `main` 会被拒绝，
+   推任务分支 → `gh pr create` → 轮询检查（`--wait-timeout`，默认 1800s）→ `gh pr merge --merge`。
+   服务端分支保护已启用（Require PR + enforce_admins），直推 `main` 会被拒绝，
    因此 PR 是默认路径；`--transport direct` 仅用于非 GitHub 远端 / 本地测试。
 
 ## 五、锁语义（第 3 层细节）
@@ -105,7 +105,8 @@ python engine/scripts/workflow_guard.py lock release checkout
 ## 六、与 CI 的关系
 
 GitHub Actions 在远端 runner 上跑，不经过本地锁；定时任务推 `auto/*` 分支并开 PR，由复合动作
-`.github/actions/auto-merge-pr` 启用自动合并（`validate` / `audit` 通过即合入；纯个人项目无第三方评审）。
+`.github/actions/auto-merge-pr` 在工作流内自跑门禁（`validate.py` + `audit_pipeline --gate --strict`）后合并
+（纯个人项目无第三方评审；bot PR 不触发 `pull_request` 工作流，故门禁内移）。
 第 2 层的 PR 传输在服务端分支保护下等待 `validate` / `audit` 通过后再合并；**不要**用
 `sync --push-local` 直推 main（服务端分支保护会拒绝）。
 
@@ -205,16 +206,16 @@ python engine/scripts/verify_report_parity.py --compare  .migration-baseline    
 
 | # | 项 | 结果 |
 |---|---|---|
-| 1 | 测试全绿 | ✅ `python -m unittest discover -s engine/tests` 全绿（1177 项，4 跳过） |
+| 1 | 测试全绿 | ✅ `python -m unittest discover -s engine/tests` 全绿（1179 项，4 跳过） |
 | 2 | `validate.py` 通过 | ✅ 退出码 0 |
-| 3 | 双轴评审存在且无 P0/P1 | ✅ `docs/toolchain/reviews/ci-auto-merge-pr-review.md`（ci-auto-merge-pr） |
+| 3 | 双轴评审存在且无 P0/P1 | ✅ `docs/toolchain/reviews/ci-auto-merge-inwork-gate-review.md`（ci-auto-merge-inwork-gate） |
 | 4 | `coverage_gate.py` 达标 | ✅ 88.7%（阈值 80%，enforce=true） |
 | 5 | `cleanup_workspace.py --check` 零残留 | ✅ 零残留 |
-| 6 | 新增/改动工具已登记 | ✅ 本次无新增 / 改动 Python 工具；`generate_registry.py --check` 通过（工具 50 / 类型 12 / 主题 21 / 工作流 8） |
+| 6 | 新增/改动工具已登记 | ✅ 改动 `trigger_watch.py`（写前建目录）；`generate_registry.py --check` 通过（工具 50 / 类型 12 / 主题 21 / 工作流 8） |
 | 7 | 生成物确定性 | ✅ `build_hub.py --check` / `build_index.py --check` 均退出码 0 |
 | 8 | 架构边界 | ✅ `engine/tools/` 无 git 可变操作；`engine/scripts/` 不产出内容；`iter_business_dirs()` = 21 |
-| 9 | 端到端（CI 通过即自动合并） | ✅ PR #11（空提交）`validate` / `audit` SUCCESS 后自动合入，merge commit `2ecb68e` |
-| 10 | 静态检查 | ✅ `ruff check engine` 0；`mypy` 63 文件 0 |
+| 9 | 端到端（工作流内门禁后自动合并） | ✅ 复合动作机制就绪；合并后触发 `scheduled-report-tasks` 真跑，结果补记于记忆 |
+| 10 | 静态检查 | ✅ `ruff check engine` 0；`mypy` 0 |
 
 ## 十三、输入门禁可移植性（`engine/scripts/bootstrap_gate.py` / `check_gate.py`）
 

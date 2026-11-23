@@ -5,6 +5,10 @@
 > **分支**：`task/ci-auto-merge-pr-d8877c46`
 > **评审日期**：2026-11-23
 > **评审口径**：Standards（仓库规范符合性）+ Spec（验收标准覆盖度）
+>
+> ⚠️ **已废弃（2026-11-23）**：本评审对应的 `--auto` 方案经真跑验证不成立
+> （bot / `GITHUB_TOKEN` 创建的 PR 不触发 `pull_request` 工作流，`--auto` 永卡 `BLOCKED`）。
+> 已由 [ci-auto-merge-inwork-gate](../reviews/ci-auto-merge-inwork-gate-review.md)（门禁内移）取代。
 
 ## 一、Standards 轴（规范符合性）
 

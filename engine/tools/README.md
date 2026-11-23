@@ -13,7 +13,7 @@ pip install -r requirements.txt   # markdown
 python -m unittest discover -s engine/tests -q   # 单元测试（以 docs/CI.md 与实测为准）
 ```
 
-> 测试计数：1177 项（`python -m unittest discover -s engine/tests` 实测，与 `docs/CI.md` 六节一致；由 `engine/tests/test_arch_guard.py` 双向锁定）。
+> 测试计数：1179 项（`python -m unittest discover -s engine/tests` 实测，与 `docs/CI.md` 六节一致；由 `engine/tests/test_arch_guard.py` 双向锁定）。
 
 ## 退出码约定（校验类工具统一）
 
@@ -533,3 +533,4 @@ python engine/tools/local_ci.py list                   # 列检查项 / 排除�
 | v1.17 | 2026-11-22 | 合并 PR 化 | `workflow_guard merge` 新增 `--transport auto\|direct\|pr` + `--wait-timeout`（PR 传输：推分支 → 建 PR → 等检查 → 合并）与 4 项 PR 传输测试；测试计数 1167 → 1171 |
 | v1.18 | 2026-11-22 | task stop 信任 merged 登记 | `task stop` 对已登记 `merged`（含 `merged_sha`）的任务跳过祖先检查（PR 合并远端分支已删 / 本地 base 滞后时不误报）；测试计数 1171 → 1172 |
 | v1.19 | 2026-11-23 | CI 自动化 PR 免审批自动合并 | 新增复合动作 `.github/actions/auto-merge-pr` 与守卫测试 `test_ci_auto_merge.py`（5 项）；6 条工作流 8 个提交点启用自动合并；测试计数 1172 → 1177 |
+| v1.20 | 2026-11-23 | 门禁内移修正 | 复合动作改为「建 PR → 工作流内门禁（`validate.py` + `audit_pipeline --gate --strict`）→ `gh pr merge --merge`」；`trigger_watch.py` 写快照前建目录（新增 1 项回归测试）；测试计数 1177 → 1179 |

@@ -99,6 +99,16 @@ class TestTriggerWatch(unittest.TestCase):
             self.assertEqual(rc, 0)
             self.assertTrue(snap.is_file())
 
+    def test_cli_apply_creates_missing_parent_dir(self):
+        # 回归：engine/report-audits/pipeline/ 未被 git 跟踪时，--apply 不应 FileNotFoundError
+        with tempfile.TemporaryDirectory() as d:
+            snap = Path(d) / "nested" / "pipeline" / "trigger-watch.json"
+            self.assertFalse(snap.parent.exists())
+            with unittest.mock.patch.object(trigger_watch, "SNAPSHOT", snap):
+                rc = trigger_watch.main_argv(["--apply", "--period", "2026-11"])
+            self.assertEqual(rc, 0)
+            self.assertTrue(snap.is_file())
+
     def test_load_non_object_raises(self):
         # T1 评审 N3：schema 非对象（如 []）负例
         with tempfile.TemporaryDirectory() as d, unittest.mock.patch.object(_common, "PIPELINE_DIR", Path(d)):

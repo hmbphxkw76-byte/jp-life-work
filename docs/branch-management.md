@@ -81,17 +81,21 @@ python engine/scripts/branch_naming.py install --uninstall [--force]
 
 ### 3.1 服务端分支保护（main）
 
-`main` 已启用分支保护：**Require pull request before merging** + **Require status checks**
-（`validate` / `audit`）+ **Do not bypass for administrators**（enforce_admins）+ 禁 force-push / 禁删除。
+`main` 已启用分支保护：**Require pull request before merging** + **Do not bypass for administrators**（enforce_admins）+ 禁 force-push / 禁删除。
+（必需状态检查已于 2026-11-23 移除，门禁内移到工作流，见 §3.2。）
 因此 `merge` 默认走 PR 传输（`--transport auto`）：直推 `main` 会被服务端拒绝；
 `--transport direct` 仅用于非 GitHub 远端或本地测试。
 
-### 3.2 CI 自动化 PR 免审批自动合并
+### 3.2 CI 自动化 PR 门禁内移自动合并
 
 6 条工作流（8 个提交点）产出的 `[automated]` PR 经复合动作
-`.github/actions/auto-merge-pr` 创建并启用自动合并；仓库设置 `allow_auto_merge=true`。
-质量门不变：必需检查 `validate` / `audit` 通过后才合入，未通过保持打开。
-仓库为纯个人项目、无第三方评审，故不设人工审批（分支保护 `required_approving_review_count=0`）。
+`.github/actions/auto-merge-pr` 创建，并在**工作流内自跑门禁**
+（`engine/tools/validate.py` + `engine/tools/audit_pipeline.py --gate --strict`，接受退出码 `{0,2}`）
+后 `gh pr merge --merge`；门禁失败保留 PR open、不合并。
+
+原因：bot（`GITHUB_TOKEN`）创建的 PR 不触发 `pull_request` 工作流，`gh pr merge --auto` 会永卡 `BLOCKED`
+（旧 `--auto` 方案因此废弃）。仓库为纯个人项目、无第三方评审，故不设人工审批
+（`required_approving_review_count=0`）。
 
 ## 四、存量分支梳理与映射台账
 
@@ -146,3 +150,4 @@ python engine/scripts/branch_naming.py install --uninstall [--force]
 | v1.0 | 2026-11-17 | 建立 `task/<slug>-<sid>` 规范、`branch_naming.py`、pre-push / pre-commit 钩子、存量补全与台账 |
 | v1.1 | 2026-11-22 | 合并流程 PR 化（`merge --transport pr`：推分支 → 建 PR → 等检查 → 合并）+ `main` 服务端分支保护；新增 §3.1 |
 | v1.2 | 2026-11-23 | CI 自动化 PR 免审批自动合并：新增复合动作 `.github/actions/auto-merge-pr`，6 条工作流 8 个提交点接线，仓库设置启用 `allow_auto_merge`；新增 §3.2 |
+| v1.3 | 2026-11-23 | 门禁内移：`--auto` 方案废弃（bot PR 不触发 `pull_request` 门禁）；复合动作改为工作流内自跑门禁后合并；`main` 移除必需状态检查（保留 Require PR / enforce_admins / 评审数 0）；§3.1 / §3.2 重写 |
