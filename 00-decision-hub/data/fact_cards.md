@@ -2,7 +2,11 @@
 
 > **用途**：跨主题**高频共享数字**的单一事实源。每张卡片含五字段（值 / 统计口径 / 数据时点 / 来源 URL / 版本号）；其他报告与登记册一律以 `[@FC-NNN]` 指针引用，不复制值。
 > **标准**：见 [fact-card-standard.md](../../engine/report_templates/fact-card-standard.md)。
-> **corroboration**：来源 URL 计数（初判，遗留清理）；多源互证（≥2 独立来源）待人工复核。
+> **corroboration**：来源计数（n22）。取值为正整数（已核验的独立来源 URL 数）或 `single-source`。
+> 官方统计量 / 官方定价属唯一权威口径、客观上不存在独立第二来源，一律填 `single-source`（见
+> [fact-card-standard.md](../../engine/report_templates/fact-card-standard.md) §一）；**不得为凑计数加入同一发布者的重复页面或非独立转载**。
+> 现行 15 张均为 `single-source`：多数为厚労省 / 総務省 / 日銀 / 警察庁等唯一官方口径，或为官方定价（登录费、受験料、签证料）；
+> 尚待人工复核是否确有可核验的独立第二源（优先候选：FC-008 / FC-009 / FC-010 / FC-011 / FC-013 / FC-014 / FC-015 / FC-016）。
 > **纪律**：00 模块只读消费，不回写来源主题；冲突口径并列建卡，不合并、不取均值；值变更递增版本号并留痕。
 
 ---
@@ -11,21 +15,21 @@
 
 | ID | 值 | 统计口径 | 数据时点 | 来源 URL | 版本号 | corroboration |
 |---|---|---|---|---|---|---|
-| FC-001 | 22,100 人 | ISA「特定技能 1 号分野别受入れ見込数」・自動車運送業（现行） | 2026-01-23 阁议（2024.4–2029.3） | https://www.moj.go.jp/isa/content/001472175.pdf | v1 | 1 |
-| FC-002 | 843 人 / 充足率 3.8% | ISA「分野别受入れ見込数・在留者数」・1 号 | 2026-08 末速报（2026-11-06 表） | https://www.moj.go.jp/isa/content/001472175.pdf | v1 | 1 |
-| FC-003 | 2.56 | 厚労省有效求人倍率・汽车驾驶业（常用含パート） | 2026-09（2026-10-30 公布） | https://www.mhlw.go.jp/stf/newpage_76960.html | v1 | 1 |
-| FC-004 | 341,158 円 | 厚労省毎月勤労統計・運輸業・郵便業现金给与总额（含加班、未含赏与） | 2026-09（2026-11-06 公布） | https://www.mhlw.go.jp/toukei/itiran/roudou/monthly/r08/2609p/xls/2609c01p.xlsx | v1 | 1 |
-| FC-005 | 324,381 円 | 総務省「小売物価統計調査」・普通教习所 AT 限定全国月次均价 | 2026-09 | https://www.e-stat.go.jp/stat-search/database?layout=dataset&statdisp_id=0003449368 | v1 | 1 |
-| FC-006 | 28,400 円；2–4 万円/人·月 | ISA 登録支援機関・新登录费与行情 | 2026 | https://www.moj.go.jp/isa/policies/ssw/supportssw.html | v1 | 1 |
-| FC-008 | 10,000 円 | JFT-Basic 受验费（日本国内，含消费税相当额） | 2026 | https://www.prometric-jp.com/ssw/exam/fee/ | v1 | 1 |
-| FC-009 | 6,500 円；15,000 円 | ClassNK 技能试験费 / 证明书费 | 2026 | https://sswt-portal.classnk.or.jp/area?tab=3 | v1 | 1 |
-| FC-010 | 715 元 / 1,430 元 | 驻日领馆签证费・单次 / 二次・数次（上海 / 青岛 / 重庆一致） | 2026-07-01 起 | https://www.shanghai.cn.emb-japan.go.jp/itpr_ja/11_000001_00633.html | v1 | 1 |
-| FC-011 | 42.8% / 13.1% | 警察庁外免切替・知识确认 / 技能确认合格率 | 2025-10–12 | https://drivey.jp/blog/gaimen-kirikae-knowledge-test | v1 | 1 |
-| FC-012 | +4.6% | 日銀 SPPI「道路貨物輸送」 | 2026-09 速报 | https://www.boj.or.jp/statistics/pi/cspi_release/sppi2609.pdf | v1 | 1 |
-| FC-013 | 38 件 | TSR 倒产・運輸業（+2.7%，连续 2 个月增） | 2026-10 | https://www.tsr-net.co.jp/news/status/detail/1203416_1610.html | v1 | 1 |
-| FC-014 | 国务院令第 620 号 | 《对外劳务合作管理条例》・经营资格 / 名单 | 2012-08-01 施行 | https://www.gov.cn/gongbao/content/2012/content_2161721.htm | v1 | 1 |
-| FC-015 | 国务院令第 841 号 | 出境入境中介服务・备案制 | 2026-09-15 施行 | https://www.gov.cn/gongbao/2026/issue_12906/202608/content_7077791.html | v1 | 1 |
-| FC-016 | 4.1982 元 | 中国外汇交易中心・100 日元中间价 | 2026-11-17 | https://www.chinamoney.com.cn/ | v2 | 1 |
+| FC-001 | 22,100 人 | ISA「特定技能 1 号分野别受入れ見込数」・自動車運送業（现行） | 2026-01-23 阁议（2024.4–2029.3） | https://www.moj.go.jp/isa/content/001472175.pdf | v1 | single-source |
+| FC-002 | 843 人 / 充足率 3.8% | ISA「分野别受入れ見込数・在留者数」・1 号 | 2026-08 末速报（2026-11-06 表） | https://www.moj.go.jp/isa/content/001472175.pdf | v1 | single-source |
+| FC-003 | 2.56 | 厚労省有效求人倍率・汽车驾驶业（常用含パート） | 2026-09（2026-10-30 公布） | https://www.mhlw.go.jp/stf/newpage_76960.html | v1 | single-source |
+| FC-004 | 341,158 円 | 厚労省毎月勤労統計・運輸業・郵便業现金给与总额（含加班、未含赏与） | 2026-09（2026-11-06 公布） | https://www.mhlw.go.jp/toukei/itiran/roudou/monthly/r08/2609p/xls/2609c01p.xlsx | v1 | single-source |
+| FC-005 | 324,381 円 | 総務省「小売物価統計調査」・普通教习所 AT 限定全国月次均价 | 2026-09 | https://www.e-stat.go.jp/stat-search/database?layout=dataset&statdisp_id=0003449368 | v1 | single-source |
+| FC-006 | 28,400 円；2–4 万円/人·月 | ISA 登録支援機関・新登录费与行情 | 2026 | https://www.moj.go.jp/isa/policies/ssw/supportssw.html | v1 | single-source |
+| FC-008 | 10,000 円 | JFT-Basic 受验费（日本国内，含消费税相当额） | 2026 | https://www.prometric-jp.com/ssw/exam/fee/ | v1 | single-source |
+| FC-009 | 6,500 円；15,000 円 | ClassNK 技能试験费 / 证明书费 | 2026 | https://sswt-portal.classnk.or.jp/area?tab=3 | v1 | single-source |
+| FC-010 | 715 元 / 1,430 元 | 驻日领馆签证费・单次 / 二次・数次（上海 / 青岛 / 重庆一致） | 2026-07-01 起 | https://www.shanghai.cn.emb-japan.go.jp/itpr_ja/11_000001_00633.html | v1 | single-source |
+| FC-011 | 42.8% / 13.1% | 警察庁外免切替・知识确认 / 技能确认合格率 | 2025-10–12 | https://drivey.jp/blog/gaimen-kirikae-knowledge-test | v1 | single-source |
+| FC-012 | +4.6% | 日銀 SPPI「道路貨物輸送」 | 2026-09 速报 | https://www.boj.or.jp/statistics/pi/cspi_release/sppi2609.pdf | v1 | single-source |
+| FC-013 | 38 件 | TSR 倒产・運輸業（+2.7%，连续 2 个月增） | 2026-10 | https://www.tsr-net.co.jp/news/status/detail/1203416_1610.html | v1 | single-source |
+| FC-014 | 国务院令第 620 号 | 《对外劳务合作管理条例》・经营资格 / 名单 | 2012-08-01 施行 | https://www.gov.cn/gongbao/content/2012/content_2161721.htm | v1 | single-source |
+| FC-015 | 国务院令第 841 号 | 出境入境中介服务・备案制 | 2026-09-15 施行 | https://www.gov.cn/gongbao/2026/issue_12906/202608/content_7077791.html | v1 | single-source |
+| FC-016 | 4.1982 元 | 中国外汇交易中心・100 日元中间价 | 2026-11-17 | https://www.chinamoney.com.cn/ | v2 | single-source |
 
 ---
 

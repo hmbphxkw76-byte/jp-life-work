@@ -13,7 +13,7 @@ pip install -r requirements.txt   # markdown
 python -m unittest discover -s engine/tests -q   # 单元测试（以 docs/CI.md 与实测为准）
 ```
 
-> 测试计数：1186 项（`python -m unittest discover -s engine/tests` 实测，与 `docs/CI.md` 六节一致；由 `engine/tests/test_arch_guard.py` 双向锁定）。
+> 测试计数：1188 项（`python -m unittest discover -s engine/tests` 实测，与 `docs/CI.md` 六节一致；由 `engine/tests/test_arch_guard.py` 双向锁定）。
 
 ## 退出码约定（校验类工具统一）
 
@@ -537,3 +537,4 @@ python engine/tools/local_ci.py list                   # 列检查项 / 排除�
 | v1.21 | 2026-11-23 | 修复 merge 等待竞态 | `workflow_guard` 新增 `PR_REQUIRED_CHECKS=(validate,audit)`，`_gh_pr_wait_checks` 显式等待（空 rollup + `CLEAN` 不再误判为可合并）；新增 4 项回归；测试计数 1179 → 1183 |
 | v1.22 | 2026-11-23 | 写回换行口径硬化 | `generate_registry.write()` / `sync_vocab.dump_json()` 写回统一 `newline="\n"`（Windows 不再产 CRLF 假 dirty）；新增 `test_write_lf.py` 2 项；过程留痕守卫元组补 2 份；测试计数 1183 → 1185 |
 | v1.23 | 2026-11-23 | 阶段闸登记册判据修复 | `stage_gate_check` 的 `G1-REGISTRY` glob 未命中时认可已声明且存在的 `{{REGISTRY_PATH}}`（修 `00-decision-hub` 误报 P2）；新增 1 项回归；测试计数 1185 → 1186 |
+| v1.24 | 2026-11-23 | 事实卡片 corroboration 语义 | `fact_card_check` 支持 `single-source`（唯一权威口径不计 P2）+ 在库卡片守卫；标准文档 v1.2；测试计数 1186 → 1188 |

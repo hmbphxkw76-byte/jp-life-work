@@ -86,13 +86,19 @@ def check_fields(cards: dict[str, dict]) -> list[dict]:
 
 
 def check_corroboration(cards: dict[str, dict]) -> list[dict]:
-    """n22：corroboration 来源数登记与多源互证提示（P2）。"""
+    """n22：corroboration 来源数登记与多源互证提示（P2）。
+
+    取值语义：正整数 = 已核验的来源 URL 计数；``single-source`` = 已核验为唯一权威口径、
+    不适用 ≥2 互证（官方统计量 / 官方定价），不计 P2。空值仍报「未标注」。
+    """
     issues = []
     for cid, c in sorted(cards.items()):
         v = (c.get("corroboration") or "").strip()
         if not v:
             issues.append({"id": cid, "level": "P2", "issue": "corroboration 未标注",
                            "detail": "事实卡片未登记 corroboration 来源数（n22）"})
+        elif v == "single-source":
+            continue
         elif v.isdigit() and int(v) < 2:
             issues.append({"id": cid, "level": "P2", "issue": "corroboration 来源数 < 2",
                            "detail": f"当前 {v}，建议多源互证"})

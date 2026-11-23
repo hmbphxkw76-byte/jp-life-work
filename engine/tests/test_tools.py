@@ -1999,6 +1999,19 @@ class TestFactCardCheck(unittest.TestCase):
         self.assertEqual(len(issues), 2)
         self.assertTrue(all(i["level"] == "P2" for i in issues))
 
+    def test_corroboration_single_source(self):
+        """显式 single-source（已核验为唯一权威口径、不适用 ≥2 互证）不计 P2。"""
+        cards = {"FC-001": {"corroboration": "single-source"},
+                 "FC-002": {"corroboration": "2"}}
+        self.assertEqual(fact_card_check.check_corroboration(cards), [])
+
+    def test_real_cards_corroboration_declared(self):
+        """在库卡片 corroboration 必须为 ≥2 或显式 single-source。"""
+        for cid, c in fact_card_check.parse_cards().items():
+            v = (c.get("corroboration") or "").strip()
+            self.assertTrue(v == "single-source" or (v.isdigit() and int(v) >= 2),
+                            f"{cid} corroboration 不合规：{v!r}")
+
     def test_lineage(self):
         """n24：FC → 引用报告 / 登记册 血缘索引。"""
         cards = {"FC-001": {"值": "22,100"}}
