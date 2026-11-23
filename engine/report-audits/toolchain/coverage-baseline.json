@@ -2,8 +2,8 @@
   "threshold": 80,
   "per_tool_min": 60,
   "enforce": true,
-  "total_percent": 89.57,
-  "tests_green": false,
+  "total_percent": 88.72,
+  "tests_green": true,
   "per_tool": {
     "link_check.py": 65.4,
     "audit_registry.py": 74.2,
@@ -48,12 +48,12 @@
     "report_diff.py": 98.8,
     "skeleton_builder.py": 98.9,
     "source_normalize.py": 98.9,
-    "pipeline_status.py": 100.0,
+    "trigger_watch.py": 100.0,
     "ensure_region_topics.py": 100.0,
     "incremental_build.py": 100.0,
-    "trigger_watch.py": 100.0,
-    "review_gate.py": 100.0,
-    "generate_registry.py": 100.0
+    "pipeline_status.py": 100.0,
+    "generate_registry.py": 100.0,
+    "review_gate.py": 100.0
   },
   "weakest": {
     "link_check.py": 65.4,

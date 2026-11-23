@@ -1,6 +1,6 @@
 # 文档索引（docs/）
 
-> **版本**：v2.16（2026-11-22 task stop 信任 merged 登记）
+> **版本**：v2.17（2026-11-23 CI 自动化 PR 免审批自动合并）
 > **用途**：jp-life-work 规范与审计标准的**单一入口**。只收「长期有效规范」，不收一次性过程记录。
 > **维护纪律**：规范类文档修订须同步 `engine/tests/test_tools.py` 对应守卫测试，并经合并门禁校验。
 
@@ -71,3 +71,4 @@
 | v2.14 | 2026-11-22 | 本地等价 CI 入口 | 新增 `engine/tools/local_ci.py`（只读编排层：33 项本地检查 + 确定性 JSON，退出码 0/1/2）与 `engine/tests/test_local_ci.py`（21 项）；结果目录入 `.gitignore`；工具 50 / 类型 12 / 测试 1167 / 工作流 8 |
 | v2.15 | 2026-11-22 | 合并 PR 化 + main 分支保护 | `workflow_guard merge` 新增 `--transport auto\|direct\|pr` + `--wait-timeout`（PR 传输：推分支 → 建 PR → 等检查 → 合并）与 4 项 PR 传输测试；`main` 启用分支保护；工具 50 / 类型 12 / 测试 1171 / 工作流 8 |
 | v2.16 | 2026-11-22 | task stop 信任 merged 登记 | `task stop` 对已登记 `merged`（含 `merged_sha`）的任务跳过祖先检查（PR 合并远端分支已删 / 本地 base 滞后时不误报）；新增 1 项测试；工具 50 / 类型 12 / 测试 1172 / 工作流 8 |
+| v2.17 | 2026-11-23 | CI 自动化 PR 免审批自动合并 | 新增复合动作 `.github/actions/auto-merge-pr` 与守卫测试 `test_ci_auto_merge.py`（5 项）；6 条工作流 8 个提交点改为创建 PR 后启用自动合并，仓库设置启用 `allow_auto_merge`；工具 50 / 类型 12 / 测试 1177 / 工作流 8 |

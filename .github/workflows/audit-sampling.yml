@@ -77,6 +77,7 @@ jobs:
             --run-url "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
 
       - name: 提交抽检报告与审计状态
+        id: submit
         if: always()
         run: |
           git add -A -- ':(glob)**/reports/*.md' ':(glob)**/reports/*.html' \
@@ -90,10 +91,16 @@ jobs:
           git commit -m "chore(audit): 月度分层抽检报告（含不合格处置）"
           BRANCH="auto/audit-sampling-$(date -u +%Y%m%d-%H%M%S)"
           git push origin "HEAD:$BRANCH"
-          gh pr create --base main --head "$BRANCH" \
-            --title "[automated] 月度分层抽检报告" \
-            --body "由 .github/workflows/audit-sampling.yml 自动提交（[automated] 标记，保留 github-actions[bot] 提交身份）。请评审后合并。" \
-            || echo "::warning::PR 创建失败（可能已存在），请人工确认"
+          echo "branch=$BRANCH" >> "$GITHUB_OUTPUT"
+
+      - name: 创建 PR 并启用自动合并
+        if: always()
+        uses: ./.github/actions/auto-merge-pr
+        with:
+          branch: ${{ steps.submit.outputs.branch }}
+          title: "[automated] 月度分层抽检报告"
+          body: "由 .github/workflows/audit-sampling.yml 自动提交（[automated] 标记，保留 github-actions[bot] 提交身份）。CI（validate / audit）通过后自动合并。"
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       # 阶段收尾：无论成败清理缓存、临时产物与 pip 缓存，保证流水线结束后无残留。
       - uses: ./.github/actions/workspace-cleanup

@@ -104,7 +104,8 @@ python engine/scripts/workflow_guard.py lock release checkout
 
 ## 六、与 CI 的关系
 
-GitHub Actions 在远端 runner 上跑，不经过本地锁；定时任务推 `auto/*` 分支并开 PR，由人评审合并。
+GitHub Actions 在远端 runner 上跑，不经过本地锁；定时任务推 `auto/*` 分支并开 PR，由复合动作
+`.github/actions/auto-merge-pr` 启用自动合并（`validate` / `audit` 通过即合入；纯个人项目无第三方评审）。
 第 2 层的 PR 传输在服务端分支保护下等待 `validate` / `audit` 通过后再合并；**不要**用
 `sync --push-local` 直推 main（服务端分支保护会拒绝）。
 
@@ -204,15 +205,16 @@ python engine/scripts/verify_report_parity.py --compare  .migration-baseline    
 
 | # | 项 | 结果 |
 |---|---|---|
-| 1 | 测试全绿 | ✅ `python -m unittest discover -s engine/tests` 全绿（1167 项，4 跳过） |
+| 1 | 测试全绿 | ✅ `python -m unittest discover -s engine/tests` 全绿（1177 项，4 跳过） |
 | 2 | `validate.py` 通过 | ✅ 退出码 0 |
-| 3 | 双轴评审存在且无 P0/P1 | ✅ `docs/toolchain/reviews/local-ci-entry-review.md`（local-ci-entry） |
-| 4 | `coverage_gate.py` 达标 | ✅ 89.6%（阈值 80%，enforce=true）；单工具最低阈值 60% |
+| 3 | 双轴评审存在且无 P0/P1 | ✅ `docs/toolchain/reviews/ci-auto-merge-pr-review.md`（ci-auto-merge-pr） |
+| 4 | `coverage_gate.py` 达标 | ✅ 88.7%（阈值 80%，enforce=true） |
 | 5 | `cleanup_workspace.py --check` 零残留 | ✅ 零残留 |
-| 6 | 新增/改动工具已登记 | ✅ 新增 `local_ci.py`；`generate_registry.py --check` 通过（工具 50 / 类型 12 / 主题 21 / 工作流 8） |
-| 6b | 决策面板产物一致性 | ✅ `consulting_panel.py --check` 退出码 0（面板 md 与重算一致） |
+| 6 | 新增/改动工具已登记 | ✅ 本次无新增 / 改动 Python 工具；`generate_registry.py --check` 通过（工具 50 / 类型 12 / 主题 21 / 工作流 8） |
 | 7 | 生成物确定性 | ✅ `build_hub.py --check` / `build_index.py --check` 均退出码 0 |
 | 8 | 架构边界 | ✅ `engine/tools/` 无 git 可变操作；`engine/scripts/` 不产出内容；`iter_business_dirs()` = 21 |
+| 9 | 端到端（CI 通过即自动合并） | ✅ PR #11（空提交）`validate` / `audit` SUCCESS 后自动合入，merge commit `2ecb68e` |
+| 10 | 静态检查 | ✅ `ruff check engine` 0；`mypy` 63 文件 0 |
 
 ## 十三、输入门禁可移植性（`engine/scripts/bootstrap_gate.py` / `check_gate.py`）
 

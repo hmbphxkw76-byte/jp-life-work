@@ -119,6 +119,7 @@ jobs:
             --body-file /tmp/issue-body.md
 
       - name: 记录自动化状态并提交
+        id: submit
         if: always()
         run: |
           RESULT="${{ job.status == 'success' && 'success' || 'failure' }}"
@@ -135,10 +136,16 @@ jobs:
           git commit -m "chore: 记录月度提醒自动化状态"
           BRANCH="auto/report-tasks-$(date -u +%Y%m%d-%H%M%S)"
           git push origin "HEAD:$BRANCH"
-          gh pr create --base main --head "$BRANCH" \
-            --title "[automated] 月度提醒自动化状态" \
-            --body "由 .github/workflows/scheduled-report-tasks.yml 自动提交（[automated] 标记，保留 github-actions[bot] 提交身份）。请评审后合并。" \
-            || echo "::warning::PR 创建失败（可能已存在），请人工确认"
+          echo "branch=$BRANCH" >> "$GITHUB_OUTPUT"
+
+      - name: 创建 PR 并启用自动合并
+        if: always()
+        uses: ./.github/actions/auto-merge-pr
+        with:
+          branch: ${{ steps.submit.outputs.branch }}
+          title: "[automated] 月度提醒自动化状态"
+          body: "由 .github/workflows/scheduled-report-tasks.yml 自动提交（[automated] 标记，保留 github-actions[bot] 提交身份）。CI（validate / audit）通过后自动合并。"
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       # 阶段收尾：无论成败清理缓存、临时产物与 pip 缓存，保证流水线结束后无残留。
       - uses: ./.github/actions/workspace-cleanup
