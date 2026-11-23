@@ -142,9 +142,15 @@ def check_topic(b) -> list[Finding]:
 
     data_dir = b.path / "data"
     regs = sorted(data_dir.glob(REGISTRY_GLOB)) if data_dir.is_dir() else []
-    if not regs:
+    if not regs and declared and (b.path / declared.group(1).strip()).is_file():
+        # 声明式登记册：如 00-decision-hub 的 decision_hub_registry.md，结构与标准
+        # *_indicator_registry.md 活值表不同（无「口径 / 优先数据源」列），故不送入
+        # gate2_filter（否则会误报 G2-SCHEMA P1）；此处仅确认其存在。
+        pass
+    elif not regs:
         out.append(Finding("G1-REGISTRY", "P2", "指标登记册",
-                           f"缺少 data/{REGISTRY_GLOB}（决策层 / 骨架主题可豁免）", "闸1"))
+                           f"缺少 data/{REGISTRY_GLOB}，且未声明可用的 {{{{REGISTRY_PATH}}}}"
+                           "（骨架主题可豁免）", "闸1"))
     else:
         out += gate2_filter(_read(regs[0]))
     return out

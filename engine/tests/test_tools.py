@@ -2959,6 +2959,20 @@ class TestStageGateCheck(unittest.TestCase):
         _common.ROOT = self.root
         self.assertIn("G1-REGISTRY", self._codes(stage_gate_check.check_topic(self._topic(config=self._CFG))))
 
+    def test_check_topic_declared_registry_without_glob(self):
+        """声明式 {{REGISTRY_PATH}} 存在但非 *_indicator_registry.md 命名时，不再误报 G1-REGISTRY。
+
+        实例：00-decision-hub 声明 data/decision_hub_registry.md（结构异于标准指标登记册），
+        旧判据只 glob ``*_indicator_registry.md`` 故漏认。
+        """
+        _common.ROOT = self.root
+        cfg = self._CFG + "{{REGISTRY_PATH}} = data/decision_hub_registry.md\n"
+        b = self._topic(config=cfg)
+        (b.path / "data" / "decision_hub_registry.md").write_text(
+            "# 赴日决策仪表盘 · 指标登记册\n\n| # | 决策问题 | 指标 | 收敛状态 |\n|---|---|---|---|\n",
+            encoding="utf-8")
+        self.assertEqual(stage_gate_check.check_topic(b), [])
+
     def test_check_topic_full_pass(self):
         _common.ROOT = self.root
         cfg = self._CFG + "{{REGISTRY_PATH}} = data/x_indicator_registry.md\n"
