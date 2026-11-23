@@ -1112,6 +1112,1086 @@
           "term": "係長"
         }
       ]
+    },
+    "CONCEPT-046": {
+      "name": "元請",
+      "terms": [
+        {
+          "topic": "01-ssw-driver",
+          "id": "SSW-021",
+          "term": "元請"
+        },
+        {
+          "topic": "04-industry-logistics",
+          "id": "LOG-044",
+          "term": "元請"
+        }
+      ]
+    },
+    "CONCEPT-047": {
+      "name": "改善基準告示",
+      "terms": [
+        {
+          "topic": "01-ssw-driver",
+          "id": "SSW-034",
+          "term": "改善基準告示"
+        },
+        {
+          "topic": "04-industry-logistics",
+          "id": "LOG-039",
+          "term": "改善基準告示"
+        }
+      ]
+    },
+    "CONCEPT-048": {
+      "name": "玉掛け",
+      "terms": [
+        {
+          "topic": "01-ssw-driver",
+          "id": "SSW-039",
+          "term": "玉掛け"
+        },
+        {
+          "topic": "02-career-driver",
+          "id": "CDR-030",
+          "term": "玉掛け"
+        }
+      ]
+    },
+    "CONCEPT-049": {
+      "name": "適性診断",
+      "terms": [
+        {
+          "topic": "01-ssw-driver",
+          "id": "SSW-051",
+          "term": "適性診断"
+        },
+        {
+          "topic": "15-health-wellbeing",
+          "id": "HLW-069",
+          "term": "適性診断"
+        }
+      ]
+    },
+    "CONCEPT-050": {
+      "name": "健康診断",
+      "terms": [
+        {
+          "topic": "01-ssw-driver",
+          "id": "SSW-052",
+          "term": "健康診断"
+        },
+        {
+          "topic": "14-life-operations",
+          "id": "LOP-011",
+          "term": "健康診断"
+        }
+      ]
+    },
+    "CONCEPT-051": {
+      "name": "確定申告",
+      "terms": [
+        {
+          "topic": "01-ssw-driver",
+          "id": "SSW-064",
+          "term": "確定申告"
+        },
+        {
+          "topic": "07-economy-finance",
+          "id": "ECF-046",
+          "term": "確定申告"
+        }
+      ]
+    },
+    "CONCEPT-052": {
+      "name": "申請取次",
+      "terms": [
+        {
+          "topic": "01-ssw-driver",
+          "id": "SSW-073",
+          "term": "申請取次"
+        },
+        {
+          "topic": "08-visa-immigration",
+          "id": "VIS-073",
+          "term": "申請取次"
+        }
+      ]
+    },
+    "CONCEPT-053": {
+      "name": "危険物乙種第4類",
+      "terms": [
+        {
+          "topic": "01-ssw-driver",
+          "id": "SSW-087",
+          "term": "危険物乙種第4類"
+        },
+        {
+          "topic": "02-career-driver",
+          "id": "CDR-081",
+          "term": "危険物乙種第4類"
+        }
+      ]
+    },
+    "CONCEPT-054": {
+      "name": "年末調整",
+      "terms": [
+        {
+          "topic": "01-ssw-driver",
+          "id": "SSW-102",
+          "term": "年末調整"
+        },
+        {
+          "topic": "07-economy-finance",
+          "id": "ECF-047",
+          "term": "年末調整"
+        }
+      ]
+    },
+    "CONCEPT-055": {
+      "name": "課長",
+      "terms": [
+        {
+          "topic": "02-career-driver",
+          "id": "CDR-004",
+          "term": "課長"
+        },
+        {
+          "topic": "03-career-management",
+          "id": "CMG-007",
+          "term": "課長"
+        }
+      ]
+    },
+    "CONCEPT-056": {
+      "name": "支店長",
+      "terms": [
+        {
+          "topic": "02-career-driver",
+          "id": "CDR-009",
+          "term": "支店長"
+        },
+        {
+          "topic": "03-career-management",
+          "id": "CMG-003",
+          "term": "支店長"
+        }
+      ]
+    },
+    "CONCEPT-057": {
+      "name": "営業所長",
+      "terms": [
+        {
+          "topic": "02-career-driver",
+          "id": "CDR-010",
+          "term": "営業所長"
+        },
+        {
+          "topic": "03-career-management",
+          "id": "CMG-004",
+          "term": "営業所長"
+        }
+      ]
+    },
+    "CONCEPT-058": {
+      "name": "賞与",
+      "terms": [
+        {
+          "topic": "02-career-driver",
+          "id": "CDR-019",
+          "term": "賞与"
+        },
+        {
+          "topic": "03-career-management",
+          "id": "CMG-034",
+          "term": "賞与"
+        }
+      ]
+    },
+    "CONCEPT-059": {
+      "name": "昇給",
+      "terms": [
+        {
+          "topic": "02-career-driver",
+          "id": "CDR-021",
+          "term": "昇給"
+        },
+        {
+          "topic": "03-career-management",
+          "id": "CMG-033",
+          "term": "昇給"
+        }
+      ]
+    },
+    "CONCEPT-060": {
+      "name": "求人",
+      "terms": [
+        {
+          "topic": "02-career-driver",
+          "id": "CDR-037",
+          "term": "求人"
+        },
+        {
+          "topic": "06-industry-technology",
+          "id": "TEC-072",
+          "term": "求人"
+        }
+      ]
+    },
+    "CONCEPT-061": {
+      "name": "面接",
+      "terms": [
+        {
+          "topic": "02-career-driver",
+          "id": "CDR-039",
+          "term": "面接"
+        },
+        {
+          "topic": "11-language-japanese",
+          "id": "JPN-062",
+          "term": "面接"
+        }
+      ]
+    },
+    "CONCEPT-062": {
+      "name": "転職",
+      "terms": [
+        {
+          "topic": "02-career-driver",
+          "id": "CDR-049",
+          "term": "転職"
+        },
+        {
+          "topic": "16-exit-transition-return",
+          "id": "ETR-011",
+          "term": "転職"
+        }
+      ]
+    },
+    "CONCEPT-063": {
+      "name": "管理職",
+      "terms": [
+        {
+          "topic": "02-career-driver",
+          "id": "CDR-053",
+          "term": "管理職"
+        },
+        {
+          "topic": "03-career-management",
+          "id": "CMG-005",
+          "term": "管理職"
+        }
+      ]
+    },
+    "CONCEPT-064": {
+      "name": "雇用契約書",
+      "terms": [
+        {
+          "topic": "02-career-driver",
+          "id": "CDR-066",
+          "term": "雇用契約書"
+        },
+        {
+          "topic": "17-migration-compliance",
+          "id": "MPC-053",
+          "term": "雇用契約書"
+        }
+      ]
+    },
+    "CONCEPT-065": {
+      "name": "雇用保険被保険者証",
+      "terms": [
+        {
+          "topic": "02-career-driver",
+          "id": "CDR-092",
+          "term": "雇用保険被保険者証"
+        },
+        {
+          "topic": "16-exit-transition-return",
+          "id": "ETR-051",
+          "term": "雇用保険被保険者証"
+        }
+      ]
+    },
+    "CONCEPT-066": {
+      "name": "報連相",
+      "terms": [
+        {
+          "topic": "03-career-management",
+          "id": "CMG-023",
+          "term": "報連相"
+        },
+        {
+          "topic": "11-language-japanese",
+          "id": "JPN-053",
+          "term": "報連相"
+        }
+      ]
+    },
+    "CONCEPT-067": {
+      "name": "道路運送車両法",
+      "terms": [
+        {
+          "topic": "04-industry-logistics",
+          "id": "LOG-090",
+          "term": "道路運送車両法"
+        },
+        {
+          "topic": "05-industry-autonomous",
+          "id": "AUT-088",
+          "term": "道路運送車両法"
+        }
+      ]
+    },
+    "CONCEPT-068": {
+      "name": "保険",
+      "terms": [
+        {
+          "topic": "05-industry-autonomous",
+          "id": "AUT-056",
+          "term": "保険"
+        },
+        {
+          "topic": "18-family-parenting",
+          "id": "FAM-045",
+          "term": "保険"
+        }
+      ]
+    },
+    "CONCEPT-069": {
+      "name": "所得税",
+      "terms": [
+        {
+          "topic": "07-economy-finance",
+          "id": "ECF-042",
+          "term": "所得税"
+        },
+        {
+          "topic": "16-exit-transition-return",
+          "id": "ETR-016",
+          "term": "所得税"
+        }
+      ]
+    },
+    "CONCEPT-070": {
+      "name": "消費税",
+      "terms": [
+        {
+          "topic": "07-economy-finance",
+          "id": "ECF-044",
+          "term": "消費税"
+        },
+        {
+          "topic": "12-culture-life",
+          "id": "CUL-032",
+          "term": "消費税"
+        }
+      ]
+    },
+    "CONCEPT-071": {
+      "name": "源泉徴収",
+      "terms": [
+        {
+          "topic": "07-economy-finance",
+          "id": "ECF-074",
+          "term": "源泉徴収"
+        },
+        {
+          "topic": "16-exit-transition-return",
+          "id": "ETR-068",
+          "term": "源泉徴収"
+        }
+      ]
+    },
+    "CONCEPT-072": {
+      "name": "分離課税",
+      "terms": [
+        {
+          "topic": "07-economy-finance",
+          "id": "ECF-077",
+          "term": "分離課税"
+        },
+        {
+          "topic": "16-exit-transition-return",
+          "id": "ETR-070",
+          "term": "分離課税"
+        }
+      ]
+    },
+    "CONCEPT-073": {
+      "name": "永住者",
+      "terms": [
+        {
+          "topic": "08-visa-immigration",
+          "id": "VIS-006",
+          "term": "永住者"
+        },
+        {
+          "topic": "18-family-parenting",
+          "id": "FAM-077",
+          "term": "永住者"
+        }
+      ]
+    },
+    "CONCEPT-074": {
+      "name": "定住者",
+      "terms": [
+        {
+          "topic": "08-visa-immigration",
+          "id": "VIS-008",
+          "term": "定住者"
+        },
+        {
+          "topic": "18-family-parenting",
+          "id": "FAM-033",
+          "term": "定住者"
+        }
+      ]
+    },
+    "CONCEPT-075": {
+      "name": "家族滞在",
+      "terms": [
+        {
+          "topic": "08-visa-immigration",
+          "id": "VIS-010",
+          "term": "家族滞在"
+        },
+        {
+          "topic": "18-family-parenting",
+          "id": "FAM-001",
+          "term": "家族滞在"
+        }
+      ]
+    },
+    "CONCEPT-076": {
+      "name": "再入国許可",
+      "terms": [
+        {
+          "topic": "08-visa-immigration",
+          "id": "VIS-020",
+          "term": "再入国許可"
+        },
+        {
+          "topic": "16-exit-transition-return",
+          "id": "ETR-020",
+          "term": "再入国許可"
+        }
+      ]
+    },
+    "CONCEPT-077": {
+      "name": "身元保証人",
+      "terms": [
+        {
+          "topic": "08-visa-immigration",
+          "id": "VIS-039",
+          "term": "身元保証人"
+        },
+        {
+          "topic": "09-politics-law",
+          "id": "LAW-080",
+          "term": "身元保証人"
+        }
+      ]
+    },
+    "CONCEPT-078": {
+      "name": "生活保護",
+      "terms": [
+        {
+          "topic": "08-visa-immigration",
+          "id": "VIS-051",
+          "term": "生活保護"
+        },
+        {
+          "topic": "18-family-parenting",
+          "id": "FAM-025",
+          "term": "生活保護"
+        }
+      ]
+    },
+    "CONCEPT-079": {
+      "name": "出入国管理及び難民認定法",
+      "terms": [
+        {
+          "topic": "08-visa-immigration",
+          "id": "VIS-052",
+          "term": "出入国管理及び難民認定法"
+        },
+        {
+          "topic": "09-politics-law",
+          "id": "LAW-069",
+          "term": "出入国管理及び難民認定法"
+        }
+      ]
+    },
+    "CONCEPT-080": {
+      "name": "出国命令",
+      "terms": [
+        {
+          "topic": "08-visa-immigration",
+          "id": "VIS-058",
+          "term": "出国命令"
+        },
+        {
+          "topic": "09-politics-law",
+          "id": "LAW-074",
+          "term": "出国命令"
+        }
+      ]
+    },
+    "CONCEPT-081": {
+      "name": "難民認定",
+      "terms": [
+        {
+          "topic": "08-visa-immigration",
+          "id": "VIS-060",
+          "term": "難民認定"
+        },
+        {
+          "topic": "09-politics-law",
+          "id": "LAW-078",
+          "term": "難民認定"
+        }
+      ]
+    },
+    "CONCEPT-082": {
+      "name": "弁護士",
+      "terms": [
+        {
+          "topic": "08-visa-immigration",
+          "id": "VIS-066",
+          "term": "弁護士"
+        },
+        {
+          "topic": "09-politics-law",
+          "id": "LAW-032",
+          "term": "弁護士"
+        }
+      ]
+    },
+    "CONCEPT-083": {
+      "name": "行政不服審査",
+      "terms": [
+        {
+          "topic": "08-visa-immigration",
+          "id": "VIS-076",
+          "term": "行政不服審査"
+        },
+        {
+          "topic": "09-politics-law",
+          "id": "LAW-026",
+          "term": "行政不服審査"
+        }
+      ]
+    },
+    "CONCEPT-084": {
+      "name": "在留特別許可",
+      "terms": [
+        {
+          "topic": "08-visa-immigration",
+          "id": "VIS-077",
+          "term": "在留特別許可"
+        },
+        {
+          "topic": "09-politics-law",
+          "id": "LAW-075",
+          "term": "在留特別許可"
+        }
+      ]
+    },
+    "CONCEPT-085": {
+      "name": "地方自治",
+      "terms": [
+        {
+          "topic": "09-politics-law",
+          "id": "LAW-012",
+          "term": "地方自治"
+        },
+        {
+          "topic": "13-regional-info",
+          "id": "REG-046",
+          "term": "地方自治"
+        }
+      ]
+    },
+    "CONCEPT-086": {
+      "name": "条例",
+      "terms": [
+        {
+          "topic": "09-politics-law",
+          "id": "LAW-017",
+          "term": "条例"
+        },
+        {
+          "topic": "13-regional-info",
+          "id": "REG-057",
+          "term": "条例"
+        }
+      ]
+    },
+    "CONCEPT-087": {
+      "name": "地方分権",
+      "terms": [
+        {
+          "topic": "09-politics-law",
+          "id": "LAW-054",
+          "term": "地方分権"
+        },
+        {
+          "topic": "13-regional-info",
+          "id": "REG-052",
+          "term": "地方分権"
+        }
+      ]
+    },
+    "CONCEPT-088": {
+      "name": "幼稚園",
+      "terms": [
+        {
+          "topic": "10-education-qualification",
+          "id": "EDU-001",
+          "term": "幼稚園"
+        },
+        {
+          "topic": "18-family-parenting",
+          "id": "FAM-019",
+          "term": "幼稚園"
+        }
+      ]
+    },
+    "CONCEPT-089": {
+      "name": "敷金",
+      "terms": [
+        {
+          "topic": "12-culture-life",
+          "id": "CUL-017",
+          "term": "敷金"
+        },
+        {
+          "topic": "14-life-operations",
+          "id": "LOP-012",
+          "term": "敷金"
+        }
+      ]
+    },
+    "CONCEPT-090": {
+      "name": "礼金",
+      "terms": [
+        {
+          "topic": "12-culture-life",
+          "id": "CUL-018",
+          "term": "礼金"
+        },
+        {
+          "topic": "14-life-operations",
+          "id": "LOP-013",
+          "term": "礼金"
+        }
+      ]
+    },
+    "CONCEPT-091": {
+      "name": "更新料",
+      "terms": [
+        {
+          "topic": "12-culture-life",
+          "id": "CUL-019",
+          "term": "更新料"
+        },
+        {
+          "topic": "14-life-operations",
+          "id": "LOP-014",
+          "term": "更新料"
+        }
+      ]
+    },
+    "CONCEPT-092": {
+      "name": "火災保険",
+      "terms": [
+        {
+          "topic": "12-culture-life",
+          "id": "CUL-020",
+          "term": "火災保険"
+        },
+        {
+          "topic": "16-exit-transition-return",
+          "id": "ETR-036",
+          "term": "火災保険"
+        }
+      ]
+    },
+    "CONCEPT-093": {
+      "name": "電子マネー",
+      "terms": [
+        {
+          "topic": "12-culture-life",
+          "id": "CUL-033",
+          "term": "電子マネー"
+        },
+        {
+          "topic": "14-life-operations",
+          "id": "LOP-076",
+          "term": "電子マネー"
+        }
+      ]
+    },
+    "CONCEPT-094": {
+      "name": "防災",
+      "terms": [
+        {
+          "topic": "12-culture-life",
+          "id": "CUL-056",
+          "term": "防災"
+        },
+        {
+          "topic": "19-safety-disaster",
+          "id": "SFD-039",
+          "term": "防災"
+        }
+      ]
+    },
+    "CONCEPT-095": {
+      "name": "地震",
+      "terms": [
+        {
+          "topic": "12-culture-life",
+          "id": "CUL-057",
+          "term": "地震"
+        },
+        {
+          "topic": "19-safety-disaster",
+          "id": "SFD-028",
+          "term": "地震"
+        }
+      ]
+    },
+    "CONCEPT-096": {
+      "name": "台風",
+      "terms": [
+        {
+          "topic": "12-culture-life",
+          "id": "CUL-058",
+          "term": "台風"
+        },
+        {
+          "topic": "19-safety-disaster",
+          "id": "SFD-029",
+          "term": "台風"
+        }
+      ]
+    },
+    "CONCEPT-097": {
+      "name": "防災訓練",
+      "terms": [
+        {
+          "topic": "12-culture-life",
+          "id": "CUL-061",
+          "term": "防災訓練"
+        },
+        {
+          "topic": "19-safety-disaster",
+          "id": "SFD-004",
+          "term": "防災訓練"
+        }
+      ]
+    },
+    "CONCEPT-098": {
+      "name": "転入届",
+      "terms": [
+        {
+          "topic": "12-culture-life",
+          "id": "CUL-065",
+          "term": "転入届"
+        },
+        {
+          "topic": "13-regional-info",
+          "id": "REG-055",
+          "term": "転入届"
+        }
+      ]
+    },
+    "CONCEPT-099": {
+      "name": "転出届",
+      "terms": [
+        {
+          "topic": "12-culture-life",
+          "id": "CUL-066",
+          "term": "転出届"
+        },
+        {
+          "topic": "16-exit-transition-return",
+          "id": "ETR-017",
+          "term": "転出届"
+        }
+      ]
+    },
+    "CONCEPT-100": {
+      "name": "保証会社",
+      "terms": [
+        {
+          "topic": "12-culture-life",
+          "id": "CUL-071",
+          "term": "保証会社"
+        },
+        {
+          "topic": "14-life-operations",
+          "id": "LOP-028",
+          "term": "保証会社"
+        }
+      ]
+    },
+    "CONCEPT-101": {
+      "name": "印鑑",
+      "terms": [
+        {
+          "topic": "12-culture-life",
+          "id": "CUL-073",
+          "term": "印鑑"
+        },
+        {
+          "topic": "14-life-operations",
+          "id": "LOP-039",
+          "term": "印鑑"
+        }
+      ]
+    },
+    "CONCEPT-102": {
+      "name": "転入",
+      "terms": [
+        {
+          "topic": "13-regional-info",
+          "id": "REG-016",
+          "term": "転入"
+        },
+        {
+          "topic": "14-life-operations",
+          "id": "LOP-005",
+          "term": "転入"
+        }
+      ]
+    },
+    "CONCEPT-103": {
+      "name": "転出",
+      "terms": [
+        {
+          "topic": "13-regional-info",
+          "id": "REG-017",
+          "term": "転出"
+        },
+        {
+          "topic": "14-life-operations",
+          "id": "LOP-004",
+          "term": "転出"
+        }
+      ]
+    },
+    "CONCEPT-104": {
+      "name": "医療機関",
+      "terms": [
+        {
+          "topic": "13-regional-info",
+          "id": "REG-040",
+          "term": "医療機関"
+        },
+        {
+          "topic": "15-health-wellbeing",
+          "id": "HLW-041",
+          "term": "医療機関"
+        }
+      ]
+    },
+    "CONCEPT-105": {
+      "name": "被用者健康保険",
+      "terms": [
+        {
+          "topic": "14-life-operations",
+          "id": "LOP-007",
+          "term": "被用者健康保険"
+        },
+        {
+          "topic": "15-health-wellbeing",
+          "id": "HLW-021",
+          "term": "被用者健康保険"
+        }
+      ]
+    },
+    "CONCEPT-106": {
+      "name": "子ども・子育て支援金",
+      "terms": [
+        {
+          "topic": "14-life-operations",
+          "id": "LOP-054",
+          "term": "子ども・子育て支援金"
+        },
+        {
+          "topic": "15-health-wellbeing",
+          "id": "HLW-057",
+          "term": "子ども・子育て支援金"
+        }
+      ]
+    },
+    "CONCEPT-107": {
+      "name": "国民健康保険料",
+      "terms": [
+        {
+          "topic": "14-life-operations",
+          "id": "LOP-055",
+          "term": "国民健康保険料"
+        },
+        {
+          "topic": "15-health-wellbeing",
+          "id": "HLW-056",
+          "term": "国民健康保険料"
+        }
+      ]
+    },
+    "CONCEPT-108": {
+      "name": "出産育児一時金",
+      "terms": [
+        {
+          "topic": "15-health-wellbeing",
+          "id": "HLW-054",
+          "term": "出産育児一時金"
+        },
+        {
+          "topic": "18-family-parenting",
+          "id": "FAM-011",
+          "term": "出産育児一時金"
+        }
+      ]
+    },
+    "CONCEPT-109": {
+      "name": "直接支払制度",
+      "terms": [
+        {
+          "topic": "15-health-wellbeing",
+          "id": "HLW-055",
+          "term": "直接支払制度"
+        },
+        {
+          "topic": "18-family-parenting",
+          "id": "FAM-061",
+          "term": "直接支払制度"
+        }
+      ]
+    },
+    "CONCEPT-110": {
+      "name": "年金",
+      "terms": [
+        {
+          "topic": "16-exit-transition-return",
+          "id": "ETR-029",
+          "term": "年金"
+        },
+        {
+          "topic": "18-family-parenting",
+          "id": "FAM-043",
+          "term": "年金"
+        }
+      ]
+    },
+    "CONCEPT-111": {
+      "name": "解約金",
+      "terms": [
+        {
+          "topic": "16-exit-transition-return",
+          "id": "ETR-035",
+          "term": "解約金"
+        },
+        {
+          "topic": "17-migration-compliance",
+          "id": "MPC-020",
+          "term": "解約金"
+        }
+      ]
+    },
+    "CONCEPT-112": {
+      "name": "労働基準法第15条",
+      "terms": [
+        {
+          "topic": "16-exit-transition-return",
+          "id": "ETR-043",
+          "term": "労働基準法第15条"
+        },
+        {
+          "topic": "17-migration-compliance",
+          "id": "MPC-062",
+          "term": "労働基準法第15条"
+        }
+      ]
+    },
+    "CONCEPT-113": {
+      "name": "労働基準法第16条",
+      "terms": [
+        {
+          "topic": "16-exit-transition-return",
+          "id": "ETR-044",
+          "term": "労働基準法第16条"
+        },
+        {
+          "topic": "17-migration-compliance",
+          "id": "MPC-055",
+          "term": "労働基準法第16条"
+        }
+      ]
+    },
+    "CONCEPT-114": {
+      "name": "労働基準法第24条",
+      "terms": [
+        {
+          "topic": "16-exit-transition-return",
+          "id": "ETR-046",
+          "term": "労働基準法第24条"
+        },
+        {
+          "topic": "17-migration-compliance",
+          "id": "MPC-056",
+          "term": "労働基準法第24条"
+        }
+      ]
+    },
+    "CONCEPT-115": {
+      "name": "包括許可",
+      "terms": [
+        {
+          "topic": "16-exit-transition-return",
+          "id": "ETR-062",
+          "term": "包括許可"
+        },
+        {
+          "topic": "18-family-parenting",
+          "id": "FAM-059",
+          "term": "包括許可"
+        }
+      ]
+    },
+    "CONCEPT-116": {
+      "name": "個別許可",
+      "terms": [
+        {
+          "topic": "16-exit-transition-return",
+          "id": "ETR-063",
+          "term": "個別許可"
+        },
+        {
+          "topic": "18-family-parenting",
+          "id": "FAM-060",
+          "term": "個別許可"
+        }
+      ]
+    },
+    "CONCEPT-117": {
+      "name": "领事保护",
+      "terms": [
+        {
+          "topic": "19-safety-disaster",
+          "id": "SFD-015",
+          "term": "领事保护"
+        },
+        {
+          "topic": "20-overseas-china",
+          "id": "OVC-033",
+          "term": "领事保护"
+        }
+      ]
     }
   }
 }
