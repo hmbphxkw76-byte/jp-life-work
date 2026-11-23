@@ -224,7 +224,7 @@ python engine/vocabulary/script/vocab_tool.py topic-add --topic smart-logistics 
 `check` 与 `verify` 的警告级项可由显式豁免清单跳过，二者口径一致（同读一份清单，由 `check_topic` 统一判定）：
 
 - 清单结构：`exemptions[]`，每项含 `topic`（主题 ID）、`check`（检查项标识）、`reason`（豁免理由）、`evidence`（证据指针）。
-- 当前仅豁免 `id_sequence_gap`（ID 序号不连续）：01-ssw-driver / 02-career-driver 因 2026-11-19 删除 22 条无法核验的 npa.go.jp 词条遗留缺号，重排会波及报告引用与生成物（证据见复核记录 §8A.5）。
+- 当前仅豁免 `id_sequence_gap`（ID 序号不连续），共 17 个主题：① 01-ssw-driver / 02-career-driver —— 2026-11-19 删除 22 条无法核验的 npa.go.jp 词条遗留缺号（证据见复核记录 §8A.5）；② 其余 15 个主题（03 / 04 / 05 / 06 / 07 / 08 / 10 / 11 / 12 / 13 / 14 / 15 / 17 / 19 / 20）—— 2026-11-21「词条删除」后遗留缺号，逐条证据见各自 `terms.md` 版本记录（删除日期、版本号、条数）。二者均因 ID 语义未变、重排会波及报告引用与生成物而显式豁免。
 - 纪律：只豁免已留痕的既有警告；新增警告默认不豁免，须先查因；新增豁免须同步更新清单与本节。
 - 清单缺失 / 损坏 / 结构不符时视为无豁免，不阻断校验。
 
