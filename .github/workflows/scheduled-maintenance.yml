@@ -156,7 +156,9 @@ jobs:
             --run-url "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
 
       # 定时任务不再直推 main（W2 / R1）：提交后推自动分支并开 PR，保留 [automated] 标记。
+      # 纯个人项目无第三方评审：PR 交由复合动作启用自动合并，CI（validate / audit）通过即合入。
       - name: 提交维护产物
+        id: submit
         run: |
           git add -A
           if git diff --cached --quiet; then
@@ -168,14 +170,20 @@ jobs:
           git commit -m "chore: 定时维护（归位 / 归档 / 索引 / 汇总页同步）"
           BRANCH="auto/maintenance-$(date -u +%Y%m%d-%H%M%S)"
           git push origin "HEAD:$BRANCH"
-          gh pr create --base main --head "$BRANCH" \
-            --title "[automated] 定时维护产物同步" \
-            --body "由 .github/workflows/scheduled-maintenance.yml 自动提交（[automated] 标记，保留 github-actions[bot] 提交身份）。请评审后合并。" \
-            || echo "::warning::PR 创建失败（可能已存在），请人工确认"
+          echo "branch=$BRANCH" >> "$GITHUB_OUTPUT"
+
+      - name: 创建 PR 并启用自动合并（维护产物）
+        uses: ./.github/actions/auto-merge-pr
+        with:
+          branch: ${{ steps.submit.outputs.branch }}
+          title: "[automated] 定时维护产物同步"
+          body: "由 .github/workflows/scheduled-maintenance.yml 自动提交（[automated] 标记，保留 github-actions[bot] 提交身份）。CI（validate / audit）通过后自动合并。"
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       # 失败补记：主提交步骤随 job 成功路径执行；job 失败时仍把本轮自动化状态入库，
       # 避免「记录了却因未提交而丢失」（与其余 4 条工作流的 always 提交口径一致）。
       - name: 提交自动化状态（失败补记）
+        id: submit_status
         if: always()
         run: |
           if [ ! -f automation-status.json ]; then
@@ -192,10 +200,16 @@ jobs:
           git commit -m "chore: 补记定时维护自动化状态"
           BRANCH="auto/maintenance-status-$(date -u +%Y%m%d-%H%M%S)"
           git push origin "HEAD:$BRANCH"
-          gh pr create --base main --head "$BRANCH" \
-            --title "[automated] 补记定时维护自动化状态" \
-            --body "由 scheduled-maintenance.yml 失败补记步骤自动提交（[automated] 标记）。请评审后合并。" \
-            || echo "::warning::PR 创建失败（可能已存在），请人工确认"
+          echo "branch=$BRANCH" >> "$GITHUB_OUTPUT"
+
+      - name: 创建 PR 并启用自动合并（自动化状态）
+        if: always()
+        uses: ./.github/actions/auto-merge-pr
+        with:
+          branch: ${{ steps.submit_status.outputs.branch }}
+          title: "[automated] 补记定时维护自动化状态"
+          body: "由 scheduled-maintenance.yml 失败补记步骤自动提交（[automated] 标记）。CI（validate / audit）通过后自动合并。"
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       # 阶段收尾：无论成败清理缓存、临时产物与 pip 缓存，保证流水线结束后无残留。
       - uses: ./.github/actions/workspace-cleanup

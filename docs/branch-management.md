@@ -86,6 +86,13 @@ python engine/scripts/branch_naming.py install --uninstall [--force]
 因此 `merge` 默认走 PR 传输（`--transport auto`）：直推 `main` 会被服务端拒绝；
 `--transport direct` 仅用于非 GitHub 远端或本地测试。
 
+### 3.2 CI 自动化 PR 免审批自动合并
+
+6 条工作流（8 个提交点）产出的 `[automated]` PR 经复合动作
+`.github/actions/auto-merge-pr` 创建并启用自动合并；仓库设置 `allow_auto_merge=true`。
+质量门不变：必需检查 `validate` / `audit` 通过后才合入，未通过保持打开。
+仓库为纯个人项目、无第三方评审，故不设人工审批（分支保护 `required_approving_review_count=0`）。
+
 ## 四、存量分支梳理与映射台账
 
 ### 4.1 本次补全（2026-11-17）
@@ -138,3 +145,4 @@ python engine/scripts/branch_naming.py install --uninstall [--force]
 |---|---|---|
 | v1.0 | 2026-11-17 | 建立 `task/<slug>-<sid>` 规范、`branch_naming.py`、pre-push / pre-commit 钩子、存量补全与台账 |
 | v1.1 | 2026-11-22 | 合并流程 PR 化（`merge --transport pr`：推分支 → 建 PR → 等检查 → 合并）+ `main` 服务端分支保护；新增 §3.1 |
+| v1.2 | 2026-11-23 | CI 自动化 PR 免审批自动合并：新增复合动作 `.github/actions/auto-merge-pr`，6 条工作流 8 个提交点接线，仓库设置启用 `allow_auto_merge`；新增 §3.2 |

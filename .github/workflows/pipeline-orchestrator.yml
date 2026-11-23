@@ -141,6 +141,7 @@ jobs:
             --body-file /tmp/issue-body.md
 
       - name: 提交流水线产物（状态 / 快照 / 监控视图）
+        id: submit
         run: |
           git add -A -- engine/report-audits/pipeline
           if git diff --cached --quiet; then
@@ -152,10 +153,15 @@ jobs:
           git commit -m "chore(pipeline): 触发检测与编排状态同步"
           BRANCH="auto/pipeline-$(date -u +%Y%m%d-%H%M%S)"
           git push origin "HEAD:$BRANCH"
-          gh pr create --base main --head "$BRANCH" \
-            --title "[automated] 流水线编排状态同步" \
-            --body "由 .github/workflows/pipeline-orchestrator.yml 自动提交（[automated] 标记，保留 github-actions[bot] 提交身份）。请评审后合并。" \
-            || echo "::warning::PR 创建失败（可能已存在），请人工确认"
+          echo "branch=$BRANCH" >> "$GITHUB_OUTPUT"
+
+      - name: 创建 PR 并启用自动合并（流水线产物）
+        uses: ./.github/actions/auto-merge-pr
+        with:
+          branch: ${{ steps.submit.outputs.branch }}
+          title: "[automated] 流水线编排状态同步"
+          body: "由 .github/workflows/pipeline-orchestrator.yml 自动提交（[automated] 标记，保留 github-actions[bot] 提交身份）。CI（validate / audit）通过后自动合并。"
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: 记录自动化状态
         if: always()
@@ -167,6 +173,7 @@ jobs:
 
       # 失败补记：主提交步骤随 job 成功路径执行；job 失败时仍把本轮自动化状态入库。
       - name: 提交自动化状态（失败补记）
+        id: submit_status
         if: always()
         run: |
           if [ ! -f automation-status.json ]; then
@@ -183,10 +190,16 @@ jobs:
           git commit -m "chore: 补记流水线编排自动化状态"
           BRANCH="auto/pipeline-status-$(date -u +%Y%m%d-%H%M%S)"
           git push origin "HEAD:$BRANCH"
-          gh pr create --base main --head "$BRANCH" \
-            --title "[automated] 补记流水线编排自动化状态" \
-            --body "由 pipeline-orchestrator.yml 失败补记步骤自动提交（[automated] 标记）。请评审后合并。" \
-            || echo "::warning::PR 创建失败（可能已存在），请人工确认"
+          echo "branch=$BRANCH" >> "$GITHUB_OUTPUT"
+
+      - name: 创建 PR 并启用自动合并（自动化状态）
+        if: always()
+        uses: ./.github/actions/auto-merge-pr
+        with:
+          branch: ${{ steps.submit_status.outputs.branch }}
+          title: "[automated] 补记流水线编排自动化状态"
+          body: "由 pipeline-orchestrator.yml 失败补记步骤自动提交（[automated] 标记）。CI（validate / audit）通过后自动合并。"
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       # 阶段收尾：无论成败清理缓存、临时产物与 pip 缓存，保证流水线结束后无残留。
       - uses: ./.github/actions/workspace-cleanup
