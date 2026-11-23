@@ -3,7 +3,7 @@
 > **版本**：v1.0（2026-11-23）
 > **规格**：[specs/ci-auto-merge-inwork-gate.md](../specs/ci-auto-merge-inwork-gate.md)
 > **分支**：`task/ci-auto-merge-inwork-gate-d8877c46`
-> **状态**：进行中（T1–T6 完成，T7 待真跑）
+> **状态**：已完成
 
 ## 工单
 
@@ -47,4 +47,4 @@
 ### T7 · 真跑验证
 
 - **验收**：触发 `scheduled-report-tasks`，其 PR 在门禁通过后自动合入 `main`（记录 PR 号与合并提交）。
-- **状态**：待办（合并后执行）
+- **状态**：已完成（PR #17，merge `ccbd697`；另 `pipeline-orchestrator` → PR #19 / #20 亦自动合入）
