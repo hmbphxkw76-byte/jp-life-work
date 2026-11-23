@@ -88,7 +88,7 @@ python engine/scripts/workflow_guard.py lock release checkout
 6. **不改写任务分支**：默认 `--no-ff`，任务分支历史原样保留。
 7. **只合并已提交内容**：未提交的改动不会被带入合并，也不会被推上 main。
 8. **PR 传输（默认）**：`--transport auto` 在 GitHub 远端 + `gh` 可用时走 PR 合并：
-   推任务分支 → `gh pr create` → 轮询检查（`--wait-timeout`，默认 1800s）→ `gh pr merge --merge`。
+   推任务分支 → `gh pr create` → 轮询检查（显式等待 `PR_REQUIRED_CHECKS = (validate, audit)`；`--wait-timeout`，默认 1800s）→ `gh pr merge --merge`。
    服务端分支保护已启用（Require PR + enforce_admins），直推 `main` 会被拒绝，
    因此 PR 是默认路径；`--transport direct` 仅用于非 GitHub 远端 / 本地测试。
 
@@ -107,7 +107,7 @@ python engine/scripts/workflow_guard.py lock release checkout
 GitHub Actions 在远端 runner 上跑，不经过本地锁；定时任务推 `auto/*` 分支并开 PR，由复合动作
 `.github/actions/auto-merge-pr` 在工作流内自跑门禁（`validate.py` + `audit_pipeline --gate --strict`）后合并
 （纯个人项目无第三方评审；bot PR 不触发 `pull_request` 工作流，故门禁内移）。
-第 2 层的 PR 传输在服务端分支保护下等待 `validate` / `audit` 通过后再合并；**不要**用
+第 2 层的 PR 传输**显式等待 `validate` / `audit` 通过后再合并**（`PR_REQUIRED_CHECKS`；分支保护已不强制必需检查，见 §六）；**不要**用
 `sync --push-local` 直推 main（服务端分支保护会拒绝）。
 
 ## 七、状态与清理
@@ -206,10 +206,10 @@ python engine/scripts/verify_report_parity.py --compare  .migration-baseline    
 
 | # | 项 | 结果 |
 |---|---|---|
-| 1 | 测试全绿 | ✅ `python -m unittest discover -s engine/tests` 全绿（1179 项，4 跳过） |
+| 1 | 测试全绿 | ✅ `python -m unittest discover -s engine/tests` 全绿（1183 项，4 跳过） |
 | 2 | `validate.py` 通过 | ✅ 退出码 0 |
-| 3 | 双轴评审存在且无 P0/P1 | ✅ `docs/toolchain/reviews/ci-auto-merge-inwork-gate-review.md`（ci-auto-merge-inwork-gate） |
-| 4 | `coverage_gate.py` 达标 | ✅ 88.7%（阈值 80%，enforce=true） |
+| 3 | 双轴评审存在且无 P0/P1 | ✅ `docs/toolchain/reviews/fix-merge-wait-checks-review.md`（fix-merge-wait-checks） |
+| 4 | `coverage_gate.py` 达标 | ✅ 88.9%（阈值 80%，enforce=true） |
 | 5 | `cleanup_workspace.py --check` 零残留 | ✅ 零残留 |
 | 6 | 新增/改动工具已登记 | ✅ 改动 `trigger_watch.py`（写前建目录）；`generate_registry.py --check` 通过（工具 50 / 类型 12 / 主题 21 / 工作流 8） |
 | 7 | 生成物确定性 | ✅ `build_hub.py --check` / `build_index.py --check` 均退出码 0 |
