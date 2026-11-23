@@ -258,7 +258,7 @@ reports/YYYY-MM-<slug>.md  ──md2html.py──►  reports/YYYY-MM-<slug>.htm
 - **辅助开关**：报告页工具条「隐藏更新标记」对照阅读、「展开全部删除」。
 - **呈现**：报告页新标签页独立打开，页脚提供「← 返回主题 / 返回首页」。
 
-## 六、测试体系（`engine/tests/`，1183 项）
+## 六、测试体系（`engine/tests/`，1185 项）
 
 | 场景 | 测试类 | 覆盖 |
 |---|---|---|
@@ -290,7 +290,7 @@ reports/YYYY-MM-<slug>.md  ──md2html.py──►  reports/YYYY-MM-<slug>.htm
 | 跨平台差异守卫 | `test_platform_guard.py`（9 项） | 路径分隔（无 Windows 路径字面量 / 工作流正斜杠）、换行（仓库 blob LF / `.gitattributes` / `atomic_write` 保 LF）、命令可用性（无 `shell=True` / 无 PowerShell 专属语法 / 工具路径存在） |
 | 性能趋势快照 | `test_perf_snapshot.py`（6 项） | 规模快照字段与实测口径、耗时采集、基线语义（首条为基线 / 追加不改基线 / `--set-baseline` 覆盖）、CLI `--porcelain` |
 
-> 合计 1183 项（`python -m unittest discover -s engine/tests` 集成后实测，当前全绿；`incremental_build` 两项「无变更」断言在集成分支领先 main 时按预期失败，合并后通过）。
+> 合计 1185 项（`python -m unittest discover -s engine/tests` 集成后实测，当前全绿；`incremental_build` 两项「无变更」断言在集成分支领先 main 时按预期失败，合并后通过）。
 
 ## 七、手动命令速查
 
@@ -635,3 +635,4 @@ CI 在 ubuntu runner 上用 **bash** 执行 `run:`，本地维护者用 **PowerS
 | v2.34 | 2026-11-23 | CI 自动化 PR 免审批自动合并 | 新增复合动作 `.github/actions/auto-merge-pr`（创建/复用 PR + `gh pr merge --auto --merge`）；6 条工作流 8 个提交点接线；仓库设置启用 `allow_auto_merge`；新增守卫测试 `test_ci_auto_merge.py`；`docs/branch-management.md` v1.2 / `engine/scripts/README.md` 同步 |
 | v2.35 | 2026-11-23 | CI 自动化 PR 门禁内移自动合并 | 修正 `--auto` 方案（bot PR 不触发 `pull_request` 门禁，永卡 BLOCKED）：复合动作改为「建 PR → 工作流内门禁（`validate.py` + `audit_pipeline --gate --strict`）→ `gh pr merge --merge`」；`main` 分支保护移除必需检查（保留 Require PR / enforce_admins / 评审数 0）；修 `trigger_watch.py` 建目录；新增守卫测试断言；`docs/branch-management.md` v1.3 / `engine` 手册同步 |
 | v2.36 | 2026-11-23 | 修复 merge 等待竞态 | `workflow_guard` 新增 `PR_REQUIRED_CHECKS=(validate,audit)`，`_gh_pr_wait_checks` 显式等待（修复「空 rollup + `CLEAN` 立即合并」，实证 PR #21）；新增 4 项回归；测试计数 1179 → 1183 |
+| v2.37 | 2026-11-23 | 写回换行口径硬化 | `generate_registry.write()` / `sync_vocab.dump_json()` 写回统一 `newline="\n"`（消除 Windows 下 CRLF 假 dirty 与 sync 阻塞）；新增 `test_write_lf.py`（2 项）；`PROCESS_TRACE_DOCS` 补 2 份过程留痕；测试计数 1183 → 1185 |

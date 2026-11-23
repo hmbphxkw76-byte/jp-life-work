@@ -77,7 +77,12 @@ def load_json(path: Path) -> dict:
 def dump_json(path: Path, obj):
     path.parent.mkdir(parents=True, exist_ok=True)
     tmp = path.with_suffix(path.suffix + ".tmp")
-    tmp.write_text(json.dumps(obj, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    # newline="\n"：Windows 默认会写 CRLF，违反 .gitattributes `eol=lf`，造成假 dirty。
+    tmp.write_text(
+        json.dumps(obj, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+        newline="\n",
+    )
     os.replace(tmp, path)
 
 

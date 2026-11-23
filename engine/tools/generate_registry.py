@@ -50,14 +50,20 @@ def render_snapshot(reg: dict) -> str:
 
 def write() -> int:
     reg = scan()
-    REGISTRY_JSON.write_text(json.dumps(reg, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    # newline="\n"：Windows 下默认 newline=None 会把 \n 写成 CRLF，违反 .gitattributes
+    # 的 `* text=auto eol=lf`，导致工作区假 dirty 并阻塞 workflow_guard sync。
+    REGISTRY_JSON.write_text(
+        json.dumps(reg, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+        newline="\n",
+    )
     text = README.read_text(encoding="utf-8")
     if BEGIN in text and END in text:
         text = re.sub(re.escape(BEGIN) + r".*?" + re.escape(END),
                       render_snapshot(reg), text, flags=re.DOTALL)
     else:
         text = text.rstrip("\n") + "\n\n" + render_snapshot(reg) + "\n"
-    README.write_text(text, encoding="utf-8")
+    README.write_text(text, encoding="utf-8", newline="\n")
     print(f"注册表已生成：{REGISTRY_JSON.relative_to(ROOT)}（{counts(reg)}）")
     return 0
 

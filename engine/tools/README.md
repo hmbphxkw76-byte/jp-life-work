@@ -13,7 +13,7 @@ pip install -r requirements.txt   # markdown
 python -m unittest discover -s engine/tests -q   # 单元测试（以 docs/CI.md 与实测为准）
 ```
 
-> 测试计数：1183 项（`python -m unittest discover -s engine/tests` 实测，与 `docs/CI.md` 六节一致；由 `engine/tests/test_arch_guard.py` 双向锁定）。
+> 测试计数：1185 项（`python -m unittest discover -s engine/tests` 实测，与 `docs/CI.md` 六节一致；由 `engine/tests/test_arch_guard.py` 双向锁定）。
 
 ## 退出码约定（校验类工具统一）
 
@@ -535,3 +535,4 @@ python engine/tools/local_ci.py list                   # 列检查项 / 排除�
 | v1.19 | 2026-11-23 | CI 自动化 PR 免审批自动合并 | 新增复合动作 `.github/actions/auto-merge-pr` 与守卫测试 `test_ci_auto_merge.py`（5 项）；6 条工作流 8 个提交点启用自动合并；测试计数 1172 → 1177 |
 | v1.20 | 2026-11-23 | 门禁内移修正 | 复合动作改为「建 PR → 工作流内门禁（`validate.py` + `audit_pipeline --gate --strict`）→ `gh pr merge --merge`」；`trigger_watch.py` 写快照前建目录（新增 1 项回归测试）；测试计数 1177 → 1179 |
 | v1.21 | 2026-11-23 | 修复 merge 等待竞态 | `workflow_guard` 新增 `PR_REQUIRED_CHECKS=(validate,audit)`，`_gh_pr_wait_checks` 显式等待（空 rollup + `CLEAN` 不再误判为可合并）；新增 4 项回归；测试计数 1179 → 1183 |
+| v1.22 | 2026-11-23 | 写回换行口径硬化 | `generate_registry.write()` / `sync_vocab.dump_json()` 写回统一 `newline="\n"`（Windows 不再产 CRLF 假 dirty）；新增 `test_write_lf.py` 2 项；过程留痕守卫元组补 2 份；测试计数 1183 → 1185 |
