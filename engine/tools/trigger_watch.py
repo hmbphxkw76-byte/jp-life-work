@@ -249,6 +249,8 @@ def main_argv(argv: list[str] | None = None) -> int:
     payload = scan(period)
     text = json.dumps(payload, ensure_ascii=False, indent=2)
     if args.apply:
+        # engine/report-audits/pipeline/ 可能未被 git 跟踪（新克隆 / 清理后不存在），写前显式创建。
+        SNAPSHOT.parent.mkdir(parents=True, exist_ok=True)
         atomic_write(SNAPSHOT, text)
         print(f"已写入快照：{SNAPSHOT}")
     else:

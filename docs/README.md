@@ -1,6 +1,6 @@
 # 文档索引（docs/）
 
-> **版本**：v2.17（2026-11-23 CI 自动化 PR 免审批自动合并）
+> **版本**：v2.18（2026-11-23 CI 自动化 PR 门禁内移自动合并）
 > **用途**：jp-life-work 规范与审计标准的**单一入口**。只收「长期有效规范」，不收一次性过程记录。
 > **维护纪律**：规范类文档修订须同步 `engine/tests/test_tools.py` 对应守卫测试，并经合并门禁校验。
 
@@ -72,3 +72,4 @@
 | v2.15 | 2026-11-22 | 合并 PR 化 + main 分支保护 | `workflow_guard merge` 新增 `--transport auto\|direct\|pr` + `--wait-timeout`（PR 传输：推分支 → 建 PR → 等检查 → 合并）与 4 项 PR 传输测试；`main` 启用分支保护；工具 50 / 类型 12 / 测试 1171 / 工作流 8 |
 | v2.16 | 2026-11-22 | task stop 信任 merged 登记 | `task stop` 对已登记 `merged`（含 `merged_sha`）的任务跳过祖先检查（PR 合并远端分支已删 / 本地 base 滞后时不误报）；新增 1 项测试；工具 50 / 类型 12 / 测试 1172 / 工作流 8 |
 | v2.17 | 2026-11-23 | CI 自动化 PR 免审批自动合并 | 新增复合动作 `.github/actions/auto-merge-pr` 与守卫测试 `test_ci_auto_merge.py`（5 项）；6 条工作流 8 个提交点改为创建 PR 后启用自动合并，仓库设置启用 `allow_auto_merge`；工具 50 / 类型 12 / 测试 1177 / 工作流 8 |
+| v2.18 | 2026-11-23 | CI 自动化 PR 门禁内移自动合并 | 修正 `--auto`（bot PR 不触发 `pull_request` 门禁）：复合动作改为建 PR → 工作流内门禁 → 合并；`main` 移除必需检查；`trigger_watch.py` 建目录；工具 50 / 类型 12 / 测试 1179 / 工作流 8 |

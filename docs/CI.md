@@ -1,6 +1,6 @@
 # CI 与自动化体系
 
-> **版本**：v2.34（2026-11-23 CI 自动化 PR 免审批自动合并）
+> **版本**：v2.35（2026-11-23 CI 自动化 PR 门禁内移自动合并）
 > 本文档说明 jp-life-work 报告管理体系的持续集成（CI）与定时自动化。
 > 代码位置：`.github/workflows/`（8 条工作流）；工具链：`engine/tools/`；测试：`engine/tests/`。
 
@@ -17,7 +17,7 @@
 | 内容零丢失 / 对比准确性 | `engine/tests/test_tools.py` |
 | 信息质量评估 / 混乱修复 | `info-quality.yml`（每周一 02:20 UTC） |
 | 审计门禁（登记册 / 台账 / 标识 / L1–L5） | `audit-gate.yml`（阻断） |
-| CI 自动化 PR 合并 | 复合动作 `.github/actions/auto-merge-pr` + 仓库 `allow_auto_merge`（必需检查通过即合入） |
+| CI 自动化 PR 合并 | 复合动作 `.github/actions/auto-merge-pr`：建 PR → 工作流内门禁（`validate` + `audit_pipeline --gate --strict`）→ 合并 |
 | 决策支持件套（参数 / 一页纸 / 财务模型 / 事实卡片 / 待核实闭环） | `validate.yml`（复用门禁）+ `scheduled-maintenance.yml`（刷新） |
 | 流程复用一致性 | `engine/tests/test_tools.py::TestProcessReuse` |
 | 阶段出口质量（采集 / 筛选 / 分类左移） | `validate.yml`（`stage_gate_check.py`） |
@@ -75,7 +75,7 @@
 
 > 实测（2026-11-22，生成前信息核验任务）：主 job **32 个命名步骤**（不含通用「安装依赖」，含「安装开发依赖」；主 job 实际共 33 个 `- name:` 步骤）+ **3 个附加 job**（契约测试分片 / 覆盖率 / 工作区卫生）；契约测试已拆为独立 4 分片 job，`ruff` 与 `mypy` 为主 job 内静态检查步骤。集成合并后如步骤数变化，以实测为准并更新本表。
 
-> 通用改造（W2 / R5 / R1 / R7，2026-11-19）：8 条工作流均已接入 `actions/cache@v4` pip 缓存（key 随 `requirements*.txt` 哈希）并补齐 `timeout-minutes`；5 条定时工作流（maintenance / audit-sampling / info-quality / scheduled-report-tasks / pipeline-orchestrator）提交改为推自动分支 + 开 PR 并启用自动合并（`[automated]` 标记，保留 `github-actions[bot]` 提交身份）；月度 cron 错峰至 00:15 / 00:45 / 01:15 / 01:45（间隔 ≥ 30 分钟）；契约测试由 `run_tests_parallel.py` 分 4 片并行。
+> 通用改造（W2 / R5 / R1 / R7，2026-11-19）：8 条工作流均已接入 `actions/cache@v4` pip 缓存（key 随 `requirements*.txt` 哈希）并补齐 `timeout-minutes`；5 条定时工作流（maintenance / audit-sampling / info-quality / scheduled-report-tasks / pipeline-orchestrator）提交改为推自动分支 + 开 PR，由复合动作在工作流内自跑门禁并合并（`[automated]` 标记，保留 `github-actions[bot]` 提交身份）；月度 cron 错峰至 00:15 / 00:45 / 01:15 / 01:45（间隔 ≥ 30 分钟）；契约测试由 `run_tests_parallel.py` 分 4 片并行。
 
 > 两个关卡对期间 >= 2026-11 的**新报告**阻断；历史报告由 `--new-only` 跳过，
 > 遗留项列入 `engine/report-audits/audit/lint-whitelist.json` 豁免（逾期恢复阻断）。
@@ -120,7 +120,7 @@
 | 提交 | `git commit` + `git push` | 有变更才提交 |
 | 自动化状态失败补记 | `git add -A -- automation-status.json` → `commit` + `push`（`if: always()`） | job 失败时主提交跳过，本步骤仍把本轮状态入库，避免「记录了却因未提交而丢失」 |
 
-> 实测（2026-11-20，main @`ff19ac8`）：共 **24 步**（不含通用「安装依赖」），含 `auto_verify.py --all --dry-run` / `decision_metrics.py --history` / `l5_meta_check.py` / `counterexample_scan.py`；定时任务提交已改为推分支 + 开 PR（W2 / R1），2026-11-23 起由复合动作启用免审批自动合并。
+> 实测（2026-11-20，main @`ff19ac8`）：共 **24 步**（不含通用「安装依赖」），含 `auto_verify.py --all --dry-run` / `decision_metrics.py --history` / `l5_meta_check.py` / `counterexample_scan.py`；定时任务提交已改为推分支 + 开 PR（W2 / R1），2026-11-23 起由复合动作在工作流内自跑门禁并合并（门禁内移，见 v2.35）。
 
 - **退出码约定**：`0` 通过；`1` 错误（阻断）；`2` 警告（放行）。
 - **核验日志策略（N6）**：`auto_verify.py --all --dry-run` 逐报告写
@@ -258,7 +258,7 @@ reports/YYYY-MM-<slug>.md  ──md2html.py──►  reports/YYYY-MM-<slug>.htm
 - **辅助开关**：报告页工具条「隐藏更新标记」对照阅读、「展开全部删除」。
 - **呈现**：报告页新标签页独立打开，页脚提供「← 返回主题 / 返回首页」。
 
-## 六、测试体系（`engine/tests/`，1177 项）
+## 六、测试体系（`engine/tests/`，1179 项）
 
 | 场景 | 测试类 | 覆盖 |
 |---|---|---|
@@ -290,7 +290,7 @@ reports/YYYY-MM-<slug>.md  ──md2html.py──►  reports/YYYY-MM-<slug>.htm
 | 跨平台差异守卫 | `test_platform_guard.py`（9 项） | 路径分隔（无 Windows 路径字面量 / 工作流正斜杠）、换行（仓库 blob LF / `.gitattributes` / `atomic_write` 保 LF）、命令可用性（无 `shell=True` / 无 PowerShell 专属语法 / 工具路径存在） |
 | 性能趋势快照 | `test_perf_snapshot.py`（6 项） | 规模快照字段与实测口径、耗时采集、基线语义（首条为基线 / 追加不改基线 / `--set-baseline` 覆盖）、CLI `--porcelain` |
 
-> 合计 1177 项（`python -m unittest discover -s engine/tests` 集成后实测，当前全绿；`incremental_build` 两项「无变更」断言在集成分支领先 main 时按预期失败，合并后通过）。
+> 合计 1179 项（`python -m unittest discover -s engine/tests` 集成后实测，当前全绿；`incremental_build` 两项「无变更」断言在集成分支领先 main 时按预期失败，合并后通过）。
 
 ## 七、手动命令速查
 
@@ -398,7 +398,7 @@ CI 之外的**本地多会话 / 多任务并行**由三层隔离机制约束，�
   钩子 `python engine/scripts/workflow_guard.py hooks`（pre-push / pre-commit）自动校验，新克隆 / 换机后必装。
   规范与台账：`docs/branch-management.md`。
 - **与 CI 的边界**：Actions 在远端 runner 上跑，不经过本地锁；定时任务推 `auto/*` 分支，
-  由复合动作 `.github/actions/auto-merge-pr` 开 PR 并启用自动合并（`validate` / `audit` 通过即合入）。
+  由复合动作 `.github/actions/auto-merge-pr` 开 PR，并在工作流内自跑门禁（`validate.py` + `audit_pipeline --gate --strict`）后合并。
   合并侧用 `--force-with-lease` 兜底，远端被 CI 推进时本地合并失败重试，不覆盖。
 - **详文档**：`engine/scripts/README.md`；**会话规约**：`.meituan-catpaw/5833106238/skills/workflow-guard/SKILL.md`；
   **分支规范**：`docs/branch-management.md`；**测试**：`engine/tests/test_workflow_guard.py`、`engine/tests/test_branch_naming.py`。
@@ -576,11 +576,11 @@ CI 在 ubuntu runner 上用 **bash** 执行 `run:`，本地维护者用 **PowerS
 | 推送保护 | ✅ enabled | 仓库设置 `secret_scanning_push_protection` |
 | 依赖安全更新 | ✅ enabled | 仓库设置 `dependabot_security_updates` |
 | 依赖版本更新 | ✅ | `.github/dependabot.yml`（github-actions / pip 周更） |
-| 工作流最小权限 | ✅ | 8 条工作流均显式 `permissions`；定时任务推分支 + 开 PR 并启用自动合并，无 `pull_request_target` |
+| 工作流最小权限 | ✅ | 8 条工作流均显式 `permissions`；定时任务推分支 + 开 PR，由复合动作在工作流内门禁后合并，无 `pull_request_target` |
 | Actions 可创建 PR | ✅ enabled | 仓库设置 `can_approve_pull_request_reviews`（修复前自动化 `gh pr create` 被静默拒绝，积压 26 个 `auto/html-sync-*` 僵尸分支） |
-| 自动合并 | ✅ enabled | 仓库设置 `allow_auto_merge`；复合动作 `.github/actions/auto-merge-pr`（`validate` / `audit` 通过即合入） |
+| 自动合并 | ✅ 门禁内移 | 复合动作 `.github/actions/auto-merge-pr`：建 PR → 工作流内门禁（`validate` + `audit_pipeline --gate --strict`）→ `gh pr merge --merge` |
 | 远端分支治理 | ✅ | `delete_branch_on_merge=true`；已清理 26 个僵尸分支，当前远端仅 `main` |
-| 服务端分支保护 | ✅ 已启用 | `main`：Require PR + Require status checks（`validate` / `audit`）+ enforce_admins + 禁 force-push / 删除；`merge` 默认走 PR 传输 |
+| 服务端分支保护 | ✅ 已启用 | `main`：Require PR + enforce_admins + 禁 force-push / 删除（必需状态检查已移除，门禁内移到工作流，见 v2.35）；`merge` 默认走 PR 传输 |
 | GitHub Pages | ✅ public | legacy Pages（main 根），与 PUBLIC 仓库一致 |
 
 ---
@@ -633,3 +633,4 @@ CI 在 ubuntu runner 上用 **bash** 执行 `run:`，本地维护者用 **PowerS
 | v2.32 | 2026-11-22 | 自动化 PR 权限修复 + 分支治理 | 仓库设置 `can_approve_pull_request_reviews=true`（修复自动化 PR 创建被静默拒绝）+ `delete_branch_on_merge=true`；合并 4 个 Dependabot actions 升级（checkout v7 / setup-python v7 / cache v6 / upload-artifact v7）；清理 26 个 `auto/html-sync-*` 僵尸分支；第十六节补两行 |
 | v2.33 | 2026-11-22 | 合并 PR 化 + main 分支保护 | `workflow_guard merge` 新增 `--transport auto\|direct\|pr` + `--wait-timeout`（PR 传输：推分支 → 建 PR → 等检查 → 合并）；`main` 启用分支保护（Require PR + `validate`/`audit` + enforce_admins + 禁 force-push/删除）；`AGENTS.md` / `branch-management.md` v1.1 / `engine/scripts/README.md` 同步 |
 | v2.34 | 2026-11-23 | CI 自动化 PR 免审批自动合并 | 新增复合动作 `.github/actions/auto-merge-pr`（创建/复用 PR + `gh pr merge --auto --merge`）；6 条工作流 8 个提交点接线；仓库设置启用 `allow_auto_merge`；新增守卫测试 `test_ci_auto_merge.py`；`docs/branch-management.md` v1.2 / `engine/scripts/README.md` 同步 |
+| v2.35 | 2026-11-23 | CI 自动化 PR 门禁内移自动合并 | 修正 `--auto` 方案（bot PR 不触发 `pull_request` 门禁，永卡 BLOCKED）：复合动作改为「建 PR → 工作流内门禁（`validate.py` + `audit_pipeline --gate --strict`）→ `gh pr merge --merge`」；`main` 分支保护移除必需检查（保留 Require PR / enforce_admins / 评审数 0）；修 `trigger_watch.py` 建目录；新增守卫测试断言；`docs/branch-management.md` v1.3 / `engine` 手册同步 |

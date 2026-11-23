@@ -1,7 +1,8 @@
-"""CI 自动化 PR 免审批自动合并（ci-auto-merge-pr）守卫测试。
+"""CI 自动化 PR 门禁内移自动合并（ci-auto-merge-inwork-gate）守卫测试。
 
 断言：
-- 复合动作 `.github/actions/auto-merge-pr` 存在且实现「创建 / 复用 PR + 启用自动合并」；
+- 复合动作 `.github/actions/auto-merge-pr` 实现「建 / 复用 PR → 工作流内门禁 → 合并」；
+- 不再依赖 `--auto`（bot 创建的 PR 不触发 `pull_request` 工作流，`--auto` 会永卡 BLOCKED）；
 - 6 条工作流的 8 个 PR 点全部经该复合动作接线；
 - 仓库内不再有直接 `gh pr create`（防漂移回退到人工合并）。
 """
@@ -29,11 +30,18 @@ class TestAutoMergeAction(unittest.TestCase):
     def test_composite_action_exists(self) -> None:
         self.assertTrue(ACTION.is_file(), f"缺少复合动作：{ACTION}")
 
-    def test_composite_action_enables_auto_merge(self) -> None:
+    def test_composite_action_merges_without_auto(self) -> None:
         t = ACTION.read_text(encoding="utf-8")
         self.assertIn("gh pr merge", t)
-        self.assertIn("--auto", t)
         self.assertIn("--merge", t)
+        self.assertNotIn("--auto", t, "不应再使用 --auto：bot PR 不触发 pull_request 门禁")
+
+    def test_composite_action_runs_in_workflow_gate(self) -> None:
+        t = ACTION.read_text(encoding="utf-8")
+        self.assertIn("validate.py", t)
+        self.assertIn("audit_pipeline.py", t)
+        self.assertIn("--gate", t)
+        self.assertIn("--strict", t)
 
     def test_composite_action_declares_inputs(self) -> None:
         t = ACTION.read_text(encoding="utf-8")

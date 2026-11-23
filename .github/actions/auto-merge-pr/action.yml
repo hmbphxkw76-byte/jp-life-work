@@ -1,8 +1,8 @@
 name: auto-merge-pr
 description: >
-  为自动化分支创建（或复用）PR 并启用免审批自动合并。
-  仓库为纯个人项目，无第三方评审；质量唯一门是 CI（validate / audit），
-  必需检查通过后由 GitHub 自动合并，未通过则保持打开（数据完整底线不变）。
+  为自动化分支创建（或复用）PR，在工作流内自跑质量门禁，通过后自动合并。
+  无 PAT 模式：bot（GITHUB_TOKEN）创建的 PR 不触发 pull_request 工作流，
+  故把门禁从分支保护必需检查内移到本动作执行；分支保护不再要求 validate / audit。
 inputs:
   branch:
     description: 已推送的 PR 头分支（为空则跳过，例如本轮无变更）
@@ -14,7 +14,7 @@ inputs:
   body:
     description: PR 正文
     required: false
-    default: 由 jp-life-work CI 自动创建；必需检查（validate / audit）通过后自动合并。
+    default: 由 jp-life-work CI 自动创建；工作流内门禁（validate / audit_pipeline --gate --strict）通过后自动合并。
   token:
     description: GitHub token（缺省 github.token）
     required: false
@@ -23,7 +23,7 @@ inputs:
 runs:
   using: composite
   steps:
-    - name: 创建或复用 PR 并启用自动合并
+    - name: 创建 / 复用 PR → 工作流内门禁 → 合并
       shell: bash
       env:
         GH_TOKEN: ${{ inputs.token }}
@@ -31,7 +31,7 @@ runs:
         PR_TITLE: ${{ inputs.title }}
         PR_BODY: ${{ inputs.body }}
       run: |
-        set -euo pipefail
+        set -uo pipefail
         if [ -z "$PR_BRANCH" ]; then
           echo "无分支输出（本轮无变更或未提交），跳过 PR。"
           exit 0
@@ -47,8 +47,21 @@ runs:
           echo "::error::无法创建或定位 PR（分支 $PR_BRANCH）"
           exit 1
         fi
-        if ! gh pr merge "$num" --auto --merge; then
-          echo "::error::启用自动合并失败：请确认仓库已开启 allow_auto_merge，且 main 分支保护未强制人工评审"
+        echo "PR #$num（$PR_BRANCH → main）"
+        # 工作流内质量门禁（内移自分支保护必需检查）：接受退出码 {0,2}
+        python engine/tools/validate.py; v=$?
+        python engine/tools/audit_pipeline.py --gate --strict; a=$?
+        echo "门禁退出码：validate=$v audit_pipeline=$a"
+        if [ "$v" -ne 0 ] && [ "$v" -ne 2 ]; then
+          echo "::error::validate 阻断（退出码 $v），保留 PR open、不合并"
           exit 1
         fi
-        echo "PR #$num（$PR_BRANCH → main）已启用自动合并：validate / audit 通过后自动合入"
+        if [ "$a" -ne 0 ] && [ "$a" -ne 2 ]; then
+          echo "::error::审计门禁阻断（退出码 $a），保留 PR open、不合并"
+          exit 1
+        fi
+        if ! gh pr merge "$num" --merge; then
+          echo "::error::合并失败（PR #$num）"
+          exit 1
+        fi
+        echo "PR #$num 门禁通过，已合并入 main"
