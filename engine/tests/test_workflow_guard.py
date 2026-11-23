@@ -16,6 +16,7 @@ import tempfile
 import time
 import unittest
 from pathlib import Path
+from unittest import mock
 
 ROOT = Path(__file__).resolve().parents[2]
 TOOL = ROOT / "engine" / "scripts" / "workflow_guard.py"
@@ -463,7 +464,12 @@ mode = os.environ.get("FAKE_GH_MODE", "ok")
 if args[:2] == ["pr", "create"]:
     print("https://github.com/hmbphxkw76-byte/jp-life-work/pull/7")
 elif args[:2] == ["pr", "view"]:
-    rollup = [{"conclusion": "FAILURE"}] if mode == "fail" else [{"conclusion": "SUCCESS"}]
+    if mode == "fail":
+        rollup = [{"name": "validate", "conclusion": "FAILURE"},
+                  {"name": "audit", "conclusion": "SUCCESS"}]
+    else:
+        rollup = [{"name": "validate", "conclusion": "SUCCESS"},
+                  {"name": "audit", "conclusion": "SUCCESS"}]
     print(json.dumps({"state": "OPEN", "mergeable": "MERGEABLE",
                       "mergeStateStatus": "CLEAN", "statusCheckRollup": rollup,
                       "mergeCommit": {"oid": "a" * 40}}))
@@ -532,6 +538,40 @@ class TestPRTransport(TempRepoCase):
         self.repo.tool("merge", "demo", "--no-verify", env=env)  # 默认 auto
         self.assertEqual(self.repo.tasks()[0]["status"], "merged")
         self.assertFalse(calls.exists())  # 未触碰 gh
+
+
+class TestWaitChecks(unittest.TestCase):
+    """_gh_pr_wait_checks 必须显式等待 validate / audit，而非依赖分支保护 CLEAN。"""
+
+    @staticmethod
+    def _views(rollup, ms="CLEAN"):
+        return {"state": "OPEN", "mergeStateStatus": ms, "statusCheckRollup": rollup}
+
+    def test_empty_rollup_clean_waits(self):
+        # 回归：移除分支保护必需检查后，空 rollup + CLEAN 不得立即返回
+        views = self._views([])
+        with mock.patch.object(wg, "_gh_pr_view", return_value=views), \
+             mock.patch("time.sleep"), self.assertRaises(wg.GuardError):
+            wg._gh_pr_wait_checks("1", timeout=0)
+
+    def test_missing_required_check_waits(self):
+        views = self._views([{"name": "validate", "conclusion": "SUCCESS"}])
+        with mock.patch.object(wg, "_gh_pr_view", return_value=views), \
+             mock.patch("time.sleep"), self.assertRaises(wg.GuardError):
+            wg._gh_pr_wait_checks("1", timeout=0)
+
+    def test_required_checks_success_returns(self):
+        views = self._views([{"name": "validate", "conclusion": "SUCCESS"},
+                             {"name": "audit", "conclusion": "SUCCESS"}])
+        with mock.patch.object(wg, "_gh_pr_view", return_value=views):
+            wg._gh_pr_wait_checks("1", timeout=0)
+
+    def test_required_check_failure_blocks(self):
+        views = self._views([{"name": "validate", "conclusion": "FAILURE"},
+                             {"name": "audit", "conclusion": "SUCCESS"}])
+        with mock.patch.object(wg, "_gh_pr_view", return_value=views), \
+             self.assertRaises(wg.GuardError):
+            wg._gh_pr_wait_checks("1", timeout=0)
 
 
 if __name__ == "__main__":

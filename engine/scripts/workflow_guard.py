@@ -61,6 +61,14 @@ DEFAULT_WAIT = 0              # 默认不等待锁，快速失败
 DEFAULT_PR_WAIT_TIMEOUT = 1800  # PR 传输等待必需检查的超时（秒）
 PR_POLL_INTERVAL = 15           # PR 检查轮询间隔（秒）
 
+# 合并前必须等待的远程检查名（与 docs/CI.md 的 CI 门禁一致）。
+# 分支保护已不强制必需检查（见 docs/branch-management.md §3.2），故在此显式等待，
+# 避免「rollup 为空 + mergeStateStatus=CLEAN」时误判为可合并。
+PR_REQUIRED_CHECKS: tuple[str, ...] = ("validate", "audit")
+_CHECK_PASSED = ("SUCCESS", "NEUTRAL", "SKIPPED", "COMPLETED")
+_CHECK_FAILED = ("FAILURE", "ERROR", "CANCELLED", "TIMED_OUT",
+                "ACTION_REQUIRED", "STALE")
+
 TASK_NAME_RE = re.compile(r"^[a-z0-9][a-z0-9-]{0,62}$")
 SCOPES = ("checkout", "merge", "commit", "push")
 
@@ -220,22 +228,23 @@ def _gh_pr_wait_checks(num: str, timeout: int, cwd: Path | None = None,
         if v.get("state") != "OPEN":
             return
         ms = v.get("mergeStateStatus") or "UNKNOWN"
-        conclusions = [c.get("conclusion") or c.get("state") or "UNKNOWN"
-                       for c in (v.get("statusCheckRollup") or [])]
+        rollup = v.get("statusCheckRollup") or []
+        by_name = {c.get("name"): (c.get("conclusion") or c.get("state") or "UNKNOWN")
+                   for c in rollup}
+        conclusions = list(by_name.values())
         line = f"mergeState={ms} checks={conclusions}"
         if line != last:
             print(f"[workflow-guard] PR #{num}：{line}")
             last = line
-        failed = [c for c in conclusions
-                  if c in ("FAILURE", "ERROR", "CANCELLED", "TIMED_OUT",
-                           "ACTION_REQUIRED", "STALE")]
+        failed = [n for n, c in by_name.items() if c in _CHECK_FAILED]
         if failed:
-            raise GuardError(f"PR #{num} 校验失败：{conclusions}")
-        pending = [c for c in conclusions
-                   if c not in ("SUCCESS", "NEUTRAL", "SKIPPED", "COMPLETED")]
-        if ms in ("CLEAN", "HAS_HOOKS") and not pending:
+            raise GuardError(f"PR #{num} 校验失败："
+                             f"{ {n: by_name[n] for n in failed} }")
+        # 指定检查必须全部出现且通过；缺失或未完成都视为 pending
+        missing = [n for n in PR_REQUIRED_CHECKS if by_name.get(n) not in _CHECK_PASSED]
+        if ms in ("CLEAN", "HAS_HOOKS") and not missing:
             return
-        if ms == "BLOCKED" and not pending:
+        if ms == "BLOCKED" and not missing:
             raise GuardError(f"PR #{num} 被分支保护阻断（必需检查 / 审查未完成）：{conclusions}")
         if time.time() >= deadline:
             raise GuardError(f"等待 PR #{num} 校验超时（{timeout}s）：{line}")
