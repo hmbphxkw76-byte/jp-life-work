@@ -1,0 +1,45 @@
+{
+  "period": "2026-11",
+  "stages": {
+    "S0_detect": {
+      "status": "completed",
+      "summary": {
+        "window_due": 0,
+        "stale": 0,
+        "candidates": 3
+      },
+      "started": "2026-11-23T02:43:04+00:00",
+      "completed": "2026-11-23T02:43:04+00:00"
+    },
+    "S1_plan": {
+      "status": "completed",
+      "summary": {
+        "pending_count": 0,
+        "pending": []
+      },
+      "started": "2026-11-23T02:43:04+00:00",
+      "completed": "2026-11-23T02:43:04+00:00"
+    },
+    "S2_author": {
+      "status": "pending",
+      "summary": {
+        "gate": "author",
+        "todo": []
+      },
+      "started": "2026-11-23T02:43:04+00:00"
+    }
+  },
+  "blocking": "S2_author",
+  "state_error": null,
+  "audit": {
+    "total": 21,
+    "states": {
+      "audited": 21
+    }
+  },
+  "heartbeat": {
+    "phase": "scheduled-report-tasks",
+    "result": "success",
+    "timestamp": "2026-11-23T02:36:48+00:00"
+  }
+}
