@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
-  "updated": "2026-11-19",
-  "comment": "verify/check 显式豁免清单（B4）。由 vocab_tool.py 的 check_topic 读取，check 与 verify 一致豁免；仅豁免已留痕的既有警告，新增警告默认不豁免。豁免须写明理由与证据，新增豁免须同步更新本文件与 README 第九节。",
+  "updated": "2026-11-23",
+  "comment": "verify/check 显式豁免清单（B4）。由 vocab_tool.py 的 check_topic 读取，check 与 verify 一致豁免；仅豁免已留痕的既有警告，新增警告默认不豁免。豁免须写明理由与证据，新增豁免须同步更新本文件与 README 第 5.1 节。",
   "exemptions": [
     {
       "topic": "01-ssw-driver",
@@ -14,6 +14,96 @@
       "check": "id_sequence_gap",
       "reason": "2026-11-19 删除 11 条无法核验的 npa.go.jp 词条后遗留缺号（1..104，现存 93 条）；ID 语义未变、词条数高于下限，重排会波及报告引用与生成物，故显式豁免。",
       "evidence": "docs/登记册待核实项复核记录-2026-11-19.md §8A.5；commit 60ab42a"
+    },
+    {
+      "topic": "03-career-management",
+      "check": "id_sequence_gap",
+      "reason": "2026-11-21 词条删除 14 条（terms.md v1.5 版本记录留痕）后遗留缺号（1..68，现存 58 条）；ID 语义未变，重排会波及报告引用与生成物，故显式豁免。",
+      "evidence": "engine/vocabulary/data/03-career-management/terms.md 版本记录 v1.5（2026-11-21）"
+    },
+    {
+      "topic": "04-industry-logistics",
+      "check": "id_sequence_gap",
+      "reason": "2026-11-21 词条删除 2 条（terms.md v1.8 版本记录留痕）后遗留缺号（1..109，现存 107 条）；ID 语义未变，重排会波及报告引用与生成物，故显式豁免。",
+      "evidence": "engine/vocabulary/data/04-industry-logistics/terms.md 版本记录 v1.8（2026-11-21）"
+    },
+    {
+      "topic": "05-industry-autonomous",
+      "check": "id_sequence_gap",
+      "reason": "2026-11-21 词条删除 2 条（terms.md v1.7 版本记录留痕）后遗留缺号（1..105，现存 104 条）；ID 语义未变，重排会波及报告引用与生成物，故显式豁免。",
+      "evidence": "engine/vocabulary/data/05-industry-autonomous/terms.md 版本记录 v1.7（2026-11-21）"
+    },
+    {
+      "topic": "06-industry-technology",
+      "check": "id_sequence_gap",
+      "reason": "2026-11-21 词条删除 7 条（terms.md v1.5 版本记录留痕）后遗留缺号（1..74，现存 67 条）；ID 语义未变，重排会波及报告引用与生成物，故显式豁免。",
+      "evidence": "engine/vocabulary/data/06-industry-technology/terms.md 版本记录 v1.5（2026-11-21）"
+    },
+    {
+      "topic": "07-economy-finance",
+      "check": "id_sequence_gap",
+      "reason": "2026-11-21 词条删除 7 条（terms.md v1.7 版本记录留痕）后遗留缺号（1..77，现存 70 条）；ID 语义未变，重排会波及报告引用与生成物，故显式豁免。",
+      "evidence": "engine/vocabulary/data/07-economy-finance/terms.md 版本记录 v1.7（2026-11-21）"
+    },
+    {
+      "topic": "08-visa-immigration",
+      "check": "id_sequence_gap",
+      "reason": "2026-11-21 词条删除 4 条（terms.md v1.9 版本记录留痕）后遗留缺号（1..79，现存 75 条）；ID 语义未变，重排会波及报告引用与生成物，故显式豁免。",
+      "evidence": "engine/vocabulary/data/08-visa-immigration/terms.md 版本记录 v1.9（2026-11-21）"
+    },
+    {
+      "topic": "10-education-qualification",
+      "check": "id_sequence_gap",
+      "reason": "2026-11-21 词条删除 14 条（terms.md v1.5 版本记录留痕）后遗留缺号（1..70，现存 56 条）；ID 语义未变，重排会波及报告引用与生成物，故显式豁免。",
+      "evidence": "engine/vocabulary/data/10-education-qualification/terms.md 版本记录 v1.5（2026-11-21）"
+    },
+    {
+      "topic": "11-language-japanese",
+      "check": "id_sequence_gap",
+      "reason": "2026-11-21 词条删除 18 条（terms.md v1.6 版本记录留痕）后遗留缺号（2..70，现存 52 条，1 号亦被删）；ID 语义未变，重排会波及报告引用与生成物，故显式豁免。",
+      "evidence": "engine/vocabulary/data/11-language-japanese/terms.md 版本记录 v1.6（2026-11-21）"
+    },
+    {
+      "topic": "12-culture-life",
+      "check": "id_sequence_gap",
+      "reason": "2026-11-21 词条删除 4 条（terms.md v1.7 版本记录留痕）后遗留缺号（1..73，现存 69 条）；ID 语义未变，重排会波及报告引用与生成物，故显式豁免。",
+      "evidence": "engine/vocabulary/data/12-culture-life/terms.md 版本记录 v1.7（2026-11-21）"
+    },
+    {
+      "topic": "13-regional-info",
+      "check": "id_sequence_gap",
+      "reason": "2026-11-21 词条删除 5 条（terms.md v1.7 版本记录留痕）后遗留缺号（1..69，现存 64 条）；ID 语义未变，重排会波及报告引用与生成物，故显式豁免。",
+      "evidence": "engine/vocabulary/data/13-regional-info/terms.md 版本记录 v1.7（2026-11-21）"
+    },
+    {
+      "topic": "14-life-operations",
+      "check": "id_sequence_gap",
+      "reason": "2026-11-21 词条删除 3 条（terms.md v1.12 版本记录留痕）后遗留缺号（1..77，现存 74 条）；ID 语义未变，重排会波及报告引用与生成物，故显式豁免。",
+      "evidence": "engine/vocabulary/data/14-life-operations/terms.md 版本记录 v1.12（2026-11-21）"
+    },
+    {
+      "topic": "15-health-wellbeing",
+      "check": "id_sequence_gap",
+      "reason": "2026-11-21 词条删除 1 条（terms.md v1.8 版本记录留痕）后遗留缺号（1..76，现存 75 条）；ID 语义未变，重排会波及报告引用与生成物，故显式豁免。",
+      "evidence": "engine/vocabulary/data/15-health-wellbeing/terms.md 版本记录 v1.8（2026-11-21）"
+    },
+    {
+      "topic": "17-migration-compliance",
+      "check": "id_sequence_gap",
+      "reason": "2026-11-21 词条删除 1 条（terms.md v1.7 版本记录留痕）后遗留缺号（1..77，现存 76 条）；ID 语义未变，重排会波及报告引用与生成物，故显式豁免。",
+      "evidence": "engine/vocabulary/data/17-migration-compliance/terms.md 版本记录 v1.7（2026-11-21）"
+    },
+    {
+      "topic": "19-safety-disaster",
+      "check": "id_sequence_gap",
+      "reason": "2026-11-21 词条删除 2 条（terms.md v1.9 版本记录留痕）后遗留缺号（1..75，现存 73 条）；ID 语义未变，重排会波及报告引用与生成物，故显式豁免。",
+      "evidence": "engine/vocabulary/data/19-safety-disaster/terms.md 版本记录 v1.9（2026-11-21）"
+    },
+    {
+      "topic": "20-overseas-china",
+      "check": "id_sequence_gap",
+      "reason": "2026-11-21 词条删除 1 条（terms.md v1.7 版本记录留痕）后遗留缺号（1..79，现存 78 条）；ID 语义未变，重排会波及报告引用与生成物，故显式豁免。",
+      "evidence": "engine/vocabulary/data/20-overseas-china/terms.md 版本记录 v1.7（2026-11-21）"
     }
   ]
 }
