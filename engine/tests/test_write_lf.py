@@ -18,9 +18,9 @@ import tempfile
 import unittest
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "engine" / "tools"))
-sys.path.insert(0, str(ROOT / "engine" / "vocabulary" / "script"))
+ENGINE_DIR = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ENGINE_DIR / "tools"))
+sys.path.insert(0, str(ENGINE_DIR / "vocabulary" / "script"))
 
 import generate_registry  # noqa: E402
 import sync_vocab  # noqa: E402
