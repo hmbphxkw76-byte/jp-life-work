@@ -1,5 +1,5 @@
 {
-  "run_date": "2026-11-19",
+  "run_date": "2026-11-23",
   "topics_total": 21,
   "metrics_before": {
     "topics_total": 21,
@@ -8,11 +8,11 @@
     "missing_items": 0,
     "contradictions": 0,
     "gaps": 0,
-    "source_coverage": 0.3672546359113523,
-    "semantic_completion": 0.3672546359113523,
+    "source_coverage": 0.9520295202952029,
+    "semantic_completion": 0.9520295202952029,
     "stale_reports": 0,
     "dup_ratio": 0.0,
-    "fact_dup_ratio": 0.010886894232239184,
+    "fact_dup_ratio": 0.013924024718726512,
     "empty_module_ratio": 0.0,
     "attribution_errors": 0,
     "cite_valid_ratio": 1.0,
@@ -20,7 +20,7 @@
     "findings_by_level": {
       "P0": 0,
       "P1": 0,
-      "P2": 0
+      "P2": 1
     }
   },
   "metrics_after": {
@@ -30,11 +30,11 @@
     "missing_items": 0,
     "contradictions": 0,
     "gaps": 0,
-    "source_coverage": 0.3672546359113523,
-    "semantic_completion": 0.3672546359113523,
+    "source_coverage": 0.9520295202952029,
+    "semantic_completion": 0.9520295202952029,
     "stale_reports": 0,
     "dup_ratio": 0.0,
-    "fact_dup_ratio": 0.010886894232239184,
+    "fact_dup_ratio": 0.013924024718726512,
     "empty_module_ratio": 0.0,
     "attribution_errors": 0,
     "cite_valid_ratio": 1.0,
@@ -42,10 +42,21 @@
     "findings_by_level": {
       "P0": 0,
       "P1": 0,
-      "P2": 0
+      "P2": 1
     }
   },
-  "findings": [],
+  "findings": [
+    {
+      "code": "C-15",
+      "level": "P2",
+      "topic": "全库",
+      "path": "engine/vocabulary/（词库）",
+      "location": "跨主题同概念",
+      "detail": "概念 45 条；同名词条组 112，未登记 72；引用错误 0；未登记候选 20",
+      "spec": "S-09",
+      "status": "open"
+    }
+  ],
   "repairs": [],
   "verification": {
     "checks": {
@@ -65,11 +76,11 @@
       "missing_items": 0,
       "contradictions": 0,
       "gaps": 0,
-      "source_coverage": 0.3672546359113523,
-      "semantic_completion": 0.3672546359113523,
+      "source_coverage": 0.9520295202952029,
+      "semantic_completion": 0.9520295202952029,
       "stale_reports": 0,
       "dup_ratio": 0.0,
-      "fact_dup_ratio": 0.010886894232239184,
+      "fact_dup_ratio": 0.013924024718726512,
       "empty_module_ratio": 0.0,
       "attribution_errors": 0,
       "cite_valid_ratio": 1.0,
@@ -77,7 +88,7 @@
       "findings_by_level": {
         "P0": 0,
         "P1": 0,
-        "P2": 0
+        "P2": 1
       }
     },
     "after": {
@@ -87,11 +98,11 @@
       "missing_items": 0,
       "contradictions": 0,
       "gaps": 0,
-      "source_coverage": 0.3672546359113523,
-      "semantic_completion": 0.3672546359113523,
+      "source_coverage": 0.9520295202952029,
+      "semantic_completion": 0.9520295202952029,
       "stale_reports": 0,
       "dup_ratio": 0.0,
-      "fact_dup_ratio": 0.010886894232239184,
+      "fact_dup_ratio": 0.013924024718726512,
       "empty_module_ratio": 0.0,
       "attribution_errors": 0,
       "cite_valid_ratio": 1.0,
@@ -99,9 +110,20 @@
       "findings_by_level": {
         "P0": 0,
         "P1": 0,
-        "P2": 0
+        "P2": 1
       }
     },
-    "open_after": []
+    "open_after": [
+      {
+        "code": "C-15",
+        "level": "P2",
+        "topic": "全库",
+        "path": "engine/vocabulary/（词库）",
+        "location": "跨主题同概念",
+        "detail": "概念 45 条；同名词条组 112，未登记 72；引用错误 0；未登记候选 20",
+        "spec": "S-09",
+        "status": "open"
+      }
+    ]
   }
 }
