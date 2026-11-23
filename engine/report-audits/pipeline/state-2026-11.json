@@ -1,0 +1,34 @@
+{
+  "schema_version": "1.0",
+  "period": "2026-11",
+  "stages": {
+    "S0_detect": {
+      "status": "completed",
+      "summary": {
+        "window_due": 0,
+        "stale": 0,
+        "candidates": 3
+      },
+      "started": "2026-11-23T02:43:04+00:00",
+      "completed": "2026-11-23T02:43:04+00:00"
+    },
+    "S1_plan": {
+      "status": "completed",
+      "summary": {
+        "pending_count": 0,
+        "pending": []
+      },
+      "started": "2026-11-23T02:43:04+00:00",
+      "completed": "2026-11-23T02:43:04+00:00"
+    },
+    "S2_author": {
+      "status": "pending",
+      "summary": {
+        "gate": "author",
+        "todo": []
+      },
+      "started": "2026-11-23T02:43:04+00:00"
+    }
+  },
+  "updated": "2026-11-23T02:43:04+00:00"
+}

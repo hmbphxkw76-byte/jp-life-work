@@ -1,0 +1,32 @@
+{
+  "period": "2026-11",
+  "window_due": [],
+  "stale": [],
+  "candidates": [
+    {
+      "topic": "01-ssw-driver",
+      "trigger": "唯一观察项：ssw.go.jp 受入上限仍写 24,500、未同步更正（连续五次）；本版 ISA 表 2026-11-06 版再次列示 22,100，观察降为月度扫描，不影响结论",
+      "source": "01-ssw-driver/data/ssw_driver_indicator_registry.md",
+      "keywords": [
+        "未同步"
+      ]
+    },
+    {
+      "topic": "01-ssw-driver",
+      "trigger": "首要触发器：ISA 9 月末速报**未发布**：2026-11-06 换版仍为 2026-08 末（843/438,128/23,348）；按更新节奏预计 12 月上旬随 10 月分发布（推断）→ 触发后重点刷新 #1、#3",
+      "source": "01-ssw-driver/data/ssw_driver_indicator_registry.md",
+      "keywords": [
+        "未发布",
+        "预计"
+      ]
+    },
+    {
+      "topic": "01-ssw-driver",
+      "trigger": "新增触发器：两项 2027-04-01 生效要件已进入倒计时：①出租车/巴士区分 B1 相当以上（COE 申请）②登録支援機関支援体制要件改正 → 2027 年初须专项复核 #2、#12 及 2 号/育成就労衔接",
+      "source": "01-ssw-driver/data/ssw_driver_indicator_registry.md",
+      "keywords": [
+        "倒计时"
+      ]
+    }
+  ]
+}
