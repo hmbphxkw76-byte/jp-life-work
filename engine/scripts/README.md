@@ -214,7 +214,7 @@ python engine/scripts/verify_report_parity.py --compare  .migration-baseline    
 | 6 | 新增/改动工具已登记 | ✅ 改动 `trigger_watch.py`（写前建目录）；`generate_registry.py --check` 通过（工具 50 / 类型 12 / 主题 21 / 工作流 8） |
 | 7 | 生成物确定性 | ✅ `build_hub.py --check` / `build_index.py --check` 均退出码 0 |
 | 8 | 架构边界 | ✅ `engine/tools/` 无 git 可变操作；`engine/scripts/` 不产出内容；`iter_business_dirs()` = 21 |
-| 9 | 端到端（工作流内门禁后自动合并） | ✅ 复合动作机制就绪；合并后触发 `scheduled-report-tasks` 真跑，结果补记于记忆 |
+| 9 | 端到端（工作流内门禁后自动合并） | ✅ 触发 `scheduled-report-tasks`（run 45101195923）→ PR #17 自动合入（merge `ccbd697`）；`pipeline-orchestrator` → PR #19 / #20 亦自动合入 |
 | 10 | 静态检查 | ✅ `ruff check engine` 0；`mypy` 0 |
 
 ## 十三、输入门禁可移植性（`engine/scripts/bootstrap_gate.py` / `check_gate.py`）
