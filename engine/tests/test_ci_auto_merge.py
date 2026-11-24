@@ -48,6 +48,15 @@ class TestAutoMergeAction(unittest.TestCase):
         for name in ("branch", "title", "body"):
             self.assertIn(f"{name}:", t, f"复合动作缺少输入：{name}")
 
+    def test_composite_action_deletes_merged_head_branch(self) -> None:
+        """合并后必须显式删头分支，且删失败要显式告警（不依赖仓库设置的隐式自动删除）。"""
+        t = ACTION.read_text(encoding="utf-8")
+        self.assertIn("gh api -X DELETE", t)
+        self.assertIn("git/refs/heads/", t)
+        self.assertLess(t.index("gh pr merge"), t.index("git/refs/heads/"),
+                        "删头分支必须发生在 PR 合并成功之后")
+        self.assertIn("::warning::", t, "删分支失败不得静默吞掉")
+
 
 class TestWorkflowWiring(unittest.TestCase):
     def test_every_automated_workflow_uses_action(self) -> None:
