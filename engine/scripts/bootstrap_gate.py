@@ -44,12 +44,12 @@ def install(root: Path) -> list[str]:
 
     claude = root / "CLAUDE.md"
     if not claude.exists():
-        claude.write_text(CLAUDE_MD, encoding="utf-8")
+        claude.write_text(CLAUDE_MD, encoding="utf-8", newline="\n")
         actions.append(f"创建 {claude}")
 
     cursor = root / ".cursorrules"
     if not cursor.exists():
-        cursor.write_text(CURSORRULES, encoding="utf-8")
+        cursor.write_text(CURSORRULES, encoding="utf-8", newline="\n")
         actions.append(f"创建 {cursor}")
 
     return actions

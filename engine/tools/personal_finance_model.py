@@ -338,7 +338,7 @@ def main() -> int:
 
     try:
         out.parent.mkdir(parents=True, exist_ok=True)
-        out.write_text(content, encoding="utf-8")
+        out.write_text(content, encoding="utf-8", newline="\n")
     except OSError as e:
         print(f"[ERROR] 写入失败：{e}")
         return 1

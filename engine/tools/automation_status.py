@@ -54,7 +54,7 @@ def record(phase: str, result: str, run_url: str) -> int:
             "timestamp": datetime.now(tz=UTC).isoformat(timespec="seconds"),
         }
     )
-    STATUS_FILE.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    STATUS_FILE.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
     print(f"已记录：phase={phase} result={result}")
     return 0
 

@@ -162,7 +162,7 @@ def write_baseline(baseline_dir: Path) -> int:
     manifest = {"created": datetime.now().isoformat(timespec="seconds"),
                 "root": str(ROOT), "files": files}
     (baseline_dir / "manifest.json").write_text(
-        json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8")
+        json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8", newline="\n")
     print(f"[parity] 基线已写入 {baseline_dir}（{len(rels)} 个文件）")
     return 0
 

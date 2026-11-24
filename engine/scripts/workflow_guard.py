@@ -427,7 +427,7 @@ def load_tasks(state: Path) -> list[dict]:
 
 
 def save_tasks(state: Path, tasks: list[dict]) -> None:
-    with _tasks_file(state).open("w", encoding="utf-8") as f:
+    with _tasks_file(state).open("w", encoding="utf-8", newline="\n") as f:
         json.dump(tasks, f, ensure_ascii=False, indent=2)
 
 

@@ -13,7 +13,7 @@ pip install -r requirements.txt   # markdown
 python -m unittest discover -s engine/tests -q   # 单元测试（以 docs/CI.md 与实测为准）
 ```
 
-> 测试计数：1208 项（`python -m unittest discover -s engine/tests` 实测，与 `docs/CI.md` 六节一致；由 `engine/tests/test_arch_guard.py` 双向锁定）。
+> 测试计数：1210 项（`python -m unittest discover -s engine/tests` 实测，与 `docs/CI.md` 六节一致；由 `engine/tests/test_arch_guard.py` 双向锁定）。
 
 ## 退出码约定（校验类工具统一）
 
@@ -544,3 +544,4 @@ python engine/tools/local_ci.py list                   # 列检查项 / 排除�
 | v1.28 | 2026-11-23 | 反例扫描裁定清单 | `counterexample_scan` 新增裁定清单（单源保持可见）；新增 3 项守卫；测试计数 1194 → 1197 |
 | v1.29 | 2026-11-23 | link_check 覆盖率提升 | 新增 9 项单元测试；`link_check.py` 65.4% → 78.5%；测试计数 1197 → 1206 |
 | v1.30 | 2026-11-24 | 核验闭环第一批 | `verification-retention-map.json` 基线刷新 + 新增 `test_vocab_verification_map.py`（2 项）；测试计数 1206 → 1208 |
+| v1.31 | 2026-11-24 | 写回换行全量治理 | 62 处写点补 `newline="\n"`；新增 AST 守卫（2 项）；测试计数 1208 → 1210 |

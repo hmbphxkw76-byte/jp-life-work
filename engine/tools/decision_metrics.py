@@ -241,7 +241,7 @@ def _history() -> list[dict]:
 
 def append_history(snap: dict) -> None:
     HISTORY.parent.mkdir(parents=True, exist_ok=True)
-    with HISTORY.open("a", encoding="utf-8") as f:
+    with HISTORY.open("a", encoding="utf-8", newline="\n") as f:
         f.write(json.dumps(snap, ensure_ascii=False) + "\n")
 
 

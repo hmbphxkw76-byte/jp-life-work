@@ -95,7 +95,7 @@ def main(argv=None) -> int:
         print("[ERROR] INDEX.md 已过期：请运行 python engine/tools/build_index.py 重新生成后提交")
         return 1
     try:
-        (ROOT / "INDEX.md").write_text(text, encoding="utf-8")
+        (ROOT / "INDEX.md").write_text(text, encoding="utf-8", newline="\n")
     except OSError as e:
         print(f"[ERROR] 写入 INDEX.md 失败: {e}")
         return 1

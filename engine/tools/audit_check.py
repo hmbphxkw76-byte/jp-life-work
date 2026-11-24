@@ -345,7 +345,7 @@ def _iq_findings_by_path() -> dict[str, list[AuditFinding]]:
         })
     IQ_CACHE.parent.mkdir(parents=True, exist_ok=True)
     IQ_CACHE.write_text(json.dumps({"version": CACHE_VERSION, "key": key, "findings": mapped},
-                                ensure_ascii=False, indent=2), encoding="utf-8")
+                                ensure_ascii=False, indent=2), encoding="utf-8", newline="\n")
     return {p: [AuditFinding(**d) for d in items] for p, items in mapped.items()}
 
 
@@ -438,7 +438,7 @@ def write_pending_p2(results: list[ReportResult], run_date: str) -> list[dict]:
                 "review_by": (date.fromisoformat(first) + timedelta(days=P2_REVIEW_DAYS)).isoformat(),
             })
     payload = {"version": "1.0", "updated": run_date, "count": len(items), "items": items}
-    PENDING_P2.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+    PENDING_P2.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8", newline="\n")
     return items
 
 
@@ -489,7 +489,7 @@ def write_report(results: list[ReportResult], summary: dict, run_date: str) -> l
         + ["", f"**总体结论：{conclusion}**", ""]
     )
     p = CHECK_REPORT_MD
-    p.write_text(md, encoding="utf-8")
+    p.write_text(md, encoding="utf-8", newline="\n")
 
     payload = {
         "run_date": run_date,
@@ -506,7 +506,7 @@ def write_report(results: list[ReportResult], summary: dict, run_date: str) -> l
         ],
     }
     pj = CHECK_REPORT_JSON
-    pj.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+    pj.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8", newline="\n")
     return [p, pj]
 
 

@@ -348,7 +348,7 @@ def cmd_init(tmeta: dict) -> int:
         print(f"[init] 词库已存在，跳过：{rel(tmeta['storage'])}")
     else:
         versions = [["v1.0", today(), "首建词库", "init 命令创建空词库骨架"]]
-        tmeta["storage"].write_text(render_terms_md(tmeta, [], versions), encoding="utf-8")
+        tmeta["storage"].write_text(render_terms_md(tmeta, [], versions), encoding="utf-8", newline="\n")
         print(f"[init] 创建词库骨架：{rel(tmeta['storage'])}")
     print(f"[init] 主题 '{tmeta['id']}' 初始化完成（imports/ exports/ 就绪）。"
           f"下一步：import --topic {tmeta['id']} --file <导入文件>")
@@ -418,7 +418,7 @@ def cmd_import(tmeta: dict, file_arg: str) -> int:
     if added:
         versions.append([next_version(versions), today_s, "批量导入",
                          f"新增 {added} 条 / 跳过重复 {skipped} 条 / 无效 {invalid} 条；文件 {file_path.name}"])
-        storage.write_text(render_terms_md(tmeta, terms, versions), encoding="utf-8")
+        storage.write_text(render_terms_md(tmeta, terms, versions), encoding="utf-8", newline="\n")
     print(f"[import] 读取 {len(entries)} 行 → 新增 {added} / 跳过重复 {skipped} / 无效 {invalid}；"
           f"词库共 {len(terms)} 条" + (f"（{rel(storage)} 已更新至 {versions[-1][0]}）" if added else "（未写盘）"))
     for w in warns[:10]:
@@ -539,7 +539,7 @@ def cmd_tag(tmeta: dict, term_id: str, add: str, remove: str) -> int:
     target["last_updated"] = today()
     detail = f"{target['id']}：增 {','.join(add_list) or '—'} / 删 {','.join(remove_list) or '—'}"
     versions.append([next_version(versions), today(), "标签调整", detail])
-    storage.write_text(render_terms_md(tmeta, terms, versions), encoding="utf-8")
+    storage.write_text(render_terms_md(tmeta, terms, versions), encoding="utf-8", newline="\n")
     print(f"[tag] {target['id']}「{target['term']}」标签 → {';'.join(tags) or '（空）'}；词库更新至 {versions[-1][0]}")
     auto_sync_hook(tmeta["id"])
     return 0
@@ -569,7 +569,7 @@ def cmd_alias(tmeta: dict, term_id: str, add: str, remove: str) -> int:
     target["last_updated"] = today()
     detail = f"{target['id']}：增 {','.join(add_list) or '—'} / 删 {','.join(remove_list) or '—'}"
     versions.append([next_version(versions), today(), "别名调整", detail])
-    storage.write_text(render_terms_md(tmeta, terms, versions), encoding="utf-8")
+    storage.write_text(render_terms_md(tmeta, terms, versions), encoding="utf-8", newline="\n")
     print(f"[alias] {target['id']}「{target['term']}」别名 → {';'.join(aliases) or '（空）'}；词库更新至 {versions[-1][0]}")
     auto_sync_hook(tmeta["id"])
     return 0
@@ -602,7 +602,7 @@ def cmd_remove(tmeta: dict, term_ids: str) -> int:
     if missing:
         detail += f"；未找到 {','.join(missing)}"
     versions.append([next_version(versions), today(), "词条删除", detail])
-    storage.write_text(render_terms_md(tmeta, kept, versions), encoding="utf-8")
+    storage.write_text(render_terms_md(tmeta, kept, versions), encoding="utf-8", newline="\n")
     print(f"[remove] 删除 {len(removed)} 条（{before}→{len(kept)}）；词库更新至 {versions[-1][0]}")
     auto_sync_hook(tmeta["id"])
     return 0
@@ -658,7 +658,7 @@ def cmd_verify_update(tmeta: dict, file_arg: str) -> int:
     if updated:
         versions.append([next_version(versions), today(), "核验回填",
                          f"更新 {updated} 条核验字段；文件 {Path(file_arg).name}"])
-        storage.write_text(render_terms_md(tmeta, terms, versions), encoding="utf-8")
+        storage.write_text(render_terms_md(tmeta, terms, versions), encoding="utf-8", newline="\n")
         auto_sync_hook(tmeta["id"])
     print(f"[verify-update] 读取 {len(entries)} 行 → 更新 {updated} / 未匹配 {missing} / 非法 {invalid}；"
           f"词库共 {len(terms)} 条" + (f"（已更新至 {versions[-1][0]}）" if updated else "（未写盘）"))
@@ -701,10 +701,10 @@ def cmd_export(tmeta: dict, fmt: str, out: str) -> int:
                 "count": len(terms), "categories": counts,
                 "terms": [{**t, "aliases": t["aliases"], "tags": t["tags"]} for t in terms],
             }
-            target.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+            target.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8", newline="\n")
         elif f == "jsonl":
             lines = [json.dumps(t, ensure_ascii=False) for t in terms]
-            target.write_text("\n".join(lines) + ("\n" if lines else ""), encoding="utf-8")
+            target.write_text("\n".join(lines) + ("\n" if lines else ""), encoding="utf-8", newline="\n")
         else:
             rows = [STORAGE_HEADER] + [
                 [t["id"], t["term"], ";".join(t["aliases"]), t["category"], ";".join(t["tags"]),
@@ -752,7 +752,7 @@ def cmd_index(cfg: dict) -> int:
     L.append("- 检索建议：以词条 ID 为主键，别名与标签作为索引字段，分类作为过滤面。")
     L.append("")
     index_path = TOOL_ROOT / "INDEX.md"
-    index_path.write_text("\n".join(L), encoding="utf-8")
+    index_path.write_text("\n".join(L), encoding="utf-8", newline="\n")
     print(f"[index] {rel(index_path)} 已生成（{len(rows)} 个主题 / {total} 条词条）")
     return 0
 
@@ -812,7 +812,7 @@ def make_skeleton(tmeta: dict) -> list:
             created.append(str(d))
     if not tmeta["storage"].exists():
         versions = [["v1.0", today(), "首建词库", "topic-add/init 创建空词库骨架"]]
-        tmeta["storage"].write_text(render_terms_md(tmeta, [], versions), encoding="utf-8")
+        tmeta["storage"].write_text(render_terms_md(tmeta, [], versions), encoding="utf-8", newline="\n")
         created.append(str(tmeta["storage"]))
     return created
 
@@ -857,7 +857,7 @@ def cmd_topic_add(cfg: dict, args) -> int:
         bump_registry_version(cfg)
         out = {k: v for k, v in cfg.items() if k != "_path"}
         tmp = cfg_path.with_suffix(".json.tmp")
-        tmp.write_text(json.dumps(out, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        tmp.write_text(json.dumps(out, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
         os.replace(tmp, cfg_path)
         tmeta = resolve_topic(cfg, tid)
         created = make_skeleton(tmeta)
@@ -912,7 +912,7 @@ def cmd_topic_remove(cfg: dict, args) -> int:
         bump_registry_version(cfg)
         out = {k: v for k, v in cfg.items() if k != "_path"}
         tmp = cfg_path.with_suffix(".json.tmp")
-        tmp.write_text(json.dumps(out, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        tmp.write_text(json.dumps(out, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
         os.replace(tmp, cfg_path)
         if args.delete_data:
             shutil.rmtree(TOOL_ROOT / "data" / tid, ignore_errors=True)
@@ -1083,7 +1083,7 @@ def cmd_vocab_hash(cfg: dict, args) -> int:
         base_path.parent.mkdir(parents=True, exist_ok=True)
         base_path.write_text(json.dumps(
             {"vocab_hash": digest, "topics": topics, "terms": terms, "updated": today()},
-            ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+            ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
         print(f"[vocab-hash] 基线已写入：{rel(base_path)}（{digest[:12]}…，{topics} 主题 / {terms} 词条）")
         return 0
     if getattr(args, "check", False):

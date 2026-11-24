@@ -512,7 +512,7 @@ def main() -> int:
                 return 2
             print("咨询面板校验通过：与重算一致")
             return 0
-        out.write_text(content, encoding="utf-8")
+        out.write_text(content, encoding="utf-8", newline="\n")
         print(f"咨询面板已生成：{out.relative_to(ROOT)}")
         return 0
 
@@ -529,7 +529,7 @@ def main() -> int:
 
     content = render_output_md(prof, derived, verdicts, plan, args.profile, demo=args.demo)
     if args.out:
-        Path(args.out).write_text(content, encoding="utf-8")
+        Path(args.out).write_text(content, encoding="utf-8", newline="\n")
         print(f"咨询面板输出已生成：{Path(args.out)}")
     else:
         print(content)
