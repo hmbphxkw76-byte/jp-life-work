@@ -13,7 +13,7 @@ pip install -r requirements.txt   # markdown
 python -m unittest discover -s engine/tests -q   # 单元测试（以 docs/CI.md 与实测为准）
 ```
 
-> 测试计数：1211 项（`python -m unittest discover -s engine/tests` 实测，与 `docs/CI.md` 六节一致；由 `engine/tests/test_arch_guard.py` 双向锁定）。
+> 测试计数：1218 项（`python -m unittest discover -s engine/tests` 实测，与 `docs/CI.md` 六节一致；由 `engine/tests/test_arch_guard.py` 双向锁定）。
 
 ## 退出码约定（校验类工具统一）
 
@@ -546,3 +546,4 @@ python engine/tools/local_ci.py list                   # 列检查项 / 排除�
 | v1.30 | 2026-11-24 | 核验闭环第一批 | `verification-retention-map.json` 基线刷新 + 新增 `test_vocab_verification_map.py`（2 项）；测试计数 1206 → 1208 |
 | v1.31 | 2026-11-24 | 写回换行全量治理 | 62 处写点补 `newline="\n"`；新增 AST 守卫（2 项）；测试计数 1208 → 1210 |
 | v1.32 | 2026-11-24 | 自动化已合并分支显式清理 | `auto-merge-pr` 合并成功后 `gh api -X DELETE .../git/refs/heads/...` 显式删头分支（删失败 `::warning::`）；清理残留 3 个 `auto/*-*`；新增 1 项守卫；测试计数 1210 → 1211 |
+| v1.33 | 2026-11-24 | 反例扫描「单源」判定收敛 | `_single_source_sentences()` 仅对外部来源判定；新增内部指针白名单 / 章节指针 / 泛化词剔除与疑问句、建议类排除；新增 7 项守卫；测试计数 1211 → 1218 |
