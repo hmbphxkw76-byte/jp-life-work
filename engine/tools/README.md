@@ -13,7 +13,7 @@ pip install -r requirements.txt   # markdown
 python -m unittest discover -s engine/tests -q   # 单元测试（以 docs/CI.md 与实测为准）
 ```
 
-> 测试计数：1189 项（`python -m unittest discover -s engine/tests` 实测，与 `docs/CI.md` 六节一致；由 `engine/tests/test_arch_guard.py` 双向锁定）。
+> 测试计数：1190 项（`python -m unittest discover -s engine/tests` 实测，与 `docs/CI.md` 六节一致；由 `engine/tests/test_arch_guard.py` 双向锁定）。
 
 ## 退出码约定（校验类工具统一）
 
@@ -539,3 +539,4 @@ python engine/tools/local_ci.py list                   # 列检查项 / 排除�
 | v1.23 | 2026-11-23 | 阶段闸登记册判据修复 | `stage_gate_check` 的 `G1-REGISTRY` glob 未命中时认可已声明且存在的 `{{REGISTRY_PATH}}`（修 `00-decision-hub` 误报 P2）；新增 1 项回归；测试计数 1185 → 1186 |
 | v1.24 | 2026-11-23 | 事实卡片 corroboration 语义 | `fact_card_check` 支持 `single-source`（唯一权威口径不计 P2）+ 在库卡片守卫；标准文档 v1.2；测试计数 1186 → 1188 |
 | v1.25 | 2026-11-23 | md2html 写回换行硬化 | `md2html.py` 唯一写点加 `newline="\n"`；新增 1 项守卫；测试计数 1188 → 1189 |
+| v1.26 | 2026-11-23 | 本地校验只读口径 | `local_ci` 信息质量步骤锁定 `--check`（守卫测试）；测试计数 1189 → 1190 |

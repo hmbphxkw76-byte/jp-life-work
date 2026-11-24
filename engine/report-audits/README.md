@@ -1,6 +1,6 @@
 # report-audits/ 审计留痕治理说明
 
-> **版本**：v1.2（2026-11-20 n25 加工层受控）
+> **版本**：v1.3（2026-11-23 本地校验只读口径）
 > **定位**：`engine/report-audits/` 存放审计台账与生成报告。本文件规定其**分层规则**与
 > **生成器对照**，避免把生成物当活文档手工维护，也避免误删门禁依赖的台账。
 >
@@ -29,6 +29,13 @@
 | `info-quality/repair-history.md` | `info_quality_check.py`（追加式） | 跨运行累计修复日志（json 只含本轮，不可由 json 派生；随提交留存） |
 | `toolchain/perf-trend.json` | `perf_snapshot.py`（scheduled-maintenance 月度追加） | 性能趋势快照（规模 + 耗时基线 / 历史，保留最近 36 条，供跨月对比） |
 | `report-migration-2026-11.json` / `-paths.json` | `migrate_monthly_reports.py` / 测试夹具 | 迁移清单与路径映射（`test_tools.py::TestHistoricalMigration` 依赖） |
+
+> **写入口径（重要）**：上表中 `info-quality/` 的评估 / 修复 / 验证三清单与 `info-quality.json`、
+> `repair-history.md` 由**维护模式**刷新——即 `info-quality.yml`（`--apply`）或手工全量运行
+> `info_quality_check.py`；其变更随维护流程提交。
+> **本地校验一律只读**：`validate.py`、`local_ci.py`（本地等价 CI）走 `--check`，不写盘
+> （由 `engine/tests/test_local_ci.py::test_info_quality_is_side_effect_free` 锁定）。
+> 因此在本地跑校验**不应**让这些文件变脏；若变脏，说明有人以维护模式手工运行过，需按维护流程处理。
 
 ### 2. 生成物（工具渲染，json 为源，可删除重生成）
 
@@ -74,3 +81,4 @@
 | v1.0 | 2026-11-17 | 初始版本 | 建立审计留痕分层（活台账 / 生成物 / 历史归档）、生成器对照与新增/删除规则 |
 | v1.1 | 2026-11-17 | 迁移后治理 | 第三节改为「CI 接线对照」，移除已失效的「范围外接线问题」描述 |
 | v1.2 | 2026-11-20 | n25 加工层受控 | `audit/source-index.json` 由生成物提升为活台账（含报告内容指纹），移出 `.gitignore` |
+| v1.3 | 2026-11-23 | 本地校验只读口径 | §一 新增「写入口径」说明：三清单由维护模式刷新并随维护流程提交；`validate.py` / `local_ci.py` 走 `--check` 不写盘（有守卫测试锁定） |

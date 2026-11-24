@@ -49,6 +49,15 @@ class CheckRegistryCase(unittest.TestCase):
             for flag in banned:
                 self.assertNotIn(flag, c.cmd, f"{c.id} 含非只读开关 {flag}")
 
+    def test_info_quality_is_side_effect_free(self):
+        """本地 CI 的信息质量步骤必须走 `--check`，不得刷新跟踪的三清单。
+
+        维护模式（`info-quality.yml --apply` / 手工全量）才写盘并随维护流程提交；
+        本地等价 CI 若写盘会让 `engine/report-audits/info-quality/*` 每轮变脏并阻塞 sync。
+        """
+        c = next(c for c in local_ci.CHECKS if c.id == "info-quality")
+        self.assertIn("--check", c.cmd)
+
 
 class StatusCase(unittest.TestCase):
     def test_mapping(self):
