@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "updated": "2026-11-19",
+  "updated": "2026-11-24",
   "comment": "「部分核验」分类 → 保留口径映射表（B3，100% 覆盖）。clusters 定义保留簇与保留理由；categories 给出全部分类的归属与实测条数；coverage 记录覆盖率；baseline 记录工单口径与实测差异。本文件为机读事实源，不改变「部分核验」状态，不新增校验命令。",
   "baseline": {
     "ticket": "docs/toolchain/tickets/b3-vocab-convergence-map.md",
@@ -13,11 +13,14 @@
       "categories_unmapped": 87
     },
     "measured": {
-      "partial_terms": 1391,
+      "terms_total": 1518,
+      "verified_terms": 164,
+      "partial_terms": 1354,
+      "pending_terms": 0,
       "categories_total": 110,
-      "terms_total": 1612
+      "categories_with_partial": 109
     },
-    "difference_note": "工单/复核记录 1423 条 vs 实测 1391 条，差 32：66bb692 将 01/02 各 11 条「部分核验」改「待核实」（−22），18/19/20 共 10 条升级「已核验」（−10）；60ab42a 删除 01/02 各 11 条「待核实」（全库总数 1634→1612，不影响部分核验计数）。另 §7A.7 分主题表求和 1420，其中 20-overseas-china 记 64，1423 快照实测为 67。"
+    "difference_note": "工单/复核记录 1423 条 vs 首测 1391 条，差 32：66bb692 将 01/02 各 11 条「部分核验」改「待核实」（−22），18/19/20 共 10 条升级「已核验」（−10）；60ab42a 删除 01/02 各 11 条「待核实」（全库总数 1634→1612）。2026-11-24 复测（vocab-verify-baseline-refresh）：全库 1518 条 = 已核验 164 + 部分核验 1354，待核实 0；部分核验涉及 109 个分类，全部在 categories 映射内（无未映射）。后续「深化」指逐条补官方原文证据，受网络可达性限制（多数 .go.jp / mofa.go.jp 直连 403），须人工或换网络环境批次推进。"
   },
   "clusters": [
     {
@@ -514,8 +517,11 @@
   "coverage": {
     "categories_total": 110,
     "categories_mapped": 110,
-    "partial_terms": 1391,
-    "mapped_terms": 1391,
+    "terms_total": 1518,
+    "verified_terms": 164,
+    "partial_terms": 1354,
+    "pending_terms": 0,
+    "mapped_terms": 1354,
     "unmapped_categories": []
   }
 }
