@@ -258,7 +258,7 @@ reports/YYYY-MM-<slug>.md  ──md2html.py──►  reports/YYYY-MM-<slug>.htm
 - **辅助开关**：报告页工具条「隐藏更新标记」对照阅读、「展开全部删除」。
 - **呈现**：报告页新标签页独立打开，页脚提供「← 返回主题 / 返回首页」。
 
-## 六、测试体系（`engine/tests/`，1210 项）
+## 六、测试体系（`engine/tests/`，1211 项）
 
 | 场景 | 测试类 | 覆盖 |
 |---|---|---|
@@ -290,7 +290,7 @@ reports/YYYY-MM-<slug>.md  ──md2html.py──►  reports/YYYY-MM-<slug>.htm
 | 跨平台差异守卫 | `test_platform_guard.py`（9 项） | 路径分隔（无 Windows 路径字面量 / 工作流正斜杠）、换行（仓库 blob LF / `.gitattributes` / `atomic_write` 保 LF）、命令可用性（无 `shell=True` / 无 PowerShell 专属语法 / 工具路径存在） |
 | 性能趋势快照 | `test_perf_snapshot.py`（6 项） | 规模快照字段与实测口径、耗时采集、基线语义（首条为基线 / 追加不改基线 / `--set-baseline` 覆盖）、CLI `--porcelain` |
 
-> 合计 1210 项（`python -m unittest discover -s engine/tests` 集成后实测，当前全绿；`incremental_build` 两项「无变更」断言在集成分支领先 main 时按预期失败，合并后通过）。
+> 合计 1211 项（`python -m unittest discover -s engine/tests` 集成后实测，当前全绿；`incremental_build` 两项「无变更」断言在集成分支领先 main 时按预期失败，合并后通过）。
 
 ## 七、手动命令速查
 
@@ -645,3 +645,4 @@ CI 在 ubuntu runner 上用 **bash** 执行 `run:`，本地维护者用 **PowerS
 | v2.44 | 2026-11-23 | link_check 覆盖率提升 | 新增 9 项单元测试（候选提取 / 跳过规则 / audit-status 键 / 外链抽检）；link_check 覆盖率 65.4% → **78.5%**；测试计数 1197 → 1206 |
 | v2.45 | 2026-11-24 | 核验闭环第一批 | `verification-retention-map.json` 基线刷新（已核验 164 / 部分核验 1354 / 待核实 0，分类映射 100%）；新增 2 项守卫（分类全覆盖 + 计数一致）；测试计数 1206 → 1208 |
 | v2.46 | 2026-11-24 | 写回换行全量治理 | 62 处未受控文本写回补 `newline="\n"`（24 文件）；新增 AST 静态守卫 `test_write_eol_guard.py`；测试计数 1208 → 1210 |
+| v2.47 | 2026-11-24 | 自动化已合并分支显式清理 | 复合动作 `auto-merge-pr` 在 `gh pr merge` 成功后显式删除 PR 头分支（`gh api -X DELETE .../git/refs/heads/...`），不再依赖仓库设置 `delete_branch_on_merge` 的隐式行为（实测对 bot 合并路径残留 3 例：PR #23 / #27 / #35）；删失败以 `::warning::` 暴露不静默；新增 1 项守卫；测试计数 1210 → 1211 |
