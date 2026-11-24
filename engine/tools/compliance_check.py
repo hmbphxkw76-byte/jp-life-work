@@ -320,7 +320,7 @@ def run_audit(outdir: Path) -> tuple[int, int, int, Path]:
         "```",
         "",
     ]
-    audit_path.write_text("\n".join(body), encoding="utf-8")
+    audit_path.write_text("\n".join(body), encoding="utf-8", newline="\n")
     return total, compliant, violated, audit_path
 
 

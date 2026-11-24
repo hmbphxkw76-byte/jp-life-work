@@ -53,7 +53,7 @@ def add(question: str, field: str, old: str, new: str, basis: str, source: str,
     when = when or date.today().isoformat()
     row = f"| {when} | {question} | {field} | {old} | {new} | {basis} | {source} |"
     LOG_PATH.parent.mkdir(parents=True, exist_ok=True)
-    LOG_PATH.write_text(text.rstrip() + "\n" + row + "\n", encoding="utf-8")
+    LOG_PATH.write_text(text.rstrip() + "\n" + row + "\n", encoding="utf-8", newline="\n")
 
 
 def entries(limit: int = 0) -> list[dict]:

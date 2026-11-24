@@ -278,8 +278,8 @@ def main() -> int:
             out_md = Path(brel) / "reports" / target_name
             out_html = out_md.with_suffix(".html")
             try:
-                out_md.write_text(merged, encoding="utf-8")
-                out_html.write_text(md2html.convert(out_md), encoding="utf-8")
+                out_md.write_text(merged, encoding="utf-8", newline="\n")
+                out_html.write_text(md2html.convert(out_md), encoding="utf-8", newline="\n")
             except OSError as e:
                 print(f"[ERROR] 写入失败 {out_md}: {e}")
                 return 1
@@ -294,9 +294,10 @@ def main() -> int:
 
     AUDIT_DIR.mkdir(parents=True, exist_ok=True)
     MANIFEST_JSON.write_text(
-        json.dumps({"results": results}, ensure_ascii=False, indent=2), encoding="utf-8"
+        json.dumps({"results": results}, ensure_ascii=False, indent=2),
+        encoding="utf-8", newline="\n",
     )
-    MANIFEST_MD.write_text(render_manifest(plan_map, results), encoding="utf-8")
+    MANIFEST_MD.write_text(render_manifest(plan_map, results), encoding="utf-8", newline="\n")
     print(f"迁移完成：{len(results)} 份来源已并入 {total and sum(len(m) for m in plan_map.values())} 份月度报告")
     print(f"迁移清单：{MANIFEST_MD}")
     return 0

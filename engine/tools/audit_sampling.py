@@ -234,9 +234,9 @@ def write_report(payload: dict) -> list[Path]:
         ]
     )
     p = SAMPLING_DIR / f"sampling-{payload['period']}.md"
-    p.write_text(md, encoding="utf-8")
+    p.write_text(md, encoding="utf-8", newline="\n")
     pj = SAMPLING_DIR / f"sampling-{payload['period']}.json"
-    pj.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+    pj.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8", newline="\n")
     return [p, pj]
 
 

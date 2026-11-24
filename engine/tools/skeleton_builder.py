@@ -235,7 +235,7 @@ def main() -> int:
             return 1
         new, n = merge_empty_modules(_read(p))
         if args.apply:
-            p.write_text(new, encoding="utf-8")
+            p.write_text(new, encoding="utf-8", newline="\n")
             print(f"已合并空模块 {n} 节：{p}")
             return 0
         print(f"可合并空模块 {n} 节（--apply 写回）")
@@ -249,7 +249,7 @@ def main() -> int:
     if args.out:
         out = Path(args.out)
         out.parent.mkdir(parents=True, exist_ok=True)
-        out.write_text(skeleton, encoding="utf-8")
+        out.write_text(skeleton, encoding="utf-8", newline="\n")
         print(f"骨架已生成：{out}")
     else:
         print(skeleton)

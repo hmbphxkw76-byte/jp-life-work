@@ -131,7 +131,7 @@ def main(argv: list[str] | None = None) -> int:
             OUT.parent.mkdir(parents=True, exist_ok=True)
             OUT.write_text(json.dumps({"count": len(pairs), "exempted": len(raw) - len(pairs),
                                       "pairs": pairs},
-                                      ensure_ascii=False, indent=2), encoding="utf-8")
+                                      ensure_ascii=False, indent=2), encoding="utf-8", newline="\n")
             print(f"已写入：{OUT.relative_to(ROOT)}")
     if pairs:
         return 2

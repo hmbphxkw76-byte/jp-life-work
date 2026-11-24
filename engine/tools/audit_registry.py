@@ -168,8 +168,8 @@ def build() -> list[dict]:
         "count": len(entries),
         "reports": entries,
     }
-    REGISTRY_JSON.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
-    REGISTRY_MD.write_text(render_md(entries, date.today().isoformat()), encoding="utf-8")
+    REGISTRY_JSON.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8", newline="\n")
+    REGISTRY_MD.write_text(render_md(entries, date.today().isoformat()), encoding="utf-8", newline="\n")
     return entries
 
 

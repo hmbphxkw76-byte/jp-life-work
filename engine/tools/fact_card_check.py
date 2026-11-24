@@ -204,7 +204,7 @@ def main() -> int:
 
     if args.write:
         REPORT_PATH.parent.mkdir(parents=True, exist_ok=True)
-        REPORT_PATH.write_text(render_md(issues, summary), encoding="utf-8")
+        REPORT_PATH.write_text(render_md(issues, summary), encoding="utf-8", newline="\n")
         print(f"报告已写入：{REPORT_PATH.relative_to(ROOT)}")
 
     if p0p1:

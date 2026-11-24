@@ -347,7 +347,7 @@ def write_report(results: list[dict], summary: dict, run_date: str) -> list[Path
         "",
     ])
     p = REPORT_MD
-    p.write_text(md, encoding="utf-8")
+    p.write_text(md, encoding="utf-8", newline="\n")
 
     payload = {
         "run_date": run_date,
@@ -362,7 +362,7 @@ def write_report(results: list[dict], summary: dict, run_date: str) -> list[Path
         ],
     }
     pj = REPORT_JSON
-    pj.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+    pj.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8", newline="\n")
     return [p, pj]
 
 

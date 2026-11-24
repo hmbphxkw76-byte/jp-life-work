@@ -323,7 +323,7 @@ def main(argv: list[str] | None = None) -> int:
         out.write_text(
             json.dumps(build_document(results, branch), ensure_ascii=False, indent=2) + "\n",
             encoding="utf-8",
-        )
+        newline="\n")
         if not args.json and not args.markdown:
             print(f"结果已落盘：{out}")
 

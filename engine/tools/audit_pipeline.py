@@ -204,7 +204,7 @@ def _append(event: dict) -> dict:
     h = _hash(prev_hash, body)
     rec = {"seq": seq, "prev_hash": prev_hash, "hash": h, **body}
     AUDIT_DIR.mkdir(parents=True, exist_ok=True)
-    with LEDGER.open("a", encoding="utf-8") as f:
+    with LEDGER.open("a", encoding="utf-8", newline="\n") as f:
         f.write(json.dumps(rec, ensure_ascii=False) + "\n")
     return rec
 
@@ -255,7 +255,7 @@ def write_status(state: dict) -> Path:
     # 否则 audit-status.json 会引用不存在的文件（内链门禁 / 对账误报）。
     _prune_ghosts(state)
     payload = {"version": SPEC_VERSION, "updated": _now(), "reports": state}
-    STATUS.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+    STATUS.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8", newline="\n")
     return STATUS
 
 
@@ -524,7 +524,7 @@ def cmd_rebind(all_: bool = True, rel: str | None = None) -> int:
         text = _insert_after_disclaimer(
             text, badge_text(audit_id, state[rep].get("finalized_at", ""),
                              cur_md.removeprefix("sha256:")))
-        md.write_text(text, encoding="utf-8")
+        md.write_text(text, encoding="utf-8", newline="\n")
         _regenerate_html(md)
         cur_md, cur_html = _current_hashes(rep)
         _append({"ts": _now(), "event": "rebind", "report": rep, "actor": "system",
@@ -633,7 +633,7 @@ def cmd_purge_ghosts() -> int:
         prev = h
     tmp = LEDGER.parent / (LEDGER.name + ".tmp")
     tmp.write_text("".join(json.dumps(r, ensure_ascii=False) + "\n" for r in out),
-                   encoding="utf-8")
+                   encoding="utf-8", newline="\n")
     tmp.replace(LEDGER)
     state = rebuild_status(load_ledger())
     write_status(state)

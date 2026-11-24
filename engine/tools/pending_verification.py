@@ -114,7 +114,7 @@ def main() -> int:
     if not args.check:
         OUT_PATH.parent.mkdir(parents=True, exist_ok=True)
         OUT_PATH.write_text(json.dumps({"summary": summary, "items": rows},
-                                       ensure_ascii=False, indent=2), encoding="utf-8")
+                                       ensure_ascii=False, indent=2), encoding="utf-8", newline="\n")
         print(f"已写入：{OUT_PATH.relative_to(ROOT)}")
 
     if summary["overdue"] or summary["unregistered"]:

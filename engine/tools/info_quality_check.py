@@ -1015,7 +1015,7 @@ def _insert_disclaimer(path: Path) -> Repair | None:
         nl = text.find("\n")
         pos = nl + 1 if nl != -1 else len(text)
     new_text = text[:pos] + STANDARD_DISCLAIMER + "\n\n" + text[pos:]
-    path.write_text(new_text, encoding="utf-8")
+    path.write_text(new_text, encoding="utf-8", newline="\n")
     return Repair("C-06", "", _rel(path), "S-05", "插入标准化免责声明（头部块引用）",
                   "（缺失）", STANDARD_DISCLAIMER)
 
@@ -1040,7 +1040,7 @@ def _dedupe_within_file(path: Path) -> Repair | None:
     new_text = "".join(out)
     if not path.is_absolute():
         path = ROOT / path
-    path.write_text(new_text, encoding="utf-8")
+    path.write_text(new_text, encoding="utf-8", newline="\n")
     return Repair("C-03", "", _rel(path), "S-02", f"删除同文档内重复段落 {removed} 处",
                   f"重复段落 ×{removed}", "已保留首次出现并删除后续副本")
 
@@ -1051,7 +1051,7 @@ def _repoint(path: Path, old_target: str, new_target: Path) -> Repair | None:
     new_text = text.replace(old_target, new_rel)
     if new_text == text:
         return None
-    path.write_text(new_text, encoding="utf-8")
+    path.write_text(new_text, encoding="utf-8", newline="\n")
     return Repair("C-09", "", _rel(path), "S-08", f"失效引用重指：{old_target} → {new_rel}",
                   old_target, new_rel)
 
@@ -1110,7 +1110,7 @@ def repair(findings: list[Finding], units: list[dict]) -> list[Repair]:
                 (topic_dir / "prompts").mkdir(parents=True, exist_ok=True)
             if f.path.endswith("business-config.md") and not (topic_dir / "prompts" / "business-config.md").exists():
                 target = topic_dir / "prompts" / "business-config.md"
-                target.write_text(PLACEHOLDER_CONFIG.format(slug=topic_slug_of(f.topic)), encoding="utf-8")
+                target.write_text(PLACEHOLDER_CONFIG.format(slug=topic_slug_of(f.topic)), encoding="utf-8", newline="\n")
                 repairs.append(Repair(f.code, f.topic, f.path, "S-05", "补建业务配置占位骨架",
                                       "（缺失）", target.read_text(encoding="utf-8")[:80] + "…"))
                 f.status = "fixed"
@@ -1118,7 +1118,7 @@ def repair(findings: list[Finding], units: list[dict]) -> list[Repair]:
                 target = topic_dir / "data" / f"{topic_slug_of(f.topic)}_indicator_registry.md"
                 if not target.exists():
                     target.parent.mkdir(parents=True, exist_ok=True)
-                    target.write_text(PLACEHOLDER_REGISTRY.format(slug=topic_slug_of(f.topic)), encoding="utf-8")
+                    target.write_text(PLACEHOLDER_REGISTRY.format(slug=topic_slug_of(f.topic)), encoding="utf-8", newline="\n")
                     repairs.append(Repair(f.code, f.topic, f.path, "S-05", "补建指标登记册占位骨架",
                                           "（缺失）", target.read_text(encoding="utf-8")[:80] + "…"))
                     f.status = "fixed"
@@ -1129,7 +1129,7 @@ def repair(findings: list[Finding], units: list[dict]) -> list[Repair]:
             elif f.path.endswith("operations-guide.md"):
                 target = topic_dir / "operations-guide.md"
                 if not target.exists():
-                    target.write_text(PLACEHOLDER_GUIDE.format(slug=topic_slug_of(f.topic)), encoding="utf-8")
+                    target.write_text(PLACEHOLDER_GUIDE.format(slug=topic_slug_of(f.topic)), encoding="utf-8", newline="\n")
                     repairs.append(Repair(f.code, f.topic, f.path, "S-05", "补建操作指南占位骨架",
                                           "（缺失）", target.read_text(encoding="utf-8")[:80] + "…"))
                     f.status = "fixed"
@@ -1261,7 +1261,7 @@ def write_reports(findings: list[Finding], repairs: list[Repair],
         "",
     ])
     p = AUDIT_DIR / "assessment-ledger.md"
-    p.write_text(assessment, encoding="utf-8")
+    p.write_text(assessment, encoding="utf-8", newline="\n")
     written.append(p)
 
     # 修复台账
@@ -1278,7 +1278,7 @@ def write_reports(findings: list[Finding], repairs: list[Repair],
         "",
     ])
     p = AUDIT_DIR / "repair-ledger.md"
-    p.write_text(repair_md, encoding="utf-8")
+    p.write_text(repair_md, encoding="utf-8", newline="\n")
     written.append(p)
 
     # 验证报告
@@ -1312,7 +1312,7 @@ def write_reports(findings: list[Finding], repairs: list[Repair],
         for f in sorted(findings, key=lambda x: P_LEVELS[x.level]) if f.status == "unfixable"
     ] + ["", f"**验证结论：{'全部通过' if ver['passed'] else '存在未通过校验项，见上表'}**", ""])
     p = AUDIT_DIR / "verification-report.md"
-    p.write_text(report_md, encoding="utf-8")
+    p.write_text(report_md, encoding="utf-8", newline="\n")
     written.append(p)
 
     # 机器可读 JSON
@@ -1326,7 +1326,7 @@ def write_reports(findings: list[Finding], repairs: list[Repair],
         "verification": ver,
     }
     p = AUDIT_DIR / "info-quality.json"
-    p.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+    p.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8", newline="\n")
     written.append(p)
 
     # 累计修复历史（跨运行追加，便于周期审计）
@@ -1334,10 +1334,10 @@ def write_reports(findings: list[Finding], repairs: list[Repair],
         hist = AUDIT_DIR / "repair-history.md"
         entry = f"## {run_date}：自动修复 {len(repairs)} 条\n\n" + md_table(rows) + "\n"
         if hist.exists():
-            with hist.open("a", encoding="utf-8") as fh:
+            with hist.open("a", encoding="utf-8", newline="\n") as fh:
                 fh.write(entry)
         else:
-            hist.write_text("# 信息质量修复历史（累计）\n\n" + entry, encoding="utf-8")
+            hist.write_text("# 信息质量修复历史（累计）\n\n" + entry, encoding="utf-8", newline="\n")
         written.append(hist)
     return written
 

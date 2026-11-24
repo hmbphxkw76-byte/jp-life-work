@@ -142,7 +142,7 @@ def write_baseline(path: Path, payload: dict) -> None:
     tmp = path.with_name(path.name + ".tmp")
     try:
         tmp.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
-                       encoding="utf-8")
+                       encoding="utf-8", newline="\n")
         os.replace(tmp, path)
     except BaseException:
         with contextlib.suppress(OSError):
