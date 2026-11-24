@@ -1,0 +1,1534 @@
+{
+  "schema_version": "1.0",
+  "updated": "2026-11-23",
+  "comment": "近义扫描「已裁定保留」清单。命中 (topic, a, b) 即不再计为疑似；新增疑似默认不豁免，须先经人工裁定（见 docs/词库近义合并规范.md）。本批登记依据：docs/反例与近义裁定清单-2026-11-18.md —— 全部为「包含关系但非同一对象」，裁定保留。",
+  "source": "docs/反例与近义裁定清单-2026-11-18.md",
+  "exemptions": [
+    {
+      "topic": "01-ssw-driver",
+      "a": "在留カード",
+      "b": "在留カード再交付",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "01-ssw-driver",
+      "a": "在留期間",
+      "b": "在留期間更新",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "01-ssw-driver",
+      "a": "車検",
+      "b": "車検費用",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "01-ssw-driver",
+      "a": "送金",
+      "b": "国際送金",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "01-ssw-driver",
+      "a": "運行管理者",
+      "b": "運行管理者試験",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "02-career-driver",
+      "a": "年収",
+      "b": "年収交渉",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "02-career-driver",
+      "a": "正社員",
+      "b": "勤務地限定正社員",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "02-career-driver",
+      "a": "求人",
+      "b": "求人票",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "02-career-driver",
+      "a": "管理職",
+      "b": "運行管理職への転換",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "02-career-driver",
+      "a": "転職",
+      "b": "異業種転職",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "02-career-driver",
+      "a": "転職",
+      "b": "転職エージェント",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "02-career-driver",
+      "a": "退職金",
+      "b": "退職金制度",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "02-career-driver",
+      "a": "運行管理者",
+      "b": "運行管理者資格",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "02-career-driver",
+      "a": "面接",
+      "b": "面接で聞かれること",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "03-career-management",
+      "a": "リーダー",
+      "b": "リーダー育成",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "03-career-management",
+      "a": "業務改善",
+      "b": "業務改善提案",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "03-career-management",
+      "a": "研修",
+      "b": "内定者研修",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "03-career-management",
+      "a": "研修",
+      "b": "研修効果測定",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "03-career-management",
+      "a": "管理職",
+      "b": "中間管理職",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "03-career-management",
+      "a": "評価面談",
+      "b": "面談",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "04-industry-logistics",
+      "a": "下請法",
+      "b": "下請",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "04-industry-logistics",
+      "a": "物流",
+      "b": "グリーン物流パートナーシップ",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "04-industry-logistics",
+      "a": "物流",
+      "b": "共同物流平台",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "04-industry-logistics",
+      "a": "物流",
+      "b": "物流コスト",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "04-industry-logistics",
+      "a": "物流",
+      "b": "物流センター",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "04-industry-logistics",
+      "a": "物流",
+      "b": "物流二法",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "04-industry-logistics",
+      "a": "物流",
+      "b": "物流倒産",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "04-industry-logistics",
+      "a": "物流",
+      "b": "物流効率化法",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "04-industry-logistics",
+      "a": "物流",
+      "b": "物流危機",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "04-industry-logistics",
+      "a": "物流",
+      "b": "物流子会社",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "04-industry-logistics",
+      "a": "物流",
+      "b": "物流市場規模",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "04-industry-logistics",
+      "a": "荷主",
+      "b": "荷主の責任",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "04-industry-logistics",
+      "a": "運賃",
+      "b": "運賃改定",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "04-industry-logistics",
+      "a": "運送会社",
+      "b": "大手運送会社",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "05-industry-autonomous",
+      "a": "GNSS",
+      "b": "RTK-GNSS",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "05-industry-autonomous",
+      "a": "予測",
+      "b": "モデル予測制御",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "05-industry-autonomous",
+      "a": "制御",
+      "b": "モデル予測制御",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "05-industry-autonomous",
+      "a": "制御",
+      "b": "縦横制御",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "05-industry-autonomous",
+      "a": "制御",
+      "b": "電子制御ブレーキ",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "05-industry-autonomous",
+      "a": "自動運転タクシー",
+      "b": "自動運転",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "05-industry-autonomous",
+      "a": "自動運転トラック",
+      "b": "自動運転",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "05-industry-autonomous",
+      "a": "自動運転バス",
+      "b": "自動運転",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "05-industry-autonomous",
+      "a": "自動運転レベル",
+      "b": "自動運転",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "05-industry-autonomous",
+      "a": "自動運転ロードマップ",
+      "b": "自動運転",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "05-industry-autonomous",
+      "a": "道路交通法",
+      "b": "道路交通法施行規則",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "05-industry-autonomous",
+      "a": "遠隔監視",
+      "b": "遠隔監視者要件",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "05-industry-autonomous",
+      "a": "高速道路自動運転",
+      "b": "自動運転",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "06-industry-technology",
+      "a": "エンジニア",
+      "b": "QAエンジニア",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "06-industry-technology",
+      "a": "エンジニア",
+      "b": "バックエンドエンジニア",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "06-industry-technology",
+      "a": "エンジニア",
+      "b": "フロントエンドエンジニア",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "06-industry-technology",
+      "a": "バックエンド",
+      "b": "バックエンドエンジニア",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "06-industry-technology",
+      "a": "フロントエンド",
+      "b": "フロントエンドエンジニア",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "07-economy-finance",
+      "a": "為替",
+      "b": "為替リスク",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "07-economy-finance",
+      "a": "金融庁",
+      "b": "金融庁検査",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "08-visa-immigration",
+      "a": "不許可",
+      "b": "不許可理由",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "08-visa-immigration",
+      "a": "不許可",
+      "b": "不許可理由書",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "08-visa-immigration",
+      "a": "不許可",
+      "b": "不許可通知",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "08-visa-immigration",
+      "a": "不許可理由",
+      "b": "不許可理由書",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "08-visa-immigration",
+      "a": "再入国許可",
+      "b": "みなし再入国許可",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "08-visa-immigration",
+      "a": "出入国管理及び難民認定法",
+      "b": "難民認定",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "08-visa-immigration",
+      "a": "在留資格",
+      "b": "在留資格取消",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "08-visa-immigration",
+      "a": "在留資格",
+      "b": "在留資格変更",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "08-visa-immigration",
+      "a": "在留資格",
+      "b": "在留資格認定証明書",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "08-visa-immigration",
+      "a": "在留資格",
+      "b": "在留資格認定証明書交付申請",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "08-visa-immigration",
+      "a": "在留資格認定証明書",
+      "b": "在留資格認定証明書交付申請",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "08-visa-immigration",
+      "a": "在留資格認定証明書",
+      "b": "証明書",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "08-visa-immigration",
+      "a": "在留資格認定証明書交付申請",
+      "b": "証明書",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "08-visa-immigration",
+      "a": "審査",
+      "b": "行政不服審査",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "08-visa-immigration",
+      "a": "帰化",
+      "b": "帰化許可申請",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "08-visa-immigration",
+      "a": "日本人の配偶者等",
+      "b": "配偶者",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "08-visa-immigration",
+      "a": "永住者",
+      "b": "永住者の配偶者等",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "08-visa-immigration",
+      "a": "永住者の配偶者等",
+      "b": "配偶者",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "08-visa-immigration",
+      "a": "理由書",
+      "b": "不許可理由書",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "08-visa-immigration",
+      "a": "理由書",
+      "b": "理由書の書き方",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "08-visa-immigration",
+      "a": "許可通知",
+      "b": "不許可通知",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "09-politics-law",
+      "a": "内閣",
+      "b": "内閣総理大臣",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "09-politics-law",
+      "a": "出入国管理及び難民認定法",
+      "b": "難民認定",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "09-politics-law",
+      "a": "弁護士",
+      "b": "弁護士相談",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "09-politics-law",
+      "a": "改正",
+      "b": "税制改正",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "09-politics-law",
+      "a": "示談",
+      "b": "示談書",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "10-education-qualification",
+      "a": "受験",
+      "b": "受験勉強",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "10-education-qualification",
+      "a": "大学",
+      "b": "大学院",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "10-education-qualification",
+      "a": "奨学金",
+      "b": "給付型奨学金",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "10-education-qualification",
+      "a": "奨学金",
+      "b": "貸与型奨学金",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "10-education-qualification",
+      "a": "短期大学",
+      "b": "大学",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "10-education-qualification",
+      "a": "進学",
+      "b": "進学相談",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "10-education-qualification",
+      "a": "願書",
+      "b": "願書提出",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "10-education-qualification",
+      "a": "高等専門学校",
+      "b": "専門学校",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "11-language-japanese",
+      "a": "ビジネス敬語",
+      "b": "敬語",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "11-language-japanese",
+      "a": "二重敬語",
+      "b": "敬語",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "11-language-japanese",
+      "a": "尊敬語",
+      "b": "敬語",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "11-language-japanese",
+      "a": "社内敬語",
+      "b": "敬語",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "11-language-japanese",
+      "a": "社外敬語",
+      "b": "敬語",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "12-culture-life",
+      "a": "市役所",
+      "b": "市役所手続き",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "12-culture-life",
+      "a": "引っ越し",
+      "b": "引っ越し挨拶",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "12-culture-life",
+      "a": "挨拶",
+      "b": "引っ越し挨拶",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "12-culture-life",
+      "a": "挨拶",
+      "b": "挨拶回り",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "12-culture-life",
+      "a": "病院",
+      "b": "病院受診",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "12-culture-life",
+      "a": "防災",
+      "b": "防災訓練",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "13-regional-info",
+      "a": "人口",
+      "b": "人口減少",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "13-regional-info",
+      "a": "人口",
+      "b": "昼夜間人口比率",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "13-regional-info",
+      "a": "地域おこし協力隊",
+      "b": "地域おこし",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "13-regional-info",
+      "a": "地方",
+      "b": "九州地方",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "13-regional-info",
+      "a": "地方",
+      "b": "地方交付税",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "13-regional-info",
+      "a": "地方",
+      "b": "地方分権",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "13-regional-info",
+      "a": "地方",
+      "b": "地方創生",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "13-regional-info",
+      "a": "地方",
+      "b": "地方税",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "13-regional-info",
+      "a": "地方",
+      "b": "地方自治",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "13-regional-info",
+      "a": "地方",
+      "b": "近畿地方",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "13-regional-info",
+      "a": "地方",
+      "b": "関東地方",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "13-regional-info",
+      "a": "移住支援金",
+      "b": "移住",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "13-regional-info",
+      "a": "転入",
+      "b": "転入届",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "14-life-operations",
+      "a": "原状回復",
+      "b": "原状回復ガイドライン",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "14-life-operations",
+      "a": "国民健康保険",
+      "b": "国民健康保険料",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "14-life-operations",
+      "a": "転出",
+      "b": "転出証明書",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "15-health-wellbeing",
+      "a": "介護サービス",
+      "b": "高額介護サービス費",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "15-health-wellbeing",
+      "a": "健康保険",
+      "b": "健康保険組合",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "15-health-wellbeing",
+      "a": "健康保険",
+      "b": "国民健康保険料",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "15-health-wellbeing",
+      "a": "健康保険",
+      "b": "被用者健康保険",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "15-health-wellbeing",
+      "a": "医疗费扣除",
+      "b": "医疗费",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "15-health-wellbeing",
+      "a": "医療機関",
+      "b": "保険医療機関",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "15-health-wellbeing",
+      "a": "被保险者证",
+      "b": "介護保険被保险者证",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "16-exit-transition-return",
+      "a": "厚生年金脱退一时金",
+      "b": "年金",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "16-exit-transition-return",
+      "a": "在留カード",
+      "b": "在留カード返納",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "16-exit-transition-return",
+      "a": "帰国前確定申告",
+      "b": "帰国",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "16-exit-transition-return",
+      "a": "手当",
+      "b": "基本手当",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "16-exit-transition-return",
+      "a": "手当",
+      "b": "解雇予告手当",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "16-exit-transition-return",
+      "a": "被用者保険",
+      "b": "被用者保険資格喪失",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "16-exit-transition-return",
+      "a": "解約",
+      "b": "解約予告期間",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "16-exit-transition-return",
+      "a": "解約",
+      "b": "解約金",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "16-exit-transition-return",
+      "a": "解雇予告",
+      "b": "解雇予告手当",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "16-exit-transition-return",
+      "a": "退職",
+      "b": "退職所得",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "16-exit-transition-return",
+      "a": "雇用",
+      "b": "雇用保険被保険者証",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "16-exit-transition-return",
+      "a": "雇用保険",
+      "b": "雇用",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "16-exit-transition-return",
+      "a": "雇用保険",
+      "b": "雇用保険被保険者証",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "17-migration-compliance",
+      "a": "出境入境中介服务",
+      "b": "从事出境入境中介服务的机构和人员备案管理办法",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "17-migration-compliance",
+      "a": "労働基準法",
+      "b": "労働基準法第15条",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "17-migration-compliance",
+      "a": "労働基準法第16条",
+      "b": "労働基準法",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "17-migration-compliance",
+      "a": "労働基準法第24条",
+      "b": "労働基準法",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "17-migration-compliance",
+      "a": "备案",
+      "b": "从事出境入境中介服务的机构和人员备案管理办法",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "17-migration-compliance",
+      "a": "备案",
+      "b": "备案信息公示",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "17-migration-compliance",
+      "a": "对外劳务合作",
+      "b": "对外劳务合作企业名单",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "17-migration-compliance",
+      "a": "对外劳务合作",
+      "b": "对外劳务合作管理条例",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "17-migration-compliance",
+      "a": "对外劳务合作",
+      "b": "对外劳务合作经营资格",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "17-migration-compliance",
+      "a": "对外劳务合作",
+      "b": "对外劳务合作经营资格证书",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "17-migration-compliance",
+      "a": "对外劳务合作经营资格",
+      "b": "对外劳务合作经营资格证书",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "17-migration-compliance",
+      "a": "技能実習",
+      "b": "外国人技能実習機構",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "17-migration-compliance",
+      "a": "技能実習",
+      "b": "技能実習法",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "17-migration-compliance",
+      "a": "技能実習",
+      "b": "技能実習計画",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "17-migration-compliance",
+      "a": "特定技能",
+      "b": "1号特定技能外国人支援計画",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "17-migration-compliance",
+      "a": "特定技能",
+      "b": "特定技能专门中介",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "17-migration-compliance",
+      "a": "登録支援機関",
+      "b": "登録支援機関登录费",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "17-migration-compliance",
+      "a": "育成就労",
+      "b": "育成就労制度運用要領",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "17-migration-compliance",
+      "a": "認定送出機関",
+      "b": "認定送出機関名单",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "17-migration-compliance",
+      "a": "送出機関",
+      "b": "認定送出機関",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "17-migration-compliance",
+      "a": "送出機関",
+      "b": "認定送出機関名单",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "17-migration-compliance",
+      "a": "黑名单",
+      "b": "黑名单雇主",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "18-family-parenting",
+      "a": "介護休業",
+      "b": "育児・介護休業法",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "18-family-parenting",
+      "a": "保険",
+      "b": "公的医療保険",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "18-family-parenting",
+      "a": "児童手当",
+      "b": "児童",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "18-family-parenting",
+      "a": "児童扶養手当",
+      "b": "児童",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "18-family-parenting",
+      "a": "出産育児一時金",
+      "b": "出産",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "18-family-parenting",
+      "a": "医療",
+      "b": "公的医療保険",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "18-family-parenting",
+      "a": "医療",
+      "b": "医療情報基盤・診療報酬審査支払機構",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "18-family-parenting",
+      "a": "婚姻届",
+      "b": "婚姻届受理証明書",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "18-family-parenting",
+      "a": "待機児童",
+      "b": "児童",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "18-family-parenting",
+      "a": "戸籍誊本",
+      "b": "戸籍",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "18-family-parenting",
+      "a": "扶養",
+      "b": "児童扶養手当",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "18-family-parenting",
+      "a": "教育",
+      "b": "教育委員会",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "18-family-parenting",
+      "a": "日本語指導",
+      "b": "日本語指導補助者",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "18-family-parenting",
+      "a": "生活保護",
+      "b": "生活",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "18-family-parenting",
+      "a": "産科医療給付金",
+      "b": "医療",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "18-family-parenting",
+      "a": "第3号被保険者",
+      "b": "保険",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "19-safety-disaster",
+      "a": "地震",
+      "b": "緊急地震速報",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "19-safety-disaster",
+      "a": "地震",
+      "b": "緊急地震速報全国訓練",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "19-safety-disaster",
+      "a": "多言語防災気象情報",
+      "b": "防災",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "19-safety-disaster",
+      "a": "情報難民",
+      "b": "情報難民ゼロ",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "19-safety-disaster",
+      "a": "洪水",
+      "b": "洪水警報",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "19-safety-disaster",
+      "a": "緊急地震速報",
+      "b": "緊急地震速報全国訓練",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "19-safety-disaster",
+      "a": "警報",
+      "b": "危険警報",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "19-safety-disaster",
+      "a": "警報",
+      "b": "大雨警報",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "19-safety-disaster",
+      "a": "警報",
+      "b": "洪水警報",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "19-safety-disaster",
+      "a": "警報",
+      "b": "特別警報",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "19-safety-disaster",
+      "a": "警戒",
+      "b": "警戒レベル相当情報",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "19-safety-disaster",
+      "a": "警戒レベル",
+      "b": "警戒",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "19-safety-disaster",
+      "a": "警戒レベル",
+      "b": "警戒レベル相当情報",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "19-safety-disaster",
+      "a": "避難",
+      "b": "避難情報ガイドライン",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "19-safety-disaster",
+      "a": "避難勧告",
+      "b": "避難",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "19-safety-disaster",
+      "a": "避難所",
+      "b": "避難",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "19-safety-disaster",
+      "a": "避難指示",
+      "b": "避難",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "19-safety-disaster",
+      "a": "防災",
+      "b": "川の防災情報",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "19-safety-disaster",
+      "a": "防災",
+      "b": "新たな防災気象情報",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "19-safety-disaster",
+      "a": "防災",
+      "b": "防災の手引き",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "19-safety-disaster",
+      "a": "防災",
+      "b": "防災庁",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "19-safety-disaster",
+      "a": "防災メール",
+      "b": "防災",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "19-safety-disaster",
+      "a": "防災行政无线",
+      "b": "防災",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "19-safety-disaster",
+      "a": "防災計画",
+      "b": "防災",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "19-safety-disaster",
+      "a": "防災訓練",
+      "b": "防災",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "20-overseas-china",
+      "a": "中日社保协定",
+      "b": "中日社保协定适用人员",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "20-overseas-china",
+      "a": "公证",
+      "b": "海外远程视频公证",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "20-overseas-china",
+      "a": "华侨回国定居",
+      "b": "华侨回国定居证",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "20-overseas-china",
+      "a": "居住证",
+      "b": "居住证暂行条例",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "20-overseas-china",
+      "a": "居住证",
+      "b": "港澳台居民居住证",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "20-overseas-china",
+      "a": "户籍",
+      "b": "就业地参保户籍限制",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "20-overseas-china",
+      "a": "户籍",
+      "b": "户籍恢复",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "20-overseas-china",
+      "a": "户籍",
+      "b": "户籍类证明",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "20-overseas-china",
+      "a": "护照",
+      "b": "护照换发",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "20-overseas-china",
+      "a": "护照",
+      "b": "护照补发",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "20-overseas-china",
+      "a": "护照",
+      "b": "电子护照",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "20-overseas-china",
+      "a": "无犯罪记录证明",
+      "b": "无犯罪记录证明跨省通办",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "20-overseas-china",
+      "a": "档案转递",
+      "b": "高校毕业生档案转递接收专项行动",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "20-overseas-china",
+      "a": "犯罪记录查询",
+      "b": "公安机关办理犯罪记录查询工作规定",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "20-overseas-china",
+      "a": "领事馆",
+      "b": "驻名古屋总领事馆",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "20-overseas-china",
+      "a": "领事馆",
+      "b": "驻大阪总领事馆",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "20-overseas-china",
+      "a": "领事馆",
+      "b": "驻新潟总领事馆",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "20-overseas-china",
+      "a": "领事馆",
+      "b": "驻札幌总领事馆",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "20-overseas-china",
+      "a": "领事馆",
+      "b": "驻福冈总领事馆",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    },
+    {
+      "topic": "20-overseas-china",
+      "a": "领事馆",
+      "b": "驻长崎总领事馆",
+      "reason": "包含关系（不同对象）",
+      "evidence": "docs/反例与近义裁定清单-2026-11-18.md"
+    }
+  ]
+}
