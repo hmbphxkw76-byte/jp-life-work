@@ -206,12 +206,12 @@ python engine/scripts/verify_report_parity.py --compare  .migration-baseline    
 
 | # | 项 | 结果 |
 |---|---|---|
-| 1 | 测试全绿 | ✅ `python -m unittest discover -s engine/tests` 全绿（1197 项，4 跳过） |
+| 1 | 测试全绿 | ✅ `python -m unittest discover -s engine/tests` 全绿（1206 项，4 跳过） |
 | 2 | `validate.py` 通过 | ✅ 退出码 0 |
-| 3 | 双轴评审存在且无 P0/P1 | ✅ `docs/toolchain/reviews/counterexample-adjudications-review.md`（counterexample-adjudications） |
+| 3 | 双轴评审存在且无 P0/P1 | ✅ `docs/toolchain/reviews/link-check-coverage-review.md`（link-check-coverage） |
 | 4 | `coverage_gate.py` 达标 | ✅ 88.9%（阈值 80%，enforce=true） |
 | 5 | `cleanup_workspace.py --check` 零残留 | ✅ 零残留 |
-| 6 | 新增/改动工具已登记 | ✅ 改动 `counterexample_scan.py`（裁定清单）；未新增工具，`generate_registry.py --check` 通过（工具 50 / 类型 12 / 主题 21 / 工作流 8） |
+| 6 | 新增/改动工具已登记 | ✅ 本次仅新增测试（`TestLinkCheckUnits`），未新增 / 改动工具；`generate_registry.py --check` 通过（工具 50 / 类型 12 / 主题 21 / 工作流 8） |
 | 7 | 生成物确定性 | ✅ `build_hub.py --check` / `build_index.py --check` 均退出码 0 |
 | 8 | 架构边界 | ✅ `engine/tools/` 无 git 可变操作；`engine/scripts/` 不产出内容；`iter_business_dirs()` = 21 |
 | 9 | 端到端（工作流内门禁后自动合并） | ✅ 触发 `scheduled-report-tasks`（run 45101195923）→ PR #17 自动合入（merge `ccbd697`）；`pipeline-orchestrator` → PR #19 / #20 亦自动合入 |
