@@ -10,7 +10,10 @@
 - ``ABS``：绝对化措辞命中（绝对 / 必然 / 一定 / 所有 / 全部 / 100% 等）；
 - ``GEN``：以偏概全 / 过度推断标记（以偏概全 / 过度推断 / 一概而论 / 都 / 全部）；
 - ``NOSRC``：结论式断言句但所在段落无来源标记（``[Source:`` / ``http``）；
-- ``单源``：含关键数字的段落仅一个来源标记且无 corroboration / 单源标注（n22）。
+- ``单源``：含关键数字的段落仅一个来源标记且无 corroboration / 单源标注（n23）。
+  n23 收紧：仅当该来源标记指向**外部一手来源**时才判定；来源括注为报告内部指针
+  （本报告 / 本主题登记册 / 主题登记册 / business-config / 基线报告 / 来源清单）的段落不参与，
+  疑问句与「（建议）」类操作建议句亦不参与。
 
 输出：``engine/report-audits/audit/counterexample-report.json``（不入库）。
 
@@ -45,10 +48,44 @@ SINGLE_LABEL_RE = re.compile(r"单源|corroboration|互证|多源")
 NUM_RE = re.compile(r"\d")
 # 结论性措辞：仅对「关键结论」类句子判定单源，避免普通来源句误报
 CLAIM_RE = re.compile(r"结论|判断|表明|意味着|说明|证实|显示|缺口|不足|超过|达到|风险|预计")
+# 内部指针：来源括注指向报告自身章节 / 登记册 / 配置，不构成外部来源
+SRC_TAIL_RE = re.compile(r"来源[：:]\s*([^）)\n]*)")
+INTERNAL_TOKENS = ("本报告", "本主题登记册", "本主题", "主题登记册", "business-config",
+                   "基线报告", "来源清单")
+SECTION_PTR_RE = re.compile(r"第?[一二三四五六七八九十百\d]+节|详见|见来源清单|官方原文回溯")
+GENERIC_WORDS = ("建议章", "推断", "事实", "建议", "结论", "实证", "说明", "解读", "报告期", "依据")
+NUM_CHARS_RE = re.compile(r"[第一二三四五六七八九十百千\d]")
+PUNCT_CHARS = " 　/·、，,。（）():：-"
+ADVICE_MARK = "（建议）"
+
+
+def _internal_source_only(para: str) -> bool:
+    """段落的所有「来源：」尾注是否均为内部指针（无外部机构信息）。
+
+    仅剔除可识别为报告自身的字样与泛化词；尾部只要残留任何实质名词
+    （机构 / 主题 / 模式等），即视为含外部成分，不排除该段。
+    """
+    tails = SRC_TAIL_RE.findall(para)
+    if not tails:
+        return False
+    for raw in tails:
+        s = raw
+        for tok in INTERNAL_TOKENS:
+            s = s.replace(tok, "")
+        s = SECTION_PTR_RE.sub("", s)
+        for word in GENERIC_WORDS:
+            s = s.replace(word, "")
+        s = NUM_CHARS_RE.sub("", s).strip(PUNCT_CHARS)
+        if s:
+            return False
+    return True
 
 
 def _single_source_sentences(text: str) -> list[str]:
-    """段落级单源候选：含数字的结论句，所在段落仅一个来源标记且无 corroboration 标注。"""
+    """段落级单源候选：含数字的结论句，所在段落仅一个【外部】来源标记且无 corroboration 标注。
+
+    n23 收紧：内部指针段落、疑问句、「（建议）」操作建议句不参与。
+    """
     out: list[str] = []
     for para in re.split(r"\n\s*\n", text):
         if not NUM_RE.search(para):
@@ -57,8 +94,12 @@ def _single_source_sentences(text: str) -> list[str]:
             continue
         if SINGLE_LABEL_RE.search(para):
             continue
+        if _internal_source_only(para):
+            continue
         for sent in SENTENCE_RE.findall(para):
-            if NUM_RE.search(sent) and CLAIM_RE.search(sent):
+            if NUM_RE.search(sent) and CLAIM_RE.search(sent) \
+                    and not sent.rstrip().endswith(("？", "?")) \
+                    and ADVICE_MARK not in sent:
                 out.append(sent.strip()[:160])
                 break
     return out

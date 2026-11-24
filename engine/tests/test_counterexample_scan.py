@@ -63,6 +63,40 @@ class ScanTextCase(unittest.TestCase):
         self.assertFalse(any("单源" in i["kinds"] for i in cs.scan_text(
             "该指标 2026-11 为 3.8%（来源：ISA）。")))
 
+    def test_single_source_internal_section_pointer_not_hit(self):
+        # 来源括注指向本报告内部章节 → 不是外部来源，不判单源
+        text = "结论：2030 年度司机缺口为 162,912 人。（来源：本报告第七节推断）"
+        self.assertFalse(any("单源" in i["kinds"] for i in cs.scan_text(text)))
+
+    def test_single_source_registry_pointer_not_hit(self):
+        text = ("**观察项与触发器状态**：触发器结论均为「首期为空」（截至 2026-11-17）。"
+                "（来源：主题登记册，详见第八节）")
+        self.assertFalse(any("单源" in i["kinds"] for i in cs.scan_text(text)))
+
+    def test_single_source_business_config_pointer_not_hit(self):
+        text = "**结论 4**：不就学风险存在地域差。（来源：本报告第一节 / business-config）"
+        self.assertFalse(any("单源" in i["kinds"] for i in cs.scan_text(text)))
+
+    def test_single_source_mixed_internal_external_still_hit(self):
+        # 内部指针之外仍有外部机构实证 → 仍需判定，不得整段排除
+        text = "**结论 3**：中継输送是主流方案。（来源：本报告第三节中継输送模式 / 国交省实证）"
+        self.assertTrue(any("单源" in i["kinds"] for i in cs.scan_text(text)))
+
+    def test_single_source_question_not_hit(self):
+        # 疑问句不是论断
+        text = "IT 人才缺口 2030 年推计的低 / 中 / 高位情景最新读数如何？（来源：経済産業省，详见第九节）"
+        self.assertFalse(any("单源" in i["kinds"] for i in cs.scan_text(text)))
+
+    def test_single_source_advice_not_hit(self):
+        # 操作建议类句子（建议）不作为候选
+        text = "缴费前要求提供书面收费清单与正规发票 / 收据，任何「现金给个人」都视为高风险信号 3 类（建议）。（来源：ISA，详见第九节）"
+        self.assertFalse(any("单源" in i["kinds"] for i in cs.scan_text(text)))
+
+    def test_single_source_external_still_hit(self):
+        # 真实外部单一来源仍须命中（防止过度排除）
+        text = "结论：2030 年度司机缺口为 162,912 人。（来源：国土交通省，详见第九节）"
+        self.assertTrue(any("单源" in i["kinds"] for i in cs.scan_text(text)))
+
 
 class ScanAndMainCase(unittest.TestCase):
     def setUp(self) -> None:
