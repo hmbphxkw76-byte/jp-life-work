@@ -728,7 +728,9 @@ def main() -> int:
         try:
             html = convert(md)
             out = md.with_suffix(".html")
-            out.write_text(html, encoding="utf-8")
+            # newline="\n"：Windows 下默认 newline=None 会写 CRLF，使重新生成的报告 HTML
+            # 在仓库里变成假 dirty（与 generate_registry / sync_vocab 同一根因）。
+            out.write_text(html, encoding="utf-8", newline="\n")
             print(f"[OK] {md} -> {out.name}")
             ok += 1
         except Exception as e:  # noqa: BLE001

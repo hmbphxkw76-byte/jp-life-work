@@ -19,6 +19,7 @@ import unittest
 from pathlib import Path
 
 ENGINE_DIR = Path(__file__).resolve().parents[1]
+REPO_ROOT = ENGINE_DIR.parent
 sys.path.insert(0, str(ENGINE_DIR / "tools"))
 sys.path.insert(0, str(ENGINE_DIR / "vocabulary" / "script"))
 
@@ -70,6 +71,33 @@ class TestWriteLf(unittest.TestCase):
             target = Path(d) / "sync-state.json"
             sync_vocab.dump_json(target, {"topic": "demo", "entries": {}})
             self.assertNotIn(b"\r", target.read_bytes(), "sync-state.json 含 CR（应为 LF）")
+
+    def test_md2html_emits_lf(self) -> None:
+        """md2html 产物须为 LF：否则重新生成 HTML 会让 21 份报告在 Windows 下假 dirty。"""
+        import md2html
+
+        scratch = REPO_ROOT / ".tmp_test_write_lf"
+        scratch.mkdir(parents=True, exist_ok=True)
+        src = scratch / "sample.md"
+        src.write_text("# 标题\n\n正文，含 [@FC-001] 指针。\n", encoding="utf-8", newline="")
+        orig_collect = md2html.collect_md_reports
+        orig_argv = list(sys.argv)
+        md2html.collect_md_reports = lambda: [src]
+        sys.argv = ["md2html.py"]
+        try:
+            md2html.main()
+        finally:
+            md2html.collect_md_reports = orig_collect
+            sys.argv = orig_argv
+        out = src.with_suffix(".html")
+        try:
+            self.assertTrue(out.is_file(), "md2html 未产出 HTML")
+            self.assertNotIn(b"\r", out.read_bytes(), "HTML 含 CR（应为 LF）")
+        finally:
+            for p in (out, src):
+                if p.exists():
+                    p.unlink()
+            scratch.rmdir()
 
 
 if __name__ == "__main__":

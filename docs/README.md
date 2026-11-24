@@ -1,6 +1,6 @@
 # 文档索引（docs/）
 
-> **版本**：v2.23（2026-11-23 事实卡片 corroboration 语义）
+> **版本**：v2.24（2026-11-23 md2html 写回换行硬化）
 > **用途**：jp-life-work 规范与审计标准的**单一入口**。只收「长期有效规范」，不收一次性过程记录。
 > **维护纪律**：规范类文档修订须同步 `engine/tests/test_tools.py` 对应守卫测试，并经合并门禁校验。
 
@@ -79,3 +79,4 @@
 | v2.21 | 2026-11-23 | 写回换行口径硬化 | `generate_registry.write()` / `sync_vocab.dump_json()` 统一 `newline="\n"`（消除 Windows 下 CRLF 假 dirty 与 sync 阻塞）；新增 `test_write_lf.py`（2 项）；过程留痕守卫元组补 2 份；工具 50 / 类型 12 / 测试 1185 / 工作流 8 |
 | v2.22 | 2026-11-23 | 阶段闸登记册判据修复 | `stage_gate_check` 的 `G1-REGISTRY` glob 未命中时认可已声明且存在的 `{{REGISTRY_PATH}}`（修 `00-decision-hub` 误报 P2）；新增 1 项回归；工具 50 / 类型 12 / 测试 1186 / 工作流 8 |
 | v2.23 | 2026-11-23 | 事实卡片 corroboration 语义 | `corroboration` 新增 `single-source`（官方统计 / 官方定价等唯一权威口径不计 P2）；15 张卡片据此标记并注明复核待办；标准文档 v1.2；新增 2 项守卫；工具 50 / 类型 12 / 测试 1188 / 工作流 8 |
+| v2.24 | 2026-11-23 | md2html 写回换行硬化 | `md2html.py` 唯一写点加 `newline="\n"`（消除重生成报告 HTML 的假 dirty）；新增 1 项守卫；工具 50 / 类型 12 / 测试 1189 / 工作流 8 |
