@@ -1,6 +1,6 @@
 # 文档索引（docs/）
 
-> **版本**：v2.27（2026-11-23 反例扫描裁定清单）
+> **版本**：v2.28（2026-11-23 link_check 覆盖率提升）
 > **用途**：jp-life-work 规范与审计标准的**单一入口**。只收「长期有效规范」，不收一次性过程记录。
 > **维护纪律**：规范类文档修订须同步 `engine/tests/test_tools.py` 对应守卫测试，并经合并门禁校验。
 
@@ -83,3 +83,4 @@
 | v2.25 | 2026-11-23 | 本地校验只读口径 | `report-audits/README.md` v1.3 明确「三清单由维护模式刷新、本地 `validate` / `local_ci` 走 `--check` 不写盘」；新增 1 项守卫；工具 50 / 类型 12 / 测试 1190 / 工作流 8 |
 | v2.26 | 2026-11-23 | 近义扫描已裁定保留清单 | `vocab_near_check` 增 `config/near-dup-exemptions.json`（218 对已裁定保留）与过滤函数；新增 4 项守卫；工具 50 / 类型 12 / 测试 1194 / 工作流 8 |
 | v2.27 | 2026-11-23 | 反例扫描裁定清单 | `counterexample_scan` 增 `config/counterexample-adjudications.json`（22 条 ABS/GEN/NOSRC 已裁定）；单源 39 条保持可见；新增 3 项守卫；工具 50 / 类型 12 / 测试 1197 / 工作流 8 |
+| v2.28 | 2026-11-23 | link_check 覆盖率提升 | `TestLinkCheckUnits` 新增 9 项（候选提取 / 跳过规则 / audit-status 键 / 外链抽检 mock）；`link_check.py` 覆盖率由 65.4% 升至 **78.5%**；工具 50 / 类型 12 / 测试 1206 / 工作流 8 |

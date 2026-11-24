@@ -18,6 +18,7 @@ import sys
 import tempfile
 import unittest
 import unittest.mock
+import urllib.error
 from datetime import UTC, date, datetime
 from pathlib import Path
 
@@ -743,6 +744,112 @@ class TestLinkCheck(unittest.TestCase):
 
     def test_external_urls_collected(self):
         self.assertGreater(len(link_check.collect_external_urls()), 0)
+
+
+class TestLinkCheckUnits(unittest.TestCase):
+    """link_check 单元覆盖：候选提取、跳过规则、audit-status 键、外链抽检。"""
+
+    def test_helper_predicates(self):
+        self.assertTrue(link_check._is_external("https://x"))
+        self.assertTrue(link_check._is_external("#a"))
+        self.assertTrue(link_check._is_external("mailto:a@b"))
+        self.assertFalse(link_check._is_external("docs/a.md"))
+        self.assertTrue(link_check._looks_like_path("docs/a.md"))
+        self.assertTrue(link_check._looks_like_path("docs/a"))
+        self.assertFalse(link_check._looks_like_path("aaa"))
+
+    def test_candidates_markdown(self):
+        text = "[a](docs/x.md) [b](https://e) [c](#frag)"
+        self.assertEqual(link_check._candidates(text, False, False),
+                         {"docs/x.md", "https://e", "#frag"})
+
+    def test_candidates_html(self):
+        self.assertEqual(link_check._candidates('<a href="docs/x.html">x</a>', False, True),
+                         {"docs/x.html"})
+
+    def test_candidates_json_valid_and_invalid(self):
+        good = '{"p": "docs/x.md", "nested": ["a/b.html"], "n": 1}'
+        self.assertEqual(link_check._candidates(good, True, False), {"docs/x.md", "a/b.html"})
+        self.assertEqual(link_check._candidates("{not json", True, False), set())
+
+    def _root_with_docs(self, root: Path) -> None:
+        (root / "docs").mkdir(parents=True, exist_ok=True)
+        (root / "docs" / "target.md").write_text("x", encoding="utf-8")
+
+    def test_check_skips_external_anchor_template_and_outside(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            self._root_with_docs(root)
+            (root / "docs" / "page.md").write_text(
+                "[a](../docs/target.md#sec) [b](https://e) [c]({{VAR}}) "
+                "[d](../../outside.md) [e](mailto:x@y) [f](../docs/missing.md)",
+                encoding="utf-8")
+            with unittest.mock.patch.object(link_check, "ROOT", root), \
+                 unittest.mock.patch.object(link_check, "GLOBS", ["docs/*.md"]):
+                missing = link_check.check(root)
+        self.assertEqual(missing, ["docs/missing.md"])
+
+    def test_check_skip_prefixes(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            d = root / "engine" / "report-audits"
+            d.mkdir(parents=True)
+            (d / "report-migration-x.md").write_text("[a](../nope.md)", encoding="utf-8")
+            with unittest.mock.patch.object(link_check, "ROOT", root), \
+                 unittest.mock.patch.object(link_check, "GLOBS",
+                                            ["engine/report-audits/*.md"]):
+                self.assertEqual(link_check.check(root), [])
+
+    def test_audit_status_keys(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            a = root / "engine" / "report-audits" / "audit"
+            a.mkdir(parents=True)
+            f = a / "audit-status.json"
+            f.write_text('{"reports": {"01-x/reports/a.md": {}}}', encoding="utf-8")
+            self.assertEqual(link_check._check_audit_status(root), ["01-x/reports/a.md"])
+            f.write_text("{bad", encoding="utf-8")
+            self.assertEqual(link_check._check_audit_status(root), [])
+            f.unlink()
+            self.assertEqual(link_check._check_audit_status(root), [])
+
+    def test_collect_external_urls_from_temp_root(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            d = root / "01-x" / "reports"
+            d.mkdir(parents=True)
+            (d / "2026-11-x.md").write_text(
+                "见 https://a.example/x。与 http://b.example/y, 结束", encoding="utf-8")
+            urls = link_check.collect_external_urls(root)
+        self.assertEqual(urls, ["http://b.example/y", "https://a.example/x"])
+
+    def test_check_external_mocked(self):
+        class _Resp:
+            status = 200
+
+            def __enter__(self):
+                return self
+
+            def __exit__(self, *a):
+                return False
+
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            d = root / "01-x" / "reports"
+            d.mkdir(parents=True)
+            (d / "2026-11-x.md").write_text("https://ok.example/ https://fail.example/",
+                                           encoding="utf-8")
+
+            def fake(req, timeout=0):
+                url = req.full_url
+                if "ok" in url:
+                    return _Resp()
+                raise urllib.error.HTTPError(url, 500, "err", {}, None)  # type: ignore[arg-type]
+
+            with unittest.mock.patch("urllib.request.urlopen", fake):
+                res = link_check.check_external(root, timeout=1)
+        self.assertEqual(res["https://ok.example/"], "ok")
+        self.assertEqual(res["https://fail.example/"], "fail")
 
 
 class TestPromptStructureGuard(unittest.TestCase):
