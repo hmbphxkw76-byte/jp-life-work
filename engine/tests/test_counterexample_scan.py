@@ -6,6 +6,7 @@
 from __future__ import annotations
 
 import importlib.util
+import json
 import sys
 import tempfile
 import unittest
@@ -91,9 +92,44 @@ class ScanAndMainCase(unittest.TestCase):
 
     def test_main_exit_2(self):
         with mock.patch.object(cs, "scan",
-                               return_value=[{"report": "r", "count": 1, "items": []}]), \
+                               return_value=[{"report": "r", "count": 1,
+                                               "items": [{"sentence": "s", "kinds": ["GEN"],
+                                                         "hits": []}]}]), \
                 mock.patch.object(sys, "argv", ["counterexample_scan.py", "--json"]):
             self.assertEqual(cs.main(), 2)
+
+
+class AdjudicationCase(unittest.TestCase):
+    """裁定清单：命中 (report, sentence) 即不再计为待处理。"""
+
+    def setUp(self) -> None:
+        self._tmp = tempfile.TemporaryDirectory()
+        self.root = Path(self._tmp.name)
+        self.addCleanup(self._tmp.cleanup)
+
+    def _cfg(self, items: list[dict]) -> Path:
+        p = self.root / "adj.json"
+        p.write_text(json.dumps({"schema_version": "1.0", "adjudications": items},
+                                ensure_ascii=False), encoding="utf-8")
+        return p
+
+    def test_missing_file_is_empty(self):
+        self.assertEqual(cs.load_adjudications(self.root / "nope.json"), {})
+
+    def test_broken_json_is_empty(self):
+        p = self.root / "bad.json"
+        p.write_text("{not json", encoding="utf-8")
+        self.assertEqual(cs.load_adjudications(p), {})
+
+    def test_main_filters_adjudicated(self):
+        cfg = self._cfg([{"report": "r", "sentence": "s", "verdict": "保留",
+                         "reason": "x", "evidence": "y"}])
+        rows = [{"report": "r", "count": 1,
+                "items": [{"sentence": "s", "kinds": ["GEN"], "hits": []}]}]
+        with mock.patch.object(cs, "scan", return_value=rows), \
+                mock.patch.object(cs, "ADJ", cfg), \
+                mock.patch.object(sys, "argv", ["counterexample_scan.py", "--json"]):
+            self.assertEqual(cs.main(), 0)   # 全部已裁定 → 无待处理
 
 
 if __name__ == "__main__":

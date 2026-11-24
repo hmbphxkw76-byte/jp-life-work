@@ -35,6 +35,8 @@ from _common import ROOT, atomic_write, iter_business_dirs  # noqa: E402
 from audit_check import absolute_hits  # noqa: E402
 
 OUT = ROOT / "engine" / "report-audits" / "audit" / "counterexample-report.json"
+# 裁定清单：命中 (report, sentence) 即不再计为候选（新增候选默认不豁免）
+ADJ = ROOT / "engine" / "config" / "counterexample-adjudications.json"
 
 GEN_RE = re.compile(r"以偏概全|过度推断|一概而论|全部|所有|无一例外")
 SENTENCE_RE = re.compile(r"[^。！？\n]{4,80}[。！？]")
@@ -109,25 +111,59 @@ def scan() -> list[dict]:
     return rows
 
 
+def load_adjudications(path: Path | None = None) -> dict[tuple[str, str], dict]:
+    """读取裁定清单：{(report, sentence): {verdict, reason, evidence}}。缺失 / 损坏返回空。"""
+    p = path or ADJ
+    if not p.is_file():
+        return {}
+    try:
+        data = json.loads(p.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return {}
+    out: dict[tuple[str, str], dict] = {}
+    for e in data.get("adjudications", []):
+        if not isinstance(e, dict):
+            continue
+        key = (e.get("report", ""), e.get("sentence", ""))
+        out[key] = {k: e.get(k, "") for k in ("verdict", "reason", "evidence")}
+    return out
+
+
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description="反例 / 绝对化论断扫描")
     ap.add_argument("--check", action="store_true", help="不写文件")
     ap.add_argument("--json", action="store_true")
     args = ap.parse_args(argv)
 
-    rows = scan()
+    adj = load_adjudications()
+    rows: list[dict] = []
+    n_adj = 0
+    for r in scan():
+        items, kept_adj = [], []
+        for it in r["items"]:
+            hit = adj.get((r["report"], it["sentence"]))
+            if hit:
+                n_adj += 1
+                it = dict(it, verdict=hit.get("verdict", ""), reason=hit.get("reason", ""))
+                kept_adj.append(it)
+            else:
+                items.append(it)
+        if items or kept_adj:
+            rows.append({"report": r["report"], "count": len(items),
+                         "adjudicated": len(kept_adj), "items": items})
     total = sum(r["count"] for r in rows)
     if args.json:
-        print(json.dumps({"total": total, "reports": rows}, ensure_ascii=False, indent=2))
+        print(json.dumps({"total": total, "adjudicated": n_adj, "reports": rows},
+                         ensure_ascii=False, indent=2))
     else:
-        print(f"反例扫描：{len(rows)} 份报告，{total} 条候选")
+        print(f"反例扫描：{len(rows)} 份报告，{total} 条待处理（另 {n_adj} 条已裁定）")
         for r in rows:
-            print(f"  {r['report']}：{r['count']} 条")
+            print(f"  {r['report']}：{r['count']} 条待处理 / {r['adjudicated']} 条已裁定")
             for it in r["items"][:3]:
                 print(f"    [{'/'.join(it['kinds'])}] {it['sentence'][:70]}")
         if not args.check and not args.json:
-            atomic_write(OUT, json.dumps({"total": total, "reports": rows},
-                                        ensure_ascii=False, indent=2))
+            atomic_write(OUT, json.dumps({"total": total, "adjudicated": n_adj,
+                                        "reports": rows}, ensure_ascii=False, indent=2))
             print(f"已写入：{OUT.relative_to(ROOT)}")
     if total:
         return 2

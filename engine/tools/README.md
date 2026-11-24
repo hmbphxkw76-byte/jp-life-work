@@ -13,7 +13,7 @@ pip install -r requirements.txt   # markdown
 python -m unittest discover -s engine/tests -q   # 单元测试（以 docs/CI.md 与实测为准）
 ```
 
-> 测试计数：1194 项（`python -m unittest discover -s engine/tests` 实测，与 `docs/CI.md` 六节一致；由 `engine/tests/test_arch_guard.py` 双向锁定）。
+> 测试计数：1197 项（`python -m unittest discover -s engine/tests` 实测，与 `docs/CI.md` 六节一致；由 `engine/tests/test_arch_guard.py` 双向锁定）。
 
 ## 退出码约定（校验类工具统一）
 
@@ -541,3 +541,4 @@ python engine/tools/local_ci.py list                   # 列检查项 / 排除�
 | v1.25 | 2026-11-23 | md2html 写回换行硬化 | `md2html.py` 唯一写点加 `newline="\n"`；新增 1 项守卫；测试计数 1188 → 1189 |
 | v1.26 | 2026-11-23 | 本地校验只读口径 | `local_ci` 信息质量步骤锁定 `--check`（守卫测试）；测试计数 1189 → 1190 |
 | v1.27 | 2026-11-23 | 近义扫描已裁定保留清单 | `vocab_near_check` 新增豁免清单与过滤；新增 4 项守卫；测试计数 1190 → 1194 |
+| v1.28 | 2026-11-23 | 反例扫描裁定清单 | `counterexample_scan` 新增裁定清单（单源保持可见）；新增 3 项守卫；测试计数 1194 → 1197 |
