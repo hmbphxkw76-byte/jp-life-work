@@ -21,7 +21,7 @@
 - `load_adjudications(path=None) -> dict[tuple[str,str], dict]`（缺失 / 损坏返回空）；
 - `main()`：把每条 item 分为 `items`（待处理）与已裁定两类；退出码仅由待处理数决定；
 - 报告 JSON 增加 `adjudicated` 字段；
-- 新增测试 4 项（缺失 / 损坏 / 过滤后退出码 0 / 既有退出码语义保持）。
+- 新增测试 3 项（缺失 / 损坏 / 过滤后退出码 0），并保持既有 `test_main_exit_2` 语义。
 
 ## 四、验收标准
 
