@@ -232,6 +232,15 @@ python engine/vocabulary/script/vocab_tool.py topic-add --topic smart-logistics 
 
 「部分核验」条目的「分类 → 保留口径」100% 映射表（B3）：`clusters` 定义保留簇与保留理由，`categories` 给出全部分类的归属与条数，`coverage` 记录覆盖率，`baseline` 记录工单口径与实测差异。该文件为机读事实源，供定向核验与审计使用；不改变「部分核验」状态，也不新增校验命令。
 
+### 5.3 近义扫描已裁定保留清单（config/near-dup-exemptions.json）
+
+`vocab_near_check.py` 只认「包含关系」，会把「X 与 X+Y」这类**不同对象**判为疑似。已裁定保留的对登记于
+`config/near-dup-exemptions.json`（`exemptions[]`，每项含 `topic` / `a` / `b` / `reason` / `evidence`），命中即不再计为疑似：
+
+- 现状：218 对全部登记（依据 `docs/反例与近义裁定清单-2026-11-18.md`，均为「包含关系但非同一对象」）；
+- 纪律：**新增疑似默认不豁免**，须先经人工裁定；工具由此从「全量报警」转为「增量检测器」；
+- 报告与 `--json` 输出附 `exempted` 计数；退出码仅由未豁免对决定。
+
 ## 六、数据契约（上层系统对接）
 
 导出 JSON 顶层结构：

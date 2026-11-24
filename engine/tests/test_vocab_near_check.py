@@ -6,6 +6,7 @@
 from __future__ import annotations
 
 import importlib.util
+import json
 import sys
 import tempfile
 import unittest
@@ -97,6 +98,49 @@ class ScanCase(unittest.TestCase):
                 mock.patch.object(vnc, "OUT", self.root / "near.json"), \
                 mock.patch.object(sys, "argv", ["vocab_near_check.py", "--json"]):
             self.assertEqual(vnc.main(), 0)
+
+
+class ExemptionCase(unittest.TestCase):
+    """已裁定保留清单：命中即不再计为疑似（增量检测器）。"""
+
+    def _cfg(self, d: Path, items: list[dict]) -> Path:
+        p = d / "near-dup-exemptions.json"
+        p.write_text(json.dumps({"schema_version": "1.0", "exemptions": items},
+                                ensure_ascii=False), encoding="utf-8")
+        return p
+
+    def test_missing_file_is_empty(self):
+        with tempfile.TemporaryDirectory() as d:
+            self.assertEqual(vnc.load_exemptions(Path(d) / "nope.json"), set())
+
+    def test_broken_json_is_empty(self):
+        with tempfile.TemporaryDirectory() as d:
+            p = Path(d) / "bad.json"
+            p.write_text("{not json", encoding="utf-8")
+            self.assertEqual(vnc.load_exemptions(p), set())
+
+    def test_filter_only_removes_listed_pair(self):
+        with tempfile.TemporaryDirectory() as d:
+            p = self._cfg(Path(d), [{"topic": "01-x", "a": "送金", "b": "国際送金"}])
+            ex = vnc.load_exemptions(p)
+        pairs = [{"topic": "01-x", "a": "送金", "b": "国際送金"},
+                 {"topic": "01-x", "a": "車検", "b": "車検費用"}]
+        kept = vnc.filter_exempted(pairs, ex)
+        self.assertEqual([(q["a"], q["b"]) for q in kept], [("車検", "車検費用")])
+
+    def test_main_exit_0_when_all_exempted(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            data = root / "data" / "01-x"
+            data.mkdir(parents=True)
+            (data / "terms.md").write_text(TERMS, encoding="utf-8")
+            cfg = self._cfg(root, [{"topic": "01-x", "a": "送金", "b": "国際送金"}])
+            with mock.patch.object(vnc, "VOCAB_DATA", root / "data"), \
+                    mock.patch.object(vnc, "ROOT", root), \
+                    mock.patch.object(vnc, "OUT", root / "near.json"), \
+                    mock.patch.object(vnc, "EXEMPT", cfg), \
+                    mock.patch.object(sys, "argv", ["vocab_near_check.py", "--json"]):
+                self.assertEqual(vnc.main(), 0)
 
 
 if __name__ == "__main__":

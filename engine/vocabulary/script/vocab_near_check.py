@@ -27,6 +27,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[3]
 VOCAB_DATA = ROOT / "engine" / "vocabulary" / "data"
 OUT = VOCAB_DATA / "near-dup-report.json"
+# 「已裁定保留」清单：命中即不再计为疑似（增量检测器；新增疑似默认不豁免）
+EXEMPT = ROOT / "engine" / "vocabulary" / "config" / "near-dup-exemptions.json"
 
 MIN_LEN_SUBSTR = 2
 
@@ -87,22 +89,48 @@ def scan() -> list[dict]:
     return pairs
 
 
+def _key(p: dict) -> tuple[str, str, str]:
+    return (p["topic"], p["a"], p["b"])
+
+
+def load_exemptions(path: Path | None = None) -> set[tuple[str, str, str]]:
+    """读取「已裁定保留」清单（(topic, a, b) 集合）。文件缺失或损坏时返回空集（不报错）。"""
+    p = path or EXEMPT
+    if not p.is_file():
+        return set()
+    try:
+        data = json.loads(p.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return set()
+    return {(e.get("topic", ""), e.get("a", ""), e.get("b", ""))
+            for e in data.get("exemptions", []) if isinstance(e, dict)}
+
+
+def filter_exempted(pairs: list[dict], exempt: set[tuple[str, str, str]]) -> list[dict]:
+    """剔除已裁定保留的对。"""
+    return [p for p in pairs if _key(p) not in exempt]
+
+
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description="词库近义 / 近重复词条扫描")
     ap.add_argument("--check", action="store_true", help="不写文件")
     ap.add_argument("--json", action="store_true")
     args = ap.parse_args(argv)
 
-    pairs = scan()
+    raw = scan()
+    exempt = load_exemptions()
+    pairs = filter_exempted(raw, exempt)
     if args.json:
-        print(json.dumps({"count": len(pairs), "pairs": pairs}, ensure_ascii=False, indent=2))
+        print(json.dumps({"count": len(pairs), "exempted": len(raw) - len(pairs),
+                          "pairs": pairs}, ensure_ascii=False, indent=2))
     else:
-        print(f"近义扫描：{len(pairs)} 对疑似")
+        print(f"近义扫描：{len(pairs)} 对疑似（另 {len(raw) - len(pairs)} 对已裁定保留）")
         for p in pairs[:40]:
             print(f"  [{p['topic']}] {p['a']}({p['a_kind']}) ~ {p['b']}({p['b_kind']})：{p['reason']}")
         if not args.check:
             OUT.parent.mkdir(parents=True, exist_ok=True)
-            OUT.write_text(json.dumps({"count": len(pairs), "pairs": pairs},
+            OUT.write_text(json.dumps({"count": len(pairs), "exempted": len(raw) - len(pairs),
+                                      "pairs": pairs},
                                       ensure_ascii=False, indent=2), encoding="utf-8")
             print(f"已写入：{OUT.relative_to(ROOT)}")
     if pairs:
