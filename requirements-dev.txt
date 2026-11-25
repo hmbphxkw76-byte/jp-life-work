@@ -1,5 +1,5 @@
 # 开发 / 静态检查依赖（架构优化方向 E / I-7；W2 / R5 固定版本）。
 # 运行依赖仍为 requirements.txt；本文件仅供 CI 与本地 lint 使用。
 # 完整锁定（含传递依赖）见 requirements-dev.lock，CI / 本地复现优先用 lock。
-ruff==0.17.5
+ruff==0.17.6
 mypy==2.4.1
